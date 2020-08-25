@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="superpepperserver" version="1.0.0">
+ <names>
+  <name lang="en_US">SuperPepperServer</name>
+  <name lang="en_US-x-scrald">SuperPepperServer</name>
+ </names>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="SuperPepperServer">
+   <nature></nature>
+   <names>
+    <name lang="en_US">SuperPepperServer</name>
+    <name lang="en_US-x-scrald">SuperPepperServer</name>
+   </names>
+   <permissions>
+    <canRunOnPod/>
+    <canStandUp/>
+    <canSitDown/>
+   </permissions>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.4"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>
