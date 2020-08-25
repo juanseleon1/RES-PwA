@@ -1,5 +1,6 @@
 package com.leon.sasepwa;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -35,9 +36,10 @@ public class  ConexManager {
         try {
             s.connect(address);
             JSONObject json = new JSONObject();
+            json.put("Imprimir", "Hola Mundo");
             OutputStreamWriter out = new OutputStreamWriter(s.getOutputStream(), StandardCharsets.UTF_8);
             out.write(json.toString());
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         finally {
