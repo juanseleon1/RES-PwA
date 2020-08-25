@@ -9,6 +9,7 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
