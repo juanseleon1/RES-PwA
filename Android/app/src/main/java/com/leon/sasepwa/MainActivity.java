@@ -15,6 +15,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
+        ConexManager.getManager().connecTest();
     }
 
     @Override
