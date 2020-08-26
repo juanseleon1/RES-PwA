@@ -15,9 +15,5 @@
    <nature>interactive</nature>
    <permissions/>
   </behaviorContent>
-  <behaviorContent path="HelPepper">
-   <nature>interactive</nature>
-   <permissions/>
-  </behaviorContent>
  </contents>
 </package>

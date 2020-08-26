@@ -42,6 +42,7 @@ class MyClass(GeneratedClass):
         reload(sys)
         sys.setdefaultencoding('utf-8')
         self.memory = ALProxy("ALMemory")
+        self.logger.error("Iniciando Server")
     def onLoad(self):
         pass
 
@@ -62,11 +63,15 @@ class MyClass(GeneratedClass):
     def onInput_onStop(self):
         self.onUnload()
 
-class MyTCPHandler(BaseRequestHandler):
+class MyTCPHandler(StreamRequestHandler):
     def handle(self):
+        self.logger.error("Recibiendo Conex")
         while 1:
-            self.data = self.request.recv(1024).strip()
-
+            self.data = self.rfile.readline().strip()
+            print("{} wrote:".format(self.client_address[0]))
+            print(self.data)
+            self.logger.error(self.data)
+"""
             recvDic = {}
             try:
                 recvDic = json_loads_byteified(self.data)
@@ -97,7 +102,7 @@ class MyTCPHandler(BaseRequestHandler):
                 self.request.sendall(header)
         else:
             pass
-
+"""
 
 
 class TcpServer(ThreadingTCPServer):
