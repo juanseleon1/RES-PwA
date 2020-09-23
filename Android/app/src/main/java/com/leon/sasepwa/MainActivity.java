@@ -6,9 +6,12 @@ import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.human.HumanConverter;
+import com.aldebaran.qi.sdk.object.human.EngagementIntentionState;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
+        private HumanConverter e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
