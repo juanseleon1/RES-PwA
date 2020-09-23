@@ -5,10 +5,23 @@
  */
 package RobotAgentBDI;
 
+import BESA.Kernel.Agent.Event.DataBESA;
+import rational.mapping.Believes;
+
 /**
  *
  * @author juans
  */
-public class RobotAgentBelieves {
+public class RobotAgentBelieves implements Believes{
+
+    @Override
+    public boolean update(DataBESA dbesa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Believes clone() throws Exception, CloneNotSupportedException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
