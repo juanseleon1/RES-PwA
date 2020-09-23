@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package agentepepper;
+package RobotAgentBDI;
 
 /**
  *
  * @author juans
  */
-public class AgentePepper {
+public class RobotAgentBDI extends AgentBDI{
 
     /**
      * @param args the command line arguments
