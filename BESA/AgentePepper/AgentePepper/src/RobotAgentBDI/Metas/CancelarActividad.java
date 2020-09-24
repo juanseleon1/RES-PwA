@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Metas;
+package RobotAgentBDI.Metas;
 
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
@@ -16,9 +16,9 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class ActividadStorytelling extends GoalBDI{
+public class CancelarActividad extends GoalBDI{
 
-    public ActividadStorytelling(int id, RationalRole role, String description, GoalBDITypes type) {
+    public CancelarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }
 

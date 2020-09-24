@@ -17,18 +17,9 @@ import rational.mapping.Believes;
  */
 public class RobotAgentBDI extends AgentBDI{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
 
     public RobotAgentBDI(String alias, Believes believes, List<GoalBDI> goals, double passwd, double threshold) throws ExceptionBESA {
         super(alias, believes, goals, passwd,threshold);
     }
 
-
-
-    
 }
