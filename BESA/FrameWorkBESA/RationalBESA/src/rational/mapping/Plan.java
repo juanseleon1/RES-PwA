@@ -22,6 +22,10 @@ public class Plan implements Serializable {
         this.command = command;
     }
 
+    public Plan() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void addTask(Task task) {
         taskList.add(task);
     }
