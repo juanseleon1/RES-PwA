@@ -7,6 +7,7 @@ package RobotAgentBDI;
 
 import BESA.BDI.AgentStructuralModel.Agent.AgentBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
+import BESA.ExceptionBESA;
 import java.util.List;
 import rational.mapping.Believes;
 
@@ -23,8 +24,18 @@ public class RobotAgentBDI extends AgentBDI{
         // TODO code application logic here
     }
 
-    public RobotAgentBDI(String alias, Believes believes, List<GoalBDI> goals, double passwd, double threshold) {
-        super(alias, believes, goals, passwd);
+    public RobotAgentBDI(String alias, Believes believes, List<GoalBDI> goals, double passwd, double threshold) throws ExceptionBESA {
+        super(alias, believes, goals, passwd,threshold);
+    }
+
+    @Override
+    public void setupRationalAgent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void shutdownRationalAgent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
