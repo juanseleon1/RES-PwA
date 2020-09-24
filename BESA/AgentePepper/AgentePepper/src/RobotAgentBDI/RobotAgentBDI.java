@@ -28,15 +28,7 @@ public class RobotAgentBDI extends AgentBDI{
         super(alias, believes, goals, passwd,threshold);
     }
 
-    @Override
-    public void setupRationalAgent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public void shutdownRationalAgent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     
 }

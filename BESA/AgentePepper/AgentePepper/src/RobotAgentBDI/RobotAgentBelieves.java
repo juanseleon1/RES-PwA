@@ -8,34 +8,17 @@ package RobotAgentBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.DataBESA;
+import rational.data.InfoData;
 import rational.mapping.Believes;
 
 /**
  *
  * @author juans
  */
-public class RobotAgentBelieves implements Believes{
-
-    @Override
-    public boolean update(DataBESA dbesa) {
+public class RobotAgentBelieves implements Believes{     
+   @Override
+    public boolean update(InfoData si) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Believes clone() throws Exception, CloneNotSupportedException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-     protected RobotAgentBelieves getBelieves() {
-        return (RobotAgentBelieves) ((StateBDI) this.getState()).getBelieves();
-    }
-     
-     public void debug() {
-        StateBDI state = (StateBDI) this.getState();
-        GoalBDI goal = state.getMachineBDIParams().getIntention();
-        if (goal != null) {
-            System.out.println("Current intention: " + goal.getDescription() + "  -- Charge: " + getBelieves());
-        }
     }
 
 
