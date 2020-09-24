@@ -16,7 +16,7 @@ public class RobotAgentBelieves implements Believes{
     
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
-    private BSelectorRolAgentePepper bSelectorRolAgentePepper = new BSelectorRolAgentePepper();
+    private BSelectorRolAgente bSelectorRolAgente = new BSelectorRolAgente();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
     private BInteraccionSensores bInteraccionSensores = new BInteraccionSensores();
     private BNivelBateria bNivelBateria = new BNivelBateria();

@@ -12,7 +12,7 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class BSelectorRolAgentePepper implements Believes{
+public class BSelectorRolAgente implements Believes{
 
     @Override
     public boolean update(InfoData si) {
