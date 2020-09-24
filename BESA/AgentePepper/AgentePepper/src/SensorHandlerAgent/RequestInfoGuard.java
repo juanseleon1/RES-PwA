@@ -3,24 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RobotAgentBDI;
+package SensorHandlerAgent;
 
-import BESA.BDI.AgentStructuralModel.GoalBDI;
-import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.DataBESA;
-import rational.data.InfoData;
-import rational.mapping.Believes;
+import PwAProfileManagerAgent.*;
+import BESA.Kernel.Agent.Event.EventBESA;
+import BESA.Kernel.Agent.GuardBESA;
 
 /**
  *
  * @author juans
  */
-public class RobotAgentBelieves implements Believes{     
-   @Override
-    public boolean update(InfoData si) {
+public class RequestInfoGuard extends GuardBESA{
+
+    @Override
+    public void funcExecGuard(EventBESA ebesa) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
-  
+    
 }
