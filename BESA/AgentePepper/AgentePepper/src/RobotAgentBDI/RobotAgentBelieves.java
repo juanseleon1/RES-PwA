@@ -5,9 +5,6 @@
  */
 package RobotAgentBDI;
 
-import BESA.BDI.AgentStructuralModel.GoalBDI;
-import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.DataBESA;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -21,6 +18,4 @@ public class RobotAgentBelieves implements Believes{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-    
 }
