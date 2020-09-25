@@ -5,10 +5,13 @@
  */
 package EmotionalAnalyzerAgent;
 
+import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
-import BESA.Kernel.Agent.StateBESA;
 import BESA.Kernel.Agent.StructBESA;
+import ServiceProviderAgent.ServiceProviderAgent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,13 +19,20 @@ import BESA.Kernel.Agent.StructBESA;
  */
 public class EmotionalAnalyzerAgent extends AgentBESA {
 
-    public EmotionalAnalyzerAgent(String alias, StateBESA state, StructBESA structAgent, double passwd) throws KernelAgentExceptionBESA {
-        super(alias, state, structAgent, passwd);
+    public static String ProcessEmotionGuard= "ProcessEmotionGuard";
+    public EmotionalAnalyzerAgent(String alias) throws KernelAgentExceptionBESA {
+        super(alias, new EmotionalAnalyzerState(), new StructBESA(), 0.96);
     }
 
     @Override
     public void setupAgent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            StructBESA struct=this.getStructAgent();
+            struct.addBehavior("");
+            struct.bindGuard(ProcessEmotionGuard, ProcessEmotionGuard.class);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(ServiceProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

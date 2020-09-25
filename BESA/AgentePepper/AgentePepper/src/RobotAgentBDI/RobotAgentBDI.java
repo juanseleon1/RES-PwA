@@ -8,6 +8,7 @@ package RobotAgentBDI;
 import BESA.BDI.AgentStructuralModel.Agent.AgentBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
+import java.util.ArrayList;
 import java.util.List;
 import rational.mapping.Believes;
 
@@ -18,8 +19,11 @@ import rational.mapping.Believes;
 public class RobotAgentBDI extends AgentBDI{
 
 
-    public RobotAgentBDI(String alias, Believes believes, List<GoalBDI> goals, double passwd, double threshold) throws ExceptionBESA {
-        super(alias, believes, goals, passwd,threshold);
+    public RobotAgentBDI(String alias, List<GoalBDI> RAGoals) throws ExceptionBESA {
+        super(alias, new RobotAgentBelieves(), RAGoals, 0.96, 0);
     }
+    
+
+
 
 }
