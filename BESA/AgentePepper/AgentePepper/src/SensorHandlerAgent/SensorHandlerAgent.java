@@ -5,25 +5,39 @@
  */
 package SensorHandlerAgent;
 
-import EmotionalAnalyzerAgent.*;
+import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
-import BESA.Kernel.Agent.StateBESA;
 import BESA.Kernel.Agent.StructBESA;
+import ServiceProviderAgent.ServiceProviderAgent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author juans
  */
 public class SensorHandlerAgent extends AgentBESA {
-
-    public SensorHandlerAgent(String alias, StateBESA state, StructBESA structAgent, double passwd) throws KernelAgentExceptionBESA {
-        super(alias, state, structAgent, passwd);
+public static String GetEmotionalInfoPeriodicGuard= "GetEmotionalInfoPeriodicGuard";
+public static String GetOtherInfoPeriodicGuard= "GetOtherInfoPeriodicGuard";
+public static String RequestInfoGuard= "RequestInfoGuard";
+    public SensorHandlerAgent(String alias) throws KernelAgentExceptionBESA {
+        super(alias, new SensorHandlerState(), new StructBESA(), 0.96);
     }
 
     @Override
     public void setupAgent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            StructBESA struct=this.getStructAgent();
+            struct.addBehavior("GetEmotionalInfoPeriodicGuard");
+            struct.bindGuard(GetEmotionalInfoPeriodicGuard, GetEmotionalInfoPeriodicGuard.class);
+            struct.addBehavior("GetOtherInfoPeriodicGuard");
+            struct.bindGuard(GetOtherInfoPeriodicGuard, GetOtherInfoPeriodicGuard.class);
+            struct.addBehavior("RequestInfoGuard");
+            struct.bindGuard(RequestInfoGuard, RequestInfoGuard.class);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(ServiceProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
