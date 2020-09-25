@@ -27,4 +27,10 @@ public class RobotAgentBelieves implements Believes{
     public boolean update(InfoData si) {
         throw new UnsupportedOperationException(" "); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void inicializarPerfil() {
+        
+    }
+    
+    
 }
