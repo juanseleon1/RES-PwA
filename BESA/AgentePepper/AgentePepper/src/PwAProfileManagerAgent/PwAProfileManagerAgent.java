@@ -9,7 +9,6 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
 import BESA.Kernel.Agent.StructBESA;
-import EmotionalAnalyzerAgent.ProcessEmotionGuard;
 import ServiceProviderAgent.ServiceProviderAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
