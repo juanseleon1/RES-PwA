@@ -1,4 +1,4 @@
 package com.leon.sasepwaperfil;
 
-public class ActMemorama {
+public class ActMemorama extends ActividadPepper {
 }
