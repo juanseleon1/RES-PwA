@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RobotAgentBDI;
+package RobotAgentBDI.Believes;
 
+import RobotAgentBDI.BSelectorRolAgente;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -23,6 +24,7 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoInactivo bEstadoInactivo = new BEstadoInactivo();
     private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();
     
+    //AQUI SE MANDA LO DE INFORMATIONFLOW
    @Override
     public boolean update(InfoData si) {
         throw new UnsupportedOperationException(" "); //To change body of generated methods, choose Tools | Templates.

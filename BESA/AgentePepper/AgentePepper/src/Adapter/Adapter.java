@@ -5,10 +5,17 @@
  */
 package Adapter;
 
+import BESA.Adapter.AdapterBESA;
+import BESA.Kernel.System.Directory.AgHandlerBESA;
+
 /**
  *
  * @author juans
  */
-public class Adapter {
+public class Adapter extends AdapterBESA{
+    
+    public Adapter(String eventToSendType, AgHandlerBESA agh) {
+        super(eventToSendType, agh);
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import BESA.BDI.AgentStructuralModel.Agent.AgentBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
