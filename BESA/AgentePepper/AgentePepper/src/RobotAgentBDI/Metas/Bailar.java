@@ -11,12 +11,22 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
  * @author mafegarces
  */
 public class Bailar extends GoalBDI{
+
+    private static String descrip;
+
+    public static Bailar buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
+        Bailar b= new Bailar(0, musicTherapyRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
 
     public Bailar(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);

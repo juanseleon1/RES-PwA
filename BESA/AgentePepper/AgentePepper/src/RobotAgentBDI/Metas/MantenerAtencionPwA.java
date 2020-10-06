@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
@@ -18,6 +19,14 @@ import rational.mapping.Believes;
  */
 public class MantenerAtencionPwA extends GoalBDI{
 
+            private static String descrip;
+
+    public static MantenerAtencionPwA buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
+        MantenerAtencionPwA b= new MantenerAtencionPwA(0, mantAtenRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public MantenerAtencionPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }

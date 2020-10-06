@@ -16,11 +16,9 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
 import BESA.Util.PeriodicDataBESA;
 import SensorHandlerAgent.GetEmotionalInfoPeriodicGuard;
 import SensorHandlerAgent.GetOtherInfoPeriodicGuard;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rational.mapping.Believes;
 
 /**
  *
@@ -33,11 +31,14 @@ public class RobotAgentBDI extends AgentBDI{
 
     public RobotAgentBDI(String alias, List<GoalBDI> RAGoals) throws ExceptionBESA {
         super(alias, new RobotAgentBelieves(), RAGoals, 0.96, 0);
+        this.startBDIsystem();
+        
     }
     
-    public void begin() throws ExceptionBESA{
-        
-        try{
+    
+    private void startBDIsystem()
+    {
+             try{
             this.start();
             this.startTimers();
             PeriodicDataBESA data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
@@ -54,7 +55,6 @@ public class RobotAgentBDI extends AgentBDI{
         {
            Logger.getLogger(RobotAgentBDI.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
     }
-
+        
 }

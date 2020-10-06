@@ -11,12 +11,21 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
  * @author mafegarces
  */
 public class ReiniciarActividad extends GoalBDI{
+                private static String descrip;
+
+    public static ReiniciarActividad buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole reiActRole = new RationalRole(descrip, rolePlan);
+        ReiniciarActividad b= new ReiniciarActividad(0, reiActRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
 
     public ReiniciarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);

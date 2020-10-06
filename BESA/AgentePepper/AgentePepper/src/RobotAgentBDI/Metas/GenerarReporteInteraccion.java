@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
@@ -18,6 +19,14 @@ import rational.mapping.Believes;
  */
 public class GenerarReporteInteraccion extends GoalBDI{
 
+            private static String descrip;
+
+    public static GenerarReporteInteraccion buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole genRepRole = new RationalRole(descrip, rolePlan);
+        GenerarReporteInteraccion b= new GenerarReporteInteraccion(0, genRepRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public GenerarReporteInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }
