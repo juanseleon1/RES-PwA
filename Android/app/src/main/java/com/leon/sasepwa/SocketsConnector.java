@@ -13,6 +13,7 @@ public class SocketsConnector {
     BufferedReader in;
     QiContext qiContext;
     String infoSocket;
+    int data4QiContext;
 
     public SocketsConnector(QiContext qiContext) {
         this.qiContext = qiContext;
@@ -26,8 +27,8 @@ public class SocketsConnector {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new DataOutputStream(socket.getOutputStream());
             infoSocket = in.readLine();
+            data4QiContext = Integer.parseInt(infoSocket);
 
-            
 
             socket.close();
         }catch (Exception e){
