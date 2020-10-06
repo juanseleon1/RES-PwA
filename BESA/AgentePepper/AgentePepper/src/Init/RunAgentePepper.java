@@ -8,7 +8,7 @@ import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
 import PwAProfileManagerAgent.*;
 import RobotAgentBDI.RobotAgentBDI;
-import RobotAgentBDI.RobotAgentBelieves;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import SensorHandlerAgent.SensorHandlerAgent;
 import SensorHandlerAgent.SensorHandlerState;
 import ServiceProviderAgent.ServiceProviderAgent;
