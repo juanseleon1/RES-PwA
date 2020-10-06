@@ -1,4 +1,6 @@
-package RobotAgentBDI.Believes;
+package RobotAgentBDI.Believes.PerfilPwA;
+
+
 
 import java.util.HashMap;
 import java.util.List;

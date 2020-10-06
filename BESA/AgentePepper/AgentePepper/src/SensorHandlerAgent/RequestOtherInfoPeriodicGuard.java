@@ -5,6 +5,7 @@
  */
 package SensorHandlerAgent;
 
+import BESA.Kernel.Agent.Event.DataBESA;
 import EmotionalAnalyzerAgent.*;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
@@ -14,11 +15,10 @@ import BESA.Kernel.Agent.PeriodicGuardBESA;
  *
  * @author juans
  */
-public class GetOtherInfoPeriodicGuard extends PeriodicGuardBESA{
+public class RequestOtherInfoPeriodicGuard extends PeriodicGuardBESA{
 
     @Override
     public void funcPeriodicExecGuard(EventBESA ebesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

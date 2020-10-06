@@ -25,6 +25,7 @@ public class Bailar extends GoalBDI{
         Plan rolePlan= new Plan();
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
         Bailar b= new Bailar(0, musicTherapyRole, descrip, GoalBDITypes.DUTY);
+        //crear clases tareas y agregar al plan
         return b;
     }
 

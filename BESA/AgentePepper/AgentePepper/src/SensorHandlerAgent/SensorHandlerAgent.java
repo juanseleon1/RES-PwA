@@ -30,11 +30,11 @@ public static String RequestInfoGuard= "RequestInfoGuard";
         try {
             StructBESA struct=this.getStructAgent();
             struct.addBehavior("GetEmotionalInfoPeriodicGuard");
-            struct.bindGuard(GetEmotionalInfoPeriodicGuard, GetEmotionalInfoPeriodicGuard.class);
+            struct.bindGuard(GetEmotionalInfoPeriodicGuard, RequestEmotionalInfoPeriodicGuard.class);
             struct.addBehavior("GetOtherInfoPeriodicGuard");
-            struct.bindGuard(GetOtherInfoPeriodicGuard, GetOtherInfoPeriodicGuard.class);
+            struct.bindGuard(GetOtherInfoPeriodicGuard, RequestOtherInfoPeriodicGuard.class);
             struct.addBehavior("RequestInfoGuard");
-            struct.bindGuard(RequestInfoGuard, RequestInfoGuard.class);
+            struct.bindGuard(RequestInfoGuard, GetInfoGuard.class);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(ServiceProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
         }

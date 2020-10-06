@@ -19,8 +19,8 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
 import BESA.Util.PeriodicDataBESA;
 import RobotAgentBDI.RobotAgentBDI;
 import static RobotAgentBDI.RobotAgentBDI.PERIODIC_TIME;
-import SensorHandlerAgent.GetEmotionalInfoPeriodicGuard;
-import SensorHandlerAgent.GetOtherInfoPeriodicGuard;
+import SensorHandlerAgent.RequestEmotionalInfoPeriodicGuard;
+import SensorHandlerAgent.RequestOtherInfoPeriodicGuard;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
