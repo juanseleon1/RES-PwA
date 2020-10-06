@@ -4,7 +4,6 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
-import PwAProfileManagerAgent.*;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.AnimarPwA;
 import RobotAgentBDI.Metas.Bailar;
@@ -35,8 +34,6 @@ import java.util.logging.Logger;
  * @author juans
  */
 public class RunAgentePepper {
-        /**
-     */
     
     public static String aliasRobotAgent= "RobotAgent";
     public static String aliasEAAgent= "EAAgent";
@@ -49,10 +46,9 @@ public class RunAgentePepper {
             AdmBESA.getInstance();
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals());
             EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent);
-            PwAProfileManagerAgent PWAPM= new PwAProfileManagerAgent(aliasPwAPMAgentt);
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
             ServiceProviderAgent SPA= new ServiceProviderAgent(aliasSPAgent);
-            startAllAgents(RABDI,EAA,PWAPM,SHA,SPA);
+            startAllAgents(RABDI,EAA,SHA,SPA);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(RunAgentePepper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,10 +98,9 @@ public class RunAgentePepper {
     }
 
 
-    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, PwAProfileManagerAgent PWAPM, SensorHandlerAgent SHA, ServiceProviderAgent SPA) {
+    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, ServiceProviderAgent SPA) {
         RABDI.start();
         EAA.start();
-        PWAPM.start();
         SHA.start();
         SPA.start();
     }

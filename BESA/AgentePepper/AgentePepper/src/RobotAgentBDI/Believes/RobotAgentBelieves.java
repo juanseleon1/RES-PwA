@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import SensorHandlerAgent.SensorData;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -23,9 +24,30 @@ public class RobotAgentBelieves implements Believes{
     private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();
     
     //AQUI SE MANDA LO DE INFORMATIONFLOW
+    //Aqui se accede a BD y se pide info de otros believes. 
    @Override
     public boolean update(InfoData si) {
-        throw new UnsupportedOperationException(" "); //To change body of generated methods, choose Tools | Templates.
+        SensorData infoRecibida= (SensorData)si;
+        switch (infoRecibida.getDataType()) {
+            case ACTIVIDAD:
+                
+                break;
+            case EMOCIONES:
+                break;
+            case INACTIVIDAD:
+                break;
+            case INTHABLA:
+                break;
+            case INTSENSORES:
+                break;
+            case BATERIA:
+                break;
+            case RETROALIM:
+                break;
+            default:
+                break;
+        }
+        return true;
     }
     
     public void inicializarPerfil() {
