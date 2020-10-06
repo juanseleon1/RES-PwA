@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
@@ -18,6 +19,14 @@ import rational.mapping.Believes;
  */
 public class AnimarPwA extends GoalBDI{
 
+        private static String descrip;
+
+    public static AnimarPwA buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole animateRole = new RationalRole(descrip, rolePlan);
+        AnimarPwA b= new AnimarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public AnimarPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }

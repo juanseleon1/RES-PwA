@@ -5,7 +5,6 @@
  */
 package RobotAgentBDI.Believes;
 
-import RobotAgentBDI.BSelectorRolAgente;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -17,7 +16,6 @@ public class RobotAgentBelieves implements Believes{
     
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
-    private BSelectorRolAgente bSelectorRolAgente = new BSelectorRolAgente();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
     private BInteraccionSensores bInteraccionSensores = new BInteraccionSensores();
     private BNivelBateria bNivelBateria = new BNivelBateria();

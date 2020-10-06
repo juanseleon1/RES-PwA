@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
@@ -18,6 +19,14 @@ import rational.mapping.Believes;
  */
 public class ReanudarActividad extends GoalBDI{
 
+                private static String descrip;
+
+    public static ReanudarActividad buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole reaActnRole = new RationalRole(descrip, rolePlan);
+        ReanudarActividad b= new ReanudarActividad(0, reaActnRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public ReanudarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }

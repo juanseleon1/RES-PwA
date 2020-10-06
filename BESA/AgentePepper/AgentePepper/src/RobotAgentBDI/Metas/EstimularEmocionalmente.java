@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
@@ -18,6 +19,15 @@ import rational.mapping.Believes;
  */
 public class EstimularEmocionalmente extends GoalBDI{
 
+    
+            private static String descrip;
+
+    public static EstimularEmocionalmente buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole estimEmoRole = new RationalRole(descrip, rolePlan);
+        EstimularEmocionalmente b= new EstimularEmocionalmente(0, estimEmoRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public EstimularEmocionalmente(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }

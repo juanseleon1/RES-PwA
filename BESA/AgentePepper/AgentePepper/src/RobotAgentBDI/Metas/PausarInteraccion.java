@@ -11,13 +11,21 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
  * @author mafegarces
  */
 public class PausarInteraccion extends GoalBDI{
+            private static String descrip;
 
+    public static PausarInteraccion buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole PaIntRole = new RationalRole(descrip, rolePlan);
+        PausarInteraccion b= new PausarInteraccion(0, PaIntRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public PausarInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }

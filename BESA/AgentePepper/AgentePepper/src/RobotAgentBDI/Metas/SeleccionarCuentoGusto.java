@@ -11,12 +11,22 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
 
 /**
  *
  * @author mafegarces
  */
 public class SeleccionarCuentoGusto extends GoalBDI{
+    
+                private static String descrip;
+
+    public static SeleccionarCuentoGusto buildGoal() {
+        Plan rolePlan= new Plan();
+        RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
+        SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(0, selCuenGRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
 
     public SeleccionarCuentoGusto(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
