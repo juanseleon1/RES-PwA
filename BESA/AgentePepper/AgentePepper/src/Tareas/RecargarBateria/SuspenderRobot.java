@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class SuspenderRobot extends Task{
 
+    public SuspenderRobot() {
+        System.out.println("--- Task Suspender Robot Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Suspender Robot ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Suspender Robot ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Suspender Robot ---");
     }
     
 }

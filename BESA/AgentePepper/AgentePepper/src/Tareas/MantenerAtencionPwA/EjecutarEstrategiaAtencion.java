@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class EjecutarEstrategiaAtencion extends Task{
 
+    public EjecutarEstrategiaAtencion() {
+        System.out.println("--- Task Ejecutar Estrategia Atencion Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Ejecutar Estrategia Atencion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Ejecutar Estrategia Atencion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Ejecutar Estrategia Atencion ---");
     }
     
 }

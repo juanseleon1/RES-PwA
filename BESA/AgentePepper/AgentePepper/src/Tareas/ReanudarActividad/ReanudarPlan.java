@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class ReanudarPlan extends Task{
 
+    public ReanudarPlan() {
+        System.out.println("--- Task Reanudar Plan Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Reanudar Plan ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Reanudar Plan ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Reanudar Plan ---");
     }
     
 }

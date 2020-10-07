@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class SolicitarPosicionPwA extends Task{
 
+    public SolicitarPosicionPwA() {
+        System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Solicitar Posicion PwA ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Solicitar Posicion PwA ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Solicitar Posicion PwA ---");
     }
     
 }

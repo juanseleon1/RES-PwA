@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class DesplegarFormulario extends Task{
 
+    public DesplegarFormulario() {
+        System.out.println("--- Task Desplegar Formulario Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Desplegar Formulario ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Desplegar Formulario ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Desplegar Formulario ---");
     }
     
 }

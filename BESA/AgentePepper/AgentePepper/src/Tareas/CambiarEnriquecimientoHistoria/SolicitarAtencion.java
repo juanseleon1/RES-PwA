@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class SolicitarAtencion extends Task{
 
+    public SolicitarAtencion() {
+        System.out.println("--- Task Solicitar Atencion Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Solicitar Atencion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Solicitar Atencion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Solicitar Atencion ---");
     }
     
 }

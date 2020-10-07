@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class RetroalimentarBDI extends Task{
 
+    public RetroalimentarBDI() {
+        System.out.println("--- Task Retroalimentar BDI Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Retroalimentar BDI ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Retroalimentar BDI ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Retroalimentar BDI ---");
     }
     
 }

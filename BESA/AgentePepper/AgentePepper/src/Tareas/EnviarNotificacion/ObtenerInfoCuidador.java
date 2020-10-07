@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class ObtenerInfoCuidador extends Task{
 
+    public ObtenerInfoCuidador() {
+        System.out.println("--- Task Obtener Informacion Cuidador Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Obtener Informacion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Obtener Informacion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Obtener Informacion ---");
     }
     
 }

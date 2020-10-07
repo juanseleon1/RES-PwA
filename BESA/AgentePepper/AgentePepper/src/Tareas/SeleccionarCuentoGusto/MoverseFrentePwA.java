@@ -14,19 +14,23 @@ import rational.mapping.Task;
  */
 public class MoverseFrentePwA extends Task{
 
+    public MoverseFrentePwA() {
+        System.out.println("--- Task Moverse Frente PwA Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Moverse Frente PwA ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Moverse Frente PwA ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Moverse Frente PwA ---");
     }
-    
 }

@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class EvaluarEstadoEmocional extends Task{
 
+    public EvaluarEstadoEmocional() {
+        System.out.println("--- Task Evaluar Estado Emocional Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Evaluar Estado Emocional ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Evaluar Estado Emocional ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Evaluar Estado Emocional ---");
     }
     
 }

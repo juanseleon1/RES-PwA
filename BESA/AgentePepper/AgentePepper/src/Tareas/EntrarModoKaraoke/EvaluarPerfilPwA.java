@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class EvaluarPerfilPwA extends Task{
 
+    public EvaluarPerfilPwA() {
+        System.out.println("--- Task Evaluar Perfil PwA Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Evaluar Perfil PwA ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Evaluar Perfil PwA ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Evaluar Perfil PwA ---");
     }
     
 }

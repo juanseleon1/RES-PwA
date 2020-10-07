@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class PreguntarSentimientos extends Task{
 
+    public PreguntarSentimientos() {
+        System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Preguntar Sentimientos ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Preguntar Sentimientos ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Preguntar Sentimientos ---");
     }
     
 }

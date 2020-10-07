@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class PersistirInfoInteraccion extends Task{
 
+    public PersistirInfoInteraccion() {
+        System.out.println("--- Task Persistir Informacion Interaccion Iniciada ---");
+    }
+
+    
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Persistir Informacion Interaccion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Persistir Informacion Interaccion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Persistir Informacion Interaccion ---");
     }
     
 }

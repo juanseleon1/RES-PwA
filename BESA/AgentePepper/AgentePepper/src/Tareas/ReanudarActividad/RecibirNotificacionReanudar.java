@@ -14,19 +14,24 @@ import rational.mapping.Task;
  */
 public class RecibirNotificacionReanudar extends Task{
 
+    public RecibirNotificacionReanudar() {
+        System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Recibir Notificacion Reanudar ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Recibir Notificacion Reanudar ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Recibir Notificar Reanudar ---");
     }
     
 }

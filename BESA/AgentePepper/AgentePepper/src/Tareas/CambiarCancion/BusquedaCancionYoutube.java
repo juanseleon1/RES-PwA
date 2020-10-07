@@ -14,19 +14,23 @@ import rational.mapping.Task;
  */
 public class BusquedaCancionYoutube extends Task{
 
+    public BusquedaCancionYoutube() {
+        System.out.println("--- Task Busqueda Cancion Iniciada ---");
+    }
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Busqueda Cancion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Busqueda Cancion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Busqueda Cancion ---");
     }
     
 }

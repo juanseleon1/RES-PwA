@@ -15,19 +15,24 @@ import rational.mapping.Task;
  */
 public class IniciarNuevoPlan extends Task{
 
+    public IniciarNuevoPlan() {
+        System.out.println("--- Task Iniciar Nuevo Plan Iniciada ---");
+    }
+    
+
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Iniciar Nuevo Plan ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Iniciar Nuevo Plan ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Iniciar Nuevo Plan ---");
     }
 
 }
