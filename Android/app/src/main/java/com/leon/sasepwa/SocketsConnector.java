@@ -1,5 +1,9 @@
 package com.leon.sasepwa;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
 
 import java.net.*;
 import java.io.*;
@@ -29,6 +33,14 @@ public class SocketsConnector {
             infoSocket = in.readLine();
             data4QiContext = Integer.parseInt(infoSocket);
 
+            Animation myAnimation = AnimationBuilder.with(qiContext).withResources(R.raw.HH).build();
+
+            Animate animate = AnimateBuilder.with(qiContext).withAnimation(myAnimation).build();
+            animate.addOnLabelReachedListener((label, time) -> {
+                // Called when a label is reached.
+            });
+
+            animate.async().run();
 
             socket.close();
         }catch (Exception e){
