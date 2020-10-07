@@ -9,6 +9,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
+import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
+import Tareas.PwA.EvaluarConcentracionAtencion;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -25,7 +28,7 @@ public class MantenerAtencionPwA extends GoalBDI{
 
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         SeleccionarEstrategiaAtencion seleccionarEstrategiaA = new SeleccionarEstrategiaAtencion();
-        EjecutarEstrategia ejecutarEstrategia = new EjecutarEstrategia();
+        EjecutarEstrategiaAtencion ejecutarEstrategia = new EjecutarEstrategiaAtencion();
 
         Plan rolePlan= new Plan();
 
