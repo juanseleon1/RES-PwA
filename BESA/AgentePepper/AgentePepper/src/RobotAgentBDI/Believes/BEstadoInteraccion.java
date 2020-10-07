@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceProviderAgent;
+package RobotAgentBDI.Believes;
 
-import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Agent.GuardBESA;
+import rational.data.InfoData;
+import rational.mapping.Believes;
 
 /**
  *
- * @author juans
+ * @author mafegarces
  */
-public class RequestActivityGuard extends GuardBESA{
+public class BEstadoInteraccion implements Believes{
+
     @Override
-    public void funcExecGuard(EventBESA ebesa) {
+    public boolean update(InfoData si) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
+    
 }

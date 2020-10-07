@@ -9,7 +9,7 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
 import BESA.Kernel.Agent.StructBESA;
-import ServiceProviderAgent.ServiceProviderAgent;
+import ServiceAgentPepper.RobotProviderAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +36,7 @@ public static String RequestInfoGuard= "RequestInfoGuard";
             struct.addBehavior("RequestInfoGuard");
             struct.bindGuard(RequestInfoGuard, GetInfoGuard.class);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(ServiceProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

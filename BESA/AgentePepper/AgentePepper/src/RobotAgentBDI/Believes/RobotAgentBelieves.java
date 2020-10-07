@@ -14,7 +14,7 @@ import rational.mapping.Believes;
  * @author juans
  */
 public class RobotAgentBelieves implements Believes{   
-    
+    private BEstadoInteraccion bEstadoInteraccion = new BEstadoInteraccion();
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
@@ -23,6 +23,11 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoInactivo bEstadoInactivo = new BEstadoInactivo();
     private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();
     
+    public RobotAgentBelieves()
+    {
+     getPerfilBD();
+    }
+    
     //AQUI SE MANDA LO DE INFORMATIONFLOW
     //Aqui se accede a BD y se pide info de otros believes. 
    @Override
@@ -30,19 +35,26 @@ public class RobotAgentBelieves implements Believes{
         SensorData infoRecibida= (SensorData)si;
         switch (infoRecibida.getDataType()) {
             case ACTIVIDAD:
-                
+                bEstadoActividad.update(si);
                 break;
             case EMOCIONES:
+                bEstadoEmocionalPwA.update(si);
                 break;
             case INACTIVIDAD:
+                bEstadoInactivo.update(si);
                 break;
             case INTHABLA:
+                bEstadoInteraccion.update(si);
                 break;
             case INTSENSORES:
+                bInteraccionSensores.update(si);
                 break;
             case BATERIA:
+                bNivelBateria.update(si);
                 break;
             case RETROALIM:
+                bPerfilPwA.update(si);
+                actualizarPerfilEnDB();
                 break;
             default:
                 break;
@@ -50,9 +62,14 @@ public class RobotAgentBelieves implements Believes{
         return true;
     }
     
-    public void inicializarPerfil() {
-        
+    private void actualizarPerfilEnDB() {
+        //conectarConBD
+        bPerfilPwA.updateToDB();
     }
     
+        private void getPerfilBD() {
+        //conectarConBD
+        bPerfilPwA.getFromDB();
+    }
     
 }
