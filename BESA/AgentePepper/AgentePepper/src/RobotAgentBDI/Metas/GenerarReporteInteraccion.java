@@ -12,9 +12,12 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.GenerarReporteInteraccion.MostrarInfo;
 import Tareas.GenerarReporteInteraccion.PersistirInfoInteraccion;
 import Tareas.GenerarReporteInteraccion.RecopilarInfoInteraccion;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -29,8 +32,11 @@ public class GenerarReporteInteraccion extends GoalBDI{
         PersistirInfoInteraccion persistirInfoI = new PersistirInfoInteraccion();
         RecopilarInfoInteraccion recopilarInfoI = new RecopilarInfoInteraccion();
         MostrarInfo mostrarInfo = new MostrarInfo();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(persistirInfoI);
         rolePlan.addTask(recopilarInfoI);

@@ -15,9 +15,12 @@ import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
 import Tareas.EstimularEmocionalmente.RetroalimentarBDI;
 import Tareas.EstimularEmocionalmente.SeleccionarEstrategiaEmocional;
 import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -36,8 +39,11 @@ public class EstimularEmocionalmente extends GoalBDI{
         InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();
         SeleccionarEstrategiaEmocional seleccionarEstrategiaE = new SeleccionarEstrategiaEmocional();
         RetroalimentarBDI retroalimentar = new RetroalimentarBDI();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(interpretarEstadoFlujo);

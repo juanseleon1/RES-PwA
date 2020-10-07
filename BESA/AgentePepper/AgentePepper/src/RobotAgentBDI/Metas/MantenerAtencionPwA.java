@@ -12,9 +12,12 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
 import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
 import Tareas.PwA.EvaluarConcentracionAtencion;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -29,8 +32,11 @@ public class MantenerAtencionPwA extends GoalBDI{
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         SeleccionarEstrategiaAtencion seleccionarEstrategiaA = new SeleccionarEstrategiaAtencion();
         EjecutarEstrategiaAtencion ejecutarEstrategia = new EjecutarEstrategiaAtencion();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(evaluarCA);
         rolePlan.addTask(seleccionarEstrategiaA);

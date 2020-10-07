@@ -13,9 +13,12 @@ import Tareas.PwA.ActualizarPerfil;
 import Tareas.PwA.EvaluarConcentracionAtencion;
 import Tareas.PwA.EvaluarEstadoEmocional;
 import Tareas.ReiniciarActividad.ReiniciarActividadTask;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -30,8 +33,11 @@ public class ReiniciarActividad extends GoalBDI{
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
         ReiniciarActividadTask reiniciarActividad = new ReiniciarActividadTask();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(evaluarCA);

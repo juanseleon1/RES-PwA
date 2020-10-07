@@ -12,9 +12,12 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.PausarInteraccion.PausarActividad;
 import Tareas.PausarInteraccion.SuspenderMetas;
 import Tareas.PwA.DetectarPwA;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -28,8 +31,11 @@ public class PausarInteraccion extends GoalBDI{
         DetectarPwA detectarPwA = new DetectarPwA();
         PausarActividad pausarActividad = new PausarActividad();
         SuspenderMetas suspenderMetas = new SuspenderMetas();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(detectarPwA);
         rolePlan.addTask(pausarActividad);

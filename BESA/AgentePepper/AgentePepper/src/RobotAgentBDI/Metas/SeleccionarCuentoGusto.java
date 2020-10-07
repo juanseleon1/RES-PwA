@@ -15,9 +15,12 @@ import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import Tareas.SeleccionarCuentoGusto.SeleccionarCuento;
 import Tareas.SeleccionarCuentoGusto.VerificarObstaculos;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -35,8 +38,11 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         SeleccionarCuento seleccionarCuento = new SeleccionarCuento();
         DetectarPwA detectarPwA = new DetectarPwA();
         VerificarObstaculos verificarObstaculos = new VerificarObstaculos();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(evaluarCA);
         rolePlan.addTask(seleccionarCuento);
@@ -44,7 +50,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         rolePlan.addTask(verificarObstaculos);
         rolePlan.addTask(detectarPwA);
         rolePlan.addTask(moverseFrente);
-
+        
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
         SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(0, selCuenGRole, descrip, GoalBDITypes.DUTY);
         return b;

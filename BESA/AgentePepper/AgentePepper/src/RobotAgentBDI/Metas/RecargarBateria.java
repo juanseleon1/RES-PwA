@@ -14,9 +14,12 @@ import Tareas.RecargarBateria.MoverseEstacionCarga;
 import Tareas.RecargarBateria.ReportarNivelBateria;
 import Tareas.RecargarBateria.SuspenderRobot;
 import Tareas.RecargarBateria.UbicarEstacionCarga;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -32,8 +35,11 @@ public class RecargarBateria extends GoalBDI{
         ReportarNivelBateria reportarNivelBateria = new ReportarNivelBateria();
         SuspenderRobot suspenderRobot = new SuspenderRobot();
         UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
-
-        Plan rolePlan= new Plan();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        String command = null;
+        
+        Plan rolePlan= new Plan(taskList, resources, command);
 
         rolePlan.addTask(detenerPlan);
         rolePlan.addTask(reportarNivelBateria);
