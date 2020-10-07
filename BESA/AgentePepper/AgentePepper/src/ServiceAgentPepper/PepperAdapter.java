@@ -6,7 +6,6 @@
 package ServiceAgentPepper;
 
 import BESA.Adapter.AdapterBESA;
-import BESA.Kernel.System.Directory.AgHandlerBESA;
 
 /**
  *
@@ -16,6 +15,7 @@ public class PepperAdapter extends AdapterBESA{
     
     public PepperAdapter() {
         super(null,null);
-    }    
-    
+    }
+//AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
+    public void
 }

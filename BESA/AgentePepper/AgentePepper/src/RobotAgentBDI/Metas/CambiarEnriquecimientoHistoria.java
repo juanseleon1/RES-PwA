@@ -9,6 +9,10 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.CambiarEnriquecimientoHistoria.EvaluarEnriquecer;
+import Tareas.CambiarEnriquecimientoHistoria.SolicitarActivacionActividad;
+import Tareas.CambiarEnriquecimientoHistoria.SolicitarAtencion;
+import Tareas.PwA.EvaluarConcentracionAtencion;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -31,7 +35,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
         Plan rolePlan= new Plan();
 
-        rolePlan.addTask(solicitarCA);
+        rolePlan.addTask(evaluarCA);
         rolePlan.addTask(evaluarEnriquecer);
         rolePlan.addTask(solicitarActivacionA);
         rolePlan.addTask(solicitarAtencion);
