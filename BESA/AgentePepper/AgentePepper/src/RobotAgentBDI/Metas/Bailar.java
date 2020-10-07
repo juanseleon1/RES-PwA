@@ -15,9 +15,12 @@ import Tareas.Bailar.FinalizarBaile;
 import Tareas.Bailar.RecibirRetroalimentacion;
 import Tareas.Bailar.RepetirBaile;
 import Tareas.Bailar.SeleccionarBaile;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -35,9 +38,9 @@ public class Bailar extends GoalBDI{
         RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
         RepetirBaile repetirBaile = new RepetirBaile();
         SeleccionarBaile seleccionarBaile = new SeleccionarBaile();
-
-        Plan rolePlan= new Plan();
-
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
         rolePlan.addTask(seleccionarBaile);
         rolePlan.addTask(ejecutarBaile);
         rolePlan.addTask(recibirRetroalimentacion);

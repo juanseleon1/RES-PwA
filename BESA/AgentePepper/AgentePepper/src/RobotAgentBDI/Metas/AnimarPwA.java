@@ -11,9 +11,12 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.AnimarPwA.EjecutarEstrategiaAnimar;
 import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -27,12 +30,11 @@ public class AnimarPwA extends GoalBDI{
 
         EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
-
-        Plan rolePlan= new Plan();
-
-        rolePlan.addTask(evaluarEstadoE);
-        rolePlan.addTask(ejecutarEstrategia);
-
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        tarea.add(evaluarEstadoE);
+        tarea.add(ejecutarEstrategia);
+        Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
         AnimarPwA b= new AnimarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
         return b;

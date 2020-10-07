@@ -13,9 +13,12 @@ import Tareas.CancelarActividad.CancelarActividadTask;
 import Tareas.PwA.ActualizarPerfil;
 import Tareas.PwA.EvaluarConcentracionAtencion;
 import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -32,7 +35,9 @@ public class CancelarActividad extends GoalBDI{
         ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
         CancelarActividadTask cancelarActividad = new CancelarActividadTask();
 
-        Plan rolePlan= new Plan();
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
         
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(evaluarCA);

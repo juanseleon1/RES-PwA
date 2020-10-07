@@ -12,9 +12,12 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.CambiarDificultad.EvaluarDesempeño;
 import Tareas.CambiarDificultad.SeleccionarEstrategiaDificultad;
 import Tareas.CambiarDificultad.SolicitarEstrategia;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -30,8 +33,11 @@ public class CambiarDificultad extends GoalBDI{
         EvaluarDesempeño evaluarDesempeño = new EvaluarDesempeño();
         SeleccionarEstrategiaDificultad seleccionarEstrategiaD = new SeleccionarEstrategiaDificultad();
         SolicitarEstrategia solicitarEstrategia = new SolicitarEstrategia();
+        
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
 
-        Plan rolePlan= new Plan();
 
         rolePlan.addTask(evaluarDesempeño);
         rolePlan.addTask(seleccionarEstrategiaD);
