@@ -22,22 +22,12 @@ public static String GetEmotionalInfoPeriodicGuard= "GetEmotionalInfoPeriodicGua
 public static String GetOtherInfoPeriodicGuard= "GetOtherInfoPeriodicGuard";
 public static String RequestInfoGuard= "RequestInfoGuard";
     public SensorHandlerAgent(String alias) throws KernelAgentExceptionBESA {
-        super(alias, new SensorHandlerState(), new StructBESA(), 0.96);
+        super(alias, new SensorHandlerState(), buildSensorHandlerStruct(), 0.96);
     }
 
     @Override
     public void setupAgent() {
-        try {
-            StructBESA struct=this.getStructAgent();
-            struct.addBehavior("GetEmotionalInfoPeriodicGuard");
-            struct.bindGuard(GetEmotionalInfoPeriodicGuard, RequestEmotionalInfoPeriodicGuard.class);
-            struct.addBehavior("GetOtherInfoPeriodicGuard");
-            struct.bindGuard(GetOtherInfoPeriodicGuard, RequestOtherInfoPeriodicGuard.class);
-            struct.addBehavior("RequestInfoGuard");
-            struct.bindGuard(RequestInfoGuard, GetInfoGuard.class);
-        } catch (ExceptionBESA ex) {
-            Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     @Override
@@ -45,4 +35,21 @@ public static String RequestInfoGuard= "RequestInfoGuard";
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    private static StructBESA buildSensorHandlerStruct()
+    {
+         StructBESA struct=new StructBESA();
+        try {
+           
+            struct.addBehavior("GetEmotionalInfoPeriodicGuard");
+            struct.bindGuard(GetEmotionalInfoPeriodicGuard, RequestEmotionalInfoPeriodicGuard.class);
+            struct.addBehavior("GetOtherInfoPeriodicGuard");
+            struct.bindGuard(GetOtherInfoPeriodicGuard, RequestOtherInfoPeriodicGuard.class);
+            struct.addBehavior("RequestInfoGuard");
+            struct.bindGuard(RequestInfoGuard, GetInfoGuard.class);
+            
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return struct;
+    }
 }

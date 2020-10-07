@@ -6,10 +6,21 @@
 package ServiceAgentPepper;
 
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
+import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderAgentExceptionBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDescriptor;
 import BESA.Kernel.Social.ServiceProvider.agent.StateServiceProvider;
 import BESA.Local.Directory.AgLocalHandlerBESA;
+import ServiceAgentPepper.ActivityServices.ActivityService;
+import ServiceAgentPepper.AutonomyServices.AutonomyService;
+import ServiceAgentPepper.BatteryServices.BatteryService;
+import ServiceAgentPepper.HumanServices.HumanService;
+import ServiceAgentPepper.LocationServices.LocationService;
+import ServiceAgentPepper.MovementServices.MovementService;
+import ServiceAgentPepper.StateServices.StateService;
+import ServiceAgentPepper.VoiceServices.VoiceService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,12 +41,19 @@ public class RobotProviderAgent extends ServiceProviderBESA {
     
     public RobotProviderAgent(String alias) throws KernelAgentExceptionBESA {
         super(alias,prepareServiceProvider(),ServiceProviderBESA.getDefaultStruct() ,0.96);
+        adapterP.setRpa(this);
    }
 
     private static StateServiceProvider prepareServiceProvider()
     {
-        adapterP = new PepperAdapter();
-        StateServiceProvider estado = new StateServiceProvider(adapterP,new ServiceProviderDescriptor());
+        StateServiceProvider estado=null;
+        try {
+            adapterP = new PepperAdapter();
+            estado = new StateServiceProvider(adapterP,buildProviderDescriptor());
+            
+        } catch (ServiceProviderAgentExceptionBESA ex) {
+            Logger.getLogger(RobotProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return estado;
     }
     @Override
@@ -54,5 +72,35 @@ public class RobotProviderAgent extends ServiceProviderBESA {
     public void shutdownAgent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    private static ServiceProviderDescriptor buildProviderDescriptor() throws ServiceProviderAgentExceptionBESA
+    {
+        ServiceProviderDescriptor spd =new ServiceProviderDescriptor();
+           ActivityService as= new ActivityService();
+           as.setName(servActividades);
+           AutonomyService autos= new AutonomyService();
+           autos.setName(servAutonomia);
+           BatteryService bs= new BatteryService();
+           bs.setName(servBateria);
+           HumanService hs= new HumanService();
+           hs.setName(servHumanos);
+           LocationService ls= new LocationService();
+           ls.setName(servLocation);
+           MovementService ms= new MovementService();
+           ms.setName(servMovimiento);
+           StateService ss= new StateService();
+           ss.setName(servEstado);
+           VoiceService vs= new VoiceService();
+           vs.setName(servVoz);
+           
+           spd.addSPService(as);
+           spd.addSPService(autos);
+           spd.addSPService(bs);
+           spd.addSPService(hs);
+           spd.addSPService(ls);
+           spd.addSPService(ms);
+           spd.addSPService(ss);
+           spd.addSPService(vs);
+        
+        return spd;
+    }
 }

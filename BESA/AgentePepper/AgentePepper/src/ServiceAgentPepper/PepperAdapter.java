@@ -15,9 +15,22 @@ import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
  */
 public class PepperAdapter extends AdapterBESA{
     
+    private RobotProviderAgent rpa;
+    
     public PepperAdapter() {
         super(null,null);
+        this.rpa=null;
     }
+
+    public RobotProviderAgent getRpa() {
+        return rpa;
+    }
+
+    public void setRpa(RobotProviderAgent rpa) {
+        this.rpa = rpa;
+    }
+    
+    
 //AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
 
     public DataBESA solicitarInfoActividadAsync(SPServiceDataRequest data) {
