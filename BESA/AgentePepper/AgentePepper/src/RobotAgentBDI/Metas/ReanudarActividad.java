@@ -34,9 +34,8 @@ public class ReanudarActividad extends GoalBDI{
         SolicitarPosicionPwA solicitarPosicion = new SolicitarPosicionPwA();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        String command = null;
         
-        Plan rolePlan= new Plan(taskList, resources, command);
+        Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(recibirNotificacionR);
         rolePlan.addTask(solicitarPosicion);

@@ -33,9 +33,8 @@ public class PausarInteraccion extends GoalBDI{
         SuspenderMetas suspenderMetas = new SuspenderMetas();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        String command = null;
         
-        Plan rolePlan= new Plan(taskList, resources, command);
+        Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(detectarPwA);
         rolePlan.addTask(pausarActividad);
