@@ -33,7 +33,7 @@ public class SocketsConnector {
             infoSocket = in.readLine();
             data4QiContext = Integer.parseInt(infoSocket);
 
-            Animation myAnimation = AnimationBuilder.with(qiContext).withResources(R.raw.HH).build();
+            Animation myAnimation = AnimationBuilder.with(qiContext).withResources(R.raw.hh).build();
 
             Animate animate = AnimateBuilder.with(qiContext).withAnimation(myAnimation).build();
             animate.addOnLabelReachedListener((label, time) -> {
