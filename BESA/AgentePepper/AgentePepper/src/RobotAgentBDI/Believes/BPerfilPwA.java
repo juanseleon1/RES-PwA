@@ -8,8 +8,10 @@ import RobotAgentBDI.Believes.PerfilPwA.Imagen;
 import RobotAgentBDI.Believes.PerfilPwA.NivelEducativo;
 import java.util.Date;
 import java.util.List;
+import rational.data.InfoData;
+import rational.mapping.Believes;
 
-public class BPerfilPwA{
+public class BPerfilPwA implements Believes{
     private String nombre;
     private String apellidos;
     private Date fechaNacimiento;
@@ -23,10 +25,7 @@ public class BPerfilPwA{
     private PerfilMedico medico;
     private List<Familiar> familiares;
 
-    
-    public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     public String getNombre() {
         return nombre;
     }
@@ -121,6 +120,19 @@ public class BPerfilPwA{
 
     public void setFamiliares(List<Familiar> familiares) {
         this.familiares = familiares;
+    }
+
+    @Override
+    public boolean update(InfoData si) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void updateToDB() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void getFromDB() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

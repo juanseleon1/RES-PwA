@@ -9,7 +9,6 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
 import BESA.Kernel.Agent.StructBESA;
-import ServiceProviderAgent.ServiceProviderAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +30,7 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
             struct.addBehavior("");
             struct.bindGuard(ProcessEmotionGuard, ProcessEmotionGuard.class);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(ServiceProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmotionalAnalyzerAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

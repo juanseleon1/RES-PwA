@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.CambiarActividad.*;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -25,7 +26,7 @@ public class CambiarActividad extends GoalBDI{
 
         DetenerPlan detenerPlan = new DetenerPlan();
         IniciarNuevoPlan iniciarNuevoP = new IniciarNuevoPlan();
-        RecibirSolicitudCambio recibirSolicitudC = new RecibirSolitudCambio();
+        RecibirSolicitudCambio recibirSolicitudC = new RecibirSolicitudCambio();
 
         Plan rolePlan= new Plan();
 

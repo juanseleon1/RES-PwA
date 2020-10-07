@@ -9,6 +9,8 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.CambiarCancion.*;
+import Tareas.PwA.EvaluarEstadoEmocional;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -23,9 +25,9 @@ public class CambiarCancion extends GoalBDI{
 
     public static CambiarCancion buildGoal() {
     
-        SolicitarEstadoEmocional solicitarEstadoE = new SolicitarEstadoEmocional();
+        EvaluarEstadoEmocional solicitarEstadoE = new EvaluarEstadoEmocional();
         BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
-        ConfimarCancion confirmarCancion = new ConfirmarCancion();
+        ConfirmarCancion confirmarCancion = new ConfirmarCancion();
         RepetirCancion repetirCancion = new RepetirCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
 

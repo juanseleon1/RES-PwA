@@ -12,7 +12,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class ResistirInfoInteraccion extends Task{
+public class PersistirInfoInteraccion extends Task{
 
     @Override
     public void executeTask(Believes parameters) {

@@ -5,10 +5,7 @@
  */
 package SensorHandlerAgent;
 
-import BESA.Kernel.Agent.Event.DataBESA;
-import EmotionalAnalyzerAgent.*;
 import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.Agent.PeriodicGuardBESA;
 
 /**

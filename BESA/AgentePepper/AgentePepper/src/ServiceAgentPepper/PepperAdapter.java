@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Adapter;
+package ServiceAgentPepper;
 
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
@@ -12,10 +12,10 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
  *
  * @author juans
  */
-public class Adapter extends AdapterBESA{
+public class PepperAdapter extends AdapterBESA{
     
-    public Adapter(String eventToSendType, AgHandlerBESA agh) {
-        super(eventToSendType, agh);
-    }
+    public PepperAdapter() {
+        super(null,null);
+    }    
     
 }
