@@ -11,9 +11,12 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -28,7 +31,9 @@ public class ConversarEmpaticamente extends GoalBDI{
         EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
     
-        Plan rolePlan= new Plan();
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
 
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(preguntarSentimientos);

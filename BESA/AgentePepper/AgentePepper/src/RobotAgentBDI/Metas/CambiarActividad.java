@@ -10,9 +10,12 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.CambiarActividad.*;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -28,7 +31,9 @@ public class CambiarActividad extends GoalBDI{
         IniciarNuevoPlan iniciarNuevoP = new IniciarNuevoPlan();
         RecibirSolicitudCambio recibirSolicitudC = new RecibirSolicitudCambio();
 
-        Plan rolePlan= new Plan();
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
 
         rolePlan.addTask(recibirSolicitudC);
         rolePlan.addTask(detenerPlan);

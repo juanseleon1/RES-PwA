@@ -32,11 +32,18 @@ public class EntrarModoKaraoke extends GoalBDI{
         ActivarSubtitulos activarSubtitulos = new ActivarSubtitulos();
         BuscarLetra buscarLetras = new BuscarLetra();
         EvaluarPerfilPwA evaluarPerfil = new EvaluarPerfilPwA();
+<<<<<<< HEAD
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         String command = null;
         
         Plan rolePlan= new Plan(taskList, resources, command);
+=======
+
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
+>>>>>>> 826a4a062fd89dcfc416bcd3429fc7547c8226dc
         
         rolePlan.addTask(evaluarPerfil);
         rolePlan.addTask(buscarLetras);

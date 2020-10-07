@@ -13,9 +13,12 @@ import Tareas.CambiarEnriquecimientoHistoria.EvaluarEnriquecer;
 import Tareas.CambiarEnriquecimientoHistoria.SolicitarActivacionActividad;
 import Tareas.CambiarEnriquecimientoHistoria.SolicitarAtencion;
 import Tareas.PwA.EvaluarConcentracionAtencion;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -33,7 +36,9 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         SolicitarActivacionActividad solicitarActivacionA = new SolicitarActivacionActividad();
         SolicitarAtencion solicitarAtencion = new SolicitarAtencion();
 
-        Plan rolePlan= new Plan();
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
 
         rolePlan.addTask(evaluarCA);
         rolePlan.addTask(evaluarEnriquecer);

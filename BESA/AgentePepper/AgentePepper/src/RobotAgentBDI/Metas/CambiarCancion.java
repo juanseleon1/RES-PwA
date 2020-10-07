@@ -11,9 +11,12 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.CambiarCancion.*;
 import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -31,7 +34,9 @@ public class CambiarCancion extends GoalBDI{
         RepetirCancion repetirCancion = new RepetirCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
 
-        Plan rolePlan= new Plan();
+        List<String> resources= new ArrayList<>();
+        List<Task> tarea= new ArrayList<>();
+        Plan rolePlan= new Plan(tarea,resources,null);
 
         rolePlan.addTask(solicitarEstadoE);
         rolePlan.addTask(seleccionarCancion);
