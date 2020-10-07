@@ -23,7 +23,7 @@ public class CancelarActividad extends GoalBDI{
 
     public static CancelarActividad buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new SolicitarEstadoEmocional();
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
         CancelarActividad cancelarActividad = new CancelarActividad();
