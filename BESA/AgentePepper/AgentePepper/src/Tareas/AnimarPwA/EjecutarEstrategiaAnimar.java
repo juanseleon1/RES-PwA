@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.ReiniciarActividad;
+package Tareas.AnimarPwA;
 
 import rational.mapping.Believes;
 import rational.mapping.Task;
@@ -12,7 +12,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class ReiniciarActividad extends Task{
+public class EjecutarEstrategiaAnimar extends Task{
 
     @Override
     public void executeTask(Believes parameters) {

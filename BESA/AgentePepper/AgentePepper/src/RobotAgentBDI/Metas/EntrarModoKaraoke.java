@@ -9,6 +9,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
+import Tareas.EntrarModoKaraoke.BuscarLetra;
+import Tareas.EntrarModoKaraoke.EvaluarPerfilPwA;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -24,7 +27,7 @@ public class EntrarModoKaraoke extends GoalBDI{
     public static EntrarModoKaraoke buildGoal() {
 
         ActivarSubtitulos activarSubtitulos = new ActivarSubtitulos();
-        BuscarLetras buscarLetras = new BuscarLetras();
+        BuscarLetra buscarLetras = new BuscarLetra();
         EvaluarPerfilPwA evaluarPerfil = new EvaluarPerfilPwA();
 
         Plan rolePlan= new Plan();

@@ -9,6 +9,10 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.PwA.ActualizarPerfil;
+import Tareas.PwA.EvaluarConcentracionAtencion;
+import Tareas.PwA.EvaluarEstadoEmocional;
+import Tareas.ReiniciarActividad.ReiniciarActividadTask;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -25,7 +29,7 @@ public class ReiniciarActividad extends GoalBDI{
         EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
-        ReiniciarActividad reiniciarActividad = new ReiniciarActividad();
+        ReiniciarActividadTask reiniciarActividad = new ReiniciarActividadTask();
 
         Plan rolePlan= new Plan();
 

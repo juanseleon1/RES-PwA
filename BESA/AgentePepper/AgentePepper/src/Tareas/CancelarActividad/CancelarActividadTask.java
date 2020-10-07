@@ -12,7 +12,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class CancelarActividad extends Task{
+public class CancelarActividadTask extends Task{
 
     @Override
     public void executeTask(Believes parameters) {
