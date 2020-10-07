@@ -20,6 +20,7 @@ public class VoiceService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("executeService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarVoiceAsync(data);
     }

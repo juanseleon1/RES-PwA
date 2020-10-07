@@ -54,6 +54,11 @@ public class SensorData extends InfoData{
     public void setDataPE(HashMap<String, Object> dataPE) {
         this.dataPE = dataPE;
     }
+
+    @Override
+    public String toString() {
+        return "SensorData{" + "dataType=" + dataType + ", infoReceived=" + infoReceived + ", dataP=" + dataP + ", dataPE=" + dataPE + '}';
+    }
     
     
 }

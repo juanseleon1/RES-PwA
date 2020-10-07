@@ -29,6 +29,7 @@ public class ProcessEmotionGuard extends GuardBESA{
     public void funcExecGuard(EventBESA ebesa) {
          try {
             SensorData infoRecibida = (SensorData)ebesa.getData();
+            System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
             infoRecibida.setDataPE(procesarEmociones(infoRecibida));
             infoRecibida.setDataP(null);
             AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAid(RunAgentePepper.aliasRobotAgent);
@@ -42,7 +43,8 @@ public class ProcessEmotionGuard extends GuardBESA{
     }
 
     private HashMap<String, Object> procesarEmociones(SensorData infoRecibida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("procesarEmociones Activa");
+        return null;
     }
     
 }

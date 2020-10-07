@@ -20,6 +20,7 @@ public class HumanService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("HumanService Solicitado");
                 PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarInfoHumanAsync(data);
     }

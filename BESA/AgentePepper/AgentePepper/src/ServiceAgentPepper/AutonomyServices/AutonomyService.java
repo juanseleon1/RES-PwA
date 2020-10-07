@@ -20,6 +20,7 @@ public class AutonomyService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("AutonomyService Solicitado");
                 PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarInfoAutonomyAsync(data);
     }

@@ -20,6 +20,7 @@ public class MovementService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("MovementService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarMovementAsync(data);
     }

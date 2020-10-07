@@ -26,11 +26,11 @@ public class GetInfoGuard extends GuardBESA{
 
     @Override
     public void funcExecGuard(EventBESA ebesa) {
-        
         try {
             SensorData infoRecibida = (SensorData)ebesa.getData();
             //ACTIVIDAD,EMOCIONES,INACTIVIDAD,INTHABLA,INTSENSORES,BATERIA,RETROALIM
-            
+            System.out.println("GetInfoGuard Event Received: "+infoRecibida);
+
             infoRecibida.setDataP(procesarDatos(infoRecibida));
             infoRecibida.setInfoReceived(null);
             AgHandlerBESA handler;
@@ -54,7 +54,8 @@ public class GetInfoGuard extends GuardBESA{
     }
 
     private HashMap<String, Object> procesarDatos(SensorData infoRecibida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("GetInfoGuard procesarDatos exec: "+infoRecibida);
+        return null;
     }
     
 }

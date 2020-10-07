@@ -16,7 +16,8 @@ public class BEstadoInteraccion implements Believes{
 
     @Override
     public boolean update(InfoData si) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("BEstadoInteraccion update Received: "+si);
+        return true;
     }
     
 }
