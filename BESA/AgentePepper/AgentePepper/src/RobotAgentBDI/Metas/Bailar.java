@@ -22,10 +22,26 @@ public class Bailar extends GoalBDI{
     private static String descrip;
 
     public static Bailar buildGoal() {
+        //crear clases tareas y agregar al plan
+        EjecutarBaile ejecutarBaile = new EjecutarBaile();
+        CambiarBaile cambiarBaile = new CambiarBaile();
+        FinalizarBaile finalizarBaile = new FinalizarBaile();
+        RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
+        RepetirBaile repetirBaile = new RepetirBaile();
+        SeleccionarBaile seleccionarBaile = new SeleccionarBaile();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(seleccionarBaile);
+        rolePlan.addTask(ejecutarBaile);
+        rolePlan.addTask(recibirRetroalimentacion);
+        rolePlan.addTask(cambiarBaile);
+        rolePlan.addTask(repetirBaile);
+        rolePlan.addTask(finalizarBaile);
+
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
         Bailar b= new Bailar(0, musicTherapyRole, descrip, GoalBDITypes.DUTY);
-        //crear clases tareas y agregar al plan
+        
         return b;
     }
 

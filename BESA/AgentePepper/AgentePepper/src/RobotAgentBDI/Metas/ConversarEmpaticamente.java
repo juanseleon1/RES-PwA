@@ -19,11 +19,18 @@ import rational.mapping.Plan;
  */
 public class ConversarEmpaticamente extends GoalBDI{
 
-    
-        private static String descrip;
+    private static String descrip;
 
     public static ConversarEmpaticamente buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
+    
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(preguntarSentimientos);
+
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
         ConversarEmpaticamente b= new ConversarEmpaticamente(0, convEmpRole, descrip, GoalBDITypes.DUTY);
         return b;

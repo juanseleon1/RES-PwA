@@ -23,7 +23,17 @@ public class CambiarDificultad extends GoalBDI{
         private static String descrip;
 
     public static CambiarDificultad buildGoal() {
+
+        EvaluarDesempeño evaluarDesempeño = new EvaluarDesempeño();
+        SeleccionarEstrategiaDificultad seleccionarEstrategiaD = new SeleccionarEstrategiaDificultad();
+        SolicitarEstrategia solicitarEstrategia = new SolicitarEstrategia();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarDesempeño);
+        rolePlan.addTask(seleccionarEstrategiaD);
+        rolePlan.addTask(solicitarEstrategia);
+
         RationalRole cambiarDifRole = new RationalRole(descrip, rolePlan);
         CambiarDificultad b= new CambiarDificultad(0, cambiarDifRole, descrip, GoalBDITypes.DUTY);
         return b;

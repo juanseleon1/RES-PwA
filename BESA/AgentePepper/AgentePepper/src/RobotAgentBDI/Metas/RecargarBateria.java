@@ -21,7 +21,21 @@ public class RecargarBateria extends GoalBDI{
                 private static String descrip;
 
     public static RecargarBateria buildGoal() {
+
+        DetenerPlan detenerPlan = new DetenerPlan();
+        MoverseEstacionCarga moverseEstacionCarga = new MoverseEstacionCarga();
+        ReportarNivelBateria reportarNivelBateria = new ReportarNivelBateria();
+        SuspenderRobot suspenderRobot = new SuspenderRobot();
+        UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(detenerPlan);
+        rolePlan.addTask(reportarNivelBateria);
+        rolePlan.addTask(ubicarEstacionCarga);
+        rolePlan.addTask(moverseEstacionCarga);
+        rolePlan.addTask(suspenderRobot);
+
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);
         RecargarBateria b= new RecargarBateria(0, recBatRole, descrip, GoalBDITypes.DUTY);
         return b;

@@ -22,7 +22,17 @@ public class ReanudarActividad extends GoalBDI{
                 private static String descrip;
 
     public static ReanudarActividad buildGoal() {
+
+        ReanudarPlan reanudarPlan = new ReanudarPlan();
+        RecibirNotificacionReanudar recibirNotificacionR = new RecibirNotificacionReanudar();
+        SolicitarPosicionPwA solicitarPosicion = new SolicitarPosicionPwA();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(recibirNotificacionR);
+        rolePlan.addTask(solicitarPosicion);
+        rolePlan.addTask(reanudarPlan);
+        
         RationalRole reaActnRole = new RationalRole(descrip, rolePlan);
         ReanudarActividad b= new ReanudarActividad(0, reaActnRole, descrip, GoalBDITypes.DUTY);
         return b;

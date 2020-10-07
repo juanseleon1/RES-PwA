@@ -20,10 +20,26 @@ import rational.mapping.Plan;
 public class EstimularEmocionalmente extends GoalBDI{
 
     
-            private static String descrip;
+    private static String descrip;
 
     public static EstimularEmocionalmente buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        ContinuarActividad continuarActividad = new ContinuarActividad();
+        EjecutarEstrategia ejecutarEstrategia = new EjecutarEstrategia();
+        InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();
+        SeleccionarEstrategiaEmocional seleccionarEstrategiaE = new SeleccionarEstrategiaEmocional();
+        RetroalimentarBDI retroalimentar = new RetroalimentarBDI();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(interpretarEstadoFlujo);
+        rolePlan.addTask(seleccionarEstrategiaE);
+        rolePlan.addTask(ejecutarEstrategia);
+        rolePlan.addTask(retroalimentar);
+        rolePlan.addTask(continuarActividad);
+
         RationalRole estimEmoRole = new RationalRole(descrip, rolePlan);
         EstimularEmocionalmente b= new EstimularEmocionalmente(0, estimEmoRole, descrip, GoalBDITypes.DUTY);
         return b;

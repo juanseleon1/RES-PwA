@@ -21,7 +21,19 @@ public class ReiniciarActividad extends GoalBDI{
                 private static String descrip;
 
     public static ReiniciarActividad buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
+        ReiniciarActividad reiniciarActividad = new ReiniciarActividad();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(evaluarCA);
+        rolePlan.addTask(actualizarPerfil);
+        rolePlan.addTask(reiniciarActividad);
+
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
         ReiniciarActividad b= new ReiniciarActividad(0, reiActRole, descrip, GoalBDITypes.DUTY);
         return b;

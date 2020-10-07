@@ -19,10 +19,19 @@ import rational.mapping.Plan;
  */
 public class AnimarPwA extends GoalBDI{
 
-        private static String descrip;
+    private static String descrip;
 
     public static AnimarPwA buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        EjecutarEstrategia ejecutarEstrategia = new EjecutarEstrategia();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(solicitarEstadoE);
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(ejecutarEstrategia);
+
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
         AnimarPwA b= new AnimarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
         return b;

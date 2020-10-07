@@ -23,7 +23,19 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         private static String descrip;
 
     public static CambiarEnriquecimientoHistoria buildGoal() {
+
+        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        EvaluarEnriquecer evaluarEnriquecer = new EvaluarEnriquecer();
+        SolicitarActivacionActividad solicitarActivacionA = new SolicitarActivacionActividad();
+        SolicitarAtencion solicitarAtencion = new SolicitarAtencion();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(solicitarCA);
+        rolePlan.addTask(evaluarEnriquecer);
+        rolePlan.addTask(solicitarActivacionA);
+        rolePlan.addTask(solicitarAtencion);
+        
         RationalRole cehRole = new RationalRole(descrip, rolePlan);
         CambiarEnriquecimientoHistoria b= new CambiarEnriquecimientoHistoria(0, cehRole, descrip, GoalBDITypes.DUTY);
         return b;

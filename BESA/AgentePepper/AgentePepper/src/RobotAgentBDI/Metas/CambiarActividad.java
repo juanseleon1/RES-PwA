@@ -22,7 +22,17 @@ public class CambiarActividad extends GoalBDI{
         private static String descrip;
 
     public static CambiarActividad buildGoal() {
+
+        DetenerPlan detenerPlan = new DetenerPlan();
+        IniciarNuevoPlan iniciarNuevoP = new IniciarNuevoPlan();
+        RecibirSolicitudCambio recibirSolicitudC = new RecibirSolitudCambio();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(recibirSolicitudC);
+        rolePlan.addTask(detenerPlan);
+        rolePlan.addTask(iniciarNuevoP);
+
         RationalRole changeRole = new RationalRole(descrip, rolePlan);
         CambiarActividad b= new CambiarActividad(0, changeRole, descrip, GoalBDITypes.DUTY);
         return b;

@@ -22,7 +22,21 @@ public class CambiarCancion extends GoalBDI{
         private static String descrip;
 
     public static CambiarCancion buildGoal() {
+    
+        SolicitarEstadoEmocional solicitarEstadoE = new SolicitarEstadoEmocional();
+        BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
+        ConfimarCancion confirmarCancion = new ConfirmarCancion();
+        RepetirCancion repetirCancion = new RepetirCancion();
+        SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(solicitarEstadoE);
+        rolePlan.addTask(seleccionarCancion);
+        rolePlan.addTask(busquedaCancionYT);
+        rolePlan.addTask(confirmarCancion);
+        rolePlan.addTask(repetirCancion);
+
         RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);
         CambiarCancion b= new CambiarCancion(0, cambiarCancionRole, descrip, GoalBDITypes.DUTY);
         return b;

@@ -21,7 +21,17 @@ public class PausarInteraccion extends GoalBDI{
             private static String descrip;
 
     public static PausarInteraccion buildGoal() {
+
+        DetectarPwA detectarPwA = new DetectarPwA();
+        PausarActividad pausarActividad = new PausarActividad();
+        SuspenderMetas suspenderMetas = new SuspenderMetas();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(pausarActividad);
+        rolePlan.addTask(suspenderMetas);
+
         RationalRole PaIntRole = new RationalRole(descrip, rolePlan);
         PausarInteraccion b= new PausarInteraccion(0, PaIntRole, descrip, GoalBDITypes.DUTY);
         return b;

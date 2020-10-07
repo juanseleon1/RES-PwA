@@ -22,7 +22,17 @@ public class MantenerAtencionPwA extends GoalBDI{
             private static String descrip;
 
     public static MantenerAtencionPwA buildGoal() {
+
+        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        SeleccionarEstrategiaAtencion seleccionarEstrategiaA = new SeleccionarEstrategiaAtencion();
+        EjecutarEstrategia ejecutarEstrategia = new EjecutarEstrategia();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarCA);
+        rolePlan.addTask(seleccionarEstrategiaA);
+        rolePlan.addTask(ejecutarEstrategia);
+
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
         MantenerAtencionPwA b= new MantenerAtencionPwA(0, mantAtenRole, descrip, GoalBDITypes.DUTY);
         return b;
