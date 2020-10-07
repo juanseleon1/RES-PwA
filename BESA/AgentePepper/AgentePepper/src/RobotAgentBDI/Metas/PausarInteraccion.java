@@ -41,36 +41,43 @@ public class PausarInteraccion extends GoalBDI{
     }
     public PausarInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
+        System.out.println("Meta PausarInteraccion created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion evaluateViability");
+        return 0;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion detectGoal");
+        return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion evaluatePlausibility");
+        return 0;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion evaluateContribution");
+        return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion predictResultUnlegality");
+        return false;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta PausarInteraccion goalSucceeded");
+        return false;
     }
     
 }

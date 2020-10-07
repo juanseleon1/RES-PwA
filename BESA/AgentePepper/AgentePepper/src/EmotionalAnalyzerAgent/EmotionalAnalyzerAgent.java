@@ -22,6 +22,7 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
     public static String ProcessEmotionGuard= "ProcessEmotionGuard";
     public EmotionalAnalyzerAgent(String alias) throws KernelAgentExceptionBESA {
         super(alias, new EmotionalAnalyzerState(), buildEAStruct(), 0.96);
+        System.out.println("EmotionalAnalyzerAgent Iniciado");
     }
 
     @Override

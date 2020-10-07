@@ -44,6 +44,7 @@ public class RunAgentePepper {
     public static void main(String[] args) {
         try {
             AdmBESA.getInstance();
+            System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals());
             EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent);
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);

@@ -33,6 +33,7 @@ public class RobotAgentBelieves implements Believes{
    @Override
     public boolean update(InfoData si) {
         SensorData infoRecibida= (SensorData)si;
+        System.out.println("RobotAgentBelieves update Received: "+si);
         switch (infoRecibida.getDataType()) {
             case ACTIVIDAD:
                 bEstadoActividad.update(si);

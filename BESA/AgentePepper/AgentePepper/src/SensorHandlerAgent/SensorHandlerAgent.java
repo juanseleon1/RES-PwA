@@ -20,9 +20,10 @@ import java.util.logging.Logger;
 public class SensorHandlerAgent extends AgentBESA {
 public static String GetEmotionalInfoPeriodicGuard= "GetEmotionalInfoPeriodicGuard";
 public static String GetOtherInfoPeriodicGuard= "GetOtherInfoPeriodicGuard";
-public static String RequestInfoGuard= "RequestInfoGuard";
+public static String GetInfoGuard= "GetInfoGuard";
     public SensorHandlerAgent(String alias) throws KernelAgentExceptionBESA {
         super(alias, new SensorHandlerState(), buildSensorHandlerStruct(), 0.96);
+        System.out.println("SensorHandlerAgent Iniciado");
     }
 
     @Override
@@ -44,8 +45,8 @@ public static String RequestInfoGuard= "RequestInfoGuard";
             struct.bindGuard(GetEmotionalInfoPeriodicGuard, RequestEmotionalInfoPeriodicGuard.class);
             struct.addBehavior("GetOtherInfoPeriodicGuard");
             struct.bindGuard(GetOtherInfoPeriodicGuard, RequestOtherInfoPeriodicGuard.class);
-            struct.addBehavior("RequestInfoGuard");
-            struct.bindGuard(RequestInfoGuard, GetInfoGuard.class);
+            struct.addBehavior("GetInfoGuard");
+            struct.bindGuard(GetInfoGuard, GetInfoGuard.class);
             
         } catch (ExceptionBESA ex) {
             Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);

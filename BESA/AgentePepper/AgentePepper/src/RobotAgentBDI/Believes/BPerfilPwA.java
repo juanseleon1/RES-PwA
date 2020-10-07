@@ -124,15 +124,17 @@ public class BPerfilPwA implements Believes{
 
     @Override
     public boolean update(InfoData si) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("BPerfilPwA update Received: "+si);
+        return true;
     }
 
-    void updateToDB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public void updateToDB() {
+        System.out.println("updateToDB Received ");
+       
     }
 
-    void getFromDB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void getFromDB() {
+        System.out.println("getFromDB Received ");
     }
 
 

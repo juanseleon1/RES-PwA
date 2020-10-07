@@ -20,6 +20,7 @@ public class LocationService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("LocationService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarInfoLocationAsync(data);
     }

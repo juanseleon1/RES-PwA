@@ -53,36 +53,43 @@ public class Bailar extends GoalBDI{
 
     public Bailar(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
+        System.out.println("Meta Bailar created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar evaluateViability");
+        return 0;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar detectGoal");
+        return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar evaluatePlausibility");
+        return 0;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar evaluateContribution");
+        return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar predictResultUnlegality");
+        return false;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Bailar goalSucceeded");
+        return false;
     }
     
 }

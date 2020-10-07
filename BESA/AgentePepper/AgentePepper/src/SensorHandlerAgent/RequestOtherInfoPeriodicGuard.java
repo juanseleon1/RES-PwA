@@ -16,6 +16,7 @@ public class RequestOtherInfoPeriodicGuard extends PeriodicGuardBESA{
 
     @Override
     public void funcPeriodicExecGuard(EventBESA ebesa) {
+         System.out.println("RequestOtherInfoPeriodicGuard Event Received: "+ebesa);
     }
 
     

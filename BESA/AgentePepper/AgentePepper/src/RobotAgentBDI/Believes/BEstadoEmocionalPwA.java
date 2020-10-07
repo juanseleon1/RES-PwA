@@ -16,7 +16,8 @@ public class BEstadoEmocionalPwA implements Believes{
 
     @Override
     public boolean update(InfoData si) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("BEstadoEmocionalPwA update Received: "+si);
+        return true;
     }
     
 }

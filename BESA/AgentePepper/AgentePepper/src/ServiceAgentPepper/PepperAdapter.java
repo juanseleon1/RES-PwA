@@ -34,34 +34,42 @@ public class PepperAdapter extends AdapterBESA{
 //AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
 
     public DataBESA solicitarInfoActividadAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoActividadAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarInfoAutonomyAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoAutonomyAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarInfoBatteryAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoBatteryAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarInfoHumanAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoHumanAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarInfoLocationAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoLocationAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarInfoStateAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarInfoStateAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarVoiceAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarVoiceAsync Iniciado");
+        return null;
     }
 
     public DataBESA solicitarMovementAsync(SPServiceDataRequest data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("solicitarMovementAsync Iniciado");
+        return null;
     }
 }

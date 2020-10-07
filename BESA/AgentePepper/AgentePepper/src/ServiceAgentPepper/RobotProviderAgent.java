@@ -42,6 +42,7 @@ public class RobotProviderAgent extends ServiceProviderBESA {
     public RobotProviderAgent(String alias) throws KernelAgentExceptionBESA {
         super(alias,prepareServiceProvider(),ServiceProviderBESA.getDefaultStruct() ,0.96);
         adapterP.setRpa(this);
+        System.out.println("RobotProviderAgent Iniciado");
    }
 
     private static StateServiceProvider prepareServiceProvider()
@@ -70,8 +71,7 @@ public class RobotProviderAgent extends ServiceProviderBESA {
 
     @Override
     public void shutdownAgent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        }
     private static ServiceProviderDescriptor buildProviderDescriptor() throws ServiceProviderAgentExceptionBESA
     {
         ServiceProviderDescriptor spd =new ServiceProviderDescriptor();
@@ -91,7 +91,6 @@ public class RobotProviderAgent extends ServiceProviderBESA {
            ss.setName(servEstado);
            VoiceService vs= new VoiceService();
            vs.setName(servVoz);
-           
            spd.addSPService(as);
            spd.addSPService(autos);
            spd.addSPService(bs);

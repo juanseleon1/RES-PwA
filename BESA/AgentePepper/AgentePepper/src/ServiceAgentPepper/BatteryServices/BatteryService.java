@@ -20,6 +20,7 @@ public class BatteryService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+        System.out.println("BatteryService Solicitado");
                PepperAdapter padapter= (PepperAdapter)adapter;
         return padapter.solicitarInfoBatteryAsync(data);
     }
