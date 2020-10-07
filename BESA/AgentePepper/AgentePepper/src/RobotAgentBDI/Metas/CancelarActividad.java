@@ -9,6 +9,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.PwA.ActualizarPerfil;
+import Tareas.PwA.EvaluarConcentracionAtencion;
+import Tareas.PwA.EvaluarEstadoEmocional;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -23,7 +26,7 @@ public class CancelarActividad extends GoalBDI{
 
     public static CancelarActividad buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new SolicitarEstadoEmocional();
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
         ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
         CancelarActividad cancelarActividad = new CancelarActividad();

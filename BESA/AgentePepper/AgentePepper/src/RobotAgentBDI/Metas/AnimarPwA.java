@@ -9,6 +9,8 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.AnimarPwA.EjecutarEstrategia;
+import Tareas.PwA.EvaluarEstadoEmocional;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -28,7 +30,6 @@ public class AnimarPwA extends GoalBDI{
 
         Plan rolePlan= new Plan();
 
-        rolePlan.addTask(solicitarEstadoE);
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(ejecutarEstrategia);
 
