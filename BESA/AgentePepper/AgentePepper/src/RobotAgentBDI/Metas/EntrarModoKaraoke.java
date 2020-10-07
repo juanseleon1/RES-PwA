@@ -19,10 +19,20 @@ import rational.mapping.Plan;
  */
 public class EntrarModoKaraoke extends GoalBDI{
 
-            private static String descrip;
+    private static String descrip;
 
     public static EntrarModoKaraoke buildGoal() {
+
+        ActivarSubtitulos activarSubtitulos = new ActivarSubtitulos();
+        BuscarLetras buscarLetras = new BuscarLetras();
+        EvaluarPerfilPwA evaluarPerfil = new EvaluarPerfilPwA();
+
         Plan rolePlan= new Plan();
+        
+        rolePlan.addTask(evaluarPerfil);
+        rolePlan.addTask(buscarLetras);
+        rolePlan.addTask(activarSubtitulos);
+
         RationalRole karaokeRole = new RationalRole(descrip, rolePlan);
         EntrarModoKaraoke b= new EntrarModoKaraoke(0, karaokeRole, descrip, GoalBDITypes.DUTY);
         return b;

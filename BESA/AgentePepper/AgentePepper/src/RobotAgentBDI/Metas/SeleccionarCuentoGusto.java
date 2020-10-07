@@ -19,10 +19,26 @@ import rational.mapping.Plan;
  */
 public class SeleccionarCuentoGusto extends GoalBDI{
     
-                private static String descrip;
+    private static String descrip;
 
     public static SeleccionarCuentoGusto buildGoal() {
+
+        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        BuscarAnimaciones buscarAnimaciones = new BuscarAnimaciones();
+        MoverseFrentePwA moverseFrente = new MoverseFrentePwA();
+        SeleccionarCuento seleccionarCuento = new SeleccionarCuento();
+        DetectarPwA detectarPwA = new DetectarPwA();
+        VerificarObstaculos verificarObstaculos = new VerificarObstaculos();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(evaluarCA);
+        rolePlan.addTask(seleccionarCuento);
+        rolePlan.addTask(buscarAnimaciones);
+        rolePlan.addTask(verificarObstaculos);
+        rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(moverseFrente);
+
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
         SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(0, selCuenGRole, descrip, GoalBDITypes.DUTY);
         return b;

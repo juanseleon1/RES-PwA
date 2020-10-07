@@ -19,11 +19,22 @@ import rational.mapping.Plan;
  */
 public class CancelarActividad extends GoalBDI{
 
-    
-        private static String descrip;
+    private static String descrip;
 
     public static CancelarActividad buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new SolicitarEstadoEmocional();
+        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
+        CancelarActividad cancelarActividad = new CancelarActividad();
+
         Plan rolePlan= new Plan();
+        
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(evaluarCA);
+        rolePlan.addTask(actualizarPerfil);
+        rolePlan.addTask(cancelarActividad);
+
         RationalRole cancelarActRole = new RationalRole(descrip, rolePlan);
         CancelarActividad b= new CancelarActividad(0, cancelarActRole, descrip, GoalBDITypes.DUTY);
         return b;

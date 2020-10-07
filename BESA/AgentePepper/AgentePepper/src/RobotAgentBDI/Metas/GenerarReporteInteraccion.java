@@ -22,7 +22,17 @@ public class GenerarReporteInteraccion extends GoalBDI{
             private static String descrip;
 
     public static GenerarReporteInteraccion buildGoal() {
+
+        PersistirInfoInteraccion persistirInfoI = new PersistirInfoInteraccion();
+        RecopilarInfoInteraccion recopilarInfoI = new RecopilarInfoInteraccion();
+        MostrarInfo mostrarInfo = new MostrarInfo();
+
         Plan rolePlan= new Plan();
+
+        rolePlan.addTask(persistirInfoI);
+        rolePlan.addTask(recopilarInfoI);
+        rolePlan.addTask(mostrarInfo);
+
         RationalRole genRepRole = new RationalRole(descrip, rolePlan);
         GenerarReporteInteraccion b= new GenerarReporteInteraccion(0, genRepRole, descrip, GoalBDITypes.DUTY);
         return b;
