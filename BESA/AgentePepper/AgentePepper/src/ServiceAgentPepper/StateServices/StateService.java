@@ -9,17 +9,19 @@ import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPService;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import ServiceAgentPepper.PepperAdapter;
 
 /**
  *
  * @author juans
  */
-public class HumanService extends SPService{
+public class StateService extends SPService{
 
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PepperAdapter padapter= (PepperAdapter)adapter;
+        return padapter.solicitarInfoStateAsync(data);
     }
     
 }

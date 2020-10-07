@@ -21,7 +21,7 @@ public class ActivityService extends SPService{
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
         PepperAdapter padapter= (PepperAdapter)adapter;
-        
+        return padapter.solicitarInfoActividadAsync(data);
     }
     
 }

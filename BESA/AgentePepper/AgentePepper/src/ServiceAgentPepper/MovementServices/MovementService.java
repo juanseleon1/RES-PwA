@@ -9,6 +9,7 @@ import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPService;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import ServiceAgentPepper.PepperAdapter;
 
 /**
  *
@@ -19,7 +20,8 @@ public class MovementService extends SPService{
         
     @Override
     public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PepperAdapter padapter= (PepperAdapter)adapter;
+        return padapter.solicitarMovementAsync(data);
     }
     
 }
