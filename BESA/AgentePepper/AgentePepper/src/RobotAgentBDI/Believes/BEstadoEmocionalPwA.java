@@ -20,4 +20,5 @@ public class BEstadoEmocionalPwA implements Believes{
         return true;
     }
     
+    
 }
