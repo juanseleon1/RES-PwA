@@ -15,7 +15,6 @@ public class showEmotion extends RobotActivity implements RobotLifecycleCallback
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override
