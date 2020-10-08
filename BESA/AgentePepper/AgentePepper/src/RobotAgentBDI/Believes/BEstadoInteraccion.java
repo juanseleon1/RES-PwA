@@ -14,6 +14,14 @@ import rational.mapping.Believes;
  */
 public class BEstadoInteraccion implements Believes{
 
+    private boolean cambioDificultadVoz=false;
+    private boolean ayudaAcitivdadSolicitada=false;
+    private boolean cambioEnriqPos=false;
+    private boolean cambioEnriqNeg=false;
+    private boolean pausarInt=false;
+    private boolean cancelarInt=false;
+    private boolean reiniciarInt=false;
+    private long tiempoSinInt=0;
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoInteraccion update Received: "+si);

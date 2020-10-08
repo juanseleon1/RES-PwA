@@ -13,7 +13,9 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInactivo implements Believes{
-
+    private boolean sistemaSuspendido=false;
+    private long tiempoInicialSinInt;
+            
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoInactivo update Received: "+si);

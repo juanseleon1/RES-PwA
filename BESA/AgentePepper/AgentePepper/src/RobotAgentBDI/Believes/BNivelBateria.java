@@ -13,7 +13,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BNivelBateria implements Believes{
-
+    private int bateria;
     @Override
     public boolean update(InfoData si) {
         System.out.println("BNivelBateria update Received: "+si);

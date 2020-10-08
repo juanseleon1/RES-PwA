@@ -18,7 +18,8 @@ import SensorHandlerAgent.SensorDataType;
 public class PepperAdapter extends AdapterBESA{
     
     private RobotProviderAgent rpa;
-    
+    private final int serverPort=7896;
+    private final String IP= "127.0.0.1"; 
     public PepperAdapter() {
         super(null,null);
         this.rpa=null;
@@ -57,9 +58,19 @@ public class PepperAdapter extends AdapterBESA{
     }
 
     public DataBESA solicitarInfoHumanAsync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoHumanAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.EMOCIONES);
+        SensorData sd=null;
+//        try {
+            System.out.println("solicitarInfoHumanAsync Iniciado");
+            //Socket s = new Socket(IP, serverPort);
+//            //ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
+            System.out.println("Enviando solicitud al Robot");
+//            //oos.writeObject((Integer)0);
+            sd= new SensorData(null);
+            sd.setDataType(SensorDataType.EMOCIONES);
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         return sd;
     }
 
