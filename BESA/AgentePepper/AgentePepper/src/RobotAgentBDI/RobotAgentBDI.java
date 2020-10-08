@@ -34,33 +34,12 @@ public class RobotAgentBDI extends AgentBDI{
 
     public RobotAgentBDI(String alias, List<GoalBDI> RAGoals) throws ExceptionBESA {
         super(alias, new RobotAgentBelieves(), RAGoals, 0.96, 0);
-        this.startBDIsystem();
         System.out.println("RobotAgentBDI Iniciado");
         
     }
     
     
-    private void startBDIsystem()
-    {
-             try{
-            this.start();
-            this.startTimers();
-            PeriodicDataBESA data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
-            EventBESA eventBESA = new EventBESA(RequestEmotionalInfoPeriodicGuard.class.getName(), data);
-            AgHandlerBESA agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
-            agHandlerBESA.sendEvent(eventBESA);
-            
-            data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
-            eventBESA = new EventBESA(RequestOtherInfoPeriodicGuard.class.getName(), data);
-            agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
-            agHandlerBESA.sendEvent(eventBESA);
-        }
-        catch (ExceptionBESA ex)
-        {
-           Logger.getLogger(RobotAgentBDI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+     
         public boolean requestInformationFlowPerfil() {
         try {
             sendEvent(new EventBESA(InformationFlowGuard.class.getName()));

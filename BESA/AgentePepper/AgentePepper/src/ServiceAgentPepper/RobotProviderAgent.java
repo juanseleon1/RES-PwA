@@ -29,14 +29,14 @@ import java.util.logging.Logger;
 public class RobotProviderAgent extends ServiceProviderBESA {
     
     private static AgLocalHandlerBESA agh;
-    public static String servActividades;
-    public static String servAutonomia;
-    public static String servBateria;
-    public static String servHumanos;
-    public static String servLocation;
-    public static String servMovimiento;
-    public static String servEstado;
-    public static String servVoz;
+    public static String servActividades="servActividades";
+    public static String servAutonomia="servAutonomia";
+    public static String servBateria="servBateria";
+    public static String servHumanos="servHumanos";
+    public static String servLocation="servLocation";
+    public static String servMovimiento="servMovimiento";
+    public static String servEstado="servEstado";
+    public static String servVoz="servVoz";
     private static PepperAdapter adapterP;
     
     public RobotProviderAgent(String alias) throws KernelAgentExceptionBESA {

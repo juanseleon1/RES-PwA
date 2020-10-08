@@ -21,20 +21,20 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class RequestEmotionalInfoPeriodicGuard extends PeriodicGuardBESA{
+public class getBatteryPeriodicGuard extends PeriodicGuardBESA{
 
     @Override
     public void funcPeriodicExecGuard(EventBESA ebesa) {
         try {
-            System.out.println("RequestEmotionalInfoPeriodicGuard Event Received: "+ebesa);
-            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servHumanos);
+            System.out.println("getBatteryPeriodicGuard Event Received: "+ebesa);
+            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servBateria);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
-            ServiceProviderDataRequest spdr= new ServiceProviderDataRequest(this.getAgent().getAid(),RobotProviderAgent.servHumanos, new SPServiceDataRequest(GetInfoGuard.class.getName(), SensorData.class.getName()));
+            ServiceProviderDataRequest spdr= new ServiceProviderDataRequest(this.getAgent().getAid(),RobotProviderAgent.servBateria, new SPServiceDataRequest(GetInfoGuard.class.getName(), SensorData.class.getName()));
             EventBESA evt= new EventBESA(GuardServiceProviderRequest.class.getName(), spdr);
             evt.setSenderAgId(this.getAgent().getAid());
             agH.sendEvent(evt);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(RequestEmotionalInfoPeriodicGuard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(getBatteryPeriodicGuard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

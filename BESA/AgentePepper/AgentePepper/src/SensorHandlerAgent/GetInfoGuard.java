@@ -37,12 +37,12 @@ public class GetInfoGuard extends GuardBESA{
             EventBESA sensorEvtA;
             if(infoRecibida.getDataType().equals(SensorDataType.EMOCIONES))
             {
-            handler = AdmBESA.getInstance().getHandlerByAid(RunAgentePepper.aliasEAAgent);
+            handler = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasEAAgent);
             sensorEvtA= new EventBESA(ProcessEmotionGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  
             }else
             {
-            handler = AdmBESA.getInstance().getHandlerByAid(RunAgentePepper.aliasRobotAgent);
+            handler = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasRobotAgent);
             sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  
             }

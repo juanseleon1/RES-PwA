@@ -99,11 +99,14 @@ public class RunAgentePepper {
     }
 
 
-    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotProviderAgent SPA) {
+    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotProviderAgent SPA) throws ExceptionBESA {
         RABDI.start();
+        RABDI.startTimers();
+        SPA.start();
         EAA.start();
         SHA.start();
-        SPA.start();
+        SHA.subscribeServices();
+        
     }
 
 }

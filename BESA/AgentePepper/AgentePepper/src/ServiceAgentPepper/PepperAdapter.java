@@ -8,6 +8,8 @@ package ServiceAgentPepper;
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import SensorHandlerAgent.SensorData;
+import SensorHandlerAgent.SensorDataType;
 
 /**
  *
@@ -35,41 +37,96 @@ public class PepperAdapter extends AdapterBESA{
 
     public DataBESA solicitarInfoActividadAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoActividadAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.ACTIVIDAD);
+        return sd;
     }
 
-    public DataBESA solicitarInfoAutonomyAsync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoAutonomyAsync Iniciado");
-        return null;
+    public DataBESA setAutonomyAsync(SPServiceDataRequest data) {
+        System.out.println("setAutonomyAsync Iniciado");
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.AUTO);
+        return sd;
     }
 
     public DataBESA solicitarInfoBatteryAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoBatteryAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.BATERIA);
+        return sd;
     }
 
     public DataBESA solicitarInfoHumanAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoHumanAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.EMOCIONES);
+        return sd;
     }
 
     public DataBESA solicitarInfoLocationAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoLocationAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.LOCATION);
+        return sd;
     }
 
     public DataBESA solicitarInfoStateAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoStateAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.INACTIVIDAD);
+        return sd;
     }
 
     public DataBESA solicitarVoiceAsync(SPServiceDataRequest data) {
         System.out.println("solicitarVoiceAsync Iniciado");
-        return null;
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.INTHABLA);
+        return sd;
     }
 
     public DataBESA solicitarMovementAsync(SPServiceDataRequest data) {
         System.out.println("solicitarMovementAsync Iniciado");
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.MOVIM);
+        return sd;
+    }
+    
+    public DataBESA solicitarInfoActividadSync(SPServiceDataRequest data) {
+        System.out.println("solicitarInfoActividadSync Iniciado");
+        SensorData sd= new SensorData(null);
+        sd.setDataType(SensorDataType.ACTIVIDAD);
+        return sd;
+    }
+
+    public DataBESA solicitarInfoBatterySync(SPServiceDataRequest data) {
+        System.out.println("solicitarInfoBatterySync Iniciado");
         return null;
     }
+
+    public DataBESA solicitarInfoHumanSync(SPServiceDataRequest data) {
+        System.out.println("solicitarInfoHumanSync Iniciado");
+        return null;
+    }
+
+    public DataBESA solicitarInfoLocationSync(SPServiceDataRequest data) {
+        System.out.println("solicitarInfoLocationSync Iniciado");
+        return null;
+    }
+
+    public DataBESA solicitarInfoStateSync(SPServiceDataRequest data) {
+        System.out.println("solicitarInfoStateSync Iniciado");
+        return null;
+    }
+
+    public DataBESA solicitarVoiceSync(SPServiceDataRequest data) {
+        System.out.println("solicitarVoiceSync Iniciado");
+        return null;
+    }
+
+    public DataBESA solicitarMovementSync(SPServiceDataRequest data) {
+        System.out.println("solicitarMovementSync Iniciado");
+        return null;
+    }
+    
+
 }
