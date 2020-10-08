@@ -5,7 +5,11 @@ import android.os.Bundle;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
+import com.aldebaran.qi.sdk.object.humanawareness.HumanawarenessConverter;
 
 public class cheerMessage extends RobotActivity implements RobotLifecycleCallbacks {
 
@@ -15,7 +19,6 @@ public class cheerMessage extends RobotActivity implements RobotLifecycleCallbac
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override
@@ -28,7 +31,7 @@ public class cheerMessage extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-
+        qiContext.getHumanAwareness();
     }
 
     @Override

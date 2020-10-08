@@ -6,6 +6,7 @@
  */
 package BESA.Kernel.Social.ServiceProvider.agent;
 
+import BESA.Kernel.Agent.Event.DataBESA;
 import java.io.Serializable;
 
 /**
@@ -16,7 +17,7 @@ import java.io.Serializable;
  * @version 2.0, 11/01/11
  * @since   JDK1.0
  */
-public class SPServiceDataRequest implements Serializable {
+public class SPServiceDataRequest extends DataBESA implements Serializable {
 
     /**
      *

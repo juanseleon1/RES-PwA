@@ -9,8 +9,18 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Tareas.AnimarPwA.EjecutarEstrategiaAnimar;
+import Tareas.EstimularEmocionalmente.ContinuarActividad;
+import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
+import Tareas.EstimularEmocionalmente.RetroalimentarBDI;
+import Tareas.EstimularEmocionalmente.SeleccionarEstrategiaEmocional;
+import Tareas.PwA.EvaluarEstadoEmocional;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -18,38 +28,72 @@ import rational.mapping.Believes;
  */
 public class EstimularEmocionalmente extends GoalBDI{
 
+    
+    private static String descrip;
+
+    public static EstimularEmocionalmente buildGoal() {
+
+        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        ContinuarActividad continuarActividad = new ContinuarActividad();
+        EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
+        InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();
+        SeleccionarEstrategiaEmocional seleccionarEstrategiaE = new SeleccionarEstrategiaEmocional();
+        RetroalimentarBDI retroalimentar = new RetroalimentarBDI();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        
+        Plan rolePlan= new Plan(taskList, resources, null);
+
+        rolePlan.addTask(evaluarEstadoE);
+        rolePlan.addTask(interpretarEstadoFlujo);
+        rolePlan.addTask(seleccionarEstrategiaE);
+        rolePlan.addTask(ejecutarEstrategia);
+        rolePlan.addTask(retroalimentar);
+        rolePlan.addTask(continuarActividad);
+
+        RationalRole estimEmoRole = new RationalRole(descrip, rolePlan);
+        EstimularEmocionalmente b= new EstimularEmocionalmente(0, estimEmoRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
     public EstimularEmocionalmente(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
+        System.out.println("Meta EstimularEmocionalmente created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente evaluateViability");
+        return 0;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente detectGoal");
+        return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente evaluatePlausibility");
+        return 0;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente evaluateContribution");
+        return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente predictResultUnlegality");
+        return false;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta EstimularEmocionalmente goalSucceeded");
+        return false;
     }
     
 }

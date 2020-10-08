@@ -15,7 +15,6 @@ public class ratingQuestion extends RobotActivity implements RobotLifecycleCallb
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override
