@@ -72,5 +72,72 @@ public class RobotAgentBelieves implements Believes{
         //conectarConBD
         bPerfilPwA.getFromDB();
     }
+
+    public BEstadoInteraccion getbEstadoInteraccion() {
+        return bEstadoInteraccion;
+    }
+
+    public void setbEstadoInteraccion(BEstadoInteraccion bEstadoInteraccion) {
+        this.bEstadoInteraccion = bEstadoInteraccion;
+    }
+
+    public BEstadoEmocionalPwA getbEstadoEmocionalPwA() {
+        return bEstadoEmocionalPwA;
+    }
+
+    public void setbEstadoEmocionalPwA(BEstadoEmocionalPwA bEstadoEmocionalPwA) {
+        this.bEstadoEmocionalPwA = bEstadoEmocionalPwA;
+    }
+
+    public BEstadoActividad getbEstadoActividad() {
+        return bEstadoActividad;
+    }
+
+    public void setbEstadoActividad(BEstadoActividad bEstadoActividad) {
+        this.bEstadoActividad = bEstadoActividad;
+    }
+
+    public BPerfilPwA getbPerfilPwA() {
+        return bPerfilPwA;
+    }
+
+    public void setbPerfilPwA(BPerfilPwA bPerfilPwA) {
+        this.bPerfilPwA = bPerfilPwA;
+    }
+
+    public BInteraccionSensores getbInteraccionSensores() {
+        return bInteraccionSensores;
+    }
+
+    public void setbInteraccionSensores(BInteraccionSensores bInteraccionSensores) {
+        this.bInteraccionSensores = bInteraccionSensores;
+    }
+
+    public BNivelBateria getbNivelBateria() {
+        return bNivelBateria;
+    }
+
+    public void setbNivelBateria(BNivelBateria bNivelBateria) {
+        this.bNivelBateria = bNivelBateria;
+    }
+
+    public BEstadoInactivo getbEstadoInactivo() {
+        return bEstadoInactivo;
+    }
+
+    public void setbEstadoInactivo(BEstadoInactivo bEstadoInactivo) {
+        this.bEstadoInactivo = bEstadoInactivo;
+    }
+
+    public BInteraccionPwA getbPersonaInteractuando() {
+        return bPersonaInteractuando;
+    }
+
+    public void setbPersonaInteractuando(BInteraccionPwA bPersonaInteractuando) {
+        this.bPersonaInteractuando = bPersonaInteractuando;
+    }
+        
+        
+    
     
 }

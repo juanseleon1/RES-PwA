@@ -10,12 +10,6 @@ import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,8 +18,8 @@ import java.util.logging.Logger;
 public class PepperAdapter extends AdapterBESA{
     
     private RobotProviderAgent rpa;
-    private int serverPort=7896;
-    private String IP= "127.0.0.1"; 
+    private final int serverPort=7896;
+    private final String IP= "127.0.0.1"; 
     public PepperAdapter() {
         super(null,null);
         this.rpa=null;
@@ -65,18 +59,18 @@ public class PepperAdapter extends AdapterBESA{
 
     public DataBESA solicitarInfoHumanAsync(SPServiceDataRequest data) {
         SensorData sd=null;
-        try {
+//        try {
             System.out.println("solicitarInfoHumanAsync Iniciado");
-            Socket s = new Socket(IP, serverPort);
-            ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
+            //Socket s = new Socket(IP, serverPort);
+//            //ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
             System.out.println("Enviando solicitud al Robot");
-            oos.writeObject((Integer)0);
+//            //oos.writeObject((Integer)0);
             sd= new SensorData(null);
             sd.setDataType(SensorDataType.EMOCIONES);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         return sd;
     }
 
