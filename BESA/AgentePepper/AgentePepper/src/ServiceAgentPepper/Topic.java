@@ -41,48 +41,5 @@ public class Topic {
 	topic = (javax.jms.Topic) ic.lookup("jms/topic/"+nTopic);
     }
     
-    //enviar mensaje
-    pasarMensaje()
-    databesa a messageJMS
-    
-    public void mandarMensajeTopico() throws JMSException {
-        TopicSession session;
-	TopicPublisher publisher;
-        
-        session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-	publisher = session.createPublisher(topic);
-    }
-            
-    public void cerrarConexiones() {
-        
-    }
-	
-	private static class Publisher implements Runnable {
-		
-		private TopicSession session;
-		private TopicPublisher publisher;
-		
-		public Publisher(TopicConnection connection, javax.jms.Topic topic) throws Exception {
-			this.session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-			this.publisher = this.session.createPublisher(topic);
-		}
-		
-		public void close() throws Exception  {
-			publisher.close();
-			session.close();
-		}
-		
-		@Override
-		public void run() {
-			try {
-				for (int i = 0; i < 10; ++i) {
-					Message mensaje = session.createTextMessage(String.format("¡Hola mundo! (%d)", i));
-					publisher.publish(mensaje);
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 }
+
