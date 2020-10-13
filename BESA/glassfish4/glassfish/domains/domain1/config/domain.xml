@@ -90,7 +90,7 @@
   </nodes>
  <configs>
    <config name="server-config">
-      
+      <system-property name="JMS_PROVIDER_PORT" value="7676" description="Port Number that JMS Service will listen for remote clients connection." />
       
       <http-service>
         <access-log/>
@@ -462,7 +462,7 @@
              <thread-pool max-thread-pool-size="200" idle-thread-timeout-in-seconds="120" name="thread-pool-1" />
          </thread-pools>
          <group-management-service/>
-         
+         <system-property name="JMS_PROVIDER_PORT" value="27676" description="Port Number that JMS Service will listen for remote clients connection." />
          <system-property name="ASADMIN_LISTENER_PORT" value="24848"/>
          <system-property name="HTTP_LISTENER_PORT" value="28080"/>
          <system-property name="HTTP_SSL_LISTENER_PORT" value="28181"/>
@@ -475,7 +475,7 @@
      </config>
   </configs>
   <property name="administrative.domain.name" value="domain1"/>
-  <secure-admin special-admin-indicator="550694af-5a4d-4c3e-8e83-5e90099ede11">
+  <secure-admin special-admin-indicator="718fe3ff-df18-49f8-84a0-3aeedb3250db">
       <secure-admin-principal dn="CN=localhost,OU=GlassFish,O=Oracle Corporation,L=Santa Clara,ST=California,C=US"></secure-admin-principal>
       <secure-admin-principal dn="CN=localhost-instance,OU=GlassFish,O=Oracle Corporation,L=Santa Clara,ST=California,C=US"></secure-admin-principal>
   </secure-admin>
