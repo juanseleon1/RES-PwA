@@ -10,6 +10,13 @@ import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
+import ServiceAgentPepper.AutonomyServices.AutonomyService;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 /**
  *
@@ -20,9 +27,19 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
+    private HashMap<String,Topic> topicos;
+    private HashMap<String,Subscriber> subs;
     public PepperAdapter() {
         super(null,null);
-        this.rpa=null;
+        try {
+            topicos= new HashMap<>();
+            subs= new HashMap<>();
+            llenarTopicos();
+            suscribir();
+            this.rpa=null;
+        } catch (NamingException | JMSException ex) {
+            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public RobotProviderAgent getRpa() {
@@ -138,6 +155,21 @@ public class PepperAdapter extends AdapterBESA{
         System.out.println("solicitarMovementSync Iniciado");
         return null;
     }
-    
 
+    private void llenarTopicos() throws NamingException, JMSException {
+        topicos.put(RobotProviderAgent.servAutonomia, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servActividades, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servBateria, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servEstado, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servHumanos, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servLocation, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servMovimiento, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));
+        
+    }
+
+    private void suscribir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
