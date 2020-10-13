@@ -1,0 +1,272 @@
+[#|2020-10-13T16:15:39.909-0500|WARNING|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[S2004]: Log output channel com.sun.messaging.jmq.util.log.SysLogHandler is disabled: no imqutil in java.library.path|#]
+
+
+[#|2020-10-13T16:15:39.953-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|
+================================================================================
+Message Queue 5.1
+Oracle
+Version:  5.1  (Build 9-b)
+Compile:  July 29 2014 1229
+
+Copyright (c) 2013, Oracle and/or its affiliates.  All rights reserved.
+================================================================================
+Java Runtime: 1.8.0_261 Oracle Corporation C:\Program Files\Java\jdk1.8.0_261\jre
+|#]
+
+
+[#|2020-10-13T16:15:40.026-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|   IMQ_HOME=C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq
+|#]
+
+
+[#|2020-10-13T16:15:40.026-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|IMQ_VARHOME=C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq
+|#]
+
+
+[#|2020-10-13T16:15:40.027-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Windows 10 10.0 amd64 10.100.139.68 (4 cpu) juans
+|#]
+
+
+[#|2020-10-13T16:15:40.034-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Java Heap Size: max=466432k, current=325632k
+|#]
+
+
+[#|2020-10-13T16:15:40.034-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Arguments: -port 7676 -name imqbroker -nobind -imqhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq -varhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq -libhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq\lib -useRmiRegistry -rmiRegistryPort 8686 -save -silent
+|#]
+
+
+[#|2020-10-13T16:15:40.034-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|JMSRA BrokerProps: imq.cluster.dynamicChangeMasterBrokerEnabled=true, imq.service.activate=jmsdirect, imq.imqcmd.password=*****, imq.jmsra.managed=true, imq.cluster.nowaitForMasterBroker=true
+|#]
+
+
+[#|2020-10-13T16:15:40.035-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Broker Properties: imq.service.activate=jmsdirect, imq.cluster.nowaitForMasterBroker=true, imq.jmx.rmiregistry.use=true, imq.portmapper.port=7676, imq.jmsra.managed=true, imq.instancename=imqbroker, java.util.logging.ConsoleHandler.level=OFF, imq.imqcmd.password=*****, imq.jmx.rmiregistry.port=8686, imq.service.runtimeAdd=mqdirect2, imq.cluster.dynamicChangeMasterBrokerEnabled=true, imq.jmx.rmiregistry.start=false, imq.portmapper.bind=false
+|#]
+
+
+[#|2020-10-13T16:15:40.035-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Embedded Broker 
+|#]
+
+
+[#|2020-10-13T16:15:40.215-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|imq.persist.minimizeWrites=true
+|#]
+
+
+[#|2020-10-13T16:15:40.216-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|imq.persist.file.minimizeWrites=false
+|#]
+
+
+[#|2020-10-13T16:15:40.259-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1060]: Loading persistent data...
+|#]
+
+
+[#|2020-10-13T16:15:40.260-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|Using built-in file-based persistent store: C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq\instances\imqbroker\
+|#]
+
+
+[#|2020-10-13T16:15:40.614-0500|WARNING|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|WARNING Existing file: incompleteTxnStorehas older cookie version than current version. Current version = 1. Original file version = 0
+|#]
+
+
+[#|2020-10-13T16:15:40.767-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B2219]: Broker property setting imq.persist.minimizeWritesLevel2=true will be ignored
+|#]
+
+
+[#|2020-10-13T16:15:40.816-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1041]: Cluster initialization successful.
+|#]
+
+
+[#|2020-10-13T16:15:40.991-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1013]: Auto Creation of Queues is enabled
+|#]
+
+
+[#|2020-10-13T16:15:41.087-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|new transaction log enabled
+|#]
+
+
+[#|2020-10-13T16:15:41.088-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|sync writes to disk = false
+|#]
+
+
+[#|2020-10-13T16:15:41.088-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|logNonTransactedMsgSend = false
+|#]
+
+
+[#|2020-10-13T16:15:41.089-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|logNonTransactedMsgAck = false
+|#]
+
+
+[#|2020-10-13T16:15:41.089-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1392]: Opening transaction log with file mode rw, maximum size 10.485.760 bytes
+|#]
+
+
+[#|2020-10-13T16:15:41.205-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1136]: Processing stored transactions
+|#]
+
+
+[#|2020-10-13T16:15:41.205-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1390]: Loading of transactions has been successfully completed
+|#]
+
+
+[#|2020-10-13T16:15:41.206-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1434]: Retrieving stored destinations
+|#]
+
+
+[#|2020-10-13T16:15:41.206-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1503]: Retrieved 0 destinations from store
+|#]
+
+
+[#|2020-10-13T16:15:41.213-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1144]: Creating Dead Message Queue
+|#]
+
+
+[#|2020-10-13T16:15:41.272-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1158]: Administrator has created destination mq.sys.dmq [Queue]
+|#]
+
+
+[#|2020-10-13T16:15:41.993-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1239]: Using platform MBean server
+|#]
+
+
+[#|2020-10-13T16:15:42.114-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1234]: JMX Connector Server jmxrmi started successfully with url service:jmx:rmi://Leon0713/jndi/rmi://10.100.139.68:8686/10.100.139.68/7676/jmxrmi
+|#]
+
+
+[#|2020-10-13T16:15:42.770-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1004]: Starting the admin service using tcp(host = *, port=0, mode=dedicated) with min threads 4 and max threads of 10 
+|#]
+
+
+[#|2020-10-13T16:15:42.771-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1227]: Using file user repository for admin service connection authentication
+|#]
+
+
+[#|2020-10-13T16:15:42.825-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1004]: Starting the jms service using tcp(host = *, port=0, mode=dedicated) with min threads 10 and max threads of 1000 
+|#]
+
+
+[#|2020-10-13T16:15:42.826-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1227]: Using file user repository for jms service connection authentication
+|#]
+
+
+[#|2020-10-13T16:15:42.840-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1004]: Starting the mqdirect2 service using in-process connections with min threads 0 and max threads of 0 
+|#]
+
+
+[#|2020-10-13T16:15:42.840-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1227]: Using file user repository for mqdirect2 service connection authentication
+|#]
+
+
+[#|2020-10-13T16:15:42.851-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1004]: Starting the jmsdirect service using  with min threads 0 and max threads of 0 
+|#]
+
+
+[#|2020-10-13T16:15:42.852-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1227]: Using file user repository for jmsdirect service connection authentication
+|#]
+
+
+[#|2020-10-13T16:15:42.922-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1004]: Starting the cluster service using tcp [ 0.0.0.0/0.0.0.0:54211 ] with min threads 1 and max threads of 1 
+|#]
+
+
+[#|2020-10-13T16:15:42.924-0500|INFO|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1228]: Cluster ping interval is 60 seconds
+|#]
+
+
+[#|2020-10-13T16:15:42.937-0500|FORCE|5.1|imq.log.Logger|_ThreadID=121;_ThreadName=admin-listener(7);|[B1039]: Broker "imqbroker@10.100.139.68:7676" ready.
+|#]
+
+
+[#|2020-10-13T16:15:44.119-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1065]: Accepting: admin@127.0.0.1:54215->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T16:15:44.283-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1066]:   Closing: admin@127.0.0.1:54215->jms:54209 because "[B0059]: Client closed the connection". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T16:16:09.956-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1065]: Accepting: admin@127.0.0.1:54274->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T16:16:09.985-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1066]:   Closing: admin@127.0.0.1:54274->jms:54209 because "[B0059]: Client closed the connection". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T16:41:24.047-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Open: jmxrmi, connection ID: rmi://10.100.139.68  1, Count=1
+|#]
+
+
+[#|2020-10-13T16:41:24.090-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Close: jmxrmi, connection ID: rmi://10.100.139.68  1, Count=0
+|#]
+
+
+[#|2020-10-13T16:41:26.555-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Open: jmxrmi, connection ID: rmi://10.100.139.68  2, Count=1
+|#]
+
+
+[#|2020-10-13T16:41:26.632-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Close: jmxrmi, connection ID: rmi://10.100.139.68  2, Count=0
+|#]
+
+
+[#|2020-10-13T16:41:32.151-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Open: jmxrmi, connection ID: rmi://10.100.139.68  3, Count=1
+|#]
+
+
+[#|2020-10-13T16:41:32.159-0500|INFO|5.1|imq.log.Logger|_ThreadID=254;_ThreadName=RMI TCP Connection(31)-10.100.139.68;|JMX Connection Close: jmxrmi, connection ID: rmi://10.100.139.68  3, Count=0
+|#]
+
+
+[#|2020-10-13T17:02:52.220-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1065]: Accepting: guest@127.0.0.1:59289->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:02:55.294-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1066]:   Closing: guest@127.0.0.1:59289->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:05:04.223-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1065]: Accepting: guest@127.0.0.1:59513->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:05:18.685-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1066]:   Closing: guest@127.0.0.1:59513->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:06:41.565-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1065]: Accepting: guest@127.0.0.1:59684->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:07:06.566-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1066]:   Closing: guest@127.0.0.1:59684->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:08:49.487-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1065]: Accepting: guest@127.0.0.1:59919->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:08:56.079-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1066]:   Closing: guest@127.0.0.1:59919->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:09:53.889-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1065]: Accepting: guest@127.0.0.1:60035->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:10:03.021-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1066]:   Closing: guest@127.0.0.1:60035->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:15:31.029-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1065]: Accepting: guest@127.0.0.1:60622->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:16:07.072-0500|INFO|5.1|imq.log.Logger|_ThreadID=229;_ThreadName=Thread-jms[0];|[B1066]:   Closing: guest@127.0.0.1:60622->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:16:26.941-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1065]: Accepting: guest@127.0.0.1:60725->jms:54209. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:16:48.679-0500|INFO|5.1|imq.log.Logger|_ThreadID=230;_ThreadName=Thread-jms[1];|[B1066]:   Closing: guest@127.0.0.1:60725->jms:54209 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+

@@ -28,6 +28,7 @@ public class PepperAdapter extends AdapterBESA{
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
     private HashMap<String,Topic> topicos;
+    private static String connection="__defaultConnectionFactory";
     private HashMap<String,Subscriber> subs;
     public PepperAdapter() {
         super(null,null);
@@ -157,19 +158,21 @@ public class PepperAdapter extends AdapterBESA{
     }
 
     private void llenarTopicos() throws NamingException, JMSException {
-        topicos.put(RobotProviderAgent.servAutonomia, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servActividades, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servBateria, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servEstado, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servHumanos, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servLocation, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servMovimiento, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));
-        
+        topicos.put(RobotProviderAgent.servAutonomia, new Topic(connection, RobotProviderAgent.servAutonomia));
+        Topic obj = topicos.get(RobotProviderAgent.servAutonomia);
+        obj.
+//        topicos.put(RobotProviderAgent.servActividades, new Topic(connection, RobotProviderAgent.servActividades));
+//        topicos.put(RobotProviderAgent.servBateria, new Topic(connection, RobotProviderAgent.servBateria));
+//        topicos.put(RobotProviderAgent.servEstado, new Topic(connection, RobotProviderAgent.servEstado));
+//        topicos.put(RobotProviderAgent.servHumanos, new Topic(connection, RobotProviderAgent.servHumanos));
+//        topicos.put(RobotProviderAgent.servLocation, new Topic(connection, RobotProviderAgent.servLocation));
+//        topicos.put(RobotProviderAgent.servMovimiento, new Topic(connection, RobotProviderAgent.servMovimiento));
+//        topicos.put(RobotProviderAgent.servVoz, new Topic(connection, RobotProviderAgent.servVoz));
+//        
     }
 
     private void suscribir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
