@@ -10,6 +10,8 @@ import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  *
@@ -20,8 +22,11 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
+    private HashMap<String,Topico> topicos;
     public PepperAdapter() {
         super(null,null);
+        topicos= new HashMap<String, Topico>();
+        llenarTopicos();
         this.rpa=null;
     }
 
@@ -138,6 +143,9 @@ public class PepperAdapter extends AdapterBESA{
         System.out.println("solicitarMovementSync Iniciado");
         return null;
     }
-    
 
+    private void llenarTopicos() {
+        topicos.;
+    }
+    
 }
