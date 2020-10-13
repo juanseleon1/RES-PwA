@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarCancion.*;
 import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
@@ -62,6 +63,16 @@ public class CambiarCancion extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarCancion detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //cambiar strings y numero
+        if((blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "enojado") && 
+                blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getGusto() > 5 )//actividadactual
+        {
+            
+        }
+        
         return 0;
     }
 

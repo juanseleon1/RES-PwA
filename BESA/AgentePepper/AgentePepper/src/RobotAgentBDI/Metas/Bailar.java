@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.CambiarBaile;
 import Tareas.Bailar.EjecutarBaile;
 import Tareas.Bailar.FinalizarBaile;
@@ -68,6 +69,15 @@ public class Bailar extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //completar
+        if (blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getGusto() > 5 &&
+               blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getEnriquecimiento() > 2) {
+            
+        }
+        
         return 0;
     }
 
