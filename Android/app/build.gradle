@@ -37,5 +37,6 @@ dependencies {
 	implementation 'com.aldebaran:qisdk:1.6.7'
 	implementation 'com.aldebaran:qisdk-design:1.6.7'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
-
+    implementation 'com.kaazing:enterprise.android.client.all:4.1.2'
+    implementation group: 'javax.jms', name: 'jms', version: '1.1'
 }
