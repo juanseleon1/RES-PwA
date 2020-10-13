@@ -35,7 +35,6 @@ public class RobotAgentBDI extends AgentBDI{
     public RobotAgentBDI(String alias, List<GoalBDI> RAGoals) throws ExceptionBESA {
         super(alias, new RobotAgentBelieves(), RAGoals, 0.96, 0);
         System.out.println("RobotAgentBDI Iniciado");
-        
     }
     
     
