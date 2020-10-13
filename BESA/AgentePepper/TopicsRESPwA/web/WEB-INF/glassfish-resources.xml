@@ -5,4 +5,8 @@
     <description/>
     <property name="Name" value="EmotionTopic"/>
   </admin-object-resource>
+  <admin-object-resource enabled="true" jndi-name="jms/myTopic" object-type="user" res-adapter="jmsra" res-type="javax.jms.Topic">
+    <description/>
+    <property name="Name" value="MyTopic"/>
+  </admin-object-resource>
 </resources>
