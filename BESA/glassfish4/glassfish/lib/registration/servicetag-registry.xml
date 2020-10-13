@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 
     DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
@@ -38,19 +39,17 @@
     only if the new code is made subject to such option by the copyright
     holder.
 
--->
-
-<registry>
+--><registry>
   <service_tag>
-    <instance_urn></instance_urn>
+    <instance_urn>urn:st:7161bf9d-166e-4887-8986-4cdc9bdc69b5</instance_urn>
     <product_name>GlassFish Server Open Source Edition</product_name>
     <product_version>4.1</product_version>
     <product_urn>urn:uuid:05617256-0677-11dd-8282-080020a9ed93</product_urn>
     <product_parent_urn>urn:uuid:a573278d-43d6-11d9-9607-080020a9ed93</product_parent_urn>
     <product_parent>Sun Java System Application Server</product_parent>
-    <product_defined_inst_id></product_defined_inst_id>
+    <product_defined_inst_id/>
     <product_vendor>Oracle</product_vendor>
-    <platform_arch></platform_arch>
+    <platform_arch/>
     <container>global</container>
     <source>GlassFish Open Source Edition 4.1</source>
     <status>NOT_TRANSFERRED</status>

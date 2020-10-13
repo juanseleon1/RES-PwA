@@ -18,16 +18,7 @@ repo.registration_uri = None
 repo.collection_type = core
 repo.refresh_seconds = 14400
 
-[property]
-send-uuid = True
-description = GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API.
-title = GlassFish 4
-image-tou-url = http://glassfish-repo.java.net/terms.html
-require-optional = False
-flush-content-cache-on-success = False
-display-copyrights = True
-preferred-authority = release.glassfish.org
-pursue-latest = True
+uuid = 7161bf9d-166e-4887-8986-4cdc9bdc69b5
 
 [variant]
 variant.opensolaris.zone = global
@@ -50,3 +41,15 @@ repo.registration_uri = None
 repo.collection_type = core
 repo.refresh_seconds = None
 
+uuid = 7161bf9d-166e-4887-8986-4cdc9bdc69b5
+
+[property]
+display-copyrights = True
+require-optional = False
+send-uuid = True
+image-tou-url = http://glassfish-repo.java.net/terms.html
+description = GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API.
+pursue-latest = True
+title = GlassFish 4
+flush-content-cache-on-success = False
+preferred-authority = release.glassfish.org
