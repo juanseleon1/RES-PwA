@@ -10,8 +10,13 @@ import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
+import ServiceAgentPepper.AutonomyServices.AutonomyService;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 /**
  *
@@ -22,12 +27,18 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
-    private HashMap<String,Topico> topicos;
+    private HashMap<String,Topic> topicos;
     public PepperAdapter() {
         super(null,null);
-        topicos= new HashMap<String, Topico>();
-        llenarTopicos();
-        this.rpa=null;
+        try {
+            topicos= new HashMap<String, Topic>();
+            llenarTopicos();
+            this.rpa=null;
+        } catch (NamingException ex) {
+            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
+            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public RobotProviderAgent getRpa() {
@@ -144,8 +155,16 @@ public class PepperAdapter extends AdapterBESA{
         return null;
     }
 
-    private void llenarTopicos() {
-        topicos.;
+    private void llenarTopicos() throws NamingException, JMSException {
+        topicos.put(RobotProviderAgent.servAutonomia, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servActividades, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servBateria, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servEstado, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servHumanos, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servLocation, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servMovimiento, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));
+        
     }
     
 }
