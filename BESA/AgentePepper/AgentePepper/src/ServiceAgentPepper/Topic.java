@@ -1,6 +1,7 @@
 package ServiceAgentPepper;
 
 
+import SensorHandlerAgent.SensorData;
 import java.util.Properties;
 import javax.jms.*;
 import javax.naming.Context;
@@ -24,6 +25,8 @@ public class Topic {
     private static String contrasena = "guest";
     private TopicConnection connection;
     private javax.jms.Topic topic;
+    private TopicSession session;
+    private TopicPublisher publisher;
     
     public Topic(String nConnection, String nTopic) throws NamingException, JMSException {
         
@@ -37,9 +40,32 @@ public class Topic {
 
 	TopicConnectionFactory connectionFactory = (TopicConnectionFactory) ic.lookup("jms/"+nConnection);
 	connection = connectionFactory.createTopicConnection(usuario, contrasena);
-		
+	
 	topic = (javax.jms.Topic) ic.lookup("jms/topic/"+nTopic);
+        
+        session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+	publisher = session.createPublisher(topic);
+        
     }
-    
+		
+    public void close() throws Exception  {
+	publisher.close();
+	session.close();
+    }
+		
+    public void sendMessage(SensorData data) {
+	try {
+            Message info = castDataToMessage(data);
+            publisher.publish(info);
+            System.out.println("Message Send");
+            Thread.sleep(1000);
+	} catch (Exception e) {
+            e.printStackTrace();
+	}
+    }
+
+    public Message castDataToMessage(SensorData data) {
+        return null;
+    }
 }
 
