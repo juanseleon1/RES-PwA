@@ -65,7 +65,10 @@ public class CambiarCancion extends GoalBDI{
         System.out.println("Meta CambiarCancion detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if((blvs. == triste || blvs. == enojado) && blvs.gustomusica)
+        
+        //cambiar strings y numero
+        if((blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "enojado") && 
+                blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getGusto() > 5 )//actividadactual
         {
             
         }

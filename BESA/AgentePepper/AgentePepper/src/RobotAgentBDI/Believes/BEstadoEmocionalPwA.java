@@ -18,13 +18,27 @@ public class BEstadoEmocionalPwA implements Believes{
     private Object estadoEmocional;
     private long concentracion;
     private long atencion;
-    private long  tiemopNoAtencion;
-    private long  tiemopNoConcentracion;
+    private long  tiempoNoAtencion;
+    private long  tiempoNoConcentracion;
+    
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoEmocionalPwA update Received: "+si);
         return true;
     }
+
+    public long getTiempoTriste() {
+        return tiempoTriste;
+    }
+
+    public long getTiempoIra() {
+        return tiempoIra;
+    }
+
+    public Object getEstadoEmocional() {
+        return estadoEmocional;
+    }
+    
     
     
 }

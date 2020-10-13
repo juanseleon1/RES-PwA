@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
 import Tareas.EntrarModoKaraoke.BuscarLetra;
 import Tareas.EntrarModoKaraoke.EvaluarPerfilPwA;
@@ -60,6 +61,12 @@ public class EntrarModoKaraoke extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
+        //if()
+        
         return 0;
     }
 

@@ -37,7 +37,6 @@ public class RunAgentePepper {
     
     public static String aliasRobotAgent= "RobotAgent";
     public static String aliasEAAgent= "EAAgent";
-    public static String aliasPwAPMAgentt= "PwAPMAgentt";
     public static String aliasSHAAgent= "SHAAgent";
     public static String aliasSPAgent= "SPAgent";
     
@@ -106,7 +105,6 @@ public class RunAgentePepper {
         EAA.start();
         SHA.start();
         SHA.subscribeServices();
-        
     }
 
 }

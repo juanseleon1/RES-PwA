@@ -62,6 +62,10 @@ public class ConversarEmpaticamente extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //tiempotriste || tiempoenojo
+        if(blvs.getbEstadoEmocionalPwA().getTiempoTriste() > 15.0 && blvs.getbEstadoEmocionalPwA().getTiempoIra() > 15) {
+            
+        }
+        
         
         return 0;
     }
