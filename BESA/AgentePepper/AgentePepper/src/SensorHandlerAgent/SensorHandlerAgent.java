@@ -17,10 +17,8 @@ import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataSuscribe;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import BESA.Util.PeriodicDataBESA;
-import RobotAgentBDI.RobotAgentBDI;
 import static RobotAgentBDI.RobotAgentBDI.PERIODIC_TIME;
 import ServiceAgentPepper.RobotProviderAgent;
-import static ServiceAgentPepper.RobotProviderAgent.servVoz;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,7 +96,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
             ServiceProviderDataSuscribe spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servHumanos,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -113,7 +111,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servActividades,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -129,7 +127,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servAutonomia,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -144,7 +142,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servBateria,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -159,7 +157,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servLocation,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -174,7 +172,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servMovimiento,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -189,7 +187,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servEstado,
                     SensorData.class.getName());
             //Crea el evento a enviar
@@ -204,7 +202,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
-                    ServiceProviderBESA.SYNCHRONIC_SERVICE,
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
                     RobotProviderAgent.servVoz,
                     SensorData.class.getName());
             //Crea el evento a enviar
