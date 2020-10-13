@@ -21,8 +21,7 @@ public class  ConexManager{
     private static final int PORT= 1025;
     private InetSocketAddress address=null;
     private static  ConexManager manager;
-
-
+    
     private DispatchQueue dispatchQueue;
 
 
