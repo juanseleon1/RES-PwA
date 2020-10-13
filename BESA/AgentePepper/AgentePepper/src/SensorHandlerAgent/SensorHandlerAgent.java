@@ -34,7 +34,6 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
     public SensorHandlerAgent(String alias) throws KernelAgentExceptionBESA {
         super(alias, new SensorHandlerState(), buildSensorHandlerStruct(), 0.96);
         System.out.println("SensorHandlerAgent Iniciado");
-        startSystem();
     }
 
     @Override
@@ -51,10 +50,6 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
     {
          StructBESA struct=new StructBESA();
         try {
-            struct.addBehavior("GetEmotionalInfoPeriodicGuard");
-            struct.bindGuard(GetEmotionalInfoPeriodicGuard, RequestEmotionalInfoPeriodicGuard.class);
-            struct.addBehavior("GetOtherInfoPeriodicGuard");
-            struct.bindGuard(GetOtherInfoPeriodicGuard, RequestOtherInfoPeriodicGuard.class);
             struct.addBehavior("GetInfoGuard");
             struct.bindGuard(GetInfoGuard, GetInfoGuard.class);
             struct.addBehavior("getBatteryPeriodicGuard");
@@ -65,30 +60,7 @@ public static String getBatteryPeriodicGuard= "getBatteryPeriodicGuard";
         return struct;
     }
     
-     private void startSystem()
-    {
-             try{
-            PeriodicDataBESA data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
-            EventBESA eventBESA = new EventBESA(RequestEmotionalInfoPeriodicGuard.class.getName(), data);
-            AgHandlerBESA agHandlerBESA = AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
-            agHandlerBESA.sendEvent(eventBESA);
-            
-            data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
-            eventBESA = new EventBESA(RequestOtherInfoPeriodicGuard.class.getName(), data);
-            agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
-            agHandlerBESA.sendEvent(eventBESA);
-            
-            data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
-            eventBESA = new EventBESA(getBatteryPeriodicGuard.class.getName(), data);
-            agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
-            agHandlerBESA.sendEvent(eventBESA);
-
-        }
-        catch (ExceptionBESA ex)
-        {
-           Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+ 
 
     public void subscribeServices() throws ExceptionBESA {
         String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servHumanos);

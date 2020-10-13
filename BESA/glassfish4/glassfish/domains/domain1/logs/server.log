@@ -5752,3 +5752,21 @@ KeyIdentifier [
 [2020-10-13T13:29:33.001-0500] [glassfish 4.1] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=50 _ThreadName=admin-listener(1)] [timeMillis: 1602613773001] [levelValue: 800] [[
   TopicsRESPwA was successfully deployed in 10.471 milliseconds.]]
 
+[2020-10-13T14:18:43.147-0500] [glassfish 4.1] [INFO] [NCLS-CORE-00092] [javax.enterprise.system.core] [tid: _ThreadID=145 _ThreadName=Thread-34] [timeMillis: 1602616723147] [levelValue: 800] [[
+  Server shutdown initiated]]
+
+[2020-10-13T14:18:43.317-0500] [glassfish 4.1] [INFO] [NCLS-BOOTSTRAP-00028] [javax.enterprise.bootstrap] [tid: _ThreadID=145 _ThreadName=Thread-34] [timeMillis: 1602616723317] [levelValue: 800] [[
+  Unregistered com.sun.enterprise.glassfish.bootstrap.osgi.EmbeddedOSGiGlassFishImpl@670d4d38 from service registry.]]
+
+[2020-10-13T14:18:43.325-0500] [glassfish 4.1] [INFO] [] [] [tid: _ThreadID=145 _ThreadName=Thread-8] [timeMillis: 1602616723325] [levelValue: 800] [[
+  FileMonitoring shutdown]]
+
+[2020-10-13T14:18:43.432-0500] [glassfish 4.1] [INFO] [NCLS-JMX-00002] [javax.enterprise.system.jmx] [tid: _ThreadID=145 _ThreadName=Thread-34] [timeMillis: 1602616723432] [levelValue: 800] [[
+  JMXStartupService: Stopped JMXConnectorServer: null]]
+
+[2020-10-13T14:18:43.435-0500] [glassfish 4.1] [INFO] [NCLS-JMX-00001] [javax.enterprise.system.jmx] [tid: _ThreadID=145 _ThreadName=Thread-34] [timeMillis: 1602616723435] [levelValue: 800] [[
+  JMXStartupService and JMXConnectors have been shut down.]]
+
+[2020-10-13T14:18:44.140-0500] [glassfish 4.1] [INFO] [] [] [tid: _ThreadID=148 _ThreadName=Thread-8] [timeMillis: 1602616724140] [levelValue: 800] [[
+  JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool]]]
+

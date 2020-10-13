@@ -28,15 +28,16 @@ public class PepperAdapter extends AdapterBESA{
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
     private HashMap<String,Topic> topicos;
+    private HashMap<String,Subscriber> subs;
     public PepperAdapter() {
         super(null,null);
         try {
-            topicos= new HashMap<String, Topic>();
+            topicos= new HashMap<>();
+            subs= new HashMap<>();
             llenarTopicos();
+            suscribir();
             this.rpa=null;
-        } catch (NamingException ex) {
-            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JMSException ex) {
+        } catch (NamingException | JMSException ex) {
             Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -165,6 +166,10 @@ public class PepperAdapter extends AdapterBESA{
         topicos.put(RobotProviderAgent.servMovimiento, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));
         
+    }
+
+    private void suscribir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

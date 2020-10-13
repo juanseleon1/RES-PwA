@@ -71,10 +71,6 @@ public class Topic {
 		
 		// Obtener el Topic en el cual se publicarán y del cual se recibirán los mensajes
 		javax.jms.Topic topic = (javax.jms.Topic) ic.lookup("jms/topic/test");
-
-		// Preparar el publicador y subscriptor al Topic
-		Subscriber subscriber1 = new Subscriber(connection, topic);
-		Subscriber subscriber2 = new Subscriber(connection, topic);
 		Publisher publisher = new Publisher(connection, topic);
 		
 		// Inicializar la recepción y envío de los mensajes
@@ -90,39 +86,11 @@ public class Topic {
 		connection.stop();
 		
 		// Terminar liberando los recursos
-		subscriber1.close();
-		subscriber2.close();
 		publisher.close();		
 		connection.close();
 		ic.close();
 	}
 	
-	private static class Subscriber implements MessageListener {
-		
-		private TopicSession session;
-		private TopicSubscriber subscriber;
-		
-		public Subscriber(TopicConnection connection, javax.jms.Topic topic) throws Exception {
-			this.session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-			this.subscriber = this.session.createSubscriber(topic, null, false);
-			this.subscriber.setMessageListener(this);
-		}
-		
-		public void close() throws Exception  {
-			subscriber.close();
-			session.close();
-		}
-		
-		@Override
-		public void onMessage(Message message) {
-			try {
-				TextMessage text = (TextMessage) message;
-				System.out.printf("Suscriptor (%s): El publicador dice: «%s»\n", this, text.getText());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
 	private static class Publisher implements Runnable {
 		
