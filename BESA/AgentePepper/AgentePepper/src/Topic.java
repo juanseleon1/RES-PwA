@@ -3,6 +3,7 @@ import java.util.Properties;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,6 +16,25 @@ import javax.naming.InitialContext;
  * @author mafegarces
  */
 public class Topic {
+    
+    public static String usuario = "guest";
+    public static String contrasena = "guest";
+    
+    public Topic(String nConnection, String nTopic) throws NamingException, JMSException {
+        // Propiedades para crear el contexto: clase factoría, url del servidor JNDI y credenciales
+        Properties env = new Properties();
+	env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+	env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+	env.put(Context.SECURITY_PRINCIPAL, usuario);
+	env.put(Context.SECURITY_CREDENTIALS, contrasena);
+
+	InitialContext ic = new InitialContext(env);
+
+	TopicConnectionFactory connectionFactory = (TopicConnectionFactory) ic.lookup("jms/"+nConnection);
+	TopicConnection connection = connectionFactory.createTopicConnection(usuario, contrasena);
+		
+	javax.jms.Topic topic = (javax.jms.Topic) ic.lookup("jms/topic/"+nTopic);
+    }
 
 	/**
 	 * Antes de ejecutar este ejemplo, usando WildFly se ha de crear un usuario guest y clave guest con el 
@@ -22,7 +42,8 @@ public class Topic {
 	 */
 	public static void main(String[] args) throws Exception {
 		// Usuario y password para conectarse al servidor JNDI y al Topic
-		String usuario = "guest";
+		//atributos estaticos
+                String usuario = "guest";
 		String contrasena = "guest";
 
 		// Propiedades para crear el contexto: clase factoría, url del servidor JNDI y credenciales
