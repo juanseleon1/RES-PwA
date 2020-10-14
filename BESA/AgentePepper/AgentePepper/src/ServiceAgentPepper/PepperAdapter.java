@@ -8,6 +8,7 @@ package ServiceAgentPepper;
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import RobotAgentBDI.RobotAgentBDI;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
 import ServiceAgentPepper.AutonomyServices.AutonomyService;
@@ -27,9 +28,10 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
+    private String connection = "__defaultConnectionFactory";
     private HashMap<String,Topic> topicos;
     private HashMap<String,Subscriber> subs;
-    public PepperAdapter() {
+    public PepperAdapter() throws Exception {
         super(null,null);
         try {
             topicos= new HashMap<>();
@@ -157,18 +159,19 @@ public class PepperAdapter extends AdapterBESA{
     }
 
     private void llenarTopicos() throws NamingException, JMSException {
-        topicos.put(RobotProviderAgent.servAutonomia, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servActividades, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servAutonomia, new Topic(connection, RobotProviderAgent.servAutonomia));
+        /*topicos.put(RobotProviderAgent.servActividades, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servBateria, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servEstado, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servHumanos, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servLocation, new Topic(IP, IP));
         topicos.put(RobotProviderAgent.servMovimiento, new Topic(IP, IP));
-        topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));
+        topicos.put(RobotProviderAgent.servVoz, new Topic(IP, IP));*/
         
     }
 
-    private void suscribir() {
+    private void suscribir() throws Exception {
+        Subscriber subscriber = new Subscriber(connection, RobotProviderAgent.servAutonomia);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
