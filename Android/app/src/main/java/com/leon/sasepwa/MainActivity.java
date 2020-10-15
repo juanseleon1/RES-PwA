@@ -11,14 +11,13 @@ import com.aldebaran.qi.sdk.object.human.EngagementIntentionState;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
-        private HumanConverter e;
+    private HumanConverter e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override
@@ -31,7 +30,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-
+        ConexManager conexManager = new ConexManager(qiContext);
+        conexManager.start();
     }
 
     @Override
