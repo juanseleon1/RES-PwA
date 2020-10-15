@@ -160,7 +160,6 @@ public class PepperAdapter extends AdapterBESA{
     private void llenarTopicos() throws NamingException, JMSException {
         topicos.put(RobotProviderAgent.servAutonomia, new Topic(connection, RobotProviderAgent.servAutonomia));
         Topic obj = topicos.get(RobotProviderAgent.servAutonomia);
-        obj.
 //        topicos.put(RobotProviderAgent.servActividades, new Topic(connection, RobotProviderAgent.servActividades));
 //        topicos.put(RobotProviderAgent.servBateria, new Topic(connection, RobotProviderAgent.servBateria));
 //        topicos.put(RobotProviderAgent.servEstado, new Topic(connection, RobotProviderAgent.servEstado));

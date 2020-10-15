@@ -270,3 +270,271 @@ Java Runtime: 1.8.0_261 Oracle Corporation C:\Program Files\Java\jdk1.8.0_261\jr
 |#]
 
 
+[#|2020-10-13T17:25:09.714-0500|FORCE|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1047]: Shutting down broker...[BrokerProcess:Thread[Thread-58,5,main]]
+|#]
+
+
+[#|2020-10-13T17:25:09.738-0500|FORCE|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1077]: Broadcast good-bye to all connections ...
+|#]
+
+
+[#|2020-10-13T17:25:09.739-0500|FORCE|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1078]: Flushing good-bye messages ...
+|#]
+
+
+[#|2020-10-13T17:25:09.739-0500|INFO|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1007]: Stopping Service admin with protocol tcp(host = *, port=0, mode=dedicated)
+|#]
+
+
+[#|2020-10-13T17:25:09.742-0500|INFO|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1007]: Stopping Service jmsdirect with protocol 
+|#]
+
+
+[#|2020-10-13T17:25:09.743-0500|INFO|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1007]: Stopping Service mqdirect2 with protocol none
+|#]
+
+
+[#|2020-10-13T17:25:09.744-0500|INFO|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1007]: Stopping Service jms with protocol tcp(host = *, port=0, mode=dedicated)
+|#]
+
+
+[#|2020-10-13T17:25:09.820-0500|WARNING|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|WARNING Caught exception when stopping JMX Connector Server jmxrmi:
+java.io.IOException: Cannot bind to URL: javax.naming.CommunicationException [Root exception is java.rmi.NoSuchObjectException: no such object in table]
+|#]
+
+
+[#|2020-10-13T17:25:09.821-0500|WARNING|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|WARNING [B2138]: Caught exception when stopping JMX Agent:
+java.io.IOException: Cannot bind to URL: javax.naming.CommunicationException [Root exception is java.rmi.NoSuchObjectException: no such object in table]
+|#]
+
+
+[#|2020-10-13T17:25:25.625-0500|FORCE|5.1|imq.log.Logger|_ThreadID=355;_ThreadName=Thread-58;|[B1048]: Shutdown of broker complete.
+|#]
+
+
+[#|2020-10-13T17:31:26.316-0500|WARNING|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[S2004]: Log output channel com.sun.messaging.jmq.util.log.SysLogHandler is disabled: no imqutil in java.library.path|#]
+
+
+[#|2020-10-13T17:31:26.468-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|
+================================================================================
+Message Queue 5.1
+Oracle
+Version:  5.1  (Build 9-b)
+Compile:  July 29 2014 1229
+
+Copyright (c) 2013, Oracle and/or its affiliates.  All rights reserved.
+================================================================================
+Java Runtime: 1.8.0_261 Oracle Corporation C:\Program Files\Java\jdk1.8.0_261\jre
+|#]
+
+
+[#|2020-10-13T17:31:26.750-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|   IMQ_HOME=C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq
+|#]
+
+
+[#|2020-10-13T17:31:26.750-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|IMQ_VARHOME=C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq
+|#]
+
+
+[#|2020-10-13T17:31:26.751-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Windows 10 10.0 amd64 10.100.139.68 (4 cpu) juans
+|#]
+
+
+[#|2020-10-13T17:31:26.766-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Java Heap Size: max=466432k, current=268800k
+|#]
+
+
+[#|2020-10-13T17:31:26.767-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Arguments: -port 7676 -name imqbroker -nobind -imqhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq -varhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq -libhome C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\mq\lib -useRmiRegistry -rmiRegistryPort 8686 -save -silent
+|#]
+
+
+[#|2020-10-13T17:31:26.767-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|JMSRA BrokerProps: imq.cluster.dynamicChangeMasterBrokerEnabled=true, imq.service.activate=jmsdirect, imq.imqcmd.password=*****, imq.jmsra.managed=true, imq.cluster.nowaitForMasterBroker=true
+|#]
+
+
+[#|2020-10-13T17:31:26.769-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Broker Properties: imq.service.activate=jmsdirect, imq.cluster.nowaitForMasterBroker=true, imq.jmx.rmiregistry.use=true, imq.portmapper.port=7676, imq.jmsra.managed=true, imq.instancename=imqbroker, java.util.logging.ConsoleHandler.level=OFF, imq.imqcmd.password=*****, imq.jmx.rmiregistry.port=8686, imq.service.runtimeAdd=mqdirect2, imq.cluster.dynamicChangeMasterBrokerEnabled=true, imq.jmx.rmiregistry.start=false, imq.portmapper.bind=false
+|#]
+
+
+[#|2020-10-13T17:31:26.770-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Embedded Broker 
+|#]
+
+
+[#|2020-10-13T17:31:27.413-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|imq.persist.minimizeWrites=true
+|#]
+
+
+[#|2020-10-13T17:31:27.414-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|imq.persist.file.minimizeWrites=false
+|#]
+
+
+[#|2020-10-13T17:31:27.542-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1060]: Loading persistent data...
+|#]
+
+
+[#|2020-10-13T17:31:27.544-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|Using built-in file-based persistent store: C:\Users\juans\Desktop\Tesis\TesisPepperRepo\BESA\glassfish4\glassfish\domains\domain1\imq\instances\imqbroker\
+|#]
+
+
+[#|2020-10-13T17:31:29.214-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B2219]: Broker property setting imq.persist.minimizeWritesLevel2=true will be ignored
+|#]
+
+
+[#|2020-10-13T17:31:29.448-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1041]: Cluster initialization successful.
+|#]
+
+
+[#|2020-10-13T17:31:29.921-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1013]: Auto Creation of Queues is enabled
+|#]
+
+
+[#|2020-10-13T17:31:30.155-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|new transaction log enabled
+|#]
+
+
+[#|2020-10-13T17:31:30.155-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|sync writes to disk = false
+|#]
+
+
+[#|2020-10-13T17:31:30.159-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|logNonTransactedMsgSend = false
+|#]
+
+
+[#|2020-10-13T17:31:30.160-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|logNonTransactedMsgAck = false
+|#]
+
+
+[#|2020-10-13T17:31:30.161-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1392]: Opening transaction log with file mode rw, maximum size 10.485.760 bytes
+|#]
+
+
+[#|2020-10-13T17:31:30.266-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1270]: Processing messages from transaction log file...
+|#]
+
+
+[#|2020-10-13T17:31:30.280-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1434]: Retrieving stored destinations
+|#]
+
+
+[#|2020-10-13T17:31:30.315-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1503]: Retrieved 1 destinations from store
+|#]
+
+
+[#|2020-10-13T17:31:30.323-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1151]: Loading destination mq.sys.dmq [Queue] with 0 messages
+|#]
+
+
+[#|2020-10-13T17:31:30.329-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1152]: Loading of destination mq.sys.dmq [Queue] complete
+|#]
+
+
+[#|2020-10-13T17:31:30.429-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1136]: Processing stored transactions
+|#]
+
+
+[#|2020-10-13T17:31:30.430-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1390]: Loading of transactions has been successfully completed
+|#]
+
+
+[#|2020-10-13T17:31:30.576-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1239]: Using platform MBean server
+|#]
+
+
+[#|2020-10-13T17:31:31.048-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1234]: JMX Connector Server jmxrmi started successfully with url service:jmx:rmi://Leon0713/jndi/rmi://10.100.139.68:8686/10.100.139.68/7676/jmxrmi
+|#]
+
+
+[#|2020-10-13T17:31:32.939-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1004]: Starting the admin service using tcp(host = *, port=0, mode=dedicated) with min threads 4 and max threads of 10 
+|#]
+
+
+[#|2020-10-13T17:31:32.940-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1227]: Using file user repository for admin service connection authentication
+|#]
+
+
+[#|2020-10-13T17:31:33.008-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1004]: Starting the jms service using tcp(host = *, port=0, mode=dedicated) with min threads 10 and max threads of 1000 
+|#]
+
+
+[#|2020-10-13T17:31:33.009-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1227]: Using file user repository for jms service connection authentication
+|#]
+
+
+[#|2020-10-13T17:31:33.031-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1004]: Starting the mqdirect2 service using in-process connections with min threads 0 and max threads of 0 
+|#]
+
+
+[#|2020-10-13T17:31:33.033-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1227]: Using file user repository for mqdirect2 service connection authentication
+|#]
+
+
+[#|2020-10-13T17:31:33.054-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1004]: Starting the jmsdirect service using  with min threads 0 and max threads of 0 
+|#]
+
+
+[#|2020-10-13T17:31:33.054-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1227]: Using file user repository for jmsdirect service connection authentication
+|#]
+
+
+[#|2020-10-13T17:31:33.150-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1004]: Starting the cluster service using tcp [ 0.0.0.0/0.0.0.0:62225 ] with min threads 1 and max threads of 1 
+|#]
+
+
+[#|2020-10-13T17:31:33.152-0500|INFO|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1228]: Cluster ping interval is 60 seconds
+|#]
+
+
+[#|2020-10-13T17:31:33.166-0500|FORCE|5.1|imq.log.Logger|_ThreadID=146;_ThreadName=p: thread-pool-1; w: 3;|[B1039]: Broker "imqbroker@10.100.139.68:7676" ready.
+|#]
+
+
+[#|2020-10-13T17:31:43.225-0500|INFO|5.1|imq.log.Logger|_ThreadID=162;_ThreadName=Thread-jms[0];|[B1065]: Accepting: guest@127.0.0.1:62242->jms:62223. Count: service=1 broker=1
+|#]
+
+
+[#|2020-10-13T17:32:05.272-0500|INFO|5.1|imq.log.Logger|_ThreadID=162;_ThreadName=Thread-jms[0];|[B1066]:   Closing: guest@127.0.0.1:62242->jms:62223 because "java.net.SocketException: Connection reset". Count: service=0 broker=0
+|#]
+
+
+[#|2020-10-13T17:35:27.590-0500|FORCE|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1047]: Shutting down broker...[BrokerProcess:Thread[Thread-42,5,main]]
+|#]
+
+
+[#|2020-10-13T17:35:27.600-0500|FORCE|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1077]: Broadcast good-bye to all connections ...
+|#]
+
+
+[#|2020-10-13T17:35:27.601-0500|FORCE|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1078]: Flushing good-bye messages ...
+|#]
+
+
+[#|2020-10-13T17:35:27.601-0500|INFO|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1007]: Stopping Service admin with protocol tcp(host = *, port=0, mode=dedicated)
+|#]
+
+
+[#|2020-10-13T17:35:27.602-0500|INFO|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1007]: Stopping Service jmsdirect with protocol 
+|#]
+
+
+[#|2020-10-13T17:35:27.603-0500|INFO|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1007]: Stopping Service mqdirect2 with protocol none
+|#]
+
+
+[#|2020-10-13T17:35:27.603-0500|INFO|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1007]: Stopping Service jms with protocol tcp(host = *, port=0, mode=dedicated)
+|#]
+
+
+[#|2020-10-13T17:35:27.625-0500|WARNING|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|WARNING Caught exception when stopping JMX Connector Server jmxrmi:
+java.io.IOException: Cannot bind to URL: javax.naming.CommunicationException [Root exception is java.rmi.NoSuchObjectException: no such object in table]
+|#]
+
+
+[#|2020-10-13T17:35:27.625-0500|WARNING|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|WARNING [B2138]: Caught exception when stopping JMX Agent:
+java.io.IOException: Cannot bind to URL: javax.naming.CommunicationException [Root exception is java.rmi.NoSuchObjectException: no such object in table]
+|#]
+
+
+[#|2020-10-13T17:35:31.648-0500|FORCE|5.1|imq.log.Logger|_ThreadID=175;_ThreadName=Thread-42;|[B1048]: Shutdown of broker complete.
+|#]
+
+
