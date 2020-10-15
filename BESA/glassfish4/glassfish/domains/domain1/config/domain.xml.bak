@@ -30,6 +30,7 @@
     </application>
   </system-applications>
   <resources>
+    <jdbc-resource pool-name="SamplePool" jndi-name="jdbc/sample"></jdbc-resource>
     <jdbc-resource pool-name="__TimerPool" object-type="system-admin" jndi-name="jdbc/__TimerPool"></jdbc-resource>
     <jdbc-resource pool-name="DerbyPool" object-type="system-all" jndi-name="jdbc/__default"></jdbc-resource>
     <jdbc-connection-pool datasource-classname="org.apache.derby.jdbc.EmbeddedXADataSource" name="__TimerPool" res-type="javax.sql.XADataSource">
@@ -50,11 +51,19 @@
     <managed-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedExecutorService"></managed-executor-service>
     <managed-scheduled-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedScheduledExecutorService"></managed-scheduled-executor-service>
     <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
-    <connector-connection-pool max-pool-size="250" resource-adapter-name="jmsra" steady-pool-size="1" name="jms/TopicConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.TopicConnectionFactory" transaction-support=""></connector-connection-pool>
+    <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/TopicConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.TopicConnectionFactory" transaction-support=""></connector-connection-pool>
     <connector-resource pool-name="jms/TopicConnectionFactory-Connection-Pool" jndi-name="jms/TopicConnectionFactory"></connector-resource>
     <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="jms/servAutonomia">
       <property name="Name" value="servAutonomia"></property>
     </admin-object-resource>
+    <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="org.apache.derby.jdbc.ClientDataSource" name="SamplePool" res-type="javax.sql.DataSource">
+      <property name="User" value="app"></property>
+      <property name="DatabaseName" value="sample"></property>
+      <property name="serverName" value="localhost"></property>
+      <property name="PortNumber" value="1527"></property>
+      <property name="URL" value="jdbc:derby://localhost:1527/sample"></property>
+      <property name="Password" value="app"></property>
+    </jdbc-connection-pool>
   </resources>
   <servers>
     <server config-ref="server-config" name="server">
@@ -69,6 +78,7 @@
       <resource-ref ref="concurrent/__defaultManagedThreadFactory"></resource-ref>
       <resource-ref ref="jms/TopicConnectionFactory"></resource-ref>
       <resource-ref ref="jms/servAutonomia"></resource-ref>
+      <resource-ref ref="jdbc/sample"></resource-ref>
     </server>
   </servers>
   <nodes>
@@ -245,7 +255,7 @@
         </transports>
       </network-config>
       <thread-pools>
-        <thread-pool name="admin-thread-pool" max-queue-size="256" max-thread-pool-size="50"></thread-pool>
+        <thread-pool name="admin-thread-pool" max-thread-pool-size="50" max-queue-size="256"></thread-pool>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
       </thread-pools>
@@ -294,7 +304,7 @@
       </ejb-container>
       <mdb-container></mdb-container>
       <jms-service addresslist-behavior="priority" default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
       </jms-service>
       <log-service file="${com.sun.aas.instanceRoot}/logs/server.log" log-rotation-limit-in-bytes="2000000">
         <module-log-levels></module-log-levels>
@@ -434,6 +444,7 @@
       <thread-pools>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
+        <thread-pool name="admin-thread-pool" max-thread-pool-size="50" max-queue-size="256"></thread-pool>
       </thread-pools>
       <group-management-service>
         <failure-detection></failure-detection>
@@ -460,7 +471,7 @@
   </secure-admin>
   <clusters></clusters>
   <applications>
-    <application context-root="/TopicsRESPwA" object-type="user" directory-deployed="true" name="TopicsRESPwA" location="file:/C:/Users/juans/Desktop/Tesis/TesisPepperRepo/BESA/AgentePepper/TopicsRESPwA/build/web/">
+    <application context-root="/TopicsRESPwA" object-type="user" name="TopicsRESPwA" directory-deployed="true" location="file:/C:/Users/juans/Desktop/Tesis/TesisPepperRepo/BESA/AgentePepper/TopicsRESPwA/build/web/">
       <property name="appLocation" value="file:/C:/Users/juans/Desktop/Tesis/TesisPepperRepo/BESA/AgentePepper/TopicsRESPwA/build/web/"></property>
       <property name="archiveType" value="war"></property>
       <property name="defaultAppName" value="web"></property>

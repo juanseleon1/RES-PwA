@@ -54,6 +54,8 @@ public class RobotProviderAgent extends ServiceProviderBESA {
             
         } catch (ServiceProviderAgentExceptionBESA ex) {
             Logger.getLogger(RobotProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RobotProviderAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
         return estado;
     }

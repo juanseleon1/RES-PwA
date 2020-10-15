@@ -56,10 +56,10 @@ public class Topic {
 		
     public void sendMessage(SensorData data) {
 	try {
-            Message info = castDataToMessage(data);
+            Message info=session.createTextMessage(data.getMessage());
+            //Message info = castDataToMessage(data);
             publisher.publish(info);
             System.out.println("Message Send");
-            Thread.sleep(1000);
 	} catch (Exception e) {
             e.printStackTrace();
 	}

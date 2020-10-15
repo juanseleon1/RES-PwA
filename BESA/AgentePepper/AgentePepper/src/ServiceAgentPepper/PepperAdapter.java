@@ -8,6 +8,7 @@ package ServiceAgentPepper;
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import RobotAgentBDI.RobotAgentBDI;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
 import ServiceAgentPepper.AutonomyServices.AutonomyService;
@@ -27,10 +28,10 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
+    private String connection = "__defaultConnectionFactory";
     private HashMap<String,Topic> topicos;
-    private static String connection="__defaultConnectionFactory";
     private HashMap<String,Subscriber> subs;
-    public PepperAdapter() {
+    public PepperAdapter() throws Exception {
         super(null,null);
         try {
             topicos= new HashMap<>();
@@ -159,7 +160,6 @@ public class PepperAdapter extends AdapterBESA{
 
     private void llenarTopicos() throws NamingException, JMSException {
         topicos.put(RobotProviderAgent.servAutonomia, new Topic(connection, RobotProviderAgent.servAutonomia));
-        Topic obj = topicos.get(RobotProviderAgent.servAutonomia);
 //        topicos.put(RobotProviderAgent.servActividades, new Topic(connection, RobotProviderAgent.servActividades));
 //        topicos.put(RobotProviderAgent.servBateria, new Topic(connection, RobotProviderAgent.servBateria));
 //        topicos.put(RobotProviderAgent.servEstado, new Topic(connection, RobotProviderAgent.servEstado));
@@ -170,8 +170,11 @@ public class PepperAdapter extends AdapterBESA{
 //        
     }
 
-    private void suscribir() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    private void suscribir() throws Exception {
+        Topic obj = topicos.get(RobotProviderAgent.servAutonomia);
+        Subscriber subscriber = new Subscriber(connection, RobotProviderAgent.servAutonomia);
+        obj.sendMessage(new SensorData("Holaaaa"));
     }
     
 }
