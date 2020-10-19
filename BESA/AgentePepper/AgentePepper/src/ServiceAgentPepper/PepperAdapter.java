@@ -8,16 +8,13 @@ package ServiceAgentPepper;
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import RobotAgentBDI.RobotAgentBDI;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
-import ServiceAgentPepper.AutonomyServices.AutonomyService;
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.jms.JMSException;
-import javax.naming.NamingException;
 
 /**
  *
@@ -28,20 +25,16 @@ public class PepperAdapter extends AdapterBESA{
     private RobotProviderAgent rpa;
     private final int serverPort=7896;
     private final String IP= "127.0.0.1"; 
-    private String connection = "__defaultConnectionFactory";
-    private HashMap<String,Topic> topicos;
-    private HashMap<String,Subscriber> subs;
+    private PepperAdapterReceiver receiver;
+    private Thread hiloReceiver;
+    private static int numPackage=0;
     public PepperAdapter() throws Exception {
         super(null,null);
-        try {
-            topicos= new HashMap<>();
-            subs= new HashMap<>();
-            llenarTopicos();
-            suscribir();
-            this.rpa=null;
-        } catch (NamingException | JMSException ex) {
-            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        receiver=new PepperAdapterReceiver();
+        hiloReceiver= new Thread(receiver);
+        hiloReceiver.start();
+        this.rpa=null;
+
     }
 
     public RobotProviderAgent getRpa() {
@@ -55,126 +48,59 @@ public class PepperAdapter extends AdapterBESA{
     
 //AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
 
-    public DataBESA solicitarInfoActividadAsync(SPServiceDataRequest data) {
+    public void solicitarInfoActividadAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoActividadAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.ACTIVIDAD);
-        return sd;
+        enviarMensaje(data);
     }
 
-    public DataBESA setAutonomyAsync(SPServiceDataRequest data) {
+    public void solicitarAutonomyAsync(SPServiceDataRequest data) {
         System.out.println("setAutonomyAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.AUTO);
-        return sd;
+        enviarMensaje(data);
     }
 
-    public DataBESA solicitarInfoBatteryAsync(SPServiceDataRequest data) {
+    public void solicitarInfoBatteryAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoBatteryAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.BATERIA);
-        return sd;
+        enviarMensaje(data);
     }
 
-    public DataBESA solicitarInfoHumanAsync(SPServiceDataRequest data) {
-        SensorData sd=null;
-//        try {
-            System.out.println("solicitarInfoHumanAsync Iniciado");
-            //Socket s = new Socket(IP, serverPort);
-//            //ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
-            System.out.println("Enviando solicitud al Robot");
-//            //oos.writeObject((Integer)0);
-            sd= new SensorData(null);
-            sd.setDataType(SensorDataType.EMOCIONES);
-//            
-//        } catch (IOException ex) {
-//            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        return sd;
+    public void solicitarInfoHumanAsync(SPServiceDataRequest data) {
+    System.out.println("solicitarInfoHumanAsync Iniciado");
+        enviarMensaje(data);
     }
 
-    public DataBESA solicitarInfoLocationAsync(SPServiceDataRequest data) {
+    public void solicitarInfoLocationAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoLocationAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.LOCATION);
-        return sd;
+        enviarMensaje(data);
+
     }
 
-    public DataBESA solicitarInfoStateAsync(SPServiceDataRequest data) {
+    public void solicitarInfoStateAsync(SPServiceDataRequest data) {
         System.out.println("solicitarInfoStateAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.INACTIVIDAD);
-        return sd;
+        enviarMensaje(data);
+
     }
 
-    public DataBESA solicitarVoiceAsync(SPServiceDataRequest data) {
+    public void solicitarVoiceAsync(SPServiceDataRequest data) {
         System.out.println("solicitarVoiceAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.INTHABLA);
-        return sd;
+        enviarMensaje(data);
+
     }
 
-    public DataBESA solicitarMovementAsync(SPServiceDataRequest data) {
+    public void solicitarMovementAsync(SPServiceDataRequest data) {
         System.out.println("solicitarMovementAsync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.MOVIM);
-        return sd;
+        enviarMensaje(data);
+
     }
     
-    public DataBESA solicitarInfoActividadSync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoActividadSync Iniciado");
-        SensorData sd= new SensorData(null);
-        sd.setDataType(SensorDataType.ACTIVIDAD);
-        return sd;
-    }
-
-    public DataBESA solicitarInfoBatterySync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoBatterySync Iniciado");
-        return null;
-    }
-
-    public DataBESA solicitarInfoHumanSync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoHumanSync Iniciado");
-        return null;
-    }
-
-    public DataBESA solicitarInfoLocationSync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoLocationSync Iniciado");
-        return null;
-    }
-
-    public DataBESA solicitarInfoStateSync(SPServiceDataRequest data) {
-        System.out.println("solicitarInfoStateSync Iniciado");
-        return null;
-    }
-
-    public DataBESA solicitarVoiceSync(SPServiceDataRequest data) {
-        System.out.println("solicitarVoiceSync Iniciado");
-        return null;
-    }
-
-    public DataBESA solicitarMovementSync(SPServiceDataRequest data) {
-        System.out.println("solicitarMovementSync Iniciado");
-        return null;
-    }
-
-    private void llenarTopicos() throws NamingException, JMSException {
-        topicos.put(RobotProviderAgent.servAutonomia, new Topic(connection, RobotProviderAgent.servAutonomia));
-//        topicos.put(RobotProviderAgent.servActividades, new Topic(connection, RobotProviderAgent.servActividades));
-//        topicos.put(RobotProviderAgent.servBateria, new Topic(connection, RobotProviderAgent.servBateria));
-//        topicos.put(RobotProviderAgent.servEstado, new Topic(connection, RobotProviderAgent.servEstado));
-//        topicos.put(RobotProviderAgent.servHumanos, new Topic(connection, RobotProviderAgent.servHumanos));
-//        topicos.put(RobotProviderAgent.servLocation, new Topic(connection, RobotProviderAgent.servLocation));
-//        topicos.put(RobotProviderAgent.servMovimiento, new Topic(connection, RobotProviderAgent.servMovimiento));
-//        topicos.put(RobotProviderAgent.servVoz, new Topic(connection, RobotProviderAgent.servVoz));
-//        
-    }
-
-
-    private void suscribir() throws Exception {
-        Topic obj = topicos.get(RobotProviderAgent.servAutonomia);
-        Subscriber subscriber = new Subscriber(connection, RobotProviderAgent.servAutonomia);
-        obj.sendMessage(new SensorData("Holaaaa"));
-    }
-    
+   private void enviarMensaje(SPServiceDataRequest data)
+   {
+        try {
+            Socket s = new Socket(IP, serverPort);
+            ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
+            System.out.println("Enviando solicitud al Robot");
+            oos.writeObject((Integer)0);
+        } catch (IOException ex) {
+            Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+   }
 }

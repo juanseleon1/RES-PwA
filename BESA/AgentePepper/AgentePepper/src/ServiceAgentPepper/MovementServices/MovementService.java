@@ -7,22 +7,25 @@ package ServiceAgentPepper.MovementServices;
 
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
+import BESA.Kernel.Social.ServiceProvider.agent.SPInfoGuard;
 import BESA.Kernel.Social.ServiceProvider.agent.SPService;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import ServiceAgentPepper.PepperAdapter;
+import java.util.ArrayList;
+import java.util.Map;
+import rational.services.AsynchronousService;
 
 /**
  *
  * @author juans
  */
-public class MovementService extends SPService{
+public class MovementService extends AsynchronousService{
 
-        
     @Override
-    public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+    public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
         System.out.println("MovementService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
-        return padapter.solicitarMovementAsync(data);
+        padapter.solicitarMovementAsync(data);
     }
     
 }

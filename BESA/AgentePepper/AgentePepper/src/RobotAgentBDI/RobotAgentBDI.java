@@ -31,8 +31,6 @@ public class RobotAgentBDI extends AgentBDI{
         System.out.println("RobotAgentBDI Iniciado");
     }
     
-    
-     
         public boolean requestInformationFlowPerfil() {
         try {
             sendEvent(new EventBESA(InformationFlowGuard.class.getName()));

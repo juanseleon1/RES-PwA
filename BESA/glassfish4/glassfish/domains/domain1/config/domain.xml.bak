@@ -2,13 +2,13 @@
   <security-configurations>
     <authentication-service default="true" name="adminAuth" use-password-credential="true">
       <security-provider provider-name="adminSpc" name="spcrealm" type="LoginModule">
-        <login-module-config module-class="com.sun.enterprise.admin.util.AdminLoginModule" control-flag="sufficient" name="adminSpecialLM">
+        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.admin.util.AdminLoginModule" name="adminSpecialLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
       </security-provider>
       <security-provider provider-name="adminFile" name="filerealm" type="LoginModule">
-        <login-module-config module-class="com.sun.enterprise.security.auth.login.FileLoginModule" control-flag="sufficient" name="adminFileLM">
+        <login-module-config control-flag="sufficient" module-class="com.sun.enterprise.security.auth.login.FileLoginModule" name="adminFileLM">
           <property name="config" value="server-config"></property>
           <property name="auth-realm" value="admin-realm"></property>
         </login-module-config>
@@ -22,7 +22,7 @@
   </security-configurations>
   <managed-job-config></managed-job-config>
   <system-applications>
-    <application context-root="" object-type="system-admin" name="__admingui" directory-deployed="true" location="${com.sun.aas.installRootURI}/lib/install/applications/__admingui">
+    <application context-root="" object-type="system-admin" directory-deployed="true" name="__admingui" location="${com.sun.aas.installRootURI}/lib/install/applications/__admingui">
       <module name="__admingui">
         <engine sniffer="web"></engine>
         <engine sniffer="security"></engine>
@@ -45,14 +45,12 @@
       <property name="DatabaseName" value="sun-appserv-samples"></property>
       <property name="connectionAttributes" value=";create=true"></property>
     </jdbc-connection-pool>
-    <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
+    <connector-connection-pool max-pool-size="250" resource-adapter-name="jmsra" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
     <context-service object-type="system-all" jndi-name="concurrent/__defaultContextService"></context-service>
     <managed-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedExecutorService"></managed-executor-service>
     <managed-scheduled-executor-service object-type="system-all" jndi-name="concurrent/__defaultManagedScheduledExecutorService"></managed-scheduled-executor-service>
     <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
-    <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/TopicConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.TopicConnectionFactory" transaction-support=""></connector-connection-pool>
-    <connector-resource pool-name="jms/TopicConnectionFactory-Connection-Pool" jndi-name="jms/TopicConnectionFactory"></connector-resource>
     <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="jms/servAutonomia">
       <property name="Name" value="servAutonomia"></property>
     </admin-object-resource>
@@ -68,7 +66,6 @@
   <servers>
     <server config-ref="server-config" name="server">
       <application-ref ref="__admingui" virtual-servers="__asadmin"></application-ref>
-      <application-ref ref="TopicsRESPwA" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
       <resource-ref ref="jms/__defaultConnectionFactory"></resource-ref>
@@ -76,7 +73,6 @@
       <resource-ref ref="concurrent/__defaultManagedExecutorService"></resource-ref>
       <resource-ref ref="concurrent/__defaultManagedScheduledExecutorService"></resource-ref>
       <resource-ref ref="concurrent/__defaultManagedThreadFactory"></resource-ref>
-      <resource-ref ref="jms/TopicConnectionFactory"></resource-ref>
       <resource-ref ref="jms/servAutonomia"></resource-ref>
       <resource-ref ref="jdbc/sample"></resource-ref>
     </server>
@@ -115,7 +111,7 @@
       <transaction-service tx-log-dir="${com.sun.aas.instanceRoot}/logs"></transaction-service>
       <batch-runtime-configuration></batch-runtime-configuration>
       <jms-service default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
       </jms-service>
       <ejb-container>
         <ejb-timer-service></ejb-timer-service>
@@ -255,7 +251,7 @@
         </transports>
       </network-config>
       <thread-pools>
-        <thread-pool name="admin-thread-pool" max-thread-pool-size="50" max-queue-size="256"></thread-pool>
+        <thread-pool name="admin-thread-pool" max-queue-size="256" max-thread-pool-size="50"></thread-pool>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
       </thread-pools>
@@ -304,7 +300,7 @@
       </ejb-container>
       <mdb-container></mdb-container>
       <jms-service addresslist-behavior="priority" default-jms-host="default_JMS_host" type="EMBEDDED">
-        <jms-host port="${JMS_PROVIDER_PORT}" name="default_JMS_host" host="localhost"></jms-host>
+        <jms-host port="${JMS_PROVIDER_PORT}" host="localhost" name="default_JMS_host"></jms-host>
       </jms-service>
       <log-service file="${com.sun.aas.instanceRoot}/logs/server.log" log-rotation-limit-in-bytes="2000000">
         <module-log-levels></module-log-levels>
@@ -444,7 +440,7 @@
       <thread-pools>
         <thread-pool name="http-thread-pool"></thread-pool>
         <thread-pool name="thread-pool-1" max-thread-pool-size="200"></thread-pool>
-        <thread-pool name="admin-thread-pool" max-thread-pool-size="50" max-queue-size="256"></thread-pool>
+        <thread-pool name="admin-thread-pool" max-queue-size="256" max-thread-pool-size="50"></thread-pool>
       </thread-pools>
       <group-management-service>
         <failure-detection></failure-detection>
@@ -470,74 +466,5 @@
     <secure-admin-principal dn="CN=localhost-instance,OU=GlassFish,O=Oracle Corporation,L=Santa Clara,ST=California,C=US"></secure-admin-principal>
   </secure-admin>
   <clusters></clusters>
-  <applications>
-    <application context-root="/TopicsRESPwA" object-type="user" name="TopicsRESPwA" directory-deployed="true" location="file:/C:/Users/juans/Desktop/Tesis/TesisPepperRepo/BESA/AgentePepper/TopicsRESPwA/build/web/">
-      <property name="appLocation" value="file:/C:/Users/juans/Desktop/Tesis/TesisPepperRepo/BESA/AgentePepper/TopicsRESPwA/build/web/"></property>
-      <property name="archiveType" value="war"></property>
-      <property name="defaultAppName" value="web"></property>
-      <property name="java-web-start-enabled" value="true"></property>
-      <property name="implicitCdiEnabled" value="true"></property>
-      <module name="TopicsRESPwA">
-        <engine sniffer="resources"></engine>
-        <engine sniffer="security"></engine>
-        <engine sniffer="web"></engine>
-      </module>
-      <resources>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/EmotionTopic">
-          <property name="Name" value="EmotionTopic"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/myTopic">
-          <property name="Name" value="MyTopic"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servActividades">
-          <property name="Name" value="servActividades"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servActividadesR">
-          <property name="Name" value="servActividadesR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servAutonomiaR">
-          <property name="Name" value="servAutonomiaR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servAutonomia">
-          <property name="Name" value="servAutonomia"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servBateriaR">
-          <property name="Name" value="servBateria"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servBateria">
-          <property name="Name" value="servBateria"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servHumanosR">
-          <property name="Name" value="servHumanosR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servHumanos">
-          <property name="Name" value="servHumanos"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servLocationR">
-          <property name="Name" value="servLocationR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servLocation">
-          <property name="Name" value="servLocation"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servMovimientoR">
-          <property name="Name" value="servMovimientoR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servMovimiento">
-          <property name="Name" value="servMovimiento"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servEstadoR">
-          <property name="Name" value="servEstadoR"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servEstado">
-          <property name="Name" value="servEstado"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servVoz">
-          <property name="Name" value="servVoz"></property>
-        </admin-object-resource>
-        <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="java:app/jms/servVozR">
-          <property name="Name" value="servVozR"></property>
-        </admin-object-resource>
-      </resources>
-    </application>
-  </applications>
+  <applications></applications>
 </domain>
