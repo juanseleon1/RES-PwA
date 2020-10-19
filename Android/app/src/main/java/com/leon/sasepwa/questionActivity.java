@@ -15,7 +15,6 @@ public class questionActivity extends RobotActivity implements RobotLifecycleCal
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override

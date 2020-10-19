@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.aldebaran:robotservice-client:2.1.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3317cb366a3dd3cba4c947a8a6fe2067/jetified-robotservice-client-2.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3317cb366a3dd3cba4c947a8a6fe2067/jetified-robotservice-client-2.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3317cb366a3dd3cba4c947a8a6fe2067/jetified-robotservice-client-2.1.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

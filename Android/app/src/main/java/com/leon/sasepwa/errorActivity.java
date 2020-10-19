@@ -15,7 +15,6 @@ public class errorActivity extends RobotActivity implements RobotLifecycleCallba
         super.onCreate(savedInstanceState);
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
-        ConexManager.getManager().connecTest();
     }
 
     @Override
