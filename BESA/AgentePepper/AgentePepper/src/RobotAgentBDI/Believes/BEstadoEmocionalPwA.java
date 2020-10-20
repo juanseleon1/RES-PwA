@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import RobotAgentBDI.Believes.PerfilPwA.Emocion;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -37,6 +38,22 @@ public class BEstadoEmocionalPwA implements Believes{
 
     public Object getEstadoEmocional() {
         return estadoEmocional;
+    }
+
+    public long getTiempoNoAtencion() {
+        return tiempoNoAtencion;
+    }
+
+    public long getConcentracion() {
+        return concentracion;
+    }
+
+    public long getAtencion() {
+        return atencion;
+    }
+
+    public long getTiempoNoConcentracion() {
+        return tiempoNoConcentracion;
     }
     
     

@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.PwA.ActualizarPerfil;
 import Tareas.PwA.EvaluarConcentracionAtencion;
 import Tareas.PwA.EvaluarEstadoEmocional;
@@ -62,6 +63,13 @@ public class ReiniciarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReiniciarActividad detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        if(blvs.getbEstadoInteraccion().isReiniciarInt()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -74,7 +82,7 @@ public class ReiniciarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReiniciarActividad evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

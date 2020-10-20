@@ -7,6 +7,9 @@ import java.util.HashMap;
 public class PerfilPreferencias {
     private HashMap<String,ActividadPepper> actividadesSis;
     private String nombrePreferido;
+    private boolean gustoKaraoke;
+    private boolean gustoBaile;
+    private boolean gustoMusica;
 
     public HashMap<String, ActividadPepper> getActividadesSis() {
         return actividadesSis;
@@ -23,4 +26,27 @@ public class PerfilPreferencias {
     public void setNombrePreferido(String nombrePreferido) {
         this.nombrePreferido = nombrePreferido;
     }
+    
+    public boolean isGustoKaraoke() {
+        return gustoKaraoke;
+    }
+
+    public void setGustoKaraoke(boolean gustoKaraoke) {
+        this.gustoKaraoke = gustoKaraoke;
+    }
+
+    public boolean isGustoBaile() {
+        return gustoBaile;
+    }
+
+    public void setGustoBaile(boolean gustoBaile) {
+        this.gustoBaile = gustoBaile;
+    }
+
+    public boolean isGustoMusica() {
+        return gustoMusica;
+    }
+    
+    
+    
 }

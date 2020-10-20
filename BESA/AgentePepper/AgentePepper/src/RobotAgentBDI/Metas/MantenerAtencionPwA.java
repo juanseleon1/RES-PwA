@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
 import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
 import Tareas.PwA.EvaluarConcentracionAtencion;
@@ -59,6 +60,14 @@ public class MantenerAtencionPwA extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MantenerAtencionPwA detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
+        if(blvs.getbEstadoEmocionalPwA().getTiempoNoAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoNoConcentracion() > 1) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -71,7 +80,9 @@ public class MantenerAtencionPwA extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MantenerAtencionPwA evaluateContribution");
-        return 0;
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        return blvs.getbEstadoEmocionalPwA().getTiempoNoAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoNoConcentracion();
     }
 
     @Override

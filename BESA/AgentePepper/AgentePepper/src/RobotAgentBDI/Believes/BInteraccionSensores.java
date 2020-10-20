@@ -13,11 +13,18 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BInteraccionSensores implements Believes{
-    private boolean hayInteraccionFisica=false;
+    private boolean hayInteraccionFisica = false;
+    private boolean detectaPwA = false;
+    
     @Override
     public boolean update(InfoData si) {
         System.out.println("BInteraccionPwA update Received: "+si);
         return true;
     }
+
+    public boolean isDetectaPwA() {
+        return detectaPwA;
+    }
+    
     
 }

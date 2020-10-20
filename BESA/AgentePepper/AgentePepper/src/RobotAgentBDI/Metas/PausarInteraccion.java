@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.PausarInteraccion.PausarActividad;
 import Tareas.PausarInteraccion.SuspenderMetas;
 import Tareas.PwA.DetectarPwA;
@@ -58,6 +59,14 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //180 s -> 3 min
+        if(blvs.getbEstadoInteraccion().isPausarInt() || blvs.getbEstadoInteraccion().getTiempoSinInt() > 180) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -70,7 +79,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

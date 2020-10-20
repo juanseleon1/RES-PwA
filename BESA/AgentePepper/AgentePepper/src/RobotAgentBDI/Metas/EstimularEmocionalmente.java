@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Tareas.AnimarPwA.EjecutarEstrategiaAnimar;
+import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Tareas.EstimularEmocionalmente.ContinuarActividad;
 import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
 import Tareas.EstimularEmocionalmente.RetroalimentarBDI;

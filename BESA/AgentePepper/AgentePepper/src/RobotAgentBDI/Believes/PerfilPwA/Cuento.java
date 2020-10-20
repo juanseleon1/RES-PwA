@@ -7,7 +7,7 @@ import java.util.List;
 public class Cuento {
     private String autor;
     private String genero;
-    private String gusto;
+    private float gusto;
     private List<Imagen> imagenes;
 
     public String getAutor() {
@@ -26,11 +26,11 @@ public class Cuento {
         this.genero = genero;
     }
 
-    public String getGusto() {
+    public float getGusto() {
         return gusto;
     }
 
-    public void setGusto(String gusto) {
+    public void setGusto(float gusto) {
         this.gusto = gusto;
     }
 

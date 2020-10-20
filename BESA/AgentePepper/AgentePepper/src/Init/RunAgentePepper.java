@@ -5,7 +5,7 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import RobotAgentBDI.RobotAgentBDI;
-import RobotAgentBDI.Metas.AnimarPwA;
+import RobotAgentBDI.Metas.AnimarElogiarPwA;
 import RobotAgentBDI.Metas.Bailar;
 import RobotAgentBDI.Metas.CambiarActividad;
 import RobotAgentBDI.Metas.CambiarCancion;
@@ -60,7 +60,7 @@ public class RunAgentePepper {
         List<GoalBDI> RAGoals= new ArrayList<>();
         //Crear Metas
         Bailar bailarGoal= Bailar.buildGoal();
-        AnimarPwA animarGoal=  AnimarPwA.buildGoal();
+        AnimarElogiarPwA animarGoal=  AnimarElogiarPwA.buildGoal();
         CambiarActividad cambiarActividadGoal=  CambiarActividad.buildGoal();
         CambiarCancion cambiarCancionrGoal=  CambiarCancion.buildGoal();
         CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();

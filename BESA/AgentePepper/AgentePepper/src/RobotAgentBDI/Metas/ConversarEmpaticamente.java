@@ -62,10 +62,9 @@ public class ConversarEmpaticamente extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //tiempotriste || tiempoenojo
-        if(blvs.getbEstadoEmocionalPwA().getTiempoTriste() > 15.0 && blvs.getbEstadoEmocionalPwA().getTiempoIra() > 15) {
-            
+        if(blvs.getbEstadoEmocionalPwA().getTiempoTriste() > 15.0 && blvs.getbEstadoEmocionalPwA().getTiempoIra() > 15.0) {
+            return 1.0;
         }
-        
         
         return 0;
     }
@@ -79,7 +78,9 @@ public class ConversarEmpaticamente extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente evaluateContribution");
-        return 0;
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        return blvs.getbEstadoEmocionalPwA().getTiempoTriste() + blvs.getbEstadoEmocionalPwA().getTiempoIra();
     }
 
     @Override
@@ -91,6 +92,7 @@ public class ConversarEmpaticamente extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
         return false;
     }
     

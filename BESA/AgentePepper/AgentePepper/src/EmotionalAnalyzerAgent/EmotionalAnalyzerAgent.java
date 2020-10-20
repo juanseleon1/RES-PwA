@@ -37,7 +37,7 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
  
      private static StructBESA buildEAStruct()
     {
-         StructBESA struct=new StructBESA();
+        StructBESA struct=new StructBESA();
         try {
             struct.addBehavior(ProcessEmotionGuard);
             struct.bindGuard(ProcessEmotionGuard, ProcessEmotionGuard.class);

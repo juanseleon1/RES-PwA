@@ -15,9 +15,8 @@ import rational.mapping.Believes;
 public class BEstadoInteraccion implements Believes{
 
     private boolean cambioDificultadVoz=false;
-    private boolean ayudaAcitivdadSolicitada=false;
-    private boolean cambioEnriqPos=false;
-    private boolean cambioEnriqNeg=false;
+    private boolean ayudaActividadSolicitada=false;
+    private boolean cambioEnriq=false;
     private boolean pausarInt=false;
     private boolean cancelarInt=false;
     private boolean reiniciarInt=false;
@@ -26,6 +25,34 @@ public class BEstadoInteraccion implements Believes{
     public boolean update(InfoData si) {
         System.out.println("BEstadoInteraccion update Received: "+si);
         return true;
+    }
+
+    public boolean isCambioDificultadVoz() {
+        return cambioDificultadVoz;
+    }
+
+    public boolean isAyudaActividadSolicitada() {
+        return ayudaActividadSolicitada;
+    }
+
+    public boolean isCambioEnriq() {
+        return cambioEnriq;
+    }
+
+    public boolean isPausarInt() {
+        return pausarInt;
+    }
+
+    public boolean isCancelarInt() {
+        return cancelarInt;
+    }
+
+    public boolean isReiniciarInt() {
+        return reiniciarInt;
+    }
+
+    public long getTiempoSinInt() {
+        return tiempoSinInt;
     }
     
 }

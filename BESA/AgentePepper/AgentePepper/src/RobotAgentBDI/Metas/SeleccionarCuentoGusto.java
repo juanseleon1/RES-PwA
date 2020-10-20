@@ -9,6 +9,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
+import RobotAgentBDI.Believes.PerfilPwA.Cuento;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.PwA.DetectarPwA;
 import Tareas.PwA.EvaluarConcentracionAtencion;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
@@ -69,6 +72,16 @@ public class SeleccionarCuentoGusto extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta SeleccionarCuentoGusto detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //verificar gusto cuento seleccionado > 0.5
+        List <Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
+        
+        if(blvs.getbEstadoActividad().getActividadActual().contentEquals("ActMemorama")) {
+            return 1.0;
+        }
+        
         return 0;
     }
 

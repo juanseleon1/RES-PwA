@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarDificultad.EvaluarDesempeño;
 import Tareas.CambiarDificultad.SeleccionarEstrategiaDificultad;
 import Tareas.CambiarDificultad.SolicitarEstrategia;
@@ -61,6 +62,14 @@ public class CambiarDificultad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarDificultad detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //faltan intentos fallidos ((intentosFallidos> + 50% errores || FallosSeguidos>V || intentosCorrectos > 100%)
+        if (blvs.getbEstadoInteraccion().isCambioDificultadVoz()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 

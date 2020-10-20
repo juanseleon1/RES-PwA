@@ -9,6 +9,8 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
+import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
 import Tareas.EntrarModoKaraoke.BuscarLetra;
@@ -65,8 +67,10 @@ public class EntrarModoKaraoke extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
-        //if()
-        
+        List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoTerapia")).getCanciones();
+        if(blvs.getbEstadoActividad().tiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
+            return 1.0;
+        }
         return 0;
     }
 
@@ -79,6 +83,15 @@ public class EntrarModoKaraoke extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke evaluateContribution");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        double valor = 0;
+        
+        //PwA quiere cantar + letraDisponibleCancion
+        if(blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
+            valor = 1.0;
+        }
+        
         return 0;
     }
 

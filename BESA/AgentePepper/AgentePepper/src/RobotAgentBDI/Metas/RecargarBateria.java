@@ -9,6 +9,8 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.RobotAgentBDI;
 import Tareas.CambiarActividad.DetenerPlan;
 import Tareas.RecargarBateria.MoverseEstacionCarga;
 import Tareas.RecargarBateria.ReportarNivelBateria;
@@ -26,7 +28,8 @@ import rational.mapping.Task;
  * @author mafegarces
  */
 public class RecargarBateria extends GoalBDI{
-                private static String descrip;
+    
+    private static String descrip;
 
     public static RecargarBateria buildGoal() {
 
@@ -65,6 +68,13 @@ public class RecargarBateria extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta RecargarBateria detectGoal");
+                
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        if(blvs.getbNivelBateria().getBateria() <= 20) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -77,7 +87,7 @@ public class RecargarBateria extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta RecargarBateria evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

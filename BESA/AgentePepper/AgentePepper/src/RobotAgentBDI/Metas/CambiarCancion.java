@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarCancion.*;
 import Tareas.PwA.EvaluarEstadoEmocional;
@@ -68,9 +69,8 @@ public class CambiarCancion extends GoalBDI{
         
         //cambiar strings y numero
         if((blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "enojado") && 
-                blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getGusto() > 5 )//actividadactual
-        {
-            
+                blvs.getbEstadoActividad().getActividadActual().contentEquals("ActMusicoterapia") && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
+            return 1.0;
         }
         
         return 0;
@@ -85,7 +85,12 @@ public class CambiarCancion extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarCancion evaluateContribution");
-        return 0;
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        
+        //valenciaIra + valenciaTriste
+        return blvs.getbEstadoEmocionalPwA().getTiempoTriste() + blvs.getbEstadoEmocionalPwA().getTiempoIra()+((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia")).getCancionEscogida().getGusto();
+
     }
 
     @Override

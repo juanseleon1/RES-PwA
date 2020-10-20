@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CancelarActividad.CancelarActividadTask;
 import Tareas.PwA.ActualizarPerfil;
 import Tareas.PwA.EvaluarConcentracionAtencion;
@@ -62,6 +63,13 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        if(blvs.getbEstadoInteraccion().isCancelarInt()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -74,7 +82,7 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

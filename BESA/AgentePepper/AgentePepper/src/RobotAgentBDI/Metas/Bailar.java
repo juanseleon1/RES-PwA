@@ -73,11 +73,10 @@ public class Bailar extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //completar
-        if (blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getGusto() > 5 &&
-               blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("MusicoTerapia").getEnriquecimiento() > 2) {
-            
+        if (blvs.getbEstadoActividad().tiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia").getGusto() > 5 &&
+               blvs.getbPerfilPwA().getPreferencias().isGustoBaile() && blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia").getEnriquecimiento() > 2) {
+            return 1.0;
         }
-        
         return 0;
     }
 
@@ -90,6 +89,14 @@ public class Bailar extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar evaluateContribution");
+       
+        //perfil.gustaBaile
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        
+        if(blvs.getbPerfilPwA().getPreferencias().isGustoBaile()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 

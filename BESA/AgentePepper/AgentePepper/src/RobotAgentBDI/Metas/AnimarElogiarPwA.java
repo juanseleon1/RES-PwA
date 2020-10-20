@@ -9,7 +9,8 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Tareas.AnimarPwA.EjecutarEstrategiaAnimar;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,11 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class AnimarPwA extends GoalBDI{
+public class AnimarElogiarPwA extends GoalBDI{
 
     private static String descrip;
 
-    public static AnimarPwA buildGoal() {
+    public static AnimarElogiarPwA buildGoal() {
 
         EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
         EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
@@ -36,10 +37,10 @@ public class AnimarPwA extends GoalBDI{
         tarea.add(ejecutarEstrategia);
         Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
-        AnimarPwA b= new AnimarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
+        AnimarElogiarPwA b= new AnimarElogiarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
-    public AnimarPwA(int id, RationalRole role, String description, GoalBDITypes type) {
+    public AnimarElogiarPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         System.out.println("Meta AnimarPwA created");
     }
@@ -53,6 +54,14 @@ public class AnimarPwA extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //alto numero de errores, tiene aciertos, cierto tiempo activo
+        if (blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste") {
+            return 1.0;
+        }
+        
         return 0;
     }
 

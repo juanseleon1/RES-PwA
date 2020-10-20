@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarActividad.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import rational.mapping.Task;
 public class CambiarActividad extends GoalBDI{
 
         private static String descrip;
+        private static float inflar;
 
     public static CambiarActividad buildGoal() {
 
@@ -57,6 +59,14 @@ public class CambiarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarActividad detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        //valor gusto actividad nueva, mirar valor concentracion depende de cada PwA
+        if(blvs.getbEstadoEmocionalPwA().getConcentracion() > 10 && blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "ira") {
+            return 1.0;
+        }
+        
         return 0;
     }
 

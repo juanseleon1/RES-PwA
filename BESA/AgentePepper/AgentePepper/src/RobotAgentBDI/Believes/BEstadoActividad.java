@@ -14,10 +14,28 @@ import rational.mapping.Believes;
  */
 public class BEstadoActividad implements Believes{
 
+    private long inicioActividad;
+    private String actividadActual;
+    private boolean finalizoActividad;
+    
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoActividad update Received: "+si);
         return true;
     }
+    
+    public long tiempoActividad() {
+        return 0;
+    }
+
+    public String getActividadActual() {
+        return actividadActual;
+    }
+
+    public boolean isFinalizoActividad() {
+        return finalizoActividad;
+    }
+    
+    
     
 }

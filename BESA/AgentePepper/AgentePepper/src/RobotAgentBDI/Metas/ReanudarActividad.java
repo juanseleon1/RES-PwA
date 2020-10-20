@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ReanudarActividad.ReanudarPlan;
 import Tareas.ReanudarActividad.RecibirNotificacionReanudar;
 import Tareas.ReanudarActividad.SolicitarPosicionPwA;
@@ -25,7 +26,7 @@ import rational.mapping.Task;
  */
 public class ReanudarActividad extends GoalBDI{
 
-                private static String descrip;
+    private static String descrip;
 
     public static ReanudarActividad buildGoal() {
 
@@ -59,6 +60,14 @@ public class ReanudarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReanudarActividad detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
+        //estimuloreanudado
+        if(blvs.getbInteraccionSensores().isDetectaPwA()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -71,7 +80,7 @@ public class ReanudarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReanudarActividad evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override
