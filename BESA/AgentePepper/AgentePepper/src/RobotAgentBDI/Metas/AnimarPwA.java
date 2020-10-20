@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Init.RunAgentePepper;
 import Tareas.AnimarPwA.EjecutarEstrategiaAnimar;
 import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import rational.mapping.Task;
 public class AnimarPwA extends GoalBDI{
 
     private static String descrip;
-
     public static AnimarPwA buildGoal() {
 
         EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
@@ -36,7 +36,7 @@ public class AnimarPwA extends GoalBDI{
         tarea.add(ejecutarEstrategia);
         Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
-        AnimarPwA b= new AnimarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
+        AnimarPwA b= new AnimarPwA(RunAgentePepper.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public AnimarPwA(int id, RationalRole role, String description, GoalBDITypes type) {

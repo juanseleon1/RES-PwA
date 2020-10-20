@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Init.RunAgentePepper;
 import Tareas.PausarInteraccion.PausarActividad;
 import Tareas.PausarInteraccion.SuspenderMetas;
 import Tareas.PwA.DetectarPwA;
@@ -41,7 +42,7 @@ public class PausarInteraccion extends GoalBDI{
         rolePlan.addTask(suspenderMetas);
 
         RationalRole PaIntRole = new RationalRole(descrip, rolePlan);
-        PausarInteraccion b= new PausarInteraccion(0, PaIntRole, descrip, GoalBDITypes.DUTY);
+        PausarInteraccion b= new PausarInteraccion(RunAgentePepper.getPlanID(), PaIntRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public PausarInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {

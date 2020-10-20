@@ -57,6 +57,9 @@ public class RobotAgentBelieves implements Believes{
                 bPerfilPwA.update(si);
                 actualizarPerfilEnDB();
                 break;
+                case ACK:
+                bPerfilPwA.update(si);
+                break;
             default:
                 break;
         }

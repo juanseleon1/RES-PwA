@@ -6,10 +6,7 @@
 package ServiceAgentPepper;
 
 import BESA.Adapter.AdapterBESA;
-import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import SensorHandlerAgent.SensorData;
-import SensorHandlerAgent.SensorDataType;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -23,7 +20,7 @@ import java.util.logging.Logger;
 public class PepperAdapter extends AdapterBESA{
     
     private RobotProviderAgent rpa;
-    private final int serverPort=7896;
+    private final int robotPort=7896;
     private final String IP= "127.0.0.1"; 
     private PepperAdapterReceiver receiver;
     private Thread hiloReceiver;
@@ -95,7 +92,7 @@ public class PepperAdapter extends AdapterBESA{
    private void enviarMensaje(SPServiceDataRequest data)
    {
         try {
-            Socket s = new Socket(IP, serverPort);
+            Socket s = new Socket(IP, robotPort);
             ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
             System.out.println("Enviando solicitud al Robot");
             oos.writeObject((Integer)0);

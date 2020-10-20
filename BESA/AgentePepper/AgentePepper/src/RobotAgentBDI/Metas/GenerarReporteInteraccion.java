@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Init.RunAgentePepper;
 import Tareas.GenerarReporteInteraccion.MostrarInfo;
 import Tareas.GenerarReporteInteraccion.PersistirInfoInteraccion;
 import Tareas.GenerarReporteInteraccion.RecopilarInfoInteraccion;
@@ -42,7 +43,7 @@ public class GenerarReporteInteraccion extends GoalBDI{
         rolePlan.addTask(mostrarInfo);
 
         RationalRole genRepRole = new RationalRole(descrip, rolePlan);
-        GenerarReporteInteraccion b= new GenerarReporteInteraccion(0, genRepRole, descrip, GoalBDITypes.DUTY);
+        GenerarReporteInteraccion b= new GenerarReporteInteraccion(RunAgentePepper.getPlanID(), genRepRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public GenerarReporteInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {

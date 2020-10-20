@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarCancion.*;
 import Tareas.PwA.EvaluarEstadoEmocional;
@@ -46,7 +47,7 @@ public class CambiarCancion extends GoalBDI{
         rolePlan.addTask(repetirCancion);
 
         RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);
-        CambiarCancion b= new CambiarCancion(0, cambiarCancionRole, descrip, GoalBDITypes.DUTY);
+        CambiarCancion b= new CambiarCancion(RunAgentePepper.getPlanID(), cambiarCancionRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarCancion(int id, RationalRole role, String description, GoalBDITypes type) {
