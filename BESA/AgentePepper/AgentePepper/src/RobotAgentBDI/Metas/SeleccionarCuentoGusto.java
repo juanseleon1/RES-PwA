@@ -14,7 +14,7 @@ import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.PwA.DetectarPwA;
-import Tareas.PwA.EvaluarConcentracionAtencion;
+import Tareas.PwA.EvaluarAtencion;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import Tareas.SeleccionarCuentoGusto.SeleccionarCuento;
@@ -36,7 +36,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     public static SeleccionarCuentoGusto buildGoal() {
 
-        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        EvaluarAtencion evaluarCA = new EvaluarAtencion();
         BuscarAnimaciones buscarAnimaciones = new BuscarAnimaciones();
         MoverseFrentePwA moverseFrente = new MoverseFrentePwA();
         SeleccionarCuento seleccionarCuento = new SeleccionarCuento();

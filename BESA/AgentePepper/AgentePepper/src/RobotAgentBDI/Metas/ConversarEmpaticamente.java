@@ -12,8 +12,8 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.ConversarEmpaticamente.EscogerEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -31,8 +31,9 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     public static ConversarEmpaticamente buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        //evaluar estado emocional
         PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
+        EscogerEstrategiaConversar estrategiaConversar = new EscogerEstrategiaConversar();
     
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
@@ -40,6 +41,9 @@ public class ConversarEmpaticamente extends GoalBDI{
 
         rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(preguntarSentimientos);
+        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
+        rolePlan.addTask(estrategiaConversar);
+        //hacer if en escoger estrategia, iniciar todo denuevo
 
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
         ConversarEmpaticamente b= new ConversarEmpaticamente(RunAgentePepper.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);

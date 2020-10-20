@@ -15,7 +15,6 @@ import Tareas.EstimularEmocionalmente.ContinuarActividad;
 import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
 import Tareas.EstimularEmocionalmente.RetroalimentarBDI;
 import Tareas.EstimularEmocionalmente.SeleccionarEstrategiaEmocional;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -33,8 +32,10 @@ public class EstimularEmocionalmente extends GoalBDI{
     private static String descrip;
 
     public static EstimularEmocionalmente buildGoal() {
+        
+        //Pertenece a Actividad Memorama
 
-        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        //evaluar estado emocional
         ContinuarActividad continuarActividad = new ContinuarActividad();
         EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
         InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();

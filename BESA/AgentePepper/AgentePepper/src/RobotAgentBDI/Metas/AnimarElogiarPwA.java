@@ -12,7 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Init.RunAgentePepper;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -30,11 +29,10 @@ public class AnimarElogiarPwA extends GoalBDI{
 
     public static AnimarElogiarPwA buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
+        //evaluar estado emocional
         EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
-        tarea.add(evaluarEstadoE);
         tarea.add(ejecutarEstrategia);
         Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
@@ -57,6 +55,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA detectGoal");
         
+        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //alto numero de errores, tiene aciertos, cierto tiempo activo

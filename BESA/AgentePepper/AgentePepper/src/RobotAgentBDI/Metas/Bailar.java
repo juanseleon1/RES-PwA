@@ -11,11 +11,10 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.Bailar.CambiarBaile;
+import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.EjecutarBaile;
 import Tareas.Bailar.FinalizarBaile;
-import Tareas.Bailar.RecibirRetroalimentacion;
-import Tareas.Bailar.RepetirBaile;
+import Tareas.CambiarCancion.RecibirRetroalimentacion;
 import Tareas.Bailar.SeleccionarBaile;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,21 +34,19 @@ public class Bailar extends GoalBDI{
     public static Bailar buildGoal() {
         //crear clases tareas y agregar al plan
         EjecutarBaile ejecutarBaile = new EjecutarBaile();
-        CambiarBaile cambiarBaile = new CambiarBaile();
+        InicializarBaile inicializarBaile = new InicializarBaile();
         FinalizarBaile finalizarBaile = new FinalizarBaile();
-        RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
-        RepetirBaile repetirBaile = new RepetirBaile();
         SeleccionarBaile seleccionarBaile = new SeleccionarBaile();
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
-        rolePlan.addTask(seleccionarBaile);
+        rolePlan.addTask(seleccionarBaile); //evaluar Estado emocional, mirar tipo de baile que puede hacer dependiendo de la canción
         rolePlan.addTask(ejecutarBaile);
-        rolePlan.addTask(recibirRetroalimentacion);
-        rolePlan.addTask(cambiarBaile);
-        rolePlan.addTask(repetirBaile);
+        rolePlan.addTask(inicializarBaile);
         rolePlan.addTask(finalizarBaile);
-
+        
+        //while de espera activa para saber que se movia a un lugar seguro
+        
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
         Bailar b= new Bailar(RunAgentePepper.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
         

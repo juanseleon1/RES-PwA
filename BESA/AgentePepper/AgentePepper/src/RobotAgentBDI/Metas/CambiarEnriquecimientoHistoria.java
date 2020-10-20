@@ -12,9 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.CambiarEnriquecimientoHistoria.EvaluarEnriquecer;
-import Tareas.CambiarEnriquecimientoHistoria.SolicitarActivacionActividad;
-import Tareas.CambiarEnriquecimientoHistoria.SolicitarAtencion;
-import Tareas.PwA.EvaluarConcentracionAtencion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -33,19 +30,16 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
     public static CambiarEnriquecimientoHistoria buildGoal() {
 
-        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        //evaluar atencion, emociones
         EvaluarEnriquecer evaluarEnriquecer = new EvaluarEnriquecer();
-        SolicitarActivacionActividad solicitarActivacionA = new SolicitarActivacionActividad();
-        SolicitarAtencion solicitarAtencion = new SolicitarAtencion();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
 
-        rolePlan.addTask(evaluarCA);
-        rolePlan.addTask(evaluarEnriquecer);
-        rolePlan.addTask(solicitarActivacionA);
-        rolePlan.addTask(solicitarAtencion);
+        rolePlan.addTask(evaluarA);
+        //crear interface enriquecer(bajo,medio,alto) que permita ejecutarEstrategia(), guardar enriquecer en believes y despues sacarla de estos
+        rolePlan.addTask(evaluarEnriquecer);//si es automatico o el PwA lo pide
         
         RationalRole cehRole = new RationalRole(descrip, rolePlan);
         CambiarEnriquecimientoHistoria b= new CambiarEnriquecimientoHistoria(RunAgentePepper.getPlanID(), cehRole, descrip, GoalBDITypes.DUTY);

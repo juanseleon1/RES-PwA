@@ -32,15 +32,14 @@ public class CambiarActividad extends GoalBDI{
 
         DetenerPlan detenerPlan = new DetenerPlan();
         IniciarNuevoPlan iniciarNuevoP = new IniciarNuevoPlan();
-        RecibirSolicitudCambio recibirSolicitudC = new RecibirSolicitudCambio();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
 
-        rolePlan.addTask(recibirSolicitudC);
-        rolePlan.addTask(detenerPlan);
-        rolePlan.addTask(iniciarNuevoP);
+        rolePlan.addTask(detenerPlan); //se guarda retroalimentacion
+        rolePlan.addTask(iniciarNuevoP); //preguntar plan especifico, esperar respuesta, 
+        //rta: NO, al azar una actividad, bajar funcion activación actividad reciente
 
         RationalRole changeRole = new RationalRole(descrip, rolePlan);
         CambiarActividad b= new CambiarActividad(RunAgentePepper.getPlanID(), changeRole, descrip, GoalBDITypes.DUTY);

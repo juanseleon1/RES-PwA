@@ -29,6 +29,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean estaBailando=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
+    private boolean estaReproduciendoCancion=false;
     
     @Override
     public boolean update(InfoData si) {

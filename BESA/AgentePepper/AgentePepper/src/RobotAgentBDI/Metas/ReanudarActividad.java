@@ -31,6 +31,7 @@ public class ReanudarActividad extends GoalBDI{
 
     public static ReanudarActividad buildGoal() {
 
+        //REVISAR
         ReanudarPlan reanudarPlan = new ReanudarPlan();
         RecibirNotificacionReanudar recibirNotificacionR = new RecibirNotificacionReanudar();
         SolicitarPosicionPwA solicitarPosicion = new SolicitarPosicionPwA();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.RecargarBateria;
+package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
 import rational.mapping.Task;
@@ -12,26 +12,25 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class DetenerPlan extends Task{
+public class RecibirRetroalimentacion extends Task{
 
-    public DetenerPlan() {
-        System.out.println("--- Task Detener Plan Iniciada ---");
+    public RecibirRetroalimentacion() {
+        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
     }
-    
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Detener Plan ---");
+        System.out.println("--- Execute Task Recibir Retroalimentacion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Detener Plan ---");
+        System.out.println("--- Interrupt Task Recibir Retroalimentacion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Detener Plan ---");
+        System.out.println("--- Cancel Task Recibir Retroalimentacion ---");
     }
     
 }

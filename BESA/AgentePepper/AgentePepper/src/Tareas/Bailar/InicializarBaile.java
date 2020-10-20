@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.CambiarEnriquecimientoHistoria;
+package Tareas.Bailar;
 
 import rational.mapping.Believes;
 import rational.mapping.Task;
@@ -12,26 +12,27 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class SolicitarAtencion extends Task{
-
-    public SolicitarAtencion() {
-        System.out.println("--- Task Solicitar Atencion Iniciada ---");
-    }
+public class InicializarBaile extends Task{
     
+    //revisa el espacio para que no se choque
+
+    public InicializarBaile() {
+        System.out.println("--- Task Cambiar Baile Iniciada ---");
+    }
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Solicitar Atencion ---");
+        System.out.println("--- Execute Task Cambiar Baile ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Solicitar Atencion ---");
+        System.out.println("--- Interrupt Task Cambiar Baile ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Solicitar Atencion ---");
+        System.out.println("--- Cancel Task Cambiar Baile---");
     }
     
 }

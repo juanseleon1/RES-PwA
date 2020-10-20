@@ -11,9 +11,6 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
-import Tareas.PwA.ActualizarPerfil;
-import Tareas.PwA.EvaluarConcentracionAtencion;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import Tareas.ReiniciarActividad.ReiniciarActividadTask;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +28,13 @@ public class ReiniciarActividad extends GoalBDI{
 
     public static ReiniciarActividad buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
-        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
-        ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
+        //evaluar estado emocional
         ReiniciarActividadTask reiniciarActividad = new ReiniciarActividadTask();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(evaluarEstadoE);
-        rolePlan.addTask(evaluarCA);
-        rolePlan.addTask(actualizarPerfil);
         rolePlan.addTask(reiniciarActividad);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);

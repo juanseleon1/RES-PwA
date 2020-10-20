@@ -12,8 +12,8 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.CambiarCancion.RecibirRetroalimentacion;
 import Tareas.CambiarCancion.*;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -31,21 +31,19 @@ public class CambiarCancion extends GoalBDI{
 
     public static CambiarCancion buildGoal() {
     
-        EvaluarEstadoEmocional solicitarEstadoE = new EvaluarEstadoEmocional();
         BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
-        ConfirmarCancion confirmarCancion = new ConfirmarCancion();
         RepetirCancion repetirCancion = new RepetirCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
+        RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
 
-        rolePlan.addTask(solicitarEstadoE);
-        rolePlan.addTask(seleccionarCancion);
-        rolePlan.addTask(busquedaCancionYT);
-        rolePlan.addTask(confirmarCancion);
-        rolePlan.addTask(repetirCancion);
+        rolePlan.addTask(seleccionarCancion); //evaluar estado emocional, si no es la primera cancion, saltar contenido de esa tarea
+        rolePlan.addTask(busquedaCancionYT); //buscar API o desde la BD y se envia
+        rolePlan.addTask(repetirCancion); //preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
+        rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
         RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);
         CambiarCancion b= new CambiarCancion(RunAgentePepper.getPlanID(), cambiarCancionRole, descrip, GoalBDITypes.DUTY);

@@ -18,6 +18,7 @@ public class BEstadoActividad implements Believes{
     private Actividad actividadActual;
     private boolean finalizoActividad;
     private boolean mejoraEmocional;
+    private Estrategia estrategia;
     
     @Override
     public boolean update(InfoData si) {
