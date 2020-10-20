@@ -21,12 +21,11 @@ public class RobotAgentBelieves implements Believes{
     private BInteraccionSensores bInteraccionSensores = new BInteraccionSensores();
     private BNivelBateria bNivelBateria = new BNivelBateria();
     private BEstadoInactivo bEstadoInactivo = new BEstadoInactivo();
-    private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();
-    
+    private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();  
     public RobotAgentBelieves()
     {
      getPerfilBD();
-    }
+    }   
     
     //AQUI SE MANDA LO DE INFORMATIONFLOW
     //Aqui se accede a BD y se pide info de otros believes. 

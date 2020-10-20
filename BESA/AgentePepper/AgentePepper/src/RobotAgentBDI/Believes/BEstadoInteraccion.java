@@ -21,6 +21,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean cancelarInt=false;
     private boolean reiniciarInt=false;
     private long tiempoSinInt=0;
+    
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoInteraccion update Received: "+si);

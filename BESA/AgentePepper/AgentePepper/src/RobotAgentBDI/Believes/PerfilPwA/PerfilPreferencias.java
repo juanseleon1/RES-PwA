@@ -47,6 +47,4 @@ public class PerfilPreferencias {
         return gustoMusica;
     }
     
-    
-    
 }

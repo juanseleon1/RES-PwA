@@ -26,5 +26,4 @@ public class BInteraccionSensores implements Believes{
         return detectaPwA;
     }
     
-    
 }
