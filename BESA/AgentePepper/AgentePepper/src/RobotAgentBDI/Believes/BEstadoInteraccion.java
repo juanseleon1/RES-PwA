@@ -9,7 +9,7 @@ import rational.data.InfoData;
 import rational.mapping.Believes;
 
 /**
- *
+ *  
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{

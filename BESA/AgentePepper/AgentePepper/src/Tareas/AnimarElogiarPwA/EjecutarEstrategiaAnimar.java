@@ -18,8 +18,6 @@ public class EjecutarEstrategiaAnimar extends Task{
         System.out.println("--- Task Ejecutar Estrategia Animar PwA Iniciada ---");
     }
     
-    
-
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Estrategia Animar PwA ---");
