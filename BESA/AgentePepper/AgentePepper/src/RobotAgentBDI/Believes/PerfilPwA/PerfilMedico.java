@@ -9,9 +9,9 @@ public class PerfilMedico {
     private String nombreCuidador;
     private boolean gustaSocializar;
     private boolean tomaMedicamentos;
-    private boolean discapacidadAuditiva;
+    private int discapacidadAuditiva;
     private boolean discapacidadVisual;
-    private boolean discpacidadMotora;
+    private boolean discapacidadMotora;
     private int estadio;
     private double periodoVigilia;
     private CausaDemencia causa;
@@ -43,11 +43,11 @@ public class PerfilMedico {
         this.tomaMedicamentos = tomaMedicamentos;
     }
 
-    public boolean isDiscapacidadAuditiva() {
+    public int isDiscapacidadAuditiva() {
         return discapacidadAuditiva;
     }
 
-    public void setDiscapacidadAuditiva(boolean discapacidadAuditiva) {
+    public void setDiscapacidadAuditiva(int discapacidadAuditiva) {
         this.discapacidadAuditiva = discapacidadAuditiva;
     }
 
@@ -60,11 +60,11 @@ public class PerfilMedico {
     }
 
     public boolean isDiscpacidadMotora() {
-        return discpacidadMotora;
+        return discapacidadMotora;
     }
 
     public void setDiscpacidadMotora(boolean discpacidadMotora) {
-        this.discpacidadMotora = discpacidadMotora;
+        this.discapacidadMotora = discpacidadMotora;
     }
 
     public int getEstadio() {

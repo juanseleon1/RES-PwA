@@ -10,6 +10,7 @@ public class PerfilPreferencias {
     private boolean gustoKaraoke;
     private boolean gustoBaile;
     private boolean gustoMusica;
+    private boolean volumenPreferido;
 
     public HashMap<String, ActividadPepper> getActividadesSis() {
         return actividadesSis;

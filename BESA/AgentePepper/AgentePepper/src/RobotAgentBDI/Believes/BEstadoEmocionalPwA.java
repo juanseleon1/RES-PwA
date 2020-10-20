@@ -5,7 +5,9 @@
  */
 package RobotAgentBDI.Believes;
 
+import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.PerfilPwA.Emocion;
+import java.util.HashMap;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -14,13 +16,11 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoEmocionalPwA implements Believes{
-    private long tiempoTriste;
-    private long tiempoIra;
-    private Object estadoEmocional;
-    private long concentracion;
-    private long atencion;
-    private long  tiempoNoAtencion;
-    private long  tiempoNoConcentracion;
+
+    private EmotionPwA tiempoEmocionPredominante;
+    private HashMap<String,Integer> estadoEmocional;
+    private long tiempoAtencion;
+    private long tiempoRelajacion;
     
     @Override
     public boolean update(InfoData si) {
@@ -28,33 +28,11 @@ public class BEstadoEmocionalPwA implements Believes{
         return true;
     }
 
-    public long getTiempoTriste() {
-        return tiempoTriste;
-    }
-
-    public long getTiempoIra() {
-        return tiempoIra;
-    }
-
     public Object getEstadoEmocional() {
         return estadoEmocional;
     }
 
-    public long getTiempoNoAtencion() {
-        return tiempoNoAtencion;
-    }
 
-    public long getConcentracion() {
-        return concentracion;
-    }
-
-    public long getAtencion() {
-        return atencion;
-    }
-
-    public long getTiempoNoConcentracion() {
-        return tiempoNoConcentracion;
-    }
     
     
     

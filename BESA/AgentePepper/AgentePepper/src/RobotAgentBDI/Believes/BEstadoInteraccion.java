@@ -21,6 +21,14 @@ public class BEstadoInteraccion implements Believes{
     private boolean cancelarInt=false;
     private boolean reiniciarInt=false;
     private long tiempoSinInt=0;
+    private boolean sistemaSuspendido=false;
+    private long nivelEnriquecimiento=0;
+    private long velocidad=0;
+    private long distanciaPwA=0;
+    private boolean estaHablando=false;
+    private boolean estaBailando=false;
+    private boolean hayInteraccionFisica = false;
+    private boolean detectaPwA = false;
     
     @Override
     public boolean update(InfoData si) {
