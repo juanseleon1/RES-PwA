@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Init.RunAgentePepper;
 import Tareas.CambiarActividad.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class CambiarActividad extends GoalBDI{
         rolePlan.addTask(iniciarNuevoP);
 
         RationalRole changeRole = new RationalRole(descrip, rolePlan);
-        CambiarActividad b= new CambiarActividad(0, changeRole, descrip, GoalBDITypes.DUTY);
+        CambiarActividad b= new CambiarActividad(RunAgentePepper.getPlanID(), changeRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarActividad(int id, RationalRole role, String description, GoalBDITypes type) {

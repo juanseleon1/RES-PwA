@@ -12,6 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Init.RunAgentePepper;
 import Tareas.PwA.DetectarPwA;
 import Tareas.PwA.EvaluarConcentracionAtencion;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
@@ -54,7 +55,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         rolePlan.addTask(moverseFrente);
         
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
-        SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(0, selCuenGRole, descrip, GoalBDITypes.DUTY);
+        SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(RunAgentePepper.getPlanID(), selCuenGRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 

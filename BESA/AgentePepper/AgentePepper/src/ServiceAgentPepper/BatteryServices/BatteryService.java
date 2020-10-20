@@ -7,22 +7,25 @@ package ServiceAgentPepper.BatteryServices;
 
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
+import BESA.Kernel.Social.ServiceProvider.agent.SPInfoGuard;
 import BESA.Kernel.Social.ServiceProvider.agent.SPService;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import ServiceAgentPepper.PepperAdapter;
+import java.util.ArrayList;
+import java.util.Map;
+import rational.services.AsynchronousService;
 
 /**
  *
  * @author juans
  */
-public class BatteryService extends SPService{
+public class BatteryService extends AsynchronousService{
 
-        
     @Override
-    public DataBESA executeService(SPServiceDataRequest data, AdapterBESA adapter) {
+    public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
         System.out.println("BatteryService Solicitado");
-               PepperAdapter padapter= (PepperAdapter)adapter;
-        return padapter.solicitarInfoBatteryAsync(data);
+        PepperAdapter padapter= (PepperAdapter)adapter;
+        padapter.solicitarInfoBatteryAsync(data);
     }
     
 }

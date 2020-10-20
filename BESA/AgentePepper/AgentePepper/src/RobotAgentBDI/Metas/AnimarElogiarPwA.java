@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
+import Init.RunAgentePepper;
 import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,10 @@ public class AnimarElogiarPwA extends GoalBDI{
         tarea.add(ejecutarEstrategia);
         Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
-        AnimarElogiarPwA b= new AnimarElogiarPwA(0, animateRole, descrip, GoalBDITypes.DUTY);
+        AnimarElogiarPwA b= new AnimarElogiarPwA(RunAgentePepper.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+    
     public AnimarElogiarPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         System.out.println("Meta AnimarPwA created");

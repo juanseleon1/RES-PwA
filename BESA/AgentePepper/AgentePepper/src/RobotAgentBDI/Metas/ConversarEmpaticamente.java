@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
+import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import Tareas.PwA.EvaluarEstadoEmocional;
@@ -41,7 +42,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         rolePlan.addTask(preguntarSentimientos);
 
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
-        ConversarEmpaticamente b= new ConversarEmpaticamente(0, convEmpRole, descrip, GoalBDITypes.DUTY);
+        ConversarEmpaticamente b= new ConversarEmpaticamente(RunAgentePepper.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {

@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Init.RunAgentePepper;
 import Tareas.CancelarActividad.CancelarActividadTask;
 import Tareas.PwA.ActualizarPerfil;
 import Tareas.PwA.EvaluarConcentracionAtencion;
@@ -46,7 +47,7 @@ public class CancelarActividad extends GoalBDI{
         rolePlan.addTask(cancelarActividad);
 
         RationalRole cancelarActRole = new RationalRole(descrip, rolePlan);
-        CancelarActividad b= new CancelarActividad(0, cancelarActRole, descrip, GoalBDITypes.DUTY);
+        CancelarActividad b= new CancelarActividad(RunAgentePepper.getPlanID(), cancelarActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CancelarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
