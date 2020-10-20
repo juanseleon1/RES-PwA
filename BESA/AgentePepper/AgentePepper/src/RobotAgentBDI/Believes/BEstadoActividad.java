@@ -13,10 +13,11 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoActividad implements Believes{
-
+    
     private long inicioActividad;
-    private String actividadActual;
+    private Actividad actividadActual;
     private boolean finalizoActividad;
+    private boolean mejoraEmocional;
     
     @Override
     public boolean update(InfoData si) {
@@ -28,7 +29,7 @@ public class BEstadoActividad implements Believes{
         return 0;
     }
 
-    public String getActividadActual() {
+    public Actividad getActividadActual() {
         return actividadActual;
     }
 

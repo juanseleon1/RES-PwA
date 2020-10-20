@@ -18,14 +18,10 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
-    private BInteraccionSensores bInteraccionSensores = new BInteraccionSensores();
-    private BNivelBateria bNivelBateria = new BNivelBateria();
-    private BEstadoInactivo bEstadoInactivo = new BEstadoInactivo();
-    private BInteraccionPwA bPersonaInteractuando = new BInteraccionPwA();
     
     public RobotAgentBelieves()
     {
-     getPerfilBD();
+        getPerfilBD();
     }
     
     //AQUI SE MANDA LO DE INFORMATIONFLOW
@@ -41,17 +37,8 @@ public class RobotAgentBelieves implements Believes{
             case EMOCIONES:
                 bEstadoEmocionalPwA.update(si);
                 break;
-            case INACTIVIDAD:
-                bEstadoInactivo.update(si);
-                break;
             case INTHABLA:
                 bEstadoInteraccion.update(si);
-                break;
-            case INTSENSORES:
-                bInteraccionSensores.update(si);
-                break;
-            case BATERIA:
-                bNivelBateria.update(si);
                 break;
             case RETROALIM:
                 bPerfilPwA.update(si);
@@ -107,40 +94,6 @@ public class RobotAgentBelieves implements Believes{
     public void setbPerfilPwA(BPerfilPwA bPerfilPwA) {
         this.bPerfilPwA = bPerfilPwA;
     }
-
-    public BInteraccionSensores getbInteraccionSensores() {
-        return bInteraccionSensores;
-    }
-
-    public void setbInteraccionSensores(BInteraccionSensores bInteraccionSensores) {
-        this.bInteraccionSensores = bInteraccionSensores;
-    }
-
-    public BNivelBateria getbNivelBateria() {
-        return bNivelBateria;
-    }
-
-    public void setbNivelBateria(BNivelBateria bNivelBateria) {
-        this.bNivelBateria = bNivelBateria;
-    }
-
-    public BEstadoInactivo getbEstadoInactivo() {
-        return bEstadoInactivo;
-    }
-
-    public void setbEstadoInactivo(BEstadoInactivo bEstadoInactivo) {
-        this.bEstadoInactivo = bEstadoInactivo;
-    }
-
-    public BInteraccionPwA getbPersonaInteractuando() {
-        return bPersonaInteractuando;
-    }
-
-    public void setbPersonaInteractuando(BInteraccionPwA bPersonaInteractuando) {
-        this.bPersonaInteractuando = bPersonaInteractuando;
-    }
         
-        
-    
-    
+       
 }
