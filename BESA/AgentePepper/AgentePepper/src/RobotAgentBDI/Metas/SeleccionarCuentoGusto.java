@@ -13,10 +13,9 @@ import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
-import Tareas.PwA.DetectarPwA;
-import Tareas.PwA.EvaluarAtencion;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
+import Tareas.SeleccionarCuentoGusto.RecomendarCuento;
 import Tareas.SeleccionarCuentoGusto.SeleccionarCuento;
 import Tareas.SeleccionarCuentoGusto.VerificarObstaculos;
 import java.util.ArrayList;
@@ -36,23 +35,21 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     public static SeleccionarCuentoGusto buildGoal() {
 
-        EvaluarAtencion evaluarCA = new EvaluarAtencion();
         BuscarAnimaciones buscarAnimaciones = new BuscarAnimaciones();
         MoverseFrentePwA moverseFrente = new MoverseFrentePwA();
         SeleccionarCuento seleccionarCuento = new SeleccionarCuento();
-        DetectarPwA detectarPwA = new DetectarPwA();
         VerificarObstaculos verificarObstaculos = new VerificarObstaculos();
+        RecomendarCuento recomendarCuento = new RecomendarCuento();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(evaluarCA);
-        rolePlan.addTask(seleccionarCuento);
-        rolePlan.addTask(buscarAnimaciones);
-        rolePlan.addTask(verificarObstaculos);
-        rolePlan.addTask(detectarPwA);
-        rolePlan.addTask(moverseFrente);
+        rolePlan.addTask(seleccionarCuento); //evalua estado emocional, mira perfil
+        rolePlan.addTask(buscarAnimaciones); //buscar y enviar
+        rolePlan.addTask(verificarObstaculos); 
+        rolePlan.addTask(moverseFrente); //detectar PwA y moverse al frente de él
+        rolePlan.addTask(recomendarCuento);
         
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
         SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(RunAgentePepper.getPlanID(), selCuenGRole, descrip, GoalBDITypes.DUTY);

@@ -39,7 +39,6 @@ public class ConversarEmpaticamente extends GoalBDI{
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
 
-        rolePlan.addTask(evaluarEstadoE);
         rolePlan.addTask(preguntarSentimientos);
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         rolePlan.addTask(estrategiaConversar);

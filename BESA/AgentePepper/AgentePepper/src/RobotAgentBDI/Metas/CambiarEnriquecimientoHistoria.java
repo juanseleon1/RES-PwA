@@ -37,7 +37,6 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
 
-        rolePlan.addTask(evaluarA);
         //crear interface enriquecer(bajo,medio,alto) que permita ejecutarEstrategia(), guardar enriquecer en believes y despues sacarla de estos
         rolePlan.addTask(evaluarEnriquecer);//si es automatico o el PwA lo pide
         
