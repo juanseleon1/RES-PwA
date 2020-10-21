@@ -18,7 +18,6 @@ public class SolicitarActivacionActividad extends Task{
         System.out.println("--- Task Solicitar Activacion Actividad Iniciada ---");
     }
     
-
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Solicitar Activacion Actividad ---");
