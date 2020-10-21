@@ -14,7 +14,6 @@ import RobotAgentBDI.RobotAgentBDI;
 import Init.RunAgentePepper;
 import Tareas.CambiarActividad.DetenerPlan;
 import Tareas.RecargarBateria.MoverseEstacionCarga;
-import Tareas.RecargarBateria.ReportarNivelBateria;
 import Tareas.RecargarBateria.SuspenderRobot;
 import Tareas.RecargarBateria.UbicarEstacionCarga;
 import java.util.ArrayList;
@@ -34,18 +33,14 @@ public class RecargarBateria extends GoalBDI{
 
     public static RecargarBateria buildGoal() {
 
-        DetenerPlan detenerPlan = new DetenerPlan();
         MoverseEstacionCarga moverseEstacionCarga = new MoverseEstacionCarga();
-        ReportarNivelBateria reportarNivelBateria = new ReportarNivelBateria();
-        SuspenderRobot suspenderRobot = new SuspenderRobot();
+        SuspenderRobot suspenderRobot = new SuspenderRobot();//Suspender a robot y notificar/decir
         UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(detenerPlan);
-        rolePlan.addTask(reportarNivelBateria);
         rolePlan.addTask(ubicarEstacionCarga);
         rolePlan.addTask(moverseEstacionCarga);
         rolePlan.addTask(suspenderRobot);

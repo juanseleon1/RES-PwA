@@ -14,8 +14,6 @@ import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import Init.RunAgentePepper;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
-import Tareas.EntrarModoKaraoke.BuscarLetra;
-import Tareas.EntrarModoKaraoke.EvaluarPerfilPwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -34,17 +32,12 @@ public class EntrarModoKaraoke extends GoalBDI{
     public static EntrarModoKaraoke buildGoal() {
 
         ActivarSubtitulos activarSubtitulos = new ActivarSubtitulos();
-        BuscarLetra buscarLetras = new BuscarLetra();
-        EvaluarPerfilPwA evaluarPerfil = new EvaluarPerfilPwA();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        
-        rolePlan.addTask(evaluarPerfil);
-        rolePlan.addTask(buscarLetras);
-        rolePlan.addTask(activarSubtitulos);
+        rolePlan.addTask(activarSubtitulos); //se buscan y activan
 
         RationalRole karaokeRole = new RationalRole(descrip, rolePlan);
         EntrarModoKaraoke b= new EntrarModoKaraoke(RunAgentePepper.getPlanID(), karaokeRole, descrip, GoalBDITypes.DUTY);

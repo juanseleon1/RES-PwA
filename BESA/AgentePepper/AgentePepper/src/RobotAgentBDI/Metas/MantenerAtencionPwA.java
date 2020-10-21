@@ -13,7 +13,6 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
 import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
-import Tareas.PwA.EvaluarConcentracionAtencion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -27,11 +26,11 @@ import rational.mapping.Task;
  */
 public class MantenerAtencionPwA extends GoalBDI{
 
-            private static String descrip;
+    private static String descrip;
 
     public static MantenerAtencionPwA buildGoal() {
 
-        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
+        //evaluar atencion, estado emocional
         SeleccionarEstrategiaAtencion seleccionarEstrategiaA = new SeleccionarEstrategiaAtencion();
         EjecutarEstrategiaAtencion ejecutarEstrategia = new EjecutarEstrategiaAtencion();
         List<String> resources = new ArrayList<>();
@@ -39,8 +38,8 @@ public class MantenerAtencionPwA extends GoalBDI{
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(evaluarCA);
         rolePlan.addTask(seleccionarEstrategiaA);
+        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         rolePlan.addTask(ejecutarEstrategia);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);

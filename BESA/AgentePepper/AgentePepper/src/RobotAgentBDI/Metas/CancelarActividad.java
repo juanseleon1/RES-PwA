@@ -12,9 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.CancelarActividad.CancelarActividadTask;
-import Tareas.PwA.ActualizarPerfil;
-import Tareas.PwA.EvaluarConcentracionAtencion;
-import Tareas.PwA.EvaluarEstadoEmocional;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -32,19 +29,13 @@ public class CancelarActividad extends GoalBDI{
 
     public static CancelarActividad buildGoal() {
 
-        EvaluarEstadoEmocional evaluarEstadoE = new EvaluarEstadoEmocional();
-        EvaluarConcentracionAtencion evaluarCA = new EvaluarConcentracionAtencion();
-        ActualizarPerfil actualizarPerfil = new ActualizarPerfil();
         CancelarActividadTask cancelarActividad = new CancelarActividadTask();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
         
-        rolePlan.addTask(evaluarEstadoE);
-        rolePlan.addTask(evaluarCA);
-        rolePlan.addTask(actualizarPerfil);
-        rolePlan.addTask(cancelarActividad);
+        rolePlan.addTask(cancelarActividad); //evaluar estado emocional
 
         RationalRole cancelarActRole = new RationalRole(descrip, rolePlan);
         CancelarActividad b= new CancelarActividad(RunAgentePepper.getPlanID(), cancelarActRole, descrip, GoalBDITypes.DUTY);

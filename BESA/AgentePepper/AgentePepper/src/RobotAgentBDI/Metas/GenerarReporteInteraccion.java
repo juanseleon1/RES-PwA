@@ -12,8 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.GenerarReporteInteraccion.MostrarInfo;
-import Tareas.GenerarReporteInteraccion.PersistirInfoInteraccion;
-import Tareas.GenerarReporteInteraccion.RecopilarInfoInteraccion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -31,17 +29,13 @@ public class GenerarReporteInteraccion extends GoalBDI{
 
     public static GenerarReporteInteraccion buildGoal() {
 
-        PersistirInfoInteraccion persistirInfoI = new PersistirInfoInteraccion();
-        RecopilarInfoInteraccion recopilarInfoI = new RecopilarInfoInteraccion();
         MostrarInfo mostrarInfo = new MostrarInfo();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(persistirInfoI);
-        rolePlan.addTask(recopilarInfoI);
-        rolePlan.addTask(mostrarInfo);
+        rolePlan.addTask(mostrarInfo);//sacar info y mostrar
 
         RationalRole genRepRole = new RationalRole(descrip, rolePlan);
         GenerarReporteInteraccion b= new GenerarReporteInteraccion(RunAgentePepper.getPlanID(), genRepRole, descrip, GoalBDITypes.DUTY);

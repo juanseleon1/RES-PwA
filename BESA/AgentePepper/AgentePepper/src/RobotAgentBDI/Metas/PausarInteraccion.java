@@ -13,7 +13,6 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.PausarInteraccion.PausarActividad;
 import Tareas.PausarInteraccion.SuspenderMetas;
-import Tareas.PwA.DetectarPwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -30,7 +29,6 @@ public class PausarInteraccion extends GoalBDI{
 
     public static PausarInteraccion buildGoal() {
 
-        DetectarPwA detectarPwA = new DetectarPwA();
         PausarActividad pausarActividad = new PausarActividad();
         SuspenderMetas suspenderMetas = new SuspenderMetas();
         List<String> resources = new ArrayList<>();
@@ -38,7 +36,6 @@ public class PausarInteraccion extends GoalBDI{
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(detectarPwA);
         rolePlan.addTask(pausarActividad);
         rolePlan.addTask(suspenderMetas);
 
