@@ -6,13 +6,13 @@
 package Tareas.AnimarElogiarPwA;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class EjecutarEstrategiaAnimar extends Task{
+public class EjecutarEstrategiaAnimar extends ResPwaTask{
 
     public EjecutarEstrategiaAnimar() {
         System.out.println("--- Task Ejecutar Estrategia Animar PwA Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.PausarInteraccion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SuspenderMetas extends Task{
+public class SuspenderMetas extends ResPwaTask{
 
     public SuspenderMetas() {
         System.out.println("--- Task Suspender Metas Iniciada ---");

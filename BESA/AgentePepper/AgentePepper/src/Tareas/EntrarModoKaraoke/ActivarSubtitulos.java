@@ -6,13 +6,13 @@
 package Tareas.EntrarModoKaraoke;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class ActivarSubtitulos extends Task{
+public class ActivarSubtitulos extends ResPwaTask{
 
     public ActivarSubtitulos() {
         System.out.println("--- Task Activar Subtitulos Iniciada ---");

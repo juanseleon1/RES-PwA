@@ -6,13 +6,13 @@
 package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class BusquedaCancionYoutube extends Task{
+public class BusquedaCancionYoutube extends ResPwaTask{
 
     public BusquedaCancionYoutube() {
         System.out.println("--- Task Busqueda Cancion Iniciada ---");

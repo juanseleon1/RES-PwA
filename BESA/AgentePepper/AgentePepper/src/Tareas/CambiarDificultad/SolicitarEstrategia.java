@@ -7,13 +7,13 @@
 package Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SolicitarEstrategia extends Task{
+public class SolicitarEstrategia extends ResPwaTask{
 
     public SolicitarEstrategia() {
         System.out.println("--- Task Solicitar Estrategia Iniciada ---");

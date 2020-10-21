@@ -6,13 +6,13 @@
 package Tareas.PausarInteraccion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class PausarActividad extends Task{
+public class PausarActividad extends ResPwaTask{
 
     public PausarActividad() {
         System.out.println("--- Task Pausar Actividad Iniciada ---");

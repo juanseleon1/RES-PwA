@@ -6,13 +6,13 @@
 package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class RevisarPerfil extends Task{
+public class RevisarPerfil extends ResPwaTask{
 
     public RevisarPerfil() {
         System.out.println("--- Task Revisar Perfil Iniciada ---");

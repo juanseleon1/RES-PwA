@@ -6,13 +6,13 @@
 package Tareas.ReanudarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class RecibirNotificacionReanudar extends Task{
+public class RecibirNotificacionReanudar extends ResPwaTask{
 
     public RecibirNotificacionReanudar() {
         System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");

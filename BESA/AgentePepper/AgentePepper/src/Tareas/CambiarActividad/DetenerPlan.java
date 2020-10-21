@@ -7,13 +7,13 @@
 package Tareas.CambiarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class DetenerPlan extends Task{
+public class DetenerPlan extends ResPwaTask{
 
     public DetenerPlan() {
         System.out.println("--- Task Detener Plan Iniciada ---");

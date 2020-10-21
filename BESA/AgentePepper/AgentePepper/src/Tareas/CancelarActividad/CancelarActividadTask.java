@@ -6,13 +6,13 @@
 package Tareas.CancelarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class CancelarActividadTask extends Task{
+public class CancelarActividadTask extends ResPwaTask{
 
     public CancelarActividadTask() {
         System.out.println("--- Task Cancelar Actividad Iniciada ---");

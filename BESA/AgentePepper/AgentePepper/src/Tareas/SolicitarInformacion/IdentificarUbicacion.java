@@ -6,13 +6,13 @@
 package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class IdentificarUbicacion extends Task{
+public class IdentificarUbicacion extends ResPwaTask{
 
     public IdentificarUbicacion() {
         System.out.println("--- Task Identificar Ubicacion Iniciada ---");

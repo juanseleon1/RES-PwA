@@ -6,13 +6,13 @@
 package Tareas.EnviarNotificacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SolicitarEstadoEmergencia extends Task{
+public class SolicitarEstadoEmergencia extends ResPwaTask{
 
     public SolicitarEstadoEmergencia() {
         System.out.println("--- Task Solicitar Estado Emergencia Iniciada ---");

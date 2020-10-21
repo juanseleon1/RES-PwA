@@ -5,9 +5,6 @@
  */
 package ServiceAgentPepper.EnergyServices;
 
-import ServiceAgentPepper.AutonomyServices.*;
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans

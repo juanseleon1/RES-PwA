@@ -6,13 +6,13 @@
 package Tareas.CambiarEnriquecimientoHistoria;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class EvaluarEnriquecer extends Task{
+public class EvaluarEnriquecer extends ResPwaTask{
 
     public EvaluarEnriquecer() {
         System.out.println("--- Task Evaluar Enriquecer Iniciada ---");

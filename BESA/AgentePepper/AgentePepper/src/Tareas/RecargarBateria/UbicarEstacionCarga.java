@@ -6,13 +6,13 @@
 package Tareas.RecargarBateria;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class UbicarEstacionCarga extends Task{
+public class UbicarEstacionCarga extends ResPwaTask{
 
     public UbicarEstacionCarga() {
         System.out.println("--- Task Ubicar Estacion Carga Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class InterpretarEstadoFlujo extends Task{
+public class InterpretarEstadoFlujo extends ResPwaTask{
 
     public InterpretarEstadoFlujo() {
         System.out.println("--- Task Interpretar Estado Flujo Iniciada ---");

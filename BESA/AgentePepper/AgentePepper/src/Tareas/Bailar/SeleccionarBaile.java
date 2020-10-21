@@ -6,13 +6,13 @@
 package Tareas.Bailar;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarBaile extends Task{
+public class SeleccionarBaile extends ResPwaTask{
 
     public SeleccionarBaile() {
         System.out.println("--- Task Seleccionar Baile Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class RepetirCancion extends Task{
+public class RepetirCancion extends ResPwaTask{
 
     public RepetirCancion() {
         System.out.println("--- Task Repetir Cancion Iniciada ---");

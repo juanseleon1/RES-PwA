@@ -6,13 +6,13 @@
 package Tareas.EnviarNotificacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class PrepararMensaje extends Task{
+public class PrepararMensaje extends ResPwaTask{
 
     public PrepararMensaje() {
         System.out.println("--- Task Preparar Mensaje Iniciada ---");

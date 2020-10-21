@@ -6,13 +6,13 @@
 package Tareas.RecargarBateria;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SuspenderRobot extends Task{
+public class SuspenderRobot extends ResPwaTask{
 
     public SuspenderRobot() {
         System.out.println("--- Task Suspender Robot Iniciada ---");

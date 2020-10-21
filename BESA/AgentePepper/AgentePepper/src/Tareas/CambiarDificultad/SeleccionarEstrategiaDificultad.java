@@ -6,13 +6,13 @@
 package Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarEstrategiaDificultad extends Task{
+public class SeleccionarEstrategiaDificultad extends ResPwaTask{
 
     public SeleccionarEstrategiaDificultad() {
         System.out.println("--- Task Seleccionar Estrategia Dificultad Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class RetroalimentarBDI extends Task{
+public class RetroalimentarBDI extends ResPwaTask{
 
     public RetroalimentarBDI() {
         System.out.println("--- Task Retroalimentar BDI Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarCancion extends Task{
+public class SeleccionarCancion extends ResPwaTask{
 
     public SeleccionarCancion() {
         System.out.println("--- Task Seleccionar Cancion Iniciada ---");

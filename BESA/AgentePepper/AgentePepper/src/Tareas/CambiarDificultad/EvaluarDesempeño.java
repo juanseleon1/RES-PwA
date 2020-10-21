@@ -6,13 +6,13 @@
 package Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class EvaluarDesempeño extends Task{
+public class EvaluarDesempeño extends ResPwaTask{
 
     public EvaluarDesempeño() {
         System.out.println("--- Task Evaluar Desempeño Iniciada ---");

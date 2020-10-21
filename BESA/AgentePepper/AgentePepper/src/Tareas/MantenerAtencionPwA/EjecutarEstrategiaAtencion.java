@@ -6,13 +6,13 @@
 package Tareas.MantenerAtencionPwA;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class EjecutarEstrategiaAtencion extends Task{
+public class EjecutarEstrategiaAtencion extends ResPwaTask{
 
     public EjecutarEstrategiaAtencion() {
         System.out.println("--- Task Ejecutar Estrategia Atencion Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class MoverseFrentePwA extends Task{
+public class MoverseFrentePwA extends ResPwaTask{
 
     public MoverseFrentePwA() {
         System.out.println("--- Task Moverse Frente PwA Iniciada ---");

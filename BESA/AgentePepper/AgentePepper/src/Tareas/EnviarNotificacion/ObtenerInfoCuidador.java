@@ -6,13 +6,13 @@
 package Tareas.EnviarNotificacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class ObtenerInfoCuidador extends Task{
+public class ObtenerInfoCuidador extends ResPwaTask{
 
     public ObtenerInfoCuidador() {
         System.out.println("--- Task Obtener Informacion Cuidador Iniciada ---");

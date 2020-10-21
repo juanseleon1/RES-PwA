@@ -6,13 +6,13 @@
 package Tareas.GenerarReporteInteraccion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class MostrarInfo extends Task{
+public class MostrarInfo extends ResPwaTask{
 
     public MostrarInfo() {
         System.out.println("--- Task Mostrar Informacion Interaccion Iniciada ---");

@@ -6,13 +6,13 @@
 package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class RecibirRetroalimentacion extends Task{
+public class RecibirRetroalimentacion extends ResPwaTask{
 
     public RecibirRetroalimentacion() {
         System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");

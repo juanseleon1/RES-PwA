@@ -6,13 +6,13 @@
 package Tareas.ReanudarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SolicitarPosicionPwA extends Task{
+public class SolicitarPosicionPwA extends ResPwaTask{
 
     public SolicitarPosicionPwA() {
         System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");

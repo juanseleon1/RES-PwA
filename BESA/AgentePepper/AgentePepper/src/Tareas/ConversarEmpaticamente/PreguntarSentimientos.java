@@ -6,13 +6,13 @@
 package Tareas.ConversarEmpaticamente;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class PreguntarSentimientos extends Task{
+public class PreguntarSentimientos extends ResPwaTask{
 
     public PreguntarSentimientos() {
         System.out.println("--- Task Preguntar Sentimientos Iniciada ---");

@@ -7,13 +7,13 @@
 package Tareas.CambiarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class IniciarNuevoPlan extends Task{
+public class IniciarNuevoPlan extends ResPwaTask{
 
     public IniciarNuevoPlan() {
         System.out.println("--- Task Iniciar Nuevo Plan Iniciada ---");

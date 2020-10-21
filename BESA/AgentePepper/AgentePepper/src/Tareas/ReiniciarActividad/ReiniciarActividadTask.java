@@ -6,13 +6,13 @@
 package Tareas.ReiniciarActividad;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class ReiniciarActividadTask extends Task{
+public class ReiniciarActividadTask extends ResPwaTask{
 
     public ReiniciarActividadTask() {
         System.out.println("--- Task Reiniciar Actividad Iniciada ---");

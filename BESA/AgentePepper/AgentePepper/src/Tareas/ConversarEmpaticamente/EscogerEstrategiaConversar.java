@@ -6,13 +6,13 @@
 package Tareas.ConversarEmpaticamente;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class EscogerEstrategiaConversar extends Task{
+public class EscogerEstrategiaConversar extends ResPwaTask{
     
     public EscogerEstrategiaConversar() {
         System.out.println("--- Task Escoger Estrategia Conversar Iniciada ---");

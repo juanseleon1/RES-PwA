@@ -6,13 +6,13 @@
 package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class DesplegarFormulario extends Task{
+public class DesplegarFormulario extends ResPwaTask{
 
     public DesplegarFormulario() {
         System.out.println("--- Task Desplegar Formulario Iniciada ---");

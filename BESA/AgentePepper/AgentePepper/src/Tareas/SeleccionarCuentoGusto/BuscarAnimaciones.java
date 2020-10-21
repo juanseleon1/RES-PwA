@@ -6,13 +6,13 @@
 package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class BuscarAnimaciones extends Task{
+public class BuscarAnimaciones extends ResPwaTask{
 
     public BuscarAnimaciones() {
         System.out.println("--- Task Buscar Animaciones Iniciada ---");

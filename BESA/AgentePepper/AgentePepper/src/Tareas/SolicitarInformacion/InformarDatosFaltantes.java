@@ -6,13 +6,13 @@
 package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class InformarDatosFaltantes extends Task{
+public class InformarDatosFaltantes extends ResPwaTask{
 
     public InformarDatosFaltantes() {
         System.out.println("--- Task Informar Datos Faltantes Iniciada ---");

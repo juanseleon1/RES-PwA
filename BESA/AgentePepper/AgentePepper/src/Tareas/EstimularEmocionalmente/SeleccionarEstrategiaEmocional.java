@@ -6,13 +6,13 @@
 package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
-import rational.mapping.Task;
+import RobotAgentBDI.ResPwaTask;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarEstrategiaEmocional extends Task{
+public class SeleccionarEstrategiaEmocional extends ResPwaTask{
 
     public SeleccionarEstrategiaEmocional() {
         System.out.println("--- Task Seleccionar Estrategia Emocional Iniciada ---");
