@@ -9,12 +9,26 @@ import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import SensorHandlerAgent.*;
 import java.util.HashMap;
 import rational.data.InfoData;
+import rational.services.ActivateServiceData;
 
 /**
  *
  * @author juans
  */
-public class ServiceDataRequest extends SPServiceDataRequest{
+public class ServiceDataRequest extends ActivateServiceData{
+    
+    private String subservice;
+    private HashMap<String,Object> params;
+    
+    
+    public ServiceDataRequest(String service,String subservice, HashMap<String,Object> params)
+    {    
+        
+       super(service);
+       this.subservice=subservice;
+       this.params=params;
+        
+    }
     
 
     

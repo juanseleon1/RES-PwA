@@ -5,16 +5,25 @@
  */
 package ServiceAgentPepper.MovementServices;
 
-import ServiceAgentPepper.AutonomyServices.*;
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans
  */
 public enum MovementServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private MovementServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

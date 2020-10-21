@@ -5,16 +5,25 @@
  */
 package ServiceAgentPepper.RobotStateServices;
 
-import ServiceAgentPepper.AutonomyServices.*;
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans
  */
 public enum RobotStateServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private RobotStateServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

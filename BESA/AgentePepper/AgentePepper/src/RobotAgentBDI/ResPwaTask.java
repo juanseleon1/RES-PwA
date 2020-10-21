@@ -7,15 +7,11 @@ package RobotAgentBDI;
 
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataRequest;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.RunAgentePepper;
-import SensorHandlerAgent.GetInfoGuard;
-import SensorHandlerAgent.SensorData;
-import ServiceAgentPepper.RobotProviderAgent;
-import Tareas.Bailar.InicializarBaile;
+import ServiceAgentPepper.ServiceDataRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.mapping.Task;
@@ -26,14 +22,13 @@ import rational.services.ActivateAsynchronousServiceGuard;
  * @author juans
  */
 public abstract class ResPwaTask extends Task{
-    public void requestService(String serviceToUse)
+    public void requestService(ServiceDataRequest sdr)
     {
          try {
-            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(serviceToUse);
+            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
             String SHID = AdmBESA.getInstance().searchAidByAlias(RunAgentePepper.aliasSHAAgent);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
-            ServiceProviderDataRequest spdr= new ServiceProviderDataRequest(SHID,serviceToUse, new SPServiceDataRequest(GetInfoGuard.class.getName(), SensorData.class.getName()));
-            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), spdr);
+            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
             evt.setSenderAgId(SHID);
             agH.sendEvent(evt);
         } catch (ExceptionBESA ex) {

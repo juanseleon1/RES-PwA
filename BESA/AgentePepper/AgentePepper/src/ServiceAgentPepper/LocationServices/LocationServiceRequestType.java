@@ -5,16 +5,25 @@
  */
 package ServiceAgentPepper.LocationServices;
 
-import ServiceAgentPepper.AutonomyServices.*;
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans
  */
 public enum LocationServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private LocationServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }
