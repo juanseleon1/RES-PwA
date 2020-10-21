@@ -9,8 +9,14 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import Init.RunAgentePepper;
+import Tareas.Conversacion.PreguntarEstAnimo;
+import java.util.ArrayList;
+import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
+import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
@@ -18,38 +24,62 @@ import rational.mapping.Believes;
  */
 public class Conversacion extends GoalBDI{
 
+    private static String descrip;
+
+    public static Conversacion buildGoal() {
+
+        PreguntarEstAnimo preguntarEA = new PreguntarEstAnimo();
+        List<String> resources = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+        
+        Plan rolePlan= new Plan(taskList, resources, null);
+
+        rolePlan.addTask(preguntarEA);
+
+        RationalRole reiActRole = new RationalRole(descrip, rolePlan);
+        Conversacion b= new Conversacion(RunAgentePepper.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        return b;
+    }
+    
     public Conversacion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
+        System.out.println("Meta Conversacion created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion evaluateViability");
+        return 0;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion detectGoal");
+        return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion evaluatePlausibility");
+        return 0;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion evaluateContribution");
+        return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion predictResultUnlegality");
+        return false;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Meta Conversacion goalSucceeded");
+        return false;
     }
     
 }
