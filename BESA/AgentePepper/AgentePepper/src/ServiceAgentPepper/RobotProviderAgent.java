@@ -13,11 +13,12 @@ import BESA.Kernel.Social.ServiceProvider.agent.StateServiceProvider;
 import BESA.Local.Directory.AgLocalHandlerBESA;
 import ServiceAgentPepper.ActivityServices.ActivityService;
 import ServiceAgentPepper.AutonomyServices.AutonomyService;
-import ServiceAgentPepper.BatteryServices.BatteryService;
+import ServiceAgentPepper.EnergyServices.EnergyService;
 import ServiceAgentPepper.HumanServices.HumanService;
 import ServiceAgentPepper.LocationServices.LocationService;
 import ServiceAgentPepper.MovementServices.MovementService;
-import ServiceAgentPepper.StateServices.StateService;
+import ServiceAgentPepper.RobotStateServices.RobotStateService;
+import ServiceAgentPepper.TabletServices.TabletService;
 import ServiceAgentPepper.VoiceServices.VoiceService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,14 +30,24 @@ import java.util.logging.Logger;
 public class RobotProviderAgent extends ServiceProviderBESA {
     
     private static AgLocalHandlerBESA agh;
+    //Se encarga de animaciones
     public static String servActividades="servActividades";
+    //Control de funciones autonomas
     public static String servAutonomia="servAutonomia";
-    public static String servBateria="servBateria";
+    //Aagar*prender/susenderrobot
+    public static String servEnergia="servEnergia";
+    //Pedir informacion sobre el PwA, incluye login.
     public static String servHumanos="servHumanos";
+    //Manejo de modelo del mundo y ubicacion del PwA
     public static String servLocation="servLocation";
+    //Solicitud de movimiento del robot.
     public static String servMovimiento="servMovimiento";
-    public static String servEstado="servEstado";
+    //Manejo de estado emocional del robot.
+    public static String servEstadoRobot="servEstadoRobot";
+    //Solicitudes de Voz
     public static String servVoz="servVoz";
+    //Solicitudes de tablet
+    public static String servTablet="servTablet";
     private static PepperAdapter adapterP;
     
     public RobotProviderAgent(String alias) throws KernelAgentExceptionBESA {
@@ -63,12 +74,13 @@ public class RobotProviderAgent extends ServiceProviderBESA {
     public void setupAgent() {
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servActividades);
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servAutonomia);
-        this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servBateria);
+        this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servEnergia);
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servHumanos);
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servLocation);
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servMovimiento);
-        this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servEstado);
+        this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servEstadoRobot);
         this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servVoz);
+        this.getAdmLocal().bindSPServiceInDirectory(this.getAid(), servTablet);
     }
 
     @Override
@@ -81,18 +93,20 @@ public class RobotProviderAgent extends ServiceProviderBESA {
            as.setName(servActividades);
            AutonomyService autos= new AutonomyService();
            autos.setName(servAutonomia);
-           BatteryService bs= new BatteryService();
-           bs.setName(servBateria);
+           EnergyService bs= new EnergyService();
+           bs.setName(servEnergia);
            HumanService hs= new HumanService();
            hs.setName(servHumanos);
            LocationService ls= new LocationService();
            ls.setName(servLocation);
            MovementService ms= new MovementService();
            ms.setName(servMovimiento);
-           StateService ss= new StateService();
-           ss.setName(servEstado);
+           RobotStateService ss= new RobotStateService();
+           ss.setName(servEstadoRobot);
            VoiceService vs= new VoiceService();
            vs.setName(servVoz);
+           TabletService ts= new TabletService();
+           ts.setName(servTablet);
            spd.addSPService(as);
            spd.addSPService(autos);
            spd.addSPService(bs);
@@ -101,6 +115,7 @@ public class RobotProviderAgent extends ServiceProviderBESA {
            spd.addSPService(ms);
            spd.addSPService(ss);
            spd.addSPService(vs);
+           spd.addSPService(ts);
         
         return spd;
     }

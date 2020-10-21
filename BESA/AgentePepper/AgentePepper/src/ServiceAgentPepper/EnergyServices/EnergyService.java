@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServiceAgentPepper.StateServices;
+package ServiceAgentPepper.EnergyServices;
 
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Agent.Event.DataBESA;
@@ -19,13 +19,13 @@ import rational.services.AsynchronousService;
  *
  * @author juans
  */
-public class StateService extends AsynchronousService{
+public class EnergyService extends AsynchronousService{
 
     @Override
     public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
-        System.out.println("StateService Solicitado");
+        System.out.println("BatteryService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
-        padapter.solicitarInfoStateAsync(data);
+        padapter.solicitarInfoBatteryAsync(data);
     }
     
 }

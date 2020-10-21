@@ -104,13 +104,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servBateria);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servEnergia);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servBateria,
+                    RobotProviderAgent.servEnergia,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -149,13 +149,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servEstado);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servEstadoRobot);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servEstado,
+                    RobotProviderAgent.servEstadoRobot,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
