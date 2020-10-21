@@ -5,8 +5,22 @@
  */
 package Tareas.Bailar;
 
+import BESA.ExceptionBESA;
+import BESA.Kernel.Agent.Event.EventBESA;
+import BESA.Kernel.Social.ServiceProvider.agent.GuardServiceProviderRequest;
+import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataRequest;
+import BESA.Kernel.System.AdmBESA;
+import BESA.Kernel.System.Directory.AgHandlerBESA;
+import Init.RunAgentePepper;
+import SensorHandlerAgent.GetInfoGuard;
+import SensorHandlerAgent.SensorData;
+import ServiceAgentPepper.RobotProviderAgent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rational.mapping.Believes;
 import rational.mapping.Task;
+import rational.services.ActivateAsynchronousServiceGuard;
 
 /**
  *
@@ -22,7 +36,18 @@ public class InicializarBaile extends Task{
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Cambiar Baile ---");
+        try {
+            System.out.println("--- Execute Task Cambiar Baile ---");
+            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servHumanos);
+            String SHID = AdmBESA.getInstance().searchAidByAlias(RunAgentePepper.aliasSHAAgent);
+            AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
+            ServiceProviderDataRequest spdr= new ServiceProviderDataRequest(SHID,RobotProviderAgent.servHumanos, new SPServiceDataRequest(GetInfoGuard.class.getName(), SensorData.class.getName()));
+            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), spdr);
+            evt.setSenderAgId(SHID);
+            agH.sendEvent(evt);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(InicializarBaile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

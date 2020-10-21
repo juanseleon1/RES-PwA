@@ -32,6 +32,21 @@ import java.util.logging.Logger;
 /**
  *
  * @author juans
+ * Cuidador--> crea perfil y crea pwas
+
+Autenticar.
+1. Pepper se acerca.
+2. Si identifica la cara, lo saluda e inicia sesion.
+3. Le avisa que no lo conoce y que hable con su cuidador para poder hacerle un perfil.
+Conversacion Casual.
+"Hola, como estas hoy" y muestra en tablet
+ y espera respuesta oral. 
+Como estas como te fue hoy.
+Y luego, lo escucha por un rato.
+y le dice que hagan una actividad. 
+
+Luego empieza la sesion. 
+
  */
 public class RunAgentePepper {
     
@@ -68,12 +83,12 @@ public class RunAgentePepper {
         AnimarElogiarPwA animarGoal=  AnimarElogiarPwA.buildGoal();
         CambiarActividad cambiarActividadGoal=  CambiarActividad.buildGoal();
         CambiarCancion cambiarCancionrGoal=  CambiarCancion.buildGoal();
-        CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
+       // CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
         CambiarEnriquecimientoHistoria cambiarEnriquecimientoHistoriaGoal=  CambiarEnriquecimientoHistoria.buildGoal();
         CancelarActividad CancelarActividadGoal=  CancelarActividad.buildGoal();
         ConversarEmpaticamente conversarEmpaticamenteGoal=  ConversarEmpaticamente.buildGoal();
         EntrarModoKaraoke entrarModoKaraokeGoal=  EntrarModoKaraoke.buildGoal();
-        EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
+        //EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
         GenerarReporteInteraccion generarReporteInteraccionGoal=  GenerarReporteInteraccion.buildGoal();
         MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
         PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -86,12 +101,12 @@ public class RunAgentePepper {
         RAGoals.add(animarGoal);
         RAGoals.add(cambiarActividadGoal);
         RAGoals.add(cambiarCancionrGoal);
-        RAGoals.add(cambiarDificultadGoal);
+//        RAGoals.add(cambiarDificultadGoal);
         RAGoals.add(cambiarEnriquecimientoHistoriaGoal);
         RAGoals.add(CancelarActividadGoal);
         RAGoals.add(conversarEmpaticamenteGoal);
         RAGoals.add(entrarModoKaraokeGoal);
-        RAGoals.add(estimularEmocionalmenteGoal);
+        //RAGoals.add(estimularEmocionalmenteGoal);
         RAGoals.add(generarReporteInteraccionGoal);
         RAGoals.add(mantenerAtencionPwAGoal);
         RAGoals.add(pausarInteraccionGoal);

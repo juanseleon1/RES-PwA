@@ -88,7 +88,12 @@ public class PepperAdapter extends AdapterBESA{
         enviarMensaje(data);
 
     }
-    
+    public void solicitarTabletAsync(SPServiceDataRequest data) {
+        System.out.println("solicitarTabletAsync Iniciado");
+        enviarMensaje(data);
+
+    }
+   
    private void enviarMensaje(SPServiceDataRequest data)
    {
         try {
