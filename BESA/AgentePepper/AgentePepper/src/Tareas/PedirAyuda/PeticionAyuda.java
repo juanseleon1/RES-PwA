@@ -5,14 +5,14 @@
  */
 package Tareas.PedirAyuda;
 
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class PeticionAyuda extends Task{
+public class PeticionAyuda extends ResPwaTask{
     
     public PeticionAyuda() {
         System.out.println("--- Task Peticion Ayuda Iniciada ---");

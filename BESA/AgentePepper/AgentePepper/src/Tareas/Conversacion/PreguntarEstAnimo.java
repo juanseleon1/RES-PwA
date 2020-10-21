@@ -5,14 +5,14 @@
  */
 package Tareas.Conversacion;
 
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class PreguntarEstAnimo extends Task{
+public class PreguntarEstAnimo extends ResPwaTask{
     
     public PreguntarEstAnimo() {
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");

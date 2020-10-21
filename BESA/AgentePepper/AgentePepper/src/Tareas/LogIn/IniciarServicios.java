@@ -5,14 +5,14 @@
  */
 package Tareas.LogIn;
 
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class IniciarServicios extends Task{
+public class IniciarServicios extends ResPwaTask{
 
     public IniciarServicios() {
         System.out.println("--- Task Iniciar Servicios Iniciada ---");

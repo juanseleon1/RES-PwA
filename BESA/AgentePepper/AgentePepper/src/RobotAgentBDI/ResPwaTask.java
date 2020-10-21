@@ -39,6 +39,5 @@ public abstract class ResPwaTask extends Task{
         } catch (ExceptionBESA ex) {
             Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }

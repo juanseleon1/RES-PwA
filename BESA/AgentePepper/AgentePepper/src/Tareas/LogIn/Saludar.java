@@ -5,14 +5,14 @@
  */
 package Tareas.LogIn;
 
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class Saludar extends Task{
+public class Saludar extends ResPwaTask{
     
     //incluye detectar la cara del PwA y saludarlo
     

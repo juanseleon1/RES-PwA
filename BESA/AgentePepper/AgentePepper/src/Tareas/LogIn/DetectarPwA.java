@@ -5,19 +5,15 @@
  */
 package Tareas.LogIn;
 
-import BESA.BDI.AgentStructuralModel.GoalBDI;
-import BESA.BDI.AgentStructuralModel.GoalBDITypes;
-import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import rational.RationalRole;
+
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class DetectarPwA extends Task{
+public class DetectarPwA extends ResPwaTask{
     
     public DetectarPwA() {
         System.out.println("--- Task Detectar PwA Iniciada ---");

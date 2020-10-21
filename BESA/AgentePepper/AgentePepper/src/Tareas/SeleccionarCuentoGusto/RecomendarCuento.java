@@ -5,14 +5,14 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
+import RobotAgentBDI.ResPwaTask;
 import rational.mapping.Believes;
-import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class RecomendarCuento extends Task{
+public class RecomendarCuento extends ResPwaTask{
     
     public RecomendarCuento() {
         System.out.println("--- Task Recomendar Cuento Iniciada ---");
