@@ -10,8 +10,20 @@ package ServiceAgentPepper.ActivityServices;
  * @author juans
  */
 public enum ActivityServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private ActivityServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

@@ -5,13 +5,30 @@
  */
 package ServiceAgentPepper.EnergyServices;
 
+import ServiceAgentPepper.VoiceServices.*;
+import ServiceAgentPepper.EnergyServices.*;
+import ServiceAgentPepper.AutonomyServices.*;
+import ServiceAgentPepper.ActivityServices.*;
+
 /**
  *
  * @author juans
  */
 public enum EnergyServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private EnergyServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

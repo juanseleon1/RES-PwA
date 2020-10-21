@@ -5,16 +5,25 @@
  */
 package ServiceAgentPepper.HumanServices;
 
-import ServiceAgentPepper.AutonomyServices.*;
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans
  */
 public enum HumanServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private HumanServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

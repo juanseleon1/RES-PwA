@@ -5,6 +5,7 @@
  */
 package ServiceAgentPepper.TabletServices;
 
+import ServiceAgentPepper.VoiceServices.*;
 import ServiceAgentPepper.EnergyServices.*;
 import ServiceAgentPepper.AutonomyServices.*;
 import ServiceAgentPepper.ActivityServices.*;
@@ -14,8 +15,20 @@ import ServiceAgentPepper.ActivityServices.*;
  * @author juans
  */
 public enum TabletServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private TabletServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

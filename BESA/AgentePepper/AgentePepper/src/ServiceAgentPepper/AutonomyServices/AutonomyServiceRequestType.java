@@ -5,15 +5,25 @@
  */
 package ServiceAgentPepper.AutonomyServices;
 
-import ServiceAgentPepper.ActivityServices.*;
-
 /**
  *
  * @author juans
  */
 public enum AutonomyServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private AutonomyServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }

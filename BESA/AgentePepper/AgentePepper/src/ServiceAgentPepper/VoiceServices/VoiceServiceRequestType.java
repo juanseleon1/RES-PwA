@@ -14,8 +14,20 @@ import ServiceAgentPepper.ActivityServices.*;
  * @author juans
  */
 public enum VoiceServiceRequestType {
-    
+    HOLA(" ");
     
     private String serviceType;
+    
+    private VoiceServiceRequestType(String serv)
+    {
+        serviceType=serv;
+    }
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
     
 }
