@@ -62,7 +62,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //cambiar valor tiempo (10), debe variar segun la duracion de la historia
-        if(blvs.getbEstadoInteraccion().isCambioEnriq() || blvs.getbEstadoEmocionalPwA().getTiempoNoAtencion() > 10) {
+        if(blvs.getbEstadoInteraccion().isCambioEnriq() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10) {
             return 1.0;
         }
         

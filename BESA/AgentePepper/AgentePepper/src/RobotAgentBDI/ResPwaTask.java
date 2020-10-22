@@ -10,7 +10,7 @@ import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.RunAgentePepper;
-import ServiceAgentPepper.ServiceDataRequest;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.mapping.Task;

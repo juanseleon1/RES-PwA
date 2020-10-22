@@ -15,7 +15,7 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.RunAgentePepper;
 import SensorHandlerAgent.GetInfoGuard;
 import SensorHandlerAgent.SensorData;
-import ServiceAgentPepper.RobotProviderAgent;
+import ServiceAgentResPwA.RobotSPAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.mapping.Believes;

@@ -17,10 +17,13 @@ import rational.mapping.Believes;
  */
 public class BEstadoEmocionalPwA implements Believes{
 
-    private EmotionPwA tiempoEmocionPredominante;
+    private EmotionPwA emocionPredominante;
+    private long tiempoEmocionPredominante;
     private HashMap<String,Integer> estadoEmocional;
     private long tiempoAtencion;
+    private long tiempoSinAtencion;
     private long tiempoRelajacion;
+    private long tiempoSinRelajacion;
     
     @Override
     public boolean update(InfoData si) {
@@ -28,12 +31,61 @@ public class BEstadoEmocionalPwA implements Believes{
         return true;
     }
 
-    public Object getEstadoEmocional() {
+    public EmotionPwA getEmocionPredominante() {
+        return emocionPredominante;
+    }
+
+    public void setEmocionPredominante(EmotionPwA emocionPredominante) {
+        this.emocionPredominante = emocionPredominante;
+    }
+
+    public long getTiempoEmocionPredominante() {
+        return System.currentTimeMillis()-tiempoEmocionPredominante;
+    }
+
+    public void setTiempoEmocionPredominante(long tiempoEmocionPredominante) {
+        this.tiempoEmocionPredominante = tiempoEmocionPredominante;
+    }
+
+    public HashMap<String,Integer> getEstadoEmocional() {
         return estadoEmocional;
     }
 
+    public void setEstadoEmocional(HashMap<String,Integer> estadoEmocional) {
+        this.estadoEmocional = estadoEmocional;
+    }
 
-    
-    
-    
+    public long getTiempoAtencion() {
+        return tiempoAtencion;
+    }
+
+    public void setTiempoAtencion(long tiempoAtencion) {
+        this.tiempoAtencion = tiempoAtencion;
+    }
+
+    public long getTiempoRelajacion() {
+        return tiempoRelajacion;
+    }
+
+    public void setTiempoRelajacion(long tiempoRelajacion) {
+        this.tiempoRelajacion = tiempoRelajacion;
+    }
+
+    public long getTiempoSinAtencion() {
+        return tiempoSinAtencion;
+    }
+
+    public void setTiempoSinAtencion(long tiempoSinAtencion) {
+        this.tiempoSinAtencion = tiempoSinAtencion;
+    }
+
+    public long getTiempoSinRelajacion() {
+        return tiempoSinRelajacion;
+    }
+
+    public void setTiempoSinRelajacion(long tiempoSinRelajacion) {
+        this.tiempoSinRelajacion = tiempoSinRelajacion;
+    }
+
+      
 }

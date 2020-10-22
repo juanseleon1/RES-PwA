@@ -18,7 +18,7 @@ import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import BESA.Util.PeriodicDataBESA;
 import static RobotAgentBDI.RobotAgentBDI.PERIODIC_TIME;
-import ServiceAgentPepper.RobotProviderAgent;
+import ServiceAgentResPwA.RobotSPAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,13 +58,13 @@ public static String GetInfoGuard= "GetInfoGuard";
  
 
     public void subscribeServices() throws ExceptionBESA {
-        String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servHumanos);
+        String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servHumanos);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
             ServiceProviderDataSuscribe spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servHumanos,
+                    RobotSPAgent.servHumanos,
                     SensorData.class.getName());
             //Crea el evento a enviar
             EventBESA evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -73,13 +73,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servActividades);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servActividades);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servActividades,
+                    RobotSPAgent.servActividades,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -89,13 +89,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servAutonomia);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servAutonomia);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servAutonomia,
+                    RobotSPAgent.servAutonomia,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -104,13 +104,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servEnergia);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servEnergia);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servEnergia,
+                    RobotSPAgent.servEnergia,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -119,13 +119,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servLocation);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servLocation);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servLocation,
+                    RobotSPAgent.servLocation,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -134,13 +134,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servMovimiento);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servMovimiento);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servMovimiento,
+                    RobotSPAgent.servMovimiento,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -149,13 +149,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servEstadoRobot);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servEstadoRobot);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servEstadoRobot,
+                    RobotSPAgent.servEstadoRobot,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
@@ -164,13 +164,13 @@ public static String GetInfoGuard= "GetInfoGuard";
             agH.sendEvent(evSP);
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
-             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotProviderAgent.servVoz);
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servVoz);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
                     GetInfoGuard.class.getName(),
                     ServiceProviderBESA.ASYNCHRONIC_SERVICE,
-                    RobotProviderAgent.servVoz,
+                    RobotSPAgent.servVoz,
                     SensorData.class.getName());
             //Crea el evento a enviar
              evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);

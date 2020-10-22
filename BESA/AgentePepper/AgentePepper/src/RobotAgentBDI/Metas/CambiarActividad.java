@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.RunAgentePepper;
 import Tareas.CambiarActividad.*;
@@ -62,8 +63,8 @@ public class CambiarActividad extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        //valor gusto actividad nueva, mirar valor concentracion depende de cada PwA
-        if(blvs.getbEstadoEmocionalPwA().getConcentracion() > 10 && blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "ira") {
+        //valor gusto actividad nueva, mirar valor congetConcentracioncentracion depende de cada PwA
+        if(blvs.getbEstadoEmocionalPwA().getTiempoAtencion() > 10 && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO))) {
             return 1.0;
         }
         
