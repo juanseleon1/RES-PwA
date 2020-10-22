@@ -7,7 +7,6 @@ package RobotAgentBDI;
 
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataRequest;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.RunAgentePepper;

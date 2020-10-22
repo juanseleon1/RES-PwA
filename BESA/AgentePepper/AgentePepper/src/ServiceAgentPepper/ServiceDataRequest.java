@@ -5,10 +5,7 @@
  */
 package ServiceAgentPepper;
 
-import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import SensorHandlerAgent.*;
 import java.util.HashMap;
-import rational.data.InfoData;
 import rational.services.ActivateServiceData;
 
 /**
