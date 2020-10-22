@@ -12,7 +12,7 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum ActivityServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    RUNANIMATION("RUNANIMATION"),GOTOPOSTURE("GOTOPOSTURE"),DETECTNEWFACE("DETECTNEWFACE"),GETFACELIST("GETFACELIST");
     
     private String serviceType;
     
@@ -20,10 +20,12 @@ public enum ActivityServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }

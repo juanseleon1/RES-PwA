@@ -12,7 +12,10 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum VoiceServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    SAY("SAY"),SETSAYVOLUMN("SETSAYVOLUMN"),SAYWITHMOVEMENT("SAYWITHMOVEMENT"),SETSYSTEMVOLUME("SETSYSTEMVOLUME"),PLAYSOUND("PLAYSOUND"),
+    PAUSESOUND("PAUSESOUND"),ACTIVATEVOICEEMOANAL("ACTIVATEVOICEEMOANAL"),DESACTIVVOICEEMOANAL("DESACTIVVOICEEMOANAL"),ACTVOICERECOG("ACTVOICERECOG"),
+    DESACTVOICERECOG("DESACTVOICERECOG"),ACTIVATECONVTOPIC("ACTIVATECONVTOPIC"),DEACTCONVTOPIC("DEACTCONVTOPIC"),SAYUNDERTOPICCONTEXT("SAYUNDERTOPICCONTEXT"),
+    SETTOPICFOCUS("SETTOPICFOCUS");
     
     private String serviceType;
     
@@ -20,10 +23,12 @@ public enum VoiceServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }

@@ -12,7 +12,9 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum AutonomyServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    ACTIVATELIFESGINALSINT("ACTIVATELIFESGINALSINT"),ACTIVATE("ACTIVATE"),ACTIVATELIFESIGNALS("ACTIVATELIFESIGNALS"),DEFENGAGEMENTTYPE("DEFENGAGEMENTTYPE"),
+    ACTIVATEPUSHREFLEXES("ACTIVATEPUSHREFLEXES"),ACIVATEBREATHMOV("ACIVATEBREATHMOV"),ACTIVATEMOVDETECTION("ACTIVATEMOVDETECTION"),
+    ACTIVATEFACEDETEC("ACTIVATEFACEDETEC"),ACTIVATECOLISSIONDETECT("ACTIVATECOLISSIONDETECT");
     
     private String serviceType;
     
@@ -20,10 +22,12 @@ public enum AutonomyServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }
