@@ -18,7 +18,9 @@ allprojects {
         jcenter()
     	maven {
     		url 'https://qisdk.softbankrobotics.com/sdk/maven'
-    	}
+            }
+        mavenCentral()
+        maven { url "https://repository.kaazing.com/maven/" }
     }
 }
 

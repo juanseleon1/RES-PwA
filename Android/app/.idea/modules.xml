@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-753133957/SASEPWA.iml" filepath="$PROJECT_DIR$/.idea/modules/-753133957/SASEPWA.iml" group="SASEPWA" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="SASEPWA/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1360535452/com.kaazing.gateway.client.android-4.2.5.iml" filepath="$PROJECT_DIR$/.idea/modules/-1360535452/com.kaazing.gateway.client.android-4.2.5.iml" group="SASEPWA/com.kaazing.gateway.client.android-4.2.5" />
     </modules>
   </component>
 </project>

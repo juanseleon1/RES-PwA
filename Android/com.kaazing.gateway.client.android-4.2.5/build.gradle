@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('com.kaazing.gateway.client.android-4.2.5.jar'))
