@@ -6,13 +6,12 @@
 package SensorHandlerAgent;
 
 import BESA.ExceptionBESA;
-import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.ProcessEmotionGuard;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,18 +30,18 @@ public class GetInfoGuard extends GuardBESA{
             //ACTIVIDAD,EMOCIONES,INACTIVIDAD,INTHABLA,INTSENSORES,BATERIA,RETROALIM
             System.out.println("GetInfoGuard Event Received: "+infoRecibida);
 
-            infoRecibida.setDataP(procesarDatos(infoRecibida));
+            infoRecibida.setDataP(processData(infoRecibida));
             infoRecibida.setInfoReceived(null);
             AgHandlerBESA handler;
             EventBESA sensorEvtA;
-            if(infoRecibida.getDataType().equals(SensorDataType.EMOCIONES))
+            if(infoRecibida.getDataType().equals(SensorDataType.EMOTIONS))
             {
-            handler = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasEAAgent);
+            handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasEAAgent);
             sensorEvtA= new EventBESA(ProcessEmotionGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  
             }else
             {
-            handler = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasRobotAgent);
+            handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
             sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  
             }
@@ -53,7 +52,7 @@ public class GetInfoGuard extends GuardBESA{
         
     }
 
-    private HashMap<String, Object> procesarDatos(SensorData infoRecibida) {
+    private HashMap<String, Object> processData(SensorData infoRecibida) {
         System.out.println("GetInfoGuard procesarDatos exec: "+infoRecibida);
         return null;
     }

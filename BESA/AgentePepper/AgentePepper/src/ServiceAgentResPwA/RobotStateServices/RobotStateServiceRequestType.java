@@ -12,7 +12,8 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum RobotStateServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    WAKEUP("WAKEUP"),SUSPEND("SUSPEND"),SETREFRESHTIMESENSORS("SETREFRESHTIMESENSORS"),ACTIVATERASTA("ACTIVATERASTA"),RANDOMEYES("RANDOMEYES"),
+    SETLEDSINTENSITY("SETLEDSINTENSITY"),CHANGELEDCOLOR("CHANGELEDCOLOR"),ACTIVATESTIFFNESS("ACTIVATESTIFFNESS");
     
     private String serviceType;
     
@@ -20,10 +21,12 @@ public enum RobotStateServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }

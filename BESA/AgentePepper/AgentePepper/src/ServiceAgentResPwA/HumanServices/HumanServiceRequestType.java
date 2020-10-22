@@ -12,7 +12,7 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum HumanServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    GETEMOTIONSTATE("GETEMOTIONSTATE"),LOGIN("LOGIN");
     
     private String serviceType;
     
@@ -20,10 +20,12 @@ public enum HumanServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }

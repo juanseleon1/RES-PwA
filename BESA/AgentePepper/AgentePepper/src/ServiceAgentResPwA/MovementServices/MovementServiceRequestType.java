@@ -12,7 +12,7 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum MovementServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    MOVE("MOVE"),MOVEFORWARD("MOVEFORWARD"),MOVETO("MOVETO"),MOVETOPOSITION("MOVETOPOSITION");
     
     private String serviceType;
     

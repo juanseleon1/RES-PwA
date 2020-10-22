@@ -5,6 +5,8 @@
  */
 package RobotAgentBDI.Believes;
 
+import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import rational.data.InfoData;
 import rational.mapping.Believes;
@@ -16,10 +18,10 @@ import rational.mapping.Believes;
 public class BEstadoActividad implements Believes{
     
     private long inicioActividad;
-    private Actividad actividadActual;
+    private ResPwAActivity actividadActual;
     private boolean finalizoActividad;
     private boolean mejoraEmocional;
-    private Estrategia estrategia;
+    private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     
     @Override
@@ -36,11 +38,11 @@ public class BEstadoActividad implements Believes{
         this.inicioActividad = inicioActividad;
     }
 
-    public Actividad getActividadActual() {
+    public ResPwAActivity getActividadActual() {
         return actividadActual;
     }
 
-    public void setActividadActual(Actividad actividadActual) {
+    public void setActividadActual(ResPwAActivity actividadActual) {
         this.actividadActual = actividadActual;
     }
 
@@ -64,11 +66,11 @@ public class BEstadoActividad implements Believes{
         this.mejoraEmocional = mejoraEmocional;
     }
 
-    public Estrategia getEstrategia() {
+    public ResPwAStrategy getEstrategia() {
         return estrategia;
     }
 
-    public void setEstrategia(Estrategia estrategia) {
+    public void setEstrategia(ResPwAStrategy estrategia) {
         this.estrategia = estrategia;
     }
 

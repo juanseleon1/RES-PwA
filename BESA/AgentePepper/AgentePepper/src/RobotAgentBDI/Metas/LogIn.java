@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.Saludar;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class LogIn extends GoalBDI{
         rolePlan.addTask(saludar);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
-        LogIn b= new LogIn(RunAgentePepper.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        LogIn b= new LogIn(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 

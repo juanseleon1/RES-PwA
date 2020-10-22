@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RobotAgentBDI.Believes;
+package RobotAgentBDI;
 
 /**
  *
- * @author juans
+ * @author mafegarces
  */
-public interface Estrategia {
-    
-    public abstract void ejecutarEstrategia();
+public enum ResPwAActivity {
+    MUSICOTERAPIA,
+    MEMORAMA,
+    CUENTERIA
 }

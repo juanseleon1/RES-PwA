@@ -12,7 +12,9 @@ import ServiceAgentResPwA.ServiceEnum;
  * @author juans
  */
 public enum TabletServiceRequestType implements ServiceEnum{
-    HOLA(" ");
+    TABLETON("TABLETON"),WAKETABLET("WAKETABLET"),SUSPENDTABLET("SUSPENDTABLET"),TABLETOFF("TABLETOFF"),SHOWVIDEO("SHOWVIDEO"),QUITVIDEO("QUITVIDEO"),
+    PAUSEVIDEO("PAUSEVIDEO"),RESUMEVIDEO("RESUMEVIDEO"),PRELOADIMG("PRELOADIMG"),SHOWIMG("SHOWIMG"),HIDEIMG("HIDEIMG"),SETTABLETBRIGHT("SETTABLETBRIGHT"),
+    SETTABLETVOL("SETTABLETVOL"),LOADIMGLIST("LOADIMGLIST");
     
     private String serviceType;
     
@@ -20,10 +22,12 @@ public enum TabletServiceRequestType implements ServiceEnum{
     {
         serviceType=serv;
     }
+    @Override
     public String getServiceType() {
         return serviceType;
     }
 
+    @Override
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }

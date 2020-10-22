@@ -12,8 +12,8 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
-import RobotAgentBDI.Believes.Actividad;
+import Init.InitRESPwA;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import Tareas.SeleccionarCuentoGusto.RecomendarCuento;
@@ -53,7 +53,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         rolePlan.addTask(recomendarCuento);
         
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
-        SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(RunAgentePepper.getPlanID(), selCuenGRole, descrip, GoalBDITypes.DUTY);
+        SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(InitRESPwA.getPlanID(), selCuenGRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 
@@ -77,7 +77,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         //verificar gusto cuento seleccionado > 0.5
         List <Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
         
-        if(blvs.getbEstadoActividad().getActividadActual().equals(Actividad.MEMORAMA)) {
+        if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MEMORAMA)) {
             return 1.0;
         }
         

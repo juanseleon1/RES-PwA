@@ -6,9 +6,7 @@
 package ServiceAgentResPwA.VoiceServices;
 
 import BESA.Adapter.AdapterBESA;
-import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPInfoGuard;
-import BESA.Kernel.Social.ServiceProvider.agent.SPService;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import Adapter.PepperAdapter.PepperAdapter;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class VoiceService extends AsynchronousService{
     public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
         System.out.println("VoiceService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
-        padapter.solicitarVoiceAsync(data);
+        padapter.VoiceServiceReqAsync(data);
     }
     
 }
