@@ -27,13 +27,21 @@ public class BEstadoActividad implements Believes{
         System.out.println("BEstadoActividad update Received: "+si);
         return true;
     }
-    
-    public long tiempoActividad() {
-        return 0;
+
+    public long getInicioActividad() {
+        return inicioActividad;
+    }
+
+    public void setInicioActividad(long inicioActividad) {
+        this.inicioActividad = inicioActividad;
     }
 
     public Actividad getActividadActual() {
         return actividadActual;
+    }
+
+    public void setActividadActual(Actividad actividadActual) {
+        this.actividadActual = actividadActual;
     }
 
     public boolean isFinalizoActividad() {
@@ -42,6 +50,30 @@ public class BEstadoActividad implements Believes{
 
     public Cancion getCancionActual() {
         return cancionActual;
+    }
+
+    public void setFinalizoActividad(boolean finalizoActividad) {
+        this.finalizoActividad = finalizoActividad;
+    }
+
+    public boolean isMejoraEmocional() {
+        return mejoraEmocional;
+    }
+
+    public void setMejoraEmocional(boolean mejoraEmocional) {
+        this.mejoraEmocional = mejoraEmocional;
+    }
+
+    public Estrategia getEstrategia() {
+        return estrategia;
+    }
+
+    public void setEstrategia(Estrategia estrategia) {
+        this.estrategia = estrategia;
+    }
+
+    public long calcTiempoActividad() {
+        return System.currentTimeMillis()-inicioActividad;
     }
     
     

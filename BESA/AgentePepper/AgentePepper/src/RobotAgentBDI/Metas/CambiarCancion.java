@@ -9,8 +9,10 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import Init.RunAgentePepper;
+import RobotAgentBDI.Believes.Actividad;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarCancion.RecibirRetroalimentacion;
 import Tareas.CambiarCancion.*;
@@ -67,8 +69,8 @@ public class CambiarCancion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //cambiar strings y numero
-        if((blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste" || blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "enojado") && 
-                blvs.getbEstadoActividad().getActividadActual().contentEquals("ActMusicoterapia") && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
+        if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO)) && 
+                blvs.getbEstadoActividad().getActividadActual().equals(Actividad.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
             return 1.0;
         }
         
@@ -88,7 +90,7 @@ public class CambiarCancion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
         //valenciaIra + valenciaTriste
-        return blvs.getbEstadoEmocionalPwA().getTiempoTriste() + blvs.getbEstadoEmocionalPwA().getTiempoIra()+((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia")).getCancionEscogida().getGusto();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia")).getCancionEscogida().getGusto();
 
     }
 

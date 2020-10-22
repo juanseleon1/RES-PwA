@@ -23,7 +23,7 @@ import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
 import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import SensorHandlerAgent.SensorHandlerAgent;
-import ServiceAgentPepper.RobotProviderAgent;
+import ServiceAgentResPwA.RobotSPAgent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -63,7 +63,7 @@ public class RunAgentePepper {
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals());
             EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent);
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
-            RobotProviderAgent SPA= new RobotProviderAgent(aliasSPAgent);
+            RobotSPAgent SPA= new RobotSPAgent(aliasSPAgent);
             startAllAgents(RABDI,EAA,SHA,SPA);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(RunAgentePepper.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +118,7 @@ public class RunAgentePepper {
     }
 
 
-    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotProviderAgent SPA) throws ExceptionBESA {
+    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotSPAgent SPA) throws ExceptionBESA {
         RABDI.start();
         RABDI.startTimers();
         SPA.start();

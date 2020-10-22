@@ -18,6 +18,7 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
+    private BEstadoRobot bEstadoRobot = new BEstadoRobot();
 
     public RobotAgentBelieves()
     {
@@ -95,6 +96,16 @@ public class RobotAgentBelieves implements Believes{
     public void setbPerfilPwA(BPerfilPwA bPerfilPwA) {
         this.bPerfilPwA = bPerfilPwA;
     }
+
+    public BEstadoRobot getbEstadoRobot() {
+        return bEstadoRobot;
+    }
+
+    public void setbEstadoRobot(BEstadoRobot bEstadoRobot) {
+        this.bEstadoRobot = bEstadoRobot;
+    }
+    
+    
         
        
 }

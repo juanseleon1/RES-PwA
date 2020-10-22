@@ -64,7 +64,7 @@ public class MantenerAtencionPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
-        if(blvs.getbEstadoEmocionalPwA().getTiempoNoAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoNoConcentracion() > 1) {
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion()> 1) {
             return 1.0;
         }
         
@@ -82,7 +82,7 @@ public class MantenerAtencionPwA extends GoalBDI{
         System.out.println("Meta MantenerAtencionPwA evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoNoAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoNoConcentracion();
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion();
     }
 
     @Override

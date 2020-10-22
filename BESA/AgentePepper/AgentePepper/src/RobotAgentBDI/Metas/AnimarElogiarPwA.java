@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Init.RunAgentePepper;
@@ -59,7 +60,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //alto numero de errores, tiene aciertos, cierto tiempo activo
-        if (blvs.getbEstadoEmocionalPwA().getEstadoEmocional() == "triste") {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA)) {
             return 1.0;
         }
         

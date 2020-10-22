@@ -62,7 +62,7 @@ public class EntrarModoKaraoke extends GoalBDI{
         
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
         List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoTerapia")).getCanciones();
-        if(blvs.getbEstadoActividad().tiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
+        if(blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
             return 1.0;
         }
         return 0;

@@ -66,7 +66,7 @@ public class ReanudarActividad extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
 
         //estimuloreanudado
-        if(blvs.getbInteraccionSensores().isDetectaPwA()) {
+        if(blvs.getbEstadoInteraccion().isDetectaPwA()) {
             return 1.0;
         }
         

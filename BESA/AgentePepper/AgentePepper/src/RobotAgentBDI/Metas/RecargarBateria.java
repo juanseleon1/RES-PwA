@@ -65,7 +65,7 @@ public class RecargarBateria extends GoalBDI{
                 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        if(blvs.getbNivelBateria().getBateria() <= 20) {
+        if(blvs.getbEstadoRobot().getBateria() <= 20) {
             return 1.0;
         }
         

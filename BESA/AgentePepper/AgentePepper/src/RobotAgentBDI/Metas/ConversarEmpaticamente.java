@@ -10,7 +10,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.RunAgentePepper;
+import RobotAgentBDI.Believes.PerfilPwA.Emocion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.EscogerEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
@@ -64,9 +66,9 @@ public class ConversarEmpaticamente extends GoalBDI{
         System.out.println("Meta ConversarEmpaticamente detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
+       
         //tiempotriste || tiempoenojo
-        if(blvs.getbEstadoEmocionalPwA().getTiempoTriste() > 15.0 && blvs.getbEstadoEmocionalPwA().getTiempoIra() > 15.0) {
+        if(  (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
             return 1.0;
         }
         
@@ -84,7 +86,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoTriste() + blvs.getbEstadoEmocionalPwA().getTiempoIra();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override
