@@ -11,8 +11,8 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
-import Init.RunAgentePepper;
-import RobotAgentBDI.Believes.Actividad;
+import Init.InitRESPwA;
+import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.CambiarCancion.RecibirRetroalimentacion;
 import Tareas.CambiarCancion.*;
@@ -48,7 +48,7 @@ public class CambiarCancion extends GoalBDI{
         rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
         RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);
-        CambiarCancion b= new CambiarCancion(RunAgentePepper.getPlanID(), cambiarCancionRole, descrip, GoalBDITypes.DUTY);
+        CambiarCancion b= new CambiarCancion(InitRESPwA.getPlanID(), cambiarCancionRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarCancion(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -69,8 +69,8 @@ public class CambiarCancion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //cambiar strings y numero
-        if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO)) && 
-                blvs.getbEstadoActividad().getActividadActual().equals(Actividad.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
+        if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
+                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
             return 1.0;
         }
         

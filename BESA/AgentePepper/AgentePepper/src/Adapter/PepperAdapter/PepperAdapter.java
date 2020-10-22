@@ -24,13 +24,13 @@ public class PepperAdapter extends AdapterBESA{
     private final int robotPort=7896;
     private final String IP= "127.0.0.1"; 
     private PepperAdapterReceiver receiver;
-    private Thread hiloReceiver;
+    private Thread recvThread;
     private static int numPackage=0;
     public PepperAdapter() throws Exception {
         super(null,null);
         receiver=new PepperAdapterReceiver();
-        hiloReceiver= new Thread(receiver);
-        hiloReceiver.start();
+        recvThread= new Thread(receiver);
+        recvThread.start();
         this.rpa=null;
 
     }
@@ -46,65 +46,65 @@ public class PepperAdapter extends AdapterBESA{
     
 //AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
 
-    public void solicitarInfoActividadAsync(SPServiceDataRequest data) {
+    public void ActivityServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarInfoActividadAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
     }
 
-    public void solicitarAutonomyAsync(SPServiceDataRequest data) {
+    public void AutonomyServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("setAutonomyAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
     }
 
-    public void solicitarInfoBatteryAsync(SPServiceDataRequest data) {
+    public void EnergyServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarInfoBatteryAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
     }
 
-    public void solicitarInfoHumanAsync(SPServiceDataRequest data) {
+    public void HumanServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarInfoHumanAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
     }
 
-    public void solicitarInfoLocationAsync(SPServiceDataRequest data) {
+    public void LocationServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarInfoLocationAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
 
     }
 
-    public void solicitarInfoStateAsync(SPServiceDataRequest data) {
+    public void RobotStateServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarInfoStateAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
 
     }
 
-    public void solicitarVoiceAsync(SPServiceDataRequest data) {
+    public void VoiceServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarVoiceAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
 
     }
 
-    public void solicitarMovementAsync(SPServiceDataRequest data) {
+    public void MovementServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarMovementAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
 
     }
-    public void solicitarTabletAsync(SPServiceDataRequest data) {
+    public void TabletServiceReqAsync(SPServiceDataRequest data) {
         data=(ServiceDataRequest)data;
         System.out.println("solicitarTabletAsync Iniciado");
-        enviarMensaje(data);
+        sendRequest(data);
 
     }
    
-   private void enviarMensaje(SPServiceDataRequest data)
+   private void sendRequest(SPServiceDataRequest data)
    {
         try {
             Socket s = new Socket(IP, robotPort);

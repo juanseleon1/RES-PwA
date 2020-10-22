@@ -11,7 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class EntrarModoKaraoke extends GoalBDI{
         rolePlan.addTask(activarSubtitulos); //se buscan y activan
 
         RationalRole karaokeRole = new RationalRole(descrip, rolePlan);
-        EntrarModoKaraoke b= new EntrarModoKaraoke(RunAgentePepper.getPlanID(), karaokeRole, descrip, GoalBDITypes.DUTY);
+        EntrarModoKaraoke b= new EntrarModoKaraoke(InitRESPwA.getPlanID(), karaokeRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public EntrarModoKaraoke(int id, RationalRole role, String description, GoalBDITypes type) {

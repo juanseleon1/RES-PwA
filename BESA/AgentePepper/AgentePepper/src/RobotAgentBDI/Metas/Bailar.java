@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.EjecutarBaile;
@@ -48,7 +48,7 @@ public class Bailar extends GoalBDI{
         //while de espera activa para saber que se movia a un lugar seguro
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
-        Bailar b= new Bailar(RunAgentePepper.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
+        Bailar b= new Bailar(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
         
         return b;
     }

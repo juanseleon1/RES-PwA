@@ -11,7 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.CambiarActividad.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class CambiarActividad extends GoalBDI{
         //rta: NO, al azar una actividad, bajar funcion activación actividad reciente
 
         RationalRole changeRole = new RationalRole(descrip, rolePlan);
-        CambiarActividad b= new CambiarActividad(RunAgentePepper.getPlanID(), changeRole, descrip, GoalBDITypes.DUTY);
+        CambiarActividad b= new CambiarActividad(InitRESPwA.getPlanID(), changeRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -64,7 +64,7 @@ public class CambiarActividad extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //valor gusto actividad nueva, mirar valor congetConcentracioncentracion depende de cada PwA
-        if(blvs.getbEstadoEmocionalPwA().getTiempoAtencion() > 10 && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO))) {
+        if(blvs.getbEstadoEmocionalPwA().getTiempoAtencion() > 10 && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))) {
             return 1.0;
         }
         

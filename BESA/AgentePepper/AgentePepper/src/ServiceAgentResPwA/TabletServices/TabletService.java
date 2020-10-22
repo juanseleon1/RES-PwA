@@ -23,7 +23,7 @@ public class TabletService extends AsynchronousService{
     public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
         System.out.println("TabletService Solicitado");
         PepperAdapter padapter= (PepperAdapter)adapter;
-        padapter.solicitarTabletAsync(data);
+        padapter.TabletServiceReqAsync(data);
     }
     
 }

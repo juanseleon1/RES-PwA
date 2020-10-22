@@ -10,7 +10,7 @@ package EmotionalAnalyzerAgent;
  * @author mafegarces
  */
 public enum EmotionPwA {
-    ENOJO,
-    TRISTEZA,
-    FELICIDAD
+    ANGER,
+    SADNESS,
+    HAPPYNESS
 }

@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.PedirAyuda.PeticionAyuda;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class PedirAyuda extends GoalBDI{
         rolePlan.addTask(peticionAyuda); //dar respuesta a PwA
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
-        PedirAyuda b= new PedirAyuda(RunAgentePepper.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        PedirAyuda b= new PedirAyuda(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 

@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.EstimularEmocionalmente.ContinuarActividad;
 import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
 import Tareas.EstimularEmocionalmente.RetroalimentarBDI;
@@ -54,7 +54,7 @@ public class EstimularEmocionalmente extends GoalBDI{
         rolePlan.addTask(continuarActividad);
 
         RationalRole estimEmoRole = new RationalRole(descrip, rolePlan);
-        EstimularEmocionalmente b= new EstimularEmocionalmente(RunAgentePepper.getPlanID(), estimEmoRole, descrip, GoalBDITypes.DUTY);
+        EstimularEmocionalmente b= new EstimularEmocionalmente(InitRESPwA.getPlanID(), estimEmoRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public EstimularEmocionalmente(int id, RationalRole role, String description, GoalBDITypes type) {

@@ -11,7 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import RobotAgentBDI.Believes.PerfilPwA.Emocion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.EscogerEstrategiaConversar;
@@ -47,7 +47,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         //hacer if en escoger estrategia, iniciar todo denuevo
 
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
-        ConversarEmpaticamente b= new ConversarEmpaticamente(RunAgentePepper.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
+        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -68,7 +68,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
        
         //tiempotriste || tiempoenojo
-        if(  (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ENOJO)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
+        if(  (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
             return 1.0;
         }
         

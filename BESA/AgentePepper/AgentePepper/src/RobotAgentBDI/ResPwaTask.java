@@ -9,7 +9,7 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public abstract class ResPwaTask extends Task{
     {
          try {
             String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
-            String SHID = AdmBESA.getInstance().searchAidByAlias(RunAgentePepper.aliasSHAAgent);
+            String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSHAAgent);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
             evt.setSenderAgId(SHID);

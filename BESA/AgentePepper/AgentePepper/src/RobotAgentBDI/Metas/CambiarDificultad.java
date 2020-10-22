@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.CambiarDificultad.EvaluarDesempeño;
 import Tareas.CambiarDificultad.SeleccionarEstrategiaDificultad;
 import Tareas.CambiarDificultad.SolicitarEstrategia;
@@ -47,7 +47,7 @@ public class CambiarDificultad extends GoalBDI{
         rolePlan.addTask(solicitarEstrategia);
 
         RationalRole cambiarDifRole = new RationalRole(descrip, rolePlan);
-        CambiarDificultad b= new CambiarDificultad(RunAgentePepper.getPlanID(), cambiarDifRole, descrip, GoalBDITypes.DUTY);
+        CambiarDificultad b= new CambiarDificultad(InitRESPwA.getPlanID(), cambiarDifRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarDificultad(int id, RationalRole role, String description, GoalBDITypes type) {

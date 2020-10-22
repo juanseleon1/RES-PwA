@@ -33,21 +33,18 @@ public class RobotAgentBelieves implements Believes{
         SensorData infoRecibida= (SensorData)si;
         System.out.println("RobotAgentBelieves update Received: "+si);
         switch (infoRecibida.getDataType()) {
-            case ACTIVIDAD:
+            case ACTIVITY:
                 bEstadoActividad.update(si);
                 break;
-            case EMOCIONES:
+            case EMOTIONS:
                 bEstadoEmocionalPwA.update(si);
                 break;
-            case INTHABLA:
+            case INTERACTION:
                 bEstadoInteraccion.update(si);
                 break;
-            case RETROALIM:
+            case PROFILE:
                 bPerfilPwA.update(si);
                 actualizarPerfilEnDB();
-                break;
-                case ACK:
-                bPerfilPwA.update(si);
                 break;
             default:
                 break;

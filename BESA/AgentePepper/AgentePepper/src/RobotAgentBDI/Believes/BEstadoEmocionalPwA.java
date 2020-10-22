@@ -6,7 +6,6 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
-import RobotAgentBDI.Believes.PerfilPwA.Emocion;
 import java.util.HashMap;
 import rational.data.InfoData;
 import rational.mapping.Believes;

@@ -39,7 +39,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver implements Runn
                 byte[] buf = null;
                 in.readFully(buf);
                 SensorData sd=byteToSensorData(buf);
-                actualizarBelieves(sd);
+                updateBlvs(sd);
             } catch (IOException | ExceptionBESA ex) {
                 Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }

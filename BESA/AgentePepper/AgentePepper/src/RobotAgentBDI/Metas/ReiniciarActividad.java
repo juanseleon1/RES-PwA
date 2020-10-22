@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.ReiniciarActividad.ReiniciarActividadTask;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class ReiniciarActividad extends GoalBDI{
         rolePlan.addTask(reiniciarActividad);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
-        ReiniciarActividad b= new ReiniciarActividad(RunAgentePepper.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        ReiniciarActividad b= new ReiniciarActividad(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 

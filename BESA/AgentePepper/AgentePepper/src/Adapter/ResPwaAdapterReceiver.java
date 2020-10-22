@@ -9,7 +9,7 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import SensorHandlerAgent.GetInfoGuard;
 import SensorHandlerAgent.SensorData;
 import java.net.ServerSocket;
@@ -25,8 +25,8 @@ public abstract class  ResPwaAdapterReceiver {
     protected ServerSocket ss;
     protected abstract SensorData byteToSensorData(byte[] buf);
     
-    protected void actualizarBelieves(SensorData sd) throws ExceptionBESA {
-        AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasSHAAgent);
+    protected void updateBlvs(SensorData sd) throws ExceptionBESA {
+        AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasSHAAgent);
         EventBESA evSP = new EventBESA(GetInfoGuard.class.getName(),sd);
         agH.sendEvent(evSP);
     }

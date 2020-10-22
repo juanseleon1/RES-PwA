@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.CambiarEnriquecimientoHistoria.EvaluarEnriquecer;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         rolePlan.addTask(evaluarEnriquecer);//si es automatico o el PwA lo pide
         
         RationalRole cehRole = new RationalRole(descrip, rolePlan);
-        CambiarEnriquecimientoHistoria b= new CambiarEnriquecimientoHistoria(RunAgentePepper.getPlanID(), cehRole, descrip, GoalBDITypes.DUTY);
+        CambiarEnriquecimientoHistoria b= new CambiarEnriquecimientoHistoria(InitRESPwA.getPlanID(), cehRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public CambiarEnriquecimientoHistoria(int id, RationalRole role, String description, GoalBDITypes type) {

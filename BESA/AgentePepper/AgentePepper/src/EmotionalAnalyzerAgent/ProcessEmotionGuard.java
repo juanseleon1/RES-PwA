@@ -10,7 +10,7 @@ import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import SensorHandlerAgent.GetInfoGuard;
 import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
@@ -31,12 +31,12 @@ public class ProcessEmotionGuard extends GuardBESA{
             System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
             infoRecibida.setDataPE(procesarEmociones(infoRecibida));
             infoRecibida.setDataP(null);
-            AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(RunAgentePepper.aliasRobotAgent);
+            AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
             EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  
 
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(GetInfoGuard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProcessEmotionGuard.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
 import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class MantenerAtencionPwA extends GoalBDI{
         rolePlan.addTask(ejecutarEstrategia);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
-        MantenerAtencionPwA b= new MantenerAtencionPwA(RunAgentePepper.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);
+        MantenerAtencionPwA b= new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     public MantenerAtencionPwA(int id, RationalRole role, String description, GoalBDITypes type) {

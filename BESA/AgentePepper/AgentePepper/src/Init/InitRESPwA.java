@@ -9,12 +9,10 @@ import RobotAgentBDI.Metas.AnimarElogiarPwA;
 import RobotAgentBDI.Metas.Bailar;
 import RobotAgentBDI.Metas.CambiarActividad;
 import RobotAgentBDI.Metas.CambiarCancion;
-import RobotAgentBDI.Metas.CambiarDificultad;
 import RobotAgentBDI.Metas.CambiarEnriquecimientoHistoria;
 import RobotAgentBDI.Metas.CancelarActividad;
 import RobotAgentBDI.Metas.ConversarEmpaticamente;
 import RobotAgentBDI.Metas.EntrarModoKaraoke;
-import RobotAgentBDI.Metas.EstimularEmocionalmente;
 import RobotAgentBDI.Metas.GenerarReporteInteraccion;
 import RobotAgentBDI.Metas.MantenerAtencionPwA;
 import RobotAgentBDI.Metas.PausarInteraccion;
@@ -48,7 +46,7 @@ y le dice que hagan una actividad.
 Luego empieza la sesion. 
 
  */
-public class RunAgentePepper {
+public class InitRESPwA {
     
     public static String aliasRobotAgent= "RobotAgent";
     public static String aliasEAAgent= "EAAgent";
@@ -66,7 +64,7 @@ public class RunAgentePepper {
             RobotSPAgent SPA= new RobotSPAgent(aliasSPAgent);
             startAllAgents(RABDI,EAA,SHA,SPA);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(RunAgentePepper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         }
                
     }

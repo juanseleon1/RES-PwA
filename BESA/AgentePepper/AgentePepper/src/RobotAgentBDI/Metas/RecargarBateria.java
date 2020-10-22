@@ -10,7 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import Tareas.RecargarBateria.MoverseEstacionCarga;
 import Tareas.RecargarBateria.SuspenderRobot;
 import Tareas.RecargarBateria.UbicarEstacionCarga;
@@ -44,7 +44,7 @@ public class RecargarBateria extends GoalBDI{
         rolePlan.addTask(suspenderRobot);
 
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);
-        RecargarBateria b= new RecargarBateria(RunAgentePepper.getPlanID(), recBatRole, descrip, GoalBDITypes.DUTY);
+        RecargarBateria b= new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 

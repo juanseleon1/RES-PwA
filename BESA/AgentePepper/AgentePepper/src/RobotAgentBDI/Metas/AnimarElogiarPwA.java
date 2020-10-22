@@ -12,7 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
-import Init.RunAgentePepper;
+import Init.InitRESPwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -37,7 +37,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         tarea.add(ejecutarEstrategia);
         Plan rolePlan= new Plan(tarea,resources,null);
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
-        AnimarElogiarPwA b= new AnimarElogiarPwA(RunAgentePepper.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
+        AnimarElogiarPwA b= new AnimarElogiarPwA(InitRESPwA.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
     
@@ -60,7 +60,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //alto numero de errores, tiene aciertos, cierto tiempo activo
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.TRISTEZA)) {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)) {
             return 1.0;
         }
         

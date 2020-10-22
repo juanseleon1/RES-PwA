@@ -9,15 +9,12 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
-import BESA.Kernel.Agent.PeriodicGuardBESA;
 import BESA.Kernel.Agent.StructBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.GuardServiceProviderSuscribe;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataSuscribe;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
-import BESA.Util.PeriodicDataBESA;
-import static RobotAgentBDI.RobotAgentBDI.PERIODIC_TIME;
 import ServiceAgentResPwA.RobotSPAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -165,6 +162,21 @@ public static String GetInfoGuard= "GetInfoGuard";
             
              /////////////////////////////////////////////////////////////////////////////////////////////////
              spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servVoz);
+             agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
+            //Crea el data de suscripcion
+             spDataSuscribe = new ServiceProviderDataSuscribe(
+                    GetInfoGuard.class.getName(),
+                    ServiceProviderBESA.ASYNCHRONIC_SERVICE,
+                    RobotSPAgent.servVoz,
+                    SensorData.class.getName());
+            //Crea el evento a enviar
+             evSP = new EventBESA(GuardServiceProviderSuscribe.class.getName(), spDataSuscribe);
+            evSP.setSenderAgId(this.getAid());
+            //Env�a el evento
+            agH.sendEvent(evSP);
+            
+             /////////////////////////////////////////////////////////////////////////////////////////////////
+             spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(RobotSPAgent.servTablet);
              agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             //Crea el data de suscripcion
              spDataSuscribe = new ServiceProviderDataSuscribe(
