@@ -26,6 +26,7 @@ public class DetenerPlan extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Detener Plan ---");
+        
     }
 
     @Override

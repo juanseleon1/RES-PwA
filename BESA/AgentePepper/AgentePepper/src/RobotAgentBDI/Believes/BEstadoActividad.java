@@ -8,6 +8,7 @@ package RobotAgentBDI.Believes;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
+import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -23,6 +24,7 @@ public class BEstadoActividad implements Believes{
     private boolean mejoraEmocional;
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
+    private Cuento cuentoActual;
     
     @Override
     public boolean update(InfoData si) {
@@ -76,6 +78,14 @@ public class BEstadoActividad implements Believes{
 
     public long calcTiempoActividad() {
         return System.currentTimeMillis()-inicioActividad;
+    }
+
+    public void setCancionActual(Cancion cancionActual) {
+        this.cancionActual = cancionActual;
+    }
+
+    public void setCuentoActual(Cuento cuentoActual) {
+        this.cuentoActual = cuentoActual;
     }
     
     

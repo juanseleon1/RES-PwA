@@ -25,6 +25,7 @@ public class VerificarObstaculos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Verificar Obstaculos ---");
+        infoServicio.put("SEARCHFREEZONE", "radio - restriccion desplazamiento");
     }
 
     @Override

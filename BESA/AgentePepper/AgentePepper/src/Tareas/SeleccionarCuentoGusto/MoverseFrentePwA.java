@@ -25,6 +25,8 @@ public class MoverseFrentePwA extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Moverse Frente PwA ---");
+        //no se jiji
+        infoServicio.put("MOVETO", null);
     }
 
     @Override

@@ -5,9 +5,13 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
+import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
+import RobotAgentBDI.Believes.PerfilPwA.Cuento;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -25,6 +29,21 @@ public class SeleccionarCuento extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Cuento ---");
+        infoServicio.put("GETEMOTIONSTATE", null);
+        //escoge el cuento
+        float gusto = -1;
+        Cuento cuentoEleg = null;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
+        for(Cuento c: cuentos) {
+            //escoger cuento
+            if(c.getGusto() > gusto){
+                cuentoEleg = c;
+                gusto = c.getGusto();
+            }
+        }
+        blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
     }
 
     @Override

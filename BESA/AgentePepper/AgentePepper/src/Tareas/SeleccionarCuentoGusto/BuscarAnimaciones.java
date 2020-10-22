@@ -25,6 +25,8 @@ public class BuscarAnimaciones extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
+        //busca animaciones y mensajes - ciclo
+        
     }
 
     @Override
