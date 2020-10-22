@@ -5,6 +5,7 @@
  */
 package Tareas.CambiarCancion;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ public class BusquedaCancionYoutube extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
-        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().getCancionActual().buscarCancion();
     }
 
     @Override

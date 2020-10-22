@@ -25,6 +25,9 @@ public class SuspenderRobot extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Suspender Robot ---");
+        //buscar texto
+        infoServicio.put("SAY", "texto");
+        infoServicio.put("SUSPEND", null);
     }
 
     @Override

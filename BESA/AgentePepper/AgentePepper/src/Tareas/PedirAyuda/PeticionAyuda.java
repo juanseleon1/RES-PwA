@@ -24,6 +24,8 @@ public class PeticionAyuda extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Peticion Ayuda ---");
+        //dar respuesta a petición
+        infoServicio.put("SAY", "respuesta");
     }
 
     @Override

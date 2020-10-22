@@ -25,7 +25,7 @@ public class SeleccionarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Baile ---");
-        infoServicio.put("obtenerEstadoEmocional", null);
+        infoServicio.put("GETEMOTIONSTATE", null);
         
     }
 

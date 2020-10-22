@@ -27,7 +27,7 @@ public class InicializarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cambiar Baile ---");
-        infoServicio.put("InicializarAnimacion", null);
+        infoServicio.put("INITANIMATION", null);
     }
 
     @Override

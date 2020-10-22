@@ -29,6 +29,7 @@ public class LogIn extends GoalBDI{
 
     public static LogIn buildGoal() {
 
+        //falta mirar iniciarServicios
         DetectarPwA detectarPwA = new DetectarPwA();
         Saludar saludar = new Saludar();
         List<String> resources = new ArrayList<>();

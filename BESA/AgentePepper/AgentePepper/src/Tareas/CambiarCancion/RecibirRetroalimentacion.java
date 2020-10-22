@@ -24,6 +24,11 @@ public class RecibirRetroalimentacion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
+        infoServicio.put("GETEMOTIONSTATE", null);
+        //buscar texto
+        infoServicio.put("SAY", "Texto");
+        //buscar url
+        infoServicio.put("SHOWIMG", "url");
     }
 
     @Override

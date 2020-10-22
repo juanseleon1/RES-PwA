@@ -56,7 +56,7 @@ public class Cancion {
         return tags;
     }
     
-    public void buscarCancion(String n){
+    public void buscarCancion(){
         
     }
 }

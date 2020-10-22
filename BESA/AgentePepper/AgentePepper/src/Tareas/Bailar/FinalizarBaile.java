@@ -19,7 +19,7 @@ public class FinalizarBaile extends ResPwaTask{
 
     public FinalizarBaile() {
         System.out.println("--- Task Finalizar Baile Iniciada ---");
-        infoServicio.put("detenerAnimacion", null);
+        infoServicio.put("STOPANIMATION", null);
     }
     
 

@@ -5,6 +5,7 @@
  */
 package Tareas.CambiarCancion;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class RepetirCancion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Repetir Cancion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("reproducirSonido", blvs.getbEstadoActividad().getCancionActual().getLinkVideo());
     }
 
     @Override

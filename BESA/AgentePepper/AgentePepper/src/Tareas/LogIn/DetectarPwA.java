@@ -6,6 +6,7 @@
 package Tareas.LogIn;
 
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -25,6 +26,11 @@ public class DetectarPwA extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Detectar PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("DETECTNEWFACE", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
+        infoServicio.put("LOGIN", null);
+        //¿si ya existe?
+        infoServicio.put("GETFACELIST", null);
     }
 
     @Override

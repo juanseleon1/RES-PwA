@@ -5,6 +5,7 @@
  */
 package Tareas.LogIn;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -26,6 +27,10 @@ public class Saludar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Saludar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("SAY", "Hola" + blvs.getbPerfilPwA().getPreferencias().getNombrePreferido());
+        //mirar url animacion
+        infoServicio.put("RUNANIMATION", "animacionSaludar");
     }
 
     @Override

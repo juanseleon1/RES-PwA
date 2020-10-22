@@ -5,6 +5,7 @@
  */
 package Tareas.CambiarCancion;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
@@ -27,6 +28,9 @@ public class SeleccionarCancion extends ResPwaTask{
         System.out.println("--- Execute Task Seleccionar Cancion ---");
         infoServicio.put("obtenerEstadoEmocional", null);
         //buscar cancion BD
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        //cambiar parametro cancion seleccionada
+        infoServicio.put("reproducirSonido", blvs.getbEstadoActividad().getCancionActual().getLinkVideo());
     }
 
     @Override
