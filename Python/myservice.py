@@ -23,6 +23,42 @@ def main():
 if __name__ == "__main__":
     main()
 
+def message_manage(key, msg):
+        switch_accion = {
+           1: "editar_pwa",
+           2: "registrar_cuidador",
+           3: "historial",
+           4: "seleccionar_actividades",
+           5: "login",
+           6: "cambiar_actividad",
+           7: "conversacion_empatica",
+           8: "presentarse",
+           9: "ayuda",
+           10: "consultar_actividades",
+           11: "saludar",
+           12: "despedirse",
+           13: "reinicio_actividad",
+           14: "cancelar_actividad",
+           15: "cancelar_interaccion",
+           16: "bailar",
+           17: "karaoke",
+           18: "bateria",
+           19: "cancion",
+           20: "falta_informacion",
+           21: "notificacion",
+           22: "cambiar_dificultad",
+           23: "seleccionar_cuento",
+           24: "animar",
+           25: "mantener_atencion",
+           26: "reanudar_actividad",
+           27: "reporte",
+           28: "pausa_interaccion",
+           29: "musicoterapia",
+           30: "modificar_historia"
+        }
+        func = switch_accion.get(key)
+        func(msg)
+        
 def registrar_cuidador(params):
     pass
 
