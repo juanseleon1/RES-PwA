@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class PepperAdapterReceiver extends ResPwaAdapterReceiver implements Runnable{
+public class PepperAdapterReceiver extends ResPwaAdapterReceiver{
 
     public static final int revPort=7897 ;
     public PepperAdapterReceiver() throws IOException{

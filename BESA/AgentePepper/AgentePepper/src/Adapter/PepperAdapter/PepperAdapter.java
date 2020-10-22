@@ -5,10 +5,13 @@
  */
 package Adapter.PepperAdapter;
 
-import BESA.Adapter.AdapterBESA;
+import Adapter.ResPwaAdapter;
+import Adapter.Sendable;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import ServiceAgentResPwA.RobotSPAgent;
 import ServiceAgentResPwA.ServiceDataRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,100 +22,99 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class PepperAdapter extends AdapterBESA{
-    private RobotSPAgent rpa;
+public class PepperAdapter extends ResPwaAdapter{
+    
     private final int robotPort=7896;
     private final String IP= "127.0.0.1"; 
-    private PepperAdapterReceiver receiver;
-    private Thread recvThread;
-    private static int numPackage=0;
     public PepperAdapter() throws Exception {
-        super(null,null);
+        super();
         receiver=new PepperAdapterReceiver();
         recvThread= new Thread(receiver);
         recvThread.start();
         this.rpa=null;
 
     }
-
-    public RobotSPAgent getRpa() {
-        return rpa;
-    }
-
-    public void setRpa(RobotSPAgent rpa) {
-        this.rpa = rpa;
-    }
-    
     
 //AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
-
+    @Override
     public void ActivityServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR = (ServiceDataRequest)data;
         System.out.println("solicitarInfoActividadAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
     }
 
+    @Override
     public void AutonomyServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("setAutonomyAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
     }
-
+    @Override
     public void EnergyServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarInfoBatteryAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
     }
-
+    @Override
     public void HumanServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarInfoHumanAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
     }
-
+    @Override
     public void LocationServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarInfoLocationAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
 
     }
-
+    @Override
     public void RobotStateServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarInfoStateAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
 
     }
-
+    @Override
     public void VoiceServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarVoiceAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
 
     }
-
+    @Override
     public void MovementServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarMovementAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
 
     }
+        @Override
     public void TabletServiceReqAsync(SPServiceDataRequest data) {
-        data=(ServiceDataRequest)data;
+        ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarTabletAsync Iniciado");
-        sendRequest(data);
+        sendRequest(dataR);
 
     }
-   
-   private void sendRequest(SPServiceDataRequest data)
+   @Override
+   public void sendRequest(ServiceDataRequest data)
    {
         try {
-            Socket s = new Socket(IP, robotPort);
-            ObjectOutputStream oos= new ObjectOutputStream(s.getOutputStream());
-            System.out.println("Enviando solicitud al Robot");
-            oos.writeObject((Integer)0);
+            String JSON=convertServiceRequest(data);
+            try (Socket s = new Socket(IP, robotPort); DataOutputStream oos = new DataOutputStream (s.getOutputStream())) {
+                System.out.println("Enviando solicitud al Robot");
+                oos.writeUTF(JSON+"\n\r");
+                oos.flush();
+            }
         } catch (IOException ex) {
             Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
         }   
+   }
+   
+   private String convertServiceRequest(ServiceDataRequest data) throws JsonProcessingException
+   {
+       String methodName=null;
+       Sendable s= new Sendable(sendNewSendable(), methodName,data.getParams());
+       return new ObjectMapper().writeValueAsString(s);
    }
 }

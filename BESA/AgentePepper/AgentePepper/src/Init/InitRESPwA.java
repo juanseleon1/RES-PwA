@@ -1,5 +1,6 @@
 package Init;
 
+import Adapter.Sendable;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
@@ -22,7 +23,10 @@ import RobotAgentBDI.Metas.ReiniciarActividad;
 import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +70,7 @@ public class InitRESPwA {
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
+  
     }
     
     public static int getPlanID(){

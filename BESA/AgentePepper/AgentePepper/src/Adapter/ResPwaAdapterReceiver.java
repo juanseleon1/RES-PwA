@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author juans
  */
-public abstract class  ResPwaAdapterReceiver {
+public abstract class  ResPwaAdapterReceiver implements Runnable{
     
     protected AtomicBoolean ready;
     protected ServerSocket ss;

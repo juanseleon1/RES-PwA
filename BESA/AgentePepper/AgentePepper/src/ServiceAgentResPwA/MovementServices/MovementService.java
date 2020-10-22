@@ -9,6 +9,7 @@ import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPInfoGuard;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import Adapter.PepperAdapter.PepperAdapter;
+import Adapter.ResPwaAdapter;
 import java.util.ArrayList;
 import java.util.Map;
 import rational.services.AsynchronousService;
@@ -22,8 +23,8 @@ public class MovementService extends AsynchronousService{
     @Override
     public void executeAsyncService(SPServiceDataRequest data, AdapterBESA adapter, Map<String, ArrayList<SPInfoGuard>> subscribeAgents) {
         System.out.println("MovementService Solicitado");
-        PepperAdapter padapter= (PepperAdapter)adapter;
-        padapter.MovementServiceReqAsync(data);
+        ResPwaAdapter rpadapter= (ResPwaAdapter)adapter;
+        rpadapter.MovementServiceReqAsync(data);
     }
     
 }
