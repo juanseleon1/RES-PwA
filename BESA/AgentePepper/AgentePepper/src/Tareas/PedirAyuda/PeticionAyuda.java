@@ -6,6 +6,7 @@
 package Tareas.PedirAyuda;
 
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 import rational.mapping.Believes;
 
 /**
@@ -13,6 +14,8 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class PeticionAyuda extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     public PeticionAyuda() {
         System.out.println("--- Task Peticion Ayuda Iniciada ---");

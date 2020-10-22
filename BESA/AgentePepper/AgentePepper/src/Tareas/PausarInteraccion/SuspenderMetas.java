@@ -7,12 +7,15 @@ package Tareas.PausarInteraccion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SuspenderMetas extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SuspenderMetas() {
         System.out.println("--- Task Suspender Metas Iniciada ---");

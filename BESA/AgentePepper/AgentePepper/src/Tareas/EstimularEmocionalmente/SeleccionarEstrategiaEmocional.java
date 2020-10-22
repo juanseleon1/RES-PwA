@@ -7,12 +7,15 @@ package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SeleccionarEstrategiaEmocional extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SeleccionarEstrategiaEmocional() {
         System.out.println("--- Task Seleccionar Estrategia Emocional Iniciada ---");

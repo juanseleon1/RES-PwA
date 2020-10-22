@@ -1,5 +1,7 @@
 package RobotAgentBDI.Believes.PerfilPwA;
 
+import java.util.List;
+
 
 
 public class Cancion {
@@ -8,6 +10,7 @@ public class Cancion {
     private float duracion;
     private String linkVideo;
     private Evento eventoRel;
+    private List<String> tags;
 
     public String getNombre() {
         return nombre;
@@ -47,5 +50,13 @@ public class Cancion {
 
     public void setEventoRel(Evento eventoRel) {
         this.eventoRel = eventoRel;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+    
+    public void buscarCancion(String n){
+        
     }
 }

@@ -6,6 +6,7 @@
 package Tareas.LogIn;
 
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 import rational.mapping.Believes;
 
 /**
@@ -13,6 +14,8 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class IniciarServicios extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public IniciarServicios() {
         System.out.println("--- Task Iniciar Servicios Iniciada ---");

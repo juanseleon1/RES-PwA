@@ -8,6 +8,7 @@ package Tareas.CambiarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
@@ -15,6 +16,8 @@ import RobotAgentBDI.ResPwaTask;
  */
 public class DetenerPlan extends ResPwaTask{
 
+    private HashMap<String,Object> infoServicio;
+    
     public DetenerPlan() {
         System.out.println("--- Task Detener Plan Iniciada ---");
     }

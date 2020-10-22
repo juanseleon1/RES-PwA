@@ -7,15 +7,19 @@ package Tareas.Bailar;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class FinalizarBaile extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public FinalizarBaile() {
         System.out.println("--- Task Finalizar Baile Iniciada ---");
+        infoServicio.put("detenerAnimacion", null);
     }
     
 

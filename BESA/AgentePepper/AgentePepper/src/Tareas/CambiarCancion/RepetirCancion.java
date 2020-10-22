@@ -7,12 +7,15 @@ package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class RepetirCancion extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public RepetirCancion() {
         System.out.println("--- Task Repetir Cancion Iniciada ---");

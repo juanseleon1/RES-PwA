@@ -7,6 +7,7 @@ package Tareas.LogIn;
 
 
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 import rational.mapping.Believes;
 
 /**
@@ -14,6 +15,8 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class DetectarPwA extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     public DetectarPwA() {
         System.out.println("--- Task Detectar PwA Iniciada ---");

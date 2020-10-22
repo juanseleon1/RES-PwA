@@ -7,12 +7,15 @@ package Tareas.MantenerAtencionPwA;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class EjecutarEstrategiaAtencion extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public EjecutarEstrategiaAtencion() {
         System.out.println("--- Task Ejecutar Estrategia Atencion Iniciada ---");

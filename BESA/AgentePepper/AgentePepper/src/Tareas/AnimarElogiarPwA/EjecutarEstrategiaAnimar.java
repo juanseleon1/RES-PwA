@@ -7,12 +7,16 @@ package Tareas.AnimarElogiarPwA;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class EjecutarEstrategiaAnimar extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
+    
 
     public EjecutarEstrategiaAnimar() {
         System.out.println("--- Task Ejecutar Estrategia Animar PwA Iniciada ---");

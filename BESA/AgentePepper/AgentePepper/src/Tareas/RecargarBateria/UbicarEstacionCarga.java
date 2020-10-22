@@ -7,12 +7,15 @@ package Tareas.RecargarBateria;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class UbicarEstacionCarga extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public UbicarEstacionCarga() {
         System.out.println("--- Task Ubicar Estacion Carga Iniciada ---");

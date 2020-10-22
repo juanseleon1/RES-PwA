@@ -6,6 +6,7 @@
 package Tareas.SeleccionarCuentoGusto;
 
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 import rational.mapping.Believes;
 
 /**
@@ -13,6 +14,8 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class RecomendarCuento extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     public RecomendarCuento() {
         System.out.println("--- Task Recomendar Cuento Iniciada ---");

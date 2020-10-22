@@ -7,12 +7,15 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class MoverseFrentePwA extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public MoverseFrentePwA() {
         System.out.println("--- Task Moverse Frente PwA Iniciada ---");

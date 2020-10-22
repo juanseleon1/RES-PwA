@@ -8,17 +8,19 @@ package Tareas.CambiarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class IniciarNuevoPlan extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public IniciarNuevoPlan() {
         System.out.println("--- Task Iniciar Nuevo Plan Iniciada ---");
     }
-    
 
     @Override
     public void executeTask(Believes parameters) {

@@ -7,12 +7,15 @@ package Tareas.ReanudarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class RecibirNotificacionReanudar extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public RecibirNotificacionReanudar() {
         System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");

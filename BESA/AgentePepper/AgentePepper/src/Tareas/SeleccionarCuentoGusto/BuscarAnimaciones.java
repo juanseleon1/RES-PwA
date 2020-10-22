@@ -7,12 +7,15 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class BuscarAnimaciones extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public BuscarAnimaciones() {
         System.out.println("--- Task Buscar Animaciones Iniciada ---");

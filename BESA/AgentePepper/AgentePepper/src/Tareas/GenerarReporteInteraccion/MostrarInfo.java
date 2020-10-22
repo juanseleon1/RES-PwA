@@ -7,12 +7,15 @@ package Tareas.GenerarReporteInteraccion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class MostrarInfo extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public MostrarInfo() {
         System.out.println("--- Task Mostrar Informacion Interaccion Iniciada ---");

@@ -7,12 +7,15 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SeleccionarCuento extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SeleccionarCuento() {
         System.out.println("--- Task Seleccionar Cuento Iniciada ---");

@@ -7,12 +7,15 @@ package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class DesplegarFormulario extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public DesplegarFormulario() {
         System.out.println("--- Task Desplegar Formulario Iniciada ---");

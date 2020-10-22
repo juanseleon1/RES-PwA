@@ -7,12 +7,15 @@ package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class InterpretarEstadoFlujo extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public InterpretarEstadoFlujo() {
         System.out.println("--- Task Interpretar Estado Flujo Iniciada ---");

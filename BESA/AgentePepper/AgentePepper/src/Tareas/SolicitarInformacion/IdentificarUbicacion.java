@@ -7,12 +7,15 @@ package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class IdentificarUbicacion extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public IdentificarUbicacion() {
         System.out.println("--- Task Identificar Ubicacion Iniciada ---");

@@ -7,12 +7,15 @@ package Tareas.EntrarModoKaraoke;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class ActivarSubtitulos extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public ActivarSubtitulos() {
         System.out.println("--- Task Activar Subtitulos Iniciada ---");

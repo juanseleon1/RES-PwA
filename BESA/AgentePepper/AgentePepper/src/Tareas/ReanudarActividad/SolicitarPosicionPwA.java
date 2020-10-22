@@ -7,12 +7,15 @@ package Tareas.ReanudarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SolicitarPosicionPwA extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SolicitarPosicionPwA() {
         System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");

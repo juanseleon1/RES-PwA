@@ -8,12 +8,15 @@ package Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SolicitarEstrategia extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SolicitarEstrategia() {
         System.out.println("--- Task Solicitar Estrategia Iniciada ---");

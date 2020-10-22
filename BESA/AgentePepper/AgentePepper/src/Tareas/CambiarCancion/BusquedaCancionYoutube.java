@@ -7,12 +7,15 @@ package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class BusquedaCancionYoutube extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public BusquedaCancionYoutube() {
         System.out.println("--- Task Busqueda Cancion Iniciada ---");
@@ -21,6 +24,7 @@ public class BusquedaCancionYoutube extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
+        
     }
 
     @Override

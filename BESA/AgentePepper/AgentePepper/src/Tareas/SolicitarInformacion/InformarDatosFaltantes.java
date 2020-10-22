@@ -7,12 +7,15 @@ package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class InformarDatosFaltantes extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public InformarDatosFaltantes() {
         System.out.println("--- Task Informar Datos Faltantes Iniciada ---");

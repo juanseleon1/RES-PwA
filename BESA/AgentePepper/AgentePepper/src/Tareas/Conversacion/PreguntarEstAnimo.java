@@ -6,6 +6,7 @@
 package Tareas.Conversacion;
 
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 import rational.mapping.Believes;
 
 /**
@@ -13,6 +14,8 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class PreguntarEstAnimo extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     public PreguntarEstAnimo() {
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");

@@ -7,12 +7,15 @@ package Tareas.EnviarNotificacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class ObtenerInfoCuidador extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public ObtenerInfoCuidador() {
         System.out.println("--- Task Obtener Informacion Cuidador Iniciada ---");

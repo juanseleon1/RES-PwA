@@ -5,14 +5,18 @@
  */
 package Tareas.Bailar;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SeleccionarBaile extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SeleccionarBaile() {
         System.out.println("--- Task Seleccionar Baile Iniciada ---");
@@ -21,6 +25,8 @@ public class SeleccionarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Baile ---");
+        infoServicio.put("obtenerEstadoEmocional", null);
+        
     }
 
     @Override

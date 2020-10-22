@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -19,6 +20,7 @@ public class BEstadoActividad implements Believes{
     private boolean finalizoActividad;
     private boolean mejoraEmocional;
     private Estrategia estrategia;
+    private Cancion cancionActual;
     
     @Override
     public boolean update(InfoData si) {
@@ -36,6 +38,10 @@ public class BEstadoActividad implements Believes{
 
     public boolean isFinalizoActividad() {
         return finalizoActividad;
+    }
+
+    public Cancion getCancionActual() {
+        return cancionActual;
     }
     
     

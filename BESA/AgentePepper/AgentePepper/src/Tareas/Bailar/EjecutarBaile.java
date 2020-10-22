@@ -5,14 +5,18 @@
  */
 package Tareas.Bailar;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class EjecutarBaile extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public EjecutarBaile() {
         System.out.println("--- Task Ejecutar Baile Iniciada ---");
@@ -22,6 +26,9 @@ public class EjecutarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Baile ---");
+        //buscar tipo de baile dependiendo de canción
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("correrAnimacion", blvs.getbEstadoActividad().getCancionActual().getTags());
     }
 
     @Override

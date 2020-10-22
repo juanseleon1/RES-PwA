@@ -7,12 +7,15 @@ package Tareas.ConversarEmpaticamente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class EscogerEstrategiaConversar extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     public EscogerEstrategiaConversar() {
         System.out.println("--- Task Escoger Estrategia Conversar Iniciada ---");

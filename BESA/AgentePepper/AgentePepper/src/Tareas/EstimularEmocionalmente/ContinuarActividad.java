@@ -7,12 +7,15 @@ package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class ContinuarActividad extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public ContinuarActividad() {
         System.out.println("--- Task Continuar Actividad Iniciada ---");

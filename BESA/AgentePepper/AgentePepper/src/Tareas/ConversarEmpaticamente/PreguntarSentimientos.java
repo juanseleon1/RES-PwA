@@ -7,12 +7,15 @@ package Tareas.ConversarEmpaticamente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class PreguntarSentimientos extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public PreguntarSentimientos() {
         System.out.println("--- Task Preguntar Sentimientos Iniciada ---");

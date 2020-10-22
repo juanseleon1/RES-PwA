@@ -7,12 +7,15 @@ package Tareas.CambiarCancion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class RecibirRetroalimentacion extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public RecibirRetroalimentacion() {
         System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");

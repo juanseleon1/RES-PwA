@@ -7,12 +7,15 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class VerificarObstaculos extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public VerificarObstaculos() {
         System.out.println("--- Task Verificar Obstaculos Iniciada ---");

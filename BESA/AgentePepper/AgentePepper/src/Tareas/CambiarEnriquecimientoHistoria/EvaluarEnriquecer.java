@@ -7,12 +7,15 @@ package Tareas.CambiarEnriquecimientoHistoria;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class EvaluarEnriquecer extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public EvaluarEnriquecer() {
         System.out.println("--- Task Evaluar Enriquecer Iniciada ---");

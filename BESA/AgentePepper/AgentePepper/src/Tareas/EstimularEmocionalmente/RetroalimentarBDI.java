@@ -7,12 +7,15 @@ package Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class RetroalimentarBDI extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public RetroalimentarBDI() {
         System.out.println("--- Task Retroalimentar BDI Iniciada ---");

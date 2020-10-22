@@ -7,12 +7,15 @@ package Tareas.ReiniciarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class ReiniciarActividadTask extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public ReiniciarActividadTask() {
         System.out.println("--- Task Reiniciar Actividad Iniciada ---");

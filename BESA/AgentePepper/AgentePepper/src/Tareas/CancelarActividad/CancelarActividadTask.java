@@ -7,12 +7,15 @@ package Tareas.CancelarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class CancelarActividadTask extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public CancelarActividadTask() {
         System.out.println("--- Task Cancelar Actividad Iniciada ---");

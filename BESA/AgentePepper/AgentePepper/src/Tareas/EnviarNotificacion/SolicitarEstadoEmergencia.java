@@ -7,12 +7,15 @@ package Tareas.EnviarNotificacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SolicitarEstadoEmergencia extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SolicitarEstadoEmergencia() {
         System.out.println("--- Task Solicitar Estado Emergencia Iniciada ---");

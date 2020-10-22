@@ -5,28 +5,17 @@
  */
 package Tareas.Bailar;
 
-import BESA.ExceptionBESA;
-import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Social.ServiceProvider.agent.GuardServiceProviderRequest;
-import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderDataRequest;
-import BESA.Kernel.System.AdmBESA;
-import BESA.Kernel.System.Directory.AgHandlerBESA;
-import Init.RunAgentePepper;
-import SensorHandlerAgent.GetInfoGuard;
-import SensorHandlerAgent.SensorData;
-import ServiceAgentPepper.RobotProviderAgent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
-import rational.services.ActivateAsynchronousServiceGuard;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class InicializarBaile extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
     
     //revisa el espacio para que no se choque
 
@@ -36,8 +25,8 @@ public class InicializarBaile extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-            System.out.println("--- Execute Task Cambiar Baile ---");
-
+        System.out.println("--- Execute Task Cambiar Baile ---");
+        infoServicio.put("InicializarAnimacion", null);
     }
 
     @Override

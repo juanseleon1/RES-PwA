@@ -7,12 +7,15 @@ package Tareas.RecargarBateria;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
 public class SuspenderRobot extends ResPwaTask{
+    
+    private HashMap<String,Object> infoServicio;
 
     public SuspenderRobot() {
         System.out.println("--- Task Suspender Robot Iniciada ---");
