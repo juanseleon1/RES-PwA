@@ -5,9 +5,10 @@
  */
 package Tareas.Bailar;
 
-import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -16,7 +17,7 @@ import java.util.HashMap;
  */
 public class SeleccionarBaile extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarBaile() {
         System.out.println("--- Task Seleccionar Baile Iniciada ---");
@@ -24,8 +25,11 @@ public class SeleccionarBaile extends ResPwaTask{
     
     @Override
     public void executeTask(Believes parameters) {
+        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Seleccionar Baile ---");
         infoServicio.put("GETEMOTIONSTATE", null);
+        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        //buscar baile
         
     }
 

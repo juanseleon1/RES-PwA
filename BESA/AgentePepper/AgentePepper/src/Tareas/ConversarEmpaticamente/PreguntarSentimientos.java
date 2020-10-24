@@ -7,6 +7,10 @@ package Tareas.ConversarEmpaticamente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -15,7 +19,7 @@ import java.util.HashMap;
  */
 public class PreguntarSentimientos extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public PreguntarSentimientos() {
         System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
@@ -24,7 +28,18 @@ public class PreguntarSentimientos extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
+        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
+        infoServicio.put("GETEMOTIONSTATE", null);
+        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        //buscar texto
+        infoServicio.clear();
+        infoServicio.put("SAY", "Texto");
+        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        //buscar url
+        infoServicio.clear();
+        infoServicio.put("SHOWIMG", "url");
+        srb.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
     }
 
     @Override

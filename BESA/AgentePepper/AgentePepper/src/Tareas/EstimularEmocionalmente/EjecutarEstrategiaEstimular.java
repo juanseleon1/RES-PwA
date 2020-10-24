@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class EjecutarEstrategiaEstimular extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EjecutarEstrategiaEstimular() {
         System.out.println("--- Task Ejecutar Estrategia Estimular Iniciada ---");

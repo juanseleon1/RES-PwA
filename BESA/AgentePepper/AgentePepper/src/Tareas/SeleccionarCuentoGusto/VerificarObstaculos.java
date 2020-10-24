@@ -8,6 +8,7 @@ package Tareas.SeleccionarCuentoGusto;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -25,7 +26,12 @@ public class VerificarObstaculos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Verificar Obstaculos ---");
-        infoServicio.put("SEARCHFREEZONE", "radio - restriccion desplazamiento");
+        List<Double> parametros = null ; //1. radio, 2.restriccion desplazamiento (distancia max)
+        parametros.add(0.5);
+        parametros.add(0.5);
+        infoServicio.put("SEARCHFREEZONE", parametros);
+        
+        
     }
 
     @Override

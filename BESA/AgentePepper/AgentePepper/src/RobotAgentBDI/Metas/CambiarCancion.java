@@ -34,7 +34,7 @@ public class CambiarCancion extends GoalBDI{
     public static CambiarCancion buildGoal() {
     
         BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
-        RepetirCancion repetirCancion = new RepetirCancion();
+        ReproducirCancion reproducirCancion = new ReproducirCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
         RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
 
@@ -44,7 +44,7 @@ public class CambiarCancion extends GoalBDI{
 
         rolePlan.addTask(seleccionarCancion); //evaluar estado emocional, si no es la primera cancion, saltar contenido de esa tarea
         rolePlan.addTask(busquedaCancionYT); //buscar API o desde la BD y se envia
-        rolePlan.addTask(repetirCancion); //preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
+        rolePlan.addTask(reproducirCancion); //preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
         rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
         RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);

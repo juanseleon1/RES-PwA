@@ -16,7 +16,7 @@ import rational.mapping.Believes;
  */
 public class Saludar extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
     //incluye detectar la cara del PwA y saludarlo
     

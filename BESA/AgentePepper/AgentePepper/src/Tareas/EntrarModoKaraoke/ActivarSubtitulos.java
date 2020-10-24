@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class ActivarSubtitulos extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public ActivarSubtitulos() {
         System.out.println("--- Task Activar Subtitulos Iniciada ---");

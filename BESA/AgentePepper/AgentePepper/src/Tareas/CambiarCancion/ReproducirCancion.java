@@ -3,47 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.Bailar;
+package Tareas.CambiarCancion;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class EjecutarBaile extends ResPwaTask{
-    
+public class ReproducirCancion extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public EjecutarBaile() {
-        System.out.println("--- Task Ejecutar Baile Iniciada ---");
+    public ReproducirCancion() {
+        System.out.println("--- Task Reproducir Cancion Iniciada ---");
     }
-    
 
     @Override
     public void executeTask(Believes parameters) {
         ServiceRequestBuilder srb = null;
-        System.out.println("--- Execute Task Ejecutar Baile ---");
-        //buscar tipo de baile dependiendo de canción
+        System.out.println("--- Execute Task Reproducir Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("RUNANIMATION", blvs.getbEstadoActividad().getCancionActual().getTags());
-        srb.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        infoServicio.put("PLAYSOUND", blvs.getbEstadoActividad().getCancionActual().getLinkVideo());
+        srb.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Ejecutar Baile ---");
+        System.out.println("--- Interrupt Task Reproducir Cancion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Ejecutar Baile ---");
+        System.out.println("--- Cancel Task Reproducir Cancion ---");
     }
     
 }
