@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.MovementServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum MovementServiceRequestType implements ServiceEnum{
+public enum MovementServiceRequestType implements ServiceRequestType{
     MOVE("MOVE"),MOVEFORWARD("MOVEFORWARD"),MOVETO("MOVETO"),MOVETOPOSITION("MOVETOPOSITION");
     
     private String serviceType;

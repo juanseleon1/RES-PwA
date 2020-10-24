@@ -9,7 +9,7 @@ package ServiceAgentResPwA;
  *
  * @author juans
  */
-public interface ServiceEnum {
+public interface ServiceRequestType {
     
     public String getServiceType();
 

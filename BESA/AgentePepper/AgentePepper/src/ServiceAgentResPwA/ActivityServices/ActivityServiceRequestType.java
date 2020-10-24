@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.ActivityServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum ActivityServiceRequestType implements ServiceEnum{
+public enum ActivityServiceRequestType implements ServiceRequestType{
     RUNANIMATION("RUNANIMATION"),GOTOPOSTURE("GOTOPOSTURE"),DETECTNEWFACE("DETECTNEWFACE"),GETFACELIST("GETFACELIST");
     
     private String serviceType;

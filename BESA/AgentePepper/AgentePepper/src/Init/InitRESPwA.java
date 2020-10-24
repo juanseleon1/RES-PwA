@@ -1,6 +1,6 @@
 package Init;
 
-import Adapter.Sendable;
+import Adapter.PepperAdapter.PepperSendable;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;

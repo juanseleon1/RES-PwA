@@ -14,7 +14,7 @@ import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.RobotSPAgent;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 
@@ -24,7 +24,7 @@ import java.util.HashMap;
  */
 public class ServiceRequestBuilder {
     
-    public static ServiceDataRequest buildRequest(ServiceEnum e, HashMap<String,Object> params)
+    public static ServiceDataRequest buildRequest(ServiceRequestType e, HashMap<String,Object> params)
     {
         String serv=null;
         if( e instanceof ActivityServiceRequestType)

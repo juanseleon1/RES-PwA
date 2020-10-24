@@ -6,14 +6,12 @@
 package Adapter.PepperAdapter;
 
 import Adapter.ResPwaAdapter;
-import Adapter.Sendable;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
 import ServiceAgentResPwA.ServiceDataRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +22,12 @@ import java.util.logging.Logger;
  */
 public class PepperAdapter extends ResPwaAdapter{
     
-    private final int robotPort=7896;
-    private final String IP= "127.0.0.1"; 
+    protected Thread recvThread;
     public PepperAdapter() throws Exception {
         super();
         receiver=new PepperAdapterReceiver();
-        recvThread= new Thread(receiver);
+        serviceMapper=new PepperServiceMapper();
+        recvThread= new Thread((PepperAdapterReceiver)receiver);
         recvThread.start();
         this.rpa=null;
 
@@ -89,14 +87,14 @@ public class PepperAdapter extends ResPwaAdapter{
         sendRequest(dataR);
 
     }
-        @Override
+    @Override
     public void TabletServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
         System.out.println("solicitarTabletAsync Iniciado");
         sendRequest(dataR);
 
     }
-   @Override
+
    public void sendRequest(ServiceDataRequest data)
    {
         try {
@@ -113,8 +111,9 @@ public class PepperAdapter extends ResPwaAdapter{
    
    private String convertServiceRequest(ServiceDataRequest data) throws JsonProcessingException
    {
-       String methodName=null;
-       Sendable s= new Sendable(sendNewSendable(), methodName,data.getParams());
+       PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
+       String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
+       PepperSendable s= new PepperSendable(sendNewSendable(),proxyMethod[0],proxyMethod[1],data.getParams());
        return new ObjectMapper().writeValueAsString(s);
    }
 }

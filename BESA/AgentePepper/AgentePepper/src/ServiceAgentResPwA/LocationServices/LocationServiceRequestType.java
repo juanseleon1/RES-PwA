@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.LocationServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum LocationServiceRequestType implements ServiceEnum{
+public enum LocationServiceRequestType implements ServiceRequestType{
     SEARCHFREEZONE("SEARCHFREEZONE"),GETFREEZONES("GETFREEZONES"),GETROBOTPOSITION("GETROBOTPOSITION");
     
     private String serviceType;

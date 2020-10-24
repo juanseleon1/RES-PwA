@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.HumanServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum HumanServiceRequestType implements ServiceEnum{
+public enum HumanServiceRequestType implements ServiceRequestType{
     GETEMOTIONSTATE("GETEMOTIONSTATE"),LOGIN("LOGIN");
     
     private String serviceType;
