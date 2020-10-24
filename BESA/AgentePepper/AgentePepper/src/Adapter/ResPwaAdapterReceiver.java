@@ -12,18 +12,14 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.InitRESPwA;
 import SensorHandlerAgent.GetInfoGuard;
 import SensorHandlerAgent.SensorData;
-import java.net.ServerSocket;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
  * @author juans
  */
-public abstract class  ResPwaAdapterReceiver implements Runnable{
+public abstract class  ResPwaAdapterReceiver<T>{
     
-    protected AtomicBoolean ready;
-    protected ServerSocket ss;
-    protected abstract SensorData byteToSensorData(byte[] buf);
+    protected abstract SensorData byteToSensorData(T buf);
     
     protected void updateBlvs(SensorData sd) throws ExceptionBESA {
         AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasSHAAgent);

@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.TabletServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum TabletServiceRequestType implements ServiceEnum{
+public enum TabletServiceRequestType implements ServiceRequestType{
     TABLETON("TABLETON"),WAKETABLET("WAKETABLET"),SUSPENDTABLET("SUSPENDTABLET"),TABLETOFF("TABLETOFF"),SHOWVIDEO("SHOWVIDEO"),QUITVIDEO("QUITVIDEO"),
     PAUSEVIDEO("PAUSEVIDEO"),RESUMEVIDEO("RESUMEVIDEO"),PRELOADIMG("PRELOADIMG"),SHOWIMG("SHOWIMG"),HIDEIMG("HIDEIMG"),SETTABLETBRIGHT("SETTABLETBRIGHT"),
     SETTABLETVOL("SETTABLETVOL"),LOADIMGLIST("LOADIMGLIST");

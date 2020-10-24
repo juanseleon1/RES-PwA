@@ -34,6 +34,14 @@ public class ServiceDataRequest extends ActivateServiceData{
     public void setParams(HashMap<String, Object> params) {
         this.params = params;
     }
+
+    public String getSubservice() {
+        return subservice;
+    }
+
+    public void setSubservice(String subservice) {
+        this.subservice = subservice;
+    }
     
 
     

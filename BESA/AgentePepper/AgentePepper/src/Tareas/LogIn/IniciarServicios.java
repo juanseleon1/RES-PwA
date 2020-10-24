@@ -9,7 +9,6 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.ServiceEnum;
 import java.util.HashMap;
 import rational.mapping.Believes;
 

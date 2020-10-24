@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Adapter;
+package Adapter.PepperAdapter;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 
 @JsonPropertyOrder({ "id", "proxyName","methodName", "params" })
-public class Sendable implements Serializable{
+public class PepperSendable implements Serializable{
     
     
     private int id; 
@@ -23,7 +23,8 @@ public class Sendable implements Serializable{
     private String methodName;
     private HashMap<String,Object> params;
 
-    public Sendable( int id ,String methodName, HashMap<String, Object> params) {
+    public PepperSendable( int id ,String proxyName ,String methodName, HashMap<String, Object> params) {
+        this.proxyName=proxyName;
         this.methodName = methodName;
         this.id = id;
         this.params = params;
@@ -51,6 +52,14 @@ public class Sendable implements Serializable{
 
     public void setParams(HashMap<String,Object> params) {
         this.params = params;
+    }
+
+    public String getProxyName() {
+        return proxyName;
+    }
+
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
     }
     
     

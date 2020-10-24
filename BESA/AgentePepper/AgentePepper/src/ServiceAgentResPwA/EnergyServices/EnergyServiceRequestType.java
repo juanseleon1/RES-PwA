@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.EnergyServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum EnergyServiceRequestType implements ServiceEnum{
+public enum EnergyServiceRequestType implements ServiceRequestType{
     ACTIVATEMONITORINGCHARGESERV("ACTIVATEMONITORINGCHARGESERV"),GETBATTERY("GETBATTERY"),GETTEMP("GETTEMP");
     
     private String serviceType;

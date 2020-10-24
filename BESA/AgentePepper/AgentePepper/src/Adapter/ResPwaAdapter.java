@@ -16,9 +16,11 @@ import ServiceAgentResPwA.ServiceDataRequest;
  */
 public abstract class ResPwaAdapter extends AdapterBESA{
     protected RobotSPAgent rpa;
+    protected final int robotPort=7896;
+    protected final String IP= "127.0.0.1"; 
     protected ResPwaAdapterReceiver receiver;
-    protected Thread recvThread;
     protected static int numPackage=0;
+    protected static ServiceMapper serviceMapper;
     protected  ResPwaAdapter()
     {
         super(null,null);
@@ -34,6 +36,23 @@ public abstract class ResPwaAdapter extends AdapterBESA{
     public static int sendNewSendable(){
         return numPackage++;
     }
+
+    public ResPwaAdapterReceiver getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(ResPwaAdapterReceiver receiver) {
+        this.receiver = receiver;
+    }
+
+    public static ServiceMapper getServiceMapper() {
+        return serviceMapper;
+    }
+
+    public static void setServiceMapper(ServiceMapper serviceMapper) {
+        ResPwaAdapter.serviceMapper = serviceMapper;
+    }
+    
     
      public abstract void ActivityServiceReqAsync(SPServiceDataRequest data);
      public abstract void AutonomyServiceReqAsync(SPServiceDataRequest data);
@@ -44,6 +63,5 @@ public abstract class ResPwaAdapter extends AdapterBESA{
      public abstract void VoiceServiceReqAsync(SPServiceDataRequest data);
      public abstract void MovementServiceReqAsync(SPServiceDataRequest data);
      public abstract void TabletServiceReqAsync(SPServiceDataRequest data);
-     public abstract void sendRequest(ServiceDataRequest data);
     
 }

@@ -5,13 +5,13 @@
  */
 package ServiceAgentResPwA.RobotStateServices;
 
-import ServiceAgentResPwA.ServiceEnum;
+import ServiceAgentResPwA.ServiceRequestType;
 
 /**
  *
  * @author juans
  */
-public enum RobotStateServiceRequestType implements ServiceEnum{
+public enum RobotStateServiceRequestType implements ServiceRequestType{
     WAKEUP("WAKEUP"),SUSPEND("SUSPEND"),SETREFRESHTIMESENSORS("SETREFRESHTIMESENSORS"),ACTIVATERASTA("ACTIVATERASTA"),RANDOMEYES("RANDOMEYES"),
     SETLEDSINTENSITY("SETLEDSINTENSITY"),CHANGELEDCOLOR("CHANGELEDCOLOR"),ACTIVATESTIFFNESS("ACTIVATESTIFFNESS");
     

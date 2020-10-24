@@ -20,9 +20,11 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class PepperAdapterReceiver extends ResPwaAdapterReceiver{
+public class PepperAdapterReceiver extends ResPwaAdapterReceiver<byte []> implements Runnable{
 
     public static final int revPort=7897 ;
+    protected AtomicBoolean ready;
+    protected ServerSocket ss;
     public PepperAdapterReceiver() throws IOException{
         ready= new AtomicBoolean(true);
         ss=new ServerSocket(revPort);
