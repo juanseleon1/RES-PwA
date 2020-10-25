@@ -8,7 +8,11 @@ package Tareas.Bailar;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -16,7 +20,7 @@ import java.util.HashMap;
  */
 public class InicializarBaile extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
     //revisa el espacio para que no se choque
 
@@ -26,8 +30,13 @@ public class InicializarBaile extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
+        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Cambiar Baile ---");
-        infoServicio.put("INITANIMATION", null);
+        List<Double> parametros = null ; //1. radio, 2.restriccion desplazamiento (distancia max)
+        parametros.add(0.5);
+        parametros.add(0.5);
+        infoServicio.put("SEARCHFREEZONE", parametros);
+        srb.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
     }
 
     @Override

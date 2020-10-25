@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class SeleccionarEstrategiaEmocional extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarEstrategiaEmocional() {
         System.out.println("--- Task Seleccionar Estrategia Emocional Iniciada ---");

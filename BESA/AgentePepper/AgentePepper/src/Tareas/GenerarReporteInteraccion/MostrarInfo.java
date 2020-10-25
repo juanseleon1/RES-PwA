@@ -7,6 +7,9 @@ package Tareas.GenerarReporteInteraccion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -15,7 +18,7 @@ import java.util.HashMap;
  */
 public class MostrarInfo extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public MostrarInfo() {
         System.out.println("--- Task Mostrar Informacion Interaccion Iniciada ---");
@@ -24,7 +27,16 @@ public class MostrarInfo extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
+        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Mostrar Informacion Interaccion ---");
+        //buscar info interacciones BD
+        
+        //buscar texto
+        infoServicio.put("SAY", "Texto");
+        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        //buscar url
+        infoServicio.put("SHOWIMG", "url");
+        srb.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
     }
 
     @Override

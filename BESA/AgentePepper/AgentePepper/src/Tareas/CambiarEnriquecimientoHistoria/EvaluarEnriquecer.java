@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class EvaluarEnriquecer extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EvaluarEnriquecer() {
         System.out.println("--- Task Evaluar Enriquecer Iniciada ---");

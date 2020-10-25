@@ -6,6 +6,9 @@
 package Tareas.Conversacion;
 
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -15,10 +18,17 @@ import rational.mapping.Believes;
  */
 public class PreguntarEstAnimo extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public PreguntarEstAnimo() {
+        ServiceRequestBuilder srb = null;
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
+        infoServicio.put("GETEMOTIONSTATE", null);
+        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        //buscar texto "¿como estas pepito?"
+        infoServicio.clear();
+        infoServicio.put("SAY", "Texto");
+        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
     
     @Override

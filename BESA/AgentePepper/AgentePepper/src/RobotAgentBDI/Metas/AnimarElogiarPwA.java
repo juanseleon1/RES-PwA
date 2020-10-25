@@ -13,6 +13,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Init.InitRESPwA;
+import Tareas.AnimarElogiarPwA.SeleccionarEstrategiaAnimar;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -31,11 +32,16 @@ public class AnimarElogiarPwA extends GoalBDI{
     public static AnimarElogiarPwA buildGoal() {
 
         //evaluar estado emocional
+        SeleccionarEstrategiaAnimar seleccionarEstrategia = new SeleccionarEstrategiaAnimar();
         EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
-        tarea.add(ejecutarEstrategia);
+
         Plan rolePlan= new Plan(tarea,resources,null);
+        
+        rolePlan.addTask(seleccionarEstrategia);
+        rolePlan.addTask(ejecutarEstrategia);
+        
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
         AnimarElogiarPwA b= new AnimarElogiarPwA(InitRESPwA.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
         return b;

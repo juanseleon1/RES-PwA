@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class SolicitarEstadoEmergencia extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SolicitarEstadoEmergencia() {
         System.out.println("--- Task Solicitar Estado Emergencia Iniciada ---");

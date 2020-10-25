@@ -5,20 +5,20 @@
  */
 package Tareas.ConversarEmpaticamente;
 
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class EscogerEstrategiaConversar extends ResPwaTask{
+public class EjecutarEstrategiaConversar extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
-    public EscogerEstrategiaConversar() {
-        System.out.println("--- Task Escoger Estrategia Conversar Iniciada ---");
+    public EjecutarEstrategiaConversar() {
+        System.out.println("--- Task Ejecutar Estrategia Conversar Iniciada ---");
     }
 
     @Override
@@ -35,5 +35,4 @@ public class EscogerEstrategiaConversar extends ResPwaTask{
     public void cancelTask(Believes believes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class ContinuarActividad extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public ContinuarActividad() {
         System.out.println("--- Task Continuar Actividad Iniciada ---");

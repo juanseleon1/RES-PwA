@@ -11,8 +11,9 @@ import ServiceAgentResPwA.ServiceRequestType;
  *
  * @author juans
  */
+
 public enum ActivityServiceRequestType implements ServiceRequestType{
-    RUNANIMATION("RUNANIMATION"),GOTOPOSTURE("GOTOPOSTURE"),DETECTNEWFACE("DETECTNEWFACE"),GETFACELIST("GETFACELIST");
+    RUNANIMATION("RUNANIMATION"),GOTOPOSTURE("GOTOPOSTURE"),DETECTNEWFACE("DETECTNEWFACE"),GETFACELIST("GETFACELIST"), STOPANIMATION("STOPANIMATION");
     
     private String serviceType;
     

@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class BusquedaCancionYoutube extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public BusquedaCancionYoutube() {
         System.out.println("--- Task Busqueda Cancion Iniciada ---");
@@ -26,6 +26,7 @@ public class BusquedaCancionYoutube extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        //hacer parte API Youtube en el metodo buscarCancion
         blvs.getbEstadoActividad().getCancionActual().buscarCancion();
     }
 
