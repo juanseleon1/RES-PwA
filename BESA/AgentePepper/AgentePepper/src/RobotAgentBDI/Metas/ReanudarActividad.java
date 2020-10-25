@@ -11,7 +11,6 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
-import Tareas.ReanudarActividad.ReanudarPlan;
 import Tareas.ReanudarActividad.RecibirNotificacionReanudar;
 import Tareas.ReanudarActividad.SolicitarPosicionPwA;
 import java.util.ArrayList;
@@ -32,7 +31,6 @@ public class ReanudarActividad extends GoalBDI{
     public static ReanudarActividad buildGoal() {
 
         //REVISAR
-        ReanudarPlan reanudarPlan = new ReanudarPlan();
         RecibirNotificacionReanudar recibirNotificacionR = new RecibirNotificacionReanudar();
         SolicitarPosicionPwA solicitarPosicion = new SolicitarPosicionPwA();
         List<String> resources = new ArrayList<>();
@@ -42,7 +40,6 @@ public class ReanudarActividad extends GoalBDI{
 
         rolePlan.addTask(recibirNotificacionR);
         rolePlan.addTask(solicitarPosicion);
-        rolePlan.addTask(reanudarPlan);
         
         RationalRole reaActnRole = new RationalRole(descrip, rolePlan);
         ReanudarActividad b= new ReanudarActividad(InitRESPwA.getPlanID(), reaActnRole, descrip, GoalBDITypes.DUTY);
@@ -65,8 +62,8 @@ public class ReanudarActividad extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
 
-        //estimuloreanudado
-        if(blvs.getbEstadoInteraccion().isDetectaPwA()) {
+        //estaba suspendido
+        if(blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoRobot().isEstaSuspendido()) {
             return 1.0;
         }
         

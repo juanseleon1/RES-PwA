@@ -12,6 +12,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,9 @@ public class SeleccionarCuento extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Cuento ---");
         infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        
         //escoge el cuento
         float gusto = -1;
         Cuento cuentoEleg = null;

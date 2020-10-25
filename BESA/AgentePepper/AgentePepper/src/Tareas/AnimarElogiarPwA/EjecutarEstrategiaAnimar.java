@@ -5,6 +5,8 @@
  */
 package Tareas.AnimarElogiarPwA;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
@@ -25,6 +27,9 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Estrategia Animar PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        estrategia.execStrategy();
     }
 
     @Override

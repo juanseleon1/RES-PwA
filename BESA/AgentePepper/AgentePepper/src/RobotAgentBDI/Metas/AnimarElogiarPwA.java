@@ -85,6 +85,11 @@ public class AnimarElogiarPwA extends GoalBDI{
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA evaluateContribution");
         
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)) {
+            return 1.0;
+        }
         return 0;
     }
 

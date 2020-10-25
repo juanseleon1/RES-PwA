@@ -12,6 +12,8 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.CancelarActividad.CancelarActividadTask;
+import Tareas.CancelarActividad.PreguntarActividad;
+import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -30,12 +32,16 @@ public class CancelarActividad extends GoalBDI{
     public static CancelarActividad buildGoal() {
 
         CancelarActividadTask cancelarActividad = new CancelarActividadTask();
+        MoverseFrentePwA moversePwA = new MoverseFrentePwA();
+        PreguntarActividad preguntarA = new PreguntarActividad();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
         
         rolePlan.addTask(cancelarActividad); //evaluar estado emocional
+        rolePlan.addTask(moversePwA);
+        rolePlan.addTask(preguntarA);
 
         RationalRole cancelarActRole = new RationalRole(descrip, rolePlan);
         CancelarActividad b= new CancelarActividad(InitRESPwA.getPlanID(), cancelarActRole, descrip, GoalBDITypes.DUTY);

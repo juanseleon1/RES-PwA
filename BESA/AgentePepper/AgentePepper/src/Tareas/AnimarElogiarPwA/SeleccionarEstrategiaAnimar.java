@@ -5,7 +5,12 @@
  */
 package Tareas.AnimarElogiarPwA;
 
+import EmotionalAnalyzerAgent.EmotionPwA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -25,6 +30,11 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
+        infoServicio.put("GETEMOTIONSTATE", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        
+        //blvs.getbEstadoActividad().setEstrategia(ResPwAStrategy);
     }
 
     @Override

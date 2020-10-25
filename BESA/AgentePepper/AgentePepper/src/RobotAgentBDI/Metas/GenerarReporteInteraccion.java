@@ -35,7 +35,7 @@ public class GenerarReporteInteraccion extends GoalBDI{
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(mostrarInfo);//sacar info y mostrar
+        rolePlan.addTask(mostrarInfo);
 
         RationalRole genRepRole = new RationalRole(descrip, rolePlan);
         GenerarReporteInteraccion b= new GenerarReporteInteraccion(InitRESPwA.getPlanID(), genRepRole, descrip, GoalBDITypes.DUTY);

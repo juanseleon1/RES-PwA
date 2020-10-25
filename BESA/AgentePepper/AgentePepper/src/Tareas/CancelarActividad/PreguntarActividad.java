@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.PedirAyuda;
+package Tareas.CancelarActividad;
 
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -16,31 +16,34 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class PeticionAyuda extends ResPwaTask{
+public class PreguntarActividad extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
-    
-    public PeticionAyuda() {
-        System.out.println("--- Task Peticion Ayuda Iniciada ---");
+
+    public PreguntarActividad() {
+        System.out.println("--- Task Preguntar Actividad Iniciada ---");
     }
     
+
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Peticion Ayuda ---");
-        //dar respuesta a petición
-        infoServicio.put("SAY", "respuesta");
+        System.out.println("--- Execute Task Preguntar Actividad ---");
+        
+        //buscar texto
+        infoServicio.put("SAY", "ASK ACTIVITY");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
+        infoServicio.clear();
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Peticion Ayuda ---");
+        System.out.println("--- Interrupt Task Preguntar Actividad ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Peticion Ayuda ---");
+        System.out.println("--- Cancel Task Preguntar Actividad ---");
     }
     
 }

@@ -11,6 +11,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -28,18 +29,18 @@ public class DetectarPwA extends ResPwaTask{
     
     @Override
     public void executeTask(Believes parameters) {
-
         System.out.println("--- Execute Task Detectar PwA ---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("DETECTNEWFACE", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
-        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
-        //¿si ya existe?
-        infoServicio.put("GETFACELIST", null);
-        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
+        ServiceDataRequest srb = null;
         
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
+        requestService(srb);
         infoServicio.clear();
+        
         infoServicio.put("LOGIN", null);
-        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
+        requestService(srb);
     }
 
     @Override

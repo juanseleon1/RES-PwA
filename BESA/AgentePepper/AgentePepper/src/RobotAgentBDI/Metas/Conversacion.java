@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Conversacion.PreguntarEstAnimo;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,12 @@ public class Conversacion extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Conversacion detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        if (blvs.getbEstadoInteraccion().isDetectaPwA()) {
+            return 1.0;
+        }
         return 0;
     }
 
@@ -67,7 +74,7 @@ public class Conversacion extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Conversacion evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

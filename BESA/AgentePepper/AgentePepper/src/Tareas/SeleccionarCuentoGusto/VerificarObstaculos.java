@@ -10,6 +10,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationService;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class VerificarObstaculos extends ResPwaTask{
         System.out.println("--- Execute Task Verificar Obstaculos ---");
         infoServicio.put("RADIO", 0.5);
         infoServicio.put("DISTANCIAMAX", 0.5);
-        ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-        
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        requestService(srb);
     }
 
     @Override

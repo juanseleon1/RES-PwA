@@ -3,39 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Tareas.LogIn;
 
-package Tareas.CambiarDificultad;
-
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class SolicitarEstrategia extends ResPwaTask{
+public class CargarPerfilPwA extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
-
-    public SolicitarEstrategia() {
-        System.out.println("--- Task Solicitar Estrategia Iniciada ---");
-    }
     
+
+    public CargarPerfilPwA() {
+        System.out.println("--- Task Seleccionar Estrategia Animar PwA Iniciada ---");
+    }
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Solicitar Estrategia ---");
+        System.out.println("--- Execute Task Cargar Perfil PwA ---");
+        
+        //buscar BD perfil
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Solicitar Estrategia ---");
+        System.out.println("--- Interrupt Task Cargar Perfil PwA ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Solicitar Estrategia ---");
+        System.out.println("--- Cancel Task Cargar Perfil PwA ---");
     }
-
+    
+    
 }

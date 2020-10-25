@@ -59,7 +59,7 @@ public class InitRESPwA {
     public static String aliasEAAgent= "EAAgent";
     public static String aliasSHAAgent= "SHAAgent";
     public static String aliasSPAgent= "SPAgent";
-    private static int PLANID =0;
+    private static int PLANID = 0;
     
     public static void main(String[] args) {
         try {

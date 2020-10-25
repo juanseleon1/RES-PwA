@@ -9,7 +9,7 @@ package ResPwaUtils;
  *
  * @author juans
  */
-public class YTUtis {
+public class YTUtils {
     public String searchYTVideo(String searchTerm)
     {
         return null;

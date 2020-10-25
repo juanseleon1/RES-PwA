@@ -26,6 +26,7 @@ public class BEstadoRobot implements Believes{
     private boolean activadoConsciente=false;
     private boolean activadoSeñalesDeVida=false;
     private boolean activadoMovHabla=false;
+    private boolean estaSuspendido=false;
 
     @Override
     public boolean update(InfoData si) {
@@ -119,5 +120,11 @@ public class BEstadoRobot implements Believes{
     public void setActivadoMovHabla(boolean activadoMovHabla) {
         this.activadoMovHabla = activadoMovHabla;
     }
+
+    public boolean isEstaSuspendido() {
+        return estaSuspendido;
+    }
+    
+    
     
 }

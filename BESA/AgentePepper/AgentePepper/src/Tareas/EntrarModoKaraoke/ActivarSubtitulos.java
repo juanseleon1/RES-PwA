@@ -5,8 +5,14 @@
  */
 package Tareas.EntrarModoKaraoke;
 
+import ResPwaUtils.YTUtils;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -25,6 +31,16 @@ public class ActivarSubtitulos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Activar Subtitulos ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("GETEMOTIONSTATE", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        
+        YTUtils yt = new YTUtils();
+        String urlcancion = yt.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre() + " lyrics");
+        infoServicio.put("SHOWVIDEO", urlcancion);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
+        requestService(srb);
     }
 
     @Override

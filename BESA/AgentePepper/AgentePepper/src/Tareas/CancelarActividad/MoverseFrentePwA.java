@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.PedirAyuda;
+package Tareas.CancelarActividad;
 
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -16,31 +16,32 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class PeticionAyuda extends ResPwaTask{
-    
+public class MoverseFrentePwA extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
-    
-    public PeticionAyuda() {
-        System.out.println("--- Task Peticion Ayuda Iniciada ---");
+
+    public MoverseFrentePwA() {
+        System.out.println("--- Task Moverse Frente PwA Iniciada ---");
     }
     
+
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Peticion Ayuda ---");
-        //dar respuesta a petición
-        infoServicio.put("SAY", "respuesta");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        System.out.println("--- Execute Task Moverse Frente PwA ---");
+        //parametros desde naoqi
+        infoServicio.put("MOVETOPWA", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Peticion Ayuda ---");
+        System.out.println("--- Interrupt Task Moverse Frente PwA ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Peticion Ayuda ---");
+        System.out.println("--- Cancel Task Moverse Frente PwA ---");
     }
     
 }

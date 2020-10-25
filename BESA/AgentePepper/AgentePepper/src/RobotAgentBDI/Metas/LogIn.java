@@ -10,7 +10,11 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
+import Tareas.LogIn.CargarPerfilPwA;
 import Tareas.LogIn.DetectarPwA;
+import Tareas.LogIn.IniciarServicios;
 import Tareas.LogIn.Saludar;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,8 @@ public class LogIn extends GoalBDI{
 
         //falta mirar iniciarServicios
         DetectarPwA detectarPwA = new DetectarPwA();
+        CargarPerfilPwA cargarPerfil = new CargarPerfilPwA();
+        IniciarServicios iniciarServicios = new IniciarServicios();
         Saludar saludar = new Saludar();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
@@ -38,6 +44,8 @@ public class LogIn extends GoalBDI{
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(cargarPerfil);
+        rolePlan.addTask(iniciarServicios);
         rolePlan.addTask(saludar);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
@@ -59,6 +67,13 @@ public class LogIn extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn detectGoal");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        if (blvs.getbEstadoInteraccion().isDetectaPwA()) {
+            return 1.0;
+        }
+        
         return 0;
     }
 
@@ -71,7 +86,7 @@ public class LogIn extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn evaluateContribution");
-        return 0;
+        return 1.0;
     }
 
     @Override

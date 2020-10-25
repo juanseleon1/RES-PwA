@@ -42,9 +42,9 @@ public class Bailar extends GoalBDI{
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan(tarea,resources,null);
+        rolePlan.addTask(inicializarBaile);
         rolePlan.addTask(seleccionarBaile); //evaluar Estado emocional, mirar tipo de baile que puede hacer dependiendo de la canción
         rolePlan.addTask(ejecutarBaile);
-        rolePlan.addTask(inicializarBaile);
         rolePlan.addTask(finalizarBaile);
         
         //while de espera activa para saber que se movia a un lugar seguro

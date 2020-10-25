@@ -5,6 +5,8 @@
  */
 package Tareas.CambiarEnriquecimientoHistoria;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -13,11 +15,11 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class EjecutarEnriquecer extends ResPwaTask{
+public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public EjecutarEnriquecer() {
+    public EjecutarEstrategiaEnriquecer() {
         System.out.println("--- Task Ejecutar Enriquecer Iniciada ---");
     }
     
@@ -25,6 +27,9 @@ public class EjecutarEnriquecer extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Enriquecer ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        estrategia.execStrategy();
     }
 
     @Override

@@ -7,6 +7,10 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -26,7 +30,9 @@ public class BuscarAnimaciones extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
         //busca animaciones y mensajes - ciclo
-        //SAYWITHMOVEMENT
+        infoServicio.put("SAYWITHMOVEMENT", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
+        requestService(srb);
     }
 
     @Override

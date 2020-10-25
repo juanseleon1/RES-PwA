@@ -13,7 +13,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.CambiarDificultad.EvaluarDesempeño;
 import Tareas.CambiarDificultad.SeleccionarEstrategiaDificultad;
-import Tareas.CambiarDificultad.SolicitarEstrategia;
+import Tareas.CambiarDificultad.EjecutarEstrategiaDificultad;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -32,9 +32,10 @@ public class CambiarDificultad extends GoalBDI{
 
     public static CambiarDificultad buildGoal() {
 
+        //Hace parte de memorama
         EvaluarDesempeño evaluarDesempeño = new EvaluarDesempeño();
         SeleccionarEstrategiaDificultad seleccionarEstrategiaD = new SeleccionarEstrategiaDificultad();
-        SolicitarEstrategia solicitarEstrategia = new SolicitarEstrategia();
+        EjecutarEstrategiaDificultad ejecutarEstrategia = new EjecutarEstrategiaDificultad();
         
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
@@ -44,7 +45,7 @@ public class CambiarDificultad extends GoalBDI{
         rolePlan.addTask(evaluarDesempeño);
         rolePlan.addTask(seleccionarEstrategiaD); 
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(solicitarEstrategia);
+        rolePlan.addTask(ejecutarEstrategia);
 
         RationalRole cambiarDifRole = new RationalRole(descrip, rolePlan);
         CambiarDificultad b= new CambiarDificultad(InitRESPwA.getPlanID(), cambiarDifRole, descrip, GoalBDITypes.DUTY);

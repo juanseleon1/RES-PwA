@@ -91,6 +91,10 @@ public class BEstadoActividad implements Believes{
     public void setCuentoActual(Cuento cuentoActual) {
         this.cuentoActual = cuentoActual;
     }
+
+    public Cuento getCuentoActual() {
+        return cuentoActual;
+    }
     
     
     

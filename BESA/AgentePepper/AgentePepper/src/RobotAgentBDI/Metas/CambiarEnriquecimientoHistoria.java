@@ -11,8 +11,8 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
-import Tareas.CambiarEnriquecimientoHistoria.EjecutarEnriquecer;
-import Tareas.CambiarEnriquecimientoHistoria.EvaluarEnriquecer;
+import Tareas.CambiarEnriquecimientoHistoria.EjecutarEstrategiaEnriquecer;
+import Tareas.CambiarEnriquecimientoHistoria.EvaluarEstrategiaEnriquecer;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -30,10 +30,10 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         private static String descrip;
 
     public static CambiarEnriquecimientoHistoria buildGoal() {
-
+        
         //evaluar atencion, emociones
-        EvaluarEnriquecer evaluarEnriquecer = new EvaluarEnriquecer();
-        EjecutarEnriquecer ejecutarEnriquecer = new EjecutarEnriquecer();
+        EvaluarEstrategiaEnriquecer evaluarEnriquecer = new EvaluarEstrategiaEnriquecer();
+        EjecutarEstrategiaEnriquecer ejecutarEnriquecer = new EjecutarEstrategiaEnriquecer();
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
@@ -83,13 +83,12 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         System.out.println("Meta CambiarEnriquecimientoHistoria evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        double value = 0;
         
         if(blvs.getbEstadoInteraccion().isCambioEnriq()) {
-            value = 1.0;
+            return 1.0;
         }
-        
-        return value;
+        //verificar esto
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion()/10;
     }
 
     @Override

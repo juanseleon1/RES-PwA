@@ -31,16 +31,16 @@ public class RecargarBateria extends GoalBDI{
 
     public static RecargarBateria buildGoal() {
 
-        MoverseEstacionCarga moverseEstacionCarga = new MoverseEstacionCarga();
+        //MoverseEstacionCarga moverseEstacionCarga = new MoverseEstacionCarga();
         SuspenderRobot suspenderRobot = new SuspenderRobot();//Suspender a robot y notificar/decir
-        UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
+        //UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
-        rolePlan.addTask(ubicarEstacionCarga);
-        rolePlan.addTask(moverseEstacionCarga);
+        //rolePlan.addTask(ubicarEstacionCarga);
+        //rolePlan.addTask(moverseEstacionCarga);
         rolePlan.addTask(suspenderRobot);
 
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);

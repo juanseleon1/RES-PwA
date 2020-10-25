@@ -9,6 +9,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
@@ -29,16 +30,23 @@ public class PreguntarSentimientos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
+        ServiceDataRequest srb = null;
+        
         infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
+        
         //buscar texto
-        infoServicio.clear();
         infoServicio.put("SAY", "Texto");
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        //buscar url
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb);
         infoServicio.clear();
+        
+        //buscar url
         infoServicio.put("SHOWIMG", "url");
-        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        requestService(srb);
     }
 
     @Override

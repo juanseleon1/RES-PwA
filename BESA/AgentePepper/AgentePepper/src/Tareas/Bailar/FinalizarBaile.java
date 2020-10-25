@@ -9,6 +9,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -21,14 +22,15 @@ public class FinalizarBaile extends ResPwaTask{
 
     public FinalizarBaile() {
         System.out.println("--- Task Finalizar Baile Iniciada ---");
-        infoServicio.put("STOPANIMATION", null);
-        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Finalizar Baile ---");
+        infoServicio.put("STOPANIMATION", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override

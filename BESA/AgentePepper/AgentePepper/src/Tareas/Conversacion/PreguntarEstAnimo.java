@@ -8,6 +8,7 @@ package Tareas.Conversacion;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -22,17 +23,21 @@ public class PreguntarEstAnimo extends ResPwaTask{
     
     public PreguntarEstAnimo() {
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        //buscar texto "¿como estas pepito?"
-        infoServicio.clear();
-        infoServicio.put("SAY", "Texto");
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
     
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Estado Animo ---");
+        ServiceDataRequest srb = null;
+        infoServicio.put("GETEMOTIONSTATE", null);
+        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
+        
+        //buscar texto "¿como estas pepito?"
+        infoServicio.put("SAY", "Texto");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb);
     }
 
     @Override

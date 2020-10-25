@@ -32,51 +32,83 @@ public class IniciarServicios extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Iniciar Servicios ---");
+        ServiceDataRequest srb = null;
         
         infoServicio.put("ACTIVATEBLINKING", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATELIFESIGNALS", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATELIFESIGNALSINT", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESGINALSINT, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESGINALSINT, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEACTIVEHEARING", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEACTIVEHEARING, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEACTIVEHEARING, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATESPEAKMOVEMENTS", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATESPEAKMOVEMENTS, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATESPEAKMOVEMENTS, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEPUSHREFLEXES", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEPUSHREFLEXES, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEPUSHREFLEXES, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEBREATHMOV", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACIVATEBREATHMOV, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACIVATEBREATHMOV, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEMOVDETECTION", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEMOVDETECTION, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEMOVDETECTION, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEFACEDETEC", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEFACEDETEC, infoServicio);
-        infoServicio.put("ACTIVATECOsLISSIONDETECT", true);
-        ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATECOLISSIONDETECT, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEFACEDETEC, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
+        infoServicio.put("ACTIVATECOLISSIONDETECT", true);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATECOLISSIONDETECT, infoServicio);
+        requestService(srb);
         infoServicio.clear();
         
         infoServicio.put("ACTIVATEMONITORINGCHARGESERV", true);
-        ServiceRequestBuilder.buildRequest(EnergyServiceRequestType.ACTIVATEMONITORINGCHARGESERV, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(EnergyServiceRequestType.ACTIVATEMONITORINGCHARGESERV, infoServicio);
+        requestService(srb);
         infoServicio.clear();
         
         infoServicio.put("ACTIVATESTIFFNESS", true);
-        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
+        requestService(srb);
         infoServicio.clear();
         
         infoServicio.put("TABLETON", true);
-        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("SETTABLETBRIGHT", 1);
-        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("SETTABLETVOL", 10);//depende perfil del usuario 1-15
-        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
+        requestService(srb);
         infoServicio.clear();
         
         infoServicio.put("SETSAYVOLUMEN", 0.5);//depende perfil del usuario 0-1.0
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUMN, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUMN, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTIVATEVOICEEMOANAL", "EmotionAnalysis"); //revisar nombre
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         infoServicio.put("ACTVOICERECOG", "SpeechRecognition"); //revisar nombre
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
+        requestService(srb);
         
     }
 

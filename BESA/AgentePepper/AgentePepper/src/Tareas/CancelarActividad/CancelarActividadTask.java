@@ -7,6 +7,12 @@ package Tareas.CancelarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -25,6 +31,10 @@ public class CancelarActividadTask extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cancelar Actividad ---");
+        ServiceDataRequest srb = null;
+        infoServicio.put("STOPACTIVITY", null);
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override

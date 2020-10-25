@@ -27,6 +27,7 @@ public class BEstadoInteraccion implements Believes{
     private long distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaBailando=false;
+    private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
     private boolean estaReproduciendoCancion=false;
@@ -165,6 +166,10 @@ public class BEstadoInteraccion implements Believes{
         this.estaReproduciendoCancion = estaReproduciendoCancion;
     }
 
+    public boolean isQuiereCantar() {
+        return quiereCantar;
+    }
 
+    
     
 }

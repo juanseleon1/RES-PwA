@@ -75,9 +75,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //verificar gusto cuento seleccionado > 0.5
-        List <Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getCuenteria()).getCuentos();
-        
-        if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MEMORAMA)) {
+        if(blvs.getbEstadoActividad().getCuentoActual().getGusto() > 0.5 && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA)) {
             return 1.0;
         }
         
@@ -93,7 +91,8 @@ public class SeleccionarCuentoGusto extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta SeleccionarCuentoGusto evaluateContribution");
-        return 0;
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        return blvs.getbEstadoActividad().getCuentoActual().getGusto();
     }
 
     @Override

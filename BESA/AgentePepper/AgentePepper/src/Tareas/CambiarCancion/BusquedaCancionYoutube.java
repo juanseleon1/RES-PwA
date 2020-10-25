@@ -5,9 +5,14 @@
  */
 package Tareas.CambiarCancion;
 
+import ResPwaUtils.YTUtils;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -26,8 +31,12 @@ public class BusquedaCancionYoutube extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //hacer parte API Youtube en el metodo buscarCancion
-        blvs.getbEstadoActividad().getCancionActual().buscarCancion();
+        
+        YTUtils yt = new YTUtils();
+        String urlcancion = yt.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
+        infoServicio.put("SHOWVIDEO", urlcancion);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
+        requestService(srb);
     }
 
     @Override

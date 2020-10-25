@@ -10,7 +10,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -32,7 +32,8 @@ public class EjecutarBaile extends ResPwaTask{
         //buscar tipo de baile dependiendo de canción
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("RUNANIMATION", blvs.getbEstadoActividad().getCancionActual().getTags());
-        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override

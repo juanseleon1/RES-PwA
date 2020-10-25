@@ -5,12 +5,14 @@
  */
 package Tareas.CambiarCancion;
 
+import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -29,10 +31,13 @@ public class SeleccionarCancion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Cancion ---");
-        infoServicio.put("obtenerEstadoEmocional", null);
-        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        infoServicio.put("GETEMOTIONSTATE", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
         //buscar cancion BD
-        
+        Cancion cancion = null;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setCancionActual(cancion);
     }
 
     @Override

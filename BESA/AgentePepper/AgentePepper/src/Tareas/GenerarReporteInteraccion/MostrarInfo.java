@@ -8,6 +8,7 @@ package Tareas.GenerarReporteInteraccion;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
@@ -28,14 +29,16 @@ public class MostrarInfo extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Mostrar Informacion Interaccion ---");
-        //buscar info interacciones BD
+        ServiceDataRequest srb = null;
+    
+        infoServicio.put("SAY", "INFO INTERACCION");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         
-        //buscar texto
-        infoServicio.put("SAY", "Texto");
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        //buscar url
-        infoServicio.put("SHOWIMG", "url");
-        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        infoServicio.put("SHOWIMG", "INFO INTERACCION");
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        requestService(srb);
     }
 
     @Override

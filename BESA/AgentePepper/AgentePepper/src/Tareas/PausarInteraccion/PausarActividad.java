@@ -9,6 +9,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -21,14 +22,15 @@ public class PausarActividad extends ResPwaTask{
 
     public PausarActividad() {
         System.out.println("--- Task Pausar Actividad Iniciada ---");
-        infoServicio.put("SUSPEND", null);
-        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Pausar Actividad ---");
+        infoServicio.put("SUSPEND", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
+        requestService(srb);
     }
 
     @Override

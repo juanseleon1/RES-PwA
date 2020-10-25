@@ -13,6 +13,7 @@ import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +62,8 @@ public class EntrarModoKaraoke extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
-        List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCanciones();
-        if(blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
+        //List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCanciones(); -> si tiene letra solo se puede con el API
+        if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbEstadoActividad().calcTiempoActividad() > 30 && (blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke() || blvs.getbEstadoInteraccion().isQuiereCantar())) {
             return 1.0;
         }
         return 0;
@@ -79,11 +80,10 @@ public class EntrarModoKaraoke extends GoalBDI{
         System.out.println("Meta EntrarModoKaraoke evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        double valor = 0;
         
         //PwA quiere cantar + letraDisponibleCancion
-        if(blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke()) {
-            valor = 1.0;
+        if(blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke() || blvs.getbEstadoInteraccion().isQuiereCantar()) {
+            return 1.0;
         }
         
         return 0;

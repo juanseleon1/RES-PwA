@@ -68,7 +68,6 @@ public class CambiarCancion extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        //cambiar strings y numero
         if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
                 blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
             return 1.0;
@@ -90,7 +89,6 @@ public class CambiarCancion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
         return blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("SADNESS")+blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("ANGER")+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getCancionEscogida().getGusto();
-
 
     }
 

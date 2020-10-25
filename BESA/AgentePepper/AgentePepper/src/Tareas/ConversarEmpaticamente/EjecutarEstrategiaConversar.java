@@ -5,6 +5,8 @@
  */
 package Tareas.ConversarEmpaticamente;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -23,16 +25,19 @@ public class EjecutarEstrategiaConversar extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Execute Task Ejecutar Estrategia Conversar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        estrategia.execStrategy();
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Interrupt Task Ejecutar Estrategia Conversar ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Cancel Task Ejecutar Estrategia Conversar ---");
     }
 }

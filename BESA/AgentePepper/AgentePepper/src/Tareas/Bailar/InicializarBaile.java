@@ -11,6 +11,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class InicializarBaile extends ResPwaTask{
         System.out.println("--- Execute Task Cambiar Baile ---");
         infoServicio.put("RADIO", 0.5);
         infoServicio.put("DISTANCIAMAX", 0.5);
-        ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        requestService(srb);
     }
 
     @Override

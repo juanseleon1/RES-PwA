@@ -9,6 +9,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
@@ -28,12 +29,16 @@ public class SuspenderRobot extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Suspender Robot ---");
+        ServiceDataRequest srb = null;
         //buscar texto
-        infoServicio.put("SAY", "textoDespedir");
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        infoServicio.put("SAYGOODBYE", "textoDespedir");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb);
         infoServicio.clear();
+        
         infoServicio.put("SUSPEND", null);
-        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
+        requestService(srb);
     }
 
     @Override

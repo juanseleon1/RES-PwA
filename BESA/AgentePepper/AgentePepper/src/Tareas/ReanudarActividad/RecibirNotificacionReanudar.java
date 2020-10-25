@@ -9,6 +9,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -28,7 +29,8 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Notificacion Reanudar ---");
         infoServicio.put("WAKEUP", null);
-        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
+        requestService(srb);
     }
 
     @Override
