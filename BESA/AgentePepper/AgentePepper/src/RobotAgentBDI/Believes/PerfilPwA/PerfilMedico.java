@@ -17,7 +17,6 @@ public class PerfilMedico {
     private CausaDemencia causa;
     private HashMap<String,Float> CDR;
     private List<ActividadRutinaria> actividades;
-    private HashMap<String,Emocion> emociones;
 
     public String getNombreCuidador() {
         return nombreCuidador;
@@ -107,11 +106,4 @@ public class PerfilMedico {
         this.actividades = actividades;
     }
 
-    public HashMap<String, Emocion> getEmociones() {
-        return emociones;
-    }
-
-    public void setEmociones(HashMap<String, Emocion> emociones) {
-        this.emociones = emociones;
-    }
 }

@@ -12,7 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
-import RobotAgentBDI.Believes.PerfilPwA.Emocion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.EjecutarEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.SeleccionarEstrategiaConversar;
