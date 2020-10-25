@@ -38,7 +38,7 @@ public class SeleccionarCuento extends ResPwaTask{
         Cuento cuentoEleg = null;
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
+        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getCuenteria()).getCuentos();
         for(Cuento c: cuentos) {
             //escoger cuento
             if(c.getGusto() > gusto){

@@ -26,9 +26,11 @@ public class PepperServiceMapper extends ServiceMapper<String>{
                     String helper[];
                     data = myReader.nextLine();
                     helper= data.split(",");
-                    mapper.replace(helper[0], helper[1]);
+                    if(keyvals.contains(helper[0]))
+                      mapper.replace(helper[0], helper[1]);
                 }
             }
+            System.out.println("ServiceMapperLoaded");
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
     }

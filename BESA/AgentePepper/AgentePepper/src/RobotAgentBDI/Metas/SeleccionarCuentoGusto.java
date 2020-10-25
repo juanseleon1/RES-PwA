@@ -75,7 +75,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //verificar gusto cuento seleccionado > 0.5
-        List <Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
+        List <Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getCuenteria()).getCuentos();
         
         if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MEMORAMA)) {
             return 1.0;

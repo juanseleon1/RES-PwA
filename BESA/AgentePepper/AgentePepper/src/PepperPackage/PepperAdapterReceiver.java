@@ -34,6 +34,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     public PepperAdapterReceiver() throws IOException{
         ready= new AtomicBoolean(true);
         ss=new ServerSocket(revPort);
+        System.out.println("PepperAdptRecvReady");
     }
     
     @Override

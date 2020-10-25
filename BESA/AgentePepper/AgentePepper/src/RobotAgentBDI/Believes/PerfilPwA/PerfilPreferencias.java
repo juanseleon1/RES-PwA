@@ -5,20 +5,16 @@ package RobotAgentBDI.Believes.PerfilPwA;
 import java.util.HashMap;
 
 public class PerfilPreferencias {
-    private HashMap<String,ActividadPepper> actividadesSis;
+    private ActCuenteria cuenteria;
+    private ActMemorama memorama;
+    private ActMusicoterapia musicoterapia;
     private String nombrePreferido;
     private boolean gustoKaraoke;
     private boolean gustoBaile;
     private boolean gustoMusica;
     private boolean volumenPreferido;
 
-    public HashMap<String, ActividadPepper> getActividadesSis() {
-        return actividadesSis;
-    }
 
-    public void setActividadesSis(HashMap<String, ActividadPepper> actividadesSis) {
-        this.actividadesSis = actividadesSis;
-    }
 
     public String getNombrePreferido() {
         return nombrePreferido;
@@ -46,6 +42,42 @@ public class PerfilPreferencias {
 
     public boolean isGustoMusica() {
         return gustoMusica;
+    }
+
+    public boolean isVolumenPreferido() {
+        return volumenPreferido;
+    }
+
+    public void setVolumenPreferido(boolean volumenPreferido) {
+        this.volumenPreferido = volumenPreferido;
+    }
+
+    public void setCuenteria(ActCuenteria cuenteria) {
+        this.cuenteria = cuenteria;
+    }
+
+    public void setMemorama(ActMemorama memorama) {
+        this.memorama = memorama;
+    }
+
+    public void setMusicoterapia(ActMusicoterapia musicoterapia) {
+        this.musicoterapia = musicoterapia;
+    }
+
+    public void setGustoMusica(boolean gustoMusica) {
+        this.gustoMusica = gustoMusica;
+    }
+
+    public ActCuenteria getCuenteria() {
+        return cuenteria;
+    }
+
+    public ActMemorama getMemorama() {
+        return memorama;
+    }
+
+    public ActMusicoterapia getMusicoterapia() {
+        return musicoterapia;
     }
     
 }
