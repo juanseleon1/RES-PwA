@@ -7,6 +7,8 @@ package Tareas.PausarInteraccion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -15,10 +17,12 @@ import java.util.HashMap;
  */
 public class PausarActividad extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public PausarActividad() {
         System.out.println("--- Task Pausar Actividad Iniciada ---");
+        infoServicio.put("SUSPEND", null);
+        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
     }
     
 

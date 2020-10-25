@@ -6,6 +6,8 @@
 package Tareas.PedirAyuda;
 
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -15,7 +17,7 @@ import rational.mapping.Believes;
  */
 public class PeticionAyuda extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public PeticionAyuda() {
         System.out.println("--- Task Peticion Ayuda Iniciada ---");
@@ -26,6 +28,7 @@ public class PeticionAyuda extends ResPwaTask{
         System.out.println("--- Execute Task Peticion Ayuda ---");
         //dar respuesta a petición
         infoServicio.put("SAY", "respuesta");
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
 
     @Override

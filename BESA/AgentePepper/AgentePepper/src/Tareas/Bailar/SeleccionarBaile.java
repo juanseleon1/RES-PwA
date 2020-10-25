@@ -25,10 +25,9 @@ public class SeleccionarBaile extends ResPwaTask{
     
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Seleccionar Baile ---");
         infoServicio.put("GETEMOTIONSTATE", null);
-        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         //buscar baile
         
     }

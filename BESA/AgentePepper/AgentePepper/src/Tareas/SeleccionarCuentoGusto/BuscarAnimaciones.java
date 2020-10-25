@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class BuscarAnimaciones extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public BuscarAnimaciones() {
         System.out.println("--- Task Buscar Animaciones Iniciada ---");
@@ -26,7 +26,7 @@ public class BuscarAnimaciones extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
         //busca animaciones y mensajes - ciclo
-        
+        //SAYWITHMOVEMENT
     }
 
     @Override

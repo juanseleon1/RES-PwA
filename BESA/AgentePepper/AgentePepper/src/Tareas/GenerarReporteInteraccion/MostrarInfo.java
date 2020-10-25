@@ -27,16 +27,15 @@ public class MostrarInfo extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Mostrar Informacion Interaccion ---");
         //buscar info interacciones BD
         
         //buscar texto
         infoServicio.put("SAY", "Texto");
-        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         //buscar url
         infoServicio.put("SHOWIMG", "url");
-        srb.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
     }
 
     @Override

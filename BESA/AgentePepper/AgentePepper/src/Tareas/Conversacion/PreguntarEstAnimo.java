@@ -21,14 +21,13 @@ public class PreguntarEstAnimo extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public PreguntarEstAnimo() {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
         infoServicio.put("GETEMOTIONSTATE", null);
-        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         //buscar texto "¿como estas pepito?"
         infoServicio.clear();
         infoServicio.put("SAY", "Texto");
-        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
     
     @Override

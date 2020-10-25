@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class SolicitarPosicionPwA extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SolicitarPosicionPwA() {
         System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");

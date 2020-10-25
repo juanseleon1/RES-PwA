@@ -28,18 +28,17 @@ public class PreguntarSentimientos extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
         infoServicio.put("GETEMOTIONSTATE", null);
-        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         //buscar texto
         infoServicio.clear();
         infoServicio.put("SAY", "Texto");
-        srb.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         //buscar url
         infoServicio.clear();
         infoServicio.put("SHOWIMG", "url");
-        srb.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
     }
 
     @Override

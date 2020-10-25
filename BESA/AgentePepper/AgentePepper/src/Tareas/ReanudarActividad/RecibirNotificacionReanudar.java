@@ -7,6 +7,8 @@ package Tareas.ReanudarActividad;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -15,7 +17,7 @@ import java.util.HashMap;
  */
 public class RecibirNotificacionReanudar extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public RecibirNotificacionReanudar() {
         System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");
@@ -25,6 +27,8 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Notificacion Reanudar ---");
+        infoServicio.put("WAKEUP", null);
+        ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
     }
 
     @Override

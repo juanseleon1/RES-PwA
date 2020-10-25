@@ -28,12 +28,11 @@ public class EjecutarBaile extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Ejecutar Baile ---");
         //buscar tipo de baile dependiendo de canción
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("RUNANIMATION", blvs.getbEstadoActividad().getCancionActual().getTags());
-        srb.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
     }
 
     @Override

@@ -20,10 +20,9 @@ public class FinalizarBaile extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public FinalizarBaile() {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Task Finalizar Baile Iniciada ---");
         infoServicio.put("STOPANIMATION", null);
-        srb.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
     }
     
 

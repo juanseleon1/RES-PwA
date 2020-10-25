@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class DesplegarFormulario extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public DesplegarFormulario() {
         System.out.println("--- Task Desplegar Formulario Iniciada ---");

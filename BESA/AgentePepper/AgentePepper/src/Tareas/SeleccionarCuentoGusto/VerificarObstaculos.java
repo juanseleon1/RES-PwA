@@ -7,6 +7,9 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.LocationServices.LocationService;
+import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +19,7 @@ import java.util.List;
  */
 public class VerificarObstaculos extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public VerificarObstaculos() {
         System.out.println("--- Task Verificar Obstaculos Iniciada ---");
@@ -26,11 +29,9 @@ public class VerificarObstaculos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Verificar Obstaculos ---");
-        List<Double> parametros = null ; //1. radio, 2.restriccion desplazamiento (distancia max)
-        parametros.add(0.5);
-        parametros.add(0.5);
-        infoServicio.put("SEARCHFREEZONE", parametros);
-        
+        infoServicio.put("RADIO", 0.5);
+        infoServicio.put("DISTANCIAMAX", 0.5);
+        ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
         
     }
 

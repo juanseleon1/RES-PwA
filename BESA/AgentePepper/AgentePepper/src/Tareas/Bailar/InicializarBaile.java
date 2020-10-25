@@ -30,13 +30,10 @@ public class InicializarBaile extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Cambiar Baile ---");
-        List<Double> parametros = null ; //1. radio, 2.restriccion desplazamiento (distancia max)
-        parametros.add(0.5);
-        parametros.add(0.5);
-        infoServicio.put("SEARCHFREEZONE", parametros);
-        srb.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        infoServicio.put("RADIO", 0.5);
+        infoServicio.put("DISTANCIAMAX", 0.5);
+        ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
     }
 
     @Override

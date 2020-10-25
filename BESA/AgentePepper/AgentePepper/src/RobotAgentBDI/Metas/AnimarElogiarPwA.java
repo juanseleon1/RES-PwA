@@ -66,7 +66,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //alto numero de errores, tiene aciertos, cierto tiempo activo
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)) {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         

@@ -28,17 +28,18 @@ public class DetectarPwA extends ResPwaTask{
     
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
+
         System.out.println("--- Execute Task Detectar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("DETECTNEWFACE", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
-        srb.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
+        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
         //¿si ya existe?
         infoServicio.put("GETFACELIST", null);
-        srb.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
+        ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
         
+        infoServicio.clear();
         infoServicio.put("LOGIN", null);
-        srb.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
+        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
     }
 
     @Override

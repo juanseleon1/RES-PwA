@@ -7,6 +7,8 @@ package Tareas.SeleccionarCuentoGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -15,7 +17,7 @@ import java.util.HashMap;
  */
 public class MoverseFrentePwA extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public MoverseFrentePwA() {
         System.out.println("--- Task Moverse Frente PwA Iniciada ---");
@@ -25,8 +27,9 @@ public class MoverseFrentePwA extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Moverse Frente PwA ---");
-        //no se los parametros jiji
+        //no se los parametros jiji, creo que es más desde naoqi
         infoServicio.put("MOVETO", null);
+        ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         
         
     }

@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class RevisarPerfil extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public RevisarPerfil() {
         System.out.println("--- Task Revisar Perfil Iniciada ---");

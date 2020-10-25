@@ -28,10 +28,9 @@ public class SeleccionarCancion extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Seleccionar Cancion ---");
         infoServicio.put("obtenerEstadoEmocional", null);
-        srb.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         //buscar cancion BD
         
     }

@@ -26,11 +26,10 @@ public class ReproducirCancion extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        ServiceRequestBuilder srb = null;
         System.out.println("--- Execute Task Reproducir Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("PLAYSOUND", blvs.getbEstadoActividad().getCancionActual().getLinkVideo());
-        srb.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
     }
 
     @Override

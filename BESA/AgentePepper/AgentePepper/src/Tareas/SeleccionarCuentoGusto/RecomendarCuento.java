@@ -9,6 +9,8 @@ import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import java.util.List;
 import rational.mapping.Believes;
@@ -19,7 +21,7 @@ import rational.mapping.Believes;
  */
 public class RecomendarCuento extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public RecomendarCuento() {
         System.out.println("--- Task Recomendar Cuento Iniciada ---");
@@ -34,7 +36,8 @@ public class RecomendarCuento extends ResPwaTask{
         for(Cuento c: cuentos) {
             //escoger cuento
         }
-        infoServicio.put("SAY", null);
+        infoServicio.put("SAY", "textoCuentoElegido");
+        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
 
     @Override

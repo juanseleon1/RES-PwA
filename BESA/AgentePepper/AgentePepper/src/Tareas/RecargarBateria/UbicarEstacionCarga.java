@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class UbicarEstacionCarga extends ResPwaTask{
     
-    private HashMap<String,Object> infoServicio;
+    private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public UbicarEstacionCarga() {
         System.out.println("--- Task Ubicar Estacion Carga Iniciada ---");

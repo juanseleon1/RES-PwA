@@ -12,7 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.PausarInteraccion.PausarActividad;
-import Tareas.PausarInteraccion.SuspenderMetas;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -30,14 +29,12 @@ public class PausarInteraccion extends GoalBDI{
     public static PausarInteraccion buildGoal() {
 
         PausarActividad pausarActividad = new PausarActividad();
-        SuspenderMetas suspenderMetas = new SuspenderMetas();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(pausarActividad);
-        rolePlan.addTask(suspenderMetas);
 
         RationalRole PaIntRole = new RationalRole(descrip, rolePlan);
         PausarInteraccion b= new PausarInteraccion(InitRESPwA.getPlanID(), PaIntRole, descrip, GoalBDITypes.DUTY);
