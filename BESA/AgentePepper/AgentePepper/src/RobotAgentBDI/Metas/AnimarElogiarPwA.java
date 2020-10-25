@@ -14,6 +14,8 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Init.InitRESPwA;
 import Tareas.AnimarElogiarPwA.SeleccionarEstrategiaAnimar;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -65,8 +67,10 @@ public class AnimarElogiarPwA extends GoalBDI{
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
+        Timestamp ts = Timestamp.valueOf(LocalDateTime.now());  
+        long time = ts.getTime() - blvs.getbEstadoActividad().getInicioActividad();
         //alto numero de errores, tiene aciertos, cierto tiempo activo
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || !blvs.getbEstadoActividad().isFinalizoActividad()) {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && !blvs.getbEstadoActividad().isFinalizoActividad() && time > 15) {
             return 1.0;
         }
         
