@@ -19,7 +19,7 @@ import SensorHandlerAgent.SensorData;
  */
 public abstract class  ResPwaAdapterReceiver<T>{
     
-    protected abstract SensorData byteToSensorData(T buf);
+    protected abstract SensorData toSensorData(T buf);
     
     protected void updateBlvs(SensorData sd) throws ExceptionBESA {
         AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasSHAAgent);

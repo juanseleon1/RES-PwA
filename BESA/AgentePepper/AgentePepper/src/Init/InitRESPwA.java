@@ -1,10 +1,11 @@
 package Init;
 
-import Adapter.PepperAdapter.PepperSendable;
+import PepperPackage.PepperSendable;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
+import PepperPackage.PepperEAStrategy;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.AnimarElogiarPwA;
 import RobotAgentBDI.Metas.Bailar;
@@ -65,7 +66,7 @@ public class InitRESPwA {
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals());
-            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent);
+            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy());
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
             RobotSPAgent SPA= new RobotSPAgent(aliasSPAgent);
             startAllAgents(RABDI,EAA,SHA,SPA);

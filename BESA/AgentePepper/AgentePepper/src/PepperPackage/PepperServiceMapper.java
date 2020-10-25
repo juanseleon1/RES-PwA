@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Adapter.PepperAdapter;
+package PepperPackage;
 
 import Adapter.ServiceMapper;
-import ServiceAgentResPwA.ServiceRequestType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

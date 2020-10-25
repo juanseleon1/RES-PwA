@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Adapter.PepperAdapter;
+package PepperPackage;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;

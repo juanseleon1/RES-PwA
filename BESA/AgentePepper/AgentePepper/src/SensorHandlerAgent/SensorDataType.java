@@ -10,5 +10,24 @@ package SensorHandlerAgent;
  * @author juans
  */
 public enum SensorDataType {
-    ACTIVITY,EMOTIONS,INTERACTION,ROBOT,PROFILE
+    ACTIVITY("act"),EMOTIONS("emo"),INTERACTION("int"),ROBOT("rob"),PROFILE("prof");
+    private final String identif;
+    private SensorDataType(String i)
+    {
+        identif=i;
+    }
+    
+    public static SensorDataType getFromId(String ident)
+    {
+        SensorDataType ret=null;
+        for (SensorDataType sdt : values()) {
+            if(sdt.identif.equals(ident))
+            {
+                ret=sdt;
+                break;
+            }
+        }
+        return ret;
+    }
+    
 }

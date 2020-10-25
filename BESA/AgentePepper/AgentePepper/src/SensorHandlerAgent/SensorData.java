@@ -5,7 +5,7 @@
  */
 package SensorHandlerAgent;
 
-import java.util.HashMap;
+import java.util.Map;
 import rational.data.InfoData;
 
 /**
@@ -15,12 +15,13 @@ import rational.data.InfoData;
 public class SensorData extends InfoData{
     
     private SensorDataType dataType;
-    private byte[] infoReceived=null;
-    private HashMap<String, Object> dataP=null;
-    private HashMap<String, Object> dataPE=null;
+    private String infoReceived=null;
+    private Map<String, Object> dataP=null;
+    private Map<String, Object> dataPE=null;
+    private int ack;
 
-    public SensorData(String message) {
-        super(message);
+    public SensorData() {
+        super(null);
     }
 
     public SensorDataType getDataType() {
@@ -31,34 +32,43 @@ public class SensorData extends InfoData{
         this.dataType = dataType;
     }
 
-    public byte[] getInfoReceived() {
-        return infoReceived;
-    }
-
-    public void setInfoReceived(byte[] infoReceived) {
-        this.infoReceived = infoReceived;
-    }
-
-    public HashMap<String, Object> getDataP() {
+    public Map<String, Object> getDataP() {
         return dataP;
     }
 
-    public void setDataP(HashMap<String, Object> dataP) {
+    public void setDataP(Map<String, Object> dataP) {
         this.dataP = dataP;
     }
 
-    public HashMap<String, Object> getDataPE() {
+    public Map<String, Object> getDataPE() {
         return dataPE;
     }
 
-    public void setDataPE(HashMap<String, Object> dataPE) {
+    public void setDataPE(Map<String, Object> dataPE) {
         this.dataPE = dataPE;
+    }
+
+    public String getInfoReceived() {
+        return infoReceived;
+    }
+
+    public void setInfoReceived(String infoReceived) {
+        this.infoReceived = infoReceived;
+    }
+
+    public int getAck() {
+        return ack;
+    }
+
+    public void setAck(int ack) {
+        this.ack = ack;
     }
 
     @Override
     public String toString() {
-        return "SensorData{" + "dataType=" + dataType + ", infoReceived=" + infoReceived + ", dataP=" + dataP + ", dataPE=" + dataPE + '}';
+        return "SensorData{" + "dataType=" + dataType + ", infoReceived=" + infoReceived + ", dataP=" + dataP + ", dataPE=" + dataPE + ", ack=" + ack + '}';
     }
-    
+
+
     
 }

@@ -12,7 +12,10 @@ import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.ProcessEmotionGuard;
 import Init.InitRESPwA;
-import java.util.HashMap;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.guards.InformationFlowGuard;
@@ -52,9 +55,15 @@ public class GetInfoGuard extends GuardBESA{
         
     }
 
-    private HashMap<String, Object> processData(SensorData infoRecibida) {
-        System.out.println("GetInfoGuard procesarDatos exec: "+infoRecibida);
-        return null;
+    private Map<String, Object> processData(SensorData infoRecibida) {
+        Map<String, Object> map=null;
+        try {
+            System.out.println("GetInfoGuard procesarDatos exec: "+infoRecibida);
+            map= new ObjectMapper().readValue("{"+infoRecibida.getInfoReceived()+"}", new TypeReference<Map<String,Object>>(){});
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(GetInfoGuard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return map;
     }
     
 }
