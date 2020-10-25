@@ -12,5 +12,17 @@ import BESA.Kernel.Agent.StateBESA;
  * @author juans
  */
 public class EmotionalAnalyzerState extends StateBESA{
+    private EmotionalAnalyzerStrategy eaStrategy;
+
+    public EmotionalAnalyzerState(EmotionalAnalyzerStrategy eas){
+        
+    }
+    public EmotionalAnalyzerStrategy getEaStrategy() {
+        return eaStrategy;
+    }
+
+    public void setEaStrategy(EmotionalAnalyzerStrategy eaStrategy) {
+        this.eaStrategy = eaStrategy;
+    }
     
 }

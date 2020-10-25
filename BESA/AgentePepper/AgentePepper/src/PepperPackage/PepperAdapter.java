@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Adapter.PepperAdapter;
+package PepperPackage;
 
 import Adapter.ResPwaAdapter;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
@@ -100,7 +100,7 @@ public class PepperAdapter extends ResPwaAdapter{
         try {
             String JSON=convertServiceRequest(data);
             try (Socket s = new Socket(IP, robotPort); DataOutputStream oos = new DataOutputStream (s.getOutputStream())) {
-                System.out.println("Enviando solicitud al Robot");
+                System.out.println("Enviando solicitud al Robot: \n"+JSON);
                 oos.writeUTF(JSON+"\n\r");
                 oos.flush();
             }
@@ -113,7 +113,7 @@ public class PepperAdapter extends ResPwaAdapter{
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
        String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
-       PepperSendable s= new PepperSendable(sendNewSendable(),proxyMethod[0],proxyMethod[1],data.getParams());
+       PepperSendable s= new PepperSendable(sendNewSendable(),proxyMethod[0].trim(),proxyMethod[1].trim(),data.getParams());
        return new ObjectMapper().writeValueAsString(s);
    }
 }

@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA;
 
-import Adapter.PepperAdapter.PepperAdapter;
+import PepperPackage.PepperAdapter;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderAgentExceptionBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.ServiceProviderBESA;
