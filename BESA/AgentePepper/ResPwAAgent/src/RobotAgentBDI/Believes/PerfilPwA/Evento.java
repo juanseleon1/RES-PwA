@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Evento {
     private String nombre;
-    private List<Imagen> imagenes;
     private List<String> tags;
     private Date fecha;
     private float gusto;
@@ -18,14 +17,6 @@ public class Evento {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public List<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(List<Imagen> imagenes) {
-        this.imagenes = imagenes;
     }
 
     public List<String> getTags() {

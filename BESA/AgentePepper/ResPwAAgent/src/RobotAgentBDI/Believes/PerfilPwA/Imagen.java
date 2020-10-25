@@ -11,7 +11,6 @@ public class Imagen {
     private List<String> tags;
     private Date fecha;
     private float gusto;
-    private List<Familiar> relacionados;
 
     public void setTags(List<String> tags) {
         this.tags = tags;
@@ -25,7 +24,18 @@ public class Imagen {
         this.gusto = gusto;
     }
 
-    public void setRelacionados(List<Familiar> relacionados) {
-        this.relacionados = relacionados;
+    public List<String> getTags() {
+        return tags;
     }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public float getGusto() {
+        return gusto;
+    }
+    
+    
+
 }

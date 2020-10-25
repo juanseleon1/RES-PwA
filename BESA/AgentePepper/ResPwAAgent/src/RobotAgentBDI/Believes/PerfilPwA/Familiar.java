@@ -10,7 +10,6 @@ public class Familiar {
     private String parentesco;
     private Date nacimiento;
     private float interes;
-    private List<Imagen> relacionadas;
 
     public String getNombre() {
         return nombre;
@@ -44,11 +43,4 @@ public class Familiar {
         this.interes = interes;
     }
 
-    public List<Imagen> getRelacionadas() {
-        return relacionadas;
-    }
-
-    public void setRelacionadas(List<Imagen> relacionadas) {
-        this.relacionadas = relacionadas;
-    }
 }

@@ -1,9 +1,5 @@
 package RobotAgentBDI.Believes.PerfilPwA;
 
-
-
-import java.util.HashMap;
-
 public class PerfilPreferencias {
     private ActCuenteria cuenteria;
     private ActMemorama memorama;

@@ -7,6 +7,7 @@ import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.PepperEAStrategy;
+import ResPwaUtils.YTUtis;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.AnimarElogiarPwA;
 import RobotAgentBDI.Metas.Bailar;
@@ -96,7 +97,6 @@ public class InitRESPwA {
         Conversacion conversacionGoal = Conversacion.buildGoal();
         ConversarEmpaticamente conversarEmpaticamenteGoal=  ConversarEmpaticamente.buildGoal();
         EntrarModoKaraoke entrarModoKaraokeGoal=  EntrarModoKaraoke.buildGoal();
-
         GenerarReporteInteraccion generarReporteInteraccionGoal=  GenerarReporteInteraccion.buildGoal();
         LogIn logInGoal = LogIn.buildGoal();
         MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();

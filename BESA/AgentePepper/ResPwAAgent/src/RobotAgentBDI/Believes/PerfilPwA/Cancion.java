@@ -4,12 +4,10 @@ import java.util.List;
 
 
 
-public class Cancion {
+public class Cancion{
     private String nombre;
     private float gusto;
     private float duracion;
-    private String linkVideo;
-    private Evento eventoRel;
     private List<String> tags;
 
     public String getNombre() {
@@ -34,22 +32,6 @@ public class Cancion {
 
     public void setDuracion(float duracion) {
         this.duracion = duracion;
-    }
-
-    public String getLinkVideo() {
-        return linkVideo;
-    }
-
-    public void setLinkVideo(String linkVideo) {
-        this.linkVideo = linkVideo;
-    }
-
-    public Evento getEventoRel() {
-        return eventoRel;
-    }
-
-    public void setEventoRel(Evento eventoRel) {
-        this.eventoRel = eventoRel;
     }
 
     public List<String> getTags() {

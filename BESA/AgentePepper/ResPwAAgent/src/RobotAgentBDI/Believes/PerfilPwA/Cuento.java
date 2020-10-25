@@ -8,7 +8,6 @@ public class Cuento {
     private String autor;
     private String genero;
     private float gusto;
-    private List<Imagen> imagenes;
 
     public String getAutor() {
         return autor;
@@ -34,11 +33,4 @@ public class Cuento {
         this.gusto = gusto;
     }
 
-    public List<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(List<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
 }

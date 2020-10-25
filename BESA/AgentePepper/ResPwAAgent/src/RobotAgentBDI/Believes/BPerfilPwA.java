@@ -4,7 +4,6 @@ import RobotAgentBDI.Believes.PerfilPwA.EstadoCivil;
 import RobotAgentBDI.Believes.PerfilPwA.PerfilPreferencias;
 import RobotAgentBDI.Believes.PerfilPwA.Familiar;
 import RobotAgentBDI.Believes.PerfilPwA.PerfilMedico;
-import RobotAgentBDI.Believes.PerfilPwA.Imagen;
 import RobotAgentBDI.Believes.PerfilPwA.NivelEducativo;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +19,10 @@ public class BPerfilPwA implements Believes{
     private EstadoCivil estadoCivil;
     private NivelEducativo nivelEd;
     private String profesion;
-    private List<Imagen> fotosFamiliares;
     private PerfilPreferencias preferencias;
     private PerfilMedico medico;
     private List<Familiar> familiares;
+    private String cedula;
 
 
     public String getNombre() {
@@ -90,14 +89,6 @@ public class BPerfilPwA implements Believes{
         this.profesion = profesion;
     }
 
-    public List<Imagen> getFotosFamiliares() {
-        return fotosFamiliares;
-    }
-
-    public void setFotosFamiliares(List<Imagen> fotosFamiliares) {
-        this.fotosFamiliares = fotosFamiliares;
-    }
-
     public PerfilPreferencias getPreferencias() {
         return preferencias;
     }
@@ -135,6 +126,14 @@ public class BPerfilPwA implements Believes{
 
     public void getFromDB() {
         System.out.println("getFromDB Received ");
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
 

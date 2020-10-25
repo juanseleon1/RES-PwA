@@ -5,7 +5,13 @@
  */
 package RobotAgentBDI.Believes;
 
+import ResPwaUtils.FBaseUtils;
+import RobotAgentBDI.Believes.PerfilPwA.Imagen;
 import SensorHandlerAgent.SensorData;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -19,10 +25,15 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
-
+    private Map<String,List<String>> imgCuentos;
+    private List<Imagen> imgsPerfil;
+   
     public RobotAgentBelieves()
     {
+     imgCuentos=new HashMap<>();
      getPerfilBD();
+     FBaseUtils.initResPwa(this);
+     imgsPerfil=new ArrayList<>();
     }    
 
     
@@ -103,6 +114,22 @@ public class RobotAgentBelieves implements Believes{
 
     public void setbEstadoRobot(BEstadoRobot bEstadoRobot) {
         this.bEstadoRobot = bEstadoRobot;
+    }
+
+    public Map<String,List<String>> getImgCuentos() {
+        return imgCuentos;
+    }
+
+    public void setImgCuentos(Map<String,List<String>> imgCuentos) {
+        this.imgCuentos = imgCuentos;
+    }
+
+    public List<Imagen> getImgsPerfil() {
+        return imgsPerfil;
+    }
+
+    public void setImgsPerfil(List<Imagen> imgsPerfil) {
+        this.imgsPerfil = imgsPerfil;
     }
     
     
