@@ -14,10 +14,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.EjecutarBaile;
 import Tareas.Bailar.FinalizarBaile;
-import Tareas.CambiarCancion.RecibirRetroalimentacion;
 import Tareas.Bailar.SeleccionarBaile;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -69,15 +66,13 @@ public class Bailar extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar detectGoal");
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
         //completar
-        if (true||blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getGusto() > 5 &&
+        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getGusto() > 5 &&
                blvs.getbPerfilPwA().getPreferencias().isGustoBaile() && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getEnriquecimiento() > 2) {
             return 1.0;
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -93,11 +88,11 @@ public class Bailar extends GoalBDI{
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
-        if(true ||blvs.getbPerfilPwA().getPreferencias().isGustoBaile()) {
+        if(blvs.getbPerfilPwA().getPreferencias().isGustoBaile()) {
             return 1.0;
         }
         
-        return 1;
+        return 0;
     }
 
     @Override
