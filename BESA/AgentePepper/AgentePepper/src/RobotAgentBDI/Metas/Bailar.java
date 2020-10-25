@@ -73,8 +73,8 @@ public class Bailar extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //completar
-        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia").getGusto() > 5 &&
-               blvs.getbPerfilPwA().getPreferencias().isGustoBaile() && blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActMusicoterapia").getEnriquecimiento() > 2) {
+        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getGusto() > 5 &&
+               blvs.getbPerfilPwA().getPreferencias().isGustoBaile() && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getEnriquecimiento() > 2) {
             return 1.0;
         }
         return 0;

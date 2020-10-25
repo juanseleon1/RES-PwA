@@ -12,12 +12,10 @@ import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
-import ServiceAgentResPwA.ServiceRequestType;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,39 +27,40 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class ServiceMapper<M> {
     protected Map<String,M> mapper;
+    protected List<String> keyvals;
     protected ServiceMapper(){
         initServiceMapper();
         uploadServiceRelation();
     }
     private void initServiceMapper(){
         mapper= new ConcurrentHashMap<>();
-        List<String> listEnum= new ArrayList<>();
+        keyvals= new ArrayList<>();
         Arrays.asList(ActivityServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(AutonomyServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(EnergyServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(HumanServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(LocationServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(MovementServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(RobotStateServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(TabletServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
         Arrays.asList(VoiceServiceRequestType.values()).stream().forEach((e)->{
-                mapper.put(e.getServiceType(), null);
+                keyvals.add(e.getServiceType());
         });
 
     }

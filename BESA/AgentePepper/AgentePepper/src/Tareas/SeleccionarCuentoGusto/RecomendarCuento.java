@@ -32,7 +32,7 @@ public class RecomendarCuento extends ResPwaTask{
         System.out.println("--- Execute Task Recomendar Cuento ---");
         //buscar cuento
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getActividadesSis().get("ActCuenteria")).getCuentos();
+        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getCuenteria()).getCuentos();
         for(Cuento c: cuentos) {
             //escoger cuento
         }

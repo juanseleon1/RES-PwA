@@ -30,6 +30,7 @@ public class PepperAdapter extends ResPwaAdapter{
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         recvThread.start();
         this.rpa=null;
+        System.out.println("PepperAdapterCreated");
 
     }
     
