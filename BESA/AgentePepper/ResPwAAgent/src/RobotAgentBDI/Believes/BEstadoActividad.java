@@ -9,6 +9,8 @@ import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -77,7 +79,9 @@ public class BEstadoActividad implements Believes{
     }
 
     public long calcTiempoActividad() {
-        return System.currentTimeMillis()-inicioActividad;
+        Timestamp ts = Timestamp.valueOf(LocalDateTime.now());  
+        long time = (ts.getTime() - inicioActividad)/1000;
+        return time;
     }
 
     public void setCancionActual(Cancion cancionActual) {

@@ -88,9 +88,9 @@ public class CambiarCancion extends GoalBDI{
         System.out.println("Meta CambiarCancion evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        
-        //valenciaIra + valenciaTriste
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCancionEscogida().getGusto();
+
+        return blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("SADNESS")+blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("ANGER")+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getCancionEscogida().getGusto();
+
 
     }
 

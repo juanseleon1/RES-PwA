@@ -66,11 +66,9 @@ public class AnimarElogiarPwA extends GoalBDI{
         
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        Timestamp ts = Timestamp.valueOf(LocalDateTime.now());  
-        long time = ts.getTime() - blvs.getbEstadoActividad().getInicioActividad();
+       
         //alto numero de errores, tiene aciertos, cierto tiempo activo
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && !blvs.getbEstadoActividad().isFinalizoActividad() && time > 15) {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && !blvs.getbEstadoActividad().isFinalizoActividad() && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
             return 1.0;
         }
         
@@ -86,6 +84,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA evaluateContribution");
+        
         return 0;
     }
 
