@@ -21,11 +21,11 @@ public class Cancion{
     public float getGusto() {
         return gusto;
     }
-
+    
     public void setGusto(float gusto) {
         this.gusto = gusto;
     }
-
+    
     public float getDuracion() {
         return duracion;
     }

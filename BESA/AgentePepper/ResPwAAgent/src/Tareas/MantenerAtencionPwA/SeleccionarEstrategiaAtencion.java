@@ -32,6 +32,13 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
         infoServicio.put("GETEMOTIONSTATE", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
+        
+        //complejidad actividad es baja -> mayor tiempo de interacción 
+        //cambiar actividad, preguntar si desea cambiarla a una de sus favoritas
+        //preguntar si desea cambiar cancion/cuento/dificultad
+        //"Me siento solo" "no me dejes"
+        //adivinanzas, dato curioso
+        //si se va, irlo a buscar
     }
 
     @Override

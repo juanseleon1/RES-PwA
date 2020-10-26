@@ -25,6 +25,10 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Conversar ---");
+        //preguntar sobre sus sentimientos, le cuente un poco sobre como se siente, escucha activa
+        //Actuar como su amigo "Te entiendo" "¿Te gustaria hablar de eso?" "Te puedo ayudar" "Hablame un poco más"
+        //Dar consejos, solucion
+        //"Todo estará bien" Poner mano en el hombro, cosas así
     }
 
     @Override

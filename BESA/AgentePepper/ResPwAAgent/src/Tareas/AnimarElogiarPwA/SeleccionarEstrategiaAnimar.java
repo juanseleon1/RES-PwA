@@ -34,6 +34,9 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
         
+        //animar con frases elogiantes, chistes, 
+        //para caso memorama, tener en cuenta tiempo en un mismo problema
+        
         //blvs.getbEstadoActividad().setEstrategia(ResPwAStrategy);
     }
 

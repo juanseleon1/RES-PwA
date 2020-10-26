@@ -24,10 +24,5 @@ public class ActMusicoterapia extends ActividadPepper  {
     public void setCanciones(List<Cancion> canciones) {
         this.canciones = canciones;
     }
-    
-    //implementar
-    public Cancion getCancionEscogida() {
-        return null;
-    }
      
 }

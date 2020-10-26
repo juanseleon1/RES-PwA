@@ -30,10 +30,10 @@ public class RobotAgentBelieves implements Believes{
    
     public RobotAgentBelieves()
     {
-     imgCuentos=new HashMap<>();
-     getPerfilBD();
-     FBaseUtils.initResPwa(this);
-     imgsPerfil=new ArrayList<>();
+        imgCuentos=new HashMap<>();
+        getPerfilBD();
+        FBaseUtils.initResPwa(this);
+        imgsPerfil=new ArrayList<>();
     }    
 
     
@@ -132,7 +132,17 @@ public class RobotAgentBelieves implements Believes{
         this.imgsPerfil = imgsPerfil;
     }
     
-    
+    public List<Imagen> getImagexTag(String tag) {
+        List<Imagen> imagenes = new ArrayList<>();
         
-       
+        for (Imagen i : imgsPerfil) {
+            for (String t : i.getTags()) {
+                if (t.equalsIgnoreCase(tag)) {
+                    imagenes.add(i);
+                }
+            }
+        }
+        return imagenes;
+    }
+        
 }
