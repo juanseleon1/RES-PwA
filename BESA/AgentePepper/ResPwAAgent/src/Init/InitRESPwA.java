@@ -1,13 +1,14 @@
 package Init;
 
-import PepperPackage.PepperSendable;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.PepperEAStrategy;
-import ResPwaUtils.YTUtils;
+import RobotAgentBDI.Believes.PerfilPwA.Cuidador;
+import RobotAgentBDI.Believes.PerfilPwA.Perfilpwa;
+import RobotAgentBDI.Believes.PerfilPwA.handlers.CuidadorJpaController;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.AnimarElogiarPwA;
 import RobotAgentBDI.Metas.Bailar;
@@ -28,13 +29,12 @@ import RobotAgentBDI.Metas.ReiniciarActividad;
 import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -61,13 +61,15 @@ public class InitRESPwA {
     public static String aliasEAAgent= "EAAgent";
     public static String aliasSHAAgent= "SHAAgent";
     public static String aliasSPAgent= "SPAgent";
+    public static String emf= "ResPwAAgentPU";
     private static int PLANID = 0;
     
     public static void main(String[] args) {
        try {
+            String cedula=obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
-            RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals());
+            RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
             EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy());
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
             RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, new PepperAdapter());
@@ -80,7 +82,39 @@ public class InitRESPwA {
         }
   
     }
-    
+    private static String obtenerUsuario (){
+        String cedula = null,user=null,pwd=null;
+        boolean login=false;
+        Scanner scan= new Scanner(System.in);
+        Cuidador c=null;
+        CuidadorJpaController cjc= new CuidadorJpaController(Persistence.createEntityManagerFactory(emf));
+        do{
+            System.out.println("Ingrese su nombre de usuario: ");
+            user=scan.nextLine();
+            System.out.println("Ingrese su contrasena: ");
+            pwd= scan.nextLine();
+            c=cjc.findCuidador(user);
+            if(c==null)
+            {
+                System.out.println("Usuario Inexistente");
+            }else{
+               login= c.getContraseña().equals(pwd);
+               if(!login)
+               {
+                   System.out.println("Contrasena no coincide");
+               }
+            }
+            
+        }while(!login);
+        List<Perfilpwa> pwalist = c.getPerfilpwaList();
+
+        for (int i=0; i<pwalist.size();i++) {
+             System.out.println(i+" Paciente: "+pwalist.get(i).getCedula());
+        }
+        System.out.println("Ingrese el numero del paciente que utilizara ResPwa");
+        int selec= scan.nextInt();
+        return pwalist.get(selec).getCedula();
+    }
     public static int getPlanID(){
         return ++PLANID;
     }

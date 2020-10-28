@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -28,10 +30,10 @@ public class RobotAgentBelieves implements Believes{
     private Map<String,List<String>> imgCuentos;
     private List<Imagen> imgsPerfil;
    
-    public RobotAgentBelieves()
+    public RobotAgentBelieves(String cedula)
     {
         imgCuentos=new HashMap<>();
-        getPerfilBD();
+        getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
         imgsPerfil=new ArrayList<>();
     }    
@@ -67,13 +69,17 @@ public class RobotAgentBelieves implements Believes{
     }
     
     private void actualizarPerfilEnDB() {
-        //conectarConBD
-        bPerfilPwA.updateToDB();
+        try {
+            //conectarConBD
+            bPerfilPwA.updateToDB();
+        } catch (Exception ex) {
+            Logger.getLogger(RobotAgentBelieves.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-        private void getPerfilBD() {
+        private void getPerfilBD(String cedula) {
         //conectarConBD
-        bPerfilPwA.getFromDB();
+        bPerfilPwA.getFromDB(cedula);
     }
 
     public BEstadoInteraccion getbEstadoInteraccion() {
