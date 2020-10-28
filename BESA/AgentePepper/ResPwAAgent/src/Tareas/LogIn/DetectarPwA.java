@@ -45,6 +45,7 @@ public class DetectarPwA extends ResPwaTask{
         toca recibir el id*/
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        //hay que cambiar este parametro
         infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
         requestService(srb);

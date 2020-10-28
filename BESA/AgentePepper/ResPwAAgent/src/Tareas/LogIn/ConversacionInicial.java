@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.Conversacion;
+package Tareas.LogIn;
 
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -17,11 +17,11 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class PreguntarEstAnimo extends ResPwaTask{
+public class ConversacionInicial extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
-    public PreguntarEstAnimo() {
+    public ConversacionInicial() {
         System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
     }
     
@@ -35,7 +35,7 @@ public class PreguntarEstAnimo extends ResPwaTask{
         infoServicio.clear();
         
         //buscar texto "¿como estas pepito?"
-        infoServicio.put("SAY", "Texto");
+        infoServicio.put("SAY", "TextoEmociones");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }
@@ -51,3 +51,4 @@ public class PreguntarEstAnimo extends ResPwaTask{
     }
     
 }
+

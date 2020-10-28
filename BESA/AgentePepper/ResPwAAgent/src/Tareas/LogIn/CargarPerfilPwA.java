@@ -26,7 +26,7 @@ public class CargarPerfilPwA extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cargar Perfil PwA ---");
         
-        //buscar BD perfil
+        //buscar BD perfil a partir de cedula
     }
 
     @Override

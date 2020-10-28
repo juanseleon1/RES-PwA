@@ -63,7 +63,7 @@ public class ActivarKaraoke extends GoalBDI{
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
         //List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCanciones(); -> si tiene letra solo se puede con el API
         if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbEstadoActividad().calcTiempoActividad() > 30 && 
-                (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando()) {
+                (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando() && !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         return 0;

@@ -81,7 +81,7 @@ public class Bailar extends GoalBDI{
             }
         }
         if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
-               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && enriq > 2 ) {
+               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && enriq > 2) {
             return 1.0;
         }
         return 0;
@@ -100,7 +100,7 @@ public class Bailar extends GoalBDI{
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
-        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5) {
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         

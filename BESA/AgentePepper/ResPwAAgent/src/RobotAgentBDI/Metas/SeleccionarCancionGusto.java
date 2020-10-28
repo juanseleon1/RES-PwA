@@ -70,7 +70,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
-                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5) {
+                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5 && blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         

@@ -14,6 +14,8 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,6 +35,11 @@ public class SeleccionarCuento extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Cuento ---");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
+        blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
+        
         infoServicio.put("GETEMOTIONSTATE", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
@@ -40,7 +47,6 @@ public class SeleccionarCuento extends ResPwaTask{
         //escoge el cuento
         float gusto = -1;
         Cuento cuentoEleg = null;
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
         for(Cuento c: cuentos) {
             //escoger cuento

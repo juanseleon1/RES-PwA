@@ -13,6 +13,7 @@ import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.LogIn.CargarPerfilPwA;
+import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
 import Tareas.LogIn.Saludar;
@@ -38,6 +39,7 @@ public class LogIn extends GoalBDI{
         CargarPerfilPwA cargarPerfil = new CargarPerfilPwA();
         IniciarServicios iniciarServicios = new IniciarServicios();
         Saludar saludar = new Saludar();
+        ConversacionInicial conversacion = new ConversacionInicial();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
@@ -47,6 +49,7 @@ public class LogIn extends GoalBDI{
         rolePlan.addTask(cargarPerfil);
         rolePlan.addTask(iniciarServicios);
         rolePlan.addTask(saludar);
+        rolePlan.addTask(conversacion);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
         LogIn b= new LogIn(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
