@@ -66,16 +66,15 @@ def BEstadoEmocionalPwA(info_human_state):
 
 def getEmotionalReaction():
     #Returns:	The detected reaction.
-    return mood.getEmotionalReaction()
+    return alMood.getEmotionalReaction()
 
 def getAttention():
     #“unengaged”: attentionLevel < 0.6
     #“semiEngaged” : 0.6 <= attentionLevel < 0.9
     #“fullyEngaged”: attentionLevel >= 0.9
-    return mood.attention()
+    return alMood.attention()
     
 # Choregraphe bezier export in Python.
-from naoqi import ALProxy
 def dance_macarena():
     names = list()
     times = list()
@@ -151,17 +150,26 @@ def dance_macarena():
 
 
 
-def dance(dance_names, dance_times, dance_keys):
+def run_animation(animation_names, animation_times, animation_keys):
     try:
       # uncomment the following line and modify the IP if you use this script outside Choregraphe.
       # motion = ALProxy("ALMotion", IP, 9559)
-      motion = ALProxy("ALMotion")
-      motion.angleInterpolationBezier(names, times, keys)
+      alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
     except BaseException, err:
       print err
       
+def run_animation( animation_path, animation_tag):
+    alAnimationPlayer.runTag(animation_path, animation_tag)
+
+def go_to_posture( posture, speed):
+    alRobotPosture.goToPosture(posture, speed)
+
+def learn_face(person_name):
+    #Returns: true if the operation succeeded
+    return alFaceDetection.learnFace(person_name)
+    
 def hablar(texto_hablar):
-    textospeech.say(texto_hablar)
+    alTexToSpeech.say(texto_hablar)
     
 def safe_str(obj):
     try: return str(obj)
@@ -276,8 +284,12 @@ def modificar_historia(params):
     pass
 
 #Declare the NaoqiCore variables --------------------------------------------------------------------
-mood = ALProxy("ALMood")
-textospeech = ALProxy("ALTextToSpeech", HOST, 9559)
+alMood = ALProxy("ALMood")
+alTexToSpeech = ALProxy("ALTextToSpeech", HOST, 9559)
+alAnimationPlayer = ALProxy("ALAnimationPlayerProxy", HOST, 9559)
+alMotion = ALProxy("ALMotion", HOST, 9559)
+alRobotPosture = ALProxy("ALRobotPosture", HOST, 9559)
+alFaceDetection = ALProxy("ALFaceDetectionProxy", HOST, 9559)
 #----------------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
