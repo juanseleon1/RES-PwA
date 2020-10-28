@@ -10,7 +10,6 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
@@ -31,7 +30,7 @@ public class SolicitarPosicionPwA extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Solicitar Posicion PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
+        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getNombre()+" "+blvs.getbPerfilPwA().getPerfil().getApellido());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
         requestService(srb);
     }

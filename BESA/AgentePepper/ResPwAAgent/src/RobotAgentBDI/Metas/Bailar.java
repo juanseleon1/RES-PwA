@@ -10,11 +10,13 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.PerfilPwA.Actividadpwa;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.EjecutarBaile;
 import Tareas.Bailar.FinalizarBaile;
 import Tareas.Bailar.SeleccionarBaile;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -68,8 +70,18 @@ public class Bailar extends GoalBDI{
         System.out.println("Meta Bailar detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //completar
-        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getGusto() > 5 &&
-               blvs.getbPerfilPwA().getPreferencias().isGustoBaile() && blvs.getbPerfilPwA().getPreferencias().getMusicoterapia().getEnriquecimiento() > 2) {
+        List<Actividadpwa> lista = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActividadpwaList();
+        double gusto = 0;
+        int enriq = 0;
+        for (Actividadpwa act : lista) {
+            if(act.getNombre().equalsIgnoreCase("musioterapia"))
+            {
+                gusto=act.getGusto();
+                enriq=(int) act.getEnriquecimientofavorito().floatValue();
+            }
+        }
+        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
+               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && enriq > 2 ) {
             return 1.0;
         }
         return 0;
@@ -88,7 +100,7 @@ public class Bailar extends GoalBDI{
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
-        if(blvs.getbPerfilPwA().getPreferencias().isGustoBaile()) {
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5) {
             return 1.0;
         }
         

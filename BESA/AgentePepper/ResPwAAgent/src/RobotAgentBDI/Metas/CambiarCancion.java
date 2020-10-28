@@ -10,7 +10,6 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
-import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
@@ -69,7 +68,7 @@ public class CambiarCancion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
-                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPreferencias().isGustoMusica()) {
+                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5) {
             return 1.0;
         }
         

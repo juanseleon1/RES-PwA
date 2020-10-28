@@ -33,7 +33,7 @@ public class DetectarPwA extends ResPwaTask{
         ServiceDataRequest srb = null;
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
+        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
         requestService(srb);
         infoServicio.clear();
