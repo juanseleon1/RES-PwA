@@ -11,7 +11,11 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import rational.mapping.Believes;
 
 /**
@@ -34,10 +38,16 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
         
-        //animar con frases elogiantes, chistes, 
-        //para caso memorama, tener en cuenta tiempo en un mismo problema
+        //animar con frases elogiantes, chistes
+        Random rand = new Random();
+        List<String> estrategias = Arrays.asList("Frase elogiante", "Chiste");
+        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
+        AnimarStrategy as = new AnimarStrategy();
+        as.setNombre(estrategia);
+        //si es necesario se mandan parametros (como blvs)
         
-        //blvs.getbEstadoActividad().setEstrategia(ResPwAStrategy);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setEstrategia(as);
     }
 
     @Override

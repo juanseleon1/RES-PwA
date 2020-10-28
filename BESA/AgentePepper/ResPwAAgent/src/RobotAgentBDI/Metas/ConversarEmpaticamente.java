@@ -29,7 +29,7 @@ import rational.mapping.Task;
  */
 public class ConversarEmpaticamente extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "ConversarEmpaticamente";
 
     public static ConversarEmpaticamente buildGoal() {
 
@@ -45,7 +45,6 @@ public class ConversarEmpaticamente extends GoalBDI{
         rolePlan.addTask(preguntarSentimientos);
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         rolePlan.addTask(seleccionarEstrategiaC);
-        //hacer if en escoger estrategia, iniciar todo denuevo
         rolePlan.addTask(ejecutarEstrategiaC);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
@@ -69,7 +68,6 @@ public class ConversarEmpaticamente extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
        
-        //tiempotriste || tiempoenojo
         if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
             return 1.0;
         }

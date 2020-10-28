@@ -16,7 +16,7 @@ public class BEstadoInteraccion implements Believes{
 
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
-    private boolean cambioEnriq=false;
+    private boolean quiereEnriquec=false;
     private boolean pausarInt=false;
     private boolean cancelarInt=false;
     private boolean reiniciarInt=false;
@@ -54,12 +54,12 @@ public class BEstadoInteraccion implements Believes{
         this.ayudaActividadSolicitada = ayudaActividadSolicitada;
     }
 
-    public boolean isCambioEnriq() {
-        return cambioEnriq;
+    public boolean isQuiereEnriquec() {
+        return quiereEnriquec;
     }
 
-    public void setCambioEnriq(boolean cambioEnriq) {
-        this.cambioEnriq = cambioEnriq;
+    public void setQuiereEnriquec(boolean quiereEnriquec) {
+        this.quiereEnriquec = quiereEnriquec;
     }
 
     public boolean isPausarInt() {

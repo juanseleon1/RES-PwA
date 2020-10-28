@@ -29,8 +29,8 @@ public class BuscarAnimaciones extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
-        //busca animaciones y mensajes - ciclo
-        infoServicio.put("SAYWITHMOVEMENT", null);
+        //busca animaciones y mensajes base de datos
+        infoServicio.put("SAYWITHMOVEMENT", "MandarCuento");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb);
     }

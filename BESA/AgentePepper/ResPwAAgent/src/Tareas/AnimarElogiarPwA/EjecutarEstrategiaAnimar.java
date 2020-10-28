@@ -9,7 +9,14 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -29,7 +36,9 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
         System.out.println("--- Execute Task Ejecutar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        estrategia.execStrategy();
+        
+        ServiceDataRequest srb = estrategia.execStrategy();
+        requestService(srb);
     }
 
     @Override

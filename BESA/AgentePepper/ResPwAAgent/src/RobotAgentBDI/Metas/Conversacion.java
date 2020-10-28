@@ -25,7 +25,7 @@ import rational.mapping.Task;
  */
 public class Conversacion extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "Conversacion";
 
     public static Conversacion buildGoal() {
 

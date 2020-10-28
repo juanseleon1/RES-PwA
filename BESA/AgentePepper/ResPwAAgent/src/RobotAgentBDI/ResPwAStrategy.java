@@ -5,11 +5,13 @@
  */
 package RobotAgentBDI;
 
+import ServiceAgentResPwA.ServiceDataRequest;
+
 /**
  *
  * @author juans
  */
-public interface ResPwAStrategy{ 
+public interface ResPwAStrategy{
     
-    public abstract void execStrategy();
+    public abstract ServiceDataRequest execStrategy();
 }

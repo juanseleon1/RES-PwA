@@ -3,50 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.CambiarCancion;
+package Tareas.ActivarKaraoke;
 
 import ResPwaUtils.YTUtils;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class BusquedaCancionYoutube extends ResPwaTask{
-    
+public class CambiarVelocidadMov extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public BusquedaCancionYoutube() {
-        System.out.println("--- Task Busqueda Cancion Iniciada ---");
+    public CambiarVelocidadMov() {
+        System.out.println("--- Task Cambiar Velocidad Movimientos Iniciada ---");
     }
+    
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Busqueda Cancion ---");
+        System.out.println("--- Execute Task Cambiar Velocidad Movimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
-        YTUtils yt = new YTUtils();
-        String urlcancion = yt.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
-        infoServicio.put("SHOWVIDEO", urlcancion);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
+        infoServicio.put("TAGSSONGS", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Busqueda Cancion ---");
+        System.out.println("--- Interrupt Task Cambiar Velocidad Movimientos ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Busqueda Cancion ---");
+        System.out.println("--- Cancel Task Cambiar Velocidad Movimientos ---");
     }
     
 }

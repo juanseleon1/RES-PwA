@@ -33,7 +33,7 @@ public class Bailar extends GoalBDI{
     private static String descrip="Bailar";
 
     public static Bailar buildGoal() {
-        //crear clases tareas y agregar al plan
+        
         EjecutarBaile ejecutarBaile = new EjecutarBaile();
         InicializarBaile inicializarBaile = new InicializarBaile();
         FinalizarBaile finalizarBaile = new FinalizarBaile();

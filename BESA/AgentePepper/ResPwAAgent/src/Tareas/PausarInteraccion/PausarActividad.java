@@ -5,11 +5,15 @@
  */
 package Tareas.PausarInteraccion;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -28,7 +32,27 @@ public class PausarActividad extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Pausar Actividad ---");
-        infoServicio.put("SUSPEND", null);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        if(blvs.getbEstadoInteraccion().isEstaBailando()) {
+            infoServicio.put("STOPANIMATION", "pausarTask");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            infoServicio.put("STOPALL", "pausarTask");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+            infoServicio.put("STOPVIDEO", "pausarTask");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
+            requestService(srb);
+        }
+        
+        infoServicio.put("SUSPEND", "pausarTask");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
         requestService(srb);
     }

@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.CambiarEnriquecimientoHistoria.EjecutarEstrategiaEnriquecer;
 import Tareas.CambiarEnriquecimientoHistoria.EvaluarEstrategiaEnriquecer;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import rational.mapping.Task;
 public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
     
-        private static String descrip;
+        private static String descrip = "CambiarEnriquecimientoHistoria";
 
     public static CambiarEnriquecimientoHistoria buildGoal() {
         
@@ -65,7 +66,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //cambiar valor tiempo (10), debe variar segun la duracion de la historia
-        if(blvs.getbEstadoInteraccion().isCambioEnriq() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10) {
+        if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoInteraccion().isQuiereEnriquec() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10) {
             return 1.0;
         }
         
@@ -84,11 +85,11 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
-        if(blvs.getbEstadoInteraccion().isCambioEnriq()) {
+        if(blvs.getbEstadoInteraccion().isQuiereEnriquec()) {
             return 1.0;
         }
         //verificar esto
-        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion()/10;
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion();
     }
 
     @Override

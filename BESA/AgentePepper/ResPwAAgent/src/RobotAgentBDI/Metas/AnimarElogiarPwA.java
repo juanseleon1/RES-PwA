@@ -29,7 +29,7 @@ import rational.mapping.Task;
  */
 public class AnimarElogiarPwA extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "AnimarElogiarPwA";
 
     public static AnimarElogiarPwA buildGoal() {
 
@@ -44,6 +44,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         rolePlan.addTask(seleccionarEstrategia);
         rolePlan.addTask(ejecutarEstrategia);
         
+        descrip = "animate";
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
         AnimarElogiarPwA b= new AnimarElogiarPwA(InitRESPwA.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
         return b;

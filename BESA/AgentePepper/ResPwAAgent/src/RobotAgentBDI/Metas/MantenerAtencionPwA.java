@@ -26,7 +26,7 @@ import rational.mapping.Task;
  */
 public class MantenerAtencionPwA extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "MantenerAtencionPwA";
 
     public static MantenerAtencionPwA buildGoal() {
 

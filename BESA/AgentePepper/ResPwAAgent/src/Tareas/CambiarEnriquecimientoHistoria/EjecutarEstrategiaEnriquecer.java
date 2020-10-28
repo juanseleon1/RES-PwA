@@ -8,7 +8,11 @@ package Tareas.CambiarEnriquecimientoHistoria;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
+import ServiceAgentResPwA.ServiceDataRequest;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import rational.mapping.Believes;
 
 /**
@@ -27,9 +31,17 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Enriquecer ---");
+        
+        //luces, pantalla, todos los recursos
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        estrategia.execStrategy();
+        
+        ServiceDataRequest srb = estrategia.execStrategy();
+        requestService(srb);
+        
+        //propiedades voz(tono,etc) en blvs
+        //plan mostrar emociones pepper
+        //enriquecimiento: pre cargar enriquecimiento o no, act: si no pone atencion->¿enriquecemos o no?, cont:que tan distraido
     }
 
     @Override

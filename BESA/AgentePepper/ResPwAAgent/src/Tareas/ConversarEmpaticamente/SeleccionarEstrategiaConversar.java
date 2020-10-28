@@ -5,9 +5,14 @@
  */
 package Tareas.ConversarEmpaticamente;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import Tareas.CambiarEnriquecimientoHistoria.EnriquecerStrategy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -25,10 +30,21 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Conversar ---");
-        //preguntar sobre sus sentimientos, le cuente un poco sobre como se siente, escucha activa
+        //Hacer preguntas: sobre sus sentimientos
         //Actuar como su amigo "Te entiendo" "¿Te gustaria hablar de eso?" "Te puedo ayudar" "Hablame un poco más"
-        //Dar consejos, solucion
+        //Dar consejos, solucion ej:respirar
         //"Todo estará bien" Poner mano en el hombro, cosas así
+        //Siempre: Tener contacto visual, escuchar
+        
+        Random rand = new Random();
+        List<String> estrategias = Arrays.asList("Pregunta","Consejo");
+        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
+        ConversarStrategy cs = new ConversarStrategy();
+        cs.setNombre(estrategia);
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setEstrategia(cs);
+        
     }
 
     @Override

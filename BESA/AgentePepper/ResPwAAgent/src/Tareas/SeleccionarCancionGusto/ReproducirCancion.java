@@ -3,53 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.EntrarModoKaraoke;
+package Tareas.SeleccionarCancionGusto;
 
 import ResPwaUtils.YTUtils;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class ActivarSubtitulos extends ResPwaTask{
-    
+public class ReproducirCancion extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public ActivarSubtitulos() {
-        System.out.println("--- Task Activar Subtitulos Iniciada ---");
+    public ReproducirCancion() {
+        System.out.println("--- Task Reproducir Cancion Iniciada ---");
     }
-    
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Activar Subtitulos ---");
+        System.out.println("--- Execute Task Reproducir Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        
-        String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre() + " lyrics");
+        String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
         infoServicio.put("SHOWVIDEO", urlcancion);
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Activar Subtitulos ---");
+        System.out.println("--- Interrupt Task Reproducir Cancion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Activar Subtitulos ---");
+        System.out.println("--- Cancel Task Reproducir Cancion ---");
     }
     
 }

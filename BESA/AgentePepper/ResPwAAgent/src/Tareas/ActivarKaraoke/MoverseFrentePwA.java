@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.SeleccionarCuentoGusto;
+package Tareas.ActivarKaraoke;
 
+import ResPwaUtils.YTUtils;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 
 /**
@@ -28,7 +32,6 @@ public class MoverseFrentePwA extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Moverse Frente PwA ---");
-        //parametros desde naoqi
         infoServicio.put("MOVETO", "PwA");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         requestService(srb);
@@ -43,4 +46,5 @@ public class MoverseFrentePwA extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Moverse Frente PwA ---");
     }
+    
 }

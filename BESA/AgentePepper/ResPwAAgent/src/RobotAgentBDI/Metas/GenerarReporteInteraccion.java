@@ -25,7 +25,7 @@ import rational.mapping.Task;
  */
 public class GenerarReporteInteraccion extends GoalBDI{
 
-            private static String descrip;
+            private static String descrip = "GenerarReporteInteraccion";
 
     public static GenerarReporteInteraccion buildGoal() {
 

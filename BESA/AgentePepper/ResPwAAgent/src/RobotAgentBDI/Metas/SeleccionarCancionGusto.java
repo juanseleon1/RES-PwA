@@ -5,6 +5,9 @@
  */
 package RobotAgentBDI.Metas;
 
+import Tareas.SeleccionarCancionGusto.SeleccionarCancion;
+import Tareas.SeleccionarCancionGusto.BusquedaCancionYoutube;
+import Tareas.SeleccionarCancionGusto.ReproducirCancion;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
@@ -13,8 +16,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.CambiarCancion.RecibirRetroalimentacion;
-import Tareas.CambiarCancion.*;
+import Tareas.SeleccionarCancionGusto.RecibirRetroalimentacion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -26,11 +28,11 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class CambiarCancion extends GoalBDI{
+public class SeleccionarCancionGusto extends GoalBDI{
 
-        private static String descrip;
+    private static String descrip = "SeleccionarCancionGusto"; 
 
-    public static CambiarCancion buildGoal() {
+    public static SeleccionarCancionGusto buildGoal() {
     
         BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
         ReproducirCancion reproducirCancion = new ReproducirCancion();
@@ -46,11 +48,11 @@ public class CambiarCancion extends GoalBDI{
         rolePlan.addTask(reproducirCancion); //preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
         rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
-        RationalRole cambiarCancionRole = new RationalRole(descrip, rolePlan);
-        CambiarCancion b= new CambiarCancion(InitRESPwA.getPlanID(), cambiarCancionRole, descrip, GoalBDITypes.DUTY);
+        RationalRole selCancionGRole = new RationalRole(descrip, rolePlan);
+        SeleccionarCancionGusto b= new SeleccionarCancionGusto(InitRESPwA.getPlanID(), selCancionGRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
-    public CambiarCancion(int id, RationalRole role, String description, GoalBDITypes type) {
+    public SeleccionarCancionGusto(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         System.out.println("Meta CambiarCancion created");
     }

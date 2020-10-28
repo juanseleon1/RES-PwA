@@ -15,6 +15,7 @@ import rational.mapping.Believes;
 public class BEstadoRobot implements Believes{
     
     private int bateria;
+    private int volumenVoz;
     //private long velocidad;
     private boolean activadoParpadear=false;
     private boolean activadoAutoColision=false;
