@@ -164,9 +164,15 @@ def run_animation( animation_path, animation_tag):
 def go_to_posture( posture, speed):
     alRobotPosture.goToPosture(posture, speed)
 
+#Learns a new face and adds it in the database under the specified name.
 def learn_face(person_name):
     #Returns: true if the operation succeeded
     return alFaceDetection.learnFace(person_name)
+
+#Gets a list containing the name of each learned face. The size of this list is always
+#equal to the number of faces in the data base.
+def get_face_list():
+    return alFaceDetection.getLearnedFacesList()
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
