@@ -23,14 +23,14 @@ def handle_client(conn, addr):
 def message_manage(key, msg):
         switch_accion = {
             "BEstadoEmocionalPwA": "BEstadoEmocionalPwA",
-           1: "editar_pwa",
-           2: "registrar_cuidador",
-           3: "historial",
-           4: "seleccionar_actividades",
-           5: "login",
-           6: "cambiar_actividad",
-           7: "conversacion_empatica",
-           8: "presentarse",
+           "RUNANIMATION": "run_animation",
+           "GOTOPOSTURE": "go_to_posture",
+           "DETECTNEWFACE ": "learn_face",
+           "GETFACELIST": "get_face_list",
+           "ACTIVATE": "activate_blinking",
+           "ACTIVATELIFESIGNALS": "activate_life_signals",
+           "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
+           "DEFENGAGEMENTTYPE": "set_engagement_type",
            9: "ayuda",
            10: "consultar_actividades",
            11: "saludar",
@@ -181,6 +181,15 @@ def activate_blinking(enabled):
 #Enables or disables the background movements.
 def activate_life_signals(enabled):
     alBackgroundMovement.setEnabled(enabled)
+
+#Enables or disables basic awareness.
+def activate_life_signals_awareness(enabled):
+    alBasicAwareness.setEnabled (enabled)
+
+#Sets the engagement mode.
+#https://developer.softbankrobotics.com/pepper-naoqi-25/naoqi-developer-guide/naoqi-apis/naoqi-interaction-engines/albasicawareness#albasicawareness-engagement-modes
+def set_engagement_type(modeName):
+    alBasicAwareness.setEngagementMode ( modeName )
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -306,6 +315,11 @@ alRobotPosture = ALProxy("ALRobotPosture", HOST, 9559)
 alFaceDetection = ALProxy("ALFaceDetectionProxy", HOST, 9559)
 alAutonomousBlinking = ALProxy("AutonomousBlinkingProxy", HOST, 9559)
 alBackgroundMovement = ALProxy("ALBackgroundMovementProxy", HOST, 9559)
+alBasicAwareness = ALProxy("ALBasicAwarenessProxy", HOST, 9559)
+#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
+#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
+#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
+#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #----------------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
