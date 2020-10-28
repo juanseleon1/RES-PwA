@@ -429,77 +429,74 @@ def set_tablet_bright(brightness):
 def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
-#
-def say():
+#Says the specified string of characters.
+def say(text):
+    alTexToSpeech.say(text)
 
-
- #   
+ #   This method stops the current and all the pending tasks immediately.
 def stop_all():
+    alTexToSpeech.stopAll()
 
 
-#
-def set_say_volume():
+#Sets the current gain applied to the signal synthesized by the text to speech engine.
+def set_say_volume(volume):
+    alTexToSpeech.setVolume(volume)
 
+#Say the annotated text given in parameter and animate it with animations inserted in the text.
+def say_with_movement(text):
+    alAnimatedSpeech.say(text)
 
-#
-def say_with_movement():
+#Sets the overall output volume of the system.
+def set_system_volume(volume):
+    alAudioDevice.setOutputVolume(volume)
 
+#Starts the playback of the specified file. 
+def play_sound(sound):
+    alAudioPlayer.playFile(sound)
 
-#
-def set_system_volume():
+#Pause the playback of the specified task.
+def pause_sound(idSound):
+    alAudioPlayer.pause(idSound)
 
+#Subscribes to ALVoiceEmotionAnalysis .
+def activate_voice_emotion_analysis(subscriberName):
+    alVoiceEmotionAnalysis.subscribe(subscriberName) 
 
-#
-def play_sound():
-
-
-#
-def pause_sound():
-
-
-#
-def activate_voice_emotion_analysis():
-
-
-#
+#Unsubscribes to ALVoiceEmotionAnalysis .
 def desactivate_voice_emotion_analysis():
+    alVoiceEmotionAnalysis.unsubscribe(subscriberName)
 
+#Subscribes to ALSpeechRecognition 
+def activate_voice_recognition(subscriber):
+    alSpeechRecognition.subscribe(subscriber)
 
-#
-def activate_voice_recognition():
-
-
-#
+#Unsubscribes to ALSpeechRecognition
 def desactivate_voice_recognition():
+    alSpeechRecognition.unsubscribe(subscriber)
 
+#Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human’s inputs.
+def activate_conversational_topic(topicName):
+    alDialogProxy.activateTopic(topicName)
 
-#
-def activate_conversational_topic():
+#Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine 
+def load_conversational_topic(topicName):
+     alDialogProxy.loadTopic(path)
 
+#Unloads the specified topic and frees the associated memory.
+def unload_conversational_topic(topicName):
+     alDialogProxy.unloadTopic(topicName)
 
-#
-def load_conversational_topic():
+#Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the human’s inputs.
+def deactivate_conversational_topic(topicName):
+     alDialogProxy.deactivateTopic(topicName)
 
+#Says a tagged sentence from a topic.
+def say_under_topic_context(topic, tag):
+    alDialogProxy.say(topic,tag)
 
-#
-def unload_conversational_topic():
-
-
-#
-def deactivate_conversational_topic():
-
-
-#
-def say_under_topic_context():
-
-
-#
-def set_topic_focus():
-
-
-
-
-
+#If multiple topics can be active at the same time, only one of them is used to generate proposals.
+def set_topic_focus(topicName):
+    alDialogProxy.setFocus(topicName)
 
 
 
