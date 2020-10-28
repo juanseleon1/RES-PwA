@@ -22,16 +22,17 @@ def handle_client(conn, addr):
 
 def message_manage(key, msg):
         switch_accion = {
+            #ActivityServices
             "BEstadoEmocionalPwA": "BEstadoEmocionalPwA",
-           "RUNANIMATION": "run_animation",
-           "GOTOPOSTURE": "go_to_posture",
-           "DETECTNEWFACE ": "learn_face",
-           "GETFACELIST": "get_face_list",
-           "ACTIVATE": "activate_blinking",
-           "ACTIVATELIFESIGNALS": "activate_life_signals",
-           "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
-           "DEFENGAGEMENTTYPE": "set_engagement_type",
-           "ACTIVATEACTIVEHEARING": "activate_hearing_movement",
+            "RUNANIMATION": "run_animation",
+            "GOTOPOSTURE": "go_to_posture",
+            "DETECTNEWFACE ": "learn_face",
+            "GETFACELIST": "get_face_list",
+            "ACTIVATE": "activate_blinking",
+            "ACTIVATELIFESIGNALS": "activate_life_signals",
+            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
+            "DEFENGAGEMENTTYPE": "set_engagement_type",
+            "ACTIVATEACTIVEHEARING": "activate_hearing_movement",
             "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements",
             "DEFCONVERSATIONMODE":"define_conversation_mode",
             "ACTIVATEPUSHREFLEXES":"activate_push_reflexes",
@@ -39,9 +40,11 @@ def message_manage(key, msg):
             "ACTIVATEMOVDETECTION":"activate_movement_detection",
             "ACTIVATEFACEDETEC":"activate_face_detection",
             "ACTIVATECOLISSIONDETECT":"activate_colission_detection",
-
-
-
+            #EnergyServices
+            "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service",
+            "GETBATTERY":"get_battery",
+            "GETTEMP":"get_tempreature",
+            #
             
            10: "consultar_actividades",
            11: "saludar",
@@ -231,10 +234,18 @@ def activate_face_detection(enabled):
     alFaceDetection.setRecognitionEnabled(enabled)
 
 #Enable/Disable Anti-collision protection of the arms of the robot.
-def activate_colission_detection(chainName,enable):
-    alMotionProxy.setCollisionProtectionEnabled(chainName   ,enable)
+def activate_colission_detection(chainName,enabled):
+    alMotionProxy.setCollisionProtectionEnabled(chainName,enabled)
 
-    
+#Enables or disables power monitoring.
+def activate_monitoring_charge_service(enabled):
+    alBatteryProxy.enablePowerMonitoring(enabled)
+
+#Get battery charge.
+def get_battery():
+    return  alBatteryProxy.getBatteryCharge()
+
+   
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -366,7 +377,8 @@ alSpeakingMovementProxy = ALProxy("ALSpeakingMovementProxy",HOST,9559)
 alMotionProxy = ALProxy("ALMotionProxy",HOST,9559)
 alPeoplePerception = ALProxy("ALPeoplePerception",HOST,9559)
 alFaceDetection = ALProxy("ALFaceDetection",HOST,9559)
-
+alBatteryProxy = ALProxy("ALBatteryProxy",HOST,9559)
+alBodyTemperatureProxy = ALProxy("ALBodyTempreatureProxy",HOST,9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
