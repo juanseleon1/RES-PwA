@@ -348,7 +348,7 @@ def random_eyes(duration):
     alLedsProxy.randomEyes(duration)
 
 #Sets the intensity of a LED or Group of LEDs.
-def set_leds_intensity(sensor, intensity)
+def set_leds_intensity(sensor, intensity):
     alLedsProxy.setIntensity(sensor, intensity)
 """
 #Sets the color of an RGB led using  color code.
@@ -360,7 +360,64 @@ def  activate_stiffness(enabled):
             ALGUNACOSA.SetSmartStiffnessEnabled
 
 
-""" 
+"""
+#Turn on/off the tablet screen.
+def tablet_on():
+    alTabletService.turnScreenOn(True)
+
+#Wake the tablet (from standby mode).
+def wake_tablet():
+    alTabletService.wakeUp()
+    
+#Put the tablet in sleep mode (standby mode).
+def suspend_tablet():
+    alTabletService.goToSleep()
+
+#Turn on/off the tablet screen.
+def tablet_off():
+    alTabletService.turnScreenOn(False)
+
+#Open a video player on tablet and play video from given url.
+def show_video(url):
+    alTabletService.playVideo(url)
+
+#Close the video player.
+def quit_video():
+    alTabletService.stopVideo()
+
+#Pause the video playing but do not close the video player.
+def pause_video():
+    alTabletService.pauseVideo()
+
+#Resume the video paused by ALTabletService::pauseVideo .
+def  resume_video():
+     alTabletService.resumeVideo()
+
+#
+def preload_image():
+
+
+#
+def show_image():
+
+
+#Hide image currently displayed.
+def hide_image():
+    alTabletService.hideImage()
+
+#Set tablet brightness.
+def set_tablet_bright(brightness):
+    alTabletService.setBrightness(brightness)
+
+#Configure the media volume of the tablet.
+def set_tablet_volume(volume):
+    alTabletService.setVolume(volume)
+
+
+
+
+
+
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
