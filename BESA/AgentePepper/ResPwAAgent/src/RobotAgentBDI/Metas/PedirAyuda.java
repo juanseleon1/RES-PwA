@@ -25,7 +25,7 @@ import rational.mapping.Task;
  */
 public class PedirAyuda extends GoalBDI{
     
-    private static String descrip;
+    private static String descrip = "PedirAyuda";
 
     public static PedirAyuda buildGoal() {
 

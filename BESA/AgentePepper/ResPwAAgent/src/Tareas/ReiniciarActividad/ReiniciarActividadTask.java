@@ -5,8 +5,13 @@
  */
 package Tareas.ReiniciarActividad;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -25,6 +30,12 @@ public class ReiniciarActividadTask extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Reiniciar Actividad ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        //revisar esto
+        infoServicio.put("WAKEUP", blvs.getbEstadoActividad().getActividadActual());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
+        requestService(srb);
     }
 
     @Override

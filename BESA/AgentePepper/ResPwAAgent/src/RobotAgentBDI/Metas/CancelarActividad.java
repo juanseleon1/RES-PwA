@@ -27,7 +27,7 @@ import rational.mapping.Task;
  */
 public class CancelarActividad extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "CancelarActividad";
 
     public static CancelarActividad buildGoal() {
 

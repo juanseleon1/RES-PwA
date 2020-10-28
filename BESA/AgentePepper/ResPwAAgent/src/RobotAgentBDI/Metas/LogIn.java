@@ -29,7 +29,7 @@ import rational.mapping.Task;
  */
 public class LogIn extends GoalBDI{
     
-    private static String descrip;
+    private static String descrip = "LogIn";
 
     public static LogIn buildGoal() {
 

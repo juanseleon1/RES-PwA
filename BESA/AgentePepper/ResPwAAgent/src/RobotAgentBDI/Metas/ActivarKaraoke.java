@@ -14,7 +14,7 @@ import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.EntrarModoKaraoke.ActivarSubtitulos;
+import Tareas.ActivarKaraoke.MoverseFrentePwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -26,25 +26,25 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class EntrarModoKaraoke extends GoalBDI{
+public class ActivarKaraoke extends GoalBDI{
 
-    private static String descrip;
+    private static String descrip = "ActivarKaraoke";
 
-    public static EntrarModoKaraoke buildGoal() {
+    public static ActivarKaraoke buildGoal() {
 
-        ActivarSubtitulos activarSubtitulos = new ActivarSubtitulos();
+        MoverseFrentePwA activarSubtitulos = new MoverseFrentePwA();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(activarSubtitulos); //se buscan y activan
-
+        
         RationalRole karaokeRole = new RationalRole(descrip, rolePlan);
-        EntrarModoKaraoke b= new EntrarModoKaraoke(InitRESPwA.getPlanID(), karaokeRole, descrip, GoalBDITypes.DUTY);
+        ActivarKaraoke b= new ActivarKaraoke(InitRESPwA.getPlanID(), karaokeRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
-    public EntrarModoKaraoke(int id, RationalRole role, String description, GoalBDITypes type) {
+    public ActivarKaraoke(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         System.out.println("Meta EntrarModoKaraoke created");
     }

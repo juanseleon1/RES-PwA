@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.CambiarCancion;
+package Tareas.SeleccionarCancionGusto;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;

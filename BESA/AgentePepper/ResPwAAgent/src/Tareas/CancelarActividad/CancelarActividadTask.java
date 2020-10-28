@@ -5,6 +5,7 @@
  */
 package Tareas.CancelarActividad;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -32,9 +33,27 @@ public class CancelarActividadTask extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cancelar Actividad ---");
         ServiceDataRequest srb = null;
-        infoServicio.put("STOPACTIVITY", null);
-        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
-        requestService(srb);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        if(blvs.getbEstadoInteraccion().isEstaBailando()) {
+            infoServicio.put("STOPANIMATION", "cancelarTask");
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            infoServicio.put("STOPALL", "cancelarTask");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+            infoServicio.put("QUITVIDEO", "cancelarTask");
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, infoServicio);
+            requestService(srb);
+        }
+
+        blvs.getbEstadoActividad().setFinalizoActividad(true);
     }
 
     @Override

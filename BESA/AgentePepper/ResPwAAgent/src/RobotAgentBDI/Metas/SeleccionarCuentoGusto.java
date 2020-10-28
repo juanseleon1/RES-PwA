@@ -32,7 +32,7 @@ import rational.mapping.Task;
  */
 public class SeleccionarCuentoGusto extends GoalBDI{
     
-    private static String descrip;
+    private static String descrip = "SeleccionarCuentoGusto";
 
     public static SeleccionarCuentoGusto buildGoal() {
 
@@ -75,7 +75,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //verificar gusto cuento seleccionado > 0.5
-        if(blvs.getbEstadoActividad().getCuentoActual().getGusto() > 0.5 && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA)) {
+        if(blvs.getbEstadoActividad().getCuentoActual().getGusto() > 0.5 && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         

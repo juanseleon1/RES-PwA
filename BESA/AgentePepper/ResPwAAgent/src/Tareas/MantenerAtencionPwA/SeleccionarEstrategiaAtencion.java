@@ -11,7 +11,11 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import Tareas.ConversarEmpaticamente.ConversarStrategy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -39,6 +43,15 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
         //"Me siento solo" "no me dejes"
         //adivinanzas, dato curioso
         //si se va, irlo a buscar
+        
+        Random rand = new Random();
+        List<String> estrategias = Arrays.asList("Adivinanza","Dato Curioso","Cambiar Actividad","Cambiar Cancion","Cambiar Cuento");
+        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
+        ConversarStrategy cs = new ConversarStrategy();
+        cs.setNombre(estrategia);
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setEstrategia(cs);
     }
 
     @Override

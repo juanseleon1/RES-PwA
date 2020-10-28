@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,6 +10,7 @@ import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
@@ -29,10 +30,13 @@ public class EjecutarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Ejecutar Baile ---");
-        //buscar tipo de baile dependiendo de canción
+        infoServicio.put("GETEMOTIONSTATE", null);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
+        requestService(srb);
+        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("RUNANIMATION", blvs.getbEstadoActividad().getCancionActual().getTags());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        infoServicio.put("TAGSSONG", blvs.getbEstadoActividad().getCancionActual().getTags());
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }
 

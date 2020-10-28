@@ -27,7 +27,7 @@ import rational.mapping.Task;
  */
 public class RecargarBateria extends GoalBDI{
     
-    private static String descrip;
+    private static String descrip = "RecargarBateria";
 
     public static RecargarBateria buildGoal() {
 

@@ -8,6 +8,7 @@ package Tareas.SeleccionarCuentoGusto;
 import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;

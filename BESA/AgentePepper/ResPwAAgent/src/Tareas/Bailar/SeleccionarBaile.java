@@ -5,9 +5,11 @@
  */
 package Tareas.Bailar;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
@@ -30,9 +32,11 @@ public class SeleccionarBaile extends ResPwaTask{
         infoServicio.put("GETEMOTIONSTATE", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
-
-        //buscar baile
         
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("TAGSSONG", blvs.getbEstadoActividad().getCancionActual().getTags());
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb); 
     }
 
     @Override

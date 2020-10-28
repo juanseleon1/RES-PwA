@@ -32,6 +32,18 @@ public class DetectarPwA extends ResPwaTask{
         System.out.println("--- Execute Task Detectar PwA ---");
         ServiceDataRequest srb = null;
         
+        //si existe o no -> si no tiene el id de la BD es porque no ha interactuado con el robot
+        /*if(Existeid) {
+            infoServicio.put("GETIDROBOT", "");
+            srb = ServiceRequestBuilder.buildRequest(RobotServiceRequestType.IDROBOT, infoServicio);
+            requestService(srb);
+        } else {
+            infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
+            requestService(srb);
+        }
+        toca recibir el id*/
+        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);

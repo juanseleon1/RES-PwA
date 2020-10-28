@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.CambiarCancion;
+package Tareas.SeleccionarCancionGusto;
 
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -34,8 +35,11 @@ public class SeleccionarCancion extends ResPwaTask{
         infoServicio.put("GETEMOTIONSTATE", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
+        
         //buscar cancion BD
-        Cancion cancion = null;
+        Cancion cancion = new Cancion();
+        cancion.setNombre("Unicornio salvaje");
+        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         blvs.getbEstadoActividad().setCancionActual(cancion);
     }

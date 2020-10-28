@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 
 /**
@@ -29,7 +30,9 @@ public class EjecutarEstrategiaAtencion extends ResPwaTask{
         System.out.println("--- Execute Task Ejecutar Estrategia Atencion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        estrategia.execStrategy();
+        
+        ServiceDataRequest srb = estrategia.execStrategy();
+        requestService(srb);
     }
 
     @Override

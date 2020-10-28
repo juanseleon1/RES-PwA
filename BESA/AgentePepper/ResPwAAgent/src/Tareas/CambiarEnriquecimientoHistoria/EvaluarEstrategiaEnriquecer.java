@@ -11,7 +11,11 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import Tareas.AnimarElogiarPwA.AnimarStrategy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -29,9 +33,14 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Evaluar Enriquecer ---");
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
+        Random rand = new Random();
+        List<String> estrategias = Arrays.asList("Luces", "Pantalla", "Bailar", "Frase");
+        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
+        EnriquecerStrategy es = new EnriquecerStrategy();
+        es.setNombre(estrategia);
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setEstrategia(es);
     }
 
     @Override

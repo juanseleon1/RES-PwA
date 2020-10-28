@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import BESA.BDI.AgentStructuralModel.GoalBDI;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
@@ -95,7 +96,6 @@ public class BEstadoActividad implements Believes{
     public Cuento getCuentoActual() {
         return cuentoActual;
     }
-    
-    
+
     
 }

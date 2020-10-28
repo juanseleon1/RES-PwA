@@ -5,11 +5,14 @@
  */
 package Tareas.RecargarBateria;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
@@ -29,15 +32,37 @@ public class SuspenderRobot extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Suspender Robot ---");
-        ServiceDataRequest srb = null;
         //buscar texto
-        infoServicio.put("SAYGOODBYE", "textoDespedir");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        infoServicio.put("SAY", "textoDespedir");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio.clear();
         
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        if(blvs.getbEstadoInteraccion().isEstaBailando()) {
+            infoServicio.put("STOPANIMATION", null);
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            infoServicio.put("STOPALL", null);
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
+            requestService(srb);
+        }
+        
+        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+            infoServicio.put("STOPVIDEO", null);
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
+            requestService(srb);
+        }
+        
         infoServicio.put("SUSPEND", null);
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
+        requestService(srb);
+        infoServicio.put("SUSPENDTABLET", null);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, infoServicio);
         requestService(srb);
     }
 

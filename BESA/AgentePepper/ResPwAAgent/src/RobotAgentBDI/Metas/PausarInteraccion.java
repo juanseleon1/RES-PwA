@@ -24,7 +24,8 @@ import rational.mapping.Task;
  * @author mafegarces
  */
 public class PausarInteraccion extends GoalBDI{
-            private static String descrip;
+    
+    private static String descrip = "PausarInteraccion";
 
     public static PausarInteraccion buildGoal() {
 

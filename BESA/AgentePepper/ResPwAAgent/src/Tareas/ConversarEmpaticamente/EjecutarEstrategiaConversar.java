@@ -8,6 +8,7 @@ package Tareas.ConversarEmpaticamente;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -28,7 +29,9 @@ public class EjecutarEstrategiaConversar extends ResPwaTask{
         System.out.println("--- Execute Task Ejecutar Estrategia Conversar ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        estrategia.execStrategy();
+        
+        ServiceDataRequest srb = estrategia.execStrategy();
+        requestService(srb);
     }
 
     @Override
