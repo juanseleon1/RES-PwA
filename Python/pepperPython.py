@@ -173,6 +173,14 @@ def learn_face(person_name):
 #equal to the number of faces in the data base.
 def get_face_list():
     return alFaceDetection.getLearnedFacesList()
+
+#Enables or disables the autonomous blinking.
+def activate_blinking(enabled):
+    alAutonomousBlinking.setEnabled(enabled)
+
+#Enables or disables the background movements.
+def activate_life_signals(enabled):
+    alBackgroundMovement.setEnabled(enabled)
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -289,13 +297,15 @@ def musicoterapia(params):
 def modificar_historia(params):
     pass
 
-#Declare the NaoqiCore variables --------------------------------------------------------------------
+#Declare the Naoqi variables --------------------------------------------------------------------
 alMood = ALProxy("ALMood")
 alTexToSpeech = ALProxy("ALTextToSpeech", HOST, 9559)
 alAnimationPlayer = ALProxy("ALAnimationPlayerProxy", HOST, 9559)
 alMotion = ALProxy("ALMotion", HOST, 9559)
 alRobotPosture = ALProxy("ALRobotPosture", HOST, 9559)
 alFaceDetection = ALProxy("ALFaceDetectionProxy", HOST, 9559)
+alAutonomousBlinking = ALProxy("AutonomousBlinkingProxy", HOST, 9559)
+alBackgroundMovement = ALProxy("ALBackgroundMovementProxy", HOST, 9559)
 #----------------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
