@@ -33,7 +33,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cambiar Velocidad Movimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGS", blvs.getbEstadoActividad().getCancionActual().getTags());
+        infoServicio.put("TAGSSONGS", blvs.getbEstadoActividad().getCancionActual().getTagsList());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }

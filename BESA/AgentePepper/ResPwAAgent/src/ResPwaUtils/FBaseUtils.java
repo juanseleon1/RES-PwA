@@ -7,7 +7,6 @@ package ResPwaUtils;
 
 import RobotAgentBDI.Believes.PerfilPwA.Imagen;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.RobotAgentBDI;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -17,10 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -86,7 +83,7 @@ public class FBaseUtils {
             Logger.getLogger(FBaseUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("/"+rab.getbPerfilPwA().getCedula());
+        DatabaseReference ref = database.getReference("/"+rab.getbPerfilPwA().getPerfil().getCedula());
         // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
             @Override

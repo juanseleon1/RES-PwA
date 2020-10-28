@@ -9,7 +9,6 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import RobotAgentBDI.Believes.PerfilPwA.ActMusicoterapia;
 import RobotAgentBDI.Believes.PerfilPwA.Cancion;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
@@ -64,7 +63,7 @@ public class ActivarKaraoke extends GoalBDI{
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
         //List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCanciones(); -> si tiene letra solo se puede con el API
         if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbEstadoActividad().calcTiempoActividad() > 30 && 
-                (blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke() || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando()) {
+                (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando()) {
             return 1.0;
         }
         return 0;
@@ -83,7 +82,7 @@ public class ActivarKaraoke extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
         //PwA quiere cantar + letraDisponibleCancion
-        if(blvs.getbPerfilPwA().getPreferencias().isGustoKaraoke() || blvs.getbEstadoInteraccion().isQuiereCantar()) {
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
             return 1.0;
         }
         

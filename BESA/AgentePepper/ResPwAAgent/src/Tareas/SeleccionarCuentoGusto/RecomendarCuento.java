@@ -5,7 +5,6 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
-import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
 import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
@@ -32,7 +31,7 @@ public class RecomendarCuento extends ResPwaTask{
         System.out.println("--- Execute Task Recomendar Cuento ---");
         //buscar cuento
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        List<Cuento> cuentos = ((ActCuenteria)blvs.getbPerfilPwA().getPreferencias().getCuenteria()).getCuentos();
+        List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
         for(Cuento c: cuentos) {
             //escoger cuento
         }

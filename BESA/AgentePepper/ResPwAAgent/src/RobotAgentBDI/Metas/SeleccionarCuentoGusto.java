@@ -9,8 +9,6 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import RobotAgentBDI.Believes.PerfilPwA.ActCuenteria;
-import RobotAgentBDI.Believes.PerfilPwA.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;

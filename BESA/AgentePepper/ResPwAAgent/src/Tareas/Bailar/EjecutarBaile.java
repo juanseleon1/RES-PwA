@@ -35,7 +35,8 @@ public class EjecutarBaile extends ResPwaTask{
         requestService(srb);
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGSSONG", blvs.getbEstadoActividad().getCancionActual().getTags());
+
+        infoServicio.put("TAGS", blvs.getbEstadoActividad().getCancionActual().getTagsList());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }
