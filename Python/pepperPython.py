@@ -79,8 +79,24 @@ def message_manage(key, msg):
             "HIDEIMG":"hide_image",
             "SETTABLETBRIGHT":"set_tablet_bright",
             "SETTABLETVOL":"set_tablet_volume",
-
-
+            #VoiceServices
+            "SAY":"say",
+            "STOPALL":"stop_all",
+            "SETSAYVOLUMN":"set_say_volume",
+            "SAYWITHMOVEMENT":"say_with_movement",
+            "SETSYSTEMVOLUME":"set_system_volume",
+            "PLAYSOUND":"play_sound",
+            "PAUSESOUND":"pause_sound",
+            "ACTIVATEVOICEEMOANAL":"activate_voice_emotion_analysis",
+            "DESACTIVVOICEEMOANAL":"desactivate_voice_emotion_analysis",
+            "ACTVOICERECOG":"activate_voice_recognition",
+            "DESACTVOICERECOG":"desactivate_voice_recognition",
+            "ACTIVATECONVTOPIC":"activate_conversational_topic",
+            "LOADCONVTOPIC":"load_conversational_topic",
+            "UNLOADCONVTOPIC":"unload_conversational_topic",
+            "DEACTCONVTOPIC":"deactivate_conversational_topic",
+            "SAYUNDERTOPICCONTEXT":"say_under_topic_context",
+            "SETTOPICFOCUS":"set_topic_focus",
 
             
             
@@ -393,11 +409,11 @@ def pause_video():
 def  resume_video():
      alTabletService.resumeVideo()
 
-#
+# Load the image to show to de user
 def preload_image():
 
 
-#
+#Shows the image in the tablet for the user
 def show_image():
 
 
@@ -412,6 +428,76 @@ def set_tablet_bright(brightness):
 #Configure the media volume of the tablet.
 def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
+
+#
+def say():
+
+
+ #   
+def stop_all():
+
+
+#
+def set_say_volume():
+
+
+#
+def say_with_movement():
+
+
+#
+def set_system_volume():
+
+
+#
+def play_sound():
+
+
+#
+def pause_sound():
+
+
+#
+def activate_voice_emotion_analysis():
+
+
+#
+def desactivate_voice_emotion_analysis():
+
+
+#
+def activate_voice_recognition():
+
+
+#
+def desactivate_voice_recognition():
+
+
+#
+def activate_conversational_topic():
+
+
+#
+def load_conversational_topic():
+
+
+#
+def unload_conversational_topic():
+
+
+#
+def deactivate_conversational_topic():
+
+
+#
+def say_under_topic_context():
+
+
+#
+def set_topic_focus():
+
+
+
 
 
 
@@ -557,6 +643,13 @@ alLocalizationProxy = ALProxy("ALLocalizationProxy",HOST,9559)
 alSensorsProxy = ALProxy("ALSensorsProxy",HOST,9559)
 alLedsProxy = ALProxy("ALLedsProxy",HOST,9559)
 alTabletService = ALProxy("ALTabletService",HOST,9559)
+alAnimatedSpeech = ALProxy("ALAnimatedSpeech",HOST,9559)
+alAudioDevice = ALProxy("ALAudioDevice",HOST,9559)
+alAudioPlayer = ALProxy("ALAudioPlayer",HOST,9559)
+alVoiceEmotionAnalysis  = ALProxy("ALVoiceEmotionAnalysis",HOST,9559)
+alSpeechRecognition  = ALProxy("ALSpeechRecognition",HOST,9559)
+alDialogProxy = ALProxy("ALDialogProxy",HOST,9559)
+
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
