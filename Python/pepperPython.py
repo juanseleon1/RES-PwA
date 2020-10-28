@@ -32,6 +32,17 @@ def message_manage(key, msg):
            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
            "DEFENGAGEMENTTYPE": "set_engagement_type",
            "ACTIVATEACTIVEHEARING": "activate_hearing_movement",
+            "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements",
+            "DEFCONVERSATIONMODE":"define_conversation_mode",
+            "ACTIVATEPUSHREFLEXES":"activate_push_reflexes",
+            "ACIVATEBREATHMOV":"activate_breath_movement",
+            "ACTIVATEMOVDETECTION":"activate_movement_detection",
+            "ACTIVATEFACEDETEC":"activate_face_detection",
+            "ACTIVATECOLISSIONDETECT":"activate_colission_detection",
+
+
+
+            
            10: "consultar_actividades",
            11: "saludar",
            12: "despedirse",
@@ -194,6 +205,36 @@ def set_engagement_type(modeName):
 #Enables or disables the listening movements.
 def activate_hearing_movement(enabled):
     alListeningMovement.setEnabled(enabled)
+
+#Enables or disables the speaking movements.
+def activate_speak_movements(enabled):
+    alSpeakingMovementProxy.setEnabled(enabled)
+
+#Sets the current speaking movement mode.  Random - Contextual 
+def define_conversation_mode(mode):
+    alSpeakingMovementProxy.setMode(mode)
+
+#Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner. If not allowed, an exception is thrown.
+def activate_push_reflexes(enabled):
+    alMotionProxy.setPushRecoveryEnabled(enabled)
+    
+ #Starts or stops breathing animation on a chain.   
+def activate_breath_movement(enabled):
+    alMotionProxy.setBreathEnabled("Body",enabled)
+
+#Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
+def activate_movement_detection(enabled):
+    alPeoplePerception.setMovementDetectionEnabled(enabled)
+    
+#Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
+def activate_face_detection(enabled):
+    alFaceDetection.setRecognitionEnabled(enabled)
+
+#Enable/Disable Anti-collision protection of the arms of the robot.
+def activate_colission_detection(chainName,enable):
+    alMotionProxy.setCollisionProtectionEnabled(chainName   ,enable)
+
+    
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -321,6 +362,11 @@ alAutonomousBlinking = ALProxy("AutonomousBlinkingProxy", HOST, 9559)
 alBackgroundMovement = ALProxy("ALBackgroundMovementProxy", HOST, 9559)
 alBasicAwareness = ALProxy("ALBasicAwarenessProxy", HOST, 9559)
 alListeningMovement = ALProxy(" ALListeningMovementProxy", HOST, 9559)
+alSpeakingMovementProxy = ALProxy("ALSpeakingMovementProxy",HOST,9559)
+alMotionProxy = ALProxy("ALMotionProxy",HOST,9559)
+alPeoplePerception = ALProxy("ALPeoplePerception",HOST,9559)
+alFaceDetection = ALProxy("ALFaceDetection",HOST,9559)
+
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)

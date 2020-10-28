@@ -1,8 +1,6 @@
 # in myservice.py
 
 import qi
-import helper
-import mylib
 
 class MyService:
 
