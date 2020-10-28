@@ -31,7 +31,7 @@ def message_manage(key, msg):
            "ACTIVATELIFESIGNALS": "activate_life_signals",
            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
            "DEFENGAGEMENTTYPE": "set_engagement_type",
-           9: "ayuda",
+           "ACTIVATEACTIVEHEARING": "activate_hearing_movement",
            10: "consultar_actividades",
            11: "saludar",
            12: "despedirse",
@@ -184,12 +184,16 @@ def activate_life_signals(enabled):
 
 #Enables or disables basic awareness.
 def activate_life_signals_awareness(enabled):
-    alBasicAwareness.setEnabled (enabled)
+    alBasicAwareness.setEnabled(enabled)
 
 #Sets the engagement mode.
 #https://developer.softbankrobotics.com/pepper-naoqi-25/naoqi-developer-guide/naoqi-apis/naoqi-interaction-engines/albasicawareness#albasicawareness-engagement-modes
 def set_engagement_type(modeName):
     alBasicAwareness.setEngagementMode ( modeName )
+
+#Enables or disables the listening movements.
+def activate_hearing_movement(enabled):
+    alListeningMovement.setEnabled(enabled)
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -316,7 +320,7 @@ alFaceDetection = ALProxy("ALFaceDetectionProxy", HOST, 9559)
 alAutonomousBlinking = ALProxy("AutonomousBlinkingProxy", HOST, 9559)
 alBackgroundMovement = ALProxy("ALBackgroundMovementProxy", HOST, 9559)
 alBasicAwareness = ALProxy("ALBasicAwarenessProxy", HOST, 9559)
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
+alListeningMovement = ALProxy(" ALListeningMovementProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
