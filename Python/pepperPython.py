@@ -44,7 +44,45 @@ def message_manage(key, msg):
             "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service",
             "GETBATTERY":"get_battery",
             "GETTEMP":"get_tempreature",
-            #
+            #HumanServices
+            "GETEMOTIONSTATE":"get_emotion_State",
+            "LOGIN":"login",
+            #LocationServices
+            "SEARCHFREEZONE":"search_free_zone",
+            "GETFREEZONES":"get_free_zones",
+            "GETROBOTPOSITION":"get_robot_position",
+            #MovementServices
+            "MOVE":"move",
+            "MOVEFORWARD":"move_forward",
+            "MOVETO":"move_to",
+            "MOVETOPOSITION":"move_to_position",
+            #RobotStateServices
+            "WAKEUP":"wake_up",
+            "SUSPEND":"suspend",
+            "SETREFRESHTIMESENSORS":"set_refresh_time_sensors",
+            "ACTIVATERASTA ":"activate_rasta",
+            "RANDOMEYES":"random_eyes",
+            "SETLEDSINTENSITY":"set_leds_intensity",
+            "CHANGELEDCOLOR":"change_led_color",
+            "ACTIVATESTIFFNESS":"activate_stiffness",
+            #TabletServices
+            "TABLETON":"tablet_on",
+            "WAKETABLET":"wake_tablet",
+            "SUSPENDTABLET":"suspend_tablet",
+            "TABLETOFF":"tablet_off",
+            "SHOWVIDEO":"show_video",
+            "QUITVIDEO":"quit_video",
+            "PAUSEVIDEO":"pause_video",
+            "RESUMEVIDEO":"resume_video",
+            "PRELOADIMG":"preload_image",
+            "SHOWIMG":"show_image",
+            "HIDEIMG":"hide_image",
+            "SETTABLETBRIGHT":"set_tablet_bright",
+            "SETTABLETVOL":"set_tablet_volume",
+
+
+
+            
             
            10: "consultar_actividades",
            11: "saludar",
@@ -245,7 +283,84 @@ def activate_monitoring_charge_service(enabled):
 def get_battery():
     return  alBatteryProxy.getBatteryCharge()
 
-   
+#Return the actual state of the temperature diagnosis. Only the highest level of failure is returned.
+def get_tempreature():
+    return alBodyTemperatureProxy.getTemperatureDiagnosis()
+
+#Gets the emotional state of the current focused user through a PersonState struct.
+def get_emotion_State():
+    return alMood.currentPersonState()
+
+"""                         NI PINSHI IDEA DE COMO DEJAR EL LOGIN
+def login():
+
+    alUserSession
+
+"""
+
+#Looks for a free circular zone of a specified radius not farer than a specified displacement.
+def search_free_zone(radius, displacement):
+    return alNavigationProxy.searchFreeZone(radius,displacement)
+
+#Looks for a free circular zone of a specified radius not farer than a specified displacement
+def get_free_zones(radius, displacement):
+    return alNavigationProxy.findFreeZone(radius, displacement)
+
+""" No se si exista problema por utilizar ALLocalizationProxy o simplemente ALLocalization"""
+#Gets the coordinates x, y, theta of the pose2D of the robot
+def get_robot_position(enabled)
+    return alLocalizationProxy.getRobotPosition(enabled)
+
+#Makes the robot move at the given velocity, expressed in FRAME_ROBOT
+def move(x,y,speed):
+    alMotion.move(x,y,speed)
+
+#Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
+def move_forward(x,y,speed):
+    alMotion.moveTo(x,y,speed)
+
+#Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
+def move_to(x,y):
+    alNavigationProxy.navigateTo(x,y)
+
+#Go to the given position trying to perform a visual close loop with the image contained in current panorama at theta.
+def move_to_position(position):
+    alLocalizationProxy.goToPosition(position)
+
+# The robot wakes up
+def wake_up():
+    alMotionProxy.wakeUp()
+
+#The robot rests: goes to a relaxed and safe position and sets Motor off.
+def suspend():
+    alMotionProxy.rest()
+
+#Updates the period if relevant.
+def set_refresh_time_sensors(sensor, time):
+    alSensorsProxy.updatePeriod(sensor,time)
+
+#Launch a green/yellow/red rasta animation on all body.
+def  activate_rasta(duration):
+    alLedsProxy.rasta(duration)
+
+#Launch a random animation in eyes
+def random_eyes(duration):
+    alLedsProxy.randomEyes(duration)
+
+#Sets the intensity of a LED or Group of LEDs.
+def set_leds_intensity(sensor, intensity)
+    alLedsProxy.setIntensity(sensor, intensity)
+"""
+#Sets the color of an RGB led using  color code.
+def change_led_color(sensor, color):
+    alLedsProxy.fadeRGB(sensor, color)
+
+
+def  activate_stiffness(enabled):
+            ALGUNACOSA.SetSmartStiffnessEnabled
+
+
+""" 
     
 def hablar(texto_hablar):
     alTexToSpeech.say(texto_hablar)
@@ -379,6 +494,12 @@ alPeoplePerception = ALProxy("ALPeoplePerception",HOST,9559)
 alFaceDetection = ALProxy("ALFaceDetection",HOST,9559)
 alBatteryProxy = ALProxy("ALBatteryProxy",HOST,9559)
 alBodyTemperatureProxy = ALProxy("ALBodyTempreatureProxy",HOST,9559)
+alUserSession = ALProxy("ALUserSession",HOST,9559)
+alNavigationProxy = ALProxy("ALNavigationProxy",HOST,9559)
+alLocalizationProxy = ALProxy("ALLocalizationProxy",HOST,9559)
+alSensorsProxy = ALProxy("ALSensorsProxy",HOST,9559)
+alLedsProxy = ALProxy("ALLedsProxy",HOST,9559)
+alTabletService = ALProxy("ALTabletService",HOST,9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
