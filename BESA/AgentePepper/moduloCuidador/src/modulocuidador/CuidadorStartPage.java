@@ -6,14 +6,8 @@
 package modulocuidador;
 
 import java.awt.CardLayout;
-import DAL.Fachada;
-import DAL.PaisJpaController;
-import Mundo.*;
 import RobotAgentBDI.Believes.PerfilPwA.Cuidador;
 import RobotAgentBDI.Believes.PerfilPwA.handlers.CuidadorJpaController;
-import comparators.comparadorPuntaje;
-import comparators.comparadorSillas;
-import comparators.comparadorSillas1;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -63,6 +57,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         pwd = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        menuGeneral = new javax.swing.JPanel();
         Registrar1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -203,7 +198,6 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         padre.setLayout(new java.awt.CardLayout());
 
@@ -241,8 +235,12 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                         .addGap(0, 298, Short.MAX_VALUE)
                         .addComponent(login))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addGroup(HomeLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(HomeLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(pwd))
                 .addGap(283, 283, 283))
         );
@@ -251,7 +249,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -263,6 +261,20 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         );
 
         padre.add(Home, "0");
+
+        javax.swing.GroupLayout menuGeneralLayout = new javax.swing.GroupLayout(menuGeneral);
+        menuGeneral.setLayout(menuGeneralLayout);
+        menuGeneralLayout.setHorizontalGroup(
+            menuGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 654, Short.MAX_VALUE)
+        );
+        menuGeneralLayout.setVerticalGroup(
+            menuGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 421, Short.MAX_VALUE)
+        );
+
+        padre.add(menuGeneral, "gMenu");
+        menuGeneral.getAccessibleContext().setAccessibleName("");
 
         jLabel6.setText("Partido:");
 
@@ -320,7 +332,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addGroup(Registrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(partCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addGroup(Registrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
@@ -457,7 +469,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stablaDA, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addComponent(stablaDA, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(Registrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
@@ -571,7 +583,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addGroup(Registrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(minu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                 .addGroup(Registrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8)
                     .addComponent(jButton9))
@@ -782,7 +794,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addComponent(Soct, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton14)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         padre.add(Generar3, "6");
@@ -1277,7 +1289,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addGroup(Ventas5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel45))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                 .addGroup(Ventas5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton22)
                     .addComponent(jButton23))
@@ -1407,7 +1419,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                     .addComponent(fh3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eq3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addGroup(Ventas6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
                     .addComponent(jLabel50))
@@ -1465,8 +1477,6 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         );
 
         padre.add(fotito, "66");
-
-        getContentPane().add(padre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jMenuBar1.setRequestFocusEnabled(false);
 
@@ -1530,19 +1540,23 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         getAccessibleContext().setAccessibleName("Mundial Rusia 2018");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CardLayout card = (CardLayout) padre.getLayout();
-        partCombo.removeAllItems();
-        card.show(padre, "1");
-        List<Partidos> p = f.obtenerPartidos();
-        for (Partidos s : p) {
-            partCombo.addItem(s);
-        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -1550,42 +1564,42 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
-        Calendar c = Calendar.getInstance();
-        fechal.setText("Fecha Actual: \t " + String.valueOf(c.get(Calendar.DATE)) + "-" + String.valueOf(c.get(Calendar.MONTH)) + "-" + String.valueOf(c.get(Calendar.YEAR)));
-        String curr = String.format("%02d:%02d", c.get(Calendar.HOUR), c.get(Calendar.MINUTE));
-        horal.setText("Hora Actual: \t " + curr);
-        Vector<String> enc = new Vector<String>();
-        Vector<Vector<Object>> cont = new Vector<Vector<Object>>();
-        enc.add("Partido");
-        enc.add("Fecha");
-        enc.add("Estadio");
-        enc.add("Ciudad");
-        enc.add("Equipos");
-        enc.add("Horario");
-        List<Partidos> p = f.obtenerPartidos();
-        for (Partidos aux : p) {
-            Date t = (Date) aux.getHorario();
-            Date n = Calendar.getInstance().getTime();
-            if (t.after(n)) {
-                Calendar x = Calendar.getInstance();
-                x.setTime(t);
-                Vector<Object> o = new Vector<Object>();
-                o.add(aux.getCodigopartido());
-                String curry = String.format("%02d:%02d", x.get(Calendar.HOUR), x.get(Calendar.MINUTE));
-                o.add(String.valueOf(x.get(Calendar.DATE)) + "-" + String.valueOf(x.get(Calendar.MONTH)) + "-" + String.valueOf(x.get(Calendar.YEAR)));
-                o.add(aux.getCodestadio().getNombree());
-                o.add(aux.getCodestadio().getCiudad());
-                String s = new String(aux.getLocal().getNombreeq() + "-" + aux.getVisitante().getNombreeq());
-                o.add(s);
-                o.add(curry);
-                cont.add(o);
-            }
-        }
-        tablaDis = new JTable(cont, enc);
-        jScrollPane6.setViewportView(tablaDis);
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "7");        // TODO add your handling code here:
+//
+//        Calendar c = Calendar.getInstance();
+//        fechal.setText("Fecha Actual: \t " + String.valueOf(c.get(Calendar.DATE)) + "-" + String.valueOf(c.get(Calendar.MONTH)) + "-" + String.valueOf(c.get(Calendar.YEAR)));
+//        String curr = String.format("%02d:%02d", c.get(Calendar.HOUR), c.get(Calendar.MINUTE));
+//        horal.setText("Hora Actual: \t " + curr);
+//        Vector<String> enc = new Vector<String>();
+//        Vector<Vector<Object>> cont = new Vector<Vector<Object>>();
+//        enc.add("Partido");
+//        enc.add("Fecha");
+//        enc.add("Estadio");
+//        enc.add("Ciudad");
+//        enc.add("Equipos");
+//        enc.add("Horario");
+//        List<Partidos> p = f.obtenerPartidos();
+//        for (Partidos aux : p) {
+//            Date t = (Date) aux.getHorario();
+//            Date n = Calendar.getInstance().getTime();
+//            if (t.after(n)) {
+//                Calendar x = Calendar.getInstance();
+//                x.setTime(t);
+//                Vector<Object> o = new Vector<Object>();
+//                o.add(aux.getCodigopartido());
+//                String curry = String.format("%02d:%02d", x.get(Calendar.HOUR), x.get(Calendar.MINUTE));
+//                o.add(String.valueOf(x.get(Calendar.DATE)) + "-" + String.valueOf(x.get(Calendar.MONTH)) + "-" + String.valueOf(x.get(Calendar.YEAR)));
+//                o.add(aux.getCodestadio().getNombree());
+//                o.add(aux.getCodestadio().getCiudad());
+//                String s = new String(aux.getLocal().getNombreeq() + "-" + aux.getVisitante().getNombreeq());
+//                o.add(s);
+//                o.add(curry);
+//                cont.add(o);
+//            }
+//        }
+//        tablaDis = new JTable(cont, enc);
+//        jScrollPane6.setViewportView(tablaDis);
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "7");        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1598,109 +1612,109 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_partComboActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        Partidos p = (Partidos) partCombo.getSelectedItem();
-        Vector<Object> enc = new Vector<Object>();
-        enc.add("# de Partido");
-        enc.add("Estadio");
-        enc.add("Fecha");
-        enc.add("Hora");
-        enc.add("Equipo Local");
-        enc.add("Equipo Visitante");
-        Vector< Vector<String>> conte = new Vector<Vector<String>>();
-        Vector<String> linea = new Vector<>();
-        linea.add(String.valueOf(p.getCodigopartido()));
-        linea.add(p.getCodestadio().getNombree());
-        Date aux = (Date) p.getHorario();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(aux);
-        linea.add(String.valueOf(cal.get(Calendar.YEAR)) + "-" + String.valueOf(cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-        String curr = String.format("%02d:%02d", cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
-        linea.add(curr);
-        linea.add(String.valueOf(p.getLocal().getNombreeq()));
-        linea.add(String.valueOf(p.getVisitante().getNombreeq()));
-        conte.add(linea);
-        for (int i = 0; i < linea.size(); i++) {
-            System.out.println(linea.get(i));
-        }
-        tablaD = new JTable(conte, enc);
-        stablaD.setViewportView(tablaD);
-        //SEGUNDA TABLA
-        enc.clear();
-        enc.add("Equipo");
-        enc.add("Goles");
-        Vector< Vector<String>> sconte = new Vector<>();
-        Vector<String> slinea = new Vector<>();
-        Vector<String> sslinea = new Vector<>();
-        slinea.clear();
-        slinea.add(p.getVisitante().getNombreeq());
-        slinea.add(String.valueOf(f.obtenerMarcador(p.getCodigopartido(), p.getVisitante().getNombreeq())));
-        sconte.add(slinea);
-           Vector<ImageIcon> imag = new  Vector<ImageIcon>();
-        sslinea.add(p.getLocal().getNombreeq());
-        sslinea.add(String.valueOf(f.obtenerMarcador(p.getCodigopartido(), p.getLocal().getNombreeq())));
-        sconte.add(sslinea);
-        tablaM = new JTable(sconte, enc);
-        stablaM.setViewportView(tablaM);
-        //Tercera tabla
-        enc.clear();
-        enc.add("Equipo");
-        enc.add("Jugador");
-        enc.add("Minuto");
-        Vector< Vector<String>> tconte = new Vector<>();
-        List<Anotacionxpartido> l = f.obtenerDetalle(p.getCodigopartido());
-        for (Anotacionxpartido w : l) {
-     
-                imag.add(f.obtenerImagen(Integer.parseInt(String.valueOf(w.getJugador().getCodigoju()))));
-           
-            Vector<String> tlinea = new Vector<>();
-            AnotacionxpartidoPK a = w.getAnotacionxpartidoPK();
-            tlinea.add(w.getJugador().getNombreeq().getNombreeq());
-            tlinea.add(w.getJugador().getNombreju() + " " + w.getJugador().getApellidoju());
-            int i = Integer.parseInt(String.valueOf(a.getMinuto()));
-            if (a.getTiempo() == BigInteger.valueOf(3)) {
-                i += 45;
-            }
-            tlinea.add(i + "´");
-            tconte.add(tlinea);
-        }
-        fotoss=imag;
-        tablaDA = new JTable(tconte, enc);
-        stablaDA.setViewportView(tablaDA);
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "2");
+//
+//        Partidos p = (Partidos) partCombo.getSelectedItem();
+//        Vector<Object> enc = new Vector<Object>();
+//        enc.add("# de Partido");
+//        enc.add("Estadio");
+//        enc.add("Fecha");
+//        enc.add("Hora");
+//        enc.add("Equipo Local");
+//        enc.add("Equipo Visitante");
+//        Vector< Vector<String>> conte = new Vector<Vector<String>>();
+//        Vector<String> linea = new Vector<>();
+//        linea.add(String.valueOf(p.getCodigopartido()));
+//        linea.add(p.getCodestadio().getNombree());
+//        Date aux = (Date) p.getHorario();
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(aux);
+//        linea.add(String.valueOf(cal.get(Calendar.YEAR)) + "-" + String.valueOf(cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+//        String curr = String.format("%02d:%02d", cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
+//        linea.add(curr);
+//        linea.add(String.valueOf(p.getLocal().getNombreeq()));
+//        linea.add(String.valueOf(p.getVisitante().getNombreeq()));
+//        conte.add(linea);
+//        for (int i = 0; i < linea.size(); i++) {
+//            System.out.println(linea.get(i));
+//        }
+//        tablaD = new JTable(conte, enc);
+//        stablaD.setViewportView(tablaD);
+//        //SEGUNDA TABLA
+//        enc.clear();
+//        enc.add("Equipo");
+//        enc.add("Goles");
+//        Vector< Vector<String>> sconte = new Vector<>();
+//        Vector<String> slinea = new Vector<>();
+//        Vector<String> sslinea = new Vector<>();
+//        slinea.clear();
+//        slinea.add(p.getVisitante().getNombreeq());
+//        slinea.add(String.valueOf(f.obtenerMarcador(p.getCodigopartido(), p.getVisitante().getNombreeq())));
+//        sconte.add(slinea);
+//           Vector<ImageIcon> imag = new  Vector<ImageIcon>();
+//        sslinea.add(p.getLocal().getNombreeq());
+//        sslinea.add(String.valueOf(f.obtenerMarcador(p.getCodigopartido(), p.getLocal().getNombreeq())));
+//        sconte.add(sslinea);
+//        tablaM = new JTable(sconte, enc);
+//        stablaM.setViewportView(tablaM);
+//        //Tercera tabla
+//        enc.clear();
+//        enc.add("Equipo");
+//        enc.add("Jugador");
+//        enc.add("Minuto");
+//        Vector< Vector<String>> tconte = new Vector<>();
+//        List<Anotacionxpartido> l = f.obtenerDetalle(p.getCodigopartido());
+//        for (Anotacionxpartido w : l) {
+//     
+//                imag.add(f.obtenerImagen(Integer.parseInt(String.valueOf(w.getJugador().getCodigoju()))));
+//           
+//            Vector<String> tlinea = new Vector<>();
+//            AnotacionxpartidoPK a = w.getAnotacionxpartidoPK();
+//            tlinea.add(w.getJugador().getNombreeq().getNombreeq());
+//            tlinea.add(w.getJugador().getNombreju() + " " + w.getJugador().getApellidoju());
+//            int i = Integer.parseInt(String.valueOf(a.getMinuto()));
+//            if (a.getTiempo() == BigInteger.valueOf(3)) {
+//                i += 45;
+//            }
+//            tlinea.add(i + "´");
+//            tconte.add(tlinea);
+//        }
+//        fotoss=imag;
+//        tablaDA = new JTable(tconte, enc);
+//        stablaDA.setViewportView(tablaDA);
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "2");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Anotacionxpartido axp = new Anotacionxpartido();
-        Anotaciones a = new Anotaciones();
-        a.setTipoan("CABEZA");
-        List<Anotacionxpartido> la = a.getAnotacionxpartidoList();
-        if (la == null) {
-            la = new ArrayList<Anotacionxpartido>();
-        }
-
-        Jugador j = (Jugador) jug1.getSelectedItem();
-        a.setAnotacionxpartidoList(la);
-        Partidos p = (Partidos) partCombo.getSelectedItem();
-        axp.setAnotaciones(a);
-        axp.setJugador(j);
-        AnotacionxpartidoPK ap = new AnotacionxpartidoPK();
-        ap.setCodigoju(j.getCodigoju());
-        ap.setCodigopartido(p.getCodigopartido());
-        ap.setMinuto(BigInteger.valueOf(Integer.parseInt(minu1.getText())));
-        ap.setTiempo(BigInteger.ONE);
-        ap.setTipoan(a.getTipoan());
-        axp.setPartidos(p);
-        axp.setVar("NO");
-        axp.setAnotacionxpartidoPK(ap);
-        la.add(axp);
-        try {
-            f.insertarAnotacion(axp);
-            JOptionPane.showConfirmDialog(null, "Se ha agregado la anotacion con exito", "EXITO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(CuidadorStartPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Anotacionxpartido axp = new Anotacionxpartido();
+//        Anotaciones a = new Anotaciones();
+//        a.setTipoan("CABEZA");
+//        List<Anotacionxpartido> la = a.getAnotacionxpartidoList();
+//        if (la == null) {
+//            la = new ArrayList<Anotacionxpartido>();
+//        }
+//
+//        Jugador j = (Jugador) jug1.getSelectedItem();
+//        a.setAnotacionxpartidoList(la);
+//        Partidos p = (Partidos) partCombo.getSelectedItem();
+//        axp.setAnotaciones(a);
+//        axp.setJugador(j);
+//        AnotacionxpartidoPK ap = new AnotacionxpartidoPK();
+//        ap.setCodigoju(j.getCodigoju());
+//        ap.setCodigopartido(p.getCodigopartido());
+//        ap.setMinuto(BigInteger.valueOf(Integer.parseInt(minu1.getText())));
+//        ap.setTiempo(BigInteger.ONE);
+//        ap.setTipoan(a.getTipoan());
+//        axp.setPartidos(p);
+//        axp.setVar("NO");
+//        axp.setAnotacionxpartidoPK(ap);
+//        la.add(axp);
+//        try {
+//            f.insertarAnotacion(axp);
+//            JOptionPane.showConfirmDialog(null, "Se ha agregado la anotacion con exito", "EXITO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+//        } catch (Exception ex) {
+//            Logger.getLogger(CuidadorStartPage.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1709,40 +1723,40 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        Vector<Object> enc = new Vector<Object>();
-        enc.add("#PART");
-        enc.add("FECHA");
-        enc.add("ESTADIO");
-        enc.add("CIUDAD");
-        enc.add("EQUIPOS");
-        enc.add("HORARIO");
-        Vector<Vector<Object>> conte = new Vector<>();
-        for (Partidos p : oc) {
-            Vector<Object> info = new Vector<Object>();
-            info.add(p.getCodigopartido());
-            Date d = (Date) p.getHorario();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(d);
-            info.add(String.valueOf(cal.get(Calendar.YEAR)) + "-" + String.valueOf(cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-            info.add(p.getCodestadio().getNombree());
-            info.add(p.getCodestadio().getCiudad());
-            info.add(p.getLocal().getNombreeq() + "-" + p.getVisitante().getNombreeq());
-            String curr = String.format("%02d:%02d", cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
-            info.add(curr);
-            conte.add(info);
-            f.insertarPartido(p);
-        }
-
-        Toct = new JTable(conte, enc);
-        Soct.setViewportView(Toct);
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "6");          // TODO add your handling code here:
+//        Vector<Object> enc = new Vector<Object>();
+//        enc.add("#PART");
+//        enc.add("FECHA");
+//        enc.add("ESTADIO");
+//        enc.add("CIUDAD");
+//        enc.add("EQUIPOS");
+//        enc.add("HORARIO");
+//        Vector<Vector<Object>> conte = new Vector<>();
+//        for (Partidos p : oc) {
+//            Vector<Object> info = new Vector<Object>();
+//            info.add(p.getCodigopartido());
+//            Date d = (Date) p.getHorario();
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(d);
+//            info.add(String.valueOf(cal.get(Calendar.YEAR)) + "-" + String.valueOf(cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+//            info.add(p.getCodestadio().getNombree());
+//            info.add(p.getCodestadio().getCiudad());
+//            info.add(p.getLocal().getNombreeq() + "-" + p.getVisitante().getNombreeq());
+//            String curr = String.format("%02d:%02d", cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
+//            info.add(curr);
+//            conte.add(info);
+//            f.insertarPartido(p);
+//        }
+//
+//        Toct = new JTable(conte, enc);
+//        Soct.setViewportView(Toct);
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "6");          // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (f.EliminarPartidos(oc)) {
-            JOptionPane.showConfirmDialog(null, "Se han eliminado los partidos con exito", "EXITO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        }
+//        if (f.EliminarPartidos(oc)) {
+//            JOptionPane.showConfirmDialog(null, "Se han eliminado los partidos con exito", "EXITO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+//        }
 
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -1752,71 +1766,71 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        DefaultTableModel m = (DefaultTableModel) tablaDis.getModel();
-        if (tablaDis.getSelectedRow() != -1) {
-            Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDis.getSelectedRow());
-            for (int i = 0; i < v.size(); i++) {
-                System.out.println(v.get(i));
-            }
-
-            Partidos p = f.obtenerPartido((BigInteger) v.get(0));
-            System.out.println(p);
-            if (f.obtenerCanti(p) != 0) {
-                estL.setText("Estadio: " + p.getCodestadio().getNombree());
-                parL.setText("Partido: " + p.getCodigopartido());
-                edL.setText("Entradas Disponibles: " + f.obtenerCanti(p));
-                Vector<Object> enc = new Vector<Object>();
-                enc.add("Categoria");
-                enc.add("Precio");
-                enc.add("Entradas Disponibles");
-                Estadio es = p.getCodestadio();
-                Vector<Vector<Object>> conte = new Vector<Vector<Object>>();
-                Vector<Object> uno = new Vector<Object>();
-                Vector<Object> dos = new Vector<Object>();
-                Vector<Object> tres = new Vector<Object>();
-                Vector<Object> cuat = new Vector<Object>();
-                Vector<Object> cinc = new Vector<Object>();
-
-                if (f.obtenerCantiPat(p, BigInteger.ONE) != 0) {
-                    uno.add(BigInteger.ONE);
-                    uno.add(f.getPrecio(BigInteger.ONE, p.getFase().getFase()));
-                    uno.add(f.obtenerCantiDis(p, BigInteger.ONE));
-                    conte.add(uno);
-                }
-                if (f.obtenerCantiPat(p, BigInteger.valueOf(2)) != 0) {
-                    dos.add(BigInteger.valueOf(2));
-                    dos.add(f.getPrecio(BigInteger.valueOf(2), p.getFase().getFase()));
-                    dos.add(f.obtenerCantiDis(p, BigInteger.valueOf(2)));
-                    conte.add(dos);
-                }
-                if (f.obtenerCantiPat(p, BigInteger.valueOf(3)) != 0) {
-                    tres.add(BigInteger.valueOf(3));
-                    tres.add(f.getPrecio(BigInteger.valueOf(3), p.getFase().getFase()));
-                    tres.add(f.obtenerCantiDis(p, BigInteger.valueOf(3)));
-                    conte.add(tres);
-                }
-                if (f.obtenerCantiPat(p, BigInteger.valueOf(4)) != 0) {
-                    cuat.add(BigInteger.valueOf(4));
-                    cuat.add(f.getPrecio(BigInteger.valueOf(4), p.getFase().getFase()));
-                    cuat.add(f.obtenerCantiDis(p, BigInteger.valueOf(4)));
-                    conte.add(cuat);
-                }
-                if (f.obtenerCantiPat(p, BigInteger.valueOf(5)) != 0) {
-                    cinc.add(BigInteger.valueOf(5));
-                    cinc.add(f.getPrecio(BigInteger.valueOf(5), p.getFase().getFase()));
-                    cinc.add(f.obtenerCantiDis(p, BigInteger.valueOf(5)));
-                    conte.add(cinc);
-                }
-                tablaSilla = new JTable(conte, enc);
-                scrollSilla.setViewportView(tablaSilla);
-                CardLayout card = (CardLayout) padre.getLayout();
-                card.show(padre, "8");
-            } else {
-                JOptionPane.showMessageDialog(null, "No existen entradas para este partido ", "Sin disponibilidad", JOptionPane.DEFAULT_OPTION);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un partido ", "Sin seleccion", JOptionPane.DEFAULT_OPTION);
-        }
+//        DefaultTableModel m = (DefaultTableModel) tablaDis.getModel();
+//        if (tablaDis.getSelectedRow() != -1) {
+//            Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDis.getSelectedRow());
+//            for (int i = 0; i < v.size(); i++) {
+//                System.out.println(v.get(i));
+//            }
+//
+//            Partidos p = f.obtenerPartido((BigInteger) v.get(0));
+//            System.out.println(p);
+//            if (f.obtenerCanti(p) != 0) {
+//                estL.setText("Estadio: " + p.getCodestadio().getNombree());
+//                parL.setText("Partido: " + p.getCodigopartido());
+//                edL.setText("Entradas Disponibles: " + f.obtenerCanti(p));
+//                Vector<Object> enc = new Vector<Object>();
+//                enc.add("Categoria");
+//                enc.add("Precio");
+//                enc.add("Entradas Disponibles");
+//                Estadio es = p.getCodestadio();
+//                Vector<Vector<Object>> conte = new Vector<Vector<Object>>();
+//                Vector<Object> uno = new Vector<Object>();
+//                Vector<Object> dos = new Vector<Object>();
+//                Vector<Object> tres = new Vector<Object>();
+//                Vector<Object> cuat = new Vector<Object>();
+//                Vector<Object> cinc = new Vector<Object>();
+//
+//                if (f.obtenerCantiPat(p, BigInteger.ONE) != 0) {
+//                    uno.add(BigInteger.ONE);
+//                    uno.add(f.getPrecio(BigInteger.ONE, p.getFase().getFase()));
+//                    uno.add(f.obtenerCantiDis(p, BigInteger.ONE));
+//                    conte.add(uno);
+//                }
+//                if (f.obtenerCantiPat(p, BigInteger.valueOf(2)) != 0) {
+//                    dos.add(BigInteger.valueOf(2));
+//                    dos.add(f.getPrecio(BigInteger.valueOf(2), p.getFase().getFase()));
+//                    dos.add(f.obtenerCantiDis(p, BigInteger.valueOf(2)));
+//                    conte.add(dos);
+//                }
+//                if (f.obtenerCantiPat(p, BigInteger.valueOf(3)) != 0) {
+//                    tres.add(BigInteger.valueOf(3));
+//                    tres.add(f.getPrecio(BigInteger.valueOf(3), p.getFase().getFase()));
+//                    tres.add(f.obtenerCantiDis(p, BigInteger.valueOf(3)));
+//                    conte.add(tres);
+//                }
+//                if (f.obtenerCantiPat(p, BigInteger.valueOf(4)) != 0) {
+//                    cuat.add(BigInteger.valueOf(4));
+//                    cuat.add(f.getPrecio(BigInteger.valueOf(4), p.getFase().getFase()));
+//                    cuat.add(f.obtenerCantiDis(p, BigInteger.valueOf(4)));
+//                    conte.add(cuat);
+//                }
+//                if (f.obtenerCantiPat(p, BigInteger.valueOf(5)) != 0) {
+//                    cinc.add(BigInteger.valueOf(5));
+//                    cinc.add(f.getPrecio(BigInteger.valueOf(5), p.getFase().getFase()));
+//                    cinc.add(f.obtenerCantiDis(p, BigInteger.valueOf(5)));
+//                    conte.add(cinc);
+//                }
+//                tablaSilla = new JTable(conte, enc);
+//                scrollSilla.setViewportView(tablaSilla);
+//                CardLayout card = (CardLayout) padre.getLayout();
+//                card.show(padre, "8");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No existen entradas para este partido ", "Sin disponibilidad", JOptionPane.DEFAULT_OPTION);
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Seleccione un partido ", "Sin seleccion", JOptionPane.DEFAULT_OPTION);
+//        }
 
 
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -1827,75 +1841,75 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        ButtonGroup b1 = new ButtonGroup();
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
-        b1.add(jRadioButton1);
-        b1.add(jRadioButton2);
-        boolean rev = false;
-        jTextField1.setEnabled(false);
-        jTextField2.setEnabled(false);
-        jTextField1.setText("");
-        jTextField2.setText("");
-        DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
-        DefaultTableModel m1 = (DefaultTableModel) tablaDis.getModel();
-        DefaultTableModel m2 = (DefaultTableModel) tablaCheck.getModel();
-        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaSilla.getSelectedRow());
-        Vector<Object> v1 = (Vector<Object>) m1.getDataVector().get(tablaDis.getSelectedRow());
-        Partidos p;
-        p = f.obtenerPartido((BigInteger) v1.get(0));
-        Vector<Vector<Object>> v2 = (Vector<Vector<Object>>) m2.getDataVector();
+//        ButtonGroup b1 = new ButtonGroup();
+//        jRadioButton1.setSelected(false);
+//        jRadioButton2.setSelected(false);
+//        b1.add(jRadioButton1);
+//        b1.add(jRadioButton2);
+//        boolean rev = false;
+//        jTextField1.setEnabled(false);
+//        jTextField2.setEnabled(false);
+//        jTextField1.setText("");
+//        jTextField2.setText("");
+//        DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
+//        DefaultTableModel m1 = (DefaultTableModel) tablaDis.getModel();
+//        DefaultTableModel m2 = (DefaultTableModel) tablaCheck.getModel();
+//        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaSilla.getSelectedRow());
+//        Vector<Object> v1 = (Vector<Object>) m1.getDataVector().get(tablaDis.getSelectedRow());
+//        Partidos p;
+//        p = f.obtenerPartido((BigInteger) v1.get(0));
+//        Vector<Vector<Object>> v2 = (Vector<Vector<Object>>) m2.getDataVector();
 
-        List<Boleteria> sill = new ArrayList<Boleteria>();
-        Vector<String> enca = new Vector<String>();
-        for (int i = 0; i < v2.get(0).size(); i++) {
-            enca.add(m2.getColumnName(i));
-        }
-        System.out.println(v2.toString());
-        for (int i = 0; i < v2.size(); i++) {
-            Vector<Object> aux = v2.get(i);
-            for (int j = 1; j < aux.size(); j++) {
-                if ((Boolean) aux.get(j)) {
-                    rev = true;
-                    SillasPK ay = new SillasPK();
-                    ay.setCodestadio(p.getCodestadio().getCodestadio());
-                    BigInteger as = BigInteger.valueOf(i + 1);
-                    ay.setNumfila(as);
-                    ay.setNumasiento(BigInteger.valueOf(Long.parseLong(enca.get(j))));
-                    System.out.println(ay);
-                    sill.add(f.obtenerBoleta(ay, p));
-                }
-            }
-        }
-        pago = sill;
-        BigInteger s = (BigInteger) v.get(0);
-        e2.setText("Estadio: " + p.getCodestadio().getNombree());
-        p2.setText("Partido: " + p.getCodigopartido());
-        c2.setText("Categoria: " + s);
-        d2.setText("Disponibles: " + f.obtenerCantiDis(p, s));
-        s2.setText("Solicitadas: " + sill.size());
-        Vector<Object> enc = new Vector<Object>();
-        Vector< Vector<Object>> conte = new Vector< Vector<Object>>();
-        enc.add("Fila");
-        enc.add("Numero");
-        float tot = 0;
-        for (Boleteria b : sill) {
-            Vector<Object> enc1 = new Vector<Object>();
-            enc1.add(b.getSillas().getSillasPK().getNumfila());
-            enc1.add(b.getSillas().getSillasPK().getNumasiento());
-            conte.add(enc1);
-            tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
-        }
-        jTable1 = new JTable(conte, enc);
-        jScrollPane9.setViewportView(jTable1);
-        jLabel40.setText("Total: " + tot);
-        finalt = tot;
-        if (rev) {
-            CardLayout card = (CardLayout) padre.getLayout();
-            card.show(padre, "10");
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione al menos una silla");
-        }
+//        List<Boleteria> sill = new ArrayList<Boleteria>();
+//        Vector<String> enca = new Vector<String>();
+//        for (int i = 0; i < v2.get(0).size(); i++) {
+//            enca.add(m2.getColumnName(i));
+//        }
+//        System.out.println(v2.toString());
+//        for (int i = 0; i < v2.size(); i++) {
+//            Vector<Object> aux = v2.get(i);
+//            for (int j = 1; j < aux.size(); j++) {
+//                if ((Boolean) aux.get(j)) {
+//                    rev = true;
+//                    SillasPK ay = new SillasPK();
+//                    ay.setCodestadio(p.getCodestadio().getCodestadio());
+//                    BigInteger as = BigInteger.valueOf(i + 1);
+//                    ay.setNumfila(as);
+//                    ay.setNumasiento(BigInteger.valueOf(Long.parseLong(enca.get(j))));
+//                    System.out.println(ay);
+//                    sill.add(f.obtenerBoleta(ay, p));
+//                }
+//            }
+//        }
+//        pago = sill;
+//        BigInteger s = (BigInteger) v.get(0);
+//        e2.setText("Estadio: " + p.getCodestadio().getNombree());
+//        p2.setText("Partido: " + p.getCodigopartido());
+//        c2.setText("Categoria: " + s);
+//        d2.setText("Disponibles: " + f.obtenerCantiDis(p, s));
+//        s2.setText("Solicitadas: " + sill.size());
+//        Vector<Object> enc = new Vector<Object>();
+//        Vector< Vector<Object>> conte = new Vector< Vector<Object>>();
+//        enc.add("Fila");
+//        enc.add("Numero");
+//        float tot = 0;
+//        for (Boleteria b : sill) {
+//            Vector<Object> enc1 = new Vector<Object>();
+//            enc1.add(b.getSillas().getSillasPK().getNumfila());
+//            enc1.add(b.getSillas().getSillasPK().getNumasiento());
+//            conte.add(enc1);
+//            tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
+//        }
+//        jTable1 = new JTable(conte, enc);
+//        jScrollPane9.setViewportView(jTable1);
+//        jLabel40.setText("Total: " + tot);
+//        finalt = tot;
+//        if (rev) {
+//            CardLayout card = (CardLayout) padre.getLayout();
+//            card.show(padre, "10");
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Seleccione al menos una silla");
+//        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
 
@@ -1933,345 +1947,345 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        Fase fas = (Fase) fase.getSelectedItem();
-        //List<Partidos> parts = f.getPartidosFase(fas);
-
-        if (fas.getFase().equals("OCTAVOS")) {
-            fas = f.buscarFase("GRUPOS");
-        }
-        List<Partidos> parts = fas.getPartidosCollection();
-        List<Equipo> eq = new ArrayList<Equipo>();
-
-        for (Partidos p : parts) {
-            if (!eq.contains(p.getLocal())) {
-                p.getLocal().setPe(0);
-                p.getLocal().setPg(0);
-                p.getLocal().setPp(0);
-                eq.add(p.getLocal());
-            }
-            if (!eq.contains(p.getVisitante())) {
-                p.getVisitante().setPe(0);
-                p.getVisitante().setPg(0);
-                p.getVisitante().setPp(0);
-                eq.add(p.getVisitante());
-
-            }
-
-        }
-
-        for (Partidos p : parts) {
-            int a = (int) f.obtenerMarcador(p.getCodigopartido(), p.getLocal().getNombreeq());
-            int b = (int) f.obtenerMarcador(p.getCodigopartido(), p.getVisitante().getNombreeq());
-            int i = 0;
-            if (a > b) {
-                for (Equipo e : eq) {
-                    if (e.getNombreeq() == p.getLocal().getNombreeq()) {
-                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
-                        pts += 3;
-                        e.setPuntaje(BigInteger.valueOf(pts));
-                        e.setPg(e.getPg() + 1);
-                    }
-                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
-                        e.setPp(e.getPp() + 1);
-                    }
-                }
-            }
-            if (a < b) {
-                for (Equipo e : eq) {
-                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
-                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
-                        pts += 3;
-                        e.setPuntaje(BigInteger.valueOf(pts));
-                        e.setPg(e.getPg() + 1);
-                    }
-                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
-                        e.setPp(e.getPp() + 1);
-                    }
-                }
-            }
-            if (a == b) {
-                for (Equipo e : eq) {
-                    if (e.getNombreeq() == p.getLocal().getNombreeq()) {
-                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
-                        pts += 1;
-                        e.setPuntaje(BigInteger.valueOf(pts));
-                        e.setPe(e.getPp() + 1);
-                    }
-                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
-                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
-                        pts += 1;
-                        e.setPuntaje(BigInteger.valueOf(pts));
-                        e.setPe(e.getPp() + 1);
-                    }
-                }
-            }
-        }
-        List<Equipo> a = new ArrayList<Equipo>();
-        List<Equipo> b = new ArrayList<Equipo>();
-        List<Equipo> c = new ArrayList<Equipo>();
-        List<Equipo> d = new ArrayList<Equipo>();
-        List<Equipo> e = new ArrayList<Equipo>();
-        List<Equipo> gf = new ArrayList<Equipo>();
-        List<Equipo> g = new ArrayList<Equipo>();
-        List<Equipo> h = new ArrayList<Equipo>();
-        for (Equipo ee : eq) {
-            char grupo = ee.getGrupo();
-            switch (grupo) {
-                case 'A':
-                    a.add(ee);
-                    break;
-                case 'B':
-                    b.add(ee);
-                    break;
-                case 'C':
-                    c.add(ee);
-                    break;
-                case 'D':
-                    d.add(ee);
-                    break;
-                case 'E':
-                    e.add(ee);
-                    break;
-                case 'F':
-                    gf.add(ee);
-                    break;
-                case 'G':
-                    g.add(ee);
-                    break;
-                case 'H':
-                    h.add(ee);
-                    break;
-            }
-        }
-
-        Collections.sort(a, new comparadorPuntaje());
-        Collections.sort(b, new comparadorPuntaje());
-        Collections.sort(c, new comparadorPuntaje());
-        Collections.sort(d, new comparadorPuntaje());
-        Collections.sort(e, new comparadorPuntaje());
-        Collections.sort(gf, new comparadorPuntaje());
-        Collections.sort(g, new comparadorPuntaje());
-        Collections.sort(h, new comparadorPuntaje());
-        Collections.reverse(a);
-        Collections.reverse(b);
-        Collections.reverse(c);
-        Collections.reverse(d);
-        Collections.reverse(e);
-        Collections.reverse(gf);
-        Collections.reverse(g);
-        Collections.reverse(h);
-
-        Vector<Object> enc = new Vector<Object>();
-        enc.add("GRUPO");
-        enc.add("POS");
-        enc.add("EQUIPO");
-        enc.add("PG");
-        enc.add("PE");
-        enc.add("PP");
-        enc.add("PUNTAJE");
-
-        Vector<Vector<Object>> conte = new Vector<>();
-        int n = 1;
-        for (Equipo p : a) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : b) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : c) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : d) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : e) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : gf) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : g) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        n = 1;
-        for (Equipo p : h) {
-            Vector<Object> vc = new Vector<Object>();
-            vc.add(p.getGrupo());
-            vc.add(n);
-            vc.add(p.getNombreeq());
-            vc.add(p.getPg());
-            vc.add(p.getPe());
-            vc.add(p.getPp());
-            vc.add(p.getPuntaje());
-            n++;
-            conte.add(vc);
-        }
-        Tposi = new JTable(conte, enc);
-        Sposi.setViewportView(Tposi);
-
-        /*CREACION DE OCTAVOS*/
-        List<Partidos> octs = new ArrayList<Partidos>();
-        Fase fs = new Fase();
-        fs.setFase("OCTAVOS");
-        for (int i = 0; i < 8; i++) {
-            Partidos ps = new Partidos();
-            ps.setFase(fs);
-            octs.add(ps);
-        }
-        /*PARTIDO 1*/
-        Partidos z = octs.get(0);
-        z.setLocal(a.get(0));
-        z.setVisitante(b.get(1));
-        Calendar fech = Calendar.getInstance();
-        fech.set(2018, 6, 30, 21, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(11));
-        z.setCodigopartido(BigInteger.valueOf(49));
-        octs.set(0, z);
-
-        /*PARTIDO 2*/
-        z = octs.get(1);
-        z.setLocal(c.get(0));
-        z.setVisitante(d.get(1));
-        fech.set(2018, 6, 30, 17, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(3));
-        z.setCodigopartido(BigInteger.valueOf(50));
-        octs.set(1, z);
-
-        /*PARTIDO 3*/
-        z = octs.get(2);
-        z.setLocal(b.get(0));
-        z.setVisitante(a.get(1));
-        fech.set(2018, 7, 1, 17, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(4));
-        z.setCodigopartido(BigInteger.valueOf(51));
-        octs.set(2, z);
-
-        /*PARTIDO 4*/
-        z = octs.get(3);
-        z.setLocal(d.get(0));
-        z.setVisitante(c.get(1));
-        fech.set(2018, 7, 1, 21, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(6));
-        z.setCodigopartido(BigInteger.valueOf(52));
-        octs.set(3, z);
-
-        /*PARTIDO 5*/
-        z = octs.get(4);
-        z.setLocal(e.get(0));
-        z.setVisitante(gf.get(1));
-        fech.set(2018, 7, 2, 18, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(9));
-        z.setCodigopartido(BigInteger.valueOf(53));
-        octs.set(4, z);
-
-        /*PARTIDO 6*/
-        z = octs.get(5);
-        z.setLocal(g.get(0));
-        z.setVisitante(h.get(1));
-        fech.set(2018, 7, 2, 21, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(7));
-        z.setCodigopartido(BigInteger.valueOf(54));
-        octs.set(5, z);
-
-        /*PARTIDO 7*/
-        z = octs.get(6);
-        z.setLocal(gf.get(0));
-        z.setVisitante(e.get(1));
-        fech.set(2018, 7, 3, 17, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(8));
-        z.setCodigopartido(BigInteger.valueOf(55));
-        octs.set(6, z);
-
-        /*PARTIDO 8*/
-        z = octs.get(7);
-        z.setLocal(h.get(0));
-        z.setVisitante(g.get(1));
-        fech.set(2018, 7, 3, 17, 00, 00);
-        z.setHorario(fech.getTime());
-        z.setCodestadio(f.getEstadio(5));
-        z.setCodigopartido(BigInteger.valueOf(56));
-        octs.set(7, z);
-
-        oc = octs;
-
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "5");
+//        Fase fas = (Fase) fase.getSelectedItem();
+//        //List<Partidos> parts = f.getPartidosFase(fas);
+//
+//        if (fas.getFase().equals("OCTAVOS")) {
+//            fas = f.buscarFase("GRUPOS");
+//        }
+//        List<Partidos> parts = fas.getPartidosCollection();
+//        List<Equipo> eq = new ArrayList<Equipo>();
+//
+//        for (Partidos p : parts) {
+//            if (!eq.contains(p.getLocal())) {
+//                p.getLocal().setPe(0);
+//                p.getLocal().setPg(0);
+//                p.getLocal().setPp(0);
+//                eq.add(p.getLocal());
+//            }
+//            if (!eq.contains(p.getVisitante())) {
+//                p.getVisitante().setPe(0);
+//                p.getVisitante().setPg(0);
+//                p.getVisitante().setPp(0);
+//                eq.add(p.getVisitante());
+//
+//            }
+//
+//        }
+//
+//        for (Partidos p : parts) {
+//            int a = (int) f.obtenerMarcador(p.getCodigopartido(), p.getLocal().getNombreeq());
+//            int b = (int) f.obtenerMarcador(p.getCodigopartido(), p.getVisitante().getNombreeq());
+//            int i = 0;
+//            if (a > b) {
+//                for (Equipo e : eq) {
+//                    if (e.getNombreeq() == p.getLocal().getNombreeq()) {
+//                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
+//                        pts += 3;
+//                        e.setPuntaje(BigInteger.valueOf(pts));
+//                        e.setPg(e.getPg() + 1);
+//                    }
+//                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
+//                        e.setPp(e.getPp() + 1);
+//                    }
+//                }
+//            }
+//            if (a < b) {
+//                for (Equipo e : eq) {
+//                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
+//                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
+//                        pts += 3;
+//                        e.setPuntaje(BigInteger.valueOf(pts));
+//                        e.setPg(e.getPg() + 1);
+//                    }
+//                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
+//                        e.setPp(e.getPp() + 1);
+//                    }
+//                }
+//            }
+//            if (a == b) {
+//                for (Equipo e : eq) {
+//                    if (e.getNombreeq() == p.getLocal().getNombreeq()) {
+//                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
+//                        pts += 1;
+//                        e.setPuntaje(BigInteger.valueOf(pts));
+//                        e.setPe(e.getPp() + 1);
+//                    }
+//                    if (e.getNombreeq() == p.getVisitante().getNombreeq()) {
+//                        int pts = Integer.parseInt(String.valueOf(e.getPuntaje()));
+//                        pts += 1;
+//                        e.setPuntaje(BigInteger.valueOf(pts));
+//                        e.setPe(e.getPp() + 1);
+//                    }
+//                }
+//            }
+//        }
+//        List<Equipo> a = new ArrayList<Equipo>();
+//        List<Equipo> b = new ArrayList<Equipo>();
+//        List<Equipo> c = new ArrayList<Equipo>();
+//        List<Equipo> d = new ArrayList<Equipo>();
+//        List<Equipo> e = new ArrayList<Equipo>();
+//        List<Equipo> gf = new ArrayList<Equipo>();
+//        List<Equipo> g = new ArrayList<Equipo>();
+//        List<Equipo> h = new ArrayList<Equipo>();
+//        for (Equipo ee : eq) {
+//            char grupo = ee.getGrupo();
+//            switch (grupo) {
+//                case 'A':
+//                    a.add(ee);
+//                    break;
+//                case 'B':
+//                    b.add(ee);
+//                    break;
+//                case 'C':
+//                    c.add(ee);
+//                    break;
+//                case 'D':
+//                    d.add(ee);
+//                    break;
+//                case 'E':
+//                    e.add(ee);
+//                    break;
+//                case 'F':
+//                    gf.add(ee);
+//                    break;
+//                case 'G':
+//                    g.add(ee);
+//                    break;
+//                case 'H':
+//                    h.add(ee);
+//                    break;
+//            }
+//        }
+//
+//        Collections.sort(a, new comparadorPuntaje());
+//        Collections.sort(b, new comparadorPuntaje());
+//        Collections.sort(c, new comparadorPuntaje());
+//        Collections.sort(d, new comparadorPuntaje());
+//        Collections.sort(e, new comparadorPuntaje());
+//        Collections.sort(gf, new comparadorPuntaje());
+//        Collections.sort(g, new comparadorPuntaje());
+//        Collections.sort(h, new comparadorPuntaje());
+//        Collections.reverse(a);
+//        Collections.reverse(b);
+//        Collections.reverse(c);
+//        Collections.reverse(d);
+//        Collections.reverse(e);
+//        Collections.reverse(gf);
+//        Collections.reverse(g);
+//        Collections.reverse(h);
+//
+//        Vector<Object> enc = new Vector<Object>();
+//        enc.add("GRUPO");
+//        enc.add("POS");
+//        enc.add("EQUIPO");
+//        enc.add("PG");
+//        enc.add("PE");
+//        enc.add("PP");
+//        enc.add("PUNTAJE");
+//
+//        Vector<Vector<Object>> conte = new Vector<>();
+//        int n = 1;
+//        for (Equipo p : a) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : b) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : c) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : d) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : e) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : gf) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : g) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        n = 1;
+//        for (Equipo p : h) {
+//            Vector<Object> vc = new Vector<Object>();
+//            vc.add(p.getGrupo());
+//            vc.add(n);
+//            vc.add(p.getNombreeq());
+//            vc.add(p.getPg());
+//            vc.add(p.getPe());
+//            vc.add(p.getPp());
+//            vc.add(p.getPuntaje());
+//            n++;
+//            conte.add(vc);
+//        }
+//        Tposi = new JTable(conte, enc);
+//        Sposi.setViewportView(Tposi);
+//
+//        /*CREACION DE OCTAVOS*/
+//        List<Partidos> octs = new ArrayList<Partidos>();
+//        Fase fs = new Fase();
+//        fs.setFase("OCTAVOS");
+//        for (int i = 0; i < 8; i++) {
+//            Partidos ps = new Partidos();
+//            ps.setFase(fs);
+//            octs.add(ps);
+//        }
+//        /*PARTIDO 1*/
+//        Partidos z = octs.get(0);
+//        z.setLocal(a.get(0));
+//        z.setVisitante(b.get(1));
+//        Calendar fech = Calendar.getInstance();
+//        fech.set(2018, 6, 30, 21, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(11));
+//        z.setCodigopartido(BigInteger.valueOf(49));
+//        octs.set(0, z);
+//
+//        /*PARTIDO 2*/
+//        z = octs.get(1);
+//        z.setLocal(c.get(0));
+//        z.setVisitante(d.get(1));
+//        fech.set(2018, 6, 30, 17, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(3));
+//        z.setCodigopartido(BigInteger.valueOf(50));
+//        octs.set(1, z);
+//
+//        /*PARTIDO 3*/
+//        z = octs.get(2);
+//        z.setLocal(b.get(0));
+//        z.setVisitante(a.get(1));
+//        fech.set(2018, 7, 1, 17, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(4));
+//        z.setCodigopartido(BigInteger.valueOf(51));
+//        octs.set(2, z);
+//
+//        /*PARTIDO 4*/
+//        z = octs.get(3);
+//        z.setLocal(d.get(0));
+//        z.setVisitante(c.get(1));
+//        fech.set(2018, 7, 1, 21, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(6));
+//        z.setCodigopartido(BigInteger.valueOf(52));
+//        octs.set(3, z);
+//
+//        /*PARTIDO 5*/
+//        z = octs.get(4);
+//        z.setLocal(e.get(0));
+//        z.setVisitante(gf.get(1));
+//        fech.set(2018, 7, 2, 18, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(9));
+//        z.setCodigopartido(BigInteger.valueOf(53));
+//        octs.set(4, z);
+//
+//        /*PARTIDO 6*/
+//        z = octs.get(5);
+//        z.setLocal(g.get(0));
+//        z.setVisitante(h.get(1));
+//        fech.set(2018, 7, 2, 21, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(7));
+//        z.setCodigopartido(BigInteger.valueOf(54));
+//        octs.set(5, z);
+//
+//        /*PARTIDO 7*/
+//        z = octs.get(6);
+//        z.setLocal(gf.get(0));
+//        z.setVisitante(e.get(1));
+//        fech.set(2018, 7, 3, 17, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(8));
+//        z.setCodigopartido(BigInteger.valueOf(55));
+//        octs.set(6, z);
+//
+//        /*PARTIDO 8*/
+//        z = octs.get(7);
+//        z.setLocal(h.get(0));
+//        z.setVisitante(g.get(1));
+//        fech.set(2018, 7, 3, 17, 00, 00);
+//        z.setHorario(fech.getTime());
+//        z.setCodestadio(f.getEstadio(5));
+//        z.setCodigopartido(BigInteger.valueOf(56));
+//        octs.set(7, z);
+//
+//        oc = octs;
+//
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "5");
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -2291,128 +2305,128 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
-        DefaultTableModel m1 = (DefaultTableModel) tablaDis.getModel();
-        if (tablaSilla.getSelectedRow() != -1) {
-            Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaSilla.getSelectedRow());
-            Vector<Object> v1 = (Vector<Object>) m1.getDataVector().get(tablaDis.getSelectedRow());
-            if ((long) v.get(2) != Long.parseLong("0")) {
-                Partidos p;
-                p = f.obtenerPartido((BigInteger) v1.get(0));
-                BigInteger s = (BigInteger) v.get(0);
-                E.setText("Estadio: " + p.getCodestadio().getNombree());
-                P.setText("Partido: " + p.getCodigopartido());
-                C.setText("Categoria: " + s);
-                D.setText("Disponibles: " + f.obtenerCantiDis(p, s));
-                Vector<Object> enc = new Vector<Object>();
-                enc.add("Fila/Silla");
-                Vector<Sillas> si = new Vector<Sillas>();
-                for (Boleteria b : f.obtenerCantPat(p, s)) {
-                    si.add(b.getSillas());
-                }
-                Collections.sort(si, new comparadorSillas());
-                for (Sillas silla : si) {
-                    if (!enc.contains(silla.getSillasPK().getNumasiento())) {
-                        enc.add(silla.getSillasPK().getNumasiento());
-                    }
-                }
-                Collections.sort(si, new comparadorSillas1());
-                Sillas h = si.get(si.size() - 1);
-                for (Sillas er : si) {
-                    System.out.println(er);
-                }
-                Vector< Vector<Object>> conte = new Vector< Vector<Object>>();
-                int comp = Integer.parseInt(String.valueOf(h.getSillasPK().getNumfila()));
-                System.out.println(comp);
-                for (int i = 0; i < comp; i++) {
-                    Vector<Object> sub = new Vector<Object>();
-
-                    sub.add(i + 1);
-                    for (int j = 1; j < enc.size(); j++) {
-                        sub.add(false);
-                    }
-                    conte.add(sub);
-                }
-                si.clear();
-                tablaCheck = new JTable(conte, enc) {
-                    @Override
-                    public Class getColumnClass(int column) {
-                        switch (column) {
-                            case 0:
-                                return String.class;
-                            default:
-                                return Boolean.class;
-
-                        }
-
-                    }
-                };
-                for (Boleteria b : f.obtenerCantDis(p, s)) {
-                    si.add(b.getSillas());
-                }
-                for (Sillas silla : si) {
-                    BigInteger e = silla.getSillasPK().getNumasiento();
-                    int j = Integer.parseInt(String.valueOf(silla.getSillasPK().getNumfila())) - 1;
-                    int x = 0;
-                    for (int i = 1; i < enc.size(); i++) {
-                        if (e == enc.get(i)) {
-                            x = i;
-                        }
-                    }
-                    conte.get(j).set(x, true);
-                }
-
-                jScrollPane8.setViewportView(tablaCheck);
-                CardLayout card = (CardLayout) padre.getLayout();
-
-                card.show(padre, "9");
-            } else {
-                JOptionPane.showMessageDialog(null, "Categoria sin disponibilidad");
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor seleccione una categoria");
-        }
+//        DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
+//        DefaultTableModel m1 = (DefaultTableModel) tablaDis.getModel();
+//        if (tablaSilla.getSelectedRow() != -1) {
+//            Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaSilla.getSelectedRow());
+//            Vector<Object> v1 = (Vector<Object>) m1.getDataVector().get(tablaDis.getSelectedRow());
+//            if ((long) v.get(2) != Long.parseLong("0")) {
+//                Partidos p;
+//                p = f.obtenerPartido((BigInteger) v1.get(0));
+//                BigInteger s = (BigInteger) v.get(0);
+//                E.setText("Estadio: " + p.getCodestadio().getNombree());
+//                P.setText("Partido: " + p.getCodigopartido());
+//                C.setText("Categoria: " + s);
+//                D.setText("Disponibles: " + f.obtenerCantiDis(p, s));
+//                Vector<Object> enc = new Vector<Object>();
+//                enc.add("Fila/Silla");
+//                Vector<Sillas> si = new Vector<Sillas>();
+//                for (Boleteria b : f.obtenerCantPat(p, s)) {
+//                    si.add(b.getSillas());
+//                }
+//                Collections.sort(si, new comparadorSillas());
+//                for (Sillas silla : si) {
+//                    if (!enc.contains(silla.getSillasPK().getNumasiento())) {
+//                        enc.add(silla.getSillasPK().getNumasiento());
+//                    }
+//                }
+//                Collections.sort(si, new comparadorSillas1());
+//                Sillas h = si.get(si.size() - 1);
+//                for (Sillas er : si) {
+//                    System.out.println(er);
+//                }
+//                Vector< Vector<Object>> conte = new Vector< Vector<Object>>();
+//                int comp = Integer.parseInt(String.valueOf(h.getSillasPK().getNumfila()));
+//                System.out.println(comp);
+//                for (int i = 0; i < comp; i++) {
+//                    Vector<Object> sub = new Vector<Object>();
+//
+//                    sub.add(i + 1);
+//                    for (int j = 1; j < enc.size(); j++) {
+//                        sub.add(false);
+//                    }
+//                    conte.add(sub);
+//                }
+//                si.clear();
+//                tablaCheck = new JTable(conte, enc) {
+//                    @Override
+//                    public Class getColumnClass(int column) {
+//                        switch (column) {
+//                            case 0:
+//                                return String.class;
+//                            default:
+//                                return Boolean.class;
+//
+//                        }
+//
+//                    }
+//                };
+//                for (Boleteria b : f.obtenerCantDis(p, s)) {
+//                    si.add(b.getSillas());
+//                }
+//                for (Sillas silla : si) {
+//                    BigInteger e = silla.getSillasPK().getNumasiento();
+//                    int j = Integer.parseInt(String.valueOf(silla.getSillasPK().getNumfila())) - 1;
+//                    int x = 0;
+//                    for (int i = 1; i < enc.size(); i++) {
+//                        if (e == enc.get(i)) {
+//                            x = i;
+//                        }
+//                    }
+//                    conte.get(j).set(x, true);
+//                }
+//
+//                jScrollPane8.setViewportView(tablaCheck);
+//                CardLayout card = (CardLayout) padre.getLayout();
+//
+//                card.show(padre, "9");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Categoria sin disponibilidad");
+//            }
+//
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Por favor seleccione una categoria");
+//        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        boolean enc = true;
-        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Escoja algun metodo de pago");
-            jButton18ActionPerformed(evt);
-            enc = false;
-        }
-        if (jRadioButton1.isSelected()) {
-            if (jTextField1.getText().equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese el valor a pagar");
-                jButton18ActionPerformed(evt);
-                enc = false;
-            }
-            float tot = 0;
-
-            for (Boleteria b : pago) {
-                tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
-            }
-            if (enc && Float.parseFloat(jTextField1.getText()) < tot) {
-                JOptionPane.showMessageDialog(null, "Ingrese un valor igual o superior al total");
-                jButton18ActionPerformed(evt);
-                enc = false;
-
-            }
-        }
-        if (jRadioButton2.isSelected() && jTextField2.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(null, "Ingrese el valor a pagar");
-            jButton18ActionPerformed(evt);
-            enc = false;
-        }
-        if (enc) {
-            efec = jTextField1.getText();
-            card = jTextField2.getText();
-            CardLayout card = (CardLayout) padre.getLayout();
-            card.show(padre, "11");
-        }
-
-        // TODO add your handling code here:
+//        boolean enc = true;
+//        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+//            JOptionPane.showMessageDialog(null, "Escoja algun metodo de pago");
+//            jButton18ActionPerformed(evt);
+//            enc = false;
+//        }
+//        if (jRadioButton1.isSelected()) {
+//            if (jTextField1.getText().equalsIgnoreCase("")) {
+//                JOptionPane.showMessageDialog(null, "Ingrese el valor a pagar");
+//                jButton18ActionPerformed(evt);
+//                enc = false;
+//            }
+//            float tot = 0;
+//
+//            for (Boleteria b : pago) {
+//                tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
+//            }
+//            if (enc && Float.parseFloat(jTextField1.getText()) < tot) {
+//                JOptionPane.showMessageDialog(null, "Ingrese un valor igual o superior al total");
+//                jButton18ActionPerformed(evt);
+//                enc = false;
+//
+//            }
+//        }
+//        if (jRadioButton2.isSelected() && jTextField2.getText().equalsIgnoreCase("")) {
+//            JOptionPane.showMessageDialog(null, "Ingrese el valor a pagar");
+//            jButton18ActionPerformed(evt);
+//            enc = false;
+//        }
+//        if (enc) {
+//            efec = jTextField1.getText();
+//            card = jTextField2.getText();
+//            CardLayout card = (CardLayout) padre.getLayout();
+//            card.show(padre, "11");
+//        }
+//
+//        // TODO add your handling code here:
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -2429,142 +2443,142 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese el Pasaporte");
             jButton20ActionPerformed(evt);
         }
-        Usuarios nuevo = new Usuarios();
-        nuevo.setApellido(jTextField4.getText());
-        nuevo.setNombre(jTextField3.getText());
-        PaisJpaController pai = new PaisJpaController(Persistence.createEntityManagerFactory("BasesFinalPU"));
-        nuevo.setCodpais(pai.findPais("1"));
-        nuevo.setFechan(Calendar.getInstance().getTime());
-        nuevo.setId(BigDecimal.valueOf(Long.parseLong(jTextField5.getText())));
-
-        float tot = 0;
-
-        for (Boleteria b : pago) {
-            tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
-        }
-        String fep = null, recib = null, fac = null;
-        if (jRadioButton1.isSelected()) {
-            fep = "EFECTIVO";
-            long pa = Long.parseLong(efec);
-            recib = String.valueOf(pa);
-            Pago pag = new Pago("EFECTIVO");
-            fac = pag.getPagoPK().getIdpago().toString();
-            pag.setTotal(BigInteger.valueOf((long) tot));
-            pag.setBoleteriaCollection(pago);
-            Efectivo e = new Efectivo();
-            EfectivoPK epk = new EfectivoPK();
-            epk.setIdpago(pag.getPagoPK().getIdpago());
-            epk.setTipopago(pag.getPagoPK().getTipopago());
-            e.setEfectivoPK(epk);
-            e.setPagado(BigInteger.valueOf(pa));
-            long tot1 = (long) tot;
-            if (tot > pa) {
-                e.setVueltos(BigInteger.valueOf(tot1 - pa));
-            } else {
-                e.setVueltos(BigInteger.ZERO);
-            }
-            Usuarios u = f.usuarioExis(nuevo.getId());
-            if (u == null) {
-                List<Pago> alp = new ArrayList<>();
-                alp.add(pag);
-                pag.setUsuariosId(nuevo);
-                e.setPago(pag);
-                f.insertarUsuarios(nuevo);
-                f.insertarPago(pag);
-                f.insertarEfectivo(e);
-
-            } else {
-                List<Pago> alp = u.getPagoCollection();
-                if (alp == null) {
-                    alp = new ArrayList<Pago>();
-                }
-                alp.add(pag);
-                u.setPagoCollection(alp);
-                e.setPago(pag);
-                f.insertarPago(pag);
-                f.actualizarUsuarios(u);
-                f.insertarEfectivo(e);
-
-                nuevo = u;
-            }
-
-        }
-        if (jRadioButton2.isSelected()) {
-            fep = "TARJETACREDITO";
-            recib = "CREDITO";
-            long pa = Long.parseLong(card);
-            Pago pag = new Pago("TARJETACREDITO");
-            fac = pag.getPagoPK().getIdpago().toString();
-            pag.setTotal(BigInteger.valueOf((long) tot));
-            pag.setBoleteriaCollection(pago);
-            Tarjetacredito e = new Tarjetacredito();
-            TarjetacreditoPK epk = new TarjetacreditoPK();
-            epk.setIdpago(pag.getPagoPK().getIdpago());
-            epk.setTipopago(pag.getPagoPK().getTipopago());
-            e.setTarjetacreditoPK(epk);
-            e.setBanco("BANCOLOMBIA");
-            e.setNumero(BigInteger.valueOf(Long.parseLong(card)));
-            e.setPago(pag);
-            Usuarios u = f.usuarioExis(nuevo.getId());
-            if (u == null) {
-                List<Pago> alp = new ArrayList<>();
-                alp.add(pag);
-                pag.setUsuariosId(nuevo);
-                e.setPago(pag);
-                f.insertarUsuarios(nuevo);
-                f.insertarPago(pag);
-                f.insertarTC(e);
-
-            } else {
-                List<Pago> alp = u.getPagoCollection();
-                if (alp == null) {
-                    alp = new ArrayList<Pago>();
-                }
-                alp.add(pag);
-                u.setPagoCollection(alp);
-                e.setPago(pag);
-                f.insertarPago(pag);
-                if (!f.existeTarjeta(epk)) {
-                    f.insertarTC(e);
-                }
-                f.actualizarUsuarios(u);
-
-                nuevo = u;
-            }
-
-        }
-        n3.setText("Nombres: " + nuevo.getNombre());
-        a3.setText("Apellidos: " + nuevo.getApellido());
-        d3.setText("Identificacion: " + nuevo.getId());
-        e3.setText("Estadio: " + pago.get(0).getCodigopartido().getCodestadio().getNombree());
-        p3.setText("Partido: " + pago.get(0).getCodigopartido().getCodigopartido());
-        fh3.setText("Fecha y hora: " + pago.get(0).getCodigopartido().getHorario());
-        eq3.setText("Equipos: " + pago.get(0).getCodigopartido().getLocal() + "-" + pago.get(0).getCodigopartido().getVisitante());
-        c3.setText("Cantidad: " + pago.size());
-        cat3.setText("Categoria: " + pago.get(0).getSillas().getCodcategoria());
-        String stri = new String();
-        for (Boleteria b : pago) {
-            String stri2 = String.valueOf(b.getSillas().getSillasPK().getNumasiento()) + String.valueOf(b.getSillas().getSillasPK().getNumfila());
-            stri += stri2 + " ";
-        }
-        sil3.setText("Sillas: " + stri);
-        tot3.setText("Total a pagar: " + tot);
-        fp3.setText("Forma de pago: " + fep);
-        re3.setText("Recibido: " + recib);
-        fac1.setText("# de factura: " + fac);
-        fc.setText("Fecha de Compra: " + LocalDate.now());
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "12");          // TODO add your handling code here:
+//        Usuarios nuevo = new Usuarios();
+//        nuevo.setApellido(jTextField4.getText());
+//        nuevo.setNombre(jTextField3.getText());
+//        PaisJpaController pai = new PaisJpaController(Persistence.createEntityManagerFactory("BasesFinalPU"));
+//        nuevo.setCodpais(pai.findPais("1"));
+//        nuevo.setFechan(Calendar.getInstance().getTime());
+//        nuevo.setId(BigDecimal.valueOf(Long.parseLong(jTextField5.getText())));
+////////
+////////        float tot = 0;
+////////
+////////        for (Boleteria b : pago) {
+////////            tot += Float.parseFloat(String.valueOf(b.getPrecio().getValor()));
+////////        }
+////////        String fep = null, recib = null, fac = null;
+////////        if (jRadioButton1.isSelected()) {
+////////            fep = "EFECTIVO";
+////////            long pa = Long.parseLong(efec);
+////////            recib = String.valueOf(pa);
+////////            Pago pag = new Pago("EFECTIVO");
+////////            fac = pag.getPagoPK().getIdpago().toString();
+////////            pag.setTotal(BigInteger.valueOf((long) tot));
+////////            pag.setBoleteriaCollection(pago);
+////////            Efectivo e = new Efectivo();
+////////            EfectivoPK epk = new EfectivoPK();
+////////            epk.setIdpago(pag.getPagoPK().getIdpago());
+////////            epk.setTipopago(pag.getPagoPK().getTipopago());
+////////            e.setEfectivoPK(epk);
+////////            e.setPagado(BigInteger.valueOf(pa));
+////////            long tot1 = (long) tot;
+////////            if (tot > pa) {
+////////                e.setVueltos(BigInteger.valueOf(tot1 - pa));
+////////            } else {
+////////                e.setVueltos(BigInteger.ZERO);
+////////            }
+////////            Usuarios u = f.usuarioExis(nuevo.getId());
+////////            if (u == null) {
+////////                List<Pago> alp = new ArrayList<>();
+////////                alp.add(pag);
+////////                pag.setUsuariosId(nuevo);
+////////                e.setPago(pag);
+////////                f.insertarUsuarios(nuevo);
+////////                f.insertarPago(pag);
+////////                f.insertarEfectivo(e);
+////////
+////////            } else {
+////////                List<Pago> alp = u.getPagoCollection();
+////////                if (alp == null) {
+////////                    alp = new ArrayList<Pago>();
+////////                }
+////////                alp.add(pag);
+////////                u.setPagoCollection(alp);
+////////                e.setPago(pag);
+////////                f.insertarPago(pag);
+////////                f.actualizarUsuarios(u);
+////////                f.insertarEfectivo(e);
+////////
+////////                nuevo = u;
+////////            }
+////////
+////////        }
+////////        if (jRadioButton2.isSelected()) {
+////////            fep = "TARJETACREDITO";
+////////            recib = "CREDITO";
+////////            long pa = Long.parseLong(card);
+////////            Pago pag = new Pago("TARJETACREDITO");
+////////            fac = pag.getPagoPK().getIdpago().toString();
+////////            pag.setTotal(BigInteger.valueOf((long) tot));
+////////            pag.setBoleteriaCollection(pago);
+////////            Tarjetacredito e = new Tarjetacredito();
+////////            TarjetacreditoPK epk = new TarjetacreditoPK();
+////////            epk.setIdpago(pag.getPagoPK().getIdpago());
+////////            epk.setTipopago(pag.getPagoPK().getTipopago());
+////////            e.setTarjetacreditoPK(epk);
+////////            e.setBanco("BANCOLOMBIA");
+////////            e.setNumero(BigInteger.valueOf(Long.parseLong(card)));
+////////            e.setPago(pag);
+////////            Usuarios u = f.usuarioExis(nuevo.getId());
+////////            if (u == null) {
+////////                List<Pago> alp = new ArrayList<>();
+////////                alp.add(pag);
+////////                pag.setUsuariosId(nuevo);
+////////                e.setPago(pag);
+////////                f.insertarUsuarios(nuevo);
+////////                f.insertarPago(pag);
+////////                f.insertarTC(e);
+//////
+//////            } else {
+//////                List<Pago> alp = u.getPagoCollection();
+//////                if (alp == null) {
+//////                    alp = new ArrayList<Pago>();
+//////                }
+//////                alp.add(pag);
+//////                u.setPagoCollection(alp);
+//////                e.setPago(pag);
+//////                f.insertarPago(pag);
+//////                if (!f.existeTarjeta(epk)) {
+//////                    f.insertarTC(e);
+//////                }
+//////                f.actualizarUsuarios(u);
+//////
+//////                nuevo = u;
+//////            }
+//////
+//////        }
+//////        n3.setText("Nombres: " + nuevo.getNombre());
+////        a3.setText("Apellidos: " + nuevo.getApellido());
+////        d3.setText("Identificacion: " + nuevo.getId());
+////        e3.setText("Estadio: " + pago.get(0).getCodigopartido().getCodestadio().getNombree());
+////        p3.setText("Partido: " + pago.get(0).getCodigopartido().getCodigopartido());
+////        fh3.setText("Fecha y hora: " + pago.get(0).getCodigopartido().getHorario());
+////        eq3.setText("Equipos: " + pago.get(0).getCodigopartido().getLocal() + "-" + pago.get(0).getCodigopartido().getVisitante());
+////        c3.setText("Cantidad: " + pago.size());
+////        cat3.setText("Categoria: " + pago.get(0).getSillas().getCodcategoria());
+////        String stri = new String();
+////        for (Boleteria b : pago) {
+////            String stri2 = String.valueOf(b.getSillas().getSillasPK().getNumasiento()) + String.valueOf(b.getSillas().getSillasPK().getNumfila());
+////            stri += stri2 + " ";
+////        }
+////        sil3.setText("Sillas: " + stri);
+////        tot3.setText("Total a pagar: " + tot);
+////        fp3.setText("Forma de pago: " + fep);
+//        re3.setText("Recibido: " + recib);
+//        fac1.setText("# de factura: " + fac);
+//        fc.setText("Fecha de Compra: " + LocalDate.now());
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "12");          // TODO add your handling code here:
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        fase.removeAllItems();
-        List<Fase> fa = f.obtenerFases();
-        for (Fase q : fa) {
-            fase.addItem(q);
-        }
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "4");
+//        fase.removeAllItems();
+//        List<Fase> fa = f.obtenerFases();
+//        for (Fase q : fa) {
+//            fase.addItem(q);
+//        }
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "4");
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -2574,23 +2588,23 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Partidos p = (Partidos) partCombo.getSelectedItem();
-        part.setText(p.getCodigopartido() + "");
-        if (eq1 == null) {
-            eq1 = new JComboBox();
-        }
-        if (jug1 == null) {
-            jug1 = new JComboBox();
-        }
-        eq1.removeAllItems();
-        jug1.removeAllItems();
-        eq1.addItem(p.getLocal());
-        eq1.addItem(p.getVisitante());
-        //jug1.setEnabled(false);
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "3");
-
-
+//        Partidos p = (Partidos) partCombo.getSelectedItem();
+//        part.setText(p.getCodigopartido() + "");
+//        if (eq1 == null) {
+//            eq1 = new JComboBox();
+//        }
+//        if (jug1 == null) {
+//            jug1 = new JComboBox();
+//        }
+//        eq1.removeAllItems();
+//        jug1.removeAllItems();
+//        eq1.addItem(p.getLocal());
+//        eq1.addItem(p.getVisitante());
+//        //jug1.setEnabled(false);
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "3");
+//
+//
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
@@ -2608,19 +2622,19 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     private void eq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eq1ActionPerformed
 
-        Equipo e = (Equipo) eq1.getSelectedItem();
-        if (e != null) {
-
-            List<Alineaciones> re = f.obtenerAlin(e.getNombreeq(), Integer.parseInt(part.getText()));
-
-            jug1.removeAllItems();
-            for (Alineaciones j : re) {
-                jug1.addItem(j.getJugador());
-            }
-            jug1.setEnabled(true);
-        } else {
-            jug1.removeAllItems();
-        }
+//        Equipo e = (Equipo) eq1.getSelectedItem();
+//        if (e != null) {
+//
+//            List<Alineaciones> re = f.obtenerAlin(e.getNombreeq(), Integer.parseInt(part.getText()));
+//
+//            jug1.removeAllItems();
+//            for (Alineaciones j : re) {
+//                jug1.addItem(j.getJugador());
+//            }
+//            jug1.setEnabled(true);
+//        } else {
+//            jug1.removeAllItems();
+//        }
 
     }//GEN-LAST:event_eq1ActionPerformed
 
@@ -2653,12 +2667,12 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaDAMouseClicked
 
     private void stablaDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stablaDAMouseClicked
-       DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
-        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
-        ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "66");     
-        jLabel11.setIcon(ayuda);      
+//       DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
+//        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
+//        ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "66");     
+//        jLabel11.setIcon(ayuda);      
     }//GEN-LAST:event_stablaDAMouseClicked
 
     private void stablaDAPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_stablaDAPropertyChange
@@ -2670,17 +2684,25 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaDAPropertyChange
 
     private void tablaDAMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDAMousePressed
-    DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
-        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
-        ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "66");     
-        jLabel11.setIcon(ayuda);
+//    DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
+//        Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
+//        ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
+//        CardLayout card = (CardLayout) padre.getLayout();
+//        card.show(padre, "66");     
+//        jLabel11.setIcon(ayuda);
     }//GEN-LAST:event_tablaDAMousePressed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
         jButton4ActionPerformed(evt);      // TODO add your handling code here:
     }//GEN-LAST:event_RegresarActionPerformed
+
+    private void pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwdActionPerformed
+
+    private void nusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nusuarioActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         String cedula = null,user=null,pwdl=null;
@@ -2700,28 +2722,21 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese una contraseña");
             sirve=false;
         }
-        
+
         if(sirve && c==null)
+        {
+            JOptionPane.showMessageDialog(null, "Nombre de Usuario inexistente");
+        }else{
+            loginl= c.getContraseña().equals(pwdl);
+            if(!loginl)
             {
-                JOptionPane.showMessageDialog(null, "Nombre de Usuario inexistente");
-            }else{
-               loginl= c.getContraseña().equals(pwdl);
-               if(!loginl)
-               {
-                   JOptionPane.showMessageDialog(null, "Constraseña no ooincide");
-               }
+                JOptionPane.showMessageDialog(null, "Constraseña no ooincide");
             }
-            
-       
+        }
+        CardLayout card = (CardLayout) padre.getLayout();
+        card.show(padre, "gMenu");     
+
     }//GEN-LAST:event_loginActionPerformed
-
-    private void nusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nusuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nusuarioActionPerformed
-
-    private void pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pwdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2874,6 +2889,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JComboBox jug1;
     private javax.swing.JButton login;
+    private javax.swing.JPanel menuGeneral;
     private javax.swing.JTextField minu1;
     private javax.swing.JLabel n3;
     private javax.swing.JTextField nusuario;

@@ -15,7 +15,6 @@ import RobotAgentBDI.Metas.Bailar;
 import RobotAgentBDI.Metas.SeleccionarCancionGusto;
 import RobotAgentBDI.Metas.CambiarEnriquecimientoHistoria;
 import RobotAgentBDI.Metas.CancelarActividad;
-import RobotAgentBDI.Metas.Conversacion;
 import RobotAgentBDI.Metas.ConversarEmpaticamente;
 import RobotAgentBDI.Metas.ActivarKaraoke;
 import RobotAgentBDI.Metas.GenerarReporteInteraccion;
