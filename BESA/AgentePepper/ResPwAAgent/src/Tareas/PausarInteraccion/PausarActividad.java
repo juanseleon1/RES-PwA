@@ -35,24 +35,24 @@ public class PausarActividad extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando()) {
-            infoServicio.put("STOPANIMATION", "pausarTask");
+            infoServicio.put("STOPANIMATION", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
             requestService(srb);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            infoServicio.put("STOPALL", "pausarTask");
+            infoServicio.put("STOPALL", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
             requestService(srb);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
-            infoServicio.put("STOPVIDEO", "pausarTask");
+            infoServicio.put("PAUSEVIDEO", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
             requestService(srb);
         }
         
-        infoServicio.put("SUSPEND", "pausarTask");
+        infoServicio.put("SUSPEND", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
         requestService(srb);
     }

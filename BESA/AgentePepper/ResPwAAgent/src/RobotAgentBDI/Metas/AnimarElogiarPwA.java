@@ -58,7 +58,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

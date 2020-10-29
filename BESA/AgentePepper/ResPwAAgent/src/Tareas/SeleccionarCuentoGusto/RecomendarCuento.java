@@ -35,7 +35,7 @@ public class RecomendarCuento extends ResPwaTask{
         for(Cuento c: cuentos) {
             //escoger cuento
         }
-        infoServicio.put("SAY", "nombreCuentoElegido");
+        infoServicio.put("SAY", "nomCuentoElegido");
         ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
     }
 

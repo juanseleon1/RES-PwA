@@ -32,8 +32,8 @@ public class ReiniciarActividadTask extends ResPwaTask{
         System.out.println("--- Execute Task Reiniciar Actividad ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        //revisar esto
-        infoServicio.put("WAKEUP", blvs.getbEstadoActividad().getActividadActual());
+        //revisar esto blvs.getbEstadoActividad().getActividadActual()
+        infoServicio.put("WAKEUP", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
         requestService(srb);
     }

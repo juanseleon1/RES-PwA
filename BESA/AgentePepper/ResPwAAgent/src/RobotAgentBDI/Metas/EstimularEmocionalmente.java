@@ -65,7 +65,7 @@ public class EstimularEmocionalmente extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EstimularEmocionalmente evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class EstimularEmocionalmente extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EstimularEmocionalmente evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class EstimularEmocionalmente extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EstimularEmocionalmente predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

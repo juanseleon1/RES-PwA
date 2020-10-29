@@ -35,7 +35,7 @@ public class ConversacionInicial extends ResPwaTask{
         infoServicio.clear();
         
         //buscar texto "¿como estas pepito?"
-        infoServicio.put("SAY", "TextoEmociones");
+        infoServicio.put("SAY", "PreguntaSentimientos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }

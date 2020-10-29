@@ -37,7 +37,7 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
         //Siempre: Tener contacto visual, escuchar
         
         Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Pregunta","Consejo");
+        List<String> estrategias = Arrays.asList("PreguntaEmp","Consejo");
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
         ConversarStrategy cs = new ConversarStrategy();
         cs.setNombre(estrategia);

@@ -34,7 +34,7 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Evaluar Enriquecer ---");
         Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Luces", "Pantalla", "Bailar", "Frase");
+        List<String> estrategias = Arrays.asList("Luces", "Imagen", "MovEnriquecer", "FraseEnriquecer");
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
         EnriquecerStrategy es = new EnriquecerStrategy();
         es.setNombre(estrategia);

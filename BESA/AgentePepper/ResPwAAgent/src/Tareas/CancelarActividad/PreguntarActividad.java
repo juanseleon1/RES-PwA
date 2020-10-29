@@ -30,7 +30,7 @@ public class PreguntarActividad extends ResPwaTask{
         System.out.println("--- Execute Task Preguntar Actividad ---");
         
         //buscar texto
-        infoServicio.put("SAY", "ASK ACTIVITY");
+        infoServicio.put("SAY", "AskActivity");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio.clear();

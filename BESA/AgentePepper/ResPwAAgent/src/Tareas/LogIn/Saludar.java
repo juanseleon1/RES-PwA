@@ -38,7 +38,7 @@ public class Saludar extends ResPwaTask{
         requestService(srb);
         infoServicio.clear();
         //mirar url animacion
-        infoServicio.put("RUNANIMATION", "animacionSaludar");
+        infoServicio.put("RUNANIMATION", "Saludar");
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }

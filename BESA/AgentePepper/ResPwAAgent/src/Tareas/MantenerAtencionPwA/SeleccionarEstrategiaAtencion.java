@@ -45,7 +45,7 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
         //si se va, irlo a buscar
         
         Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Adivinanza","Dato Curioso","Cambiar Actividad","Cambiar Cancion","Cambiar Cuento");
+        List<String> estrategias = Arrays.asList("Adivinanza","DatoCurioso");
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
         ConversarStrategy cs = new ConversarStrategy();
         cs.setNombre(estrategia);

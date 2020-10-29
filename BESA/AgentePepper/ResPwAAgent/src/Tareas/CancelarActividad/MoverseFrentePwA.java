@@ -29,7 +29,7 @@ public class MoverseFrentePwA extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Moverse Frente PwA ---");
         //parametros desde naoqi
-        infoServicio.put("MOVETOPWA", null);
+        infoServicio.put("MOVETO", "PwA");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         requestService(srb);
     }

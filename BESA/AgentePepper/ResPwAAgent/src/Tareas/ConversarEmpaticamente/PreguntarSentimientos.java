@@ -38,7 +38,7 @@ public class PreguntarSentimientos extends ResPwaTask{
         infoServicio.clear();
         
         //buscar texto
-        infoServicio.put("SAY", "Texto");
+        infoServicio.put("SAY", "PreguntaSentimientos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio.clear();

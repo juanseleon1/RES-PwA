@@ -37,13 +37,13 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         infoServicio.clear();
         
         //buscar texto
-        infoServicio.put("SAY", "RETROALIMENTACION CANCION");
+        infoServicio.put("SAY", "AskRetroCancion");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio.clear();
         
         //buscar url
-        infoServicio.put("SHOWIMG", "RETROALIMENTACION CANCION");
+        infoServicio.put("SHOWIMG", "AskRetroCancion");
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
         requestService(srb);
     }

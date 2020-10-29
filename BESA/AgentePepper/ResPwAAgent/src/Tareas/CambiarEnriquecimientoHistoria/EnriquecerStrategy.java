@@ -33,16 +33,16 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 infoServicio.put("CHANGELEDCOLOR", nombre);
                 srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
                 break;
-            case "Pantalla":
-                //enviar imagen
+            case "Imagen":
+                //enviar url imagen
                 infoServicio.put("SHOWIMGENRIQUECER", nombre);
                 srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
                 break;
-            case "Bailar":
+            case "MovEnriquecer":
                 infoServicio.put("RUNANIMATION", nombre);
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 break;
-            case "Frase":
+            case "FraseEnriquecer":
                 //enviar frase
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
