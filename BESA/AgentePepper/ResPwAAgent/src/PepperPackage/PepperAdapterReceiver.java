@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
@@ -28,7 +27,7 @@ import java.util.logging.Logger;
  */
 public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> implements Runnable{
 
-    public static final int revPort=7897 ;
+    public static final int revPort=7897;
     protected AtomicBoolean ready;
     protected ServerSocket ss;
     public PepperAdapterReceiver() throws IOException{

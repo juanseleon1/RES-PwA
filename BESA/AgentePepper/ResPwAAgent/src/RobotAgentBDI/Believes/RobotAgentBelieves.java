@@ -33,7 +33,7 @@ public class RobotAgentBelieves implements Believes{
     public RobotAgentBelieves(String cedula)
     {
         imgCuentos=new HashMap<>();
-        getPerfilBD(cedula);
+        //getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
         imgsPerfil=new ArrayList<>();
     }    

@@ -66,7 +66,7 @@ public class InitRESPwA {
     
     public static void main(String[] args) {
        try {
-            String cedula=obtenerUsuario();
+            String cedula="";//obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
@@ -123,41 +123,41 @@ public class InitRESPwA {
     {
         List<GoalBDI> RAGoals= new ArrayList<>();
         //Crear Metas
-        Bailar bailarGoal= Bailar.buildGoal();
-        AnimarElogiarPwA animarGoal=  AnimarElogiarPwA.buildGoal();
-        SeleccionarCancionGusto cambiarCancionrGoal=  SeleccionarCancionGusto.buildGoal();
-        CambiarEnriquecimientoHistoria cambiarEnriquecimientoHistoriaGoal=  CambiarEnriquecimientoHistoria.buildGoal();
-        CancelarActividad CancelarActividadGoal=  CancelarActividad.buildGoal();
-        Conversacion conversacionGoal = Conversacion.buildGoal();
-        ConversarEmpaticamente conversarEmpaticamenteGoal=  ConversarEmpaticamente.buildGoal();
-        ActivarKaraoke entrarModoKaraokeGoal=  ActivarKaraoke.buildGoal();
-        GenerarReporteInteraccion generarReporteInteraccionGoal=  GenerarReporteInteraccion.buildGoal();
+//        Bailar bailarGoal= Bailar.buildGoal();
+//        AnimarElogiarPwA animarGoal=  AnimarElogiarPwA.buildGoal();
+//        SeleccionarCancionGusto cambiarCancionrGoal=  SeleccionarCancionGusto.buildGoal();
+//        CambiarEnriquecimientoHistoria cambiarEnriquecimientoHistoriaGoal=  CambiarEnriquecimientoHistoria.buildGoal();
+//        CancelarActividad CancelarActividadGoal=  CancelarActividad.buildGoal();
+//        Conversacion conversacionGoal = Conversacion.buildGoal();
+//        ConversarEmpaticamente conversarEmpaticamenteGoal=  ConversarEmpaticamente.buildGoal();
+//        ActivarKaraoke entrarModoKaraokeGoal=  ActivarKaraoke.buildGoal();
+//        GenerarReporteInteraccion generarReporteInteraccionGoal=  GenerarReporteInteraccion.buildGoal();
         LogIn logInGoal = LogIn.buildGoal();
-        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
-        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
-        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
-        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
-        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
-        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
-        SeleccionarCuentoGusto seleccionarCuentoGustoGoal=  SeleccionarCuentoGusto.buildGoal();
-        //Agregar a Lista
-        RAGoals.add(bailarGoal);
-        RAGoals.add(animarGoal);
-        RAGoals.add(cambiarCancionrGoal);
-        RAGoals.add(cambiarEnriquecimientoHistoriaGoal);
-        RAGoals.add(CancelarActividadGoal);
-        RAGoals.add(conversacionGoal);
-        RAGoals.add(conversarEmpaticamenteGoal);
-        RAGoals.add(entrarModoKaraokeGoal);
-        RAGoals.add(generarReporteInteraccionGoal);
+//        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
+//        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
+//        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
+//        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
+//        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
+//        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
+//        SeleccionarCuentoGusto seleccionarCuentoGustoGoal=  SeleccionarCuentoGusto.buildGoal();
+//        //Agregar a Lista
+//        RAGoals.add(bailarGoal);
+//        RAGoals.add(animarGoal);
+//        RAGoals.add(cambiarCancionrGoal);
+//        RAGoals.add(cambiarEnriquecimientoHistoriaGoal);
+//        RAGoals.add(CancelarActividadGoal);
+//        RAGoals.add(conversacionGoal);
+//        RAGoals.add(conversarEmpaticamenteGoal);
+//        RAGoals.add(entrarModoKaraokeGoal);
+//        RAGoals.add(generarReporteInteraccionGoal);
         RAGoals.add(logInGoal);
-        RAGoals.add(mantenerAtencionPwAGoal);
-        RAGoals.add(pausarInteraccionGoal);
-        RAGoals.add(reanudarActividadGoal);
-        RAGoals.add(recargarBateriaGoal);
-        RAGoals.add(pedirAyudaGoal);
-        RAGoals.add(reiniciarActividadGoal);
-        RAGoals.add(seleccionarCuentoGustoGoal);
+//        RAGoals.add(mantenerAtencionPwAGoal);
+//        RAGoals.add(pausarInteraccionGoal);
+//        RAGoals.add(reanudarActividadGoal);
+//        RAGoals.add(recargarBateriaGoal);
+//        RAGoals.add(pedirAyudaGoal);
+//        RAGoals.add(reiniciarActividadGoal);
+//        RAGoals.add(seleccionarCuentoGustoGoal);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);

@@ -61,7 +61,7 @@ public class LogIn extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn evaluateViability");
-        return 0;
+        return 1.0;
     }
 
     @Override
@@ -74,13 +74,13 @@ public class LogIn extends GoalBDI{
             return 1.0;
         }
         
-        return 0;
+        return 1.0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn evaluatePlausibility");
-        return 0;
+        return 1.0;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class LogIn extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

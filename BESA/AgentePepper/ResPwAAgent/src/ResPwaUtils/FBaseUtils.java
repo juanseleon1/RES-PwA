@@ -35,7 +35,7 @@ public class FBaseUtils {
 
         try {
             FileInputStream serviceAccount = new FileInputStream(FBPATH);
-            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            FirebaseOptions options =  FirebaseOptions.builder().setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://respwa.firebaseio.com")
                     .build();
 
