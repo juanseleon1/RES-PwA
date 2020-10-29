@@ -14,6 +14,8 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 /**
@@ -32,6 +34,11 @@ public class SeleccionarCancion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Cancion ---");
+        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
+        blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
+        
         infoServicio.put("GETEMOTIONSTATE", null);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
@@ -40,7 +47,6 @@ public class SeleccionarCancion extends ResPwaTask{
         Cancion cancion = new Cancion();
         cancion.setNombre("Unicornio salvaje");
         
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         blvs.getbEstadoActividad().setCancionActual(cancion);
     }
 

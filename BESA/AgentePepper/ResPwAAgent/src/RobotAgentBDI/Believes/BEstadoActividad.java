@@ -21,7 +21,7 @@ import rational.mapping.Believes;
  */
 public class BEstadoActividad implements Believes{
     
-    private long inicioActividad;
+    private long tiempoInicioActividad;
     private ResPwAActivity actividadActual;
     private boolean finalizoActividad;
     private boolean mejoraEmocional;
@@ -35,12 +35,12 @@ public class BEstadoActividad implements Believes{
         return true;
     }
 
-    public long getInicioActividad() {
-        return inicioActividad;
+    public long getTiempoInicioActividad() {
+        return tiempoInicioActividad;
     }
 
-    public void setInicioActividad(long inicioActividad) {
-        this.inicioActividad = inicioActividad;
+    public void setTiempoInicioActividad(long tiempoInicioActividad) {
+        this.tiempoInicioActividad = tiempoInicioActividad;
     }
 
     public ResPwAActivity getActividadActual() {
@@ -81,7 +81,7 @@ public class BEstadoActividad implements Believes{
 
     public long calcTiempoActividad() {
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());  
-        long time = (ts.getTime() - inicioActividad)/1000;
+        long time = (ts.getTime() - tiempoInicioActividad)/1000;
         return time;
     }
 

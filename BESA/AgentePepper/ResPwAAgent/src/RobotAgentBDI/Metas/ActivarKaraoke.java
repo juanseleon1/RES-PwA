@@ -51,7 +51,7 @@ public class ActivarKaraoke extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ActivarKaraoke extends GoalBDI{
         //tiempoActMusical>30sec && letraDisponibleCancion && (PwAQuiereCantar||perfil.gustosKaraoke)
         //List<Cancion> canciones = ((ActMusicoterapia)blvs.getbPerfilPwA().getPreferencias().getMusicoterapia()).getCanciones(); -> si tiene letra solo se puede con el API
         if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbEstadoActividad().calcTiempoActividad() > 30 && 
-                (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando()) {
+                (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) && !blvs.getbEstadoInteraccion().isEstaBailando() && !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         return 0;
@@ -72,7 +72,7 @@ public class ActivarKaraoke extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ActivarKaraoke extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

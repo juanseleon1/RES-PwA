@@ -31,12 +31,13 @@ public class MostrarInfo extends ResPwaTask{
         System.out.println("--- Execute Task Mostrar Informacion Interaccion ---");
         ServiceDataRequest srb = null;
     
-        infoServicio.put("SAY", "INFO INTERACCION");
+        infoServicio.put("SAY", "AvisoInfoInter");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio.clear();
         
-        infoServicio.put("SHOWIMG", "INFO INTERACCION");
+        //parametros interaccion (tiempo, emociones)
+        infoServicio.put("SHOWIMG", "ParamsInte");
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
         requestService(srb);
     }

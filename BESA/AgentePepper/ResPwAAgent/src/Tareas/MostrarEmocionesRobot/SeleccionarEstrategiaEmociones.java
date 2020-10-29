@@ -3,47 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.CancelarActividad;
+package Tareas.MostrarEmocionesRobot;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.ConversarEmpaticamente.ConversarStrategy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class PreguntarActividad extends ResPwaTask{
+public class SeleccionarEstrategiaEmociones extends ResPwaTask {
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public PreguntarActividad() {
-        System.out.println("--- Task Preguntar Actividad Iniciada ---");
+    public SeleccionarEstrategiaEmociones() {
+        System.out.println("--- Task Seleccionar Estrategia Atencion Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Preguntar Actividad ---");
-        
-        //buscar texto
-        infoServicio.put("SAY", "AskActivity");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
-        infoServicio.clear();
+        System.out.println("--- Execute Task Seleccionar Estrategia Atencion ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Preguntar Actividad ---");
+        System.out.println("--- Interrupt Task Seleccionar Estrategia Atencion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Preguntar Actividad ---");
+        System.out.println("--- Cancel Task Seleccionar Estrategia Atencion ---");
     }
     
 }

@@ -7,7 +7,6 @@ package RobotAgentBDI.Metas;
 
 import Tareas.SeleccionarCancionGusto.SeleccionarCancion;
 import Tareas.SeleccionarCancionGusto.BusquedaCancionYoutube;
-import Tareas.SeleccionarCancionGusto.ReproducirCancion;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
@@ -35,7 +34,6 @@ public class SeleccionarCancionGusto extends GoalBDI{
     public static SeleccionarCancionGusto buildGoal() {
     
         BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
-        ReproducirCancion reproducirCancion = new ReproducirCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
         RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
 
@@ -44,8 +42,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
         Plan rolePlan= new Plan(tarea,resources,null);
 
         rolePlan.addTask(seleccionarCancion); //evaluar estado emocional, si no es la primera cancion, saltar contenido de esa tarea
-        rolePlan.addTask(busquedaCancionYT); //buscar API o desde la BD y se envia
-        rolePlan.addTask(reproducirCancion); //preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
+        rolePlan.addTask(busquedaCancionYT); //buscar API o desde la BD y se envia,preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
         rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
         RationalRole selCancionGRole = new RationalRole(descrip, rolePlan);
@@ -60,7 +57,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarCancion evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -70,7 +67,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
-                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5) {
+                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5 && blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         
@@ -80,7 +77,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarCancion evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -96,7 +93,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarCancion predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

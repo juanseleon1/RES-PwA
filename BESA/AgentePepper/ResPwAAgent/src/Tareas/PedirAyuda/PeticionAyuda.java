@@ -28,7 +28,7 @@ public class PeticionAyuda extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Peticion Ayuda ---");
         //dar respuesta a petición
-        infoServicio.put("SAY", "respuesta");
+        infoServicio.put("SAY", "DarRespuesta");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }

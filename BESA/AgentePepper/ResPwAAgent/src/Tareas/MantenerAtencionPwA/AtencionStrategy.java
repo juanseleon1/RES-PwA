@@ -33,18 +33,6 @@ public class AtencionStrategy implements ResPwAStrategy{
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "Cambiar Actividad":
-                infoServicio.put("SAY", nombre);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case "Cambiar Cancion":
-                infoServicio.put("SAY", nombre);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case "Cambiar Cuento":
-                infoServicio.put("SAY", nombre);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
         }
         return srb;
     }

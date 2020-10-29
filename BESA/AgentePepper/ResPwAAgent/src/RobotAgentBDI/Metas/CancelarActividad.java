@@ -55,7 +55,7 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

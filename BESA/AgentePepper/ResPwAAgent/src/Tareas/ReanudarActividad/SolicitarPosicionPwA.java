@@ -30,7 +30,7 @@ public class SolicitarPosicionPwA extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Solicitar Posicion PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getNombre()+" "+blvs.getbPerfilPwA().getPerfil().getApellido());
+        infoServicio.put("DETECTPWA", infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot()));
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
         requestService(srb);
     }

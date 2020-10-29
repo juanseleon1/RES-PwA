@@ -25,7 +25,7 @@ public class ConversarStrategy implements ResPwAStrategy{
         ServiceDataRequest srb = null;
         switch (nombre)
         {
-            case "Pregunta":
+            case "PreguntaEmp":
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;

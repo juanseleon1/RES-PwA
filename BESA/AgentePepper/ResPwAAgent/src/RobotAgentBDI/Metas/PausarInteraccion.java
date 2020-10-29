@@ -49,7 +49,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion evaluateViability");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion evaluatePlausibility");
-        return 0;
+        return 1;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion predictResultUnlegality");
-        return false;
+        return true;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class SeleccionarBaile extends ResPwaTask{
         requestService(srb);
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGSSONG", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb); 
     }

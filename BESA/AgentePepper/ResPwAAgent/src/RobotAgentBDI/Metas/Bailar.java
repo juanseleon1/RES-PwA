@@ -13,7 +13,6 @@ import Init.InitRESPwA;
 import RobotAgentBDI.Believes.PerfilPwA.Actividadpwa;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.InicializarBaile;
-import Tareas.Bailar.EjecutarBaile;
 import Tareas.Bailar.FinalizarBaile;
 import Tareas.Bailar.SeleccionarBaile;
 import java.math.BigInteger;
@@ -34,7 +33,6 @@ public class Bailar extends GoalBDI{
 
     public static Bailar buildGoal() {
         
-        EjecutarBaile ejecutarBaile = new EjecutarBaile();
         InicializarBaile inicializarBaile = new InicializarBaile();
         FinalizarBaile finalizarBaile = new FinalizarBaile();
         SeleccionarBaile seleccionarBaile = new SeleccionarBaile();
@@ -43,7 +41,6 @@ public class Bailar extends GoalBDI{
         Plan rolePlan= new Plan(tarea,resources,null);
         rolePlan.addTask(inicializarBaile);
         rolePlan.addTask(seleccionarBaile); //evaluar Estado emocional, mirar tipo de baile que puede hacer dependiendo de la canción
-        rolePlan.addTask(ejecutarBaile);
         rolePlan.addTask(finalizarBaile);
         
         //while de espera activa para saber que se movia a un lugar seguro
@@ -81,7 +78,7 @@ public class Bailar extends GoalBDI{
             }
         }
         if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
-               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && enriq > 2 ) {
+               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && enriq > 2) {
             return 1.0;
         }
         return 0;
@@ -100,7 +97,7 @@ public class Bailar extends GoalBDI{
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
-        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5) {
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
         
