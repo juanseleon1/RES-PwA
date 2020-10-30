@@ -50,17 +50,17 @@ public class NivelEducativoJpaController implements Serializable {
             nivelEducativo.setPerfilpwaList(attachedPerfilpwaList);
             em.persist(nivelEducativo);
             for (Perfilpwa perfilpwaListPerfilpwa : nivelEducativo.getPerfilpwaList()) {
-                NivelEducativo oldTiponiveleducativoOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getTiponiveleducativo();
-                perfilpwaListPerfilpwa.setTiponiveleducativo(nivelEducativo);
+                NivelEducativo oldNivelEducativoTiponeOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getNivelEducativoTipone();
+                perfilpwaListPerfilpwa.setNivelEducativoTipone(nivelEducativo);
                 perfilpwaListPerfilpwa = em.merge(perfilpwaListPerfilpwa);
-                if (oldTiponiveleducativoOfPerfilpwaListPerfilpwa != null) {
-                    oldTiponiveleducativoOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
-                    oldTiponiveleducativoOfPerfilpwaListPerfilpwa = em.merge(oldTiponiveleducativoOfPerfilpwaListPerfilpwa);
+                if (oldNivelEducativoTiponeOfPerfilpwaListPerfilpwa != null) {
+                    oldNivelEducativoTiponeOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
+                    oldNivelEducativoTiponeOfPerfilpwaListPerfilpwa = em.merge(oldNivelEducativoTiponeOfPerfilpwaListPerfilpwa);
                 }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findNivelEducativo(nivelEducativo.getTiponiveleducativo()) != null) {
+            if (findNivelEducativo(nivelEducativo.getTipone()) != null) {
                 throw new PreexistingEntityException("NivelEducativo " + nivelEducativo + " already exists.", ex);
             }
             throw ex;
@@ -76,7 +76,7 @@ public class NivelEducativoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            NivelEducativo persistentNivelEducativo = em.find(NivelEducativo.class, nivelEducativo.getTiponiveleducativo());
+            NivelEducativo persistentNivelEducativo = em.find(NivelEducativo.class, nivelEducativo.getTipone());
             List<Perfilpwa> perfilpwaListOld = persistentNivelEducativo.getPerfilpwaList();
             List<Perfilpwa> perfilpwaListNew = nivelEducativo.getPerfilpwaList();
             List<Perfilpwa> attachedPerfilpwaListNew = new ArrayList<Perfilpwa>();
@@ -89,18 +89,18 @@ public class NivelEducativoJpaController implements Serializable {
             nivelEducativo = em.merge(nivelEducativo);
             for (Perfilpwa perfilpwaListOldPerfilpwa : perfilpwaListOld) {
                 if (!perfilpwaListNew.contains(perfilpwaListOldPerfilpwa)) {
-                    perfilpwaListOldPerfilpwa.setTiponiveleducativo(null);
+                    perfilpwaListOldPerfilpwa.setNivelEducativoTipone(null);
                     perfilpwaListOldPerfilpwa = em.merge(perfilpwaListOldPerfilpwa);
                 }
             }
             for (Perfilpwa perfilpwaListNewPerfilpwa : perfilpwaListNew) {
                 if (!perfilpwaListOld.contains(perfilpwaListNewPerfilpwa)) {
-                    NivelEducativo oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getTiponiveleducativo();
-                    perfilpwaListNewPerfilpwa.setTiponiveleducativo(nivelEducativo);
+                    NivelEducativo oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getNivelEducativoTipone();
+                    perfilpwaListNewPerfilpwa.setNivelEducativoTipone(nivelEducativo);
                     perfilpwaListNewPerfilpwa = em.merge(perfilpwaListNewPerfilpwa);
-                    if (oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa != null && !oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa.equals(nivelEducativo)) {
-                        oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
-                        oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa = em.merge(oldTiponiveleducativoOfPerfilpwaListNewPerfilpwa);
+                    if (oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa != null && !oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa.equals(nivelEducativo)) {
+                        oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
+                        oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa = em.merge(oldNivelEducativoTiponeOfPerfilpwaListNewPerfilpwa);
                     }
                 }
             }
@@ -108,7 +108,7 @@ public class NivelEducativoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = nivelEducativo.getTiponiveleducativo();
+                String id = nivelEducativo.getTipone();
                 if (findNivelEducativo(id) == null) {
                     throw new NonexistentEntityException("The nivelEducativo with id " + id + " no longer exists.");
                 }
@@ -129,13 +129,13 @@ public class NivelEducativoJpaController implements Serializable {
             NivelEducativo nivelEducativo;
             try {
                 nivelEducativo = em.getReference(NivelEducativo.class, id);
-                nivelEducativo.getTiponiveleducativo();
+                nivelEducativo.getTipone();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The nivelEducativo with id " + id + " no longer exists.", enfe);
             }
             List<Perfilpwa> perfilpwaList = nivelEducativo.getPerfilpwaList();
             for (Perfilpwa perfilpwaListPerfilpwa : perfilpwaList) {
-                perfilpwaListPerfilpwa.setTiponiveleducativo(null);
+                perfilpwaListPerfilpwa.setNivelEducativoTipone(null);
                 perfilpwaListPerfilpwa = em.merge(perfilpwaListPerfilpwa);
             }
             em.remove(nivelEducativo);

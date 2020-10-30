@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B15E721A-74D5-B9E6-DD1A-368F99166900" name="EstadoCivil">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>FF683E38-CE70-147D-AA96-AD9E8EBBD75B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tipoEC" id="630AF5F0-23F4-EA46-C26E-BCD85C9C83A0">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>A3A20E22-62E0-DBA5-1114-39D0F06E5E51</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="47FB64E2-F3A9-EDF8-AF92-72A7BA2042D0" name="EstadoCivil_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>4C0BF0F1-EB0B-B53B-07BD-3B7CE72E9855</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="630AF5F0-23F4-EA46-C26E-BCD85C9C83A0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

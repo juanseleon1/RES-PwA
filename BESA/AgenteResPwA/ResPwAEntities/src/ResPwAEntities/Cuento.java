@@ -31,52 +31,53 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUENTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuento.findAll", query = "SELECT c FROM Cuento c"),
-    @NamedQuery(name = "Cuento.findByNombreautor", query = "SELECT c FROM Cuento c WHERE c.nombreautor = :nombreautor"),
-    @NamedQuery(name = "Cuento.findByGusto", query = "SELECT c FROM Cuento c WHERE c.gusto = :gusto"),
-    @NamedQuery(name = "Cuento.findByNombrecuento", query = "SELECT c FROM Cuento c WHERE c.nombrecuento = :nombrecuento")})
+    @NamedQuery(name = "Cuento.findAll", query = "SELECT c FROM Cuento c")
+    , @NamedQuery(name = "Cuento.findByAutor", query = "SELECT c FROM Cuento c WHERE c.autor = :autor")
+    , @NamedQuery(name = "Cuento.findByGusto", query = "SELECT c FROM Cuento c WHERE c.gusto = :gusto")
+    , @NamedQuery(name = "Cuento.findByNombre", query = "SELECT c FROM Cuento c WHERE c.nombre = :nombre")})
 public class Cuento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
-    @Column(name = "NOMBREAUTOR")
-    private String nombreautor;
+    @Column(name = "AUTOR")
+    private String autor;
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
     @Id
     @Basic(optional = false)
-    @Column(name = "NOMBRECUENTO")
-    private String nombrecuento;
+    @Column(name = "NOMBRE")
+    private String nombre;
     @JoinTable(name = "PREFERENCIAXCUENTO", joinColumns = {
-        @JoinColumn(name = "NOMBRECUENTO", referencedColumnName = "NOMBRECUENTO")}, inverseJoinColumns = {
-        @JoinColumn(name = "CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
+        @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
+        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
     @ManyToMany
     private List<PerfilPreferencia> perfilPreferenciaList;
-    @JoinColumn(name = "NOMBREGENERO", referencedColumnName = "NOMBREGENERO")
+    @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false)
-    private Genero nombregenero;
+    private Genero generoGenero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuento")
     private List<Frases> frasesList;
 
     public Cuento() {
     }
 
-    public Cuento(String nombrecuento) {
-        this.nombrecuento = nombrecuento;
+    public Cuento(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Cuento(String nombrecuento, String nombreautor, double gusto) {
-        this.nombrecuento = nombrecuento;
-        this.nombreautor = nombreautor;
+    public Cuento(String nombre, String autor, double gusto) {
+        this.nombre = nombre;
+        this.autor = autor;
         this.gusto = gusto;
     }
 
-    public String getNombreautor() {
-        return nombreautor;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setNombreautor(String nombreautor) {
-        this.nombreautor = nombreautor;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public double getGusto() {
@@ -87,12 +88,12 @@ public class Cuento implements Serializable {
         this.gusto = gusto;
     }
 
-    public String getNombrecuento() {
-        return nombrecuento;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombrecuento(String nombrecuento) {
-        this.nombrecuento = nombrecuento;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @XmlTransient
@@ -104,12 +105,12 @@ public class Cuento implements Serializable {
         this.perfilPreferenciaList = perfilPreferenciaList;
     }
 
-    public Genero getNombregenero() {
-        return nombregenero;
+    public Genero getGeneroGenero() {
+        return generoGenero;
     }
 
-    public void setNombregenero(Genero nombregenero) {
-        this.nombregenero = nombregenero;
+    public void setGeneroGenero(Genero generoGenero) {
+        this.generoGenero = generoGenero;
     }
 
     @XmlTransient
@@ -124,7 +125,7 @@ public class Cuento implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nombrecuento != null ? nombrecuento.hashCode() : 0);
+        hash += (nombre != null ? nombre.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +136,7 @@ public class Cuento implements Serializable {
             return false;
         }
         Cuento other = (Cuento) object;
-        if ((this.nombrecuento == null && other.nombrecuento != null) || (this.nombrecuento != null && !this.nombrecuento.equals(other.nombrecuento))) {
+        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
         return true;
@@ -143,7 +144,7 @@ public class Cuento implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Cuento[ nombrecuento=" + nombrecuento + " ]";
+        return "BDInterface.Cuento[ nombre=" + nombre + " ]";
     }
     
 }

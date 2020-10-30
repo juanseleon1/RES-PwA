@@ -27,13 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUIDADOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c"),
-    @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario"),
-    @NamedQuery(name = "Cuidador.findByContrase\u00f1a", query = "SELECT c FROM Cuidador c WHERE c.contrase\u00f1a = :contrase\u00f1a"),
-    @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo"),
-    @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
+    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c")
+    , @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario")
+    , @NamedQuery(name = "Cuidador.findByContrase\u00f1a", query = "SELECT c FROM Cuidador c WHERE c.contrase\u00f1a = :contrase\u00f1a")
+    , @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo")
+    , @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
 public class Cuidador implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,7 +52,7 @@ public class Cuidador implements Serializable {
     @Basic(optional = false)
     @Column(name = "CELULAR")
     private String celular;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadornombre")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadorNombreusuario")
     private List<Perfilpwa> perfilpwaList;
 
     public Cuidador() {
@@ -140,7 +141,7 @@ public class Cuidador implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Cuidador[ nombreusuario=" + nombreusuario + " ]";
+        return "BDInterface.Cuidador[ nombreusuario=" + nombreusuario + " ]";
     }
     
 }

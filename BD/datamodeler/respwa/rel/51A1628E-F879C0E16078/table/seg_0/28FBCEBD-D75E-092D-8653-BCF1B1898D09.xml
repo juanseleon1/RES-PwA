@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="28FBCEBD-D75E-092D-8653-BCF1B1898D09" name="Tags">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>04E49C61-9B78-5D7E-9CF4-A0A27E6787AC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="8C79D322-695B-A0CB-8CF5-2DBEBA44082D">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>A9C916DE-1E47-0AE8-CA57-8ED609C1EFA7</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tag" id="181FB3F9-8E19-9E96-324D-7BDD74B16E64">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>4169B2D9-48D7-FA4A-1912-5F11068BD07F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5815178E-8EC9-DDAE-8EBF-8B57A1186ECB" name="Tags_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>FEBD2C0D-F679-64FB-0F8F-24894E282BA0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8C79D322-695B-A0CB-8CF5-2DBEBA44082D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2B37C4B9-03AD-7BE7-BE6C-DD6FEA81FA70" name="PreferenciaCancion">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Perfil_Preferencia_PerfilPwa_cedula" id="1D29F1CE-AB5B-DC5C-78DD-7AC2F16A36C2">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1A777762-1B02-E4AE-81FE-73D87C802FBA" referredColumn="BE6639E6-1EA9-2AF5-66E8-64350D397113"/>
+</associations>
+</Column>
+<Column name="Cancion_nombre" id="D7157AF0-B721-8F2E-DA07-8CF320BC8399">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="97E9A433-E742-D636-5F42-32446EF57521" referredColumn="96CBE676-4AF0-CE20-AC05-A2BEF403625E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="83EFB483-54F3-A01B-18B5-9A63F7AD9BB1" name="PreferenciaCancion_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1D29F1CE-AB5B-DC5C-78DD-7AC2F16A36C2"/>
+<colUsage columnID="D7157AF0-B721-8F2E-DA07-8CF320BC8399"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7071DBA6-AAA1-DAEE-4716-66CECFDF554E" name="PreferenciaCancion_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>38EB2120-5CB5-7C36-9B78-D105B8F5D3F6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1D29F1CE-AB5B-DC5C-78DD-7AC2F16A36C2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7B085ACD-F461-FC04-8935-B382AB587972" name="PreferenciaCancion_Cancion_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>38EB2120-5CB5-7C36-9B78-D105B8F5D3F6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7157AF0-B721-8F2E-DA07-8CF320BC8399"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

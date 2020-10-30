@@ -26,9 +26,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "DIFICULTAD")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Dificultad.findAll", query = "SELECT d FROM Dificultad d"),
-    @NamedQuery(name = "Dificultad.findByDificultad", query = "SELECT d FROM Dificultad d WHERE d.dificultad = :dificultad")})
+    @NamedQuery(name = "Dificultad.findAll", query = "SELECT d FROM Dificultad d")
+    , @NamedQuery(name = "Dificultad.findByDificultad", query = "SELECT d FROM Dificultad d WHERE d.dificultad = :dificultad")})
 public class Dificultad implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -83,7 +84,7 @@ public class Dificultad implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Dificultad[ dificultad=" + dificultad + " ]";
+        return "BDInterface.Dificultad[ dificultad=" + dificultad + " ]";
     }
     
 }

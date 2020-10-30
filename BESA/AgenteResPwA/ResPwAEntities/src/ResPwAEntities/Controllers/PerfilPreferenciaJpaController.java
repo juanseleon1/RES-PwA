@@ -79,7 +79,7 @@ public class PerfilPreferenciaJpaController implements Serializable {
             perfilPreferencia.setActividadpwaList(attachedActividadpwaList);
             List<Cuento> attachedCuentoList = new ArrayList<Cuento>();
             for (Cuento cuentoListCuentoToAttach : perfilPreferencia.getCuentoList()) {
-                cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombrecuento());
+                cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombre());
                 attachedCuentoList.add(cuentoListCuentoToAttach);
             }
             perfilPreferencia.setCuentoList(attachedCuentoList);
@@ -159,7 +159,7 @@ public class PerfilPreferenciaJpaController implements Serializable {
             perfilPreferencia.setActividadpwaList(actividadpwaListNew);
             List<Cuento> attachedCuentoListNew = new ArrayList<Cuento>();
             for (Cuento cuentoListNewCuentoToAttach : cuentoListNew) {
-                cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombrecuento());
+                cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombre());
                 attachedCuentoListNew.add(cuentoListNewCuentoToAttach);
             }
             cuentoListNew = attachedCuentoListNew;

@@ -47,10 +47,10 @@ public class CancionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Genero nombregenero = cancion.getNombregenero();
-            if (nombregenero != null) {
-                nombregenero = em.getReference(nombregenero.getClass(), nombregenero.getNombregenero());
-                cancion.setNombregenero(nombregenero);
+            Genero generoGenero = cancion.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero = em.getReference(generoGenero.getClass(), generoGenero.getGenero());
+                cancion.setGeneroGenero(generoGenero);
             }
             List<Tags> attachedTagsList = new ArrayList<Tags>();
             for (Tags tagsListTagsToAttach : cancion.getTagsList()) {
@@ -65,9 +65,9 @@ public class CancionJpaController implements Serializable {
             }
             cancion.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
             em.persist(cancion);
-            if (nombregenero != null) {
-                nombregenero.getCancionList().add(cancion);
-                nombregenero = em.merge(nombregenero);
+            if (generoGenero != null) {
+                generoGenero.getCancionList().add(cancion);
+                generoGenero = em.merge(generoGenero);
             }
             for (Tags tagsListTags : cancion.getTagsList()) {
                 tagsListTags.getCancionList().add(cancion);
@@ -96,15 +96,15 @@ public class CancionJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Cancion persistentCancion = em.find(Cancion.class, cancion.getNombre());
-            Genero nombregeneroOld = persistentCancion.getNombregenero();
-            Genero nombregeneroNew = cancion.getNombregenero();
+            Genero generoGeneroOld = persistentCancion.getGeneroGenero();
+            Genero generoGeneroNew = cancion.getGeneroGenero();
             List<Tags> tagsListOld = persistentCancion.getTagsList();
             List<Tags> tagsListNew = cancion.getTagsList();
             List<PerfilPreferencia> perfilPreferenciaListOld = persistentCancion.getPerfilPreferenciaList();
             List<PerfilPreferencia> perfilPreferenciaListNew = cancion.getPerfilPreferenciaList();
-            if (nombregeneroNew != null) {
-                nombregeneroNew = em.getReference(nombregeneroNew.getClass(), nombregeneroNew.getNombregenero());
-                cancion.setNombregenero(nombregeneroNew);
+            if (generoGeneroNew != null) {
+                generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
+                cancion.setGeneroGenero(generoGeneroNew);
             }
             List<Tags> attachedTagsListNew = new ArrayList<Tags>();
             for (Tags tagsListNewTagsToAttach : tagsListNew) {
@@ -121,13 +121,13 @@ public class CancionJpaController implements Serializable {
             perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
             cancion.setPerfilPreferenciaList(perfilPreferenciaListNew);
             cancion = em.merge(cancion);
-            if (nombregeneroOld != null && !nombregeneroOld.equals(nombregeneroNew)) {
-                nombregeneroOld.getCancionList().remove(cancion);
-                nombregeneroOld = em.merge(nombregeneroOld);
+            if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
+                generoGeneroOld.getCancionList().remove(cancion);
+                generoGeneroOld = em.merge(generoGeneroOld);
             }
-            if (nombregeneroNew != null && !nombregeneroNew.equals(nombregeneroOld)) {
-                nombregeneroNew.getCancionList().add(cancion);
-                nombregeneroNew = em.merge(nombregeneroNew);
+            if (generoGeneroNew != null && !generoGeneroNew.equals(generoGeneroOld)) {
+                generoGeneroNew.getCancionList().add(cancion);
+                generoGeneroNew = em.merge(generoGeneroNew);
             }
             for (Tags tagsListOldTags : tagsListOld) {
                 if (!tagsListNew.contains(tagsListOldTags)) {
@@ -182,10 +182,10 @@ public class CancionJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cancion with id " + id + " no longer exists.", enfe);
             }
-            Genero nombregenero = cancion.getNombregenero();
-            if (nombregenero != null) {
-                nombregenero.getCancionList().remove(cancion);
-                nombregenero = em.merge(nombregenero);
+            Genero generoGenero = cancion.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero.getCancionList().remove(cancion);
+                generoGenero = em.merge(generoGenero);
             }
             List<Tags> tagsList = cancion.getTagsList();
             for (Tags tagsListTags : tagsList) {

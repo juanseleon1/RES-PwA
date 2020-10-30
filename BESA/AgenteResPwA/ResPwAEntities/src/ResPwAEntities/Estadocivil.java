@@ -26,30 +26,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ESTADOCIVIL")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadocivil.findAll", query = "SELECT e FROM Estadocivil e"),
-    @NamedQuery(name = "Estadocivil.findByTipoestado", query = "SELECT e FROM Estadocivil e WHERE e.tipoestado = :tipoestado")})
+    @NamedQuery(name = "Estadocivil.findAll", query = "SELECT e FROM Estadocivil e")
+    , @NamedQuery(name = "Estadocivil.findByTipoec", query = "SELECT e FROM Estadocivil e WHERE e.tipoec = :tipoec")})
 public class Estadocivil implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "TIPOESTADO")
-    private String tipoestado;
-    @OneToMany(mappedBy = "tipoestadocivil")
+    @Column(name = "TIPOEC")
+    private String tipoec;
+    @OneToMany(mappedBy = "estadocivilTipoec")
     private List<Perfilpwa> perfilpwaList;
 
     public Estadocivil() {
     }
 
-    public Estadocivil(String tipoestado) {
-        this.tipoestado = tipoestado;
+    public Estadocivil(String tipoec) {
+        this.tipoec = tipoec;
     }
 
-    public String getTipoestado() {
-        return tipoestado;
+    public String getTipoec() {
+        return tipoec;
     }
 
-    public void setTipoestado(String tipoestado) {
-        this.tipoestado = tipoestado;
+    public void setTipoec(String tipoec) {
+        this.tipoec = tipoec;
     }
 
     @XmlTransient
@@ -64,7 +65,7 @@ public class Estadocivil implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tipoestado != null ? tipoestado.hashCode() : 0);
+        hash += (tipoec != null ? tipoec.hashCode() : 0);
         return hash;
     }
 
@@ -75,7 +76,7 @@ public class Estadocivil implements Serializable {
             return false;
         }
         Estadocivil other = (Estadocivil) object;
-        if ((this.tipoestado == null && other.tipoestado != null) || (this.tipoestado != null && !this.tipoestado.equals(other.tipoestado))) {
+        if ((this.tipoec == null && other.tipoec != null) || (this.tipoec != null && !this.tipoec.equals(other.tipoec))) {
             return false;
         }
         return true;
@@ -83,7 +84,7 @@ public class Estadocivil implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Estadocivil[ tipoestado=" + tipoestado + " ]";
+        return "BDInterface.Estadocivil[ tipoec=" + tipoec + " ]";
     }
     
 }

@@ -27,41 +27,42 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "GENERO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g"),
-    @NamedQuery(name = "Genero.findByNombregenero", query = "SELECT g FROM Genero g WHERE g.nombregenero = :nombregenero"),
-    @NamedQuery(name = "Genero.findByGusto", query = "SELECT g FROM Genero g WHERE g.gusto = :gusto")})
+    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g")
+    , @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero")
+    , @NamedQuery(name = "Genero.findByGusto", query = "SELECT g FROM Genero g WHERE g.gusto = :gusto")})
 public class Genero implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "NOMBREGENERO")
-    private String nombregenero;
+    @Column(name = "GENERO")
+    private String genero;
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombregenero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero")
     private List<Cancion> cancionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombregenero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero")
     private List<Cuento> cuentoList;
 
     public Genero() {
     }
 
-    public Genero(String nombregenero) {
-        this.nombregenero = nombregenero;
+    public Genero(String genero) {
+        this.genero = genero;
     }
 
-    public Genero(String nombregenero, double gusto) {
-        this.nombregenero = nombregenero;
+    public Genero(String genero, double gusto) {
+        this.genero = genero;
         this.gusto = gusto;
     }
 
-    public String getNombregenero() {
-        return nombregenero;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setNombregenero(String nombregenero) {
-        this.nombregenero = nombregenero;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public double getGusto() {
@@ -93,7 +94,7 @@ public class Genero implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nombregenero != null ? nombregenero.hashCode() : 0);
+        hash += (genero != null ? genero.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +105,7 @@ public class Genero implements Serializable {
             return false;
         }
         Genero other = (Genero) object;
-        if ((this.nombregenero == null && other.nombregenero != null) || (this.nombregenero != null && !this.nombregenero.equals(other.nombregenero))) {
+        if ((this.genero == null && other.genero != null) || (this.genero != null && !this.genero.equals(other.genero))) {
             return false;
         }
         return true;
@@ -112,7 +113,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Genero[ nombregenero=" + nombregenero + " ]";
+        return "BDInterface.Genero[ genero=" + genero + " ]";
     }
     
 }

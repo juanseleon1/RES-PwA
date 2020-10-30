@@ -31,14 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ACTIVIDADPWA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Actividadpwa.findAll", query = "SELECT a FROM Actividadpwa a"),
-    @NamedQuery(name = "Actividadpwa.findById", query = "SELECT a FROM Actividadpwa a WHERE a.id = :id"),
-    @NamedQuery(name = "Actividadpwa.findByNombre", query = "SELECT a FROM Actividadpwa a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "Actividadpwa.findByTipo", query = "SELECT a FROM Actividadpwa a WHERE a.tipo = :tipo"),
-    @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion"),
-    @NamedQuery(name = "Actividadpwa.findByGusto", query = "SELECT a FROM Actividadpwa a WHERE a.gusto = :gusto"),
-    @NamedQuery(name = "Actividadpwa.findByEnriquecimientofavorito", query = "SELECT a FROM Actividadpwa a WHERE a.enriquecimientofavorito = :enriquecimientofavorito")})
+    @NamedQuery(name = "Actividadpwa.findAll", query = "SELECT a FROM Actividadpwa a")
+    , @NamedQuery(name = "Actividadpwa.findById", query = "SELECT a FROM Actividadpwa a WHERE a.id = :id")
+    , @NamedQuery(name = "Actividadpwa.findByNombre", query = "SELECT a FROM Actividadpwa a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Actividadpwa.findByTipo", query = "SELECT a FROM Actividadpwa a WHERE a.tipo = :tipo")
+    , @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion")
+    , @NamedQuery(name = "Actividadpwa.findByGusto", query = "SELECT a FROM Actividadpwa a WHERE a.gusto = :gusto")
+    , @NamedQuery(name = "Actividadpwa.findByEnriqfav", query = "SELECT a FROM Actividadpwa a WHERE a.enriqfav = :enriqfav")})
 public class Actividadpwa implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -58,11 +59,11 @@ public class Actividadpwa implements Serializable {
     @Column(name = "GUSTO")
     private double gusto;
     @Basic(optional = false)
-    @Column(name = "ENRIQUECIMIENTOFAVORITO")
-    private BigInteger enriquecimientofavorito;
+    @Column(name = "ENRIQFAV")
+    private BigInteger enriqfav;
     @JoinTable(name = "ACTXPREFERENCIA", joinColumns = {
         @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
+        @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
     @ManyToMany
     private List<PerfilPreferencia> perfilPreferenciaList;
     @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
@@ -76,13 +77,13 @@ public class Actividadpwa implements Serializable {
         this.id = id;
     }
 
-    public Actividadpwa(BigDecimal id, String nombre, String tipo, BigInteger duracion, double gusto, BigInteger enriquecimientofavorito) {
+    public Actividadpwa(BigDecimal id, String nombre, String tipo, BigInteger duracion, double gusto, BigInteger enriqfav) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.duracion = duracion;
         this.gusto = gusto;
-        this.enriquecimientofavorito = enriquecimientofavorito;
+        this.enriqfav = enriqfav;
     }
 
     public BigDecimal getId() {
@@ -125,12 +126,12 @@ public class Actividadpwa implements Serializable {
         this.gusto = gusto;
     }
 
-    public BigInteger getEnriquecimientofavorito() {
-        return enriquecimientofavorito;
+    public BigInteger getEnriqfav() {
+        return enriqfav;
     }
 
-    public void setEnriquecimientofavorito(BigInteger enriquecimientofavorito) {
-        this.enriquecimientofavorito = enriquecimientofavorito;
+    public void setEnriqfav(BigInteger enriqfav) {
+        this.enriqfav = enriqfav;
     }
 
     @XmlTransient
@@ -172,7 +173,7 @@ public class Actividadpwa implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Actividadpwa[ id=" + id + " ]";
+        return "BDInterface.Actividadpwa[ id=" + id + " ]";
     }
     
 }

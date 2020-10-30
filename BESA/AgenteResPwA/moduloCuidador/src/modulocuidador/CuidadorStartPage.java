@@ -33,7 +33,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class CuidadorStartPage extends javax.swing.JFrame {
 
-    public static String emf= "moduloCuidadorPU";
     /**
      * Creates new form FinalBases
      */
@@ -63,15 +62,11 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         menuGeneral = new javax.swing.JPanel();
         crearPerfil = new javax.swing.JButton();
         verPWAs = new javax.swing.JButton();
+        cuento = new javax.swing.JPanel();
+        consultarPwA = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         regisCommit.setText("Registrarse");
 
@@ -163,7 +158,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         padre.add(Home, "0");
 
-        menuGeneral.setLayout(new java.awt.GridLayout());
+        menuGeneral.setLayout(new java.awt.GridLayout(1, 0));
 
         crearPerfil.setLabel("Crear Nuevo PwA");
         crearPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -179,28 +174,37 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         padre.add(menuGeneral, "gMenu");
         menuGeneral.getAccessibleContext().setAccessibleName("");
 
+        javax.swing.GroupLayout cuentoLayout = new javax.swing.GroupLayout(cuento);
+        cuento.setLayout(cuentoLayout);
+        cuentoLayout.setHorizontalGroup(
+            cuentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 698, Short.MAX_VALUE)
+        );
+        cuentoLayout.setVerticalGroup(
+            cuentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        padre.add(cuento, "card4");
+
+        javax.swing.GroupLayout consultarPwALayout = new javax.swing.GroupLayout(consultarPwA);
+        consultarPwA.setLayout(consultarPwALayout);
+        consultarPwALayout.setHorizontalGroup(
+            consultarPwALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 698, Short.MAX_VALUE)
+        );
+        consultarPwALayout.setVerticalGroup(
+            consultarPwALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        padre.add(consultarPwA, "card5");
+
         jMenuBar1.setRequestFocusEnabled(false);
 
-        jMenu4.setText("Inicio");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
+        jMenu1.setLabel("Crear");
 
-        jMenuItem4.setText("Inicio");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu4);
-
-        jMenu1.setText("Registrar");
-
-        jMenuItem1.setText("Encuentro");
+        jMenuItem1.setLabel("Cuento");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -210,35 +214,6 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
         jMenu1.getAccessibleContext().setAccessibleDescription("");
-
-        jMenu2.setText("Generar");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem2.setText("Partidos 2nda Fase");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Venta");
-
-        jMenuItem3.setText("Boleteria");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -260,69 +235,6 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-//
-//        Calendar c = Calendar.getInstance();
-//        fechal.setText("Fecha Actual: \t " + String.valueOf(c.get(Calendar.DATE)) + "-" + String.valueOf(c.get(Calendar.MONTH)) + "-" + String.valueOf(c.get(Calendar.YEAR)));
-//        String curr = String.format("%02d:%02d", c.get(Calendar.HOUR), c.get(Calendar.MINUTE));
-//        horal.setText("Hora Actual: \t " + curr);
-//        Vector<String> enc = new Vector<String>();
-//        Vector<Vector<Object>> cont = new Vector<Vector<Object>>();
-//        enc.add("Partido");
-//        enc.add("Fecha");
-//        enc.add("Estadio");
-//        enc.add("Ciudad");
-//        enc.add("Equipos");
-//        enc.add("Horario");
-//        List<Partidos> p = f.obtenerPartidos();
-//        for (Partidos aux : p) {
-//            Date t = (Date) aux.getHorario();
-//            Date n = Calendar.getInstance().getTime();
-//            if (t.after(n)) {
-//                Calendar x = Calendar.getInstance();
-//                x.setTime(t);
-//                Vector<Object> o = new Vector<Object>();
-//                o.add(aux.getCodigopartido());
-//                String curry = String.format("%02d:%02d", x.get(Calendar.HOUR), x.get(Calendar.MINUTE));
-//                o.add(String.valueOf(x.get(Calendar.DATE)) + "-" + String.valueOf(x.get(Calendar.MONTH)) + "-" + String.valueOf(x.get(Calendar.YEAR)));
-//                o.add(aux.getCodestadio().getNombree());
-//                o.add(aux.getCodestadio().getCiudad());
-//                String s = new String(aux.getLocal().getNombreeq() + "-" + aux.getVisitante().getNombreeq());
-//                o.add(s);
-//                o.add(curry);
-//                cont.add(o);
-//            }
-//        }
-//        tablaDis = new JTable(cont, enc);
-//        jScrollPane6.setViewportView(tablaDis);
-//        CardLayout card = (CardLayout) padre.getLayout();
-//        card.show(padre, "7");        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-//        fase.removeAllItems();
-//        List<Fase> fa = f.obtenerFases();
-//        for (Fase q : fa) {
-//            fase.addItem(q);
-//        }
-//        CardLayout card = (CardLayout) padre.getLayout();
-//        card.show(padre, "4");
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "0");
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdActionPerformed
         // TODO add your handling code here:
@@ -402,19 +314,15 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Home;
+    private javax.swing.JPanel consultarPwA;
     private javax.swing.JButton crearPerfil;
+    private javax.swing.JPanel cuento;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JButton login;
     private javax.swing.JPanel menuGeneral;
     private javax.swing.JTextField nusuario;

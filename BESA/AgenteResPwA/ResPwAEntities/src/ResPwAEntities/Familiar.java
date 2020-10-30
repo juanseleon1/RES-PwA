@@ -33,14 +33,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "FAMILIAR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Familiar.findAll", query = "SELECT f FROM Familiar f"),
-    @NamedQuery(name = "Familiar.findById", query = "SELECT f FROM Familiar f WHERE f.id = :id"),
-    @NamedQuery(name = "Familiar.findByNombre", query = "SELECT f FROM Familiar f WHERE f.nombre = :nombre"),
-    @NamedQuery(name = "Familiar.findByParentesco", query = "SELECT f FROM Familiar f WHERE f.parentesco = :parentesco"),
-    @NamedQuery(name = "Familiar.findByInteres", query = "SELECT f FROM Familiar f WHERE f.interes = :interes"),
-    @NamedQuery(name = "Familiar.findByEstavivo", query = "SELECT f FROM Familiar f WHERE f.estavivo = :estavivo"),
-    @NamedQuery(name = "Familiar.findByNacimiento", query = "SELECT f FROM Familiar f WHERE f.nacimiento = :nacimiento")})
+    @NamedQuery(name = "Familiar.findAll", query = "SELECT f FROM Familiar f")
+    , @NamedQuery(name = "Familiar.findById", query = "SELECT f FROM Familiar f WHERE f.id = :id")
+    , @NamedQuery(name = "Familiar.findByNombre", query = "SELECT f FROM Familiar f WHERE f.nombre = :nombre")
+    , @NamedQuery(name = "Familiar.findByParentesco", query = "SELECT f FROM Familiar f WHERE f.parentesco = :parentesco")
+    , @NamedQuery(name = "Familiar.findByInteres", query = "SELECT f FROM Familiar f WHERE f.interes = :interes")
+    , @NamedQuery(name = "Familiar.findByEstavivo", query = "SELECT f FROM Familiar f WHERE f.estavivo = :estavivo")
+    , @NamedQuery(name = "Familiar.findByNacimiento", query = "SELECT f FROM Familiar f WHERE f.nacimiento = :nacimiento")})
 public class Familiar implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -64,7 +65,7 @@ public class Familiar implements Serializable {
     private Date nacimiento;
     @JoinTable(name = "FAMILIARES", joinColumns = {
         @JoinColumn(name = "FAMILIAR_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "CEDULA", referencedColumnName = "CEDULA")})
+        @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA")})
     @ManyToMany
     private List<Perfilpwa> perfilpwaList;
 
@@ -162,7 +163,7 @@ public class Familiar implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Familiar[ id=" + id + " ]";
+        return "BDInterface.Familiar[ id=" + id + " ]";
     }
     
 }

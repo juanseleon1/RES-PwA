@@ -48,10 +48,10 @@ public class CuentoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Genero nombregenero = cuento.getNombregenero();
-            if (nombregenero != null) {
-                nombregenero = em.getReference(nombregenero.getClass(), nombregenero.getNombregenero());
-                cuento.setNombregenero(nombregenero);
+            Genero generoGenero = cuento.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero = em.getReference(generoGenero.getClass(), generoGenero.getGenero());
+                cuento.setGeneroGenero(generoGenero);
             }
             List<PerfilPreferencia> attachedPerfilPreferenciaList = new ArrayList<PerfilPreferencia>();
             for (PerfilPreferencia perfilPreferenciaListPerfilPreferenciaToAttach : cuento.getPerfilPreferenciaList()) {
@@ -66,9 +66,9 @@ public class CuentoJpaController implements Serializable {
             }
             cuento.setFrasesList(attachedFrasesList);
             em.persist(cuento);
-            if (nombregenero != null) {
-                nombregenero.getCuentoList().add(cuento);
-                nombregenero = em.merge(nombregenero);
+            if (generoGenero != null) {
+                generoGenero.getCuentoList().add(cuento);
+                generoGenero = em.merge(generoGenero);
             }
             for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : cuento.getPerfilPreferenciaList()) {
                 perfilPreferenciaListPerfilPreferencia.getCuentoList().add(cuento);
@@ -85,7 +85,7 @@ public class CuentoJpaController implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findCuento(cuento.getNombrecuento()) != null) {
+            if (findCuento(cuento.getNombre()) != null) {
                 throw new PreexistingEntityException("Cuento " + cuento + " already exists.", ex);
             }
             throw ex;
@@ -101,9 +101,9 @@ public class CuentoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cuento persistentCuento = em.find(Cuento.class, cuento.getNombrecuento());
-            Genero nombregeneroOld = persistentCuento.getNombregenero();
-            Genero nombregeneroNew = cuento.getNombregenero();
+            Cuento persistentCuento = em.find(Cuento.class, cuento.getNombre());
+            Genero generoGeneroOld = persistentCuento.getGeneroGenero();
+            Genero generoGeneroNew = cuento.getGeneroGenero();
             List<PerfilPreferencia> perfilPreferenciaListOld = persistentCuento.getPerfilPreferenciaList();
             List<PerfilPreferencia> perfilPreferenciaListNew = cuento.getPerfilPreferenciaList();
             List<Frases> frasesListOld = persistentCuento.getFrasesList();
@@ -120,9 +120,9 @@ public class CuentoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (nombregeneroNew != null) {
-                nombregeneroNew = em.getReference(nombregeneroNew.getClass(), nombregeneroNew.getNombregenero());
-                cuento.setNombregenero(nombregeneroNew);
+            if (generoGeneroNew != null) {
+                generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
+                cuento.setGeneroGenero(generoGeneroNew);
             }
             List<PerfilPreferencia> attachedPerfilPreferenciaListNew = new ArrayList<PerfilPreferencia>();
             for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferenciaToAttach : perfilPreferenciaListNew) {
@@ -139,13 +139,13 @@ public class CuentoJpaController implements Serializable {
             frasesListNew = attachedFrasesListNew;
             cuento.setFrasesList(frasesListNew);
             cuento = em.merge(cuento);
-            if (nombregeneroOld != null && !nombregeneroOld.equals(nombregeneroNew)) {
-                nombregeneroOld.getCuentoList().remove(cuento);
-                nombregeneroOld = em.merge(nombregeneroOld);
+            if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
+                generoGeneroOld.getCuentoList().remove(cuento);
+                generoGeneroOld = em.merge(generoGeneroOld);
             }
-            if (nombregeneroNew != null && !nombregeneroNew.equals(nombregeneroOld)) {
-                nombregeneroNew.getCuentoList().add(cuento);
-                nombregeneroNew = em.merge(nombregeneroNew);
+            if (generoGeneroNew != null && !generoGeneroNew.equals(generoGeneroOld)) {
+                generoGeneroNew.getCuentoList().add(cuento);
+                generoGeneroNew = em.merge(generoGeneroNew);
             }
             for (PerfilPreferencia perfilPreferenciaListOldPerfilPreferencia : perfilPreferenciaListOld) {
                 if (!perfilPreferenciaListNew.contains(perfilPreferenciaListOldPerfilPreferencia)) {
@@ -174,7 +174,7 @@ public class CuentoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = cuento.getNombrecuento();
+                String id = cuento.getNombre();
                 if (findCuento(id) == null) {
                     throw new NonexistentEntityException("The cuento with id " + id + " no longer exists.");
                 }
@@ -195,7 +195,7 @@ public class CuentoJpaController implements Serializable {
             Cuento cuento;
             try {
                 cuento = em.getReference(Cuento.class, id);
-                cuento.getNombrecuento();
+                cuento.getNombre();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cuento with id " + id + " no longer exists.", enfe);
             }
@@ -210,10 +210,10 @@ public class CuentoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Genero nombregenero = cuento.getNombregenero();
-            if (nombregenero != null) {
-                nombregenero.getCuentoList().remove(cuento);
-                nombregenero = em.merge(nombregenero);
+            Genero generoGenero = cuento.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero.getCuentoList().remove(cuento);
+                generoGenero = em.merge(generoGenero);
             }
             List<PerfilPreferencia> perfilPreferenciaList = cuento.getPerfilPreferenciaList();
             for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : perfilPreferenciaList) {

@@ -62,13 +62,13 @@ public class PerfilMedicoJpaController implements Serializable {
             em.getTransaction().begin();
             Cdr cdr = perfilMedico.getCdr();
             if (cdr != null) {
-                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoCedula());
+                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoPerfilpwaCedula());
                 perfilMedico.setCdr(cdr);
             }
-            Causademencia causademenciaEnfermedad = perfilMedico.getCausademenciaEnfermedad();
-            if (causademenciaEnfermedad != null) {
-                causademenciaEnfermedad = em.getReference(causademenciaEnfermedad.getClass(), causademenciaEnfermedad.getEnfermedad());
-                perfilMedico.setCausademenciaEnfermedad(causademenciaEnfermedad);
+            Causademencia causademenciaCondicion = perfilMedico.getCausademenciaCondicion();
+            if (causademenciaCondicion != null) {
+                causademenciaCondicion = em.getReference(causademenciaCondicion.getClass(), causademenciaCondicion.getCondicion());
+                perfilMedico.setCausademenciaCondicion(causademenciaCondicion);
             }
             Perfilpwa perfilpwa = perfilMedico.getPerfilpwa();
             if (perfilpwa != null) {
@@ -91,9 +91,9 @@ public class PerfilMedicoJpaController implements Serializable {
                 cdr.setPerfilMedico(perfilMedico);
                 cdr = em.merge(cdr);
             }
-            if (causademenciaEnfermedad != null) {
-                causademenciaEnfermedad.getPerfilMedicoList().add(perfilMedico);
-                causademenciaEnfermedad = em.merge(causademenciaEnfermedad);
+            if (causademenciaCondicion != null) {
+                causademenciaCondicion.getPerfilMedicoList().add(perfilMedico);
+                causademenciaCondicion = em.merge(causademenciaCondicion);
             }
             if (perfilpwa != null) {
                 perfilpwa.setPerfilMedico(perfilMedico);
@@ -129,8 +129,8 @@ public class PerfilMedicoJpaController implements Serializable {
             PerfilMedico persistentPerfilMedico = em.find(PerfilMedico.class, perfilMedico.getPerfilpwaCedula());
             Cdr cdrOld = persistentPerfilMedico.getCdr();
             Cdr cdrNew = perfilMedico.getCdr();
-            Causademencia causademenciaEnfermedadOld = persistentPerfilMedico.getCausademenciaEnfermedad();
-            Causademencia causademenciaEnfermedadNew = perfilMedico.getCausademenciaEnfermedad();
+            Causademencia causademenciaCondicionOld = persistentPerfilMedico.getCausademenciaCondicion();
+            Causademencia causademenciaCondicionNew = perfilMedico.getCausademenciaCondicion();
             Perfilpwa perfilpwaOld = persistentPerfilMedico.getPerfilpwa();
             Perfilpwa perfilpwaNew = perfilMedico.getPerfilpwa();
             List<Actividadrutinaria> actividadrutinariaListOld = persistentPerfilMedico.getActividadrutinariaList();
@@ -155,12 +155,12 @@ public class PerfilMedicoJpaController implements Serializable {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (cdrNew != null) {
-                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoCedula());
+                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoPerfilpwaCedula());
                 perfilMedico.setCdr(cdrNew);
             }
-            if (causademenciaEnfermedadNew != null) {
-                causademenciaEnfermedadNew = em.getReference(causademenciaEnfermedadNew.getClass(), causademenciaEnfermedadNew.getEnfermedad());
-                perfilMedico.setCausademenciaEnfermedad(causademenciaEnfermedadNew);
+            if (causademenciaCondicionNew != null) {
+                causademenciaCondicionNew = em.getReference(causademenciaCondicionNew.getClass(), causademenciaCondicionNew.getCondicion());
+                perfilMedico.setCausademenciaCondicion(causademenciaCondicionNew);
             }
             if (perfilpwaNew != null) {
                 perfilpwaNew = em.getReference(perfilpwaNew.getClass(), perfilpwaNew.getCedula());
@@ -183,13 +183,13 @@ public class PerfilMedicoJpaController implements Serializable {
                 cdrNew.setPerfilMedico(perfilMedico);
                 cdrNew = em.merge(cdrNew);
             }
-            if (causademenciaEnfermedadOld != null && !causademenciaEnfermedadOld.equals(causademenciaEnfermedadNew)) {
-                causademenciaEnfermedadOld.getPerfilMedicoList().remove(perfilMedico);
-                causademenciaEnfermedadOld = em.merge(causademenciaEnfermedadOld);
+            if (causademenciaCondicionOld != null && !causademenciaCondicionOld.equals(causademenciaCondicionNew)) {
+                causademenciaCondicionOld.getPerfilMedicoList().remove(perfilMedico);
+                causademenciaCondicionOld = em.merge(causademenciaCondicionOld);
             }
-            if (causademenciaEnfermedadNew != null && !causademenciaEnfermedadNew.equals(causademenciaEnfermedadOld)) {
-                causademenciaEnfermedadNew.getPerfilMedicoList().add(perfilMedico);
-                causademenciaEnfermedadNew = em.merge(causademenciaEnfermedadNew);
+            if (causademenciaCondicionNew != null && !causademenciaCondicionNew.equals(causademenciaCondicionOld)) {
+                causademenciaCondicionNew.getPerfilMedicoList().add(perfilMedico);
+                causademenciaCondicionNew = em.merge(causademenciaCondicionNew);
             }
             if (perfilpwaOld != null && !perfilpwaOld.equals(perfilpwaNew)) {
                 perfilpwaOld.setPerfilMedico(null);
@@ -256,10 +256,10 @@ public class PerfilMedicoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Causademencia causademenciaEnfermedad = perfilMedico.getCausademenciaEnfermedad();
-            if (causademenciaEnfermedad != null) {
-                causademenciaEnfermedad.getPerfilMedicoList().remove(perfilMedico);
-                causademenciaEnfermedad = em.merge(causademenciaEnfermedad);
+            Causademencia causademenciaCondicion = perfilMedico.getCausademenciaCondicion();
+            if (causademenciaCondicion != null) {
+                causademenciaCondicion.getPerfilMedicoList().remove(perfilMedico);
+                causademenciaCondicion = em.merge(causademenciaCondicion);
             }
             Perfilpwa perfilpwa = perfilMedico.getPerfilpwa();
             if (perfilpwa != null) {

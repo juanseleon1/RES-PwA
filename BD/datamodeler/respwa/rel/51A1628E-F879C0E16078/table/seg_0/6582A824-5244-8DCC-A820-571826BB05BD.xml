@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6582A824-5244-8DCC-A820-571826BB05BD" name="listaTags">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Cancion_nombre" id="7F082776-193D-4485-1757-C33296558637">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4B12D07F-314B-40B1-FF40-7792C1E6E650" referredColumn="96CBE676-4AF0-CE20-AC05-A2BEF403625E"/>
+</associations>
+</Column>
+<Column name="Tags_id" id="33B1B164-2C27-D7BE-81D2-0C8A1EC09B45">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="21A44874-2021-1A06-61D2-DD670D93DB15" referredColumn="8C79D322-695B-A0CB-8CF5-2DBEBA44082D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7230F1F0-8671-85EF-A3CE-9B28EACE11FD" name="listaTags_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7F082776-193D-4485-1757-C33296558637"/>
+<colUsage columnID="33B1B164-2C27-D7BE-81D2-0C8A1EC09B45"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8E0803A6-3B8C-E9D5-CAAA-AF435157579D" name="listaTags_Cancion_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7F082776-193D-4485-1757-C33296558637"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9BCCEFA5-F107-645A-224F-6985E695798B" name="listaTags_Tags_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="33B1B164-2C27-D7BE-81D2-0C8A1EC09B45"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

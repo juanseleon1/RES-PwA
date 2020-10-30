@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="74F41F30-9395-A3AE-D81F-A1CF0166BAA2" containerWithKeyObject="68A5A575-EFBC-6E3F-5E5F-FD99F91F6734" localFKIndex="6051EC61-0888-73C9-FCB8-62156DA4F15B" name="Cancion_Genero_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:40:10 UTC</createdTime>
+<generatorID>7635C045-CFAB-4757-19B4-1164B4AA8218</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Genero</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6EB85343-C814-F501-4A0A-D85C94E2B50C</referredTableID>
+<keyObject>0D4A39BB-723E-F010-A8F4-2283049FD81E</keyObject>
+<referredKeyID>0D4A39BB-723E-F010-A8F4-2283049FD81E</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>genero</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

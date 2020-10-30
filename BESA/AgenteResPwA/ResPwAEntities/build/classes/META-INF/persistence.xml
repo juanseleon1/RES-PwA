@@ -19,6 +19,7 @@
     <class>ResPwAEntities.Genero</class>
     <class>ResPwAEntities.Actividadrutinaria</class>
     <class>ResPwAEntities.Tags</class>
+    <class>ResPwAEntities.Enriq</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
       <property name="javax.persistence.jdbc.user" value="is784921"/>

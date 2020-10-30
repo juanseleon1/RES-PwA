@@ -7,7 +7,9 @@ package ResPwAEntities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,18 +30,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "FRASES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Frases.findAll", query = "SELECT f FROM Frases f"),
-    @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido"),
-    @NamedQuery(name = "Frases.findByOrden", query = "SELECT f FROM Frases f WHERE f.frasesPK.orden = :orden"),
-    @NamedQuery(name = "Frases.findByNombrecuento", query = "SELECT f FROM Frases f WHERE f.frasesPK.nombrecuento = :nombrecuento")})
+    @NamedQuery(name = "Frases.findAll", query = "SELECT f FROM Frases f")
+    , @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido")
+    , @NamedQuery(name = "Frases.findByOrden", query = "SELECT f FROM Frases f WHERE f.frasesPK.orden = :orden")
+    , @NamedQuery(name = "Frases.findByCuentoNombre", query = "SELECT f FROM Frases f WHERE f.frasesPK.cuentoNombre = :cuentoNombre")})
 public class Frases implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected FrasesPK frasesPK;
     @Basic(optional = false)
     @Column(name = "CONTENIDO")
     private String contenido;
-    @JoinColumn(name = "NOMBRECUENTO", referencedColumnName = "NOMBRECUENTO", insertable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "frases")
+    private List<Enriq> enriqList;
+    @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Cuento cuento;
 
@@ -53,8 +60,8 @@ public class Frases implements Serializable {
         this.contenido = contenido;
     }
 
-    public Frases(BigInteger orden, String nombrecuento) {
-        this.frasesPK = new FrasesPK(orden, nombrecuento);
+    public Frases(BigInteger orden, String cuentoNombre) {
+        this.frasesPK = new FrasesPK(orden, cuentoNombre);
     }
 
     public FrasesPK getFrasesPK() {
@@ -71,6 +78,15 @@ public class Frases implements Serializable {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    @XmlTransient
+    public List<Enriq> getEnriqList() {
+        return enriqList;
+    }
+
+    public void setEnriqList(List<Enriq> enriqList) {
+        this.enriqList = enriqList;
     }
 
     public Cuento getCuento() {
@@ -103,7 +119,7 @@ public class Frases implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Frases[ frasesPK=" + frasesPK + " ]";
+        return "BDInterface.Frases[ frasesPK=" + frasesPK + " ]";
     }
     
 }

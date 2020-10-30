@@ -51,12 +51,12 @@ public class CuidadorJpaController implements Serializable {
             cuidador.setPerfilpwaList(attachedPerfilpwaList);
             em.persist(cuidador);
             for (Perfilpwa perfilpwaListPerfilpwa : cuidador.getPerfilpwaList()) {
-                Cuidador oldCuidadornombreOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getCuidadornombre();
-                perfilpwaListPerfilpwa.setCuidadornombre(cuidador);
+                Cuidador oldCuidadorNombreusuarioOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getCuidadorNombreusuario();
+                perfilpwaListPerfilpwa.setCuidadorNombreusuario(cuidador);
                 perfilpwaListPerfilpwa = em.merge(perfilpwaListPerfilpwa);
-                if (oldCuidadornombreOfPerfilpwaListPerfilpwa != null) {
-                    oldCuidadornombreOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
-                    oldCuidadornombreOfPerfilpwaListPerfilpwa = em.merge(oldCuidadornombreOfPerfilpwaListPerfilpwa);
+                if (oldCuidadorNombreusuarioOfPerfilpwaListPerfilpwa != null) {
+                    oldCuidadorNombreusuarioOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
+                    oldCuidadorNombreusuarioOfPerfilpwaListPerfilpwa = em.merge(oldCuidadorNombreusuarioOfPerfilpwaListPerfilpwa);
                 }
             }
             em.getTransaction().commit();
@@ -86,7 +86,7 @@ public class CuidadorJpaController implements Serializable {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Perfilpwa " + perfilpwaListOldPerfilpwa + " since its cuidadornombre field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Perfilpwa " + perfilpwaListOldPerfilpwa + " since its cuidadorNombreusuario field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -102,12 +102,12 @@ public class CuidadorJpaController implements Serializable {
             cuidador = em.merge(cuidador);
             for (Perfilpwa perfilpwaListNewPerfilpwa : perfilpwaListNew) {
                 if (!perfilpwaListOld.contains(perfilpwaListNewPerfilpwa)) {
-                    Cuidador oldCuidadornombreOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getCuidadornombre();
-                    perfilpwaListNewPerfilpwa.setCuidadornombre(cuidador);
+                    Cuidador oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getCuidadorNombreusuario();
+                    perfilpwaListNewPerfilpwa.setCuidadorNombreusuario(cuidador);
                     perfilpwaListNewPerfilpwa = em.merge(perfilpwaListNewPerfilpwa);
-                    if (oldCuidadornombreOfPerfilpwaListNewPerfilpwa != null && !oldCuidadornombreOfPerfilpwaListNewPerfilpwa.equals(cuidador)) {
-                        oldCuidadornombreOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
-                        oldCuidadornombreOfPerfilpwaListNewPerfilpwa = em.merge(oldCuidadornombreOfPerfilpwaListNewPerfilpwa);
+                    if (oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa != null && !oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa.equals(cuidador)) {
+                        oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
+                        oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa = em.merge(oldCuidadorNombreusuarioOfPerfilpwaListNewPerfilpwa);
                     }
                 }
             }
@@ -146,7 +146,7 @@ public class CuidadorJpaController implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Cuidador (" + cuidador + ") cannot be destroyed since the Perfilpwa " + perfilpwaListOrphanCheckPerfilpwa + " in its perfilpwaList field has a non-nullable cuidadornombre field.");
+                illegalOrphanMessages.add("This Cuidador (" + cuidador + ") cannot be destroyed since the Perfilpwa " + perfilpwaListOrphanCheckPerfilpwa + " in its perfilpwaList field has a non-nullable cuidadorNombreusuario field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
