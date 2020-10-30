@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="actXPreferencia" directorySegmentName="seg_0" id="58135EAA-E3D4-C46A-30C3-A5804662CE8B">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:40:44 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="81E35EFC-753B-3794-54D2-D562298501BC" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>FA9DED35-253B-3272-39BE-11D23D90A4C5</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>053F5D28-E2D6-F084-8633-F6C00A75B01C</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

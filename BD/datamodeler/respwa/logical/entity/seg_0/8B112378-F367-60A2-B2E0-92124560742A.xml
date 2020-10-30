@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="8B112378-F367-60A2-B2E0-92124560742A" name="Nivel Educativo">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 17:59:43 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="1121A4E5-EBE4-D87E-ADEE-2CB3D5C348D6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="tipoNivelEducativo" id="62DDE682-8FEF-1AC7-BCEA-10A8271C9002">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 17:59:58 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="1121A4E5-EBE4-D87E-ADEE-2CB3D5C348D6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="C8673223-A025-32BF-6C27-3D184B1E03DA" name="Nivel Educativo PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:03:27 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="1121A4E5-EBE4-D87E-ADEE-2CB3D5C348D6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>62DDE682-8FEF-1AC7-BCEA-10A8271C9002</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

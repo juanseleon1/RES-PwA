@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PerfilXActividadRutinaria" directorySegmentName="seg_0" id="6A267BAD-B2BF-6451-14A9-F0F0FEEC5DCE">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:15:41 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<sourcePk>D18C99DB-D326-BAC9-993C-A138FF237E2C</sourcePk>
+<targetPk>4B9A4A74-6670-7212-BD9D-ACF9BB4CA264</targetPk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C4C92279-704A-3768-75A6-8851A6F0020C</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>901A9438-A603-C064-7A09-F8BD91D2CD12</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
