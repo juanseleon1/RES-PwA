@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FF683E38-CE70-147D-AA96-AD9E8EBBD75B" name="EstadoCivil">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 17:57:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="tipoEstado" id="A3A20E22-62E0-DBA5-1114-39D0F06E5E51">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 17:57:36 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="4C0BF0F1-EB0B-B53B-07BD-3B7CE72E9855" name="EstadoCivil PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:03:17 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A3A20E22-62E0-DBA5-1114-39D0F06E5E51</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

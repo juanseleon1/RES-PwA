@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PreferenciaXCuento" directorySegmentName="seg_0" id="697EA809-6745-4776-9700-3EF616416ED2">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:40:10 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="4EAFE9D3-2C51-C964-F68D-23632B1BF6BB" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>053F5D28-E2D6-F084-8633-F6C00A75B01C</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>B4276BE5-B342-B9A2-0CD9-485F537F71CB</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

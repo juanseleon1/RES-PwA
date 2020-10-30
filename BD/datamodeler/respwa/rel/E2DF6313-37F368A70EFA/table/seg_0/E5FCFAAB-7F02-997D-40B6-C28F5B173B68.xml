@@ -1,0 +1,203 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E5FCFAAB-7F02-997D-40B6-C28F5B173B68" name="PerfilPwa">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>6F20CB6B-96CA-8A33-9D0E-B3019671C714</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="nombre" id="8C527C9E-6BED-4631-4EDD-7F06A25FC009">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>D68C48D6-F1C8-09A0-FBF4-B8878327B111</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="apellido" id="08519735-C62A-E9A7-5096-48B7E89CCFBF">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>963D8D99-F2B1-2359-0463-C1C0EDE99B36</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fechaNacimiento" id="9CED115D-3CF7-0923-CE7A-31B059BB9061">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>529883F7-A523-A6E0-C978-7928B67553EF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="paisNacimiento" id="D12403FC-E8BA-DEA5-D861-A042A07CB41E">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>60B7D309-2DA6-61EE-CE2C-8EEE578565E8</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="edad" id="E819C675-A58D-8277-A1A0-57632C4D594D">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>5A481F5C-8BFB-B144-EF32-5DF29B4F2DEA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cedula" id="EB8CF811-D077-845B-7B64-33405864C555">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>7D8AF2AF-E0B4-67F7-8221-224634856615</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="profesion" id="6DA38068-E216-24FA-38FB-23B965D09576">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>3538F29A-5029-361F-4999-910D719004A1</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EstadoCivil_tipoEstado" id="221E746F-F21E-A475-E80D-9E3124051BDA">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>D1C0DB81-196F-D0C7-CA7B-8425D04F0D45</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A3EB84DB-4CB9-FDFC-2B3D-AE8CB2BA15E5" referredColumn="CCDD0701-B5FD-9CDA-8EB6-43C54DFE5DC6"/>
+</associations>
+</Column>
+<Column name="Nivel_Educativo_tipoNivelEducativo" id="C2B9E360-3B4D-F509-1C42-0BF6FFA8AE93">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>290E14B1-108D-CEDC-AB88-766ACC2D608C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="68D29450-F8DC-766F-4AEF-EA46680F6346" referredColumn="30DD473C-6993-82E6-66A8-BAF5652C5D3D"/>
+</associations>
+</Column>
+<Column name="Cuidador_nombreUsuario" id="A95B332A-DE7B-A98B-3083-0FCFDA96442D">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>54770113-767C-BFDC-63EE-AF98A8AF2709</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8A96D50E-DC33-3285-C117-90437502CFDC" referredColumn="34322E18-162A-063E-1729-8B21E1B0D5DE"/>
+</associations>
+</Column>
+<Column name="idRobot" id="90A5F2DE-A362-1655-049C-291EEC219CBD">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:20:52 UTC</createdTime>
+<generatorID>DF22FF47-47A1-4A9C-79E0-6E969E4B2037</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9E59A4F0-B36C-B248-AA54-7226EC1BD9AA" name="PerfilPwa_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>338122E9-3B24-0B4E-B89C-00D3F37EF6A7</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EB8CF811-D077-845B-7B64-33405864C555"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3D09DE2D-6F82-5CF9-3448-E36004A8E1BF" name="PerfilPwa_Cuidador_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>F750D6EC-A11C-203F-7F08-5CC0F55DD1E5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A95B332A-DE7B-A98B-3083-0FCFDA96442D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="833F1388-9D1F-8F5C-D1CD-8A12D50E262C" name="PerfilPwa_EstadoCivil_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>7015AA22-F310-F0BA-93DF-6D872566877A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="221E746F-F21E-A475-E80D-9E3124051BDA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="ECE0A270-4D13-3F44-B610-5DF1F76C3069" name="PerfilPwa_Nivel_Educativo_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>74884BFC-1B52-8145-C07C-E3DC013D6661</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C2B9E360-3B4D-F509-1C42-0BF6FFA8AE93"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

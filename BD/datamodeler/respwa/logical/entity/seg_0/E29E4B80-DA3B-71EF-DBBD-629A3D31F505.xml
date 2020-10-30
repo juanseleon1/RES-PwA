@@ -1,0 +1,121 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E29E4B80-DA3B-71EF-DBBD-629A3D31F505" name="CDR">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:11:55 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="memoria" id="C4E4B648-70AA-127A-5BAF-FC04E53B7829">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:23:16 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="orientacion" id="6F3E689E-41B1-A251-9301-7B13EA601AF1">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:23:30 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Juicio" id="73C0DB4B-9641-94DD-ACC6-76EA8F1BAB2A">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:25:54 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Vida Social" id="8A954B5B-B682-9A50-A1EB-D3AAD31E9237">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:26:08 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="hogar" id="C5B86086-0989-28E3-29A0-97081EFAA777">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:26:24 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cuidadoPersonal" id="E1B46384-94E9-C89D-1ECE-9E1223664C85">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:26:37 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cedula" id="97F6CB7F-A2E2-AC0D-CDCB-0F3520F4ABEF">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:29:40 UTC</createdTime>
+<generatorID>42271AD6-5D50-299B-B505-563A90E919E6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<referedAttribute>7A31410F-011D-6E47-0810-0C75FAF9B0C0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="020EC631-2334-8922-BCB4-B048DD804E10" name="CDR PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:06:44 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>97F6CB7F-A2E2-AC0D-CDCB-0F3520F4ABEF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

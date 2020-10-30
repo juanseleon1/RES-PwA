@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="90FDAC53-C99D-53EF-45C5-BBEFC50F9087" containerWithKeyObject="4C7F3190-6C33-4D48-C425-EB1827FE61BA" localFKIndex="95364903-D2ED-11EE-F213-E0482D2834D7" name="Perfil_Medico_PerfilPwa_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:06:17 UTC</createdTime>
+<generatorID>D71947AB-04DB-4F6D-B992-39D113A3CB57</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>PerfilPwa</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E5FCFAAB-7F02-997D-40B6-C28F5B173B68</referredTableID>
+<keyObject>9E59A4F0-B36C-B248-AA54-7226EC1BD9AA</keyObject>
+<referredKeyID>9E59A4F0-B36C-B248-AA54-7226EC1BD9AA</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>cedula</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

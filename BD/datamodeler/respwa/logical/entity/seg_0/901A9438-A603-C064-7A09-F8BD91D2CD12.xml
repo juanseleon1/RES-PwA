@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="901A9438-A603-C064-7A09-F8BD91D2CD12" name="ActividadRutinaria">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:12:07 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="nombre" id="D37300FE-7380-1359-E639-2254FA924A74">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:57:46 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id" id="94B6D62E-EA7C-49A9-03D2-D9BDF2F67A45">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:58:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="duracion" id="4736CE5E-9BE4-D3E7-8F85-F8F3A034AF63">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:58:34 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="hora" id="B48CBBA1-80EF-72F0-91B0-69201F721B62">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:58:52 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cedula" id="0CAE562A-2BC0-72FB-34D7-ABB2D27AADEA">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:06:31 UTC</createdTime>
+<generatorID>6A267BAD-B2BF-6451-14A9-F0F0FEEC5DCE</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>7A31410F-011D-6E47-0810-0C75FAF9B0C0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="4B9A4A74-6670-7212-BD9D-ACF9BB4CA264" name="ActividadRutinaria PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:58:32 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>94B6D62E-EA7C-49A9-03D2-D9BDF2F67A45</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

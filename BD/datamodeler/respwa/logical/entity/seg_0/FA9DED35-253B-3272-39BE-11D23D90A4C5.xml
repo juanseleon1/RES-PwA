@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FA9DED35-253B-3272-39BE-11D23D90A4C5" name="ActividadPwA">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:26:23 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="CED7F308-B878-69DF-1E2B-4261284AAFD6">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:28:18 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="BA8C642A-161E-2494-A112-CEED1309C029">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:28:29 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo" id="A368FD0C-397E-3742-716B-BC46BC886369">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:31:45 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="duracion" id="0B21C0B2-1E9F-37B1-C530-90464CA12BAC">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:32:33 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="gusto" id="3B3CFEB7-EA77-896E-D6C1-EA9BC8A7F8A8">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:33:19 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="enriquecimientoFavorito" id="8315EEDA-AD31-0153-96BB-6AA7D6F22E20">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:33:37 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="dificultad" id="597AE98B-AAA7-D638-4071-342D2F4D0457">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 21:11:34 UTC</createdTime>
+<generatorID>307FF311-E74E-DFDD-B99C-F34AFC20044D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>7C4C2F85-2895-257F-7DF3-0BC6A7999597</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="59B19170-51D5-46DD-7FF6-7773FA6523C6" name="ActividadPwA PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:28:27 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>CED7F308-B878-69DF-1E2B-4261284AAFD6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

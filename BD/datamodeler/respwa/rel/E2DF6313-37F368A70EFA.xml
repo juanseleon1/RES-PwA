@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="respwa" id="E2DF6313-144C-72FD-C210-37F368A70EFA" mainViewID="1730FE53-804E-46E5-C535-66FAFC810890">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-28 00:05:45 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>79C73AAF-E1A7-E669-7DF0-025EE81A2AFC</selectedRDBMSSite>
+</relationalModel>
