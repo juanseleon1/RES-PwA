@@ -2,6 +2,9 @@ from naoqi import ALProxy
 import socket
 import threading
 import json
+import qi
+import sys
+import argparse
 
 def handle_client(conn, addr):
     print("Lo logro")
@@ -19,11 +22,11 @@ def handle_client(conn, addr):
     msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
     if jsonObj["methodName"] == "hablar":
         print(jsonObj["methodName"])
+    hablar("hi Enrique, my name is Pepper")
 
 def message_manage(key, msg):
         switch_accion = {
-            #ActivityServices
-            "BEstadoEmocionalPwA": "BEstadoEmocionalPwA",
+            #ActivityServices-------------------------------------------------------
             "RUNANIMATION": "run_animation",
             "GOTOPOSTURE": "go_to_posture",
             "DETECTNEWFACE ": "learn_face",
@@ -40,23 +43,23 @@ def message_manage(key, msg):
             "ACTIVATEMOVDETECTION":"activate_movement_detection",
             "ACTIVATEFACEDETEC":"activate_face_detection",
             "ACTIVATECOLISSIONDETECT":"activate_colission_detection",
-            #EnergyServices
+            #EnergyServices-------------------------------------------------------
             "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service",
             "GETBATTERY":"get_battery",
             "GETTEMP":"get_tempreature",
-            #HumanServices
+            #HumanServices-------------------------------------------------------
             "GETEMOTIONSTATE":"get_emotion_State",
             "LOGIN":"login",
-            #LocationServices
+            #LocationServices-------------------------------------------------------
             "SEARCHFREEZONE":"search_free_zone",
             "GETFREEZONES":"get_free_zones",
             "GETROBOTPOSITION":"get_robot_position",
-            #MovementServices
+            #MovementServices-------------------------------------------------------
             "MOVE":"move",
             "MOVEFORWARD":"move_forward",
             "MOVETO":"move_to",
             "MOVETOPOSITION":"move_to_position",
-            #RobotStateServices
+            #RobotStateServices-------------------------------------------------------
             "WAKEUP":"wake_up",
             "SUSPEND":"suspend",
             "SETREFRESHTIMESENSORS":"set_refresh_time_sensors",
@@ -65,7 +68,7 @@ def message_manage(key, msg):
             "SETLEDSINTENSITY":"set_leds_intensity",
             "CHANGELEDCOLOR":"change_led_color",
             "ACTIVATESTIFFNESS":"activate_stiffness",
-            #TabletServices
+            #TabletServices-------------------------------------------------------
             "TABLETON":"tablet_on",
             "WAKETABLET":"wake_tablet",
             "SUSPENDTABLET":"suspend_tablet",
@@ -79,7 +82,7 @@ def message_manage(key, msg):
             "HIDEIMG":"hide_image",
             "SETTABLETBRIGHT":"set_tablet_bright",
             "SETTABLETVOL":"set_tablet_volume",
-            #VoiceServices
+            #VoiceServices-------------------------------------------------------
             "SAY":"say",
             "STOPALL":"stop_all",
             "SETSAYVOLUMN":"set_say_volume",
@@ -96,31 +99,7 @@ def message_manage(key, msg):
             "UNLOADCONVTOPIC":"unload_conversational_topic",
             "DEACTCONVTOPIC":"deactivate_conversational_topic",
             "SAYUNDERTOPICCONTEXT":"say_under_topic_context",
-            "SETTOPICFOCUS":"set_topic_focus",
-
-            
-            
-           10: "consultar_actividades",
-           11: "saludar",
-           12: "despedirse",
-           13: "reinicio_actividad",
-           14: "cancelar_actividad",
-           15: "cancelar_interaccion",
-           16: "bailar",
-           17: "karaoke",
-           18: "bateria",
-           19: "cancion",
-           20: "falta_informacion",
-           21: "notificacion",
-           22: "cambiar_dificultad",
-           23: "seleccionar_cuento",
-           24: "animar",
-           25: "mantener_atencion",
-           26: "reanudar_actividad",
-           27: "reporte",
-           28: "pausa_interaccion",
-           29: "musicoterapia",
-           30: "modificar_historia"
+            "SETTOPICFOCUS":"set_topic_focus"
         }
         func = switch_accion.get(key)
         func(msg)
@@ -137,9 +116,9 @@ def getEmotionalReaction():
     return alMood.getEmotionalReaction()
 
 def getAttention():
-    #“unengaged”: attentionLevel < 0.6
-    #“semiEngaged” : 0.6 <= attentionLevel < 0.9
-    #“fullyEngaged”: attentionLevel >= 0.9
+    #ï¿½unengagedï¿½: attentionLevel < 0.6
+    #ï¿½semiEngagedï¿½ : 0.6 <= attentionLevel < 0.9
+    #ï¿½fullyEngagedï¿½: attentionLevel >= 0.9
     return alMood.attention()
     
 # Choregraphe bezier export in Python.
@@ -324,7 +303,7 @@ def get_free_zones(radius, displacement):
 
 """ No se si exista problema por utilizar ALLocalizationProxy o simplemente ALLocalization"""
 #Gets the coordinates x, y, theta of the pose2D of the robot
-def get_robot_position(enabled)
+def get_robot_position(enabled):
     return alLocalizationProxy.getRobotPosition(enabled)
 
 #Makes the robot move at the given velocity, expressed in FRAME_ROBOT
@@ -411,11 +390,11 @@ def  resume_video():
 
 # Load the image to show to de user
 def preload_image():
-
+    pass
 
 #Shows the image in the tablet for the user
 def show_image():
-
+    pass
 
 #Hide image currently displayed.
 def hide_image():
@@ -474,7 +453,7 @@ def activate_voice_recognition(subscriber):
 def desactivate_voice_recognition():
     alSpeechRecognition.unsubscribe(subscriber)
 
-#Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human’s inputs.
+#Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the humanï¿½s inputs.
 def activate_conversational_topic(topicName):
     alDialogProxy.activateTopic(topicName)
 
@@ -486,7 +465,7 @@ def load_conversational_topic(topicName):
 def unload_conversational_topic(topicName):
      alDialogProxy.unloadTopic(topicName)
 
-#Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the human’s inputs.
+#Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the humanï¿½s inputs.
 def deactivate_conversational_topic(topicName):
      alDialogProxy.deactivateTopic(topicName)
 
@@ -533,27 +512,27 @@ def conversacion_empatica(params):
     func()
 
 def conversacion_triste():
-    frase_inicial = "Sé que estás triste," #realizar una pausa! IMPORTANTE!!!!!!!!!!!!!!
+    frase_inicial = "Sï¿½ que estï¿½s triste," #realizar una pausa! IMPORTANTE!!!!!!!!!!!!!!
     switch_conversacion = {
         1: "pero sabes? la tristeza nos puede ayudar a hacer una introspeccion y esto nos permite estar mejor.",
-        2: "Aveces la tristeza nos puede hacer sentir mal, te cuento que como el resto de emociones tiene una función que nos permite volver mejores",
-        3: "¿Sabías que usualmente necesitamos la ayuda de otras personas cuando estamos tristes?",
-        4: "y te sientes mal, pero esta emoción te permite sanar heridas"
+        2: "Aveces la tristeza nos puede hacer sentir mal, te cuento que como el resto de emociones tiene una funciï¿½n que nos permite volver mejores",
+        3: "ï¿½Sabï¿½as que usualmente necesitamos la ayuda de otras personas cuando estamos tristes?",
+        4: "y te sientes mal, pero esta emociï¿½n te permite sanar heridas"
     }
-    frase_principal = "¿Te gustaría escuchar una canción?"
+    frase_principal = "ï¿½Te gustarï¿½a escuchar una canciï¿½n?"
 
 def conversacion_alegre():
-    frase_inicial = "Me gusta verte así,"
+    frase_inicial = "Me gusta verte asï¿½,"
     switch_conversacion = {
-        1: "La alegría te genera una sonrisa hermosa",
-        2: "Las personas se desempeñan mucho mejor cuando están alegres",
-        3: "La alegría es parte de la vida y es vital para disfrutar nuestra estadia",
-        4: "luces genial, esa alegría que reflejas te hace ver mejor"
+        1: "La alegrï¿½a te genera una sonrisa hermosa",
+        2: "Las personas se desempeï¿½an mucho mejor cuando estï¿½n alegres",
+        3: "La alegrï¿½a es parte de la vida y es vital para disfrutar nuestra estadia",
+        4: "luces genial, esa alegrï¿½a que reflejas te hace ver mejor"
     }
-    frase_principal = "¿Escuchamos una canción?"
+    frase_principal = "ï¿½Escuchamos una canciï¿½n?"
 
 def conversacion_ira(genero):
-    frase_inicial = "Veo que estás enfadad"
+    frase_inicial = "Veo que estï¿½s enfadad"
 
     if genero =='M':
         frase_inicial = frase_inicial + "o"
@@ -565,10 +544,10 @@ def conversacion_ira(genero):
     switch_conversacion = {
         1: "es normal sentir ira, pero no debes dejarla salir de control porque no te permite tomar buenas decisiones",
         2: "aveces la ira te puede hacer sentir mal, sin embargo debes tomar las cosas con serenidad",
-        3: "pero sabes? las cosas tienen la importancia que tú les das",
+        3: "pero sabes? las cosas tienen la importancia que tï¿½ les das",
         4: "la ira te indispone y dificulta que pienses con claridad"
     }
-    frase_principal = "¿si quieres podemos escuchar una canción para relajarnos?"
+    frase_principal = "ï¿½si quieres podemos escuchar una canciï¿½n para relajarnos?"
 
 def presentarse(params):
     pass
@@ -617,62 +596,76 @@ def musicoterapia(params):
 def modificar_historia(params):
     pass
 
-#Declare the Naoqi variables --------------------------------------------------------------------
-alMood = session.service("ALMood")
-alTexToSpeech = session.service("ALTextToSpeech")
-alAnimationPlayer = session.service("ALAnimationPlayerProxy")
-alMotion = session.service("ALMotion")
-alRobotPosture = session.service("ALRobotPosture")
-alFaceDetection = session.service("ALFaceDetectionProxy")
-alAutonomousBlinking = session.service("AutonomousBlinkingProxy")
-alBackgroundMovement = session.service("ALBackgroundMovementProxy")
-alBasicAwareness = session.service("ALBasicAwarenessProxy")
-alListeningMovement = session.service(" ALListeningMovementProxy")
-alSpeakingMovementProxy = session.service("ALSpeakingMovementProxy")
-alMotionProxy = session.service("ALMotionProxy")
-alPeoplePerception = session.service("ALPeoplePerception")
-alFaceDetection = session.service("ALFaceDetection")
-alBatteryProxy = session.service("ALBatteryProxy")
-alBodyTemperatureProxy = session.service("ALBodyTempreatureProxy")
-alUserSession = session.service("ALUserSession")
-alNavigationProxy = session.service("ALNavigationProxy")
-alLocalizationProxy = session.service("ALLocalizationProxy")
-alSensorsProxy = session.service("ALSensorsProxy")
-alLedsProxy = session.service("ALLedsProxy")
-alTabletService = session.service("ALTabletService")
-alAnimatedSpeech = session.service("ALAnimatedSpeech")
-alAudioDevice = ALProxy("ALAudioDevice")
-alAudioPlayer = session.service("ALAudioPlayer")
-alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
-alSpeechRecognition  = session.service("ALSpeechRecognition")
-alDialogProxy = session.service("ALDialogProxy")
 
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
 #----------------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
-HOST = '127.0.0.1' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '192.168.2.7' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST)
 PORT = 7895    # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
-ADDR = (HOST, PORT)
+ADDR = (HOST_LOCAL, PORT)
 server = None
 HEADER = 1024
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 print("Server starting...pop1111111111111111111")
+
+#------------------------------------------------------------------------------------------------
+parser = argparse.ArgumentParser()
+parser.add_argument("--ip", type=str, default=HOST, help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
+parser.add_argument("--port", type=int, default=9559, help="Naoqi port number")
+args = parser.parse_args()
+session = qi.Session()
+try:
+    session.connect("tcp://" + args.ip + ":" + str(args.port))
+except RuntimeError:
+    print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
+               "Please check your script arguments. Run with -h option for help.")
+    sys.exit(1)
+#----------------------------------------------------------------------------------------------------
+
+#Declare the Naoqi variables --------------------------------------------------------------------
+alMood = session.service("ALMood")
+alTexToSpeech = session.service("ALTextToSpeech")
+alAnimationPlayer = session.service("ALAnimationPlayer")
+alMotion = session.service("ALMotion")
+alRobotPosture = session.service("ALRobotPosture")
+alFaceDetection = session.service("ALFaceDetection")
+alAutonomousBlinking = session.service("ALAutonomousBlinking")
+alBackgroundMovement = session.service("ALBackgroundMovement")
+alBasicAwareness = session.service("ALBasicAwareness")
+alListeningMovement = session.service("ALListeningMovement")
+alSpeakingMovementProxy = session.service("ALSpeakingMovement")
+alMotionProxy = session.service("ALMotion")
+alPeoplePerception = session.service("ALPeoplePerception")
+alFaceDetection = session.service("ALFaceDetection")
+alBatteryProxy = session.service("ALBattery")
+alBodyTemperatureProxy = session.service("ALBodyTemperature")
+alUserSession = session.service("ALUserSession")
+alNavigationProxy = session.service("ALNavigation")
+alLocalizationProxy = session.service("ALLocalization")
+alSensorsProxy = session.service("ALSensors") 
+alLedsProxy = session.service("ALLeds")
+alTabletService = session.service("ALTabletService")
+alAnimatedSpeech = session.service("ALAnimatedSpeech")
+alAudioDevice = session.service("ALAudioDevice")
+alAudioPlayer = session.service("ALAudioPlayer")
+alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
+alSpeechRecognition  = session.service("ALSpeechRecognition")
+alDialogProxy = session.service("ALDialog")
+#----------------------------------------------------------------------------------------------------
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 print("Server starting...pop22222222222222222222222")
-ADDR = (HOST, PORT)
+ADDR = (HOST_LOCAL, PORT)
 print("Server starting...pop3333333333333333333333333")
 server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
-print("[STARTING] server is listening on", HOST)
+print("[STARTING] server is listening on", HOST_LOCAL)
 conn, addr = server.accept()
 thread = threading.Thread(target=handle_client, args=(conn, addr))
 thread.start()
