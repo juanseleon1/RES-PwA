@@ -28,7 +28,16 @@ def handle_client(conn, addr):
     else:
         hablar("Mal")
     print(get_face_list()[0])
-    
+
+    #activate_blinking(False)+++++++++++++++++++++++++++++
+    #activate_life_signals(false)+++++++++++++++++++++++++
+    #activate_life_signals_awareness(False)
+    #set_engagement_type("FullyEngaged")
+    #activate_hearing_movement(False)
+    #activate_speak_movements(False)
+    #define_conversation_mode("random")
+    #activate_push_reflexes(False)
+    #
 def message_manage(key, msg):
         switch_accion = {
             #ActivityServices-------------------------------------------------------
@@ -36,14 +45,14 @@ def message_manage(key, msg):
             "GOTOPOSTURE": "go_to_posture",  #No hace nada-------------------------
             "DETECTNEWFACE ": "learn_face",  #funcionando
             "GETFACELIST": "get_face_list",  #funcionando
-            "ACTIVATE": "activate_blinking",
-            "ACTIVATELIFESIGNALS": "activate_life_signals",
-            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness",
-            "DEFENGAGEMENTTYPE": "set_engagement_type",
-            "ACTIVATEACTIVEHEARING": "activate_hearing_movement",
-            "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements",
-            "DEFCONVERSATIONMODE":"define_conversation_mode",
-            "ACTIVATEPUSHREFLEXES":"activate_push_reflexes",
+            "ACTIVATE": "activate_blinking", #
+            "ACTIVATELIFESIGNALS": "activate_life_signals", #
+            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness", #
+            "DEFENGAGEMENTTYPE": "set_engagement_type", #
+            "ACTIVATEACTIVEHEARING": "activate_hearing_movement",#
+            "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements", #
+            "DEFCONVERSATIONMODE":"define_conversation_mode", #
+            "ACTIVATEPUSHREFLEXES":"activate_push_reflexes", #
             "ACIVATEBREATHMOV":"activate_breath_movement",
             "ACTIVATEMOVDETECTION":"activate_movement_detection",
             "ACTIVATEFACEDETEC":"activate_face_detection",
@@ -270,9 +279,9 @@ def activate_push_reflexes(enabled):
     alMotionProxy.setPushRecoveryEnabled(enabled)
     
  #Starts or stops breathing animation on a chain.   
-def activate_breath_movement(enabled):
-    alMotionProxy.setBreathEnabled("Body",enabled)
-
+def activate_breath_movement(extremity_to_enabled, enabled):
+    alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
+("Body",enabled)
 #Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
 def activate_movement_detection(enabled):
     alPeoplePerception.setMovementDetectionEnabled(enabled)
