@@ -11,11 +11,11 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Perfilpwa;
-import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Cuento;
 import java.util.ArrayList;
 import java.util.List;
-import ResPwAEntities.Cuento;
 import ResPwAEntities.Cancion;
+import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
@@ -39,14 +39,14 @@ public class PerfilPreferenciaJpaController implements Serializable {
     }
 
     public void create(PerfilPreferencia perfilPreferencia) throws IllegalOrphanException, PreexistingEntityException, Exception {
-        if (perfilPreferencia.getActividadpwaList() == null) {
-            perfilPreferencia.setActividadpwaList(new ArrayList<Actividadpwa>());
-        }
         if (perfilPreferencia.getCuentoList() == null) {
             perfilPreferencia.setCuentoList(new ArrayList<Cuento>());
         }
         if (perfilPreferencia.getCancionList() == null) {
             perfilPreferencia.setCancionList(new ArrayList<Cancion>());
+        }
+        if (perfilPreferencia.getActxpreferenciaList() == null) {
+            perfilPreferencia.setActxpreferenciaList(new ArrayList<Actxpreferencia>());
         }
         List<String> illegalOrphanMessages = null;
         Perfilpwa perfilpwaOrphanCheck = perfilPreferencia.getPerfilpwa();
@@ -71,12 +71,6 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwa = em.getReference(perfilpwa.getClass(), perfilpwa.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwa);
             }
-            List<Actividadpwa> attachedActividadpwaList = new ArrayList<Actividadpwa>();
-            for (Actividadpwa actividadpwaListActividadpwaToAttach : perfilPreferencia.getActividadpwaList()) {
-                actividadpwaListActividadpwaToAttach = em.getReference(actividadpwaListActividadpwaToAttach.getClass(), actividadpwaListActividadpwaToAttach.getId());
-                attachedActividadpwaList.add(actividadpwaListActividadpwaToAttach);
-            }
-            perfilPreferencia.setActividadpwaList(attachedActividadpwaList);
             List<Cuento> attachedCuentoList = new ArrayList<Cuento>();
             for (Cuento cuentoListCuentoToAttach : perfilPreferencia.getCuentoList()) {
                 cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombre());
@@ -89,14 +83,16 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 attachedCancionList.add(cancionListCancionToAttach);
             }
             perfilPreferencia.setCancionList(attachedCancionList);
+            List<Actxpreferencia> attachedActxpreferenciaList = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListActxpreferenciaToAttach : perfilPreferencia.getActxpreferenciaList()) {
+                actxpreferenciaListActxpreferenciaToAttach = em.getReference(actxpreferenciaListActxpreferenciaToAttach.getClass(), actxpreferenciaListActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaList.add(actxpreferenciaListActxpreferenciaToAttach);
+            }
+            perfilPreferencia.setActxpreferenciaList(attachedActxpreferenciaList);
             em.persist(perfilPreferencia);
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(perfilPreferencia);
                 perfilpwa = em.merge(perfilpwa);
-            }
-            for (Actividadpwa actividadpwaListActividadpwa : perfilPreferencia.getActividadpwaList()) {
-                actividadpwaListActividadpwa.getPerfilPreferenciaList().add(perfilPreferencia);
-                actividadpwaListActividadpwa = em.merge(actividadpwaListActividadpwa);
             }
             for (Cuento cuentoListCuento : perfilPreferencia.getCuentoList()) {
                 cuentoListCuento.getPerfilPreferenciaList().add(perfilPreferencia);
@@ -105,6 +101,15 @@ public class PerfilPreferenciaJpaController implements Serializable {
             for (Cancion cancionListCancion : perfilPreferencia.getCancionList()) {
                 cancionListCancion.getPerfilPreferenciaList().add(perfilPreferencia);
                 cancionListCancion = em.merge(cancionListCancion);
+            }
+            for (Actxpreferencia actxpreferenciaListActxpreferencia : perfilPreferencia.getActxpreferenciaList()) {
+                PerfilPreferencia oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia = actxpreferenciaListActxpreferencia.getPerfilPreferencia();
+                actxpreferenciaListActxpreferencia.setPerfilPreferencia(perfilPreferencia);
+                actxpreferenciaListActxpreferencia = em.merge(actxpreferenciaListActxpreferencia);
+                if (oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia != null) {
+                    oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListActxpreferencia);
+                    oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia = em.merge(oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -127,12 +132,12 @@ public class PerfilPreferenciaJpaController implements Serializable {
             PerfilPreferencia persistentPerfilPreferencia = em.find(PerfilPreferencia.class, perfilPreferencia.getPerfilpwaCedula());
             Perfilpwa perfilpwaOld = persistentPerfilPreferencia.getPerfilpwa();
             Perfilpwa perfilpwaNew = perfilPreferencia.getPerfilpwa();
-            List<Actividadpwa> actividadpwaListOld = persistentPerfilPreferencia.getActividadpwaList();
-            List<Actividadpwa> actividadpwaListNew = perfilPreferencia.getActividadpwaList();
             List<Cuento> cuentoListOld = persistentPerfilPreferencia.getCuentoList();
             List<Cuento> cuentoListNew = perfilPreferencia.getCuentoList();
             List<Cancion> cancionListOld = persistentPerfilPreferencia.getCancionList();
             List<Cancion> cancionListNew = perfilPreferencia.getCancionList();
+            List<Actxpreferencia> actxpreferenciaListOld = persistentPerfilPreferencia.getActxpreferenciaList();
+            List<Actxpreferencia> actxpreferenciaListNew = perfilPreferencia.getActxpreferenciaList();
             List<String> illegalOrphanMessages = null;
             if (perfilpwaNew != null && !perfilpwaNew.equals(perfilpwaOld)) {
                 PerfilPreferencia oldPerfilPreferenciaOfPerfilpwa = perfilpwaNew.getPerfilPreferencia();
@@ -143,6 +148,14 @@ public class PerfilPreferenciaJpaController implements Serializable {
                     illegalOrphanMessages.add("The Perfilpwa " + perfilpwaNew + " already has an item of type PerfilPreferencia whose perfilpwa column cannot be null. Please make another selection for the perfilpwa field.");
                 }
             }
+            for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
+                if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Actxpreferencia " + actxpreferenciaListOldActxpreferencia + " since its perfilPreferencia field is not nullable.");
+                }
+            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
@@ -150,13 +163,6 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwaNew = em.getReference(perfilpwaNew.getClass(), perfilpwaNew.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwaNew);
             }
-            List<Actividadpwa> attachedActividadpwaListNew = new ArrayList<Actividadpwa>();
-            for (Actividadpwa actividadpwaListNewActividadpwaToAttach : actividadpwaListNew) {
-                actividadpwaListNewActividadpwaToAttach = em.getReference(actividadpwaListNewActividadpwaToAttach.getClass(), actividadpwaListNewActividadpwaToAttach.getId());
-                attachedActividadpwaListNew.add(actividadpwaListNewActividadpwaToAttach);
-            }
-            actividadpwaListNew = attachedActividadpwaListNew;
-            perfilPreferencia.setActividadpwaList(actividadpwaListNew);
             List<Cuento> attachedCuentoListNew = new ArrayList<Cuento>();
             for (Cuento cuentoListNewCuentoToAttach : cuentoListNew) {
                 cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombre());
@@ -171,6 +177,13 @@ public class PerfilPreferenciaJpaController implements Serializable {
             }
             cancionListNew = attachedCancionListNew;
             perfilPreferencia.setCancionList(cancionListNew);
+            List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
+                actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaListNew.add(actxpreferenciaListNewActxpreferenciaToAttach);
+            }
+            actxpreferenciaListNew = attachedActxpreferenciaListNew;
+            perfilPreferencia.setActxpreferenciaList(actxpreferenciaListNew);
             perfilPreferencia = em.merge(perfilPreferencia);
             if (perfilpwaOld != null && !perfilpwaOld.equals(perfilpwaNew)) {
                 perfilpwaOld.setPerfilPreferencia(null);
@@ -179,18 +192,6 @@ public class PerfilPreferenciaJpaController implements Serializable {
             if (perfilpwaNew != null && !perfilpwaNew.equals(perfilpwaOld)) {
                 perfilpwaNew.setPerfilPreferencia(perfilPreferencia);
                 perfilpwaNew = em.merge(perfilpwaNew);
-            }
-            for (Actividadpwa actividadpwaListOldActividadpwa : actividadpwaListOld) {
-                if (!actividadpwaListNew.contains(actividadpwaListOldActividadpwa)) {
-                    actividadpwaListOldActividadpwa.getPerfilPreferenciaList().remove(perfilPreferencia);
-                    actividadpwaListOldActividadpwa = em.merge(actividadpwaListOldActividadpwa);
-                }
-            }
-            for (Actividadpwa actividadpwaListNewActividadpwa : actividadpwaListNew) {
-                if (!actividadpwaListOld.contains(actividadpwaListNewActividadpwa)) {
-                    actividadpwaListNewActividadpwa.getPerfilPreferenciaList().add(perfilPreferencia);
-                    actividadpwaListNewActividadpwa = em.merge(actividadpwaListNewActividadpwa);
-                }
             }
             for (Cuento cuentoListOldCuento : cuentoListOld) {
                 if (!cuentoListNew.contains(cuentoListOldCuento)) {
@@ -216,6 +217,17 @@ public class PerfilPreferenciaJpaController implements Serializable {
                     cancionListNewCancion = em.merge(cancionListNewCancion);
                 }
             }
+            for (Actxpreferencia actxpreferenciaListNewActxpreferencia : actxpreferenciaListNew) {
+                if (!actxpreferenciaListOld.contains(actxpreferenciaListNewActxpreferencia)) {
+                    PerfilPreferencia oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia = actxpreferenciaListNewActxpreferencia.getPerfilPreferencia();
+                    actxpreferenciaListNewActxpreferencia.setPerfilPreferencia(perfilPreferencia);
+                    actxpreferenciaListNewActxpreferencia = em.merge(actxpreferenciaListNewActxpreferencia);
+                    if (oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia != null && !oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia.equals(perfilPreferencia)) {
+                        oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListNewActxpreferencia);
+                        oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia = em.merge(oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -233,7 +245,7 @@ public class PerfilPreferenciaJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -245,15 +257,21 @@ public class PerfilPreferenciaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The perfilPreferencia with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            List<Actxpreferencia> actxpreferenciaListOrphanCheck = perfilPreferencia.getActxpreferenciaList();
+            for (Actxpreferencia actxpreferenciaListOrphanCheckActxpreferencia : actxpreferenciaListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PerfilPreferencia (" + perfilPreferencia + ") cannot be destroyed since the Actxpreferencia " + actxpreferenciaListOrphanCheckActxpreferencia + " in its actxpreferenciaList field has a non-nullable perfilPreferencia field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Perfilpwa perfilpwa = perfilPreferencia.getPerfilpwa();
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(null);
                 perfilpwa = em.merge(perfilpwa);
-            }
-            List<Actividadpwa> actividadpwaList = perfilPreferencia.getActividadpwaList();
-            for (Actividadpwa actividadpwaListActividadpwa : actividadpwaList) {
-                actividadpwaListActividadpwa.getPerfilPreferenciaList().remove(perfilPreferencia);
-                actividadpwaListActividadpwa = em.merge(actividadpwaListActividadpwa);
             }
             List<Cuento> cuentoList = perfilPreferencia.getCuentoList();
             for (Cuento cuentoListCuento : cuentoList) {

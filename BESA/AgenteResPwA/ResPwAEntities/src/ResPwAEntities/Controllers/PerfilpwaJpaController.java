@@ -125,12 +125,12 @@ public class PerfilpwaJpaController implements Serializable {
                 familiarListFamiliar = em.merge(familiarListFamiliar);
             }
             for (Registroactividad registroactividadListRegistroactividad : perfilpwa.getRegistroactividadList()) {
-                Perfilpwa oldPerfilpwaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getPerfilpwa();
-                registroactividadListRegistroactividad.setPerfilpwa(perfilpwa);
+                Perfilpwa oldPerfilpwaCedulaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getPerfilpwaCedula();
+                registroactividadListRegistroactividad.setPerfilpwaCedula(perfilpwa);
                 registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
-                if (oldPerfilpwaOfRegistroactividadListRegistroactividad != null) {
-                    oldPerfilpwaOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
-                    oldPerfilpwaOfRegistroactividadListRegistroactividad = em.merge(oldPerfilpwaOfRegistroactividadListRegistroactividad);
+                if (oldPerfilpwaCedulaOfRegistroactividadListRegistroactividad != null) {
+                    oldPerfilpwaCedulaOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
+                    oldPerfilpwaCedulaOfRegistroactividadListRegistroactividad = em.merge(oldPerfilpwaCedulaOfRegistroactividadListRegistroactividad);
                 }
             }
             em.getTransaction().commit();
@@ -184,7 +184,7 @@ public class PerfilpwaJpaController implements Serializable {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Registroactividad " + registroactividadListOldRegistroactividad + " since its perfilpwa field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Registroactividad " + registroactividadListOldRegistroactividad + " since its perfilpwaCedula field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -281,12 +281,12 @@ public class PerfilpwaJpaController implements Serializable {
             }
             for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
                 if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
-                    Perfilpwa oldPerfilpwaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getPerfilpwa();
-                    registroactividadListNewRegistroactividad.setPerfilpwa(perfilpwa);
+                    Perfilpwa oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getPerfilpwaCedula();
+                    registroactividadListNewRegistroactividad.setPerfilpwaCedula(perfilpwa);
                     registroactividadListNewRegistroactividad = em.merge(registroactividadListNewRegistroactividad);
-                    if (oldPerfilpwaOfRegistroactividadListNewRegistroactividad != null && !oldPerfilpwaOfRegistroactividadListNewRegistroactividad.equals(perfilpwa)) {
-                        oldPerfilpwaOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
-                        oldPerfilpwaOfRegistroactividadListNewRegistroactividad = em.merge(oldPerfilpwaOfRegistroactividadListNewRegistroactividad);
+                    if (oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad != null && !oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad.equals(perfilpwa)) {
+                        oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
+                        oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad = em.merge(oldPerfilpwaCedulaOfRegistroactividadListNewRegistroactividad);
                     }
                 }
             }
@@ -339,7 +339,7 @@ public class PerfilpwaJpaController implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Perfilpwa (" + perfilpwa + ") cannot be destroyed since the Registroactividad " + registroactividadListOrphanCheckRegistroactividad + " in its registroactividadList field has a non-nullable perfilpwa field.");
+                illegalOrphanMessages.add("This Perfilpwa (" + perfilpwa + ") cannot be destroyed since the Registroactividad " + registroactividadListOrphanCheckRegistroactividad + " in its registroactividadList field has a non-nullable perfilpwaCedula field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

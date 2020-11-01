@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D2298C0E-8785-C35B-9896-7AE6E4D56EFA" name="familiares">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PerfilPwa_cedula" id="CBCAC56C-76A5-BB6A-91F5-FBACC0D982A3">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6A0B571F-144F-86E5-0B7E-C456B4DD9D34" referredColumn="3F3DEBAC-87D5-3174-D5EA-65B1FB728017"/>
+</associations>
+</Column>
+<Column name="Familiar_id" id="2E976AE3-D6BD-F59C-DEFC-A256CCCD81B7">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0797FF6B-CD6D-0666-9AAB-6DF42255C7B1" referredColumn="32A1052F-457B-CFAD-9AD0-60252EA55863"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="372B5159-AFE7-FC9A-41F4-9838322B778B" name="familiares_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CBCAC56C-76A5-BB6A-91F5-FBACC0D982A3"/>
+<colUsage columnID="2E976AE3-D6BD-F59C-DEFC-A256CCCD81B7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="70D3C6B7-8DDC-4597-E363-B4A1B419D0A9" name="familiares_PerfilPwa_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>08632116-D059-56AA-79B0-E8407829290E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CBCAC56C-76A5-BB6A-91F5-FBACC0D982A3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="63B526E2-B2DA-639A-31DE-D6CD1816F608" name="familiares_Familiar_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>08632116-D059-56AA-79B0-E8407829290E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2E976AE3-D6BD-F59C-DEFC-A256CCCD81B7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

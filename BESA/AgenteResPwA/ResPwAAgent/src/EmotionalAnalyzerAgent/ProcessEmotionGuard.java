@@ -28,9 +28,9 @@ public class ProcessEmotionGuard extends GuardBESA{
             SensorData infoRecibida = (SensorData)ebesa.getData();
             System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
             EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
-            eaState.getEaModel().updtModelFromEvt(infoRecibida);
             infoRecibida.setDataPE(eaState.getEaStrategy().processEmotion(infoRecibida));
             infoRecibida.setDataP(null);
+            eaState.getEaModel().updtModelFromEvt(infoRecibida);
             AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
             EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
             handler.sendEvent(sensorEvtA);  

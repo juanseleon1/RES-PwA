@@ -1,5 +1,5 @@
--- Generado por Oracle SQL Developer Data Modeler 20.3.0.283.0710
---   en:        2020-10-30 15:57:01 COT
+-- Generado por Oracle SQL Developer Data Modeler 20.2.0.167.1538
+--   en:        2020-11-01 14:36:05 COT
 --   sitio:      Oracle Database 12cR2
 --   tipo:      Oracle Database 12cR2
 
@@ -58,13 +58,10 @@ DROP TABLE tags CASCADE CONSTRAINTS;
 -- predefined type, no DDL - XMLTYPE
 
 CREATE TABLE actividadpwa (
-    id                     INTEGER NOT NULL,
-    nombre                 VARCHAR2(30 CHAR) NOT NULL,
-    tipo                   VARCHAR2(30) NOT NULL,
-    duracion               NUMBER NOT NULL,
-    gusto                  FLOAT NOT NULL,
-    enriqfav               INTEGER NOT NULL,
-    dificultad_dificultad  VARCHAR2(10 CHAR)
+    id        INTEGER NOT NULL,
+    nombre    VARCHAR2(30 CHAR) NOT NULL,
+    tipo      VARCHAR2(30) NOT NULL,
+    duracion  NUMBER NOT NULL
 );
 
 ALTER TABLE actividadpwa ADD CONSTRAINT actividadpwa_pk PRIMARY KEY ( id );
@@ -81,7 +78,11 @@ ALTER TABLE actividadrutinaria ADD CONSTRAINT actividadrutinaria_pk PRIMARY KEY 
 
 CREATE TABLE actxpreferencia (
     actividadpwa_id            INTEGER NOT NULL,
-    perfil_preferencia_cedula  VARCHAR2(30 CHAR) NOT NULL
+    perfil_preferencia_cedula  VARCHAR2(30 CHAR) NOT NULL,
+    activa                     NUMBER NOT NULL,
+    dificultad_dificultad      VARCHAR2(10 CHAR) NOT NULL,
+    gusto                      FLOAT NOT NULL,
+    enriq                      INTEGER NOT NULL
 );
 
 ALTER TABLE actxpreferencia ADD CONSTRAINT actxpreferencia_pk PRIMARY KEY ( actividadpwa_id,
@@ -139,16 +140,13 @@ CREATE TABLE dificultad (
 ALTER TABLE dificultad ADD CONSTRAINT dificultad_pk PRIMARY KEY ( dificultad );
 
 CREATE TABLE enriq (
-    frases_orden          INTEGER NOT NULL,
-    frases_cuento_nombre  VARCHAR2(15 CHAR) NOT NULL,
+    frases_orden          INTEGER,
+    frases_cuento_nombre  VARCHAR2(15 CHAR),
     params                VARCHAR2(20 CHAR) NOT NULL,
     valor                 VARCHAR2(20 CHAR) NOT NULL
 );
 
-ALTER TABLE enriq
-    ADD CONSTRAINT enriq_pk PRIMARY KEY ( params,
-                                          frases_cuento_nombre,
-                                          frases_orden );
+ALTER TABLE enriq ADD CONSTRAINT enriq_pk PRIMARY KEY ( params );
 
 CREATE TABLE estadocivil (
     tipoec VARCHAR2(20 CHAR) NOT NULL
@@ -267,14 +265,11 @@ CREATE TABLE registroactividad (
     estadofinal       VARCHAR2(30 CHAR) NOT NULL,
     perfilpwa_cedula  VARCHAR2(30 CHAR) NOT NULL,
     tipo              VARCHAR2(20 CHAR) NOT NULL,
-    actividadpwa_id   INTEGER NOT NULL
+    actividadpwa_id   INTEGER
 );
 
-ALTER TABLE registroactividad
-    ADD CONSTRAINT registroactividad_pk PRIMARY KEY ( fecha,
-                                                      tipo,
-                                                      perfilpwa_cedula,
-                                                      actividadpwa_id );
+ALTER TABLE registroactividad ADD CONSTRAINT registroactividad_pk PRIMARY KEY ( fecha,
+                                                                                tipo );
 
 CREATE TABLE tags (
     id   INTEGER NOT NULL,
@@ -283,10 +278,6 @@ CREATE TABLE tags (
 
 ALTER TABLE tags ADD CONSTRAINT tags_pk PRIMARY KEY ( id );
 
-ALTER TABLE actividadpwa
-    ADD CONSTRAINT actividadpwa_dificultad_fk FOREIGN KEY ( dificultad_dificultad )
-        REFERENCES dificultad ( dificultad );
-
 ALTER TABLE actividadrutinaria
     ADD CONSTRAINT actividadrutinaria_perfil_medico_fk FOREIGN KEY ( perfil_medico_perfilpwa_cedula )
         REFERENCES perfil_medico ( perfilpwa_cedula );
@@ -294,6 +285,10 @@ ALTER TABLE actividadrutinaria
 ALTER TABLE actxpreferencia
     ADD CONSTRAINT actxpreferencia_actividadpwa_fk FOREIGN KEY ( actividadpwa_id )
         REFERENCES actividadpwa ( id );
+
+ALTER TABLE actxpreferencia
+    ADD CONSTRAINT actxpreferencia_dificultad_fk FOREIGN KEY ( dificultad_dificultad )
+        REFERENCES dificultad ( dificultad );
 
 ALTER TABLE actxpreferencia
     ADD CONSTRAINT actxpreferencia_perfil_preferencia_fk FOREIGN KEY ( perfil_preferencia_cedula )

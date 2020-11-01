@@ -10,12 +10,11 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
-import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.FinalizarBaile;
 import Tareas.Bailar.SeleccionarBaile;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -67,14 +66,14 @@ public class Bailar extends GoalBDI{
         System.out.println("Meta Bailar detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //completar
-        List<Actividadpwa> lista = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActividadpwaList();
+        List<Actxpreferencia> lista = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList();
         double gusto = 0;
         int enriq = 0;
-        for (Actividadpwa act : lista) {
-            if(act.getNombre().equalsIgnoreCase("musioterapia"))
+        for (Actxpreferencia act : lista) {
+            if(act.getActividadpwa().getNombre().equalsIgnoreCase("musicoterapia"))
             {
                 gusto=act.getGusto();
-                enriq=(int) act.getEnriqfav().floatValue();
+                enriq=(int) act.getEnriq().intValue();
             }
         }
         if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&

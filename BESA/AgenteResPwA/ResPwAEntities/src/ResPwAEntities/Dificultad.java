@@ -8,6 +8,7 @@ package ResPwAEntities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,8 +36,8 @@ public class Dificultad implements Serializable {
     @Basic(optional = false)
     @Column(name = "DIFICULTAD")
     private String dificultad;
-    @OneToMany(mappedBy = "dificultadDificultad")
-    private List<Actividadpwa> actividadpwaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dificultadDificultad")
+    private List<Actxpreferencia> actxpreferenciaList;
 
     public Dificultad() {
     }
@@ -54,12 +55,12 @@ public class Dificultad implements Serializable {
     }
 
     @XmlTransient
-    public List<Actividadpwa> getActividadpwaList() {
-        return actividadpwaList;
+    public List<Actxpreferencia> getActxpreferenciaList() {
+        return actxpreferenciaList;
     }
 
-    public void setActividadpwaList(List<Actividadpwa> actividadpwaList) {
-        this.actividadpwaList = actividadpwaList;
+    public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
+        this.actxpreferenciaList = actxpreferenciaList;
     }
 
     @Override
