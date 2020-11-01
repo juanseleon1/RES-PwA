@@ -30,7 +30,7 @@ def handle_client(conn, addr):
     print(get_face_list()[0])
     
     #activate_blinking(False)+++++++++++++++++++++++++++++
-    #activate_life_signals(false)+++++++++++++++++++++++++
+    #activate_life_signals(False)+++++++++++++++++++++++++
     #activate_life_signals_awareness(False)
     #set_engagement_type("FullyEngaged")
     #activate_hearing_movement(False)
@@ -46,6 +46,13 @@ def handle_client(conn, addr):
     #print("Temperature", get_temperature())
     #print("Smile", get_emotion_state().get("expressions").get("excitement")[0]) #return the excitement value
     #print(login())
+    #search_free_zone(0.6, 0.5)
+    #get_free_zone(0.6, 0.5)
+    #get_robot_position(True)
+    #move(0.25,0.25,0.1)
+    #move_forward(0.2, 0.2, 0.1)
+    #move_to(2.0, 0.0)
+    #move_to_position(45)
     
 def message_manage(key, msg):
         switch_accion = {
@@ -74,14 +81,14 @@ def message_manage(key, msg):
             "GETEMOTIONSTATE":"get_emotion_state", #
             "LOGIN":"login", #
             #LocationServices-------------------------------------------------------
-            "SEARCHFREEZONE":"search_free_zone",
-            "GETFREEZONES":"get_free_zones",
-            "GETROBOTPOSITION":"get_robot_position",
+            "SEARCHFREEZONE":"search_free_zone", #
+            "GETFREEZONES":"get_free_zone", #
+            "GETROBOTPOSITION":"get_robot_position", #
             #MovementServices-------------------------------------------------------
-            "MOVE":"move",
-            "MOVEFORWARD":"move_forward",
-            "MOVETO":"move_to",
-            "MOVETOPOSITION":"move_to_position",
+            "MOVE":"move", #
+            "MOVEFORWARD":"move_forward", #
+            "MOVETO":"move_to", #
+            "MOVETOPOSITION":"move_to_position", #
             #RobotStateServices-------------------------------------------------------
             "WAKEUP":"wake_up",
             "SUSPEND":"suspend",
@@ -334,20 +341,20 @@ def login():
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement.
 def search_free_zone(radius, displacement):
-    return alNavigationProxy.searchFreeZone(radius,displacement)
+    return alNavigationProxy.findFreeZone(radius,displacement)
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement
-def get_free_zones(radius, displacement):
-    return alNavigationProxy.findFreeZone(radius, displacement)
+def get_free_zone(radius, displacement):
+    return alNavigationProxy.getFreeZone(radius, displacement)
 
-""" No se si exista problema por utilizar ALLocalizationProxy o simplemente ALLocalization"""
 #Gets the coordinates x, y, theta of the pose2D of the robot
 def get_robot_position(enabled):
     return alLocalizationProxy.getRobotPosition(enabled)
 
 #Makes the robot move at the given velocity, expressed in FRAME_ROBOT
-def move(x,y,speed):
-    alMotion.move(x,y,speed)
+#Z is rotation
+def move(x, y, z):
+    alMotion.move(x,y,z)
 
 #Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
 def move_forward(x,y,speed):
