@@ -8,7 +8,6 @@ package ResPwAEntities.Controllers;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import ResPwAEntities.Enriq;
-import ResPwAEntities.EnriqPK;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -35,11 +34,6 @@ public class EnriqJpaController implements Serializable {
     }
 
     public void create(Enriq enriq) throws PreexistingEntityException, Exception {
-        if (enriq.getEnriqPK() == null) {
-            enriq.setEnriqPK(new EnriqPK());
-        }
-        enriq.getEnriqPK().setFrasesOrden(enriq.getFrases().getFrasesPK().getOrden());
-        enriq.getEnriqPK().setFrasesCuentoNombre(enriq.getFrases().getFrasesPK().getCuentoNombre());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -56,7 +50,7 @@ public class EnriqJpaController implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findEnriq(enriq.getEnriqPK()) != null) {
+            if (findEnriq(enriq.getParams()) != null) {
                 throw new PreexistingEntityException("Enriq " + enriq + " already exists.", ex);
             }
             throw ex;
@@ -68,13 +62,11 @@ public class EnriqJpaController implements Serializable {
     }
 
     public void edit(Enriq enriq) throws NonexistentEntityException, Exception {
-        enriq.getEnriqPK().setFrasesOrden(enriq.getFrases().getFrasesPK().getOrden());
-        enriq.getEnriqPK().setFrasesCuentoNombre(enriq.getFrases().getFrasesPK().getCuentoNombre());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Enriq persistentEnriq = em.find(Enriq.class, enriq.getEnriqPK());
+            Enriq persistentEnriq = em.find(Enriq.class, enriq.getParams());
             Frases frasesOld = persistentEnriq.getFrases();
             Frases frasesNew = enriq.getFrases();
             if (frasesNew != null) {
@@ -94,7 +86,7 @@ public class EnriqJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                EnriqPK id = enriq.getEnriqPK();
+                String id = enriq.getParams();
                 if (findEnriq(id) == null) {
                     throw new NonexistentEntityException("The enriq with id " + id + " no longer exists.");
                 }
@@ -107,7 +99,7 @@ public class EnriqJpaController implements Serializable {
         }
     }
 
-    public void destroy(EnriqPK id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -115,7 +107,7 @@ public class EnriqJpaController implements Serializable {
             Enriq enriq;
             try {
                 enriq = em.getReference(Enriq.class, id);
-                enriq.getEnriqPK();
+                enriq.getParams();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The enriq with id " + id + " no longer exists.", enfe);
             }
@@ -157,7 +149,7 @@ public class EnriqJpaController implements Serializable {
         }
     }
 
-    public Enriq findEnriq(EnriqPK id) {
+    public Enriq findEnriq(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Enriq.class, id);

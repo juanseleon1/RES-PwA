@@ -39,30 +39,28 @@ public class RegistroactividadJpaController implements Serializable {
         if (registroactividad.getRegistroactividadPK() == null) {
             registroactividad.setRegistroactividadPK(new RegistroactividadPK());
         }
-        registroactividad.getRegistroactividadPK().setActividadpwaId(registroactividad.getActividadpwa().getId());
-        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Actividadpwa actividadpwa = registroactividad.getActividadpwa();
-            if (actividadpwa != null) {
-                actividadpwa = em.getReference(actividadpwa.getClass(), actividadpwa.getId());
-                registroactividad.setActividadpwa(actividadpwa);
+            Actividadpwa actividadpwaId = registroactividad.getActividadpwaId();
+            if (actividadpwaId != null) {
+                actividadpwaId = em.getReference(actividadpwaId.getClass(), actividadpwaId.getId());
+                registroactividad.setActividadpwaId(actividadpwaId);
             }
-            Perfilpwa perfilpwa = registroactividad.getPerfilpwa();
-            if (perfilpwa != null) {
-                perfilpwa = em.getReference(perfilpwa.getClass(), perfilpwa.getCedula());
-                registroactividad.setPerfilpwa(perfilpwa);
+            Perfilpwa perfilpwaCedula = registroactividad.getPerfilpwaCedula();
+            if (perfilpwaCedula != null) {
+                perfilpwaCedula = em.getReference(perfilpwaCedula.getClass(), perfilpwaCedula.getCedula());
+                registroactividad.setPerfilpwaCedula(perfilpwaCedula);
             }
             em.persist(registroactividad);
-            if (actividadpwa != null) {
-                actividadpwa.getRegistroactividadList().add(registroactividad);
-                actividadpwa = em.merge(actividadpwa);
+            if (actividadpwaId != null) {
+                actividadpwaId.getRegistroactividadList().add(registroactividad);
+                actividadpwaId = em.merge(actividadpwaId);
             }
-            if (perfilpwa != null) {
-                perfilpwa.getRegistroactividadList().add(registroactividad);
-                perfilpwa = em.merge(perfilpwa);
+            if (perfilpwaCedula != null) {
+                perfilpwaCedula.getRegistroactividadList().add(registroactividad);
+                perfilpwaCedula = em.merge(perfilpwaCedula);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -78,41 +76,39 @@ public class RegistroactividadJpaController implements Serializable {
     }
 
     public void edit(Registroactividad registroactividad) throws NonexistentEntityException, Exception {
-        registroactividad.getRegistroactividadPK().setActividadpwaId(registroactividad.getActividadpwa().getId());
-        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Registroactividad persistentRegistroactividad = em.find(Registroactividad.class, registroactividad.getRegistroactividadPK());
-            Actividadpwa actividadpwaOld = persistentRegistroactividad.getActividadpwa();
-            Actividadpwa actividadpwaNew = registroactividad.getActividadpwa();
-            Perfilpwa perfilpwaOld = persistentRegistroactividad.getPerfilpwa();
-            Perfilpwa perfilpwaNew = registroactividad.getPerfilpwa();
-            if (actividadpwaNew != null) {
-                actividadpwaNew = em.getReference(actividadpwaNew.getClass(), actividadpwaNew.getId());
-                registroactividad.setActividadpwa(actividadpwaNew);
+            Actividadpwa actividadpwaIdOld = persistentRegistroactividad.getActividadpwaId();
+            Actividadpwa actividadpwaIdNew = registroactividad.getActividadpwaId();
+            Perfilpwa perfilpwaCedulaOld = persistentRegistroactividad.getPerfilpwaCedula();
+            Perfilpwa perfilpwaCedulaNew = registroactividad.getPerfilpwaCedula();
+            if (actividadpwaIdNew != null) {
+                actividadpwaIdNew = em.getReference(actividadpwaIdNew.getClass(), actividadpwaIdNew.getId());
+                registroactividad.setActividadpwaId(actividadpwaIdNew);
             }
-            if (perfilpwaNew != null) {
-                perfilpwaNew = em.getReference(perfilpwaNew.getClass(), perfilpwaNew.getCedula());
-                registroactividad.setPerfilpwa(perfilpwaNew);
+            if (perfilpwaCedulaNew != null) {
+                perfilpwaCedulaNew = em.getReference(perfilpwaCedulaNew.getClass(), perfilpwaCedulaNew.getCedula());
+                registroactividad.setPerfilpwaCedula(perfilpwaCedulaNew);
             }
             registroactividad = em.merge(registroactividad);
-            if (actividadpwaOld != null && !actividadpwaOld.equals(actividadpwaNew)) {
-                actividadpwaOld.getRegistroactividadList().remove(registroactividad);
-                actividadpwaOld = em.merge(actividadpwaOld);
+            if (actividadpwaIdOld != null && !actividadpwaIdOld.equals(actividadpwaIdNew)) {
+                actividadpwaIdOld.getRegistroactividadList().remove(registroactividad);
+                actividadpwaIdOld = em.merge(actividadpwaIdOld);
             }
-            if (actividadpwaNew != null && !actividadpwaNew.equals(actividadpwaOld)) {
-                actividadpwaNew.getRegistroactividadList().add(registroactividad);
-                actividadpwaNew = em.merge(actividadpwaNew);
+            if (actividadpwaIdNew != null && !actividadpwaIdNew.equals(actividadpwaIdOld)) {
+                actividadpwaIdNew.getRegistroactividadList().add(registroactividad);
+                actividadpwaIdNew = em.merge(actividadpwaIdNew);
             }
-            if (perfilpwaOld != null && !perfilpwaOld.equals(perfilpwaNew)) {
-                perfilpwaOld.getRegistroactividadList().remove(registroactividad);
-                perfilpwaOld = em.merge(perfilpwaOld);
+            if (perfilpwaCedulaOld != null && !perfilpwaCedulaOld.equals(perfilpwaCedulaNew)) {
+                perfilpwaCedulaOld.getRegistroactividadList().remove(registroactividad);
+                perfilpwaCedulaOld = em.merge(perfilpwaCedulaOld);
             }
-            if (perfilpwaNew != null && !perfilpwaNew.equals(perfilpwaOld)) {
-                perfilpwaNew.getRegistroactividadList().add(registroactividad);
-                perfilpwaNew = em.merge(perfilpwaNew);
+            if (perfilpwaCedulaNew != null && !perfilpwaCedulaNew.equals(perfilpwaCedulaOld)) {
+                perfilpwaCedulaNew.getRegistroactividadList().add(registroactividad);
+                perfilpwaCedulaNew = em.merge(perfilpwaCedulaNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -143,15 +139,15 @@ public class RegistroactividadJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The registroactividad with id " + id + " no longer exists.", enfe);
             }
-            Actividadpwa actividadpwa = registroactividad.getActividadpwa();
-            if (actividadpwa != null) {
-                actividadpwa.getRegistroactividadList().remove(registroactividad);
-                actividadpwa = em.merge(actividadpwa);
+            Actividadpwa actividadpwaId = registroactividad.getActividadpwaId();
+            if (actividadpwaId != null) {
+                actividadpwaId.getRegistroactividadList().remove(registroactividad);
+                actividadpwaId = em.merge(actividadpwaId);
             }
-            Perfilpwa perfilpwa = registroactividad.getPerfilpwa();
-            if (perfilpwa != null) {
-                perfilpwa.getRegistroactividadList().remove(registroactividad);
-                perfilpwa = em.merge(perfilpwa);
+            Perfilpwa perfilpwaCedula = registroactividad.getPerfilpwaCedula();
+            if (perfilpwaCedula != null) {
+                perfilpwaCedula.getRegistroactividadList().remove(registroactividad);
+                perfilpwaCedula = em.merge(perfilpwaCedula);
             }
             em.remove(registroactividad);
             em.getTransaction().commit();

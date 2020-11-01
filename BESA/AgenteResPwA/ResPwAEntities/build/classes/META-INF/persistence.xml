@@ -21,6 +21,8 @@
     <class>ResPwAEntities.Tags</class>
     <class>ResPwAEntities.Enriq</class>
     <class>ResPwAEntities.Registroactividad</class>
+    <class>ResPwAEntities.Actxpreferencia</class>
+    <class>ResPwAEntities.Books</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
       <property name="javax.persistence.jdbc.user" value="is784921"/>

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -59,11 +61,11 @@ public class PerfilPreferencia implements Serializable {
     @Column(name = "VOLPREFERIDO")
     private BigInteger volpreferido;
     @ManyToMany(mappedBy = "perfilPreferenciaList")
-    private List<Actividadpwa> actividadpwaList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList")
     private List<Cuento> cuentoList;
     @ManyToMany(mappedBy = "perfilPreferenciaList")
     private List<Cancion> cancionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia")
+    private List<Actxpreferencia> actxpreferenciaList;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Perfilpwa perfilpwa;
@@ -133,15 +135,6 @@ public class PerfilPreferencia implements Serializable {
     }
 
     @XmlTransient
-    public List<Actividadpwa> getActividadpwaList() {
-        return actividadpwaList;
-    }
-
-    public void setActividadpwaList(List<Actividadpwa> actividadpwaList) {
-        this.actividadpwaList = actividadpwaList;
-    }
-
-    @XmlTransient
     public List<Cuento> getCuentoList() {
         return cuentoList;
     }
@@ -157,6 +150,15 @@ public class PerfilPreferencia implements Serializable {
 
     public void setCancionList(List<Cancion> cancionList) {
         this.cancionList = cancionList;
+    }
+
+    @XmlTransient
+    public List<Actxpreferencia> getActxpreferenciaList() {
+        return actxpreferenciaList;
+    }
+
+    public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
+        this.actxpreferenciaList = actxpreferenciaList;
     }
 
     public Perfilpwa getPerfilpwa() {

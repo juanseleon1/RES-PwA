@@ -6,7 +6,6 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,9 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Registroactividad.findByFecha", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.fecha = :fecha")
     , @NamedQuery(name = "Registroactividad.findByEstadoinicial", query = "SELECT r FROM Registroactividad r WHERE r.estadoinicial = :estadoinicial")
     , @NamedQuery(name = "Registroactividad.findByEstadofinal", query = "SELECT r FROM Registroactividad r WHERE r.estadofinal = :estadofinal")
-    , @NamedQuery(name = "Registroactividad.findByPerfilpwaCedula", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.perfilpwaCedula = :perfilpwaCedula")
-    , @NamedQuery(name = "Registroactividad.findByTipo", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.tipo = :tipo")
-    , @NamedQuery(name = "Registroactividad.findByActividadpwaId", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.actividadpwaId = :actividadpwaId")})
+    , @NamedQuery(name = "Registroactividad.findByTipo", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.tipo = :tipo")})
 public class Registroactividad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,12 +42,12 @@ public class Registroactividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "ESTADOFINAL")
     private String estadofinal;
-    @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private Actividadpwa actividadpwaId;
+    @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA")
     @ManyToOne(optional = false)
-    private Actividadpwa actividadpwa;
-    @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Perfilpwa perfilpwa;
+    private Perfilpwa perfilpwaCedula;
 
     public Registroactividad() {
     }
@@ -65,8 +62,8 @@ public class Registroactividad implements Serializable {
         this.estadofinal = estadofinal;
     }
 
-    public Registroactividad(Date fecha, String perfilpwaCedula, String tipo, BigInteger actividadpwaId) {
-        this.registroactividadPK = new RegistroactividadPK(fecha, perfilpwaCedula, tipo, actividadpwaId);
+    public Registroactividad(Date fecha, String tipo) {
+        this.registroactividadPK = new RegistroactividadPK(fecha, tipo);
     }
 
     public RegistroactividadPK getRegistroactividadPK() {
@@ -93,20 +90,20 @@ public class Registroactividad implements Serializable {
         this.estadofinal = estadofinal;
     }
 
-    public Actividadpwa getActividadpwa() {
-        return actividadpwa;
+    public Actividadpwa getActividadpwaId() {
+        return actividadpwaId;
     }
 
-    public void setActividadpwa(Actividadpwa actividadpwa) {
-        this.actividadpwa = actividadpwa;
+    public void setActividadpwaId(Actividadpwa actividadpwaId) {
+        this.actividadpwaId = actividadpwaId;
     }
 
-    public Perfilpwa getPerfilpwa() {
-        return perfilpwa;
+    public Perfilpwa getPerfilpwaCedula() {
+        return perfilpwaCedula;
     }
 
-    public void setPerfilpwa(Perfilpwa perfilpwa) {
-        this.perfilpwa = perfilpwa;
+    public void setPerfilpwaCedula(Perfilpwa perfilpwaCedula) {
+        this.perfilpwaCedula = perfilpwaCedula;
     }
 
     @Override

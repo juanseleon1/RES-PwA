@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -42,7 +41,7 @@ public class Frases implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONTENIDO")
     private String contenido;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "frases")
+    @OneToMany(mappedBy = "frases")
     private List<Enriq> enriqList;
     @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE", insertable = false, updatable = false)
     @ManyToOne(optional = false)

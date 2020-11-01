@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="8855FAF1-18BE-5246-477A-941E5813CAC4" containerWithKeyObject="2AD227E2-1942-300C-C109-50A95F2D3E0A" localFKIndex="43399F3B-C9A2-9651-D138-D7EB4EDEA0F5" name="ActividadPwA_Dificultad_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>307FF311-E74E-DFDD-B99C-F34AFC20044D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Dificultad</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E820A9AA-0828-395A-8E8F-130BC33BDC49</referredTableID>
+<keyObject>C7E0FB5D-D67F-389B-68EA-221D6350F472</keyObject>
+<referredKeyID>C7E0FB5D-D67F-389B-68EA-221D6350F472</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>dificultad</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

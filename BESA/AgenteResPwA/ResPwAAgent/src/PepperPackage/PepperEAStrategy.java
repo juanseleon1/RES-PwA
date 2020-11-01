@@ -34,7 +34,6 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy{
     }
 
     private void translateToResPwa(Map<String, Object> ret) {
-        //
+        
     }
-    
 }

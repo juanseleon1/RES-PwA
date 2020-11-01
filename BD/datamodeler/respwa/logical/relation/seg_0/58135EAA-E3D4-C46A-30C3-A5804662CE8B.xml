@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 18:40:44 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="81E35EFC-753B-3794-54D2-D562298501BC" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
 </engineerTo>
 <identifying>false</identifying>
 <optionalSource>false</optionalSource>
@@ -15,4 +15,19 @@
 <targetEntity>053F5D28-E2D6-F084-8633-F6C00A75B01C</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<attribute name="activa" id="B35EC040-32B6-68BF-B2BC-608743A5D22D">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:02:19 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</attribute>
+</attributes>
 </Relation>

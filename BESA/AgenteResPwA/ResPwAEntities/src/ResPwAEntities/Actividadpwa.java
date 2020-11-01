@@ -15,8 +15,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -63,15 +61,12 @@ public class Actividadpwa implements Serializable {
     @Basic(optional = false)
     @Column(name = "ENRIQFAV")
     private BigInteger enriqfav;
-    @JoinTable(name = "ACTXPREFERENCIA", joinColumns = {
-        @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany
-    private List<PerfilPreferencia> perfilPreferenciaList;
     @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
     @ManyToOne
     private Dificultad dificultadDificultad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa")
+    private List<Actxpreferencia> actxpreferenciaList;
+    @OneToMany(mappedBy = "actividadpwaId")
     private List<Registroactividad> registroactividadList;
 
     public Actividadpwa() {
@@ -138,21 +133,21 @@ public class Actividadpwa implements Serializable {
         this.enriqfav = enriqfav;
     }
 
-    @XmlTransient
-    public List<PerfilPreferencia> getPerfilPreferenciaList() {
-        return perfilPreferenciaList;
-    }
-
-    public void setPerfilPreferenciaList(List<PerfilPreferencia> perfilPreferenciaList) {
-        this.perfilPreferenciaList = perfilPreferenciaList;
-    }
-
     public Dificultad getDificultadDificultad() {
         return dificultadDificultad;
     }
 
     public void setDificultadDificultad(Dificultad dificultadDificultad) {
         this.dificultadDificultad = dificultadDificultad;
+    }
+
+    @XmlTransient
+    public List<Actxpreferencia> getActxpreferenciaList() {
+        return actxpreferenciaList;
+    }
+
+    public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
+        this.actxpreferenciaList = actxpreferenciaList;
     }
 
     @XmlTransient

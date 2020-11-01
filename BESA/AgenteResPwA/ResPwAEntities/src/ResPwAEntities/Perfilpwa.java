@@ -83,7 +83,7 @@ public class Perfilpwa implements Serializable {
     @JoinColumn(name = "NIVEL_EDUCATIVO_TIPONE", referencedColumnName = "TIPONE")
     @ManyToOne
     private NivelEducativo nivelEducativoTipone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwaCedula")
     private List<Registroactividad> registroactividadList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
     private PerfilMedico perfilMedico;

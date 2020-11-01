@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ResPwAEntities;
 
 import java.io.Serializable;
@@ -205,5 +206,5 @@ public class PerfilMedico implements Serializable {
     public String toString() {
         return "ResPwAEntities.PerfilMedico[ perfilpwaCedula=" + perfilpwaCedula + " ]";
     }
-    
+
 }
