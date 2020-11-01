@@ -7,8 +7,13 @@ package EmotionalAnalyzerAgent;
 
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
+import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
+import BESA.Kernel.Agent.PeriodicGuardBESA;
 import BESA.Kernel.Agent.StructBESA;
+import BESA.Kernel.System.AdmBESA;
+import BESA.Kernel.System.Directory.AgHandlerBESA;
+import BESA.Util.PeriodicDataBESA;
 import SensorHandlerAgent.SensorHandlerAgent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +26,7 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
 
     public static String ProcessEmotionGuard= "ProcessEmotionGuard";
     public static String updtEmotionGuard= "updtEmotionGuard";
+    private static long PERIODIC_TIME=50000;
     public EmotionalAnalyzerAgent(String alias, EmotionalAnalyzerStrategy eas,EmotionalModel em) throws KernelAgentExceptionBESA {
         super(alias, new EmotionalAnalyzerState(eas,em), buildEAStruct(), 0.96);
         System.out.println("EmotionalAnalyzerAgent Iniciado");
@@ -49,5 +55,12 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
             Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
         return struct;
+    }
+     
+    public void startEmotionalModel() throws ExceptionBESA{
+        PeriodicDataBESA data = new PeriodicDataBESA(PERIODIC_TIME, PeriodicGuardBESA.START_PERIODIC_CALL);
+            EventBESA eventBESA = new EventBESA(updateEmotionalState.class.getName(), data);
+            AgHandlerBESA agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
+            agHandlerBESA.sendEvent(eventBESA);
     }
 }

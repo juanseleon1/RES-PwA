@@ -18,19 +18,19 @@ import java.util.logging.Logger;
  * @author juans
  */
 public class PepperEModel extends EmotionalModel{
-    private float state;
-    private float refreshRate;
-    private float normalState;
+    private double state;
+    private double refreshRate;
+    private double normalState;
 
-    public PepperEModel(float state, float refreshRate, float normalState) {
-        this.state = state;
-        this.refreshRate = refreshRate;
+    public PepperEModel(double normalState) {
+        this.state = normalState;
+        this.refreshRate = 0;
         this.normalState = normalState;
     }
     
     @Override
     public void updateModel() {
-        float act=refreshRate, dif=normalState-state,fact=1;
+        double act=refreshRate, dif=normalState-state,fact=1;
         if(dif<0)
             fact*=-1;
         if(dif<act)
