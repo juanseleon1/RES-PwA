@@ -15,7 +15,7 @@ public class EmotionalAnalyzerState extends StateBESA{
     private EmotionalAnalyzerStrategy eaStrategy;
 
     public EmotionalAnalyzerState(EmotionalAnalyzerStrategy eas){
-        
+        eaStrategy=eas;
     }
     public EmotionalAnalyzerStrategy getEaStrategy() {
         return eaStrategy;
