@@ -54,45 +54,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="gusto" id="11357CDD-993D-D238-A568-ED4FB9E0C040">
-<createdBy>juans</createdBy>
-<createdTime>2020-11-01 18:03:14 UTC</createdTime>
-<generatorID>3B3CFEB7-EA77-896E-D6C1-EA9BC8A7F8A8</generatorID>
-<ownerDesignName>respwa</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT021</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="enriqFav" id="6F2E74AB-88FB-D0CA-F90F-9F168BB36AF4">
-<createdBy>juans</createdBy>
-<createdTime>2020-11-01 18:03:14 UTC</createdTime>
-<generatorID>8315EEDA-AD31-0153-96BB-6AA7D6F22E20</generatorID>
-<ownerDesignName>respwa</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="Dificultad_dificultad" id="A12F262B-2989-6270-9516-D5B0FB157BD4">
-<createdBy>juans</createdBy>
-<createdTime>2020-11-01 18:03:14 UTC</createdTime>
-<generatorID>597AE98B-AAA7-D638-4071-342D2F4D0457</generatorID>
-<ownerDesignName>respwa</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="8855FAF1-18BE-5246-477A-941E5813CAC4" referredColumn="C23354F3-1906-CD8C-46E7-6F7485740C0A"/>
-</associations>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="59A9F20F-938C-6862-41B3-738BCD4C58CF" name="ActividadPwA_PK">
@@ -105,17 +66,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="E556B603-2C57-CBDA-F973-4FC853A8E78D"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="43399F3B-C9A2-9651-D138-D7EB4EDEA0F5" name="ActividadPwA_Dificultad_FK">
-<createdBy>juans</createdBy>
-<createdTime>2020-11-01 18:03:15 UTC</createdTime>
-<generatorID>307FF311-E74E-DFDD-B99C-F34AFC20044D</generatorID>
-<ownerDesignName>respwa</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="A12F262B-2989-6270-9516-D5B0FB157BD4"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

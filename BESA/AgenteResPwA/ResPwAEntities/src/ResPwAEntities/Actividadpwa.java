@@ -14,8 +14,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,9 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Actividadpwa.findById", query = "SELECT a FROM Actividadpwa a WHERE a.id = :id")
     , @NamedQuery(name = "Actividadpwa.findByNombre", query = "SELECT a FROM Actividadpwa a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Actividadpwa.findByTipo", query = "SELECT a FROM Actividadpwa a WHERE a.tipo = :tipo")
-    , @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion")
-    , @NamedQuery(name = "Actividadpwa.findByGusto", query = "SELECT a FROM Actividadpwa a WHERE a.gusto = :gusto")
-    , @NamedQuery(name = "Actividadpwa.findByEnriqfav", query = "SELECT a FROM Actividadpwa a WHERE a.enriqfav = :enriqfav")})
+    , @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion")})
 public class Actividadpwa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,15 +51,6 @@ public class Actividadpwa implements Serializable {
     @Basic(optional = false)
     @Column(name = "DURACION")
     private BigInteger duracion;
-    @Basic(optional = false)
-    @Column(name = "GUSTO")
-    private double gusto;
-    @Basic(optional = false)
-    @Column(name = "ENRIQFAV")
-    private BigInteger enriqfav;
-    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
-    @ManyToOne
-    private Dificultad dificultadDificultad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa")
     private List<Actxpreferencia> actxpreferenciaList;
     @OneToMany(mappedBy = "actividadpwaId")
@@ -76,13 +63,11 @@ public class Actividadpwa implements Serializable {
         this.id = id;
     }
 
-    public Actividadpwa(BigInteger id, String nombre, String tipo, BigInteger duracion, double gusto, BigInteger enriqfav) {
+    public Actividadpwa(BigInteger id, String nombre, String tipo, BigInteger duracion) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.duracion = duracion;
-        this.gusto = gusto;
-        this.enriqfav = enriqfav;
     }
 
     public BigInteger getId() {
@@ -115,30 +100,6 @@ public class Actividadpwa implements Serializable {
 
     public void setDuracion(BigInteger duracion) {
         this.duracion = duracion;
-    }
-
-    public double getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(double gusto) {
-        this.gusto = gusto;
-    }
-
-    public BigInteger getEnriqfav() {
-        return enriqfav;
-    }
-
-    public void setEnriqfav(BigInteger enriqfav) {
-        this.enriqfav = enriqfav;
-    }
-
-    public Dificultad getDificultadDificultad() {
-        return dificultadDificultad;
-    }
-
-    public void setDificultadDificultad(Dificultad dificultadDificultad) {
-        this.dificultadDificultad = dificultadDificultad;
     }
 
     @XmlTransient

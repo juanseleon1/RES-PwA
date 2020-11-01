@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 20.2.0.167.1538
---   en:        2020-11-01 13:07:27 COT
+--   en:        2020-11-01 14:36:05 COT
 --   sitio:      Oracle Database 12cR2
 --   tipo:      Oracle Database 12cR2
 
@@ -58,13 +58,10 @@ DROP TABLE tags CASCADE CONSTRAINTS;
 -- predefined type, no DDL - XMLTYPE
 
 CREATE TABLE actividadpwa (
-    id                     INTEGER NOT NULL,
-    nombre                 VARCHAR2(30 CHAR) NOT NULL,
-    tipo                   VARCHAR2(30) NOT NULL,
-    duracion               NUMBER NOT NULL,
-    gusto                  FLOAT NOT NULL,
-    enriqfav               INTEGER NOT NULL,
-    dificultad_dificultad  VARCHAR2(10 CHAR)
+    id        INTEGER NOT NULL,
+    nombre    VARCHAR2(30 CHAR) NOT NULL,
+    tipo      VARCHAR2(30) NOT NULL,
+    duracion  NUMBER NOT NULL
 );
 
 ALTER TABLE actividadpwa ADD CONSTRAINT actividadpwa_pk PRIMARY KEY ( id );
@@ -82,7 +79,10 @@ ALTER TABLE actividadrutinaria ADD CONSTRAINT actividadrutinaria_pk PRIMARY KEY 
 CREATE TABLE actxpreferencia (
     actividadpwa_id            INTEGER NOT NULL,
     perfil_preferencia_cedula  VARCHAR2(30 CHAR) NOT NULL,
-    activa                     NUMBER NOT NULL
+    activa                     NUMBER NOT NULL,
+    dificultad_dificultad      VARCHAR2(10 CHAR) NOT NULL,
+    gusto                      FLOAT NOT NULL,
+    enriq                      INTEGER NOT NULL
 );
 
 ALTER TABLE actxpreferencia ADD CONSTRAINT actxpreferencia_pk PRIMARY KEY ( actividadpwa_id,
@@ -103,16 +103,16 @@ CREATE TABLE causademencia (
 ALTER TABLE causademencia ADD CONSTRAINT causademencia_pk PRIMARY KEY ( condicion );
 
 CREATE TABLE cdr (
-    memoria               INTEGER NOT NULL,
-    orientacion           INTEGER NOT NULL,
-    juicio                INTEGER NOT NULL,
-    vida_social           INTEGER NOT NULL,
-    hogar                 INTEGER NOT NULL,
-    cuidadopersonal       INTEGER NOT NULL,
-    perfil_medico_cedula  VARCHAR2(30 CHAR) NOT NULL
+    memoria                         INTEGER NOT NULL,
+    orientacion                     INTEGER NOT NULL,
+    juicio                          INTEGER NOT NULL,
+    vida_social                     INTEGER NOT NULL,
+    hogar                           INTEGER NOT NULL,
+    cuidadopersonal                 INTEGER NOT NULL,
+    perfil_medico_perfilpwa_cedula  VARCHAR2(30 CHAR) NOT NULL
 );
 
-ALTER TABLE cdr ADD CONSTRAINT cdr_pk PRIMARY KEY ( perfil_medico_cedula );
+ALTER TABLE cdr ADD CONSTRAINT cdr_pk PRIMARY KEY ( perfil_medico_perfilpwa_cedula );
 
 CREATE TABLE cuento (
     genero_genero  VARCHAR2(20 CHAR) NOT NULL,
@@ -140,10 +140,10 @@ CREATE TABLE dificultad (
 ALTER TABLE dificultad ADD CONSTRAINT dificultad_pk PRIMARY KEY ( dificultad );
 
 CREATE TABLE enriq (
-    frases_orden   INTEGER,
-    frases_nombre  VARCHAR2(15 CHAR),
-    params         VARCHAR2(20 CHAR) NOT NULL,
-    valor          VARCHAR2(20 CHAR) NOT NULL
+    frases_orden          INTEGER,
+    frases_cuento_nombre  VARCHAR2(15 CHAR),
+    params                VARCHAR2(20 CHAR) NOT NULL,
+    valor                 VARCHAR2(20 CHAR) NOT NULL
 );
 
 ALTER TABLE enriq ADD CONSTRAINT enriq_pk PRIMARY KEY ( params );
@@ -278,10 +278,6 @@ CREATE TABLE tags (
 
 ALTER TABLE tags ADD CONSTRAINT tags_pk PRIMARY KEY ( id );
 
-ALTER TABLE actividadpwa
-    ADD CONSTRAINT actividadpwa_dificultad_fk FOREIGN KEY ( dificultad_dificultad )
-        REFERENCES dificultad ( dificultad );
-
 ALTER TABLE actividadrutinaria
     ADD CONSTRAINT actividadrutinaria_perfil_medico_fk FOREIGN KEY ( perfil_medico_perfilpwa_cedula )
         REFERENCES perfil_medico ( perfilpwa_cedula );
@@ -289,6 +285,10 @@ ALTER TABLE actividadrutinaria
 ALTER TABLE actxpreferencia
     ADD CONSTRAINT actxpreferencia_actividadpwa_fk FOREIGN KEY ( actividadpwa_id )
         REFERENCES actividadpwa ( id );
+
+ALTER TABLE actxpreferencia
+    ADD CONSTRAINT actxpreferencia_dificultad_fk FOREIGN KEY ( dificultad_dificultad )
+        REFERENCES dificultad ( dificultad );
 
 ALTER TABLE actxpreferencia
     ADD CONSTRAINT actxpreferencia_perfil_preferencia_fk FOREIGN KEY ( perfil_preferencia_cedula )
@@ -299,7 +299,7 @@ ALTER TABLE cancion
         REFERENCES genero ( genero );
 
 ALTER TABLE cdr
-    ADD CONSTRAINT cdr_perfil_medico_fk FOREIGN KEY ( perfil_medico_cedula )
+    ADD CONSTRAINT cdr_perfil_medico_fk FOREIGN KEY ( perfil_medico_perfilpwa_cedula )
         REFERENCES perfil_medico ( perfilpwa_cedula );
 
 ALTER TABLE cuento
@@ -308,7 +308,7 @@ ALTER TABLE cuento
 
 ALTER TABLE enriq
     ADD CONSTRAINT enriq_frases_fk FOREIGN KEY ( frases_orden,
-                                                 frases_nombre )
+                                                 frases_cuento_nombre )
         REFERENCES frases ( orden,
                             cuento_nombre );
 

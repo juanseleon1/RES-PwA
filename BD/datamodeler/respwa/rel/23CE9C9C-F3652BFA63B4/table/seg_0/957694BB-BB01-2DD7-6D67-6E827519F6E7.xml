@@ -74,7 +74,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Perfil_Medico_cedula" id="28F66206-2A34-2B68-9E48-95A0118A8B4B">
+<Column name="Perfil_Medico_PerfilPwa_cedula" id="28F66206-2A34-2B68-9E48-95A0118A8B4B">
 <createdBy>juans</createdBy>
 <createdTime>2020-11-01 18:03:14 UTC</createdTime>
 <generatorID>97F6CB7F-A2E2-AC0D-CDCB-0F3520F4ABEF</generatorID>
@@ -83,7 +83,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>

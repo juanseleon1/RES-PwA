@@ -41,7 +41,7 @@ public class Enriq implements Serializable {
     private String valor;
     @JoinColumns({
         @JoinColumn(name = "FRASES_ORDEN", referencedColumnName = "ORDEN")
-        , @JoinColumn(name = "FRASES_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
+        , @JoinColumn(name = "FRASES_CUENTO_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
     @ManyToOne
     private Frases frases;
 

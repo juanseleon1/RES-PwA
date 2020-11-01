@@ -29,7 +29,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -46,6 +46,47 @@
 <logicalDatatype>LOGDT006</logicalDatatype>
 <dataTypeSize>1</dataTypeSize>
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+<Column name="Dificultad_dificultad" id="D451F15F-3F32-DA3F-A3E9-86236D056587">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:31:47 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="269DD314-C4D0-332F-3FEC-E58919A06C7E" referredColumn="C23354F3-1906-CD8C-46E7-6F7485740C0A"/>
+</associations>
+</Column>
+<Column name="gusto" id="6AB2BB4A-7B4B-A36C-C565-5E3385528DF2">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:32:53 UTC</createdTime>
+<generatorID>CE237DB1-6AD1-2179-6DCF-B703CC0A46F5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+<Column name="enriq" id="D5202F78-373C-0C01-5C3E-0D57A7E3489A">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:32:53 UTC</createdTime>
+<generatorID>1483C9FC-FED6-918F-9E7E-9291597CB6F2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <isRelationshipColumn>true</isRelationshipColumn>
 <isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
@@ -84,6 +125,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="578DFF3E-04FD-D718-B22C-9E73F570810E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F82F63ED-3497-E54A-A3A0-94B54656BF4B" name="actXPreferencia_Dificultad_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:31:47 UTC</createdTime>
+<generatorID>0B395BB3-7CED-8669-9521-AE337EF9C52F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D451F15F-3F32-DA3F-A3E9-86236D056587"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

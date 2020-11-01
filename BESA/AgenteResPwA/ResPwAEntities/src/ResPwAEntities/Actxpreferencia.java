@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actxpreferencia.findAll", query = "SELECT a FROM Actxpreferencia a")
     , @NamedQuery(name = "Actxpreferencia.findByActividadpwaId", query = "SELECT a FROM Actxpreferencia a WHERE a.actxpreferenciaPK.actividadpwaId = :actividadpwaId")
     , @NamedQuery(name = "Actxpreferencia.findByPerfilPreferenciaCedula", query = "SELECT a FROM Actxpreferencia a WHERE a.actxpreferenciaPK.perfilPreferenciaCedula = :perfilPreferenciaCedula")
-    , @NamedQuery(name = "Actxpreferencia.findByActiva", query = "SELECT a FROM Actxpreferencia a WHERE a.activa = :activa")})
+    , @NamedQuery(name = "Actxpreferencia.findByActiva", query = "SELECT a FROM Actxpreferencia a WHERE a.activa = :activa")
+    , @NamedQuery(name = "Actxpreferencia.findByGusto", query = "SELECT a FROM Actxpreferencia a WHERE a.gusto = :gusto")
+    , @NamedQuery(name = "Actxpreferencia.findByEnriq", query = "SELECT a FROM Actxpreferencia a WHERE a.enriq = :enriq")})
 public class Actxpreferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,9 +40,18 @@ public class Actxpreferencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "ACTIVA")
     private BigInteger activa;
+    @Basic(optional = false)
+    @Column(name = "GUSTO")
+    private double gusto;
+    @Basic(optional = false)
+    @Column(name = "ENRIQ")
+    private BigInteger enriq;
     @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Actividadpwa actividadpwa;
+    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
+    @ManyToOne(optional = false)
+    private Dificultad dificultadDificultad;
     @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private PerfilPreferencia perfilPreferencia;
@@ -52,9 +63,11 @@ public class Actxpreferencia implements Serializable {
         this.actxpreferenciaPK = actxpreferenciaPK;
     }
 
-    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigInteger activa) {
+    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigInteger activa, double gusto, BigInteger enriq) {
         this.actxpreferenciaPK = actxpreferenciaPK;
         this.activa = activa;
+        this.gusto = gusto;
+        this.enriq = enriq;
     }
 
     public Actxpreferencia(BigInteger actividadpwaId, String perfilPreferenciaCedula) {
@@ -77,12 +90,36 @@ public class Actxpreferencia implements Serializable {
         this.activa = activa;
     }
 
+    public double getGusto() {
+        return gusto;
+    }
+
+    public void setGusto(double gusto) {
+        this.gusto = gusto;
+    }
+
+    public BigInteger getEnriq() {
+        return enriq;
+    }
+
+    public void setEnriq(BigInteger enriq) {
+        this.enriq = enriq;
+    }
+
     public Actividadpwa getActividadpwa() {
         return actividadpwa;
     }
 
     public void setActividadpwa(Actividadpwa actividadpwa) {
         this.actividadpwa = actividadpwa;
+    }
+
+    public Dificultad getDificultadDificultad() {
+        return dificultadDificultad;
+    }
+
+    public void setDificultadDificultad(Dificultad dificultadDificultad) {
+        this.dificultadDificultad = dificultadDificultad;
     }
 
     public PerfilPreferencia getPerfilPreferencia() {

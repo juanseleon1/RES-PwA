@@ -24,7 +24,7 @@
 <colAssociation fkAssociation="7D2503F1-6A8C-F577-4D93-774D6179EE68" referredColumn="8F9BA551-9E98-7F43-C0E2-41D8F43F32A5"/>
 </associations>
 </Column>
-<Column name="Frases_nombre" id="76C22DA0-7BA3-354C-8B34-187CC8FA230F">
+<Column name="Frases_Cuento_nombre" id="76C22DA0-7BA3-354C-8B34-187CC8FA230F">
 <createdBy>juans</createdBy>
 <createdTime>2020-11-01 18:03:14 UTC</createdTime>
 <generatorID>292D868B-A408-E982-4D9E-3D7286561811</generatorID>
@@ -34,7 +34,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>

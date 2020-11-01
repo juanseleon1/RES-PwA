@@ -10,7 +10,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Actxpreferencia;
+import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import ResPwAEntities.Dificultad;
@@ -35,27 +36,27 @@ public class DificultadJpaController implements Serializable {
     }
 
     public void create(Dificultad dificultad) throws PreexistingEntityException, Exception {
-        if (dificultad.getActividadpwaList() == null) {
-            dificultad.setActividadpwaList(new ArrayList<Actividadpwa>());
+        if (dificultad.getActxpreferenciaList() == null) {
+            dificultad.setActxpreferenciaList(new ArrayList<Actxpreferencia>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Actividadpwa> attachedActividadpwaList = new ArrayList<Actividadpwa>();
-            for (Actividadpwa actividadpwaListActividadpwaToAttach : dificultad.getActividadpwaList()) {
-                actividadpwaListActividadpwaToAttach = em.getReference(actividadpwaListActividadpwaToAttach.getClass(), actividadpwaListActividadpwaToAttach.getId());
-                attachedActividadpwaList.add(actividadpwaListActividadpwaToAttach);
+            List<Actxpreferencia> attachedActxpreferenciaList = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListActxpreferenciaToAttach : dificultad.getActxpreferenciaList()) {
+                actxpreferenciaListActxpreferenciaToAttach = em.getReference(actxpreferenciaListActxpreferenciaToAttach.getClass(), actxpreferenciaListActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaList.add(actxpreferenciaListActxpreferenciaToAttach);
             }
-            dificultad.setActividadpwaList(attachedActividadpwaList);
+            dificultad.setActxpreferenciaList(attachedActxpreferenciaList);
             em.persist(dificultad);
-            for (Actividadpwa actividadpwaListActividadpwa : dificultad.getActividadpwaList()) {
-                Dificultad oldDificultadDificultadOfActividadpwaListActividadpwa = actividadpwaListActividadpwa.getDificultadDificultad();
-                actividadpwaListActividadpwa.setDificultadDificultad(dificultad);
-                actividadpwaListActividadpwa = em.merge(actividadpwaListActividadpwa);
-                if (oldDificultadDificultadOfActividadpwaListActividadpwa != null) {
-                    oldDificultadDificultadOfActividadpwaListActividadpwa.getActividadpwaList().remove(actividadpwaListActividadpwa);
-                    oldDificultadDificultadOfActividadpwaListActividadpwa = em.merge(oldDificultadDificultadOfActividadpwaListActividadpwa);
+            for (Actxpreferencia actxpreferenciaListActxpreferencia : dificultad.getActxpreferenciaList()) {
+                Dificultad oldDificultadDificultadOfActxpreferenciaListActxpreferencia = actxpreferenciaListActxpreferencia.getDificultadDificultad();
+                actxpreferenciaListActxpreferencia.setDificultadDificultad(dificultad);
+                actxpreferenciaListActxpreferencia = em.merge(actxpreferenciaListActxpreferencia);
+                if (oldDificultadDificultadOfActxpreferenciaListActxpreferencia != null) {
+                    oldDificultadDificultadOfActxpreferenciaListActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListActxpreferencia);
+                    oldDificultadDificultadOfActxpreferenciaListActxpreferencia = em.merge(oldDificultadDificultadOfActxpreferenciaListActxpreferencia);
                 }
             }
             em.getTransaction().commit();
@@ -71,36 +72,42 @@ public class DificultadJpaController implements Serializable {
         }
     }
 
-    public void edit(Dificultad dificultad) throws NonexistentEntityException, Exception {
+    public void edit(Dificultad dificultad) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Dificultad persistentDificultad = em.find(Dificultad.class, dificultad.getDificultad());
-            List<Actividadpwa> actividadpwaListOld = persistentDificultad.getActividadpwaList();
-            List<Actividadpwa> actividadpwaListNew = dificultad.getActividadpwaList();
-            List<Actividadpwa> attachedActividadpwaListNew = new ArrayList<Actividadpwa>();
-            for (Actividadpwa actividadpwaListNewActividadpwaToAttach : actividadpwaListNew) {
-                actividadpwaListNewActividadpwaToAttach = em.getReference(actividadpwaListNewActividadpwaToAttach.getClass(), actividadpwaListNewActividadpwaToAttach.getId());
-                attachedActividadpwaListNew.add(actividadpwaListNewActividadpwaToAttach);
-            }
-            actividadpwaListNew = attachedActividadpwaListNew;
-            dificultad.setActividadpwaList(actividadpwaListNew);
-            dificultad = em.merge(dificultad);
-            for (Actividadpwa actividadpwaListOldActividadpwa : actividadpwaListOld) {
-                if (!actividadpwaListNew.contains(actividadpwaListOldActividadpwa)) {
-                    actividadpwaListOldActividadpwa.setDificultadDificultad(null);
-                    actividadpwaListOldActividadpwa = em.merge(actividadpwaListOldActividadpwa);
+            List<Actxpreferencia> actxpreferenciaListOld = persistentDificultad.getActxpreferenciaList();
+            List<Actxpreferencia> actxpreferenciaListNew = dificultad.getActxpreferenciaList();
+            List<String> illegalOrphanMessages = null;
+            for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
+                if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Actxpreferencia " + actxpreferenciaListOldActxpreferencia + " since its dificultadDificultad field is not nullable.");
                 }
             }
-            for (Actividadpwa actividadpwaListNewActividadpwa : actividadpwaListNew) {
-                if (!actividadpwaListOld.contains(actividadpwaListNewActividadpwa)) {
-                    Dificultad oldDificultadDificultadOfActividadpwaListNewActividadpwa = actividadpwaListNewActividadpwa.getDificultadDificultad();
-                    actividadpwaListNewActividadpwa.setDificultadDificultad(dificultad);
-                    actividadpwaListNewActividadpwa = em.merge(actividadpwaListNewActividadpwa);
-                    if (oldDificultadDificultadOfActividadpwaListNewActividadpwa != null && !oldDificultadDificultadOfActividadpwaListNewActividadpwa.equals(dificultad)) {
-                        oldDificultadDificultadOfActividadpwaListNewActividadpwa.getActividadpwaList().remove(actividadpwaListNewActividadpwa);
-                        oldDificultadDificultadOfActividadpwaListNewActividadpwa = em.merge(oldDificultadDificultadOfActividadpwaListNewActividadpwa);
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
+                actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaListNew.add(actxpreferenciaListNewActxpreferenciaToAttach);
+            }
+            actxpreferenciaListNew = attachedActxpreferenciaListNew;
+            dificultad.setActxpreferenciaList(actxpreferenciaListNew);
+            dificultad = em.merge(dificultad);
+            for (Actxpreferencia actxpreferenciaListNewActxpreferencia : actxpreferenciaListNew) {
+                if (!actxpreferenciaListOld.contains(actxpreferenciaListNewActxpreferencia)) {
+                    Dificultad oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia = actxpreferenciaListNewActxpreferencia.getDificultadDificultad();
+                    actxpreferenciaListNewActxpreferencia.setDificultadDificultad(dificultad);
+                    actxpreferenciaListNewActxpreferencia = em.merge(actxpreferenciaListNewActxpreferencia);
+                    if (oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia != null && !oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia.equals(dificultad)) {
+                        oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListNewActxpreferencia);
+                        oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia = em.merge(oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia);
                     }
                 }
             }
@@ -121,7 +128,7 @@ public class DificultadJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -133,10 +140,16 @@ public class DificultadJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The dificultad with id " + id + " no longer exists.", enfe);
             }
-            List<Actividadpwa> actividadpwaList = dificultad.getActividadpwaList();
-            for (Actividadpwa actividadpwaListActividadpwa : actividadpwaList) {
-                actividadpwaListActividadpwa.setDificultadDificultad(null);
-                actividadpwaListActividadpwa = em.merge(actividadpwaListActividadpwa);
+            List<String> illegalOrphanMessages = null;
+            List<Actxpreferencia> actxpreferenciaListOrphanCheck = dificultad.getActxpreferenciaList();
+            for (Actxpreferencia actxpreferenciaListOrphanCheckActxpreferencia : actxpreferenciaListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Dificultad (" + dificultad + ") cannot be destroyed since the Actxpreferencia " + actxpreferenciaListOrphanCheckActxpreferencia + " in its actxpreferenciaList field has a non-nullable dificultadDificultad field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(dificultad);
             em.getTransaction().commit();
