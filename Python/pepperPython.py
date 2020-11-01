@@ -44,39 +44,8 @@ def handle_client(conn, addr):
     #activate_monitoring_charge_service(False)
     #print("Battery", get_battery())
     #print("Temperature", get_temperature())
-
-
-
-
-
-
-
-
-    #set_topic_focus("empatia")
-    #say_under_topic_context((path,"empatia")
-    #deactivate_conversational_topic("empatia")
-    #unload_conversational_topic("empatia")
-    #load_conversational_topic("empatia")
-    #activate_conversational_topic("empatia")
-    #desactivate_voice_recognition():
-    #activate_voice_recognition(subscriber)
-    #desactivate_voice_emotion_analysis()
-    #activate_voice_emotion_analysis(Sadness)
-    #def pause_sound(idSound)
-    #def play_sound(idSound)
-    #def set_system_volume(50)
-    #def say_with_movement("Hola Enrique")
-    #def set_say_volume(75)
-    #def stop_all()
-    #def say("Hola mundo")
-    
-
-
-
-
-
-
-
+    #print("Smile", get_emotion_state().get("expressions").get("excitement")[0]) #return the excitement value
+    #print(login())
     
 def message_manage(key, msg):
         switch_accion = {
@@ -102,8 +71,8 @@ def message_manage(key, msg):
             "GETBATTERY":"get_battery", #
             "GETTEMP":"get_temperature",#
             #HumanServices-------------------------------------------------------
-            "GETEMOTIONSTATE":"get_emotion_State",
-            "LOGIN":"login",
+            "GETEMOTIONSTATE":"get_emotion_state", #
+            "LOGIN":"login", #
             #LocationServices-------------------------------------------------------
             "SEARCHFREEZONE":"search_free_zone",
             "GETFREEZONES":"get_free_zones",
@@ -157,9 +126,6 @@ def message_manage(key, msg):
         }
         func = switch_accion.get(key)
         func(msg)
-
-
-        
 
 def BEstadoEmocionalPwA(info_human_state):
     if info_human_state == "attention":
@@ -350,15 +316,21 @@ def get_temperature():
     return alBodyTemperatureProxy.getTemperatureDiagnosis()
 
 #Gets the emotional state of the current focused user through a PersonState struct.
-def get_emotion_State():
+def get_emotion_state():
     return alMood.currentPersonState()
 
-"""                         NI PINSHI IDEA DE COMO DEJAR EL LOGIN
+#                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
+#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesión activa coincida con
+#el que está interactuando con el robot
 def login():
 
-    alUserSession
+    for i in alUserSession.getOpenUserSessions():
+        if i == alUserSession.getFocusedUser():
+            return True
+            
+    return False
 
-"""
+
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement.
 def search_free_zone(radius, displacement):
@@ -563,8 +535,6 @@ def registrar_cuidador(params):
 def historial(params):
     pass
 def seleccionar_actividades(params):
-    pass
-def login(params):
     pass
 def cambiar_actividad(params):
     pass
