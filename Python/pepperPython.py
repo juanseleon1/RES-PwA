@@ -30,7 +30,7 @@ def handle_client(conn, addr):
     print(get_face_list()[0])
     
     #activate_blinking(False)+++++++++++++++++++++++++++++
-    #activate_life_signals(false)+++++++++++++++++++++++++
+    #activate_life_signals(False)+++++++++++++++++++++++++
     #activate_life_signals_awareness(False)
     #set_engagement_type("FullyEngaged")
     #activate_hearing_movement(False)
@@ -57,39 +57,9 @@ def handle_client(conn, addr):
     #suspend()
     #activate_rasta(2.0f)
     #random_eyes(2.0f)
-
-    #set_topic_focus("empatia")
-    #say_under_topic_context((path,"empatia")
-    #deactivate_conversational_topic("empatia")
-    #unload_conversational_topic("empatia")
-    #load_conversational_topic("empatia")
-    #activate_conversational_topic("empatia")
-    #desactivate_voice_recognition():
-    #activate_voice_recognition(subscriber)
-    #desactivate_voice_emotion_analysis()
-    #activate_voice_emotion_analysis(Sadness)
-    #pause_sound(idSound)
-    #play_sound(idSound)
-    #set_system_volume(50)
-    #say_with_movement("Hola Enrique")
-    #set_say_volume(75)
-    #stop_all()
-    #say("Hola mundo")
-    #tablet_on()
-    #wake_tablet()
-    #suspend_tablet()
-    #tablet_off()
-    #show_video("https://www.youtube.com/watch?v=TmKh7lAwnBI&ab_channel=BadBunny")
-    #quit_video()
-    #pause_video()
-    #resume_video()
-    #preload_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
-    #show_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
-    #hide_image()
-    #set_tablet_bright(50)
-    #set_tablet_volume(50)
-
-
+    #set_leds_intensity("LeftFaceLedsGreen", 0.5)
+    #change_led_color("AllLeds", "green", 0.5 )
+    #activate_stiffness(False)
     
 def message_manage(key, msg):
         switch_accion = {
@@ -118,22 +88,22 @@ def message_manage(key, msg):
             "GETEMOTIONSTATE":"get_emotion_state", #
             "LOGIN":"login", #
             #LocationServices-------------------------------------------------------
-            "SEARCHFREEZONE":"search_free_zone",
-            "GETFREEZONES":"get_free_zones",
-            "GETROBOTPOSITION":"get_robot_position",
+            "SEARCHFREEZONE":"search_free_zone", #
+            "GETFREEZONES":"get_free_zone", #
+            "GETROBOTPOSITION":"get_robot_position", #
             #MovementServices-------------------------------------------------------
-            "MOVE":"move",
-            "MOVEFORWARD":"move_forward",
-            "MOVETO":"move_to",
-            "MOVETOPOSITION":"move_to_position",
+            "MOVE":"move", #
+            "MOVEFORWARD":"move_forward", #
+            "MOVETO":"move_to", #
+            "MOVETOPOSITION":"move_to_position", #
             #RobotStateServices-------------------------------------------------------
             "WAKEUP":"wake_up", #
             "SUSPEND":"suspend", #
             "SETREFRESHTIMESENSORS":"set_refresh_time_sensors", #Hay que crear un modulo para probar
             "ACTIVATERASTA ":"activate_rasta", #
             "RANDOMEYES":"random_eyes",#
-            "SETLEDSINTENSITY":"set_leds_intensity",
-            "CHANGELEDCOLOR":"change_led_color",
+            "SETLEDSINTENSITY":"set_leds_intensity",#
+            "CHANGELEDCOLOR":"change_led_color",#
             "ACTIVATESTIFFNESS":"activate_stiffness",
             #TabletServices-------------------------------------------------------
             "TABLETON":"tablet_on",
@@ -364,8 +334,8 @@ def get_emotion_state():
     return alMood.currentPersonState()
 
 #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
-#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesiï¿½n activa coincida con
-#el que estï¿½ interactuando con el robot
+#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesión activa coincida con
+#el que está interactuando con el robot
 def login():
 
     for i in alUserSession.getOpenUserSessions():
@@ -378,20 +348,20 @@ def login():
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement.
 def search_free_zone(radius, displacement):
-    return alNavigationProxy.searchFreeZone(radius,displacement)
+    return alNavigationProxy.findFreeZone(radius,displacement)
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement
-def get_free_zones(radius, displacement):
-    return alNavigationProxy.findFreeZone(radius, displacement)
+def get_free_zone(radius, displacement):
+    return alNavigationProxy.getFreeZone(radius, displacement)
 
-""" No se si exista problema por utilizar ALLocalizationProxy o simplemente ALLocalization"""
 #Gets the coordinates x, y, theta of the pose2D of the robot
 def get_robot_position(enabled):
     return alLocalizationProxy.getRobotPosition(enabled)
 
 #Makes the robot move at the given velocity, expressed in FRAME_ROBOT
-def move(x,y,speed):
-    alMotion.move(x,y,speed)
+#Z is rotation
+def move(x, y, z):
+    alMotion.move(x,y,z)
 
 #Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
 def move_forward(x,y,speed):
@@ -428,17 +398,18 @@ def random_eyes(duration):
 #Sets the intensity of a LED or Group of LEDs.
 def set_leds_intensity(sensor, intensity):
     alLedsProxy.setIntensity(sensor, intensity)
-"""
+
 #Sets the color of an RGB led using  color code.
-def change_led_color(sensor, color):
+def change_led_color(sensor, color, duration):
     alLedsProxy.fadeRGB(sensor, color)
 
-
+#Enable or Disable the smart stiffness reflex for all the joints (True by default).
+#The update takes one motion cycle.
 def  activate_stiffness(enabled):
-            ALGUNACOSA.SetSmartStiffnessEnabled
+    return alMotion.SetSmartStiffnessEnabled(enabled)
 
 
-"""
+
 #Turn on/off the tablet screen.
 def tablet_on():
     alTabletService.turnScreenOn(True)
@@ -472,13 +443,11 @@ def  resume_video():
      alTabletService.resumeVideo()
 
 # Load the image to show to de user
-def preload_image(url):
-    alTabletService.preLoadImage(url)
+def preload_image():
     pass
 
 #Shows the image in the tablet for the user
-def show_image(url):
-    alTabletService.showImage(url)
+def show_image():
     pass
 
 #Hide image currently displayed.
