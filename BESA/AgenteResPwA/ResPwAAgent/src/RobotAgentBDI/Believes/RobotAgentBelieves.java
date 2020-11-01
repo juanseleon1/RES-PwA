@@ -28,7 +28,7 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoActividad bEstadoActividad = new BEstadoActividad();
     private BPerfilPwA bPerfilPwA = new BPerfilPwA();
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
-    private Map<String,List<String>> imgCuentos;
+    private Map<String,List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
    
     public RobotAgentBelieves(String cedula)

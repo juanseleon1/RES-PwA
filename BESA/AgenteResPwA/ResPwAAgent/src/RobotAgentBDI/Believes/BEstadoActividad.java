@@ -34,6 +34,7 @@ public class BEstadoActividad implements Believes{
     private Integer boostAnimarElogiarPwA;
     private Integer boostBailar;
     private Integer boostCambiarEnriquecimientoHistoria;
+    private Integer boostCancelarActividad;
     private Integer boostConversarEmpaticamente;
     private Integer boostLogIn;
     private Integer boostMantenerAtencionPwA;
@@ -224,6 +225,14 @@ public class BEstadoActividad implements Believes{
 
     public void setBoostSeleccionarCuentoGusto(Integer boostSeleccionarCuentoGusto) {
         this.boostSeleccionarCuentoGusto = boostSeleccionarCuentoGusto;
+    }
+
+    public Integer getBoostCancelarActividad() {
+        return boostCancelarActividad;
+    }
+
+    public void setBoostCancelarActividad(Integer boostCancelarActividad) {
+        this.boostCancelarActividad = boostCancelarActividad;
     }
 
     

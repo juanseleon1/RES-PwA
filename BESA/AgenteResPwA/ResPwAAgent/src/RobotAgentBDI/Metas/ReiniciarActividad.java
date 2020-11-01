@@ -76,7 +76,8 @@ public class ReiniciarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReiniciarActividad evaluateContribution");
-        return 1.0;
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        return 1.0 + blvs.getbEstadoActividad().getBoostReiniciarActividad();
     }
 
     @Override

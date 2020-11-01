@@ -86,7 +86,7 @@ public class SeleccionarCancionGusto extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
-        return blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("SADNESS")+blvs.getbEstadoEmocionalPwA().getEstadoEmocional().get("ANGER")+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbEstadoActividad().getCancionActual().getGusto();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbEstadoActividad().getCancionActual().getGusto() + blvs.getbEstadoActividad().getBoostSeleccionarCancionGusto();
 
     }
 

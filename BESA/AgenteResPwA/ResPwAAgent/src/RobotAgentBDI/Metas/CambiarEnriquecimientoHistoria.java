@@ -87,10 +87,10 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
         if(blvs.getbEstadoInteraccion().isQuiereEnriquec()) {
-            return 1.0;
+            return 1.0 + blvs.getbEstadoActividad().getBoostCambiarEnriquecimientoHistoria() + blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion();
         }
         //verificar esto
-        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion();
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoActividad().getBoostCambiarEnriquecimientoHistoria();
     }
 
     @Override

@@ -90,7 +90,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta SeleccionarCuentoGusto evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoActividad().getCuentoActual().getGusto();
+        return blvs.getbEstadoActividad().getCuentoActual().getGusto() + blvs.getbEstadoActividad().getBoostSeleccionarCuentoGusto();
     }
 
     @Override
