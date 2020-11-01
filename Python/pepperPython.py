@@ -23,7 +23,10 @@ def handle_client(conn, addr):
     if jsonObj["methodName"] == "hablar":
         print(jsonObj["methodName"])
     
-    
+    if learn_face("Brayan"):
+        hablar("hola Enrique, mi nombre es Pepper")
+    else:
+        hablar("Mal")
     print(get_face_list()[0])
     
 def message_manage(key, msg):
