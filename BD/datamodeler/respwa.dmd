@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="respwa" id="D307E5D7-60DB-F3E7-A06F-543F87442E35" version="3.5">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 17:46:30 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>D307E5D7-60DB-F3E7-A06F-543F87442E35</designId>
+</OSDM_Design>

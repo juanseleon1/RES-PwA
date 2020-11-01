@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="moduloCuidadorPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modulocuidador.entities.Cuento</class>
+    <class>modulocuidador.entities.Estadocivil</class>
+    <class>modulocuidador.entities.NivelEducativo</class>
+    <class>modulocuidador.entities.Cuidador</class>
+    <class>modulocuidador.entities.Cancion</class>
+    <class>modulocuidador.entities.Cdr</class>
+    <class>modulocuidador.entities.Dificultad</class>
+    <class>modulocuidador.entities.Actividadpwa</class>
+    <class>modulocuidador.entities.PerfilPreferencia</class>
+    <class>modulocuidador.entities.Perfilpwa</class>
+    <class>modulocuidador.entities.Frases</class>
+    <class>modulocuidador.entities.Tags</class>
+    <class>modulocuidador.entities.Actividadrutinaria</class>
+    <class>modulocuidador.entities.Genero</class>
+    <class>modulocuidador.entities.Causademencia</class>
+    <class>modulocuidador.entities.Familiar</class>
+    <class>modulocuidador.entities.PerfilMedico</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
+      <property name="javax.persistence.jdbc.user" value="is784921"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="wAGs3vfUQ0"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6DD66939-C2C1-4D32-7B95-A3434CEA7D55" name="actXPreferencia">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ActividadPwA_id" id="98F8658E-764C-C7F0-432B-51C53E07276E">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:03 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="48BD994F-27A7-63B3-0166-FF631F79C0F0" referredColumn="A86310CB-1E8B-E5D8-7732-0036BAD1E30C"/>
+</associations>
+</Column>
+<Column name="Perfil_Preferencia_cedula" id="46BB126D-9A35-666D-C4FD-4D07155E58DF">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:03 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="53BCA70C-7490-8A54-26EB-F8CE1B317E3E" referredColumn="B33FD595-CA9A-6576-7C07-9B2C5F6FDA75"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DD9EAEDC-52A3-1CEE-E228-180CBE49D04E" name="actXPreferencia_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="98F8658E-764C-C7F0-432B-51C53E07276E"/>
+<colUsage columnID="46BB126D-9A35-666D-C4FD-4D07155E58DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="49B9F521-2BB2-4186-B393-F55386725E2A" name="actXPreferencia_ActividadPwA_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>58135EAA-E3D4-C46A-30C3-A5804662CE8B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="98F8658E-764C-C7F0-432B-51C53E07276E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9483E9D4-F953-B0AF-FB5A-8197A00DC38B" name="actXPreferencia_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:03 UTC</createdTime>
+<generatorID>58135EAA-E3D4-C46A-30C3-A5804662CE8B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="46BB126D-9A35-666D-C4FD-4D07155E58DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

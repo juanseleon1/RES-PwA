@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="21741AE1-C344-C196-0AE7-5371203CEB23" name="Dificultad">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:34:45 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="dificultad" id="7C4C2F85-2895-257F-7DF3-0BC6A7999597">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:34:58 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0B395BB3-7CED-8669-9521-AE337EF9C52F" name="Dificultad PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:36:52 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7C4C2F85-2895-257F-7DF3-0BC6A7999597</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4A316010-4D7F-A691-005C-3B41AFA94851" name="Genero">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:16:02 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="genero" id="F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:28:57 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="gusto" id="A44E1486-1AC1-D98B-AFF5-830FA11CAAC2">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:29:23 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="84ADC354-5798-F86C-C1F1-703FB948B1AB" name="Genero PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:29:03 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
