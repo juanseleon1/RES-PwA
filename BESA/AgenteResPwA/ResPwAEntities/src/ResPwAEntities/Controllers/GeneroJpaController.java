@@ -55,32 +55,32 @@ public class GeneroJpaController implements Serializable {
             genero.setCancionList(attachedCancionList);
             List<Cuento> attachedCuentoList = new ArrayList<Cuento>();
             for (Cuento cuentoListCuentoToAttach : genero.getCuentoList()) {
-                cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombrecuento());
+                cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombre());
                 attachedCuentoList.add(cuentoListCuentoToAttach);
             }
             genero.setCuentoList(attachedCuentoList);
             em.persist(genero);
             for (Cancion cancionListCancion : genero.getCancionList()) {
-                Genero oldNombregeneroOfCancionListCancion = cancionListCancion.getNombregenero();
-                cancionListCancion.setNombregenero(genero);
+                Genero oldGeneroGeneroOfCancionListCancion = cancionListCancion.getGeneroGenero();
+                cancionListCancion.setGeneroGenero(genero);
                 cancionListCancion = em.merge(cancionListCancion);
-                if (oldNombregeneroOfCancionListCancion != null) {
-                    oldNombregeneroOfCancionListCancion.getCancionList().remove(cancionListCancion);
-                    oldNombregeneroOfCancionListCancion = em.merge(oldNombregeneroOfCancionListCancion);
+                if (oldGeneroGeneroOfCancionListCancion != null) {
+                    oldGeneroGeneroOfCancionListCancion.getCancionList().remove(cancionListCancion);
+                    oldGeneroGeneroOfCancionListCancion = em.merge(oldGeneroGeneroOfCancionListCancion);
                 }
             }
             for (Cuento cuentoListCuento : genero.getCuentoList()) {
-                Genero oldNombregeneroOfCuentoListCuento = cuentoListCuento.getNombregenero();
-                cuentoListCuento.setNombregenero(genero);
+                Genero oldGeneroGeneroOfCuentoListCuento = cuentoListCuento.getGeneroGenero();
+                cuentoListCuento.setGeneroGenero(genero);
                 cuentoListCuento = em.merge(cuentoListCuento);
-                if (oldNombregeneroOfCuentoListCuento != null) {
-                    oldNombregeneroOfCuentoListCuento.getCuentoList().remove(cuentoListCuento);
-                    oldNombregeneroOfCuentoListCuento = em.merge(oldNombregeneroOfCuentoListCuento);
+                if (oldGeneroGeneroOfCuentoListCuento != null) {
+                    oldGeneroGeneroOfCuentoListCuento.getCuentoList().remove(cuentoListCuento);
+                    oldGeneroGeneroOfCuentoListCuento = em.merge(oldGeneroGeneroOfCuentoListCuento);
                 }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findGenero(genero.getNombregenero()) != null) {
+            if (findGenero(genero.getGenero()) != null) {
                 throw new PreexistingEntityException("Genero " + genero + " already exists.", ex);
             }
             throw ex;
@@ -96,7 +96,7 @@ public class GeneroJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Genero persistentGenero = em.find(Genero.class, genero.getNombregenero());
+            Genero persistentGenero = em.find(Genero.class, genero.getGenero());
             List<Cancion> cancionListOld = persistentGenero.getCancionList();
             List<Cancion> cancionListNew = genero.getCancionList();
             List<Cuento> cuentoListOld = persistentGenero.getCuentoList();
@@ -107,7 +107,7 @@ public class GeneroJpaController implements Serializable {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Cancion " + cancionListOldCancion + " since its nombregenero field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Cancion " + cancionListOldCancion + " since its generoGenero field is not nullable.");
                 }
             }
             for (Cuento cuentoListOldCuento : cuentoListOld) {
@@ -115,7 +115,7 @@ public class GeneroJpaController implements Serializable {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Cuento " + cuentoListOldCuento + " since its nombregenero field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Cuento " + cuentoListOldCuento + " since its generoGenero field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -130,7 +130,7 @@ public class GeneroJpaController implements Serializable {
             genero.setCancionList(cancionListNew);
             List<Cuento> attachedCuentoListNew = new ArrayList<Cuento>();
             for (Cuento cuentoListNewCuentoToAttach : cuentoListNew) {
-                cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombrecuento());
+                cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombre());
                 attachedCuentoListNew.add(cuentoListNewCuentoToAttach);
             }
             cuentoListNew = attachedCuentoListNew;
@@ -138,23 +138,23 @@ public class GeneroJpaController implements Serializable {
             genero = em.merge(genero);
             for (Cancion cancionListNewCancion : cancionListNew) {
                 if (!cancionListOld.contains(cancionListNewCancion)) {
-                    Genero oldNombregeneroOfCancionListNewCancion = cancionListNewCancion.getNombregenero();
-                    cancionListNewCancion.setNombregenero(genero);
+                    Genero oldGeneroGeneroOfCancionListNewCancion = cancionListNewCancion.getGeneroGenero();
+                    cancionListNewCancion.setGeneroGenero(genero);
                     cancionListNewCancion = em.merge(cancionListNewCancion);
-                    if (oldNombregeneroOfCancionListNewCancion != null && !oldNombregeneroOfCancionListNewCancion.equals(genero)) {
-                        oldNombregeneroOfCancionListNewCancion.getCancionList().remove(cancionListNewCancion);
-                        oldNombregeneroOfCancionListNewCancion = em.merge(oldNombregeneroOfCancionListNewCancion);
+                    if (oldGeneroGeneroOfCancionListNewCancion != null && !oldGeneroGeneroOfCancionListNewCancion.equals(genero)) {
+                        oldGeneroGeneroOfCancionListNewCancion.getCancionList().remove(cancionListNewCancion);
+                        oldGeneroGeneroOfCancionListNewCancion = em.merge(oldGeneroGeneroOfCancionListNewCancion);
                     }
                 }
             }
             for (Cuento cuentoListNewCuento : cuentoListNew) {
                 if (!cuentoListOld.contains(cuentoListNewCuento)) {
-                    Genero oldNombregeneroOfCuentoListNewCuento = cuentoListNewCuento.getNombregenero();
-                    cuentoListNewCuento.setNombregenero(genero);
+                    Genero oldGeneroGeneroOfCuentoListNewCuento = cuentoListNewCuento.getGeneroGenero();
+                    cuentoListNewCuento.setGeneroGenero(genero);
                     cuentoListNewCuento = em.merge(cuentoListNewCuento);
-                    if (oldNombregeneroOfCuentoListNewCuento != null && !oldNombregeneroOfCuentoListNewCuento.equals(genero)) {
-                        oldNombregeneroOfCuentoListNewCuento.getCuentoList().remove(cuentoListNewCuento);
-                        oldNombregeneroOfCuentoListNewCuento = em.merge(oldNombregeneroOfCuentoListNewCuento);
+                    if (oldGeneroGeneroOfCuentoListNewCuento != null && !oldGeneroGeneroOfCuentoListNewCuento.equals(genero)) {
+                        oldGeneroGeneroOfCuentoListNewCuento.getCuentoList().remove(cuentoListNewCuento);
+                        oldGeneroGeneroOfCuentoListNewCuento = em.merge(oldGeneroGeneroOfCuentoListNewCuento);
                     }
                 }
             }
@@ -162,7 +162,7 @@ public class GeneroJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = genero.getNombregenero();
+                String id = genero.getGenero();
                 if (findGenero(id) == null) {
                     throw new NonexistentEntityException("The genero with id " + id + " no longer exists.");
                 }
@@ -183,7 +183,7 @@ public class GeneroJpaController implements Serializable {
             Genero genero;
             try {
                 genero = em.getReference(Genero.class, id);
-                genero.getNombregenero();
+                genero.getGenero();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The genero with id " + id + " no longer exists.", enfe);
             }
@@ -193,14 +193,14 @@ public class GeneroJpaController implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Cancion " + cancionListOrphanCheckCancion + " in its cancionList field has a non-nullable nombregenero field.");
+                illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Cancion " + cancionListOrphanCheckCancion + " in its cancionList field has a non-nullable generoGenero field.");
             }
             List<Cuento> cuentoListOrphanCheck = genero.getCuentoList();
             for (Cuento cuentoListOrphanCheckCuento : cuentoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Cuento " + cuentoListOrphanCheckCuento + " in its cuentoList field has a non-nullable nombregenero field.");
+                illegalOrphanMessages.add("This Genero (" + genero + ") cannot be destroyed since the Cuento " + cuentoListOrphanCheckCuento + " in its cuentoList field has a non-nullable generoGenero field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

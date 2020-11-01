@@ -17,19 +17,20 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class FrasesPK implements Serializable {
+
     @Basic(optional = false)
     @Column(name = "ORDEN")
     private BigInteger orden;
     @Basic(optional = false)
-    @Column(name = "NOMBRECUENTO")
-    private String nombrecuento;
+    @Column(name = "CUENTO_NOMBRE")
+    private String cuentoNombre;
 
     public FrasesPK() {
     }
 
-    public FrasesPK(BigInteger orden, String nombrecuento) {
+    public FrasesPK(BigInteger orden, String cuentoNombre) {
         this.orden = orden;
-        this.nombrecuento = nombrecuento;
+        this.cuentoNombre = cuentoNombre;
     }
 
     public BigInteger getOrden() {
@@ -40,19 +41,19 @@ public class FrasesPK implements Serializable {
         this.orden = orden;
     }
 
-    public String getNombrecuento() {
-        return nombrecuento;
+    public String getCuentoNombre() {
+        return cuentoNombre;
     }
 
-    public void setNombrecuento(String nombrecuento) {
-        this.nombrecuento = nombrecuento;
+    public void setCuentoNombre(String cuentoNombre) {
+        this.cuentoNombre = cuentoNombre;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (orden != null ? orden.hashCode() : 0);
-        hash += (nombrecuento != null ? nombrecuento.hashCode() : 0);
+        hash += (cuentoNombre != null ? cuentoNombre.hashCode() : 0);
         return hash;
     }
 
@@ -66,7 +67,7 @@ public class FrasesPK implements Serializable {
         if ((this.orden == null && other.orden != null) || (this.orden != null && !this.orden.equals(other.orden))) {
             return false;
         }
-        if ((this.nombrecuento == null && other.nombrecuento != null) || (this.nombrecuento != null && !this.nombrecuento.equals(other.nombrecuento))) {
+        if ((this.cuentoNombre == null && other.cuentoNombre != null) || (this.cuentoNombre != null && !this.cuentoNombre.equals(other.cuentoNombre))) {
             return false;
         }
         return true;
@@ -74,7 +75,7 @@ public class FrasesPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.FrasesPK[ orden=" + orden + ", nombrecuento=" + nombrecuento + " ]";
+        return "ResPwAEntities.FrasesPK[ orden=" + orden + ", cuentoNombre=" + cuentoNombre + " ]";
     }
     
 }

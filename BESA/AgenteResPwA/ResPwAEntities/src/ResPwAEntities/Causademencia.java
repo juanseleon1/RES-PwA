@@ -26,30 +26,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CAUSADEMENCIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Causademencia.findAll", query = "SELECT c FROM Causademencia c"),
-    @NamedQuery(name = "Causademencia.findByEnfermedad", query = "SELECT c FROM Causademencia c WHERE c.enfermedad = :enfermedad")})
+    @NamedQuery(name = "Causademencia.findAll", query = "SELECT c FROM Causademencia c")
+    , @NamedQuery(name = "Causademencia.findByCondicion", query = "SELECT c FROM Causademencia c WHERE c.condicion = :condicion")})
 public class Causademencia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ENFERMEDAD")
-    private String enfermedad;
-    @OneToMany(mappedBy = "causademenciaEnfermedad")
+    @Column(name = "CONDICION")
+    private String condicion;
+    @OneToMany(mappedBy = "causademenciaCondicion")
     private List<PerfilMedico> perfilMedicoList;
 
     public Causademencia() {
     }
 
-    public Causademencia(String enfermedad) {
-        this.enfermedad = enfermedad;
+    public Causademencia(String condicion) {
+        this.condicion = condicion;
     }
 
-    public String getEnfermedad() {
-        return enfermedad;
+    public String getCondicion() {
+        return condicion;
     }
 
-    public void setEnfermedad(String enfermedad) {
-        this.enfermedad = enfermedad;
+    public void setCondicion(String condicion) {
+        this.condicion = condicion;
     }
 
     @XmlTransient
@@ -64,7 +65,7 @@ public class Causademencia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (enfermedad != null ? enfermedad.hashCode() : 0);
+        hash += (condicion != null ? condicion.hashCode() : 0);
         return hash;
     }
 
@@ -75,7 +76,7 @@ public class Causademencia implements Serializable {
             return false;
         }
         Causademencia other = (Causademencia) object;
-        if ((this.enfermedad == null && other.enfermedad != null) || (this.enfermedad != null && !this.enfermedad.equals(other.enfermedad))) {
+        if ((this.condicion == null && other.condicion != null) || (this.condicion != null && !this.condicion.equals(other.condicion))) {
             return false;
         }
         return true;
@@ -83,7 +84,7 @@ public class Causademencia implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Causademencia[ enfermedad=" + enfermedad + " ]";
+        return "ResPwAEntities.Causademencia[ condicion=" + condicion + " ]";
     }
     
 }

@@ -29,10 +29,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CANCION")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c"),
-    @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto")})
+    @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c")
+    , @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto")})
 public class Cancion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,13 +48,13 @@ public class Cancion implements Serializable {
     @ManyToMany
     private List<Tags> tagsList;
     @JoinTable(name = "PREFERENCIACANCION", joinColumns = {
-        @JoinColumn(name = "CANCIONNOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
-        @JoinColumn(name = "CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
+        @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
+        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
     @ManyToMany
     private List<PerfilPreferencia> perfilPreferenciaList;
-    @JoinColumn(name = "NOMBREGENERO", referencedColumnName = "NOMBREGENERO")
+    @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false)
-    private Genero nombregenero;
+    private Genero generoGenero;
 
     public Cancion() {
     }
@@ -101,12 +102,12 @@ public class Cancion implements Serializable {
         this.perfilPreferenciaList = perfilPreferenciaList;
     }
 
-    public Genero getNombregenero() {
-        return nombregenero;
+    public Genero getGeneroGenero() {
+        return generoGenero;
     }
 
-    public void setNombregenero(Genero nombregenero) {
-        this.nombregenero = nombregenero;
+    public void setGeneroGenero(Genero generoGenero) {
+        this.generoGenero = generoGenero;
     }
 
     @Override

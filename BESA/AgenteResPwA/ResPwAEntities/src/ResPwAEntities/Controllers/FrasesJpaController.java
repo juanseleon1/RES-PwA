@@ -5,6 +5,7 @@
  */
 package ResPwAEntities.Controllers;
 
+import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -13,8 +14,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Enriq;
 import ResPwAEntities.Frases;
 import ResPwAEntities.FrasesPK;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,20 +41,38 @@ public class FrasesJpaController implements Serializable {
         if (frases.getFrasesPK() == null) {
             frases.setFrasesPK(new FrasesPK());
         }
-        frases.getFrasesPK().setNombrecuento(frases.getCuento().getNombrecuento());
+        if (frases.getEnriqList() == null) {
+            frases.setEnriqList(new ArrayList<Enriq>());
+        }
+        frases.getFrasesPK().setCuentoNombre(frases.getCuento().getNombre());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Cuento cuento = frases.getCuento();
             if (cuento != null) {
-                cuento = em.getReference(cuento.getClass(), cuento.getNombrecuento());
+                cuento = em.getReference(cuento.getClass(), cuento.getNombre());
                 frases.setCuento(cuento);
             }
+            List<Enriq> attachedEnriqList = new ArrayList<Enriq>();
+            for (Enriq enriqListEnriqToAttach : frases.getEnriqList()) {
+                enriqListEnriqToAttach = em.getReference(enriqListEnriqToAttach.getClass(), enriqListEnriqToAttach.getEnriqPK());
+                attachedEnriqList.add(enriqListEnriqToAttach);
+            }
+            frases.setEnriqList(attachedEnriqList);
             em.persist(frases);
             if (cuento != null) {
                 cuento.getFrasesList().add(frases);
                 cuento = em.merge(cuento);
+            }
+            for (Enriq enriqListEnriq : frases.getEnriqList()) {
+                Frases oldFrasesOfEnriqListEnriq = enriqListEnriq.getFrases();
+                enriqListEnriq.setFrases(frases);
+                enriqListEnriq = em.merge(enriqListEnriq);
+                if (oldFrasesOfEnriqListEnriq != null) {
+                    oldFrasesOfEnriqListEnriq.getEnriqList().remove(enriqListEnriq);
+                    oldFrasesOfEnriqListEnriq = em.merge(oldFrasesOfEnriqListEnriq);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -66,8 +87,8 @@ public class FrasesJpaController implements Serializable {
         }
     }
 
-    public void edit(Frases frases) throws NonexistentEntityException, Exception {
-        frases.getFrasesPK().setNombrecuento(frases.getCuento().getNombrecuento());
+    public void edit(Frases frases) throws IllegalOrphanException, NonexistentEntityException, Exception {
+        frases.getFrasesPK().setCuentoNombre(frases.getCuento().getNombre());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,10 +96,31 @@ public class FrasesJpaController implements Serializable {
             Frases persistentFrases = em.find(Frases.class, frases.getFrasesPK());
             Cuento cuentoOld = persistentFrases.getCuento();
             Cuento cuentoNew = frases.getCuento();
+            List<Enriq> enriqListOld = persistentFrases.getEnriqList();
+            List<Enriq> enriqListNew = frases.getEnriqList();
+            List<String> illegalOrphanMessages = null;
+            for (Enriq enriqListOldEnriq : enriqListOld) {
+                if (!enriqListNew.contains(enriqListOldEnriq)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Enriq " + enriqListOldEnriq + " since its frases field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (cuentoNew != null) {
-                cuentoNew = em.getReference(cuentoNew.getClass(), cuentoNew.getNombrecuento());
+                cuentoNew = em.getReference(cuentoNew.getClass(), cuentoNew.getNombre());
                 frases.setCuento(cuentoNew);
             }
+            List<Enriq> attachedEnriqListNew = new ArrayList<Enriq>();
+            for (Enriq enriqListNewEnriqToAttach : enriqListNew) {
+                enriqListNewEnriqToAttach = em.getReference(enriqListNewEnriqToAttach.getClass(), enriqListNewEnriqToAttach.getEnriqPK());
+                attachedEnriqListNew.add(enriqListNewEnriqToAttach);
+            }
+            enriqListNew = attachedEnriqListNew;
+            frases.setEnriqList(enriqListNew);
             frases = em.merge(frases);
             if (cuentoOld != null && !cuentoOld.equals(cuentoNew)) {
                 cuentoOld.getFrasesList().remove(frases);
@@ -87,6 +129,17 @@ public class FrasesJpaController implements Serializable {
             if (cuentoNew != null && !cuentoNew.equals(cuentoOld)) {
                 cuentoNew.getFrasesList().add(frases);
                 cuentoNew = em.merge(cuentoNew);
+            }
+            for (Enriq enriqListNewEnriq : enriqListNew) {
+                if (!enriqListOld.contains(enriqListNewEnriq)) {
+                    Frases oldFrasesOfEnriqListNewEnriq = enriqListNewEnriq.getFrases();
+                    enriqListNewEnriq.setFrases(frases);
+                    enriqListNewEnriq = em.merge(enriqListNewEnriq);
+                    if (oldFrasesOfEnriqListNewEnriq != null && !oldFrasesOfEnriqListNewEnriq.equals(frases)) {
+                        oldFrasesOfEnriqListNewEnriq.getEnriqList().remove(enriqListNewEnriq);
+                        oldFrasesOfEnriqListNewEnriq = em.merge(oldFrasesOfEnriqListNewEnriq);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -105,7 +158,7 @@ public class FrasesJpaController implements Serializable {
         }
     }
 
-    public void destroy(FrasesPK id) throws NonexistentEntityException {
+    public void destroy(FrasesPK id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -116,6 +169,17 @@ public class FrasesJpaController implements Serializable {
                 frases.getFrasesPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The frases with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            List<Enriq> enriqListOrphanCheck = frases.getEnriqList();
+            for (Enriq enriqListOrphanCheckEnriq : enriqListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Frases (" + frases + ") cannot be destroyed since the Enriq " + enriqListOrphanCheckEnriq + " in its enriqList field has a non-nullable frases field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Cuento cuento = frases.getCuento();
             if (cuento != null) {

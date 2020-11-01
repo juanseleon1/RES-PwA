@@ -30,12 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ACTIVIDADRUTINARIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Actividadrutinaria.findAll", query = "SELECT a FROM Actividadrutinaria a"),
-    @NamedQuery(name = "Actividadrutinaria.findByNombre", query = "SELECT a FROM Actividadrutinaria a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "Actividadrutinaria.findById", query = "SELECT a FROM Actividadrutinaria a WHERE a.id = :id"),
-    @NamedQuery(name = "Actividadrutinaria.findByDuracion", query = "SELECT a FROM Actividadrutinaria a WHERE a.duracion = :duracion"),
-    @NamedQuery(name = "Actividadrutinaria.findByHora", query = "SELECT a FROM Actividadrutinaria a WHERE a.hora = :hora")})
+    @NamedQuery(name = "Actividadrutinaria.findAll", query = "SELECT a FROM Actividadrutinaria a")
+    , @NamedQuery(name = "Actividadrutinaria.findByNombre", query = "SELECT a FROM Actividadrutinaria a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Actividadrutinaria.findById", query = "SELECT a FROM Actividadrutinaria a WHERE a.id = :id")
+    , @NamedQuery(name = "Actividadrutinaria.findByDuracion", query = "SELECT a FROM Actividadrutinaria a WHERE a.duracion = :duracion")
+    , @NamedQuery(name = "Actividadrutinaria.findByHora", query = "SELECT a FROM Actividadrutinaria a WHERE a.hora = :hora")})
 public class Actividadrutinaria implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "NOMBRE")

@@ -50,17 +50,17 @@ public class CausademenciaJpaController implements Serializable {
             causademencia.setPerfilMedicoList(attachedPerfilMedicoList);
             em.persist(causademencia);
             for (PerfilMedico perfilMedicoListPerfilMedico : causademencia.getPerfilMedicoList()) {
-                Causademencia oldCausademenciaEnfermedadOfPerfilMedicoListPerfilMedico = perfilMedicoListPerfilMedico.getCausademenciaEnfermedad();
-                perfilMedicoListPerfilMedico.setCausademenciaEnfermedad(causademencia);
+                Causademencia oldCausademenciaCondicionOfPerfilMedicoListPerfilMedico = perfilMedicoListPerfilMedico.getCausademenciaCondicion();
+                perfilMedicoListPerfilMedico.setCausademenciaCondicion(causademencia);
                 perfilMedicoListPerfilMedico = em.merge(perfilMedicoListPerfilMedico);
-                if (oldCausademenciaEnfermedadOfPerfilMedicoListPerfilMedico != null) {
-                    oldCausademenciaEnfermedadOfPerfilMedicoListPerfilMedico.getPerfilMedicoList().remove(perfilMedicoListPerfilMedico);
-                    oldCausademenciaEnfermedadOfPerfilMedicoListPerfilMedico = em.merge(oldCausademenciaEnfermedadOfPerfilMedicoListPerfilMedico);
+                if (oldCausademenciaCondicionOfPerfilMedicoListPerfilMedico != null) {
+                    oldCausademenciaCondicionOfPerfilMedicoListPerfilMedico.getPerfilMedicoList().remove(perfilMedicoListPerfilMedico);
+                    oldCausademenciaCondicionOfPerfilMedicoListPerfilMedico = em.merge(oldCausademenciaCondicionOfPerfilMedicoListPerfilMedico);
                 }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findCausademencia(causademencia.getEnfermedad()) != null) {
+            if (findCausademencia(causademencia.getCondicion()) != null) {
                 throw new PreexistingEntityException("Causademencia " + causademencia + " already exists.", ex);
             }
             throw ex;
@@ -76,7 +76,7 @@ public class CausademenciaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Causademencia persistentCausademencia = em.find(Causademencia.class, causademencia.getEnfermedad());
+            Causademencia persistentCausademencia = em.find(Causademencia.class, causademencia.getCondicion());
             List<PerfilMedico> perfilMedicoListOld = persistentCausademencia.getPerfilMedicoList();
             List<PerfilMedico> perfilMedicoListNew = causademencia.getPerfilMedicoList();
             List<PerfilMedico> attachedPerfilMedicoListNew = new ArrayList<PerfilMedico>();
@@ -89,18 +89,18 @@ public class CausademenciaJpaController implements Serializable {
             causademencia = em.merge(causademencia);
             for (PerfilMedico perfilMedicoListOldPerfilMedico : perfilMedicoListOld) {
                 if (!perfilMedicoListNew.contains(perfilMedicoListOldPerfilMedico)) {
-                    perfilMedicoListOldPerfilMedico.setCausademenciaEnfermedad(null);
+                    perfilMedicoListOldPerfilMedico.setCausademenciaCondicion(null);
                     perfilMedicoListOldPerfilMedico = em.merge(perfilMedicoListOldPerfilMedico);
                 }
             }
             for (PerfilMedico perfilMedicoListNewPerfilMedico : perfilMedicoListNew) {
                 if (!perfilMedicoListOld.contains(perfilMedicoListNewPerfilMedico)) {
-                    Causademencia oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico = perfilMedicoListNewPerfilMedico.getCausademenciaEnfermedad();
-                    perfilMedicoListNewPerfilMedico.setCausademenciaEnfermedad(causademencia);
+                    Causademencia oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico = perfilMedicoListNewPerfilMedico.getCausademenciaCondicion();
+                    perfilMedicoListNewPerfilMedico.setCausademenciaCondicion(causademencia);
                     perfilMedicoListNewPerfilMedico = em.merge(perfilMedicoListNewPerfilMedico);
-                    if (oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico != null && !oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico.equals(causademencia)) {
-                        oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico.getPerfilMedicoList().remove(perfilMedicoListNewPerfilMedico);
-                        oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico = em.merge(oldCausademenciaEnfermedadOfPerfilMedicoListNewPerfilMedico);
+                    if (oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico != null && !oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico.equals(causademencia)) {
+                        oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico.getPerfilMedicoList().remove(perfilMedicoListNewPerfilMedico);
+                        oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico = em.merge(oldCausademenciaCondicionOfPerfilMedicoListNewPerfilMedico);
                     }
                 }
             }
@@ -108,7 +108,7 @@ public class CausademenciaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = causademencia.getEnfermedad();
+                String id = causademencia.getCondicion();
                 if (findCausademencia(id) == null) {
                     throw new NonexistentEntityException("The causademencia with id " + id + " no longer exists.");
                 }
@@ -129,13 +129,13 @@ public class CausademenciaJpaController implements Serializable {
             Causademencia causademencia;
             try {
                 causademencia = em.getReference(Causademencia.class, id);
-                causademencia.getEnfermedad();
+                causademencia.getCondicion();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The causademencia with id " + id + " no longer exists.", enfe);
             }
             List<PerfilMedico> perfilMedicoList = causademencia.getPerfilMedicoList();
             for (PerfilMedico perfilMedicoListPerfilMedico : perfilMedicoList) {
-                perfilMedicoListPerfilMedico.setCausademenciaEnfermedad(null);
+                perfilMedicoListPerfilMedico.setCausademenciaCondicion(null);
                 perfilMedicoListPerfilMedico = em.merge(perfilMedicoListPerfilMedico);
             }
             em.remove(causademencia);

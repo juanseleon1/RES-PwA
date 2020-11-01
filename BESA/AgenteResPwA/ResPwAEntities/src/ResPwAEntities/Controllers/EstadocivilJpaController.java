@@ -50,17 +50,17 @@ public class EstadocivilJpaController implements Serializable {
             estadocivil.setPerfilpwaList(attachedPerfilpwaList);
             em.persist(estadocivil);
             for (Perfilpwa perfilpwaListPerfilpwa : estadocivil.getPerfilpwaList()) {
-                Estadocivil oldTipoestadocivilOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getTipoestadocivil();
-                perfilpwaListPerfilpwa.setTipoestadocivil(estadocivil);
+                Estadocivil oldEstadocivilTipoecOfPerfilpwaListPerfilpwa = perfilpwaListPerfilpwa.getEstadocivilTipoec();
+                perfilpwaListPerfilpwa.setEstadocivilTipoec(estadocivil);
                 perfilpwaListPerfilpwa = em.merge(perfilpwaListPerfilpwa);
-                if (oldTipoestadocivilOfPerfilpwaListPerfilpwa != null) {
-                    oldTipoestadocivilOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
-                    oldTipoestadocivilOfPerfilpwaListPerfilpwa = em.merge(oldTipoestadocivilOfPerfilpwaListPerfilpwa);
+                if (oldEstadocivilTipoecOfPerfilpwaListPerfilpwa != null) {
+                    oldEstadocivilTipoecOfPerfilpwaListPerfilpwa.getPerfilpwaList().remove(perfilpwaListPerfilpwa);
+                    oldEstadocivilTipoecOfPerfilpwaListPerfilpwa = em.merge(oldEstadocivilTipoecOfPerfilpwaListPerfilpwa);
                 }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findEstadocivil(estadocivil.getTipoestado()) != null) {
+            if (findEstadocivil(estadocivil.getTipoec()) != null) {
                 throw new PreexistingEntityException("Estadocivil " + estadocivil + " already exists.", ex);
             }
             throw ex;
@@ -76,7 +76,7 @@ public class EstadocivilJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Estadocivil persistentEstadocivil = em.find(Estadocivil.class, estadocivil.getTipoestado());
+            Estadocivil persistentEstadocivil = em.find(Estadocivil.class, estadocivil.getTipoec());
             List<Perfilpwa> perfilpwaListOld = persistentEstadocivil.getPerfilpwaList();
             List<Perfilpwa> perfilpwaListNew = estadocivil.getPerfilpwaList();
             List<Perfilpwa> attachedPerfilpwaListNew = new ArrayList<Perfilpwa>();
@@ -89,18 +89,18 @@ public class EstadocivilJpaController implements Serializable {
             estadocivil = em.merge(estadocivil);
             for (Perfilpwa perfilpwaListOldPerfilpwa : perfilpwaListOld) {
                 if (!perfilpwaListNew.contains(perfilpwaListOldPerfilpwa)) {
-                    perfilpwaListOldPerfilpwa.setTipoestadocivil(null);
+                    perfilpwaListOldPerfilpwa.setEstadocivilTipoec(null);
                     perfilpwaListOldPerfilpwa = em.merge(perfilpwaListOldPerfilpwa);
                 }
             }
             for (Perfilpwa perfilpwaListNewPerfilpwa : perfilpwaListNew) {
                 if (!perfilpwaListOld.contains(perfilpwaListNewPerfilpwa)) {
-                    Estadocivil oldTipoestadocivilOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getTipoestadocivil();
-                    perfilpwaListNewPerfilpwa.setTipoestadocivil(estadocivil);
+                    Estadocivil oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa = perfilpwaListNewPerfilpwa.getEstadocivilTipoec();
+                    perfilpwaListNewPerfilpwa.setEstadocivilTipoec(estadocivil);
                     perfilpwaListNewPerfilpwa = em.merge(perfilpwaListNewPerfilpwa);
-                    if (oldTipoestadocivilOfPerfilpwaListNewPerfilpwa != null && !oldTipoestadocivilOfPerfilpwaListNewPerfilpwa.equals(estadocivil)) {
-                        oldTipoestadocivilOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
-                        oldTipoestadocivilOfPerfilpwaListNewPerfilpwa = em.merge(oldTipoestadocivilOfPerfilpwaListNewPerfilpwa);
+                    if (oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa != null && !oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa.equals(estadocivil)) {
+                        oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa.getPerfilpwaList().remove(perfilpwaListNewPerfilpwa);
+                        oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa = em.merge(oldEstadocivilTipoecOfPerfilpwaListNewPerfilpwa);
                     }
                 }
             }
@@ -108,7 +108,7 @@ public class EstadocivilJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = estadocivil.getTipoestado();
+                String id = estadocivil.getTipoec();
                 if (findEstadocivil(id) == null) {
                     throw new NonexistentEntityException("The estadocivil with id " + id + " no longer exists.");
                 }
@@ -129,13 +129,13 @@ public class EstadocivilJpaController implements Serializable {
             Estadocivil estadocivil;
             try {
                 estadocivil = em.getReference(Estadocivil.class, id);
-                estadocivil.getTipoestado();
+                estadocivil.getTipoec();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The estadocivil with id " + id + " no longer exists.", enfe);
             }
             List<Perfilpwa> perfilpwaList = estadocivil.getPerfilpwaList();
             for (Perfilpwa perfilpwaListPerfilpwa : perfilpwaList) {
-                perfilpwaListPerfilpwa.setTipoestadocivil(null);
+                perfilpwaListPerfilpwa.setEstadocivilTipoec(null);
                 perfilpwaListPerfilpwa = em.merge(perfilpwaListPerfilpwa);
             }
             em.remove(estadocivil);

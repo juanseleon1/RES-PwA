@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,16 +35,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFILPWA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Perfilpwa.findAll", query = "SELECT p FROM Perfilpwa p"),
-    @NamedQuery(name = "Perfilpwa.findByNombre", query = "SELECT p FROM Perfilpwa p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Perfilpwa.findByApellido", query = "SELECT p FROM Perfilpwa p WHERE p.apellido = :apellido"),
-    @NamedQuery(name = "Perfilpwa.findByFechanacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.fechanacimiento = :fechanacimiento"),
-    @NamedQuery(name = "Perfilpwa.findByPaisnacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.paisnacimiento = :paisnacimiento"),
-    @NamedQuery(name = "Perfilpwa.findByEdad", query = "SELECT p FROM Perfilpwa p WHERE p.edad = :edad"),
-    @NamedQuery(name = "Perfilpwa.findByCedula", query = "SELECT p FROM Perfilpwa p WHERE p.cedula = :cedula"),
-    @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion"),
-    @NamedQuery(name = "Perfilpwa.findByIdrobot", query = "SELECT p FROM Perfilpwa p WHERE p.idrobot = :idrobot")})
+    @NamedQuery(name = "Perfilpwa.findAll", query = "SELECT p FROM Perfilpwa p")
+    , @NamedQuery(name = "Perfilpwa.findByNombre", query = "SELECT p FROM Perfilpwa p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Perfilpwa.findByApellido", query = "SELECT p FROM Perfilpwa p WHERE p.apellido = :apellido")
+    , @NamedQuery(name = "Perfilpwa.findByFechanacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.fechanacimiento = :fechanacimiento")
+    , @NamedQuery(name = "Perfilpwa.findByPaisnacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.paisnacimiento = :paisnacimiento")
+    , @NamedQuery(name = "Perfilpwa.findByEdad", query = "SELECT p FROM Perfilpwa p WHERE p.edad = :edad")
+    , @NamedQuery(name = "Perfilpwa.findByCedula", query = "SELECT p FROM Perfilpwa p WHERE p.cedula = :cedula")
+    , @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion")
+    , @NamedQuery(name = "Perfilpwa.findByIdrobot", query = "SELECT p FROM Perfilpwa p WHERE p.idrobot = :idrobot")})
 public class Perfilpwa implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
@@ -72,15 +74,17 @@ public class Perfilpwa implements Serializable {
     private BigInteger idrobot;
     @ManyToMany(mappedBy = "perfilpwaList")
     private List<Familiar> familiarList;
-    @JoinColumn(name = "CUIDADORNOMBRE", referencedColumnName = "NOMBREUSUARIO")
+    @JoinColumn(name = "CUIDADOR_NOMBREUSUARIO", referencedColumnName = "NOMBREUSUARIO")
     @ManyToOne(optional = false)
-    private Cuidador cuidadornombre;
-    @JoinColumn(name = "TIPOESTADOCIVIL", referencedColumnName = "TIPOESTADO")
+    private Cuidador cuidadorNombreusuario;
+    @JoinColumn(name = "ESTADOCIVIL_TIPOEC", referencedColumnName = "TIPOEC")
     @ManyToOne
-    private Estadocivil tipoestadocivil;
-    @JoinColumn(name = "TIPONIVELEDUCATIVO", referencedColumnName = "TIPONIVELEDUCATIVO")
+    private Estadocivil estadocivilTipoec;
+    @JoinColumn(name = "NIVEL_EDUCATIVO_TIPONE", referencedColumnName = "TIPONE")
     @ManyToOne
-    private NivelEducativo tiponiveleducativo;
+    private NivelEducativo nivelEducativoTipone;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
+    private List<Registroactividad> registroactividadList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
     private PerfilMedico perfilMedico;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
@@ -176,28 +180,37 @@ public class Perfilpwa implements Serializable {
         this.familiarList = familiarList;
     }
 
-    public Cuidador getCuidadornombre() {
-        return cuidadornombre;
+    public Cuidador getCuidadorNombreusuario() {
+        return cuidadorNombreusuario;
     }
 
-    public void setCuidadornombre(Cuidador cuidadornombre) {
-        this.cuidadornombre = cuidadornombre;
+    public void setCuidadorNombreusuario(Cuidador cuidadorNombreusuario) {
+        this.cuidadorNombreusuario = cuidadorNombreusuario;
     }
 
-    public Estadocivil getTipoestadocivil() {
-        return tipoestadocivil;
+    public Estadocivil getEstadocivilTipoec() {
+        return estadocivilTipoec;
     }
 
-    public void setTipoestadocivil(Estadocivil tipoestadocivil) {
-        this.tipoestadocivil = tipoestadocivil;
+    public void setEstadocivilTipoec(Estadocivil estadocivilTipoec) {
+        this.estadocivilTipoec = estadocivilTipoec;
     }
 
-    public NivelEducativo getTiponiveleducativo() {
-        return tiponiveleducativo;
+    public NivelEducativo getNivelEducativoTipone() {
+        return nivelEducativoTipone;
     }
 
-    public void setTiponiveleducativo(NivelEducativo tiponiveleducativo) {
-        this.tiponiveleducativo = tiponiveleducativo;
+    public void setNivelEducativoTipone(NivelEducativo nivelEducativoTipone) {
+        this.nivelEducativoTipone = nivelEducativoTipone;
+    }
+
+    @XmlTransient
+    public List<Registroactividad> getRegistroactividadList() {
+        return registroactividadList;
+    }
+
+    public void setRegistroactividadList(List<Registroactividad> registroactividadList) {
+        this.registroactividadList = registroactividadList;
     }
 
     public PerfilMedico getPerfilMedico() {

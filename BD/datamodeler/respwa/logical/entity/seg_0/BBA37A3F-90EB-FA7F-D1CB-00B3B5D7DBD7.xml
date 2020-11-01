@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 20:33:15 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,7 +20,7 @@
 <createdTime>2020-10-27 20:33:46 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -33,27 +33,27 @@
 <createdTime>2020-10-27 20:34:11 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nombreCuento" id="D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3">
+<Attribute name="nombre" id="D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:53:32 UTC</createdTime>
 <generatorID>D51D2B31-BDE8-9C7D-FA90-7D0FEA5AEFB6</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <referedAttribute>0655F14C-D67B-351E-2180-8B86C4D30570</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -63,7 +63,7 @@
 <ownerDesignName>respwa</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

@@ -74,7 +74,7 @@ public class Bailar extends GoalBDI{
             if(act.getNombre().equalsIgnoreCase("musioterapia"))
             {
                 gusto=act.getGusto();
-                enriq=(int) act.getEnriquecimientofavorito().floatValue();
+                enriq=(int) act.getEnriqfav().floatValue();
             }
         }
         if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&

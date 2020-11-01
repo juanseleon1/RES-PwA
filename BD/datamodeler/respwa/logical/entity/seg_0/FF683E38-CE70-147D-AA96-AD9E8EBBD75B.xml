@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 17:57:25 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -15,12 +15,12 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="tipoEstado" id="A3A20E22-62E0-DBA5-1114-39D0F06E5E51">
+<Attribute name="tipoEC" id="A3A20E22-62E0-DBA5-1114-39D0F06E5E51">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 17:57:36 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -36,7 +36,7 @@
 <ownerDesignName>respwa</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

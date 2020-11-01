@@ -26,30 +26,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "NIVEL_EDUCATIVO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NivelEducativo.findAll", query = "SELECT n FROM NivelEducativo n"),
-    @NamedQuery(name = "NivelEducativo.findByTiponiveleducativo", query = "SELECT n FROM NivelEducativo n WHERE n.tiponiveleducativo = :tiponiveleducativo")})
+    @NamedQuery(name = "NivelEducativo.findAll", query = "SELECT n FROM NivelEducativo n")
+    , @NamedQuery(name = "NivelEducativo.findByTipone", query = "SELECT n FROM NivelEducativo n WHERE n.tipone = :tipone")})
 public class NivelEducativo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "TIPONIVELEDUCATIVO")
-    private String tiponiveleducativo;
-    @OneToMany(mappedBy = "tiponiveleducativo")
+    @Column(name = "TIPONE")
+    private String tipone;
+    @OneToMany(mappedBy = "nivelEducativoTipone")
     private List<Perfilpwa> perfilpwaList;
 
     public NivelEducativo() {
     }
 
-    public NivelEducativo(String tiponiveleducativo) {
-        this.tiponiveleducativo = tiponiveleducativo;
+    public NivelEducativo(String tipone) {
+        this.tipone = tipone;
     }
 
-    public String getTiponiveleducativo() {
-        return tiponiveleducativo;
+    public String getTipone() {
+        return tipone;
     }
 
-    public void setTiponiveleducativo(String tiponiveleducativo) {
-        this.tiponiveleducativo = tiponiveleducativo;
+    public void setTipone(String tipone) {
+        this.tipone = tipone;
     }
 
     @XmlTransient
@@ -64,7 +65,7 @@ public class NivelEducativo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tiponiveleducativo != null ? tiponiveleducativo.hashCode() : 0);
+        hash += (tipone != null ? tipone.hashCode() : 0);
         return hash;
     }
 
@@ -75,7 +76,7 @@ public class NivelEducativo implements Serializable {
             return false;
         }
         NivelEducativo other = (NivelEducativo) object;
-        if ((this.tiponiveleducativo == null && other.tiponiveleducativo != null) || (this.tiponiveleducativo != null && !this.tiponiveleducativo.equals(other.tiponiveleducativo))) {
+        if ((this.tipone == null && other.tipone != null) || (this.tipone != null && !this.tipone.equals(other.tipone))) {
             return false;
         }
         return true;
@@ -83,7 +84,7 @@ public class NivelEducativo implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.NivelEducativo[ tiponiveleducativo=" + tiponiveleducativo + " ]";
+        return "ResPwAEntities.NivelEducativo[ tipone=" + tipone + " ]";
     }
     
 }

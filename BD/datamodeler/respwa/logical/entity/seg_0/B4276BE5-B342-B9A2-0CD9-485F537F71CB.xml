@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 20:18:21 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -15,27 +15,27 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="nombreGenero" id="A4C726B9-7FEF-E153-AF45-EC46DED3302E">
+<Attribute name="genero" id="A4C726B9-7FEF-E153-AF45-EC46DED3302E">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:29:54 UTC</createdTime>
 <generatorID>409E7BDA-8D8B-1B12-3228-1727DFE583B5</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <referedAttribute>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>20 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nombreAutor" id="1AF9D65F-2D64-B34D-4C79-44AF823684E3">
+<Attribute name="Autor" id="1AF9D65F-2D64-B34D-4C79-44AF823684E3">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:31:40 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -48,19 +48,19 @@
 <createdTime>2020-10-27 20:32:12 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT021</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nombreCuento" id="0655F14C-D67B-351E-2180-8B86C4D30570">
+<Attribute name="nombre" id="0655F14C-D67B-351E-2180-8B86C4D30570">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:52:41 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="true"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -76,7 +76,7 @@
 <ownerDesignName>respwa</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="E2DF6313-144C-72FD-C210-37F368A70EFA" value="false"/>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

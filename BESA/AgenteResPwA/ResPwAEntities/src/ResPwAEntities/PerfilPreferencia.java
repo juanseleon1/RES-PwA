@@ -29,14 +29,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFIL_PREFERENCIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PerfilPreferencia.findAll", query = "SELECT p FROM PerfilPreferencia p"),
-    @NamedQuery(name = "PerfilPreferencia.findByPerfilpwaCedula", query = "SELECT p FROM PerfilPreferencia p WHERE p.perfilpwaCedula = :perfilpwaCedula"),
-    @NamedQuery(name = "PerfilPreferencia.findByNombrepreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.nombrepreferido = :nombrepreferido"),
-    @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke"),
-    @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica"),
-    @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile"),
-    @NamedQuery(name = "PerfilPreferencia.findByVolumenpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volumenpreferido = :volumenpreferido")})
+    @NamedQuery(name = "PerfilPreferencia.findAll", query = "SELECT p FROM PerfilPreferencia p")
+    , @NamedQuery(name = "PerfilPreferencia.findByPerfilpwaCedula", query = "SELECT p FROM PerfilPreferencia p WHERE p.perfilpwaCedula = :perfilpwaCedula")
+    , @NamedQuery(name = "PerfilPreferencia.findByNombrepreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.nombrepreferido = :nombrepreferido")
+    , @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke")
+    , @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica")
+    , @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile")
+    , @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido")})
 public class PerfilPreferencia implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -55,8 +56,8 @@ public class PerfilPreferencia implements Serializable {
     @Column(name = "GUSTOBAILE")
     private double gustobaile;
     @Basic(optional = false)
-    @Column(name = "VOLUMENPREFERIDO")
-    private BigInteger volumenpreferido;
+    @Column(name = "VOLPREFERIDO")
+    private BigInteger volpreferido;
     @ManyToMany(mappedBy = "perfilPreferenciaList")
     private List<Actividadpwa> actividadpwaList;
     @ManyToMany(mappedBy = "perfilPreferenciaList")
@@ -74,13 +75,13 @@ public class PerfilPreferencia implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigInteger volumenpreferido) {
+    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigInteger volpreferido) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.nombrepreferido = nombrepreferido;
         this.gustokaraoke = gustokaraoke;
         this.gustomusica = gustomusica;
         this.gustobaile = gustobaile;
-        this.volumenpreferido = volumenpreferido;
+        this.volpreferido = volpreferido;
     }
 
     public String getPerfilpwaCedula() {
@@ -123,12 +124,12 @@ public class PerfilPreferencia implements Serializable {
         this.gustobaile = gustobaile;
     }
 
-    public BigInteger getVolumenpreferido() {
-        return volumenpreferido;
+    public BigInteger getVolpreferido() {
+        return volpreferido;
     }
 
-    public void setVolumenpreferido(BigInteger volumenpreferido) {
-        this.volumenpreferido = volumenpreferido;
+    public void setVolpreferido(BigInteger volpreferido) {
+        this.volpreferido = volpreferido;
     }
 
     @XmlTransient

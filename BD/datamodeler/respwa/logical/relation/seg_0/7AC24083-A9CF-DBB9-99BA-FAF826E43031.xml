@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="regPwa" directorySegmentName="seg_0" id="7AC24083-A9CF-DBB9-99BA-FAF826E43031">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:51:16 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+</engineerTo>
+<sourcePk>338122E9-3B24-0B4E-B89C-00D3F37EF6A7</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>6F20CB6B-96CA-8A33-9D0E-B3019671C714</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>5A1359A7-9A55-8DD9-721B-0A3FD2FF2D78</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

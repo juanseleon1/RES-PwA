@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B89F8A8B-791B-3149-0647-3A31F93D27ED" name="enriq">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:11:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="orden" id="E53C8163-9B89-A717-B76D-FD1F45E50CB1">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:11:49 UTC</createdTime>
+<generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<referedAttribute>F6AC9C1B-485C-06BD-A895-CA7723E127BE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="292D868B-A408-E982-4D9E-3D7286561811">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:11:49 UTC</createdTime>
+<generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<referedAttribute>D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="params" id="38634DED-B554-A1BF-C12E-C371CF7A9013">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:12:27 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="valor" id="7338716B-DACE-E8F2-99D4-8C6981490BB5">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:12:44 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A761E129-5E72-EA15-73D1-95C3BA1B6C79" name="enriq PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 18:12:37 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>38634DED-B554-A1BF-C12E-C371CF7A9013</attributeRef>
+<attributeRef>292D868B-A408-E982-4D9E-3D7286561811</attributeRef>
+<attributeRef>E53C8163-9B89-A717-B76D-FD1F45E50CB1</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -27,10 +27,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "TAGS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tags.findAll", query = "SELECT t FROM Tags t"),
-    @NamedQuery(name = "Tags.findById", query = "SELECT t FROM Tags t WHERE t.id = :id"),
-    @NamedQuery(name = "Tags.findByTag", query = "SELECT t FROM Tags t WHERE t.tag = :tag")})
+    @NamedQuery(name = "Tags.findAll", query = "SELECT t FROM Tags t")
+    , @NamedQuery(name = "Tags.findById", query = "SELECT t FROM Tags t WHERE t.id = :id")
+    , @NamedQuery(name = "Tags.findByTag", query = "SELECT t FROM Tags t WHERE t.tag = :tag")})
 public class Tags implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id

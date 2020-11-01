@@ -22,6 +22,7 @@ import ResPwAEntities.Familiar;
 import ResPwAEntities.Perfilpwa;
 import java.util.ArrayList;
 import java.util.List;
+import ResPwAEntities.Registroactividad;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -44,24 +45,27 @@ public class PerfilpwaJpaController implements Serializable {
         if (perfilpwa.getFamiliarList() == null) {
             perfilpwa.setFamiliarList(new ArrayList<Familiar>());
         }
+        if (perfilpwa.getRegistroactividadList() == null) {
+            perfilpwa.setRegistroactividadList(new ArrayList<Registroactividad>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cuidador cuidadornombre = perfilpwa.getCuidadornombre();
-            if (cuidadornombre != null) {
-                cuidadornombre = em.getReference(cuidadornombre.getClass(), cuidadornombre.getNombreusuario());
-                perfilpwa.setCuidadornombre(cuidadornombre);
+            Cuidador cuidadorNombreusuario = perfilpwa.getCuidadorNombreusuario();
+            if (cuidadorNombreusuario != null) {
+                cuidadorNombreusuario = em.getReference(cuidadorNombreusuario.getClass(), cuidadorNombreusuario.getNombreusuario());
+                perfilpwa.setCuidadorNombreusuario(cuidadorNombreusuario);
             }
-            Estadocivil tipoestadocivil = perfilpwa.getTipoestadocivil();
-            if (tipoestadocivil != null) {
-                tipoestadocivil = em.getReference(tipoestadocivil.getClass(), tipoestadocivil.getTipoestado());
-                perfilpwa.setTipoestadocivil(tipoestadocivil);
+            Estadocivil estadocivilTipoec = perfilpwa.getEstadocivilTipoec();
+            if (estadocivilTipoec != null) {
+                estadocivilTipoec = em.getReference(estadocivilTipoec.getClass(), estadocivilTipoec.getTipoec());
+                perfilpwa.setEstadocivilTipoec(estadocivilTipoec);
             }
-            NivelEducativo tiponiveleducativo = perfilpwa.getTiponiveleducativo();
-            if (tiponiveleducativo != null) {
-                tiponiveleducativo = em.getReference(tiponiveleducativo.getClass(), tiponiveleducativo.getTiponiveleducativo());
-                perfilpwa.setTiponiveleducativo(tiponiveleducativo);
+            NivelEducativo nivelEducativoTipone = perfilpwa.getNivelEducativoTipone();
+            if (nivelEducativoTipone != null) {
+                nivelEducativoTipone = em.getReference(nivelEducativoTipone.getClass(), nivelEducativoTipone.getTipone());
+                perfilpwa.setNivelEducativoTipone(nivelEducativoTipone);
             }
             PerfilMedico perfilMedico = perfilpwa.getPerfilMedico();
             if (perfilMedico != null) {
@@ -79,18 +83,24 @@ public class PerfilpwaJpaController implements Serializable {
                 attachedFamiliarList.add(familiarListFamiliarToAttach);
             }
             perfilpwa.setFamiliarList(attachedFamiliarList);
+            List<Registroactividad> attachedRegistroactividadList = new ArrayList<Registroactividad>();
+            for (Registroactividad registroactividadListRegistroactividadToAttach : perfilpwa.getRegistroactividadList()) {
+                registroactividadListRegistroactividadToAttach = em.getReference(registroactividadListRegistroactividadToAttach.getClass(), registroactividadListRegistroactividadToAttach.getRegistroactividadPK());
+                attachedRegistroactividadList.add(registroactividadListRegistroactividadToAttach);
+            }
+            perfilpwa.setRegistroactividadList(attachedRegistroactividadList);
             em.persist(perfilpwa);
-            if (cuidadornombre != null) {
-                cuidadornombre.getPerfilpwaList().add(perfilpwa);
-                cuidadornombre = em.merge(cuidadornombre);
+            if (cuidadorNombreusuario != null) {
+                cuidadorNombreusuario.getPerfilpwaList().add(perfilpwa);
+                cuidadorNombreusuario = em.merge(cuidadorNombreusuario);
             }
-            if (tipoestadocivil != null) {
-                tipoestadocivil.getPerfilpwaList().add(perfilpwa);
-                tipoestadocivil = em.merge(tipoestadocivil);
+            if (estadocivilTipoec != null) {
+                estadocivilTipoec.getPerfilpwaList().add(perfilpwa);
+                estadocivilTipoec = em.merge(estadocivilTipoec);
             }
-            if (tiponiveleducativo != null) {
-                tiponiveleducativo.getPerfilpwaList().add(perfilpwa);
-                tiponiveleducativo = em.merge(tiponiveleducativo);
+            if (nivelEducativoTipone != null) {
+                nivelEducativoTipone.getPerfilpwaList().add(perfilpwa);
+                nivelEducativoTipone = em.merge(nivelEducativoTipone);
             }
             if (perfilMedico != null) {
                 Perfilpwa oldPerfilpwaOfPerfilMedico = perfilMedico.getPerfilpwa();
@@ -114,6 +124,15 @@ public class PerfilpwaJpaController implements Serializable {
                 familiarListFamiliar.getPerfilpwaList().add(perfilpwa);
                 familiarListFamiliar = em.merge(familiarListFamiliar);
             }
+            for (Registroactividad registroactividadListRegistroactividad : perfilpwa.getRegistroactividadList()) {
+                Perfilpwa oldPerfilpwaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getPerfilpwa();
+                registroactividadListRegistroactividad.setPerfilpwa(perfilpwa);
+                registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
+                if (oldPerfilpwaOfRegistroactividadListRegistroactividad != null) {
+                    oldPerfilpwaOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
+                    oldPerfilpwaOfRegistroactividadListRegistroactividad = em.merge(oldPerfilpwaOfRegistroactividadListRegistroactividad);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findPerfilpwa(perfilpwa.getCedula()) != null) {
@@ -133,18 +152,20 @@ public class PerfilpwaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Perfilpwa persistentPerfilpwa = em.find(Perfilpwa.class, perfilpwa.getCedula());
-            Cuidador cuidadornombreOld = persistentPerfilpwa.getCuidadornombre();
-            Cuidador cuidadornombreNew = perfilpwa.getCuidadornombre();
-            Estadocivil tipoestadocivilOld = persistentPerfilpwa.getTipoestadocivil();
-            Estadocivil tipoestadocivilNew = perfilpwa.getTipoestadocivil();
-            NivelEducativo tiponiveleducativoOld = persistentPerfilpwa.getTiponiveleducativo();
-            NivelEducativo tiponiveleducativoNew = perfilpwa.getTiponiveleducativo();
+            Cuidador cuidadorNombreusuarioOld = persistentPerfilpwa.getCuidadorNombreusuario();
+            Cuidador cuidadorNombreusuarioNew = perfilpwa.getCuidadorNombreusuario();
+            Estadocivil estadocivilTipoecOld = persistentPerfilpwa.getEstadocivilTipoec();
+            Estadocivil estadocivilTipoecNew = perfilpwa.getEstadocivilTipoec();
+            NivelEducativo nivelEducativoTiponeOld = persistentPerfilpwa.getNivelEducativoTipone();
+            NivelEducativo nivelEducativoTiponeNew = perfilpwa.getNivelEducativoTipone();
             PerfilMedico perfilMedicoOld = persistentPerfilpwa.getPerfilMedico();
             PerfilMedico perfilMedicoNew = perfilpwa.getPerfilMedico();
             PerfilPreferencia perfilPreferenciaOld = persistentPerfilpwa.getPerfilPreferencia();
             PerfilPreferencia perfilPreferenciaNew = perfilpwa.getPerfilPreferencia();
             List<Familiar> familiarListOld = persistentPerfilpwa.getFamiliarList();
             List<Familiar> familiarListNew = perfilpwa.getFamiliarList();
+            List<Registroactividad> registroactividadListOld = persistentPerfilpwa.getRegistroactividadList();
+            List<Registroactividad> registroactividadListNew = perfilpwa.getRegistroactividadList();
             List<String> illegalOrphanMessages = null;
             if (perfilMedicoOld != null && !perfilMedicoOld.equals(perfilMedicoNew)) {
                 if (illegalOrphanMessages == null) {
@@ -158,20 +179,28 @@ public class PerfilpwaJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("You must retain PerfilPreferencia " + perfilPreferenciaOld + " since its perfilpwa field is not nullable.");
             }
+            for (Registroactividad registroactividadListOldRegistroactividad : registroactividadListOld) {
+                if (!registroactividadListNew.contains(registroactividadListOldRegistroactividad)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Registroactividad " + registroactividadListOldRegistroactividad + " since its perfilpwa field is not nullable.");
+                }
+            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (cuidadornombreNew != null) {
-                cuidadornombreNew = em.getReference(cuidadornombreNew.getClass(), cuidadornombreNew.getNombreusuario());
-                perfilpwa.setCuidadornombre(cuidadornombreNew);
+            if (cuidadorNombreusuarioNew != null) {
+                cuidadorNombreusuarioNew = em.getReference(cuidadorNombreusuarioNew.getClass(), cuidadorNombreusuarioNew.getNombreusuario());
+                perfilpwa.setCuidadorNombreusuario(cuidadorNombreusuarioNew);
             }
-            if (tipoestadocivilNew != null) {
-                tipoestadocivilNew = em.getReference(tipoestadocivilNew.getClass(), tipoestadocivilNew.getTipoestado());
-                perfilpwa.setTipoestadocivil(tipoestadocivilNew);
+            if (estadocivilTipoecNew != null) {
+                estadocivilTipoecNew = em.getReference(estadocivilTipoecNew.getClass(), estadocivilTipoecNew.getTipoec());
+                perfilpwa.setEstadocivilTipoec(estadocivilTipoecNew);
             }
-            if (tiponiveleducativoNew != null) {
-                tiponiveleducativoNew = em.getReference(tiponiveleducativoNew.getClass(), tiponiveleducativoNew.getTiponiveleducativo());
-                perfilpwa.setTiponiveleducativo(tiponiveleducativoNew);
+            if (nivelEducativoTiponeNew != null) {
+                nivelEducativoTiponeNew = em.getReference(nivelEducativoTiponeNew.getClass(), nivelEducativoTiponeNew.getTipone());
+                perfilpwa.setNivelEducativoTipone(nivelEducativoTiponeNew);
             }
             if (perfilMedicoNew != null) {
                 perfilMedicoNew = em.getReference(perfilMedicoNew.getClass(), perfilMedicoNew.getPerfilpwaCedula());
@@ -188,30 +217,37 @@ public class PerfilpwaJpaController implements Serializable {
             }
             familiarListNew = attachedFamiliarListNew;
             perfilpwa.setFamiliarList(familiarListNew);
+            List<Registroactividad> attachedRegistroactividadListNew = new ArrayList<Registroactividad>();
+            for (Registroactividad registroactividadListNewRegistroactividadToAttach : registroactividadListNew) {
+                registroactividadListNewRegistroactividadToAttach = em.getReference(registroactividadListNewRegistroactividadToAttach.getClass(), registroactividadListNewRegistroactividadToAttach.getRegistroactividadPK());
+                attachedRegistroactividadListNew.add(registroactividadListNewRegistroactividadToAttach);
+            }
+            registroactividadListNew = attachedRegistroactividadListNew;
+            perfilpwa.setRegistroactividadList(registroactividadListNew);
             perfilpwa = em.merge(perfilpwa);
-            if (cuidadornombreOld != null && !cuidadornombreOld.equals(cuidadornombreNew)) {
-                cuidadornombreOld.getPerfilpwaList().remove(perfilpwa);
-                cuidadornombreOld = em.merge(cuidadornombreOld);
+            if (cuidadorNombreusuarioOld != null && !cuidadorNombreusuarioOld.equals(cuidadorNombreusuarioNew)) {
+                cuidadorNombreusuarioOld.getPerfilpwaList().remove(perfilpwa);
+                cuidadorNombreusuarioOld = em.merge(cuidadorNombreusuarioOld);
             }
-            if (cuidadornombreNew != null && !cuidadornombreNew.equals(cuidadornombreOld)) {
-                cuidadornombreNew.getPerfilpwaList().add(perfilpwa);
-                cuidadornombreNew = em.merge(cuidadornombreNew);
+            if (cuidadorNombreusuarioNew != null && !cuidadorNombreusuarioNew.equals(cuidadorNombreusuarioOld)) {
+                cuidadorNombreusuarioNew.getPerfilpwaList().add(perfilpwa);
+                cuidadorNombreusuarioNew = em.merge(cuidadorNombreusuarioNew);
             }
-            if (tipoestadocivilOld != null && !tipoestadocivilOld.equals(tipoestadocivilNew)) {
-                tipoestadocivilOld.getPerfilpwaList().remove(perfilpwa);
-                tipoestadocivilOld = em.merge(tipoestadocivilOld);
+            if (estadocivilTipoecOld != null && !estadocivilTipoecOld.equals(estadocivilTipoecNew)) {
+                estadocivilTipoecOld.getPerfilpwaList().remove(perfilpwa);
+                estadocivilTipoecOld = em.merge(estadocivilTipoecOld);
             }
-            if (tipoestadocivilNew != null && !tipoestadocivilNew.equals(tipoestadocivilOld)) {
-                tipoestadocivilNew.getPerfilpwaList().add(perfilpwa);
-                tipoestadocivilNew = em.merge(tipoestadocivilNew);
+            if (estadocivilTipoecNew != null && !estadocivilTipoecNew.equals(estadocivilTipoecOld)) {
+                estadocivilTipoecNew.getPerfilpwaList().add(perfilpwa);
+                estadocivilTipoecNew = em.merge(estadocivilTipoecNew);
             }
-            if (tiponiveleducativoOld != null && !tiponiveleducativoOld.equals(tiponiveleducativoNew)) {
-                tiponiveleducativoOld.getPerfilpwaList().remove(perfilpwa);
-                tiponiveleducativoOld = em.merge(tiponiveleducativoOld);
+            if (nivelEducativoTiponeOld != null && !nivelEducativoTiponeOld.equals(nivelEducativoTiponeNew)) {
+                nivelEducativoTiponeOld.getPerfilpwaList().remove(perfilpwa);
+                nivelEducativoTiponeOld = em.merge(nivelEducativoTiponeOld);
             }
-            if (tiponiveleducativoNew != null && !tiponiveleducativoNew.equals(tiponiveleducativoOld)) {
-                tiponiveleducativoNew.getPerfilpwaList().add(perfilpwa);
-                tiponiveleducativoNew = em.merge(tiponiveleducativoNew);
+            if (nivelEducativoTiponeNew != null && !nivelEducativoTiponeNew.equals(nivelEducativoTiponeOld)) {
+                nivelEducativoTiponeNew.getPerfilpwaList().add(perfilpwa);
+                nivelEducativoTiponeNew = em.merge(nivelEducativoTiponeNew);
             }
             if (perfilMedicoNew != null && !perfilMedicoNew.equals(perfilMedicoOld)) {
                 Perfilpwa oldPerfilpwaOfPerfilMedico = perfilMedicoNew.getPerfilpwa();
@@ -241,6 +277,17 @@ public class PerfilpwaJpaController implements Serializable {
                 if (!familiarListOld.contains(familiarListNewFamiliar)) {
                     familiarListNewFamiliar.getPerfilpwaList().add(perfilpwa);
                     familiarListNewFamiliar = em.merge(familiarListNewFamiliar);
+                }
+            }
+            for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
+                if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
+                    Perfilpwa oldPerfilpwaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getPerfilpwa();
+                    registroactividadListNewRegistroactividad.setPerfilpwa(perfilpwa);
+                    registroactividadListNewRegistroactividad = em.merge(registroactividadListNewRegistroactividad);
+                    if (oldPerfilpwaOfRegistroactividadListNewRegistroactividad != null && !oldPerfilpwaOfRegistroactividadListNewRegistroactividad.equals(perfilpwa)) {
+                        oldPerfilpwaOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
+                        oldPerfilpwaOfRegistroactividadListNewRegistroactividad = em.merge(oldPerfilpwaOfRegistroactividadListNewRegistroactividad);
+                    }
                 }
             }
             em.getTransaction().commit();
@@ -287,23 +334,30 @@ public class PerfilpwaJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("This Perfilpwa (" + perfilpwa + ") cannot be destroyed since the PerfilPreferencia " + perfilPreferenciaOrphanCheck + " in its perfilPreferencia field has a non-nullable perfilpwa field.");
             }
+            List<Registroactividad> registroactividadListOrphanCheck = perfilpwa.getRegistroactividadList();
+            for (Registroactividad registroactividadListOrphanCheckRegistroactividad : registroactividadListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Perfilpwa (" + perfilpwa + ") cannot be destroyed since the Registroactividad " + registroactividadListOrphanCheckRegistroactividad + " in its registroactividadList field has a non-nullable perfilpwa field.");
+            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Cuidador cuidadornombre = perfilpwa.getCuidadornombre();
-            if (cuidadornombre != null) {
-                cuidadornombre.getPerfilpwaList().remove(perfilpwa);
-                cuidadornombre = em.merge(cuidadornombre);
+            Cuidador cuidadorNombreusuario = perfilpwa.getCuidadorNombreusuario();
+            if (cuidadorNombreusuario != null) {
+                cuidadorNombreusuario.getPerfilpwaList().remove(perfilpwa);
+                cuidadorNombreusuario = em.merge(cuidadorNombreusuario);
             }
-            Estadocivil tipoestadocivil = perfilpwa.getTipoestadocivil();
-            if (tipoestadocivil != null) {
-                tipoestadocivil.getPerfilpwaList().remove(perfilpwa);
-                tipoestadocivil = em.merge(tipoestadocivil);
+            Estadocivil estadocivilTipoec = perfilpwa.getEstadocivilTipoec();
+            if (estadocivilTipoec != null) {
+                estadocivilTipoec.getPerfilpwaList().remove(perfilpwa);
+                estadocivilTipoec = em.merge(estadocivilTipoec);
             }
-            NivelEducativo tiponiveleducativo = perfilpwa.getTiponiveleducativo();
-            if (tiponiveleducativo != null) {
-                tiponiveleducativo.getPerfilpwaList().remove(perfilpwa);
-                tiponiveleducativo = em.merge(tiponiveleducativo);
+            NivelEducativo nivelEducativoTipone = perfilpwa.getNivelEducativoTipone();
+            if (nivelEducativoTipone != null) {
+                nivelEducativoTipone.getPerfilpwaList().remove(perfilpwa);
+                nivelEducativoTipone = em.merge(nivelEducativoTipone);
             }
             List<Familiar> familiarList = perfilpwa.getFamiliarList();
             for (Familiar familiarListFamiliar : familiarList) {

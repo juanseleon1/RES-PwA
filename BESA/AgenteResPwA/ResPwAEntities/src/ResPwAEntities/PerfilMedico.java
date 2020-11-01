@@ -31,15 +31,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFIL_MEDICO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PerfilMedico.findAll", query = "SELECT p FROM PerfilMedico p"),
-    @NamedQuery(name = "PerfilMedico.findByPerfilpwaCedula", query = "SELECT p FROM PerfilMedico p WHERE p.perfilpwaCedula = :perfilpwaCedula"),
-    @NamedQuery(name = "PerfilMedico.findByTomamedicamentos", query = "SELECT p FROM PerfilMedico p WHERE p.tomamedicamentos = :tomamedicamentos"),
-    @NamedQuery(name = "PerfilMedico.findByDiscapacidadauditiva", query = "SELECT p FROM PerfilMedico p WHERE p.discapacidadauditiva = :discapacidadauditiva"),
-    @NamedQuery(name = "PerfilMedico.findByDiscapacidadvisual", query = "SELECT p FROM PerfilMedico p WHERE p.discapacidadvisual = :discapacidadvisual"),
-    @NamedQuery(name = "PerfilMedico.findByDiscapacidadmotora", query = "SELECT p FROM PerfilMedico p WHERE p.discapacidadmotora = :discapacidadmotora"),
-    @NamedQuery(name = "PerfilMedico.findByEstadioenfermedad", query = "SELECT p FROM PerfilMedico p WHERE p.estadioenfermedad = :estadioenfermedad"),
-    @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia")})
+    @NamedQuery(name = "PerfilMedico.findAll", query = "SELECT p FROM PerfilMedico p")
+    , @NamedQuery(name = "PerfilMedico.findByPerfilpwaCedula", query = "SELECT p FROM PerfilMedico p WHERE p.perfilpwaCedula = :perfilpwaCedula")
+    , @NamedQuery(name = "PerfilMedico.findByTomamedicamentos", query = "SELECT p FROM PerfilMedico p WHERE p.tomamedicamentos = :tomamedicamentos")
+    , @NamedQuery(name = "PerfilMedico.findByDiscapauditiva", query = "SELECT p FROM PerfilMedico p WHERE p.discapauditiva = :discapauditiva")
+    , @NamedQuery(name = "PerfilMedico.findByDiscapvisual", query = "SELECT p FROM PerfilMedico p WHERE p.discapvisual = :discapvisual")
+    , @NamedQuery(name = "PerfilMedico.findByDiscapmotora", query = "SELECT p FROM PerfilMedico p WHERE p.discapmotora = :discapmotora")
+    , @NamedQuery(name = "PerfilMedico.findByEstadioenfermedad", query = "SELECT p FROM PerfilMedico p WHERE p.estadioenfermedad = :estadioenfermedad")
+    , @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia")})
 public class PerfilMedico implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,14 +50,14 @@ public class PerfilMedico implements Serializable {
     @Column(name = "TOMAMEDICAMENTOS")
     private BigInteger tomamedicamentos;
     @Basic(optional = false)
-    @Column(name = "DISCAPACIDADAUDITIVA")
-    private BigInteger discapacidadauditiva;
+    @Column(name = "DISCAPAUDITIVA")
+    private BigInteger discapauditiva;
     @Basic(optional = false)
-    @Column(name = "DISCAPACIDADVISUAL")
-    private BigInteger discapacidadvisual;
+    @Column(name = "DISCAPVISUAL")
+    private BigInteger discapvisual;
     @Basic(optional = false)
-    @Column(name = "DISCAPACIDADMOTORA")
-    private BigInteger discapacidadmotora;
+    @Column(name = "DISCAPMOTORA")
+    private BigInteger discapmotora;
     @Basic(optional = false)
     @Column(name = "ESTADIOENFERMEDAD")
     private BigInteger estadioenfermedad;
@@ -67,9 +68,9 @@ public class PerfilMedico implements Serializable {
     private List<Actividadrutinaria> actividadrutinariaList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilMedico")
     private Cdr cdr;
-    @JoinColumn(name = "CAUSADEMENCIA_ENFERMEDAD", referencedColumnName = "ENFERMEDAD")
+    @JoinColumn(name = "CAUSADEMENCIA_CONDICION", referencedColumnName = "CONDICION")
     @ManyToOne
-    private Causademencia causademenciaEnfermedad;
+    private Causademencia causademenciaCondicion;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Perfilpwa perfilpwa;
@@ -81,12 +82,12 @@ public class PerfilMedico implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilMedico(String perfilpwaCedula, BigInteger tomamedicamentos, BigInteger discapacidadauditiva, BigInteger discapacidadvisual, BigInteger discapacidadmotora, BigInteger estadioenfermedad, BigInteger periodovigilia) {
+    public PerfilMedico(String perfilpwaCedula, BigInteger tomamedicamentos, BigInteger discapauditiva, BigInteger discapvisual, BigInteger discapmotora, BigInteger estadioenfermedad, BigInteger periodovigilia) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.tomamedicamentos = tomamedicamentos;
-        this.discapacidadauditiva = discapacidadauditiva;
-        this.discapacidadvisual = discapacidadvisual;
-        this.discapacidadmotora = discapacidadmotora;
+        this.discapauditiva = discapauditiva;
+        this.discapvisual = discapvisual;
+        this.discapmotora = discapmotora;
         this.estadioenfermedad = estadioenfermedad;
         this.periodovigilia = periodovigilia;
     }
@@ -107,28 +108,28 @@ public class PerfilMedico implements Serializable {
         this.tomamedicamentos = tomamedicamentos;
     }
 
-    public BigInteger getDiscapacidadauditiva() {
-        return discapacidadauditiva;
+    public BigInteger getDiscapauditiva() {
+        return discapauditiva;
     }
 
-    public void setDiscapacidadauditiva(BigInteger discapacidadauditiva) {
-        this.discapacidadauditiva = discapacidadauditiva;
+    public void setDiscapauditiva(BigInteger discapauditiva) {
+        this.discapauditiva = discapauditiva;
     }
 
-    public BigInteger getDiscapacidadvisual() {
-        return discapacidadvisual;
+    public BigInteger getDiscapvisual() {
+        return discapvisual;
     }
 
-    public void setDiscapacidadvisual(BigInteger discapacidadvisual) {
-        this.discapacidadvisual = discapacidadvisual;
+    public void setDiscapvisual(BigInteger discapvisual) {
+        this.discapvisual = discapvisual;
     }
 
-    public BigInteger getDiscapacidadmotora() {
-        return discapacidadmotora;
+    public BigInteger getDiscapmotora() {
+        return discapmotora;
     }
 
-    public void setDiscapacidadmotora(BigInteger discapacidadmotora) {
-        this.discapacidadmotora = discapacidadmotora;
+    public void setDiscapmotora(BigInteger discapmotora) {
+        this.discapmotora = discapmotora;
     }
 
     public BigInteger getEstadioenfermedad() {
@@ -164,12 +165,12 @@ public class PerfilMedico implements Serializable {
         this.cdr = cdr;
     }
 
-    public Causademencia getCausademenciaEnfermedad() {
-        return causademenciaEnfermedad;
+    public Causademencia getCausademenciaCondicion() {
+        return causademenciaCondicion;
     }
 
-    public void setCausademenciaEnfermedad(Causademencia causademenciaEnfermedad) {
-        this.causademenciaEnfermedad = causademenciaEnfermedad;
+    public void setCausademenciaCondicion(Causademencia causademenciaCondicion) {
+        this.causademenciaCondicion = causademenciaCondicion;
     }
 
     public Perfilpwa getPerfilpwa() {
