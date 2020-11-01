@@ -28,7 +28,7 @@ def handle_client(conn, addr):
     else:
         hablar("Mal")
     print(get_face_list()[0])
-
+    
     #activate_blinking(False)+++++++++++++++++++++++++++++
     #activate_life_signals(false)+++++++++++++++++++++++++
     #activate_life_signals_awareness(False)
@@ -37,7 +37,14 @@ def handle_client(conn, addr):
     #activate_speak_movements(False)
     #define_conversation_mode("random")
     #activate_push_reflexes(False)
-    #
+    #activate_breath_movement("Body", False)
+    #activate_movement_detection(True)
+    #activate_face_detection(False)
+    #activate_colission_detection("arms", False)
+    #activate_monitoring_charge_service(False)
+    #print("Battery", get_battery())
+    #print("Temperature", get_temperature())
+    
 def message_manage(key, msg):
         switch_accion = {
             #ActivityServices-------------------------------------------------------
@@ -53,14 +60,14 @@ def message_manage(key, msg):
             "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements", #
             "DEFCONVERSATIONMODE":"define_conversation_mode", #
             "ACTIVATEPUSHREFLEXES":"activate_push_reflexes", #
-            "ACIVATEBREATHMOV":"activate_breath_movement",
-            "ACTIVATEMOVDETECTION":"activate_movement_detection",
-            "ACTIVATEFACEDETEC":"activate_face_detection",
-            "ACTIVATECOLISSIONDETECT":"activate_colission_detection",
+            "ACIVATEBREATHMOV":"activate_breath_movement", #
+            "ACTIVATEMOVDETECTION":"activate_movement_detection", #
+            "ACTIVATEFACEDETEC":"activate_face_detection", #
+            "ACTIVATECOLISSIONDETECT":"activate_colission_detection", #
             #EnergyServices-------------------------------------------------------
-            "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service",
-            "GETBATTERY":"get_battery",
-            "GETTEMP":"get_tempreature",
+            "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service", #
+            "GETBATTERY":"get_battery", #
+            "GETTEMP":"get_temperature",#
             #HumanServices-------------------------------------------------------
             "GETEMOTIONSTATE":"get_emotion_State",
             "LOGIN":"login",
@@ -281,7 +288,7 @@ def activate_push_reflexes(enabled):
  #Starts or stops breathing animation on a chain.   
 def activate_breath_movement(extremity_to_enabled, enabled):
     alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
-("Body",enabled)
+
 #Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
 def activate_movement_detection(enabled):
     alPeoplePerception.setMovementDetectionEnabled(enabled)
@@ -303,7 +310,7 @@ def get_battery():
     return  alBatteryProxy.getBatteryCharge()
 
 #Return the actual state of the temperature diagnosis. Only the highest level of failure is returned.
-def get_tempreature():
+def get_temperature():
     return alBodyTemperatureProxy.getTemperatureDiagnosis()
 
 #Gets the emotional state of the current focused user through a PersonState struct.
