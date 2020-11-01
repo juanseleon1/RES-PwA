@@ -53,6 +53,24 @@ def handle_client(conn, addr):
     #move_forward(0.2, 0.2, 0.1)
     #move_to(2.0, 0.0)
     #move_to_position(45)
+
+    #set_topic_focus("empatia")
+    #say_under_topic_context((path,"empatia")
+    #deactivate_conversational_topic("empatia")
+    #unload_conversational_topic("empatia")
+    #load_conversational_topic("empatia")
+    #activate_conversational_topic("empatia")
+    #desactivate_voice_recognition():
+    #activate_voice_recognition(subscriber)
+    #desactivate_voice_emotion_analysis()
+    #activate_voice_emotion_analysis(Sadness)
+    #def pause_sound(idSound)
+    #def play_sound(idSound)
+    #def set_system_volume(50)
+    #def say_with_movement("Hola Enrique")
+    #def set_say_volume(75)
+    #def stop_all()
+    #def say("Hola mundo")
     
 def message_manage(key, msg):
         switch_accion = {
@@ -327,8 +345,8 @@ def get_emotion_state():
     return alMood.currentPersonState()
 
 #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
-#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesión activa coincida con
-#el que está interactuando con el robot
+#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesiï¿½n activa coincida con
+#el que estï¿½ interactuando con el robot
 def login():
 
     for i in alUserSession.getOpenUserSessions():
