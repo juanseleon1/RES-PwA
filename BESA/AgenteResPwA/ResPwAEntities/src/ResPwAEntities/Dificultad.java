@@ -84,7 +84,7 @@ public class Dificultad implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Dificultad[ dificultad=" + dificultad + " ]";
+        return "ResPwAEntities.Dificultad[ dificultad=" + dificultad + " ]";
     }
     
 }

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,7 +47,7 @@ public class Actividadpwa implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private BigInteger id;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
@@ -69,15 +71,17 @@ public class Actividadpwa implements Serializable {
     @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
     @ManyToOne
     private Dificultad dificultadDificultad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa")
+    private List<Registroactividad> registroactividadList;
 
     public Actividadpwa() {
     }
 
-    public Actividadpwa(BigDecimal id) {
+    public Actividadpwa(BigInteger id) {
         this.id = id;
     }
 
-    public Actividadpwa(BigDecimal id, String nombre, String tipo, BigInteger duracion, double gusto, BigInteger enriqfav) {
+    public Actividadpwa(BigInteger id, String nombre, String tipo, BigInteger duracion, double gusto, BigInteger enriqfav) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -86,11 +90,11 @@ public class Actividadpwa implements Serializable {
         this.enriqfav = enriqfav;
     }
 
-    public BigDecimal getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -151,6 +155,15 @@ public class Actividadpwa implements Serializable {
         this.dificultadDificultad = dificultadDificultad;
     }
 
+    @XmlTransient
+    public List<Registroactividad> getRegistroactividadList() {
+        return registroactividadList;
+    }
+
+    public void setRegistroactividadList(List<Registroactividad> registroactividadList) {
+        this.registroactividadList = registroactividadList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -173,7 +186,7 @@ public class Actividadpwa implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Actividadpwa[ id=" + id + " ]";
+        return "ResPwAEntities.Actividadpwa[ id=" + id + " ]";
     }
     
 }

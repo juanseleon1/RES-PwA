@@ -7,25 +7,19 @@ package modulocuidador;
 
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Cuidador;
+import ResPwAEntities.Perfilpwa;
 import java.awt.CardLayout;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.Persistence;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
+import java.time.Period;
+import java.util.Date;
+import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-import javax.persistence.Persistence;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,6 +27,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class CuidadorStartPage extends javax.swing.JFrame {
 
+    
+    private Perfilpwa activo=null;
+    private Cuidador activoC=null;
     /**
      * Creates new form FinalBases
      */
@@ -62,8 +59,20 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         menuGeneral = new javax.swing.JPanel();
         crearPerfil = new javax.swing.JButton();
         verPWAs = new javax.swing.JButton();
-        cuento = new javax.swing.JPanel();
         consultarPwA = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        pwasTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        registroInt = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        registroTArea = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        atras1 = new javax.swing.JButton();
+        registroPwA1 = new javax.swing.JPanel();
+        cuento = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -121,22 +130,19 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nusuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pwd)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                        .addGap(0, 248, Short.MAX_VALUE)
-                        .addComponent(login)
-                        .addGap(64, 64, 64))
-                    .addGroup(HomeLayout.createSequentialGroup()
-                        .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(37, 37, 37)
+                .addGap(283, 283, 283)
+                .addComponent(login)
+                .addGap(180, 180, 180)
                 .addComponent(jButton1)
-                .addGap(173, 173, 173))
+                .addContainerGap(435, Short.MAX_VALUE))
+            .addGroup(HomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nusuario))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +151,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,9 +164,9 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         padre.add(Home, "0");
 
-        menuGeneral.setLayout(new java.awt.GridLayout(1, 0));
+        menuGeneral.setLayout(new java.awt.GridLayout(2, 0));
 
-        crearPerfil.setLabel("Crear Nuevo PwA");
+        crearPerfil.setText("Crear Nuevo Paciente");
         crearPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearPerfilActionPerformed(evt);
@@ -169,36 +175,126 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         menuGeneral.add(crearPerfil);
 
         verPWAs.setText("Ver Pacientes");
+        verPWAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verPWAsActionPerformed(evt);
+            }
+        });
         menuGeneral.add(verPWAs);
 
         padre.add(menuGeneral, "gMenu");
         menuGeneral.getAccessibleContext().setAccessibleName("");
 
+        consultarPwA.setLayout(new java.awt.BorderLayout());
+
+        pwasTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(pwasTable);
+
+        consultarPwA.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 3));
+
+        jButton2.setText("Editar Paciente");
+        jButton2.setBorderPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+
+        jButton4.setText("Ver Registro del Paciente");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4);
+
+        jButton3.setText("Atras");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+
+        consultarPwA.add(jPanel2, java.awt.BorderLayout.PAGE_END);
+
+        padre.add(consultarPwA, "consult");
+
+        registroInt.setLayout(new java.awt.GridLayout(2, 1));
+
+        registroTArea.setColumns(20);
+        registroTArea.setRows(5);
+        registroTArea.setRequestFocusEnabled(false);
+        jScrollPane1.setViewportView(registroTArea);
+
+        registroInt.add(jScrollPane1);
+
+        atras1.setText("Volver");
+        atras1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atras1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(417, 417, 417)
+                .addComponent(atras1)
+                .addContainerGap(576, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(179, Short.MAX_VALUE)
+                .addComponent(atras1)
+                .addGap(36, 36, 36))
+        );
+
+        registroInt.add(jPanel1);
+
+        padre.add(registroInt, "regInt");
+
+        javax.swing.GroupLayout registroPwA1Layout = new javax.swing.GroupLayout(registroPwA1);
+        registroPwA1.setLayout(registroPwA1Layout);
+        registroPwA1Layout.setHorizontalGroup(
+            registroPwA1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1062, Short.MAX_VALUE)
+        );
+        registroPwA1Layout.setVerticalGroup(
+            registroPwA1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 481, Short.MAX_VALUE)
+        );
+
+        padre.add(registroPwA1, "card7");
+
         javax.swing.GroupLayout cuentoLayout = new javax.swing.GroupLayout(cuento);
         cuento.setLayout(cuentoLayout);
         cuentoLayout.setHorizontalGroup(
             cuentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 1062, Short.MAX_VALUE)
         );
         cuentoLayout.setVerticalGroup(
             cuentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         padre.add(cuento, "card4");
-
-        javax.swing.GroupLayout consultarPwALayout = new javax.swing.GroupLayout(consultarPwA);
-        consultarPwA.setLayout(consultarPwALayout);
-        consultarPwALayout.setHorizontalGroup(
-            consultarPwALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
-        );
-        consultarPwALayout.setVerticalGroup(
-            consultarPwALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
-        );
-
-        padre.add(consultarPwA, "card5");
 
         jMenuBar1.setRequestFocusEnabled(false);
 
@@ -236,6 +332,61 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void crearPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearPerfilActionPerformed
+        regoEdit();
+    }//GEN-LAST:event_crearPerfilActionPerformed
+
+    private void verPWAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPWAsActionPerformed
+        Vector<Object> enc = new Vector<Object>();
+        enc.add("Nombre");
+        enc.add("Cedula");
+        enc.add("Edad");
+        enc.add("Condicion");
+        Vector<Vector<Object>> conte = new Vector<>();
+        for ( Perfilpwa pwa : activoC.getPerfilpwaList()) {
+            Vector<Object> vc = new Vector<Object>();
+            vc.add(pwa.getNombre()+" "+pwa.getApellido());
+            vc.add(pwa.getCedula());
+            LocalDate d=LocalDate.now();
+            Date d1 = pwa.getFechanacimiento();
+            LocalDate d2= new java.sql.Date(d1.getTime()).toLocalDate();
+            Period periodo= Period.between(d2, d);
+            vc.add(periodo.getYears());
+            vc.add(pwa.getPerfilMedico().getCausademenciaCondicion().getCondicion());
+            conte.add(vc);
+        }
+        pwasTable= new JTable(conte,enc);
+        jScrollPane3.setViewportView(pwasTable);
+        CardLayout card = (CardLayout) padre.getLayout();
+        card.show(padre, "consult");
+    }//GEN-LAST:event_verPWAsActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       DefaultTableModel m = (DefaultTableModel) pwasTable.getModel();
+        if (pwasTable.getSelectedRow() != -1){
+            Vector<Object> v = (Vector<Object>) m.getDataVector().get(pwasTable.getSelectedRow());
+           Perfilpwa ppwa= RESPwABDInterface.getProfile((String) v.get(1));
+            registroTArea.setText("*-------------------------------REPORTE---------------------------------------\n");
+            StringBuilder sb= new StringBuilder();
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un paciente");
+            jButton3ActionPerformed(evt);
+        }
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       CardLayout card = (CardLayout) padre.getLayout();
+        card.show(padre, "gMenu");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void atras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atras1ActionPerformed
+        CardLayout card = (CardLayout) padre.getLayout();
+        card.show(padre, "gMenu");
+    }//GEN-LAST:event_atras1ActionPerformed
+
     private void pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pwdActionPerformed
@@ -271,17 +422,19 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Constraseña no ooincide");
             }else{
-                        CardLayout card = (CardLayout) padre.getLayout();
-                        card.show(padre, "gMenu");     
+                activoC=c;
+                if(c.getPerfilpwaList().isEmpty())
+                verPWAs.setEnabled(false);
+                CardLayout card = (CardLayout) padre.getLayout();
+                card.show(padre, "gMenu");
 
             }
         }
-
     }//GEN-LAST:event_loginActionPerformed
 
-    private void crearPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearPerfilActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_crearPerfilActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,25 +464,50 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         });
     }
 
+    private void regoEdit(){
+        if(activo==null)
+        {
+            activo=new Perfilpwa();
+        }
+        else
+        {
+            
+        }
+        
+        CardLayout card = (CardLayout) padre.getLayout();
+        card.show(padre, "registro");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Home;
+    private javax.swing.JButton atras1;
     private javax.swing.JPanel consultarPwA;
     private javax.swing.JButton crearPerfil;
     private javax.swing.JPanel cuento;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton login;
     private javax.swing.JPanel menuGeneral;
     private javax.swing.JTextField nusuario;
     private javax.swing.JPanel padre;
+    private javax.swing.JTable pwasTable;
     private javax.swing.JTextField pwd;
     private javax.swing.JButton regisCommit;
     private javax.swing.JPanel registroCui;
+    private javax.swing.JPanel registroInt;
+    private javax.swing.JPanel registroPwA1;
+    private javax.swing.JTextArea registroTArea;
     private javax.swing.JButton verPWAs;
     // End of variables declaration//GEN-END:variables
 }

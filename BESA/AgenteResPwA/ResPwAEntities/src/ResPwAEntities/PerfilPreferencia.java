@@ -189,7 +189,7 @@ public class PerfilPreferencia implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.PerfilPreferencia[ perfilpwaCedula=" + perfilpwaCedula + " ]";
+        return "ResPwAEntities.PerfilPreferencia[ perfilpwaCedula=" + perfilpwaCedula + " ]";
     }
     
 }

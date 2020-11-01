@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -82,6 +83,8 @@ public class Perfilpwa implements Serializable {
     @JoinColumn(name = "NIVEL_EDUCATIVO_TIPONE", referencedColumnName = "TIPONE")
     @ManyToOne
     private NivelEducativo nivelEducativoTipone;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
+    private List<Registroactividad> registroactividadList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
     private PerfilMedico perfilMedico;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
@@ -201,6 +204,15 @@ public class Perfilpwa implements Serializable {
         this.nivelEducativoTipone = nivelEducativoTipone;
     }
 
+    @XmlTransient
+    public List<Registroactividad> getRegistroactividadList() {
+        return registroactividadList;
+    }
+
+    public void setRegistroactividadList(List<Registroactividad> registroactividadList) {
+        this.registroactividadList = registroactividadList;
+    }
+
     public PerfilMedico getPerfilMedico() {
         return perfilMedico;
     }
@@ -239,7 +251,7 @@ public class Perfilpwa implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Perfilpwa[ cedula=" + cedula + " ]";
+        return "ResPwAEntities.Perfilpwa[ cedula=" + cedula + " ]";
     }
     
 }

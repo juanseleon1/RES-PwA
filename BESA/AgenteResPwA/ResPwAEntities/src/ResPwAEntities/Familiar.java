@@ -163,7 +163,7 @@ public class Familiar implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Familiar[ id=" + id + " ]";
+        return "ResPwAEntities.Familiar[ id=" + id + " ]";
     }
     
 }

@@ -391,7 +391,7 @@
 	<model_compare_storage_props_filter>
 	</model_compare_storage_props_filter>
 	<naming_options>
-		<model_options objectid="51A1628E-9C0E-3291-7DFB-F879C0E16078">
+		<model_options objectid="07DAE087-2073-3B0D-9769-CFEB1507F596">
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Table" max_name_length="128" case_type="2" valid_characters="null" all_valid="true" />
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Column" max_name_length="128" case_type="2" valid_characters="null" all_valid="true" />
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.TableView" max_name_length="128" case_type="2" valid_characters="null" all_valid="true" />
@@ -422,7 +422,7 @@
 		</data_types_model_estimates>
 		<relational_model_estimates>
 			<relational_model_0_estimates>
-				<relational_model_name value="respwarel"/>
+				<relational_model_name value="respwa"/>
 				<tables value="70"/>
 				<views value="70"/>
 				<foreign_keys value="70"/>

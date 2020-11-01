@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="390C09C1-985C-D6F2-83CD-21FFE90D1DC8" name="Frases">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>BBA37A3F-90EB-FA7F-D1CB-00B3B5D7DBD7</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="contenido" id="5E289DD4-F2C2-891C-3342-F0AECA4A5717">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>53134FF6-B242-E5E7-44A8-AF9F83464236</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="orden" id="4E17DA68-D6F4-8483-335A-BD8AEA739E61">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>F6AC9C1B-485C-06BD-A895-CA7723E127BE</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cuento_nombre" id="A5028B87-DC4E-ED7F-9C82-940B6B3BAEAA">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C547CAEA-E288-4AF2-F1BB-75FA6CFE1D72" referredColumn="98240C29-A6C3-8A09-5CD5-3765F51E0411"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="30C6ED2B-59EE-7484-90DC-F8C7F1BEEBEA" name="Frases_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>2DE778C9-29DC-B467-0818-9FA2C7E4889D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4E17DA68-D6F4-8483-335A-BD8AEA739E61"/>
+<colUsage columnID="A5028B87-DC4E-ED7F-9C82-940B6B3BAEAA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="78A45B63-8231-9AD6-FC8A-AEA5CDD58783" name="Frases_Cuento_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:03 UTC</createdTime>
+<generatorID>D51D2B31-BDE8-9C7D-FA90-7D0FEA5AEFB6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A5028B87-DC4E-ED7F-9C82-940B6B3BAEAA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

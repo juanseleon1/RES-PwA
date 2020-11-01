@@ -84,7 +84,7 @@ public class NivelEducativo implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.NivelEducativo[ tipone=" + tipone + " ]";
+        return "ResPwAEntities.NivelEducativo[ tipone=" + tipone + " ]";
     }
     
 }

@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 20.3.0.283.0710
---   en:        2020-10-30 13:41:39 COT
+--   en:        2020-10-30 15:57:01 COT
 --   sitio:      Oracle Database 12cR2
 --   tipo:      Oracle Database 12cR2
 
@@ -48,6 +48,8 @@ DROP TABLE perfilpwa CASCADE CONSTRAINTS;
 DROP TABLE preferenciacancion CASCADE CONSTRAINTS;
 
 DROP TABLE preferenciaxcuento CASCADE CONSTRAINTS;
+
+DROP TABLE registroactividad CASCADE CONSTRAINTS;
 
 DROP TABLE tags CASCADE CONSTRAINTS;
 
@@ -259,6 +261,21 @@ CREATE TABLE preferenciaxcuento (
 ALTER TABLE preferenciaxcuento ADD CONSTRAINT preferenciaxcuento_pk PRIMARY KEY ( perfil_preferencia_perfilpwa_cedula,
                                                                                   cuento_nombre );
 
+CREATE TABLE registroactividad (
+    fecha             DATE NOT NULL,
+    estadoinicial     VARCHAR2(30 CHAR) NOT NULL,
+    estadofinal       VARCHAR2(30 CHAR) NOT NULL,
+    perfilpwa_cedula  VARCHAR2(30 CHAR) NOT NULL,
+    tipo              VARCHAR2(20 CHAR) NOT NULL,
+    actividadpwa_id   INTEGER NOT NULL
+);
+
+ALTER TABLE registroactividad
+    ADD CONSTRAINT registroactividad_pk PRIMARY KEY ( fecha,
+                                                      tipo,
+                                                      perfilpwa_cedula,
+                                                      actividadpwa_id );
+
 CREATE TABLE tags (
     id   INTEGER NOT NULL,
     tag  VARCHAR2(20 CHAR) NOT NULL
@@ -360,13 +377,21 @@ ALTER TABLE preferenciaxcuento
     ADD CONSTRAINT preferenciaxcuento_perfil_preferencia_fk FOREIGN KEY ( perfil_preferencia_perfilpwa_cedula )
         REFERENCES perfil_preferencia ( perfilpwa_cedula );
 
+ALTER TABLE registroactividad
+    ADD CONSTRAINT registroactividad_actividadpwa_fk FOREIGN KEY ( actividadpwa_id )
+        REFERENCES actividadpwa ( id );
+
+ALTER TABLE registroactividad
+    ADD CONSTRAINT registroactividad_perfilpwa_fk FOREIGN KEY ( perfilpwa_cedula )
+        REFERENCES perfilpwa ( cedula );
+
 
 
 -- Informe de Resumen de Oracle SQL Developer Data Modeler: 
 -- 
--- CREATE TABLE                            23
+-- CREATE TABLE                            24
 -- CREATE INDEX                             0
--- ALTER TABLE                             46
+-- ALTER TABLE                             49
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0

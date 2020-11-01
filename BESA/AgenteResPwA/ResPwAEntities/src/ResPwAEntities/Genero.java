@@ -113,7 +113,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Genero[ genero=" + genero + " ]";
+        return "ResPwAEntities.Genero[ genero=" + genero + " ]";
     }
     
 }

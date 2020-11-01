@@ -91,7 +91,7 @@ public class EnriqPK implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.EnriqPK[ frasesOrden=" + frasesOrden + ", frasesCuentoNombre=" + frasesCuentoNombre + ", params=" + params + " ]";
+        return "ResPwAEntities.EnriqPK[ frasesOrden=" + frasesOrden + ", frasesCuentoNombre=" + frasesCuentoNombre + ", params=" + params + " ]";
     }
     
 }

@@ -84,7 +84,7 @@ public class Estadocivil implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Estadocivil[ tipoec=" + tipoec + " ]";
+        return "ResPwAEntities.Estadocivil[ tipoec=" + tipoec + " ]";
     }
     
 }

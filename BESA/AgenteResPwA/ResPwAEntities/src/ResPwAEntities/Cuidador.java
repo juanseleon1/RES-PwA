@@ -141,7 +141,7 @@ public class Cuidador implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Cuidador[ nombreusuario=" + nombreusuario + " ]";
+        return "ResPwAEntities.Cuidador[ nombreusuario=" + nombreusuario + " ]";
     }
     
 }

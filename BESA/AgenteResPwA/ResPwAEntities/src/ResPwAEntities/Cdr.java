@@ -166,7 +166,7 @@ public class Cdr implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Cdr[ perfilMedicoPerfilpwaCedula=" + perfilMedicoPerfilpwaCedula + " ]";
+        return "ResPwAEntities.Cdr[ perfilMedicoPerfilpwaCedula=" + perfilMedicoPerfilpwaCedula + " ]";
     }
     
 }

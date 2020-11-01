@@ -108,7 +108,7 @@ public class Enriq implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Enriq[ enriqPK=" + enriqPK + " ]";
+        return "ResPwAEntities.Enriq[ enriqPK=" + enriqPK + " ]";
     }
     
 }

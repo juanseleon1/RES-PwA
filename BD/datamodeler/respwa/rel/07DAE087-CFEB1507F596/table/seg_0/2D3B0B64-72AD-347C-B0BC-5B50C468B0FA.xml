@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2D3B0B64-72AD-347C-B0BC-5B50C468B0FA" name="Genero">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>4A316010-4D7F-A691-005C-3B41AFA94851</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="genero" id="68C41F93-8D97-9DEF-04A7-3E04E82B141D">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="gusto" id="2A928A1D-E0B3-390C-124D-95A03CC66D1C">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>A44E1486-1AC1-D98B-AFF5-830FA11CAAC2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BB5899EF-2245-1C7A-0E34-D652D002616F" name="Genero_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>84ADC354-5798-F86C-C1F1-703FB948B1AB</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="68C41F93-8D97-9DEF-04A7-3E04E82B141D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

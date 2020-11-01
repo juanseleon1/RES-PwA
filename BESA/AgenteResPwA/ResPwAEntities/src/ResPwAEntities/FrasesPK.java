@@ -75,7 +75,7 @@ public class FrasesPK implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.FrasesPK[ orden=" + orden + ", cuentoNombre=" + cuentoNombre + " ]";
+        return "ResPwAEntities.FrasesPK[ orden=" + orden + ", cuentoNombre=" + cuentoNombre + " ]";
     }
     
 }

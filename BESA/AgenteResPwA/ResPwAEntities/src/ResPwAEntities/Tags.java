@@ -103,7 +103,7 @@ public class Tags implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Tags[ id=" + id + " ]";
+        return "ResPwAEntities.Tags[ id=" + id + " ]";
     }
     
 }

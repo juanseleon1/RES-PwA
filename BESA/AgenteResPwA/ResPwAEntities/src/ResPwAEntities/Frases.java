@@ -119,7 +119,7 @@ public class Frases implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Frases[ frasesPK=" + frasesPK + " ]";
+        return "ResPwAEntities.Frases[ frasesPK=" + frasesPK + " ]";
     }
     
 }

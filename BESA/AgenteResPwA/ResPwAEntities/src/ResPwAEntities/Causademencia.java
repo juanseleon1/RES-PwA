@@ -84,7 +84,7 @@ public class Causademencia implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Causademencia[ condicion=" + condicion + " ]";
+        return "ResPwAEntities.Causademencia[ condicion=" + condicion + " ]";
     }
     
 }

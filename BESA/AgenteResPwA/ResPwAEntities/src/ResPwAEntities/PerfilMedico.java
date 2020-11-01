@@ -203,7 +203,7 @@ public class PerfilMedico implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.PerfilMedico[ perfilpwaCedula=" + perfilpwaCedula + " ]";
+        return "ResPwAEntities.PerfilMedico[ perfilpwaCedula=" + perfilpwaCedula + " ]";
     }
     
 }

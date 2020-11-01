@@ -133,7 +133,7 @@ public class Actividadrutinaria implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Actividadrutinaria[ id=" + id + " ]";
+        return "ResPwAEntities.Actividadrutinaria[ id=" + id + " ]";
     }
     
 }

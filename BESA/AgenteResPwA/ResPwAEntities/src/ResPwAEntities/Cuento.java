@@ -144,7 +144,7 @@ public class Cuento implements Serializable {
 
     @Override
     public String toString() {
-        return "BDInterface.Cuento[ nombre=" + nombre + " ]";
+        return "ResPwAEntities.Cuento[ nombre=" + nombre + " ]";
     }
     
 }

@@ -6,6 +6,7 @@
 package ResPwAEntities.Controllers;
 
 import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -15,9 +16,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Dificultad;
 import ResPwAEntities.PerfilPreferencia;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import ResPwAEntities.Registroactividad;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -40,6 +43,9 @@ public class ActividadpwaJpaController implements Serializable {
         if (actividadpwa.getPerfilPreferenciaList() == null) {
             actividadpwa.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
         }
+        if (actividadpwa.getRegistroactividadList() == null) {
+            actividadpwa.setRegistroactividadList(new ArrayList<Registroactividad>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -55,6 +61,12 @@ public class ActividadpwaJpaController implements Serializable {
                 attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
             }
             actividadpwa.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
+            List<Registroactividad> attachedRegistroactividadList = new ArrayList<Registroactividad>();
+            for (Registroactividad registroactividadListRegistroactividadToAttach : actividadpwa.getRegistroactividadList()) {
+                registroactividadListRegistroactividadToAttach = em.getReference(registroactividadListRegistroactividadToAttach.getClass(), registroactividadListRegistroactividadToAttach.getRegistroactividadPK());
+                attachedRegistroactividadList.add(registroactividadListRegistroactividadToAttach);
+            }
+            actividadpwa.setRegistroactividadList(attachedRegistroactividadList);
             em.persist(actividadpwa);
             if (dificultadDificultad != null) {
                 dificultadDificultad.getActividadpwaList().add(actividadpwa);
@@ -63,6 +75,15 @@ public class ActividadpwaJpaController implements Serializable {
             for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : actividadpwa.getPerfilPreferenciaList()) {
                 perfilPreferenciaListPerfilPreferencia.getActividadpwaList().add(actividadpwa);
                 perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
+            }
+            for (Registroactividad registroactividadListRegistroactividad : actividadpwa.getRegistroactividadList()) {
+                Actividadpwa oldActividadpwaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getActividadpwa();
+                registroactividadListRegistroactividad.setActividadpwa(actividadpwa);
+                registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
+                if (oldActividadpwaOfRegistroactividadListRegistroactividad != null) {
+                    oldActividadpwaOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
+                    oldActividadpwaOfRegistroactividadListRegistroactividad = em.merge(oldActividadpwaOfRegistroactividadListRegistroactividad);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -77,7 +98,7 @@ public class ActividadpwaJpaController implements Serializable {
         }
     }
 
-    public void edit(Actividadpwa actividadpwa) throws NonexistentEntityException, Exception {
+    public void edit(Actividadpwa actividadpwa) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -87,6 +108,20 @@ public class ActividadpwaJpaController implements Serializable {
             Dificultad dificultadDificultadNew = actividadpwa.getDificultadDificultad();
             List<PerfilPreferencia> perfilPreferenciaListOld = persistentActividadpwa.getPerfilPreferenciaList();
             List<PerfilPreferencia> perfilPreferenciaListNew = actividadpwa.getPerfilPreferenciaList();
+            List<Registroactividad> registroactividadListOld = persistentActividadpwa.getRegistroactividadList();
+            List<Registroactividad> registroactividadListNew = actividadpwa.getRegistroactividadList();
+            List<String> illegalOrphanMessages = null;
+            for (Registroactividad registroactividadListOldRegistroactividad : registroactividadListOld) {
+                if (!registroactividadListNew.contains(registroactividadListOldRegistroactividad)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Registroactividad " + registroactividadListOldRegistroactividad + " since its actividadpwa field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (dificultadDificultadNew != null) {
                 dificultadDificultadNew = em.getReference(dificultadDificultadNew.getClass(), dificultadDificultadNew.getDificultad());
                 actividadpwa.setDificultadDificultad(dificultadDificultadNew);
@@ -98,6 +133,13 @@ public class ActividadpwaJpaController implements Serializable {
             }
             perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
             actividadpwa.setPerfilPreferenciaList(perfilPreferenciaListNew);
+            List<Registroactividad> attachedRegistroactividadListNew = new ArrayList<Registroactividad>();
+            for (Registroactividad registroactividadListNewRegistroactividadToAttach : registroactividadListNew) {
+                registroactividadListNewRegistroactividadToAttach = em.getReference(registroactividadListNewRegistroactividadToAttach.getClass(), registroactividadListNewRegistroactividadToAttach.getRegistroactividadPK());
+                attachedRegistroactividadListNew.add(registroactividadListNewRegistroactividadToAttach);
+            }
+            registroactividadListNew = attachedRegistroactividadListNew;
+            actividadpwa.setRegistroactividadList(registroactividadListNew);
             actividadpwa = em.merge(actividadpwa);
             if (dificultadDificultadOld != null && !dificultadDificultadOld.equals(dificultadDificultadNew)) {
                 dificultadDificultadOld.getActividadpwaList().remove(actividadpwa);
@@ -119,11 +161,22 @@ public class ActividadpwaJpaController implements Serializable {
                     perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
                 }
             }
+            for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
+                if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
+                    Actividadpwa oldActividadpwaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getActividadpwa();
+                    registroactividadListNewRegistroactividad.setActividadpwa(actividadpwa);
+                    registroactividadListNewRegistroactividad = em.merge(registroactividadListNewRegistroactividad);
+                    if (oldActividadpwaOfRegistroactividadListNewRegistroactividad != null && !oldActividadpwaOfRegistroactividadListNewRegistroactividad.equals(actividadpwa)) {
+                        oldActividadpwaOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
+                        oldActividadpwaOfRegistroactividadListNewRegistroactividad = em.merge(oldActividadpwaOfRegistroactividadListNewRegistroactividad);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                BigDecimal id = actividadpwa.getId();
+                BigInteger id = actividadpwa.getId();
                 if (findActividadpwa(id) == null) {
                     throw new NonexistentEntityException("The actividadpwa with id " + id + " no longer exists.");
                 }
@@ -136,7 +189,7 @@ public class ActividadpwaJpaController implements Serializable {
         }
     }
 
-    public void destroy(BigDecimal id) throws NonexistentEntityException {
+    public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -147,6 +200,17 @@ public class ActividadpwaJpaController implements Serializable {
                 actividadpwa.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The actividadpwa with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            List<Registroactividad> registroactividadListOrphanCheck = actividadpwa.getRegistroactividadList();
+            for (Registroactividad registroactividadListOrphanCheckRegistroactividad : registroactividadListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Actividadpwa (" + actividadpwa + ") cannot be destroyed since the Registroactividad " + registroactividadListOrphanCheckRegistroactividad + " in its registroactividadList field has a non-nullable actividadpwa field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Dificultad dificultadDificultad = actividadpwa.getDificultadDificultad();
             if (dificultadDificultad != null) {
@@ -191,7 +255,7 @@ public class ActividadpwaJpaController implements Serializable {
         }
     }
 
-    public Actividadpwa findActividadpwa(BigDecimal id) {
+    public Actividadpwa findActividadpwa(BigInteger id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Actividadpwa.class, id);
