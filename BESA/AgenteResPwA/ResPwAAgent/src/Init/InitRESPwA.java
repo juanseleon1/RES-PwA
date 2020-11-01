@@ -69,7 +69,7 @@ public class InitRESPwA {
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
-            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), new PepperEModel());
+            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), new PepperEModel(0.3));
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
             RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, new PepperAdapter());
             startAllAgents(RABDI,EAA,SHA,SPA);

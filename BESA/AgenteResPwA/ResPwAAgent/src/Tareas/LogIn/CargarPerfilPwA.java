@@ -6,10 +6,8 @@
 package Tareas.LogIn;
 
 import static Init.InitRESPwA.emf;
-import RobotAgentBDI.Believes.PerfilPwA.PerfilMedico;
-import RobotAgentBDI.Believes.PerfilPwA.Perfilpwa;
-import RobotAgentBDI.Believes.PerfilPwA.handlers.PerfilMedicoJpaController;
-import RobotAgentBDI.Believes.PerfilPwA.handlers.PerfilpwaJpaController;
+import ResPwAEntities.Controllers.PerfilpwaJpaController;
+import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
@@ -36,8 +34,7 @@ public class CargarPerfilPwA extends ResPwaTask{
         
         //buscar BD perfil a partir de cedula
         PerfilpwaJpaController pjc= new PerfilpwaJpaController(Persistence.createEntityManagerFactory(emf));
-        Perfilpwa pwa = pjc.findPerfilpwa(blvs.getbPerfilPwA().getPerfil().getCedula());
-        blvs.setbPerfilPwA(pwa);
+        blvs.setbPerfilPwA(pjc.findPerfilpwa(blvs.getbPerfilPwA().getPerfil().getCedula()));
         
     }
 

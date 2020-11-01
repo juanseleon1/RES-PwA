@@ -5,13 +5,9 @@
  */
 package RobotAgentBDI.Believes;
 
+import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.FBaseUtils;
-<<<<<<< HEAD:BESA/AgentePepper/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java
-import RobotAgentBDI.Believes.PerfilPwA.Imagen;
-import RobotAgentBDI.Believes.PerfilPwA.Perfilpwa;
-=======
 import ResPwaUtils.Imagen;
->>>>>>> 35d1b36907a5f8de33749267cebed67a662342e9:BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
