@@ -5,8 +5,15 @@
  */
 package Tareas.LogIn;
 
+import static Init.InitRESPwA.emf;
+import RobotAgentBDI.Believes.PerfilPwA.PerfilMedico;
+import RobotAgentBDI.Believes.PerfilPwA.Perfilpwa;
+import RobotAgentBDI.Believes.PerfilPwA.handlers.PerfilMedicoJpaController;
+import RobotAgentBDI.Believes.PerfilPwA.handlers.PerfilpwaJpaController;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import java.util.HashMap;
+import javax.persistence.Persistence;
 import rational.mapping.Believes;
 
 /**
@@ -25,8 +32,13 @@ public class CargarPerfilPwA extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cargar Perfil PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //buscar BD perfil a partir de cedula
+        PerfilpwaJpaController pjc= new PerfilpwaJpaController(Persistence.createEntityManagerFactory(emf));
+        Perfilpwa pwa = pjc.findPerfilpwa(blvs.getbPerfilPwA().getPerfil().getCedula());
+        blvs.setbPerfilPwA(pwa);
+        
     }
 
     @Override

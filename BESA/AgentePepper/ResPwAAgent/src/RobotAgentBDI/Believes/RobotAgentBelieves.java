@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import ResPwaUtils.FBaseUtils;
 import RobotAgentBDI.Believes.PerfilPwA.Imagen;
+import RobotAgentBDI.Believes.PerfilPwA.Perfilpwa;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,6 +150,10 @@ public class RobotAgentBelieves implements Believes{
             }
         }
         return imagenes;
+    }
+
+    public void setbPerfilPwA(Perfilpwa pwa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
 }

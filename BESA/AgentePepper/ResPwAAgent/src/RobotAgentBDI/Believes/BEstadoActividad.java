@@ -28,6 +28,21 @@ public class BEstadoActividad implements Believes{
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     private Cuento cuentoActual;
+    private Integer boostActivarKaraoke;
+    private Integer boostAnimarElogiarPwA;
+    private Integer boostBailar;
+    private Integer boostCambiarEnriquecimientoHistoria;
+    private Integer boostConversarEmpaticamente;
+    private Integer boostLogIn;
+    private Integer boostMantenerAtencionPwA;
+    private Integer boostPausarInteraccion;
+    private Integer boostPedirAyuda;
+    private Integer boostReanudarActividad;
+    private Integer boostRecargarBateria;
+    private Integer boostReiniciarActividad;
+    private Integer boostSeleccionarCancionGusto;
+    private Integer boostSeleccionarCuentoGusto;
+    
     
     @Override
     public boolean update(InfoData si) {

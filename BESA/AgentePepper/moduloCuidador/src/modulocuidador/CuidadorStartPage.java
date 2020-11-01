@@ -6,14 +6,14 @@
 package modulocuidador;
 
 import java.awt.CardLayout;
-import DAL.Fachada;
-import DAL.PaisJpaController;
-import Mundo.*;
+//import DAL.Fachada;
+//import DAL.PaisJpaController;
+//import Mundo.*;
 import RobotAgentBDI.Believes.PerfilPwA.Cuidador;
 import RobotAgentBDI.Believes.PerfilPwA.handlers.CuidadorJpaController;
-import comparators.comparadorPuntaje;
-import comparators.comparadorSillas;
-import comparators.comparadorSillas1;
+//import comparators.comparadorPuntaje;
+//import comparators.comparadorSillas;
+//import comparators.comparadorSillas1;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -1536,13 +1536,13 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CardLayout card = (CardLayout) padre.getLayout();
+        /*CardLayout card = (CardLayout) padre.getLayout();
         partCombo.removeAllItems();
         card.show(padre, "1");
         List<Partidos> p = f.obtenerPartidos();
         for (Partidos s : p) {
             partCombo.addItem(s);
-        }
+        }*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -1551,7 +1551,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
-        Calendar c = Calendar.getInstance();
+        /*Calendar c = Calendar.getInstance();
         fechal.setText("Fecha Actual: \t " + String.valueOf(c.get(Calendar.DATE)) + "-" + String.valueOf(c.get(Calendar.MONTH)) + "-" + String.valueOf(c.get(Calendar.YEAR)));
         String curr = String.format("%02d:%02d", c.get(Calendar.HOUR), c.get(Calendar.MINUTE));
         horal.setText("Hora Actual: \t " + curr);
@@ -1585,7 +1585,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         tablaDis = new JTable(cont, enc);
         jScrollPane6.setViewportView(tablaDis);
         CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "7");        // TODO add your handling code here:
+        card.show(padre, "7");        // TODO add your handling code here:*/
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1599,7 +1599,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        Partidos p = (Partidos) partCombo.getSelectedItem();
+        /*Partidos p = (Partidos) partCombo.getSelectedItem();
         Vector<Object> enc = new Vector<Object>();
         enc.add("# de Partido");
         enc.add("Estadio");
@@ -1668,11 +1668,11 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         tablaDA = new JTable(tconte, enc);
         stablaDA.setViewportView(tablaDA);
         CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "2");
+        card.show(padre, "2");*/
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Anotacionxpartido axp = new Anotacionxpartido();
+       /* Anotacionxpartido axp = new Anotacionxpartido();
         Anotaciones a = new Anotaciones();
         a.setTipoan("CABEZA");
         List<Anotacionxpartido> la = a.getAnotacionxpartidoList();
@@ -1701,7 +1701,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(CuidadorStartPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1709,7 +1709,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        Vector<Object> enc = new Vector<Object>();
+        /*Vector<Object> enc = new Vector<Object>();
         enc.add("#PART");
         enc.add("FECHA");
         enc.add("ESTADIO");
@@ -1736,14 +1736,14 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         Toct = new JTable(conte, enc);
         Soct.setViewportView(Toct);
         CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "6");          // TODO add your handling code here:
+        card.show(padre, "6");          // TODO add your handling code here:*/
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (f.EliminarPartidos(oc)) {
+        /*if (f.EliminarPartidos(oc)) {
             JOptionPane.showConfirmDialog(null, "Se han eliminado los partidos con exito", "EXITO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
         }
-
+*/
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -1752,7 +1752,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        DefaultTableModel m = (DefaultTableModel) tablaDis.getModel();
+        /*DefaultTableModel m = (DefaultTableModel) tablaDis.getModel();
         if (tablaDis.getSelectedRow() != -1) {
             Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDis.getSelectedRow());
             for (int i = 0; i < v.size(); i++) {
@@ -1818,7 +1818,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un partido ", "Sin seleccion", JOptionPane.DEFAULT_OPTION);
         }
 
-
+*/
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
@@ -1827,7 +1827,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        ButtonGroup b1 = new ButtonGroup();
+       /* ButtonGroup b1 = new ButtonGroup();
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
         b1.add(jRadioButton1);
@@ -1896,7 +1896,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione al menos una silla");
         }
-        // TODO add your handling code here:
+        // TODO add your handling code here:*/
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -1933,7 +1933,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        Fase fas = (Fase) fase.getSelectedItem();
+        /*Fase fas = (Fase) fase.getSelectedItem();
         //List<Partidos> parts = f.getPartidosFase(fas);
 
         if (fas.getFase().equals("OCTAVOS")) {
@@ -2176,10 +2176,10 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             conte.add(vc);
         }
         Tposi = new JTable(conte, enc);
-        Sposi.setViewportView(Tposi);
+        Sposi.setViewportView(Tposi);*/
 
         /*CREACION DE OCTAVOS*/
-        List<Partidos> octs = new ArrayList<Partidos>();
+        /*List<Partidos> octs = new ArrayList<Partidos>();
         Fase fs = new Fase();
         fs.setFase("OCTAVOS");
         for (int i = 0; i < 8; i++) {
@@ -2188,7 +2188,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             octs.add(ps);
         }
         /*PARTIDO 1*/
-        Partidos z = octs.get(0);
+        /*Partidos z = octs.get(0);
         z.setLocal(a.get(0));
         z.setVisitante(b.get(1));
         Calendar fech = Calendar.getInstance();
@@ -2199,7 +2199,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(0, z);
 
         /*PARTIDO 2*/
-        z = octs.get(1);
+        /*z = octs.get(1);
         z.setLocal(c.get(0));
         z.setVisitante(d.get(1));
         fech.set(2018, 6, 30, 17, 00, 00);
@@ -2209,7 +2209,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(1, z);
 
         /*PARTIDO 3*/
-        z = octs.get(2);
+        /*z = octs.get(2);
         z.setLocal(b.get(0));
         z.setVisitante(a.get(1));
         fech.set(2018, 7, 1, 17, 00, 00);
@@ -2219,7 +2219,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(2, z);
 
         /*PARTIDO 4*/
-        z = octs.get(3);
+        /*z = octs.get(3);
         z.setLocal(d.get(0));
         z.setVisitante(c.get(1));
         fech.set(2018, 7, 1, 21, 00, 00);
@@ -2229,7 +2229,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(3, z);
 
         /*PARTIDO 5*/
-        z = octs.get(4);
+        /*z = octs.get(4);
         z.setLocal(e.get(0));
         z.setVisitante(gf.get(1));
         fech.set(2018, 7, 2, 18, 00, 00);
@@ -2239,7 +2239,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(4, z);
 
         /*PARTIDO 6*/
-        z = octs.get(5);
+        /*z = octs.get(5);
         z.setLocal(g.get(0));
         z.setVisitante(h.get(1));
         fech.set(2018, 7, 2, 21, 00, 00);
@@ -2249,7 +2249,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(5, z);
 
         /*PARTIDO 7*/
-        z = octs.get(6);
+        /*z = octs.get(6);
         z.setLocal(gf.get(0));
         z.setVisitante(e.get(1));
         fech.set(2018, 7, 3, 17, 00, 00);
@@ -2259,7 +2259,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         octs.set(6, z);
 
         /*PARTIDO 8*/
-        z = octs.get(7);
+        /*z = octs.get(7);
         z.setLocal(h.get(0));
         z.setVisitante(g.get(1));
         fech.set(2018, 7, 3, 17, 00, 00);
@@ -2272,7 +2272,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         CardLayout card = (CardLayout) padre.getLayout();
         card.show(padre, "5");
-
+*/
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
@@ -2291,7 +2291,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
+        /*DefaultTableModel m = (DefaultTableModel) tablaSilla.getModel();
         DefaultTableModel m1 = (DefaultTableModel) tablaDis.getModel();
         if (tablaSilla.getSelectedRow() != -1) {
             Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaSilla.getSelectedRow());
@@ -2372,11 +2372,11 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor seleccione una categoria");
-        }
+        }*/
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        boolean enc = true;
+       /* boolean enc = true;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
             JOptionPane.showMessageDialog(null, "Escoja algun metodo de pago");
             jButton18ActionPerformed(evt);
@@ -2412,11 +2412,11 @@ public class CuidadorStartPage extends javax.swing.JFrame {
             card.show(padre, "11");
         }
 
-        // TODO add your handling code here:
+        // TODO add your handling code here:*/
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-
+/*
         if (jTextField3.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Ingrese el Nombre");
             jButton20ActionPerformed(evt);
@@ -2554,18 +2554,18 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         fac1.setText("# de factura: " + fac);
         fc.setText("Fecha de Compra: " + LocalDate.now());
         CardLayout card = (CardLayout) padre.getLayout();
-        card.show(padre, "12");          // TODO add your handling code here:
+        card.show(padre, "12");          // TODO add your handling code here:*/
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        fase.removeAllItems();
+        /*fase.removeAllItems();
         List<Fase> fa = f.obtenerFases();
         for (Fase q : fa) {
             fase.addItem(q);
         }
         CardLayout card = (CardLayout) padre.getLayout();
         card.show(padre, "4");
-
+*/
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -2574,7 +2574,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Partidos p = (Partidos) partCombo.getSelectedItem();
+       /* Partidos p = (Partidos) partCombo.getSelectedItem();
         part.setText(p.getCodigopartido() + "");
         if (eq1 == null) {
             eq1 = new JComboBox();
@@ -2589,7 +2589,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         //jug1.setEnabled(false);
         CardLayout card = (CardLayout) padre.getLayout();
         card.show(padre, "3");
-
+*/
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -2608,7 +2608,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     private void eq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eq1ActionPerformed
 
-        Equipo e = (Equipo) eq1.getSelectedItem();
+        /*Equipo e = (Equipo) eq1.getSelectedItem();
         if (e != null) {
 
             List<Alineaciones> re = f.obtenerAlin(e.getNombreeq(), Integer.parseInt(part.getText()));
@@ -2621,7 +2621,7 @@ public class CuidadorStartPage extends javax.swing.JFrame {
         } else {
             jug1.removeAllItems();
         }
-
+*/
     }//GEN-LAST:event_eq1ActionPerformed
 
     private void jug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jug1ActionPerformed
@@ -2653,12 +2653,12 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaDAMouseClicked
 
     private void stablaDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stablaDAMouseClicked
-       DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
+       /*DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
         Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
         ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
         CardLayout card = (CardLayout) padre.getLayout();
         card.show(padre, "66");     
-        jLabel11.setIcon(ayuda);      
+        jLabel11.setIcon(ayuda);      */
     }//GEN-LAST:event_stablaDAMouseClicked
 
     private void stablaDAPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_stablaDAPropertyChange
@@ -2670,12 +2670,12 @@ public class CuidadorStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaDAPropertyChange
 
     private void tablaDAMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDAMousePressed
-    DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
+    /*DefaultTableModel m = (DefaultTableModel) tablaDA.getModel();
         Vector<Object> v = (Vector<Object>) m.getDataVector().get(tablaDA.getSelectedRow());
         ImageIcon ayuda=fotoss.get(tablaDA.getSelectedRow());
         CardLayout card = (CardLayout) padre.getLayout();
         card.show(padre, "66");     
-        jLabel11.setIcon(ayuda);
+        jLabel11.setIcon(ayuda);*/
     }//GEN-LAST:event_tablaDAMousePressed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
@@ -2725,6 +2725,11 @@ public class CuidadorStartPage extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     */
+
+    /**
+     *
+     * @param args
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
