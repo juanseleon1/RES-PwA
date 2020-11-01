@@ -30,7 +30,7 @@ def handle_client(conn, addr):
     print(get_face_list()[0])
     
     #activate_blinking(False)+++++++++++++++++++++++++++++
-    #activate_life_signals(False)+++++++++++++++++++++++++
+    #activate_life_signals(false)+++++++++++++++++++++++++
     #activate_life_signals_awareness(False)
     #set_engagement_type("FullyEngaged")
     #activate_hearing_movement(False)
@@ -46,13 +46,6 @@ def handle_client(conn, addr):
     #print("Temperature", get_temperature())
     #print("Smile", get_emotion_state().get("expressions").get("excitement")[0]) #return the excitement value
     #print(login())
-    #search_free_zone(0.6, 0.5)
-    #get_free_zone(0.6, 0.5)
-    #get_robot_position(True)
-    #move(0.25,0.25,0.1)
-    #move_forward(0.2, 0.2, 0.1)
-    #move_to(2.0, 0.0)
-    #move_to_position(45)
 
     #set_topic_focus("empatia")
     #say_under_topic_context((path,"empatia")
@@ -64,13 +57,28 @@ def handle_client(conn, addr):
     #activate_voice_recognition(subscriber)
     #desactivate_voice_emotion_analysis()
     #activate_voice_emotion_analysis(Sadness)
-    #def pause_sound(idSound)
-    #def play_sound(idSound)
-    #def set_system_volume(50)
-    #def say_with_movement("Hola Enrique")
-    #def set_say_volume(75)
-    #def stop_all()
-    #def say("Hola mundo")
+    #pause_sound(idSound)
+    #play_sound(idSound)
+    #set_system_volume(50)
+    #say_with_movement("Hola Enrique")
+    #set_say_volume(75)
+    #stop_all()
+    #say("Hola mundo")
+    #tablet_on()
+    #wake_tablet()
+    #suspend_tablet()
+    #tablet_off()
+    #show_video("https://www.youtube.com/watch?v=TmKh7lAwnBI&ab_channel=BadBunny")
+    #quit_video()
+    #pause_video()
+    #resume_video()
+    #preload_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
+    #show_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
+    #hide_image()
+    #set_tablet_bright(50)
+    #set_tablet_volume(50)
+
+
     
 def message_manage(key, msg):
         switch_accion = {
@@ -99,14 +107,14 @@ def message_manage(key, msg):
             "GETEMOTIONSTATE":"get_emotion_state", #
             "LOGIN":"login", #
             #LocationServices-------------------------------------------------------
-            "SEARCHFREEZONE":"search_free_zone", #
-            "GETFREEZONES":"get_free_zone", #
-            "GETROBOTPOSITION":"get_robot_position", #
+            "SEARCHFREEZONE":"search_free_zone",
+            "GETFREEZONES":"get_free_zones",
+            "GETROBOTPOSITION":"get_robot_position",
             #MovementServices-------------------------------------------------------
-            "MOVE":"move", #
-            "MOVEFORWARD":"move_forward", #
-            "MOVETO":"move_to", #
-            "MOVETOPOSITION":"move_to_position", #
+            "MOVE":"move",
+            "MOVEFORWARD":"move_forward",
+            "MOVETO":"move_to",
+            "MOVETOPOSITION":"move_to_position",
             #RobotStateServices-------------------------------------------------------
             "WAKEUP":"wake_up",
             "SUSPEND":"suspend",
@@ -345,8 +353,8 @@ def get_emotion_state():
     return alMood.currentPersonState()
 
 #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
-#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesiï¿½n activa coincida con
-#el que estï¿½ interactuando con el robot
+#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesión activa coincida con
+#el que está interactuando con el robot
 def login():
 
     for i in alUserSession.getOpenUserSessions():
@@ -359,20 +367,20 @@ def login():
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement.
 def search_free_zone(radius, displacement):
-    return alNavigationProxy.findFreeZone(radius,displacement)
+    return alNavigationProxy.searchFreeZone(radius,displacement)
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement
-def get_free_zone(radius, displacement):
-    return alNavigationProxy.getFreeZone(radius, displacement)
+def get_free_zones(radius, displacement):
+    return alNavigationProxy.findFreeZone(radius, displacement)
 
+""" No se si exista problema por utilizar ALLocalizationProxy o simplemente ALLocalization"""
 #Gets the coordinates x, y, theta of the pose2D of the robot
 def get_robot_position(enabled):
     return alLocalizationProxy.getRobotPosition(enabled)
 
 #Makes the robot move at the given velocity, expressed in FRAME_ROBOT
-#Z is rotation
-def move(x, y, z):
-    alMotion.move(x,y,z)
+def move(x,y,speed):
+    alMotion.move(x,y,speed)
 
 #Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
 def move_forward(x,y,speed):
@@ -453,11 +461,13 @@ def  resume_video():
      alTabletService.resumeVideo()
 
 # Load the image to show to de user
-def preload_image():
+def preload_image(url):
+    alTabletService.preLoadImage(url)
     pass
 
 #Shows the image in the tablet for the user
-def show_image():
+def show_image(url):
+    alTabletService.showImage(url)
     pass
 
 #Hide image currently displayed.
