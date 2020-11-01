@@ -44,6 +44,39 @@ def handle_client(conn, addr):
     #activate_monitoring_charge_service(False)
     #print("Battery", get_battery())
     #print("Temperature", get_temperature())
+
+
+
+
+
+
+
+
+    #set_topic_focus("empatia")
+    #say_under_topic_context((path,"empatia")
+    #deactivate_conversational_topic("empatia")
+    #unload_conversational_topic("empatia")
+    #load_conversational_topic("empatia")
+    #activate_conversational_topic("empatia")
+    #desactivate_voice_recognition():
+    #activate_voice_recognition(subscriber)
+    #desactivate_voice_emotion_analysis()
+    #activate_voice_emotion_analysis(Sadness)
+    #def pause_sound(idSound)
+    #def play_sound(idSound)
+    #def set_system_volume(50)
+    #def say_with_movement("Hola Enrique")
+    #def set_say_volume(75)
+    #def stop_all()
+    #def say("Hola mundo")
+    
+
+
+
+
+
+
+
     
 def message_manage(key, msg):
         switch_accion = {
@@ -124,6 +157,9 @@ def message_manage(key, msg):
         }
         func = switch_accion.get(key)
         func(msg)
+
+
+        
 
 def BEstadoEmocionalPwA(info_human_state):
     if info_human_state == "attention":
