@@ -20,8 +20,9 @@ import java.util.logging.Logger;
 public class EmotionalAnalyzerAgent extends AgentBESA {
 
     public static String ProcessEmotionGuard= "ProcessEmotionGuard";
-    public EmotionalAnalyzerAgent(String alias, EmotionalAnalyzerStrategy eas) throws KernelAgentExceptionBESA {
-        super(alias, new EmotionalAnalyzerState(eas), buildEAStruct(), 0.96);
+    public static String updtEmotionGuard= "updtEmotionGuard";
+    public EmotionalAnalyzerAgent(String alias, EmotionalAnalyzerStrategy eas,EmotionalModel em) throws KernelAgentExceptionBESA {
+        super(alias, new EmotionalAnalyzerState(eas,em), buildEAStruct(), 0.96);
         System.out.println("EmotionalAnalyzerAgent Iniciado");
     }
 
@@ -41,6 +42,8 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
         try {
             struct.addBehavior(ProcessEmotionGuard);
             struct.bindGuard(ProcessEmotionGuard, ProcessEmotionGuard.class);
+            struct.addBehavior(updtEmotionGuard);
+            struct.bindGuard(updtEmotionGuard, updateEmotionalState.class);
             
         } catch (ExceptionBESA ex) {
             Logger.getLogger(SensorHandlerAgent.class.getName()).log(Level.SEVERE, null, ex);
