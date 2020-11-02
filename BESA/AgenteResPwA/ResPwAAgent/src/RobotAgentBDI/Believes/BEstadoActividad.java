@@ -12,6 +12,7 @@ import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwAActivity;
+import SensorHandlerAgent.SensorData;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import rational.data.InfoData;
@@ -25,7 +26,7 @@ public class BEstadoActividad implements Believes{
     
     private long tiempoInicioActividad;
     private ResPwAActivity actividadActual;
-    private boolean finalizoActividad;
+    private boolean actividadEnCurso;
     private boolean mejoraEmocional;
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
@@ -50,11 +51,22 @@ public class BEstadoActividad implements Believes{
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoActividad update Received: "+si);
+        SensorData infoRecibida= (SensorData)si;
+        if(infoRecibida.getDataP().containsKey("actividadEnCurso"))
+        {
+            actividadEnCurso= Boolean.valueOf((String)infoRecibida.getDataP().get("actividadEnCurso"));
+            if(actividadEnCurso)
+                tiempoInicioActividad=System.currentTimeMillis();
+            else{
+                
+                tiempoInicioActividad=0;
+            }
+        }
         return true;
     }
 
     public long getTiempoInicioActividad() {
-        return tiempoInicioActividad;
+        return System.currentTimeMillis()-tiempoInicioActividad;
     }
 
     public void setTiempoInicioActividad(long tiempoInicioActividad) {
@@ -70,7 +82,7 @@ public class BEstadoActividad implements Believes{
     }
 
     public boolean isFinalizoActividad() {
-        return finalizoActividad;
+        return actividadEnCurso;
     }
 
     public Cancion getCancionActual() {
@@ -78,7 +90,7 @@ public class BEstadoActividad implements Believes{
     }
 
     public void setFinalizoActividad(boolean finalizoActividad) {
-        this.finalizoActividad = finalizoActividad;
+        this.actividadEnCurso = finalizoActividad;
     }
 
     public boolean isMejoraEmocional() {

@@ -47,7 +47,7 @@ public class CancelarActividadTask extends ResPwaTask{
             requestService(srb);
         }
         
-        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+        if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             infoServicio.put("QUITVIDEO", null);
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, infoServicio);
             requestService(srb);

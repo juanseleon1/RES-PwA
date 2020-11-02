@@ -57,6 +57,9 @@ public class RobotAgentBelieves implements Believes{
             case INTERACTION:
                 bEstadoInteraccion.update(si);
                 break;
+            case ROBOT:
+                bEstadoRobot.update(si);
+                break;
             case PROFILE:
                 bPerfilPwA.update(si);
                 actualizarPerfilEnDB();
