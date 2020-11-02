@@ -36,6 +36,7 @@ public class SuspenderRobot extends ResPwaTask{
         infoServicio.put("SAY", "textoDespedir");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
+        infoServicio = new HashMap<>();
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
@@ -43,23 +44,27 @@ public class SuspenderRobot extends ResPwaTask{
             infoServicio.put("STOPANIMATION", null);
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             infoServicio.put("STOPALL", null);
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             infoServicio.put("STOPVIDEO", null);
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         infoServicio.put("SUSPEND", null);
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
         requestService(srb);
+        infoServicio = new HashMap<>();
         infoServicio.put("SUSPENDTABLET", null);
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, infoServicio);
         requestService(srb);

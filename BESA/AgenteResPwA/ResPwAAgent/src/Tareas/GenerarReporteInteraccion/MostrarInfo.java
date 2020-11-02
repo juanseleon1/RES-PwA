@@ -34,7 +34,7 @@ public class MostrarInfo extends ResPwaTask{
         infoServicio.put("SAY", "AvisoInfoInter");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio.clear();
+        infoServicio = new HashMap<>();
         
         //parametros interaccion (tiempo, emociones)
         infoServicio.put("SHOWIMG", "ParamsInte");

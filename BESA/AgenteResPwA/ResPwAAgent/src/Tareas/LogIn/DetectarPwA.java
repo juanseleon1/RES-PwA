@@ -49,7 +49,7 @@ public class DetectarPwA extends ResPwaTask{
         infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
         requestService(srb);
-        
+        infoServicio = new HashMap<>();
         infoServicio.put("LOGIN", null);
         srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
         requestService(srb);

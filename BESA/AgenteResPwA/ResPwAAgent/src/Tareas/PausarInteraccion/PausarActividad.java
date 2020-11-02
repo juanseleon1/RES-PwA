@@ -38,18 +38,21 @@ public class PausarActividad extends ResPwaTask{
             infoServicio.put("STOPANIMATION", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             infoServicio.put("STOPALL", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             infoServicio.put("PAUSEVIDEO", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
             requestService(srb);
+            infoServicio = new HashMap<>();
         }
         
         infoServicio.put("SUSPEND", null);
