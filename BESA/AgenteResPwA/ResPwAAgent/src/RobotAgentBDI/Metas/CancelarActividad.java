@@ -93,7 +93,7 @@ public class CancelarActividad extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CancelarActividad goalSucceeded");
-        return false;
+        return true;
     }
     
 }

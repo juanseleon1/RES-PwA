@@ -87,7 +87,7 @@ public class PedirAyuda extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PedirAyuda goalSucceeded");
-        return false;
+        return true;
     }
     
 }

@@ -111,7 +111,7 @@ public class Bailar extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar goalSucceeded");
-        return false;
+        return true;
     }
     
 }

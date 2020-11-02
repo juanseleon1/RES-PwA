@@ -102,7 +102,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
-        return false;
+        return true;
     }
     
 }

@@ -99,7 +99,7 @@ public class ConversarEmpaticamente extends GoalBDI{
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
-        return false;
+        return true;
     }
     
 }

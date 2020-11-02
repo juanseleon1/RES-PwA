@@ -104,7 +104,7 @@ public class LogIn extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn goalSucceeded");
-        return false;
+        return true;
     }
     
 }

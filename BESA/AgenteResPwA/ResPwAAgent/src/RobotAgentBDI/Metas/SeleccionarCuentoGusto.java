@@ -102,7 +102,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta SeleccionarCuentoGusto goalSucceeded");
-        return false;
+        return true;
     }
     
 }

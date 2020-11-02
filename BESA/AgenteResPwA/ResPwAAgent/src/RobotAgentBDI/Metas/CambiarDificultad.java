@@ -97,7 +97,7 @@ public class CambiarDificultad extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarDificultad goalSucceeded");
-        return false;
+        return true;
     }
     
 }

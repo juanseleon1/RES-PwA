@@ -57,7 +57,7 @@ public class MostrarEmocionesRobot extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MostrarEmocionesRobot goalSucceeded");
-        return false;
+        return true;
     }
     
 }

@@ -88,7 +88,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PausarInteraccion goalSucceeded");
-        return false;
+        return true;
     }
     
 }
