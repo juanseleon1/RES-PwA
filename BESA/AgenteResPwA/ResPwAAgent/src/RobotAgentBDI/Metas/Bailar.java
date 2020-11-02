@@ -92,7 +92,6 @@ public class Bailar extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar evaluateContribution");
-       
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         

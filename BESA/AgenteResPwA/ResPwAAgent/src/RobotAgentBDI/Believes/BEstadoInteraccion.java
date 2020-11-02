@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import SensorHandlerAgent.SensorData;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -13,7 +14,6 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -23,18 +23,75 @@ public class BEstadoInteraccion implements Believes{
     private long tiempoSinInt=0;
     private boolean sistemaSuspendido=false;
     private long nivelEnriquecimiento=0;
-    private long velocidad=0;
+    private long velocidadAnim=0;
     private long distanciaPwA=0;
     private boolean estaHablando=false;
-    private boolean estaBailando=false;
+    private boolean estaMoviendo=false;
+    private boolean desplazandose=false;
     private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
-    private boolean estaReproduciendoCancion=false;
+    private boolean confirmacionRepDisp=false;
+    private boolean confirmacionRepAud=false;
+    private static final long MAXENRIQ=4;
+    private String keyNameConf= "confReproduccion";
+
     
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoInteraccion update Received: "+si);
+        SensorData infoRecibida= (SensorData)si;
+        if(infoRecibida.getDataP().containsKey(keyNameConf+"Display"))
+        {
+            confirmacionRepDisp= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Display"));
+        }
+        if(infoRecibida.getDataP().containsKey(keyNameConf+"Audio"))
+        {
+            confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
+        }
+        if(infoRecibida.getDataP().containsKey("hayPwA")){
+            detectaPwA= Boolean.valueOf((String)infoRecibida.getDataP().get("hayPwA"));
+            if(detectaPwA)
+                tiempoSinInt=0;
+            else
+            tiempoSinInt=System.currentTimeMillis();
+        }
+        if(infoRecibida.getDataP().containsKey("canto")){
+            quiereCantar= Boolean.valueOf((String)infoRecibida.getDataP().get("canto"));
+
+        }if(infoRecibida.getDataP().containsKey("enriq")){
+            quiereEnriquec= Boolean.valueOf((String)infoRecibida.getDataP().get("enriq"));
+            if(quiereEnriquec && nivelEnriquecimiento < MAXENRIQ)
+                nivelEnriquecimiento++;
+            else if(!quiereEnriquec && nivelEnriquecimiento>0)
+                nivelEnriquecimiento--;
+        }if(infoRecibida.getDataP().containsKey("suspension")){
+            sistemaSuspendido= Boolean.valueOf((String)infoRecibida.getDataP().get("suspension"));
+            
+        }if(infoRecibida.getDataP().containsKey("pausarint")){
+           pausarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("pausarint"));
+            
+        }if(infoRecibida.getDataP().containsKey("cancelarint")){
+           cancelarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("cancelarint"));
+            
+        }if(infoRecibida.getDataP().containsKey("reiniciarint")){
+           reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
+            
+        }if(infoRecibida.getDataP().containsKey("distancia")){
+          distanciaPwA  = Long.valueOf((String)infoRecibida.getDataP().get("distancia"));
+           
+        }if(infoRecibida.getDataP().containsKey("hablando")){
+          estaHablando = Boolean.valueOf((String)infoRecibida.getDataP().get("hablando"));
+            
+        }if(infoRecibida.getDataP().containsKey("moviendo")){
+          estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("moviendo"));
+            
+        }if(infoRecibida.getDataP().containsKey("desplazandose")){
+          desplazandose = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
+            
+        }if(infoRecibida.getDataP().containsKey("fisicaint")){
+           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
+        }     
         return true;
     }
 
@@ -87,7 +144,7 @@ public class BEstadoInteraccion implements Believes{
     }
 
     public long getTiempoSinInt() {
-        return tiempoSinInt;
+        return System.currentTimeMillis()- tiempoSinInt;
     }
 
     public void setTiempoSinInt(long tiempoSinInt) {
@@ -111,11 +168,11 @@ public class BEstadoInteraccion implements Believes{
     }
 
     public long getVelocidad() {
-        return velocidad;
+        return velocidadAnim;
     }
 
     public void setVelocidad(long velocidad) {
-        this.velocidad = velocidad;
+        this.velocidadAnim = velocidad;
     }
 
     public long getDistanciaPwA() {
@@ -135,11 +192,11 @@ public class BEstadoInteraccion implements Believes{
     }
 
     public boolean isEstaBailando() {
-        return estaBailando;
+        return estaMoviendo;
     }
 
     public void setEstaBailando(boolean estaBailando) {
-        this.estaBailando = estaBailando;
+        this.estaMoviendo = estaBailando;
     }
 
     public boolean isHayInteraccionFisica() {
@@ -158,16 +215,60 @@ public class BEstadoInteraccion implements Believes{
         this.detectaPwA = detectaPwA;
     }
 
-    public boolean isEstaReproduciendoCancion() {
-        return estaReproduciendoCancion;
-    }
-
-    public void setEstaReproduciendoCancion(boolean estaReproduciendoCancion) {
-        this.estaReproduciendoCancion = estaReproduciendoCancion;
-    }
-
     public boolean isQuiereCantar() {
         return quiereCantar;
+    }
+
+    public void setQuiereCantar(boolean quiereCantar) {
+        this.quiereCantar = quiereCantar;
+    }
+
+    public long getVelocidadAnim() {
+        return velocidadAnim;
+    }
+
+    public void setVelocidadAnim(long velocidadAnim) {
+        this.velocidadAnim = velocidadAnim;
+    }
+
+    public boolean isEstaMoviendo() {
+        return estaMoviendo;
+    }
+
+    public void setEstaMoviendo(boolean estaMoviendo) {
+        this.estaMoviendo = estaMoviendo;
+    }
+
+    public boolean isDesplazandose() {
+        return desplazandose;
+    }
+
+    public void setDesplazandose(boolean desplazandose) {
+        this.desplazandose = desplazandose;
+    }
+
+    public boolean isConfirmacionRepDisp() {
+        return confirmacionRepDisp;
+    }
+
+    public void setConfirmacionRepDisp(boolean confirmacionRepDisp) {
+        this.confirmacionRepDisp = confirmacionRepDisp;
+    }
+
+    public boolean isConfirmacionRepAud() {
+        return confirmacionRepAud;
+    }
+
+    public void setConfirmacionRepAud(boolean confirmacionRepAud) {
+        this.confirmacionRepAud = confirmacionRepAud;
+    }
+
+    public String getKeyNameConf() {
+        return keyNameConf;
+    }
+
+    public void setKeyNameConf(String keyNameConf) {
+        this.keyNameConf = keyNameConf;
     }
 
     

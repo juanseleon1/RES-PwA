@@ -6,6 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
+import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
 import rational.data.InfoData;
 import rational.mapping.Believes;
@@ -18,7 +19,7 @@ public class BEstadoEmocionalPwA implements Believes{
 
     private EmotionPwA emocionPredominante;
     private long tiempoEmocionPredominante;
-    private HashMap<String,Integer> estadoEmocional;
+    private HashMap<EmotionPwA,Float> estadoEmocional;
     private long tiempoAtencion;
     private long tiempoSinAtencion;
     private long tiempoRelajacion;
@@ -27,6 +28,36 @@ public class BEstadoEmocionalPwA implements Believes{
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoEmocionalPwA update Received: "+si);
+        SensorData infoRecibida= (SensorData)si;
+         if(infoRecibida.getDataPE().containsKey("EmoMap"))
+        {
+            estadoEmocional=(HashMap<EmotionPwA,Float>) infoRecibida.getDataPE().get("EmoMap");
+            calcularPredominante();
+        }
+        if(infoRecibida.getDataPE().containsKey("atencion"))
+        {
+           if((float)infoRecibida.getDataPE().get("atencion")<0.5 && tiempoSinAtencion==0)
+           {
+               tiempoSinAtencion=System.currentTimeMillis();
+               tiempoAtencion=0;
+           }else if((float)infoRecibida.getDataPE().get("atencion")>=0.5 && tiempoAtencion==0)
+           {
+               tiempoAtencion=System.currentTimeMillis();
+               tiempoSinAtencion=0;
+           }
+        }
+        if(infoRecibida.getDataPE().containsKey("relajacion"))
+        {
+           if((float)infoRecibida.getDataPE().get("relajacion")<0.5 && tiempoSinRelajacion==0)
+           {
+               tiempoSinRelajacion=System.currentTimeMillis();
+               tiempoRelajacion=0;
+           }else if((float)infoRecibida.getDataPE().get("relajacion")>=0.5 && tiempoRelajacion==0)
+           {
+               tiempoRelajacion=System.currentTimeMillis();
+               tiempoSinRelajacion=0;
+           }
+        }
         return true;
     }
 
@@ -46,16 +77,16 @@ public class BEstadoEmocionalPwA implements Believes{
         this.tiempoEmocionPredominante = tiempoEmocionPredominante;
     }
 
-    public HashMap<String,Integer> getEstadoEmocional() {
+    public HashMap<EmotionPwA,Float> getEstadoEmocional() {
         return estadoEmocional;
     }
 
-    public void setEstadoEmocional(HashMap<String,Integer> estadoEmocional) {
+    public void setEstadoEmocional(HashMap<EmotionPwA,Float> estadoEmocional) {
         this.estadoEmocional = estadoEmocional;
     }
 
     public long getTiempoAtencion() {
-        return tiempoAtencion;
+        return System.currentTimeMillis()-tiempoAtencion;
     }
 
     public void setTiempoAtencion(long tiempoAtencion) {
@@ -63,7 +94,7 @@ public class BEstadoEmocionalPwA implements Believes{
     }
 
     public long getTiempoRelajacion() {
-        return tiempoRelajacion;
+        return System.currentTimeMillis()-tiempoRelajacion;
     }
 
     public void setTiempoRelajacion(long tiempoRelajacion) {
@@ -71,7 +102,7 @@ public class BEstadoEmocionalPwA implements Believes{
     }
 
     public long getTiempoSinAtencion() {
-        return tiempoSinAtencion;
+        return System.currentTimeMillis()-tiempoSinAtencion;
     }
 
     public void setTiempoSinAtencion(long tiempoSinAtencion) {
@@ -79,11 +110,17 @@ public class BEstadoEmocionalPwA implements Believes{
     }
 
     public long getTiempoSinRelajacion() {
-        return tiempoSinRelajacion;
+        return System.currentTimeMillis()-tiempoSinRelajacion;
     }
 
     public void setTiempoSinRelajacion(long tiempoSinRelajacion) {
         this.tiempoSinRelajacion = tiempoSinRelajacion;
+    }
+
+    private void calcularPredominante() {
+
+        emocionPredominante=estadoEmocional.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+        tiempoEmocionPredominante=System.currentTimeMillis();
     }
 
       

@@ -46,7 +46,7 @@ public class PausarActividad extends ResPwaTask{
             requestService(srb);
         }
         
-        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+        if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             infoServicio.put("PAUSEVIDEO", null);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
             requestService(srb);

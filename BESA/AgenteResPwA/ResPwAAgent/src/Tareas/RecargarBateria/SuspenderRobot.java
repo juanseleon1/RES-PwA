@@ -52,7 +52,7 @@ public class SuspenderRobot extends ResPwaTask{
             requestService(srb);
         }
         
-        if(blvs.getbEstadoInteraccion().isEstaReproduciendoCancion()) {
+        if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             infoServicio.put("STOPVIDEO", null);
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
             requestService(srb);
