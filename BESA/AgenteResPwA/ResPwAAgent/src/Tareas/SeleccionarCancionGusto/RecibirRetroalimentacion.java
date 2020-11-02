@@ -34,13 +34,11 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         infoServicio.put("GETEMOTIONSTATE", null);
         srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
         requestService(srb);
-        infoServicio.clear();
         
         //buscar texto
         infoServicio.put("SAY", "AskRetroCancion");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio.clear();
         
         //buscar url
         infoServicio.put("SHOWIMG", "AskRetroCancion");
