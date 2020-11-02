@@ -32,11 +32,6 @@ public class PreguntarSentimientos extends ResPwaTask{
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
         ServiceDataRequest srb = null;
         
-        infoServicio.put("GETEMOTIONSTATE", null);
-        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        infoServicio.clear();
-        
         //buscar texto
         infoServicio.put("SAY", "PreguntaSentimientos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);

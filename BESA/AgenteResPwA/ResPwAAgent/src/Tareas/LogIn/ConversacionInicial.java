@@ -28,15 +28,10 @@ public class ConversacionInicial extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Estado Animo ---");
-        ServiceDataRequest srb = null;
-        infoServicio.put("GETEMOTIONSTATE", null);
-        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        infoServicio.clear();
         
         //buscar texto "¿como estas pepito?"
         infoServicio.put("SAY", "PreguntaSentimientos");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }
 
