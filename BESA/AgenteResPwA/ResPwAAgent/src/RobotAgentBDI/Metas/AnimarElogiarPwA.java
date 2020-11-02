@@ -71,8 +71,10 @@ public class AnimarElogiarPwA extends GoalBDI{
         //alto numero de errores, tiene aciertos, cierto tiempo activo
         //!blvs.getbEstadoActividad().isFinalizoActividad() ?
         //|| finalActividad || dice que se siente triste/enojado || Al escoger actividad por primera vez
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged()&&  blvs.getbEstadoInteraccion().isLogged()){
+            if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
             return 1.0;
+        }
         }
         
         return 0;

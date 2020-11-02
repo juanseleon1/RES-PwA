@@ -32,8 +32,7 @@ public class MostrarEmocionesRobot extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MostrarEmocionesRobot detectGoal");
-        
-        return 1;
+        return 0;
     }
 
     @Override

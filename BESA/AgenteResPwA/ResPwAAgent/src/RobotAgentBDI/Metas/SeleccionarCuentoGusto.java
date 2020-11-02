@@ -73,9 +73,12 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //verificar gusto cuento seleccionado > 0.5
-        if(blvs.getbEstadoActividad().getCuentoActual().getGusto() > 0.5 && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoActividad().isFinalizoActividad()) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(blvs.getbEstadoActividad().getCuentoActual()!=null && blvs.getbEstadoActividad().getCuentoActual().getGusto() > 0.5 && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
+        }
+        
         
         return 0;
     }

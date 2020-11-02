@@ -76,10 +76,13 @@ public class Bailar extends GoalBDI{
                 enriq=(int) act.getEnriq().intValue();
             }
         }
-        if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged()){
+            if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
                blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && enriq > 2) {
             return 1.0;
         }
+        }
+        
         return 0;
     }
 

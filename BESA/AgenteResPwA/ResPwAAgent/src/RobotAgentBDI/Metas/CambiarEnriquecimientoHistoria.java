@@ -66,10 +66,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //cambiar valor tiempo (10), debe variar segun la duracion de la historia
-        if(blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoInteraccion().isQuiereEnriquec() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10 
-                && !blvs.getbEstadoActividad().isFinalizoActividad()) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+             if(blvs.getbEstadoActividad().getActividadActual()!=null && (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && blvs.getbEstadoInteraccion().isQuiereEnriquec() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10 
+                && !blvs.getbEstadoActividad().isFinalizoActividad())) {
             return 1.0;
         }
+        }
+       
         
         return 0;
     }

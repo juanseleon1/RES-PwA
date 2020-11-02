@@ -58,10 +58,13 @@ public class PedirAyuda extends GoalBDI{
         System.out.println("Meta PedirAyuda detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        if (blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        {
+            if (blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
             return 1.0;
         }
+        }
+        
         return 0;
     }
 

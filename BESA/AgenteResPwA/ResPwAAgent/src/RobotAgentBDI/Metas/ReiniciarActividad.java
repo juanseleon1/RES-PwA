@@ -59,10 +59,12 @@ public class ReiniciarActividad extends GoalBDI{
         System.out.println("Meta ReiniciarActividad detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        if(blvs.getbEstadoInteraccion().isReiniciarInt()) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(blvs.getbEstadoInteraccion().isReiniciarInt()) {
             return 1.0;
         }
+        }
+        
         
         return 0;
     }

@@ -65,11 +65,13 @@ public class SeleccionarCancionGusto extends GoalBDI{
         System.out.println("Meta CambiarCancion detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        if((blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null&&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
                 blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5 && blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0;
         }
+        }
+        
         
         return 0;
     }

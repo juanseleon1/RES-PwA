@@ -71,7 +71,7 @@ public class LogIn extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        if (blvs.getbEstadoInteraccion().isDetectaPwA()) {
+        if (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged()) {
             return 1.0;
         }
         
