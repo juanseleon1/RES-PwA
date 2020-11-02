@@ -813,19 +813,20 @@ alDialogProxy.setLanguage("Spanish")
     # Activating the loaded topics
     activate_conversational_topic(topic_name_1)
     activate_conversational_topic(topic_name_2)
+    #Subscribe to use the topics previously activated
 
 
 #JSON
 
-    json_object = {
+    json_string = {
         "id" : null ,
         "proxyName": "proxyName",
         "methodName":"method_name", 
         "params":{              #por lo general van a ser números o strings, solo van a ver listas cuando sea cuentería y toque precargar imágenes. 
             "EAAgent":"This is the Remix", 
-            "Lista imagenes":["URL","URL2","sjfiosjfiosdjf"] 
-
- 
-
-} 
+            "Lista imagenes":["URL","URL2","sjfiosjfiosdjf"]
+        }
+    }
+    data = json.loads(json_string)
+    
 
