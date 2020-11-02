@@ -8,13 +8,20 @@ package RobotAgentBDI.Believes;
 
 
 
+import BDInterface.RESPwABDInterface;
+import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Registroactividad;
+import ResPwAEntities.RegistroactividadPK;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -26,6 +33,7 @@ public class BEstadoActividad implements Believes{
     
     private long tiempoInicioActividad;
     private ResPwAActivity actividadActual;
+    private String estadoInit=null;
     private boolean actividadEnCurso;
     private boolean mejoraEmocional;
     private ResPwAStrategy estrategia;
@@ -47,6 +55,14 @@ public class BEstadoActividad implements Believes{
     private Integer boostSeleccionarCancionGusto;
     private Integer boostSeleccionarCuentoGusto;
     
+    private String cedula;
+    private RobotAgentBelieves blvs=null;
+
+    public BEstadoActividad(String cedula,RobotAgentBelieves blvs)
+    {
+        this.cedula=cedula;
+        this.blvs=blvs;
+    }
     
     @Override
     public boolean update(InfoData si) {
@@ -56,10 +72,14 @@ public class BEstadoActividad implements Believes{
         {
             actividadEnCurso= Boolean.valueOf((String)infoRecibida.getDataP().get("actividadEnCurso"));
             if(actividadEnCurso)
+            {
                 tiempoInicioActividad=System.currentTimeMillis();
+                estadoInit=blvs.getbEstadoEmocionalPwA().getEmocionPredominante().toString();
+            }
             else{
                 
                 tiempoInicioActividad=0;
+                createNewInteResgistry();
             }
         }
         return true;
@@ -247,5 +267,17 @@ public class BEstadoActividad implements Believes{
         this.boostCancelarActividad = boostCancelarActividad;
     }
 
-    
+    public void createNewInteResgistry(){
+        RegistroactividadPK ractPK= new RegistroactividadPK(Date.valueOf(LocalDate.now()),actividadActual.getTipo());
+        Registroactividad ract= new Registroactividad(ractPK);
+        List<Actividadpwa> list= RESPwABDInterface.getActivities();
+        list.stream().filter((apwa) -> (apwa.getNombre().equalsIgnoreCase(actividadActual.toString()))).forEachOrdered((apwa) -> {
+            ract.setActividadpwaId(apwa);
+        });
+        ract.setEstadoinicial(cedula);
+        ract.setEstadofinal(cedula);
+        ract.setPerfilpwaCedula(blvs.getbPerfilPwA().getPerfil());
+        RESPwABDInterface.createRegistroAct(ract);
+    }
+
 }

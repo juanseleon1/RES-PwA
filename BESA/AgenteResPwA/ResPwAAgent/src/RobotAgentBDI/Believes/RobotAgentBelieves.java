@@ -25,8 +25,8 @@ import rational.mapping.Believes;
 public class RobotAgentBelieves implements Believes{   
     private BEstadoInteraccion bEstadoInteraccion = new BEstadoInteraccion();
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
-    private BEstadoActividad bEstadoActividad = new BEstadoActividad();
-    private BPerfilPwA bPerfilPwA = new BPerfilPwA();
+    private BEstadoActividad bEstadoActividad;
+    private BPerfilPwA bPerfilPwA;
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
     private Map<String,List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
@@ -34,11 +34,12 @@ public class RobotAgentBelieves implements Believes{
     public RobotAgentBelieves(String cedula)
     {
         imgCuentos=new HashMap<>();
-        //getPerfilBD(cedula);
+        getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
         imgsPerfil=new ArrayList<>();
-    }    
-
+        bEstadoActividad = new BEstadoActividad(cedula,this);
+        bPerfilPwA  = new BPerfilPwA(this);
+    }
     
     //AQUI SE MANDA LO DE INFORMATIONFLOW
     //Aqui se accede a BD y se pide info de otros believes. 
@@ -62,7 +63,6 @@ public class RobotAgentBelieves implements Believes{
                 break;
             case PROFILE:
                 bPerfilPwA.update(si);
-                actualizarPerfilEnDB();
                 break;
             default:
                 break;
@@ -72,15 +72,7 @@ public class RobotAgentBelieves implements Believes{
         return true;
     }
     
-    private void actualizarPerfilEnDB() {
-        try {
-            //conectarConBD
-            bPerfilPwA.updateToDB();
-        } catch (Exception ex) {
-            Logger.getLogger(RobotAgentBelieves.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
         private void getPerfilBD(String cedula) {
         //conectarConBD
         bPerfilPwA.getFromDB(cedula);
