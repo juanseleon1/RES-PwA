@@ -22,9 +22,10 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy{
 
     @Override
     public Map<String, Object> processEmotion(SensorData sd) {
+        System.out.println("Emotion Processing");
         Map<String, Object> ret = null;
         try {
-            String dat = (String) sd.getDataP().get("params");
+            String dat = (String) sd.getDataP().get("PersonData");
             ret = new ObjectMapper().readValue("{"+dat+"}", new TypeReference<Map<String,Object>>(){});
             translateToResPwa(ret);
         } catch (JsonProcessingException ex) {
@@ -34,6 +35,9 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy{
     }
 
     private void translateToResPwa(Map<String, Object> ret) {
-        
+     //Falta esto   
+        System.out.println("AQUI:" +ret.toString());
+     ret.remove("valence");
+     ret.get("attention");
     }
 }

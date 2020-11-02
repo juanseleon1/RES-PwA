@@ -46,19 +46,21 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                 Socket s=ss.accept();
                 DataInputStream  in = new DataInputStream(s.getInputStream());
                 String json = in.readUTF();
-                new Thread(){
+             Thread t1= new Thread(){
                 @Override
                 public void run()
                 {
                     try {
+                        System.out.println("entro hilo2");
                         SensorData sd=toSensorData(json);
                         updateBlvs(sd);
                     } catch (ExceptionBESA ex) {
                         Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                }.start();
-                        
+                };
+                t1.start();
+                System.out.println("entro hilo1"); 
             } catch (IOException ex) {
                 Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -76,7 +78,10 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         
         SensorData resp= new SensorData();
         try {
+            System.out.println("toSensorData "+json);
             Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
+            
+            System.out.println("MAP: "+map.toString());
             resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
             resp.setInfoReceived((String) map.get("params"));

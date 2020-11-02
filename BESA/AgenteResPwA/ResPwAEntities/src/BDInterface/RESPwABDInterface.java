@@ -5,22 +5,9 @@
  */
 package BDInterface;
 
-import ResPwAEntities.Actividadpwa;
-import ResPwAEntities.Actxpreferencia;
-import ResPwAEntities.ActxpreferenciaPK;
-import ResPwAEntities.Cancion;
-import ResPwAEntities.Controllers.ActividadpwaJpaController;
-import ResPwAEntities.Controllers.ActxpreferenciaJpaController;
-import ResPwAEntities.Controllers.CancionJpaController;
-import ResPwAEntities.Controllers.CuentoJpaController;
-import ResPwAEntities.Controllers.CuidadorJpaController;
-import ResPwAEntities.Controllers.PerfilpwaJpaController;
-import ResPwAEntities.Controllers.RegistroactividadJpaController;
+import ResPwAEntities.*;
+import ResPwAEntities.Controllers.*;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
-import ResPwAEntities.Cuento;
-import ResPwAEntities.Cuidador;
-import ResPwAEntities.Perfilpwa;
-import ResPwAEntities.Registroactividad;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

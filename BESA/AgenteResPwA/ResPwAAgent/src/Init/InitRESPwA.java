@@ -1,12 +1,13 @@
 package Init;
 
+import BDInterface.RESPwABDInterface;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.PepperEAStrategy;
-import PepperPackage.PepperEModel;
+import PepperPackage.EmotionalModel.PepperEModel;
 import ResPwAEntities.Controllers.CuidadorJpaController;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
@@ -66,7 +67,7 @@ public class InitRESPwA {
     private static double predefEmoState=0.3;
     public static void main(String[] args) {
        try {
-            String cedula="";//obtenerUsuario();
+            String cedula=obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
@@ -79,21 +80,20 @@ public class InitRESPwA {
         } 
         catch (Exception ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
-        }
-  
+        } 
     }
     private static String obtenerUsuario (){
         String cedula = null,user=null,pwd=null;
         boolean login=false;
         Scanner scan= new Scanner(System.in);
         Cuidador c=null;
-        CuidadorJpaController cjc= new CuidadorJpaController(Persistence.createEntityManagerFactory(emf));
+        
         do{
             System.out.println("Ingrese su nombre de usuario: ");
             user=scan.nextLine();
             System.out.println("Ingrese su contrasena: ");
             pwd= scan.nextLine();
-            c=cjc.findCuidador(user);
+            c=RESPwABDInterface.getCarer(user);
             if(c==null)
             {
                 System.out.println("Usuario Inexistente");

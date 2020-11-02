@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Actxpreferencia;
-import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import ResPwAEntities.Dificultad;
@@ -72,7 +71,7 @@ public class DificultadJpaController implements Serializable {
         }
     }
 
-    public void edit(Dificultad dificultad) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Dificultad dificultad) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,18 +79,6 @@ public class DificultadJpaController implements Serializable {
             Dificultad persistentDificultad = em.find(Dificultad.class, dificultad.getDificultad());
             List<Actxpreferencia> actxpreferenciaListOld = persistentDificultad.getActxpreferenciaList();
             List<Actxpreferencia> actxpreferenciaListNew = dificultad.getActxpreferenciaList();
-            List<String> illegalOrphanMessages = null;
-            for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
-                if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Actxpreferencia " + actxpreferenciaListOldActxpreferencia + " since its dificultadDificultad field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
             for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
                 actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
@@ -100,6 +87,12 @@ public class DificultadJpaController implements Serializable {
             actxpreferenciaListNew = attachedActxpreferenciaListNew;
             dificultad.setActxpreferenciaList(actxpreferenciaListNew);
             dificultad = em.merge(dificultad);
+            for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
+                if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
+                    actxpreferenciaListOldActxpreferencia.setDificultadDificultad(null);
+                    actxpreferenciaListOldActxpreferencia = em.merge(actxpreferenciaListOldActxpreferencia);
+                }
+            }
             for (Actxpreferencia actxpreferenciaListNewActxpreferencia : actxpreferenciaListNew) {
                 if (!actxpreferenciaListOld.contains(actxpreferenciaListNewActxpreferencia)) {
                     Dificultad oldDificultadDificultadOfActxpreferenciaListNewActxpreferencia = actxpreferenciaListNewActxpreferencia.getDificultadDificultad();
@@ -128,7 +121,7 @@ public class DificultadJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -140,16 +133,10 @@ public class DificultadJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The dificultad with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<Actxpreferencia> actxpreferenciaListOrphanCheck = dificultad.getActxpreferenciaList();
-            for (Actxpreferencia actxpreferenciaListOrphanCheckActxpreferencia : actxpreferenciaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Dificultad (" + dificultad + ") cannot be destroyed since the Actxpreferencia " + actxpreferenciaListOrphanCheckActxpreferencia + " in its actxpreferenciaList field has a non-nullable dificultadDificultad field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+            List<Actxpreferencia> actxpreferenciaList = dificultad.getActxpreferenciaList();
+            for (Actxpreferencia actxpreferenciaListActxpreferencia : actxpreferenciaList) {
+                actxpreferenciaListActxpreferencia.setDificultadDificultad(null);
+                actxpreferenciaListActxpreferencia = em.merge(actxpreferenciaListActxpreferencia);
             }
             em.remove(dificultad);
             em.getTransaction().commit();

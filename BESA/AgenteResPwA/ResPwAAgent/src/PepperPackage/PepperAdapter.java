@@ -30,14 +30,13 @@ public class PepperAdapter extends ResPwaAdapter{
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         this.rpa=null;
         System.out.println("PepperAdapter Created");
-
+        startPepperRcv();
     }
     
-    public void startPepperRcv()
+    private void startPepperRcv()
     {
         recvThread.start();
     }
-//AQUI VAN TODOS LOS SERVICIOS TANTO SYNC COMO ASYNC    
     @Override
     public void ActivityServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR = (ServiceDataRequest)data;
