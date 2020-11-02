@@ -38,10 +38,6 @@ public class SeleccionarCuento extends ResPwaTask{
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        
         //escoge el cuento
         float gusto = -1;
         Cuento cuentoEleg = null;

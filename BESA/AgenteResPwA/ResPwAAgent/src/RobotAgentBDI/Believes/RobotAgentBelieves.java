@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.FBaseUtils;
 import ResPwaUtils.Imagen;
 import SensorHandlerAgent.SensorData;
@@ -28,7 +29,7 @@ public class RobotAgentBelieves implements Believes {
     private BEstadoActividad bEstadoActividad;
     private BPerfilPwA bPerfilPwA;
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
-    private Map<String, List<String>> imgCuentos;
+    private Map<String,List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
 
     public RobotAgentBelieves(String cedula) {
@@ -144,5 +145,4 @@ public class RobotAgentBelieves implements Believes {
         }
         return imagenes;
     }
-
 }

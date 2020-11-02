@@ -96,10 +96,10 @@ public class Bailar extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
         if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
-            return 1.0;
+            return 1.0 + blvs.getbEstadoActividad().getBoostBailar();
         }
         
-        return 0;
+        return blvs.getbEstadoActividad().getBoostBailar();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class Bailar extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Bailar goalSucceeded");
-        return false;
+        return true;
     }
     
 }

@@ -82,7 +82,7 @@ public class MantenerAtencionPwA extends GoalBDI{
         System.out.println("Meta MantenerAtencionPwA evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion();
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() + blvs.getbEstadoActividad().getBoostMantenerAtencionPwA();
     }
 
     @Override
@@ -94,6 +94,6 @@ public class MantenerAtencionPwA extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MantenerAtencionPwA goalSucceeded");
-        return false;
+        return true;
     }
 }

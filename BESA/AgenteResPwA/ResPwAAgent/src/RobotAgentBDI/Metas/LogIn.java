@@ -12,7 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.LogIn.CargarPerfilPwA;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
@@ -36,7 +35,6 @@ public class LogIn extends GoalBDI{
 
         //falta mirar iniciarServicios
         DetectarPwA detectarPwA = new DetectarPwA();
-        CargarPerfilPwA cargarPerfil = new CargarPerfilPwA();
         IniciarServicios iniciarServicios = new IniciarServicios();
         Saludar saludar = new Saludar();
         ConversacionInicial conversacion = new ConversacionInicial();
@@ -46,7 +44,6 @@ public class LogIn extends GoalBDI{
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(detectarPwA);
-        rolePlan.addTask(cargarPerfil);
         rolePlan.addTask(iniciarServicios);
         rolePlan.addTask(saludar);
         rolePlan.addTask(conversacion);
@@ -91,7 +88,8 @@ public class LogIn extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn evaluateContribution");
-        return 1.0;
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
     }
 
     @Override
@@ -103,7 +101,7 @@ public class LogIn extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn goalSucceeded");
-        return false;
+        return true;
     }
     
 }

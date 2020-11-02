@@ -8,26 +8,10 @@ import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.PepperEAStrategy;
 import PepperPackage.EmotionalModel.PepperEModel;
-import ResPwAEntities.Controllers.CuidadorJpaController;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.RobotAgentBDI;
-import RobotAgentBDI.Metas.AnimarElogiarPwA;
-import RobotAgentBDI.Metas.Bailar;
-import RobotAgentBDI.Metas.SeleccionarCancionGusto;
-import RobotAgentBDI.Metas.CambiarEnriquecimientoHistoria;
-import RobotAgentBDI.Metas.CancelarActividad;
-import RobotAgentBDI.Metas.ConversarEmpaticamente;
-import RobotAgentBDI.Metas.ActivarKaraoke;
-import RobotAgentBDI.Metas.GenerarReporteInteraccion;
 import RobotAgentBDI.Metas.LogIn;
-import RobotAgentBDI.Metas.MantenerAtencionPwA;
-import RobotAgentBDI.Metas.PausarInteraccion;
-import RobotAgentBDI.Metas.PedirAyuda;
-import RobotAgentBDI.Metas.ReanudarActividad;
-import RobotAgentBDI.Metas.RecargarBateria;
-import RobotAgentBDI.Metas.ReiniciarActividad;
-import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
 import java.util.ArrayList;
@@ -35,7 +19,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.Persistence;
 
 /**
  *

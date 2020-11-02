@@ -23,6 +23,7 @@
     <class>ResPwAEntities.Perfilpwa</class>
     <class>ResPwAEntities.Registroactividad</class>
     <class>ResPwAEntities.Tags</class>
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
       <property name="javax.persistence.jdbc.user" value="is784921"/>

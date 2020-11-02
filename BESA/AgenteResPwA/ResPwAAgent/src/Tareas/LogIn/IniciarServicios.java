@@ -84,6 +84,10 @@ public class IniciarServicios extends ResPwaTask{
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
         requestService(srb);
         infoServicio.clear();
+        infoServicio.put("SETREFRESHTIMESENSORS", null);
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SETREFRESHTIMESENSORS, infoServicio);
+        requestService(srb);
+        infoServicio.clear();
         
         infoServicio.put("TABLETON", true);
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, infoServicio);

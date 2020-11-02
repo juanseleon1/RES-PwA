@@ -91,9 +91,9 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
         if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)) {
-            return 1.0;
+            return 1.0 + blvs.getbEstadoActividad().getBoostAnimarElogiarPwA();
         }
-        return 0;
+        return blvs.getbEstadoActividad().getBoostAnimarElogiarPwA();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta AnimarPwA goalSucceeded");
-        return false;
+        return true;
     }
     
 }

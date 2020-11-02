@@ -33,9 +33,6 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Atencion ---");
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
         
         //complejidad actividad es baja -> mayor tiempo de interacción 
         //cambiar actividad, preguntar si desea cambiarla a una de sus favoritas

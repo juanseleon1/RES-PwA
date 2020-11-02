@@ -82,10 +82,10 @@ public class ActivarKaraoke extends GoalBDI{
         
         //PwA quiere cantar + letraDisponibleCancion
         if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke()>0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
-            return 1.0;
+            return 1.0 + blvs.getbEstadoActividad().getBoostActivarKaraoke();
         }
         
-        return 0;
+        return blvs.getbEstadoActividad().getBoostActivarKaraoke();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class ActivarKaraoke extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta EntrarModoKaraoke goalSucceeded");
-        return false;
+        return true;
     }
     
 }

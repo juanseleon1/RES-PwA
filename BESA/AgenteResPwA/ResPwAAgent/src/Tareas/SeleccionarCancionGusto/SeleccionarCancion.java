@@ -40,10 +40,6 @@ public class SeleccionarCancion extends ResPwaTask{
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         
-        infoServicio.put("GETEMOTIONSTATE", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        
         //buscar cancion BD
         Cancion cancion = new Cancion();
         cancion.setNombre("Unicornio salvaje");

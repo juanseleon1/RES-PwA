@@ -86,7 +86,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ConversarEmpaticamente extends GoalBDI{
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
-        return false;
+        return true;
     }
     
 }
