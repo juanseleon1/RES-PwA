@@ -31,30 +31,29 @@ import rational.mapping.Believes;
  */
 public class BEstadoActividad implements Believes{
     
-    private long tiempoInicioActividad;
+    private long tiempoInicioActividad=0;
     private ResPwAActivity actividadActual;
     private String estadoInit=null;
-    private boolean actividadEnCurso;
-    private boolean mejoraEmocional;
+    private boolean actividadEnCurso=false;
+    private boolean mejoraEmocional=false;
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     private Cuento cuentoActual;
-    private Integer boostActivarKaraoke;
-    private Integer boostAnimarElogiarPwA;
-    private Integer boostBailar;
-    private Integer boostCambiarEnriquecimientoHistoria;
-    private Integer boostCancelarActividad;
-    private Integer boostConversarEmpaticamente;
-    private Integer boostLogIn;
-    private Integer boostMantenerAtencionPwA;
-    private Integer boostPausarInteraccion;
-    private Integer boostPedirAyuda;
-    private Integer boostReanudarActividad;
-    private Integer boostRecargarBateria;
-    private Integer boostReiniciarActividad;
-    private Integer boostSeleccionarCancionGusto;
-    private Integer boostSeleccionarCuentoGusto;
-    
+    private Integer boostActivarKaraoke=0;
+    private Integer boostAnimarElogiarPwA=0;
+    private Integer boostBailar=0;
+    private Integer boostCambiarEnriquecimientoHistoria=0;
+    private Integer boostCancelarActividad=0;
+    private Integer boostConversarEmpaticamente=0;
+    private Integer boostLogIn=0;
+    private Integer boostMantenerAtencionPwA=0;
+    private Integer boostPausarInteraccion=0;
+    private Integer boostPedirAyuda=0;
+    private Integer boostReanudarActividad=0;
+    private Integer boostRecargarBateria=0;
+    private Integer boostReiniciarActividad=0;
+    private Integer boostSeleccionarCancionGusto=0;
+    private Integer boostSeleccionarCuentoGusto=0;
     private String cedula;
     private RobotAgentBelieves blvs=null;
 
