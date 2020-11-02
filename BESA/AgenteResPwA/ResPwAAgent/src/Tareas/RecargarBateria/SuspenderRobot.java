@@ -36,7 +36,6 @@ public class SuspenderRobot extends ResPwaTask{
         infoServicio.put("SAY", "textoDespedir");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio.clear();
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         

@@ -33,7 +33,6 @@ public class PreguntarActividad extends ResPwaTask{
         infoServicio.put("SAY", "AskActivity");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio.clear();
     }
 
     @Override

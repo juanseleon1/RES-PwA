@@ -36,7 +36,7 @@ public class Saludar extends ResPwaTask{
         infoServicio.put("SAY", "Hola" + blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getNombrepreferido());
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio.clear();
+        
         //mirar url animacion
         infoServicio.put("RUNANIMATION", "Saludar");
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
