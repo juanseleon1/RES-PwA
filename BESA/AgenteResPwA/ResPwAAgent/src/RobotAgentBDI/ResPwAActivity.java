@@ -10,7 +10,20 @@ package RobotAgentBDI;
  * @author mafegarces
  */
 public enum ResPwAActivity {
-    MUSICOTERAPIA,
-    MEMORAMA,
-    CUENTERIA
+    MUSICOTERAPIA("Entretenimiento"),
+    MEMORAMA("Entretenimiento"),
+    CUENTERIA("Entretenimiento");
+    private ResPwAActivity(String s){
+        tipo=s;
+    }
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
 }
