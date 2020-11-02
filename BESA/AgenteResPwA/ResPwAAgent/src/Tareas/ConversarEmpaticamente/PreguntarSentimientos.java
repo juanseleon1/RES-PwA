@@ -36,7 +36,7 @@ public class PreguntarSentimientos extends ResPwaTask{
         infoServicio.put("SAY", "PreguntaSentimientos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        
+        infoServicio = new HashMap<>();
         //buscar url
         infoServicio.put("SHOWIMG", "url");
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
