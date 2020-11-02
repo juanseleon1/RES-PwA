@@ -1,31 +1,17 @@
 package Init;
 
+import BDInterface.RESPwABDInterface;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.PepperEAStrategy;
-import PepperPackage.PepperEModel;
-import ResPwAEntities.Controllers.CuidadorJpaController;
+import PepperPackage.EmotionalModel.PepperEModel;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.RobotAgentBDI;
-import RobotAgentBDI.Metas.AnimarElogiarPwA;
-import RobotAgentBDI.Metas.Bailar;
-import RobotAgentBDI.Metas.SeleccionarCancionGusto;
-import RobotAgentBDI.Metas.CambiarEnriquecimientoHistoria;
-import RobotAgentBDI.Metas.CancelarActividad;
-import RobotAgentBDI.Metas.ConversarEmpaticamente;
-import RobotAgentBDI.Metas.ActivarKaraoke;
 import RobotAgentBDI.Metas.LogIn;
-import RobotAgentBDI.Metas.MantenerAtencionPwA;
-import RobotAgentBDI.Metas.PausarInteraccion;
-import RobotAgentBDI.Metas.PedirAyuda;
-import RobotAgentBDI.Metas.ReanudarActividad;
-import RobotAgentBDI.Metas.RecargarBateria;
-import RobotAgentBDI.Metas.ReiniciarActividad;
-import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
 import java.util.ArrayList;
@@ -33,7 +19,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -65,7 +50,7 @@ public class InitRESPwA {
     private static double predefEmoState=0.3;
     public static void main(String[] args) {
        try {
-            String cedula="";//obtenerUsuario();
+            String cedula=obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
@@ -78,21 +63,20 @@ public class InitRESPwA {
         } 
         catch (Exception ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
-        }
-  
+        } 
     }
     private static String obtenerUsuario (){
         String cedula = null,user=null,pwd=null;
         boolean login=false;
         Scanner scan= new Scanner(System.in);
         Cuidador c=null;
-        CuidadorJpaController cjc= new CuidadorJpaController(Persistence.createEntityManagerFactory(emf));
+        
         do{
             System.out.println("Ingrese su nombre de usuario: ");
             user=scan.nextLine();
             System.out.println("Ingrese su contrasena: ");
             pwd= scan.nextLine();
-            c=cjc.findCuidador(user);
+            c=RESPwABDInterface.getCarer(user);
             if(c==null)
             {
                 System.out.println("Usuario Inexistente");

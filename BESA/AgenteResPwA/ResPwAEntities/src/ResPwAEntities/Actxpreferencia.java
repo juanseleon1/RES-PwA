@@ -50,7 +50,7 @@ public class Actxpreferencia implements Serializable {
     @ManyToOne(optional = false)
     private Actividadpwa actividadpwa;
     @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Dificultad dificultadDificultad;
     @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA", insertable = false, updatable = false)
     @ManyToOne(optional = false)

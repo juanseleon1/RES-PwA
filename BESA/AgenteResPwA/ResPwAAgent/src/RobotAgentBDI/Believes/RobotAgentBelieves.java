@@ -22,7 +22,8 @@ import rational.mapping.Believes;
  *
  * @author juans
  */
-public class RobotAgentBelieves implements Believes{   
+public class RobotAgentBelieves implements Believes {
+
     private BEstadoInteraccion bEstadoInteraccion = new BEstadoInteraccion();
     private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
     private BEstadoActividad bEstadoActividad;
@@ -30,50 +31,48 @@ public class RobotAgentBelieves implements Believes{
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
     private Map<String,List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
-   
-    public RobotAgentBelieves(String cedula)
-    {
-        imgCuentos=new HashMap<>();
+
+    public RobotAgentBelieves(String cedula) {
+        imgCuentos = new HashMap<>();
+        imgsPerfil = new ArrayList<>();
+        bEstadoActividad = new BEstadoActividad(cedula, this);
+        bPerfilPwA = new BPerfilPwA(this);
         getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
-        imgsPerfil=new ArrayList<>();
-        bEstadoActividad = new BEstadoActividad(cedula,this);
-        bPerfilPwA  = new BPerfilPwA(this);
     }
-    
+
     //AQUI SE MANDA LO DE INFORMATIONFLOW
     //Aqui se accede a BD y se pide info de otros believes. 
-   @Override
+    @Override
     public boolean update(InfoData si) {
-        SensorData infoRecibida= (SensorData)si;
-        System.out.println("RobotAgentBelieves update Received: "+si);
-        if(si!=null){
-        switch (infoRecibida.getDataType()) {
-            case ACTIVITY:
-                bEstadoActividad.update(si);
-                break;
-            case EMOTIONS:
-                bEstadoEmocionalPwA.update(si);
-                break;
-            case INTERACTION:
-                bEstadoInteraccion.update(si);
-                break;
-            case ROBOT:
-                bEstadoRobot.update(si);
-                break;
-            case PROFILE:
-                bPerfilPwA.update(si);
-                break;
-            default:
-                break;
+        SensorData infoRecibida = (SensorData) si;
+        System.out.println("RobotAgentBelieves update Received: " + si);
+        if (si != null) {
+            switch (infoRecibida.getDataType()) {
+                case ACTIVITY:
+                    bEstadoActividad.update(si);
+                    break;
+                case EMOTIONS:
+                    bEstadoEmocionalPwA.update(si);
+                    break;
+                case INTERACTION:
+                    bEstadoInteraccion.update(si);
+                    break;
+                case ROBOT:
+                    bEstadoRobot.update(si);
+                    break;
+                case PROFILE:
+                    bPerfilPwA.update(si);
+                    break;
+                default:
+                    break;
+            }
+            return true;
         }
         return true;
     }
-        return true;
-    }
-    
 
-        private void getPerfilBD(String cedula) {
+    private void getPerfilBD(String cedula) {
         //conectarConBD
         bPerfilPwA.getFromDB(cedula);
     }
@@ -118,11 +117,11 @@ public class RobotAgentBelieves implements Believes{
         this.bEstadoRobot = bEstadoRobot;
     }
 
-    public Map<String,List<String>> getImgCuentos() {
+    public Map<String, List<String>> getImgCuentos() {
         return imgCuentos;
     }
 
-    public void setImgCuentos(Map<String,List<String>> imgCuentos) {
+    public void setImgCuentos(Map<String, List<String>> imgCuentos) {
         this.imgCuentos = imgCuentos;
     }
 
@@ -133,10 +132,10 @@ public class RobotAgentBelieves implements Believes{
     public void setImgsPerfil(List<Imagen> imgsPerfil) {
         this.imgsPerfil = imgsPerfil;
     }
-    
+
     public List<Imagen> getImagexTag(String tag) {
         List<Imagen> imagenes = new ArrayList<>();
-        
+
         for (Imagen i : imgsPerfil) {
             for (String t : i.getTags()) {
                 if (t.equalsIgnoreCase(tag)) {
@@ -146,9 +145,4 @@ public class RobotAgentBelieves implements Believes{
         }
         return imagenes;
     }
-
-    public void setbPerfilPwA(Perfilpwa pwa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-        
 }

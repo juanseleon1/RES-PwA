@@ -12,7 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.LogIn.CargarPerfilPwA;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
@@ -36,7 +35,6 @@ public class LogIn extends GoalBDI{
 
         //falta mirar iniciarServicios
         DetectarPwA detectarPwA = new DetectarPwA();
-        CargarPerfilPwA cargarPerfil = new CargarPerfilPwA();
         IniciarServicios iniciarServicios = new IniciarServicios();
         Saludar saludar = new Saludar();
         ConversacionInicial conversacion = new ConversacionInicial();
@@ -46,7 +44,6 @@ public class LogIn extends GoalBDI{
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(detectarPwA);
-        rolePlan.addTask(cargarPerfil);
         rolePlan.addTask(iniciarServicios);
         rolePlan.addTask(saludar);
         rolePlan.addTask(conversacion);

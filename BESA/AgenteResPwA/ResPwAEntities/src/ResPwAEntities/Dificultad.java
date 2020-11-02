@@ -8,7 +8,6 @@ package ResPwAEntities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -36,7 +35,7 @@ public class Dificultad implements Serializable {
     @Basic(optional = false)
     @Column(name = "DIFICULTAD")
     private String dificultad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dificultadDificultad")
+    @OneToMany(mappedBy = "dificultadDificultad")
     private List<Actxpreferencia> actxpreferenciaList;
 
     public Dificultad() {
