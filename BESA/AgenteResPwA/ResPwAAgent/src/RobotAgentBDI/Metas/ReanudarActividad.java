@@ -63,9 +63,12 @@ public class ReanudarActividad extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
 
         //estaba suspendido
-        if(blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoRobot().isEstaSuspendido()) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoRobot().isEstaSuspendido()) {
             return 1.0;
         }
+        }
+        
         
         return 0;
     }

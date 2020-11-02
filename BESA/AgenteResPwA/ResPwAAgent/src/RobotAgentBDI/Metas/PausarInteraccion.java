@@ -59,9 +59,12 @@ public class PausarInteraccion extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //3 min
-        if(blvs.getbEstadoInteraccion().isPausarInt() || blvs.getbEstadoInteraccion().getTiempoSinInt()/60 > 3) {
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(blvs.getbEstadoInteraccion().isPausarInt() || blvs.getbEstadoInteraccion().getTiempoSinInt()/60 > 3) {
             return 1.0;
         }
+        }
+        
         
         return 0;
     }

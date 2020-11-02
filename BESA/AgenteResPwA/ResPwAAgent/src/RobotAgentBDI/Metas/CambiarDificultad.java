@@ -69,7 +69,7 @@ public class CambiarDificultad extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         //faltan intentos fallidos ((intentosFallidos> + 50% errores || FallosSeguidos>V || intentosCorrectos > 100%)
-        if (blvs.getbEstadoInteraccion().isCambioDificultadVoz()) {
+        if (blvs.getbEstadoInteraccion().isCambioDificultadVoz() ) {
             return 1.0;
         }
         

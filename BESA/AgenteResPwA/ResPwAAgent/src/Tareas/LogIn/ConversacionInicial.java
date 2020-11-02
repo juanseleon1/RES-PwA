@@ -5,6 +5,7 @@
  */
 package Tareas.LogIn;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
@@ -28,11 +29,13 @@ public class ConversacionInicial extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Estado Animo ---");
-        
+        RobotAgentBelieves rab= (RobotAgentBelieves)parameters;
         //buscar texto "¿como estas pepito?"
         infoServicio.put("SAY", "PreguntaSentimientos");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
+        rab.getbEstadoInteraccion().setLogged(true);
+        
     }
 
     @Override

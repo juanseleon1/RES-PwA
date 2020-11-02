@@ -5,9 +5,6 @@
  */
 package RobotAgentBDI.Believes;
 
-
-
-
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Cancion;
@@ -29,56 +26,51 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class BEstadoActividad implements Believes{
-    
-    private long tiempoInicioActividad;
+public class BEstadoActividad implements Believes {
+
+    private long tiempoInicioActividad = 0;
     private ResPwAActivity actividadActual;
-    private String estadoInit=null;
-    private boolean actividadEnCurso;
-    private boolean mejoraEmocional;
+    private String estadoInit = null;
+    private boolean actividadEnCurso = false;
+    private boolean mejoraEmocional = false;
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     private Cuento cuentoActual;
-    private Integer boostActivarKaraoke;
-    private Integer boostAnimarElogiarPwA;
-    private Integer boostBailar;
-    private Integer boostCambiarEnriquecimientoHistoria;
-    private Integer boostCancelarActividad;
-    private Integer boostConversarEmpaticamente;
-    private Integer boostLogIn;
-    private Integer boostMantenerAtencionPwA;
-    private Integer boostPausarInteraccion;
-    private Integer boostPedirAyuda;
-    private Integer boostReanudarActividad;
-    private Integer boostRecargarBateria;
-    private Integer boostReiniciarActividad;
-    private Integer boostSeleccionarCancionGusto;
-    private Integer boostSeleccionarCuentoGusto;
-    
+    private Integer boostActivarKaraoke = 0;
+    private Integer boostAnimarElogiarPwA = 0;
+    private Integer boostBailar = 0;
+    private Integer boostCambiarEnriquecimientoHistoria = 0;
+    private Integer boostCancelarActividad = 0;
+    private Integer boostConversarEmpaticamente = 0;
+    private Integer boostLogIn = 0;
+    private Integer boostMantenerAtencionPwA = 0;
+    private Integer boostPausarInteraccion = 0;
+    private Integer boostPedirAyuda = 0;
+    private Integer boostReanudarActividad = 0;
+    private Integer boostRecargarBateria = 0;
+    private Integer boostReiniciarActividad = 0;
+    private Integer boostSeleccionarCancionGusto = 0;
+    private Integer boostSeleccionarCuentoGusto = 0;
     private String cedula;
-    private RobotAgentBelieves blvs=null;
+    private RobotAgentBelieves blvs = null;
 
-    public BEstadoActividad(String cedula,RobotAgentBelieves blvs)
-    {
-        this.cedula=cedula;
-        this.blvs=blvs;
+    public BEstadoActividad(String cedula, RobotAgentBelieves blvs) {
+        this.cedula = cedula;
+        this.blvs = blvs;
     }
-    
+
     @Override
     public boolean update(InfoData si) {
-        System.out.println("BEstadoActividad update Received: "+si);
-        SensorData infoRecibida= (SensorData)si;
-        if(infoRecibida.getDataP().containsKey("actividadEnCurso"))
-        {
-            actividadEnCurso= Boolean.valueOf((String)infoRecibida.getDataP().get("actividadEnCurso"));
-            if(actividadEnCurso)
-            {
-                tiempoInicioActividad=System.currentTimeMillis();
-                estadoInit=blvs.getbEstadoEmocionalPwA().getEmocionPredominante().toString();
-            }
-            else{
-                
-                tiempoInicioActividad=0;
+        System.out.println("BEstadoActividad update Received: " + si);
+        SensorData infoRecibida = (SensorData) si;
+        if (infoRecibida.getDataP().containsKey("actividadEnCurso")) {
+            actividadEnCurso = Boolean.valueOf((String) infoRecibida.getDataP().get("actividadEnCurso"));
+            if (actividadEnCurso) {
+                tiempoInicioActividad = System.currentTimeMillis();
+                estadoInit = blvs.getbEstadoEmocionalPwA().getEmocionPredominante().toString();
+            } else {
+
+                tiempoInicioActividad = 0;
                 createNewInteResgistry();
             }
         }
@@ -86,7 +78,7 @@ public class BEstadoActividad implements Believes{
     }
 
     public long getTiempoInicioActividad() {
-        return System.currentTimeMillis()-tiempoInicioActividad;
+        return System.currentTimeMillis() - tiempoInicioActividad;
     }
 
     public void setTiempoInicioActividad(long tiempoInicioActividad) {
@@ -130,8 +122,12 @@ public class BEstadoActividad implements Believes{
     }
 
     public long calcTiempoActividad() {
-        Timestamp ts = Timestamp.valueOf(LocalDateTime.now());  
-        long time = (ts.getTime() - tiempoInicioActividad)/1000;
+        long time = -1;
+        if (tiempoInicioActividad != 0) {
+            Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
+            time = (ts.getTime() - tiempoInicioActividad) / 1000;
+        }
+
         return time;
     }
 
@@ -267,10 +263,10 @@ public class BEstadoActividad implements Believes{
         this.boostCancelarActividad = boostCancelarActividad;
     }
 
-    public void createNewInteResgistry(){
-        RegistroactividadPK ractPK= new RegistroactividadPK(Date.valueOf(LocalDate.now()),actividadActual.getTipo());
-        Registroactividad ract= new Registroactividad(ractPK);
-        List<Actividadpwa> list= RESPwABDInterface.getActivities();
+    public void createNewInteResgistry() {
+        RegistroactividadPK ractPK = new RegistroactividadPK(Date.valueOf(LocalDate.now()), actividadActual.getTipo());
+        Registroactividad ract = new Registroactividad(ractPK);
+        List<Actividadpwa> list = RESPwABDInterface.getActivities();
         list.stream().filter((apwa) -> (apwa.getNombre().equalsIgnoreCase(actividadActual.toString()))).forEachOrdered((apwa) -> {
             ract.setActividadpwaId(apwa);
         });
@@ -278,6 +274,30 @@ public class BEstadoActividad implements Believes{
         ract.setEstadofinal(cedula);
         ract.setPerfilpwaCedula(blvs.getbPerfilPwA().getPerfil());
         RESPwABDInterface.createRegistroAct(ract);
+    }
+
+    public String getEstadoInit() {
+        return estadoInit;
+    }
+
+    public void setEstadoInit(String estadoInit) {
+        this.estadoInit = estadoInit;
+    }
+
+    public boolean isActividadEnCurso() {
+        return actividadEnCurso;
+    }
+
+    public void setActividadEnCurso(boolean actividadEnCurso) {
+        this.actividadEnCurso = actividadEnCurso;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
 }

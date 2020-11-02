@@ -14,6 +14,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
+    private boolean logged=false;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -22,6 +23,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean reiniciarInt=false;
     private long tiempoSinInt=0;
     private boolean sistemaSuspendido=false;
+    private boolean sistemaSuspendidoInt=false;
     private long nivelEnriquecimiento=0;
     private long velocidadAnim=0;
     private long distanciaPwA=0;
@@ -269,6 +271,22 @@ public class BEstadoInteraccion implements Believes{
 
     public void setKeyNameConf(String keyNameConf) {
         this.keyNameConf = keyNameConf;
+    }
+
+    public boolean isSistemaSuspendidoInt() {
+        return sistemaSuspendidoInt;
+    }
+
+    public void setSistemaSuspendidoInt(boolean sistemaSuspendidoInt) {
+        this.sistemaSuspendidoInt = sistemaSuspendidoInt;
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
     }
 
     
