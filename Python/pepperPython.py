@@ -513,7 +513,7 @@ def activate_conversational_topic(topicName):
 
 #Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine 
 def load_conversational_topic(topicName):
-     alDialogProxy.loadTopic(path)
+     return alDialogProxy.loadTopicContent(topicName)
 
 #Unloads the specified topic and frees the associated memory.
 def unload_conversational_topic(topicName):
@@ -784,3 +784,34 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 conn, addr = server.accept()
 thread = threading.Thread(target=handle_client, args=(conn, addr))
 thread.start()
+
+
+
+#TOPICOS
+alDialogProxy.setLanguage("Spanish")
+    topic_content_1 = ('topic: ~retroalimentation()\n'
+                       'language: spe \n'
+                       'concept:(retroalimentacion) [Excelente Bien Regular Mal Pesimo]\n'
+                       'u: (Quiero terminar) Esta bien, ¿Nos puedes dar una retroalimentación, por favor?\n'
+                       'u: (si) Gracias! Califica como te pareció la actividad: Excelente, bien, regular, mal o pésimo\n'
+                       'u: (no) De acuerdo. Gracias por participar conmigo\n'
+                       'u: ([Excelente Bien]) Gracias por tu calificación! Esperamos que te siga gustando!\n'
+                       'u: (Regular) Gracias por tu calificación! Esperamos mejorar para la próxima\n'
+                       'u: ([Mal Pesimo]) Gracias por tu calificación! Que lastima que no te gustara, lo mejoraremos la próxima vez\n')
+
+    topic_content_2 = ('topic: ~Activity_management()\n'
+                       'language: spe\n'
+                       'concept:(emocion)[cansado aburrido mamado ] \n'
+                       'u:(No quiero jugar más) ¡Está bien! Vamos a quitar la actividad.\n'
+                       'u:(Estoy_~emocion) ¡Está bien! Quieres cambiar la actividad?.\n'
+                      'u:(si {por favor}) Bueno, cambiemos de actividad.\n')
+
+    # Loading the topics directly as text strings
+    topic_name_1 = load_conversational_topic(topic_content_1)
+    topic_name_2 = load_conversational_topic(topic_content_1)
+
+    # Activating the loaded topics
+    activate_conversational_topic(topic_name_1)
+    activate_conversational_topic(topic_name_2)
+
+
