@@ -104,7 +104,7 @@ def message_manage(key, msg):
             "RANDOMEYES":"random_eyes",#
             "SETLEDSINTENSITY":"set_leds_intensity",#
             "CHANGELEDCOLOR":"change_led_color",#
-            "ACTIVATESTIFFNESS":"activate_stiffness",
+            "ACTIVATESTIFFNESS":"activate_stiffness",#
             #TabletServices-------------------------------------------------------
             "TABLETON":"tablet_on",
             "WAKETABLET":"wake_tablet",
@@ -601,56 +601,23 @@ def conversacion_ira(genero):
     }
     frase_principal = "ï¿½si quieres podemos escuchar una canciï¿½n para relajarnos?"
 
-def presentarse(params):
-    pass
-def ayuda(params):
-    pass
-def consultar_actividades(params):
-    pass
-def saludar(params):
-    pass
-def despedirse(params):
-    pass
-def reinicio_actividad(params):
-    pass
-def cancelar_actividad(params):
-    pass
-def cancelar_interaccion(params):
-    pass
-def bailar(params):
-    pass
-def karaoke(params):
-    pass
-def bateria(params):
-    pass
-def cancion(params):
-    pass
-def falta_informacion(params):
-    pass
-def notificacion(params):
-    pass
-def cambiar_dificultad(params):
-    pass
-def seleccionar_cuento(params):
-    pass
-def animar(params):
-    pass
-def mantener_atencion(params):
-    pass
-def reanudar_actividad(params):
-    pass
-def reporte(params):
-    pass
-def pausa_interaccion(params):
-    pass
-def musicoterapia(params):
-    pass
-def modificar_historia(params):
-    pass
+#----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------    
+"""--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
+#----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
+# create python module
+class pepperModule(ALModule):
+  """python class myModule test auto documentation: comment needed to create a new python module"""
 
 
-#----------------------------------------------------------------------------------------------------
+  def pythondatachanged(self, key, value, message):
+    """callback when data change"""
+    print "datachanged", key, " ", value, " ", message
 
+    #Envío de información a BESA después de recibir un evento+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+#----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------    
+"""--------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
+#----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 print("Server starting...pop")
 HOST = '192.168.2.7' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
@@ -679,6 +646,7 @@ except RuntimeError:
 #----------------------------------------------------------------------------------------------------
 
 #Declare the Naoqi variables --------------------------------------------------------------------
+alProxy = ALProxy("ALMemory")
 alMood = session.service("ALMood")
 alTexToSpeech = session.service("ALTextToSpeech")
 alAnimationPlayer = session.service("ALAnimationPlayer")
@@ -707,10 +675,101 @@ alAudioPlayer = session.service("ALAudioPlayer")
 alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
 alSpeechRecognition  = session.service("ALSpeechRecognition")
 alDialogProxy = session.service("ALDialog")
-
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
-#ALProxy(" ALBasicAwarenessProxy", HOST, 9559)
+#----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+#Declare the modules --------------------------------------------------------------------------------
+try:
+    
+  pythonModule = pepperModule("sensorsModule")
+  
+  #Raised when an animated speech is done.
+  alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
+  #Raised when the person tracked can no longer be found for some time.
+  alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")
+  #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person’s ID is updated.
+  alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
+  #Raised when a stimulus is detected.
+  #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
+  alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected","sensorsModule", "pythondatachanged")
+  #Raised when the battery level is low and will soon need charging.
+  alProxy.subscribeToEvent("ALBattery/BatteryLow","sensorsModule", "pythondatachanged")
+  #Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
+  alProxy.subscribeToEvent("ALLocalization/GoToFailed","sensorsModule", "pythondatachanged")
+  #Raised when the robot has successfully reached its destination.
+  alProxy.subscribeToEvent("ALLocalization/GoToSuccess","sensorsModule", "pythondatachanged")
+  #Raised when the robot gets lost while trying to go to its destination.
+  alProxy.subscribeToEvent("ALLocalization/GoToLost","sensorsModule", "pythondatachanged")
+  #Raised when the localization is successful.
+  alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess","sensorsModule", "pythondatachanged")
+  #Raised when the localization fails and the robot is lost.
+  alProxy.subscribeToEvent("ALLocalization/LocalizeLost","sensorsModule", "pythondatachanged")
+  #Raised when the orientation of the robot has NOT been successfully retrieved.
+  alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost","sensorsModule", "pythondatachanged")
+  #Raised when the orientation of the robot has been successfully retrieved.
+  alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess","sensorsModule", "pythondatachanged")
+  #Raised when a chain velocity is clipped because an obstacle is too close.
+  alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+  #Raised when a move command fails.
+  alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+  #Raised when the awake status of the robot changes.
+  alProxy.subscribeToEvent("robotIsWakeUp","sensorsModule", "pythondatachanged")
+  #Raised at ALMotionProxy::wakeUp finish.
+  alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished","sensorsModule", "pythondatachanged")
+  #Raised at ALMotionProxy::rest finish.
+  alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished","sensorsModule", "pythondatachanged")
+  #Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
+  alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged","sensorsModule", "pythondatachanged")
+  #Raised when features (Move, Stiffness...) availability changed.
+  alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged","sensorsModule", "pythondatachanged")
+  #Raised when a chain velocity is clipped because an obstacle is too close.
+  alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+  #Raised when a move command fails.
+  alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+  #Raised when Pepper is correctly docked onto the charging station.
+  alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation","sensorsModule", "pythondatachanged")
+  #Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
+  alProxy.subscribeToEvent("ALRecharge/MoveFailed","sensorsModule", "pythondatachanged")
+  #Raised when Pepper failed to leave his charging station due to an obstacle in the way.
+  alProxy.subscribeToEvent("ALRecharge/LeaveFailed","sensorsModule", "pythondatachanged")
+  #Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
+  alProxy.subscribeToEvent("WordRecognized","sensorsModule", "pythondatachanged")
+  #Raised when the automatic speech recognition engine has detected a voice activity.
+  alProxy.subscribeToEvent("SpeechDetected","sensorsModule", "pythondatachanged")
+  #Raised when an error occurs.
+  alProxy.subscribeToEvent("ALTabletService/error","sensorsModule", "pythondatachanged")
+  #Raised when message occurs.
+  alProxy.subscribeToEvent("ALTabletService/message","sensorsModule", "pythondatachanged")
+  #Raised when text input occurs.
+  alProxy.subscribeToEvent("ALTabletService/onInputText","sensorsModule", "pythondatachanged")
+  #Raised when a valid tactile gesture has been detected
+  alProxy.subscribeToEvent("ALTactileGesture/Gesture","sensorsModule", "pythondatachanged")
+  #Raised when the current sentence synthesis is done.
+  alProxy.subscribeToEvent("ALTextToSpeech/TextDone","sensorsModule", "pythondatachanged")
+  #Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
+  alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
+  #Raised when an utterance has been analyzed.
+  alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
+  #
+  alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #
+  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  
+except Exception,e:
+  print "error"
+  print e
+  exit(1)
 #----------------------------------------------------------------------------------------------------
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
