@@ -98,13 +98,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CambiarEnriquecimientoHistoria predictResultUnlegality");
+        System.out.println("Meta CambiarEnriquecimientoHistoria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
+        System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
         return true;
     }
     

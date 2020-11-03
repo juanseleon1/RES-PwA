@@ -94,13 +94,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
+        System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
         return true;
     }

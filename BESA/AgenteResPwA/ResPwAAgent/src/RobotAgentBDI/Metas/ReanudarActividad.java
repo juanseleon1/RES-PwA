@@ -88,13 +88,13 @@ public class ReanudarActividad extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ReanudarActividad predictResultUnlegality");
+        System.out.println("Meta ReanudarActividad predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ReanudarActividad goalSucceeded");
+        System.out.println("Meta ReanudarActividad goalSucceeded");
         return true;
     }
     

@@ -84,13 +84,13 @@ public class PausarInteraccion extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta PausarInteraccion predictResultUnlegality");
+        System.out.println("Meta PausarInteraccion predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta PausarInteraccion goalSucceeded");
+        System.out.println("Meta PausarInteraccion goalSucceeded");
         return true;
     }
     

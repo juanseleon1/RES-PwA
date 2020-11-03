@@ -94,13 +94,13 @@ public class LogIn extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn predictResultUnlegality");
+        System.out.println("Meta LogIn predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn goalSucceeded");
+        System.out.println("Meta LogIn goalSucceeded");
         return true;
     }
     

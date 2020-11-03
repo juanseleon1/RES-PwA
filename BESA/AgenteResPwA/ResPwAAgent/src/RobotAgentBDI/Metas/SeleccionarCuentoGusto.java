@@ -98,13 +98,13 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta SeleccionarCuentoGusto predictResultUnlegality");
+        System.out.println("Meta SeleccionarCuentoGusto predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta SeleccionarCuentoGusto goalSucceeded");
+        System.out.println("Meta SeleccionarCuentoGusto goalSucceeded");
         return true;
     }
     

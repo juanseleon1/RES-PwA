@@ -94,13 +94,13 @@ public class SeleccionarCancionGusto extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CambiarCancion predictResultUnlegality");
+        System.out.println("Meta CambiarCancion predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CambiarCancion goalSucceeded");
+        System.out.println("Meta CambiarCancion goalSucceeded");
         return true;
     }
     

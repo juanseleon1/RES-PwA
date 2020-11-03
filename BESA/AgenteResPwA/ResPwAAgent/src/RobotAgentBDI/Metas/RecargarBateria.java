@@ -89,13 +89,13 @@ public class RecargarBateria extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta RecargarBateria predictResultUnlegality");
+        System.out.println("Meta RecargarBateria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta RecargarBateria goalSucceeded");
+        System.out.println("Meta RecargarBateria goalSucceeded");
         return true;
     }
     

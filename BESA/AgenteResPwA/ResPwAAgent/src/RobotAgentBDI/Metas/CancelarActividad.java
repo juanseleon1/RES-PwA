@@ -88,13 +88,13 @@ public class CancelarActividad extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CancelarActividad predictResultUnlegality");
+        System.out.println("Meta CancelarActividad predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta CancelarActividad goalSucceeded");
+        System.out.println("Meta CancelarActividad goalSucceeded");
         return true;
     }
     

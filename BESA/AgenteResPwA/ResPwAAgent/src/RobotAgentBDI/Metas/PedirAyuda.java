@@ -83,13 +83,13 @@ public class PedirAyuda extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta PedirAyuda predictResultUnlegality");
+        System.out.println("Meta PedirAyuda predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta PedirAyuda goalSucceeded");
+        System.out.println("Meta PedirAyuda goalSucceeded");
         return true;
     }
     

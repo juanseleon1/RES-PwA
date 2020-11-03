@@ -105,13 +105,13 @@ public class Bailar extends GoalBDI {
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta Bailar predictResultUnlegality");
+        System.out.println("Meta Bailar predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta Bailar goalSucceeded");
+        System.out.println("Meta Bailar goalSucceeded");
         return true;
     }
 

@@ -100,13 +100,13 @@ public class AnimarElogiarPwA extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta AnimarPwA predictResultUnlegality");
+        System.out.println("Meta AnimarPwA predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta AnimarPwA goalSucceeded");
+        System.out.println("Meta AnimarPwA goalSucceeded");
         return true;
     }
     

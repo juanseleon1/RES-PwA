@@ -94,13 +94,13 @@ public class ActivarKaraoke extends GoalBDI {
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta EntrarModoKaraoke predictResultUnlegality");
+        System.out.println("Meta EntrarModoKaraoke predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta EntrarModoKaraoke goalSucceeded");
+        System.out.println("Meta EntrarModoKaraoke goalSucceeded");
         return true;
     }
 
