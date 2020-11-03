@@ -193,4 +193,36 @@ public class BEstadoRobot implements Believes {
         return this;
     }
 
+    public int getVolumenVoz() {
+        return volumenVoz;
+    }
+
+    public void setVolumenVoz(int volumenVoz) {
+        this.volumenVoz = volumenVoz;
+    }
+
+    public long getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(long velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public int getVelHabla() {
+        return velHabla;
+    }
+
+    public void setVelHabla(int velHabla) {
+        this.velHabla = velHabla;
+    }
+
+    public int getTonoHabla() {
+        return tonoHabla;
+    }
+
+    public void setTonoHabla(int tonoHabla) {
+        this.tonoHabla = tonoHabla;
+    }
+
 }
