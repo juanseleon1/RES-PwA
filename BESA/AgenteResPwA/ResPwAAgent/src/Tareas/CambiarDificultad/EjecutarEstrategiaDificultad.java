@@ -38,4 +38,9 @@ public class EjecutarEstrategiaDificultad extends ResPwaTask{
         System.out.println("--- Cancel Task Solicitar Estrategia ---");
     }
 
+    @Override
+    public boolean checkFinish(Believes believes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

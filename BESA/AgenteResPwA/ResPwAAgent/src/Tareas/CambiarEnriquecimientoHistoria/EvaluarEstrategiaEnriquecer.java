@@ -51,5 +51,10 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Evaluar Enriquecer ---");
     }
+
+    @Override
+    public boolean checkFinish(Believes believes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

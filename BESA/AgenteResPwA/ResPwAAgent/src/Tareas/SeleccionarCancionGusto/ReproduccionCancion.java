@@ -97,4 +97,9 @@ public class ReproduccionCancion extends ResPwaTask {
         return imagenes;
     }
 
+    @Override
+    public boolean checkFinish(Believes believes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

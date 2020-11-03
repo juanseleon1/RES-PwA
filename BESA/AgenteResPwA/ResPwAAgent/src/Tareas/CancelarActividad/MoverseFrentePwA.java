@@ -43,5 +43,10 @@ public class MoverseFrentePwA extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Moverse Frente PwA ---");
     }
+
+    @Override
+    public boolean checkFinish(Believes believes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
