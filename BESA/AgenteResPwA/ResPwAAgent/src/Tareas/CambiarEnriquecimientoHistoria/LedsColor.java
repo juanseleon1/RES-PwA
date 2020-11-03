@@ -10,8 +10,8 @@ package Tareas.CambiarEnriquecimientoHistoria;
  * @author mafegarces
  */
 public enum LedsColor {
-    SADNESS(72,185,246),
-    HAPPINESS(250,247,67);
+    BLUE(72,185,246),
+    YELLOW(250,247,67);
     
     private Integer r;
     private Integer g;
