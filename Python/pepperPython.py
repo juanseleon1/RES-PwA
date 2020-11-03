@@ -358,8 +358,8 @@ def get_emotion_state():
     return alMood.currentPersonState()
 
 #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
-#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesión activa coincida con
-#el que está interactuando con el robot
+#Se verifica el login, es decir, se revisa que alguno de los usuarios con sesiï¿½n activa coincida con
+#el que estï¿½ interactuando con el robot
 def login():
 
     for i in alUserSession.getOpenUserSessions():
@@ -637,7 +637,7 @@ class pepperModule(ALModule):
     """callback when data change"""
     print "datachanged", key, " ", value, " ", message
 
-    #Envío de información a BESA después de recibir un evento+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #Envï¿½o de informaciï¿½n a BESA despuï¿½s de recibir un evento+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 #----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
@@ -712,7 +712,7 @@ try:
   alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
   #Raised when the person tracked can no longer be found for some time.
   alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")
-  #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person’s ID is updated.
+  #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked personï¿½s ID is updated.
   alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
   #Raised when a stimulus is detected.
   #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
@@ -841,19 +841,20 @@ alDialogProxy.setLanguage("Spanish")
 topic_content_1 = ('topic: ~retroalimentation()\n'
                        'language: spe \n'
                        'concept:(retroalimentacion) [Excelente Bien Regular Mal Pesimo]\n'
-                       'u: (Quiero terminar) Esta bien, ¿Nos puedes dar una retroalimentación, por favor?\n'
-                       'u: (si) Gracias! Califica como te pareció la actividad: Excelente, bien, regular, mal o pésimo\n'
+                       'u: (Quiero terminar) Esta bien, ï¿½Nos puedes dar una retroalimentaciï¿½n, por favor?\n'
+                       'u: (si) Gracias! Califica como te pareciï¿½ la actividad: Excelente, bien, regular, mal o pï¿½simo\n'
                        'u: (no) De acuerdo. Gracias por participar conmigo\n'
-                       'u: ([Excelente Bien]) Gracias por tu calificación! Esperamos que te siga gustando!\n'
-                       'u: (Regular) Gracias por tu calificación! Esperamos mejorar para la próxima\n'
-                       'u: ([Mal Pesimo]) Gracias por tu calificación! Que lastima que no te gustara, lo mejoraremos la próxima vez\n')
+                       'u: ([Excelente Bien]) Gracias por tu calificaciï¿½n! Esperamos que te siga gustando!\n'
+                       'u: (Regular) Gracias por tu calificaciï¿½n! Esperamos mejorar para la prï¿½xima\n'
+                       'u: ([Mal Pesimo]) Gracias por tu calificaciï¿½n! Que lastima que no te gustara, lo mejoraremos la prï¿½xima vez\n')
 
 topic_content_2 = ('topic: ~Activity_management()\n'
                        'language: spe\n'
                        'concept:(emocion)[cansado aburrido mamado ] \n'
-                       'u:(No quiero jugar más) ¡Está bien! Vamos a quitar la actividad.\n'
-                       'u:(Estoy_~emocion) ¡Está bien! Quieres cambiar la actividad?.\n'
-                      'u:(si {por favor}) Bueno, cambiemos de actividad.\n')
+                       'u:(No quiero jugar mï¿½s) ï¿½Estï¿½ bien! Vamos a quitar la actividad.\n'
+                       'u:(Estoy_~emocion) ï¿½Estï¿½ bien! Quieres cambiar la actividad?.\n'
+                       'u:(si {por favor}) Bueno, cambiemos de actividad.\n'
+                       'u:(Que te dices mi pez) En la buena pirobo norrea.\n')
 
     # Loading the topics directly as text strings
 topic_name_1 = load_conversational_topic(topic_content_1)
@@ -863,19 +864,16 @@ topic_name_2 = load_conversational_topic(topic_content_1)
 activate_conversational_topic(topic_name_1)
 activate_conversational_topic(topic_name_2)
     #Subscribe to use the topics previously activated
-"""
-'''
-#JSON
-    json_string = {
-        "id" : null ,
-        "proxyName": "proxyName",
-        "methodName":"method_name", 
-        "params":{              #por lo general van a ser números o strings, solo van a ver listas cuando sea cuentería y toque precargar imágenes. 
-            "EAAgent":"This is the Remix", 
-            "Lista imagenes":["URL","URL2","sjfiosjfiosdjf"]
+        
+
+    #Json creation
+
+    def json_creator(id_response, responseType, params):
+        json_string = {
+            "id" : id_response ,
+            "respType": responseType, 
+            "params":params              
         }
-    }
-    json_dump = json.dumps(json_string)
-    json_object = json.loads(json_dump)
-'''
+        return json.loads(json_dump)
+
 
