@@ -15,6 +15,7 @@ import RobotAgentBDI.ResPwAActivity;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
+import Tareas.LogIn.LogInTask;
 import Tareas.LogIn.Saludar;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +39,14 @@ public class LogIn extends GoalBDI{
         IniciarServicios iniciarServicios = new IniciarServicios();
         Saludar saludar = new Saludar();
         ConversacionInicial conversacion = new ConversacionInicial();
+        LogInTask loginT = new LogInTask();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan(taskList, resources, null);
 
         rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(loginT);
         rolePlan.addTask(iniciarServicios);
         rolePlan.addTask(saludar);
         rolePlan.addTask(conversacion);
