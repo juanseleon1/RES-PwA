@@ -815,9 +815,8 @@ alDialogProxy.setLanguage("Spanish")
     activate_conversational_topic(topic_name_2)
     #Subscribe to use the topics previously activated
 
-
+'''
 #JSON
-
     json_string = {
         "id" : null ,
         "proxyName": "proxyName",
@@ -827,6 +826,7 @@ alDialogProxy.setLanguage("Spanish")
             "Lista imagenes":["URL","URL2","sjfiosjfiosdjf"]
         }
     }
-    data = json.loads(json_string)
-    
+    json_dump = json.dumps(json_string)
+    json_object = json.loads(json_dump)
+'''
 
