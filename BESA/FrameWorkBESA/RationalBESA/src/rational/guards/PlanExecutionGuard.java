@@ -1,30 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rational.guards;
 
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
-import rational.WorkerState;
-import rational.data.ExecutionPlanData;
+import java.util.Iterator;
+import rational.RationalState;
+import rational.mapping.Plan;
 import rational.mapping.Task;
 
 /**
  *
- * @author usuario
+ * @author Andres
  */
 public class PlanExecutionGuard extends GuardBESA {
 
     @Override
-    public void funcExecGuard(EventBESA event) {
-        WorkerState workerState = (WorkerState) this.getAgent().getState();
-        ExecutionPlanData executionPlanData = (ExecutionPlanData) event.getData();                
-        Task task = executionPlanData.getTask();
-        task.setWorkerAlias(this.agent.getAlias());
-        task.setExecutionIndex(workerState.getCurrentTaskIndex());
-        task.executeTask(workerState.getBelieves());  
+    public synchronized void funcExecGuard(EventBESA ebesa) {
+        RationalState rst = (RationalState) this.getAgent().getState();
+        if(rst.getMainRole()!= null){
+            Plan plan = rst.getMainRole().getRolePlan();
+            for (Task task : plan.getTasksInExecution()) {
+                if (task.isFinalized()){
+                    for (Task nextTask : plan.getGraphPlan().get(task)) {
+                        boolean canExecute = true;
+                        for (Task dependencyTask : plan.getDependencyGraph().get(nextTask)) {
+                            if (!dependencyTask.isFinalized()) {
+                                canExecute = false;
+                                break;
+                            }
+                        }
+                        if (canExecute) {
+                            plan.getTasksWaitingForExecution().add(nextTask);
+                        }
+                    }
+                    plan.getTasksInExecution().remove(task);
+                } else {
+                    task.run(rst.getBelieves());
+                } 
+            }
+            for (Iterator<Task> iterator = plan.getTasksWaitingForExecution().iterator(); iterator.hasNext();) {
+                Task next = iterator.next();
+                next.run(rst.getBelieves());
+                plan.getTasksInExecution().add(next);
+                iterator.remove();
+            }
+        }
     }
-    
 }

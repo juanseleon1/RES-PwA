@@ -24,6 +24,7 @@ public class PotencialGoalStructure implements Serializable {
     private SortedSet<GoalBDI> oportunityGoalsList;
     private SortedSet<GoalBDI> requirementGoalsList;
     private SortedSet<GoalBDI> needGoalsList;
+    private SortedSet<GoalBDI> attentionCycleGoalsList;
 
     public PotencialGoalStructure() {
 
@@ -32,26 +33,9 @@ public class PotencialGoalStructure implements Serializable {
         oportunityGoalsList = new TreeSet<GoalBDI>();
         requirementGoalsList = new TreeSet<GoalBDI>();
         needGoalsList = new TreeSet<GoalBDI>();
+        attentionCycleGoalsList = new TreeSet<GoalBDI>();
     }
 
-    public void resetGoals() {
-        for (GoalBDI goal : survivalGoalsList) {
-            goal.getRole().getRolePlan().setInExecution(false);
-        }
-        for (GoalBDI goal : dutyGoalsList) {
-            goal.getRole().getRolePlan().setInExecution(false);
-        }
-        for (GoalBDI goal : oportunityGoalsList) {
-            goal.getRole().getRolePlan().setInExecution(false);
-        }
-        for (GoalBDI goal : requirementGoalsList) {
-            goal.getRole().getRolePlan().setInExecution(false);
-        }
-        for (GoalBDI goal : needGoalsList) {
-            goal.getRole().getRolePlan().setInExecution(false);
-        }
-    }
-    
     public SortedSet<GoalBDI> getDutyGoalsList() {
         return dutyGoalsList;
     }
@@ -91,4 +75,14 @@ public class PotencialGoalStructure implements Serializable {
     public void setSurvivalGoalsList(SortedSet<GoalBDI> survivalGoalsList) {
         this.survivalGoalsList = survivalGoalsList;
     }
+
+    public SortedSet<GoalBDI> getAttentionCycleGoalsList() {
+        return attentionCycleGoalsList;
+    }
+
+    public void setAttentionCycleGoalsList(SortedSet<GoalBDI> attentionCycleGoalsList) {
+        this.attentionCycleGoalsList = attentionCycleGoalsList;
+    }
+    
+    
 }

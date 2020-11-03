@@ -16,71 +16,36 @@ import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import BESA.Log.ReportBESA;
-import java.util.ArrayList;
-import java.util.List;
-import rational.RationalAgent;
-import rational.RationalRole;
-import rational.data.CheckExecutionData;
-import rational.data.GoalFinalizeData;
-import rational.data.RoleListData;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rational.guards.ChangeRationalRoleGuard;
-import rational.guards.EnableTaskExecutionGuard;
 import rational.mapping.Believes;
-import rational.mapping.Plan;
 
 /**
- * <p>
- * Class that represents the second Thread BDI Guard</p>
- *
- * @author SIDRe - Pontificia Universidad Javeriana
- * @author Takina - Pontificia Universidad Javeriana
+ * <p>Class that represents the second Thread BDI Guard</p>
+ * @author  SIDRe - Pontificia Universidad Javeriana
+ * @author  Takina  - Pontificia Universidad Javeriana
  * @version 2.0, 11/01/11
- * @since JDK1.0
+ * @since   JDK1.0
  */
 public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
     @Override
     public void funcExecGuard(EventBESA event) {
+        AgentBDI agentBDI = (AgentBDI) agent;
+        StateBDI stateBDI = (StateBDI) agentBDI.getState();
         try {
-            AgentBDI agentBDI = (AgentBDI) agent;
-            StateBDI stateBDI = (StateBDI) agentBDI.getState();
-            Believes believes = stateBDI.getBelieves();
+            Believes believes = stateBDI.getBelieves().clone();
             BDIMachineParams paramsBDI = stateBDI.getMachineBDIParams();
+            paramsBDI.getPyramidGoals().clear();
             PotencialGoalStructure potencialGoalStructure = paramsBDI.getPotencialGoals();
-
-            if (event.getData() instanceof CheckExecutionData) {
-                CheckExecutionData data = (CheckExecutionData) event.getData();
-                Plan plan = data.getPlan();
-                List<GoalBDI> goals = paramsBDI.getIntentionList();
-                for (int i = 0; i < goals.size(); i++) {
-                    GoalBDI goal = goals.get(i);
-                    if (goal.getRole().getRolePlan().getPlanID() == plan.getPlanID()) {
-                        if (goal.evaluateViability(believes) == 1.0f) {
-                            if (!goal.isExpropriated()) {
-                                ((RationalAgent)this.agent).notifyEnableTaskExecution(goal.getRole().getRoleName());
-                                return;
-                            }
-                        } else {                            
-                            plan.setInExecution(false);
-                            goal.setSucceed(true);
-                            GoalFinalizeData response = new GoalFinalizeData(plan.getCommand()); 
-                            believes.update(response);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (paramsBDI.getIntentionList() != null) {
+            /*
+            if(paramsBDI.getIntention() !=null){
                 paramsBDI.getPyramidGoals().callGarbageCollector(believes, paramsBDI);
             }
-
-            /**
-             * detect each potencial goal
-             */
-            /**
-             * duties
-             */
+            */            
+            /** detect each potencial goal*/
+            /** duties*/
             for (GoalBDI dutyGoal : potencialGoalStructure.getDutyGoalsList()) {
                 dutyGoal.setDetectionValue(dutyGoal.detectGoal(believes));
                 if (dutyGoal.getDetectionValue() > paramsBDI.getDutyThreshold()) {
@@ -89,18 +54,14 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                         dutyGoal.setViabilityValue(dutyGoal.evaluateViability(believes));
                         if (dutyGoal.getViabilityValue() > paramsBDI.getDutyThreshold()) {
                             dutyGoal.setContributionValue(dutyGoal.evaluateContribution(stateBDI));
-                            if (!paramsBDI.getPyramidGoals().getDutyGoalsList().contains(dutyGoal)) {
-                                paramsBDI.getPyramidGoals().getDutyGoalsList().add(dutyGoal);
-                            }
+                            paramsBDI.getPyramidGoals().getDutyGoalsList().add(dutyGoal);
                         }
                     }
                 }
 
             }
 
-            /**
-             * needs
-             */
+            /** needs*/
             for (GoalBDI needGoal : potencialGoalStructure.getNeedGoalsList()) {
                 needGoal.setDetectionValue(needGoal.detectGoal(believes));
                 if (needGoal.getDetectionValue() > paramsBDI.getNeedThreshold()) {
@@ -109,18 +70,14 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                         needGoal.setViabilityValue(needGoal.evaluateViability(believes));
                         if (needGoal.getViabilityValue() > paramsBDI.getNeedThreshold()) {
                             needGoal.setContributionValue(needGoal.evaluateContribution(stateBDI));
-                            if (!paramsBDI.getPyramidGoals().getNeedGoalsList().contains(needGoal)) {
-                                paramsBDI.getPyramidGoals().getNeedGoalsList().add(needGoal);
-                            }
+                            paramsBDI.getPyramidGoals().getNeedGoalsList().add(needGoal);
                         }
                     }
                 }
 
             }
 
-            /**
-             * oportunities
-             */
+            /** oportunities*/
             for (GoalBDI oportunityGoal : potencialGoalStructure.getOportunityGoalsList()) {
                 oportunityGoal.setDetectionValue(oportunityGoal.detectGoal(believes));
                 if (oportunityGoal.getDetectionValue() > paramsBDI.getOportunityThreshold()) {
@@ -129,18 +86,14 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                         oportunityGoal.setViabilityValue(oportunityGoal.evaluateViability(believes));
                         if (oportunityGoal.getViabilityValue() > paramsBDI.getOportunityThreshold()) {
                             oportunityGoal.setContributionValue(oportunityGoal.evaluateContribution(stateBDI));
-                            if (!paramsBDI.getPyramidGoals().getOportunityGoalsList().contains(oportunityGoal)) {
-                                paramsBDI.getPyramidGoals().getOportunityGoalsList().add(oportunityGoal);
-                            }
+                            paramsBDI.getPyramidGoals().getOportunityGoalsList().add(oportunityGoal);
                         }
                     }
                 }
 
             }
 
-            /**
-             * requiremets
-             */
+            /** requiremets*/
             for (GoalBDI requirementGoal : potencialGoalStructure.getRequirementGoalsList()) {
                 requirementGoal.setDetectionValue(requirementGoal.detectGoal(believes));
                 if (requirementGoal.getDetectionValue() > paramsBDI.getRequirementThreshold()) {
@@ -149,18 +102,15 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                         requirementGoal.setViabilityValue(requirementGoal.evaluateViability(believes));
                         if (requirementGoal.getViabilityValue() > paramsBDI.getRequirementThreshold()) {
                             requirementGoal.setContributionValue(requirementGoal.evaluateContribution(stateBDI));
-                            if (!paramsBDI.getPyramidGoals().getRequirementGoalsList().contains(requirementGoal)) {
-                                paramsBDI.getPyramidGoals().getRequirementGoalsList().add(requirementGoal);
-                            }
+                            paramsBDI.getPyramidGoals().getRequirementGoalsList().add(requirementGoal);
                         }
                     }
                 }
 
             }
 
-            /**
-             * survival
-             */
+
+            /** survival*/
             for (GoalBDI survivalGoal : potencialGoalStructure.getSurvivalGoalsList()) {
                 survivalGoal.setDetectionValue(survivalGoal.detectGoal(believes));
                 if (survivalGoal.getDetectionValue() > paramsBDI.getSurvivalThreshold()) {
@@ -169,32 +119,54 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                         survivalGoal.setViabilityValue(survivalGoal.evaluateViability(believes));
                         if (survivalGoal.getViabilityValue() > paramsBDI.getSurvivalThreshold()) {
                             survivalGoal.setContributionValue(survivalGoal.evaluateContribution(stateBDI));
-                            if (!paramsBDI.getPyramidGoals().getSurvivalGoalsList().contains(survivalGoal)) {
-                                paramsBDI.getPyramidGoals().getSurvivalGoalsList().add(survivalGoal);
-                            }
+                            paramsBDI.getPyramidGoals().getSurvivalGoalsList().add(survivalGoal);
                         }
                     }
                 }
+
             }
+            
+            /** AttentionCycle*/
+            for (GoalBDI attentionCycle : potencialGoalStructure.getAttentionCycleGoalsList()) {
+                attentionCycle.setDetectionValue(attentionCycle.detectGoal(believes));
+                if (attentionCycle.getDetectionValue() > paramsBDI.getAttentionCycleThreshold()) {
+                    attentionCycle.setPlausibilityLevel(attentionCycle.evaluatePlausibility(believes));
+                    if (attentionCycle.getPlausibilityLevel() > paramsBDI.getAttentionCycleThreshold()) {
+                        attentionCycle.setViabilityValue(attentionCycle.evaluateViability(believes));
+                        if (attentionCycle.getViabilityValue() > paramsBDI.getAttentionCycleThreshold()) {
+                            attentionCycle.setContributionValue(attentionCycle.evaluateContribution(stateBDI));
+                            paramsBDI.getPyramidGoals().getAttentionCycleGoalsList().add(attentionCycle);
+                        }
+                    }
+                }
 
-            paramsBDI.setIntentionList(paramsBDI.getPyramidGoals().getCurrentIntentionGoalList());
-
-            List<RationalRole> roleList = new ArrayList<>();
-            for (GoalBDI goal : paramsBDI.getIntentionList()) {
-                if (goal.evaluateMappingViability(paramsBDI, believes)) {
-                    if (goal.predictResultUnlegality(stateBDI)) {
-                        roleList.add(goal.getRole());
+            }
+            
+            paramsBDI.setIntention(paramsBDI.getPyramidGoals().getCurrentIntentionGoal());
+            if (paramsBDI.getIntention() != null) {               
+                if (paramsBDI.getIntention().evaluateMappingViability(paramsBDI, believes)) {
+                    if (paramsBDI.getIntention().predictResultUnlegality(stateBDI)) {
+                        EventBESA eventBesa = new EventBESA(ChangeRationalRoleGuard.class.getName(), paramsBDI.getIntention().getRole());
+                        AgHandlerBESA agHandlerBESA = agentBDI.getAdmLocal().getHandlerByAlias(agentBDI.getAlias());
+                        agHandlerBESA.sendEvent(eventBesa);
                     }
                 }
             }
-            if (!paramsBDI.getIntentionList().isEmpty()) {
-                EventBESA eventBesa = new EventBESA(ChangeRationalRoleGuard.class.getName(), new RoleListData(roleList));
-                AgHandlerBESA agHandlerBESA = agentBDI.getAdmLocal().getHandlerByAlias(agentBDI.getAlias());
-                agHandlerBESA.sendEvent(eventBesa);
-            }
-
+            
+        } catch (ExceptionBESA e) {
+            ReportBESA.error(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(DesireToIntentionInstantiationGuard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        stateBDI.setEndedTheDesiresMachine(true);
+        try {
+            EventBESA eventBesa = new EventBESA(EndedTheDesiresMachineGuard.class.getName(), null);
+            AgHandlerBESA agHandlerBESA;
+            agHandlerBESA = agentBDI.getAdmLocal().getHandlerByAlias(agentBDI.getAlias());
+            agHandlerBESA.sendEvent(eventBesa);
         } catch (ExceptionBESA e) {
             ReportBESA.error(e.getMessage());
         }
+            
     }
 }

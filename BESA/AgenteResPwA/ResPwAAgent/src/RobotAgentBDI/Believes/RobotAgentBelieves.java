@@ -142,4 +142,10 @@ public class RobotAgentBelieves implements Believes {
         }
         return imagenes;
     }
+
+    @Override
+    public Believes clone() throws CloneNotSupportedException {
+        return (Believes) super.clone();
+         
+    }
 }

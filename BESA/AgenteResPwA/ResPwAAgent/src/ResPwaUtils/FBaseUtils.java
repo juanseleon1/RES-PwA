@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class FBaseUtils {
 
     private static final String FBPATH = "respwafirebase.json";
-    private static final String FBSTORAG = "gs://respwa.appspot.com";
+    private static final String FBSTORAG = "https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2F[imgname].jpeg?alt=media";
     private static final String CUENTOS="/cuentos";
 
     public static void initResPwa(RobotAgentBelieves rab){
@@ -103,6 +103,13 @@ public class FBaseUtils {
 
         });
 
+    }
+    public static String getStorageUrl(String name)
+    {
+        String s=new String();
+       s= s.concat(FBSTORAG);
+       s =s.replace("[imgname]", name);
+        return s;
     }
 
 }

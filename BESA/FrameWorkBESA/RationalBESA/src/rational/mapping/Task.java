@@ -1,25 +1,10 @@
 package rational.mapping;
 
-import BESA.ExceptionBESA;
-import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.System.AdmBESA;
-import BESA.Kernel.System.Directory.AgHandlerBESA;
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import rational.data.TaskFinalizedData;
-import rational.guards.GoalExecutionGuard;
-import rational.guards.NotifyTaskFinalizedGuard;
-
 /**
  * 
  * @author andres
  */
-public abstract class Task  implements Serializable{
-    
-    private String workerAlias;
-    
-    private int executionIndex;
+public abstract class Task {
     
     protected enum STATE{
         WAITING_FOR_EXECUTION,
@@ -28,7 +13,6 @@ public abstract class Task  implements Serializable{
     }
 
     public Task() {
-        executionIndex = 0;
         this.taskState = STATE.WAITING_FOR_EXECUTION;
     }
     
@@ -38,6 +22,10 @@ public abstract class Task  implements Serializable{
     
     public void setTaskWaitingForExecution(){
         this.taskState = STATE.WAITING_FOR_EXECUTION;
+    }
+    
+    public void setTaskFinalized(){
+        this.taskState = STATE.FINALIZED;
     }
     
     public boolean isInExecution(){
@@ -52,37 +40,24 @@ public abstract class Task  implements Serializable{
         return this.taskState == STATE.FINALIZED;
     }
     
-    STATE taskState;
-        
+    protected STATE taskState;
+
+    public void run(Believes believes){
+        if(this.checkFinish(believes)){
+            this.setTaskFinalized();
+        }else{
+            if(!this.isInExecution()){
+                this.setTaskInExecution();
+                this.executeTask(believes);
+            }
+        }
+    }
+    
+    public abstract boolean checkFinish(Believes believes);
+    
     public abstract void executeTask(Believes parameters);
 
     public abstract void interruptTask(Believes believes);
 
     public abstract void cancelTask(Believes believes);
-    
-    public void taskFinalized() {
-        try {
-            AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(workerAlias);
-            handler.sendEvent(new EventBESA(NotifyTaskFinalizedGuard.class.getName()));
-        } catch (ExceptionBESA ex) {
-            Logger.getLogger(GoalExecutionGuard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public String getWorkerAlias() {
-        return workerAlias;
-    }
-
-    public void setWorkerAlias(String workerAlias) {
-        this.workerAlias = workerAlias;
-    }
-    
-    public int getExecutionIndex() {
-        return executionIndex;
-    }
-
-    public void setExecutionIndex(int executionIndex) {
-        this.executionIndex = executionIndex;
-    }
-        
 }

@@ -289,6 +289,10 @@ public class BEstadoInteraccion implements Believes{
         this.logged = logged;
     }
 
-    
+        @Override
+    public Believes clone() throws CloneNotSupportedException {
+        return (Believes) super.clone();
+         
+    }
     
 }

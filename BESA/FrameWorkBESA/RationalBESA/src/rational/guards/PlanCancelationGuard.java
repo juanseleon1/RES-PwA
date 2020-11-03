@@ -14,8 +14,22 @@ import rational.mapping.Task;
 public class PlanCancelationGuard extends GuardBESA {
 
     @Override
-    public void funcExecGuard(EventBESA event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void funcExecGuard(EventBESA ebesa) {
+
+        RationalState rst = (RationalState) this.getAgent().getState();
+        if (rst.getMainRole() != null) {
+            Plan plan = rst.getMainRole().getRolePlan();
+            if (plan != null) {
+                for (Task task : plan.getTasksInExecution()) {
+                    if (task.isInExecution()) {
+                        task.cancelTask(rst.getBelieves());
+                        plan.getTasksInExecution().remove(task);
+                    }else if(task.isFinalized()){
+                        plan.getTasksInExecution().remove(task);
+                    }
+                    task.setTaskFinalized();
+                }
+            }
+        }
     }
-    
 }

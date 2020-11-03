@@ -10,7 +10,7 @@ import Tareas.SeleccionarCancionGusto.ReproduccionCancion;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import BESA.Kernel.Agent.Event.KernelAgentExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
@@ -56,13 +56,13 @@ public class SeleccionarCancionGusto extends GoalBDI {
     }
 
     @Override
-    public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double evaluateViability(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta CambiarCancion evaluateViability");
         return 1;
     }
 
     @Override
-    public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double detectGoal(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta CambiarCancion detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -77,13 +77,13 @@ public class SeleccionarCancionGusto extends GoalBDI {
     }
 
     @Override
-    public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double evaluatePlausibility(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta CambiarCancion evaluatePlausibility");
         return 1;
     }
 
     @Override
-    public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
+    public double evaluateContribution(StateBDI stateBDI) throws KernelAgentExceptionBESA {
         //System.out.println("Meta CambiarCancion evaluateContribution");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
@@ -96,13 +96,13 @@ public class SeleccionarCancionGusto extends GoalBDI {
     }
 
     @Override
-    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
+    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernelAgentExceptionBESA {
         System.out.println("Meta CambiarCancion predictResultUnlegality");
         return true;
     }
 
     @Override
-    public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
+    public boolean goalSucceeded(Believes believes) throws KernelAgentExceptionBESA {
         System.out.println("Meta CambiarCancion goalSucceeded");
         return true;
     }

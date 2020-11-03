@@ -3,10 +3,10 @@ package rational.data;
 import BESA.Kernel.Agent.Event.DataBESA;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 
-public class InfoData extends DataBESA {
+public class InfoData extends DataBESA{
 
     String message;
-
+    
     public InfoData(String message) {
         this.message = message;
     }
@@ -20,7 +20,9 @@ public class InfoData extends DataBESA {
     public String getStringFromDataBesa() throws KernellAgentEventExceptionBESA {
         return message;
     }
-
+    
+    
+    
 //    SensorInfo sensorInfo;
 //
 //    public SensorInfoData(SensorInfo sensorInfo) {
@@ -34,6 +36,7 @@ public class InfoData extends DataBESA {
 //    public void setSensorInfo(SensorInfo sensorInfo) {
 //        this.sensorInfo = sensorInfo;
 //    }
+
     public String getMessage() {
         return message;
     }
@@ -41,5 +44,5 @@ public class InfoData extends DataBESA {
     public void setMessage(String message) {
         this.message = message;
     }
-
+    
 }
