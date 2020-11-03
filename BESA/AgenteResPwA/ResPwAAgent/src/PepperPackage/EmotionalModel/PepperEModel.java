@@ -66,6 +66,12 @@ public class PepperEModel extends EmotionalModel{
     
     private void calcNewEmotionalParams(Map<String, Object> map, SensorData sd) {
         Map<String, Object> pe = sd.getDataPE();
+        pe.put("LEDS", pe);
+        pe.put("velocidad", pe);
+        pe.put("velHabla", pe);
+        pe.put("tonoHabla", pe);
+        pe.put("volVoz", pe);
+        pe.put("ledIntens", pe);
     }
     private void calcNewEmotionalParams(Map<String, Object> map) {
        

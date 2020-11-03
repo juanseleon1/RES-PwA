@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
+import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -32,7 +33,8 @@ public class BEstadoRobot implements Believes {
     private boolean estaSuspendido = false;
     private int velHabla;
     private int tonoHabla;
-
+    private int ledIntensity;
+    private LedsColor leds=null;
     @Override
     public boolean update(InfoData si) {
 
@@ -77,7 +79,7 @@ public class BEstadoRobot implements Believes {
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
             if (infoRecibida.getInfo().containsKey("LEDS")) {
-                infoRecibida.getInfo().get("LEDS");
+                LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
             }
             if (infoRecibida.getInfo().containsKey("velocidad")) {
                 velocidad = (long)infoRecibida.getInfo().get("velocidad");
@@ -90,6 +92,9 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getInfo().containsKey("volVoz")) {
                 volumenVoz=(int)infoRecibida.getInfo().get("volVoz");
+            }
+            if (infoRecibida.getInfo().containsKey("ledIntens")) {
+                ledIntensity=(int)infoRecibida.getInfo().get("ledIntens");
             }
         }
         return true;
