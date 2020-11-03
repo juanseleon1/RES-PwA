@@ -5,6 +5,7 @@
  */
 package Tareas.LogIn;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
@@ -33,6 +34,7 @@ public class IniciarServicios extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Iniciar Servicios ---");
         ServiceDataRequest srb = null;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         infoServicio.put("ACTIVATEBLINKING", true);
         srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
@@ -97,12 +99,12 @@ public class IniciarServicios extends ResPwaTask{
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
-        infoServicio.put("SETTABLETVOL", 10);//depende perfil del usuario 1-15
+        infoServicio.put("SETTABLETVOL", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 1-15
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
         
-        infoServicio.put("SETSAYVOLUMEN", 0.5);//depende perfil del usuario 0-1.0
+        infoServicio.put("SETSAYVOLUMEN", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 0-1.0
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUMN, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();

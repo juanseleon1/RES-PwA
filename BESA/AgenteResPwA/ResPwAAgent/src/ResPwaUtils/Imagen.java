@@ -16,6 +16,7 @@ public class Imagen {
     private List<String> tags;
     private Date fecha;
     private float gusto;
+    private String nombre;
 
     public void setTags(List<String> tags) {
         this.tags = tags;
@@ -39,6 +40,14 @@ public class Imagen {
 
     public float getGusto() {
         return gusto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     
