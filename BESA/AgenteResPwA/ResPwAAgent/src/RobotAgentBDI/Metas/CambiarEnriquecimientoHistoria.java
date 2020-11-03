@@ -8,7 +8,7 @@ package RobotAgentBDI.Metas;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernelAgentExceptionBESA;
+import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
@@ -38,7 +38,7 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
-        Plan rolePlan= new Plan(tarea,resources,null);
+        Plan rolePlan= new Plan();
 
         //crear interface enriquecer(bajo,medio,alto) que permita ejecutarEstrategia(), guardar enriquecer en believes y despues sacarla de estos
         rolePlan.addTask(evaluarEnriquecer);//si es automatico o el PwA lo pide
@@ -54,13 +54,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
     }
 
    @Override
-    public double evaluateViability(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarEnriquecimientoHistoria evaluateViability");
         return 1;
     }
 
     @Override
-    public double detectGoal(Believes believes) throws KernelAgentExceptionBESA {
+    public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarEnriquecimientoHistoria detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -78,13 +78,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
     }
 
     @Override
-    public double evaluatePlausibility(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarEnriquecimientoHistoria evaluatePlausibility");
         return 1;
     }
 
     @Override
-    public double evaluateContribution(StateBDI stateBDI) throws KernelAgentExceptionBESA {
+    public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarEnriquecimientoHistoria evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
@@ -97,13 +97,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
     }
 
     @Override
-    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernelAgentExceptionBESA {
+    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarEnriquecimientoHistoria predictResultUnlegality");
         return true;
     }
 
     @Override
-    public boolean goalSucceeded(Believes believes) throws KernelAgentExceptionBESA {
+    public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
         return true;
     }

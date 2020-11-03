@@ -8,7 +8,7 @@ package RobotAgentBDI.Metas;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernelAgentExceptionBESA;
+import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.ReanudarActividad.RecibirNotificacionReanudar;
@@ -36,7 +36,7 @@ public class ReanudarActividad extends GoalBDI{
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
-        Plan rolePlan= new Plan(taskList, resources, null);
+        Plan rolePlan= new Plan();
 
         rolePlan.addTask(recibirNotificacionR);
         rolePlan.addTask(solicitarPosicion);
@@ -51,13 +51,13 @@ public class ReanudarActividad extends GoalBDI{
     }
 
     @Override
-    public double evaluateViability(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad evaluateViability");
         return 1;
     }
 
     @Override
-    public double detectGoal(Believes believes) throws KernelAgentExceptionBESA {
+    public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -74,26 +74,26 @@ public class ReanudarActividad extends GoalBDI{
     }
 
     @Override
-    public double evaluatePlausibility(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad evaluatePlausibility");
         return 1;
     }
 
     @Override
-    public double evaluateContribution(StateBDI stateBDI) throws KernelAgentExceptionBESA {
+    public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostReanudarActividad();
     }
 
     @Override
-    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernelAgentExceptionBESA {
+    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReanudarActividad predictResultUnlegality");
         return true;
     }
 
     @Override
-    public boolean goalSucceeded(Believes believes) throws KernelAgentExceptionBESA {
+    public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ReanudarActividad goalSucceeded");
         return true;
     }
