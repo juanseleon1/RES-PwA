@@ -757,20 +757,36 @@ try:
   alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
   #Raised each time the robot catches a human input. Contains the last human input.
   alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
-  #
-  #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
+  #Raised when the dialog engine starts or stops. The value is �1� for start, �0� for stop.
+  alProxy.subscribeToEvent("Dialog/IsStarted","sensorsModule", "pythondatachanged")
+  #Currently processed human input.
+  alProxy.subscribeToEvent("Dialog/CurrentString","sensorsModule", "pythondatachanged")
+  #Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
+  alProxy.subscribeToEvent("EngagementZones/PersonMovedAway","sensorsModule", "pythondatachanged")
+  #Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
+  alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "pythondatachanged")
+  #Raised when a person has a smile value above the current threshold (default = 0.7).
+  alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "pythondatachanged")
+  #Raised when one or several faces are currently being detected.
+  alProxy.subscribeToEvent("FaceDetected","sensorsModule", "pythondatachanged")
+  #Raised each time the list of people looking at the robot changes.
+  alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "pythondatachanged")
+  #Raised when someone turns his head away from the robot.
+  alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot","sensorsModule", "pythondatachanged")
+  #The distance in meters to the tracked human. -1.0 if no one is tracked.
+  alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman","sensorsModule", "pythondatachanged")
+  #Raised when an obstacle is detected in the close area.
+  alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected","sensorsModule", "pythondatachanged")
+  #Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
+  alProxy.subscribeToEvent("PeoplePerception/PeopleDetected","sensorsModule", "pythondatachanged")
+  #Raised when a new preference is added to the system.
+  alProxy.subscribeToEvent("preferenceAdded","sensorsModule", "pythondatachanged")
+  #Raised when the value of a preference has been updated.
+  alProxy.subscribeToEvent("preferenceChanged","sensorsModule", "pythondatachanged")
+  #Raised when something just waved at the robot.
+  alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
+  #Raised when someone just waved at the robot.
+  alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
   
 except Exception,e:
   print "error"
