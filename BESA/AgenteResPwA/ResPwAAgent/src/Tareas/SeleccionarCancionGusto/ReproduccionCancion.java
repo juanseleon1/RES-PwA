@@ -26,9 +26,9 @@ import java.util.List;
  *
  * @author mafegarces
  */
-public class ReproduccionCancion extends ResPwaTask{
-    
-    private HashMap<String,Object> infoServicio = new HashMap<>();
+public class ReproduccionCancion extends ResPwaTask {
+
+    private HashMap<String, Object> infoServicio = new HashMap<>();
 
     public ReproduccionCancion() {
 //        System.out.println("--- Task Busqueda Cancion Iniciada ---");
@@ -38,38 +38,39 @@ public class ReproduccionCancion extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
-        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
+
+        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
             String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
             requestService(srb);
         } else {
-            
+
             List<Tags> tags = blvs.getbEstadoActividad().getCancionActual().getTagsList();
-            List<Imagen> imagenes = new ArrayList<>();            
-            for(Tags t: tags) {
+            List<Imagen> imagenes = new ArrayList<>();
+            for (Tags t : tags) {
                 imagenes.addAll(blvs.getImagexTag(t.getTag()));
             }
-            
+
             //tags y parentesco -> si lo contiene tengo cuenta interes para usar esa foto
             List<Familiar> familiares = blvs.getbPerfilPwA().getPerfil().getFamiliarList();
-            for(Tags t: tags) {
-                for(Familiar f: familiares) {
-                    if(f.getParentesco().equals(t.getTag())) {
-                        if(f.getInteres() > 0.5) {
-                            //imagenes.add();
-                        }
-                    }
+            List<Imagen> imagenesFinal = new ArrayList<>();
+            for (Familiar f : familiares) {
+                if (f.getInteres() > 0.6) {
+                    imagenesFinal.addAll(getImgxTag(f.getParentesco(), imagenes));   
                 }
             }
-            
-            infoServicio = new HashMap<>();    
-            infoServicio.put("SHOWIMG", imagenes);
+
+            infoServicio = new HashMap<>();
+            infoServicio.put("SHOWIMG", imagenesFinal);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
             requestService(srb);
-             
-            AudioUtils.getCancion("Feliz cumpleaños");
+            
+            infoServicio = new HashMap<>();
+            String cancion = AudioUtils.getCancion("Feliz cumpleaños");
+            infoServicio.put("PLAYSOUND", cancion);
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
+            requestService(srb);
         }
     }
 
@@ -82,5 +83,18 @@ public class ReproduccionCancion extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
     }
-    
+
+    public List<Imagen> getImgxTag(String tag, List<Imagen> imgs) {
+        List<Imagen> imagenes = new ArrayList<>();
+
+        for (Imagen i : imgs) {
+            for (String t : i.getTags()) {
+                if (t.equalsIgnoreCase(tag)) {
+                    imagenes.add(i);
+                }
+            }
+        }
+        return imagenes;
+    }
+
 }

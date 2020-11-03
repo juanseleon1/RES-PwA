@@ -11,8 +11,8 @@ package ResPwaUtils;
  */
 public class AudioUtils {
     
-    public static void getCancion(String nomCancion) {
-        
+    public static String getCancion(String nomCancion) {
+        return null;
     }
     
 }
