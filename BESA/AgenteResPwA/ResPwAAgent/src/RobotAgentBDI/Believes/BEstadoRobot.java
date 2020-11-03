@@ -165,6 +165,10 @@ public class BEstadoRobot implements Believes{
         return estaSuspendido;
     }
     
-    
+        @Override
+    public Believes clone() throws CloneNotSupportedException {
+        return (Believes) super.clone();
+         
+    }
     
 }

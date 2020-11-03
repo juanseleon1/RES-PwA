@@ -21,7 +21,7 @@ import java.io.Serializable;
  */
 public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<GoalBDI> {
 
-    private int id;
+    private long id;
     private double plausibilityLevel;
     private double viabilityValue;
     private double contributionValue;
@@ -30,18 +30,16 @@ public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<
     private String description;
     private GoalBDITypes type;    
     private boolean succeed;
-    private boolean expropriated;
     
-    public GoalBDI(int id, RationalRole role, String description, GoalBDITypes type) {
+    public GoalBDI(long id, RationalRole role, String description, GoalBDITypes type) {
         this.id = id;
         this.role = role;
         this.description = description;
-        this.type = type;        
-        this.role.getRolePlan().setPlanID(id);
-        this.role.getRolePlan().setPriority(calcPriority(type));
-        expropriated = false;
+        this.type = type;
     }
     
+    
+
     public boolean isSucceed() {
         return succeed;
     }
@@ -78,7 +76,7 @@ public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -114,14 +112,6 @@ public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<
         this.viabilityValue = viabilityValue;
     }   
 
-    public boolean isExpropriated() {
-        return expropriated;
-    }
-
-    public void setExpropriated(boolean expropriated) {
-        this.expropriated = expropriated;
-    }
-    
     /**
      * <p>evaluate viability for a mapping proccess using the believes</p>
      * @param machineParams
@@ -151,6 +141,10 @@ public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<
                 }
             case SURVIVAL:
                 if (viabilityEvaluation > machineParams.getSurvivalThreshold()) {
+                    returnValue = true;
+                }
+            case ATTENTION_CYCLE:
+                if (viabilityEvaluation > machineParams.getAttentionCycleThreshold()) {
                     returnValue = true;
                 }
         }
@@ -183,20 +177,6 @@ public abstract class GoalBDI implements BDIEvaluable, Serializable, Comparable<
         return hash;
     }
     
-    public static int calcPriority(GoalBDITypes type) {
-        switch (type) {
-            case DUTY:
-                return 1;
-            case NEED:
-                return 2;
-            case OPORTUNITY:
-                return 3;
-            case REQUIREMENT:
-                return 4;
-            case SURVIVAL:
-                return 5;
-        }
-        return 0;
-    }
+    
     
 }

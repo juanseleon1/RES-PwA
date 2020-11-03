@@ -300,4 +300,10 @@ public class BEstadoActividad implements Believes {
         this.cedula = cedula;
     }
 
+    @Override
+    public Believes clone() throws CloneNotSupportedException {
+        return (Believes) super.clone();
+         
+    }
+
 }

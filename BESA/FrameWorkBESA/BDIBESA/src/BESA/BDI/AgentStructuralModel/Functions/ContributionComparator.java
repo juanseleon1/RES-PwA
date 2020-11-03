@@ -7,7 +7,6 @@
 package BESA.BDI.AgentStructuralModel.Functions;
 
 import BESA.BDI.AgentStructuralModel.GoalBDI;
-import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -17,7 +16,7 @@ import java.util.Comparator;
  * @version 2.0, 11/01/11
  * @since   JDK1.0
  */
-public class ContributionComparator implements Comparator<GoalBDI>, Serializable {
+public class ContributionComparator implements Comparator<GoalBDI> {
 
     /**
      * <p> 
@@ -32,7 +31,7 @@ public class ContributionComparator implements Comparator<GoalBDI>, Serializable
         if (goal1.getId() == goal2.getId()) {
             return 0;
         } else {
-            return goal2.getContributionValue() > goal1.getContributionValue() ? -1 : 1;
+            return goal2.getContributionValue() < goal1.getContributionValue() ? -1 : 1;
         }
     }
 }

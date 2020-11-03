@@ -10,77 +10,47 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.RationalRole;
 import rational.RationalState;
-import rational.data.RoleListData;
+import rational.mapping.Plan;
+import rational.mapping.Task;
 
 /**
  *
  * @author Andres
  */
-public class ChangeRationalRoleGuard extends GuardBESA {
+public class ChangeRationalRoleGuard extends GuardBESA{
 
     @Override
-    public synchronized void funcExecGuard(EventBESA ebesa) {
-        RationalState state = (RationalState) this.getAgent().getState();
-        RoleListData roleListData = (RoleListData) ebesa.getData();
+    public void funcExecGuard(EventBESA ebesa) {
+        RationalState state = (RationalState)this.getAgent().getState();
+        RationalRole newrole = (RationalRole)ebesa.getData();
 
-        // Checks the viability of roles.
-        List<RationalRole> activeRoleList = getValidRoleList(roleListData.getRoleList());
+        if(state.getMainRole()!=null && !state.getMainRole().getRoleName().equals(((RationalRole)ebesa.getData()).getRoleName())){            
 
-        // Update active removing the goals not valid.
-        for (int i = 0; i < state.getRoleList().size(); i++) {
-            RationalRole role = state.getRoleList().get(i);
-            if (!role.getRolePlan().inExecution()) {
-                state.getRoleList().remove(role);
-            }
-        }
-                
-        // Add active roles.
-        state.updateRoleList(activeRoleList);
-        
-        try {
-            AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(this.agent.getAlias());
-            handler.sendEvent(new EventBESA(GoalExecutionGuard.class.getName(), null));
-        } catch (ExceptionBESA ex) {
-            Logger.getLogger(ChangeRationalRoleGuard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public List<RationalRole> getValidRoleList(List<RationalRole> roleList) {        
-        if (roleList.size() > 1) {
-            for (int i = 0; i < roleList.size(); i++) {
-                if (!roleList.get(i).getRolePlan().inExecution()) {
-                    List<String> a = roleList.get(i).getRolePlan().getResources();
-                    for (int j = 0; j < roleList.size(); j++) {
-                        if(i != j) {
-                            List<String> b = roleList.get(j).getRolePlan().getResources();
-                            if (isShareResources(a, b)) {
-                                if (roleList.get(i).getRolePlan().getPriority() == roleList.get(j).getRolePlan().getPriority()) {
-                                    roleList.remove(j);
-                                } else {
-                                    if (roleList.get(i).getRolePlan().getPriority() > roleList.get(j).getRolePlan().getPriority()) {
-                                        roleList.remove(j);
-                                    } else {
-                                        roleList.remove(i);
-                                    }
-                                }
-                            }
+            //System.out.println("Intentando cambiar de rol a " + newrole.getRoleName());
+            if (state.getMainRole() != null) {
+            Plan plan = state.getMainRole().getRolePlan();
+                if (plan != null) {
+                    for (Task task : plan.getTasksInExecution()) {
+                        if (task.isInExecution()) {
+                            task.cancelTask(state.getBelieves());
+                            plan.getTasksInExecution().remove(task);
+                        }else if(task.isFinalized()){
+                            plan.getTasksInExecution().remove(task);
                         }
+                        task.setTaskFinalized();
                     }
                 }
             }
+            newrole.resetPlan();
+            state.setMainRole(newrole);
+        }else if(state.getMainRole()==null){
+             //System.out.println("Insertando nuevo plan: " + newrole.getRoleName());
+            newrole.resetPlan();
+            state.setMainRole(newrole);
+        }else if (!state.getMainRole().getRolePlan().inExecution()){
+            //System.out.println("Reseteando plan: " + state.getMainRole().getRoleName());
+            state.getMainRole().getRolePlan().reset();
         }
-        return roleList;
     }
-
-    public boolean isShareResources(List<String> a, List<String> b) {
-        for (int i = 0; i < a.size(); i++) {
-            for (int j = 0; j < b.size(); j++) {
-                if (a.get(i).equals(b.get(j))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
+    
 }

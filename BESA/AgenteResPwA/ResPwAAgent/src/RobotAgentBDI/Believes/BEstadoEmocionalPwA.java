@@ -123,5 +123,9 @@ public class BEstadoEmocionalPwA implements Believes{
         tiempoEmocionPredominante=System.currentTimeMillis();
     }
 
-      
+          @Override
+    public Believes clone() throws CloneNotSupportedException {
+        return (Believes) super.clone();
+         
+    }
 }

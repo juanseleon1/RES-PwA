@@ -8,7 +8,7 @@ package RobotAgentBDI.Metas;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import BESA.Kernel.Agent.Event.KernelAgentExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
@@ -62,14 +62,14 @@ public class LogIn extends GoalBDI{
     }
 
     @Override
-    public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double evaluateViability(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta LogIn evaluateViability");
         return 1.0;
 
     }
 
     @Override
-    public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double detectGoal(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta LogIn detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -82,27 +82,27 @@ public class LogIn extends GoalBDI{
     }
 
     @Override
-    public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
+    public double evaluatePlausibility(Believes believes) throws KernelAgentExceptionBESA {
         //System.out.println("Meta LogIn evaluatePlausibility");
         return 1.0;
 
     }
 
     @Override
-    public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
+    public double evaluateContribution(StateBDI stateBDI) throws KernelAgentExceptionBESA {
         //System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
     }
 
     @Override
-    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
+    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernelAgentExceptionBESA {
         System.out.println("Meta LogIn predictResultUnlegality");
         return true;
     }
 
     @Override
-    public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
+    public boolean goalSucceeded(Believes believes) throws KernelAgentExceptionBESA {
         System.out.println("Meta LogIn goalSucceeded");
         return true;
     }

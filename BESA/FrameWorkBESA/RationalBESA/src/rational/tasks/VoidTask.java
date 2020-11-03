@@ -18,6 +18,7 @@ public class VoidTask extends Task{
 
     @Override
     public void executeTask(Believes parameters) {
+        this.setTaskFinalized();
     }
 
     @Override
@@ -25,5 +26,10 @@ public class VoidTask extends Task{
 
     @Override
     public void cancelTask(Believes believes) {}
+
+    @Override
+    public boolean checkFinish(Believes believes) {
+        return true;
+    }
     
 }
