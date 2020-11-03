@@ -1,4 +1,4 @@
-from naoqi import ALProxy
+from naoqi import *
 import socket
 import threading
 import json
@@ -13,6 +13,7 @@ def handle_client(conn, addr):
     msg_length = msg_length.decode(FORMAT, 'ignore')
     msg_length = safe_str(msg_length)
     #if msg_length:
+    print("msg:", msg_length)
     y = safe_str(msg_length).split('{')[1]
     print("msg:")
     y = "{" + y
@@ -23,20 +24,20 @@ def handle_client(conn, addr):
     if jsonObj["methodName"] == "hablar":
         print(jsonObj["methodName"])
     
-    if learn_face("Brayan"):
-        hablar("hola Enrique, mi nombre es Pepper")
-    else:
-        hablar("Mal")
+    #if learn_face("Brayan"):
+    #hablar(jsonObj["methodName"])
+    #else:
+    #    hablar("Mal")
     print(get_face_list()[0])
     
-    #activate_blinking(False)+++++++++++++++++++++++++++++
-    #activate_life_signals(False)+++++++++++++++++++++++++
-    #activate_life_signals_awareness(False)
-    #set_engagement_type("FullyEngaged")
-    #activate_hearing_movement(False)
-    #activate_speak_movements(False)
-    #define_conversation_mode("random")
-    #activate_push_reflexes(False)
+    #activate_blinking(True)+++++++++++++
+    #activate_life_signals(True)+++++++++++++
+    #activate_life_signals_awareness(True)+++++++++++++
+    #set_engagement_type("FullyEngaged")+++++++++++++
+    #activate_hearing_movement(True)+++++++++++++
+    #activate_speak_movements(True)+++++++++++++
+    #define_conversation_mode("random")+++++++++++++
+    activate_push_reflexes(False)
     #activate_breath_movement("Body", False)
     #activate_movement_detection(True)
     #activate_face_detection(False)
@@ -91,7 +92,7 @@ def message_manage(key, msg):
             "GOTOPOSTURE": "go_to_posture",  #No hace nada-------------------------
             "DETECTNEWFACE ": "learn_face",  #funcionando
             "GETFACELIST": "get_face_list",  #funcionando
-            "ACTIVATE": "activate_blinking", #
+            "ACTIVATE": "activate_blinking", #Parece que funciona, no bota error
             "ACTIVATELIFESIGNALS": "activate_life_signals", #
             "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness", #
             "DEFENGAGEMENTTYPE": "set_engagement_type", #
@@ -669,6 +670,8 @@ except RuntimeError:
 #----------------------------------------------------------------------------------------------------
 
 #Declare the Naoqi variables --------------------------------------------------------------------
+global alBroker
+alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
 alProxy = ALProxy("ALMemory")
 alMood = session.service("ALMood")
 alTexToSpeech = session.service("ALTextToSpeech")
@@ -702,8 +705,8 @@ alDialogProxy = session.service("ALDialog")
 #----------------------------------------------------------------------------------------------------
 #Declare the modules --------------------------------------------------------------------------------
 try:
-    
-  pythonModule = pepperModule("sensorsModule")
+    """
+  sensorsModule = pepperModule("sensorsModule")
   
   #Raised when an animated speech is done.
   alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
@@ -810,10 +813,11 @@ try:
   alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
   #Raised when someone just waved at the robot.
   alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
-  
+  """
 except Exception,e:
   print "error"
   print e
+  sensorsModule.exit()
   exit(1)
 #----------------------------------------------------------------------------------------------------
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -830,11 +834,11 @@ conn, addr = server.accept()
 thread = threading.Thread(target=handle_client, args=(conn, addr))
 thread.start()
 
-
+"""
 
 #TOPICOS
 alDialogProxy.setLanguage("Spanish")
-    topic_content_1 = ('topic: ~retroalimentation()\n'
+topic_content_1 = ('topic: ~retroalimentation()\n'
                        'language: spe \n'
                        'concept:(retroalimentacion) [Excelente Bien Regular Mal Pesimo]\n'
                        'u: (Quiero terminar) Esta bien, ¿Nos puedes dar una retroalimentación, por favor?\n'
@@ -844,7 +848,7 @@ alDialogProxy.setLanguage("Spanish")
                        'u: (Regular) Gracias por tu calificación! Esperamos mejorar para la próxima\n'
                        'u: ([Mal Pesimo]) Gracias por tu calificación! Que lastima que no te gustara, lo mejoraremos la próxima vez\n')
 
-    topic_content_2 = ('topic: ~Activity_management()\n'
+topic_content_2 = ('topic: ~Activity_management()\n'
                        'language: spe\n'
                        'concept:(emocion)[cansado aburrido mamado ] \n'
                        'u:(No quiero jugar más) ¡Está bien! Vamos a quitar la actividad.\n'
@@ -852,14 +856,14 @@ alDialogProxy.setLanguage("Spanish")
                       'u:(si {por favor}) Bueno, cambiemos de actividad.\n')
 
     # Loading the topics directly as text strings
-    topic_name_1 = load_conversational_topic(topic_content_1)
-    topic_name_2 = load_conversational_topic(topic_content_1)
+topic_name_1 = load_conversational_topic(topic_content_1)
+topic_name_2 = load_conversational_topic(topic_content_1)
 
     # Activating the loaded topics
-    activate_conversational_topic(topic_name_1)
-    activate_conversational_topic(topic_name_2)
+activate_conversational_topic(topic_name_1)
+activate_conversational_topic(topic_name_2)
     #Subscribe to use the topics previously activated
-
+"""
 '''
 #JSON
     json_string = {
