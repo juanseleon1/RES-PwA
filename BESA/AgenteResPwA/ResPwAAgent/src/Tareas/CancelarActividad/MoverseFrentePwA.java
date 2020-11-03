@@ -5,10 +5,12 @@
  */
 package Tareas.CancelarActividad;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import Tareas.AnimarElogiarPwA.AnimarStrategy;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -46,7 +48,11 @@ public class MoverseFrentePwA extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isDesplazandose()) {
+            return true;
+        }
+        return false;
     }
     
 }

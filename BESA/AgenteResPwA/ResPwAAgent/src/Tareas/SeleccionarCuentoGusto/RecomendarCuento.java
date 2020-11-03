@@ -9,6 +9,7 @@ import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +32,20 @@ public class RecomendarCuento extends ResPwaTask{
         System.out.println("--- Execute Task Recomendar Cuento ---");
         //buscar cuento
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        float gusto = -1;
+        Cuento cuentoEleg = null;
         List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
         for(Cuento c: cuentos) {
-            //escoger cuento
+            if( c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3 <= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
+                cuentoEleg = c;
+                gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
+            }
         }
-        infoServicio.put("SAY", "nomCuentoElegido");
-        ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
+        
+        infoServicio.put("SAY", cuentoEleg);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb);
     }
 
     @Override
@@ -51,7 +60,11 @@ public class RecomendarCuento extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

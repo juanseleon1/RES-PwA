@@ -5,6 +5,9 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
+import ResPwAEntities.Cancion;
+import ResPwAEntities.Cuento;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -12,6 +15,7 @@ import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -30,8 +34,11 @@ public class BuscarAnimaciones extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
         //busca animaciones y mensajes base de datos
-        infoServicio.put("SAYWITHMOVEMENT", "MandarCuento");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        //enviar cuento
+        infoServicio.put("SAY", blvs.getbEstadoActividad().getCuentoActual());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }
 
@@ -47,7 +54,11 @@ public class BuscarAnimaciones extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

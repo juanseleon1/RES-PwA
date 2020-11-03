@@ -45,8 +45,7 @@ public class SeleccionarCuento extends ResPwaTask{
         for(Cuento c: cuentos) {
             //escoger cuento
             
-            if( c.getGusto()+c.getGeneroGenero().getGusto()<= gusto){
-            } else {
+            if( c.getGusto()*0.7+c.getGeneroGenero().getGusto()*0.3 <= gusto){
                 cuentoEleg = c;
                 gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
             }
@@ -66,7 +65,11 @@ public class SeleccionarCuento extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoActividad().getCuentoActual() != null) {
+            return true;
+        }
+        return false;
     }
     
 }

@@ -12,7 +12,7 @@ package EmotionalAnalyzerAgent;
 public enum EmotionPwA {
     ANGER("ANGER"),
     SADNESS("SADNESS"),
-    HAPPYNESS("HAPPYNESS");
+    HAPPINESS("HAPPINESS");
     
     private String dict;
 
