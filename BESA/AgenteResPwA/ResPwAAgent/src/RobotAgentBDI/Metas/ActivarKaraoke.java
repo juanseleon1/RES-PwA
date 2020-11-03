@@ -85,11 +85,11 @@ public class ActivarKaraoke extends GoalBDI {
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
 
         //PwA quiere cantar + letraDisponibleCancion
-        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
-            return 1.0 + blvs.getbEstadoActividad().getBoostActivarKaraoke();
+        if (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
+            return blvs.getbEstadoActividad().getBoostActivarKaraoke() + blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke();
         }
 
-        return blvs.getbEstadoActividad().getBoostActivarKaraoke();
+        return blvs.getbEstadoActividad().getBoostActivarKaraoke() + blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke();
     }
 
     @Override

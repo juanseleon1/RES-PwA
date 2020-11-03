@@ -12,6 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.Bailar.InicializarBaile;
 import Tareas.Bailar.FinalizarBaile;
 import Tareas.Bailar.SeleccionarBaile;
@@ -96,11 +97,11 @@ public class Bailar extends GoalBDI {
         //perfil.gustaBaile
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
 
-        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
-            return 1.0 + blvs.getbEstadoActividad().getBoostBailar();
+        if (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
+            return blvs.getbEstadoActividad().getBoostBailar() + blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke();
         }
 
-        return blvs.getbEstadoActividad().getBoostBailar();
+        return blvs.getbEstadoActividad().getBoostBailar() + blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke();
     }
 
     @Override

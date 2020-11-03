@@ -7,6 +7,7 @@ package Tareas.SeleccionarCancionGusto;
 
 
 import ResPwAEntities.Cancion;
+import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
@@ -18,6 +19,7 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -40,11 +42,19 @@ public class SeleccionarCancion extends ResPwaTask{
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         
-        //buscar cancion BD
-        Cancion cancion = new Cancion();
-        cancion.setNombre("Unicornio salvaje");
+        float gusto = -1;
+        Cancion cancionEleg = null;
+        List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
+        for(Cancion c: canciones) {
+            
+            if( c.getGusto()+c.getGeneroGenero().getGusto()<= gusto){
+            } else {
+                cancionEleg = c;
+                gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
+            }
+        }
+        blvs.getbEstadoActividad().setCancionActual(cancionEleg);
         
-        blvs.getbEstadoActividad().setCancionActual(cancion);
     }
 
     @Override

@@ -45,10 +45,10 @@ public class SeleccionarCuento extends ResPwaTask{
         for(Cuento c: cuentos) {
             //escoger cuento
             
-            if( c.getGusto()<= gusto){
+            if( c.getGusto()+c.getGeneroGenero().getGusto()<= gusto){
             } else {
                 cuentoEleg = c;
-                gusto = (float) c.getGusto();
+                gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
             }
         }
         blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);

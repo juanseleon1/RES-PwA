@@ -6,7 +6,7 @@
 package RobotAgentBDI.Metas;
 
 import Tareas.SeleccionarCancionGusto.SeleccionarCancion;
-import Tareas.SeleccionarCancionGusto.BusquedaCancionYoutube;
+import Tareas.SeleccionarCancionGusto.ReproduccionCancion;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
@@ -27,28 +27,29 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class SeleccionarCancionGusto extends GoalBDI{
+public class SeleccionarCancionGusto extends GoalBDI {
 
-    private static String descrip = "SeleccionarCancionGusto"; 
+    private static String descrip = "SeleccionarCancionGusto";
 
     public static SeleccionarCancionGusto buildGoal() {
-    
-        BusquedaCancionYoutube busquedaCancionYT = new BusquedaCancionYoutube();
+
+        ReproduccionCancion busquedaCancionYT = new ReproduccionCancion();
         SeleccionarCancion seleccionarCancion = new SeleccionarCancion();
         RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
 
-        List<String> resources= new ArrayList<>();
-        List<Task> tarea= new ArrayList<>();
-        Plan rolePlan= new Plan(tarea,resources,null);
+        List<String> resources = new ArrayList<>();
+        List<Task> tarea = new ArrayList<>();
+        Plan rolePlan = new Plan(tarea, resources, null);
 
         rolePlan.addTask(seleccionarCancion); //evaluar estado emocional, si no es la primera cancion, saltar contenido de esa tarea
         rolePlan.addTask(busquedaCancionYT); //buscar API o desde la BD y se envia,preguntar si quiere una canción, inflar funcion contribucion cambiar cancion
         rolePlan.addTask(recibirRetroalimentacion); //cuando acabe la canción pedir retroalimentacion
 
         RationalRole selCancionGRole = new RationalRole(descrip, rolePlan);
-        SeleccionarCancionGusto b= new SeleccionarCancionGusto(InitRESPwA.getPlanID(), selCancionGRole, descrip, GoalBDITypes.DUTY);
+        SeleccionarCancionGusto b = new SeleccionarCancionGusto(InitRESPwA.getPlanID(), selCancionGRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+
     public SeleccionarCancionGusto(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         //System.out.println("Meta CambiarCancion created");
@@ -63,16 +64,15 @@ public class SeleccionarCancionGusto extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarCancion detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null&&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
-                blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() >0.5 && blvs.getbEstadoActividad().isFinalizoActividad()) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() != null && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))
+                    && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA) && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica() > 0.5 && blvs.getbEstadoActividad().isFinalizoActividad()) {
+                return 1.0;
+            }
         }
-        }
-        
-        
+
         return 0;
     }
 
@@ -85,10 +85,13 @@ public class SeleccionarCancionGusto extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta CambiarCancion evaluateContribution");
-        
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()+blvs.getbEstadoActividad().getCancionActual().getGusto() + blvs.getbEstadoActividad().getBoostSeleccionarCancionGusto();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
+
+        if (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA)) {
+            return blvs.getbEstadoActividad().getCancionActual().getGusto() + blvs.getbEstadoActividad().getBoostSeleccionarCancionGusto();
+        }
+        return 0;
 
     }
 
@@ -103,5 +106,5 @@ public class SeleccionarCancionGusto extends GoalBDI{
         System.out.println("Meta CambiarCancion goalSucceeded");
         return true;
     }
-    
+
 }
