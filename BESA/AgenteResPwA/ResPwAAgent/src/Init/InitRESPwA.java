@@ -89,7 +89,7 @@ public class InitRESPwA {
             System.out.println("Ingrese su nombre de usuario: ");
             //user=scan.nextLine();
             System.out.println("Ingrese su contrasena: ");
-//            pwd= scan.nextLine();
+//          pwd= scan.nextLine();
             c=RESPwABDInterface.getCarer(user);
             if(c==null)
             {

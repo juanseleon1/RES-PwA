@@ -2,15 +2,8 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/SeleccionarCancionGusto/ReproduccionCancion.java</file>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/SeleccionarCancionGusto/SeleccionarCancion.java</file>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/DetectarPwA.java</file>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
+            <file>file:/C:/Users/juans/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
         </group>
->>>>>>> 0b3a40d0b0fae453f648c8c56f37928155ff4b60
     </open-files>
 </project-private>

@@ -38,7 +38,7 @@ public class BDIBuilderDirector {
 
     /** 
      * <p> Execute the build flow </p>
-     * @throws KernellAgentExceptionBESA
+     * @throws KernelAgentExceptionBESA
      * @throws ExceptionBESA 
      */
     public void buildBDIAgent() throws KernelAgentExceptionBESA, ExceptionBESA {
