@@ -513,7 +513,7 @@ def activate_conversational_topic(topicName):
 
 #Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine 
 def load_conversational_topic(topicName):
-     return alDialogProxy.loadTopicContent(topicName)
+     alDialogProxy.loadTopic(path)
 
 #Unloads the specified topic and frees the associated memory.
 def unload_conversational_topic(topicName):
@@ -749,8 +749,14 @@ try:
   alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
   #Raised when an utterance has been analyzed.
   alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
-  #
+  #Raised whenever an activity completes its execution and exits.
   alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
+  #Raised when the robot touch status changed.
+  alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged")
+  #Raised when at least one device (joint, actuator, sensor) has a high temperature.
+  alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
+  #Raised each time the robot catches a human input. Contains the last human input.
+  alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
   #
   #alProxy.subscribeToEvent("","sensorsModule", "pythondatachanged")
   #
