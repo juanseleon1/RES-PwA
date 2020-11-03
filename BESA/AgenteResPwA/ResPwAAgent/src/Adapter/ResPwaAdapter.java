@@ -32,7 +32,7 @@ public abstract class ResPwaAdapter extends AdapterBESA{
     public void setRpa(RobotSPAgent rpa) {
         this.rpa = rpa;
     }
-    public static int sendNewSendable(){
+    public synchronized static int sendNewSendable(){
         return numPackage++;
     }
 
