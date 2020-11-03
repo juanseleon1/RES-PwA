@@ -40,7 +40,7 @@ public class SuspenderRobot extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        if(blvs.getbEstadoInteraccion().isEstaBailando()) {
+        if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             infoServicio.put("STOPANIMATION", null);
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
             requestService(srb);
@@ -82,7 +82,11 @@ public class SuspenderRobot extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+            return true;
+        }
+        return false;
     }
     
 }

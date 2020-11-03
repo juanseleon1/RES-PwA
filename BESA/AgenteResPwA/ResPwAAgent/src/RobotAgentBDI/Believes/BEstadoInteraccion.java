@@ -6,6 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
+import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -35,6 +36,8 @@ public class BEstadoInteraccion implements Believes{
     private boolean detectaPwA = false;
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
+    private LedsColor leds=null;
+    private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
 
@@ -294,5 +297,19 @@ public class BEstadoInteraccion implements Believes{
         super.clone();
         return this;
     }
+
+    public LedsColor getLeds() {
+        return leds;
+    }
+
+    public boolean isConfirmarActServicios() {
+        return confirmarActServicios;
+    }
+
+    public void setConfirmarActServicios(boolean confirmarActServicios) {
+        this.confirmarActServicios = confirmarActServicios;
+    }
+    
+    
     
 }

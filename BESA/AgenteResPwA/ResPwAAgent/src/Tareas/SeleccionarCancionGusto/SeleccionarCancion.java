@@ -47,8 +47,7 @@ public class SeleccionarCancion extends ResPwaTask{
         List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
         for(Cancion c: canciones) {
             
-            if( c.getGusto()+c.getGeneroGenero().getGusto()<= gusto){
-            } else {
+            if( c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3 <= gusto){
                 cancionEleg = c;
                 gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
             }
@@ -69,7 +68,11 @@ public class SeleccionarCancion extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoActividad().getCancionActual()!=null) {
+            return true;
+        }
+        return false;
     }
     
 }

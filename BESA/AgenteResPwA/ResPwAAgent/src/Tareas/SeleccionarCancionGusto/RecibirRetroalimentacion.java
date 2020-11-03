@@ -5,6 +5,7 @@
  */
 package Tareas.SeleccionarCancionGusto;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -31,21 +32,12 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
         ServiceDataRequest srb = null;
         
-        infoServicio.put("GETEMOTIONSTATE", null);
-        srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.GETEMOTIONSTATE, infoServicio);
-        requestService(srb);
-        infoServicio = new HashMap<>();
-        
         //buscar texto
         infoServicio.put("SAY", "AskRetroCancion");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
         
-        //buscar url
-        infoServicio.put("SHOWIMG", "AskRetroCancion");
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
-        requestService(srb);
     }
 
     @Override
@@ -60,7 +52,11 @@ public class RecibirRetroalimentacion extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

@@ -8,6 +8,7 @@ package Tareas.ConversarEmpaticamente;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
+import Tareas.AnimarElogiarPwA.AnimarStrategy;
 import Tareas.CambiarEnriquecimientoHistoria.EnriquecerStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,7 +60,11 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof ConversarStrategy) {
+            return true;
+        }
+        return false;
     }
     
 }

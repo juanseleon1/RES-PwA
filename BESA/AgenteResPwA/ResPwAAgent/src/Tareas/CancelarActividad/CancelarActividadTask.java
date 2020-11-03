@@ -14,6 +14,7 @@ import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.AnimarElogiarPwA.AnimarStrategy;
 import java.util.HashMap;
 
 /**
@@ -35,21 +36,21 @@ public class CancelarActividadTask extends ResPwaTask{
         ServiceDataRequest srb = null;
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        if(blvs.getbEstadoInteraccion().isEstaBailando()) {
+        if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             infoServicio.put("STOPANIMATION", null);
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
             requestService(srb);
-            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            infoServicio = new HashMap<>();
             infoServicio.put("STOPALL", null);
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
             requestService(srb);
-            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
+            infoServicio = new HashMap<>();
             infoServicio.put("QUITVIDEO", null);
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, infoServicio);
             requestService(srb);
@@ -70,7 +71,11 @@ public class CancelarActividadTask extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaMoviendo() && !blvs.getbEstadoInteraccion().isEstaBailando() && !blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && !blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

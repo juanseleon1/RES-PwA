@@ -83,6 +83,15 @@ public class ReproduccionCancion extends ResPwaTask {
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
     }
+    
+    @Override
+    public boolean checkFinish(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && !blvs.getbEstadoInteraccion().isConfirmacionRepAud()) {
+            return true;
+        }
+        return false;
+    }
 
     public List<Imagen> getImgxTag(String tag, List<Imagen> imgs) {
         List<Imagen> imagenes = new ArrayList<>();
@@ -95,11 +104,6 @@ public class ReproduccionCancion extends ResPwaTask {
             }
         }
         return imagenes;
-    }
-
-    @Override
-    public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

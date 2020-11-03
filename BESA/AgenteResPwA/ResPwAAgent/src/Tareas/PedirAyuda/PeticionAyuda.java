@@ -5,6 +5,7 @@
  */
 package Tareas.PedirAyuda;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -45,7 +46,11 @@ public class PeticionAyuda extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -48,7 +49,8 @@ public class VerificarObstaculos extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //idk
+        return true;
     }
     
 }

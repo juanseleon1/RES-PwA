@@ -63,7 +63,11 @@ public class DetectarPwA extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isDetectaPwA()) {
+            return true;
+        }
+        return false;
     }
     
     

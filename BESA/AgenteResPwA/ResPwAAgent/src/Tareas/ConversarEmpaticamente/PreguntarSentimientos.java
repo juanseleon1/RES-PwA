@@ -5,6 +5,7 @@
  */
 package Tareas.ConversarEmpaticamente;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -36,11 +37,7 @@ public class PreguntarSentimientos extends ResPwaTask{
         infoServicio.put("SAY", "PreguntaSentimientos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio = new HashMap<>();
-        //buscar url
-        infoServicio.put("SHOWIMG", "url");
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
-        requestService(srb);
+    
     }
 
     @Override
@@ -55,7 +52,11 @@ public class PreguntarSentimientos extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
+        }
+        return false;
     }
     
 }

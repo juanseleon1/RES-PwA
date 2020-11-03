@@ -14,6 +14,7 @@ import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.HashMap;
 
 /**
@@ -72,7 +73,11 @@ public class PausarActividad extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isPausarInt() && !blvs.getbEstadoInteraccion().isEstaBailando() && !blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()) {
+            return true;
+        }
+        return false;
     }
     
 }
