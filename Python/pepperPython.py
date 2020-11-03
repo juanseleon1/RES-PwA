@@ -849,7 +849,8 @@ alDialogProxy.setLanguage("Spanish")
                        'concept:(emocion)[cansado aburrido mamado ] \n'
                        'u:(No quiero jugar más) ¡Está bien! Vamos a quitar la actividad.\n'
                        'u:(Estoy_~emocion) ¡Está bien! Quieres cambiar la actividad?.\n'
-                      'u:(si {por favor}) Bueno, cambiemos de actividad.\n')
+                       'u:(si {por favor}) Bueno, cambiemos de actividad.\n'
+                       'u:(Que te dices mi pez) En la buena pirobo norrea.\n')
 
     # Loading the topics directly as text strings
     topic_name_1 = load_conversational_topic(topic_content_1)
@@ -859,19 +860,16 @@ alDialogProxy.setLanguage("Spanish")
     activate_conversational_topic(topic_name_1)
     activate_conversational_topic(topic_name_2)
     #Subscribe to use the topics previously activated
+        
 
-'''
-#JSON
-    json_string = {
-        "id" : null ,
-        "proxyName": "proxyName",
-        "methodName":"method_name", 
-        "params":{              #por lo general van a ser números o strings, solo van a ver listas cuando sea cuentería y toque precargar imágenes. 
-            "EAAgent":"This is the Remix", 
-            "Lista imagenes":["URL","URL2","sjfiosjfiosdjf"]
+    #Json creation
+
+    def json_creator(id_response, responseType, params):
+        json_string = {
+            "id" : id_response ,
+            "respType": responseType, 
+            "params":params              
         }
-    }
-    json_dump = json.dumps(json_string)
-    json_object = json.loads(json_dump)
-'''
+        return json.loads(json_dump)
+
 
