@@ -24,7 +24,7 @@ public class DetectarPwA extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>(); 
     
     public DetectarPwA() {
-        System.out.println("--- Task Detectar PwA Iniciada ---");
+//        System.out.println("--- Task Detectar PwA Iniciada ---");
     }
     
     @Override

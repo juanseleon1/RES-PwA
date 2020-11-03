@@ -25,7 +25,7 @@ public class MoverseFrentePwA extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public MoverseFrentePwA() {
-        System.out.println("--- Task Moverse Frente PwA Iniciada ---");
+//        System.out.println("--- Task Moverse Frente PwA Iniciada ---");
     }
     
 

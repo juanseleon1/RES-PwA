@@ -55,19 +55,19 @@ public class LogIn extends GoalBDI{
 
     public LogIn(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta LogIn created");
+        //System.out.println("Meta LogIn created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn evaluateViability");
+        //System.out.println("Meta LogIn evaluateViability");
         return 1.0;
 
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn detectGoal");
+        //System.out.println("Meta LogIn detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -80,27 +80,27 @@ public class LogIn extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn evaluatePlausibility");
+        //System.out.println("Meta LogIn evaluatePlausibility");
         return 1.0;
 
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn evaluateContribution");
+        //System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn predictResultUnlegality");
+        //System.out.println("Meta LogIn predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta LogIn goalSucceeded");
+        //System.out.println("Meta LogIn goalSucceeded");
         return true;
     }
     

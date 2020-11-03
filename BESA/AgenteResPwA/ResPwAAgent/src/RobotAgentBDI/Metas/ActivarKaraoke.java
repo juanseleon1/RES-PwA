@@ -44,18 +44,18 @@ public class ActivarKaraoke extends GoalBDI{
     }
     public ActivarKaraoke(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta EntrarModoKaraoke created");
+        //System.out.println("Meta EntrarModoKaraoke created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EntrarModoKaraoke evaluateViability");
+        //System.out.println("Meta EntrarModoKaraoke evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EntrarModoKaraoke detectGoal");
+        //System.out.println("Meta EntrarModoKaraoke detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -74,7 +74,7 @@ public class ActivarKaraoke extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EntrarModoKaraoke evaluatePlausibility");
+        //System.out.println("Meta EntrarModoKaraoke evaluatePlausibility");
         return 1;
     }
 
@@ -94,13 +94,13 @@ public class ActivarKaraoke extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EntrarModoKaraoke predictResultUnlegality");
+        //System.out.println("Meta EntrarModoKaraoke predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EntrarModoKaraoke goalSucceeded");
+        //System.out.println("Meta EntrarModoKaraoke goalSucceeded");
         return true;
     }
     

@@ -18,7 +18,7 @@ public class PrepararMensaje extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public PrepararMensaje() {
-        System.out.println("--- Task Preparar Mensaje Iniciada ---");
+//        System.out.println("--- Task Preparar Mensaje Iniciada ---");
     }
 
     

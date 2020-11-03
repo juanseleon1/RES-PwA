@@ -24,7 +24,7 @@ public class BusquedaCancionYoutube extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public BusquedaCancionYoutube() {
-        System.out.println("--- Task Busqueda Cancion Iniciada ---");
+//        System.out.println("--- Task Busqueda Cancion Iniciada ---");
     }
 
     @Override

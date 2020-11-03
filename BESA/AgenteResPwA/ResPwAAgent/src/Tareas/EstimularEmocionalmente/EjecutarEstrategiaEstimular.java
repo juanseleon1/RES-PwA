@@ -18,7 +18,7 @@ public class EjecutarEstrategiaEstimular extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EjecutarEstrategiaEstimular() {
-        System.out.println("--- Task Ejecutar Estrategia Estimular Iniciada ---");
+//        System.out.println("--- Task Ejecutar Estrategia Estimular Iniciada ---");
     }
     
 

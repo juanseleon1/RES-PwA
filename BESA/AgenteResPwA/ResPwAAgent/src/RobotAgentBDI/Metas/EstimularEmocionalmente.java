@@ -59,42 +59,42 @@ public class EstimularEmocionalmente extends GoalBDI{
     }
     public EstimularEmocionalmente(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta EstimularEmocionalmente created");
+        //System.out.println("Meta EstimularEmocionalmente created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente evaluateViability");
+        //System.out.println("Meta EstimularEmocionalmente evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente detectGoal");
+        //System.out.println("Meta EstimularEmocionalmente detectGoal");
         return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente evaluatePlausibility");
+        //System.out.println("Meta EstimularEmocionalmente evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente evaluateContribution");
+        //System.out.println("Meta EstimularEmocionalmente evaluateContribution");
         return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente predictResultUnlegality");
+        //System.out.println("Meta EstimularEmocionalmente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta EstimularEmocionalmente goalSucceeded");
+        //System.out.println("Meta EstimularEmocionalmente goalSucceeded");
         return true;
     }
     

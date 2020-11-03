@@ -23,7 +23,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public RecibirRetroalimentacion() {
-        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
+//        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
     }
 
     @Override

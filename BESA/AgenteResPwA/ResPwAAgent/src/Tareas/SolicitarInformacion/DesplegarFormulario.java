@@ -18,7 +18,7 @@ public class DesplegarFormulario extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public DesplegarFormulario() {
-        System.out.println("--- Task Desplegar Formulario Iniciada ---");
+//        System.out.println("--- Task Desplegar Formulario Iniciada ---");
     }
     
 

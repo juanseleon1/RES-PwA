@@ -24,7 +24,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class MantenerAtencionPwA extends GoalBDI{
+public class MantenerAtencionPwA extends GoalBDI {
 
     private static String descrip = "MantenerAtencionPwA";
 
@@ -35,65 +35,68 @@ public class MantenerAtencionPwA extends GoalBDI{
         EjecutarEstrategiaAtencion ejecutarEstrategia = new EjecutarEstrategiaAtencion();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        
-        Plan rolePlan= new Plan(taskList, resources, null);
+
+        Plan rolePlan = new Plan(taskList, resources, null);
 
         rolePlan.addTask(seleccionarEstrategiaA);
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         rolePlan.addTask(ejecutarEstrategia);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
-        MantenerAtencionPwA b= new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);
+        MantenerAtencionPwA b = new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+
     public MantenerAtencionPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta MantenerAtencionPwA created");
+        //System.out.println("Meta MantenerAtencionPwA created");
     }
 
-@Override
+    @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA evaluateViability");
+        //System.out.println("Meta MantenerAtencionPwA evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA detectGoal");
-        
+        //System.out.println("Meta MantenerAtencionPwA detectGoal");
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 1) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+
+            //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
+            if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 1) {
+                return 1.0;
+            }
         }
-        
+
         return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA evaluatePlausibility");
+        //System.out.println("Meta MantenerAtencionPwA evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA evaluateContribution");
-        
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        //System.out.println("Meta MantenerAtencionPwA evaluateContribution");
+
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() + blvs.getbEstadoActividad().getBoostMantenerAtencionPwA();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA predictResultUnlegality");
+        //System.out.println("Meta MantenerAtencionPwA predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA goalSucceeded");
+        //System.out.println("Meta MantenerAtencionPwA goalSucceeded");
         return true;
     }
 }

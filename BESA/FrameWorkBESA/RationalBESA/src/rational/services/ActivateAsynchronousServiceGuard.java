@@ -15,7 +15,6 @@ public class ActivateAsynchronousServiceGuard extends GuardBESA{
         @Override
         public void run(){
             AsynchronousService servicio = (AsynchronousService) state.getDescriptor().getServiceAccessTable().get(data.getServiceName());
-            System.out.println("Enviando Solicitud");
             servicio.executeAsyncService((SPServiceDataRequest) data, state.getAdapter(), state.getAgentsGuardsTableAsync());
         }};
         t1.start();

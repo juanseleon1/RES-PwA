@@ -25,7 +25,7 @@ public class SuspenderRobot extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SuspenderRobot() {
-        System.out.println("--- Task Suspender Robot Iniciada ---");
+//        System.out.println("--- Task Suspender Robot Iniciada ---");
     }
     
 

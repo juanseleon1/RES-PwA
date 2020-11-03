@@ -53,18 +53,18 @@ public class CambiarDificultad extends GoalBDI{
     }
     public CambiarDificultad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta CambiarDificultad created");
+        //System.out.println("Meta CambiarDificultad created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad evaluateViability");
+        //System.out.println("Meta CambiarDificultad evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad detectGoal");
+        //System.out.println("Meta CambiarDificultad detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -78,25 +78,25 @@ public class CambiarDificultad extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad evaluatePlausibility");
+        //System.out.println("Meta CambiarDificultad evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad evaluateContribution");
+        //System.out.println("Meta CambiarDificultad evaluateContribution");
         return 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad predictResultUnlegality");
+        //System.out.println("Meta CambiarDificultad predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarDificultad goalSucceeded");
+        //System.out.println("Meta CambiarDificultad goalSucceeded");
         return true;
     }
     

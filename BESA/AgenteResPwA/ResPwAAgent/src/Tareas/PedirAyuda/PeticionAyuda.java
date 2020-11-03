@@ -21,7 +21,7 @@ public class PeticionAyuda extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public PeticionAyuda() {
-        System.out.println("--- Task Peticion Ayuda Iniciada ---");
+//        System.out.println("--- Task Peticion Ayuda Iniciada ---");
     }
     
     @Override

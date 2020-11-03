@@ -26,7 +26,7 @@ public class InicializarBaile extends ResPwaTask{
     //revisa el espacio para que no se choque
 
     public InicializarBaile() {
-        System.out.println("--- Task Cambiar Baile Iniciada ---");
+//        System.out.println("--- Task Cambiar Baile Iniciada ---");
     }
 
     @Override

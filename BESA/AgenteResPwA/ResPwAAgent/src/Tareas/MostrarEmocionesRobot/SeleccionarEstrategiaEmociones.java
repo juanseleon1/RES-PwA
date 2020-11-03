@@ -26,13 +26,13 @@ public class SeleccionarEstrategiaEmociones extends ResPwaTask {
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarEstrategiaEmociones() {
-        System.out.println("--- Task Seleccionar Estrategia Atencion Iniciada ---");
+//        System.out.println("--- Task Seleccionar Estrategia Atencion Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Seleccionar Estrategia Atencion ---");
+        System.out.println("--- Execute Task Seleccionar Estrategia Emociones ---");
     }
 
     @Override

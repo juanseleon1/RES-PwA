@@ -43,18 +43,18 @@ public class PausarInteraccion extends GoalBDI{
     }
     public PausarInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta PausarInteraccion created");
+        //System.out.println("Meta PausarInteraccion created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion evaluateViability");
+        //System.out.println("Meta PausarInteraccion evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion detectGoal");
+        //System.out.println("Meta PausarInteraccion detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -71,26 +71,26 @@ public class PausarInteraccion extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion evaluatePlausibility");
+        //System.out.println("Meta PausarInteraccion evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion evaluateContribution");
+        //System.out.println("Meta PausarInteraccion evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostPausarInteraccion();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion predictResultUnlegality");
+        //System.out.println("Meta PausarInteraccion predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta PausarInteraccion goalSucceeded");
+        //System.out.println("Meta PausarInteraccion goalSucceeded");
         return true;
     }
     

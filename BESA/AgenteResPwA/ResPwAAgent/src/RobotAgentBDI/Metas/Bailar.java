@@ -26,95 +26,93 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class Bailar extends GoalBDI{
+public class Bailar extends GoalBDI {
 
-    private static String descrip="Bailar";
+    private static String descrip = "Bailar";
 
     public static Bailar buildGoal() {
-        
+
         InicializarBaile inicializarBaile = new InicializarBaile();
         FinalizarBaile finalizarBaile = new FinalizarBaile();
         SeleccionarBaile seleccionarBaile = new SeleccionarBaile();
-        List<String> resources= new ArrayList<>();
-        List<Task> tarea= new ArrayList<>();
-        Plan rolePlan= new Plan(tarea,resources,null);
+        List<String> resources = new ArrayList<>();
+        List<Task> tarea = new ArrayList<>();
+        Plan rolePlan = new Plan(tarea, resources, null);
         rolePlan.addTask(inicializarBaile);
         rolePlan.addTask(seleccionarBaile); //evaluar Estado emocional, mirar tipo de baile que puede hacer dependiendo de la canción
         rolePlan.addTask(finalizarBaile);
-        
+
         //while de espera activa para saber que se movia a un lugar seguro
-        
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
-        Bailar b= new Bailar(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
-        
+        Bailar b = new Bailar(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
+
         return b;
     }
 
     public Bailar(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta Bailar created");
+        //System.out.println("Meta Bailar created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar evaluateViability");
+        //System.out.println("Meta Bailar evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar detectGoal");
+        //System.out.println("Meta Bailar detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //completar
         List<Actxpreferencia> lista = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList();
         double gusto = 0;
         int enriq = 0;
         for (Actxpreferencia act : lista) {
-            if(act.getActividadpwa().getNombre().equalsIgnoreCase("musicoterapia"))
-            {
-                gusto=act.getGusto();
-                enriq=(int) act.getEnriq().intValue();
+            if (act.getActividadpwa().getNombre().equalsIgnoreCase("musicoterapia")) {
+                gusto = act.getGusto();
+                enriq = (int) act.getEnriq().intValue();
             }
         }
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged()){
-            if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5 &&
-               blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && enriq > 2) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoActividad().calcTiempoActividad() > 30 && gusto > 5
+                    && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && enriq > 2) {
+                return 1.0;
+            }
         }
-        }
-        
+
         return 0;
     }
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar evaluatePlausibility");
+        //System.out.println("Meta Bailar evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar evaluateContribution");
+        //System.out.println("Meta Bailar evaluateContribution");
         //perfil.gustaBaile
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        
-        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile()>0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
+
+        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5 && !blvs.getbEstadoActividad().isFinalizoActividad()) {
             return 1.0 + blvs.getbEstadoActividad().getBoostBailar();
         }
-        
+
         return blvs.getbEstadoActividad().getBoostBailar();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar predictResultUnlegality");
+        //System.out.println("Meta Bailar predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Bailar goalSucceeded");
+        //System.out.println("Meta Bailar goalSucceeded");
         return true;
     }
-    
+
 }

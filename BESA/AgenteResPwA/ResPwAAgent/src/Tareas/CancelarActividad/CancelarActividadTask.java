@@ -25,7 +25,7 @@ public class CancelarActividadTask extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public CancelarActividadTask() {
-        System.out.println("--- Task Cancelar Actividad Iniciada ---");
+//        System.out.println("--- Task Cancelar Actividad Iniciada ---");
     }
     
 

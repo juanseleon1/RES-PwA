@@ -23,7 +23,7 @@ public class PreguntarSentimientos extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public PreguntarSentimientos() {
-        System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
+//        System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
     }
     
 

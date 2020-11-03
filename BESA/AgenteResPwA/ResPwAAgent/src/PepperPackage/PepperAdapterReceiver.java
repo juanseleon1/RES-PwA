@@ -42,7 +42,6 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         while(ready.get())
         {
             try {
-                System.out.println("Running Socket");
                 Socket s=ss.accept();
                 DataInputStream  in = new DataInputStream(s.getInputStream());
                 String json = in.readUTF();

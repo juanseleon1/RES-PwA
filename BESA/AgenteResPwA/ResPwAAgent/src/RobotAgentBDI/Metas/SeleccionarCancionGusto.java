@@ -51,18 +51,18 @@ public class SeleccionarCancionGusto extends GoalBDI{
     }
     public SeleccionarCancionGusto(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta CambiarCancion created");
+        //System.out.println("Meta CambiarCancion created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion evaluateViability");
+        //System.out.println("Meta CambiarCancion evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion detectGoal");
+        //System.out.println("Meta CambiarCancion detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
@@ -78,13 +78,13 @@ public class SeleccionarCancionGusto extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion evaluatePlausibility");
+        //System.out.println("Meta CambiarCancion evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion evaluateContribution");
+        //System.out.println("Meta CambiarCancion evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
@@ -94,13 +94,13 @@ public class SeleccionarCancionGusto extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion predictResultUnlegality");
+        //System.out.println("Meta CambiarCancion predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarCancion goalSucceeded");
+        //System.out.println("Meta CambiarCancion goalSucceeded");
         return true;
     }
     

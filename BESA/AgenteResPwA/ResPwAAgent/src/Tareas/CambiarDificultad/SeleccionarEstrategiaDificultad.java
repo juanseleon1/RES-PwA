@@ -18,7 +18,7 @@ public class SeleccionarEstrategiaDificultad extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarEstrategiaDificultad() {
-        System.out.println("--- Task Seleccionar Estrategia Dificultad Iniciada ---");
+//        System.out.println("--- Task Seleccionar Estrategia Dificultad Iniciada ---");
     }
     
 

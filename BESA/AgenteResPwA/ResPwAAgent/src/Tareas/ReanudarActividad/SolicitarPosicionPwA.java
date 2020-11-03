@@ -22,7 +22,7 @@ public class SolicitarPosicionPwA extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SolicitarPosicionPwA() {
-        System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");
+//        System.out.println("--- Task Solicitar Posicion PwA Iniciada ---");
     }
     
 

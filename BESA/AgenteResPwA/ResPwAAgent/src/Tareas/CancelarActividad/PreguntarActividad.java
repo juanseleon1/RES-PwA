@@ -21,7 +21,7 @@ public class PreguntarActividad extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public PreguntarActividad() {
-        System.out.println("--- Task Preguntar Actividad Iniciada ---");
+//        System.out.println("--- Task Preguntar Actividad Iniciada ---");
     }
     
 

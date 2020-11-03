@@ -57,18 +57,18 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     public SeleccionarCuentoGusto(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta SeleccionarCuentoGusto created");
+        //System.out.println("Meta SeleccionarCuentoGusto created");
     }
 
    @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto evaluateViability");
+        //System.out.println("Meta SeleccionarCuentoGusto evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto detectGoal");
+        //System.out.println("Meta SeleccionarCuentoGusto detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -85,26 +85,26 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto evaluatePlausibility");
+        //System.out.println("Meta SeleccionarCuentoGusto evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto evaluateContribution");
+        //System.out.println("Meta SeleccionarCuentoGusto evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return blvs.getbEstadoActividad().getCuentoActual().getGusto() + blvs.getbEstadoActividad().getBoostSeleccionarCuentoGusto();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto predictResultUnlegality");
+        //System.out.println("Meta SeleccionarCuentoGusto predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta SeleccionarCuentoGusto goalSucceeded");
+        //System.out.println("Meta SeleccionarCuentoGusto goalSucceeded");
         return true;
     }
     

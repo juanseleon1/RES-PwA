@@ -19,7 +19,7 @@ public class EjecutarEstrategiaDificultad extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EjecutarEstrategiaDificultad() {
-        System.out.println("--- Task Solicitar Estrategia Iniciada ---");
+//        System.out.println("--- Task Solicitar Estrategia Iniciada ---");
     }
     
 

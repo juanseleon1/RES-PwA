@@ -28,7 +28,6 @@ public abstract class ResPwaTask extends Task{
             String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
             EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
-             System.out.println("AsyncServiceRequestSend");
             evt.setSenderAgId(SHID);
             agH.sendEvent(evt);
         } catch (ExceptionBESA ex) {

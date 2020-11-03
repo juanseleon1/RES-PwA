@@ -25,7 +25,7 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public RecibirNotificacionReanudar() {
-        System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");
+//        System.out.println("--- Task Recibir Notificacion Reanudar Iniciada ---");
     }
     
 
