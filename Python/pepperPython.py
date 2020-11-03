@@ -60,6 +60,29 @@ def handle_client(conn, addr):
     #set_leds_intensity("LeftFaceLedsGreen", 0.5)
     #change_led_color("AllLeds", "green", 0.5 )
     #activate_stiffness(False)
+
+    #pause_sound(idSound)
+    #play_sound(idSound)
+    #set_system_volume(50)
+    #say_with_movement("Hola Enrique")
+    #set_say_volume(75)
+    #stop_all()
+    #say("Hola mundo")
+    #tablet_on()
+    #wake_tablet()
+    #suspend_tablet()
+    #tablet_off()
+    #show_video("https://www.youtube.com/watch?v=TmKh7lAwnBI&ab_channel=BadBunny")
+    #quit_video()
+    #pause_video()
+    #resume_video()
+    #preload_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
+    #show_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
+    #hide_image()
+    #set_tablet_bright(50)
+    #set_tablet_volume(50)
+
+    
     
 def message_manage(key, msg):
         switch_accion = {
