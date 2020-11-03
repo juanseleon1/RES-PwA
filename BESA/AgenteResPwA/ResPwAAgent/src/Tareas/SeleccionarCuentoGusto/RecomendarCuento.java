@@ -23,7 +23,7 @@ public class RecomendarCuento extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public RecomendarCuento() {
-        System.out.println("--- Task Recomendar Cuento Iniciada ---");
+//        System.out.println("--- Task Recomendar Cuento Iniciada ---");
     }
     
     @Override

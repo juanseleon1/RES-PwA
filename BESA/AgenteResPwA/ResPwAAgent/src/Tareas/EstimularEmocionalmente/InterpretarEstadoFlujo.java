@@ -18,7 +18,7 @@ public class InterpretarEstadoFlujo extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public InterpretarEstadoFlujo() {
-        System.out.println("--- Task Interpretar Estado Flujo Iniciada ---");
+//        System.out.println("--- Task Interpretar Estado Flujo Iniciada ---");
     }
     
 

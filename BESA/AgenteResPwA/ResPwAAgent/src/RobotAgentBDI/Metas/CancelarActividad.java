@@ -49,18 +49,18 @@ public class CancelarActividad extends GoalBDI{
     }
     public CancelarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta CancelarActividad created");
+        //System.out.println("Meta CancelarActividad created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad evaluateViability");
+        //System.out.println("Meta CancelarActividad evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad detectGoal");
+        //System.out.println("Meta CancelarActividad detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
@@ -75,26 +75,26 @@ public class CancelarActividad extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad evaluatePlausibility");
+        //System.out.println("Meta CancelarActividad evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad evaluateContribution");
+        //System.out.println("Meta CancelarActividad evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostCancelarActividad();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad predictResultUnlegality");
+        //System.out.println("Meta CancelarActividad predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CancelarActividad goalSucceeded");
+        //System.out.println("Meta CancelarActividad goalSucceeded");
         return true;
     }
     

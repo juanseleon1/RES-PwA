@@ -25,7 +25,7 @@ public class Saludar extends ResPwaTask{
     //incluye detectar la cara del PwA y saludarlo
     
     public Saludar() {
-        System.out.println("--- Task Saludar Iniciada ---");
+//        System.out.println("--- Task Saludar Iniciada ---");
     }
     
     @Override

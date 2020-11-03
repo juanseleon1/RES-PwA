@@ -40,60 +40,60 @@ public class PepperAdapter extends ResPwaAdapter{
     @Override
     public void ActivityServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR = (ServiceDataRequest)data;
-        System.out.println("solicitarInfoActividadAsync Iniciado");
+        System.out.println("solicitarInfoActividadAsync Solicitado");
         sendRequest(dataR);
     }
 
     @Override
     public void AutonomyServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("setAutonomyAsync Iniciado");
+        System.out.println("setAutonomyAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void EnergyServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoBatteryAsync Iniciado");
+        System.out.println("solicitarInfoBatteryAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void HumanServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoHumanAsync Iniciado");
+        System.out.println("solicitarInfoHumanAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void LocationServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoLocationAsync Iniciado");
+        System.out.println("solicitarInfoLocationAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void RobotStateServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoStateAsync Iniciado");
+        System.out.println("solicitarInfoStateAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void VoiceServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarVoiceAsync Iniciado");
+        System.out.println("solicitarVoiceAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void MovementServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarMovementAsync Iniciado");
+        System.out.println("solicitarMovementAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void TabletServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarTabletAsync Iniciado");
+        System.out.println("solicitarTabletAsync Solicitado");
         sendRequest(dataR);
 
     }

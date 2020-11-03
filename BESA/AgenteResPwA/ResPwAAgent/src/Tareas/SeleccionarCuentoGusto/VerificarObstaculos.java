@@ -23,7 +23,7 @@ public class VerificarObstaculos extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public VerificarObstaculos() {
-        System.out.println("--- Task Verificar Obstaculos Iniciada ---");
+//        System.out.println("--- Task Verificar Obstaculos Iniciada ---");
     }
     
 

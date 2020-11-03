@@ -52,18 +52,18 @@ public class AnimarElogiarPwA extends GoalBDI{
     
     public AnimarElogiarPwA(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta AnimarPwA created");
+        //System.out.println("Meta AnimarPwA created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta AnimarPwA evaluateViability");
+        //System.out.println("Meta AnimarPwA evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta AnimarPwA detectGoal");
+        //System.out.println("Meta AnimarPwA detectGoal");
         
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -82,7 +82,7 @@ public class AnimarElogiarPwA extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta AnimarPwA evaluatePlausibility");
+        //System.out.println("Meta AnimarPwA evaluatePlausibility");
         return 1;
     }
 
@@ -100,13 +100,13 @@ public class AnimarElogiarPwA extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta AnimarPwA predictResultUnlegality");
+        //System.out.println("Meta AnimarPwA predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta AnimarPwA goalSucceeded");
+        //System.out.println("Meta AnimarPwA goalSucceeded");
         return true;
     }
     

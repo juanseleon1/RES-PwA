@@ -22,7 +22,7 @@ public class BuscarAnimaciones extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public BuscarAnimaciones() {
-        System.out.println("--- Task Buscar Animaciones Iniciada ---");
+//        System.out.println("--- Task Buscar Animaciones Iniciada ---");
     }
     
 

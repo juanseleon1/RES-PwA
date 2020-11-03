@@ -23,7 +23,7 @@ public class ConversacionInicial extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public ConversacionInicial() {
-        System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
+//        System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
     }
     
     @Override

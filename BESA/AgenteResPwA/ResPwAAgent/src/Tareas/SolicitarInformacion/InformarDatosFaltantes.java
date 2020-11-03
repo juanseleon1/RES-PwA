@@ -18,7 +18,7 @@ public class InformarDatosFaltantes extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public InformarDatosFaltantes() {
-        System.out.println("--- Task Informar Datos Faltantes Iniciada ---");
+//        System.out.println("--- Task Informar Datos Faltantes Iniciada ---");
     }
     
 

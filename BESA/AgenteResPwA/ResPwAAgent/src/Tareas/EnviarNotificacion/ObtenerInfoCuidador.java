@@ -18,7 +18,7 @@ public class ObtenerInfoCuidador extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public ObtenerInfoCuidador() {
-        System.out.println("--- Task Obtener Informacion Cuidador Iniciada ---");
+//        System.out.println("--- Task Obtener Informacion Cuidador Iniciada ---");
     }
     
 

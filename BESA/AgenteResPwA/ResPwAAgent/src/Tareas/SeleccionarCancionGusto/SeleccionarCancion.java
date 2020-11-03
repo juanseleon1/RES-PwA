@@ -28,7 +28,7 @@ public class SeleccionarCancion extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarCancion() {
-        System.out.println("--- Task Seleccionar Cancion Iniciada ---");
+//        System.out.println("--- Task Seleccionar Cancion Iniciada ---");
     }
     
 

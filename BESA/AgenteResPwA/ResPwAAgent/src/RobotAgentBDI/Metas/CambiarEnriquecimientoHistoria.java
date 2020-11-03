@@ -50,18 +50,18 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
     }
     public CambiarEnriquecimientoHistoria(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta CambiarEnriquecimientoHistoria created");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria created");
     }
 
    @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria evaluateViability");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria detectGoal");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
@@ -79,13 +79,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria evaluatePlausibility");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria evaluateContribution");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         
@@ -98,13 +98,13 @@ public class CambiarEnriquecimientoHistoria extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria predictResultUnlegality");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
+        //System.out.println("Meta CambiarEnriquecimientoHistoria goalSucceeded");
         return true;
     }
     

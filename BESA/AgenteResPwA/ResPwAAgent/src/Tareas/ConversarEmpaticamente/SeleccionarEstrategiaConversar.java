@@ -23,7 +23,7 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarEstrategiaConversar() {
-        System.out.println("--- Task Seleccionar Estrategia Conversar Iniciada ---");
+//        System.out.println("--- Task Seleccionar Estrategia Conversar Iniciada ---");
     }
     
 

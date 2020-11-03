@@ -23,7 +23,7 @@ public class SeleccionarBaile extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarBaile() {
-        System.out.println("--- Task Seleccionar Baile Iniciada ---");
+//        System.out.println("--- Task Seleccionar Baile Iniciada ---");
     }
     
     @Override

@@ -23,7 +23,7 @@ public class ReiniciarActividadTask extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public ReiniciarActividadTask() {
-        System.out.println("--- Task Reiniciar Actividad Iniciada ---");
+//        System.out.println("--- Task Reiniciar Actividad Iniciada ---");
     }
     
 

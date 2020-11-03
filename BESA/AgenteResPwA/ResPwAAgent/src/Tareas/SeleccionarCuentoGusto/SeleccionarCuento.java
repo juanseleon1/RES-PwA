@@ -26,7 +26,7 @@ public class SeleccionarCuento extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public SeleccionarCuento() {
-        System.out.println("--- Task Seleccionar Cuento Iniciada ---");
+//        System.out.println("--- Task Seleccionar Cuento Iniciada ---");
     }
     
 

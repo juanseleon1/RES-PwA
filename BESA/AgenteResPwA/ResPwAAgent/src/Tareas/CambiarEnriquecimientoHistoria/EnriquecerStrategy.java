@@ -21,7 +21,7 @@ import java.util.HashMap;
  */
 public class EnriquecerStrategy implements ResPwAStrategy{
     
-    private String nombre;
+    private int nombre;
     
     @Override
     public ServiceDataRequest execStrategy() {
@@ -29,29 +29,33 @@ public class EnriquecerStrategy implements ResPwAStrategy{
         ServiceDataRequest srb = null;
         switch (nombre)
         {
-            case "Luces":
-                infoServicio.put("CHANGELEDCOLOR", nombre);
-                srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
+            case 0: //hablar
+                infoServicio.put("SAY", nombre);
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "MovEnriquecer":
+            case 1: //movimienot
                 infoServicio.put("RUNANIMATION", nombre);
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 break;
-            case "FraseEnriquecer":
-                //enviar frase
-                infoServicio.put("SAY", nombre);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            case 2:
+                //falta escoger imagenes
+                infoServicio.put("SHOWIMG", nombre);
+                srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+                break;
+            case 3: //luces
+                infoServicio.put("CHANGELEDCOLOR", nombre);
+                srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
                 break;
         }
         return srb;
     }
 
-    public String getNombre() {
+    public int getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(int num) {
+        this.nombre = num;
     }
     
     

@@ -21,7 +21,7 @@ public class EjecutarEstrategiaConversar extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
     public EjecutarEstrategiaConversar() {
-        System.out.println("--- Task Ejecutar Estrategia Conversar Iniciada ---");
+//        System.out.println("--- Task Ejecutar Estrategia Conversar Iniciada ---");
     }
 
     @Override

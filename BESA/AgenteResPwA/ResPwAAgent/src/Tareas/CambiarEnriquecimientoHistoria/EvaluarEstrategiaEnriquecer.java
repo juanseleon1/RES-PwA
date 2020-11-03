@@ -26,20 +26,19 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EvaluarEstrategiaEnriquecer() {
-        System.out.println("--- Task Evaluar Enriquecer Iniciada ---");
+//        System.out.println("--- Task Evaluar Enriquecer Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Evaluar Enriquecer ---");
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Luces", "MovEnriquecer", "FraseEnriquecer");
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        EnriquecerStrategy es = new EnriquecerStrategy();
-        es.setNombre(estrategia);
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        long num = blvs.getbEstadoInteraccion().getNivelEnriquecimiento();
+        
+        EnriquecerStrategy es = new EnriquecerStrategy();
+        es.setNombre((int)num);
+        
         blvs.getbEstadoActividad().setEstrategia(es);
     }
 

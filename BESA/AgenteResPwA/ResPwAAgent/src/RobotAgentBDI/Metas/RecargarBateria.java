@@ -50,18 +50,18 @@ public class RecargarBateria extends GoalBDI{
 
     public RecargarBateria(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta RecargarBateria created");
+        //System.out.println("Meta RecargarBateria created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria evaluateViability");
+        //System.out.println("Meta RecargarBateria evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria detectGoal");
+        //System.out.println("Meta RecargarBateria detectGoal");
                 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
@@ -76,26 +76,26 @@ public class RecargarBateria extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria evaluatePlausibility");
+        //System.out.println("Meta RecargarBateria evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria evaluateContribution");
+        //System.out.println("Meta RecargarBateria evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria predictResultUnlegality");
+        //System.out.println("Meta RecargarBateria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria goalSucceeded");
+        //System.out.println("Meta RecargarBateria goalSucceeded");
         return true;
     }
     

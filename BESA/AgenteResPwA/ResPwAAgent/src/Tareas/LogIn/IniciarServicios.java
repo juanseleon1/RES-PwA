@@ -26,7 +26,7 @@ public class IniciarServicios extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public IniciarServicios() {
-        System.out.println("--- Task Iniciar Servicios Iniciada ---");
+//        System.out.println("--- Task Iniciar Servicios Iniciada ---");
     }
     
     @Override

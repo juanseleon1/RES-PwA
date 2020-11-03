@@ -21,7 +21,7 @@ public class EjecutarEstrategiaEmociones extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public EjecutarEstrategiaEmociones() {
-        System.out.println("--- Task Ejecutar Estrategia Emociones Iniciada ---");
+//        System.out.println("--- Task Ejecutar Estrategia Emociones Iniciada ---");
     }
     
 

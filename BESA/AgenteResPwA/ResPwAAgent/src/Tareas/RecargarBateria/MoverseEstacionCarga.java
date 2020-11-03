@@ -18,7 +18,7 @@ public class MoverseEstacionCarga extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public MoverseEstacionCarga() {
-        System.out.println("--- Task Moverse Estacion Carga Iniciada ---");
+//        System.out.println("--- Task Moverse Estacion Carga Iniciada ---");
     }
     
 

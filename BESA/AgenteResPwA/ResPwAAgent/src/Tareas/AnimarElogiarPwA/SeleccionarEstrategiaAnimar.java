@@ -28,7 +28,7 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
     
 
     public SeleccionarEstrategiaAnimar() {
-        System.out.println("--- Task Seleccionar Estrategia Animar PwA Iniciada ---");
+//        System.out.println("--- Task Seleccionar Estrategia Animar PwA Iniciada ---");
     }
     
     @Override

@@ -53,18 +53,18 @@ public class ConversarEmpaticamente extends GoalBDI{
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        System.out.println("Meta ConversarEmpaticamente created");
+        //System.out.println("Meta ConversarEmpaticamente created");
     }
 
     @Override
     public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente evaluateViability");
+        //System.out.println("Meta ConversarEmpaticamente evaluateViability");
         return 1;
     }
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente detectGoal");
+        //System.out.println("Meta ConversarEmpaticamente detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
@@ -80,13 +80,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente evaluatePlausibility");
+        //System.out.println("Meta ConversarEmpaticamente evaluatePlausibility");
         return 1;
     }
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente evaluateContribution");
+        //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
@@ -94,13 +94,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
+        //System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
         return true;
     }

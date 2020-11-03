@@ -25,7 +25,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public CambiarVelocidadMov() {
-        System.out.println("--- Task Cambiar Velocidad Movimientos Iniciada ---");
+       // System.out.println("--- Task Cambiar Velocidad Movimientos Iniciada ---");
     }
     
 

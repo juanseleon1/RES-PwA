@@ -18,7 +18,7 @@ public class RetroalimentarBDI extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public RetroalimentarBDI() {
-        System.out.println("--- Task Retroalimentar BDI Iniciada ---");
+//        System.out.println("--- Task Retroalimentar BDI Iniciada ---");
     }
     
 
