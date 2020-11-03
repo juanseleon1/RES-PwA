@@ -32,9 +32,6 @@ public class GetInfoGuard extends GuardBESA{
             SensorData infoRecibida = (SensorData)ebesa.getData();
             //ACTIVIDAD,EMOCIONES,INACTIVIDAD,INTHABLA,INTSENSORES,BATERIA,RETROALIM
             System.out.println("GetInfoGuard Event Received: "+infoRecibida);
-
-            infoRecibida.setDataP(processData(infoRecibida));
-            infoRecibida.setInfoReceived(null);
             AgHandlerBESA handler;
             EventBESA sensorEvtA;
             if(infoRecibida.getDataType().equals(SensorDataType.EMOTIONS))
@@ -53,17 +50,6 @@ public class GetInfoGuard extends GuardBESA{
             Logger.getLogger(GetInfoGuard.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    private Map<String, Object> processData(SensorData infoRecibida) {
-        Map<String, Object> map=null;
-        try {
-            System.out.println("GetInfoGuard procesarDatos exec: "+infoRecibida);
-            map= new ObjectMapper().readValue(infoRecibida.getInfoReceived(), new TypeReference<Map<String,Object>>(){});
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(GetInfoGuard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return map;
-    }
-    
+    }  
     
 }

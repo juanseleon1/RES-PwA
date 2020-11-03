@@ -5,19 +5,20 @@
  */
 package EmotionalAnalyzerAgent;
 
-import BESA.Kernel.Agent.Event.DataBESA;
 import java.util.HashMap;
 import java.util.Map;
+import rational.data.InfoData;
 
 /**
  *
  * @author juans
  */
-public class EmotionalData extends DataBESA{
+public class EmotionalData extends InfoData{
     
     private Map<String, Object> info;
     
     public EmotionalData(){
+        super("emodata");
         info=new HashMap<>();
     }
 
@@ -28,5 +29,5 @@ public class EmotionalData extends DataBESA{
     public void setInfo(Map<String, Object> info) {
         this.info = info;
     }
-    
+
 }

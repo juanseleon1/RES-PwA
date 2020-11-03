@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
 import rational.data.InfoData;
 import rational.mapping.Believes;
@@ -13,62 +14,83 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class BEstadoRobot implements Believes{
-    
+public class BEstadoRobot implements Believes {
+
     private int bateria;
     private int volumenVoz;
-    private long velocidad;
-    private boolean activadoParpadear=false;
-    private boolean activadoAutoColision=false;
-    private boolean activadoColisionExterna=false;
-    private boolean activadoRecuperacionEmpuje=false;
+    private long velocidad = 0;
+    private boolean activadoParpadear = false;
+    private boolean activadoAutoColision = false;
+    private boolean activadoColisionExterna = false;
+    private boolean activadoRecuperacionEmpuje = false;
     private int rigidezExtremidades;
     private String postura;
-    private boolean activadoMovEscucha=false;
-    private boolean activadoConsciente=false;
-    private boolean activadoSeñalesDeVida=false;
-    private boolean activadoMovHabla=false;
-    private boolean estaSuspendido=false;
+    private boolean activadoMovEscucha = false;
+    private boolean activadoConsciente = false;
+    private boolean activadoSeñalesDeVida = false;
+    private boolean activadoMovHabla = false;
+    private boolean estaSuspendido = false;
+    private int velHabla;
+    private int tonoHabla;
 
     @Override
     public boolean update(InfoData si) {
-        SensorData infoRecibida= (SensorData)si;
-        if(infoRecibida.getDataP().containsKey("bateria"))
-        {
-            bateria= Integer.valueOf((String)infoRecibida.getDataP().get("bateria"));
-        }if(infoRecibida.getDataP().containsKey("activadoParpadear"))
-        {
-            activadoParpadear= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoParpadear"));
-        }if(infoRecibida.getDataP().containsKey("activadoAutoColision"))
-        {
-            activadoAutoColision = Boolean.valueOf((String)infoRecibida.getDataP().get("activadoAutoColision"));
-        }if(infoRecibida.getDataP().containsKey("activadoColisionExterna"))
-        {
-            activadoColisionExterna= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoColisionExterna"));
-        }if(infoRecibida.getDataP().containsKey("activadoRecuperacionEmpuje"))
-        {
-            activadoRecuperacionEmpuje= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoRecuperacionEmpuje"));
-        }if(infoRecibida.getDataP().containsKey("rigidezExtremidades"))
-        {
-            rigidezExtremidades= Integer.valueOf((String)infoRecibida.getDataP().get("rigidezExtremidades"));
-        }if(infoRecibida.getDataP().containsKey("postura"))
-        {
-            postura = (String)infoRecibida.getDataP().get("postura");
-        }if(infoRecibida.getDataP().containsKey("activadoMovEscucha"))
-        {
-            activadoMovEscucha= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoMovEscucha"));
-        }if(infoRecibida.getDataP().containsKey("activadoConsciente"))
-        {
-            activadoConsciente= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoConsciente"));
-        }if(infoRecibida.getDataP().containsKey("activadoSeñalesDeVida"))
-        {
-            activadoSeñalesDeVida= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoSeñalesDeVida"));
-        }if(infoRecibida.getDataP().containsKey("activadoMovHabla"))
-        {
-            activadoMovHabla= Boolean.valueOf((String)infoRecibida.getDataP().get("activadoMovHabla"));
-        }if(infoRecibida.getDataP().containsKey("estaSuspendido"))
-        {
-            estaSuspendido = Boolean.valueOf((String)infoRecibida.getDataP().get("estaSuspendido"));
+
+        if (si instanceof SensorData) {
+            SensorData infoRecibida = (SensorData) si;
+            if (infoRecibida.getDataP().containsKey("bateria")) {
+                bateria = Integer.valueOf((String) infoRecibida.getDataP().get("bateria"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoParpadear")) {
+                activadoParpadear = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoParpadear"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoAutoColision")) {
+                activadoAutoColision = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoAutoColision"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoColisionExterna")) {
+                activadoColisionExterna = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoColisionExterna"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoRecuperacionEmpuje")) {
+                activadoRecuperacionEmpuje = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoRecuperacionEmpuje"));
+            }
+            if (infoRecibida.getDataP().containsKey("rigidezExtremidades")) {
+                rigidezExtremidades = Integer.valueOf((String) infoRecibida.getDataP().get("rigidezExtremidades"));
+            }
+            if (infoRecibida.getDataP().containsKey("postura")) {
+                postura = (String) infoRecibida.getDataP().get("postura");
+            }
+            if (infoRecibida.getDataP().containsKey("activadoMovEscucha")) {
+                activadoMovEscucha = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovEscucha"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoConsciente")) {
+                activadoConsciente = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoConsciente"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoSeñalesDeVida")) {
+                activadoSeñalesDeVida = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoSeñalesDeVida"));
+            }
+            if (infoRecibida.getDataP().containsKey("activadoMovHabla")) {
+                activadoMovHabla = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovHabla"));
+            }
+            if (infoRecibida.getDataP().containsKey("estaSuspendido")) {
+                estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("estaSuspendido"));
+            }
+        } else if (si instanceof EmotionalData) {
+            EmotionalData infoRecibida = (EmotionalData) si;
+            if (infoRecibida.getInfo().containsKey("LEDS")) {
+                infoRecibida.getInfo().get("LEDS");
+            }
+            if (infoRecibida.getInfo().containsKey("velocidad")) {
+                velocidad = (long)infoRecibida.getInfo().get("velocidad");
+            }
+            if (infoRecibida.getInfo().containsKey("velHabla")) {
+                velHabla=(int)infoRecibida.getInfo().get("velHabla");
+            }
+            if (infoRecibida.getInfo().containsKey("tonoHabla")) {
+                tonoHabla=(int)infoRecibida.getInfo().get("tonoHabla");
+            }
+            if (infoRecibida.getInfo().containsKey("volVoz")) {
+                volumenVoz=(int)infoRecibida.getInfo().get("volVoz");
+            }
         }
         return true;
     }
@@ -164,11 +186,11 @@ public class BEstadoRobot implements Believes{
     public boolean isEstaSuspendido() {
         return estaSuspendido;
     }
-    
-        @Override
+
+    @Override
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
     }
-    
+
 }

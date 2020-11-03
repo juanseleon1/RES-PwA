@@ -39,18 +39,18 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     @Override
     public void run() {
         
-        while(ready.get())
-        {
-            try {
-                Socket s=ss.accept();
-                DataInputStream  in = new DataInputStream(s.getInputStream());
-                String json = in.readUTF();
+//        while(ready.get())
+//        {
+//            try {
+                //Socket s=ss.accept();
+                //DataInputStream  in = new DataInputStream(s.getInputStream());
+                //String json = in.readUTF();
+                String json="{\"params\": {\"bodyLanguageState\": { \"ease\": { \"confidence\": 0.0, \"level\": 0.0}},\"smile\": {\"confidence\": 0.0,\"value\": 0.0},\"expressions\": {\"joy\": {\"confidence\": 0.0, \"value\": 0.0}, \"sorrow\": {\"confidence\": 0.0, \"value\": 0.0},\"excitement\": {\"confidence\": 0.0,\"value\": 0.0}, \"calm\": {\"confidence\": 0.0, \"value\": 0.0}, \"anger\": {\"confidence\": 0.0, \"value\": 0.0}, \"surprise\": {\"confidence\": 0.0, \"value\": 0.0}, \"laughter\": {\"confidence\": 0.0, \"value\": 0.0}},\"valence\": {\"confidence\": 0.0, \"value\": 0.0}, \"attention\": {\"confidence\": 0.0, \"value\": 0.0}}, \"id\": -1,\"respType\": \"emo\"}";
              Thread t1= new Thread(){
                 @Override
                 public void run()
                 {
                     try {
-                        System.out.println("entro hilo2");
                         SensorData sd=toSensorData(json);
                         updateBlvs(sd);
                     } catch (ExceptionBESA ex) {
@@ -59,11 +59,10 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                 }
                 };
                 t1.start();
-                System.out.println("entro hilo1"); 
-            } catch (IOException ex) {
-                Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//            } catch (IOException ex) {
+//                Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         
     }
     
@@ -73,18 +72,18 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     }
 
     @Override
-    protected SensorData toSensorData(String json) {
+    protected synchronized SensorData toSensorData(String json) {
         
         SensorData resp= new SensorData();
         try {
-            System.out.println("toSensorData "+json);
+//            System.out.println("toSensorData "+json);
             Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
-            
             System.out.println("MAP: "+map.toString());
             resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
-            resp.setInfoReceived((String) map.get("params"));
-        } catch (JsonProcessingException ex) {
+            resp.setDataP((Map<String, Object>) map.get("params"));
+            wait(2000);
+        } catch (JsonProcessingException | InterruptedException ex) {
             Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
         

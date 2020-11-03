@@ -30,16 +30,23 @@ public class PepperEModel extends EmotionalModel{
     
     @Override
     public void updateModel() {
-        double act=refreshRate, dif=normalState-state,fact=1;
-        if(dif<0)
-            fact*=-1;
-        if(dif<act)
-            act=dif;
-        act*=fact;
-        
-        if(dif!=0)
-        {
-            state+=act;
+        try {
+            double act=refreshRate, dif=normalState-state,fact=1;
+            if(dif<0)
+                fact*=-1;
+            if(dif<act)
+                act=dif;
+            act*=fact;
+            if(dif!=0)
+            {
+                state+=act;
+            }   EmotionalData e= new EmotionalData();
+            Map<String,Object> map= e.getInfo();
+            calcNewEmotionalParams(map);
+            e.setInfo(map);
+            sendAct(e);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(PepperEModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -59,6 +66,9 @@ public class PepperEModel extends EmotionalModel{
     
     private void calcNewEmotionalParams(Map<String, Object> map, SensorData sd) {
         Map<String, Object> pe = sd.getDataPE();
+    }
+    private void calcNewEmotionalParams(Map<String, Object> map) {
+       
     }
     
 }

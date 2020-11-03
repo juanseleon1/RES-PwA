@@ -5,6 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
+import EmotionalAnalyzerAgent.EmotionalData;
 import ResPwaUtils.FBaseUtils;
 import ResPwaUtils.Imagen;
 import SensorHandlerAgent.SensorData;
@@ -42,9 +43,11 @@ public class RobotAgentBelieves implements Believes {
     //Aqui se accede a BD y se pide info de otros believes. 
     @Override
     public boolean update(InfoData si) {
-        SensorData infoRecibida = (SensorData) si;
-        System.out.println("RobotAgentBelieves update Received: " + si);
-        if (si != null) {
+    System.out.println("RobotAgentBelieves update Received: " + si);
+        if(si!=null && si.getMessage() != null && si.getMessage().equals("emodata")) {
+            bEstadoRobot.update(si);
+        } else if(si!=null){
+            SensorData infoRecibida = (SensorData) si;
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
@@ -66,6 +69,7 @@ public class RobotAgentBelieves implements Believes {
             }
             return true;
         }
+
         return true;
     }
 
