@@ -8,7 +8,7 @@ package RobotAgentBDI.Metas;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
-import BESA.Kernel.Agent.Event.KernelAgentExceptionBESA;
+import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
@@ -40,7 +40,7 @@ public class ConversarEmpaticamente extends GoalBDI{
     
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
-        Plan rolePlan= new Plan(tarea,resources,null);
+        Plan rolePlan= new Plan();
 
         rolePlan.addTask(preguntarSentimientos);
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
@@ -57,13 +57,13 @@ public class ConversarEmpaticamente extends GoalBDI{
     }
 
     @Override
-    public double evaluateViability(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluateViability(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ConversarEmpaticamente evaluateViability");
         return 1;
     }
 
     @Override
-    public double detectGoal(Believes believes) throws KernelAgentExceptionBESA {
+    public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ConversarEmpaticamente detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -79,13 +79,13 @@ public class ConversarEmpaticamente extends GoalBDI{
     }
 
     @Override
-    public double evaluatePlausibility(Believes believes) throws KernelAgentExceptionBESA {
+    public double evaluatePlausibility(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ConversarEmpaticamente evaluatePlausibility");
         return 1;
     }
 
     @Override
-    public double evaluateContribution(StateBDI stateBDI) throws KernelAgentExceptionBESA {
+    public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
@@ -93,13 +93,13 @@ public class ConversarEmpaticamente extends GoalBDI{
     }
 
     @Override
-    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernelAgentExceptionBESA {
+    public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
-    public boolean goalSucceeded(Believes believes) throws KernelAgentExceptionBESA {
+    public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
         return true;
