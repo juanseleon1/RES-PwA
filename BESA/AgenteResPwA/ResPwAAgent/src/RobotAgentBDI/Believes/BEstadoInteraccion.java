@@ -294,8 +294,8 @@ public class BEstadoInteraccion implements Believes{
 
         @Override
     public Believes clone() throws CloneNotSupportedException {
-        return (Believes) super.clone();
-         
+        super.clone();
+        return this;
     }
 
     public LedsColor getLeds() {

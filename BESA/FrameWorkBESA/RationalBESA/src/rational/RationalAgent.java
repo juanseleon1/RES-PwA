@@ -3,7 +3,7 @@ package rational;
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.AgentBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
-import BESA.Kernel.Agent.KernellAgentExceptionBESA;
+import BESA.Kernel.Agent.KernelAgentExceptionBESA;
 import BESA.Kernel.Agent.StateBESA;
 import BESA.Kernel.Agent.StructBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.GuardServiceProviderSuscribe;
@@ -20,17 +20,17 @@ import rational.mapping.Believes;
 
 public abstract class RationalAgent extends AgentBESA {
 
-        public RationalAgent(String alias, StateBESA state, StructBESA structAgent, double passwd) throws KernellAgentExceptionBESA, ExceptionBESA {
+        public RationalAgent(String alias, StateBESA state, StructBESA structAgent, double passwd) throws KernelAgentExceptionBESA, ExceptionBESA {
             super(alias, state, setupRationalStructure(structAgent), passwd);
             
 	}
         
-        public RationalAgent(String alias, StateBESA state, StructBESA structAgent) throws KernellAgentExceptionBESA, ExceptionBESA {
+        public RationalAgent(String alias, StateBESA state, StructBESA structAgent) throws KernelAgentExceptionBESA, ExceptionBESA {
             super(alias, state, setupRationalStructure(structAgent), 0.91f);
             
 	}
 
-        public RationalAgent(String alias, Believes believes, RationalRole role) throws KernellAgentExceptionBESA, ExceptionBESA {
+        public RationalAgent(String alias, Believes believes, RationalRole role) throws KernelAgentExceptionBESA, ExceptionBESA {
             super(alias, new RationalState(believes, role), setupRationalStructure(), 0.91f);
             
             
