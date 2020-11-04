@@ -33,6 +33,8 @@ public class BEstadoRobot implements Believes {
     private boolean estaSuspendido = false;
     private double velHabla;
     private double tonoHabla;
+    private double distanciaX;
+    private double distanciaY;
     private double ledIntensity;
     private LedsColor leds=null;
     private int red;
@@ -233,4 +235,21 @@ public class BEstadoRobot implements Believes {
         this.tonoHabla = tonoHabla;
     }
 
+    public double getDistanciaX() {
+        return distanciaX;
+    }
+
+    public void setDistanciaX(double distanciaX) {
+        this.distanciaX = distanciaX;
+    }
+
+    public double getDistanciaY() {
+        return distanciaY;
+    }
+
+    public void setDistanciaY(double distanciaY) {
+        this.distanciaY = distanciaY;
+    }
+
+    
 }

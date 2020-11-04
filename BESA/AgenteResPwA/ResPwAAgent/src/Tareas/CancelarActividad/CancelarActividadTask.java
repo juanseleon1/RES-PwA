@@ -37,22 +37,17 @@ public class CancelarActividadTask extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
-            infoServicio.put("STOPANIMATION", null);
-            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
             requestService(srb);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            infoServicio = new HashMap<>();
-            infoServicio.put("STOPALL", null);
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
-            infoServicio = new HashMap<>();
-            infoServicio.put("QUITVIDEO", null);
-            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, null);
             requestService(srb);
         }
 
