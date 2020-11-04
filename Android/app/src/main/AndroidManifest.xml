@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
     <uses-feature android:name="com.softbank.hardware.pepper" />
 
     <application
@@ -68,5 +67,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
