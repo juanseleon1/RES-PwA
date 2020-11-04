@@ -360,19 +360,25 @@ def activate_push_reflexes(params):
     alMotionProxy.setPushRecoveryEnabled(enabled)
     
  #Starts or stops breathing animation on a chain.   
-def activate_breath_movement(extremity_to_enabled, enabled):
+def activate_breath_movement(params):
+    extremity_to_enabled = params.get("ACTIVATEBREATHMOV")
+    enabled = "Body"
     alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
 
 #Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
-def activate_movement_detection(enabled):
+def activate_movement_detection(params):
+    enabled = params.get("ACTIVATEMOVDETECTION")
     alPeoplePerception.setMovementDetectionEnabled(enabled)
     
 #Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
-def activate_face_detection(enabled):
+def activate_face_detection(params):
+    enabled = params.get("ACTIVATELIFESIGNALSINT")
     alFaceDetection.setRecognitionEnabled(enabled)
 
 #Enable/Disable Anti-collision protection of the arms of the robot.
-def activate_colission_detection(chainName,enabled):
+def activate_colission_detection(params):
+    chainName = "Arms"
+    enabled = params.get("ACTIVATECOLISSIONDETECT")
     alMotionProxy.setCollisionProtectionEnabled(chainName,enabled)
 
 #Enables or disables power monitoring.
@@ -405,7 +411,9 @@ def login():
 
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement.
-def search_free_zone(radius, displacement):
+def search_free_zone( params ):
+    radius = params.get("RADIO")
+    displacement = params.get("DISTANCIAMAX")
     return alNavigationProxy.findFreeZone(radius,displacement)
 
 #Looks for a free circular zone of a specified radius not farer than a specified displacement
@@ -426,7 +434,9 @@ def move_forward(x,y,speed):
     alMotion.moveTo(x,y,speed)
 
 #Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
-def move_to(x,y):
+def move_to(params):
+    x = params.get("MOVETOX")
+    y = params.get("MOVETOY")
     alNavigationProxy.navigateTo(x,y)
 
 #Go to the given position trying to perform a visual close loop with the image contained in current panorama at theta.
