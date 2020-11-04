@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CE574CC6-9943-8114-8628-F1AFA0D78E0E" name="Nivel_Educativo">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>8B112378-F367-60A2-B2E0-92124560742A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tipoNE" id="522B1AA4-1A56-8B10-00F7-FE096373D4A1">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>62DDE682-8FEF-1AC7-BCEA-10A8271C9002</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="64E38096-F355-7C0F-2AFC-3459A502C106" name="Nivel_Educativo_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-30 20:53:02 UTC</createdTime>
+<generatorID>C8673223-A025-32BF-6C27-3D184B1E03DA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="522B1AA4-1A56-8B10-00F7-FE096373D4A1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

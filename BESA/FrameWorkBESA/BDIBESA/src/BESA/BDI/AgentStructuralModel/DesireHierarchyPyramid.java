@@ -33,33 +33,37 @@ public class DesireHierarchyPyramid implements Serializable {
     private SortedSet<GoalBDI> oportunityGoalsList;
     private SortedSet<GoalBDI> requirementGoalsList;
     private SortedSet<GoalBDI> needGoalsList;
+    private SortedSet<GoalBDI> attentionCycleGoalsList;
     private List<SortedSet<GoalBDI>> generalHerarchyList;
-    private List<GoalBDI> currentIntentionGoalList;
+    private GoalBDI currentIntentionGoal;
 
     public DesireHierarchyPyramid() {
         comparator = new ContributionComparator();
-        survivalGoalsList = new TreeSet<GoalBDI>(comparator);
-        dutyGoalsList = new TreeSet<GoalBDI>(comparator);
-        oportunityGoalsList = new TreeSet<GoalBDI>(comparator);
-        requirementGoalsList = new TreeSet<GoalBDI>(comparator);
-        needGoalsList = new TreeSet<GoalBDI>(comparator);
+        survivalGoalsList = (new TreeSet<GoalBDI>(comparator));
+        dutyGoalsList = (new TreeSet<GoalBDI>(comparator));
+        oportunityGoalsList = (new TreeSet<GoalBDI>(comparator));
+        requirementGoalsList = (new TreeSet<GoalBDI>(comparator));
+        needGoalsList = (new TreeSet<GoalBDI>(comparator));
+        attentionCycleGoalsList = (new TreeSet<GoalBDI>(comparator));
         generalHerarchyList = Collections.synchronizedList(new ArrayList<SortedSet<GoalBDI>>());
         generalHerarchyList.add(survivalGoalsList);
         generalHerarchyList.add(dutyGoalsList);
         generalHerarchyList.add(oportunityGoalsList);
         generalHerarchyList.add(requirementGoalsList);
         generalHerarchyList.add(needGoalsList);
-        currentIntentionGoalList = new ArrayList<>();
+        generalHerarchyList.add(attentionCycleGoalsList);
+        
     }
 
-    public DesireHierarchyPyramid(ContributionComparator comparator, SortedSet<GoalBDI> survivalGoalsList, SortedSet<GoalBDI> dutyGoalsList, SortedSet<GoalBDI> oportunityGoalsList, SortedSet<GoalBDI> requirementGoalsList, SortedSet<GoalBDI> needGoalsList, List<GoalBDI> currentIntentionGoalList) {
+    public DesireHierarchyPyramid(ContributionComparator comparator, SortedSet<GoalBDI> survivalGoalsList, SortedSet<GoalBDI> dutyGoalsList, SortedSet<GoalBDI> oportunityGoalsList, SortedSet<GoalBDI> requirementGoalsList, SortedSet<GoalBDI> needGoalsList, SortedSet<GoalBDI> attentionCycleGoalsList, GoalBDI currentIntentionGoal) {
         this.comparator = comparator;
         this.survivalGoalsList = survivalGoalsList;
         this.dutyGoalsList = dutyGoalsList;
         this.oportunityGoalsList = oportunityGoalsList;
         this.requirementGoalsList = requirementGoalsList;
         this.needGoalsList = needGoalsList;
-        this.currentIntentionGoalList = currentIntentionGoalList;
+        this.attentionCycleGoalsList= attentionCycleGoalsList;
+        this.currentIntentionGoal = currentIntentionGoal;
     }
 
     public ContributionComparator getComparator() {
@@ -70,10 +74,10 @@ public class DesireHierarchyPyramid implements Serializable {
         this.comparator = comparator;
     }
 
-    public void setCurrentIntentionGoal(List<GoalBDI> currentIntentionGoalList) {
-        this.currentIntentionGoalList = currentIntentionGoalList;
+    public void setCurrentIntentionGoal(GoalBDI currentIntentionGoal) {
+        this.currentIntentionGoal = currentIntentionGoal;
     }
-    
+
     public SortedSet<GoalBDI> getDutyGoalsList() {
         return dutyGoalsList;
     }
@@ -114,32 +118,44 @@ public class DesireHierarchyPyramid implements Serializable {
         this.survivalGoalsList = survivalGoalsList;
     }
 
-    public List<SortedSet<GoalBDI>> getGeneralHerarchyList() {
+    public SortedSet<GoalBDI> getAttentionCycleGoalsList() {
+        return attentionCycleGoalsList;
+    }
+
+    public void setAttentionCycleGoalsList(SortedSet<GoalBDI> attentionCycleGoalsList) {
+        this.attentionCycleGoalsList = attentionCycleGoalsList;
+    }
+    
+    public synchronized List<SortedSet<GoalBDI>> getGeneralHerarchyList() {
         return generalHerarchyList;
     }
 
-    public void setGeneralHerarchyList(List<SortedSet<GoalBDI>> generalHerarchyList) {
+    public synchronized void setGeneralHerarchyList(List<SortedSet<GoalBDI>> generalHerarchyList) {
         this.generalHerarchyList = generalHerarchyList;
     }
 
+    public void clear(){
+        this.dutyGoalsList.clear();
+        this.needGoalsList.clear();
+        this.oportunityGoalsList.clear();
+        this.requirementGoalsList.clear();
+        this.survivalGoalsList.clear();
+        this.attentionCycleGoalsList.clear();
+      
+    }
     /**
      * <p> method to get the currentIntentionGoal </p>
      * @return 
      */
-    public List<GoalBDI> getCurrentIntentionGoalList() {
+    public GoalBDI getCurrentIntentionGoal() {
         synchronized (this) {
-            currentIntentionGoalList.clear();
             for (SortedSet<GoalBDI> setGoal : this.getGeneralHerarchyList()) {
                 if (!setGoal.isEmpty()) {
-                    Iterator<GoalBDI> it = setGoal.iterator();
-                    while (it.hasNext()) {
-                        GoalBDI goal = it.next();
-                        if (!goal.getRole().getRolePlan().inExecution())
-                            currentIntentionGoalList.add(goal);
-                    }
+                    this.setCurrentIntentionGoal(setGoal.first());
+                    break;
                 }
             }
-            return currentIntentionGoalList;
+            return currentIntentionGoal;
         }
     }
 
@@ -149,8 +165,7 @@ public class DesireHierarchyPyramid implements Serializable {
      * @param machineParamsBDI 
      */
     public void callGarbageCollector(Believes believes, BDIMachineParams machineParamsBDI) throws KernellAgentEventExceptionBESA {
-
-        synchronized(this.generalHerarchyList){
+        synchronized(this){
             for (Set<GoalBDI> set : this.getGeneralHerarchyList()) {
                 Iterator<GoalBDI> setIterator = set.iterator();
                 while (setIterator.hasNext()) {
@@ -179,6 +194,11 @@ public class DesireHierarchyPyramid implements Serializable {
                             break;
                         case SURVIVAL:
                             if (currentElement.evaluateViability(believes) <= machineParamsBDI.getSurvivalThreshold() || currentElement.goalSucceeded(believes)) {
+                                setIterator.remove();
+                            }
+                            break;
+                        case ATTENTION_CYCLE:
+                            if (currentElement.evaluateViability(believes) <= machineParamsBDI.getAttentionCycleThreshold() || currentElement.goalSucceeded(believes)) {
                                 setIterator.remove();
                             }
                             break;

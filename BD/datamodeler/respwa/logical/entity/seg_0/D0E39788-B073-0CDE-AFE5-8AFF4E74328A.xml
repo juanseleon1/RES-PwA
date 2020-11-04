@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D0E39788-B073-0CDE-AFE5-8AFF4E74328A" name="Cancion">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:11:45 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="nombre" id="4760F22E-8822-B9CA-4471-25D53FFBBB60">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:19:41 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="gusto" id="74C42A06-8523-66FD-3523-DDA328C01313">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:20:28 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="genero" id="A12041AA-7768-7FAA-950C-143C844D46C6">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:38:30 UTC</createdTime>
+<generatorID>7635C045-CFAB-4757-19B4-1164B4AA8218</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<referedAttribute>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="079FE8DD-67EE-E5E9-585E-B05DA2A5A4F6" name="Cancion PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:20:08 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4760F22E-8822-B9CA-4471-25D53FFBBB60</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

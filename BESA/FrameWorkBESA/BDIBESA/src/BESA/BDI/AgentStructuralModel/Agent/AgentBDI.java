@@ -6,21 +6,21 @@
  */
 package BESA.BDI.AgentStructuralModel.Agent;
 
+import BESA.BDI.AgentStructuralModel.BDIMachineParams;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.BDI.DBIDecisionMachine.DesireToIntentionInstantiationGuard;
+import BESA.BDI.DBIDecisionMachine.EndedTheDesiresMachineGuard;
 import BESA.BDI.DBIDecisionMachine.GarbageCollectionGuard;
+import BESA.BDI.DBIDecisionMachine.IntermediateBehaviorToDesiresMachineGuard;
 import BESA.BDI.DBIDecisionMachine.Timer.GarbageCollectorTimerTask;
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.KernelAgentExceptionBESA;
-import BESA.Kernel.Agent.StateBESA;
 import BESA.Kernel.Agent.StructBESA;
-import java.util.ArrayList;
 import java.util.List;
 import rational.RationalAgent;
 import rational.RationalState;
 import java.util.Timer;
-import rational.RationalRole;
 import rational.mapping.Believes;
 
 /**
@@ -34,27 +34,20 @@ import rational.mapping.Believes;
  */
 public abstract class AgentBDI extends RationalAgent {
 
-    private Timer viewerGarbageCollector;
+    Timer viewerGarbageCollector;
 
-    public AgentBDI(String alias, Believes believes, List<GoalBDI> goals, double passwd, double threshold) throws KernelAgentExceptionBESA, ExceptionBESA {
-        super(alias, new StateBDI(), setupBDIStruct(), passwd);
-        StateBDI state = (StateBDI) this.getState();
-        state.getMachineBDIParams().setNeedThreshold(threshold);
-        state.getMachineBDIParams().setDutyThreshold(threshold);
-        state.getMachineBDIParams().setOportunityThreshold(threshold);
-        state.getMachineBDIParams().setRequirementThreshold(threshold);
-        state.getMachineBDIParams().setSurvivalThreshold(threshold);
-
-        List<String> roleNameList = new ArrayList<>();
-        for (GoalBDI goal : goals) {
-            state.getMachineBDIParams().addPotentialGoal(goal);
-            roleNameList.add(goal.getRole().getRoleName());
-        }
-        state.setBelieves(believes);
-
-        state.initPool(roleNameList, alias);
+    public AgentBDI(String alias, Believes believes, List<GoalBDI> goals, double threshold,  StructBESA structAgent) throws KernelAgentExceptionBESA, ExceptionBESA {
+        super(alias, new StateBDI(goals, threshold, believes), setupBDIStruct(structAgent), 0.91);
     }
-
+    
+    public AgentBDI(String alias, Believes believes, BDIMachineParams machineBDIParams, double threshold, StructBESA structAgent) throws KernelAgentExceptionBESA, ExceptionBESA {
+        super(alias, new StateBDI(machineBDIParams, believes,threshold), setupBDIStruct(structAgent), 0.91);
+    }
+    
+    public AgentBDI(String alias, Believes believes, BDIMachineParams machineBDIParams, StructBESA structAgent) throws KernelAgentExceptionBESA, ExceptionBESA {
+        super(alias, new StateBDI(machineBDIParams, believes), setupBDIStruct(structAgent), 0.91);
+    }
+ 
     /**
      * Creates a new instance.
      *
@@ -62,21 +55,17 @@ public abstract class AgentBDI extends RationalAgent {
      * @param state Agent state.
      * @param structAgent Agent struct.
      * @param passwd Agent password.
+     * @throws BESA.ExceptionBESA
      */
-    public AgentBDI(String alias, StateBESA state, StructBESA structAgent, double passwd) throws KernelAgentExceptionBESA, ExceptionBESA {
-        super(alias, (RationalState) state, structAgent, passwd);
-        StructBESA newStruct = this.getStructAgent();
-        newStruct.addBehavior("DesireToIntentionInstantiationBehavior");
-        newStruct.addBehavior("GarbageCollectionBehavior");
-        newStruct.bindGuard("DesireToIntentionInstantiationBehavior", DesireToIntentionInstantiationGuard.class);
-        newStruct.bindGuard("GarbageCollectionBehavior", GarbageCollectionGuard.class);
+    public AgentBDI(String alias, StateBDI state, StructBESA structAgent, double passwd) throws ExceptionBESA {
+        super(alias, (RationalState) state, setupBDIStruct(structAgent), passwd);
     }
 
     @Override
-    public void setupAgent() {
-        super.setupAgent();
+    final public void setupRationalAgent() {
         RationalState rationalState = (RationalState) getState();
-        rationalState.subscribeGuardToUpdate(DesireToIntentionInstantiationGuard.class.getName());
+        rationalState.subscribeGuardToUpdate(IntermediateBehaviorToDesiresMachineGuard.class.getName());
+        setupAgentBDI();
     }
 
     /**
@@ -85,21 +74,17 @@ public abstract class AgentBDI extends RationalAgent {
      *
      * @throws ExceptionBESA
      */
-    private static StructBESA setupBDIStruct() throws ExceptionBESA {
-        StructBESA structBESA = new StructBESA();
-        structBESA.addBehavior("DesireToIntentionInstantiationBehavior");
-        structBESA.addBehavior("GarbageCollectionBehavior");
-        structBESA.bindGuard("DesireToIntentionInstantiationBehavior", DesireToIntentionInstantiationGuard.class);
-        structBESA.bindGuard("GarbageCollectionBehavior", GarbageCollectionGuard.class);
-        return structBESA;
-    }
-
+ 
     private static StructBESA setupBDIStruct(StructBESA structBESA) throws ExceptionBESA {
         structBESA.addBehavior("DataAndInformationFlowBehavior");
-        structBESA.addBehavior("DesireToIntentionInstantiationBehavior");
         structBESA.addBehavior("DominantGoalMappingBehavior");
+        structBESA.addBehavior("IntermediateBehaviorToDesiresMachine");
+        structBESA.addBehavior("DesireToIntentionInstantiationBehavior");
+        structBESA.addBehavior("EndedTheDesiresMachine");
         structBESA.addBehavior("GarbageCollectionBehavior");
+        structBESA.bindGuard("IntermediateBehaviorToDesiresMachine",IntermediateBehaviorToDesiresMachineGuard.class);
         structBESA.bindGuard("DesireToIntentionInstantiationBehavior", DesireToIntentionInstantiationGuard.class);
+        structBESA.bindGuard("EndedTheDesiresMachine",EndedTheDesiresMachineGuard.class);
         structBESA.bindGuard("GarbageCollectionBehavior", GarbageCollectionGuard.class);
         return structBESA;
     }
@@ -121,33 +106,25 @@ public abstract class AgentBDI extends RationalAgent {
         }
     }
 
+    public void startTimers(long delay, long period) throws ExceptionBESA {
+        if (this.isAlive()) {
+            /**
+             * start the timer for garbageCollector *
+             */
+            viewerGarbageCollector = new Timer();
+            GarbageCollectorTimerTask taskGarbageCollectorTimer = new GarbageCollectorTimerTask(this.getAlias(), this.getAdmLocal());
+            viewerGarbageCollector.schedule(taskGarbageCollectorTimer, delay, period);
+        }
+    }
+    
     @Override
-    public void shutdownAgent() {
-        super.shutdownAgent();
+    final public void shutdownRationalAgent() {
         if (viewerGarbageCollector != null) {
             viewerGarbageCollector.cancel();
         }
+        shutdownAgentBDI();
     }
-
-    public void initAgentBDI(Believes believes, List<GoalBDI> goals, double threshold) {
-        StateBDI state = (StateBDI) this.getState();
-
-        state.setBelieves(believes);
-
-        state.getMachineBDIParams().setNeedThreshold(threshold);
-        state.getMachineBDIParams().setDutyThreshold(threshold);
-        state.getMachineBDIParams().setOportunityThreshold(threshold);
-        state.getMachineBDIParams().setRequirementThreshold(threshold);
-        state.getMachineBDIParams().setSurvivalThreshold(threshold);
-
-        List<String> roleNameList = new ArrayList<>();
-        for (GoalBDI goal : goals) {
-            state.getMachineBDIParams().addPotentialGoal(goal);
-            roleNameList.add(goal.getRole().getRoleName());
-        }
-        state.setBelieves(believes);
-
-        state.initPool(roleNameList, this.getAlias());
-    }
-
+    
+    public abstract void setupAgentBDI();
+    public abstract void shutdownAgentBDI();
 }
