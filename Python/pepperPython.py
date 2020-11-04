@@ -485,8 +485,8 @@ def tablet_off():
     alTabletService.turnScreenOn(False)
 
 #Open a video player on tablet and play video from given url.
-def show_video(url):
-    alTabletService.playVideo(url)
+def show_video(params):
+    alTabletService.playVideo(params.get("SHOWVIDEO"))
 
 #Close the video player.
 def quit_video():
@@ -505,8 +505,8 @@ def preload_image(url):
     alTabletService.preLoadImage(url)
 
 #Shows the image in the tablet for the user
-def show_image(url):
-    alTabletService.showImage(url)
+def show_image(params):
+    alTabletService.showImage(params.get(""))
 
 #Hide image currently displayed.
 def hide_image():
@@ -521,14 +521,14 @@ def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
 #Says the specified string of characters.
-def say(text_to_speech, speed=100, pitch=1.1):
+def say(params, speed=100, pitch=1.1):
     alTexToSpeech.setParameter("speed", speed)
     alTexToSpeech.setParameter("pitchShift", pitch)
-    alTexToSpeech.say(text_to_speech)
+    alTexToSpeech.say(params.get("SAY"))
 
  #   This method stops the current and all the pending tasks immediately.
-def stop_all():
-    alTexToSpeech.stopAll()
+def stop_all(params):
+    alTexToSpeech.stopAll(params.get("STOPALL"))
 
 
 #Sets the current gain applied to the signal synthesized by the text to speech engine.
@@ -552,7 +552,8 @@ def pause_sound(idSound):
     alAudioPlayer.pause(idSound)
 
 #Subscribes to ALVoiceEmotionAnalysis .
-def activate_voice_emotion_analysis(subscriberName):
+def activate_voice_emotion_analysis(params):
+    subscriberName = params.get(“ACTIVATEVOICEEMOANAL”)
     alVoiceEmotionAnalysis.subscribe(subscriberName) 
 
 #Unsubscribes to ALVoiceEmotionAnalysis .
@@ -560,7 +561,8 @@ def desactivate_voice_emotion_analysis():
     alVoiceEmotionAnalysis.unsubscribe(subscriberName)
 
 #Subscribes to ALSpeechRecognition 
-def activate_voice_recognition(subscriber):
+def activate_voice_recognition(params):
+    subscriber = params.get("ACTVOICERECOG")
     alSpeechRecognition.subscribe(subscriber)
 
 #Unsubscribes to ALSpeechRecognition
