@@ -61,7 +61,7 @@ public class InitRESPwA {
     public static String aliasSPAgent= "SPAgent";
     public static String emf= "ResPwAEntitiesPU";
     private static int PLANID = 0;
-    private static double predefEmoState=0.3;
+    private static final double predefEmoState=2.3;
     public static void main(String[] args) {
        try {
             String cedula=obtenerUsuario();

@@ -85,19 +85,16 @@ public class BEstadoRobot implements Believes {
                 leds=LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
             }
             if (infoRecibida.getInfo().containsKey("velocidad")) {
-                velocidad += velocidad*(long)infoRecibida.getInfo().get("velocidad");
+                velocidad = (double)infoRecibida.getInfo().get("velocidad");
             }
             if (infoRecibida.getInfo().containsKey("velHabla")) {
-                velHabla+=(int)infoRecibida.getInfo().get("velHabla");
+                velHabla=(double)infoRecibida.getInfo().get("velHabla");
             }
             if (infoRecibida.getInfo().containsKey("tonoHabla")) {
-                tonoHabla+=(int)infoRecibida.getInfo().get("tonoHabla");
-            }
-            if (infoRecibida.getInfo().containsKey("volVoz")) {
-                volumenVoz+=(int)infoRecibida.getInfo().get("volVoz");
+                tonoHabla=(double)infoRecibida.getInfo().get("tonoHabla");
             }
             if (infoRecibida.getInfo().containsKey("ledIntens")) {
-                ledIntensity+=(int)infoRecibida.getInfo().get("ledIntens");
+                ledIntensity=(double)infoRecibida.getInfo().get("ledIntens");
             }
         }
         return true;

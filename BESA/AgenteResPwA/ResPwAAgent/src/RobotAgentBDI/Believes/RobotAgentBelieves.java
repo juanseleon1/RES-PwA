@@ -43,12 +43,14 @@ public class RobotAgentBelieves implements Believes {
     //Aqui se accede a BD y se pide info de otros believes. 
     @Override
     public boolean update(InfoData si) {
-    System.out.println("RobotAgentBelieves update Received: " + si);
         if(si!=null && si.getMessage() != null && si.getMessage().equals("emodata")) {
+            EmotionalData se=(EmotionalData)si;
+            System.out.println("RobotAgentBelieves update Received: "+se.getInfo() );
             bEstadoRobot.update(si);
             bEstadoEmocionalPwA.update(si);
         } else if(si!=null){
             SensorData infoRecibida = (SensorData) si;
+            System.out.println("RobotAgentBelieves update Received: "+infoRecibida.getDataP() );
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
@@ -147,7 +149,6 @@ public class RobotAgentBelieves implements Believes {
 
     @Override
     public Believes clone() throws CloneNotSupportedException {
-        super.clone();
         return this;
     }
 }

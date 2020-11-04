@@ -53,7 +53,8 @@ public class PepperEModel extends EmotionalModel{
             if(dif!=0)
             {
                 state+=act;
-            }   EmotionalData e= new EmotionalData();
+            }  
+            EmotionalData e= new EmotionalData();
             Map<String,Object> map= e.getInfo();
             calcNewEmotionalParams(map);
             e.setInfo(map);
@@ -82,7 +83,7 @@ public class PepperEModel extends EmotionalModel{
         aux=(Map<String, Object>) pe.get("bodyLanguageState");
         aux=(Map<String, Object>) aux.get("ease");
         double relval=(double) aux.get("level")*(double) aux.get("confidence");
-        System.out.println("Es esta: "+pe);
+//        System.out.println("Es esta: "+pe);
         aux=(Map<String, Object>) pe.get("smile");
         double smval=(double) aux.get("confidence")*(double) aux.get("value");
         aux=(Map<String, Object>) pe.get("expressions");
@@ -121,24 +122,29 @@ public class PepperEModel extends EmotionalModel{
     }//mariela angela
     private void calcNewEmotionalParams(Map<String, Object> map) {
         LedsColor lc=null;
-         if(state>=-1 && state<-0.6)
+        double velf=0,velh=0,pitch=0,ledInt=0;
+         if(state>=1 && state<1.4)
          {
              lc=LedsColor.BLUE;
-         }else if(state>=-0.6&& state<-0.2)
+         }else if(state>=1.4&& state<1.8)
          {
              lc=LedsColor.BLGRE;
-         }else if(state>=-0.2 && state<0.2)
+         }else if(state>=1.8 && state<2.2)
          {
              lc=LedsColor.GREEN;
-         }else if(state>=0.2 && state<0.6)
+         }else if(state>=2.2 && state<2.6)
          {
              lc=LedsColor.GREYEL;
-         }else if(state>=0.6 && state<=1)
+         }else if(state>=2.6 && state<=3)
          {
              lc=LedsColor.YELLOW;
          }
-         float velf=0,velh=0,pitch=0,ledInt=0;
-         
+        velf=0;
+        velh=(speechVBase*state)/normalState;
+        pitch=(speechBase*state)/normalState;
+        ledInt=(speechVBase*state)/normalState;
+        //x= baseV*actual/baseE
+        
         map.put("LEDS", lc.name());
         map.put("velocidad", velf);
         map.put("velHabla", velh);
