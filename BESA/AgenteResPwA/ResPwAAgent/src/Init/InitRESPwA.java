@@ -166,6 +166,7 @@ public class InitRESPwA {
         EAA.start();
         SHA.start();
         SHA.subscribeServices();
+        EAA.startEmotionalModel();
     }
 
 }
