@@ -36,7 +36,7 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
         
-        ServiceDataRequest srb = estrategia.execStrategy();
+        ServiceDataRequest srb = estrategia.execStrategy(parameters);
         requestService(srb);
         
         //propiedades voz(tono,etc) en blvs

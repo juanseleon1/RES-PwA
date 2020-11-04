@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.SeleccionarCancionGusto;
+package Tareas.SeleccionarCuentoGusto;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
@@ -33,7 +33,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         ServiceDataRequest srb = null;
         
         //buscar texto
-        infoServicio.put("SAY", "AskRetroCancion");
+        infoServicio.put("SAY", "AskRetroCuento");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
         

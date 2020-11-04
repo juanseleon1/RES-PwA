@@ -5,6 +5,7 @@
  */
 package Tareas.CambiarEnriquecimientoHistoria;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityService;
@@ -14,6 +15,7 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
@@ -24,7 +26,8 @@ public class EnriquecerStrategy implements ResPwAStrategy{
     private int nombre;
     
     @Override
-    public ServiceDataRequest execStrategy() {
+    public ServiceDataRequest execStrategy(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
         switch (nombre)
@@ -33,8 +36,10 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case 1: //movimienot
+            case 1: //movimiento
+                blvs.getbEstadoActividad().getCuentoActual().getFrasesList();
                 infoServicio.put("RUNANIMATION", nombre);
+                infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 break;
             case 2:
@@ -56,6 +61,11 @@ public class EnriquecerStrategy implements ResPwAStrategy{
 
     public void setNombre(int num) {
         this.nombre = num;
+    }
+
+    @Override
+    public ServiceDataRequest execStrategy() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

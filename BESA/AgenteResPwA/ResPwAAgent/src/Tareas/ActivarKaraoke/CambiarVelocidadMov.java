@@ -33,7 +33,8 @@ public class CambiarVelocidadMov extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cambiar Velocidad Movimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGSKARAOKE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         requestService(srb);
     }
@@ -41,6 +42,10 @@ public class CambiarVelocidadMov extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Cambiar Velocidad Movimientos ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        infoServicio.put("STOPANIMATION", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override

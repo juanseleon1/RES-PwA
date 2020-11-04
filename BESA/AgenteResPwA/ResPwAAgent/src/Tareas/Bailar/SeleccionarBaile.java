@@ -32,13 +32,16 @@ public class SeleccionarBaile extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
-        requestService(srb); 
+        requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Baile ---");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+        requestService(srb);
     }
 
     @Override

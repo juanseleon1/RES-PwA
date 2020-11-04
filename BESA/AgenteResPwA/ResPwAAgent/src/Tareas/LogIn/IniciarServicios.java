@@ -36,7 +36,7 @@ public class IniciarServicios extends ResPwaTask{
         ServiceDataRequest srb = null;
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        infoServicio.put("ACTIVATEBLINKING", true);
+        infoServicio.put("ACTIVATE", true);
         srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
@@ -76,6 +76,10 @@ public class IniciarServicios extends ResPwaTask{
         srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATECOLISSIONDETECT, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
+        infoServicio.put("DEFENGAGEMENTTYPE", "FullyEngaged");
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.DEFENGAGEMENTTYPE, infoServicio);
+        requestService(srb);
+        infoServicio = new HashMap<>();
         
         infoServicio.put("ACTIVATEMONITORINGCHARGESERV", true);
         srb = ServiceRequestBuilder.buildRequest(EnergyServiceRequestType.ACTIVATEMONITORINGCHARGESERV, infoServicio);
@@ -85,9 +89,7 @@ public class IniciarServicios extends ResPwaTask{
         infoServicio.put("ACTIVATESTIFFNESS", true);
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
         requestService(srb);
-        infoServicio = new HashMap<>();
-        infoServicio.put("SETREFRESHTIMESENSORS", null);
-        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SETREFRESHTIMESENSORS, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SETREFRESHTIMESENSORS, null);
         requestService(srb);
         infoServicio = new HashMap<>();
         
@@ -99,10 +101,10 @@ public class IniciarServicios extends ResPwaTask{
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
         requestService(srb);
         infoServicio = new HashMap<>();
-        infoServicio.put("SETTABLETVOL", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 1-15
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
-        requestService(srb);
-        infoServicio = new HashMap<>();
+//        infoServicio.put("SETTABLETVOL", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 1-15
+//        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
+//        requestService(srb);
+//        infoServicio = new HashMap<>();
         
         infoServicio.put("SETSAYVOLUMEN", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 0-1.0
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUMN, infoServicio);

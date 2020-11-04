@@ -5,8 +5,6 @@
  */
 package Tareas.SeleccionarCuentoGusto;
 
-import ResPwAEntities.Cancion;
-import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
@@ -37,7 +35,8 @@ public class BuscarAnimaciones extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //enviar cuento
-        infoServicio.put("SAY", blvs.getbEstadoActividad().getCuentoActual());
+        
+        infoServicio.put("SAY", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     }

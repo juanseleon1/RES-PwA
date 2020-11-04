@@ -31,7 +31,9 @@ public class MoverseFrentePwA extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Moverse Frente PwA ---");
         //parametros desde naoqi
-        infoServicio.put("MOVETO", "PwA");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
+        infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         requestService(srb);
     }

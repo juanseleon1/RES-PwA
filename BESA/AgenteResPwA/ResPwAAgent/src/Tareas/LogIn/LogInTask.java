@@ -31,8 +31,7 @@ public class LogInTask extends ResPwaTask{
         System.out.println("--- Execute Task LogIn ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
 
-        infoServicio.put("LOGIN", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, null);
         requestService(srb);
     }
 
