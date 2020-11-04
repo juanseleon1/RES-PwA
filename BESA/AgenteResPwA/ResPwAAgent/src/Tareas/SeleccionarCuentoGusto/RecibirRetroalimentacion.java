@@ -3,56 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.Bailar;
+package Tareas.SeleccionarCuentoGusto;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarBaile extends ResPwaTask{
+public class RecibirRetroalimentacion extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public SeleccionarBaile() {
-//        System.out.println("--- Task Seleccionar Baile Iniciada ---");
+    public RecibirRetroalimentacion() {
+//        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
     }
-    
+
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Seleccionar Baile ---");
+        System.out.println("--- Execute Task Recibir Retroalimentacion ---");
+        ServiceDataRequest srb = null;
         
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        //buscar texto
+        infoServicio.put("SAY", "AskRetroCuento");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
+        
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Seleccionar Baile ---");
-        infoServicio.put("STOPANIMATION", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
-        requestService(srb);
+        System.out.println("--- Interrupt Task Recibir Retroalimentacion ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Seleccionar Baile ---");
+        System.out.println("--- Cancel Task Recibir Retroalimentacion ---");
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaBailando()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
             return true;
         }
         return false;

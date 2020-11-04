@@ -36,7 +36,6 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         infoServicio.put("SAY", "AskRetroCancion");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
-        infoServicio = new HashMap<>();
         
     }
 

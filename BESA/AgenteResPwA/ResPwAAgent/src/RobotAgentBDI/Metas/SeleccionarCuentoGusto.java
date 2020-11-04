@@ -12,6 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
+import Tareas.SeleccionarCuentoGusto.RecibirRetroalimentacion;
 import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import Tareas.SeleccionarCuentoGusto.RecomendarCuento;
@@ -39,6 +40,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         SeleccionarCuento seleccionarCuento = new SeleccionarCuento();
         VerificarObstaculos verificarObstaculos = new VerificarObstaculos();
         RecomendarCuento recomendarCuento = new RecomendarCuento();
+        RecibirRetroalimentacion recibirRetroalimentacion = new RecibirRetroalimentacion();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
@@ -49,6 +51,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
         rolePlan.addTask(verificarObstaculos); 
         rolePlan.addTask(moverseFrente); //detectar PwA y moverse al frente de él
         rolePlan.addTask(recomendarCuento);
+        rolePlan.addTask(recibirRetroalimentacion);
         
         RationalRole selCuenGRole = new RationalRole(descrip, rolePlan);
         SeleccionarCuentoGusto b= new SeleccionarCuentoGusto(InitRESPwA.getPlanID(), selCuenGRole, descrip, GoalBDITypes.DUTY);

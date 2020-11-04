@@ -6,6 +6,7 @@
 package RobotAgentBDI;
 
 import ServiceAgentResPwA.ServiceDataRequest;
+import rational.mapping.Believes;
 
 /**
  *
@@ -14,4 +15,5 @@ import ServiceAgentResPwA.ServiceDataRequest;
 public interface ResPwAStrategy{
     
     public abstract ServiceDataRequest execStrategy();
+    public abstract ServiceDataRequest execStrategy(Believes b);
 }

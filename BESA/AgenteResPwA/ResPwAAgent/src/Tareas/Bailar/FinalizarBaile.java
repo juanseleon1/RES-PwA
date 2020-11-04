@@ -29,9 +29,8 @@ public class FinalizarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Finalizar Baile ---");
-        infoServicio.put("STOPANIMATION", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
-        requestService(srb);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+        requestService(srb); 
     }
 
     @Override
