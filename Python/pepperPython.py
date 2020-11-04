@@ -13,23 +13,30 @@ def handle_client(conn, addr):
     msg_length = msg_length.decode(FORMAT, 'ignore')
     msg_length = safe_str(msg_length)
     #if msg_length:
-    print("msg:", msg_length)
-    y = safe_str(msg_length).split('{')[1]
-    print("msg:")
-    y = "{" + y
+    #print(msg_length)
+    y = safe_str(msg_length).split('{')
+    json_string = ""
+    for val in range(1, len(y)):
+        json_string = json_string + "{" + y[val]
+    
+    #print("msg:")
+    #y = "{" + y
+    print(json_string)
     #print(y)
-    jsonObj = json.loads(y)
+    jsonObj = json.loads(json_string)
     msg_length = len(jsonObj)
     msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
-    if jsonObj["methodName"] == "hablar":
-        print(jsonObj["methodName"])
+    
+    callFunction(jsonObj)
     
     #if learn_face("Brayan"):
-    #hablar(jsonObj["methodName"])
+    #hablar(jsonObj["methodName"],100)
+    #hablar(jsonObj["methodName"],50)
     #else:
     #    hablar("Mal")
-    print(get_face_list()[0])
-    
+    #print(get_face_list()[0])
+    #json_formatted_str = json.dumps(json_creator(-1, "emo", get_emotion_state()), indent=2)
+    #print(json_formatted_str)
     #activate_blinking(True)+++++++++++++
     #activate_life_signals(True)+++++++++++++
     #activate_life_signals_awareness(True)+++++++++++++
@@ -37,55 +44,57 @@ def handle_client(conn, addr):
     #activate_hearing_movement(True)+++++++++++++
     #activate_speak_movements(True)+++++++++++++
     #define_conversation_mode("random")+++++++++++++
-    activate_push_reflexes(False)
-    #activate_breath_movement("Body", False)
-    #activate_movement_detection(True)
-    #activate_face_detection(False)
-    #activate_colission_detection("arms", False)
-    #activate_monitoring_charge_service(False)
-    #print("Battery", get_battery())
-    #print("Temperature", get_temperature())
-    #print("Smile", get_emotion_state().get("expressions").get("excitement")[0]) #return the excitement value
-    #print(login())
-    #search_free_zone(0.6, 0.5)
-    #get_free_zone(0.6, 0.5)
-    #get_robot_position(True)
-    #move(0.25,0.25,0.1)
-    #move_forward(0.2, 0.2, 0.1)
-    #move_to(2.0, 0.0)
-    #move_to_position(45)
-    #wake_up()
-    #suspend()
+    #activate_push_reflexes(False) IGNORADA POR AHORA, PARA PROBARLA HAY QUE DESACTIVAR LOS REFLEJOS DE SEGURIDAD PRIMERO
+    #activate_breath_movement("Body", True)+++++++++++++
+    #activate_movement_detection(False)+++++++++++++
+    #activate_face_detection(True)+++++++++++++
+    #activate_colission_detection("Arms", True)+++++++++++++
+    #activate_monitoring_charge_service(True)+++++++++++++
+    #print("Battery", get_battery())+++++++++++++
+    #print("Temperature", get_temperature())+++++++++++++
+    #print("Smile", get_emotion_state()) +++++++++++++
+    #print(login()) -------------
+    #search_free_zone(0.6, 0.5) +++++++++++++
+    #get_free_zone(0.6, 0.5) +++++++++++++
+    #get_robot_position(False) +++++++++++++
+    #move(0.25,0.25,0.1)+++++++++++++
+    #move_forward(0.2, 0.2, 0.1)+++++++++++++
+    #move_to(2.0, 0.0)---------------------
+    #move_to_position(2.0)
+    #wake_up()++++++++++++++++++++++                                                               ########
+    #suspend()++++++++++++++++++++++                                                               ########
     #activate_rasta(2.0f)
     #random_eyes(2.0f)
-    #set_leds_intensity("LeftFaceLedsGreen", 0.5)
-    #change_led_color("AllLeds", "green", 0.5 )
+    #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
+    #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
     #activate_stiffness(False)
 
     #pause_sound(idSound)
-    #play_sound(idSound)
-    #set_system_volume(50)
-    #say_with_movement("Hola Enrique")
-    #set_say_volume(75)
-    #stop_all()
-    #say("Hola mundo")
-    #tablet_on()
-    #wake_tablet()
-    #suspend_tablet()
+    #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
+    ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
+    #set_system_volume(20)#+++++++++++++++++++
+    #say_with_movement("Hola Enrique")+++++++++++++++++++
+    #set_say_volume(0.75)+++++++++++++++++++
+    #stop_all()---------------------
+    #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
+    #tablet_on()#++++++++++++++++++++++++++++++
+    #wake_tablet()++++++++++++++++++++++++++++++
+    #suspend_tablet()++++++++++++++++++++++++++++++
     #tablet_off()
-    #show_video("https://www.youtube.com/watch?v=TmKh7lAwnBI&ab_channel=BadBunny")
+    #show_video("https://redirector.googlevideo.com/videoplayback?expire=1604472485&ei=RfqhX4T1GarQ8gSr4qmYDg&ip=104.152.209.78&id=o-AORe7I9sVz175SndJTjmbzo4R18jnu53gU_o1Jx3NfMS&itag=18&source=youtube&requiressl=yes&mh=Fr&mm=31%2C29&mn=sn-cx5o4aqj5-tt1e%2Csn-ab5szn7e&ms=au%2Crdu&mv=u&mvi=2&pl=26&vprv=1&mime=video%2Fmp4&gir=yes&clen=12461468&ratebypass=yes&dur=190.217&lmt=1580700039115886&mt=1604450593&fvip=2&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AG3C_xAwRQIgTuadH3UvqXe9vgd7PxkCck_D7-SUu_wkoa-drKKjM10CIQCftFm5NAyngyV1h3LioLNUfgPvRih4KMoABwlurfbCAQ%3D%3D&sig=AOq0QJ8wRQIhANhJISV3QgaoKFkvVbKm1jN-5L1ADp6Ebvl6K1-nEbMTAiAt2alrXgiZxkv9OOo8lb0n9UQ_43yl0tv92_mhPh1Zsw==")
     #quit_video()
-    #pause_video()
-    #resume_video()
-    #preload_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
-    #show_image("https://aliverobots.com/wp-content/uploads/2016/05/robot-pepper.jpg")
-    #hide_image()
-    #set_tablet_bright(50)
-    #set_tablet_volume(50)
+    #pause_video()++++++++++++++++++++++++++++++
+    #resume_video()++++++++++++++++++++++++++++++
+    #preload_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+    #show_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+    #hide_image()++++++++++++++++++++++++++++++
+    #set_tablet_bright(20)#---------------------------
+    #set_tablet_volume(20)#---------------------------
 
+    #if jsonObj["methodName"] == "hablar":
+     #   print(jsonObj["methodName"])
     
-    
-def message_manage(key, msg):
+def message_manage(key):
         switch_accion = {
             #ActivityServices-------------------------------------------------------
             "RUNANIMATION": "run_animation", #funcionando
@@ -162,16 +171,31 @@ def message_manage(key, msg):
             "SAYUNDERTOPICCONTEXT":"say_under_topic_context",
             "SETTOPICFOCUS":"set_topic_focus"
         }
-        func = switch_accion.get(key)
-        func(msg)
+        return switch_accion.get(key)
+        
 
-def BEstadoEmocionalPwA(info_human_state):
+def callFunction(jsonObj):
+    function = message_manage(jsonObj["methodName"])
+    params = jsonObj["params"]
+    if params == None:
+        function()
+    else:
+        function(params)
+    
+    
+"""def BEstadoEmocionalPwA(info_human_state):
     if info_human_state == "attention":
         val_attention = getAttention()
     else:
         val_attention = getAttention()
     return val_attention
+"""
 
+def run_animation( params ):
+    animation_name = params.get("TAGSDANCE")
+    animation_factor = params.get("FACTOR")
+    animation_name(animation_factor)
+    
 def getEmotionalReaction():
     #Returns:	The detected reaction.
     return alMood.getEmotionalReaction()
@@ -183,7 +207,7 @@ def getAttention():
     return alMood.attention()
     
 # Choregraphe bezier export in Python.
-def dance_macarena():
+def dance_macarena( factor ):
     # Choregraphe bezier export in Python.
     names = list()
     times = list()
@@ -260,15 +284,15 @@ def dance_macarena():
     try:
       # uncomment the following line and modify the IP if you use this script outside Choregraphe.
       # motion = ALProxy("ALMotion", IP, 9559)
-      motion = ALProxy("ALMotion")
-      motion.angleInterpolationBezier(names, times, keys)
+      #motion = ALProxy("ALMotion")
+      #motion.angleInterpolationBezier(names, times, keys)
+      play_animation(names, times, keys)
     except BaseException, err:
       print err
 #Prueba!!!!!!!!!
-    run_animation(names, times, keys)
+    
 
-
-def run_animation(animation_names, animation_times, animation_keys):
+def play_animation(animation_names, animation_times, animation_keys):
     try:
       # uncomment the following line and modify the IP if you use this script outside Choregraphe.
       # motion = ALProxy("ALMotion", IP, 9559)
@@ -279,11 +303,14 @@ def run_animation(animation_names, animation_times, animation_keys):
 #def run_animation( animation_path, animation_tag):
 #    alAnimationPlayer.runTag(animation_path, animation_tag)
 
-def go_to_posture( posture, speed):
+def go_to_posture( params ):
+    posture = params.get("postura")
+    speed = params("velocidad")
     alRobotPosture.goToPosture(posture, speed)
 
 #Learns a new face and adds it in the database under the specified name.
-def learn_face(person_name):
+def learn_face( params ):
+    person_name = params.get("DETECTPWA")
     #Returns: true if the operation succeeded
     return alFaceDetection.learnFace(person_name)
 
@@ -293,28 +320,34 @@ def get_face_list():
     return alFaceDetection.getLearnedFacesList()
 
 #Enables or disables the autonomous blinking.
-def activate_blinking(enabled):
+def activate_blinking(params):
+    enabled = params.get("ACTIVATE")
     alAutonomousBlinking.setEnabled(enabled)
 
 #Enables or disables the background movements.
-def activate_life_signals(enabled):
+def activate_life_signals(params):
+    enabled = paramas.get("ACTIVATELIFESIGNALS")
     alBackgroundMovement.setEnabled(enabled)
 
 #Enables or disables basic awareness.
-def activate_life_signals_awareness(enabled):
+def activate_life_signals_awareness(params):
+    enabled = params.get("ACTIVATELIFESIGNALSINT")
     alBasicAwareness.setEnabled(enabled)
 
 #Sets the engagement mode.
 #https://developer.softbankrobotics.com/pepper-naoqi-25/naoqi-developer-guide/naoqi-apis/naoqi-interaction-engines/albasicawareness#albasicawareness-engagement-modes
-def set_engagement_type(modeName):
+def set_engagement_type(params):
+    modeName = params.get("DEFENGAGEMENTTYPE")
     alBasicAwareness.setEngagementMode ( modeName )
 
 #Enables or disables the listening movements.
-def activate_hearing_movement(enabled):
+def activate_hearing_movement(params):
+    enabled = paramas.get("ACTIVATEACTIVEHEARING")
     alListeningMovement.setEnabled(enabled)
 
 #Enables or disables the speaking movements.
-def activate_speak_movements(enabled):
+def activate_speak_movements(params):
+    enabled = paramas.get("ACTIVATESPEAKMOVEMENTS")
     alSpeakingMovementProxy.setEnabled(enabled)
 
 #Sets the current speaking movement mode.  Random - Contextual 
@@ -322,7 +355,8 @@ def define_conversation_mode(mode):
     alSpeakingMovementProxy.setMode(mode)
 
 #Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner. If not allowed, an exception is thrown.
-def activate_push_reflexes(enabled):
+def activate_push_reflexes(params):
+    enabled = params.get("ACTIVATEPUSHREFLEXES")
     alMotionProxy.setPushRecoveryEnabled(enabled)
     
  #Starts or stops breathing animation on a chain.   
@@ -424,8 +458,8 @@ def set_leds_intensity(sensor, intensity):
     alLedsProxy.setIntensity(sensor, intensity)
 
 #Sets the color of an RGB led using  color code.
-def change_led_color(sensor, color, duration):
-    alLedsProxy.fadeRGB(sensor, color)
+def change_led_color(sensor, red_color, green_color, blue_color, duration):
+    alLedsProxy.fadeRGB(sensor, red_color, green_color, blue_color, duration)
 
 #Enable or Disable the smart stiffness reflex for all the joints (True by default).
 #The update takes one motion cycle.
@@ -467,12 +501,12 @@ def  resume_video():
      alTabletService.resumeVideo()
 
 # Load the image to show to de user
-def preload_image():
-    pass
+def preload_image(url):
+    alTabletService.preLoadImage(url)
 
 #Shows the image in the tablet for the user
-def show_image():
-    pass
+def show_image(url):
+    alTabletService.showImage(url)
 
 #Hide image currently displayed.
 def hide_image():
@@ -487,8 +521,10 @@ def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
 #Says the specified string of characters.
-def say(text):
-    alTexToSpeech.say(text)
+def say(text_to_speech, speed=100, pitch=1.1):
+    alTexToSpeech.setParameter("speed", speed)
+    alTexToSpeech.setParameter("pitchShift", pitch)
+    alTexToSpeech.say(text_to_speech)
 
  #   This method stops the current and all the pending tasks immediately.
 def stop_all():
@@ -559,8 +595,10 @@ def set_topic_focus(topicName):
 
 
     
-def hablar(texto_hablar):
-    alTexToSpeech.say(texto_hablar)
+def hablar(text_to_speech, speed=100, pitch=1.1):
+    alTexToSpeech.setParameter("speed", speed)
+    alTexToSpeech.setParameter("pitchShift", pitch)
+    alTexToSpeech.say(text_to_speech)
     
 def safe_str(obj):
     try: return str(obj)
@@ -643,9 +681,9 @@ class pepperModule(ALModule):
 """--------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 print("Server starting...pop")
-HOST = '192.168.2.7' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '10.195.22.24' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
-print("Server starting on", HOST)
+print("Server starting on", HOST_LOCAL)
 PORT = 7895    # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
 ADDR = (HOST_LOCAL, PORT)
@@ -656,7 +694,7 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 print("Server starting...pop1111111111111111111")
 
 #------------------------------------------------------------------------------------------------
-parser = argparse.ArgumentParser()
+"""parser = argparse.ArgumentParser()
 parser.add_argument("--ip", type=str, default=HOST, help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
 parser.add_argument("--port", type=int, default=9559, help="Naoqi port number")
 args = parser.parse_args()
@@ -667,9 +705,11 @@ except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
                "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
+"""
 #----------------------------------------------------------------------------------------------------
 
 #Declare the Naoqi variables --------------------------------------------------------------------
+"""
 global alBroker
 alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
 alProxy = ALProxy("ALMemory")
@@ -701,6 +741,7 @@ alAudioPlayer = session.service("ALAudioPlayer")
 alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
 alSpeechRecognition  = session.service("ALSpeechRecognition")
 alDialogProxy = session.service("ALDialog")
+"""
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #Declare the modules --------------------------------------------------------------------------------
@@ -830,6 +871,7 @@ server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
+#while 1:  
 conn, addr = server.accept()
 thread = threading.Thread(target=handle_client, args=(conn, addr))
 thread.start()
@@ -865,15 +907,14 @@ activate_conversational_topic(topic_name_1)
 activate_conversational_topic(topic_name_2)
     #Subscribe to use the topics previously activated
         
+"""
 
-    #Json creation
-
-    def json_creator(id_response, responseType, params):
-        json_string = {
-            "id" : id_response ,
-            "respType": responseType, 
-            "params":params              
-        }
-        return json.loads(json_dump)
+def json_creator(id_response, responseType, params):
+    json_string = {
+        "id" : id_response ,
+        "respType": responseType,
+        "params":params       
+    }
+    return json.loads(json.dumps(json_string))
 
 
