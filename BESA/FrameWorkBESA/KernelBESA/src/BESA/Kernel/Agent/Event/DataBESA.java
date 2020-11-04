@@ -22,7 +22,11 @@ public abstract class DataBESA implements Serializable {
     /**
      *
      */
-    public static final long serialVersionUID = "DataBESA".hashCode();
+    private static final long serialVersionUID = "DataBESA".hashCode();
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     /**
      * Constructs a new DataBESA. 

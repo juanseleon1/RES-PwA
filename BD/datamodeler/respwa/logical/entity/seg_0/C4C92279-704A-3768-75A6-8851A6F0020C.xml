@@ -1,0 +1,137 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="C4C92279-704A-3768-75A6-8851A6F0020C" name="Perfil Medico">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:09:35 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="cedula" id="7A31410F-011D-6E47-0810-0C75FAF9B0C0">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:14:23 UTC</createdTime>
+<generatorID>D71947AB-04DB-4F6D-B992-39D113A3CB57</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<referedAttribute>7D8AF2AF-E0B4-67F7-8221-224634856615</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tomaMedicamentos" id="474D2DC3-EE0C-057A-DEA5-47A8A7FEB183">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:58:41 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="discapAuditiva" id="80534207-B6FC-0465-0F2D-99CC9FC4F145">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:59:41 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="discapVisual" id="7D9677FD-EFE3-7BF5-E1BA-2FD11D7300AA">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:02:54 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="discapMotora" id="DC9402DC-D249-E4D7-48B6-89760DEBC525">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:03:05 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estadioEnfermedad" id="1100357B-323A-3CD5-0309-B4DD2C36D51D">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:03:16 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="periodoVigilia" id="679FD5F4-4A6E-B194-959C-B3678EC6C25F">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 19:03:40 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="condicion" id="4EA2B744-4C7A-1497-9ADC-28A4E0EC8C3B">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:51:41 UTC</createdTime>
+<generatorID>137D48F6-359A-2C69-6178-0014EA818688</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>E9FA87E9-5605-0DA8-CDAB-74165BC94AE9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D18C99DB-D326-BAC9-993C-A138FF237E2C" name="Perfil Medico PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 18:15:01 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7A31410F-011D-6E47-0810-0C75FAF9B0C0</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -10,7 +10,7 @@ package BESA.BDI.AgentStructuralModel;
  * <p>Enum that represents the types of goals</p>
  * @author  SIDRe - Pontificia Universidad Javeriana
  * @author  Takina  - Pontificia Universidad Javeriana
- * @version 2.0, 11/01/11
+ * @version 2.2, 11/01/11
  * @since   JDK1.0
  */
 public enum GoalBDITypes {
@@ -19,7 +19,8 @@ public enum GoalBDITypes {
     DUTY(2, "Duty"),
     OPORTUNITY(3, "Oportunity"),
     REQUIREMENT(4, "Requirement"),
-    NEED(5, "Need");
+    NEED(5, "Need"),
+    ATTENTION_CYCLE(6,"AttentionCycle");
     private int id;
     private String name;
 

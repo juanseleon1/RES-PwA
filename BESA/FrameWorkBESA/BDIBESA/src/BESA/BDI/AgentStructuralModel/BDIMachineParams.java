@@ -6,9 +6,7 @@
  */
 package BESA.BDI.AgentStructuralModel;
 
-import java.io.Serializable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +16,7 @@ import java.util.Set;
  * @version 2.0, 11/01/11
  * @since   JDK1.0
  */
-public class BDIMachineParams  implements Serializable {
+public class BDIMachineParams {
 
     /** structure that represents the pyramid for the desire priority */
     private DesireHierarchyPyramid pyramidGoals;
@@ -27,7 +25,7 @@ public class BDIMachineParams  implements Serializable {
     /** main goal for the BDI agent*/
     private GoalBDI mainGoal;
     /** intention goal for the BDI agent*/
-    private List<GoalBDI> intentionList;
+    private GoalBDI intention;
 
     
     /** Thresholds for the goal operations*/
@@ -36,6 +34,7 @@ public class BDIMachineParams  implements Serializable {
     private double oportunityThreshold;
     private double requirementThreshold;
     private double needThreshold;
+    private double attentionCycleThreshold;
     private double mainGoalThreshold;
 
     public BDIMachineParams() {
@@ -43,12 +42,13 @@ public class BDIMachineParams  implements Serializable {
         potencialGoals = new PotencialGoalStructure();
     }
 
-    public BDIMachineParams(double dutyThreshold, double survivalThreshold, double oportunityThreshold, double requirementThreshold, double needThreshold) {
+    public BDIMachineParams(double dutyThreshold, double survivalThreshold, double oportunityThreshold, double requirementThreshold, double needThreshold, double attentionCycleThreshold ) {
         this.dutyThreshold = dutyThreshold;
         this.survivalThreshold = survivalThreshold;
         this.oportunityThreshold = oportunityThreshold;
         this.requirementThreshold = requirementThreshold;
         this.needThreshold = needThreshold;
+        this.attentionCycleThreshold= attentionCycleThreshold;
         this.pyramidGoals = new DesireHierarchyPyramid();
     }
 
@@ -108,6 +108,14 @@ public class BDIMachineParams  implements Serializable {
         this.survivalThreshold = survivalThreshold;
     }
 
+    public double getAttentionCycleThreshold() {
+        return attentionCycleThreshold;
+    }
+
+    public void setAttentionCycleThreshold(double attentionCycleThreshold) {
+        this.attentionCycleThreshold = attentionCycleThreshold;
+    }
+
     public GoalBDI getMainGoal() {
         return mainGoal;
     }
@@ -124,12 +132,12 @@ public class BDIMachineParams  implements Serializable {
         this.mainGoalThreshold = mainGoalThreshold;
     }
     
-    public List<GoalBDI> getIntentionList() {
-        return intentionList;
+    public GoalBDI getIntention() {
+        return intention;
     }
 
-    public void setIntentionList(List<GoalBDI> intentionList) {
-        this.intentionList = intentionList;
+    public void setIntention(GoalBDI intention) {
+        this.intention = intention;
     }
 
     /**
@@ -150,16 +158,13 @@ public class BDIMachineParams  implements Serializable {
     }
     
     public void addPotentialGoal(GoalBDI goal){
-        if(goal.getType() == GoalBDITypes.DUTY ){
-            this.potencialGoals.getDutyGoalsList().add(goal);
-        }else if(goal.getType() == GoalBDITypes.NEED ){
-            this.potencialGoals.getNeedGoalsList().add(goal);
-        }else if(goal.getType() == GoalBDITypes.OPORTUNITY ){
-            this.potencialGoals.getOportunityGoalsList().add(goal);
-        }else if(goal.getType() == GoalBDITypes.REQUIREMENT ){
-            this.potencialGoals.getRequirementGoalsList().add(goal);
-        }else if(goal.getType() == GoalBDITypes.SURVIVAL ){
-            this.potencialGoals.getSurvivalGoalsList().add(goal);
+        switch (goal.getType()){
+            case SURVIVAL: this.potencialGoals.getSurvivalGoalsList().add(goal); break;
+            case DUTY: this.potencialGoals.getDutyGoalsList().add(goal); break;
+            case OPORTUNITY:  this.potencialGoals.getOportunityGoalsList().add(goal); break;
+            case REQUIREMENT: this.potencialGoals.getRequirementGoalsList().add(goal); break;
+            case NEED: this.potencialGoals.getNeedGoalsList().add(goal); break;
+            case ATTENTION_CYCLE: this.potencialGoals.getAttentionCycleGoalsList().add(goal); break;
         }
     }
 }

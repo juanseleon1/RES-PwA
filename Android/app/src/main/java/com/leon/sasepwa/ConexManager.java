@@ -1,5 +1,5 @@
 package com.leon.sasepwa;
-
+import android.se.omapi.Session;
 import android.util.Log;
 
 import com.aldebaran.qi.sdk.QiContext;
@@ -21,6 +21,15 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+
+import com.kaazing.gateway.jms.client.ConnectionDisconnectedException;
+import com.kaazing.gateway.jms.client.JmsConnectionFactory;
+import com.kaazing.net.ws.WebSocketFactory;
+import javax.jms.MessageConsumer;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class  ConexManager extends Thread {
