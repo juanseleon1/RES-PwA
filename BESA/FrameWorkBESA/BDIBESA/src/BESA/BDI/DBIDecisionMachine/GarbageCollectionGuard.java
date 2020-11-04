@@ -38,6 +38,8 @@ public class GarbageCollectionGuard extends GuardBESA {
             pyramidBDI.callGarbageCollector(believes, stateBDI.getMachineBDIParams());
         } catch (KernellAgentEventExceptionBESA ex) {
             Logger.getLogger(GarbageCollectionGuard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DesireToIntentionInstantiationGuard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

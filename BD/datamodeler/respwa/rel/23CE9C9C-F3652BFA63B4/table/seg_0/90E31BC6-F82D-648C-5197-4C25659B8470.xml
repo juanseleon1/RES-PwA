@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="90E31BC6-F82D-648C-5197-4C25659B8470" name="enriq">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>B89F8A8B-791B-3149-0647-3A31F93D27ED</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Frases_orden" id="793C81EE-272A-AD30-2070-6B0079CCE19C">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>E53C8163-9B89-A717-B76D-FD1F45E50CB1</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7D2503F1-6A8C-F577-4D93-774D6179EE68" referredColumn="8F9BA551-9E98-7F43-C0E2-41D8F43F32A5"/>
+</associations>
+</Column>
+<Column name="Frases_Cuento_nombre" id="76C22DA0-7BA3-354C-8B34-187CC8FA230F">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>292D868B-A408-E982-4D9E-3D7286561811</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7D2503F1-6A8C-F577-4D93-774D6179EE68" referredColumn="C9A4E3C8-BDA3-01AE-23B3-1144F509BE68"/>
+</associations>
+</Column>
+<Column name="params" id="284AB643-0801-7F13-2AB0-FEEF3611BFEA">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>38634DED-B554-A1BF-C12E-C371CF7A9013</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="valor" id="9B56644D-0FD4-474B-B93F-AF2A91E30EB7">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>7338716B-DACE-E8F2-99D4-8C6981490BB5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="681D9D24-6C2A-A72D-861F-B490BC37268E" name="enriq_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>A761E129-5E72-EA15-73D1-95C3BA1B6C79</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="284AB643-0801-7F13-2AB0-FEEF3611BFEA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1D094323-E00A-745C-BDE5-6057545FB62A" name="enriq_Frases_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="793C81EE-272A-AD30-2070-6B0079CCE19C"/>
+<colUsage columnID="76C22DA0-7BA3-354C-8B34-187CC8FA230F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

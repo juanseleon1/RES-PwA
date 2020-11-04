@@ -3,50 +3,51 @@ package rational;
 import BESA.Kernel.Agent.StateBESA;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rational.mapping.Believes;
-import BESA.Kernel.Agent.KernelAgentExceptionBESA;
-import java.util.UUID;
 
 public class RationalState extends StateBESA {
 
-    public enum TYPE {
+    public enum TYPE{
         SYNCHRONIC,
         ASYNC;
     }
+    Believes believes;
+    RationalRole mainRole;
+    Map<String, String> SPservices;
+    Map<String, List<Class> > syncronicServices;
+    Map<String, List<Class> > asyncronicServices;
+    List<String> subscriptionsToUpdate;
 
-    private Believes believes;
-    private Map<String, String> SPservices;
-    private LinkedList<RationalRole> roleList;
-    private List<String> subscriptionsToUpdate;
-    private Map<String, WorkerAgent> workerTable;
-    private Map<String, List<Class>> syncronicServices;
-    private Map<String, List<Class>> asyncronicServices;
-
+    
     public RationalState() {
-        this.roleList = new LinkedList<>();
-        this.workerTable = new HashMap<>();
+        super();
         this.syncronicServices = new HashMap<>();
         this.asyncronicServices = new HashMap<>();
         this.subscriptionsToUpdate = new ArrayList<>();
     }
-
+    
+    public RationalState(Believes believes) {
+        super();
+        this.believes = believes;
+        this.syncronicServices = new HashMap<>();
+        this.asyncronicServices = new HashMap<>();
+        this.subscriptionsToUpdate = new ArrayList<>();
+    }
+    
+    
     public RationalState(Believes believes, RationalRole mainRole) {
         super();
         this.believes = believes;
-        this.roleList = new LinkedList<>();
-        this.workerTable = new HashMap<>();
+        this.mainRole = mainRole;
         this.syncronicServices = new HashMap<>();
         this.asyncronicServices = new HashMap<>();
         this.subscriptionsToUpdate = new ArrayList<>();
     }
 
     public RationalRole getMainRole() {
-        return !roleList.isEmpty() ? roleList.getFirst() : null;
+        return mainRole;
     }
 
     public Believes getBelieves() {
@@ -59,16 +60,16 @@ public class RationalState extends StateBESA {
 
     public void assignMainRole(RationalRole mainRole) {
         if (mainRole != null) {
-            roleList.add(mainRole);
+            this.mainRole = mainRole;
         }
     }
 
     public List<String> getSubscriptionsToUpdate() {
         return subscriptionsToUpdate;
     }
-
+    
     public void setMainRole(RationalRole mainRole) {
-        roleList.add(mainRole);
+        this.mainRole = mainRole;
     }
 
     public Map<String, List<Class>> getAsyncronicServices() {
@@ -94,70 +95,31 @@ public class RationalState extends StateBESA {
     public void setSPservices(Map<String, String> SPservices) {
         this.SPservices = SPservices;
     }
-
-    public void subscribeGuardToUpdate(String guardName) {
-        if (!subscriptionsToUpdate.contains(guardName)) {
-            this.subscriptionsToUpdate.add(guardName);
-        }
+    
+    public void subscribeGuardToUpdate(String guardName){
+        this.subscriptionsToUpdate.add(guardName);
     }
 
-    public void addService(String service, String sp, TYPE type, Class guard) {
+    public void addService(String service, String sp, TYPE type, Class guard){
         this.SPservices.put(service, sp);
-        if (type == TYPE.SYNCHRONIC) {
-            if (this.syncronicServices.containsKey(sp)) {
+        if(type == TYPE.SYNCHRONIC){
+            if(this.syncronicServices.containsKey(sp)){
                 this.syncronicServices.get(sp).add(guard);
-            } else {
+            }else{
                 List<Class> guards = new ArrayList<>();
                 guards.add(guard);
                 this.syncronicServices.put(sp, guards);
             }
-        } else {
-            if (this.asyncronicServices.containsKey(sp)) {
+        }else {
+            if(this.asyncronicServices.containsKey(sp)){
                 this.asyncronicServices.get(sp).add(guard);
-            } else {
+            }else{
                 List<Class> guards = new ArrayList<>();
                 guards.add(guard);
                 this.asyncronicServices.put(sp, guards);
             }
         }
     }
-
-    public void updateRoleList(List<RationalRole> activeRoleList) {
-        for (int i = 0; i < activeRoleList.size(); i++) {
-            RationalRole r = activeRoleList.get(i);
-            if (!roleList.contains(r)) {
-                roleList.add(r);
-            }
-        }
-    }
-
-    public LinkedList<RationalRole> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(LinkedList<RationalRole> roleList) {
-        this.roleList = roleList;
-    }
-
-    public WorkerAgent getWorker(String roleName) {
-        return workerTable.get(roleName);
-    }
-
-    public void initPool(List<String> roleNameList, String agentAlias) {
-        WorkerAgent agent;
-        WorkerState stW;
-        for (String name : roleNameList) {
-            try {
-                stW = new WorkerState(this.believes, agentAlias);
-                //agent = new WorkerAgent(name + agentAlias, stW);
-                //agent = new WorkerAgent(name, stW);
-                agent = new WorkerAgent(UUID.randomUUID().toString(), stW);                
-                agent.start();
-                workerTable.put(name, agent);
-            } catch (KernelAgentExceptionBESA ex) {
-                Logger.getLogger(RationalState.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+    
 
 }

@@ -1,0 +1,142 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="56268593-1FC4-37AE-5BE4-FDB2195EA21F" name="actXPreferencia">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ActividadPwA_id" id="FEFC67BB-FD19-A68F-9D14-031AF9C4BBDA">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="10CC1C09-36AF-DF60-6BF9-8294297D5BF8" referredColumn="E556B603-2C57-CBDA-F973-4FC853A8E78D"/>
+</associations>
+</Column>
+<Column name="Perfil_Preferencia_cedula" id="578DFF3E-04FD-D718-B22C-9E73F570810E">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="20D9D035-55CC-F066-F96C-1C23017F057D" referredColumn="89B77CE7-E74C-DFA7-6404-FD43956D986A"/>
+</associations>
+</Column>
+<Column name="activa" id="55381D40-996D-5422-79FD-127DBFC3E6C4">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>B35EC040-32B6-68BF-B2BC-608743A5D22D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+<Column name="Dificultad_dificultad" id="D451F15F-3F32-DA3F-A3E9-86236D056587">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:31:47 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="269DD314-C4D0-332F-3FEC-E58919A06C7E" referredColumn="C23354F3-1906-CD8C-46E7-6F7485740C0A"/>
+</associations>
+</Column>
+<Column name="gusto" id="6AB2BB4A-7B4B-A36C-C565-5E3385528DF2">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:32:53 UTC</createdTime>
+<generatorID>CE237DB1-6AD1-2179-6DCF-B703CC0A46F5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+<Column name="enriq" id="D5202F78-373C-0C01-5C3E-0D57A7E3489A">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:32:53 UTC</createdTime>
+<generatorID>1483C9FC-FED6-918F-9E7E-9291597CB6F2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="158D8F8E-108D-ECF0-F2ED-23D4939532FE" name="actXPreferencia_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FEFC67BB-FD19-A68F-9D14-031AF9C4BBDA"/>
+<colUsage columnID="578DFF3E-04FD-D718-B22C-9E73F570810E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="67D9AB48-E3CD-4DA2-7F43-0DC777EB50F9" name="actXPreferencia_ActividadPwA_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:14 UTC</createdTime>
+<generatorID>58135EAA-E3D4-C46A-30C3-A5804662CE8B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FEFC67BB-FD19-A68F-9D14-031AF9C4BBDA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4B3F7ED0-9887-D1E9-8F3F-7DE8A58C01E8" name="actXPreferencia_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 18:03:15 UTC</createdTime>
+<generatorID>58135EAA-E3D4-C46A-30C3-A5804662CE8B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="578DFF3E-04FD-D718-B22C-9E73F570810E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F82F63ED-3497-E54A-A3A0-94B54656BF4B" name="actXPreferencia_Dificultad_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-01 19:31:47 UTC</createdTime>
+<generatorID>0B395BB3-7CED-8669-9521-AE337EF9C52F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D451F15F-3F32-DA3F-A3E9-86236D056587"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

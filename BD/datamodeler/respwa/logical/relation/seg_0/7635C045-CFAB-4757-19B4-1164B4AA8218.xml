@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="cancionXgenero" directorySegmentName="seg_0" id="7635C045-CFAB-4757-19B4-1164B4AA8218">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:38:30 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="4EAFE9D3-2C51-C964-F68D-23632B1BF6BB" value="true"/>
+</engineerTo>
+<sourcePk>84ADC354-5798-F86C-C1F1-703FB948B1AB</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>4A316010-4D7F-A691-005C-3B41AFA94851</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D0E39788-B073-0CDE-AFE5-8AFF4E74328A</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
