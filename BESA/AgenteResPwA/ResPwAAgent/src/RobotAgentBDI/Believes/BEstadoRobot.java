@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
+import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -18,7 +19,7 @@ public class BEstadoRobot implements Believes {
 
     private int bateria;
     private int volumenVoz;
-    private long velocidad = 0;
+    private double velocidad = 0;
     private boolean activadoParpadear = false;
     private boolean activadoAutoColision = false;
     private boolean activadoColisionExterna = false;
@@ -30,9 +31,13 @@ public class BEstadoRobot implements Believes {
     private boolean activadoSeñalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
-    private int velHabla;
-    private int tonoHabla;
-
+    private double velHabla;
+    private double tonoHabla;
+    private double ledIntensity;
+    private LedsColor leds=null;
+    private int red;
+    private int green;
+    private int blue;
     @Override
     public boolean update(InfoData si) {
 
@@ -77,19 +82,22 @@ public class BEstadoRobot implements Believes {
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
             if (infoRecibida.getInfo().containsKey("LEDS")) {
-                infoRecibida.getInfo().get("LEDS");
+                leds=LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
             }
             if (infoRecibida.getInfo().containsKey("velocidad")) {
-                velocidad = (long)infoRecibida.getInfo().get("velocidad");
+                velocidad += velocidad*(long)infoRecibida.getInfo().get("velocidad");
             }
             if (infoRecibida.getInfo().containsKey("velHabla")) {
-                velHabla=(int)infoRecibida.getInfo().get("velHabla");
+                velHabla+=(int)infoRecibida.getInfo().get("velHabla");
             }
             if (infoRecibida.getInfo().containsKey("tonoHabla")) {
-                tonoHabla=(int)infoRecibida.getInfo().get("tonoHabla");
+                tonoHabla+=(int)infoRecibida.getInfo().get("tonoHabla");
             }
             if (infoRecibida.getInfo().containsKey("volVoz")) {
-                volumenVoz=(int)infoRecibida.getInfo().get("volVoz");
+                volumenVoz+=(int)infoRecibida.getInfo().get("volVoz");
+            }
+            if (infoRecibida.getInfo().containsKey("ledIntens")) {
+                ledIntensity+=(int)infoRecibida.getInfo().get("ledIntens");
             }
         }
         return true;
@@ -191,6 +199,38 @@ public class BEstadoRobot implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
+    }
+
+    public int getVolumenVoz() {
+        return volumenVoz;
+    }
+
+    public void setVolumenVoz(int volumenVoz) {
+        this.volumenVoz = volumenVoz;
+    }
+
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(double velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public double getVelHabla() {
+        return velHabla;
+    }
+
+    public void setVelHabla(double velHabla) {
+        this.velHabla = velHabla;
+    }
+
+    public double getTonoHabla() {
+        return tonoHabla;
+    }
+
+    public void setTonoHabla(double tonoHabla) {
+        this.tonoHabla = tonoHabla;
     }
 
 }

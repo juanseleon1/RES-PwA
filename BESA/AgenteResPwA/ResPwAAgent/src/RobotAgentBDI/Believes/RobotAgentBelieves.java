@@ -46,14 +46,12 @@ public class RobotAgentBelieves implements Believes {
     System.out.println("RobotAgentBelieves update Received: " + si);
         if(si!=null && si.getMessage() != null && si.getMessage().equals("emodata")) {
             bEstadoRobot.update(si);
+            bEstadoEmocionalPwA.update(si);
         } else if(si!=null){
             SensorData infoRecibida = (SensorData) si;
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
-                    break;
-                case EMOTIONS:
-                    bEstadoEmocionalPwA.update(si);
                     break;
                 case INTERACTION:
                     bEstadoInteraccion.update(si);

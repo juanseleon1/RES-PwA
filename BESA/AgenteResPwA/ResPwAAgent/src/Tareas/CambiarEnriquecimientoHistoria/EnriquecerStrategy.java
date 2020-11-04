@@ -38,7 +38,7 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 break;
             case 1: //movimiento
                 infoServicio.put("RUNANIMATION", nombre);
-                infoServicio.put("FACTOR", blvs.);
+                infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 break;
             case 2:
