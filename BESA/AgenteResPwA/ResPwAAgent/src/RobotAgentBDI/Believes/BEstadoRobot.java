@@ -19,7 +19,7 @@ public class BEstadoRobot implements Believes {
 
     private int bateria;
     private int volumenVoz;
-    private long velocidad = 0;
+    private double velocidad = 0;
     private boolean activadoParpadear = false;
     private boolean activadoAutoColision = false;
     private boolean activadoColisionExterna = false;
@@ -31,10 +31,13 @@ public class BEstadoRobot implements Believes {
     private boolean activadoSeñalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
-    private int velHabla;
-    private int tonoHabla;
-    private int ledIntensity;
+    private double velHabla;
+    private double tonoHabla;
+    private double ledIntensity;
     private LedsColor leds=null;
+    private int red;
+    private int green;
+    private int blue;
     @Override
     public boolean update(InfoData si) {
 
@@ -79,22 +82,22 @@ public class BEstadoRobot implements Believes {
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
             if (infoRecibida.getInfo().containsKey("LEDS")) {
-                LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
+                leds=LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
             }
             if (infoRecibida.getInfo().containsKey("velocidad")) {
-                velocidad = (long)infoRecibida.getInfo().get("velocidad");
+                velocidad += velocidad*(long)infoRecibida.getInfo().get("velocidad");
             }
             if (infoRecibida.getInfo().containsKey("velHabla")) {
-                velHabla=(int)infoRecibida.getInfo().get("velHabla");
+                velHabla+=(int)infoRecibida.getInfo().get("velHabla");
             }
             if (infoRecibida.getInfo().containsKey("tonoHabla")) {
-                tonoHabla=(int)infoRecibida.getInfo().get("tonoHabla");
+                tonoHabla+=(int)infoRecibida.getInfo().get("tonoHabla");
             }
             if (infoRecibida.getInfo().containsKey("volVoz")) {
-                volumenVoz=(int)infoRecibida.getInfo().get("volVoz");
+                volumenVoz+=(int)infoRecibida.getInfo().get("volVoz");
             }
             if (infoRecibida.getInfo().containsKey("ledIntens")) {
-                ledIntensity=(int)infoRecibida.getInfo().get("ledIntens");
+                ledIntensity+=(int)infoRecibida.getInfo().get("ledIntens");
             }
         }
         return true;
@@ -206,27 +209,27 @@ public class BEstadoRobot implements Believes {
         this.volumenVoz = volumenVoz;
     }
 
-    public long getVelocidad() {
+    public double getVelocidad() {
         return velocidad;
     }
 
-    public void setVelocidad(long velocidad) {
+    public void setVelocidad(double velocidad) {
         this.velocidad = velocidad;
     }
 
-    public int getVelHabla() {
+    public double getVelHabla() {
         return velHabla;
     }
 
-    public void setVelHabla(int velHabla) {
+    public void setVelHabla(double velHabla) {
         this.velHabla = velHabla;
     }
 
-    public int getTonoHabla() {
+    public double getTonoHabla() {
         return tonoHabla;
     }
 
-    public void setTonoHabla(int tonoHabla) {
+    public void setTonoHabla(double tonoHabla) {
         this.tonoHabla = tonoHabla;
     }
 

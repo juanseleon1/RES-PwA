@@ -11,6 +11,9 @@ package Tareas.CambiarEnriquecimientoHistoria;
  */
 public enum LedsColor {
     BLUE(72,185,246),
+    BLGRE(117,201,202),
+    GREEN(161, 216, 157),
+    GREYEL(206,232,112),
     YELLOW(250,247,67);
     
     private Integer r;

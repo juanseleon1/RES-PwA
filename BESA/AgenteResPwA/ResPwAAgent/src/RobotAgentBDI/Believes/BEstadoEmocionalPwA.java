@@ -6,6 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
+import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
 import rational.data.InfoData;
@@ -19,7 +20,6 @@ public class BEstadoEmocionalPwA implements Believes{
 
     private EmotionPwA emocionPredominante;
     private long tiempoEmocionPredominante;
-    private HashMap<EmotionPwA,Float> estadoEmocional;
     private long tiempoAtencion;
     private long tiempoSinAtencion;
     private long tiempoRelajacion;
@@ -28,34 +28,38 @@ public class BEstadoEmocionalPwA implements Believes{
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoEmocionalPwA update Received: "+si);
-        SensorData infoRecibida= (SensorData)si;
-         if(infoRecibida.getDataPE().containsKey("EmoMap"))
+        EmotionalData infoRecibida= (EmotionalData)si;
+        if(infoRecibida.getInfo().containsKey("atencion"))
         {
-            estadoEmocional=(HashMap<EmotionPwA,Float>) infoRecibida.getDataPE().get("EmoMap");
-            calcularPredominante();
-        }
-        if(infoRecibida.getDataPE().containsKey("atencion"))
-        {
-           if((float)infoRecibida.getDataPE().get("atencion")<0.5 && tiempoSinAtencion==0)
+           if((double)infoRecibida.getInfo().get("atencion")<0.5 && tiempoSinAtencion==0)
            {
                tiempoSinAtencion=System.currentTimeMillis();
                tiempoAtencion=0;
-           }else if((float)infoRecibida.getDataPE().get("atencion")>=0.5 && tiempoAtencion==0)
+           }else if((double)infoRecibida.getInfo().get("atencion")>=0.5 && tiempoAtencion==0)
            {
                tiempoAtencion=System.currentTimeMillis();
                tiempoSinAtencion=0;
            }
         }
-        if(infoRecibida.getDataPE().containsKey("relajacion"))
+        if(infoRecibida.getInfo().containsKey("relajacion"))
         {
-           if((float)infoRecibida.getDataPE().get("relajacion")<0.5 && tiempoSinRelajacion==0)
+           if((double)infoRecibida.getInfo().get("relajacion")<0.5 && tiempoSinRelajacion==0)
            {
                tiempoSinRelajacion=System.currentTimeMillis();
                tiempoRelajacion=0;
-           }else if((float)infoRecibida.getDataPE().get("relajacion")>=0.5 && tiempoRelajacion==0)
+           }else if((double)infoRecibida.getInfo().get("relajacion")>=0.5 && tiempoRelajacion==0)
            {
                tiempoRelajacion=System.currentTimeMillis();
                tiempoSinRelajacion=0;
+           }
+        }
+        if(infoRecibida.getInfo().containsKey("predEm"))
+        {
+          EmotionPwA emo=(EmotionPwA)infoRecibida.getInfo().get("predEm");
+           if(infoRecibida.getInfo().get("predEm")!=null && !emo.equals(emocionPredominante))
+           {
+               emocionPredominante=emo;
+               tiempoEmocionPredominante=System.currentTimeMillis();
            }
         }
         return true;
@@ -75,14 +79,6 @@ public class BEstadoEmocionalPwA implements Believes{
 
     public void setTiempoEmocionPredominante(long tiempoEmocionPredominante) {
         this.tiempoEmocionPredominante = tiempoEmocionPredominante;
-    }
-
-    public HashMap<EmotionPwA,Float> getEstadoEmocional() {
-        return estadoEmocional;
-    }
-
-    public void setEstadoEmocional(HashMap<EmotionPwA,Float> estadoEmocional) {
-        this.estadoEmocional = estadoEmocional;
     }
 
     public long getTiempoAtencion() {
@@ -116,13 +112,6 @@ public class BEstadoEmocionalPwA implements Believes{
     public void setTiempoSinRelajacion(long tiempoSinRelajacion) {
         this.tiempoSinRelajacion = tiempoSinRelajacion;
     }
-
-    private void calcularPredominante() {
-
-        emocionPredominante=estadoEmocional.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
-        tiempoEmocionPredominante=System.currentTimeMillis();
-    }
-
           @Override
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
