@@ -47,6 +47,8 @@ public class SeleccionarBaile extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Baile ---");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+        requestService(srb);
     }
 
     @Override

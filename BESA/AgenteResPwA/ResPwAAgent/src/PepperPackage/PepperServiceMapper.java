@@ -42,7 +42,7 @@ public class PepperServiceMapper extends ServiceMapper<String>{
     
     @Override
     public String getServiceTranslation(String object) {
-        return mapper.get(object);
+        return object;
     }
     
 

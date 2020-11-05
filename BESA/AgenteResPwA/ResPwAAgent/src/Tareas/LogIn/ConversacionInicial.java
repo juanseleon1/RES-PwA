@@ -41,6 +41,11 @@ public class ConversacionInicial extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Estado Animo ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override

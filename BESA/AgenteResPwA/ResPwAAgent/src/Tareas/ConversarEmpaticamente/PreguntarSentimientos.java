@@ -31,11 +31,10 @@ public class PreguntarSentimientos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
-        ServiceDataRequest srb = null;
         
         //buscar texto
         infoServicio.put("SAY", "PreguntaSentimientos");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb);
     
     }
