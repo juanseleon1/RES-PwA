@@ -563,7 +563,7 @@ def pause_sound(idSound):
 
 #Subscribes to ALVoiceEmotionAnalysis .
 def activate_voice_emotion_analysis(params):
-    subscriberName = params.get(“ACTIVATEVOICEEMOANAL”)
+    subscriberName = params.get("ACTIVATEVOICEEMOANAL")
     alVoiceEmotionAnalysis.subscribe(subscriberName) 
 
 #Unsubscribes to ALVoiceEmotionAnalysis .
@@ -696,7 +696,7 @@ print("Server starting...pop")
 HOST = '10.195.22.24' #socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST_LOCAL)
-PORT = 7895    # Port to listen on (non-privileged ports are > 1023)
+PORT = 7896    # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
 ADDR = (HOST_LOCAL, PORT)
 server = None

@@ -26,9 +26,13 @@ import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
 import RobotAgentBDI.Metas.SeleccionarCancionGusto;
 import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -70,8 +74,14 @@ public class InitRESPwA {
             RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
             EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), new PepperEModel(predefEmoState));
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
-            RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, new PepperAdapter());
+            PepperAdapter p=new PepperAdapter();
+            RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI,EAA,SHA,SPA);
+            HashMap<String, Object> hm = new HashMap<>();
+            hm.put("SAY", "Frase");
+           ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
+            p.sendRequest(data);
+            
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -167,6 +177,7 @@ public class InitRESPwA {
         SHA.start();
         SHA.subscribeServices();
         EAA.startEmotionalModel();
+        
     }
 
 }

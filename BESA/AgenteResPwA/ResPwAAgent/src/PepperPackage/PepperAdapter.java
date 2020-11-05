@@ -116,7 +116,7 @@ public class PepperAdapter extends ResPwaAdapter{
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
        String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
-       PepperSendable s= new PepperSendable(sendNewSendable(),proxyMethod[0].trim(),proxyMethod[1].trim(),data.getParams());
+       PepperSendable s= new PepperSendable(sendNewSendable(),data.getSubservice(),data.getSubservice(),data.getParams());
        return new ObjectMapper().writeValueAsString(s);
    }
 }
