@@ -681,6 +681,17 @@ def conversacion_ira(genero):
     }
     frase_principal = "�si quieres podemos escuchar una canci�n para relajarnos?"
 
+def send( msg ):
+    HOST_LOCAL = '127.0.0.1'
+    PORT = 7897
+    FORMAT = 'utf-8'
+    ADDR = (HOST_LOCAL, PORT)
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect(ADDR)
+    message = msg.dumbs()
+    client.send(message)
+    client.close()
+    
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
@@ -692,7 +703,9 @@ class pepperModule(ALModule):
   def pythondatachanged(self, key, value, message):
     """callback when data change"""
     print "datachanged", key, " ", value, " ", message
-
+    msg_to_send = json_creator(-1, "ROB", value)
+    send(message)
+    
     #Env�o de informaci�n a BESA despu�s de recibir un evento+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 #----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------    
@@ -708,7 +721,6 @@ ADDR = (HOST_LOCAL, PORT)
 server = None
 HEADER = 1024
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "!DISCONNECT"
 print("Server starting...pop1111111111111111111")
 
 #------------------------------------------------------------------------------------------------
