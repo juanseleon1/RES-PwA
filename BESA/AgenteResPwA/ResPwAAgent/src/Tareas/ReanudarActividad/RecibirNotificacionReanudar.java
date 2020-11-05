@@ -48,11 +48,25 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Recibir Notificacion Reanudar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
+        requestService(srb);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Recibir Notificar Reanudar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
+        requestService(srb);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb);
     }
 
     @Override

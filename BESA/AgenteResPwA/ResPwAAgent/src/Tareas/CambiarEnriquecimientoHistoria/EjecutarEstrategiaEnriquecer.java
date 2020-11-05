@@ -8,7 +8,12 @@ package Tareas.CambiarEnriquecimientoHistoria;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -47,11 +52,37 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Ejecutar Enriquecer ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
+        if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+            requestService(srb);
+        }
+        if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Ejecutar Enriquecer ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
+        if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+            requestService(srb);
+        }
+        if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
+            requestService(srb);
+        }
     }
 
     @Override

@@ -36,11 +36,21 @@ public class FinalizarBaile extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Finalizar Baile ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Finalizar Baile ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+        infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb);
     }
 
     @Override

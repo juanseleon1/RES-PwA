@@ -50,6 +50,8 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Evaluar Enriquecer ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
     }
 
     @Override

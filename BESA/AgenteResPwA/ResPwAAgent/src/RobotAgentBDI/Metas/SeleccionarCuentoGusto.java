@@ -13,7 +13,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.SeleccionarCuentoGusto.RecibirRetroalimentacion;
-import Tareas.SeleccionarCuentoGusto.BuscarAnimaciones;
+import Tareas.SeleccionarCuentoGusto.ReproducirCuento;
 import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
 import Tareas.SeleccionarCuentoGusto.RecomendarCuento;
 import Tareas.SeleccionarCuentoGusto.SeleccionarCuento;
@@ -35,7 +35,7 @@ public class SeleccionarCuentoGusto extends GoalBDI{
 
     public static SeleccionarCuentoGusto buildGoal() {
 
-        BuscarAnimaciones buscarAnimaciones = new BuscarAnimaciones();
+        ReproducirCuento buscarAnimaciones = new ReproducirCuento();
         MoverseFrentePwA moverseFrente = new MoverseFrentePwA();
         SeleccionarCuento seleccionarCuento = new SeleccionarCuento();
         VerificarObstaculos verificarObstaculos = new VerificarObstaculos();

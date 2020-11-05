@@ -54,6 +54,11 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Ejecutar Estrategia Animar PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override

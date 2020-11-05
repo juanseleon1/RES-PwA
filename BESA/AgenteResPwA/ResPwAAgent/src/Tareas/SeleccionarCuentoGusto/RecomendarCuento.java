@@ -43,25 +43,35 @@ public class RecomendarCuento extends ResPwaTask{
         }
         blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
         
-        infoServicio.put("SAY", cuentoEleg);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        infoServicio.put("SAYWITHMOVEMENT", cuentoEleg);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Recomendar Cuento ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Recomendar Cuento ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;
         }
         return false;

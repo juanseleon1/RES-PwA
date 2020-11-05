@@ -44,6 +44,8 @@ public class PeticionAyuda extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Peticion Ayuda ---");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+        requestService(srb);
     }
 
     @Override
