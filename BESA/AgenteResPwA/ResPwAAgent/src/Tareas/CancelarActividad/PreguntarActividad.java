@@ -40,6 +40,7 @@ public class PreguntarActividad extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Actividad ---");
+        
     }
 
     @Override

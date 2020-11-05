@@ -10,17 +10,17 @@ package Tareas.CambiarEnriquecimientoHistoria;
  * @author mafegarces
  */
 public enum LedsColor {
-    BLUE(72,185,246),
-    BLGRE(117,201,202),
-    GREEN(161, 216, 157),
-    GREYEL(206,232,112),
-    YELLOW(250,247,67);
+    BLUE(0.28,0.72,0.96),
+    BLGRE(0.46,0.79,0.79),
+    GREEN(0.63,0.84,0.49),
+    GREYEL(0.80,0.91,0.44),
+    YELLOW(0.98,0.97,0.26);
     
-    private Integer r;
-    private Integer g;
-    private Integer b;
+    private double r;
+    private double g;
+    private double b;
     
-    private LedsColor(Integer r, Integer g, Integer b) {
+    private LedsColor(double r, double g, double b) {
         this.r=r;
         this.g=g;
         this.b=b;

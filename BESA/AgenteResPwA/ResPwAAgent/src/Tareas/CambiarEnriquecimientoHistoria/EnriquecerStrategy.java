@@ -15,6 +15,9 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import rational.mapping.Believes;
 
 /**
@@ -33,22 +36,32 @@ public class EnriquecerStrategy implements ResPwAStrategy{
         switch (nombre)
         {
             case 0: //hablar
-                infoServicio.put("SAY", nombre);
+                infoServicio.put("SAY", "Frase");
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
             case 1: //movimiento
                 blvs.getbEstadoActividad().getCuentoActual().getFrasesList();
-                infoServicio.put("RUNANIMATION", nombre);
+                infoServicio.put("RUNANIMATION", "MovEnriquecer");
                 infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 break;
             case 2:
                 //falta escoger imagenes
-                infoServicio.put("SHOWIMG", nombre);
+                Map<String,List<String>> imgsCuento = blvs.getImgCuentos();
+                List<String> listImgs = imgsCuento.get(blvs.getbEstadoActividad().getCuentoActual().getNombre());
+                infoServicio.put("SHOWIMG", listImgs);
                 srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
                 break;
             case 3: //luces
-                infoServicio.put("CHANGELEDCOLOR", nombre);
+                double r = Math.random()*(2);
+                double g = Math.random()*(2);
+                double b = Math.random()*(2);
+                               
+                infoServicio.put("NAME", "AllLeds");
+                infoServicio.put("RED", r);
+                infoServicio.put("GREEN", g);
+                infoServicio.put("BLUE", b);
+                infoServicio.put("DURATION", 1.0);
                 srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
                 break;
         }

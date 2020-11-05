@@ -116,7 +116,6 @@ public class PepperAdapter extends ResPwaAdapter{
    private String convertServiceRequest(ServiceDataRequest data) throws JsonProcessingException
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
-//       String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
        PepperSendable s= new PepperSendable(sendNewSendable(),data.getSubservice(),data.getSubservice(),data.getParams());
        return new ObjectMapper().writeValueAsString(s);
    }

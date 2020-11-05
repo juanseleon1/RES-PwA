@@ -37,9 +37,6 @@ public class BEstadoRobot implements Believes {
     private double distanciaY;
     private double ledIntensity;
     private LedsColor leds=null;
-    private int red;
-    private int green;
-    private int blue;
     @Override
     public boolean update(InfoData si) {
 

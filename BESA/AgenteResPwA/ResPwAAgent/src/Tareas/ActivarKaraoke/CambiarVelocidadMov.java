@@ -13,6 +13,7 @@ import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -43,14 +44,20 @@ public class CambiarVelocidadMov extends ResPwaTask{
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Cambiar Velocidad Movimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        infoServicio.put("STOPANIMATION", blvs.getbEstadoActividad().getCancionActual().getTagsList());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
-        requestService(srb);
+        if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Cambiar Velocidad Movimientos ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+            requestService(srb);
+        }
     }
 
     @Override

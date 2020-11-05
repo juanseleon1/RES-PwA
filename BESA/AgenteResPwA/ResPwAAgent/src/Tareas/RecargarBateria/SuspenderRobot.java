@@ -41,38 +41,31 @@ public class SuspenderRobot extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
-            infoServicio.put("STOPANIMATION", null);
-            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
             requestService(srb);
-            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            infoServicio.put("STOPALL", null);
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
-            infoServicio = new HashMap<>();
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
-            infoServicio.put("STOPVIDEO", null);
-            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);
             requestService(srb);
-            infoServicio = new HashMap<>();
         }
         
-        infoServicio.put("SUSPEND", null);
-        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
         requestService(srb);
-        infoServicio = new HashMap<>();
-        infoServicio.put("SUSPENDTABLET", null);
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, infoServicio);
+
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Suspender Robot ---");
+        
     }
 
     @Override

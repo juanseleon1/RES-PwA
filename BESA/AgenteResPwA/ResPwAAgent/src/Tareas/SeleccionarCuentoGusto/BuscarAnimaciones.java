@@ -44,6 +44,7 @@ public class BuscarAnimaciones extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Buscar Animaciones ---");
+        infoServicio= new HashMap<>();
     }
 
     @Override

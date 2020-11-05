@@ -17,5 +17,12 @@
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapter.java</file>
         </group>
+
+        <group>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/CancelarActividad/CancelarActividadTask.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Bailar/SeleccionarBaile.java</file>
+        </group>
+        <group/>
+
     </open-files>
 </project-private>
