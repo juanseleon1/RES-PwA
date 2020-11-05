@@ -8,168 +8,169 @@ import argparse
 
 def handle_client(conn, addr):
     print("Lo logro")
-    
-    msg_length = conn.recv(HEADER)
-    msg_length = msg_length.decode(FORMAT, 'ignore')
-    msg_length = safe_str(msg_length)
-    #if msg_length:
-    #print(msg_length)
-    y = safe_str(msg_length).split('{')
-    json_string = ""
-    for val in range(1, len(y)):
-        json_string = json_string + "{" + y[val]
-    
-    #print("msg:")
-    #y = "{" + y
-    print(json_string)
-    #print(y)
-    jsonObj = json.loads(json_string)
-    msg_length = len(jsonObj)
-    msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
-    
-    callFunction(jsonObj)
-    
-    #if learn_face("Brayan"):
-    #hablar(jsonObj["methodName"],100)
-    #hablar(jsonObj["methodName"],50)
-    #else:
-    #    hablar("Mal")
-    #print(get_face_list()[0])
-    #json_formatted_str = json.dumps(json_creator(-1, "emo", get_emotion_state()), indent=2)
-    #print(json_formatted_str)
-    #activate_blinking(True)+++++++++++++
-    #activate_life_signals(True)+++++++++++++
-    #activate_life_signals_awareness(True)+++++++++++++
-    #set_engagement_type("FullyEngaged")+++++++++++++
-    #activate_hearing_movement(True)+++++++++++++
-    #activate_speak_movements(True)+++++++++++++
-    #define_conversation_mode("random")+++++++++++++
-    #activate_push_reflexes(False) IGNORADA POR AHORA, PARA PROBARLA HAY QUE DESACTIVAR LOS REFLEJOS DE SEGURIDAD PRIMERO
-    #activate_breath_movement("Body", True)+++++++++++++
-    #activate_movement_detection(False)+++++++++++++
-    #activate_face_detection(True)+++++++++++++
-    #activate_colission_detection("Arms", True)+++++++++++++
-    #activate_monitoring_charge_service(True)+++++++++++++
-    #print("Battery", get_battery())+++++++++++++
-    #print("Temperature", get_temperature())+++++++++++++
-    #print("Smile", get_emotion_state()) +++++++++++++
-    #print(login()) -------------
-    #search_free_zone(0.6, 0.5) +++++++++++++
-    #get_free_zone(0.6, 0.5) +++++++++++++
-    #get_robot_position(False) +++++++++++++
-    #move(0.25,0.25,0.1)+++++++++++++
-    #move_forward(0.2, 0.2, 0.1)+++++++++++++
-    #move_to(2.0, 0.0)---------------------
-    #move_to_position(2.0)
-    #wake_up()++++++++++++++++++++++                                                               ########
-    #suspend()++++++++++++++++++++++                                                               ########
-    #activate_rasta(2.0f)
-    #random_eyes(2.0f)
-    #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
-    #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
-    #activate_stiffness(False)
+    connected = True
+    while connected:
+        msg_length = conn.recv(HEADER)
+        msg_length = msg_length.decode(FORMAT, 'ignore')
+        msg_length = safe_str(msg_length)
+        #if msg_length:
+        print(msg_length)
+        y = safe_str(msg_length).split('{')
+        json_string = ""
+        for val in range(1, len(y)):
+            json_string = json_string + "{" + y[val]
+        
+        #print("msg:")
+        #y = "{" + y
+        print(json_string)
+        #print(y)
+        jsonObj = json.loads(json_string)
+        msg_length = len(jsonObj)
+        msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
+        
+        callFunction(jsonObj)
+        
+        #if learn_face("Brayan"):
+        #hablar(jsonObj["methodName"],100)
+        #hablar(jsonObj["methodName"],50)
+        #else:
+        #    hablar("Mal")
+        #print(get_face_list()[0])
+        #json_formatted_str = json.dumps(json_creator(-1, "emo", get_emotion_state()), indent=2)
+        #print(json_formatted_str)
+        #activate_blinking(True)+++++++++++++
+        #activate_life_signals(True)+++++++++++++
+        #activate_life_signals_awareness(True)+++++++++++++
+        #set_engagement_type("FullyEngaged")+++++++++++++
+        #activate_hearing_movement(True)+++++++++++++
+        #activate_speak_movements(True)+++++++++++++
+        #define_conversation_mode("random")+++++++++++++
+        #activate_push_reflexes(False) IGNORADA POR AHORA, PARA PROBARLA HAY QUE DESACTIVAR LOS REFLEJOS DE SEGURIDAD PRIMERO
+        #activate_breath_movement("Body", True)+++++++++++++
+        #activate_movement_detection(False)+++++++++++++
+        #activate_face_detection(True)+++++++++++++
+        #activate_colission_detection("Arms", True)+++++++++++++
+        #activate_monitoring_charge_service(True)+++++++++++++
+        #print("Battery", get_battery())+++++++++++++
+        #print("Temperature", get_temperature())+++++++++++++
+        #print("Smile", get_emotion_state()) +++++++++++++
+        #print(login()) -------------
+        #search_free_zone(0.6, 0.5) +++++++++++++
+        #get_free_zone(0.6, 0.5) +++++++++++++
+        #get_robot_position(False) +++++++++++++
+        #move(0.25,0.25,0.1)+++++++++++++
+        #move_forward(0.2, 0.2, 0.1)+++++++++++++
+        #move_to(2.0, 0.0)---------------------
+        #move_to_position(2.0)
+        #wake_up()++++++++++++++++++++++                                                               ########
+        #suspend()++++++++++++++++++++++                                                               ########
+        #activate_rasta(2.0f)
+        #random_eyes(2.0f)
+        #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
+        #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
+        #activate_stiffness(False)
 
-    #pause_sound(idSound)
-    #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
-    ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
-    #set_system_volume(20)#+++++++++++++++++++
-    #say_with_movement("Hola Enrique")+++++++++++++++++++
-    #set_say_volume(0.75)+++++++++++++++++++
-    #stop_all()---------------------
-    #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
-    #tablet_on()#++++++++++++++++++++++++++++++
-    #wake_tablet()++++++++++++++++++++++++++++++
-    #suspend_tablet()++++++++++++++++++++++++++++++
-    #tablet_off()
-    #show_video("https://redirector.googlevideo.com/videoplayback?expire=1604472485&ei=RfqhX4T1GarQ8gSr4qmYDg&ip=104.152.209.78&id=o-AORe7I9sVz175SndJTjmbzo4R18jnu53gU_o1Jx3NfMS&itag=18&source=youtube&requiressl=yes&mh=Fr&mm=31%2C29&mn=sn-cx5o4aqj5-tt1e%2Csn-ab5szn7e&ms=au%2Crdu&mv=u&mvi=2&pl=26&vprv=1&mime=video%2Fmp4&gir=yes&clen=12461468&ratebypass=yes&dur=190.217&lmt=1580700039115886&mt=1604450593&fvip=2&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AG3C_xAwRQIgTuadH3UvqXe9vgd7PxkCck_D7-SUu_wkoa-drKKjM10CIQCftFm5NAyngyV1h3LioLNUfgPvRih4KMoABwlurfbCAQ%3D%3D&sig=AOq0QJ8wRQIhANhJISV3QgaoKFkvVbKm1jN-5L1ADp6Ebvl6K1-nEbMTAiAt2alrXgiZxkv9OOo8lb0n9UQ_43yl0tv92_mhPh1Zsw==")
-    #quit_video()
-    #pause_video()++++++++++++++++++++++++++++++
-    #resume_video()++++++++++++++++++++++++++++++
-    #preload_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
-    #show_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
-    #hide_image()++++++++++++++++++++++++++++++
-    #set_tablet_bright(20)#---------------------------
-    #set_tablet_volume(20)#---------------------------
+        #pause_sound(idSound)
+        #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
+        ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
+        #set_system_volume(20)#+++++++++++++++++++
+        #say_with_movement("Hola Enrique")+++++++++++++++++++
+        #set_say_volume(0.75)+++++++++++++++++++
+        #stop_all()---------------------
+        #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
+        #tablet_on()#++++++++++++++++++++++++++++++
+        #wake_tablet()++++++++++++++++++++++++++++++
+        #suspend_tablet()++++++++++++++++++++++++++++++
+        #tablet_off()
+        #show_video("https://redirector.googlevideo.com/videoplayback?expire=1604472485&ei=RfqhX4T1GarQ8gSr4qmYDg&ip=104.152.209.78&id=o-AORe7I9sVz175SndJTjmbzo4R18jnu53gU_o1Jx3NfMS&itag=18&source=youtube&requiressl=yes&mh=Fr&mm=31%2C29&mn=sn-cx5o4aqj5-tt1e%2Csn-ab5szn7e&ms=au%2Crdu&mv=u&mvi=2&pl=26&vprv=1&mime=video%2Fmp4&gir=yes&clen=12461468&ratebypass=yes&dur=190.217&lmt=1580700039115886&mt=1604450593&fvip=2&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AG3C_xAwRQIgTuadH3UvqXe9vgd7PxkCck_D7-SUu_wkoa-drKKjM10CIQCftFm5NAyngyV1h3LioLNUfgPvRih4KMoABwlurfbCAQ%3D%3D&sig=AOq0QJ8wRQIhANhJISV3QgaoKFkvVbKm1jN-5L1ADp6Ebvl6K1-nEbMTAiAt2alrXgiZxkv9OOo8lb0n9UQ_43yl0tv92_mhPh1Zsw==")
+        #quit_video()
+        #pause_video()++++++++++++++++++++++++++++++
+        #resume_video()++++++++++++++++++++++++++++++
+        #preload_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+        #show_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+        #hide_image()++++++++++++++++++++++++++++++
+        #set_tablet_bright(20)#---------------------------
+        #set_tablet_volume(20)#---------------------------
 
-    #if jsonObj["methodName"] == "hablar":
-     #   print(jsonObj["methodName"])
+        #if jsonObj["methodName"] == "hablar":
+         #   print(jsonObj["methodName"])
     
 def message_manage(key):
         switch_accion = {
             #ActivityServices-------------------------------------------------------
-            "RUNANIMATION": "run_animation", #funcionando
-            "GOTOPOSTURE": "go_to_posture",  #No hace nada-------------------------
-            "DETECTNEWFACE ": "learn_face",  #funcionando
-            "GETFACELIST": "get_face_list",  #funcionando
-            "ACTIVATE": "activate_blinking", #Parece que funciona, no bota error
-            "ACTIVATELIFESIGNALS": "activate_life_signals", #
-            "ACTIVATELIFESGINALSINT": "activate_life_signals_awareness", #
-            "DEFENGAGEMENTTYPE": "set_engagement_type", #
-            "ACTIVATEACTIVEHEARING": "activate_hearing_movement",#
-            "ACTIVATESPEAKMOVEMENTS":"activate_speak_movements", #
-            "DEFCONVERSATIONMODE":"define_conversation_mode", #
-            "ACTIVATEPUSHREFLEXES":"activate_push_reflexes", #
-            "ACIVATEBREATHMOV":"activate_breath_movement", #
-            "ACTIVATEMOVDETECTION":"activate_movement_detection", #
-            "ACTIVATEFACEDETEC":"activate_face_detection", #
-            "ACTIVATECOLISSIONDETECT":"activate_colission_detection", #
+            "RUNANIMATION": run_animation, #funcionando
+            "GOTOPOSTURE": go_to_posture,  #No hace nada-------------------------
+            "DETECTNEWFACE ": learn_face,  #funcionando
+            "GETFACELIST": get_face_list,  #funcionando
+            "ACTIVATE": activate_blinking, #Parece que funciona, no bota error
+            "ACTIVATELIFESIGNALS": activate_life_signals, #
+            "ACTIVATELIFESGINALSINT": activate_life_signals_awareness, #
+            "DEFENGAGEMENTTYPE": set_engagement_type, #
+            "ACTIVATEACTIVEHEARING": activate_hearing_movement,#
+            "ACTIVATESPEAKMOVEMENTS": activate_speak_movements, #
+            "DEFCONVERSATIONMODE": define_conversation_mode, #
+            "ACTIVATEPUSHREFLEXES": activate_push_reflexes, #
+            "ACIVATEBREATHMOV": activate_breath_movement, #
+            "ACTIVATEMOVDETECTION": activate_movement_detection, #
+            "ACTIVATEFACEDETEC": activate_face_detection, #
+            "ACTIVATECOLISSIONDETECT": activate_colission_detection, #
             #EnergyServices-------------------------------------------------------
-            "ACTIVATEMONITORINGCHARGESERV":"activate_monitoring_charge_service", #
-            "GETBATTERY":"get_battery", #
-            "GETTEMP":"get_temperature",#
+            "ACTIVATEMONITORINGCHARGESERV": activate_monitoring_charge_service, #
+            "GETBATTERY": get_battery, #
+            "GETTEMP": get_temperature,#
             #HumanServices-------------------------------------------------------
-            "GETEMOTIONSTATE":"get_emotion_state", #
-            "LOGIN":"login", #
+            "GETEMOTIONSTATE": get_emotion_state, #
+            "LOGIN": login, #
             #LocationServices-------------------------------------------------------
-            "SEARCHFREEZONE":"search_free_zone", #
-            "GETFREEZONES":"get_free_zone", #
-            "GETROBOTPOSITION":"get_robot_position", #
+            "SEARCHFREEZONE": search_free_zone, #
+            "GETFREEZONES": get_free_zone, #
+            "GETROBOTPOSITION": get_robot_position, #
             #MovementServices-------------------------------------------------------
-            "MOVE":"move", #
-            "MOVEFORWARD":"move_forward", #
-            "MOVETO":"move_to", #
-            "MOVETOPOSITION":"move_to_position", #
+            "MOVE": move, #
+            "MOVEFORWARD": move_forward, #
+            "MOVETO": move_to, #
+            "MOVETOPOSITION":move_to_position, #
             #RobotStateServices-------------------------------------------------------
-            "WAKEUP":"wake_up", #
-            "SUSPEND":"suspend", #
-            "SETREFRESHTIMESENSORS":"set_refresh_time_sensors", #Hay que crear un modulo para probar
-            "ACTIVATERASTA ":"activate_rasta", #
-            "RANDOMEYES":"random_eyes",#
-            "SETLEDSINTENSITY":"set_leds_intensity",#
-            "CHANGELEDCOLOR":"change_led_color",#
-            "ACTIVATESTIFFNESS":"activate_stiffness",#
+            "WAKEUP": wake_up, #
+            "SUSPEND": suspend, #
+            "SETREFRESHTIMESENSORS": set_refresh_time_sensors, #Hay que crear un modulo para probar
+            "ACTIVATERASTA ": activate_rasta, #
+            "RANDOMEYES": random_eyes,#
+            "SETLEDSINTENSITY": set_leds_intensity,#
+            "CHANGELEDCOLOR": change_led_color,#
+            "ACTIVATESTIFFNESS": activate_stiffness,#
             #TabletServices-------------------------------------------------------
-            "TABLETON":"tablet_on",
-            "WAKETABLET":"wake_tablet",
-            "SUSPENDTABLET":"suspend_tablet",
-            "TABLETOFF":"tablet_off",
-            "SHOWVIDEO":"show_video",
-            "QUITVIDEO":"quit_video",
-            "PAUSEVIDEO":"pause_video",
-            "RESUMEVIDEO":"resume_video",
-            "PRELOADIMG":"preload_image",
-            "SHOWIMG":"show_image",
-            "HIDEIMG":"hide_image",
-            "SETTABLETBRIGHT":"set_tablet_bright",
-            "SETTABLETVOL":"set_tablet_volume",
+            "TABLETON": tablet_on,
+            "WAKETABLET": wake_tablet,
+            "SUSPENDTABLET": suspend_tablet,
+            "TABLETOFF": tablet_off,
+            "SHOWVIDEO": show_video,
+            "QUITVIDEO": quit_video,
+            "PAUSEVIDEO": pause_video,
+            "RESUMEVIDEO": resume_video,
+            "PRELOADIMG": preload_image,
+            "SHOWIMG": show_image,
+            "HIDEIMG": hide_image,
+            "SETTABLETBRIGHT": set_tablet_bright,
+            "SETTABLETVOL": set_tablet_volume,
             #VoiceServices-------------------------------------------------------
-            "SAY":"say",
-            "STOPALL":"stop_all",
-            "SETSAYVOLUMN":"set_say_volume",
-            "SAYWITHMOVEMENT":"say_with_movement",
-            "SETSYSTEMVOLUME":"set_system_volume",
-            "PLAYSOUND":"play_sound",
-            "PAUSESOUND":"pause_sound",
-            "ACTIVATEVOICEEMOANAL":"activate_voice_emotion_analysis",
-            "DESACTIVVOICEEMOANAL":"desactivate_voice_emotion_analysis",
-            "ACTVOICERECOG":"activate_voice_recognition",
-            "DESACTVOICERECOG":"desactivate_voice_recognition",
-            "ACTIVATECONVTOPIC":"activate_conversational_topic",
-            "LOADCONVTOPIC":"load_conversational_topic",
-            "UNLOADCONVTOPIC":"unload_conversational_topic",
-            "DEACTCONVTOPIC":"deactivate_conversational_topic",
-            "SAYUNDERTOPICCONTEXT":"say_under_topic_context",
-            "SETTOPICFOCUS":"set_topic_focus"
+            "SAY": say,
+            "STOPALL": stop_all,
+            "SETSAYVOLUMN": set_say_volume,
+            "SAYWITHMOVEMENT": say_with_movement,
+            "SETSYSTEMVOLUME": set_system_volume,
+            "PLAYSOUND": play_sound,
+            "PAUSESOUND": pause_sound,
+            "ACTIVATEVOICEEMOANAL": activate_voice_emotion_analysis,
+            "DESACTIVVOICEEMOANAL": desactivate_voice_emotion_analysis,
+            "ACTVOICERECOG": activate_voice_recognition,
+            "DESACTVOICERECOG": desactivate_voice_recognition,
+            "ACTIVATECONVTOPIC": activate_conversational_topic,
+            "LOADCONVTOPIC": load_conversational_topic,
+            "UNLOADCONVTOPIC": unload_conversational_topic,
+            "DEACTCONVTOPIC": deactivate_conversational_topic,
+            "SAYUNDERTOPICCONTEXT": say_under_topic_context,
+            "SETTOPICFOCUS": set_topic_focus
         }
         return switch_accion.get(key)
         
@@ -531,7 +532,7 @@ def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
 #Says the specified string of characters.
-def say(params, speed=100, pitch=1.1):
+def say(params, speed=50, pitch=1.1):
     alTexToSpeech.setParameter("speed", speed)
     alTexToSpeech.setParameter("pitchShift", pitch)
     alTexToSpeech.say(params.get("SAY"))
@@ -706,7 +707,7 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 print("Server starting...pop1111111111111111111")
 
 #------------------------------------------------------------------------------------------------
-"""parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser()
 parser.add_argument("--ip", type=str, default=HOST, help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
 parser.add_argument("--port", type=int, default=9559, help="Naoqi port number")
 args = parser.parse_args()
@@ -717,11 +718,10 @@ except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
                "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
-"""
+
 #----------------------------------------------------------------------------------------------------
 
 #Declare the Naoqi variables --------------------------------------------------------------------
-"""
 global alBroker
 alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
 alProxy = ALProxy("ALMemory")
@@ -753,7 +753,7 @@ alAudioPlayer = session.service("ALAudioPlayer")
 alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
 alSpeechRecognition  = session.service("ALSpeechRecognition")
 alDialogProxy = session.service("ALDialog")
-"""
+
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #Declare the modules --------------------------------------------------------------------------------
@@ -883,7 +883,6 @@ server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
-#while 1:  
 conn, addr = server.accept()
 thread = threading.Thread(target=handle_client, args=(conn, addr))
 thread.start()
