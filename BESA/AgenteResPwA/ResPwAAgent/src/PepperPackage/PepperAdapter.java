@@ -106,16 +106,17 @@ public class PepperAdapter extends ResPwaAdapter{
                 System.out.println("Enviando solicitud al Robot: \n"+JSON);
                 oos.writeUTF(JSON+"\n\r");
                 oos.flush();
+//                oos.close();
             }
         } catch (IOException ex) {
             Logger.getLogger(PepperAdapter.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        } 
    }
    
    private String convertServiceRequest(ServiceDataRequest data) throws JsonProcessingException
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
-       String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
+//       String proxyMethod[]= mapper.getServiceTranslation(data.getSubservice()).split("/");
        PepperSendable s= new PepperSendable(sendNewSendable(),data.getSubservice(),data.getSubservice(),data.getParams());
        return new ObjectMapper().writeValueAsString(s);
    }

@@ -9,91 +9,91 @@ import argparse
 def handle_client(conn, addr):
     print("Lo logro")
     connected = True
-    while connected:
-        msg_length = conn.recv(HEADER)
-        msg_length = msg_length.decode(FORMAT, 'ignore')
-        msg_length = safe_str(msg_length)
-        #if msg_length:
-        print(msg_length)
-        y = safe_str(msg_length).split('{')
-        json_string = ""
-        for val in range(1, len(y)):
-            json_string = json_string + "{" + y[val]
-        
-        #print("msg:")
-        #y = "{" + y
-        print(json_string)
-        #print(y)
-        jsonObj = json.loads(json_string)
-        msg_length = len(jsonObj)
-        msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
-        
-        callFunction(jsonObj)
-        
-        #if learn_face("Brayan"):
-        #hablar(jsonObj["methodName"],100)
-        #hablar(jsonObj["methodName"],50)
-        #else:
-        #    hablar("Mal")
-        #print(get_face_list()[0])
-        #json_formatted_str = json.dumps(json_creator(-1, "emo", get_emotion_state()), indent=2)
-        #print(json_formatted_str)
-        #activate_blinking(True)+++++++++++++
-        #activate_life_signals(True)+++++++++++++
-        #activate_life_signals_awareness(True)+++++++++++++
-        #set_engagement_type("FullyEngaged")+++++++++++++
-        #activate_hearing_movement(True)+++++++++++++
-        #activate_speak_movements(True)+++++++++++++
-        #define_conversation_mode("random")+++++++++++++
-        #activate_push_reflexes(False) IGNORADA POR AHORA, PARA PROBARLA HAY QUE DESACTIVAR LOS REFLEJOS DE SEGURIDAD PRIMERO
-        #activate_breath_movement("Body", True)+++++++++++++
-        #activate_movement_detection(False)+++++++++++++
-        #activate_face_detection(True)+++++++++++++
-        #activate_colission_detection("Arms", True)+++++++++++++
-        #activate_monitoring_charge_service(True)+++++++++++++
-        #print("Battery", get_battery())+++++++++++++
-        #print("Temperature", get_temperature())+++++++++++++
-        #print("Smile", get_emotion_state()) +++++++++++++
-        #print(login()) -------------
-        #search_free_zone(0.6, 0.5) +++++++++++++
-        #get_free_zone(0.6, 0.5) +++++++++++++
-        #get_robot_position(False) +++++++++++++
-        #move(0.25,0.25,0.1)+++++++++++++
-        #move_forward(0.2, 0.2, 0.1)+++++++++++++
-        #move_to(2.0, 0.0)---------------------
-        #move_to_position(2.0)
-        #wake_up()++++++++++++++++++++++                                                               ########
-        #suspend()++++++++++++++++++++++                                                               ########
-        #activate_rasta(2.0f)
-        #random_eyes(2.0f)
-        #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
-        #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
-        #activate_stiffness(False)
+    #while connected:
+    msg_length = conn.recv(HEADER)
+    msg_length = msg_length.decode(FORMAT, 'ignore')
+    msg_length = safe_str(msg_length)
+    #if msg_length:
+    #print(msg_length)
+    y = safe_str(msg_length).split('{')
+    json_string = ""
+    for val in range(1, len(y)):
+        json_string = json_string + "{" + y[val]
+    
+    print("msg:")
+    #y = "{" + y
+    print(json_string)
+    #print(y)
+    jsonObj = json.loads(json_string)
+    msg_length = len(jsonObj)
+    msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
+    
+    callFunction(jsonObj)
+    
+    #if learn_face("Brayan"):
+    #hablar(jsonObj["methodName"],100)
+    #hablar(jsonObj["methodName"],50)
+    #else:
+    #    hablar("Mal")
+    #print(get_face_list()[0])
+    #json_formatted_str = json.dumps(json_creator(-1, "emo", get_emotion_state()), indent=2)
+    #print(json_formatted_str)
+    #activate_blinking(True)+++++++++++++
+    #activate_life_signals(True)+++++++++++++
+    #activate_life_signals_awareness(True)+++++++++++++
+    #set_engagement_type("FullyEngaged")+++++++++++++
+    #activate_hearing_movement(True)+++++++++++++
+    #activate_speak_movements(True)+++++++++++++
+    #define_conversation_mode("random")+++++++++++++
+    #activate_push_reflexes(False) IGNORADA POR AHORA, PARA PROBARLA HAY QUE DESACTIVAR LOS REFLEJOS DE SEGURIDAD PRIMERO
+    #activate_breath_movement("Body", True)+++++++++++++
+    #activate_movement_detection(False)+++++++++++++
+    #activate_face_detection(True)+++++++++++++
+    #activate_colission_detection("Arms", True)+++++++++++++
+    #activate_monitoring_charge_service(True)+++++++++++++
+    #print("Battery", get_battery())+++++++++++++
+    #print("Temperature", get_temperature())+++++++++++++
+    #print("Smile", get_emotion_state()) +++++++++++++
+    #print(login()) -------------
+    #search_free_zone(0.6, 0.5) +++++++++++++
+    #get_free_zone(0.6, 0.5) +++++++++++++
+    #get_robot_position(False) +++++++++++++
+    #move(0.25,0.25,0.1)+++++++++++++
+    #move_forward(0.2, 0.2, 0.1)+++++++++++++
+    #move_to(2.0, 0.0)---------------------
+    #move_to_position(2.0)
+    #wake_up()++++++++++++++++++++++                                                               ########
+    #suspend()++++++++++++++++++++++                                                               ########
+    #activate_rasta(2.0f)
+    #random_eyes(2.0f)
+    #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
+    #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
+    #activate_stiffness(False)
 
-        #pause_sound(idSound)
-        #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
-        ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
-        #set_system_volume(20)#+++++++++++++++++++
-        #say_with_movement("Hola Enrique")+++++++++++++++++++
-        #set_say_volume(0.75)+++++++++++++++++++
-        #stop_all()---------------------
-        #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
-        #tablet_on()#++++++++++++++++++++++++++++++
-        #wake_tablet()++++++++++++++++++++++++++++++
-        #suspend_tablet()++++++++++++++++++++++++++++++
-        #tablet_off()
-        #show_video("https://redirector.googlevideo.com/videoplayback?expire=1604472485&ei=RfqhX4T1GarQ8gSr4qmYDg&ip=104.152.209.78&id=o-AORe7I9sVz175SndJTjmbzo4R18jnu53gU_o1Jx3NfMS&itag=18&source=youtube&requiressl=yes&mh=Fr&mm=31%2C29&mn=sn-cx5o4aqj5-tt1e%2Csn-ab5szn7e&ms=au%2Crdu&mv=u&mvi=2&pl=26&vprv=1&mime=video%2Fmp4&gir=yes&clen=12461468&ratebypass=yes&dur=190.217&lmt=1580700039115886&mt=1604450593&fvip=2&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AG3C_xAwRQIgTuadH3UvqXe9vgd7PxkCck_D7-SUu_wkoa-drKKjM10CIQCftFm5NAyngyV1h3LioLNUfgPvRih4KMoABwlurfbCAQ%3D%3D&sig=AOq0QJ8wRQIhANhJISV3QgaoKFkvVbKm1jN-5L1ADp6Ebvl6K1-nEbMTAiAt2alrXgiZxkv9OOo8lb0n9UQ_43yl0tv92_mhPh1Zsw==")
-        #quit_video()
-        #pause_video()++++++++++++++++++++++++++++++
-        #resume_video()++++++++++++++++++++++++++++++
-        #preload_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
-        #show_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
-        #hide_image()++++++++++++++++++++++++++++++
-        #set_tablet_bright(20)#---------------------------
-        #set_tablet_volume(20)#---------------------------
+    #pause_sound(idSound)
+    #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
+    ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
+    #set_system_volume(20)#+++++++++++++++++++
+    #say_with_movement("Hola Enrique")+++++++++++++++++++
+    #set_say_volume(0.75)+++++++++++++++++++
+    #stop_all()---------------------
+    #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
+    #tablet_on()#++++++++++++++++++++++++++++++
+    #wake_tablet()++++++++++++++++++++++++++++++
+    #suspend_tablet()++++++++++++++++++++++++++++++
+    #tablet_off()
+    #show_video("https://redirector.googlevideo.com/videoplayback?expire=1604472485&ei=RfqhX4T1GarQ8gSr4qmYDg&ip=104.152.209.78&id=o-AORe7I9sVz175SndJTjmbzo4R18jnu53gU_o1Jx3NfMS&itag=18&source=youtube&requiressl=yes&mh=Fr&mm=31%2C29&mn=sn-cx5o4aqj5-tt1e%2Csn-ab5szn7e&ms=au%2Crdu&mv=u&mvi=2&pl=26&vprv=1&mime=video%2Fmp4&gir=yes&clen=12461468&ratebypass=yes&dur=190.217&lmt=1580700039115886&mt=1604450593&fvip=2&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AG3C_xAwRQIgTuadH3UvqXe9vgd7PxkCck_D7-SUu_wkoa-drKKjM10CIQCftFm5NAyngyV1h3LioLNUfgPvRih4KMoABwlurfbCAQ%3D%3D&sig=AOq0QJ8wRQIhANhJISV3QgaoKFkvVbKm1jN-5L1ADp6Ebvl6K1-nEbMTAiAt2alrXgiZxkv9OOo8lb0n9UQ_43yl0tv92_mhPh1Zsw==")
+    #quit_video()
+    #pause_video()++++++++++++++++++++++++++++++
+    #resume_video()++++++++++++++++++++++++++++++
+    #preload_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+    #show_image("https://firebasestorage.googleapis.com/v0/b/respwa.appspot.com/o/imagenes%2Fcagejpeg.jpeg?alt=media")++++++++++++++++++++++++++++++
+    #hide_image()++++++++++++++++++++++++++++++
+    #set_tablet_bright(20)#---------------------------
+    #set_tablet_volume(20)#---------------------------
 
-        #if jsonObj["methodName"] == "hablar":
-         #   print(jsonObj["methodName"])
+    #if jsonObj["methodName"] == "hablar":
+        #   print(jsonObj["methodName"])
     
 def message_manage(key):
         switch_accion = {
@@ -180,7 +180,7 @@ def callFunction(jsonObj):
     params = jsonObj["params"]
     if params == None:
         function()
-    else:
+    elif function != None:
         function(params)
     
     
@@ -322,17 +322,17 @@ def get_face_list():
 
 #Enables or disables the autonomous blinking.
 def activate_blinking(params):
-    enabled = params.get("ACTIVATE")
+    enabled = bool(params.get("ACTIVATE"))
     alAutonomousBlinking.setEnabled(enabled)
 
 #Enables or disables the background movements.
 def activate_life_signals(params):
-    enabled = paramas.get("ACTIVATELIFESIGNALS")
+    enabled = bool(params.get("ACTIVATELIFESIGNALS"))
     alBackgroundMovement.setEnabled(enabled)
 
 #Enables or disables basic awareness.
 def activate_life_signals_awareness(params):
-    enabled = params.get("ACTIVATELIFESIGNALSINT")
+    enabled = bool(params.get("ACTIVATELIFESIGNALSINT"))
     alBasicAwareness.setEnabled(enabled)
 
 #Sets the engagement mode.
@@ -343,12 +343,12 @@ def set_engagement_type(params):
 
 #Enables or disables the listening movements.
 def activate_hearing_movement(params):
-    enabled = paramas.get("ACTIVATEACTIVEHEARING")
+    enabled = bool(params.get("ACTIVATEACTIVEHEARING"))
     alListeningMovement.setEnabled(enabled)
 
 #Enables or disables the speaking movements.
 def activate_speak_movements(params):
-    enabled = paramas.get("ACTIVATESPEAKMOVEMENTS")
+    enabled = bool(params.get("ACTIVATESPEAKMOVEMENTS"))
     alSpeakingMovementProxy.setEnabled(enabled)
 
 #Sets the current speaking movement mode.  Random - Contextual 
@@ -357,33 +357,34 @@ def define_conversation_mode(mode):
 
 #Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner. If not allowed, an exception is thrown.
 def activate_push_reflexes(params):
-    enabled = params.get("ACTIVATEPUSHREFLEXES")
+    enabled = bool(params.get("ACTIVATEPUSHREFLEXES"))
     alMotionProxy.setPushRecoveryEnabled(enabled)
     
  #Starts or stops breathing animation on a chain.   
 def activate_breath_movement(params):
-    extremity_to_enabled = params.get("ACTIVATEBREATHMOV")
-    enabled = "Body"
+    extremity_to_enabled = "Body" 
+    enabled = bool(params.get("ACTIVATEBREATHMOV"))
     alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
 
 #Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
 def activate_movement_detection(params):
-    enabled = params.get("ACTIVATEMOVDETECTION")
+    enabled = bool(params.get("ACTIVATEMOVDETECTION"))
     alPeoplePerception.setMovementDetectionEnabled(enabled)
     
 #Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
 def activate_face_detection(params):
-    enabled = params.get("ACTIVATELIFESIGNALSINT")
+    enabled = bool(params.get("ACTIVATELIFESIGNALSINT"))
     alFaceDetection.setRecognitionEnabled(enabled)
 
 #Enable/Disable Anti-collision protection of the arms of the robot.
 def activate_colission_detection(params):
     chainName = "Arms"
-    enabled = params.get("ACTIVATECOLISSIONDETECT")
+    enabled = bool(params.get("ACTIVATECOLISSIONDETECT"))
     alMotionProxy.setCollisionProtectionEnabled(chainName,enabled)
 
 #Enables or disables power monitoring.
-def activate_monitoring_charge_service(enabled):
+def activate_monitoring_charge_service(params):
+    enabled = bool(params.get("ACTIVATEMONITORINGCHARGESERV")) 
     alBatteryProxy.enablePowerMonitoring(enabled)
 
 #Get battery charge.
@@ -422,7 +423,8 @@ def get_free_zone(radius, displacement):
     return alNavigationProxy.getFreeZone(radius, displacement)
 
 #Gets the coordinates x, y, theta of the pose2D of the robot
-def get_robot_position(enabled):
+def get_robot_position(params):
+    enabled = params.get("GETROBOTPOSITION")
     return alLocalizationProxy.getRobotPosition(enabled)
 
 #Makes the robot move at the given velocity, expressed in FRAME_ROBOT
@@ -474,8 +476,9 @@ def change_led_color(sensor, red_color, green_color, blue_color, duration):
 
 #Enable or Disable the smart stiffness reflex for all the joints (True by default).
 #The update takes one motion cycle.
-def  activate_stiffness(enabled):
-    return alMotion.SetSmartStiffnessEnabled(enabled)
+def  activate_stiffness(params):
+    enabled = bool(params.get("ACTIVATESTIFFNESS"))
+    return alMotion.setSmartStiffnessEnabled(enabled)
 
 
 
@@ -524,7 +527,8 @@ def hide_image():
     alTabletService.hideImage()
 
 #Set tablet brightness.
-def set_tablet_bright(brightness):
+def set_tablet_bright(params):
+    brightness = params.get("SETTABLETBRIGHT")
     alTabletService.setBrightness(brightness)
 
 #Configure the media volume of the tablet.
@@ -532,7 +536,7 @@ def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
 #Says the specified string of characters.
-def say(params, speed=50, pitch=1.1):
+def say(params, speed=100, pitch=1.1):
     alTexToSpeech.setParameter("speed", speed)
     alTexToSpeech.setParameter("pitchShift", pitch)
     alTexToSpeech.say(params.get("SAY"))
@@ -543,7 +547,8 @@ def stop_all(params):
 
 
 #Sets the current gain applied to the signal synthesized by the text to speech engine.
-def set_say_volume(volume):
+def set_say_volume(params):
+    volume = params.get("SETSAYVOLUMEN")/100
     alTexToSpeech.setVolume(volume)
 
 #Say the annotated text given in parameter and animate it with animations inserted in the text.
@@ -883,9 +888,10 @@ server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
-conn, addr = server.accept()
-thread = threading.Thread(target=handle_client, args=(conn, addr))
-thread.start()
+while 1:
+    conn, addr = server.accept()
+    thread = threading.Thread(target=handle_client, args=(conn, addr))
+    thread.start()
 
 """
 
