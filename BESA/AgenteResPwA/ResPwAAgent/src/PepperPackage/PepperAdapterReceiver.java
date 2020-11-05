@@ -39,13 +39,12 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     @Override
     public void run() {
         
-//        while(ready.get())
-//        {
-//            try {
-                //Socket s=ss.accept();
-                //DataInputStream  in = new DataInputStream(s.getInputStream());
-                //String json = in.readUTF();
-                String json="{\"params\": {\"bodyLanguageState\": { \"ease\": { \"confidence\": 0.0, \"level\": 0.0}},\"smile\": {\"confidence\": 0.0,\"value\": 0.0},\"expressions\": {\"joy\": {\"confidence\": 0.0, \"value\": 0.0}, \"sorrow\": {\"confidence\": 0.0, \"value\": 0.0},\"excitement\": {\"confidence\": 0.0,\"value\": 0.0}, \"calm\": {\"confidence\": 0.0, \"value\": 0.0}, \"anger\": {\"confidence\": 0.0, \"value\": 0.0}, \"surprise\": {\"confidence\": 0.0, \"value\": 0.0}, \"laughter\": {\"confidence\": 0.0, \"value\": 0.0}},\"valence\": {\"confidence\": 0.0, \"value\": 0.0}, \"attention\": {\"confidence\": 0.0, \"value\": 0.0}}, \"id\": -1,\"respType\": \"emo\"}";
+        while(ready.get())
+        {
+            try {
+                Socket s=ss.accept();
+                DataInputStream  in = new DataInputStream(s.getInputStream());
+                String json = in.readUTF();
              Thread t1= new Thread(){
                 @Override
                 public void run()
@@ -59,10 +58,10 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                 }
                 };
                 t1.start();
-//            } catch (IOException ex) {
-//                Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+            } catch (IOException ex) {
+                Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }
     
@@ -78,7 +77,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         try {
 //            System.out.println("toSensorData "+json);
             Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
-            System.out.println("MAP: "+map.toString());
+            System.out.println("To sensor data: "+map.toString());
             resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
             resp.setDataP((Map<String, Object>) map.get("params"));

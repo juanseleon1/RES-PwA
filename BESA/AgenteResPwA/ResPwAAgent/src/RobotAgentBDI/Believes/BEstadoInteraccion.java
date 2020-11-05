@@ -96,7 +96,10 @@ public class BEstadoInteraccion implements Believes{
             
         }if(infoRecibida.getDataP().containsKey("fisicaint")){
            hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
-        }     
+        }
+        if(infoRecibida.getDataP().containsKey("initServ")){
+           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+        }
         return true;
     }
 
