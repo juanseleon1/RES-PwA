@@ -38,6 +38,7 @@ public class SolicitarPosicionPwA extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Solicitar Posicion PwA ---");
+        
     }
 
     @Override

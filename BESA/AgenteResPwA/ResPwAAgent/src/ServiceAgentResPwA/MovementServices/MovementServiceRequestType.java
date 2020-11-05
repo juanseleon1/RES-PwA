@@ -12,7 +12,7 @@ import ServiceAgentResPwA.ServiceRequestType;
  * @author juans
  */
 public enum MovementServiceRequestType implements ServiceRequestType{
-    MOVE("MOVE"),MOVEFORWARD("MOVEFORWARD"),MOVETO("MOVETO"),MOVETOPOSITION("MOVETOPOSITION");
+    MOVE("MOVE"),MOVEFORWARD("MOVEFORWARD"),MOVETO("MOVETO"),MOVETOPOSITION("MOVETOPOSITION"),STOPMOVEMENT("STOPMOVEMENT");
     
     private String serviceType;
     

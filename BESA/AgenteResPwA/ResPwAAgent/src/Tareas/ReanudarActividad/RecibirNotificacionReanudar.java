@@ -35,13 +35,13 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        infoServicio.put("WAKEUP", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
         requestService(srb);
-        infoServicio = new HashMap<>();
-        infoServicio.put("WAKETABLET", null);
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.WAKETABLET, infoServicio);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.WAKETABLET, null);
         requestService(srb);
+        
+        //boostActividadActual
         
     }
 

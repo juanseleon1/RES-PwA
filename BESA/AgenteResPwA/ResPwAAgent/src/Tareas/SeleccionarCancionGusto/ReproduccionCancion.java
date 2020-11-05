@@ -82,6 +82,8 @@ public class ReproduccionCancion extends ResPwaTask {
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
+        
+        
     }
     
     @Override
