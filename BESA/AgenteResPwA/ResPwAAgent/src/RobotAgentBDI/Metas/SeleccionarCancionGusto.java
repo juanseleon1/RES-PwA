@@ -5,8 +5,8 @@
  */
 package RobotAgentBDI.Metas;
 
-import Tareas.SeleccionarCancionGusto.SeleccionarCancion;
-import Tareas.SeleccionarCancionGusto.ReproduccionCancion;
+import Tareas.MusicoTerapia.SeleccionarCancion;
+import Tareas.MusicoTerapia.ReproduccionCancion;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
@@ -15,7 +15,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.SeleccionarCancionGusto.RecibirRetroalimentacion;
+import Tareas.MusicoTerapia.RecibirRetroalimentacion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;

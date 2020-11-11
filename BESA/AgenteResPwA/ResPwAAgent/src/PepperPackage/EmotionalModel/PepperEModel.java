@@ -10,7 +10,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
