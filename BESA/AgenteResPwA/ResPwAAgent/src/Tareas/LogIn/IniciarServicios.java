@@ -9,20 +9,17 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
-import ServiceAgentResPwA.EnergyServices.EnergyService;
 import ServiceAgentResPwA.EnergyServices.EnergyServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rational.mapping.Believes;
 
 /**
  *
- * @author mafegarces
+ * @author
  */
 public class IniciarServicios extends ResPwaTask{
     
