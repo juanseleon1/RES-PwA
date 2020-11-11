@@ -51,8 +51,11 @@ public class InicializarBaile extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        //idk
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoRobot().isLibreEntorno()) {
+            return true;
+        }
+        return false;
     }
     
 }

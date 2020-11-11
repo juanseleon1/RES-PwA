@@ -2,13 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/CancelarActividad/CancelarActividadTask.java</file>
-            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Bailar/SeleccionarBaile.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ReanudarActividad/SolicitarPosicionPwA.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/SeleccionarCancionGusto/ReproduccionCancion.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/LogInTask.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/PausarInteraccion/PausarActividad.java</file>
+            <file>file:/Users/mafegarces/Documents/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/DetectarPwA.java</file>
         </group>
-=======
-        <group/>
->>>>>>> develop
     </open-files>
 </project-private>

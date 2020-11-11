@@ -29,7 +29,6 @@ public class LogInTask extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task LogIn ---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, null);
         requestService(srb);

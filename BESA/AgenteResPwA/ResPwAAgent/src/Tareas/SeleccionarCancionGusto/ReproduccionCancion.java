@@ -77,12 +77,12 @@ public class ReproduccionCancion extends ResPwaTask {
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Busqueda Cancion ---");
+        
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
-        
         
     }
     
