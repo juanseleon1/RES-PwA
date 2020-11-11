@@ -13,7 +13,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.CancelarActividad.CancelarActividadTask;
 import Tareas.CancelarActividad.PreguntarActividad;
-import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
+import Tareas.Cuenteria.MoverseFrentePwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;

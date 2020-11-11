@@ -7,7 +7,7 @@ package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 

@@ -9,7 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import Tareas.AnimarElogiarPwA.AnimarStrategy;
-import Tareas.CambiarEnriquecimientoHistoria.EnriquecerStrategy;
+import Tareas.Cuenteria.EnriquecerStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
