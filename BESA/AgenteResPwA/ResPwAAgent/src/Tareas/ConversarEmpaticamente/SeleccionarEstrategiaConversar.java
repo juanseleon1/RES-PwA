@@ -51,11 +51,14 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Conversar ---");
+        
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Estrategia Conversar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
     }
 
     @Override

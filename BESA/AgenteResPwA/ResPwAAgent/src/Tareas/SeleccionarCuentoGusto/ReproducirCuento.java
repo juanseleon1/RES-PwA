@@ -19,11 +19,11 @@ import java.util.List;
  *
  * @author mafegarces
  */
-public class BuscarAnimaciones extends ResPwaTask{
+public class ReproducirCuento extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public BuscarAnimaciones() {
+    public ReproducirCuento() {
 //        System.out.println("--- Task Buscar Animaciones Iniciada ---");
     }
     
@@ -36,20 +36,29 @@ public class BuscarAnimaciones extends ResPwaTask{
         
         //enviar cuento
         
-        infoServicio.put("SAY", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Buscar Animaciones ---");
-        infoServicio= new HashMap<>();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Buscar Animaciones ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override

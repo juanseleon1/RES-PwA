@@ -55,22 +55,31 @@ public class SuspenderRobot extends ResPwaTask{
             requestService(srb);
         }
         
-        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
-        requestService(srb);
-
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb);
+        
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Suspender Robot ---");
-        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Suspender Robot ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            requestService(srb);
+        }        
     }
 
     @Override

@@ -36,6 +36,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean detectaPwA = false;
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
+    private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
@@ -98,7 +99,10 @@ public class BEstadoInteraccion implements Believes{
            hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
         }
         if(infoRecibida.getDataP().containsKey("initServ")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+           confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+        }
+        if(infoRecibida.getDataP().containsKey("respPwA")){
+           recibirRespuestaPwA = Boolean.valueOf((String)infoRecibida.getDataP().get("respPwA"));
         }
         return true;
     }
@@ -311,6 +315,14 @@ public class BEstadoInteraccion implements Believes{
 
     public void setConfirmarActServicios(boolean confirmarActServicios) {
         this.confirmarActServicios = confirmarActServicios;
+    }
+
+    public boolean isRecibirRespuestaPwA() {
+        return recibirRespuestaPwA;
+    }
+
+    public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
+        this.recibirRespuestaPwA = recibirRespuestaPwA;
     }
     
     

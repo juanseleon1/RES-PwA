@@ -61,6 +61,8 @@ public class SeleccionarCuento extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Cuento ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setCancionActual(null);
     }
 
     @Override

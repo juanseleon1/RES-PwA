@@ -59,6 +59,8 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Estrategia Atencion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
     }
 
     @Override

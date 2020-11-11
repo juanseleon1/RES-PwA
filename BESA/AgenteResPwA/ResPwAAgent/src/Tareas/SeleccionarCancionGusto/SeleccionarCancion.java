@@ -9,7 +9,6 @@ package Tareas.SeleccionarCancionGusto;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -64,6 +63,8 @@ public class SeleccionarCancion extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Cancion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setCancionActual(null);
     }
 
     @Override
