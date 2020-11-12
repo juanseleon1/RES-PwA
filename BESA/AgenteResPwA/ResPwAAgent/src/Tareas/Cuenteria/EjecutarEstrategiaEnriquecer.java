@@ -10,14 +10,10 @@ import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 import rational.mapping.Believes;
 
 /**

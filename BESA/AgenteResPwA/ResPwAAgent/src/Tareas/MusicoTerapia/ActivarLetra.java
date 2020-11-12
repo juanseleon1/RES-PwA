@@ -6,6 +6,9 @@
 package Tareas.MusicoTerapia;
 
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -25,6 +28,9 @@ public class ActivarLetra extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Activar Letra ---");
+        infoServicio.put("ACTIVATELETTER", true);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        requestService(srb);
     }
 
     @Override
