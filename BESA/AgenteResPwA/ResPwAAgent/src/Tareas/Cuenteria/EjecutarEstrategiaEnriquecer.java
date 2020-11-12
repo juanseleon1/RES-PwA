@@ -53,6 +53,13 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Ejecutar Enriquecer ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        long num = blvs.getbEstadoInteraccion().getNivelEnriquecimiento();
+        
+        EnriquecerStrategy es = new EnriquecerStrategy();
+        es.setNombre((int)num);
+        
+        blvs.getbEstadoActividad().setEstrategia(es);
+        
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
@@ -71,6 +78,7 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Ejecutar Enriquecer ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
@@ -88,7 +96,7 @@ public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo() && 
+        if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof EnriquecerStrategy && !blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo() && 
                 !blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && blvs.getbEstadoInteraccion().getLeds() != null ){
             return true;
         }
