@@ -11,7 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import Tareas.ActivarKaraoke.MoverseFrentePwA;
-import Tareas.Cuenteria.EjecutarEstrategiaEnriquecer;
+import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
 import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.Cuenteria.RecomendarCuento;

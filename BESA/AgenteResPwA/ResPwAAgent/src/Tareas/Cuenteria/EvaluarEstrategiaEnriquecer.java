@@ -20,11 +20,11 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class EjecutarEstrategiaEnriquecer extends ResPwaTask{
+public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public EjecutarEstrategiaEnriquecer() {
+    public EvaluarEstrategiaEnriquecer() {
 //        System.out.println("--- Task Ejecutar Enriquecer Iniciada ---");
     }
     
