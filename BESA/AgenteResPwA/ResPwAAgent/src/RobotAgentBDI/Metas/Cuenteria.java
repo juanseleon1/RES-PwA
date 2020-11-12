@@ -55,20 +55,20 @@ public class Cuenteria extends GoalBDI {
         tarea = new ArrayList<>();
         tarea.add(moversePwA);
         tarea.add(sCuento);
-        rolePlan.addTask(eEstrategia);
+        rolePlan.addTask(eEstrategia,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(sCuento);
         tarea.add(moversePwA);
-        rolePlan.addTask(rCuento);
+        rolePlan.addTask(rCuento,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(rCuento);
-        rolePlan.addTask(retro);
+        rolePlan.addTask(retro,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(retro);
-        rolePlan.addTask(recomCuento);
+        rolePlan.addTask(recomCuento,tarea);
         
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.DUTY);

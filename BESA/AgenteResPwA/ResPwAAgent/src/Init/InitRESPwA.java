@@ -10,22 +10,16 @@ import PepperPackage.PepperEAStrategy;
 import PepperPackage.EmotionalModel.PepperEModel;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
-import RobotAgentBDI.Metas.ActivarKaraoke;
-import RobotAgentBDI.Metas.AnimarElogiarPwA;
-import RobotAgentBDI.Metas.Bailar;
-import RobotAgentBDI.Metas.CambiarEnriquecimientoHistoria;
-import RobotAgentBDI.Metas.CancelarActividad;
-import RobotAgentBDI.Metas.ConversarEmpaticamente;
+import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.LogIn;
 import RobotAgentBDI.Metas.MantenerAtencionPwA;
+import RobotAgentBDI.Metas.MusicoTerapia;
 import RobotAgentBDI.Metas.PausarInteraccion;
 import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.ReanudarActividad;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
-import RobotAgentBDI.Metas.SeleccionarCancionGusto;
-import RobotAgentBDI.Metas.SeleccionarCuentoGusto;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
@@ -130,13 +124,8 @@ public class InitRESPwA {
     {
         List<GoalBDI> RAGoals= new ArrayList<>();
         //Crear Metas
-        Bailar bailarGoal= Bailar.buildGoal();
-        AnimarElogiarPwA animarGoal=  AnimarElogiarPwA.buildGoal();
-        SeleccionarCancionGusto cambiarCancionrGoal=  SeleccionarCancionGusto.buildGoal();
-        CambiarEnriquecimientoHistoria cambiarEnriquecimientoHistoriaGoal=  CambiarEnriquecimientoHistoria.buildGoal();
-        CancelarActividad CancelarActividadGoal=  CancelarActividad.buildGoal();
-        ConversarEmpaticamente conversarEmpaticamenteGoal=  ConversarEmpaticamente.buildGoal();
-        ActivarKaraoke entrarModoKaraokeGoal=  ActivarKaraoke.buildGoal();
+        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
         LogIn logInGoal = LogIn.buildGoal();
         MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
         PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -144,15 +133,9 @@ public class InitRESPwA {
         RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
         PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
         ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
-        SeleccionarCuentoGusto seleccionarCuentoGustoGoal=  SeleccionarCuentoGusto.buildGoal();
         //Agregar a Lista
-        RAGoals.add(bailarGoal);
-        RAGoals.add(animarGoal);
-        RAGoals.add(cambiarCancionrGoal);
-        RAGoals.add(cambiarEnriquecimientoHistoriaGoal);
-        RAGoals.add(CancelarActividadGoal);
-        RAGoals.add(conversarEmpaticamenteGoal);
-        RAGoals.add(entrarModoKaraokeGoal);
+        RAGoals.add(cuenteriaGoal);
+        RAGoals.add(musicoTGoal);
         RAGoals.add(logInGoal);
         RAGoals.add(mantenerAtencionPwAGoal);
         RAGoals.add(pausarInteraccionGoal);
@@ -160,7 +143,6 @@ public class InitRESPwA {
         RAGoals.add(recargarBateriaGoal);
         RAGoals.add(pedirAyudaGoal);
         RAGoals.add(reiniciarActividadGoal);
-        RAGoals.add(seleccionarCuentoGustoGoal);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
