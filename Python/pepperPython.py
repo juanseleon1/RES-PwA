@@ -18,6 +18,7 @@ def timer_activities():
             print (key, value)
             #create Json message
             #send the message to BESA
+            send( -1, key, value)
             
     t = threading.Timer(10.0, timer_activities).start()
 
@@ -1050,34 +1051,34 @@ except RuntimeError:
 #Declare the Naoqi variables --------------------------------------------------------------------
 alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
 alProxy = ALProxy("ALMemory")
-# alMood = session.service("ALMood")
-# alTexToSpeech = session.service("ALTextToSpeech")
-# alAnimationPlayer = session.service("ALAnimationPlayer")
+alMood = session.service("ALMood")
+alTexToSpeech = session.service("ALTextToSpeech")
+alAnimationPlayer = session.service("ALAnimationPlayer")
 alMotion = session.service("ALMotion")
-# alRobotPosture = session.service("ALRobotPosture")
-# alFaceDetection = session.service("ALFaceDetection")
-# alAutonomousBlinking = session.service("ALAutonomousBlinking")
-# alBackgroundMovement = session.service("ALBackgroundMovement")
-# alBasicAwareness = session.service("ALBasicAwareness")
-# alListeningMovement = session.service("ALListeningMovement")
-# alSpeakingMovementProxy = session.service("ALSpeakingMovement")
-# alMotionProxy = session.service("ALMotion")
-# alPeoplePerception = session.service("ALPeoplePerception")
-# alFaceDetection = session.service("ALFaceDetection")
-# alBatteryProxy = session.service("ALBattery")
-# alBodyTemperatureProxy = session.service("ALBodyTemperature")
-# alUserSession = session.service("ALUserSession")
-# alNavigationProxy = session.service("ALNavigation")
-# alLocalizationProxy = session.service("ALLocalization")
-# alSensorsProxy = session.service("ALSensors")
-# alLedsProxy = session.service("ALLeds")
-# alTabletService = session.service("ALTabletService")
+alRobotPosture = session.service("ALRobotPosture")
+alFaceDetection = session.service("ALFaceDetection")
+alAutonomousBlinking = session.service("ALAutonomousBlinking")
+alBackgroundMovement = session.service("ALBackgroundMovement")
+alBasicAwareness = session.service("ALBasicAwareness")
+alListeningMovement = session.service("ALListeningMovement")
+alSpeakingMovementProxy = session.service("ALSpeakingMovement")
+alMotionProxy = session.service("ALMotion")
+alPeoplePerception = session.service("ALPeoplePerception")
+alFaceDetection = session.service("ALFaceDetection")
+alBatteryProxy = session.service("ALBattery")
+alBodyTemperatureProxy = session.service("ALBodyTemperature")
+alUserSession = session.service("ALUserSession")
+alNavigationProxy = session.service("ALNavigation")
+alLocalizationProxy = session.service("ALLocalization")
+alSensorsProxy = session.service("ALSensors")
+alLedsProxy = session.service("ALLeds")
+alTabletService = session.service("ALTabletService")
 alAnimatedSpeech = session.service("ALAnimatedSpeech")
-# alAudioDevice = session.service("ALAudioDevice")
-# alAudioPlayer = session.service("ALAudioPlayer")
-# alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
-# alSpeechRecognition  = session.service("ALSpeechRecognition")
-# alDialogProxy = session.service("ALDialog")
+alAudioDevice = session.service("ALAudioDevice")
+alAudioPlayer = session.service("ALAudioPlayer")
+alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
+alSpeechRecognition  = session.service("ALSpeechRecognition")
+alDialogProxy = session.service("ALDialog")
 
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
@@ -1085,144 +1086,143 @@ alAnimatedSpeech = session.service("ALAnimatedSpeech")
 try:
 
     sensorsModule = pepperModule("sensorsModule")
-#   """
-#   #Raised when an animated speech is done.
-#    alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
-#   #Raised when the person tracked can no longer be found for some time.
-#    alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")      #DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
+    #Raised when an animated speech is done.
+    alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
+    #Raised when the person tracked can no longer be found for some time.
+    alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")      #DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
 
-#   #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
-#    alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
+    #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
+    alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
 
-#   #Raised when a stimulus is detected.
-#   #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
-#    alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected","sensorsModule", "pythondatachanged")
+    #Raised when a stimulus is detected.
+    #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
+    alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected","sensorsModule", "pythondatachanged")
 
-#   #Raised when the battery level is low and will soon need charging.
-#    alProxy.subscribeToEvent("ALBattery/BatteryLow","sensorsModule", "pythondatachanged")      #DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
+    #Raised when the battery level is low and will soon need charging.
+    alProxy.subscribeToEvent("ALBattery/BatteryLow","sensorsModule", "pythondatachanged")      #DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
 
-#   #Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
-#    alProxy.subscribeToEvent("ALLocalization/GoToFailed","sensorsModule", "pythondatachanged")   #NO MUESTRA NADA - 
+    #Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
+    alProxy.subscribeToEvent("ALLocalization/GoToFailed","sensorsModule", "pythondatachanged")   #NO MUESTRA NADA - 
 
-#   #Raised when the robot has successfully reached its destination.
-#   alProxy.subscribeToEvent("ALLocalization/GoToSuccess","sensorsModule", "pythondatachanged")
+    #Raised when the robot has successfully reached its destination.
+    alProxy.subscribeToEvent("ALLocalization/GoToSuccess","sensorsModule", "pythondatachanged")
 
-#   #Raised when the robot gets lost while trying to go to its destination.
-#   alProxy.subscribeToEvent("ALLocalization/GoToLost","sensorsModule", "pythondatachanged")
+    #Raised when the robot gets lost while trying to go to its destination.
+    alProxy.subscribeToEvent("ALLocalization/GoToLost","sensorsModule", "pythondatachanged")
 
-#   #Raised when the localization is successful.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess","sensorsModule", "pythondatachanged")
+    #Raised when the localization is successful.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess","sensorsModule", "pythondatachanged")
 
-#   #Raised when the localization fails and the robot is lost.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeLost","sensorsModule", "pythondatachanged")
+    #Raised when the localization fails and the robot is lost.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeLost","sensorsModule", "pythondatachanged")
 
-#   #Raised when the orientation of the robot has NOT been successfully retrieved.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost","sensorsModule", "pythondatachanged")
+    #Raised when the orientation of the robot has NOT been successfully retrieved.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost","sensorsModule", "pythondatachanged")
 
-#   #Raised when the orientation of the robot has been successfully retrieved.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess","sensorsModule", "pythondatachanged")
+    #Raised when the orientation of the robot has been successfully retrieved.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess","sensorsModule", "pythondatachanged")
 
-#   #Raised when a chain velocity is clipped because an obstacle is too close.
-#   alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+    #Raised when a chain velocity is clipped because an obstacle is too close.
+    alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
 
-#   #Raised when a move command fails.
-#   alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+    #Raised when a move command fails.
+    alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
 
-#   #Raised when the awake status of the robot changes.
-#  alProxy.subscribeToEvent("robotIsWakeUp","sensorsModule", "pythondatachanged")
+    #Raised when the awake status of the robot changes.
+    alProxy.subscribeToEvent("robotIsWakeUp","sensorsModule", "pythondatachanged")
 
-#   #Raised at ALMotionProxy::wakeUp finish.
-####   alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished","sensorsModule", "pythondatachanged")
-#   #Raised at ALMotionProxy::rest finish.
-#   alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished","sensorsModule", "pythondatachanged")
+    #Raised at ALMotionProxy::wakeUp finish.
+    ###   alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished","sensorsModule", "pythondatachanged")
+    #Raised at ALMotionProxy::rest finish.
+    alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished","sensorsModule", "pythondatachanged")
 
-#   #Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
-#   alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged","sensorsModule", "pythondatachanged")
+    #Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
+    alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged","sensorsModule", "pythondatachanged")
 
-#   #Raised when features (Move, Stiffness...) availability changed.
-#   alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged","sensorsModule", "pythondatachanged")
+    #Raised when features (Move, Stiffness...) availability changed.
+    alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged","sensorsModule", "pythondatachanged")
 
-#   #Raised when a chain velocity is clipped because an obstacle is too close.
-#   alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+    #Raised when a chain velocity is clipped because an obstacle is too close.
+    alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
 
-#   #Raised when a move command fails.
-#   alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+    #Raised when a move command fails.
+    alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
 
-#   #Raised when Pepper is correctly docked onto the charging station.
-#   alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation","sensorsModule", "pythondatachanged")
+    #Raised when Pepper is correctly docked onto the charging station.
+    alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation","sensorsModule", "pythondatachanged")
 
-#   #Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
-#   alProxy.subscribeToEvent("ALRecharge/MoveFailed","sensorsModule", "pythondatachanged")
+    #Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
+    alProxy.subscribeToEvent("ALRecharge/MoveFailed","sensorsModule", "pythondatachanged")
 
-#   #Raised when Pepper failed to leave his charging station due to an obstacle in the way.
-#   alProxy.subscribeToEvent("ALRecharge/LeaveFailed","sensorsModule", "pythondatachanged")
+    #Raised when Pepper failed to leave his charging station due to an obstacle in the way.
+    alProxy.subscribeToEvent("ALRecharge/LeaveFailed","sensorsModule", "pythondatachanged")
 
-#   #Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
-#   alProxy.subscribeToEvent("WordRecognized","sensorsModule", "pythondatachanged")
+    #Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
+    alProxy.subscribeToEvent("WordRecognized","sensorsModule", "pythondatachanged")
 
-#   #Raised when the automatic speech recognition engine has detected a voice activity.
-#    alProxy.subscribeToEvent("SpeechDetected","sensorsModule", "pythondatachanged")
+    #Raised when the automatic speech recognition engine has detected a voice activity.
+    alProxy.subscribeToEvent("SpeechDetected","sensorsModule", "pythondatachanged")
 
-#   #Raised when an error occurs.
-#   alProxy.subscribeToEvent("ALTabletService/error","sensorsModule", "pythondatachanged")
+    #Raised when an error occurs.
+    alProxy.subscribeToEvent("ALTabletService/error","sensorsModule", "pythondatachanged")
 
-#   #Raised when message occurs.
-#   alProxy.subscribeToEvent("ALTabletService/message","sensorsModule", "pythondatachanged")
+    #Raised when message occurs.
+    alProxy.subscribeToEvent("ALTabletService/message","sensorsModule", "pythondatachanged")
 
-#   #Raised when text input occurs.
-#   alProxy.subscribeToEvent("ALTabletService/onInputText","sensorsModule", "pythondatachanged")
+    #Raised when text input occurs.
+    alProxy.subscribeToEvent("ALTabletService/onInputText","sensorsModule", "pythondatachanged")
 
-#   #Raised when a valid tactile gesture has been detected
-#   alProxy.subscribeToEvent("ALTactileGesture/Gesture","sensorsModule", "pythondatachanged")
+    #Raised when a valid tactile gesture has been detected
+    alProxy.subscribeToEvent("ALTactileGesture/Gesture","sensorsModule", "pythondatachanged")
 
-#   #Raised when the current sentence synthesis is done.
-#   alProxy.subscribeToEvent("ALTextToSpeech/TextDone","sensorsModule", "pythondatachanged")
+    #Raised when the current sentence synthesis is done.
+    alProxy.subscribeToEvent("ALTextToSpeech/TextDone","sensorsModule", "pythondatachanged")
 
-#   #Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
-#   alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
-#   #Raised when an utterance has been analyzed.
-#   alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
-#   #Raised whenever an activity completes its execution and exits.
-#   alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
-#   """
-#   #Raised when the robot touch status changed.
-#   alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged")
-#   """
-#   #Raised when at least one device (joint, actuator, sensor) has a high temperature.
-#   alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
-#   #Raised each time the robot catches a human input. Contains the last human input.
-#   alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
-#   #Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
-#   alProxy.subscribeToEvent("Dialog/IsStarted","sensorsModule", "pythondatachanged")
-#   #Currently processed human input.
-#   alProxy.subscribeToEvent("Dialog/CurrentString","sensorsModule", "pythondatachanged")
-#   #Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
-#    alProxy.subscribeToEvent("EngagementZones/PersonMovedAway","sensorsModule", "pythondatachanged")
-#   #Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
-#    alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "pythondatachanged")
-#   #Raised when a person has a smile value above the current threshold (default = 0.7).
-#    alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "pythondatachanged")
-#   #Raised when one or several faces are currently being detected.
-#    alProxy.subscribeToEvent("FaceDetected","sensorsModule", "pythondatachanged")
-#   #Raised each time the list of people looking at the robot changes.
-#    alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "pythondatachanged")
-#   #Raised when someone turns his head away from the robot.
-#    alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot","sensorsModule", "pythondatachanged")
-#   #The distance in meters to the tracked human. -1.0 if no one is tracked.
-#   alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman","sensorsModule", "pythondatachanged")
-#   #Raised when an obstacle is detected in the close area.
-#   alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected","sensorsModule", "pythondatachanged")
-#   #Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
-#   alProxy.subscribeToEvent("PeoplePerception/PeopleDetected","sensorsModule", "pythondatachanged")
-#   #Raised when a new preference is added to the system.
-#   alProxy.subscribeToEvent("preferenceAdded","sensorsModule", "pythondatachanged")
-#   #Raised when the value of a preference has been updated.
-#   alProxy.subscribeToEvent("preferenceChanged","sensorsModule", "pythondatachanged")
-#   #Raised when something just waved at the robot.
-#   alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
-#   #Raised when someone just waved at the robot.
-#   alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
-#   """
+    #Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
+    alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
+    #Raised when an utterance has been analyzed.
+    alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
+    #Raised whenever an activity completes its execution and exits.
+    alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
+    """
+    #Raised when the robot touch status changed.
+    alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged")
+    """
+    #Raised when at least one device (joint, actuator, sensor) has a high temperature.
+    alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
+    #Raised each time the robot catches a human input. Contains the last human input.
+    alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
+    #Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
+    alProxy.subscribeToEvent("Dialog/IsStarted","sensorsModule", "pythondatachanged")
+    #Currently processed human input.
+    alProxy.subscribeToEvent("Dialog/CurrentString","sensorsModule", "pythondatachanged")
+    #Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
+    alProxy.subscribeToEvent("EngagementZones/PersonMovedAway","sensorsModule", "pythondatachanged")
+    #Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
+    alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "pythondatachanged")
+    #Raised when a person has a smile value above the current threshold (default = 0.7).
+    alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "pythondatachanged")
+    #Raised when one or several faces are currently being detected.
+    alProxy.subscribeToEvent("FaceDetected","sensorsModule", "pythondatachanged")
+    #Raised each time the list of people looking at the robot changes.
+    alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "pythondatachanged")
+    #Raised when someone turns his head away from the robot.
+    alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot","sensorsModule", "pythondatachanged")
+    #The distance in meters to the tracked human. -1.0 if no one is tracked.
+    alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman","sensorsModule", "pythondatachanged")
+    #Raised when an obstacle is detected in the close area.
+    alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected","sensorsModule", "pythondatachanged")
+    #Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
+    alProxy.subscribeToEvent("PeoplePerception/PeopleDetected","sensorsModule", "pythondatachanged")
+    #Raised when a new preference is added to the system.
+    alProxy.subscribeToEvent("preferenceAdded","sensorsModule", "pythondatachanged")
+    #Raised when the value of a preference has been updated.
+    alProxy.subscribeToEvent("preferenceChanged","sensorsModule", "pythondatachanged")
+    #Raised when something just waved at the robot.
+    alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
+    #Raised when someone just waved at the robot.
+    alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
+    #
 except Exception,e:
   print "error"
   print e
@@ -1245,8 +1245,8 @@ activities_running = {"battery": True}
 
 """----------------------------------------------TIMER---------------------------------------------------------"""
 #define Timer to inform BESA
-# t = threading.Timer(10.0, timer_activities)
-# t.start()
+t = threading.Timer(10.0, timer_activities)
+t.start()
 """ Robot class declaration"""
 robot = Robot()
 while 1:
