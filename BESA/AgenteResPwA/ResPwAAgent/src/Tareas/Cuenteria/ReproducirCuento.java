@@ -3,49 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.AnimarElogiarPwA;
+package Tareas.Cuenteria;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
  * @author mafegarces
  */
-public class EjecutarEstrategiaAnimar extends ResPwaTask{
+public class ReproducirCuento extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
-    
 
-    public EjecutarEstrategiaAnimar() {
-//        System.out.println("--- Task Ejecutar Estrategia Animar PwA Iniciada ---");
+    public ReproducirCuento() {
+//        System.out.println("--- Task Buscar Animaciones Iniciada ---");
     }
     
+
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Execute Task Buscar Animaciones ---");
+        //busca animaciones y mensajes base de datos
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
         
-        ServiceDataRequest srb = estrategia.execStrategy();
+        //enviar cuento
+        
+        infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Interrupt Task Buscar Animaciones ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
         }
@@ -53,9 +53,9 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Cancel Task Buscar Animaciones ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
         }
@@ -64,10 +64,10 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            return false;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+            return true;
         }
-        return true;
+        return false;
     }
     
 }

@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -30,12 +30,14 @@ public class BEstadoInteraccion implements Believes{
     private long distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
+    private boolean estaKaraokeando=false;
     private boolean desplazandose=false;
     private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
+    private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
@@ -98,7 +100,13 @@ public class BEstadoInteraccion implements Believes{
            hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
         }
         if(infoRecibida.getDataP().containsKey("initServ")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+           confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+        }
+        if(infoRecibida.getDataP().containsKey("respPwA")){
+           recibirRespuestaPwA = Boolean.valueOf((String)infoRecibida.getDataP().get("respPwA"));
+        }if(infoRecibida.getDataP().containsKey("karaokeando")){
+          estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
+            
         }
         return true;
     }
@@ -311,6 +319,22 @@ public class BEstadoInteraccion implements Believes{
 
     public void setConfirmarActServicios(boolean confirmarActServicios) {
         this.confirmarActServicios = confirmarActServicios;
+    }
+
+    public boolean isRecibirRespuestaPwA() {
+        return recibirRespuestaPwA;
+    }
+
+    public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
+        this.recibirRespuestaPwA = recibirRespuestaPwA;
+    }
+
+    public boolean isEstaKaraokeando() {
+        return estaKaraokeando;
+    }
+
+    public void setEstaKaraokeando(boolean estaKaraokeando) {
+        this.estaKaraokeando = estaKaraokeando;
     }
     
     

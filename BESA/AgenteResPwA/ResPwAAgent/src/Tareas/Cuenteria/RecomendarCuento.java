@@ -3,49 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.AnimarElogiarPwA;
+package Tareas.Cuenteria;
 
+import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAStrategy;
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class EjecutarEstrategiaAnimar extends ResPwaTask{
+public class RecomendarCuento extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
-
-    public EjecutarEstrategiaAnimar() {
-//        System.out.println("--- Task Ejecutar Estrategia Animar PwA Iniciada ---");
+    public RecomendarCuento() {
+//        System.out.println("--- Task Recomendar Cuento Iniciada ---");
     }
     
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Execute Task Recomendar Cuento ---");
+        //buscar cuento
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        float gusto = -1;
+        Cuento cuentoEleg = null;
+        List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
+        for(Cuento c: cuentos) {
+            if( c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3 <= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
+                cuentoEleg = c;
+                gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
+            }
+        }
+        blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
         
-        ServiceDataRequest srb = estrategia.execStrategy();
+        infoServicio.put("SAYWITHMOVEMENT", cuentoEleg);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Interrupt Task Recomendar Cuento ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
         }
@@ -53,9 +60,9 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Ejecutar Estrategia Animar PwA ---");
+        System.out.println("--- Cancel Task Recomendar Cuento ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb);
         }
@@ -64,10 +71,10 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            return false;
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            return true;
         }
-        return true;
+        return false;
     }
     
 }

@@ -16,4 +16,5 @@ public interface ResPwAStrategy{
     
     public abstract ServiceDataRequest execStrategy();
     public abstract ServiceDataRequest execStrategy(Believes b);
+    
 }
