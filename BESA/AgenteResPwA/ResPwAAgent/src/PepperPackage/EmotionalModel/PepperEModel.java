@@ -12,6 +12,7 @@ import EmotionalAnalyzerAgent.EmotionalModel;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorData;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import Tareas.Cuenteria.LedsColor;
 import java.util.HashMap;
@@ -118,7 +119,6 @@ public class PepperEModel extends EmotionalModel{
         else if(sowval>=joyval && angval<=sowval)
             emoP=EmotionPwA.SADNESS;
         
-        double change;
         map.put("relajacion",relval);
         map.put("atencion",atval);
         map.put("predEm", emoP);
@@ -150,13 +150,19 @@ public class PepperEModel extends EmotionalModel{
         //x= baseV*actual/baseE
         
         map.put("LEDS", lc.name());
-        map.put("velocidad", velf);
+        map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);
         map.put("ledIntens", ledInt);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, (HashMap<String, Object>) map);
+        HashMap<String,Object> map2= new HashMap<>();
+        map2.putAll(map);
+        map2.remove("LEDS");
+        map2.put("R",lc.getR() );
+        map2.put("G",lc.getG() );
+        map2.put("B",lc.getB() );
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
         requestService(srb);
-    }
+    }   
 
     
 }
