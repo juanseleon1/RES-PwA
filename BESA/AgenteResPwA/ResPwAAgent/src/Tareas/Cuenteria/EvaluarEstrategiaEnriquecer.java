@@ -35,10 +35,19 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
         
         //luces, pantalla, todos los recursos
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        if(blvs.getbEstadoInteraccion().isQuiereEnriquec() || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 10)
+        {
+            long num = blvs.getbEstadoInteraccion().getNivelEnriquecimiento();
         
-        ServiceDataRequest srb = estrategia.execStrategy(parameters);
-        requestService(srb);
+            EnriquecerStrategy es = new EnriquecerStrategy();
+            es.setNombre((int)num);
+            blvs.getbEstadoActividad().setEstrategia(es);
+        
+            ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
+        
+            ServiceDataRequest srb = estrategia.execStrategy(parameters);
+            requestService(srb);
+        }        
         
         //propiedades voz(tono,etc) en blvs
         //plan mostrar emociones pepper
@@ -48,13 +57,7 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Ejecutar Enriquecer ---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        long num = blvs.getbEstadoInteraccion().getNivelEnriquecimiento();
-        
-        EnriquecerStrategy es = new EnriquecerStrategy();
-        es.setNombre((int)num);
-        
-        blvs.getbEstadoActividad().setEstrategia(es);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;        
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);

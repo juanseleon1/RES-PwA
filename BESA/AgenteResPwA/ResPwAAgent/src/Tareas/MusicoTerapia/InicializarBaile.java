@@ -33,10 +33,13 @@ public class InicializarBaile extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cambiar Baile ---");
-        infoServicio.put("RADIO", 0.5);
-        infoServicio.put("DISTANCIAMAX", 0.5);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-        requestService(srb);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5) {
+            infoServicio.put("RADIO", 0.5);
+            infoServicio.put("DISTANCIAMAX", 0.5);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+            requestService(srb);   
+        }
     }
 
     @Override

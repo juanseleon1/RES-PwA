@@ -5,6 +5,7 @@
  */
 package Tareas.MusicoTerapia;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
@@ -28,9 +29,13 @@ public class ActivarLetra extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Activar Letra ---");
-        infoServicio.put("ACTIVATELETTER", true);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-        requestService(srb);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
+            infoServicio.put("ACTIVATELYRICS", true);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+            requestService(srb);
+        }
+        
     }
 
     @Override

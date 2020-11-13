@@ -5,8 +5,16 @@
  */
 package Tareas.MusicoTerapia;
 
+import ResPwaUtils.Imagen;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import rational.mapping.Believes;
 
 /**
@@ -25,6 +33,12 @@ public class MostrarFotos extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Mostrar Fotos ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        List<Imagen> listImgs = blvs.getImgsPerfil();
+        List<String> listUrls= listImgs.stream().map(e-> e.getUrl()).collect(Collectors.toList());
+        infoServicio.put("SHOWIMG", listUrls);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+        requestService(srb);
     }
 
     @Override

@@ -10,6 +10,9 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import ResPwAEntities.Actxpreferencia;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.ActivarKaraoke.MoverseFrentePwA;
 import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
 import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
@@ -88,6 +91,12 @@ public class Cuenteria extends GoalBDI {
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Cuenteria detectGoal");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+            if(blvs.getbEstadoActividad().getActividadActual() != null && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && !blvs.getbEstadoActividad().isFinalizoActividad()) {
+                return 1;
+            }
+        }
         return 0;
     }
 
@@ -100,7 +109,17 @@ public class Cuenteria extends GoalBDI {
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Cuenteria evaluateContribution");
-        return 1;
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        List<Actxpreferencia> listaAct = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList();
+        double valor=0;
+        
+        for (Actxpreferencia act: listaAct) {
+            if(act.getActividadpwa().getNombre().equals(ResPwAActivity.CUENTERIA)) {
+                valor = act.getGusto();
+            }
+        }
+        
+        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override

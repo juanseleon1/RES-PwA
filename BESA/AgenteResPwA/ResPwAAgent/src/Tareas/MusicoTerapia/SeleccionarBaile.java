@@ -31,10 +31,12 @@ public class SeleccionarBaile extends ResPwaTask{
         System.out.println("--- Execute Task Seleccionar Baile ---");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
-        infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
-        requestService(srb);
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5) {
+            infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
+            infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+            requestService(srb);
+        }
     }
 
     @Override

@@ -9,7 +9,11 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
+import ResPwAEntities.Actxpreferencia;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.MusicoTerapia.ActivarLetra;
 import Tareas.MusicoTerapia.BuscarPosicionOptima;
@@ -102,6 +106,13 @@ public class MusicoTerapia extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MusicoTerapia detectGoal");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+            if(blvs.getbEstadoActividad().getActividadActual()!=null && (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA)) && !blvs.getbEstadoActividad().isFinalizoActividad()
+                    && blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))) {
+                return 1;
+            }
+        }
         return 0;
     }
 
@@ -114,7 +125,17 @@ public class MusicoTerapia extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MusicoTerapia evaluateContribution");
-        return 1;
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        List<Actxpreferencia> listaAct = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList();
+        double valor=0;
+        
+        for (Actxpreferencia act: listaAct) {
+            if(act.getActividadpwa().getNombre().equals(ResPwAActivity.MUSICOTERAPIA)) {
+                valor = act.getGusto();
+            }
+        }
+        
+        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override

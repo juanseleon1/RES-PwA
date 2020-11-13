@@ -30,6 +30,7 @@ public class BEstadoInteraccion implements Believes{
     private long distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
+    private boolean estaKaraokeando=false;
     private boolean desplazandose=false;
     private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
@@ -103,6 +104,9 @@ public class BEstadoInteraccion implements Believes{
         }
         if(infoRecibida.getDataP().containsKey("respPwA")){
            recibirRespuestaPwA = Boolean.valueOf((String)infoRecibida.getDataP().get("respPwA"));
+        }if(infoRecibida.getDataP().containsKey("karaokeando")){
+          estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
+            
         }
         return true;
     }
@@ -323,6 +327,14 @@ public class BEstadoInteraccion implements Believes{
 
     public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
         this.recibirRespuestaPwA = recibirRespuestaPwA;
+    }
+
+    public boolean isEstaKaraokeando() {
+        return estaKaraokeando;
+    }
+
+    public void setEstaKaraokeando(boolean estaKaraokeando) {
+        this.estaKaraokeando = estaKaraokeando;
     }
     
     

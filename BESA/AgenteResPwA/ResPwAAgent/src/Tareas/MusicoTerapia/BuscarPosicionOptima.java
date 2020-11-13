@@ -5,7 +5,11 @@
  */
 package Tareas.MusicoTerapia;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -25,6 +29,11 @@ public class BuscarPosicionOptima extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Posicion Optima ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
+        infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
+        requestService(srb);
     }
 
     @Override
