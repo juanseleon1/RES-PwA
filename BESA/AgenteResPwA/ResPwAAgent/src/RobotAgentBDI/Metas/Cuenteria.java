@@ -15,7 +15,6 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.ActivarKaraoke.MoverseFrentePwA;
 import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
-import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.Cuenteria.RecomendarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
