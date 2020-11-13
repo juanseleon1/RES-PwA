@@ -40,9 +40,10 @@ public class AnimarElogiarPwA extends GoalBDI{
         List<Task> tarea= new ArrayList<>();
 
         Plan rolePlan= new Plan();
-        
+        List<Task> tareas= new ArrayList<>();
+        tareas.add(seleccionarEstrategia);
         rolePlan.addTask(seleccionarEstrategia);
-        rolePlan.addTask(ejecutarEstrategia);
+        rolePlan.addTask(ejecutarEstrategia,tareas);
         
         descrip = "animate";
         RationalRole animateRole = new RationalRole(descrip, rolePlan);

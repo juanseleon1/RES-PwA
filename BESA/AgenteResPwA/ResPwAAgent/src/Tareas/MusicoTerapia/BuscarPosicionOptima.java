@@ -3,53 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.ReiniciarActividad;
+package Tareas.MusicoTerapia;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
-import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
+import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class ReiniciarActividadTask extends ResPwaTask{
-    
+public class BuscarPosicionOptima extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public ReiniciarActividadTask() {
-//        System.out.println("--- Task Reiniciar Actividad Iniciada ---");
+    public BuscarPosicionOptima() {
+//        System.out.println("--- Task Buscar Posicion Optima Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Reiniciar Actividad ---");
+        System.out.println("--- Execute Task Buscar Posicion Optima ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
-        //revisar esto blvs.getbEstadoActividad().getActividadActual()
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+        infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
+        infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
         requestService(srb);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Reiniciar Actividad ---");
+        System.out.println("--- Interrupt Task Buscar Posicion Optima ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Reiniciar Actividad ---");
+        System.out.println("--- Cancel Task Buscar Posicion Optima ---");
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-        return true;
+        System.out.println("--- Check Finish Task Buscar Posicion Optima ---");
+        return false;
     }
     
 }

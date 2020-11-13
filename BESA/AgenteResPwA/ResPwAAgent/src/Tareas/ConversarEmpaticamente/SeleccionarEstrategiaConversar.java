@@ -9,7 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import Tareas.AnimarElogiarPwA.AnimarStrategy;
-import Tareas.CambiarEnriquecimientoHistoria.EnriquecerStrategy;
+import Tareas.Cuenteria.EnriquecerStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +51,14 @@ public class SeleccionarEstrategiaConversar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Conversar ---");
+        
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Estrategia Conversar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
     }
 
     @Override

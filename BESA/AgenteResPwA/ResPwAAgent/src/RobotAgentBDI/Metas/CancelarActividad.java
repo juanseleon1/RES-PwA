@@ -13,7 +13,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.CancelarActividad.CancelarActividadTask;
 import Tareas.CancelarActividad.PreguntarActividad;
-import Tareas.SeleccionarCuentoGusto.MoverseFrentePwA;
+import Tareas.Cuenteria.MoverseFrentePwA;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -40,8 +40,12 @@ public class CancelarActividad extends GoalBDI{
         Plan rolePlan= new Plan();
         
         rolePlan.addTask(cancelarActividad); //evaluar estado emocional
-        rolePlan.addTask(moversePwA);
-        rolePlan.addTask(preguntarA);
+        tarea= new ArrayList<>();
+        tarea.add(cancelarActividad);
+        rolePlan.addTask(moversePwA,tarea);
+        tarea= new ArrayList<>();
+        tarea.add(moversePwA);
+        rolePlan.addTask(preguntarA,tarea);
 
         RationalRole cancelarActRole = new RationalRole(descrip, rolePlan);
         CancelarActividad b= new CancelarActividad(InitRESPwA.getPlanID(), cancelarActRole, descrip, GoalBDITypes.DUTY);

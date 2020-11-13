@@ -40,12 +40,21 @@ public class PreguntarActividad extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Actividad ---");
-        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Preguntar Actividad ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override

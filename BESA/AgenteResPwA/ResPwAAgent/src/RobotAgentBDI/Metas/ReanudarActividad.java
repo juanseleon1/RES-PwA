@@ -39,7 +39,8 @@ public class ReanudarActividad extends GoalBDI{
         Plan rolePlan= new Plan();
 
         rolePlan.addTask(recibirNotificacionR);
-        rolePlan.addTask(solicitarPosicion);
+        taskList.add(recibirNotificacionR);
+        rolePlan.addTask(solicitarPosicion,taskList);
         
         RationalRole reaActnRole = new RationalRole(descrip, rolePlan);
         ReanudarActividad b= new ReanudarActividad(InitRESPwA.getPlanID(), reaActnRole, descrip, GoalBDITypes.DUTY);

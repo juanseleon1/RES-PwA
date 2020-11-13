@@ -39,8 +39,9 @@ public class MantenerAtencionPwA extends GoalBDI {
         Plan rolePlan = new Plan();
 
         rolePlan.addTask(seleccionarEstrategiaA);
-        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(ejecutarEstrategia);
+        taskList.add(seleccionarEstrategiaA);
+//crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
+        rolePlan.addTask(ejecutarEstrategia,taskList);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
         MantenerAtencionPwA b = new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);

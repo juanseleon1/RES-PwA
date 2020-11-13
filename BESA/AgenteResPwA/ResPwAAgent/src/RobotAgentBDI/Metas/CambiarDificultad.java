@@ -43,9 +43,13 @@ public class CambiarDificultad extends GoalBDI{
 
 
         rolePlan.addTask(evaluarDesempeño);
-        rolePlan.addTask(seleccionarEstrategiaD); 
+        tarea= new ArrayList<>();
+        tarea.add(evaluarDesempeño);
+        rolePlan.addTask(seleccionarEstrategiaD,tarea); 
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(ejecutarEstrategia);
+        tarea= new ArrayList<>();
+        tarea.add(seleccionarEstrategiaD);
+        rolePlan.addTask(ejecutarEstrategia,tarea);
 
         RationalRole cambiarDifRole = new RationalRole(descrip, rolePlan);
         CambiarDificultad b= new CambiarDificultad(InitRESPwA.getPlanID(), cambiarDifRole, descrip, GoalBDITypes.DUTY);

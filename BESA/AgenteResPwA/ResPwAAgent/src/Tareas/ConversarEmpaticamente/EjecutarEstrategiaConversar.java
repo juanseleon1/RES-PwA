@@ -8,7 +8,9 @@ package Tareas.ConversarEmpaticamente;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -37,11 +39,21 @@ public class EjecutarEstrategiaConversar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Ejecutar Estrategia Conversar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Ejecutar Estrategia Conversar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override

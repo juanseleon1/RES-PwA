@@ -58,12 +58,17 @@ public class Saludar extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Saludar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb);
+        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;
         }
         return false;

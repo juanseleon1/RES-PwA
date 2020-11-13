@@ -9,7 +9,6 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
@@ -43,9 +42,13 @@ public class ConversarEmpaticamente extends GoalBDI{
         Plan rolePlan= new Plan();
 
         rolePlan.addTask(preguntarSentimientos);
+        tarea= new ArrayList<>();
+        tarea.add(preguntarSentimientos);
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(seleccionarEstrategiaC);
-        rolePlan.addTask(ejecutarEstrategiaC);
+        rolePlan.addTask(seleccionarEstrategiaC,tarea);
+        tarea.add(seleccionarEstrategiaC);
+        tarea= new ArrayList<>();
+        rolePlan.addTask(ejecutarEstrategiaC,tarea);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
         ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);

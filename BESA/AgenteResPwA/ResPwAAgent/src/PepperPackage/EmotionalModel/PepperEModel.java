@@ -9,8 +9,12 @@ import BESA.ExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import Tareas.Cuenteria.LedsColor;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -150,6 +154,9 @@ public class PepperEModel extends EmotionalModel{
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);
         map.put("ledIntens", ledInt);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, (HashMap<String, Object>) map);
+        requestService(srb);
     }
 
+    
 }

@@ -7,7 +7,7 @@ package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -26,6 +26,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoRecuperacionEmpuje = false;
     private int rigidezExtremidades;
     private String postura;
+    private boolean libreEntorno = false;
     private boolean activadoMovEscucha = false;
     private boolean activadoConsciente = false;
     private boolean activadoSeñalesDeVida = false;
@@ -77,6 +78,9 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("estaSuspendido")) {
                 estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("estaSuspendido"));
+            }
+            if (infoRecibida.getDataP().containsKey("libreEntorno")) {
+                libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
@@ -245,5 +249,14 @@ public class BEstadoRobot implements Believes {
         this.distanciaY = distanciaY;
     }
 
+    public boolean isLibreEntorno() {
+        return libreEntorno;
+    }
+
+    public void setLibreEntorno(boolean libreEntorno) {
+        this.libreEntorno = libreEntorno;
+    }
+
+    
     
 }

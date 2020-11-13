@@ -44,12 +44,19 @@ public class LogIn extends GoalBDI{
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan();
-
         rolePlan.addTask(detectarPwA);
-        rolePlan.addTask(loginT);
-        rolePlan.addTask(iniciarServicios);
-        rolePlan.addTask(saludar);
-        rolePlan.addTask(conversacion);
+        taskList = new ArrayList<>();
+        taskList.add(detectarPwA);
+        rolePlan.addTask(loginT,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(loginT);
+        rolePlan.addTask(iniciarServicios,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(loginT);
+        rolePlan.addTask(saludar,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(saludar);
+        rolePlan.addTask(conversacion,taskList);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
         LogIn b= new LogIn(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
