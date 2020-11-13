@@ -6,6 +6,22 @@ import qi
 import sys
 import argparse
 
+#---------------------------------------------Global Variables-----------------------------------------------
+global alBroker
+global activities_running
+global robot
+
+def timer_activities():
+    
+    for key, value in activities_running.items():
+        if value == True:
+            print (key, value)
+            #create Json message
+            #send the message to BESA
+            send( -1, key, value)
+            
+    t = threading.Timer(10.0, timer_activities).start()
+
 def handle_client(conn, addr):
     #while connected:
     msg_length = conn.recv(HEADER)
@@ -23,8 +39,8 @@ def handle_client(conn, addr):
     print(json_string)
     #print(y)
     jsonObj = json.loads(json_string)
-    msg_length = len(jsonObj)
-    msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
+    #msg_length = len(jsonObj)
+    #msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
     
     #callFunction(jsonObj)
     
@@ -66,13 +82,13 @@ def handle_client(conn, addr):
     #random_eyes(2.0f)
     #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
     #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
-    #activate_stiffness(False)
+    activate_stiffness(True)
 
     #pause_sound(idSound)
     #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
     ############################alAudioPlayer.playWebStream("https://www.youtube.com/watch?v=3DZP00zvW74", 0.7, 0.0)
     #set_system_volume(20)#+++++++++++++++++++
-    #say_with_movement("Hola Enrique")+++++++++++++++++++
+    #say_with_movement("Hola Enrique")
     #set_say_volume(0.75)+++++++++++++++++++
     #stop_all()---------------------
     #say(jsonObj["methodName"],100, 1.1)++++++++++++++++++++++++++++++
@@ -236,6 +252,86 @@ def ack_manage(key):
         }
         return switch_ack.get(key, False)
 
+def responseTypeBESAFunction(function):
+
+    switch_response = {
+            #ActivityServices-------------------------------------------------------
+            "RUNANIMATION": "act", #funcionando
+            "GOTOPOSTURE": "act",  #No hace nada-------------------------
+            "DETECTNEWFACE ": "int",  #funcionando
+            "GETFACELIST": "int",  #funcionando
+            "ACTIVATE": "act", #Parece que funciona, no bota error
+            "ACTIVATELIFESIGNALS": "act", #
+            "ACTIVATELIFESGINALSINT": "act", #
+            "DEFENGAGEMENTTYPE": "int", #
+            "ACTIVATEACTIVEHEARING": "act",#
+            "ACTIVATESPEAKMOVEMENTS": "act", #
+            "DEFCONVERSATIONMODE": "int", #
+            "ACTIVATEPUSHREFLEXES": "act", #
+            "ACIVATEBREATHMOV": "act", #
+            "ACTIVATEMOVDETECTION": "act", #
+            "ACTIVATEFACEDETEC": "act", #
+            "ACTIVATECOLISSIONDETECT": "act", #
+            #EnergyServices-------------------------------------------------------
+            "ACTIVATEMONITORINGCHARGESERV": "act", #
+            "GETBATTERY": "act", #
+            "GETTEMP": "act",#
+            #HumanServices-------------------------------------------------------
+            "GETEMOTIONSTATE": "emo", #
+            "LOGIN": "act", #
+            #LocationServices-------------------------------------------------------
+            "SEARCHFREEZONE": "act", #
+            "GETFREEZONES": "act", #
+            "GETROBOTPOSITION": "act", #
+            #MovementServices-------------------------------------------------------
+            "MOVE": "act", #
+            "MOVEFORWARD": "act", #
+            "MOVETO": "act", #
+            "MOVETOPOSITION":"act", #
+            #RobotStateServices-------------------------------------------------------
+            "WAKEUP": "act", #
+            "SUSPEND": "act", #
+            "SETREFRESHTIMESENSORS": "act", #Hay que crear un modulo para probar
+            "ACTIVATERASTA ": "act", #
+            "RANDOMEYES": "act",#
+            "SETLEDSINTENSITY": "act",#
+            "CHANGELEDCOLOR": "act",#
+            "ACTIVATESTIFFNESS": "act",#
+            #TabletServices-------------------------------------------------------
+            "TABLETON": "act",
+            "WAKETABLET": "act",
+            "SUSPENDTABLET": "act",
+            "TABLETOFF": "act",
+            "SHOWVIDEO": "act",
+            "QUITVIDEO": "act",
+            "PAUSEVIDEO": "act",
+            "RESUMEVIDEO": "act",
+            "PRELOADIMG": "act",
+            "SHOWIMG": "act",
+            "HIDEIMG": "act",
+            "SETTABLETBRIGHT": "act",
+            "SETTABLETVOL": "act",
+            #VoiceServices-------------------------------------------------------
+            "SAY": "act",
+            "STOPALL": "act",
+            "SETSAYVOLUMN": "act",
+            "SAYWITHMOVEMENT": "act",
+            "SETSYSTEMVOLUME": "act",
+            "PLAYSOUND": "act",
+            "PAUSESOUND": "act",
+            "ACTIVATEVOICEEMOANAL": "act",
+            "DESACTIVVOICEEMOANAL": "act",
+            "ACTVOICERECOG": "act",
+            "DESACTVOICERECOG": "act",
+            "ACTIVATECONVTOPIC": "act",
+            "LOADCONVTOPIC": "act",
+            "UNLOADCONVTOPIC": "act",
+            "DEACTCONVTOPIC": "act",
+            "SAYUNDERTOPICCONTEXT": "act",
+            "SETTOPICFOCUS": "act"
+        }
+    return switch_response.get(function)
+
 def json_creator(id_response, responseType, params):
     json_string = {
         "id" : id_response ,
@@ -245,15 +341,25 @@ def json_creator(id_response, responseType, params):
     return json.loads(json.dumps(json_string))
 
 def callFunction(jsonObj):
+
     function = message_manage(jsonObj["methodName"])
     params = jsonObj["params"]
+
     if params == None:
         function()
     elif function != None:
         function(params)
         
-    if ack_manage(jsonObj["methodName"]):
-        send( jsonObj["id"], "ROB", True)
+    if robot.getAck(jsonObj["methodName"]):
+        ack_param[jsonObj["methodName"]] = True
+        send( jsonObj["id"], robot.getType(jsonObj["methodName"]), ack_param)
+
+    response_type = robot.getType()
+
+    if response_type != None:
+        robot_activity = messageManager(jsonObj["id"], response_type)
+        activities_running[jsonObj["methodName"]] = robot_activity
+    
 
 def run_animation( params ):
     animation_name = params.get("TAGSDANCE")
@@ -542,7 +648,7 @@ def change_led_color(sensor, red_color, green_color, blue_color, duration):
 #The update takes one motion cycle.
 def  activate_stiffness(params):
     enabled = bool(params.get("ACTIVATESTIFFNESS"))
-    return alMotion.setSmartStiffnessEnabled(enabled)
+    return alMotion.setSmartStiffnessEnabled(params)
 
 
 
@@ -756,7 +862,103 @@ def send( id_response, responseType, params):
     print("send ", msg_to_send)
     
     client.send(msg_to_send + '\r\n')
-    client.close()    
+    client.close()   
+
+
+#----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------    
+"""--------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------"""
+#----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
+class Robot:
+    def __init__(self):
+        #The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
+        self.__modules = {
+            #ActivityServices-------------------------------------------------------
+            "RUNANIMATION": [run_animation, True, "act", True], #funcionando
+            "GOTOPOSTURE": [go_to_posture, False, "rob", False],  #No hace nada-------------------------
+            "DETECTNEWFACE ": [learn_face, True, "int", False],  #funcionando
+            "GETFACELIST": [get_face_list, False, "int", False],  #funcionando
+            "ACTIVATE": [activate_blinking, True, "rob", False], #Parece que funciona, no bota error
+            "ACTIVATELIFESIGNALS": [activate_life_signals, True, "rob", False], #
+            "ACTIVATELIFESGINALSINT": [activate_life_signals_awareness, True, "rob", False], #
+            "DEFENGAGEMENTTYPE": [set_engagement_type, False, "int", False], #
+            "ACTIVATEACTIVEHEARING": [activate_hearing_movement, True, "rob", False],#
+            "ACTIVATESPEAKMOVEMENTS": [activate_speak_movements, True, "rob", False], #
+            "DEFCONVERSATIONMODE": [define_conversation_mode, True, "int", False], #
+            "ACTIVATEPUSHREFLEXES": [activate_push_reflexes, True, "rob", False], #
+            "ACIVATEBREATHMOV": [activate_breath_movement, True, "rob", False], #
+            "ACTIVATEMOVDETECTION": [activate_movement_detection, True, "rob", False], #
+            "ACTIVATEFACEDETEC": [activate_face_detection, True, "rob", False], #
+            "ACTIVATECOLISSIONDETECT": [activate_colission_detection, True, "rob", False], #
+            #EnergyServices-------------------------------------------------------
+            "ACTIVATEMONITORINGCHARGESERV": [activate_monitoring_charge_service, True, "rob", False], #
+            "GETBATTERY": [get_battery, False, "rob", False], #
+            "GETTEMP": [get_temperature, False, "rob", False],#
+            #HumanServices-------------------------------------------------------
+            "GETEMOTIONSTATE": [get_emotion_state, False, "emo", False], #
+            "LOGIN": [login, False, "act", False], #
+            #LocationServices-------------------------------------------------------
+            "SEARCHFREEZONE": [search_free_zone, False, "act", False], #
+            "GETFREEZONES": [get_free_zone, False, "act", False], #
+            "GETROBOTPOSITION": [get_robot_position, False, "act", False], #
+            #MovementServices-------------------------------------------------------
+            "MOVE": [move, True, "act", True], #
+            "MOVEFORWARD": [move_forward, True, "act", True], #
+            "MOVETO": [move_to, True, "act", True], #
+            "MOVETOPOSITION": [move_to_position, True, "act", True], #
+            #RobotStateServices-------------------------------------------------------
+            "WAKEUP": [wake_up, True, "act", False], #
+            "SUSPEND": [suspend, True, "act", False], #
+            "SETREFRESHTIMESENSORS": [set_refresh_time_sensors, False, "act", False], #Hay que crear un modulo para probar
+            "ACTIVATERASTA ": [activate_rasta, False, "act", False], #
+            "RANDOMEYES": [random_eyes, False, "act", False],#
+            "SETLEDSINTENSITY": [set_leds_intensity, True, "act", False],#
+            "CHANGELEDCOLOR": [change_led_color, True, "act", False],#
+            "ACTIVATESTIFFNESS": [activate_stiffness, True, "act", False],#
+            #TabletServices-------------------------------------------------------
+            "TABLETON": [tablet_on, True, "act", False],
+            "WAKETABLET": [wake_tablet, True, "act", False],
+            "SUSPENDTABLET": [suspend_tablet, True, "act", False],
+            "TABLETOFF": [tablet_off, True, "act", False],
+            "SHOWVIDEO": [show_video, False, "act", True],
+            "QUITVIDEO": [quit_video, False, "act", False],
+            "PAUSEVIDEO": [pause_video, False, "act", False],
+            "RESUMEVIDEO": [resume_video, False, "act", False],
+            "PRELOADIMG": [preload_image, False, "act", False],
+            "SHOWIMG": [show_image, True, "act", True],
+            "HIDEIMG": [hide_image, True, "act", False],
+            "SETTABLETBRIGHT": [set_tablet_bright, True, "act", False],
+            "SETTABLETVOL": [set_tablet_volume, True, "act", False],
+            #VoiceServices-------------------------------------------------------
+            "SAY": [say, True, "act", True],
+            "STOPALL": [stop_all, True, "act", False],
+            "SETSAYVOLUMN": [set_say_volume, True, "act", False],
+            "SAYWITHMOVEMENT": [say_with_movement, True, "act", True],
+            "SETSYSTEMVOLUME": [set_system_volume, True, "act", False],
+            "PLAYSOUND": [play_sound, True, "act", True],
+            "PAUSESOUND": [pause_sound, True, "act", False],
+            "ACTIVATEVOICEEMOANAL": [activate_voice_emotion_analysis, True, "act", False],
+            "DESACTIVVOICEEMOANAL": [desactivate_voice_emotion_analysis, True, "act", False],
+            "ACTVOICERECOG": [activate_voice_recognition, True, "act", False],
+            "DESACTVOICERECOG": [desactivate_voice_recognition, True, "act", False],
+            "ACTIVATECONVTOPIC": [activate_conversational_topic, True, "act", False],
+            "LOADCONVTOPIC": [load_conversational_topic, True, "act", False],
+            "UNLOADCONVTOPIC": [unload_conversational_topic, True, "act", False],
+            "DEACTCONVTOPIC": [deactivate_conversational_topic, True, "act", False],
+            "SAYUNDERTOPICCONTEXT": [say_under_topic_context, True, "act", True],
+            "SETTOPICFOCUS": [set_topic_focus, True, "act", False]
+        }
+    def getFunction(self, fun):
+        return self.__modules.get(fun)[0]
+
+    def getAck(self, fun):
+        return self.__modules.get(fun)[1]
+    
+    def getType(self, fun):
+        return self.__modules.get(fun)[2]
+
+    def isResponseSaved(self, fun):
+        return self.__modules.get(fun)[3]
+
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
@@ -777,16 +979,45 @@ class pepperModule(ALModule):
     client.send(msg_to_send)
     client.close() 
     """
-    print("send ", msg_to_send)
-       
+    #print("send ", msg_to_send)
+    json_creator(-1, responseTypeBESAFunction(key), getParams(key, value))
     
-    send(msg_to_send)
-    print "datachanged", key, " ", value, " ", message
+    #send(msg_to_send)
+    print "datachanged:", key, " value:", value, " message:", message
     
 
     
     #Envio de informacion a BESA despues de recibir un evento+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#----------------------------------------------------------------------------Message class---------------------------------------------------------------------------------------------    
+"""--------------------------------------------------------------------------Message class---------------------------------------------------------------------------------------------"""
+#----------------------------------------------------------------------------Message class---------------------------------------------------------------------------------------------
+class messageManager:
+    def __init__(self, idResponse = -1, response_type = None):
+        self.__idResponse = idResponse
+        self.__response_type = response_type
+        self.__params = None
+
+    def getIdResponse(self):
+        return self.__idResponse
+
+    def getResponseType(self):
+        return self.__response_type
     
+    def getParams(self):
+        return self.__params
+
+    def setIdResponse(self, idResponse):
+        self.__idResponse = idResponse
+
+    def setResponseType(self, response_type):
+        self.__response_type = response_type
+    
+    def setParams(self, params):
+        self.__params = params
+    
+
+
 #----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
@@ -801,7 +1032,7 @@ server = None
 HEADER = 1024
 FORMAT = 'utf-8'
 print("Server starting...pop1111111111111111111")
-send( "id", "ROB", True)
+#send( "id", "ROB", True)
 #------------------------------------------------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument("--ip", type=str, default=HOST, help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
@@ -818,158 +1049,185 @@ except RuntimeError:
 #----------------------------------------------------------------------------------------------------
 
 #Declare the Naoqi variables --------------------------------------------------------------------
-# global alBroker
-# alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
-# alProxy = ALProxy("ALMemory")
-# alMood = session.service("ALMood")
-# alTexToSpeech = session.service("ALTextToSpeech")
-# alAnimationPlayer = session.service("ALAnimationPlayer")
-# alMotion = session.service("ALMotion")
-# alRobotPosture = session.service("ALRobotPosture")
-# alFaceDetection = session.service("ALFaceDetection")
-# alAutonomousBlinking = session.service("ALAutonomousBlinking")
-# alBackgroundMovement = session.service("ALBackgroundMovement")
-# alBasicAwareness = session.service("ALBasicAwareness")
-# alListeningMovement = session.service("ALListeningMovement")
-# alSpeakingMovementProxy = session.service("ALSpeakingMovement")
-# alMotionProxy = session.service("ALMotion")
-# alPeoplePerception = session.service("ALPeoplePerception")
-# alFaceDetection = session.service("ALFaceDetection")
-# alBatteryProxy = session.service("ALBattery")
-# alBodyTemperatureProxy = session.service("ALBodyTemperature")
-# alUserSession = session.service("ALUserSession")
-# alNavigationProxy = session.service("ALNavigation")
-# alLocalizationProxy = session.service("ALLocalization")
-# alSensorsProxy = session.service("ALSensors")
-# alLedsProxy = session.service("ALLeds")
-# alTabletService = session.service("ALTabletService")
-# alAnimatedSpeech = session.service("ALAnimatedSpeech")
-# alAudioDevice = session.service("ALAudioDevice")
-# alAudioPlayer = session.service("ALAudioPlayer")
-# alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
-# alSpeechRecognition  = session.service("ALSpeechRecognition")
-# alDialogProxy = session.service("ALDialog")
+alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559 )
+alProxy = ALProxy("ALMemory")
+alMood = session.service("ALMood")
+alTexToSpeech = session.service("ALTextToSpeech")
+alAnimationPlayer = session.service("ALAnimationPlayer")
+alMotion = session.service("ALMotion")
+alRobotPosture = session.service("ALRobotPosture")
+alFaceDetection = session.service("ALFaceDetection")
+alAutonomousBlinking = session.service("ALAutonomousBlinking")
+alBackgroundMovement = session.service("ALBackgroundMovement")
+alBasicAwareness = session.service("ALBasicAwareness")
+alListeningMovement = session.service("ALListeningMovement")
+alSpeakingMovementProxy = session.service("ALSpeakingMovement")
+alMotionProxy = session.service("ALMotion")
+alPeoplePerception = session.service("ALPeoplePerception")
+alFaceDetection = session.service("ALFaceDetection")
+alBatteryProxy = session.service("ALBattery")
+alBodyTemperatureProxy = session.service("ALBodyTemperature")
+alUserSession = session.service("ALUserSession")
+alNavigationProxy = session.service("ALNavigation")
+alLocalizationProxy = session.service("ALLocalization")
+alSensorsProxy = session.service("ALSensors")
+alLedsProxy = session.service("ALLeds")
+alTabletService = session.service("ALTabletService")
+alAnimatedSpeech = session.service("ALAnimatedSpeech")
+alAudioDevice = session.service("ALAudioDevice")
+alAudioPlayer = session.service("ALAudioPlayer")
+alVoiceEmotionAnalysis  = session.service("ALVoiceEmotionAnalysis")
+alSpeechRecognition  = session.service("ALSpeechRecognition")
+alDialogProxy = session.service("ALDialog")
 
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 #Declare the modules --------------------------------------------------------------------------------
-# try:
+try:
 
-#   sensorsModule = pepperModule("sensorsModule")
-#   """
-#   #Raised when an animated speech is done.
-#   alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
-#   #Raised when the person tracked can no longer be found for some time.
-#   alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")
-#   #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is updated.
-#   alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
-#   #Raised when a stimulus is detected.
-#   #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
-#   alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected","sensorsModule", "pythondatachanged")
-#   #Raised when the battery level is low and will soon need charging.
-#   alProxy.subscribeToEvent("ALBattery/BatteryLow","sensorsModule", "pythondatachanged")
-#   #Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
-#   alProxy.subscribeToEvent("ALLocalization/GoToFailed","sensorsModule", "pythondatachanged")
-#   #Raised when the robot has successfully reached its destination.
-#   alProxy.subscribeToEvent("ALLocalization/GoToSuccess","sensorsModule", "pythondatachanged")
-#   #Raised when the robot gets lost while trying to go to its destination.
-#   alProxy.subscribeToEvent("ALLocalization/GoToLost","sensorsModule", "pythondatachanged")
-#   #Raised when the localization is successful.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess","sensorsModule", "pythondatachanged")
-#   #Raised when the localization fails and the robot is lost.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeLost","sensorsModule", "pythondatachanged")
-#   #Raised when the orientation of the robot has NOT been successfully retrieved.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost","sensorsModule", "pythondatachanged")
-#   #Raised when the orientation of the robot has been successfully retrieved.
-#   alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess","sensorsModule", "pythondatachanged")
-#   #Raised when a chain velocity is clipped because an obstacle is too close.
-#   alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
-#   #Raised when a move command fails.
-#   alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
-#   #Raised when the awake status of the robot changes.
-#   alProxy.subscribeToEvent("robotIsWakeUp","sensorsModule", "pythondatachanged")
-#   #Raised at ALMotionProxy::wakeUp finish.
-#   alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished","sensorsModule", "pythondatachanged")
-#   #Raised at ALMotionProxy::rest finish.
-#   alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished","sensorsModule", "pythondatachanged")
-#   #Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
-#   alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged","sensorsModule", "pythondatachanged")
-#   #Raised when features (Move, Stiffness...) availability changed.
-#   alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged","sensorsModule", "pythondatachanged")
-#   #Raised when a chain velocity is clipped because an obstacle is too close.
-#   alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
-#   #Raised when a move command fails.
-#   alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
-#   #Raised when Pepper is correctly docked onto the charging station.
-#   alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation","sensorsModule", "pythondatachanged")
-#   #Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
-#   alProxy.subscribeToEvent("ALRecharge/MoveFailed","sensorsModule", "pythondatachanged")
-#   #Raised when Pepper failed to leave his charging station due to an obstacle in the way.
-#   alProxy.subscribeToEvent("ALRecharge/LeaveFailed","sensorsModule", "pythondatachanged")
-#   #Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
-#   alProxy.subscribeToEvent("WordRecognized","sensorsModule", "pythondatachanged")
-#   #Raised when the automatic speech recognition engine has detected a voice activity.
-#   alProxy.subscribeToEvent("SpeechDetected","sensorsModule", "pythondatachanged")
-#   #Raised when an error occurs.
-#   alProxy.subscribeToEvent("ALTabletService/error","sensorsModule", "pythondatachanged")
-#   #Raised when message occurs.
-#   alProxy.subscribeToEvent("ALTabletService/message","sensorsModule", "pythondatachanged")
-#   #Raised when text input occurs.
-#   alProxy.subscribeToEvent("ALTabletService/onInputText","sensorsModule", "pythondatachanged")
-#   #Raised when a valid tactile gesture has been detected
-#   alProxy.subscribeToEvent("ALTactileGesture/Gesture","sensorsModule", "pythondatachanged")
-#   #Raised when the current sentence synthesis is done.
-#   alProxy.subscribeToEvent("ALTextToSpeech/TextDone","sensorsModule", "pythondatachanged")
-#   #Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
-#   alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
-#   #Raised when an utterance has been analyzed.
-#   alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
-#   #Raised whenever an activity completes its execution and exits.
-#   alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
-#   """
-#   #Raised when the robot touch status changed.
-#   alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged")
-#   """
-#   #Raised when at least one device (joint, actuator, sensor) has a high temperature.
-#   alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
-#   #Raised each time the robot catches a human input. Contains the last human input.
-#   alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
-#   #Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
-#   alProxy.subscribeToEvent("Dialog/IsStarted","sensorsModule", "pythondatachanged")
-#   #Currently processed human input.
-#   alProxy.subscribeToEvent("Dialog/CurrentString","sensorsModule", "pythondatachanged")
-#   #Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
-#   alProxy.subscribeToEvent("EngagementZones/PersonMovedAway","sensorsModule", "pythondatachanged")
-#   #Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
-#   alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "pythondatachanged")
-#   #Raised when a person has a smile value above the current threshold (default = 0.7).
-#   alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "pythondatachanged")
-#   #Raised when one or several faces are currently being detected.
-#   alProxy.subscribeToEvent("FaceDetected","sensorsModule", "pythondatachanged")
-#   #Raised each time the list of people looking at the robot changes.
-#   alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "pythondatachanged")
-#   #Raised when someone turns his head away from the robot.
-#   alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot","sensorsModule", "pythondatachanged")
-#   #The distance in meters to the tracked human. -1.0 if no one is tracked.
-#   alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman","sensorsModule", "pythondatachanged")
-#   #Raised when an obstacle is detected in the close area.
-#   alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected","sensorsModule", "pythondatachanged")
-#   #Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
-#   alProxy.subscribeToEvent("PeoplePerception/PeopleDetected","sensorsModule", "pythondatachanged")
-#   #Raised when a new preference is added to the system.
-#   alProxy.subscribeToEvent("preferenceAdded","sensorsModule", "pythondatachanged")
-#   #Raised when the value of a preference has been updated.
-#   alProxy.subscribeToEvent("preferenceChanged","sensorsModule", "pythondatachanged")
-#   #Raised when something just waved at the robot.
-#   alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
-#   #Raised when someone just waved at the robot.
-#   alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
-#   """
-# except Exception,e:
-#   print "error"
-#   print e
-#   alBroker.shutdown()
-#   exit(1)
+    sensorsModule = pepperModule("sensorsModule")
+    #Raised when an animated speech is done.
+    alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
+    #Raised when the person tracked can no longer be found for some time.
+    alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")      #DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
+
+    #Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
+    alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked","sensorsModule", "pythondatachanged")
+
+    #Raised when a stimulus is detected.
+    #types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
+    alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected","sensorsModule", "pythondatachanged")
+
+    #Raised when the battery level is low and will soon need charging.
+    alProxy.subscribeToEvent("ALBattery/BatteryLow","sensorsModule", "pythondatachanged")      #DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
+
+    #Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
+    alProxy.subscribeToEvent("ALLocalization/GoToFailed","sensorsModule", "pythondatachanged")   #NO MUESTRA NADA - 
+
+    #Raised when the robot has successfully reached its destination.
+    alProxy.subscribeToEvent("ALLocalization/GoToSuccess","sensorsModule", "pythondatachanged")
+
+    #Raised when the robot gets lost while trying to go to its destination.
+    alProxy.subscribeToEvent("ALLocalization/GoToLost","sensorsModule", "pythondatachanged")
+
+    #Raised when the localization is successful.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess","sensorsModule", "pythondatachanged")
+
+    #Raised when the localization fails and the robot is lost.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeLost","sensorsModule", "pythondatachanged")
+
+    #Raised when the orientation of the robot has NOT been successfully retrieved.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost","sensorsModule", "pythondatachanged")
+
+    #Raised when the orientation of the robot has been successfully retrieved.
+    alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess","sensorsModule", "pythondatachanged")
+
+    #Raised when a chain velocity is clipped because an obstacle is too close.
+    alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+
+    #Raised when a move command fails.
+    alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+
+    #Raised when the awake status of the robot changes.
+    alProxy.subscribeToEvent("robotIsWakeUp","sensorsModule", "pythondatachanged")
+
+    #Raised at ALMotionProxy::wakeUp finish.
+    ###   alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished","sensorsModule", "pythondatachanged")
+    #Raised at ALMotionProxy::rest finish.
+    alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished","sensorsModule", "pythondatachanged")
+
+    #Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
+    alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged","sensorsModule", "pythondatachanged")
+
+    #Raised when features (Move, Stiffness...) availability changed.
+    alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged","sensorsModule", "pythondatachanged")
+
+    #Raised when a chain velocity is clipped because an obstacle is too close.
+    alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped","sensorsModule", "pythondatachanged")
+
+    #Raised when a move command fails.
+    alProxy.subscribeToEvent("ALMotion/MoveFailed","sensorsModule", "pythondatachanged")
+
+    #Raised when Pepper is correctly docked onto the charging station.
+    alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation","sensorsModule", "pythondatachanged")
+
+    #Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
+    alProxy.subscribeToEvent("ALRecharge/MoveFailed","sensorsModule", "pythondatachanged")
+
+    #Raised when Pepper failed to leave his charging station due to an obstacle in the way.
+    alProxy.subscribeToEvent("ALRecharge/LeaveFailed","sensorsModule", "pythondatachanged")
+
+    #Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
+    alProxy.subscribeToEvent("WordRecognized","sensorsModule", "pythondatachanged")
+
+    #Raised when the automatic speech recognition engine has detected a voice activity.
+    alProxy.subscribeToEvent("SpeechDetected","sensorsModule", "pythondatachanged")
+
+    #Raised when an error occurs.
+    alProxy.subscribeToEvent("ALTabletService/error","sensorsModule", "pythondatachanged")
+
+    #Raised when message occurs.
+    alProxy.subscribeToEvent("ALTabletService/message","sensorsModule", "pythondatachanged")
+
+    #Raised when text input occurs.
+    alProxy.subscribeToEvent("ALTabletService/onInputText","sensorsModule", "pythondatachanged")
+
+    #Raised when a valid tactile gesture has been detected
+    alProxy.subscribeToEvent("ALTactileGesture/Gesture","sensorsModule", "pythondatachanged")
+
+    #Raised when the current sentence synthesis is done.
+    alProxy.subscribeToEvent("ALTextToSpeech/TextDone","sensorsModule", "pythondatachanged")
+
+    #Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
+    alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted","sensorsModule", "pythondatachanged")
+    #Raised when an utterance has been analyzed.
+    alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized","sensorsModule", "pythondatachanged")
+    #Raised whenever an activity completes its execution and exits.
+    alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "pythondatachanged")
+    """
+    #Raised when the robot touch status changed.
+    alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged")
+    """
+    #Raised when at least one device (joint, actuator, sensor) has a high temperature.
+    alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "pythondatachanged")
+    #Raised each time the robot catches a human input. Contains the last human input.
+    alProxy.subscribeToEvent("Dialog/LastInput","sensorsModule", "pythondatachanged")
+    #Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
+    alProxy.subscribeToEvent("Dialog/IsStarted","sensorsModule", "pythondatachanged")
+    #Currently processed human input.
+    alProxy.subscribeToEvent("Dialog/CurrentString","sensorsModule", "pythondatachanged")
+    #Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
+    alProxy.subscribeToEvent("EngagementZones/PersonMovedAway","sensorsModule", "pythondatachanged")
+    #Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
+    alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "pythondatachanged")
+    #Raised when a person has a smile value above the current threshold (default = 0.7).
+    alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "pythondatachanged")
+    #Raised when one or several faces are currently being detected.
+    alProxy.subscribeToEvent("FaceDetected","sensorsModule", "pythondatachanged")
+    #Raised each time the list of people looking at the robot changes.
+    alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "pythondatachanged")
+    #Raised when someone turns his head away from the robot.
+    alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot","sensorsModule", "pythondatachanged")
+    #The distance in meters to the tracked human. -1.0 if no one is tracked.
+    alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman","sensorsModule", "pythondatachanged")
+    #Raised when an obstacle is detected in the close area.
+    alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected","sensorsModule", "pythondatachanged")
+    #Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
+    alProxy.subscribeToEvent("PeoplePerception/PeopleDetected","sensorsModule", "pythondatachanged")
+    #Raised when a new preference is added to the system.
+    alProxy.subscribeToEvent("preferenceAdded","sensorsModule", "pythondatachanged")
+    #Raised when the value of a preference has been updated.
+    alProxy.subscribeToEvent("preferenceChanged","sensorsModule", "pythondatachanged")
+    #Raised when something just waved at the robot.
+    alProxy.subscribeToEvent("WavingDetection/Waving","sensorsModule", "pythondatachanged")
+    #Raised when someone just waved at the robot.
+    alProxy.subscribeToEvent("WavingDetection/PersonWaving","sensorsModule", "pythondatachanged")
+    #
+except Exception,e:
+  print "error"
+  print e
+  alBroker.shutdown()
+  exit(1)
 #----------------------------------------------------------------------------------------------------
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -981,6 +1239,16 @@ server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
+
+#activities_running is a dictionary which save the activities running on the robot
+activities_running = {"battery": True}
+
+"""----------------------------------------------TIMER---------------------------------------------------------"""
+#define Timer to inform BESA
+t = threading.Timer(10.0, timer_activities)
+t.start()
+""" Robot class declaration"""
+robot = Robot()
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client, args=(conn, addr))
