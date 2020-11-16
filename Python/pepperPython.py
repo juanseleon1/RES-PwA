@@ -650,6 +650,8 @@ def  activate_stiffness(params):
     enabled = bool(params.get("ACTIVATESTIFFNESS"))
     return alMotion.setSmartStiffnessEnabled(params)
 
+def change_emotion_expression(params):
+    pass
 
 
 #Turn on/off the tablet screen.
@@ -744,7 +746,7 @@ def activate_voice_emotion_analysis(params):
 
 #Unsubscribes to ALVoiceEmotionAnalysis .
 def desactivate_voice_emotion_analysis():
-    alVoiceEmotionAnalysis.unsubscribe(subscriberName)
+    alVoiceEmotionAnalysis.unsubscribe(sensorsModule)
 
 #Subscribes to ALSpeechRecognition 
 def activate_voice_recognition(params):
@@ -753,7 +755,7 @@ def activate_voice_recognition(params):
 
 #Unsubscribes to ALSpeechRecognition
 def desactivate_voice_recognition():
-    alSpeechRecognition.unsubscribe(subscriber)
+    alSpeechRecognition.unsubscribe(sensorsModule)
 
 #Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
 def activate_conversational_topic(topicName):
@@ -914,6 +916,7 @@ class Robot:
             "SETLEDSINTENSITY": [set_leds_intensity, True, "act", False],#
             "CHANGELEDCOLOR": [change_led_color, True, "act", False],#
             "ACTIVATESTIFFNESS": [activate_stiffness, True, "act", False],#
+            "ROBOTEMOTION": [change_emotion_expression, False, "emo", False],
             #TabletServices-------------------------------------------------------
             "TABLETON": [tablet_on, True, "act", False],
             "WAKETABLET": [wake_tablet, True, "act", False],
@@ -959,6 +962,66 @@ class Robot:
     def isResponseSaved(self, fun):
         return self.__modules.get(fun)[3]
 
+#----------------------------------------------------------------------------Emotion class---------------------------------------------------------------------------------------------    
+"""--------------------------------------------------------------------------Emotion class---------------------------------------------------------------------------------------------"""
+#----------------------------------------------------------------------------Emotion class---------------------------------------------------------------------------------------------
+
+class Emotion:
+    def __init__(self):
+        self.__toneSpeech = 1.1
+        self.__ledR = 1
+        self.__ledG = 1
+        self.__ledB = 1
+        self.__ledIntensity = 1
+        self.__factorVelocity = 0.0
+        self.__velocitySpeech = 100
+
+    #Getters
+
+    def getToneSpeech(self):
+        return self.__toneSpeech
+
+    def getLedR(self):
+        return self.__ledR
+
+    def getLedG(self):
+        return self.__ledG   
+
+    def getLedB(self):
+        return self.__ledB  
+
+    def getLedIntensity(self):
+        return self.__ledIntensity 
+
+    def getFactorVelocity(self):
+        return self.__factorVelocity 
+
+    def getVelocitySpeech(self):
+        return self.__velocitySpeech 
+
+    #Setters
+
+    def setToneSpeech(self, tone):
+        self.__toneSpeech = tone
+
+    def setLedR(self, ledR):
+        self.__ledR = ledR
+
+    def setLedG(self, ledG):
+        self.__ledG = ledG   
+
+    def setLedB(self, ledB):
+        self.__ledB = ledB  
+
+    def setLedIntensity(self, ledIntensity ):
+        self.__ledIntensity = ledIntensity  
+
+    def setFactorVelocity(self, factorVelocity):
+        self.__factorVelocity = factorVelocity
+
+    def setVelocitySpeech(self, velocitySpeech ):
+        self.__velocitySpeech = velocitySpeech
+    
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
@@ -980,7 +1043,7 @@ class pepperModule(ALModule):
     client.close() 
     """
     #print("send ", msg_to_send)
-    json_creator(-1, responseTypeBESAFunction(key), getParams(key, value))
+    #json_creator(-1, responseTypeBESAFunction(key), getParams(key, value))
     
     #send(msg_to_send)
     print "datachanged:", key, " value:", value, " message:", message
