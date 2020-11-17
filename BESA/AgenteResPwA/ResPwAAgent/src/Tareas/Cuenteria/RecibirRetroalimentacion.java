@@ -35,7 +35,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         //buscar texto
         infoServicio.put("SAY", "AskRetroCuento");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
         
     }
 
@@ -45,7 +45,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -55,7 +55,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

@@ -37,6 +37,13 @@ public class PepperEModel extends EmotionalModel{
         this.refreshRate = 0;
         this.normalState = normalState;
     }
+
+    @Override
+    public Map<String, Object> filterFromEM(Map<String, Object> map) {
+        Map<String,Object> map2= new HashMap<>();
+        map2.putAll(map);
+        return map2;
+    }
     
     protected enum EmoTypes{
         EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);

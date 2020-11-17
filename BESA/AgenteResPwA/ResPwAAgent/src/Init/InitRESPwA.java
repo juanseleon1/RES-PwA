@@ -60,13 +60,15 @@ public class InitRESPwA {
     public static String emf= "ResPwAEntitiesPU";
     private static int PLANID = 0;
     private static final double predefEmoState=2.3;
+    
     public static void main(String[] args) {
        try {
             String cedula=obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
-            RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula);
-            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), new PepperEModel(predefEmoState));
+            PepperEModel emoModel = new PepperEModel(predefEmoState);
+            RobotAgentBDI RABDI= new RobotAgentBDI(aliasRobotAgent,createRobotAgentGoals(),cedula, emoModel);
+            EmotionalAnalyzerAgent EAA= new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), emoModel );
             SensorHandlerAgent SHA= new SensorHandlerAgent(aliasSHAAgent);
             PepperAdapter p=new PepperAdapter();
             RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);

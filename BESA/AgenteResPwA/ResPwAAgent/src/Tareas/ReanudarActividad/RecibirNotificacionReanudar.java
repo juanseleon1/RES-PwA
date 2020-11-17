@@ -36,10 +36,10 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-        requestService(srb);
+        requestService(srb,blvs);
         
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.WAKETABLET, null);
-        requestService(srb);
+        requestService(srb,blvs);
         
         //boostActividadActual
         
@@ -51,10 +51,10 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
-        requestService(srb);
+        requestService(srb,blvs);
         
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -63,10 +63,10 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
-        requestService(srb);
+        requestService(srb,blvs);
         
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override

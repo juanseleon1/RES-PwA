@@ -33,7 +33,7 @@ public class ActivarLetra extends ResPwaTask{
         if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
             infoServicio.put("ACTIVATELYRICS", true);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
     }

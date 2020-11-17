@@ -38,7 +38,7 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
         ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
         
         ServiceDataRequest srb = estrategia.execStrategy();
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -57,7 +57,7 @@ public class EjecutarEstrategiaAnimar extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

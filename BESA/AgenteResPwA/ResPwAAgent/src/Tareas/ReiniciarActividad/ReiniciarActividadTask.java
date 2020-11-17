@@ -34,7 +34,7 @@ public class ReiniciarActividadTask extends ResPwaTask{
         
         //revisar esto blvs.getbEstadoActividad().getActividadActual()
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override

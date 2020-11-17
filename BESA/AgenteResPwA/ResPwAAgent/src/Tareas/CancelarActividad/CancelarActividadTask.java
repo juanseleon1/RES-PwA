@@ -37,17 +37,17 @@ public class CancelarActividadTask extends ResPwaTask{
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
 
         blvs.getbEstadoActividad().setFinalizoActividad(true);
@@ -66,17 +66,17 @@ public class CancelarActividadTask extends ResPwaTask{
             infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
             infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

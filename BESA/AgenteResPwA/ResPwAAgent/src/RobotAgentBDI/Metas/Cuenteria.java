@@ -127,5 +127,4 @@ public class Cuenteria extends GoalBDI {
         System.out.println("Meta Cuenteria evaluateViability");
         return true;
     }
-    
 }

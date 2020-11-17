@@ -38,7 +38,7 @@ public class ReproducirCuento extends ResPwaTask{
         
         infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ReproducirCuento extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -57,7 +57,7 @@ public class ReproducirCuento extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
