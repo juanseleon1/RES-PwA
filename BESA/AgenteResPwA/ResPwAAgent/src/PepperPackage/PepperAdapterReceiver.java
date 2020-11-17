@@ -12,8 +12,10 @@ import SensorHandlerAgent.SensorDataType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
@@ -43,8 +45,9 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         {
             try {
                 Socket s=ss.accept();
-                DataInputStream  in = new DataInputStream(s.getInputStream());
-                String json = in.readUTF();
+                //DataInputStream  in = new DataInputStream(s.getInputStream());
+                BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                String json = in.readLine(); 
              Thread t1= new Thread(){
                 @Override
                 public void run()
