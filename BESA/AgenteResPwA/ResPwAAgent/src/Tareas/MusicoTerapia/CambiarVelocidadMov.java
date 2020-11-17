@@ -39,7 +39,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
             infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
             infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
     }
@@ -50,7 +50,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -60,7 +60,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

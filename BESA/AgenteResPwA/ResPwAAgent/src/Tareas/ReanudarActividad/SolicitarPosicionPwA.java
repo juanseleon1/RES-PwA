@@ -32,7 +32,7 @@ public class SolicitarPosicionPwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("DETECTPWA", infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot()));
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.GETFACELIST, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override

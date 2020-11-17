@@ -35,31 +35,31 @@ public class SuspenderRobot extends ResPwaTask{
         //buscar texto
         infoServicio.put("SAY", "textoDespedir");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
         infoServicio = new HashMap<>();
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
-        requestService(srb);
+        requestService(srb,blvs);
         
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SuspenderRobot extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -78,7 +78,7 @@ public class SuspenderRobot extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }        
     }
 

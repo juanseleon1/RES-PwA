@@ -33,7 +33,7 @@ public class ConversacionInicial extends ResPwaTask{
         //buscar texto "¿como estas pepito?"
         infoServicio.put("SAY", "PreguntaSentimientos");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb,rab);
         rab.getbEstadoInteraccion().setLogged(true);
         
     }
@@ -44,7 +44,7 @@ public class ConversacionInicial extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -54,7 +54,7 @@ public class ConversacionInicial extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

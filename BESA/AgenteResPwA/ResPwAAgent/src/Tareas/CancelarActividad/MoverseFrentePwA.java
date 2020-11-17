@@ -35,7 +35,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
         infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -54,7 +54,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

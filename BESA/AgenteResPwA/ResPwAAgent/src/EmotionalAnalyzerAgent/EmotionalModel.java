@@ -13,6 +13,7 @@ import Init.InitRESPwA;
 import RobotAgentBDI.ResPwaTask;
 import SensorHandlerAgent.SensorData;
 import ServiceAgentResPwA.ServiceDataRequest;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.guards.InformationFlowGuard;
@@ -25,6 +26,7 @@ import rational.services.ActivateAsynchronousServiceGuard;
 public abstract class EmotionalModel {
     public abstract void updateModel();
     public abstract void updtModelFromEvt(SensorData sd);
+    public abstract Map<String,Object> filterFromEM(Map<String,Object> map);
     protected void sendAct(EmotionalData ed) throws ExceptionBESA{
         AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
         EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),ed);

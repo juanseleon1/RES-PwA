@@ -38,7 +38,7 @@ public class MostrarFotos extends ResPwaTask{
         List<String> listUrls= listImgs.stream().map(e-> e.getUrl()).collect(Collectors.toList());
         infoServicio.put("SHOWIMG", listUrls);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
