@@ -10,6 +10,7 @@ import argparse
 global alBroker
 global activities_running
 global robot
+global emotionStateRobot
 
 def timer_activities():
     
@@ -651,8 +652,13 @@ def  activate_stiffness(params):
     return alMotion.setSmartStiffnessEnabled(params)
 
 def change_emotion_expression(params):
-    pass
-
+    emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
+    emotionStateRobot.setLedR(params.get("R"))
+    emotionStateRobot.setLedG(params.get("G"))
+    emotionStateRobot.setLedB(params.get("B"))
+    emotionStateRobot.setLedIntensity(params.get("ledIntens"))
+    emotionStateRobot.setFactorVelocity(params.get("velocidad"))
+    emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
 
 #Turn on/off the tablet screen.
 def tablet_on():
@@ -1310,8 +1316,13 @@ activities_running = {"battery": True}
 #define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
 t.start()
+
 """ Robot class declaration"""
 robot = Robot()
+
+''' Emotion class declaration '''
+emotionStateRobot = Emotion()
+
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client, args=(conn, addr))
