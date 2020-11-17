@@ -19,7 +19,6 @@ import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.Cuenteria.RecomendarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
 import Tareas.Cuenteria.SeleccionarCuento;
-import Tareas.Cuenteria.VerificarObstaculos;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -42,17 +41,13 @@ public class Cuenteria extends GoalBDI {
         RecomendarCuento recomCuento = new RecomendarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
         SeleccionarCuento sCuento = new SeleccionarCuento();
-        VerificarObstaculos vObstaculos = new VerificarObstaculos();
         
         List<String> resources = new ArrayList<>();
         List<Task> tarea = new ArrayList<>();
         Plan rolePlan = new Plan();
         
         rolePlan.addTask(sCuento);
-        rolePlan.addTask(vObstaculos);
-        
-        tarea.add(vObstaculos);
-        rolePlan.addTask(moversePwA,tarea);
+        rolePlan.addTask(moversePwA);
         
         tarea = new ArrayList<>();
         tarea.add(moversePwA);
