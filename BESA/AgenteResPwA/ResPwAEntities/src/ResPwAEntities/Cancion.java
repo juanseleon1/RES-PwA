@@ -8,6 +8,7 @@ package ResPwAEntities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -52,6 +54,8 @@ public class Cancion implements Serializable {
         @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
     @ManyToMany
     private List<PerfilPreferencia> perfilPreferenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancionNombre")
+    private List<Enriq> enriqList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false)
     private Genero generoGenero;
@@ -100,6 +104,15 @@ public class Cancion implements Serializable {
 
     public void setPerfilPreferenciaList(List<PerfilPreferencia> perfilPreferenciaList) {
         this.perfilPreferenciaList = perfilPreferenciaList;
+    }
+
+    @XmlTransient
+    public List<Enriq> getEnriqList() {
+        return enriqList;
+    }
+
+    public void setEnriqList(List<Enriq> enriqList) {
+        this.enriqList = enriqList;
     }
 
     public Genero getGeneroGenero() {

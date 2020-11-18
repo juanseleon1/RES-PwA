@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 20.2.0.167.1538
---   en:        2020-11-01 14:36:05 COT
+--   en:        2020-11-18 17:06:30 COT
 --   sitio:      Oracle Database 12cR2
 --   tipo:      Oracle Database 12cR2
 
@@ -80,9 +80,9 @@ CREATE TABLE actxpreferencia (
     actividadpwa_id            INTEGER NOT NULL,
     perfil_preferencia_cedula  VARCHAR2(30 CHAR) NOT NULL,
     activa                     NUMBER NOT NULL,
-    dificultad_dificultad      VARCHAR2(10 CHAR) NOT NULL,
     gusto                      FLOAT NOT NULL,
-    enriq                      INTEGER NOT NULL
+    enriq                      INTEGER NOT NULL,
+    dificultad_dificultad      VARCHAR2(10 CHAR)
 );
 
 ALTER TABLE actxpreferencia ADD CONSTRAINT actxpreferencia_pk PRIMARY KEY ( actividadpwa_id,
@@ -103,16 +103,16 @@ CREATE TABLE causademencia (
 ALTER TABLE causademencia ADD CONSTRAINT causademencia_pk PRIMARY KEY ( condicion );
 
 CREATE TABLE cdr (
-    memoria                         INTEGER NOT NULL,
-    orientacion                     INTEGER NOT NULL,
-    juicio                          INTEGER NOT NULL,
-    vida_social                     INTEGER NOT NULL,
-    hogar                           INTEGER NOT NULL,
-    cuidadopersonal                 INTEGER NOT NULL,
-    perfil_medico_perfilpwa_cedula  VARCHAR2(30 CHAR) NOT NULL
+    memoria               INTEGER NOT NULL,
+    orientacion           INTEGER NOT NULL,
+    juicio                INTEGER NOT NULL,
+    vida_social           INTEGER NOT NULL,
+    hogar                 INTEGER NOT NULL,
+    cuidadopersonal       INTEGER NOT NULL,
+    perfil_medico_cedula  VARCHAR2(30 CHAR) NOT NULL
 );
 
-ALTER TABLE cdr ADD CONSTRAINT cdr_pk PRIMARY KEY ( perfil_medico_perfilpwa_cedula );
+ALTER TABLE cdr ADD CONSTRAINT cdr_pk PRIMARY KEY ( perfil_medico_cedula );
 
 CREATE TABLE cuento (
     genero_genero  VARCHAR2(20 CHAR) NOT NULL,
@@ -140,10 +140,11 @@ CREATE TABLE dificultad (
 ALTER TABLE dificultad ADD CONSTRAINT dificultad_pk PRIMARY KEY ( dificultad );
 
 CREATE TABLE enriq (
-    frases_orden          INTEGER,
-    frases_cuento_nombre  VARCHAR2(15 CHAR),
-    params                VARCHAR2(20 CHAR) NOT NULL,
-    valor                 VARCHAR2(20 CHAR) NOT NULL
+    frases_orden    INTEGER,
+    frases_nombre   VARCHAR2(15 CHAR),
+    params          VARCHAR2(20 CHAR) NOT NULL,
+    valor           VARCHAR2(20 CHAR) NOT NULL,
+    cancion_nombre  VARCHAR2(20 CHAR) NOT NULL
 );
 
 ALTER TABLE enriq ADD CONSTRAINT enriq_pk PRIMARY KEY ( params );
@@ -299,7 +300,7 @@ ALTER TABLE cancion
         REFERENCES genero ( genero );
 
 ALTER TABLE cdr
-    ADD CONSTRAINT cdr_perfil_medico_fk FOREIGN KEY ( perfil_medico_perfilpwa_cedula )
+    ADD CONSTRAINT cdr_perfil_medico_fk FOREIGN KEY ( perfil_medico_cedula )
         REFERENCES perfil_medico ( perfilpwa_cedula );
 
 ALTER TABLE cuento
@@ -307,8 +308,12 @@ ALTER TABLE cuento
         REFERENCES genero ( genero );
 
 ALTER TABLE enriq
+    ADD CONSTRAINT enriq_cancion_fk FOREIGN KEY ( cancion_nombre )
+        REFERENCES cancion ( nombre );
+
+ALTER TABLE enriq
     ADD CONSTRAINT enriq_frases_fk FOREIGN KEY ( frases_orden,
-                                                 frases_cuento_nombre )
+                                                 frases_nombre )
         REFERENCES frases ( orden,
                             cuento_nombre );
 
@@ -386,7 +391,7 @@ ALTER TABLE registroactividad
 -- 
 -- CREATE TABLE                            24
 -- CREATE INDEX                             0
--- ALTER TABLE                             49
+-- ALTER TABLE                             50
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0

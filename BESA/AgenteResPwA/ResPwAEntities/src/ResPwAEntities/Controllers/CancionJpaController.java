@@ -6,6 +6,7 @@
 package ResPwAEntities.Controllers;
 
 import ResPwAEntities.Cancion;
+import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import ResPwAEntities.Tags;
 import java.util.ArrayList;
 import java.util.List;
 import ResPwAEntities.PerfilPreferencia;
+import ResPwAEntities.Enriq;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -43,6 +45,9 @@ public class CancionJpaController implements Serializable {
         if (cancion.getPerfilPreferenciaList() == null) {
             cancion.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
         }
+        if (cancion.getEnriqList() == null) {
+            cancion.setEnriqList(new ArrayList<Enriq>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -64,6 +69,12 @@ public class CancionJpaController implements Serializable {
                 attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
             }
             cancion.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
+            List<Enriq> attachedEnriqList = new ArrayList<Enriq>();
+            for (Enriq enriqListEnriqToAttach : cancion.getEnriqList()) {
+                enriqListEnriqToAttach = em.getReference(enriqListEnriqToAttach.getClass(), enriqListEnriqToAttach.getParams());
+                attachedEnriqList.add(enriqListEnriqToAttach);
+            }
+            cancion.setEnriqList(attachedEnriqList);
             em.persist(cancion);
             if (generoGenero != null) {
                 generoGenero.getCancionList().add(cancion);
@@ -76,6 +87,15 @@ public class CancionJpaController implements Serializable {
             for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : cancion.getPerfilPreferenciaList()) {
                 perfilPreferenciaListPerfilPreferencia.getCancionList().add(cancion);
                 perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
+            }
+            for (Enriq enriqListEnriq : cancion.getEnriqList()) {
+                Cancion oldCancionNombreOfEnriqListEnriq = enriqListEnriq.getCancionNombre();
+                enriqListEnriq.setCancionNombre(cancion);
+                enriqListEnriq = em.merge(enriqListEnriq);
+                if (oldCancionNombreOfEnriqListEnriq != null) {
+                    oldCancionNombreOfEnriqListEnriq.getEnriqList().remove(enriqListEnriq);
+                    oldCancionNombreOfEnriqListEnriq = em.merge(oldCancionNombreOfEnriqListEnriq);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -90,7 +110,7 @@ public class CancionJpaController implements Serializable {
         }
     }
 
-    public void edit(Cancion cancion) throws NonexistentEntityException, Exception {
+    public void edit(Cancion cancion) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -102,6 +122,20 @@ public class CancionJpaController implements Serializable {
             List<Tags> tagsListNew = cancion.getTagsList();
             List<PerfilPreferencia> perfilPreferenciaListOld = persistentCancion.getPerfilPreferenciaList();
             List<PerfilPreferencia> perfilPreferenciaListNew = cancion.getPerfilPreferenciaList();
+            List<Enriq> enriqListOld = persistentCancion.getEnriqList();
+            List<Enriq> enriqListNew = cancion.getEnriqList();
+            List<String> illegalOrphanMessages = null;
+            for (Enriq enriqListOldEnriq : enriqListOld) {
+                if (!enriqListNew.contains(enriqListOldEnriq)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Enriq " + enriqListOldEnriq + " since its cancionNombre field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (generoGeneroNew != null) {
                 generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
                 cancion.setGeneroGenero(generoGeneroNew);
@@ -120,6 +154,13 @@ public class CancionJpaController implements Serializable {
             }
             perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
             cancion.setPerfilPreferenciaList(perfilPreferenciaListNew);
+            List<Enriq> attachedEnriqListNew = new ArrayList<Enriq>();
+            for (Enriq enriqListNewEnriqToAttach : enriqListNew) {
+                enriqListNewEnriqToAttach = em.getReference(enriqListNewEnriqToAttach.getClass(), enriqListNewEnriqToAttach.getParams());
+                attachedEnriqListNew.add(enriqListNewEnriqToAttach);
+            }
+            enriqListNew = attachedEnriqListNew;
+            cancion.setEnriqList(enriqListNew);
             cancion = em.merge(cancion);
             if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
                 generoGeneroOld.getCancionList().remove(cancion);
@@ -153,6 +194,17 @@ public class CancionJpaController implements Serializable {
                     perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
                 }
             }
+            for (Enriq enriqListNewEnriq : enriqListNew) {
+                if (!enriqListOld.contains(enriqListNewEnriq)) {
+                    Cancion oldCancionNombreOfEnriqListNewEnriq = enriqListNewEnriq.getCancionNombre();
+                    enriqListNewEnriq.setCancionNombre(cancion);
+                    enriqListNewEnriq = em.merge(enriqListNewEnriq);
+                    if (oldCancionNombreOfEnriqListNewEnriq != null && !oldCancionNombreOfEnriqListNewEnriq.equals(cancion)) {
+                        oldCancionNombreOfEnriqListNewEnriq.getEnriqList().remove(enriqListNewEnriq);
+                        oldCancionNombreOfEnriqListNewEnriq = em.merge(oldCancionNombreOfEnriqListNewEnriq);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -170,7 +222,7 @@ public class CancionJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -181,6 +233,17 @@ public class CancionJpaController implements Serializable {
                 cancion.getNombre();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cancion with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            List<Enriq> enriqListOrphanCheck = cancion.getEnriqList();
+            for (Enriq enriqListOrphanCheckEnriq : enriqListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Cancion (" + cancion + ") cannot be destroyed since the Enriq " + enriqListOrphanCheckEnriq + " in its enriqList field has a non-nullable cancionNombre field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Genero generoGenero = cancion.getGeneroGenero();
             if (generoGenero != null) {
