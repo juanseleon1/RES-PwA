@@ -11,6 +11,8 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import rational.mapping.Believes;
@@ -32,6 +34,9 @@ public class RecomendarCuento extends ResPwaTask{
         System.out.println("--- Execute Task Recomendar Cuento ---");
         //buscar cuento
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
+        blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
+        
         float gusto = -1;
         Cuento cuentoEleg = null;
         List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
@@ -71,7 +76,7 @@ public class RecomendarCuento extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() && blvs.getbEstadoActividad().getCuentoActual() != null) {
             return true;
         }
         return false;

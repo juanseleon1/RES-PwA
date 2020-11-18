@@ -18,7 +18,6 @@ import Tareas.Cuenteria.MoverseFrentePwA;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.Cuenteria.RecomendarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
-import Tareas.Cuenteria.SeleccionarCuento;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -40,32 +39,27 @@ public class Cuenteria extends GoalBDI {
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         RecomendarCuento recomCuento = new RecomendarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
-        SeleccionarCuento sCuento = new SeleccionarCuento();
         
         List<String> resources = new ArrayList<>();
         List<Task> tarea = new ArrayList<>();
         Plan rolePlan = new Plan();
         
-        rolePlan.addTask(sCuento);
+        rolePlan.addTask(recomCuento);
         rolePlan.addTask(moversePwA);
         
         tarea = new ArrayList<>();
         tarea.add(moversePwA);
-        tarea.add(sCuento);
+        tarea.add(recomCuento);
         rolePlan.addTask(eEstrategia,tarea);
         
         tarea = new ArrayList<>();
-        tarea.add(sCuento);
+        tarea.add(recomCuento);
         tarea.add(moversePwA);
         rolePlan.addTask(rCuento,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(rCuento);
         rolePlan.addTask(retro,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(retro);
-        rolePlan.addTask(recomCuento,tarea);
         
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.DUTY);
@@ -91,7 +85,7 @@ public class Cuenteria extends GoalBDI {
                 return 1;
             }
         }
-        return 1;
+        return 0;
     }
 
     @Override

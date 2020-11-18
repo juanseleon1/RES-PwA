@@ -11,6 +11,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,11 +22,11 @@ import java.util.Random;
  *
  * @author mafegarces
  */
-public class SeleccionarEstrategiaAtencion extends ResPwaTask{
+public class EvaluarEstrategiaAtencion extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public SeleccionarEstrategiaAtencion() {
+    public EvaluarEstrategiaAtencion() {
 //        System.out.println("--- Task Seleccionar Estrategia Atencion Iniciada ---");
     }
     
@@ -49,6 +50,9 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         blvs.getbEstadoActividad().setEstrategia(cs);
+        
+        ServiceDataRequest srb = cs.execStrategy();
+        requestService(srb,blvs);
     }
 
     @Override
@@ -61,12 +65,16 @@ public class SeleccionarEstrategiaAtencion extends ResPwaTask{
         System.out.println("--- Cancel Task Seleccionar Estrategia Atencion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
             return true;
         }
         return false;

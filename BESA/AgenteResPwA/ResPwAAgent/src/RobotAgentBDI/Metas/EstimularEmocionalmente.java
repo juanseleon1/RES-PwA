@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
+import Tareas.EstimularEmocionalmente.EjecutarEstrategiaEstimular;
 import Init.InitRESPwA;
 import Tareas.EstimularEmocionalmente.ContinuarActividad;
 import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
@@ -37,7 +37,7 @@ public class EstimularEmocionalmente extends GoalBDI{
 
         //evaluar estado emocional
         ContinuarActividad continuarActividad = new ContinuarActividad();
-        EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
+        EjecutarEstrategiaEstimular ejecutarEstrategia = new EjecutarEstrategiaEstimular();
         InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();
         SeleccionarEstrategiaEmocional seleccionarEstrategiaE = new SeleccionarEstrategiaEmocional();
         RetroalimentarBDI retroalimentar = new RetroalimentarBDI();
