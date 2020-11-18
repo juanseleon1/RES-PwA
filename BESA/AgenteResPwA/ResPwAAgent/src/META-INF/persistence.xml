@@ -5,7 +5,6 @@
     <class>ResPwAEntities.Actividadpwa</class>
     <class>ResPwAEntities.Actividadrutinaria</class>
     <class>ResPwAEntities.Actxpreferencia</class>
-    <class>ResPwAEntities.Books</class>
     <class>ResPwAEntities.Cancion</class>
     <class>ResPwAEntities.Causademencia</class>
     <class>ResPwAEntities.Cdr</class>
@@ -23,11 +22,13 @@
     <class>ResPwAEntities.Perfilpwa</class>
     <class>ResPwAEntities.Registroactividad</class>
     <class>ResPwAEntities.Tags</class>
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
       <property name="javax.persistence.jdbc.user" value="is784921"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="javax.persistence.jdbc.password" value="wAGs3vfUQ0"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

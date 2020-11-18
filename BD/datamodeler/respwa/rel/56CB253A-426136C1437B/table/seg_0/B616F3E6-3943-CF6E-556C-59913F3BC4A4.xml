@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B616F3E6-3943-CF6E-556C-59913F3BC4A4" name="PreferenciaXCuento">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Perfil_Preferencia_PerfilPwa_cedula" id="70F18E5C-4AD4-F11C-7F47-6E9912A95AA2">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7FAA00AA-1FC2-A20B-CD44-7E192CCF217A" referredColumn="47AF0FCA-48CC-08CB-6C55-0627729CF277"/>
+</associations>
+</Column>
+<Column name="Cuento_nombre" id="BF044EB2-1CFC-77F3-0125-97A27C4A40D1">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="16B153C4-E4D5-A857-734E-8C8A1FD14D15" referredColumn="4B1C7E16-0676-08A1-038A-2B260AADFA0D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2C57C612-81BA-6804-C7D7-EC98F7003DAC" name="PreferenciaXCuento_PK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="70F18E5C-4AD4-F11C-7F47-6E9912A95AA2"/>
+<colUsage columnID="BF044EB2-1CFC-77F3-0125-97A27C4A40D1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="024329A3-FF80-0CDD-F2E1-B6428DD6032E" name="PreferenciaXCuento_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<generatorID>697EA809-6745-4776-9700-3EF616416ED2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="70F18E5C-4AD4-F11C-7F47-6E9912A95AA2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="57FA7A2C-E049-29F7-CB8A-09721BBDCA7E" name="PreferenciaXCuento_Cuento_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:35 UTC</createdTime>
+<generatorID>697EA809-6745-4776-9700-3EF616416ED2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BF044EB2-1CFC-77F3-0125-97A27C4A40D1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

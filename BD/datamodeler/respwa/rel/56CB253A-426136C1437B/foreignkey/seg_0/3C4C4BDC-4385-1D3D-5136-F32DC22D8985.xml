@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="3C4C4BDC-4385-1D3D-5136-F32DC22D8985" containerWithKeyObject="B250A208-5D20-9965-A64C-852F23DE4F3D" localFKIndex="AACAE5B6-D5E9-66FE-3C0D-D4D5189CC2A6" name="Perfil_Medico_CausaDemencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:15:36 UTC</createdTime>
+<generatorID>137D48F6-359A-2C69-6178-0014EA818688</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>CausaDemencia</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0CD22C30-BC13-C270-4133-820E65E67DF1</referredTableID>
+<keyObject>1673C800-C9A8-C754-DBBA-7275158DD84F</keyObject>
+<referredKeyID>1673C800-C9A8-C754-DBBA-7275158DD84F</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>condicion</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

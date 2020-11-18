@@ -62,7 +62,7 @@ public class PerfilMedicoJpaController implements Serializable {
             em.getTransaction().begin();
             Cdr cdr = perfilMedico.getCdr();
             if (cdr != null) {
-                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoPerfilpwaCedula());
+                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoCedula());
                 perfilMedico.setCdr(cdr);
             }
             Causademencia causademenciaCondicion = perfilMedico.getCausademenciaCondicion();
@@ -155,7 +155,7 @@ public class PerfilMedicoJpaController implements Serializable {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (cdrNew != null) {
-                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoPerfilpwaCedula());
+                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoCedula());
                 perfilMedico.setCdr(cdrNew);
             }
             if (causademenciaCondicionNew != null) {
