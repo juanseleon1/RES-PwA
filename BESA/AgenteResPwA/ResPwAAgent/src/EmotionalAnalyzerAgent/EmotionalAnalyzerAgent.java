@@ -26,7 +26,7 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
 
     public static String ProcessEmotionGuard= "ProcessEmotionGuard";
     public static String updtEmotionGuard= "updtEmotionGuard";
-    private static long PERIODIC_TIME=5000;
+    private static long PERIODIC_TIME=15000;
     public EmotionalAnalyzerAgent(String alias, EmotionalAnalyzerStrategy eas,EmotionalModel em) throws KernelAgentExceptionBESA {
         super(alias, new EmotionalAnalyzerState(eas,em), buildEAStruct(), 0.96);
         System.out.println("EmotionalAnalyzerAgent Iniciado");
