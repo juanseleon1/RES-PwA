@@ -11,7 +11,6 @@ import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorData;
-import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import Tareas.Cuenteria.LedsColor;
