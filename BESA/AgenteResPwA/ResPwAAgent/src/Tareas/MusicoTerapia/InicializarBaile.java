@@ -38,7 +38,7 @@ public class InicializarBaile extends ResPwaTask{
             infoServicio.put("RADIO", 0.5);
             infoServicio.put("DISTANCIAMAX", 0.5);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-            requestService(srb);   
+            requestService(srb,blvs);   
         }
     }
 

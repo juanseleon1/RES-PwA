@@ -23,8 +23,8 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class PausarInteraccion extends GoalBDI{
-    
+public class PausarInteraccion extends GoalBDI {
+
     private static String descrip = "PausarInteraccion";
 
     public static PausarInteraccion buildGoal() {
@@ -32,15 +32,16 @@ public class PausarInteraccion extends GoalBDI{
         PausarActividad pausarActividad = new PausarActividad();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        
-        Plan rolePlan= new Plan();
+
+        Plan rolePlan = new Plan();
 
         rolePlan.addTask(pausarActividad);
 
         RationalRole PaIntRole = new RationalRole(descrip, rolePlan);
-        PausarInteraccion b= new PausarInteraccion(InitRESPwA.getPlanID(), PaIntRole, descrip, GoalBDITypes.DUTY);
+        PausarInteraccion b = new PausarInteraccion(InitRESPwA.getPlanID(), PaIntRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+
     public PausarInteraccion(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         //System.out.println("Meta PausarInteraccion created");
@@ -55,17 +56,16 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta PausarInteraccion detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
+
         //3 min
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if(blvs.getbEstadoInteraccion().isPausarInt() || blvs.getbEstadoInteraccion().getTiempoSinInt()/60 > 3) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoInteraccion().isPausarInt() || blvs.getbEstadoInteraccion().getTiempoSinInt() / 60 > 3) {
+                return 1.0;
+            }
         }
-        }
-        
-        
+
         return 0;
     }
 
@@ -78,7 +78,7 @@ public class PausarInteraccion extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta PausarInteraccion evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostPausarInteraccion();
     }
 
@@ -93,5 +93,5 @@ public class PausarInteraccion extends GoalBDI{
         System.out.println("Meta PausarInteraccion goalSucceeded");
         return true;
     }
-    
+
 }

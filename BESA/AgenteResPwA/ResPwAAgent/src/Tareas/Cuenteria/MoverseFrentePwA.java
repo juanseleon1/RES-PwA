@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
@@ -31,10 +32,18 @@ public class MoverseFrentePwA extends ResPwaTask{
         System.out.println("--- Execute Task Moverse Frente PwA ---");
         //parametros desde naoqi
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        infoServicio.put("RADIO", 0.5);
+        infoServicio.put("DISTANCIAMAX", 0.5);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        requestService(srb,blvs);
+        
+        infoServicio = new HashMap<>();
         infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
         infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
-        requestService(srb);
+        srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
+        requestService(srb,blvs);
+
     }
 
     @Override
@@ -43,7 +52,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -53,7 +62,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

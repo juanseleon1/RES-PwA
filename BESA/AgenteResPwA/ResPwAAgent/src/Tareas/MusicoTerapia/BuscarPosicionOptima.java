@@ -33,7 +33,7 @@ public class BuscarPosicionOptima extends ResPwaTask{
         infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
         infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override

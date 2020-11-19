@@ -34,7 +34,7 @@ public class PreguntarActividad extends ResPwaTask{
         //buscar texto
         infoServicio.put("SAY", "AskActivity");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PreguntarActividad extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -53,7 +53,7 @@ public class PreguntarActividad extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

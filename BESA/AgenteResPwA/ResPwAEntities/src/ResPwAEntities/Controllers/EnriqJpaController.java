@@ -5,14 +5,15 @@
  */
 package ResPwAEntities.Controllers;
 
-import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
-import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
-import ResPwAEntities.Enriq;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ResPwAEntities.Cancion;
+import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
+import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
+import ResPwAEntities.Enriq;
 import ResPwAEntities.Frases;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -38,12 +39,21 @@ public class EnriqJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Cancion cancionNombre = enriq.getCancionNombre();
+            if (cancionNombre != null) {
+                cancionNombre = em.getReference(cancionNombre.getClass(), cancionNombre.getNombre());
+                enriq.setCancionNombre(cancionNombre);
+            }
             Frases frases = enriq.getFrases();
             if (frases != null) {
                 frases = em.getReference(frases.getClass(), frases.getFrasesPK());
                 enriq.setFrases(frases);
             }
             em.persist(enriq);
+            if (cancionNombre != null) {
+                cancionNombre.getEnriqList().add(enriq);
+                cancionNombre = em.merge(cancionNombre);
+            }
             if (frases != null) {
                 frases.getEnriqList().add(enriq);
                 frases = em.merge(frases);
@@ -67,13 +77,27 @@ public class EnriqJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Enriq persistentEnriq = em.find(Enriq.class, enriq.getParams());
+            Cancion cancionNombreOld = persistentEnriq.getCancionNombre();
+            Cancion cancionNombreNew = enriq.getCancionNombre();
             Frases frasesOld = persistentEnriq.getFrases();
             Frases frasesNew = enriq.getFrases();
+            if (cancionNombreNew != null) {
+                cancionNombreNew = em.getReference(cancionNombreNew.getClass(), cancionNombreNew.getNombre());
+                enriq.setCancionNombre(cancionNombreNew);
+            }
             if (frasesNew != null) {
                 frasesNew = em.getReference(frasesNew.getClass(), frasesNew.getFrasesPK());
                 enriq.setFrases(frasesNew);
             }
             enriq = em.merge(enriq);
+            if (cancionNombreOld != null && !cancionNombreOld.equals(cancionNombreNew)) {
+                cancionNombreOld.getEnriqList().remove(enriq);
+                cancionNombreOld = em.merge(cancionNombreOld);
+            }
+            if (cancionNombreNew != null && !cancionNombreNew.equals(cancionNombreOld)) {
+                cancionNombreNew.getEnriqList().add(enriq);
+                cancionNombreNew = em.merge(cancionNombreNew);
+            }
             if (frasesOld != null && !frasesOld.equals(frasesNew)) {
                 frasesOld.getEnriqList().remove(enriq);
                 frasesOld = em.merge(frasesOld);
@@ -110,6 +134,11 @@ public class EnriqJpaController implements Serializable {
                 enriq.getParams();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The enriq with id " + id + " no longer exists.", enfe);
+            }
+            Cancion cancionNombre = enriq.getCancionNombre();
+            if (cancionNombre != null) {
+                cancionNombre.getEnriqList().remove(enriq);
+                cancionNombre = em.merge(cancionNombre);
             }
             Frases frases = enriq.getFrases();
             if (frases != null) {

@@ -11,7 +11,6 @@ import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorData;
-import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import Tareas.Cuenteria.LedsColor;
@@ -36,6 +35,13 @@ public class PepperEModel extends EmotionalModel{
         this.state = normalState;
         this.refreshRate = 0;
         this.normalState = normalState;
+    }
+
+    @Override
+    public Map<String, Object> filterFromEM(Map<String, Object> map) {
+        Map<String,Object> map2= new HashMap<>();
+        map2.putAll(map);
+        return map2;
     }
     
     protected enum EmoTypes{

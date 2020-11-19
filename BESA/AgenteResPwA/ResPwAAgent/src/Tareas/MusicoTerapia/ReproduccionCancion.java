@@ -43,7 +43,7 @@ public class ReproduccionCancion extends ResPwaTask {
             String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-            requestService(srb);
+            requestService(srb,blvs);
         } else {
 
             List<Tags> tags = blvs.getbEstadoActividad().getCancionActual().getTagsList();
@@ -64,13 +64,13 @@ public class ReproduccionCancion extends ResPwaTask {
             infoServicio = new HashMap<>();
             infoServicio.put("SHOWIMG", imagenesFinal);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
-            requestService(srb);
+            requestService(srb,blvs);
             
             infoServicio = new HashMap<>();
             String cancion = AudioUtils.getCancion("Feliz cumpleaños");
             infoServicio.put("PLAYSOUND", cancion);
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

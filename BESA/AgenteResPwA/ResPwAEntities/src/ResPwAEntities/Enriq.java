@@ -39,9 +39,12 @@ public class Enriq implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALOR")
     private String valor;
+    @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")
+    @ManyToOne(optional = false)
+    private Cancion cancionNombre;
     @JoinColumns({
         @JoinColumn(name = "FRASES_ORDEN", referencedColumnName = "ORDEN")
-        , @JoinColumn(name = "FRASES_CUENTO_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
+        , @JoinColumn(name = "FRASES_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
     @ManyToOne
     private Frases frases;
 
@@ -71,6 +74,14 @@ public class Enriq implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public Cancion getCancionNombre() {
+        return cancionNombre;
+    }
+
+    public void setCancionNombre(Cancion cancionNombre) {
+        this.cancionNombre = cancionNombre;
     }
 
     public Frases getFrases() {

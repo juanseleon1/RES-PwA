@@ -4,7 +4,7 @@
 <createdTime>2020-10-30 18:11:25 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,8 +21,9 @@
 <generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>F6AC9C1B-485C-06BD-A895-CA7723E127BE</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -35,21 +36,22 @@
 <generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="params" id="38634DED-B554-A1BF-C12E-C371CF7A9013">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-30 18:12:27 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -62,7 +64,7 @@
 <createdTime>2020-10-30 18:12:44 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -70,21 +72,33 @@
 <dataTypeSize>20 CHAR</dataTypeSize>
 <ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="nombre1" id="540BB1C9-27C5-9C50-8E39-C726A28339A8">
+<createdBy>juans</createdBy>
+<createdTime>2020-11-18 21:09:06 UTC</createdTime>
+<generatorID>3DA2B762-6728-A608-CF1B-F26DC6F6C3F3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<referedAttribute>4760F22E-8822-B9CA-4471-25D53FFBBB60</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="A761E129-5E72-EA15-73D1-95C3BA1B6C79" name="enriq PK">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-30 18:12:37 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>38634DED-B554-A1BF-C12E-C371CF7A9013</attributeRef>
-<attributeRef>292D868B-A408-E982-4D9E-3D7286561811</attributeRef>
-<attributeRef>E53C8163-9B89-A717-B76D-FD1F45E50CB1</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

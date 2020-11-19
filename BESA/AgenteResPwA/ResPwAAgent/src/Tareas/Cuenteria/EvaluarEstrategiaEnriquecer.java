@@ -43,10 +43,8 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
             es.setNombre((int)num);
             blvs.getbEstadoActividad().setEstrategia(es);
         
-            ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        
-            ServiceDataRequest srb = estrategia.execStrategy(parameters);
-            requestService(srb);
+            ServiceDataRequest srb = es.execStrategy(parameters);
+            requestService(srb,blvs);
         }        
         
         //propiedades voz(tono,etc) en blvs
@@ -61,15 +59,15 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 
@@ -80,15 +78,15 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
         blvs.getbEstadoActividad().setEstrategia(null);
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
-            requestService(srb);
+            requestService(srb,blvs);
         }
     }
 

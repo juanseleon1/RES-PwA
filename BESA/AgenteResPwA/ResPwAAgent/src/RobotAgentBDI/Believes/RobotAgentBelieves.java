@@ -6,6 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.EmotionalModel;
 import ResPwaUtils.FBaseUtils;
 import ResPwaUtils.Imagen;
 import SensorHandlerAgent.SensorData;
@@ -29,12 +30,14 @@ public class RobotAgentBelieves implements Believes {
     private BEstadoRobot bEstadoRobot = new BEstadoRobot();
     private Map<String, List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
+    private EmotionalModel em;
 
-    public RobotAgentBelieves(String cedula) {
+    public RobotAgentBelieves(String cedula, EmotionalModel em) {
         imgCuentos = new HashMap<>();
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
+        this.em=em;
         getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
     }
@@ -151,4 +154,13 @@ public class RobotAgentBelieves implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         return this;
     }
+
+    public EmotionalModel getEm() {
+        return em;
+    }
+
+    public void setEm(EmotionalModel em) {
+        this.em = em;
+    }
+    
 }
