@@ -41,6 +41,38 @@ public class PepperEModel extends EmotionalModel{
     public Map<String, Object> filterFromEM(Map<String, Object> map) {
         Map<String,Object> map2= new HashMap<>();
         map2.putAll(map);
+        double velf=0,velh=0,pitch=0,ledInt=0;
+        String s="";
+        if(map.containsKey(PepperEMParams.HVel.getTipo()))
+        {
+            velh=(double) map.get(PepperEMParams.HVel.getTipo());
+            map.replace(PepperEMParams.HVel.getTipo(), velh);
+        }
+        if(map.containsKey(PepperEMParams.FVel.getTipo()))
+        {
+            velh=(double) map.get(PepperEMParams.FVel.getTipo());
+            map.replace(PepperEMParams.FVel.getTipo(), velf);
+        }
+        if(map.containsKey(PepperEMParams.LEDINT.getTipo()))
+        {
+            velh=(double) map.get(PepperEMParams.LEDINT.getTipo());
+            map.replace(PepperEMParams.LEDINT.getTipo(), ledInt);
+        }
+        if(map.containsKey(PepperEMParams.TONOH.getTipo()))
+        {
+            velh=(double) map.get(PepperEMParams.TONOH.getTipo());
+            map.replace(PepperEMParams.TONOH.getTipo(), pitch);
+        }
+        if(map.containsKey(PepperEMParams.ANIMSTATE.getTipo()))
+        {
+            
+            s=(String) map.get(PepperEMParams.ANIMSTATE.getTipo());
+            map.replace(PepperEMParams.ANIMSTATE.getTipo(), s);
+        }
+        map.put("factorVelocidad", velf);
+        map.put("velHabla", velh);
+        map.put("tonoHabla", pitch);
+        map.put("ledIntens", ledInt);
         return map2;
     }
     
@@ -129,7 +161,8 @@ public class PepperEModel extends EmotionalModel{
         map.put("atencion",atval);
         map.put("predEm", emoP);
         calcNewEmotionalParams(map);
-    }//mariela angela
+    }
+    
     private void calcNewEmotionalParams(Map<String, Object> map) {
         LedsColor lc=null;
         double velf=0,velh=0,pitch=0,ledInt=0;
@@ -154,7 +187,6 @@ public class PepperEModel extends EmotionalModel{
         pitch=(speechBase*state)/normalState;
         ledInt=(speechVBase*state)/normalState;
         //x= baseV*actual/baseE
-        
         map.put("LEDS", lc.name());
         map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
@@ -168,7 +200,7 @@ public class PepperEModel extends EmotionalModel{
         map2.put("B",lc.getB() );
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
         requestService(srb);
-    }   
+    }
 
     
 }
