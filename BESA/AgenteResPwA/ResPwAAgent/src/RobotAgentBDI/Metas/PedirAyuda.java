@@ -23,8 +23,8 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class PedirAyuda extends GoalBDI{
-    
+public class PedirAyuda extends GoalBDI {
+
     private static String descrip = "PedirAyuda";
 
     public static PedirAyuda buildGoal() {
@@ -32,13 +32,13 @@ public class PedirAyuda extends GoalBDI{
         PeticionAyuda peticionAyuda = new PeticionAyuda();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        
-        Plan rolePlan= new Plan();
+
+        Plan rolePlan = new Plan();
 
         rolePlan.addTask(peticionAyuda); //dar respuesta a PwA
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
-        PedirAyuda b= new PedirAyuda(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        PedirAyuda b = new PedirAyuda(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 
@@ -56,15 +56,14 @@ public class PedirAyuda extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta PedirAyuda detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
-        {
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
             if (blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
-            return 1.0;
+                return 1.0;
+            }
         }
-        }
-        
+
         return 0;
     }
 
@@ -77,7 +76,7 @@ public class PedirAyuda extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta PedirAyuda evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostPedirAyuda();
     }
 
@@ -92,5 +91,5 @@ public class PedirAyuda extends GoalBDI{
         System.out.println("Meta PedirAyuda goalSucceeded");
         return true;
     }
-    
+
 }

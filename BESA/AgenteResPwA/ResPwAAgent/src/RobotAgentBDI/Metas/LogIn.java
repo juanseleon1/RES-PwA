@@ -85,7 +85,7 @@ public class LogIn extends GoalBDI{
             return 1.0;
         }
         
-        return 1.0;
+        return 0;
     }
 
     @Override

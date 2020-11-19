@@ -13,7 +13,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.EjecutarEstrategiaConversar;
-import Tareas.ConversarEmpaticamente.SeleccionarEstrategiaConversar;
+import Tareas.ConversarEmpaticamente.EvaluarEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,21 +34,16 @@ public class ConversarEmpaticamente extends GoalBDI{
 
         //evaluar estado emocional
         PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
-        SeleccionarEstrategiaConversar seleccionarEstrategiaC = new SeleccionarEstrategiaConversar();
-        EjecutarEstrategiaConversar ejecutarEstrategiaC = new EjecutarEstrategiaConversar();
+        EvaluarEstrategiaConversar evaluarEstrategiaC = new EvaluarEstrategiaConversar();
     
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan();
 
         rolePlan.addTask(preguntarSentimientos);
-        tarea= new ArrayList<>();
+        
         tarea.add(preguntarSentimientos);
-        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(seleccionarEstrategiaC,tarea);
-        tarea.add(seleccionarEstrategiaC);
-        tarea= new ArrayList<>();
-        rolePlan.addTask(ejecutarEstrategiaC,tarea);
+        rolePlan.addTask(evaluarEstrategiaC,tarea);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
         ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);

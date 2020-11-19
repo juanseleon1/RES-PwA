@@ -23,12 +23,12 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class SeleccionarEstrategiaAnimar extends ResPwaTask{
+public class EvaluarEstrategiaAnimar extends ResPwaTask{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
 
-    public SeleccionarEstrategiaAnimar() {
+    public EvaluarEstrategiaAnimar() {
 //        System.out.println("--- Task Seleccionar Estrategia Animar PwA Iniciada ---");
     }
     
@@ -46,6 +46,9 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         blvs.getbEstadoActividad().setEstrategia(as);
+        
+        ServiceDataRequest srb = as.execStrategy();
+        requestService(srb,blvs);
     }
 
     @Override
@@ -58,12 +61,16 @@ public class SeleccionarEstrategiaAnimar extends ResPwaTask{
         System.out.println("--- Cancel Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {
             return true;
         }
         return false;

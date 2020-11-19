@@ -43,9 +43,7 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
             es.setNombre((int)num);
             blvs.getbEstadoActividad().setEstrategia(es);
         
-            ResPwAStrategy estrategia = blvs.getbEstadoActividad().getEstrategia();
-        
-            ServiceDataRequest srb = estrategia.execStrategy(parameters);
+            ServiceDataRequest srb = es.execStrategy(parameters);
             requestService(srb,blvs);
         }        
         
