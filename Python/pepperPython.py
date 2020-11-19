@@ -14,12 +14,11 @@ global emotionStateRobot
 
 def timer_activities():
     
-    for key, value in activities_running.items():
-        if value == True:
-            print (key, value)
-            #create Json message
-            #send the message to BESA
-            send( -1, key, value)
+    for key, value in activities_running.items():      
+        #print (key, value)
+        #create Json message
+        #send the message to BESA
+        send( value.getIdResponse(), key, value.getParams())
             
     t = threading.Timer(10.0, timer_activities).start()
 
@@ -83,7 +82,7 @@ def handle_client(conn, addr):
     #random_eyes(2.0f)
     #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
     #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
-    activate_stiffness(True)
+    #activate_stiffness(True)
 
     #pause_sound(idSound)
     #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
@@ -347,19 +346,26 @@ def callFunction(jsonObj):
     params = jsonObj["params"]
 
     if params == None:
-        function()
-    elif function != None:
-        function(params)
+        return_value = function()
+    else:
+        return_value = function(params)
         
     if robot.getAck(jsonObj["methodName"]):
         ack_param = {}
-        ack_param[jsonObj["methodName"]] = True
+        if return_value != None:
+            ack_param[jsonObj["methodName"]] = return_value
+        else:
+            ack_param[jsonObj["methodName"]] = True
+        
         send( jsonObj["id"], robot.getType(jsonObj["methodName"]), ack_param)
 
     response_type = robot.getType(jsonObj["methodName"])
 
     if response_type != None:
         robot_activity = messageManager(jsonObj["id"], response_type)
+        activity_params = {}
+        activity_params[jsonObj["methodName"]] = True
+        robot_activity.setParams(activity_params)
         activities_running[jsonObj["methodName"]] = robot_activity
     
 
