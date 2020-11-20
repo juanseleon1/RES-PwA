@@ -14,12 +14,11 @@ global emotionStateRobot
 
 def timer_activities():
     
-    for key, value in activities_running.items():
-        if value == True:
-            print (key, value)
-            #create Json message
-            #send the message to BESA
-            send( -1, key, value)
+    for key, value in activities_running.items():      
+        #print (key, value)
+        #create Json message
+        #send the message to BESA
+        send( value.getIdResponse(), key, value.getParams())
             
     t = threading.Timer(10.0, timer_activities).start()
 
@@ -43,7 +42,7 @@ def handle_client(conn, addr):
     #msg_length = len(jsonObj)
     #msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
     
-    #callFunction(jsonObj)
+    callFunction(jsonObj)
     
     #if learn_face("Brayan"):
     #hablar(jsonObj["methodName"],100)
@@ -83,7 +82,7 @@ def handle_client(conn, addr):
     #random_eyes(2.0f)
     #set_leds_intensity("LeftFaceLedsGreen", 0.5)++++++++++++++++++++++                              ########
     #change_led_color("AllLeds", 0, 0, 0, 0.5 )                             ########
-    activate_stiffness(True)
+    #activate_stiffness(True)
 
     #pause_sound(idSound)
     #play_sound("D:\ASUS\Music\Proyectos de video\when-stars-and-salt-collide-coldplay-a-sky-full-of-stars-pianocello-cover-the-piano-guys.mp3")
@@ -343,22 +342,30 @@ def json_creator(id_response, responseType, params):
 
 def callFunction(jsonObj):
 
-    function = message_manage(jsonObj["methodName"])
+    function = robot.getFunction(jsonObj["methodName"])
     params = jsonObj["params"]
 
     if params == None:
-        function()
-    elif function != None:
-        function(params)
+        return_value = function()
+    else:
+        return_value = function(params)
         
     if robot.getAck(jsonObj["methodName"]):
-        ack_param[jsonObj["methodName"]] = True
+        ack_param = {}
+        if return_value != None:
+            ack_param[jsonObj["methodName"]] = return_value
+        else:
+            ack_param[jsonObj["methodName"]] = True
+        
         send( jsonObj["id"], robot.getType(jsonObj["methodName"]), ack_param)
 
-    response_type = robot.getType()
+    response_type = robot.getType(jsonObj["methodName"])
 
     if response_type != None:
         robot_activity = messageManager(jsonObj["id"], response_type)
+        activity_params = {}
+        activity_params[jsonObj["methodName"]] = True
+        robot_activity.setParams(activity_params)
         activities_running[jsonObj["methodName"]] = robot_activity
     
 
@@ -378,7 +385,7 @@ def getAttention():
     return alMood.attention()
     
 # Choregraphe bezier export in Python.
-def dance_macarena( factor ):
+def dance_macarena( factor = 1 ):
     # Choregraphe bezier export in Python.
     names = list()
     times = list()
@@ -457,6 +464,7 @@ def dance_macarena( factor ):
       # motion = ALProxy("ALMotion", IP, 9559)
       #motion = ALProxy("ALMotion")
       #motion.angleInterpolationBezier(names, times, keys)
+      map(lambda i: i * factor, times)
       play_animation(names, times, keys)
     except BaseException, err:
       print err
@@ -648,10 +656,10 @@ def change_led_color(sensor, red_color, green_color, blue_color, duration):
 #Enable or Disable the smart stiffness reflex for all the joints (True by default).
 #The update takes one motion cycle.
 def  activate_stiffness(params):
-    enabled = bool(params.get("ACTIVATESTIFFNESS"))
     return alMotion.setSmartStiffnessEnabled(params)
 
 def change_emotion_expression(params):
+    print ("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
     emotionStateRobot.setLedR(params.get("R"))
     emotionStateRobot.setLedG(params.get("G"))
@@ -659,6 +667,12 @@ def change_emotion_expression(params):
     emotionStateRobot.setLedIntensity(params.get("ledIntens"))
     emotionStateRobot.setFactorVelocity(params.get("velocidad"))
     emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
+    print("R: ", emotionStateRobot.getLedR(), "G: ", emotionStateRobot.getLedG(), "B: ", emotionStateRobot.getLedB() )
+    change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 1.0)
+    set_leds_intensity("AllLeds", emotionStateRobot.getLedIntensity())
+    
+
+
 
 #Turn on/off the tablet screen.
 def tablet_on():
@@ -714,7 +728,11 @@ def set_tablet_volume(volume):
     alTabletService.setVolume(volume)
 
 #Says the specified string of characters.
-def say(params, speed=100, pitch=1.1):
+def say(params, speed=None, pitch=None):
+    if speed == None:
+        speed = emotionStateRobot.getVelocitySpeech()
+    if pitch == None:
+        pitch = emotionStateRobot.getToneSpeech()
     alTexToSpeech.setParameter("speed", speed)
     alTexToSpeech.setParameter("pitchShift", pitch)
     alTexToSpeech.say(params.get("SAY"))
@@ -791,7 +809,12 @@ def set_topic_focus(topicName):
 
 
     
-def hablar(text_to_speech, speed=100, pitch=1.1):
+def hablar(text_to_speech, speed=None, pitch=None):
+    if speed == None:
+        speed = emotionStateRobot.getVelocitySpeech()
+    if pitch == None:
+        pitch = emotionStateRobot.getToneSpeech()
+
     alTexToSpeech.setParameter("speed", speed)
     alTexToSpeech.setParameter("pitchShift", pitch)
     alTexToSpeech.say(text_to_speech)
@@ -1017,7 +1040,7 @@ class Emotion:
         self.__ledG = ledG   
 
     def setLedB(self, ledB):
-        self.__ledB = ledB  
+        self.__ledB = ledB 
 
     def setLedIntensity(self, ledIntensity ):
         self.__ledIntensity = ledIntensity  

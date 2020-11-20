@@ -3,10 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/ReproducirCuento.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecibirRetroalimentacion.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/MoverseFrentePwA.java</file>
+=======
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/Cuenteria.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/BuscarPosicionOptima.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/updateEmotionalState.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapterReceiver.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerAgent.java</file>
+>>>>>>> 4cf33fe5b6541e24cdbdf8cb71ec8d4b64c6038d
         </group>
     </open-files>
 </project-private>
