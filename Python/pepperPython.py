@@ -15,11 +15,11 @@ global emotionStateRobot
 def timer_activities():
     
     for key, value in activities_running.items():      
-        #print (key, value)
+        print (key, value)
         #create Json message
         #send the message to BESA
         send( value.getIdResponse(), key, value.getParams())
-            
+
     t = threading.Timer(10.0, timer_activities).start()
 
 def handle_client(conn, addr):
@@ -370,8 +370,11 @@ def callFunction(jsonObj):
     
 
 def run_animation( params ):
+    #Get the function
     animation_name = params.get("TAGSDANCE")
+    #Get the params of the function
     animation_factor = params.get("FACTOR")
+    #Invoke the function 
     animation_name(animation_factor)
     
 def getEmotionalReaction():
@@ -500,17 +503,17 @@ def get_face_list():
 
 #Enables or disables the autonomous blinking.
 def activate_blinking(params):
-    enabled = bool(params.get("ACTIVATE"))
+    enabled = params.get("ACTIVATE")
     alAutonomousBlinking.setEnabled(enabled)
 
 #Enables or disables the background movements.
 def activate_life_signals(params):
-    enabled = bool(params.get("ACTIVATELIFESIGNALS"))
+    enabled = params.get("ACTIVATELIFESIGNALS")
     alBackgroundMovement.setEnabled(enabled)
 
 #Enables or disables basic awareness.
 def activate_life_signals_awareness(params):
-    enabled = bool(params.get("ACTIVATELIFESIGNALSINT"))
+    enabled = params.get("ACTIVATELIFESIGNALSINT")
     alBasicAwareness.setEnabled(enabled)
 
 #Sets the engagement mode.
@@ -521,12 +524,12 @@ def set_engagement_type(params):
 
 #Enables or disables the listening movements.
 def activate_hearing_movement(params):
-    enabled = bool(params.get("ACTIVATEACTIVEHEARING"))
+    enabled = params.get("ACTIVATEACTIVEHEARING")
     alListeningMovement.setEnabled(enabled)
 
 #Enables or disables the speaking movements.
 def activate_speak_movements(params):
-    enabled = bool(params.get("ACTIVATESPEAKMOVEMENTS"))
+    enabled = params.get("ACTIVATESPEAKMOVEMENTS")
     alSpeakingMovementProxy.setEnabled(enabled)
 
 #Sets the current speaking movement mode.  Random - Contextual 
@@ -535,34 +538,34 @@ def define_conversation_mode(mode):
 
 #Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner. If not allowed, an exception is thrown.
 def activate_push_reflexes(params):
-    enabled = bool(params.get("ACTIVATEPUSHREFLEXES"))
+    enabled = params.get("ACTIVATEPUSHREFLEXES")
     alMotionProxy.setPushRecoveryEnabled(enabled)
     
  #Starts or stops breathing animation on a chain.   
 def activate_breath_movement(params):
     extremity_to_enabled = "Body" 
-    enabled = bool(params.get("ACTIVATEBREATHMOV"))
+    enabled = params.get("ACTIVATEBREATHMOV")
     alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
 
 #Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
 def activate_movement_detection(params):
-    enabled = bool(params.get("ACTIVATEMOVDETECTION"))
+    enabled = params.get("ACTIVATEMOVDETECTION")
     alPeoplePerception.setMovementDetectionEnabled(enabled)
     
 #Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
 def activate_face_detection(params):
-    enabled = bool(params.get("ACTIVATELIFESIGNALSINT"))
+    enabled = params.get("ACTIVATELIFESIGNALSINT")
     alFaceDetection.setRecognitionEnabled(enabled)
 
 #Enable/Disable Anti-collision protection of the arms of the robot.
 def activate_colission_detection(params):
     chainName = "Arms"
-    enabled = bool(params.get("ACTIVATECOLISSIONDETECT"))
+    enabled = params.get("ACTIVATECOLISSIONDETECT")
     alMotionProxy.setCollisionProtectionEnabled(chainName,enabled)
 
 #Enables or disables power monitoring.
 def activate_monitoring_charge_service(params):
-    enabled = bool(params.get("ACTIVATEMONITORINGCHARGESERV")) 
+    enabled = params.get("ACTIVATEMONITORINGCHARGESERV") 
     alBatteryProxy.enablePowerMonitoring(enabled)
 
 #Get battery charge.
@@ -647,7 +650,7 @@ def random_eyes(duration):
 
 #Sets the intensity of a LED or Group of LEDs.
 def set_leds_intensity(sensor, intensity):
-    alLedsProxy.setIntensity(sensor, intensity)
+    alLedsProxy.setIntensity(sensor, intensity/100)
 
 #Sets the color of an RGB led using  color code.
 def change_led_color(sensor, red_color, green_color, blue_color, duration):
@@ -932,7 +935,7 @@ class Robot:
             "GETFREEZONES": [get_free_zone, False, "act", False], #
             "GETROBOTPOSITION": [get_robot_position, False, "act", False], #
             #MovementServices-------------------------------------------------------
-            "MOVE": [move, True, "act", True], #
+            "MOVE": [move, True, "act", True], ##################################################################
             "MOVEFORWARD": [move_forward, True, "act", True], #
             "MOVETO": [move_to, True, "act", True], #
             "MOVETOPOSITION": [move_to_position, True, "act", True], #
@@ -1076,6 +1079,8 @@ class pepperModule(ALModule):
     
     #send(msg_to_send)
     print "datachanged:", key, " value:", value, " message:", message
+
+  def 
     
 
     
@@ -1179,7 +1184,7 @@ try:
 
     sensorsModule = pepperModule("sensorsModule")
     #Raised when an animated speech is done.
-    alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "pythondatachanged") 
+    alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech","sensorsModule", "endOfAnimatedSpeech") 
     #Raised when the person tracked can no longer be found for some time.
     alProxy.subscribeToEvent("ALBasicAwareness/HumanLost","sensorsModule", "pythondatachanged")      #DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
 
@@ -1333,7 +1338,7 @@ server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
 
 #activities_running is a dictionary which save the activities running on the robot
-activities_running = {"battery": True}
+activities_running = {}
 
 """----------------------------------------------TIMER---------------------------------------------------------"""
 #define Timer to inform BESA
