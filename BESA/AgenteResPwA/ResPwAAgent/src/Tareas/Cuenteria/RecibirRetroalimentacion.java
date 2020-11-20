@@ -30,12 +30,14 @@ public class RecibirRetroalimentacion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
-        ServiceDataRequest srb = null;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //buscar texto
-        infoServicio.put("SAY", "AskRetroCuento");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        if(!blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            infoServicio.put("SAY", "AskRetroCuento");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            requestService(srb, (RobotAgentBelieves) parameters);
+        }
         
     }
 
@@ -62,7 +64,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;
         }
         return false;

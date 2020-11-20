@@ -42,7 +42,6 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
         AnimarStrategy as = new AnimarStrategy();
         as.setNombre(estrategia);
-        //si es necesario se mandan parametros (como blvs)
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         blvs.getbEstadoActividad().setEstrategia(as);
