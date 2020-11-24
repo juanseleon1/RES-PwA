@@ -83,6 +83,8 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
             Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
             System.out.println("-------To sensor data: "+map.toString()+ "-------------------");
             resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
+            
+            System.out.println("MIRE:"+ (String)map.get("respType") + "\n"+SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
             resp.setDataP((Map<String, Object>) map.get("params"));
             wait(2000);
