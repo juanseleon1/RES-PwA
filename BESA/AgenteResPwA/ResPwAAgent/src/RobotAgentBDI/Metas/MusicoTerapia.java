@@ -16,7 +16,6 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.MusicoTerapia.ActivarLetra;
-import Tareas.MusicoTerapia.BuscarPosicionOptima;
 import Tareas.MusicoTerapia.CambiarVelocidadMov;
 import Tareas.MusicoTerapia.InicializarBaile;
 import Tareas.MusicoTerapia.MostrarFotos;
@@ -41,7 +40,6 @@ public class MusicoTerapia extends GoalBDI{
     public static MusicoTerapia buildGoal() {
         
         ActivarLetra aLetra = new ActivarLetra();
-        BuscarPosicionOptima bPosicionOptima = new BuscarPosicionOptima();
         CambiarVelocidadMov cVelocidad = new CambiarVelocidadMov();
         InicializarBaile iBaile = new InicializarBaile();
         MostrarFotos mFotos = new MostrarFotos();
@@ -55,8 +53,6 @@ public class MusicoTerapia extends GoalBDI{
         Plan rolePlan = new Plan();
         
         rolePlan.addTask(sCancion);
-        tarea.add(sCancion);
-        rolePlan.addTask(bPosicionOptima,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(sCancion);
@@ -72,7 +68,6 @@ public class MusicoTerapia extends GoalBDI{
         
         tarea = new ArrayList<>();
         tarea.add(rCancion);
-        tarea.add(bPosicionOptima);
         rolePlan.addTask(iBaile,tarea);
         
         tarea = new ArrayList<>();
