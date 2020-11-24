@@ -5,6 +5,7 @@
  */
 package Tareas.Cuenteria;
 
+import ResPwAEntities.Frases;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
@@ -35,10 +36,10 @@ public class ReproducirCuento extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //enviar cuento
-        
-        infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList());
+        infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()));
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         requestService(srb,blvs);
+        blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento()+1);
     }
 
     @Override
@@ -64,7 +65,8 @@ public class ReproducirCuento extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
+            blvs.getbEstadoActividad().setIndexCuento(0);
             return true;
         }
         return false;

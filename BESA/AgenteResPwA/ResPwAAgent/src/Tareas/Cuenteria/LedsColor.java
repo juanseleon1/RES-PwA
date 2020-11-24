@@ -14,7 +14,7 @@ public enum LedsColor {
     BLGRE(0.46,0.79,0.79),
     GREEN(0.63,0.84,0.49),
     GREYEL(0.80,0.91,0.44),
-    YELLOW(0.98,0.97,0.26);
+    YELLOW(0.99,0.98,0.11);
     
     private double r;
     private double g;
