@@ -87,8 +87,8 @@ public class BEstadoInteraccion implements Believes{
         }if(infoRecibida.getDataP().containsKey("distancia")){
           distanciaPwA  = Long.valueOf((String)infoRecibida.getDataP().get("distancia"));
            
-        }if(infoRecibida.getDataP().containsKey("hablando")){
-          estaHablando = Boolean.valueOf((String)infoRecibida.getDataP().get("hablando"));
+        }if(infoRecibida.getDataP().containsKey("endOfAnimatedSpeech")){
+          estaHablando = Boolean.valueOf((String)infoRecibida.getDataP().get("endOfAnimatedSpeech"));
             
         }if(infoRecibida.getDataP().containsKey("moviendo")){
           estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("moviendo"));
@@ -96,8 +96,8 @@ public class BEstadoInteraccion implements Believes{
         }if(infoRecibida.getDataP().containsKey("desplazandose")){
           desplazandose = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
             
-        }if(infoRecibida.getDataP().containsKey("fisicaint")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
+        }if(infoRecibida.getDataP().containsKey("stimulusDetected")){
+           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("stimulusDetected"));
         }
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
