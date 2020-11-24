@@ -699,6 +699,8 @@ def show_video(params):
 
 #Close the video player.
 def quit_video():
+    if activities_running.has_key("SHOWVIDEO"):
+        activities_running.pop("SHOWVIDEO")
     alTabletService.stopVideo()
 
 #Pause the video playing but do not close the video player.
@@ -719,6 +721,8 @@ def show_image(params):
 
 #Hide image currently displayed.
 def hide_image():
+    if activities_running.has_key("SHOWIMG"):
+        activities_running.pop("SHOWIMG") 
     alTabletService.hideImage()
 
 #Set tablet brightness.
@@ -764,6 +768,8 @@ def play_sound(sound):
 
 #Pause the playback of the specified task.
 def pause_sound(idSound):
+    if activities_running.has_key("PLAYSOUND"):
+        activities_running.pop("PLAYSOUND")
     alAudioPlayer.pause(idSound)
 
 #Subscribes to ALVoiceEmotionAnalysis .
@@ -807,9 +813,6 @@ def say_under_topic_context(topic, tag):
 #If multiple topics can be active at the same time, only one of them is used to generate proposals.
 def set_topic_focus(topicName):
     alDialogProxy.setFocus(topicName)
-
-
-
 
     
 def hablar(text_to_speech, speed=None, pitch=None):
@@ -1162,6 +1165,8 @@ class pepperModule(ALModule):
   def moveFailed(self, key, value, message):
       json_params = {}
       # The value should be True
+      if activities_running.has_key("MOVE"):
+        activities_running.pop("MOVE")
       json_params["moveFailed"] = value
       send(-1, "moveFailed", json_params)
 
@@ -1202,6 +1207,8 @@ class pepperModule(ALModule):
 
   def moveFailedRecharging(self, key, message):
       json_params = {}
+      if activities_running.has_key("MOVE"):
+        activities_running.pop("MOVE")
       json_params["moveFailedRecharging"] = True
       send(-1, "moveFailedRecharging", json_params)
 
@@ -1235,7 +1242,7 @@ class pepperModule(ALModule):
   def onInputText(self, key, message):
       json_params = {}
       # The value should be True
-      json_params["onInputText"] = value
+      json_params["onInputText"] = True
       send(-1, "onInputText", json_params)
 
   def gesture(self, key, value, message):
@@ -1247,11 +1254,15 @@ class pepperModule(ALModule):
   def speechTextDone(self, key, value, message):
       json_params = {}
       # The value should be True
+      if activities_running.has_key("SAY"):
+          activities_running.pop("SAY")
       json_params["speechTextDone"] = value
       send(-1, "speechTextDone", json_params)
 
   def speechTextInterrupted(self, key, value, message):
       json_params = {}
+      if activities_running.has_key("SAY"):
+          activities_running.pop("SAY")
       # The value should be True
       json_params["speechTextInterrupted"] = value
       send(-1, "speechTextInterrupted", json_params)
@@ -1367,7 +1378,7 @@ class pepperModule(ALModule):
       # id[0] – The preference domain.
       # id[1] – The preference name.
       json_params["preferenceChanged"] = value
-      send(-1, "preferenceChanged, json_params)
+      send(-1, "preferenceChanged", json_params)
 
   def wavingDetection(self, key, value, message):
       json_params = {}
@@ -1574,11 +1585,11 @@ try:
     #Raised whenever an activity completes its execution and exits.
     alProxy.subscribeToEvent("AutonomousLife/CompletedActivity","sensorsModule", "autonomousCompletedActivity")
 
-    Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
-    """
+    #Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
+    
     #Raised when the robot touch status changed.
-    alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged") 
-    """
+    alProxy.subscribeToEvent("TouchChanged","sensorsModule", "pythondatachanged") ###########################
+    
     #Raised when at least one device (joint, actuator, sensor) has a high temperature.
     alProxy.subscribeToEvent("HotDeviceDetected","sensorsModule", "hotDeviceDetected")
     #Raised each time the robot catches a human input. Contains the last human input.
