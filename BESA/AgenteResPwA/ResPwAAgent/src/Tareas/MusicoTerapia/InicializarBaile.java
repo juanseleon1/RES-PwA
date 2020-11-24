@@ -12,6 +12,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,12 @@ public class InicializarBaile extends ResPwaTask{
             infoServicio.put("RADIO", 0.5);
             infoServicio.put("DISTANCIAMAX", 0.5);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-            requestService(srb,blvs);   
+            requestService(srb,blvs);
+            
+            infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
+            infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
+            srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
+            requestService(srb,blvs);
         }
     }
 
@@ -50,12 +56,17 @@ public class InicializarBaile extends ResPwaTask{
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Cambiar Baile---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isDesplazandose()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isLibreEntorno()) {
+        if(blvs.getbEstadoRobot().isLibreEntorno() && !blvs.getbEstadoInteraccion().isDesplazandose()) {
             return true;
         }
         return false;
