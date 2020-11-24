@@ -30,6 +30,12 @@ public class PepperEModel extends EmotionalModel{
     private double speechBase=1.1;
     private double speechVBase=100;
     private double ledsIntBase=1;
+    private double velf;
+    private double velh;
+    private double pitch;
+    private double ledInt;
+    private static final double CHANGE_FACT=0.3; 
+    private LedsColor lc;
 
     public PepperEModel(double normalState) {
         this.state = normalState;
@@ -41,27 +47,31 @@ public class PepperEModel extends EmotionalModel{
     public Map<String, Object> filterFromEM(Map<String, Object> map) {
         Map<String,Object> map2= new HashMap<>();
         map2.putAll(map);
-        double velf=0,velh=0,pitch=0,ledInt=0;
+        double velf1=0,velh1=0,pitch1=0,ledInt1=0;
         String s="";
         if(map2.containsKey(PepperEMParams.HVel.getTipo()))
         {
-            velh=(double) map2.get(PepperEMParams.HVel.getTipo());
-            map2.replace(PepperEMParams.HVel.getTipo(), velh);
+            velh1=(double) map2.get(PepperEMParams.HVel.getTipo());
+            velh1+=((velh-velh1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.HVel.getTipo(), velh1);
         }
         if(map2.containsKey(PepperEMParams.FVel.getTipo()))
         {
-            velf=(double) map2.get(PepperEMParams.FVel.getTipo());
-            map2.replace(PepperEMParams.FVel.getTipo(), velf);
+            velf1=(double) map2.get(PepperEMParams.FVel.getTipo());
+            velf1+=((velf-velf1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.FVel.getTipo(), velf1);
         }
         if(map2.containsKey(PepperEMParams.LEDINT.getTipo()))
         {
-            ledInt=(double) map2.get(PepperEMParams.LEDINT.getTipo());
-            map2.replace(PepperEMParams.LEDINT.getTipo(), ledInt);
+            ledInt1=(double) map2.get(PepperEMParams.LEDINT.getTipo());
+            ledInt1+=((ledInt-ledInt1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.LEDINT.getTipo(), ledInt1);
         }
         if(map2.containsKey(PepperEMParams.TONOH.getTipo()))
         {
-            pitch=(double) map2.get(PepperEMParams.TONOH.getTipo());
-            map2.replace(PepperEMParams.TONOH.getTipo(), pitch);
+            pitch1=(double) map2.get(PepperEMParams.TONOH.getTipo());
+            ledInt1+=((ledInt-ledInt1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.TONOH.getTipo(), pitch1);
         }
         if(map2.containsKey(PepperEMParams.ANIMSTATE.getTipo()))
         {
@@ -159,8 +169,6 @@ public class PepperEModel extends EmotionalModel{
     }
     
     private void calcNewEmotionalParams(Map<String, Object> map) {
-        LedsColor lc=null;
-        double velf=0,velh=0,pitch=0,ledInt=0;
          if(state>=1 && state<1.4)
          {
              lc=LedsColor.BLUE;

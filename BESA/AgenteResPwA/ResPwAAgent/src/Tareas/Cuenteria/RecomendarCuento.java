@@ -48,7 +48,7 @@ public class RecomendarCuento extends ResPwaTask{
         }
         blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
         
-        infoServicio.put("SAY", cuentoEleg.getNombre());
+        infoServicio.put("SAY", "Voy a contarte el cuento de "+cuentoEleg.getNombre());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb,blvs);
     }
