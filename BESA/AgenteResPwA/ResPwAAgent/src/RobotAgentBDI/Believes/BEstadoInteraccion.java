@@ -39,7 +39,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
-    private boolean confirmarActServicios=false;
+    private boolean confirmarActServicios=true;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
 
