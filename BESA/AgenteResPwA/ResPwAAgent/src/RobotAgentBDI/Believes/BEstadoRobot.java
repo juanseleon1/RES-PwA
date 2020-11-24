@@ -47,7 +47,7 @@ public class BEstadoRobot implements Believes {
                 bateria = Integer.valueOf((String) infoRecibida.getDataP().get("bateria"));
             }
             if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
-                Boolean.valueOf((String)infoRecibida.getDataP().get("ROBOTEMOTION"));
+//                BinfoRecibida.getDataP().get("ROBOTEMOTION"));
             }
             if (infoRecibida.getDataP().containsKey("activadoParpadear")) {
                 activadoParpadear = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoParpadear"));
