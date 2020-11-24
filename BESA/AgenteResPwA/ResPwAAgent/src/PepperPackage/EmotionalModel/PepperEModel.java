@@ -43,46 +43,41 @@ public class PepperEModel extends EmotionalModel{
         map2.putAll(map);
         double velf=0,velh=0,pitch=0,ledInt=0;
         String s="";
-        if(map.containsKey(PepperEMParams.HVel.getTipo()))
+        if(map2.containsKey(PepperEMParams.HVel.getTipo()))
         {
-            velh=(double) map.get(PepperEMParams.HVel.getTipo());
-            map.replace(PepperEMParams.HVel.getTipo(), velh);
+            velh=(double) map2.get(PepperEMParams.HVel.getTipo());
+            map2.replace(PepperEMParams.HVel.getTipo(), velh);
         }
-        if(map.containsKey(PepperEMParams.FVel.getTipo()))
+        if(map2.containsKey(PepperEMParams.FVel.getTipo()))
         {
-            velh=(double) map.get(PepperEMParams.FVel.getTipo());
-            map.replace(PepperEMParams.FVel.getTipo(), velf);
+            velf=(double) map2.get(PepperEMParams.FVel.getTipo());
+            map2.replace(PepperEMParams.FVel.getTipo(), velf);
         }
-        if(map.containsKey(PepperEMParams.LEDINT.getTipo()))
+        if(map2.containsKey(PepperEMParams.LEDINT.getTipo()))
         {
-            velh=(double) map.get(PepperEMParams.LEDINT.getTipo());
-            map.replace(PepperEMParams.LEDINT.getTipo(), ledInt);
+            ledInt=(double) map2.get(PepperEMParams.LEDINT.getTipo());
+            map2.replace(PepperEMParams.LEDINT.getTipo(), ledInt);
         }
-        if(map.containsKey(PepperEMParams.TONOH.getTipo()))
+        if(map2.containsKey(PepperEMParams.TONOH.getTipo()))
         {
-            velh=(double) map.get(PepperEMParams.TONOH.getTipo());
-            map.replace(PepperEMParams.TONOH.getTipo(), pitch);
+            pitch=(double) map2.get(PepperEMParams.TONOH.getTipo());
+            map2.replace(PepperEMParams.TONOH.getTipo(), pitch);
         }
-        if(map.containsKey(PepperEMParams.ANIMSTATE.getTipo()))
+        if(map2.containsKey(PepperEMParams.ANIMSTATE.getTipo()))
         {
-            
-            s=(String) map.get(PepperEMParams.ANIMSTATE.getTipo());
-            map.replace(PepperEMParams.ANIMSTATE.getTipo(), s);
+            s=(String) map2.get(PepperEMParams.ANIMSTATE.getTipo());
+            map2.replace(PepperEMParams.ANIMSTATE.getTipo(), s);
         }
-        map.put("factorVelocidad", velf);
-        map.put("velHabla", velh);
-        map.put("tonoHabla", pitch);
-        map.put("ledIntens", ledInt);
         return map2;
     }
     
-    protected enum EmoTypes{
-        EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);
-        private double perc;
-        private EmoTypes(double perc){
-            this.perc=perc;
-        }
-    };
+//    protected enum EmoTypes{
+//        EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);
+//        private double perc;
+//        private EmoTypes(double perc){
+//            this.perc=perc;
+//        }
+//    };
     
     @Override
     public void updateModel() {
