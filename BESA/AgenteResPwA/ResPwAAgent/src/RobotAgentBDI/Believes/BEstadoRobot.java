@@ -17,7 +17,7 @@ import rational.mapping.Believes;
  */
 public class BEstadoRobot implements Believes {
 
-    private int bateria;
+    private boolean bateria;
     private int volumenVoz;
     private double velocidad = 0;
     private boolean activadoParpadear = false;
@@ -43,8 +43,8 @@ public class BEstadoRobot implements Believes {
 
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
-            if (infoRecibida.getDataP().containsKey("bateria")) {
-                bateria = Integer.valueOf((String) infoRecibida.getDataP().get("bateria"));
+            if (infoRecibida.getDataP().containsKey("batteryLow")) {
+                bateria = (boolean) infoRecibida.getDataP().get("batteryLow");
             }
             if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
 //                BinfoRecibida.getDataP().get("ROBOTEMOTION"));
@@ -79,8 +79,8 @@ public class BEstadoRobot implements Believes {
             if (infoRecibida.getDataP().containsKey("activadoMovHabla")) {
                 activadoMovHabla = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovHabla"));
             }
-            if (infoRecibida.getDataP().containsKey("estaSuspendido")) {
-                estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("estaSuspendido"));
+            if (infoRecibida.getDataP().containsKey("robotIsWakeUp")) {
+                estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("robotIsWakeUp"));
             }
             if (infoRecibida.getDataP().containsKey("libreEntorno")) {
                 libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
@@ -106,11 +106,11 @@ public class BEstadoRobot implements Believes {
         return true;
     }
 
-    public int getBateria() {
+    public boolean getBateria() {
         return bateria;
     }
 
-    public void setBateria(int bateria) {
+    public void setBateria(boolean bateria) {
         this.bateria = bateria;
     }
 
