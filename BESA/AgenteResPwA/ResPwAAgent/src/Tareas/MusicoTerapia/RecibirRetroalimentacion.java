@@ -45,7 +45,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb,blvs);
-        }   
+        }
     }
 
     @Override
