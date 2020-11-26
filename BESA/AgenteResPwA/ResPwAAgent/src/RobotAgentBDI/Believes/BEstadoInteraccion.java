@@ -27,7 +27,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean sistemaSuspendidoInt=false;
     private long nivelEnriquecimiento=0;
     private long velocidadAnim=0;
-    private long distanciaPwA=0;
+    private float distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
     private boolean estaKaraokeando=false;
@@ -39,9 +39,10 @@ public class BEstadoInteraccion implements Believes{
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
-    private boolean confirmarActServicios=false;
+    private boolean confirmarActServicios=true;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
+    private boolean movError;
 
     
     @Override
@@ -58,9 +59,12 @@ public class BEstadoInteraccion implements Believes{
         }
         if(infoRecibida.getDataP().containsKey("faceDetected")){
             detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
-            if(detectaPwA)
-                tiempoSinInt=0;
-            else
+            tiempoSinInt=0;
+
+        }
+        
+        if(infoRecibida.getDataP().containsKey("humanLost")){
+            detectaPwA= false;
             tiempoSinInt=System.currentTimeMillis();
         }
         if(infoRecibida.getDataP().containsKey("canto")){
@@ -72,9 +76,8 @@ public class BEstadoInteraccion implements Believes{
                 nivelEnriquecimiento++;
             else if(!quiereEnriquec && nivelEnriquecimiento>0)
                 nivelEnriquecimiento--;
-        }if(infoRecibida.getDataP().containsKey("suspension")){
-            sistemaSuspendido= Boolean.valueOf((String)infoRecibida.getDataP().get("suspension"));
-            
+        }if(infoRecibida.getDataP().containsKey("wakeUpFinished")){
+            sistemaSuspendido= true;
         }if(infoRecibida.getDataP().containsKey("pausarint")){
            pausarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("pausarint"));
             
@@ -84,26 +87,35 @@ public class BEstadoInteraccion implements Believes{
         }if(infoRecibida.getDataP().containsKey("reiniciarint")){
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
-        }if(infoRecibida.getDataP().containsKey("distancia")){
-          distanciaPwA  = Long.valueOf((String)infoRecibida.getDataP().get("distancia"));
+        }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
+          distanciaPwA  = Float.valueOf((String)infoRecibida.getDataP().get("distanceOfTrackedHuman"));
            
-        }if(infoRecibida.getDataP().containsKey("hablando")){
-          estaHablando = Boolean.valueOf((String)infoRecibida.getDataP().get("hablando"));
+        }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
+          estaHablando = true;
             
-        }if(infoRecibida.getDataP().containsKey("moviendo")){
-          estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("moviendo"));
+        }if(infoRecibida.getDataP().containsKey("endOfAnimatedSpeech")){
+          estaHablando = false;
             
-        }if(infoRecibida.getDataP().containsKey("desplazandose")){
-          desplazandose = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
+        }if(infoRecibida.getDataP().containsKey("goToSuccess")){
+          desplazandose = false;
             
-        }if(infoRecibida.getDataP().containsKey("fisicaint")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
+        }
+        if(infoRecibida.getDataP().containsKey("goToFailed")){
+          desplazandose = false;
+          movError=true;
+            
+        }
+        if(infoRecibida.getDataP().containsKey("moviendose")){
+          estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
+            
+        }if(infoRecibida.getDataP().containsKey("stimulusDetected")){
+           hayInteraccionFisica = true;
         }
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
         }
-        if(infoRecibida.getDataP().containsKey("respPwA")){
-           recibirRespuestaPwA = Boolean.valueOf((String)infoRecibida.getDataP().get("respPwA"));
+        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+           recibirRespuestaPwA = true;
         }if(infoRecibida.getDataP().containsKey("karaokeando")){
           estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
             
@@ -191,11 +203,11 @@ public class BEstadoInteraccion implements Believes{
         this.velocidadAnim = velocidad;
     }
 
-    public long getDistanciaPwA() {
+    public float getDistanciaPwA() {
         return distanciaPwA;
     }
 
-    public void setDistanciaPwA(long distanciaPwA) {
+    public void setDistanciaPwA(float distanciaPwA) {
         this.distanciaPwA = distanciaPwA;
     }
 

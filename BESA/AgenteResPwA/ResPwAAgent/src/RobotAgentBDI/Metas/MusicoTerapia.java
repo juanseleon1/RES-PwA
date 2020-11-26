@@ -39,13 +39,9 @@ public class MusicoTerapia extends GoalBDI{
     
     public static MusicoTerapia buildGoal() {
         
-        ActivarLetra aLetra = new ActivarLetra();
-        CambiarVelocidadMov cVelocidad = new CambiarVelocidadMov();
         InicializarBaile iBaile = new InicializarBaile();
-        MostrarFotos mFotos = new MostrarFotos();
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         ReproduccionCancion rCancion = new ReproduccionCancion();
-        SeleccionarBaile sBaile = new SeleccionarBaile();
         SeleccionarCancion sCancion = new SeleccionarCancion();
         
         List<String> resources = new ArrayList<>();
@@ -53,33 +49,15 @@ public class MusicoTerapia extends GoalBDI{
         Plan rolePlan = new Plan();
         
         rolePlan.addTask(sCancion);
+        rolePlan.addTask(iBaile);
         
         tarea = new ArrayList<>();
         tarea.add(sCancion);
+        tarea.add(iBaile);
         rolePlan.addTask(rCancion,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(rCancion);
-        rolePlan.addTask(mFotos,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(rCancion);
-        rolePlan.addTask(aLetra,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(rCancion);
-        rolePlan.addTask(iBaile,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(iBaile);
-        rolePlan.addTask(sBaile,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(iBaile);
-        rolePlan.addTask(cVelocidad,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(sCancion);
         rolePlan.addTask(retro,tarea);
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);

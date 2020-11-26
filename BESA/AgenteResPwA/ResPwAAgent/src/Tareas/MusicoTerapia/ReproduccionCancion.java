@@ -38,6 +38,9 @@ public class ReproduccionCancion extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Busqueda Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        //Tener en cuenta opcion seleccionada para mandar info
+        //Dependiendo de canción seleccionada, seleccionar baile->se mandan tags, cambio velocidad->segun cancion y activar letra
 
         if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
             String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
