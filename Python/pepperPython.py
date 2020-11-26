@@ -359,9 +359,12 @@ def callFunction(jsonObj):
         
         send( jsonObj["id"], robot.getType(jsonObj["methodName"]), ack_param)
 
-    response_type = robot.getType(jsonObj["methodName"])
+    
 
-    if response_type != None:
+    response = robot.mustBeResponse(jsonObj["methodName"])
+
+    if response == True:
+        response_type = robot.getType(jsonObj["methodName"])
         robot_activity = messageManager(jsonObj["id"], response_type)
         activity_params = {}
         activity_params[jsonObj["methodName"]] = True
@@ -671,7 +674,7 @@ def change_emotion_expression(params):
     emotionStateRobot.setFactorVelocity(params.get("velocidad"))
     emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
     print("R: ", emotionStateRobot.getLedR(), "G: ", emotionStateRobot.getLedG(), "B: ", emotionStateRobot.getLedB() )
-    change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 1.0)
+    change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 15.0)
     set_leds_intensity("AllLeds", emotionStateRobot.getLedIntensity())
     
 
@@ -994,7 +997,7 @@ class Robot:
     def getType(self, fun):
         return self.__modules.get(fun)[2]
 
-    def isResponseSaved(self, fun):
+    def mustBeResponse(self, fun):
         return self.__modules.get(fun)[3]
 
 #----------------------------------------------------------------------------Emotion class---------------------------------------------------------------------------------------------    
