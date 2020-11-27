@@ -69,7 +69,7 @@ public class MoverseFrentePwA extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isDesplazandose()) {
+        if(blvs.getbEstadoRobot().isLibreEntorno() && !blvs.getbEstadoInteraccion().isDesplazandose()) {
             return true;
         }
         return false;

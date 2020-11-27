@@ -52,7 +52,7 @@ public class SeleccionarCancion extends ResPwaTask{
             }
         }
         blvs.getbEstadoActividad().setCancionActual(cancionEleg);
-        
+        //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
     }
 
     @Override

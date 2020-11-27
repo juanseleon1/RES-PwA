@@ -62,6 +62,6 @@ public class EmotionalAnalyzerAgent extends AgentBESA {
             EventBESA eventBESA = new EventBESA(updateEmotionalState.class.getName(), data);
             AgHandlerBESA agHandlerBESA =AdmBESA.getInstance().getHandlerByAlias(this.getAlias());
             agHandlerBESA.sendEvent(eventBESA);
-            System.out.println("Entra");
+//            System.out.println("Entra");
     }
 }
