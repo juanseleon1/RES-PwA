@@ -5,12 +5,14 @@ import json
 import qi
 import sys
 import argparse
+import datetime
 
 #---------------------------------------------Global Variables-----------------------------------------------
 global alBroker
 global activities_running
 global robot
 global emotionStateRobot
+global responsesXTime
 
 def timer_activities():
     
@@ -901,16 +903,37 @@ def send( id_response, responseType, params):
     HOST_LOCAL = '127.0.0.1'
     PORT = 7897
     FORMAT = 'utf-8'
-    ADDR = (HOST_LOCAL, PORT)
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(ADDR)
-    msg_to_send = json.dumps(json_creator(id_response, responseType, params))
-    print("send ", msg_to_send)
-    
-    client.send(msg_to_send + '\r\n')
-    client.close()   
+    should_send_message = True
+    if responsesXTime.has_key(params.keys()):
+        should_send_message = checkTimeMessageSended(params.keys())
+    else:
+        responsesXTime[params.keys()] = {datetime.datetime.now()}
 
+    if should_send_message:
+        ADDR = (HOST_LOCAL, PORT)
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client.connect(ADDR)
+        msg_to_send = json.dumps(json_creator(id_response, responseType, params))
+        print("send ", msg_to_send)
+        
+        client.send(msg_to_send + '\r\n')
+        client.close()   
 
+def checkTimeMessageSended(params):
+    isCorrectToSend = True
+    if (responsesXTime.get(params).hour - datetime.datetime.now().hour) == 0:
+
+        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == 0:
+
+            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
+                isCorrectToSend = False
+
+        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == -1:
+
+            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
+                isCorrectToSend = False
+
+    return isCorrectToSend
 #----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------    
 """--------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------"""
 #----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
@@ -1654,6 +1677,9 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 #activities_running is a dictionary which save the activities running on the robot
 activities_running = {}
 
+#responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses sended to BESA
+responsesXTime = {}
+
 """----------------------------------------------TIMER---------------------------------------------------------"""
 #define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
@@ -1664,11 +1690,6 @@ robot = Robot()
 
 ''' Emotion class declaration '''
 emotionStateRobot = Emotion()
-
-#Init the connection with BESA, FIRST INTERACTION WITH THE HUMAN
-# conn, addr = server.accept()
-# thread = threading.Thread(target=handle_client_init, args=(conn, addr))
-# thread.start()
 
 while 1:
     conn, addr = server.accept()
