@@ -65,6 +65,7 @@ public class DetectarPwA extends ResPwaTask{
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDetectaPwA()) {
+            System.out.println("///////////////TF//////////////");
             return true;
         }
         return false;

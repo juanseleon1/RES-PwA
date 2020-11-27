@@ -29,7 +29,7 @@ import rational.mapping.Believes;
 public class BEstadoActividad implements Believes {
 
     private long tiempoInicioActividad = 0;
-    private ResPwAActivity actividadActual;
+    private ResPwAActivity actividadActual=ResPwAActivity.CUENTERIA;
     private String estadoInit = null;
     private boolean actividadEnCurso = false;
     private boolean mejoraEmocional = false;

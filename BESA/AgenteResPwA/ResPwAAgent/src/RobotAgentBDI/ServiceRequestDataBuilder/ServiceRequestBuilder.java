@@ -56,7 +56,7 @@ public class ServiceRequestBuilder {
             serv=RobotSPAgent.servVoz;
         } 
         ServiceDataRequest sdr = new ServiceDataRequest(serv, e.getServiceType(), params);
-        System.out.println("SDR Builded "+serv+"  "+e.getServiceType());
+//        System.out.println("SDR Builded "+serv+"  "+e.getServiceType());
         return sdr;
     }
 }

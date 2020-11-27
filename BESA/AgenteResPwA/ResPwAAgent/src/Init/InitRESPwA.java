@@ -126,9 +126,9 @@ public class InitRESPwA {
     {
         List<GoalBDI> RAGoals= new ArrayList<>();
         //Crear Metas
-//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-        LogIn logInGoal = LogIn.buildGoal();
+//        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
@@ -136,9 +136,9 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
         //Agregar a Lista
-//        RAGoals.add(cuenteriaGoal);
+        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(musicoTGoal);
-        RAGoals.add(logInGoal);
+//        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);

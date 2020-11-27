@@ -15,12 +15,18 @@ global emotionStateRobot
 def timer_activities():
     
     for key, value in activities_running.items():      
-        print (key, value)
+        #print (key, value)
         #create Json message
         #send the message to BESA
         send( value.getIdResponse(), value.getResponseType() , value.getParams())
 
     t = threading.Timer(10.0, timer_activities).start()
+
+def handle_client_init(conn, addr):
+    print "Entre nigels"
+    alFaceDetection.forgetPerson("Brayan")
+    alFaceDetection.setRecognitionEnabled(True)
+    alFaceDetection.learnFace("Brayan")
 
 def handle_client(conn, addr):
     #while connected:
@@ -359,9 +365,12 @@ def callFunction(jsonObj):
         
         send( jsonObj["id"], robot.getType(jsonObj["methodName"]), ack_param)
 
-    response_type = robot.getType(jsonObj["methodName"])
+    
 
-    if response_type != None:
+    response = robot.mustBeResponse(jsonObj["methodName"])
+
+    if response == True:
+        response_type = robot.getType(jsonObj["methodName"])
         robot_activity = messageManager(jsonObj["id"], response_type)
         activity_params = {}
         activity_params[jsonObj["methodName"]] = True
@@ -671,7 +680,7 @@ def change_emotion_expression(params):
     emotionStateRobot.setFactorVelocity(params.get("velocidad"))
     emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
     print("R: ", emotionStateRobot.getLedR(), "G: ", emotionStateRobot.getLedG(), "B: ", emotionStateRobot.getLedB() )
-    change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 1.0)
+    change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 15.0)
     set_leds_intensity("AllLeds", emotionStateRobot.getLedIntensity())
     
 
@@ -994,7 +1003,7 @@ class Robot:
     def getType(self, fun):
         return self.__modules.get(fun)[2]
 
-    def isResponseSaved(self, fun):
+    def mustBeResponse(self, fun):
         return self.__modules.get(fun)[3]
 
 #----------------------------------------------------------------------------Emotion class---------------------------------------------------------------------------------------------    
@@ -1112,61 +1121,62 @@ class pepperModule(ALModule):
       json_params = {}
       #Supposedly the value always is True
       json_params["batteryLow"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def goToFailed(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["goToFailed"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def goToSuccess(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["goToSuccess"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def goToLost(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["goToLost"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def localizeSuccess(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["localizeSuccess"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
   
   def localizeLost(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["localizeLost"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def localizeDirectionLost(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["localizeDirectionLost"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def localizeDirectionSuccess(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["localizeDirectionSuccess"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def chainVelocityClipped(self, key, value, message):
       json_params = {}
       # The value should be True
       json_params["chainVelocityClipped"] = value
-      send(-1, "int", json_params)
+      send(-1, "rob", json_params)
 
   def moveFailed(self, key, value, message):
       json_params = {}
       # The value should be True
       if activities_running.has_key("MOVE"):
         activities_running.pop("MOVE")
+
       json_params["moveFailed"] = value
       send(-1, "int", json_params)
 
@@ -1247,7 +1257,7 @@ class pepperModule(ALModule):
 
   def gesture(self, key, value, message):
       json_params = {}
-      # The value should be True
+      # The value is the name of the gesture
       json_params["gesture"] = value
       send(-1, "int", json_params)
 
@@ -1343,7 +1353,7 @@ class pepperModule(ALModule):
       json_params = {}
       # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
       json_params["distanceOfTrackedHuman"] = value
-      send(-1, "int", json_params)
+      #send(-1, "int", json_params)
 
   def obstacleDetected(self, key, value, message):
       json_params = {}
@@ -1470,7 +1480,6 @@ alListeningMovement = session.service("ALListeningMovement")
 alSpeakingMovementProxy = session.service("ALSpeakingMovement")
 alMotionProxy = session.service("ALMotion")
 alPeoplePerception = session.service("ALPeoplePerception")
-alFaceDetection = session.service("ALFaceDetection")
 alBatteryProxy = session.service("ALBattery")
 alBodyTemperatureProxy = session.service("ALBodyTemperature")
 alUserSession = session.service("ALUserSession")
@@ -1604,7 +1613,7 @@ try:
     alProxy.subscribeToEvent("EngagementZones/PersonApproached","sensorsModule", "personApproached")
     #Raised when a person has a smile value above the current threshold (default = 0.7).
     alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling","sensorsModule", "personSmiling")
-    #Raised when one or several faces are currently being detected.
+    # #Raised when one or several faces are currently being detected.
     alProxy.subscribeToEvent("FaceDetected","sensorsModule", "faceDetected")
     #Raised each time the list of people looking at the robot changes.
     alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot","sensorsModule", "peopleLookingAtRobot")
@@ -1655,6 +1664,11 @@ robot = Robot()
 
 ''' Emotion class declaration '''
 emotionStateRobot = Emotion()
+
+#Init the connection with BESA, FIRST INTERACTION WITH THE HUMAN
+# conn, addr = server.accept()
+# thread = threading.Thread(target=handle_client_init, args=(conn, addr))
+# thread.start()
 
 while 1:
     conn, addr = server.accept()

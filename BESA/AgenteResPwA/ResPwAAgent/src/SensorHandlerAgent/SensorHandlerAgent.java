@@ -189,6 +189,6 @@ public static String GetInfoGuard= "GetInfoGuard";
             evSP.setSenderAgId(this.getAid());
             //Env�a el evento
             agH.sendEvent(evSP);
-            System.out.println("Servicios suscritos");
+//            System.out.println("Servicios suscritos");
     }
 }

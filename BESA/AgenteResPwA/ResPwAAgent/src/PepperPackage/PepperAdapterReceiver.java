@@ -54,7 +54,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                 {
                     try {
                         SensorData sd=toSensorData(json);
-                        System.out.println("Llego: "+json);
+//                        System.out.println("Llego: "+json);
                         updateBlvs(sd);
                     } catch (ExceptionBESA ex) {
                         Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,12 +79,12 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         
         SensorData resp= new SensorData();
         try {
-            System.out.println("toSensorData "+json);
+//            System.out.println("toSensorData "+json);
             Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
-            System.out.println("-------To sensor data: "+map.toString()+ "-------------------");
+//            System.out.println("-------To sensor data: "+map.toString()+ "-------------------");
             resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
             
-            System.out.println("MIRE:"+ (String)map.get("respType") + "\n"+SensorDataType.getFromId((String)map.get("respType")));
+//            System.out.println("MIRE:"+ (String)map.get("respType") + "\n"+SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
             resp.setDataP((Map<String, Object>) map.get("params"));
             wait(2000);
