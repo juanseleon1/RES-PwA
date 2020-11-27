@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=false;
+    private boolean logged=true;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -27,7 +27,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean sistemaSuspendidoInt=false;
     private long nivelEnriquecimiento=0;
     private long velocidadAnim=0;
-    private float distanciaPwA=0;
+    private double distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
     private boolean estaKaraokeando=false;
@@ -39,7 +39,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
-    private boolean confirmarActServicios=true;
+    private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
     private boolean movError;
@@ -58,9 +58,9 @@ public class BEstadoInteraccion implements Believes{
             confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
         }
         if(infoRecibida.getDataP().containsKey("faceDetected")){
+            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
             detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
             tiempoSinInt=0;
-
         }
         
         if(infoRecibida.getDataP().containsKey("humanLost")){
@@ -88,7 +88,7 @@ public class BEstadoInteraccion implements Believes{
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
         }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
-          distanciaPwA  = Float.valueOf((String)infoRecibida.getDataP().get("distanceOfTrackedHuman"));
+          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
            
         }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
           estaHablando = true;
@@ -203,11 +203,11 @@ public class BEstadoInteraccion implements Believes{
         this.velocidadAnim = velocidad;
     }
 
-    public float getDistanciaPwA() {
+    public double getDistanciaPwA() {
         return distanciaPwA;
     }
 
-    public void setDistanciaPwA(float distanciaPwA) {
+    public void setDistanciaPwA(double distanciaPwA) {
         this.distanciaPwA = distanciaPwA;
     }
 

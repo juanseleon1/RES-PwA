@@ -48,6 +48,8 @@ public class LogInTask extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+                    System.out.println("///////////////TF2//////////////");
+
         if(blvs.getbEstadoInteraccion().isLogged()) {
             return true;
         }

@@ -77,10 +77,10 @@ public class LogIn extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn detectGoal");
+        System.out.println("Meta LogIn detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
+        System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
         if (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged()) {
             return 1.0;
         }
@@ -97,7 +97,7 @@ public class LogIn extends GoalBDI{
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn evaluateContribution");
+        System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
     }
@@ -111,7 +111,7 @@ public class LogIn extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn goalSucceeded");
-        return true;
+        return false;
     }
     
 }
