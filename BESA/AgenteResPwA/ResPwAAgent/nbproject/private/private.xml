@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/updateEmotionalState.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/SensorHandlerAgent/GetInfoGuard.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapterReceiver.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/SensorHandlerAgent/SensorDataType.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerAgent.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/Cuenteria.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
         </group>
     </open-files>

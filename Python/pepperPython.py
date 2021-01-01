@@ -673,7 +673,6 @@ def  activate_stiffness(params):
     return alMotion.setSmartStiffnessEnabled(params)
 
 def change_emotion_expression(params):
-    print ("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
     emotionStateRobot.setLedR(params.get("R"))
     emotionStateRobot.setLedG(params.get("G"))
@@ -681,7 +680,6 @@ def change_emotion_expression(params):
     emotionStateRobot.setLedIntensity(params.get("ledIntens"))
     emotionStateRobot.setFactorVelocity(params.get("velocidad"))
     emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
-    print("R: ", emotionStateRobot.getLedR(), "G: ", emotionStateRobot.getLedG(), "B: ", emotionStateRobot.getLedB() )
     change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(), emotionStateRobot.getLedB(), 15.0)
     set_leds_intensity("AllLeds", emotionStateRobot.getLedIntensity())
     
