@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>C++ SDK - Hello world (step by step) &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="C++ SDK" href="index.html" />
+    <link rel="next" title="New qi C++ SDK" href="newsdk.html" />
+    <link rel="prev" title="C++ SDK - Hello world (auto-generated)" href="helloworld_auto.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-cpp-helloworld_detailed">
+                
+  <div class="section" id="c-sdk-hello-world-step-by-step">
+<span id="cpp-helloworld-detailed"></span><h1>C++ SDK - Hello world (step by step)<a class="headerlink" href="#c-sdk-hello-world-step-by-step" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>You should have some good knowledges in C++. However, some C++11 new features
+independent of NAOqi SDK are detailed in this tutorial.</p>
+</div>
+<div class="section" id="set-your-environment">
+<h2>Set your environment<a class="headerlink" href="#set-your-environment" title="Permalink to this headline">¶</a></h2>
+<p>To set your environment in order to be ready to code:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Install qiBuild.</strong></p>
+<p><em>Why?</em></p>
+<p><strong>qiBuild</strong> is the tool used for building software.</p>
+<p><em>How?</em></p>
+<p class="last">Follow the step by step guide: <a class="reference internal" href="install_guide.html#inst-qibuild-4-naoqi"><span>Installing qiBuild</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Create the directory where you want to create your module.</strong></p>
+<p><em>How?</em></p>
+<p>Go in your worktree directory, inside it create another directory
+where you want to write your new module.</p>
+<p>For this tutorial, this directory is named: <code class="docutils literal"><span class="pre">octopus</span></code>.</p>
+<p><em>Result</em></p>
+<p class="last">We have this tree: <code class="docutils literal"><span class="pre">my_worktree/octopus</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Create the qiproject.xml file.</strong></p>
+<p><em>Why?</em></p>
+<p>The file <code class="docutils literal"><span class="pre">qiproject.xml</span></code> is used by <strong>qiBuild</strong> to know how to
+manage dependencies between the libraries your project uses.</p>
+<p>The minimum content of this file should be:</p>
+<ul class="simple">
+<li>The maintainer of the project</li>
+<li>The name of your project.</li>
+</ul>
+<p><em>How?</em></p>
+<p>In your <code class="docutils literal"><span class="pre">octopus</span></code> directory, create the file <code class="docutils literal"><span class="pre">qiproject.xml</span></code>
+with a content organized as follows:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">&lt;project name=&quot;octopus&quot;&gt;</span>
+<span class="go">    &lt;maintainer email=&quot;jdoe@mycompany.com&quot;&gt;John DOE&lt;/maintainer&gt;</span>
+<span class="go">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<p class="last">Note: The name of your project directory and the project name
+in the file <code class="docutils literal"><span class="pre">qiproject.xml</span></code> do not necessarily have to be the same.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Create the CMakeLists.txt file.</strong></p>
+<p><em>Why?</em></p>
+<p>The file <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> is used to know how to build the
+source code corresponding to your own project.</p>
+<p><em>How?</em></p>
+<p>In your octopus directory, create the file CMakeLists.txt
+with the following content:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cmake_minimum_required(VERSION 2.8)</span>
+<span class="go">project(octopus)</span>
+</pre></div>
+</div>
+<p class="last">Note: the name of your project in the CMakeLists.txt file has no impact.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Your first configuration.</strong></p>
+<p><em>Why?</em></p>
+<p>The configuration prepares your project to be builded.</p>
+<p><em>How?</em></p>
+<p>To create the new build directory where your libraries and executables
+will be builded later, write, in your <code class="docutils literal"><span class="pre">octopus</span></code> directory:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild configure --release</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">--release</span></code> specifies in release mode.
+If you do not precise <code class="docutils literal"><span class="pre">--release</span></code>, the configuration will be
+done by default in debug mode.</p>
+<p><em>Result</em></p>
+<p>Look in your project directory, <strong>qiBuild</strong> just created for you a brand
+new:</p>
+<p><code class="docutils literal"><span class="pre">build-&lt;custom&gt;</span> <span class="pre">directory</span></code></p>
+<p class="last">Where <code class="docutils literal"><span class="pre">&lt;custom&gt;</span></code> corresponds to your system configuration,
+for example <code class="docutils literal"><span class="pre">sys-linux_x86_64</span></code> if you are on Linux 64 bits.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="your-first-code">
+<h2>Your first code<a class="headerlink" href="#your-first-code" title="Permalink to this headline">¶</a></h2>
+<p>In this part, you will learn how to write and build your first &#8220;Hello World&#8221;
+with qibuild.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Write your first code</strong></p>
+<p>Well, we have a directory where our code will be builded in the future,
+but we have no code at all for the moment. Let&#8217;s write it! Because we are
+very original, let&#8217;s write a nice Hello World!</p>
+<p>Let&#8217;s create the following file called <code class="docutils literal"><span class="pre">main.cpp</span></code> in a new sub-directory:</p>
+<p><code class="docutils literal"><span class="pre">src:</span></code></p>
+<p>In the <code class="docutils literal"><span class="pre">src</span></code> directory, create the file <code class="docutils literal"><span class="pre">main.cpp</span></code> with the following
+content:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="gp">#</span>include &lt;iostream&gt;
+
+<span class="go">int main()</span>
+<span class="go">{</span>
+<span class="go">  std::cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; std::endl;</span>
+<span class="go">  return 0;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Build your first code (first try)</strong></p>
+<p>Simply write:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild make</span>
+</pre></div>
+</div>
+<p><em>Result</em></p>
+<p>Perfect, no error.</p>
+<p>But, wait, I cannot see my hello world program anywhere!
+Actually, it&#8217;s normal, we never said to <strong>qiBuild</strong> what file it
+should build.</p>
+<p>To do so, just add in the file <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> the line:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qi_create_bin(octopus-bin &quot;src/main.cpp&quot;)</span>
+</pre></div>
+</div>
+<p>This lines said to <strong>qiBuild</strong> it should build an executable file named
+<code class="docutils literal"><span class="pre">octopus-bin</span></code> from the source file <code class="docutils literal"><span class="pre">src/main.cpp</span></code>.</p>
+<p>Your <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file should now looks like this:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">cmake_minimum_required(VERSION 2.8)</span>
+<span class="go">project(octopus)</span>
+
+<span class="go">qi_create_bin(octopus-bin &quot;src/main.cpp&quot;)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Build your first code (second try)</strong></p>
+<p>Let&#8217;s compile again:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild make</span>
+</pre></div>
+</div>
+<p>Oh no! <strong>qiBuild</strong> shows this beautiful error message:</p>
+<a class="reference internal image-reference" href="../../_images/cpp_dummies_qibuilderror01.png"><img alt="../../_images/cpp_dummies_qibuilderror01.png" src="../../_images/cpp_dummies_qibuilderror01.png" style="width: 541px; height: 137px;" /></a>
+<p>Sounds like <strong>qiBuild</strong> cannot use the <code class="docutils literal"><span class="pre">qi_create_bin</span></code> command.</p>
+<p>Actually that&#8217;s normal, because <strong>qiBuild</strong> does not know where this
+command is available.</p>
+<p>To correct that, just add to your <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file the line:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">find_package(qibuild)</span>
+</pre></div>
+</div>
+<p>This line tells to <strong>qiBuild</strong> that is should find and use the package
+<strong>qiBuild</strong> which contains the command <code class="docutils literal"><span class="pre">qi_create_bin</span></code>.</p>
+<p>Your file <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> should now look like this:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">cmake_minimum_required(VERSION 2.8)</span>
+<span class="go">project(octopus)</span>
+<span class="go">find_package(qibuild)</span>
+
+<span class="go">qi_create_bin(octopus-bin &quot;src/main.cpp&quot;)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Build your first code (third and last try)</strong></p>
+<p>Let&#8217;s compile again:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild make</span>
+</pre></div>
+</div>
+<p>This time it is OK, you will find your brand new executable file in the
+<code class="docutils literal"><span class="pre">build-&lt;custom&gt;/sdk/bin</span></code> directory, where:
+<code class="docutils literal"><span class="pre">&lt;custom&gt;</span></code> corresponds to your system configuration,
+for example <code class="docutils literal"><span class="pre">sys-linux_x86_64</span></code>.</p>
+<p>Congratulations!</p>
+<p>You could execute it just by writing:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">./octopus-bin.</span>
+</pre></div>
+</div>
+<p class="last">Congratulations! You wrote your first Hello World with <strong>qiBuild</strong>!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../programming_index.html">SDKs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../python/index.html">Python SDK</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">C++ SDK</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="install_guide.html">C++ SDK - Installation Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="helloworld_auto.html">C++ SDK - Hello world (auto-generated)</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">C++ SDK - Hello world (step by step)</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="newsdk.html">New qi C++ SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="oldsdk.html">Deprecated C++ SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../java/index_java.html">Java SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../js/index.html">JavaScript SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros/index_ros.html">ROS Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deprecated_sdks.html">Former Versions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">C++ SDK - Hello world (step by step)</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#set-your-environment">Set your environment</a></li>
+<li><a class="reference internal" href="#your-first-code">Your first code</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

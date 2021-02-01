@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NAOqi Memory Key Index &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="index.html" />
+
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-memoryindex">
+                
+
+   <h1>NAOqi Memory Key Index</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-b"><strong>b</strong></a> | 
+   <a href="#cap-c"><strong>c</strong></a> | 
+   <a href="#cap-d"><strong>d</strong></a> | 
+   <a href="#cap-e"><strong>e</strong></a> | 
+   <a href="#cap-f"><strong>f</strong></a> | 
+   <a href="#cap-l"><strong>l</strong></a> | 
+   <a href="#cap-m"><strong>m</strong></a> | 
+   <a href="#cap-p"><strong>p</strong></a> | 
+   <a href="#cap-r"><strong>r</strong></a> | 
+   <a href="#cap-s"><strong>s</strong></a> | 
+   <a href="#cap-u"><strong>u</strong></a> | 
+   <a href="#cap-v"><strong>v</strong></a>
+   </div>
+
+   <table class="indextable modindextable" cellspacing="0" cellpadding="2">
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-b"><td></td><td>
+       <strong>b</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/albacklightingdetection-api.html#BacklightingDetection/BacklightingValue"><code class="xref">BacklightingDetection/BacklightingValue</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-c"><td></td><td>
+       <strong>c</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/alcloseobjectdetection-api.html#CloseObjectDetection/ObjectInfo"><code class="xref">CloseObjectDetection/ObjectInfo</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-d"><td></td><td>
+       <strong>d</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/aldarknessdetection-api.html#DarknessDetection/DarknessValue"><code class="xref">DarknessDetection/DarknessValue</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-e"><td></td><td>
+       <strong>e</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/LastMovementsInZone1"><code class="xref">EngagementZones/LastMovementsInZone1</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/LastMovementsInZone2"><code class="xref">EngagementZones/LastMovementsInZone2</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/LastMovementsInZone3"><code class="xref">EngagementZones/LastMovementsInZone3</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/PeopleInZone1"><code class="xref">EngagementZones/PeopleInZone1</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/PeopleInZone2"><code class="xref">EngagementZones/PeopleInZone2</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#EngagementZones/PeopleInZone3"><code class="xref">EngagementZones/PeopleInZone3</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-f"><td></td><td>
+       <strong>f</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/sensors/alfsr-api.html#footContact"><code class="xref">footContact</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-l"><td></td><td>
+       <strong>l</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/sensors/alfsr-api.html#leftFootContact"><code class="xref">leftFootContact</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/sensors/alfsr-api.html#leftFootTotalWeight"><code class="xref">leftFootTotalWeight</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-m"><td></td><td>
+       <strong>m</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/almovementdetection-api.html#MovementDetection/MovementInfo"><code class="xref">MovementDetection/MovementInfo</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-p"><td></td><td>
+       <strong>p</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alfacecharacteristics-api.html#PeoplePerception/Person/<ID>/AgeProperties"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/AgeProperties</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/AnglesYawPitch"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/AnglesYawPitch</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/Distance"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/Distance</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alengagementzones-api.html#PeoplePerception/Person/<ID>/EngagementZone"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/EngagementZone</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alfacecharacteristics-api.html#PeoplePerception/Person/<ID>/ExpressionProperties"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/ExpressionProperties</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/algazeanalysis-api.html#PeoplePerception/Person/<ID>/EyeOpeningDegree"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/EyeOpeningDegree</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alfacecharacteristics-api.html#PeoplePerception/Person/<ID>/FacialPartsProperties"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/FacialPartsProperties</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/algazeanalysis-api.html#PeoplePerception/Person/<ID>/GazeDirection"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/GazeDirection</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alfacecharacteristics-api.html#PeoplePerception/Person/<ID>/GenderProperties"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/GenderProperties</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/algazeanalysis-api.html#PeoplePerception/Person/<ID>/HeadAngles"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/HeadAngles</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/IsFaceDetected"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsFaceDetected</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/algazeanalysis-api.html#PeoplePerception/Person/<ID>/IsLookingAtRobot"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsLookingAtRobot</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alsittingpeopledetection-api.html#PeoplePerception/Person/<ID>/IsSitting"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsSitting</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/IsVisible"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsVisible</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alwavingdetection-api.html#PeoplePerception/Person/<ID>/IsWaving"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsWaving</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alwavingdetection-api.html#PeoplePerception/Person/<ID>/IsWavingCenter"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsWavingCenter</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alwavingdetection-api.html#PeoplePerception/Person/<ID>/IsWavingLeft"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsWavingLeft</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alwavingdetection-api.html#PeoplePerception/Person/<ID>/IsWavingRight"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/IsWavingRight</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/algazeanalysis-api.html#PeoplePerception/Person/<ID>/LookingAtRobotScore"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/LookingAtRobotScore</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/NotSeenSince"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/NotSeenSince</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/PositionInRobotFrame"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/PositionInRobotFrame</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/PositionInTorsoFrame"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/PositionInTorsoFrame</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/PositionInWorldFrame"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/PositionInWorldFrame</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/PresentSince"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/PresentSince</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/RealHeight"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/RealHeight</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/ShirtColor"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/ShirtColor</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alpeopleperception-api.html#PeoplePerception/Person/<ID>/ShirtColorHSV"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/ShirtColorHSV</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/peopleperception/alfacecharacteristics-api.html#PeoplePerception/Person/<ID>/SmileProperties"><code class="xref">PeoplePerception/Person/&lt;ID&gt;/SmileProperties</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-r"><td></td><td>
+       <strong>r</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/sensors/alfsr-api.html#rightFootContact"><code class="xref">rightFootContact</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/sensors/alfsr-api.html#rightFootTotalWeight"><code class="xref">rightFootTotalWeight</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-s"><td></td><td>
+       <strong>s</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/alsegmentation3D-api.html#Segmentation3D/BlobsList"><code class="xref">Segmentation3D/BlobsList</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/alsegmentation3D-api.html#Segmentation3D/TopOfTrackedBlob"><code class="xref">Segmentation3D/TopOfTrackedBlob</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-u"><td></td><td>
+       <strong>u</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/core/alusersession-api.html#UserSession/OpenSessions"><code class="xref">UserSession/OpenSessions</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-v"><td></td><td>
+       <strong>v</strong></td><td></td></tr>
+     <tr class="cg-0">
+       <td></td>
+       <td>&nbsp;&nbsp;&nbsp;
+       <a href="naoqi/vision/alvisualspacehistory-api.html#VisualSpaceHistory/VisualGrid/Data"><code class="xref">VisualSpaceHistory/VisualGrid/Data</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ref/index.html">Former NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp-classindex.html">&gt; C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpp-funcindex.html">&gt; C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi-eventindex.html">&gt; NAOqi Events</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">&gt; NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ref/cpp-api.html">C++ library APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal/notice.html">Legal notices</a></li>
+</ul>
+
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="glossary.html">Glossary</a>
+      <a title="Site map" href="contents.html">Site map</a>
+      <a title="Index" href="genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

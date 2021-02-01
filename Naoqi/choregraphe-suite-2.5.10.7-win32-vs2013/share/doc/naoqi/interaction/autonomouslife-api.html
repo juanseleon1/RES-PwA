@@ -1,0 +1,1148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALAutonomousLife API &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALAutonomousLife" href="autonomouslife.html" />
+    <link rel="next" title="Launch trigger conditions" href="triggerconditions.html" />
+    <link rel="prev" title="ALAutonomousLife" href="autonomouslife.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-interaction-autonomouslife-api">
+                
+  <div class="section" id="alautonomouslife-api">
+<span id="autonomouslife-api"></span><h1>ALAutonomousLife API<a class="headerlink" href="#alautonomouslife-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index_interaction.html#naoqi-interaction"><span>NAOqi Interaction engines</span></a> - <a class="reference internal" href="autonomouslife.html#autonomouslife"><span>Overview</span></a> | API |
+<a class="reference internal" href="triggerconditions.html#launchtriggerconditions"><span>Launch trigger conditions</span></a> | <a class="reference internal" href="autonomouslife_advanced.html#autonomouslife-advanced"><span>Advanced</span></a></p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alautonomouslifeproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><span>ALModule API</span></a>.
+It also has the following specific methods:</p>
+<span class="target" id="alautonomouslifeproxy-launchpad-api"><span id="alautonomouslifeproxy-focus-api"></span></span><dl class="class">
+<dt id="AutonomousLifeProxy">
+<em class="property">class </em><code class="descname">AutonomousLifeProxy</code><a class="headerlink" href="#AutonomousLifeProxy" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Methods for Autonomous Life state management:<ul>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::setState__ssCR" title="ALAutonomousLifeProxy::setState"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::setState</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getState" title="ALAutonomousLifeProxy::getState"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getState</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::setRobotOffsetFromFloor__floatCR" title="ALAutonomousLifeProxy::setRobotOffsetFromFloor"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::setRobotOffsetFromFloor</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getRobotOffsetFromFloor" title="ALAutonomousLifeProxy::getRobotOffsetFromFloor"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getRobotOffsetFromFloor</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::setSafeguardEnabled__ssCR.bCR" title="ALAutonomousLifeProxy::setSafeguardEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::setSafeguardEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::isSafeguardEnabled__ssCR" title="ALAutonomousLifeProxy::isSafeguardEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::isSafeguardEnabled</span></code></a></li>
+</ul>
+</li>
+<li>Methods for Activity focus management:<ul>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::focusedActivity" title="ALAutonomousLifeProxy::focusedActivity"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::focusedActivity</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::stopFocus" title="ALAutonomousLifeProxy::stopFocus"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::stopFocus</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::stopAll" title="ALAutonomousLifeProxy::stopAll"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::stopAll</span></code></a></li>
+</ul>
+</li>
+<li>Methods for Activity utilities:<ul>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getLifeTime" title="ALAutonomousLifeProxy::getLifeTime"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getLifeTime</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getActivityStatistics" title="ALAutonomousLifeProxy::getActivityStatistics"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getActivityStatistics</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getAutonomousActivityStatistics" title="ALAutonomousLifeProxy::getAutonomousActivityStatistics"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getAutonomousActivityStatistics</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getFocusHistory" title="ALAutonomousLifeProxy::getFocusHistory"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getFocusHistory</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getStateHistory" title="ALAutonomousLifeProxy::getStateHistory"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getStateHistory</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getActivityNature__ssCR" title="ALAutonomousLifeProxy::getActivityNature"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getActivityNature</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getActivityContextPermissionViolations__ssCR" title="ALAutonomousLifeProxy::getActivityContextPermissionViolations"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getActivityContextPermissionViolations</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getFocusContext__ssCR" title="ALAutonomousLifeProxy::getFocusContext"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getFocusContext</span></code></a></li>
+</ul>
+</li>
+<li>Methods for Autonomous Ability management:<ul>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::setAutonomousAbilityEnabled__ssCR.b" title="ALAutonomousLifeProxy::setAutonomousAbilityEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::setAutonomousAbilityEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getAutonomousAbilityEnabled__ssCR" title="ALAutonomousLifeProxy::getAutonomousAbilityEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getAutonomousAbilityEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::getAutonomousAbilitiesStatus" title="ALAutonomousLifeProxy::getAutonomousAbilitiesStatus"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getAutonomousAbilitiesStatus</span></code></a></li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="event-list">
+<h2>Event list<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#AutonomousLife/State" title="AutonomousLife/State"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">AutonomousLife/State()</span></code></a></li>
+<li><a class="reference internal" href="#AutonomousLife/FocusedActivity" title="AutonomousLife/FocusedActivity"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">AutonomousLife/FocusedActivity()</span></code></a></li>
+<li><a class="reference internal" href="#AutonomousLife/CompletedActivity" title="AutonomousLife/CompletedActivity"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">AutonomousLife/CompletedActivity()</span></code></a></li>
+<li><a class="reference internal" href="#AutonomousLife/NextActivity" title="AutonomousLife/NextActivity"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">AutonomousLife/NextActivity()</span></code></a></li>
+<li><a class="reference internal" href="#AutonomousLife/LaunchSuggestions" title="AutonomousLife/LaunchSuggestions"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">AutonomousLife/LaunchSuggestions()</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="signal-list">
+<h2>Signal list<a class="headerlink" href="#signal-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#ALAutonomousLifeProxy::activityTransition" title="ALAutonomousLifeProxy::activityTransition"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::activityTransition</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="alautonomouslifeproxy-setstate"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::setState__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">setState</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::setState__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lets the developer manually set limited state changes in AutonomousLife.
+For futher details, see: <a class="reference internal" href="../../ref/life/state_machine_management.html#autonomouslife-states"><span>States</span></a>.</p>
+<p>When changing the state to &#8220;disabled&#8221; or &#8220;safeguard&#8221;,
+<a class="reference internal" href="#alautonomouslifeproxy-stopall"><span>stopAll()</span></a>
+is called internally.</p>
+<p><em>Note</em> Manual change from interactive to solitary state will fail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>state</strong> &#8211; Can be one of the <a class="reference internal" href="../../ref/life/state_machine_management.html#autonomouslife-states"><span>States</span></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getState">
+<a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getState</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the current state of AutonomousLife.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Can be one of the <a class="reference internal" href="../../ref/life/state_machine_management.html#autonomouslife-states"><span>States</span></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::setRobotOffsetFromFloor__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">setRobotOffsetFromFloor</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::setRobotOffsetFromFloor__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows you to set if the robot is on the floor, or higher up such as on a table.</p>
+<p>This notably have an effect on how the robot search for humans with
+<a class="reference internal" href="autonomousabilities/albasicawareness.html#albasicawareness"><span>Basic Awareness</span></a>.
+Set it correctly to enhance tracking success.</p>
+<p>The default offset is 0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>offset</strong> &#8211; A float value in meters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getRobotOffsetFromFloor">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getRobotOffsetFromFloor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getRobotOffsetFromFloor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the current offset of the robot from the floor.</p>
+<p>The default offset is 0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A float value in meters.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-setsafeguardenabled"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::setSafeguardEnabled__ssCR.bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">setSafeguardEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::setSafeguardEnabled__ssCR.bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets if a given safeguard will be handled by Autonomous Life or not.
+Default for all safeguards is true.</p>
+<p>These parameters are automatically reset to default at the end of each activity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; Name of the safeguard to consider: RobotPushed, RobotFell,
+RobotMoved, CriticalDiagnosis, CriticalTemperature</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::isSafeguardEnabled__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">isSafeguardEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::isSafeguardEnabled__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a given safeguard will be handled by Autonomous Life or not.
+Default for all safeguards is true.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; Name of the safeguard to consider: RobotPushed, RobotFell,
+RobotMoved, CriticalDiagnosis, CriticalTemperature</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A bool, true if Autonomous Life handles the safeguard.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::focusedActivity">
+<a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">focusedActivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::focusedActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the current focused activity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name of the focused activity.
+Is an empty string (&#8220;&#8221;) if no activity is focused.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-switchfocus"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::switchFocus">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">switchFocus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::switchFocus" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alautonomouslifeproxy-switchfocus1"><span>ALAutonomousLifeProxy::switchFocus(activity_name)</span></a></li>
+<li><a class="reference internal" href="#alautonomouslifeproxy-switchfocus2"><span>ALAutonomousLifeProxy::switchFocus(activity_name,flags)</span></a></li>
+</ul>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-switchfocus1"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::switchFocus__ssCR">
+<a class="reference internal" href="../stdtypes.html#i" title="int">int</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">switchFocus</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>activity_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::switchFocus__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The focused activity is the one running activity.
+This has the same effect as calling switchFocus(activity_name, 0)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>activity_name</strong> &#8211; <p>The name of the activity to start and switch focus to.</p>
+<p>The current focused activity is stopped first.</p>
+<p>Format: &#8220;package-uuid/behavior-path&#8221;</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-switchfocus2"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::switchFocus__ssCR.iCR">
+<a class="reference internal" href="../stdtypes.html#i" title="int">int</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">switchFocus</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>activity_name</em>, <a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::switchFocus__ssCR.iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The focused activity is the one running activity.</p>
+<p>This function allows to use the stacking feature of activity focus.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>activity_name</strong> &#8211; <p>The name of the activity to start and switch focus to.</p>
+<p>The current focused activity is stopped first.</p>
+<p>Format: &#8220;package-uuid/behavior-path&#8221;</p>
+</li>
+<li><strong>flags</strong> &#8211; <p>STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1).</p>
+<p>If STOP_AND_STACK_CURRENT is used, then the current focused
+activity will remain on the stack.  When the newly focused
+activity is stopped, the previous one in the stack will
+automatically be restarted and regain focus.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::stopFocus">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">stopFocus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::stopFocus" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will stop the focused activity.</p>
+<p>If there is a previous activity remaining on the stack, it is restarted
+and focused.</p>
+<p>See <a class="reference internal" href="#alautonomouslifeproxy-switchfocus2"><span>switchFocus()</span></a> and
+STOP_AND_STACK_CURRENT to see how to leave activities on the stack when
+switching focus.</p>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-stopall"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::stopAll">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">stopAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::stopAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will stop the focused activity.</p>
+<p>It will also clear the stack; no stacked activities will automatically be
+restarted and focused.</p>
+<p>See <a class="reference internal" href="#alautonomouslifeproxy-switchfocus2"><span>switchFocus()</span></a> and
+STOP_AND_STACK_CURRENT to see how to leave activities on the stack when
+switching focus.</p>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getlifetime"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::getLifeTime">
+<a class="reference internal" href="../stdtypes.html#i" title="int">int</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getLifeTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getLifeTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the time in seconds as life sees it. Based on gettimeofday().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The int time in seconds as Autonomous Life sees it.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getActivityStatistics">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getActivityStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getActivityStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets focus count, last focused time, etc for each activity.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A map of activity names, with a corresponding map of
+&#8220;prevFocusTime&#8221;, &#8220;prevUnfocusTime&#8221;, &#8220;focusCount&#8221;,
+&#8220;totalDuration&#8221;. Times are 0 for unlaunched Activities.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getAutonomousActivityStatistics">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getAutonomousActivityStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getAutonomousActivityStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets focus count, last focused time, etc just for each autonomous activity.
+This returns a subset of what <a class="reference internal" href="#ALAutonomousLifeProxy::getActivityStatistics" title="ALAutonomousLifeProxy::getActivityStatistics"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::getActivityStatistics</span></code></a> returns.
+An autonomous activity is one that has launch trigger conditions.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A map of activity names, with a corresponding map of
+&#8220;prevFocusTime&#8221;, &#8220;prevUnfocusTime&#8221;, &#8220;focusCount&#8221;,
+&#8220;totalDuration&#8221;. Times are 0 for unlaunched Activities.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getFocusHistory">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getFocusHistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getFocusHistory" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function.  It is recommended to specify
+maximum depth to prevent large ALValues from being transmitted.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alautonomouslifeproxy-getfocushistory1"><span>ALAutonomousLifeProxy::getFocusHistory()</span></a></li>
+<li><a class="reference internal" href="#alautonomouslifeproxy-getfocushistory2"><span>ALAutonomousLifeProxy::getFocusHistory(depth)</span></a></li>
+</ul>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getfocushistory1"></span><dl class="function">
+<dt>
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getFocusHistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Gets a list of the activities that have been focused, and their time focused,
+sorted from oldest to most recent.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs, each pair is ActivityName, PreviousFocusedTime.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getfocushistory2"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::getFocusHistory__iCR">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getFocusHistory</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>depth</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getFocusHistory__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of the activities that have been focused, and their time focused,
+sorted from oldest to most recent.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>depth</strong> &#8211; The maximum size of a subset of history to return.
+The subset is of the most recent history.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of pairs, each pair is ActivityName, PreviousFocusedTime.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getStateHistory">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getStateHistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getStateHistory" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function.  It is recommended to specify
+maximum depth to prevent large ALValues from being transmitted.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alautonomouslifeproxy-getstatehistory1"><span>ALAutonomousLifeProxy::getStateHistory()</span></a></li>
+<li><a class="reference internal" href="#alautonomouslifeproxy-getstatehistory2"><span>ALAutonomousLifeProxy::getStateHistory(depth)</span></a></li>
+</ul>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getstatehistory1"></span><dl class="function">
+<dt>
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getStateHistory</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Gets a list of the states that have been entered, and their time entered,
+sorted from oldest to most recent.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of pairs, each pair is StateName, PreviousEnteredTime.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getstatehistory2"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::getStateHistory__iCR">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getStateHistory</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>depth</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getStateHistory__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of the states that have been entered, and their time entered,
+sorted from oldest to most recent.</p>
+<p>Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>depth</strong> &#8211; The maximum size of a subset of history to return.
+The subset is of the most recent history.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of pairs, each pair is StateName, PreviousEnteredTime.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getActivityNature__ssCR">
+<a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getActivityNature</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>activity_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getActivityNature__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells you if an activity has &#8220;interactive&#8221; or &#8220;solitary&#8221; nature.</p>
+<p>If you pass a string which is not an activity, this will throw.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>activity_name</strong> &#8211; <p>The name of the activity to query.</p>
+<p>Format: &#8220;package-uuid/behavior-path&#8221;</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">&#8220;interactive&#8221; or &#8220;solitary&#8221;</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getActivityContextPermissionViolations__ssCR">
+<a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getActivityContextPermissionViolations</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>activity_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getActivityContextPermissionViolations__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of permissions that would be violated by a given activity in the current context.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>activity_name</strong> &#8211; <p>The name of the activity to query.</p>
+<p>Format: &#8220;package-uuid/behavior-path&#8221;</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>An array of strings of the violated permissions.</p>
+<p>&#8220;nature&#8221;: If the activity is solitary but Autonomous Life is in interactive state.</p>
+<p>&#8220;canRunOnPod&#8221;:  If the robot is currently on the Charging Station, but
+the activity does not claim that it can be started on the Charging Station in its properties.</p>
+<p>&#8220;canRunInSleep&#8221;: If the robot is currently asleep, the activity cannot be started.</p>
+<p>&#8220;error&#8221;: If the passed activity name is not actually an activity.</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-getfocuscontext"></span><dl class="function">
+<dt id="ALAutonomousLifeProxy::getFocusContext__ssCR">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getFocusContext</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>key_name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getFocusContext__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a value of an ALMemory key that is used in an activity launch trigger condition.
+The returned value will reflect the value at the time of the most recent autonomous
+activity focus.  Use this to understand why an activity was started autonomously.
+Times based on <a class="reference internal" href="#alautonomouslifeproxy-getlifetime"><span>getLifeTime()</span></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key_name</strong> &#8211; <p>The name of the ALMemory key to query.</p>
+<p>If the passed key is not used in any conditions, the function will throw</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of the timestamp of when it was set and the ALValue of the memory key:
+[seconds, microseconds, value]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::setAutonomousAbilityEnabled__ssCR.b">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">setAutonomousAbilityEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>autonomous_ability</em>, <a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::setAutonomousAbilityEnabled__ssCR.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables or disables a specific autonomous ability or all of them.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>autonomous_ability</strong> &#8211; The autonomous ability to enable/disable (ex: &#8220;BasicAwareness&#8221;) or &#8220;All&#8221; if you want to enable or disable all the autonomous abilities.</li>
+<li><strong>enabled</strong> &#8211; True to enable the autonomous ability, False otherwise.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>For further details, see: <a class="reference internal" href="../../ref/life/autonomous_abilities_management.html#autonomous-abilities-management"><span>Autonomous Abilities</span></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getAutonomousAbilityEnabled__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getAutonomousAbilityEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>autonomous_ability</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getAutonomousAbilityEnabled__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an autonomous ability is enabled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>autonomous_ability</strong> &#8211; The autonomous ability (ex: &#8220;BasicAwareness&#8221;) or &#8220;All&#8221; (in this case it will return True only if all the autonomous abilities are enabled).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if enabled, False otherwise.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>For further details, see: <a class="reference internal" href="../../ref/life/autonomous_abilities_management.html#autonomous-abilities-management"><span>Autonomous Abilities</span></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::getAutonomousAbilitiesStatus">
+std::vector&lt;AutonomousAbilityStatus&gt; <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">getAutonomousAbilitiesStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::getAutonomousAbilitiesStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status of all the autonomous abilities.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A vector of AutonomousAbilityStatus containing the autonomous ability name, a boolean to know if the autonomous ability is enabled or not and another boolean to know if the autonomous ability is currently running or not.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-guess"><div class="highlight"><pre>AutonomousAbilityStatus =
+{
+   &quot;name&quot; : &lt;str&gt;,
+   &quot;enabled&quot; : &lt;bool&gt;,
+   &quot;running&quot; : &lt;bool&gt;
+}
+</pre></div>
+</div>
+<p>For further details, see: <a class="reference internal" href="../../ref/life/autonomous_abilities_management.html#autonomousabilities-priorities"><span>Priority between the Autonomous Abilities</span></a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="AutonomousLife/State">
+<div class="line">Event: <code class="descname">&quot;AutonomousLife/State&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> state</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#AutonomousLife/State" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the state of autonomous life changes.</p>
+<p>Note that if one interactive activity switches focus to another interactive
+activity, this event is raised, as the &#8220;interactive&#8221; state is being
+reasserted.</p>
+<p>This event is raised after Autonomous Life has completed all necessary
+internal operations to prepare for the state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;AutonomousLife/State&#8221;</li>
+<li><strong>state</strong> &#8211; The current state of Autonomous Life.
+Can be one of the <a class="reference internal" href="../../ref/life/state_machine_management.html#autonomouslife-states"><span>States</span></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="AutonomousLife/FocusedActivity">
+<div class="line">Event: <code class="descname">&quot;AutonomousLife/FocusedActivity&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> activity_name</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#AutonomousLife/FocusedActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised whenever the focused activity changes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;AutonomousLife/FocusedActivity&#8221;</li>
+<li><strong>activity_name</strong> &#8211; The name of the focused activity.
+If no activity is focused it is an empty string: &#8220;&#8221;</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="AutonomousLife/CompletedActivity">
+<div class="line">Event: <code class="descname">&quot;AutonomousLife/CompletedActivity&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> activity_name</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#AutonomousLife/CompletedActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised whenever an activity completes its execution and exits.</p>
+<p><em>Note</em>  This event is raised before the FocusedActivity event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;AutonomousLife/CompletedActivity&#8221;</li>
+<li><strong>activity_name</strong> &#8211; The name of the previous activity that exited.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="AutonomousLife/NextActivity">
+<div class="line">Event: <code class="descname">&quot;AutonomousLife/NextActivity&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> activity_name</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#AutonomousLife/NextActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised whenever an activity is going to be focused.</p>
+<p><em>Note</em>  This event is raised before the FocusedActivity event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;AutonomousLife/NextActivity&#8221;</li>
+<li><strong>activity_name</strong> &#8211; The name of the activity that will be focused next.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alautonomouslifeproxy-launchsuggestions"></span><dl class="event">
+<dt id="AutonomousLife/LaunchSuggestions">
+<div class="line">Event: <code class="descname">&quot;AutonomousLife/LaunchSuggestions&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, std::vector&lt;<a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a>&gt;<em> activity_names</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#AutonomousLife/LaunchSuggestions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised whenever there are activities that have launch conditions triggered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;AutonomousLife/LaunchSuggestions&#8221;</li>
+<li><strong>activity_names</strong> &#8211; The list of activities that currently have their
+launch conditions triggered.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="signals">
+<h2>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALAutonomousLifeProxy::activityTransition">
+ActivityTransitionInfo <code class="descclassname">ALAutonomousLifeProxy::</code><code class="descname">activityTransition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAutonomousLifeProxy::activityTransition" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Triggered:</th><td class="field-body">When life switches focus from one activity to another.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A data structure explaining the when, what, and why of the focus transition.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-guess"><div class="highlight"><pre>ActivityTransitionInfo =
+{
+  &quot;TransitionTime&quot; : &lt;qi::SystemClock&gt;,
+  &quot;PreviousActivityName&quot; : &lt;string&gt;,
+  &quot;PreviousActivityStopReason&quot; : &lt;string&gt;,
+  &quot;FocusedActivityName&quot; : &lt;string&gt;,
+  &quot;FocusedActivityStartReason&quot; : &lt;string&gt;
+}
+</pre></div>
+</div>
+<p>The PreviousActivityName and FocusedActivityName are formatted the same as
+<a class="reference internal" href="#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus</span></code></a>.</p>
+<p>For more information about system clock, see: <a class="reference internal" href="../../dev/libqi/api/cpp/base/clock.html#api-clock"><span>qi clocks</span></a>.</p>
+<p>FocusedActivityStartReason:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>default-activity</td>
+<td>The default case happens when life transitions from disabled/safeguard state.</td>
+</tr>
+<tr class="row-odd"><td>condition</td>
+<td>Activity started because its trigger condition was true.</td>
+</tr>
+<tr class="row-even"><td>applauncher-voice</td>
+<td>Activity started by voice in main interactive activity.</td>
+</tr>
+<tr class="row-odd"><td>applauncher-tablet</td>
+<td>Activity started by tablet in main interactive activity.</td>
+</tr>
+<tr class="row-even"><td>unstacked</td>
+<td>Activity started because it was on the activity stack, and top of stack exited</td>
+</tr>
+<tr class="row-odd"><td>unknown-api-caller</td>
+<td>Activity started by a call to switchFocus() API with no reason given.</td>
+</tr>
+</tbody>
+</table>
+<p>PreviousActivityStopReason:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>self-stop</td>
+<td>Activty exited by its self.</td>
+</tr>
+<tr class="row-odd"><td>user-stop</td>
+<td>User stopped the activity with the head tactile gesture.</td>
+</tr>
+<tr class="row-even"><td>users-lost</td>
+<td>The main interactive activity exited because no users were present.</td>
+</tr>
+<tr class="row-odd"><td>disabled-state, safeguard-state</td>
+<td>Activity was terminated because of entering disabled/safeguard states.</td>
+</tr>
+<tr class="row-even"><td>permission-context</td>
+<td>Activity was terminated due to a permission context change that is incompatible.
+For example, if the robot is put to sleep.</td>
+</tr>
+<tr class="row-odd"><td>switchfocus-api-interrupt</td>
+<td>The switchFocus() API was used, which terminates the previous activity before
+starting the next one.</td>
+</tr>
+<tr class="row-even"><td>unknown-api-caller</td>
+<td>The stopFocus/stopAll() API was called with no reason given.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index_interaction.html">NAOqi Interaction engines</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="autonomouslife.html">ALAutonomousLife</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALAutonomousLife API</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="triggerconditions.html">Launch trigger conditions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="autonomouslife_advanced.html">ALAutonomousLife advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="autonomousabilities/alautonomousblinking.html">ALAutonomousBlinking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autonomousabilities/albackgroundmovement.html">ALBackgroundMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autonomousabilities/albasicawareness.html">ALBasicAwareness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autonomousabilities/allisteningmovement.html">ALListeningMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autonomousabilities/alspeakingmovement.html">ALSpeakingMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dialog/aldialog.html">ALDialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dialog/lexicon.html">Dialog Lexicon</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALAutonomousLife API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#event-list">Event list</a></li>
+<li><a class="reference internal" href="#signal-list">Signal list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+<li><a class="reference internal" href="#signals">Signals</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

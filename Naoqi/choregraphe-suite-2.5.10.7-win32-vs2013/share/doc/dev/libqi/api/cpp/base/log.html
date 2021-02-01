@@ -1,0 +1,1208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qi::log &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../../../index.html" />
+    <link rel="up" title="C++ qi base API" href="index.html" />
+    <link rel="next" title="qi helper macros" href="macro.html" />
+    <link rel="prev" title="qi::IOColor" href="iocolor.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-api-cpp-base-log">
+                
+  <div class="section" id="qi-log">
+<span id="api-log"></span><h1>qi::log<a class="headerlink" href="#qi-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<strong><p class="rubric">Global Namespaces</p>
+</strong><ul>
+<li><p class="first">namespace qi::log</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (namespace qi::log)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::log::addCategory__ssCR">qi::log::addCategory</a><p><a class="reference internal" href="#qi::log::color">qi::log::color</a></p>
+<p><a class="reference internal" href="#qi::log::enableCategory__ssCR.SubscriberId">qi::log::enableCategory</a></p>
+<p><a class="reference internal" href="#qi::log::init__qi::LogLevel.qi::LogContext.b">qi::log::init</a></p>
+<p><a class="reference internal" href="#qi::log::setSynchronousLog__b">qi::log::setSynchronousLog</a></p>
+<p><a class="reference internal" href="#qi::log::setColor__LogColor">qi::log::setColor</a></p>
+<p><a class="reference internal" href="#qi::log::addHandler__ssCR.qi::log::Handler.qi::LogLevel">qi::log::addHandler</a></p>
+<p><a class="reference internal" href="#qi::log::removeHandler__ssCR">qi::log::removeHandler</a></p>
+<p><a class="reference internal" href="#qi::log::setVerbosity__SubscriberId.qi::log::LogLevelC">qi::log::setVerbosity</a></p>
+<p><a class="reference internal" href="#qi::log::setLogLevel__qi::LogLevelC.SubscriberId">qi::log::setLogLevel</a></p>
+<p><a class="reference internal" href="#qi::log::verbosity__X">qi::log::verbosity</a></p>
+<p><a class="reference internal" href="#qi::log::flush">qi::log::flush</a></p>
+<p><a class="reference internal" href="#qi::log::isVisible__CategoryType.qi::LogLevel">qi::log::isVisible</a></p>
+<p><a class="reference internal" href="#qi::log::addFilters__ssCR.SubscriberId">qi::log::addFilters</a></p>
+<p><a class="reference internal" href="#qi::log::context">qi::log::context</a></p>
+<p><a class="reference internal" href="#qi::log::logLevelToString__qi::LogLevelC.b">qi::log::logLevelToString</a></p>
+<p><a class="reference internal" href="#qi::log::logLevel__SubscriberId">qi::log::logLevel</a></p>
+<p><a class="reference internal" href="#qi::log::log__qi::LogLevelC.CategoryType.ssCR.cCP.cCP.iC">qi::log::log</a></p>
+<p><a class="reference internal" href="#qi::log::setContext__i">qi::log::setContext</a></p>
+<p><a class="reference internal" href="#qi::log::categories">qi::log::categories</a></p>
+<p><a class="reference internal" href="#qi::log::destroy">qi::log::destroy</a></p>
+<p><a class="reference internal" href="#qi::log::disableCategory__ssCR.SubscriberId">qi::log::disableCategory</a></p>
+<p><a class="reference internal" href="#qi::log::stringToLogLevel__cCP">qi::log::stringToLogLevel</a></p>
+<p><a class="reference internal" href="#qi::log::setCategory__SubscriberId.ssCR.qi::log::LogLevel">qi::log::setCategory</a></p>
+<p><a class="reference internal" href="#qi::log::addFilter__ssCR.qi::LogLevel.SubscriberId">qi::log::addFilter</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+<strong><p class="rubric">Global Macros</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qiLogWarningF_Msg_...">qiLogWarningF</a><p><a class="reference internal" href="#qiLogFatal_...">qiLogFatal</a></p>
+<p><a class="reference internal" href="#qiLogInfo_...">qiLogInfo</a></p>
+<p><a class="reference internal" href="#qiLogCategory_Cat">qiLogCategory</a></p>
+<p><a class="reference internal" href="#qiLogDebug_...">qiLogDebug</a></p>
+<p><a class="reference internal" href="#qiLogErrorF_Msg_...">qiLogErrorF</a></p>
+<p><a class="reference internal" href="#qiLogInfoF_Msg_...">qiLogInfoF</a></p>
+<p><a class="reference internal" href="#qiLogDebugF_Msg_...">qiLogDebugF</a></p>
+<p><a class="reference internal" href="#qiLogVerbose_...">qiLogVerbose</a></p>
+<p><a class="reference internal" href="#qiLogWarning_...">qiLogWarning</a></p>
+<p><a class="reference internal" href="#qiLogVerboseF_Msg_...">qiLogVerboseF</a></p>
+<p><a class="reference internal" href="#qiLogFatalF_Msg_...">qiLogFatalF</a></p>
+<p><a class="reference internal" href="#qiLogError_...">qiLogError</a></p>
+</ul>
+</dl>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<p><cite>qi::log</cite> provides logging facilities. It allows one to log in different
+categories with different levels.</p>
+<p>The user can choose which categories they want to see and at which level. It is
+possible to add handlers to process the log, broadcast them on the network,
+save them in a file, etc.</p>
+<div class="section" id="encoding">
+<h3>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h3>
+<p>Logs are not modified when printed or transmitted.</p>
+<p>That means that if the source file is UTF-8 AND the compiler considers your
+string literals as UTF-8 AND the output handles UTF-8 then all logs are printed the same.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>On Windows</strong>, the compiler (VS-2013) won&#8217;t necessarily interpret string
+literals as UTF-8. Most of the time with special characters, the behavior
+is undefined.</p>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/log.hpp&gt;</span>
+
+<span class="n">qiLogCategory</span><span class="p">(</span><span class="s">&quot;myprogram.mymodule&quot;</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello world&quot;</span><span class="p">;</span>
+
+  <span class="c1">// this variant is slower than the one above</span>
+  <span class="n">qiLogError</span><span class="p">(</span><span class="s">&quot;this.goes.in.another.category&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Goodbye world&quot;</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Log calls are lazily evaluated. When you put a function call in your log
+statements, the function will <em>not</em> be called if the log is disabled (at
+runtime or compilation-time).</p>
+<div class="last highlight-cpp"><div class="highlight"><pre><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">g</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">qiLogVerbose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">();</span> <span class="c1">// f() may not be called!</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="macro">
+<h3>Macro<a class="headerlink" href="#macro" title="Permalink to this headline">¶</a></h3>
+<dl class="automacro">
+<dt id="qiLogCategory_Cat">
+<code class="descname">qiLogCategory(Cat)</code><a class="headerlink" href="#qiLogCategory_Cat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add default category for the current scope.
+Each log has a category defined by the call to qiLogCategory()
+found in scope. So you must call qiLogCategory() at least once, for
+instance at the beginning of your source file or function.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="p">{</span>
+  <span class="n">qiLogCategory</span><span class="p">(</span><span class="n">my</span><span class="p">.</span><span class="n">category</span><span class="p">);</span>
+  <span class="n">qiLogInfoF</span><span class="p">(</span><span class="s">&quot;1 + 1 is %s&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;1 + 1 is &quot;</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogDebug_...">
+<code class="descname">qiLogDebug(...)</code><a class="headerlink" href="#qiLogDebug_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in debug mode. Not compiled on release and not shown by default.
+Use as follow:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qiLogDebug</span><span class="p">(</span><span class="s">&quot;foo.bar&quot;</span><span class="p">,</span> <span class="s">&quot;my foo is %d bar&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="n">qiLogDebug</span><span class="p">(</span><span class="s">&quot;foo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my foo is &quot;</span> <span class="o">&lt;&lt;</span> <span class="mi">42</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If you don&#8217;t want to see any log, use silent log level.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogDebugF_Msg_...">
+<code class="descname">qiLogDebugF(Msg, ...)</code><a class="headerlink" href="#qiLogDebugF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogVerbose_...">
+<code class="descname">qiLogVerbose(...)</code><a class="headerlink" href="#qiLogVerbose_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in verbose mode. This level is not shown by default.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogVerboseF_Msg_...">
+<code class="descname">qiLogVerboseF(Msg, ...)</code><a class="headerlink" href="#qiLogVerboseF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogInfo_...">
+<code class="descname">qiLogInfo(...)</code><a class="headerlink" href="#qiLogInfo_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in info mode.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogInfoF_Msg_...">
+<code class="descname">qiLogInfoF(Msg, ...)</code><a class="headerlink" href="#qiLogInfoF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogWarning_...">
+<code class="descname">qiLogWarning(...)</code><a class="headerlink" href="#qiLogWarning_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in warning mode.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogWarningF_Msg_...">
+<code class="descname">qiLogWarningF(Msg, ...)</code><a class="headerlink" href="#qiLogWarningF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogError_...">
+<code class="descname">qiLogError(...)</code><a class="headerlink" href="#qiLogError_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in error mode.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogErrorF_Msg_...">
+<code class="descname">qiLogErrorF(Msg, ...)</code><a class="headerlink" href="#qiLogErrorF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogFatal_...">
+<code class="descname">qiLogFatal(...)</code><a class="headerlink" href="#qiLogFatal_..." title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in fatal mode.</p>
+</dd></dl>
+
+<dl class="automacro">
+<dt id="qiLogFatalF_Msg_...">
+<code class="descname">qiLogFatalF(Msg, ...)</code><a class="headerlink" href="#qiLogFatalF_Msg_..." title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="E_qi::LogColor">
+<!--[E_qi::LogColor]--><em>enum</em> <code class="descname">qi::LogColor</code><a class="headerlink" href="#E_qi::LogColor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Logs color mode. </p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Brief</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogColor_Never</span></code></td>
+<td>Never show color. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogColor_Auto</span></code></td>
+<td>Auto color. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogColor_Always</span></code></td>
+<td>Always show color. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="type">
+<dt id="E_qi::LogContextAttr">
+<!--[E_qi::LogContextAttr]--><em>enum</em> <code class="descname">qi::LogContextAttr</code><a class="headerlink" href="#E_qi::LogContextAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Logs context attribute. </p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="10%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Value</th>
+<th class="head">Brief</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogContextAttr_None</span></code></td>
+<td>0</td>
+<td>No context. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogContextAttr_Verbosity</span></code></td>
+<td>1</td>
+<td>Show logs level. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogContextAttr_ShortVerbosity</span></code></td>
+<td>2</td>
+<td>Show short logs level. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogContextAttr_SystemDate</span></code></td>
+<td>4</td>
+<td>Show qi::SystemClock dates. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogContextAttr_Tid</span></code></td>
+<td>8</td>
+<td>Show threads id. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogContextAttr_Category</span></code></td>
+<td>16</td>
+<td>Show categories. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogContextAttr_File</span></code></td>
+<td>32</td>
+<td>Show logs files. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogContextAttr_Function</span></code></td>
+<td>64</td>
+<td>Show functions name. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogContextAttr_Return</span></code></td>
+<td>128</td>
+<td>Print an end line between contexts and logs. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogContextAttr_Date</span></code></td>
+<td>256</td>
+<td>Show qi::Clock dates. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="type">
+<dt id="E_qi::LogLevel">
+<!--[E_qi::LogLevel]--><em>enum</em> <code class="descname">qi::LogLevel</code><a class="headerlink" href="#E_qi::LogLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Log level verbosity. </p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="10%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Value</th>
+<th class="head">Brief</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogLevel_Silent</span></code></td>
+<td>0</td>
+<td>silent log level </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogLevel_Fatal</span></code></td>
+<td></td>
+<td>fatal log level </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogLevel_Error</span></code></td>
+<td></td>
+<td>error log level </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogLevel_Warning</span></code></td>
+<td></td>
+<td>warning log level </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogLevel_Info</span></code></td>
+<td></td>
+<td>info log level </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">LogLevel_Verbose</span></code></td>
+<td></td>
+<td>verbose log level </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">LogLevel_Debug</span></code></td>
+<td></td>
+<td>debug log level </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::addCategory__ssCR">
+CategoryType <code class="descclassname">qi::log::</code><code class="descname">addCategory</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::addCategory__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Add/get a category. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; Category to add/get. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">CategoryType structure. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::addFilter__ssCR.qi::LogLevel.SubscriberId">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">addFilter</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>cat</em>, <a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <em>level</em>, SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::addFilter__ssCR.qi::LogLevel.SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set per-subscriber category to level. Globbing is supported. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cat</strong> &#8211; Category to set. </li>
+<li><strong>level</strong> &#8211; Level to set to the category. </li>
+<li><strong>sub</strong> &#8211; Log subscriber id.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">addFilter</span><span class="p">(</span><span class="s">&quot;internal.*&quot;</span><span class="p">,</span> <span class="n">silent</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>One can also set a filtering rule in QI_LOG_FILTERS environment variable.
+syntax is colon-separated list of rules of the form (+|-)CAT or CAT=level.
+For example, -internal.*:file=verbose</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::addFilters__ssCR.SubscriberId">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">addFilters</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>rules</em>, SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::addFilters__ssCR.SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Parse and execute a set of verbosity rules. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rules</strong> &#8211; Colon separated of rules. Each rule can be:
+(+)?CAT : enable category CAT-CAT : disable category CATCAT=level : set category CAT to level
+</li>
+<li><strong>sub</strong> &#8211; Log subscriber id. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each category can include a &#8216;*&#8217; for globbing. Can be set with env var QI_LOG_FILTERS. For instance &#8216;qi.*=debug:-qi.foo:+qi.foo.bar&#8217; stands for &#8220;all qi.* logs in debug, remove all qi.foo logs except qi.foo.bar&#8221;.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::addHandler__ssCR.qi::log::Handler.qi::LogLevel">
+SubscriberId <code class="descclassname">qi::log::</code><code class="descname">addHandler</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, qi::log::Handler <em>fct</em>, <a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <em>defaultLevel</em> = LogLevel_Info<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::addHandler__ssCR.qi::log::Handler.qi::LogLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Add a log handler for this process&#8217; logs. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; Name of the handler, useful to remove handler (prefer lowercase). </li>
+<li><strong>fct</strong> &#8211; Boost delegate to log handler function. </li>
+<li><strong>defaultLevel</strong> &#8211; default log verbosity. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">New log subscriber id added. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::categories">
+std::vector&lt;std::string&gt; <code class="descclassname">qi::log::</code><code class="descname">categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::categories" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Get the list of all categories. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The list of existing categories </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::color">
+LogColor <code class="descclassname">qi::log::</code><code class="descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::color" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Get log color. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Returns LogColor enum. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::context">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <code class="descclassname">qi::log::</code><code class="descname">context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::context" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Get log context. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Returns the level of context verbosity. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::destroy">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">destroy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::destroy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be called in the main of program using atexit. For example:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">atexit</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">destroy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is useful only for asynchronous log.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::disableCategory__ssCR.SubscriberId">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">disableCategory</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>cat</em>, SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::disableCategory__ssCR.SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set category to silent log level. Globbing is supported. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cat</strong> &#8211; Category to set to silence level. </li>
+<li><strong>sub</strong> &#8211; Log subscriber id. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::enableCategory__ssCR.SubscriberId">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">enableCategory</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>cat</em>, SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::enableCategory__ssCR.SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set category to current verbosity level. Globbing is supported. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cat</strong> &#8211; Category to set to current verbosity level. </li>
+<li><strong>sub</strong> &#8211; Log subscriber id. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::flush">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush asynchronous logs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::init__qi::LogLevel.qi::LogContext.b">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">init</code><span class="sig-paren">(</span><a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <em>verb</em> = qi::LogLevel_Info, qi::LogContext <em>context</em> = qi::LogContextAttr_ShortVerbosity|qi::LogContextAttr_Tid|qi::LogContextAttr_Category, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <em>synchronous</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::init__qi::LogLevel.qi::LogContext.b" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Initialization of the logging system (could be avoided) </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>verb</strong> &#8211; Log verbosity </li>
+<li><strong>context</strong> &#8211; Display Context </li>
+<li><strong>synchronous</strong> &#8211; Synchronous log </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::isVisible__CategoryType.qi::LogLevel">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::log::</code><code class="descname">isVisible</code><span class="sig-paren">(</span>CategoryType <em>category</em>, <a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::isVisible__CategoryType.qi::LogLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Check if the given combination of category and level is enable. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>category</strong> &#8211; Category to check. </li>
+<li><strong>level</strong> &#8211; Level associate to category. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if given combination of category and level is enabled. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::isVisible__ssCR.qi::LogLevel">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::log::</code><code class="descname">isVisible</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>category</em>, <a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::isVisible__ssCR.qi::LogLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Check if the given combination of category and level is enable. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>category</strong> &#8211; Category to check. </li>
+<li><strong>level</strong> &#8211; Level associate to category. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if given combination of category and level is enabled. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::log__qi::LogLevelC.CategoryType.ssCR.cCP.cCP.iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">log</code><span class="sig-paren">(</span><a class="reference external" href="#E_qi::LogLevel">const qi::LogLevel</a> <em>verb</em>, CategoryType <em>category</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>msg</em>, const char* <em>file</em> = &quot;&quot;, const char* <em>fct</em> = &quot;&quot;, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">const int</a> <em>line</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::log__qi::LogLevelC.CategoryType.ssCR.cCP.cCP.iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Log function. You should call qiLog* macros instead. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>verb</strong> &#8211; The verbosity of the message. </li>
+<li><strong>category</strong> &#8211; Log category (for filtering). </li>
+<li><strong>msg</strong> &#8211; Log message. </li>
+<li><strong>file</strong> &#8211; Filename from which this function was called (ex: FILE). </li>
+<li><strong>fct</strong> &#8211; Function name from which this function was called (ex: FUNCTION). </li>
+<li><strong>line</strong> &#8211; Line from which this function was called (ex: LINE). </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::log__qi::LogLevelC.cCP.cCP.cCP.cCP.iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">log</code><span class="sig-paren">(</span><a class="reference external" href="#E_qi::LogLevel">const qi::LogLevel</a> <em>verb</em>, const char* <em>category</em>, const char* <em>msg</em>, const char* <em>file</em> = &quot;&quot;, const char* <em>fct</em> = &quot;&quot;, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">const int</a> <em>line</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::log__qi::LogLevelC.cCP.cCP.cCP.cCP.iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Log function. You should call qiLog* macros instead. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>verb</strong> &#8211; The verbosity of the message. </li>
+<li><strong>category</strong> &#8211; Log category (for filtering). </li>
+<li><strong>msg</strong> &#8211; Log message. </li>
+<li><strong>file</strong> &#8211; Filename from which this function was called (ex: FILE). </li>
+<li><strong>fct</strong> &#8211; Function name from which this function was called (ex: FUNCTION). </li>
+<li><strong>line</strong> &#8211; Line from which this function was called (ex: LINE). </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::logLevel__SubscriberId">
+<a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <code class="descclassname">qi::log::</code><code class="descname">logLevel</code><span class="sig-paren">(</span>SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::logLevel__SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Get log verbosity. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sub</strong> &#8211; Log subscriber id. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Maximal verbosity displayed. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::logLevelToString__qi::LogLevelC.b">
+const char* <code class="descclassname">qi::log::</code><code class="descname">logLevelToString</code><span class="sig-paren">(</span><a class="reference external" href="#E_qi::LogLevel">const qi::LogLevel</a> <em>verb</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <em>verbose</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::logLevelToString__qi::LogLevelC.b" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Convert log verbosity to a readable string. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>verb</strong> &#8211; Verbosity value. </li>
+<li><strong>verbose</strong> &#8211; Enable verbose conversion. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Returns a string matching the log level verbosity. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::removeHandler__ssCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">removeHandler</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::removeHandler__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Remove a log handler. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; Name of the handler. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::setColor__LogColor">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setColor</code><span class="sig-paren">(</span>LogColor <em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setColor__LogColor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set log color. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>color</strong> &#8211; Log color value. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::setContext__i">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setContext</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setContext__i" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set log context verbosity. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctx</strong> &#8211; Value to set context.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Show context logs, it&#8217;s a bit field (add the values below).</p>
+<p>Context values possible:
+1 : Verbosity2 : ShortVerbosity4 : Date8 : ThreadId16 : Category32 : File64 : Function128: EndOfLine some useful values for context are:26 : (verb+threadId+cat)30 : (verb+threadId+date+cat)126: (verb+threadId+date+cat+file+fun)254: (verb+threadId+date+cat+file+fun+eol)</p>
+<p>Can be set with env var QI_LOG_CONTEXT</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::setSynchronousLog__b">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setSynchronousLog</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <em>sync</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setSynchronousLog__b" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Enables or disables synchronous logs. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sync</strong> &#8211; Value to set or unset synchronous.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When setting to async, this function must be called after main has started.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::setLogLevel__qi::LogLevelC.SubscriberId">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setLogLevel</code><span class="sig-paren">(</span><a class="reference external" href="#E_qi::LogLevel">const qi::LogLevel</a> <em>lv</em>, SubscriberId <em>sub</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setLogLevel__qi::LogLevelC.SubscriberId" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Set log Level. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lv</strong> &#8211; Default verbosity level shown in the logs. </li>
+<li><strong>sub</strong> &#8211; Log subscriber id.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Levels set by this function is a default value, overriden by all addFilter() and addFilters() calls.</p>
+<p>Change the log minimum level: [0-6] (default:4):
+0: silent1: fatal2: error3: warning4: info5: verbose6: debug</p>
+<p>Can be set with env var QI_LOG_LEVEL.</p>
+<p>If you don&#8217;t want any log use silent mode.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::stringToLogLevel__cCP">
+<a class="reference external" href="#E_qi::LogLevel">qi::LogLevel</a> <code class="descclassname">qi::log::</code><code class="descname">stringToLogLevel</code><span class="sig-paren">(</span>const char* <em>verb</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::stringToLogLevel__cCP" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Convert string to log verbosity. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>verb</strong> &#8211; debug, verbose, info, warning, error, fatal, silent </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Log level verbosity </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="deprecated">
+<h3>Deprecated<a class="headerlink" href="#deprecated" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="qi::log::setVerbosity__SubscriberId.qi::log::LogLevelC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setVerbosity</code><span class="sig-paren">(</span>SubscriberId <em>sub</em>, const qi::log::LogLevel <em>lv</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setVerbosity__SubscriberId.qi::log::LogLevelC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecatedsince 1.22. Use qi::log::setLogLevel(const qi::LogLevel, SubscriberId)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setVerbosity</code><span class="sig-paren">(</span>SubscriberId <em>sub</em>, const qi::log::LogLevel <em>lv</em><span class="sig-paren">)</span></dt>
+<dd><p>Deprecatedsince 1.22. Use qi::log::setLogLevel(const qi::LogLevel, SubscriberId)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setVerbosity</code><span class="sig-paren">(</span>SubscriberId <em>sub</em>, const qi::log::LogLevel <em>lv</em><span class="sig-paren">)</span></dt>
+<dd><p>Deprecatedsince 1.22. Use qi::log::setLogLevel(const qi::LogLevel, SubscriberId)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::setCategory__SubscriberId.ssCR.qi::log::LogLevel">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setCategory</code><span class="sig-paren">(</span>SubscriberId <em>sub</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>cat</em>, qi::log::LogLevel <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::setCategory__SubscriberId.ssCR.qi::log::LogLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecatedsince 1.22. Use qi::log::addFilter(const std::string&amp;, qi::LogLevel, SubscriberId)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::log::</code><code class="descname">setCategory</code><span class="sig-paren">(</span>SubscriberId <em>sub</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>cat</em>, qi::log::LogLevel <em>level</em><span class="sig-paren">)</span></dt>
+<dd><p>Deprecatedsince 1.22. Use qi::log::addFilter(const std::string&amp;, qi::LogLevel, SubscriberId)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::log::verbosity__X">
+ <code class="descclassname">qi::log::</code><code class="descname">verbosity</code><span class="sig-paren">(</span><em>SubscriberId</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::log::verbosity__X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">API References</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">C++ qi API Reference</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="index.html">C++ qi base API</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="actor.html">qi::Actor and qi::Strand</a></li>
+<li class="toctree-l6"><a class="reference internal" href="application.html">qi::Application</a></li>
+<li class="toctree-l6"><a class="reference internal" href="atomic.html">qi::Atomic</a></li>
+<li class="toctree-l6"><a class="reference internal" href="clock.html">qi clocks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eventloop.html">qi::EventLoop</a></li>
+<li class="toctree-l6"><a class="reference internal" href="future.html">qi::Promise, qi::Future</a></li>
+<li class="toctree-l6"><a class="reference internal" href="futuregroup.html">qi::Future groups</a></li>
+<li class="toctree-l6"><a class="reference internal" href="iocolor.html">qi::IOColor</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">qi::log</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="macro.html">qi helper macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="os.html">qi::os</a></li>
+<li class="toctree-l6"><a class="reference internal" href="path.html">qi::path namespace</a></li>
+<li class="toctree-l6"><a class="reference internal" href="periodictask.html">qi::PeriodicTask</a></li>
+<li class="toctree-l6"><a class="reference internal" href="preproc.html">qi preprocessor macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="stats.html">qi::stats namespace</a></li>
+<li class="toctree-l6"><a class="reference internal" href="trackable.html">qi::Trackable</a></li>
+<li class="toctree-l6"><a class="reference internal" href="translator.html">qi::Translator</a></li>
+<li class="toctree-l6"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="version.html">qi::Version</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../type/index.html">C++ qi type API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../messaging/index.html">C++ qi messaging API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../file.html">qi::File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-classindex.html">C++ Class Index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-funcindex.html">C++ Function Index</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../python/index.html">Python qi API reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../transtyping.html">&gt; Type equivalences between languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">qi::log</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#encoding">Encoding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#macro">Macro</a></li>
+<li><a class="reference internal" href="#deprecated">Deprecated</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../../../contents.html">Site map</a>
+      <a title="Index" href="../../../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

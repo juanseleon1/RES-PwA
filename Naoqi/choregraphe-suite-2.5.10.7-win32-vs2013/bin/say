@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+##
+## Copyright (C) 2009-2015 Aldebaran Robotics
+##
+import sys
+from naoqi import ALProxy
+
+# Says a test string in English
+tts = ALProxy("ALTextToSpeech", "127.0.0.1", 9559)
+if tts:
+  tts.setLanguage("English")
+  tts.say(" ".join(sys.argv[1:]))
+else:
+  print "tts is not available"

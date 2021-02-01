@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALFaceDetection API &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALFaceDetection" href="alfacedetection.html" />
+    <link rel="next" title="ALFaceDetection Tutorial" href="alfacedetection-tuto.html" />
+    <link rel="prev" title="ALFaceDetection" href="alfacedetection.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-peopleperception-alfacedetection-api">
+                
+  <div class="section" id="alfacedetection-api">
+<span id="id1"></span><h1>ALFaceDetection API<a class="headerlink" href="#alfacedetection-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-peopleperception"><span>NAOqi People Perception</span></a> - <a class="reference internal" href="alfacedetection.html#alfacedetection"><span>Overview</span></a> | API |
+<a class="reference internal" href="alfacedetection-tuto.html#alfacedetection-tuto"><span>Tutorial</span></a></p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alfacedetectionproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ALFaceDetectionProxy">
+<em class="property">class </em><code class="descname">ALFaceDetectionProxy</code><a class="headerlink" href="#ALFaceDetectionProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><span>ALModule API</span></a>.</li>
+<li>It also inherits methods from <a class="reference internal" href="../core/alextractor-api.html#alextractor-api"><span>ALExtractor API</span></a> and <a class="reference internal" href="../core/alvisionextractor-api.html#alvisionextractor-api"><span>ALVisionExtractor API</span></a>.</li>
+<li>It also has the following specific methods:<ul>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::clearDatabase" title="ALFaceDetectionProxy::clearDatabase"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::clearDatabase</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::forgetPerson__ssCR" title="ALFaceDetectionProxy::forgetPerson"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::forgetPerson</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::getLearnedFacesList" title="ALFaceDetectionProxy::getLearnedFacesList"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::getLearnedFacesList</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::getRecognitionConfidenceThreshold" title="ALFaceDetectionProxy::getRecognitionConfidenceThreshold"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::getRecognitionConfidenceThreshold</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::importOldDatabase__ssCR" title="ALFaceDetectionProxy::importOldDatabase"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::importOldDatabase</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::isRecognitionEnabled" title="ALFaceDetectionProxy::isRecognitionEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::isRecognitionEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::isTrackingEnabled" title="ALFaceDetectionProxy::isTrackingEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::isTrackingEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::learnFace__ssCR" title="ALFaceDetectionProxy::learnFace"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::learnFace</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::reLearnFace__ssCR" title="ALFaceDetectionProxy::reLearnFace"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::reLearnFace</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::setRecognitionConfidenceThreshold__float" title="ALFaceDetectionProxy::setRecognitionConfidenceThreshold"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setRecognitionConfidenceThreshold</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::setRecognitionEnabled__bCR" title="ALFaceDetectionProxy::setRecognitionEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setRecognitionEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::setTrackingEnabled__bCR" title="ALFaceDetectionProxy::setTrackingEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setTrackingEnabled</span></code></a></li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::enableRecognition__bCR" title="ALFaceDetectionProxy::enableRecognition"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::enableRecognition</span></code></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALFaceDetectionProxy::enableTracking__bCR" title="ALFaceDetectionProxy::enableTracking"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::enableTracking</span></code></a> (deprecated)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="event-list">
+<h2>Event list<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#FaceDetected" title="FaceDetected"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">FaceDetected()</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALFaceDetectionProxy::clearDatabase">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">clearDatabase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::clearDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all learned faces from the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the operation succeeded</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::forgetPerson__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">forgetPerson</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::forgetPerson__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes from the database all learned faces corresponding to the specified person.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the person to forget</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the operation succeeded</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::getLearnedFacesList">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">getLearnedFacesList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::getLearnedFacesList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list containing the name of each learned face. The size of this list is
+always equal to the number of faces in the data base.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of names</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::getRecognitionConfidenceThreshold">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">getRecognitionConfidenceThreshold</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::getRecognitionConfidenceThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current threshold value used for face recognition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Threshold value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::importOldDatabase__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">importOldDatabase</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>policy</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::importOldDatabase__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion tool. Converts an old data base (NAOqi version &lt; 1.22) to the new
+format. This needs to be run only once.</p>
+<p>If the module ALFaceDetection has already faces in its data base, you can still
+import an old data base. Its content will be merged and conflicting entries (i.e.
+faces with the same name) will be dealt with according to the specified policy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>policy</strong> &#8211; <p>Merge policy if an imported entry has the same name as an existing one.</p>
+<p>&#8220;overwrite&#8221; to replace the existing entry by the imported one,</p>
+<p>&#8220;merge&#8221; to merge data from both entries (if they don&#8217;t relate to the same person, face recognition may fail),</p>
+<p>&#8220;keep&#8221; to keep the existing entry and ignore the imported one.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::isRecognitionEnabled">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">isRecognitionEnabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::isRecognitionEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether recognition is enabled. Recognition is enabled by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true/false</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::isTrackingEnabled">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">isTrackingEnabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::isTrackingEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether tracking is enabled. Tracking is enabled by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true/false</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::learnFace__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">learnFace</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::learnFace__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learns a new face and adds it in the database under the specified name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the person to learn</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the operation succeeded</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::reLearnFace__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">reLearnFace</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::reLearnFace__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new identification picture to a specific user record.</p>
+<p>Learning a user&#8217;s face from different images with different head poses can
+improve the recognition results. Up to 10 images can be stored for each person,
+after which any new image will replace the oldest one, in a rolling buffer
+fashion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the person to learn</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the operation succeeded</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if two different persons are recognized in less than 7 seconds, only the first one
+can be relearned.</p>
+</div>
+<dl class="function">
+<dt id="ALFaceDetectionProxy::setRecognitionConfidenceThreshold__float">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">setRecognitionConfidenceThreshold</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::setRecognitionConfidenceThreshold__float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a new threshold value for face recognition. This value must be between 0 and 1,
+with a default of 0.4. Refer to <a class="reference internal" href="alfacedetection.html#threshold"><span>Threshold</span></a> for a more complete explanation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>threshold</strong> &#8211; new threshold value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::setRecognitionEnabled__bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">setRecognitionEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::setRecognitionEnabled__bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled.
+Face recognition is enabled by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>enable</strong> &#8211; true/false</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::setTrackingEnabled__bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">setTrackingEnabled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::setTrackingEnabled__bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables/disables face tracking. Enabling tracking usually allows you to follow a face even if the corresponding person is not facing the camera anymore.
+However, it can lead to more false detections. When active, only one face at a time will be detected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>enable</strong> &#8211; true/false</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::enableRecognition__bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">enableRecognition</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::enableRecognition__bCR" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 2.0: </span>Use <a class="reference internal" href="#ALFaceDetectionProxy::setRecognitionEnabled__bCR" title="ALFaceDetectionProxy::setRecognitionEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setRecognitionEnabled</span></code></a> instead.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALFaceDetectionProxy::enableTracking__bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALFaceDetectionProxy::</code><code class="descname">enableTracking</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#ALFaceDetectionProxy::enableTracking__bCR" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 2.0: </span>Use <a class="reference internal" href="#ALFaceDetectionProxy::setTrackingEnabled__bCR" title="ALFaceDetectionProxy::setTrackingEnabled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setTrackingEnabled</span></code></a> instead.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="FaceDetected">
+<div class="line">Event: <code class="descname">&quot;FaceDetected&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> value</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#FaceDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when one or several faces are currently being detected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;FaceDetected&#8221;</li>
+<li><strong>value</strong> &#8211; Informations related to the detected faces. Please refer to <a class="reference internal" href="alfacedetection.html#alfacedetection"><span>ALFaceDetection</span></a> for details.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi People Perception</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alengagementzones.html">ALEngagementZones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alfacecharacteristics.html">ALFaceCharacteristics</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="alfacedetection.html">ALFaceDetection</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALFaceDetection API</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alfacedetection-tuto.html">ALFaceDetection Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="algazeanalysis.html">ALGazeAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alpeopleperception.html">ALPeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alsittingpeopledetection.html">ALSittingPeopleDetection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alwavingdetection.html">ALWavingDetection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALFaceDetection API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#event-list">Event list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

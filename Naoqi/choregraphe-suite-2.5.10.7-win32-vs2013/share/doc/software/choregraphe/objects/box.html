@@ -1,0 +1,690 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Box &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Main objects" href="../main_objects.html" />
+    <link rel="next" title="Box - Inputs/outputs" href="box_input_output.html" />
+    <link rel="prev" title="Translation files" href="translation_files.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="software-choregraphe-objects-box">
+                
+  <div class="section" id="choregraphe-reference-box">
+<span id="box"></span><span id="id1"></span><h1>Box<a class="headerlink" href="#choregraphe-reference-box" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-a-box">
+<h2>What is a box<a class="headerlink" href="#what-is-a-box" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>Box</strong> is the basic element of the  <a class="reference internal" href="behavior.html#behavior"><span>Behaviors</span></a>.</p>
+<a class="reference internal image-reference" href="../../../_images/box.png"><img alt="../../../_images/box.png" src="../../../_images/box.png" style="width: 127px; height: 127px;" /></a>
+<p>A <strong>Box</strong> may contain a simple elementary action (<strong>Say</strong> box for example),
+as well as a very complex application (room exploration for example).</p>
+<p><strong>To go further</strong>:</p>
+<ul class="simple">
+<li>Ready-to-use boxes are available in the <a class="reference internal" href="../panels/box_libraries_panel.html#chore-box-libary-panel"><span>Box libraries panel</span></a>.</li>
+<li>To create your own box, see: <a class="reference internal" href="#choregraphe-create-box"><span>How to create a new box</span></a>.</li>
+<li>See more details about the box <a class="reference internal" href="#box-identity"><span>identity</span></a>, <a class="reference internal" href="#box-content"><span>content</span></a>,
+and <a class="reference internal" href="#box-connectors"><span>connectors and parameters</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="box-identity">
+<span id="id2"></span><h2>Box identity<a class="headerlink" href="#box-identity" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../../_images/box_identity.png"><img alt="../../../_images/box_identity.png" src="../../../_images/box_identity.png" style="width: 257px; height: 265px;" /></a>
+<p>The table below describes the properties allowing you to identify a <strong>Box</strong>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="17%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Part</th>
+<th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>A</strong></td>
+<td><strong>Name</strong></td>
+<td>Name of the box.</td>
+</tr>
+<tr class="row-odd"><td><strong>B</strong></td>
+<td><strong>Image</strong></td>
+<td>A specific image helps to understand the box type or content.</td>
+</tr>
+<tr class="row-even"><td><strong>C</strong></td>
+<td><strong>Description</strong></td>
+<td><p class="first">Displays the description of the box and some tips.</p>
+<p class="last">Appears when holding the pointer over the box and also at the bottom of the
+<a class="reference internal" href="../panels/box_libraries_panel.html#chore-box-libary-panel"><span>Box libraries panel</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="box-content">
+<span id="id3"></span><h2>Box content<a class="headerlink" href="#box-content" title="Permalink to this headline">¶</a></h2>
+<p>The content of a box depend on its <strong>type</strong>:</p>
+<ul class="simple">
+<li>a <a class="reference internal" href="python_box.html#choregraphe-reference-box-type-python"><span>Python box</span></a> contains a <a class="reference internal" href="python_script.html#python-script"><span>Python script</span></a>,</li>
+<li>a <a class="reference internal" href="flow_diagram_box.html#choregraphe-reference-box-type-flow-diagram"><span>Flow diagram box</span></a> contains a
+<a class="reference internal" href="../panels/flow_diagram_panel.html#choregraphe-reference-box-flow-diagram"><span>Flow diagram</span></a>,</li>
+<li>a <a class="reference internal" href="timeline_box.html#choregraphe-reference-box-type-timeline"><span>Timeline box</span></a> contains a
+<a class="reference internal" href="../panels/timeline_panel.html#choregraphe-reference-box-timeline"><span>Timeline</span></a>.</li>
+<li>a <a class="reference internal" href="dialog_box.html#choregraphe-reference-box-type-dialog"><span>Dialog box</span></a> refers to a
+<a class="reference internal" href="dialog_topic.html#dialog-topic"><span>Dialog topic</span></a></li>
+</ul>
+<div class="section" id="how-to-display-the-content-of-a-box">
+<h3>How to display the content of a box<a class="headerlink" href="#how-to-display-the-content-of-a-box" title="Permalink to this headline">¶</a></h3>
+<p>To display the content of a box, <strong>double click</strong> the box.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A <strong>Dialog box</strong> acts as a shortcut to the <strong>Dialog topic</strong> it refers to. If you
+double-click the box, you will <span class="xref std std-ref">edit the dialog topic</span>. Other boxes referring to
+that topic will be impacted.</p>
+</div>
+</div>
+</div>
+<div class="section" id="box-connectors-and-parameters">
+<span id="box-connectors"></span><h2>Box connectors and parameters<a class="headerlink" href="#box-connectors-and-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">In order to communicate with other boxes and to be started or stopped, a box has some connectors.</div>
+<div class="line">The connectors of the boxes are connected through <strong>links</strong> on an event based communication logic.</div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="../../../_images/box_in_out_param.png"><img alt="../../../_images/box_in_out_param.png" src="../../../_images/box_in_out_param.png" style="width: 217px; height: 175px;" /></a>
+<p>The table below describes the main connectors of a <strong>Box</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="33%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Part</th>
+<th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>A</strong></td>
+<td><a class="reference internal" href="box_input_output.html#choregraphe-reference-box-input"><span>Inputs</span></a></td>
+<td>Receive events in order to start or stop the box.</td>
+</tr>
+<tr class="row-odd"><td><strong>B</strong></td>
+<td><a class="reference internal" href="box_input_output.html#choregraphe-reference-box-output"><span>Outputs</span></a></td>
+<td>Send events and/or data during box execution or when the box execution is stopped.</td>
+</tr>
+<tr class="row-even"><td><strong>C</strong></td>
+<td><a class="reference internal" href="box_optional_components.html#choregraphe-reference-box-parameter"><span>Parameters</span></a></td>
+<td>Receive data used by the box.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-create-a-new-box">
+<span id="choregraphe-create-box"></span><h2>How to create a new box<a class="headerlink" href="#how-to-create-a-new-box" title="Permalink to this headline">¶</a></h2>
+<p>To create a box:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Right click on the <strong>Flow diagram</strong> wherever you want to create the
+box.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the contextual menu, under the <strong>Create a new box</strong> section, choose
+the type of the box you want to create.</p>
+<a class="last reference internal image-reference" href="../../../_images/box_creation.png"><img alt="../../../_images/box_creation.png" src="../../../_images/box_creation.png" style="width: 314px; height: 527px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Optional</strong> If you choosed to create a
+<a class="reference internal" href="dialog_box.html#choregraphe-reference-box-type-dialog"><span>Dialog box</span></a>, you must
+choose the dialog topic used by the box.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The box name is automatically generated from the chosen topic,
+unless you modify it by hand.</p>
+</div>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also <span class="xref std std-ref">create a new dialog topic</span> directly from here.</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td>Define a <strong>Name</strong> and a <strong>Description</strong> for your box.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><strong>Optional</strong>: set the picture to recognize it among other boxes.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="6">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Optional</strong>: set <strong>Parameters</strong>, <strong>Inputs</strong> and <strong>Outputs</strong>.</p>
+<p class="last">For further details about parameters, see: <a class="reference internal" href="box_optional_components.html#choregraphe-howto-add-remove-box-in-out-param"><span>How to add/remove inputs,
+outputs, parameters in a box</span></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="7">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <strong>OK</strong> button.</p>
+<p class="last">The created box is displayed on the diagram.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="editing-a-box">
+<span id="chore-inspec-flow-diagram-panel"></span><h2>Editing a Box<a class="headerlink" href="#editing-a-box" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../panels/inspector_panel.html#chore-inspector-panel"><span>Inspector panel</span></a> gives you a quick access to all the
+information and properties of any <a class="reference internal" href="#box"><span>Box</span></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><p class="first">Click on a <strong>Box</strong>, to display and edit:</p>
+<ul class="last simple">
+<li>The <a class="reference internal" href="#box-identity"><span>Box identity</span></a></li>
+<li>The <a class="reference internal" href="box_optional_components.html#choregraphe-reference-box-parameter"><span>Parameters</span></a> edition</li>
+<li><a class="reference internal" href="box_input_output.html#choregraphe-reference-box-input"><span>Inputs</span></a>,
+<a class="reference internal" href="box_input_output.html#choregraphe-reference-box-output"><span>Outputs</span></a>, and
+<a class="reference internal" href="box_optional_components.html#choregraphe-reference-box-parameter"><span>Parameters</span></a> lists</li>
+<li>The <a class="reference internal" href="box_optional_components.html#choregraphe-reference-box-plugin"><span>Plugin</span></a> selection</li>
+</ul>
+</td>
+<td><img alt="inpector_box_en" src="../../../_images/inspector_box_en.png" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="edit-box-widget">
+<span id="choregraphe-detailed-interface-box-edition"></span><h2>Edit Box widget<a class="headerlink" href="#edit-box-widget" title="Permalink to this headline">¶</a></h2>
+<p>When you <strong>edit</strong> or <strong>create</strong> a <a class="reference internal" href="#choregraphe-reference-box"><span>Box</span></a>,
+the following widget is displayed:</p>
+<a class="reference internal image-reference" href="../../../_images/edit_box_letters.png"><img alt="../../../_images/edit_box_letters.png" src="../../../_images/edit_box_letters.png" style="width: 369px; height: 460px;" /></a>
+<p>The table below describes the <strong>Edit Box</strong> widget:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="17%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Part</th>
+<th class="head">Name</th>
+<th class="head">Allows you to ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>A</strong></td>
+<td><strong>Box
+properties</strong></td>
+<td><p class="first">Show some box properties:</p>
+<ul class="last simple">
+<li>the <strong>Box type</strong> (flow diagram, timeline, Python,
+Dialog)</li>
+<li>If the box is of <strong>Dialog</strong> type, the box topic is
+shown and can be modified here.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>B</strong></td>
+<td><strong>General
+description</strong></td>
+<td><p class="first">Define the <a class="reference internal" href="#box-identity"><span>Box identity</span></a>:</p>
+<ul class="last">
+<li><p class="first">the <strong>Name</strong> of the box.</p>
+</li>
+<li><p class="first">the <strong>Description</strong> (a brief description of what the box does and how
+to use it).</p>
+<p>Appears when holding the pointer over the box and also at the bottom of the
+<a class="reference internal" href="../panels/box_libraries_panel.html#chore-box-libary-panel"><span>Box libraries panel</span></a>.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><strong>C</strong></td>
+<td><strong>Image</strong></td>
+<td><p class="first">Specify an image.</p>
+<p>Click the <strong>Edit</strong> button and select one or several image(s).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can choose several images to have a complete graphical description of
+what it does. But you should know that only the first image is displayed
+beside the box name in a box library.</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>D</strong></td>
+<td><strong>Connectors and
+Parameters</strong></td>
+<td><p class="first">Define the <a class="reference internal" href="#box-connectors"><span>Box connectors and parameters</span></a>.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">The button ...</th>
+<th class="head">Allows you to ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img alt="../../../_images/del.png" class="first last" src="../../../_images/del.png" />
+</td>
+<td><strong>Remove</strong> the selected item.</td>
+</tr>
+<tr class="row-odd"><td><img alt="../../../_images/edit1.png" class="first last" src="../../../_images/edit1.png" />
+</td>
+<td><strong>Edit</strong> the selected item.</td>
+</tr>
+<tr class="row-even"><td><img alt="../../../_images/add.png" class="first last" src="../../../_images/add.png" />
+</td>
+<td><strong>Add</strong> a new item.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>E</strong></td>
+<td><strong>Advanced</strong></td>
+<td><p class="first">Add a <a class="reference internal" href="box_optional_components.html#choregraphe-reference-box-plugin"><span>Plugin</span></a> to the box.</p>
+<p class="last">It is an advanced feature allowing you to add a control
+the frontage of the box.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Choregraphe Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installing.html">Choregraphe suite - Installation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../choregraphe_overview.html">What is Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connection_widget.html">Connecting Choregraphe to a robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../main_objects.html">Main objects</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="choregraphe_project.html">Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application.html">Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="activity.html">Activity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="behavior.html">Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dialog_topic.html">Dialog topic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="planar_move.html">Planar Move</a></li>
+<li class="toctree-l4"><a class="reference internal" href="translation_files.html">Translation files</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Box</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="box_input_output.html">Box - Inputs/outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="box_optional_components.html">Box - Optional components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flow_diagram_box.html">Flow diagram box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="timeline_box.html">Timeline box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python_box.html">Python box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dialog_box.html">Dialog box</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translations.html">Mastering application localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connecting.html">Managing your robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/memory_backup.html">Memory Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Box</a><ul>
+<li><a class="reference internal" href="#what-is-a-box">What is a box</a></li>
+<li><a class="reference internal" href="#box-identity">Box identity</a></li>
+<li><a class="reference internal" href="#box-content">Box content</a><ul>
+<li><a class="reference internal" href="#how-to-display-the-content-of-a-box">How to display the content of a box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#box-connectors-and-parameters">Box connectors and parameters</a></li>
+<li><a class="reference internal" href="#how-to-create-a-new-box">How to create a new box</a></li>
+<li><a class="reference internal" href="#editing-a-box">Editing a Box</a></li>
+<li><a class="reference internal" href="#edit-box-widget">Edit Box widget</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

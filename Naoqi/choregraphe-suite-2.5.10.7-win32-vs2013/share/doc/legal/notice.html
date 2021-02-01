@@ -1,0 +1,1813 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Legal notices &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../index.html" />
+    <link rel="prev" title="Glossary" href="../glossary.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="legal-notice">
+                
+  <div class="section" id="legal-notices">
+<h1>Legal notices<a class="headerlink" href="#legal-notices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="legal-statement">
+<h2>Legal Statement<a class="headerlink" href="#legal-statement" title="Permalink to this headline">¶</a></h2>
+<p>The information contained in this document is subject to change without notice.
+SoftBank Robotics Europe makes no warranty of any kind with regard to this manual, including,
+but not limited to, the implied warranties of merchantability and fitness for a particular purpose.
+SoftBank Robotics Europe shall not be liable for errors contained herein or direct, indirect,
+special, incidental or consequential damage in connection with the furnishing, performance, or use of this material.</p>
+<p>This document contains information which is protected by copyright. All rights are reserved.
+Reproduction, adaptation, or translation without prior written permission is prohibited,
+except as allowed under the copyright laws. Use of this manual and compact disc(s)
+supplied for this pack is restricted to this product only. Additional copies of the
+programs may be made for security and back-up purposes only.
+Resale of the programs in its present form or with alterations, is expressly prohibited.</p>
+<p>Corporate Office: SoftBank Robotics Europe 43 rue du Colonel Pierre Avia Paris, 75015 FRANCE</p>
+<p>Copyright © 2006-2017 SoftBank Robotics Europe.</p>
+</div>
+<div class="section" id="copyright">
+<h2>Copyright<a class="headerlink" href="#copyright" title="Permalink to this headline">¶</a></h2>
+<p>Choregraphe: all parts of the products from SoftBank Robotics Europe, including program and packaging,
+documentation, web pages and other related items are Copyright © 2006-2017 SoftBank Robotics Europe, unless specifically noted.
+All rights reserved.</p>
+</div>
+<div class="section" id="open-source-projects">
+<span id="id1"></span><h2>Open Source Projects<a class="headerlink" href="#open-source-projects" title="Permalink to this headline">¶</a></h2>
+<p>The list below describes the distribution of the source code of the
+<strong>SoftBank Robotics EuropeNAOqi software 2.5</strong>
+that fall under open source licenses.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="10%" />
+<col width="45%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Package</th>
+<th class="head">Version</th>
+<th class="head">Project</th>
+<th class="head">License type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>aldebaran-base/naoqi-os</td>
+<td>0</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">naoqi-os</a></td>
+<td><a class="reference download internal" href="../_downloads/metapackage"><code class="xref download docutils literal"><span class="pre">metapackage</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>aldebaran-robotics/crash-report-tools</td>
+<td>1</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">crash-report-tools</a></td>
+<td>commercial</td>
+</tr>
+<tr class="row-even"><td>aldebaran-robotics/naoqi</td>
+<td>0</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">naoqi</a></td>
+<td><a class="reference download internal" href="../_downloads/metapackage"><code class="xref download docutils literal"><span class="pre">metapackage</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-admin/eselect</td>
+<td>1.4.1</td>
+<td><a class="reference external" href="http://wiki.gentoo.org/wiki/Project:Eselect">eselect</a></td>
+<td><a class="reference download internal" href="../_downloads/CC-BY-SA-2.5"><code class="xref download docutils literal"><span class="pre">CC-BY-SA-2.5</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2+"><code class="xref download docutils literal"><span class="pre">GPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-admin/eselect-blas</td>
+<td>0.1</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/eselect/">eselect-blas</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-admin/eselect-cblas</td>
+<td>0.1</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/eselect/">eselect-cblas</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-admin/eselect-lapack</td>
+<td>0.1</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/eselect/">eselect-lapack</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-admin/eselect-python</td>
+<td>20111108</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/Python/">eselect-python</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-admin/perl-cleaner</td>
+<td>2.7</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/perl/">perl-cleaner</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-admin/python-updater</td>
+<td>0.11</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/Python/">python-updater</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-admin/sudo</td>
+<td>1.8.6_p7</td>
+<td><a class="reference external" href="http://www.sudo.ws/">sudo</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a>, <a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-admin/sysklogd</td>
+<td>1.5</td>
+<td><a class="reference external" href="http://www.infodrom.org/projects/sysklogd/">sysklogd</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-arch/bzip2</td>
+<td>1.0.6</td>
+<td><a class="reference external" href="http://www.bzip.org/">bzip2</a></td>
+<td><a class="reference download internal" href="../_downloads/BZIP2"><code class="xref download docutils literal"><span class="pre">BZIP2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-arch/gzip</td>
+<td>1.5</td>
+<td><a class="reference external" href="http://www.gnu.org/software/gzip/">gzip</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-arch/libarchive</td>
+<td>3.1.2</td>
+<td><a class="reference external" href="http://www.libarchive.org/">libarchive</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a>, <a class="reference download internal" href="../_downloads/BSD-4"><code class="xref download docutils literal"><span class="pre">BSD-4</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-arch/lz4</td>
+<td>0_p106</td>
+<td><a class="reference external" href="https://code.google.com/p/lz4/">lz4</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-arch/unzip</td>
+<td>6.0</td>
+<td><a class="reference external" href="http://www.info-zip.org/">unzip</a></td>
+<td><a class="reference download internal" href="../_downloads/Info-ZIP"><code class="xref download docutils literal"><span class="pre">Info-ZIP</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-arch/xz-utils</td>
+<td>5.0.5</td>
+<td><a class="reference external" href="http://tukaani.org/xz/">xz-utils</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2+"><code class="xref download docutils literal"><span class="pre">GPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-arch/zip</td>
+<td>3.0</td>
+<td><a class="reference external" href="http://www.info-zip.org/">zip</a></td>
+<td><a class="reference download internal" href="../_downloads/Info-ZIP"><code class="xref download docutils literal"><span class="pre">Info-ZIP</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-benchmarks/rt-tests</td>
+<td>0.89</td>
+<td><a class="reference external" href="https://www.osadl.org/Realtime-Preempt-Kernel.kernel-rt.0.html#externaltestingtool">rt-tests</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-crypt/tpm-tools</td>
+<td>1.3.8</td>
+<td><a class="reference external" href="http://trousers.sourceforge.net">tpm-tools</a></td>
+<td><a class="reference download internal" href="../_downloads/CPL-1.0"><code class="xref download docutils literal"><span class="pre">CPL-1.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-crypt/trousers</td>
+<td>0.3.10</td>
+<td><a class="reference external" href="http://trousers.sf.net">trousers</a></td>
+<td><a class="reference download internal" href="../_downloads/CPL-1.0"><code class="xref download docutils literal"><span class="pre">CPL-1.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-editors/nano</td>
+<td>2.3.2</td>
+<td><a class="reference external" href="http://www.nano-editor.org/">nano [1]</a>,
+<a class="reference external" href="http://www.gentoo.org/doc/en/nano-basics-guide.xml">nano [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-misc/ca-certificates</td>
+<td>20130906</td>
+<td><a class="reference external" href="http://packages.debian.org/sid/ca-certificates">ca-certificates</a></td>
+<td><a class="reference download internal" href="../_downloads/MPL-1.1"><code class="xref download docutils literal"><span class="pre">MPL-1.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-misc/editor-wrapper</td>
+<td>4</td>
+<td><a class="reference external" href="http://www.gentoo.org/">editor-wrapper</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-misc/mime-types</td>
+<td>9</td>
+<td><a class="reference external" href="http://www.gentoo.org/">mime-types</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-misc/pax-utils</td>
+<td>0.7</td>
+<td><a class="reference external" href="http://hardened.gentoo.org/pax-utils.xml">pax-utils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>app-shells/bash</td>
+<td>4.2_p45</td>
+<td><a class="reference external" href="http://tiswww.case.edu/php/chet/bash/bashtop.html">bash</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>app-text/iso-codes</td>
+<td>3.51</td>
+<td><a class="reference external" href="http://pkg-isocodes.alioth.debian.org/">iso-codes</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-cpp/eigen</td>
+<td>3.2.4</td>
+<td><a class="reference external" href="http://eigen.tuxfamily.org/">eigen</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-cpp/tbb</td>
+<td>4.2.20140601</td>
+<td><a class="reference external" href="http://www.threadingbuildingblocks.org/">tbb</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2-with-exceptions"><code class="xref download docutils literal"><span class="pre">GPL-2-with-exceptions</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-db/sqlite</td>
+<td>3.8.11.1</td>
+<td><a class="reference external" href="http://sqlite.org/">sqlite</a></td>
+<td><a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-embedded/cgoslx</td>
+<td>1.03.020</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">cgoslx</a></td>
+<td>commercial</td>
+</tr>
+<tr class="row-odd"><td>dev-embedded/libftdi</td>
+<td>1.1</td>
+<td><a class="reference external" href="http://www.intra2net.com/en/developer/libftdi/">libftdi</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-lang/orc</td>
+<td>0.4.18</td>
+<td><a class="reference external" href="http://code.entropywave.com/projects/orc/">orc</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-lang/perl</td>
+<td>5.16.3</td>
+<td><a class="reference external" href="http://www.perl.org/">perl</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-1+"><code class="xref download docutils literal"><span class="pre">GPL-1+</span></code></a>, <a class="reference download internal" href="../_downloads/Artistic"><code class="xref download docutils literal"><span class="pre">Artistic</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-lang/python</td>
+<td>2.7.6</td>
+<td><a class="reference external" href="http://www.python.org/">python</a></td>
+<td><a class="reference download internal" href="../_downloads/PSF-2"><code class="xref download docutils literal"><span class="pre">PSF-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-lang/python-exec</td>
+<td>2.0.1</td>
+<td><a class="reference external" href="https://bitbucket.org/mgorny/python-exec/">python-exec</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-lang/spidermonkey</td>
+<td>17.0.0</td>
+<td><a class="reference external" href="http://www.mozilla.org/js/spidermonkey/">spidermonkey</a></td>
+<td><a class="reference download internal" href="../_downloads/NPL-1.1"><code class="xref download docutils literal"><span class="pre">NPL-1.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/boost</td>
+<td>1.59.0</td>
+<td><a class="reference external" href="http://www.boost.org/">boost</a></td>
+<td><a class="reference download internal" href="../_downloads/Boost-1.0"><code class="xref download docutils literal"><span class="pre">Boost-1.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/console_bridge</td>
+<td>0.2.7</td>
+<td><a class="reference external" href="http://wiki.ros.org/console_bridge">console_bridge</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/dbus-glib</td>
+<td>0.100.2</td>
+<td><a class="reference external" href="http://dbus.freedesktop.org/">dbus-glib</a></td>
+<td><a class="reference download internal" href="../_downloads/AFL-2.1"><code class="xref download docutils literal"><span class="pre">AFL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/elfutils</td>
+<td>0.158</td>
+<td><a class="reference external" href="https://fedorahosted.org/elfutils/">elfutils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2-with-exceptions"><code class="xref download docutils literal"><span class="pre">GPL-2-with-exceptions</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/expat</td>
+<td>2.1.0</td>
+<td><a class="reference external" href="http://expat.sourceforge.net/">expat</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/glib</td>
+<td>2.38.2</td>
+<td><a class="reference external" href="http://www.gtk.org/">glib</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2+"><code class="xref download docutils literal"><span class="pre">LGPL-2+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/gmp</td>
+<td>5.1.3</td>
+<td><a class="reference external" href="http://gmplib.org/">gmp</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/icu</td>
+<td>51.2</td>
+<td><a class="reference external" href="http://www.icu-project.org/">icu</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/json-c</td>
+<td>0.11</td>
+<td><a class="reference external" href="https://github.com/json-c/json-c/wiki">json-c</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libdaemon</td>
+<td>0.14</td>
+<td><a class="reference external" href="http://0pointer.de/lennart/projects/libdaemon/">libdaemon</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libevent</td>
+<td>2.0.21</td>
+<td><a class="reference external" href="http://libevent.org/">libevent</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libffi</td>
+<td>3.0.13</td>
+<td><a class="reference external" href="http://sourceware.org/libffi/">libffi</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libgcrypt</td>
+<td>1.5.3</td>
+<td><a class="reference external" href="http://www.gnupg.org/">libgcrypt</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libgpg-error</td>
+<td>1.12</td>
+<td><a class="reference external" href="http://www.gnupg.org/related_software/libgpg-error">libgpg-error</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libnl</td>
+<td>3.2.23</td>
+<td><a class="reference external" href="http://www.infradead.org/~tgr/libnl/">libnl</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libpcre</td>
+<td>8.33</td>
+<td><a class="reference external" href="http://www.pcre.org/">libpcre</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libtasn1</td>
+<td>2.14</td>
+<td><a class="reference external" href="http://www.gnu.org/software/libtasn1/">libtasn1</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libusb</td>
+<td>1.0.19</td>
+<td><a class="reference external" href="http://libusb.sourceforge.net/">libusb</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libx86</td>
+<td>1.1</td>
+<td><a class="reference external" href="http://www.codon.org.uk/~mjg59/libx86">libx86</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/libxml2</td>
+<td>2.9.1</td>
+<td><a class="reference external" href="http://www.xmlsoft.org/">libxml2</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/libxslt</td>
+<td>1.1.28</td>
+<td><a class="reference external" href="http://www.xmlsoft.org/">libxslt</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/lzo</td>
+<td>2.06</td>
+<td><a class="reference external" href="http://www.oberhumer.com/opensource/lzo/">lzo</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/mpfr</td>
+<td>3.1.2</td>
+<td><a class="reference external" href="http://www.mpfr.org/">mpfr</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/nettle</td>
+<td>2.7.1</td>
+<td><a class="reference external" href="http://www.lysator.liu.se/~nisse/nettle/">nettle</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/nspr</td>
+<td>4.10.6</td>
+<td><a class="reference external" href="http://www.mozilla.org/projects/nspr/">nspr</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/MPL-2.0"><code class="xref download docutils literal"><span class="pre">MPL-2.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/openssl</td>
+<td>1.0.1h</td>
+<td><a class="reference external" href="http://www.openssl.org/">openssl</a></td>
+<td><a class="reference download internal" href="../_downloads/openssl"><code class="xref download docutils literal"><span class="pre">openssl</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/popt</td>
+<td>1.16</td>
+<td><a class="reference external" href="http://rpm5.org/">popt</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/rasqal</td>
+<td>0.9.29</td>
+<td><a class="reference external" href="http://librdf.org/rasqal/">rasqal</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/redland</td>
+<td>1.0.16</td>
+<td><a class="reference external" href="http://librdf.org/">redland</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/soprano</td>
+<td>9999</td>
+<td><a class="reference external" href="http://soprano.sourceforge.net">soprano</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-libs/tinyxml</td>
+<td>2.6.2</td>
+<td><a class="reference external" href="http://www.grinninglizard.com/tinyxml/index.html">tinyxml</a></td>
+<td><a class="reference download internal" href="../_downloads/ZLIB"><code class="xref download docutils literal"><span class="pre">ZLIB</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-libs/userspace-rcu</td>
+<td>0.8.4</td>
+<td><a class="reference external" href="http://lttng.org/urcu">userspace-rcu</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/chardet</td>
+<td>2.2.1</td>
+<td><a class="reference external" href="https://github.com/chardet/chardet">chardet [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/chardet">chardet [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/dbus-python</td>
+<td>1.2.0</td>
+<td><a class="reference external" href="http://www.freedesktop.org/wiki/Software/DBusBindings">dbus-python [1]</a>,
+<a class="reference external" href="http://dbus.freedesktop.org/doc/dbus-python/">dbus-python [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/dnspython</td>
+<td>1.9.4</td>
+<td><a class="reference external" href="http://www.dnspython.org/">dnspython [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/dnspython">dnspython [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/gst-python</td>
+<td>0.10.22</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-python</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/numpy</td>
+<td>1.8.0</td>
+<td><a class="reference external" href="http://numpy.scipy.org/">numpy</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/pillow</td>
+<td>2.4.0</td>
+<td><a class="reference external" href="https://github.com/python-imaging/Pillow">pillow [1]</a>,
+<a class="reference external" href="https://pypi.python.org/pypi/Pillow">pillow [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/HPND"><code class="xref download docutils literal"><span class="pre">HPND</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/pip</td>
+<td>1.4.1</td>
+<td><a class="reference external" href="http://www.pip-installer.org/">pip [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/pip/">pip [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/pycrypto</td>
+<td>2.6.1</td>
+<td><a class="reference external" href="http://www.dlitz.net/software/pycrypto/">pycrypto [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/pycrypto">pycrypto [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a>, <a class="reference download internal" href="../_downloads/PSF-2"><code class="xref download docutils literal"><span class="pre">PSF-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/pycurl</td>
+<td>7.19.0</td>
+<td><a class="reference external" href="http://pycurl.sourceforge.net/">pycurl [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/pycurl">pycurl [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/pygobject</td>
+<td>2.28.6</td>
+<td><a class="reference external" href="http://www.pygtk.org/">pygobject</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/pyserial</td>
+<td>2.7</td>
+<td><a class="reference external" href="http://pyserial.sourceforge.net/">pyserial [1]</a>,
+<a class="reference external" href="http://sourceforge.net/projects/pyserial/">pyserial [2]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/pyserial">pyserial [3]</a></td>
+<td><a class="reference download internal" href="../_downloads/PSF-2"><code class="xref download docutils literal"><span class="pre">PSF-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/python-dateutil</td>
+<td>2.1</td>
+<td><a class="reference external" href="https://launchpad.net/dateutil">python-dateutil [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/python-dateutil">python-dateutil [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/pyxattr</td>
+<td>0.5.2</td>
+<td><a class="reference external" href="http://pyxattr.k1024.org/">pyxattr</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/pyyaml</td>
+<td>3.10</td>
+<td><a class="reference external" href="http://pyyaml.org/wiki/PyYAML">pyyaml [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/PyYAML">pyyaml [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/requests</td>
+<td>2.5.1</td>
+<td><a class="reference external" href="http://python-requests.org/">requests [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/requests">requests [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/setuptools</td>
+<td>2.2</td>
+<td><a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a></td>
+<td><a class="reference download internal" href="../_downloads/PSF-2"><code class="xref download docutils literal"><span class="pre">PSF-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/simplejson</td>
+<td>3.3.0</td>
+<td><a class="reference external" href="http://undefined.org/python/#simplejson">simplejson [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/simplejson">simplejson [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/AFL-2.1"><code class="xref download docutils literal"><span class="pre">AFL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/six</td>
+<td>1.3.0</td>
+<td><a class="reference external" href="https://bitbucket.org/gutworth/six">six [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/six">six [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-python/vobject</td>
+<td>0.8.1c</td>
+<td><a class="reference external" href="http://vobject.skyhouseconsulting.com/">vobject [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/vobject">vobject [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-python/xmpppy</td>
+<td>0.5.0_rc1</td>
+<td><a class="reference external" href="http://xmpppy.sourceforge.net/">xmpppy</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-qt/qtchooser</td>
+<td>0_p20150102</td>
+<td><a class="reference external" href="https://qt.gitorious.org/qt/qtchooser">qtchooser</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-qt/qtconcurrent</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtconcurrent [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtconcurrent [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-qt/qtcore</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtcore [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtcore [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-qt/qtdbus</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtdbus [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtdbus [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-qt/qtnetwork</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtnetwork [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtnetwork [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-qt/qtscript</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtscript [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtscript [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-qt/qttest</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qttest [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qttest [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-qt/qtxml</td>
+<td>5.4.1</td>
+<td><a class="reference external" href="https://www.qt.io/">qtxml [1]</a>,
+<a class="reference external" href="https://qt-project.org/">qtxml [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-scheme/guile</td>
+<td>1.8.8</td>
+<td><a class="reference external" href="http://www.gnu.org/software/guile/">guile</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>dev-util/lttng-tools</td>
+<td>2.4.1</td>
+<td><a class="reference external" href="http://lttng.org">lttng-tools</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>dev-util/lttng-ust</td>
+<td>2.4.1</td>
+<td><a class="reference external" href="http://lttng.org">lttng-ust</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-gfx/zbar</td>
+<td>0.10</td>
+<td><a class="reference external" href="http://zbar.sourceforge.net/">zbar</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/alsa-lib</td>
+<td>1.0.27.2</td>
+<td><a class="reference external" href="http://www.alsa-project.org/">alsa-lib</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/flac</td>
+<td>1.3.0</td>
+<td><a class="reference external" href="http://flac.sourceforge.net">flac</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/FDL-1.2"><code class="xref download docutils literal"><span class="pre">FDL-1.2</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/gst-plugins-bad</td>
+<td>0.10.23</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-bad</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/gst-plugins-base</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-base</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2+"><code class="xref download docutils literal"><span class="pre">LGPL-2+</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2+"><code class="xref download docutils literal"><span class="pre">GPL-2+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/gst-plugins-good</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-good</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/gst-plugins-ugly</td>
+<td>0.10.19</td>
+<td><a class="reference external" href="http://gstreamer.sourceforge.net">gst-plugins-ugly</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/gstreamer</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gstreamer</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2+"><code class="xref download docutils literal"><span class="pre">LGPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/libjpeg-turbo</td>
+<td>1.3.1</td>
+<td><a class="reference external" href="http://libjpeg-turbo.virtualgl.org/">libjpeg-turbo [1]</a>,
+<a class="reference external" href="http://sourceforge.net/projects/libjpeg-turbo/">libjpeg-turbo [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/IJG"><code class="xref download docutils literal"><span class="pre">IJG</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/libmad</td>
+<td>0.15.1b</td>
+<td><a class="reference external" href="http://mad.sourceforge.net">libmad</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/libogg</td>
+<td>1.3.1</td>
+<td><a class="reference external" href="http://xiph.org/ogg/">libogg</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/libpng</td>
+<td>1.6.10</td>
+<td><a class="reference external" href="http://www.libpng.org/">libpng</a></td>
+<td><a class="reference download internal" href="../_downloads/libpng"><code class="xref download docutils literal"><span class="pre">libpng</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/libsamplerate</td>
+<td>0.1.7</td>
+<td><a class="reference external" href="http://www.mega-nerd.com/SRC/">libsamplerate</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/libsndfile</td>
+<td>1.0.25</td>
+<td><a class="reference external" href="http://www.mega-nerd.com/libsndfile">libsndfile</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/libsoundtouch</td>
+<td>1.8.0</td>
+<td><a class="reference external" href="http://www.surina.net/soundtouch/">libsoundtouch</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/libtheora</td>
+<td>1.1.1</td>
+<td><a class="reference external" href="http://www.theora.org">libtheora</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/libv4l</td>
+<td>1.6.3</td>
+<td><a class="reference external" href="http://git.linuxtv.org/v4l-utils.git">libv4l</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/libvorbis</td>
+<td>1.3.4</td>
+<td><a class="reference external" href="http://xiph.org/vorbis">libvorbis</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/opencore-amr</td>
+<td>0.1.3</td>
+<td><a class="reference external" href="http://opencore-amr.sourceforge.net/">opencore-amr</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/opencv</td>
+<td>2.4.9</td>
+<td><a class="reference external" href="http://opencv.willowgarage.com">opencv</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/openni2</td>
+<td>9999</td>
+<td><a class="reference external" href="http://www.openni.org/">openni2</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/opus</td>
+<td>1.0.2</td>
+<td><a class="reference external" href="http://opus-codec.org/">opus</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/raptor</td>
+<td>2.0.9</td>
+<td><a class="reference external" href="http://librdf.org/raptor/">raptor</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/sbc</td>
+<td>1.2</td>
+<td><a class="reference external" href="http://git.kernel.org/?p=bluetooth/sbc.git">sbc [1]</a>,
+<a class="reference external" href="http://www.bluez.org/sbc-10/">sbc [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/simple-comp</td>
+<td>9999</td>
+<td><a class="reference external" href="https://github.com/music-dsp-collection/chunkware-simple-dynamics">simple-comp [1]</a>,
+<a class="reference external" href="http://www.musicdsp.org/archive.php?classid=4#204">simple-comp [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/speex</td>
+<td>1.2_rc1</td>
+<td><a class="reference external" href="http://www.speex.org">speex</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/tiff</td>
+<td>4.0.3</td>
+<td><a class="reference external" href="http://www.remotesensing.org/libtiff/">tiff</a></td>
+<td><a class="reference download internal" href="../_downloads/libtiff"><code class="xref download docutils literal"><span class="pre">libtiff</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/vo-aacenc</td>
+<td>0.1.2</td>
+<td><a class="reference external" href="http://sourceforge.net/projects/opencore-amr/">vo-aacenc</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/vo-amrwbenc</td>
+<td>0.1.3</td>
+<td><a class="reference external" href="http://sourceforge.net/projects/opencore-amr/">vo-amrwbenc</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-libs/webrtc-audio-processing</td>
+<td>0.1</td>
+<td><a class="reference external" href="http://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/">webrtc-audio-processing</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-libs/x264</td>
+<td>0.0.20140308</td>
+<td><a class="reference external" href="http://www.videolan.org/developers/x264.html">x264</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/alsa-plugins</td>
+<td>1.0.27</td>
+<td><a class="reference external" href="http://www.alsa-project.org/">alsa-plugins</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-alsa</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-alsa</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-flac</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-flac</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-jpeg</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-jpeg</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-libnice</td>
+<td>0.1.4</td>
+<td><a class="reference external" href="http://nice.freedesktop.org/wiki/">gst-plugins-libnice</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/MPL-1.1"><code class="xref download docutils literal"><span class="pre">MPL-1.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-mad</td>
+<td>0.10.19</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-mad</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-ogg</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-ogg</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-pulse</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-pulse</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-soup</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-soup</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-theora</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-theora</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-v4l2</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-v4l2</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-vorbis</td>
+<td>0.10.36</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-vorbis</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-plugins/gst-plugins-wavpack</td>
+<td>0.10.31</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-wavpack</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-plugins/gst-plugins-x264</td>
+<td>0.10.19</td>
+<td><a class="reference external" href="http://gstreamer.freedesktop.org/">gst-plugins-x264</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-sound/alsa-utils</td>
+<td>1.0.27.2</td>
+<td><a class="reference external" href="http://www.alsa-project.org/">alsa-utils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-sound/pulseaudio</td>
+<td>9999</td>
+<td><a class="reference external" href="http://www.pulseaudio.org/">pulseaudio</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-sound/wavpack</td>
+<td>4.70.0</td>
+<td><a class="reference external" href="http://www.wavpack.com/">wavpack</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-video/cx3-camera</td>
+<td>9999</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">cx3-camera</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>media-video/ffmpeg</td>
+<td>1.2.6</td>
+<td><a class="reference external" href="http://ffmpeg.org/">ffmpeg</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>media-video/liburg</td>
+<td>9999</td>
+<td><a class="reference external" href="http://www.hokuyo-aut.jp">liburg</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-dns/avahi</td>
+<td>0.6.31</td>
+<td><a class="reference external" href="http://avahi.org/">avahi</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-dns/c-ares</td>
+<td>1.10.0</td>
+<td><a class="reference external" href="http://c-ares.haxx.se/">c-ares</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-dns/libidn</td>
+<td>1.28</td>
+<td><a class="reference external" href="http://www.gnu.org/software/libidn/">libidn</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-firewall/iptables</td>
+<td>1.4.21</td>
+<td><a class="reference external" href="http://www.netfilter.org/projects/iptables/">iptables</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-im/telepathy-mission-control</td>
+<td>5.14.1</td>
+<td><a class="reference external" href="http://cgit.freedesktop.org/telepathy/telepathy-mission-control/">telepathy-mission-control</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/farsight2</td>
+<td>0.0.31</td>
+<td><a class="reference external" href="http://www.freedesktop.org/wiki/Software/Farstream">farsight2</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/glib-networking</td>
+<td>2.38.2</td>
+<td><a class="reference external" href="http://git.gnome.org/browse/glib-networking/">glib-networking</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2+"><code class="xref download docutils literal"><span class="pre">LGPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/gnutls</td>
+<td>3.3.4</td>
+<td><a class="reference external" href="http://www.gnutls.org/">gnutls</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/gssdp</td>
+<td>0.14.7</td>
+<td><a class="reference external" href="http://gupnp.org/">gssdp</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/gupnp</td>
+<td>0.20.10</td>
+<td><a class="reference external" href="http://gupnp.org/">gupnp</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/gupnp-igd</td>
+<td>0.2.2</td>
+<td><a class="reference external" href="http://gupnp.org">gupnp-igd</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/libasyncns</td>
+<td>0.8</td>
+<td><a class="reference external" href="http://0pointer.de/lennart/projects/libasyncns/">libasyncns</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/libnice</td>
+<td>0.1.4</td>
+<td><a class="reference external" href="http://nice.freedesktop.org/wiki/">libnice</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/MPL-1.1"><code class="xref download docutils literal"><span class="pre">MPL-1.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/libproxy</td>
+<td>0.4.11</td>
+<td><a class="reference external" href="http://code.google.com/p/libproxy/">libproxy</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/libsoup</td>
+<td>2.44.2</td>
+<td><a class="reference external" href="https://wiki.gnome.org/LibSoup">libsoup</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2+"><code class="xref download docutils literal"><span class="pre">LGPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-libs/telepathy-farsight</td>
+<td>0.0.19</td>
+<td><a class="reference external" href="http://telepathy.freedesktop.org">telepathy-farsight</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-libs/telepathy-glib</td>
+<td>0.24.0</td>
+<td><a class="reference external" href="http://telepathy.freedesktop.org">telepathy-glib</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-misc/connman</td>
+<td>9999</td>
+<td><a class="reference external" href="http://connman.net">connman</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-misc/curl</td>
+<td>7.36.0</td>
+<td><a class="reference external" href="http://curl.haxx.se/">curl</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-misc/mobile-broadband-provider-info</td>
+<td>20120614</td>
+<td><a class="reference external" href="https://wiki.gnome.org/Projects/NetworkManager/MobileBroadband">mobile-broadband-provider-info</a></td>
+<td><a class="reference download internal" href="../_downloads/CC-PD"><code class="xref download docutils literal"><span class="pre">CC-PD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-misc/ntp</td>
+<td>4.2.6_p5</td>
+<td><a class="reference external" href="http://www.ntp.org/">ntp</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a>, <a class="reference download internal" href="../_downloads/HPND"><code class="xref download docutils literal"><span class="pre">HPND</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-misc/ofono</td>
+<td>9999</td>
+<td><a class="reference external" href="http://ofono.org/">ofono</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-misc/openssh</td>
+<td>6.6_p1</td>
+<td><a class="reference external" href="http://www.openssh.org/">openssh</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-misc/openvpn</td>
+<td>2.3.2</td>
+<td><a class="reference external" href="http://openvpn.net/">openvpn</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-misc/pps-tools</td>
+<td>0.0.20120407</td>
+<td><a class="reference external" href="http://wiki.enneenne.com/index.php/LinuxPPS_installation">pps-tools</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-misc/rsync</td>
+<td>3.0.9</td>
+<td><a class="reference external" href="http://rsync.samba.org/">rsync</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-misc/wget</td>
+<td>1.14</td>
+<td><a class="reference external" href="http://www.gnu.org/software/wget/">wget</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-voip/telepathy-gabble</td>
+<td>0.18.3</td>
+<td><a class="reference external" href="http://telepathy.freedesktop.org">telepathy-gabble</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-wireless/bluez</td>
+<td>5.25</td>
+<td><a class="reference external" href="http://www.bluez.org">bluez</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2+"><code class="xref download docutils literal"><span class="pre">GPL-2+</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-wireless/crda</td>
+<td>1.1.2</td>
+<td><a class="reference external" href="http://wireless.kernel.org/en/developers/Regulatory">crda</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-wireless/iw</td>
+<td>3.10</td>
+<td><a class="reference external" href="http://wireless.kernel.org/en/users/Documentation/iw">iw</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-wireless/rfkill</td>
+<td>0.5</td>
+<td><a class="reference external" href="http://wireless.kernel.org/en/users/Documentation/rfkill">rfkill</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>net-wireless/wireless-regdb</td>
+<td>20130213</td>
+<td><a class="reference external" href="http://wireless.kernel.org/en/developers/Regulatory">wireless-regdb</a></td>
+<td><a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a></td>
+</tr>
+<tr class="row-even"><td>net-wireless/wpa_supplicant</td>
+<td>9999</td>
+<td><a class="reference external" href="http://hostap.epitest.fi/wpa_supplicant/">wpa_supplicant</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sci-electronics/rosbag</td>
+<td>9999</td>
+<td><a class="reference external" href="http://wiki.ros.org/rosbag">rosbag [1]</a>,</td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sci-libs/blas-reference</td>
+<td>20070226</td>
+<td><a class="reference external" href="http://www.netlib.org/blas/">blas-reference</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sci-libs/cblas-reference</td>
+<td>20030223</td>
+<td><a class="reference external" href="http://www.netlib.org/blas/">cblas-reference</a></td>
+<td><a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sci-libs/fftw</td>
+<td>3.3.4</td>
+<td><a class="reference external" href="http://www.fftw.org/">fftw</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sci-libs/lapack-reference</td>
+<td>3.1.1</td>
+<td><a class="reference external" href="http://www.netlib.org/lapack/index.html">lapack-reference</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sci-libs/orocos-bfl</td>
+<td>0.8.0</td>
+<td><a class="reference external" href="http://orocos.org/bfl">orocos-bfl</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sci-mathematics/octomap</td>
+<td>1.6.6</td>
+<td><a class="reference external" href="http://octomap.github.io/">octomap</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/acl</td>
+<td>2.2.51</td>
+<td><a class="reference external" href="http://savannah.nongnu.org/projects/acl">acl</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/attr</td>
+<td>2.4.47</td>
+<td><a class="reference external" href="http://savannah.nongnu.org/projects/attr">attr</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/baselayout</td>
+<td>2.2</td>
+<td><a class="reference external" href="http://www.gentoo.org/">baselayout</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/busybox</td>
+<td>1.22.1</td>
+<td><a class="reference external" href="http://www.busybox.net/">busybox</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/coreutils</td>
+<td>8.21</td>
+<td><a class="reference external" href="http://www.gnu.org/software/coreutils/">coreutils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/dbus</td>
+<td>1.8.16</td>
+<td><a class="reference external" href="http://dbus.freedesktop.org/">dbus</a></td>
+<td><a class="reference download internal" href="../_downloads/AFL-2.1"><code class="xref download docutils literal"><span class="pre">AFL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/debianutils</td>
+<td>4.4</td>
+<td><a class="reference external" href="http://packages.qa.debian.org/d/debianutils.html">debianutils</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/SMAIL"><code class="xref download docutils literal"><span class="pre">SMAIL</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/file</td>
+<td>5.17</td>
+<td><a class="reference external" href="http://www.darwinsys.com/file/">file</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/gentoo-systemd-integration</td>
+<td>4</td>
+<td><a class="reference external" href="https://bitbucket.org/mgorny/gentoo-systemd-integration">gentoo-systemd-integration</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/grep</td>
+<td>2.16</td>
+<td><a class="reference external" href="http://www.gnu.org/software/grep/">grep</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/hwids</td>
+<td>20140317</td>
+<td><a class="reference external" href="https://github.com/gentoo/hwids">hwids</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/i2c-tools</td>
+<td>3.1.0</td>
+<td><a class="reference external" href="http://www.lm-sensors.org/wiki/I2CTools">i2c-tools</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/kmod</td>
+<td>17</td>
+<td><a class="reference external" href="http://git.kernel.org/?p=utils/kernel/kmod/kmod.git">kmod</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/less</td>
+<td>457</td>
+<td><a class="reference external" href="http://www.greenwoodsoftware.com/less/">less</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a>, <a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/lsb-release</td>
+<td>1.4</td>
+<td><a class="reference external" href="http://www.linuxfoundation.org/collaborate/workgroups/lsb">lsb-release</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/nao-diagnostic</td>
+<td>0.1</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">nao-diagnostic</a></td>
+<td>commercial</td>
+</tr>
+<tr class="row-even"><td>sys-apps/net-tools</td>
+<td>1.60_p20130513023548</td>
+<td><a class="reference external" href="http://net-tools.sourceforge.net/">net-tools</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/pciutils</td>
+<td>3.2.0</td>
+<td><a class="reference external" href="http://mj.ucw.cz/sw/pciutils/">pciutils [1]</a>,
+<a class="reference external" href="http://git.kernel.org/?p=utils/pciutils/pciutils.git">pciutils [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/portage</td>
+<td>2.2.8</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/portage/index.xml">portage</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/sandbox</td>
+<td>2.6</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/portage/sandbox/">sandbox</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/sed</td>
+<td>4.2.1</td>
+<td><a class="reference external" href="http://sed.sourceforge.net/">sed</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/shadow</td>
+<td>4.2.1</td>
+<td><a class="reference external" href="http://shadow.pld.org.pl/">shadow [1]</a>,
+<a class="reference external" href="http://pkg-shadow.alioth.debian.org/">shadow [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/systemd</td>
+<td>215</td>
+<td><a class="reference external" href="http://www.freedesktop.org/wiki/Software/systemd">systemd</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/tcp-wrappers</td>
+<td>7.6.22</td>
+<td><a class="reference external" href="ftp://ftp.porcupine.org/pub/security/index.html">tcp-wrappers</a></td>
+<td><a class="reference download internal" href="../_downloads/tcp_wrappers_license"><code class="xref download docutils literal"><span class="pre">tcp_wrappers_license</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/usbutils</td>
+<td>007</td>
+<td><a class="reference external" href="http://linux-usb.sourceforge.net/">usbutils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-apps/util-linux</td>
+<td>2.24.1</td>
+<td><a class="reference external" href="http://www.kernel.org/pub/linux/utils/util-linux/">util-linux</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/BSD-4"><code class="xref download docutils literal"><span class="pre">BSD-4</span></code></a>, <a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-apps/vbetool</td>
+<td>1.1</td>
+<td><a class="reference external" href="http://www.codon.org.uk/~mjg59/vbetool/">vbetool</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-auth/nss-mdns</td>
+<td>0.10</td>
+<td><a class="reference external" href="http://0pointer.de/lennart/projects/nss-mdns/">nss-mdns</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-auth/pambase</td>
+<td>20120417</td>
+<td><a class="reference external" href="http://www.gentoo.org/proj/en/base/pam/">pambase</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-auth/polkit</td>
+<td>0.112</td>
+<td><a class="reference external" href="http://www.freedesktop.org/wiki/Software/polkit">polkit</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-devel/autogen</td>
+<td>5.18.1</td>
+<td><a class="reference external" href="http://www.gnu.org/software/autogen/">autogen</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-devel/bc</td>
+<td>1.06.95</td>
+<td><a class="reference external" href="http://www.gnu.org/software/bc/bc.html">bc</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-devel/gdb</td>
+<td>7.8.1</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">gdb</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-devel/gettext</td>
+<td>0.18.3.2</td>
+<td><a class="reference external" href="http://www.gnu.org/software/gettext/">gettext</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-devel/gnuconfig</td>
+<td>20131128</td>
+<td><a class="reference external" href="http://savannah.gnu.org/projects/config">gnuconfig</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-devel/libtool</td>
+<td>2.4.2</td>
+<td><a class="reference external" href="http://www.gnu.org/software/libtool/">libtool</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-devel/make</td>
+<td>3.82</td>
+<td><a class="reference external" href="http://www.gnu.org/software/make/make.html">make</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-devel/toolchain-runtime</td>
+<td>4.9.2</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">toolchain-runtime</a></td>
+<td><a class="reference download internal" href="../_downloads/metapackage"><code class="xref download docutils literal"><span class="pre">metapackage</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-fs/e2fsprogs</td>
+<td>1.42.7</td>
+<td><a class="reference external" href="http://e2fsprogs.sourceforge.net/">e2fsprogs</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-fs/fuse</td>
+<td>2.9.3</td>
+<td><a class="reference external" href="http://fuse.sourceforge.net">fuse</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-kernel/naoqi-kernel</td>
+<td>4.0</td>
+<td><a class="reference external" href="http://kernel.org">naoqi-kernel</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/freedist"><code class="xref download docutils literal"><span class="pre">freedist</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/db</td>
+<td>4.8.30</td>
+<td><a class="reference external" href="http://www.oracle.com/technology/software/products/berkeley-db/index.html">db</a></td>
+<td><a class="reference download internal" href="../_downloads/Sleepycat"><code class="xref download docutils literal"><span class="pre">Sleepycat</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/e2fsprogs-libs</td>
+<td>1.42.7</td>
+<td><a class="reference external" href="http://e2fsprogs.sourceforge.net/">e2fsprogs-libs</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/gdbm</td>
+<td>1.8.3</td>
+<td><a class="reference external" href="http://www.gnu.org/software/gdbm/gdbm.html">gdbm</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/glibc</td>
+<td>2.21</td>
+<td><a class="reference external" href="http://www.aldebaran-robotics.com">glibc</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1+"><code class="xref download docutils literal"><span class="pre">LGPL-2.1+</span></code></a>, <a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/HPND"><code class="xref download docutils literal"><span class="pre">HPND</span></code></a>, <a class="reference download internal" href="../_downloads/ISC"><code class="xref download docutils literal"><span class="pre">ISC</span></code></a>, <a class="reference download internal" href="../_downloads/inner-net"><code class="xref download docutils literal"><span class="pre">inner-net</span></code></a>, <a class="reference download internal" href="../_downloads/rc"><code class="xref download docutils literal"><span class="pre">rc</span></code></a>, <a class="reference download internal" href="../_downloads/PCRE"><code class="xref download docutils literal"><span class="pre">PCRE</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/libcap</td>
+<td>2.22</td>
+<td><a class="reference external" href="http://www.friedhoff.org/posixfilecaps.html">libcap</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/libcap-ng</td>
+<td>0.7.3</td>
+<td><a class="reference external" href="http://people.redhat.com/sgrubb/libcap-ng/">libcap-ng</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/libseccomp</td>
+<td>2.1.1</td>
+<td><a class="reference external" href="http://sourceforge.net/projects/libseccomp/">libseccomp</a></td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/ncurses</td>
+<td>5.9</td>
+<td><a class="reference external" href="http://www.gnu.org/software/ncurses/">ncurses [1]</a>,
+<a class="reference external" href="http://dickey.his.com/ncurses/">ncurses [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/pam</td>
+<td>1.1.6</td>
+<td><a class="reference external" href="https://fedorahosted.org/linux-pam/">pam</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/readline</td>
+<td>6.2_p1</td>
+<td><a class="reference external" href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html">readline</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-libs/timezone-data</td>
+<td>2014a</td>
+<td><a class="reference external" href="http://www.iana.org/time-zones">timezone-data [1]</a>,
+<a class="reference external" href="http://www.twinsun.com/tz/tz-link.htm">timezone-data [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/public-domain"><code class="xref download docutils literal"><span class="pre">public-domain</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-libs/zlib</td>
+<td>1.2.8</td>
+<td><a class="reference external" href="http://www.zlib.net/">zlib</a></td>
+<td><a class="reference download internal" href="../_downloads/ZLIB"><code class="xref download docutils literal"><span class="pre">ZLIB</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-power/pm-quirks</td>
+<td>20100619</td>
+<td><a class="reference external" href="http://pm-utils.freedesktop.org/">pm-quirks</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-power/pm-utils</td>
+<td>1.4.1</td>
+<td><a class="reference external" href="http://pm-utils.freedesktop.org/">pm-utils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-power/upower-pm-utils</td>
+<td>0.9.23</td>
+<td><a class="reference external" href="http://upower.freedesktop.org/">upower-pm-utils</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>sys-process/htop</td>
+<td>1.0.2</td>
+<td><a class="reference external" href="http://htop.sourceforge.net">htop</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>sys-process/procps</td>
+<td>3.3.9</td>
+<td><a class="reference external" href="http://procps.sourceforge.net/">procps [1]</a>,
+<a class="reference external" href="http://gitorious.org/procps">procps [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td>www-servers/nginx</td>
+<td>1.4.7</td>
+<td><a class="reference external" href="http://nginx.org">nginx</a></td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a>, <a class="reference download internal" href="../_downloads/SSLeay"><code class="xref download docutils literal"><span class="pre">SSLeay</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2+"><code class="xref download docutils literal"><span class="pre">GPL-2+</span></code></a>, <a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>www-servers/tornadio2</td>
+<td>9999</td>
+<td><a class="reference external" href="https://github.com/aldebaran/tornadio2">tornadio2</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td>www-servers/tornado</td>
+<td>3.1.1</td>
+<td><a class="reference external" href="http://www.tornadoweb.org/">tornado [1]</a>,
+<a class="reference external" href="http://pypi.python.org/pypi/tornado">tornado [2]</a></td>
+<td><a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td>x11-misc/shared-mime-info</td>
+<td>1.2</td>
+<td><a class="reference external" href="http://freedesktop.org/wiki/Software/shared-mime-info">shared-mime-info</a></td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="open-source-projects-used-in-the-choregraphe-software-suite">
+<h2>Open Source Projects used in the Choregraphe Software Suite<a class="headerlink" href="#open-source-projects-used-in-the-choregraphe-software-suite" title="Permalink to this headline">¶</a></h2>
+<p>The Choregraphe Software Suite uses the following open source projects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="67%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Project</th>
+<th class="head">Version</th>
+<th class="head">License type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://libarchive.org">archive</a></td>
+<td>3.1.2</td>
+<td><a class="reference download internal" href="../_downloads/BSD-2"><code class="xref download docutils literal"><span class="pre">BSD-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.boost.org/">boost</a></td>
+<td>1.59</td>
+<td><a class="reference download internal" href="../_downloads/Boost-1.0"><code class="xref download docutils literal"><span class="pre">Boost-1.0</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://code.google.com/p/google-breakpad">breakpad</a></td>
+<td>master</td>
+<td><a class="reference download internal" href="../_downloads/New-BSD"><code class="xref download docutils literal"><span class="pre">New</span> <span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://eigen.tuxfamily.org/">eigen</a></td>
+<td>3.1.2</td>
+<td><a class="reference download internal" href="../_downloads/MPL-2"><code class="xref download docutils literal"><span class="pre">MPL2</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://freeimage.sourceforge.net">freeimage</a></td>
+<td>3.16.0</td>
+<td><a class="reference download internal" href="../_downloads/FIPL"><code class="xref download docutils literal"><span class="pre">FIPL</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.github.com/aldebaran/libqi">libqi</a></td>
+<td>2.4.0</td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://www.github.com/lvklabs/QSsh">qssh</a></td>
+<td>master</td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.qt.io">qt</a></td>
+<td>5.4.0</td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-3"><code class="xref download docutils literal"><span class="pre">LGPL-3</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://https://github.com/qtproject/qtftp">qtftp</a></td>
+<td>5.0.0</td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.ogre3d.org">ogre</a></td>
+<td>1.9.0</td>
+<td><a class="reference download internal" href="../_downloads/MIT"><code class="xref download docutils literal"><span class="pre">MIT</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://opencv.org">opencv_</a></td>
+<td>2.4.10</td>
+<td><a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.python.org/">python</a></td>
+<td>2.7.8</td>
+<td><a class="reference download internal" href="../_downloads/PSF-2"><code class="xref download docutils literal"><span class="pre">PSF-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://www.mega-nerd.com/libsndfile">libsndfile</a></td>
+<td>1.0.25</td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.grinninglizard.com/tinyxml/index.html">tinyxml</a></td>
+<td>2.6.2</td>
+<td><a class="reference download internal" href="../_downloads/ZLIB"><code class="xref download docutils literal"><span class="pre">ZLIB</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pepper-android-os-open-source-projects">
+<h2>Pepper Android OS - Open Source Projects<a class="headerlink" href="#pepper-android-os-open-source-projects" title="Permalink to this headline">¶</a></h2>
+<p>The Pepper Android™ OS uses the following open source projects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="18%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Project</th>
+<th class="head">Version</th>
+<th class="head">License type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://www.kernel.org">Kernel-3.10</a></td>
+<td>3.10.72</td>
+<td><a class="reference download internal" href="../_downloads/GPL"><code class="xref download docutils literal"><span class="pre">GPL</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2.1"><code class="xref download docutils literal"><span class="pre">LGPL-2.1</span></code></a>, <a class="reference download internal" href="../_downloads/BSD"><code class="xref download docutils literal"><span class="pre">BSD</span></code></a>,&nbsp; <a class="reference download internal" href="../_downloads/Apache-2.0"><code class="xref download docutils literal"><span class="pre">Apache-2.0</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.iis.fraunhofer.de/en/ff/amm/impl.html">External/aac</a></td>
+<td>&nbsp;</td>
+<td><a class="reference download internal" href="../_downloads/FRAUNHOFER FDK AAC"><code class="xref download docutils literal"><span class="pre">Fraunhofer</span> <span class="pre">FDK</span> <span class="pre">AAC</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://www.thekelleys.org.uk/dnsmasq/doc.html">External/dnsmasq</a></td>
+<td>2.51</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/GPL-3"><code class="xref download docutils literal"><span class="pre">GPL-3</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.spinics.net/lists/fio">External/fio</a></td>
+<td>2.1.9</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://www.linuxfoundation.org/collaborate/workgroups/networking/iproute2">External/iproute2</a></td>
+<td>3.4.0</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://www.netfilter.org/projects/iptables/index.html">External/iptables</a></td>
+<td>1.4.20</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://kernelnewbies.org/KernelHeaders">External/kernel-headers</a></td>
+<td>&nbsp;</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://libusb.info">External/libusb</a></td>
+<td>1.0.9</td>
+<td><a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://wiki.qemu.org/Main_Page">External/qemu</a></td>
+<td>0.12.0</td>
+<td><a class="reference download internal" href="../_downloads/GPL-2"><code class="xref download docutils literal"><span class="pre">GPL-2</span></code></a>, <a class="reference download internal" href="../_downloads/LGPL-2"><code class="xref download docutils literal"><span class="pre">LGPL-2</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>For further details, see:
+<a class="reference external" href="http://www.lgcns.com/LGCNS.GHP.Main/Faq/HelpCenter">LG CNS Help Center</a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Legal notices</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Legal notices</a><ul>
+<li><a class="reference internal" href="#legal-statement">Legal Statement</a></li>
+<li><a class="reference internal" href="#copyright">Copyright</a></li>
+<li><a class="reference internal" href="#open-source-projects">Open Source Projects</a></li>
+<li><a class="reference internal" href="#open-source-projects-used-in-the-choregraphe-software-suite">Open Source Projects used in the Choregraphe Software Suite</a></li>
+<li><a class="reference internal" href="#pepper-android-os-open-source-projects">Pepper Android OS - Open Source Projects</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../glossary.html">Glossary</a>
+      <a title="Site map" href="../contents.html">Site map</a>
+      <a title="Index" href="../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="#">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+process PeoplePerception_process(PeoplePerception, 3, 10)
+{
+# Statuses
+modeIs3D <= PeopleDetection_ModeIs3D;
+movementStatus3D <= MovementDetection_Status;
+faceStatus3D <= FaceDetection_Status;
+
+depthInputImage <= PeopleDetection_DistanceCameraSource;
+irInputImage <= PeopleDetection_IRCameraSource;
+rgbInputImage <= PeopleDetection_RGBCameraSource;
+
+cameraTopPositionTorso <= PeopleDetection_CameraRGBTorsoPositionSource;
+cameraTopPositionRobot <= PeopleDetection_CameraRGBRobotPositionSource;
+cameraTopPositionWorld <= PeopleDetection_CameraRGBWorldPositionSource;
+
+cameraDepthPositionTorso <= Motion_CameraDepth<TORSO>;
+cameraDepthPositionRobot <= Motion_CameraDepth<ROBOT>;
+cameraDepthPositionWorld <= Motion_CameraDepth<WORLD>;
+
+heightOffset<=RobotHeightOffset;
+
+
+population => population;
+removedPopulation => removedPopulation;
+visiblePopulation => visiblePopulation;
+nonVisiblePopulation => nonVisiblePopulation;
+regroupedSink => out;
+
+
+# Parameters for NearPopulation in PeopleDetection 2D and 3D
+maxDistance <= NearPopulation_MaximumDetectionRange;
+
+# Parameters for BodySize
+minBodyHeight3D <= BodySize_MinBodyHeight;
+maxBodyHeight3D <= BodySize_MaxBodyHeight;
+minBodyWidth3D <= BodySize_MinBodyWidth;
+maxBodyWidth3D <= BodySize_MaxBodyWidth;
+
+# Parameters for Segmentation in PeopleDetection3D
+kernel3D<=Labeling_Kernel;
+toleranceH3D<=Labeling_ToleranceH;
+toleranceV3D<=Labeling_ToleranceV;
+min3D<=Labeling_Min;
+max3D<=Labeling_Max;
+
+# Parameters for MovementDetection in PeopleDetection3D
+movementThreshold3D <= 0.1;
+
+# Parameters for HumanTracker
+maxSpeed <= 2.5;
+persistenceNonVisible <= Tracker_TimeBeforeNonVisiblePersonDisappears;
+persistenceVisible <= Tracker_TimeBeforeVisiblePersonDisappears;
+colorWeight <= Tracker_ColorWeight;
+}

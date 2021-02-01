@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hello Guide &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../index.html" />
+    <link rel="up" title="NAO - Out of the box" href="out_of_the_box.html" />
+    <link rel="next" title="Configuring NAO for the first time" href="first_conf.html" />
+    <link rel="prev" title="NAO - Out of the box" href="out_of_the_box.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="nao-getting_out_of_the_box">
+                
+  <div class="section" id="hello-guide">
+<span id="setup-wizard-nao"></span><h1>Hello Guide<a class="headerlink" href="#hello-guide" title="Permalink to this headline">¶</a></h1>
+<p><strong>NAO</strong> comes in a box with a graphical
+<a class="reference download internal" href="../_downloads/nao_hello-guide.pdf"><code class="xref download docutils literal"><span class="pre">Hello</span> <span class="pre">Guide</span></code></a> inside.</p>
+<p>Here is a more detailed step by step:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img alt="one" class="img-inline" src="../_images/one.png" /></td>
+<td><p class="first">Get <strong>NAO</strong> out of its box, and
+gently set <strong>NAO</strong> in a crouching position.</p>
+<a class="last reference internal image-reference" href="../_images/wiz_step1.png"><img alt="../_images/wiz_step1.png" src="../_images/wiz_step1.png" style="width: 354px; height: 214px;" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td><img alt="two" class="img-inline" src="../_images/two.png" /></td>
+<td><p class="first">Plug the charger to the mains, and
+plug the charger cable into <strong>NAO</strong>&#8216;s back.</p>
+<a class="last reference internal image-reference" href="../_images/wiz_step2.png"><img alt="../_images/wiz_step2.png" src="../_images/wiz_step2.png" style="width: 215px; height: 213px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><img alt="tre" class="img-inline" src="../_images/tree.png" /></td>
+<td><p class="first">Remove the <a class="reference internal" href="../family/robots/connectivity_nao.html#term-hatch-behind-the-head-of-the-robot"><span class="xref std std-term">hatch behind the head of the robot</span></a> to access
+to the Ethernet socket and plug an Ethernet cable.</p>
+<a class="reference internal image-reference" href="../_images/wiz_step3.png"><img alt="../_images/wiz_step3.png" src="../_images/wiz_step3.png" style="width: 330px; height: 225px;" /></a>
+<p>Then connect the Ethernet cable to your Internet box.</p>
+<p class="last">For further details, see: <a class="reference internal" href="nao-connecting.html#connect-to-ethernet"><span>Plugging my robot to Ethernet</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><img alt="fou" class="img-inline" src="../_images/four.png" /></td>
+<td><p class="first">Press the <strong>Chest button</strong> once, and wait for the completion of
+the boot process until the robot says &#8220;<strong>OGNAK GNOUK</strong>&#8221;.</p>
+<a class="last reference internal image-reference" href="../_images/wiz_step4.png"><img alt="../_images/wiz_step4.png" src="../_images/wiz_step4.png" style="width: 482px; height: 184px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td rowspan="3"><img alt="fiv" class="img-inline" src="../_images/five.png" /></td>
+<td><p class="first">Press the <strong>Chest button</strong> once.</p>
+<a class="reference internal image-reference" href="../_images/wiz_step5.png"><img alt="../_images/wiz_step5.png" src="../_images/wiz_step5.png" style="width: 160px; height: 205px;" /></a>
+<p class="last"><strong>NAO</strong> says the four numbers of its <strong>IP address</strong>: note them.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first">Open a web browser and enter this <strong>IP address</strong> in the address bar.</p>
+<a class="reference internal image-reference" href="../_images/wiz_step5ter.png"><img alt="../_images/wiz_step5ter.png" src="../_images/wiz_step5ter.png" style="width: 210px; height: 164px;" /></a>
+<p class="last"><strong>Tips</strong>: make sure you add dots between the numbers.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p class="first">An authentication windows appears.</p>
+<a class="last reference internal image-reference" href="../_images/wiz_step5bis.png"><img alt="../_images/wiz_step5bis.png" src="../_images/wiz_step5bis.png" style="width: 284px; height: 124px;" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><img alt="six" class="img-inline" src="../_images/six.png" /></td>
+<td><p class="first">Complete both <strong>User name</strong> and <strong>Password</strong> with the default value: nao.</p>
+<a class="reference internal image-reference" href="../_images/wiz_step6.png"><img alt="../_images/wiz_step6.png" src="../_images/wiz_step6.png" style="width: 233px; height: 168px;" /></a>
+<p class="last"><strong>Tips</strong>: make sure you type &#8216;nao&#8217; in lower-case.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p class="first">A <strong>Getting started</strong> wizard appears.</p>
+<a class="reference internal image-reference" href="../_images/conf_step1.png"><img alt="../_images/conf_step1.png" src="../_images/conf_step1.png" style="width: 401px; height: 228px;" /></a>
+<p>Follow its steps to configure your robot.</p>
+<p class="last">For further details, see: <a class="reference internal" href="first_conf.html#first-conf"><span>Configuring NAO for the first time</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><strong>NAO</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="introduction_nao.html">First steps with <strong>NAO</strong></a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="out_of_the_box.html"><strong>NAO</strong> - Out of the box</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">Hello Guide</a></li>
+<li class="toctree-l5"><a class="reference internal" href="first_conf.html">Configuring <strong>NAO</strong> for the first time</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Hello Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="first_conf.html">Configuring <strong>NAO</strong> for the first time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_nao.html">Apps 2.1 Store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="taking-care.html">Taking care of NAO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="understanding_nao.html">More details about <strong>NAO</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><strong>NAO</strong> - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../glossary.html">Glossary</a>
+      <a title="Site map" href="../contents.html">Site map</a>
+      <a title="Index" href="../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

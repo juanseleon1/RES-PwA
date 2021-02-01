@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using qi_stage_lib &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../../../index.html" />
+    <link rel="up" title="Using qiBuild CMake API" href="index.html" />
+    <link rel="next" title="Using host tools for cross compilation" href="using_host_tools.html" />
+    <link rel="prev" title="Writing a custom -config.cmake module file" href="writing_a_config_cmake.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="../../../beginner/index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../../index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../../../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="advanced-guide-cmake-using_qi_stage">
+                
+  <div class="section" id="using-qi-stage-lib">
+<span id="id1"></span><h1>Using qi_stage_lib<a class="headerlink" href="#using-qi-stage-lib" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference internal" href="../../cmake/api/stage.html#qi_stage_lib" title="qi_stage_lib"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_stage_lib</span></code></a>: should &#8220;just works&#8221; when using a target created
+with <a class="reference internal" href="../../cmake/api/target.html#qi_create_lib" title="qi_create_lib"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_create_lib</span></code></a>, provided that you call
+<code class="docutils literal"><span class="pre">include_directories</span></code> <strong>before</strong> staging the library:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include_directories</span><span class="p">(</span><span class="s2">&quot;${CMAKE_CURRENT_SOURCE_DIR}&quot;</span><span class="p">)</span>
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">foo/foo.cpp</span> <span class="s">foo/foo.hpp</span><span class="p">)</span>
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced-usage">
+<h2>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h2>
+<p>As the documentation explains, <a class="reference internal" href="../../cmake/api/stage.html#qi_stage_lib" title="qi_stage_lib"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_stage_lib</span></code></a> accepts various
+argument, but most of them are guessed automatically.</p>
+<p>Let us have a look on a few cases where what qibuild guesses can be wrong, and
+how to fix it.</p>
+<div class="section" id="using-qi-stage-lib-with-custom-depends">
+<h3>Using qi_stage_lib with custom DEPENDS<a class="headerlink" href="#using-qi-stage-lib-with-custom-depends" title="Permalink to this headline">¶</a></h3>
+<p>Let us assume you have a library named &#8216;bar&#8217;, depending privately on a library
+named &#8216;foo&#8217; and publicly on boost chrono.</p>
+<p>Your CMake code may look like this:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">bar</span> <span class="s">bar/bar.hpp</span> <span class="s">bar/bar.cpp</span><span class="p">)</span>
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">bar</span><span class="p">)</span>
+
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">foo/foo.hpp</span> <span class="s">foo/foo.cpp</span><span class="p">)</span>
+<span class="nb">qi_use_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">bar</span> <span class="s">boost_chrono</span><span class="p">)</span>
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span><span class="p">)</span>
+<span class="nb">qi_install_header</span><span class="p">(</span><span class="s">foo/foo.hpp</span> <span class="s">SUBFOLDER</span> <span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, the generated <code class="docutils literal"><span class="pre">foo-config.cmake</span></code> file will contain
+<code class="docutils literal"><span class="pre">FOO_DEPENDS=bar;boost_chrono;boost_system</span></code>, thanks to the call to
+<a class="reference internal" href="../../cmake/api/stage.html#qi_use_lib" title="qi_use_lib"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_use_lib</span></code></a> and because boost chrono itself depends on
+boost system.</p>
+<p>So here you must make sure that the generated <code class="docutils literal"><span class="pre">foo-config.cmake</span></code> file does
+not list <code class="docutils literal"><span class="pre">BAR</span></code> in <code class="docutils literal"><span class="pre">FOO_DEPENDS</span></code>.</p>
+<p>To do this, you should set the <code class="docutils literal"><span class="pre">DEPENDS</span></code> argument of <a class="reference internal" href="../../cmake/api/stage.html#qi_stage_lib" title="qi_stage_lib"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_stage_lib</span></code></a>, like this:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">DEPENDS</span> <span class="s2">&quot;BOOST_CHRONO;BOOST_SYSTEM&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Of course, this also means you should not create any install rule for <code class="docutils literal"><span class="pre">bar</span></code> headers.
+Also, if the <code class="docutils literal"><span class="pre">bar</span></code> library is static, you can use <code class="docutils literal"><span class="pre">qi_create_lib(bar</span> <span class="pre">NO_INSTALL)</span></code>
+to make sure the <code class="docutils literal"><span class="pre">bar</span></code> library is not installed.</p>
+</div>
+<div class="section" id="using-qi-stage-lib-with-include-dirs">
+<h3>Using qi_stage_lib with INCLUDE_DIRS<a class="headerlink" href="#using-qi-stage-lib-with-include-dirs" title="Permalink to this headline">¶</a></h3>
+<p>This can happen for instance if you generate some headers at compile time, like this:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// -- in foo/config.in.hpp</span>
+
+<span class="c1">// Configured by cmake</span>
+<span class="cp">#cmakedefine SPAM</span>
+</pre></div>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// -- in foo/foo.hpp</span>
+<span class="cp">#include &lt;foo/config.hpp&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c"># Generate a header at configuration time, in the build directory:</span>
+<span class="nb">configure_file</span><span class="p">(</span><span class="s">config.in.hpp</span> <span class="o">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="o">}</span><span class="s">/foo/config.hpp</span><span class="p">)</span>
+
+<span class="c"># Make sure the generated header can be found:</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">foo/foo.cpp</span> <span class="s">foo/foo.hpp</span><span class="p">)</span>
+
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span>
+  <span class="s">INCLUDE_DIRS</span> <span class="o">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="o">}</span>
+               <span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>From an other project, you may have a file looking like</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp"># include &lt;foo/foo.hpp&gt;</span>
+
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>So here to find <code class="docutils literal"><span class="pre">foo/foo.hpp</span></code> when using the project foo from <strong>sources</strong>, you
+need to find <code class="docutils literal"><span class="pre">/path/to/foo/src/libfoo/</span></code> <strong>and</strong> <code class="docutils literal"><span class="pre">/path/to/foo/build/</span></code>, because
+of the path where <code class="docutils literal"><span class="pre">foo/config.hpp</span></code> has been generated.</p>
+<p>Note that you have to use <strong>absolute</strong>  paths here, like any other
+cmake code generated to be use from sources.</p>
+</div>
+<div class="section" id="using-qi-stage-lib-with-path-suffixes">
+<h3>Using qi_stage_lib with PATH_SUFFIXES<a class="headerlink" href="#using-qi-stage-lib-with-path-suffixes" title="Permalink to this headline">¶</a></h3>
+<p>Contrary to the previous section, this is useful when you want to use
+foo from an <strong>installed</strong> package.</p>
+<p>So let&#8217;s assume your CMake looks like this:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">foo/foo.hpp</span> <span class="s">foo/foo.cpp</span><span class="p">)</span>
+
+<span class="nb">qi_install_header</span><span class="p">(</span><span class="s">foo/foo.hpp</span><span class="p">)</span>
+
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As explained in the <a class="reference internal" href="../how_to_write_a_library.html#how-to-write-a-library"><span>How to write a library</span></a> section, you have chosen
+to have the <code class="docutils literal"><span class="pre">foo.hpp</span></code> header inside a nice <code class="docutils literal"><span class="pre">foo/</span></code> subdirectory.</p>
+<p>But let&#8217;s assume some other project uses <code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;foo.hpp&gt;</span></code> directly.</p>
+<p>They may not be willing to change their code just yet, but still be
+willing to use the <code class="docutils literal"><span class="pre">qibuild</span></code> cmake framework.</p>
+<p>You have several solutions here:</p>
+<ul class="simple">
+<li>Install a <code class="docutils literal"><span class="pre">foo.hpp</span></code> in <code class="docutils literal"><span class="pre">&lt;prefix&gt;/include/foo.hpp</span></code> looking like</li>
+</ul>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#warning &quot;Please include foo/foo.hpp instead of foo.hpp&quot;</span>
+<span class="cp">#include &lt;foo/foo.hpp&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Use the <code class="docutils literal"><span class="pre">PATH_SUFFIXES</span></code> argument like this</li>
+</ul>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span> <span class="s">PATH_SUFFIXES</span> <span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that you have to use <strong>relative</strong>  paths here, like any other
+cmake code that will end up being installed.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qibuild Programming guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../overview/index.html">qiBuild overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Using qiBuild CMake API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="create_bin.html">Creating a binary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="create_lib.html">Creating a library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install.html">Using qi_install functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.html">Unit testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="managing_config_files.html">Managing configuration files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="managing_data.html">Managing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="writing_a_config_cmake.html">Writing a custom -config.cmake module file</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Using qi_stage_lib</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="using_host_tools.html">Using host tools for cross compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting_to_qibuild.html">Porting a CMake project to qiBuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using_toolchains.html">Using toolchains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_configs.html">Managing build configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how_to_write_a_library.html">How to write a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending_qibuild_actions.html">Extending qiBuild actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tips_and_tricks.html">qiBuild tips and tricks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/api.html">qiBuild CMake API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cfg/index.html">Configuration files syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Using qi_stage_lib</a><ul>
+<li><a class="reference internal" href="#basic-usage">Basic usage</a></li>
+<li><a class="reference internal" href="#advanced-usage">Advanced usage</a><ul>
+<li><a class="reference internal" href="#using-qi-stage-lib-with-custom-depends">Using qi_stage_lib with custom DEPENDS</a></li>
+<li><a class="reference internal" href="#using-qi-stage-lib-with-include-dirs">Using qi_stage_lib with INCLUDE_DIRS</a></li>
+<li><a class="reference internal" href="#using-qi-stage-lib-with-path-suffixes">Using qi_stage_lib with PATH_SUFFIXES</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../../../changelog.html">Changelog</a>
+        <a title="CMake index" href="../../../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../../../py-modindex.html">Python index</a>
+        <a title="Index" href="../../../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

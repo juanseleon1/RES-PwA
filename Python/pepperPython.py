@@ -805,7 +805,7 @@ def activate_conversational_topic(topicName):
 
 #Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine 
 def load_conversational_topic(topicName):
-     alDialogProxy.loadTopic(path)
+    #alDialogProxy.loadTopic(path)
 
 #Unloads the specified topic and frees the associated memory.
 def unload_conversational_topic(topicName):

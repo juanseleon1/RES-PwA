@@ -1,0 +1,33 @@
+
+material lighter
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 0.6
+            diffuse 0.1 0.1 0.1 0.6
+            specular 0.1 0.1 0.1 0.6
+            emissive 0.1 0.1 0.1 0.6
+        }
+    }
+}
+
+material darker
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.
+            diffuse 0.1 0.1 0.1 1.
+            specular 0.1 0.1 0.1 1.
+            emissive 0.1 0.1 0.1 1.
+        }
+    }
+}
+

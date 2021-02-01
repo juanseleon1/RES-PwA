@@ -1,0 +1,442 @@
+/*** setup ***/
+html {min-height:100%;background: #b7dff3;}
+body { font:12px/1.5 Verdana,sans-serif; background:#b7dff3; color: white;height:100%;}  /*** background around***/
+/*#ALTopBar {position:fixed !important;}*/
+#ALTopBar #ALLogin {display:none !important;}
+#custom-doc { min-width:640px; width:95%; margin:auto; text-align:left; padding-top:0.1px; margin-top:0;}
+#hd { padding: 45px 0 3px 0; width:100%; background: #B7DFF3; z-index:100; /*position:fixed;*/}
+#hd::before {border-style: solid;border-width: 0px 145px 145px 0px;border-color: transparent #e69412 transparent transparent;/*position: fixed;top: 0px;right: 0px;*/ float:right;margin-top: -47px;margin-right: -47px; content: '';}
+#bd { background:#009ee3; /*position: relative; padding-top: 115px;*/margin-top:10px;} /*** Left menu***/
+@-moz-document url-prefix() {#yui-main {margin-top:-8px !important}}
+/*#ft { color:#487858; font-size:90%;  } /*** not used???***/
+#ft {background:#0F2939; text-align:center;}
+#ft  a{color:#009fe3;padding: 15px;vertical-align:top;line-height:4.5}
+#ft  a:hover{color:#fff;}
+#ft img {position: relative;margin-top:10px;}
+
+/*** links ***/
+a {text-decoration: none;}
+a:hover {text-decoration: underline;}
+a img {border: none;}
+a:link, a:visited { color:#0F2939; } /*** links top ***/
+#bd a:link, #bd a:visited { color:#096DAD;  } /*** links pages***/
+#bd #sidebar a:link, #bd #sidebar a:visited { color:#fff; }
+a:hover { color:#a1d6f5; }
+.whatsnew{color: #009fe3 !important;font-size: 80%;padding-left: 10px;text-transform: none !important;}
+a.whatsnew:hover {color: #e69412 !important;}
+
+h2 a, h3 a, h4 a { text-decoration:none !important; }
+a.reference em { font-style: normal; }
+
+h2#otp-link{color:#000; margin-top:0px;padding-top: 5px;font-size:150%;}
+h2#otp-link:before { content: ''; width: 0px;height: 0px;border-style: solid;border-width: 5px 5px 5px 5px;border-color: transparent rgba(0, 0, 0, 0) transparent #0F2939;display: inline-block;vertical-align: middle;margin-bottom: 5px;margin-right:5px;}
+h2#otp-link.change-before:before {content: '';width: 0px;height: 0px;border-style: solid;border-width: 5px 5px 5px 5px;border-color: #0F2939 transparent rgba(0, 0, 0, 0) transparent;display: inline-block;vertical-align: middle;margin-top: 7px;margin-right: 5px;}
+h2#otp-link:hover {text-decoration: underline;cursor: pointer;}
+#toc-list {margin-left:15px;}
+#toc-list a.reference.internal {color: #0F2938;}
+#toc-list ul {padding-top: 1px !important;margin: 0px !important;}
+#toc-list li {margin: 0px 0px 2px 0px !important;}
+
+/*** sidebar ***/
+#sidebar {/*margin-top: 18px;*/}
+#sidebar div.sphinxsidebarwrapper { font-size:92%; margin-left: -30px;}
+#sidebar div.sphinxsidebarwrapper ul {display: none;}
+#sidebar div.sphinxsidebarwrapper ul.current {display: block;}
+#sidebar div.sphinxsidebarwrapper ul.current ul {display: block;}
+#sidebar h3, #sidebar h4 { color: white; font-size: 125%; }
+#sidebar a { color: white; }
+#sidebar ul ul { margin-top:0; margin-bottom:0; }
+#sidebar li { margin-top: 0.2em; margin-bottom: 0.2em; margin-left: 10px;}
+#sidebar li.toctree-l1{display:None;}
+#sidebar li.toctree-l1.current{display:block;}
+#bd #sidebar a:hover { color:#FFF; background:none; }
+#highlightBar{width: 100%; height: 20px; margin-right: -20px; padding-right: 12px; float: left; z-index: 500; background-color: rgb(15, 41, 57);visibility:hidden;}
+
+.titleWrapper{color: white;background-color: #0F2938;margin-left: -24px;margin-right: -23px;margin-top: -8px;padding: 10px 20px;box-shadow: 0px 1px 2px #0F2938;}
+.iNavWrapper{background-color: #E5E5E5;  margin: -8px -24px 13px -24px;padding: 8px 22px 4px 24px;}
+a.current.reference.internal { font-weight: bold; }
+
+/*** nav ***/
+#hd div.nav { margin-top: -20px; margin-right: 10%; text-align: right;}
+#ft div.nav { margin-bottom: -18px; }
+#hd h1 a { color: #000000;text-transform: uppercase;font-weight: bold;}  /*** title level 1 ***/
+#hd h1 { margin-top: -5px; }
+#global-nav { color:#000000;}
+#global-nav a {padding: 0px 20px;background: #fff;border-right: 1px solid #0f2939;color: #0F2939;display: table-cell;font-size: 150%;}
+/*#global-nav a:link {padding:2px 20px;background:#fff;border:2px solid #0F2939;color:#0F2939;margin-right:-6px;}*/
+#global-nav a.about {padding-left:0;color: #fff;background:#0F2939;}
+#global-nav a:hover, .nav a:hover {color: #fff;background:#009ee3;}
+#global-nav, div.nav  {color: #0F2939;} /*** top menu separators ***/
+#global-nav a.active{color: #fff !important;background:#0F2939 !important;}
+#global-nav .romeo {border-right: none;}
+/*** content ***/
+#yui-main div.yui-b { position: relative; }
+#yui-main div.yui-b { margin: 0 0 0 20px; background: white; color: black; padding: 0.3em 2em 1em 2em;}
+#yui-main div.yui-b .yui-g{margin-top:4px};
+.highlight-link {display:none;}
+
+/*** searchbox ***/
+#searchbox { color: #FFF; }
+div#searchbox h3{display:None;}
+div#searchbox .searchtip{display:None;}
+#yui-main div.yui-b { min-height: 768px; }
+
+/***Back to top Button***/
+
+.cd-container::after {
+  /* clearfix */
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  /* image replacement properties */
+  background: url(icon-back-to-top.png) no-repeat center 100%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+
+.no-touch .cd-top:hover {
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 101px;
+    width: 100px;
+    right: 70px;
+    bottom: 0px;
+  }
+}
+
+/*** basic styles ***/
+input {  padding: 2px 2px;font-size: 110%;}
+dd { margin-left:15px; }
+h1,h2,h3,h4 { margin-top:1em; font-family:"Trebuchet MS",sans-serif; font-weight:normal; }
+h1 { font-size:200%; margin-top:0.6em; margin-bottom:.4em; /*line-height:1.1em;*/ }
+h2 { font-size:175%; font-weight:bold; margin-bottom:.6em; line-height:1.2em; color:#0A3A5B; }
+h3 { font-size:150%; margin-bottom:.2em; color:#0A3A5B; }
+h4 { font-size:125%; font-weight:bold; margin-top:1.5em; margin-bottom:3px; }
+div.figure { text-align: center; }
+div.figure p.caption { font-size:1em; margin-top:0; margin-bottom:1.5em; color: #555;}
+hr { color:#ccc; background-color:#ccc; height:1px; border:0; }
+p, ul, dl { margin-top:.6em; margin-bottom:1em; padding-bottom: 0.1em;}
+#yui-main div.yui-b img { max-width: 50em; margin-left: auto; margin-right: auto; display: block; vertical-align: middle; }
+caption { font-size:1em; font-weight:bold; margin-top:0.5em; margin-bottom:0.5em; margin-left: 2px; text-align: center; }
+blockquote { padding: 0 1em; margin: 1em 0; font:125%/1.2em "Trebuchet MS", sans-serif; color:#234f32; border-left:2px solid #94da3a; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+ins { font-weight: bold; }
+
+/*** section indentation ***/
+.section .section .section { margin-left:14px }
+
+/*** lists ***/
+ul { padding-left:30px; }
+ol { padding-left:30px; }
+ol.arabic li { list-style-type: decimal; }
+ul li { list-style-type:square; margin-bottom:.4em; } /*** bullets (menu+ text ***/
+ol li { margin-bottom: .4em; }
+ul ul { padding-left:1.2em; }
+ul ul ul { padding-left:1em; }
+ul.linklist, ul.toc { padding-left:0; }
+ul.toc ul { margin-left:.6em; }
+ul.toc ul li { list-style-type:square; }
+ul.toc ul ul li { list-style-type:disc; }
+ul.linklist li, ul.toc li { list-style-type:none; }
+dt { margin-top:.5em; font-size:1.1em; font-weight: bold; }}
+dd { margin-bottom:.8em; }
+ol.toc { margin-bottom: 2em; }
+ol.toc li { font-size:125%; padding: .5em; line-height:1.2em; clear: right; }
+ol.toc li.b { background-color: #E0FFB8; }
+ol.toc li a:hover { background-color: transparent !important; }
+ol.toc span.release-date { color:#487858; float: right; font-size: 85%; padding-right: .5em; }
+ol.toc span.comment-count { font-size: 75%; color: #999; }
+
+/*** tables ***/
+table { color:#000; margin-bottom: 1em; width: 100%; border:1px solid #AAA;
+}
+table.docutils td p { margin-top:0; margin-bottom:.5em; }
+/* table.docutils td,  */
+table.docutils td { border:1px solid #cfcfcf; padding:4px 2px;}
+@media screen and (-webkit-min-device-pixel-ratio:0) {table.docutils td { vertical-align:middle; }}
+table.docutils th, table.docutils thead th {
+    border-left:1px solid #AAA;
+    border-right:1px solid #AAA;
+    border-top:1px solid #AAA;
+    border-bottom:1px solid #AAA;
+    padding:4px 2px;
+}
+table.docutils thead th { text-align:left; font-weight: bold; white-space: nowrap; }
+table.docutils thead th p { margin: 0; padding: 0; }
+table.docutils { border-collapse:collapse; }
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th { border: 0 !important; }
+
+/*** code blocks ***/
+.literal { white-space:nowrap; }
+.literal { color:#234f32; } /*** code methods green ***/
+#sidebar .literal { color:white; background:transparent; font-size:11px; }
+h4 .literal { color: #234f32; font-size: 13px; }
+pre { font-size:small; background:#E5E5E5; border:1px solid #DDD; border-width:1px 0; margin: 1em 0; padding: .3em .4em; overflow: auto; line-height: 1.3em;}
+dt .literal, table .literal { background:none; }
+#bd a.reference tt.literal { border-bottom: 1px #234f32 dotted; }
+
+/* Restore colors of pygments hyperlinked code */
+#bd .highlight .k a:link, #bd .highlight .k a:visited { color: #000000; text-decoration: none; border-bottom: 1px dotted #000000; }
+#bd .highlight .nf a:link, #bd .highlight .nf a:visited { color: #990000; text-decoration: none; border-bottom: 1px dotted #990000; }
+
+
+/*** notes & admonitions ***/
+.admonition-title { font-weight:bold; margin-top:0 !important; margin-bottom:0 !important;}
+.admonition .last { margin-bottom:0 !important; }
+.note {
+    padding:.8em 1em .8em; margin: 1em 0; border-left:1px solid #aeaeae;
+    padding-left:65px; background:url(docicons-note.png) .8em .8em no-repeat;
+
+}
+.warning {
+    padding:.8em 1em .8em; margin: 1em 0; border-left:0px solid #096DAD;
+    padding-left:65px; background:url(docicons-warning.png) .8em .8em no-repeat #DFDFDF;
+}
+div.admonition-philosophy { padding-left:65px; background:url(docicons-philosophy.png) .8em .8em no-repeat;}
+div.admonition-behind-the-scenes { padding-left:65px; background:url(docicons-behindscenes.png) .8em .8em no-repeat;}
+div.admonition-todo, div.system-message { padding-left:65px; background:url(docicons-warning.png) .8em .8em no-repeat #FFAAAA;}
+
+/*** versoinadded/changes ***/
+div.versionadded, div.versionchanged {  }
+div.versionadded span.title, div.versionchanged span.title { font-weight: bold; }
+
+/*** math display ***/
+#yui-main div.yui-b img.math { vertical-align: middle; display: inline }
+#yui-main div.yui-b div.body div.math p { text-align: center; }
+span.eqno { float: right; }
+
+/*** p-links ***/
+a.headerlink { color: #c60f0f; font-size: 0.8em; padding: 0 4px 0 4px; text-decoration: none; visibility: hidden; }
+h1:hover > a.headerlink, h2:hover > a.headerlink, h3:hover > a.headerlink, h4:hover > a.headerlink, h5:hover > a.headerlink, h6:hover > a.headerlink, dt:hover > a.headerlink { visibility: visible; }
+
+/*** index ***/
+table.indextable { border: 0px; }
+table.indextable td { text-align: left; vertical-align: top;}
+table.indextable dl, table.indextable dd { margin-top: 0; margin-bottom: 0; }
+table.indextable tr.pcap { height: 10px; }
+table.indextable tr.cap { margin-top: 10px; background-color: #f2f2f2;}
+
+/*** page-specific overrides ***/
+div#contents ul { margin-bottom: 0;}
+div#contents ul li { margin-bottom: 0;}
+div#contents ul ul li { margin-top: 0.3em;}
+
+/*** IE hacks ***/
+* pre { width: 100%; }
+
+
+#bd a.biglink {
+    font-size: 140%;
+    text-decoration: none;
+    color: #0F2939;
+}
+
+#bd a.legal { color: #0F2939; padding-left:15px}
+
+#bd a.biglink:hover {
+    text-decoration: underline;
+    background: white;
+    color: #0F2939;
+}
+
+p.biglink {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+img.bigimg {
+    margin-bottom: 20px;
+    margin-left: 0px !important;
+}
+
+div#whatsnew {
+    top: 0px;
+    right: 20px;
+    position: absolute;
+}
+
+div#whatsnew p {
+    font-size: 330%;
+    font-weight: bold;
+    margin: 0px;
+    color: #0F2939;
+}
+#yui-main div.yui-b img.bigimgtitle {
+    margin: 20px 20px 0px 0px;
+    position: absolute;
+    top: 0px;
+}
+
+div.main-index #yui-main div.yui-b {
+    margin: 0 0 0 20px;
+    background: white url(index_nao_wireframe.png) right bottom no-repeat;
+    color: black;
+    padding: 0em 2em 0 2em;
+}
+
+table.contentstable {
+    /* margin: 0px 300px 0px 0px; */
+    border: 0 !important;
+    margin-top: 163px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    min-width: 300px;
+}
+
+table.contentstable td {
+    vertical-align: top;
+    padding-bottom: 30px;
+}
+
+table.contentstable td ul li {
+ list-style: none;
+}
+
+table.contentstable td ul{
+ padding-left: 15px;
+}
+
+/* ------- styling for brief -----------------------*/
+
+/* Block containing prototype and param descriptions */
+div#brief dl.function, div#brief dl.event {
+  display: block;
+  border-top: 0px solid #000;
+  padding-top: 0px;
+}
+
+/* Whole prototype line */
+div#brief dl.function dt,
+div#brief dl.function dt,
+div#brief dl.event dt, div#brief dl.event dt {
+  margin: 0px;
+  padding: 0px;
+  font-family: monospace;
+}
+
+div#brief p, div#brief dl {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/* ------- styling for api reference ---------------*/
+
+p.deprecated span.versionmodified {
+    color: #7A2106;
+}
+
+/* remove line between params and returns */
+dl.function th, dl.function td, dl.event th, dl.event td{ border-bottom: none; }
+
+/* boost the size of the prototype, make commas and brackets lighter */
+dl.function dt, dl.event dt { font-family: verdana; font-size:120%; color:#666; font-weight: normal }
+
+
+/* Block containing prototype and param descriptions */
+dl.function, dl.event {
+  display: block;
+  border-top: 1px solid #CCC;
+  padding-top: 15px;
+}
+
+/* Whole prototype line */
+dl.function dt, dl.function dt, dl.event dt, dl.event dt {
+  margin-bottom: 11px;
+  margin-top: 18px;
+  margin-left: 5px;
+  font-family: monospace;
+}
+
+/* Method name */
+dl.function tt.descname, dl.event tt.descname, dl.memkey tt.descname {
+  /* font-family: "Trebuchet MS", sans-serif; */
+  color: #7a766e; font-weight:bold;
+}
+
+/* brackets */
+dl.function big { font-weight: normal; color: #666; font-size: 100%}
+
+/* Parameters and Returns labels */
+dl.function th.field-name, dl.event th.field-name { width: 8em; color: #999; text-align: right; padding-right:8px; font-style: normal;}
+
+/* Parameter names */
+dl.function em, dl.function strong, dl.event em, dl.event strong {color: green; font-weight: normal; font-style: italic; font-family: monospace;}
+dl.event strong, dl.function strong { font-size: 120%}
+/* Parameter list */
+dl.function td.field-body ul, dl.event td.field-body ul {padding-left: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px}
+dl.function td.field-body ul li, dl.event td.field-body ul li {list-style: none}
+dl.function td, dl.function th, dl.event td, dl.event th {padding: 0px;}
+
+
+
+
+
+/* ------------------------------------------------ */
+
+.footernav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#yui-main div.yui-b img.img-inline {
+  display: inline;
+  priority: important
+}
+
+dl.memkey tt.descname, dl.event tt.descname, dl.memkey tt.descname {
+  /* font-family: "Trebuchet MS", sans-serif; */
+  color: #7a766e; font-weight:bold;
+}
+
+dl.memkey tt.descname, tt.naoqi-memkey span.pre {
+ color:green;
+}
+
+tt.naoqi-memkey span.pre:hover {
+  color: green;
+}
+
+dl.memkey tt.descname:before, tt.naoqi-memkey span.pre:before {
+  content:"\"";
+}
+
+dl.memkey tt.descname:after, tt.naoqi-memkey span.pre:after {
+  content:"\"";
+}
+
+table.field-list th, table.field-list td, table.field-list tbody, table.field-list { border: none; }

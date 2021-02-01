@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="BothHandsBumpWithBump_01" />
+    <Node name="FastPointAtUserLeftArm_01" />
+    <Node name="OpenArmInFrontWithBump_01" />
+    <Node name="PointAtSelfRightArm_01" />
+    <Node name="PointAtUserBothHands_01" />
+    <Node name="StrictPointAtUserRightArm_01" />
+    <Node name="WidePointAtUserRightArm_LeanRight_01" />
+    <Node name="GoToStance_Self&amp;Others_Center" />
+    <Node name="GoToStance_Self&amp;Others_LeanRight" />
+    <Node name="GoToStance_Self&amp;Others_LeanFront" />
+    <Node name="GoToStance_Self&amp;Others_LeanBack" />
+    <Node name="GoToStance_Self&amp;Others_Flex" />
+</Folder>

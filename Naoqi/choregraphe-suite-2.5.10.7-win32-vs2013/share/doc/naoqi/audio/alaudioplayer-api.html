@@ -1,0 +1,1347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALAudioPlayer API &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALAudioPlayer" href="alaudioplayer.html" />
+    <link rel="next" title="ALAudioRecorder" href="alaudiorecorder.html" />
+    <link rel="prev" title="ALAudioPlayer" href="alaudioplayer.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-audio-alaudioplayer-api">
+                
+  <div class="section" id="alaudioplayer-api">
+<span id="id1"></span><h1>ALAudioPlayer API<a class="headerlink" href="#alaudioplayer-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-audio"><span>NAOqi Audio</span></a> - <a class="reference internal" href="alaudioplayer.html#alaudioplayer"><span>Overview</span></a> | API</p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alaudioplayerproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><span>ALModule API</span></a>.
+It also has the following specific methods:</p>
+<dl class="class">
+<dt id="ALAudioPlayerProxy">
+<em class="property">class </em><code class="descname">ALAudioPlayerProxy</code><a class="headerlink" href="#ALAudioPlayerProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getCurrentPosition__iCR" title="ALAudioPlayerProxy::getCurrentPosition"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getCurrentPosition</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getFileLength__iCR" title="ALAudioPlayerProxy::getFileLength"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getFileLength</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getInstalledSoundSetsList" title="ALAudioPlayerProxy::getInstalledSoundSetsList"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getInstalledSoundSetsList</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getLoadedFilesIds" title="ALAudioPlayerProxy::getLoadedFilesIds"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getLoadedFilesIds</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getLoadedFilesNames" title="ALAudioPlayerProxy::getLoadedFilesNames"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getLoadedFilesNames</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getLoadedSoundSetsList" title="ALAudioPlayerProxy::getLoadedSoundSetsList"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getLoadedSoundSetsList</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getMasterVolume" title="ALAudioPlayerProxy::getMasterVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getMasterVolume</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getSoundSetFileNames__ssC" title="ALAudioPlayerProxy::getSoundSetFileNames"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getSoundSetFileNames</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getVolume__iCR" title="ALAudioPlayerProxy::getVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getVolume</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::goTo__iCR.floatCR" title="ALAudioPlayerProxy::goTo"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::goTo</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::isSoundSetFileInstalled__ssCR.ssCR" title="ALAudioPlayerProxy::isSoundSetFileInstalled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetFileInstalled</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::isSoundSetInstalled__ssCR" title="ALAudioPlayerProxy::isSoundSetInstalled"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetInstalled</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::isSoundSetLoaded__ssCR" title="ALAudioPlayerProxy::isSoundSetLoaded"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetLoaded</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::loadSoundSet__ssCR" title="ALAudioPlayerProxy::loadSoundSet"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadSoundSet</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::pause__iCR" title="ALAudioPlayerProxy::pause"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::pause</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playFile__ssCR" title="ALAudioPlayerProxy::playFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playFile</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playFileFromPosition__ssCR.floatCR" title="ALAudioPlayerProxy::playFileFromPosition"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playFileFromPosition</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playFileInLoop__ssCR" title="ALAudioPlayerProxy::playFileInLoop"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playFileInLoop</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playInLoop__iCR" title="ALAudioPlayerProxy::playInLoop"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playInLoop</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playSine__iCR.iCR.iCR.floatCR" title="ALAudioPlayerProxy::playSine"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playSine</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playSoundSetFile__ssCR" title="ALAudioPlayerProxy::playSoundSetFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playSoundSetFile</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::playWebStream__ssCR.floatCR.floatCR" title="ALAudioPlayerProxy::playWebStream"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playWebStream</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::setMasterVolume__floatCR" title="ALAudioPlayerProxy::setMasterVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setMasterVolume</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::setPanorama__floatCR" title="ALAudioPlayerProxy::setPanorama"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setPanorama</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::setVolume__iCR.floatCR" title="ALAudioPlayerProxy::setVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setVolume</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::stopAll" title="ALAudioPlayerProxy::stopAll"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::stopAll</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::unloadAllFiles" title="ALAudioPlayerProxy::unloadAllFiles"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::unloadAllFiles</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::unloadFile__iCR" title="ALAudioPlayerProxy::unloadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::unloadFile</span></code></a></li>
+<li><a class="reference internal" href="#ALAudioPlayerProxy::unloadSoundSet__ssCR" title="ALAudioPlayerProxy::unloadSoundSet"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::unloadSoundSet</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getCurrentPosition__iCR">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getCurrentPosition</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getCurrentPosition__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the position in seconds in the file currently played.
+The Id of the playing task will be returned when calling a play method
+(eg. <a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a>)
+in a non-blocking manner. See below for an example in Python.</p>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_getcurrentposition.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_getcurrentposition.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use getCurrentPosition Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the getCurrentPosition method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+
+    <span class="c">#plays a file and get the current position 5 seconds later</span>
+    <span class="n">fileId</span> <span class="o">=</span> <span class="n">audio_player_service</span><span class="o">.</span><span class="n">loadFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">fileId</span><span class="p">,</span> <span class="n">_async</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c">#currentPos should be near 3 secs</span>
+    <span class="n">currentPos</span> <span class="o">=</span> <span class="n">audio_player_service</span><span class="o">.</span><span class="n">getCurrentPosition</span><span class="p">(</span><span class="n">fileId</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;The current position in file is: &quot;</span><span class="p">,</span> <span class="n">currentPos</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the currently playing of the file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Current position in seconds</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getFileLength__iCR">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getFileLength</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getFileLength__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length in second of the file that is currently played.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Length of the file in seconds</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getInstalledSoundSetsList">
+std::vector&lt;std::string&gt; <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getInstalledSoundSetsList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getInstalledSoundSetsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the installed soundsets.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getLoadedFilesIds">
+std::vector&lt;std::string&gt; <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getLoadedFilesIds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getLoadedFilesIds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the task Ids corresponding to the currently loaded files.
+File can be loaded using <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Array of task Ids</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getLoadedFilesNames">
+std::vector&lt;std::string&gt; <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getLoadedFilesNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getLoadedFilesNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the filenames (absolute paths) of the currently loaded files.
+File can be loaded using <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Array of filenames</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getLoadedSoundSetsList">
+std::vector&lt;std::string&gt; <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getLoadedSoundSetsList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getLoadedSoundSetsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the currently loaded soundsets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Array of loaded soundsets</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getSoundSetFileNames__ssC">
+std::vector&lt;std::string&gt; <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getSoundSetFileNames</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string</a> <em>setName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getSoundSetFileNames__ssC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the filenames of the corresponding soundset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>setName</strong> &#8211; name of the soundset to examine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Array of filenames</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<ul class="simple">
+<li><a class="reference internal" href="#ALAudioPlayerProxy::getSoundSetFileNames__ssC" title="ALAudioPlayerProxy::getSoundSetFileNames"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getSoundSetFileNames</span></code></a></li>
+</ul>
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getMasterVolume">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getMasterVolume</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getMasterVolume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the master volume used by <em>ALAudioPlayer</em> for playback. This volume
+can be set by using <a class="reference internal" href="#ALAudioPlayerProxy::setMasterVolume__floatCR" title="ALAudioPlayerProxy::setMasterVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setMasterVolume</span></code></a>. This volume
+is independent of the system volume that can be set through <em>ALAudioDevice</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Volume [0.0 - 1.0]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::getVolume__iCR">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">getVolume</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::getVolume__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the volume level at which the specified task should be played. This
+volume is independent of the master volume set with <a class="reference internal" href="#ALAudioPlayerProxy::setMasterVolume__floatCR" title="ALAudioPlayerProxy::setMasterVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setMasterVolume</span></code></a>.
+This task dependent volume can be set by using <a class="reference internal" href="#ALAudioPlayerProxy::setVolume__iCR.floatCR" title="ALAudioPlayerProxy::setVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setVolume</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Volume - [0.0 - 1.0]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::goTo__iCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">goTo</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::goTo__iCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jumps to a given position in second in the specified file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+<li><strong>position</strong> &#8211; Position in the file (in second)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_goto.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_goto.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use goTo Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the goTo method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+
+    <span class="n">fileId</span> <span class="o">=</span> <span class="n">audio_player_service</span><span class="o">.</span><span class="n">loadFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">fileId</span><span class="p">,</span> <span class="n">_async</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">goTo</span><span class="p">(</span><span class="n">fileId</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::isSoundSetFileInstalled__ssCR.ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">isSoundSetFileInstalled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSet</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSetFile</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::isSoundSetFileInstalled__ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells if a sound is present in a given soundset.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::isSoundSetInstalled__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">isSoundSetInstalled</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSet</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::isSoundSetInstalled__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells if a soundset is installed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::isSoundSetLoaded__ssCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">isSoundSetLoaded</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSet</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::isSoundSetLoaded__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells if a given soundset is already loaded.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::loadFile__ssCR">
+<a class="reference internal" href="../stdtypes.html#i" title="int">int</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">loadFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::loadFile__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preloads a file but does not play it yet. Preloading a file is a way to reduce
+the time necessary to actually start the playback when a &#8220;play&#8221; function is called.
+The playback of a loaded file can be started by calling <a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file to load</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Id of the task handling the playing of the file</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::loadSoundSet__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">loadSoundSet</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>setName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::loadSoundSet__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a soundset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>setName</strong> &#8211; Name of the soundset.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::pause__iCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">pause</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::pause__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pause the playback of the specified task. The pause can be resume by calling
+<a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-play1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::play__iCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">play</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::play__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-play1"><span>ALAudioPlayerProxy::play</span></a></li>
+<li><a class="reference internal" href="#alaudioplayerproxy-play2"><span>ALAudioPlayerProxy::play</span></a> with volume and pan parameters</li>
+</ul>
+<p>Starts the playback of the specified task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_play.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_play.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use play Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the play method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+
+    <span class="c">#Loads a file and launchs the playing 5 seconds later</span>
+    <span class="n">fileId</span> <span class="o">=</span> <span class="n">audio_player_service</span><span class="o">.</span><span class="n">loadFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">fileId</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-play2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::play__iCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">play</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::play__iCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the playback of the specified task, with a specific volume
+and stereo panorama. This task has for example been created using <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+<li><strong>volume</strong> &#8211; Volume of the sound file [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_play.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_play.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use play Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the play method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+
+    <span class="c">#Loads a file and launchs the playing 5 seconds later</span>
+    <span class="n">fileId</span> <span class="o">=</span> <span class="n">audio_player_service</span><span class="o">.</span><span class="n">loadFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">fileId</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfile1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFile__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFile__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-playfile1"><span>ALAudioPlayerProxy::playFile</span></a></li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playfile2"><span>ALAudioPlayerProxy::playFile</span></a> with volume and pan parameters</li>
+</ul>
+<p>Starts the playback of the specified file. This call is equivalent to calling
+successively <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a> and <a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_playfile.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_playfile.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use playFile Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the playFile method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+    
+    <span class="c">#Launchs the playing of a file</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">playFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="c">#Launchs the playing of a file on the left speaker to a volume of 50%</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">playFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfile2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFile__ssCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFile__ssCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the playback of the specified file. This call is equivalent to calling
+successively <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a> and <a class="reference internal" href="#ALAudioPlayerProxy::play__iCR" title="ALAudioPlayerProxy::play"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::play</span></code></a>
+with specific volume and pan.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+<li><strong>volume</strong> &#8211; Volume of the sound file [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alaudioplayer_playfile.py"><code class="xref download docutils literal"><span class="pre">alaudioplayer_playfile.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use playFile Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the playFile method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALAudioPlayer.</span>
+
+    <span class="n">audio_player_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALAudioPlayer&quot;</span><span class="p">)</span>
+    
+    <span class="c">#Launchs the playing of a file</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">playFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="c">#Launchs the playing of a file on the left speaker to a volume of 50%</span>
+    <span class="n">audio_player_service</span><span class="o">.</span><span class="n">playFile</span><span class="p">(</span><span class="s">&quot;/usr/share/naoqi/wav/random.wav&quot;</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfilefromposition1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFileFromPosition__ssCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFileFromPosition</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFileFromPosition__ssCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-playfilefromposition1"><span>ALAudioPlayerProxy::playFileFromPosition</span></a></li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playfilefromposition2"><span>ALAudioPlayerProxy::playFileFromPosition</span></a> with volume and pan parameters</li>
+</ul>
+<p>Starts the playback of the specified file from a given position in second.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+<li><strong>position</strong> &#8211; Position in second where the playing should begin</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfilefromposition2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFileFromPosition__ssCR.floatCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFileFromPosition</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>position</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFileFromPosition__ssCR.floatCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the playback of the specified file from a given position in second with a given volume and pan.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+<li><strong>position</strong> &#8211; Position in second where the playing should begin</li>
+<li><strong>volume</strong> &#8211; Volume requested [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfileinloop1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFileInLoop__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFileInLoop</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFileInLoop__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-playfileinloop1"><span>ALAudioPlayerProxy::playFileInLoop</span></a></li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playfileinloop2"><span>ALAudioPlayerProxy::playFileInLoop</span></a> with volume and pan parameters</li>
+</ul>
+<p>Starts the playback of the specified file and loop. The playback can then be stopped by calling <em>stop(const int &amp; taskId)</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playfileinloop2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playFileInLoop__ssCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playFileInLoop</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playFileInLoop__ssCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the playback of the specified file and loop, with specific volume and pan.
+The playback can then be stopped by calling <em>stop(const int &amp; taskId)</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Absolute path of the file</li>
+<li><strong>volume</strong> &#8211; Volume requested [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playinloop1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playInLoop__iCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playInLoop</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playInLoop__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-playinloop1"><span>ALAudioPlayerProxy::playInLoop</span></a></li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playinloop2"><span>ALAudioPlayerProxy::playInLoop</span></a> with volume and pan parameters</li>
+</ul>
+<p>Starts the playback of the specified task and loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playinloop2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playInLoop__iCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playInLoop</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playInLoop__iCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays a wav, ogg or mp3 file in loop, with specific volume and audio balance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+<li><strong>volume</strong> &#8211; Volume requested [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::playSine__iCR.iCR.iCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playSine</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>frequence</em>, <a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>gain</em>, <a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>pan</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playSine__iCR.iCR.iCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Play a sine wave which the specified characteristics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frequence</strong> &#8211; Frequence in Hertz</li>
+<li><strong>gain</strong> &#8211; Volume between [0 - 100]</li>
+<li><strong>pan</strong> &#8211; Stereo Pan set to either {-1,0,+1}</li>
+<li><strong>duration</strong> &#8211; Duration of the sine wave in seconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playsoundsetfile1"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playSoundSetFile__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playSoundSetFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playSoundSetFile__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are 3 overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alaudioplayerproxy-playsoundsetfile1"><span>ALAudioPlayerProxy::playSoundSetFile</span></a> in one of the loaded soundsets.</li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playsoundsetfile2"><span>ALAudioPlayerProxy::playSoundSetFile</span></a> in the specified soundset.</li>
+<li><a class="reference internal" href="#alaudioplayerproxy-playsoundsetfile3"><span>ALAudioPlayerProxy::playSoundSetFile</span></a> in the specified soundset and with specified parameters.</li>
+</ul>
+<p>Plays a sound contained in one of the loaded soundsets.</p>
+<p>If the same sound is present in different soundsets, it takes the sound of the
+first soundset loaded which contains this sound.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileName</strong> &#8211; Name of the sound file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playsoundsetfile2"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playSoundSetFile__ssCR.ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playSoundSetFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSetName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playSoundSetFile__ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays a sound contained in a in a specified soundset with the default parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>soundSetName</strong> &#8211; Name of the soundset.</li>
+<li><strong>fileName</strong> &#8211; Name of the sound file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alaudioplayerproxy-playsoundsetfile3"></span><dl class="function">
+<dt id="ALAudioPlayerProxy::playSoundSetFile__ssCR.ssCR.floatCR.floatCR.floatCR.bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playSoundSetFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>soundSetName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>fileName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>position</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em>, <a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>loop</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playSoundSetFile__ssCR.ssCR.floatCR.floatCR.floatCR.bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays a sound contained in a specified soundset and with specified parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>soundSetName</strong> &#8211; Name of the soundset.</li>
+<li><strong>fileName</strong> &#8211; Name of the sound file.</li>
+<li><strong>position</strong> &#8211; position in second in the specified file.</li>
+<li><strong>volume</strong> &#8211; Volume.</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right).</li>
+<li><strong>loop</strong> &#8211; play in loop yes/no.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::playWebStream__ssCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">playWebStream</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>streamName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::playWebStream__ssCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the playback of a web audio stream.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>streamName</strong> &#8211; Path of the web audio stream</li>
+<li><strong>volume</strong> &#8211; Volume requested [0.0 - 1.0]</li>
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::setMasterVolume__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">setMasterVolume</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::setMasterVolume__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the master volume used by <em>ALAudioPlayer</em> for playback. This volume
+is independent of the system volume that can be set through <em>ALAudioDevice</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>volume</strong> &#8211; Volume [0.0 - 1.0]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::setPanorama__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">setPanorama</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>pan</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::setPanorama__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the stereo panorama for all the playback tasks handled by <em>ALAudioPlayer</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pan</strong> &#8211; Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::setVolume__iCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">setVolume</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>volume</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::setVolume__iCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the volume level at which the specified task should be played. This
+volume is independent of the master volume set with <a class="reference internal" href="#ALAudioPlayerProxy::setMasterVolume__floatCR" title="ALAudioPlayerProxy::setMasterVolume"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::setMasterVolume</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+<li><strong>volume</strong> &#8211; Volume - [0.0 - 1.0]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::stopAll">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">stopAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::stopAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops all the files that are currently being played.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::unloadAllFiles">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">unloadAllFiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::unloadAllFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unloads all the files already loaded.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::unloadFile__iCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">unloadFile</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>taskId</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::unloadFile__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unloads a file previously loaded with <a class="reference internal" href="#ALAudioPlayerProxy::loadFile__ssCR" title="ALAudioPlayerProxy::loadFile"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadFile</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>taskId</strong> &#8211; Id of the task handling the playing of the file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALAudioPlayerProxy::unloadSoundSet__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALAudioPlayerProxy::</code><code class="descname">unloadSoundSet</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>setName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALAudioPlayerProxy::unloadSoundSet__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unloads a soundset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>setName</strong> &#8211; Name of the soundset.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi Audio</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alanimatedspeech.html">ALAnimatedSpeech</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alaudiodevice.html">ALAudioDevice</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="alaudioplayer.html">ALAudioPlayer</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALAudioPlayer API</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="alaudiorecorder.html">ALAudioRecorder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alsounddetection.html">ALSoundDetection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alsoundlocalization.html">ALSoundLocalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alspeechrecognition.html">ALSpeechRecognition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="altexttospeech.html">ALTextToSpeech</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alvoiceemotionanalysis.html">ALVoiceEmotionAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alaudiosourcelocalization.html">ALAudioSourceLocalization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALAudioPlayer API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

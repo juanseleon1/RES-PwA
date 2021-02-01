@@ -1,0 +1,835 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qi::AnyModule &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../../../index.html" />
+    <link rel="up" title="C++ qi type API" href="index.html" />
+    <link rel="next" title="qi::Buffer, qi::BufferReader" href="buffer.html" />
+    <link rel="prev" title="qi::Object" href="anyobject.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-api-cpp-type-anymodule">
+                
+  <div class="section" id="qi-anymodule">
+<h1>qi::AnyModule<a class="headerlink" href="#qi-anymodule" title="Permalink to this headline">¶</a></h1>
+<p>A module is a way to organise your code.</p>
+<p>A module can contain:</p>
+<ul class="simple">
+<li>function definitions</li>
+<li>factories for structures and objects</li>
+<li>constants</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Constants are a work in progress. This needs a protocol change.</p>
+</div>
+<p>Modules are cross-language, you can define a module in C++ and use it in python or the reverse.
+They can be used at runtime, so you can import a module and use it without knowing it previously.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<strong><p class="rubric">Global Namespaces</p>
+</strong><ul>
+<li><p class="first">namespace qi</p>
+<dl class="docutils">
+<strong><p class="rubric">Classes (namespace qi)</p>
+</strong><ul>
+<li><p class="first">class qi::AnyModule</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::AnyModule)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::AnyModule::moduleInfoC">qi::AnyModule::moduleInfo</a><p><a class="reference internal" href="#qi::AnyModule::moduleNameC">qi::AnyModule::moduleName</a></p>
+<p><a class="reference internal" href="#qi::AnyModule::AnyModule">qi::AnyModule::AnyModule</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::AnyModule)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::AnyModule::_moduleInfo__ModuleInfo">qi::AnyModule::_moduleInfo</a></ul>
+</dl>
+</li>
+<li><p class="first">class qi::ModuleBuilder</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::ModuleBuilder)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::ModuleBuilder::moduleNameC">qi::ModuleBuilder::moduleName</a><p><a class="reference internal" href="#qi::ModuleBuilder::ModuleBuilder__ModuleInfoCR">qi::ModuleBuilder::ModuleBuilder</a></p>
+<p><a class="reference internal" href="#qi::ModuleBuilder::setModuleInfo__ModuleInfoCR">qi::ModuleBuilder::setModuleInfo</a></p>
+<p><a class="reference internal" href="#qi::ModuleBuilder::module">qi::ModuleBuilder::module</a></p>
+<p><a class="reference internal" href="#qi::ModuleBuilder::setModulePath__ssCR">qi::ModuleBuilder::setModulePath</a></p>
+<p><a class="reference internal" href="#qi::ModuleBuilder::moduleInfo">qi::ModuleBuilder::moduleInfo</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::ModuleBuilder)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::ModuleBuilder::_object__AnyObject">qi::ModuleBuilder::_object</a><p><a class="reference internal" href="#qi::ModuleBuilder::_mod__AnyModule">qi::ModuleBuilder::_mod</a></p>
+<p><a class="reference internal" href="#qi::ModuleBuilder::_moduleInfo__ModuleInfo">qi::ModuleBuilder::_moduleInfo</a></p>
+</ul>
+</dl>
+</li>
+<li><p class="first">class qi::ModuleInfo</p>
+<dl class="docutils">
+<strong><p class="rubric">Members (class qi::ModuleInfo)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::ModuleInfo::name__ss">qi::ModuleInfo::name</a><p><a class="reference internal" href="#qi::ModuleInfo::path__ss">qi::ModuleInfo::path</a></p>
+<p><a class="reference internal" href="#qi::ModuleInfo::type__ss">qi::ModuleInfo::type</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+<strong><p class="rubric">Functions (namespace qi)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::listModules">qi::listModules</a></ul>
+</dl>
+</li>
+</ul>
+</dl>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-c-module">
+<h3>Creating a C++ Module<a class="headerlink" href="#creating-a-c-module" title="Permalink to this headline">¶</a></h3>
+<p>Lets create a simple foo module, with a Foo class and an egg function.</p>
+<p>Here is the content of foo.cpp:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/session.hpp&gt;</span>
+<span class="cp">#include &lt;qi/anymodule.hpp&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">qi</span><span class="p">;</span>
+
+<span class="c1">//the foo class takes a SessionPtr as parameter</span>
+<span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="k">const</span> <span class="n">SessionPtr</span><span class="o">&amp;</span> <span class="n">session</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">_session</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+  <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="n">bar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">SessionPtr</span> <span class="n">_session</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">QI_REGISTER_OBJECT</span><span class="p">(</span><span class="n">Foo</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span>
+
+<span class="c1">//a simple egg function</span>
+<span class="kt">void</span> <span class="nf">eggFun</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">register_foo_module</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">ModuleBuilder</span><span class="o">*</span> <span class="n">mb</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">mb</span><span class="o">-&gt;</span><span class="n">advertiseMethod</span><span class="p">(</span><span class="s">&quot;egg&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">eggFun</span><span class="p">);</span>
+  <span class="n">mb</span><span class="o">-&gt;</span><span class="n">advertiseFactory</span><span class="o">&lt;</span><span class="n">Foo</span><span class="p">,</span> <span class="k">const</span> <span class="n">SessionPtr</span><span class="o">&amp;&gt;</span><span class="p">(</span><span class="s">&quot;Foo&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">QI_REGISTER_MODULE</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">register_foo_module</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now let us write a CMakeLists.txt to compile it:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">foo-module</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">qibuild</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">qimodule</span><span class="p">)</span>
+<span class="nb">qi_sanitize_compile_flags</span><span class="p">(</span><span class="s">HIDDEN_SYMBOLS</span><span class="p">)</span>
+
+<span class="nb">qi_create_module</span><span class="p">(</span><span class="s">foo</span> <span class="s">SRC</span> <span class="s">foo.cpp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can inspect your module content using qicli:</p>
+<div class="highlight-sh"><div class="highlight"><pre>qicli mod foo
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-a-module-in-c">
+<h3>Using a Module in C++<a class="headerlink" href="#using-a-module-in-c" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s create a simple binary that will load the foo module, instantiate a Foo object and register it as a &#8220;Foo&#8221; service.</p>
+<p>footest.cpp content:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+<span class="cp">#include &lt;qi/anymodule.hpp&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">qi</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+  <span class="c1">//connect the session</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+  <span class="c1">// Register the Foo object as a service</span>
+  <span class="c1">// loadService will automatically give the session as the first parameter</span>
+  <span class="c1">// of the foo.Foo factory.</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">loadService</span><span class="p">(</span><span class="s">&quot;foo.Foo&quot;</span><span class="p">);</span>
+
+  <span class="c1">// Then simply run the application (wait for it to end)</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or the same code done by hand.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+<span class="cp">#include &lt;qi/anymodule.hpp&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">qi</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+  <span class="c1">//connect the session</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+  <span class="c1">// Register the module on the session by hand</span>
+  <span class="c1">// import the module</span>
+  <span class="n">AnyModule</span> <span class="n">foomod</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">import</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span>
+  <span class="c1">// create a Foo object</span>
+  <span class="n">AnyObject</span> <span class="n">ao</span> <span class="o">=</span> <span class="n">foomod</span><span class="p">.</span><span class="n">call</span><span class="o">&lt;</span><span class="n">AnyObject</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Foo&quot;</span><span class="p">,</span> <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">());</span>
+  <span class="c1">// register the object on the Session with the name &quot;Foo&quot;</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerService</span><span class="p">(</span><span class="s">&quot;Foo&quot;</span><span class="p">,</span> <span class="n">ao</span><span class="p">);</span>
+
+
+  <span class="c1">// Then simply run the application (wait for finish)</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let&#8217;s add a line in the CMakeLists.txt to create a binary:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_bin</span><span class="p">(</span><span class="s">footest</span> <span class="s">footest.cpp</span> <span class="s">DEPENDS</span> <span class="s">QI</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To try your new Foo service you can start it as a standalone session</p>
+<div class="highlight-shell"><div class="highlight"><pre>footest --qi-standalone
+
+<span class="c">#if you would like to register it on a running session then do</span>
+footest --qi-url<span class="o">=</span>tcp://&lt;myip&gt;:port
+</pre></div>
+</div>
+<p>Finally you can use qicli info to inspect your module</p>
+<div class="highlight-shell"><div class="highlight"><pre>qicli info Foo
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-factory-advanced">
+<h3>Module Factory (advanced)<a class="headerlink" href="#module-factory-advanced" title="Permalink to this headline">¶</a></h3>
+<p>Module support is language specific. For each language a module factory plug-in should be written.</p>
+<p>The plug-in should provide a module factory function and register it using a macro. It receives a <a class="reference internal" href="#qi::ModuleInfo" title="qi::ModuleInfo"><code class="xref cpp cpp-guess docutils literal"><span class="pre">ModuleInfo</span></code></a> which is the module to load and must return the loaded module.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">AnyModule</span> <span class="nf">mylangModuleFactory</span><span class="p">(</span><span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">ModuleInfo</span><span class="o">&amp;</span> <span class="n">moduleInfo</span><span class="p">);</span>
+
+<span class="n">QI_REGISTER_MODULE_FACTORY_PLUGIN</span><span class="p">(</span><span class="s">&quot;mylang&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mylangModuleFactory</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="finding-modules-advanced">
+<h3>Finding Modules (advanced)<a class="headerlink" href="#finding-modules-advanced" title="Permalink to this headline">¶</a></h3>
+<p>To find modules, the import function will start by looking at *.mod files in share/qi/module.
+This file indicates which module factory to use. From this module factory, a <a class="reference internal" href="#qi::ModuleInfo" title="qi::ModuleInfo"><code class="xref cpp cpp-guess docutils literal"><span class="pre">ModuleInfo</span></code></a> is constructed and given to the right language factory function that should return a valid <a class="reference internal" href="#qi::AnyModule" title="qi::AnyModule"><code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyModule</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qi-moduleinfo-class-reference">
+<h3>qi::ModuleInfo Class Reference<a class="headerlink" href="#qi-moduleinfo-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference internal" href="#qi::ModuleInfo::name__ss" title="qi::ModuleInfo::name"><code class="xref cpp cpp-func docutils literal"><span class="pre">name</span></code></a></code></dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference internal" href="#qi::ModuleInfo::type__ss" title="qi::ModuleInfo::type"><code class="xref cpp cpp-func docutils literal"><span class="pre">type</span></code></a></code></dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference internal" href="#qi::ModuleInfo::path__ss" title="qi::ModuleInfo::path"><code class="xref cpp cpp-func docutils literal"><span class="pre">path</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p></p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::ModuleInfo::name__ss">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::ModuleInfo::</code><code class="descname">name</code><a class="headerlink" href="#qi::ModuleInfo::name__ss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="qi::ModuleInfo::type__ss">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::ModuleInfo::</code><code class="descname">type</code><a class="headerlink" href="#qi::ModuleInfo::type__ss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="qi::ModuleInfo::path__ss">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::ModuleInfo::</code><code class="descname">path</code><a class="headerlink" href="#qi::ModuleInfo::path__ss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-modulebuilder-class-reference">
+<h3>qi::ModuleBuilder Class Reference<a class="headerlink" href="#qi-modulebuilder-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul>
+<li><strong>Inherits: </strong><a class="reference external" href="dynamicobjectbuilder.html"><code class="docutils literal"><span class="pre">qi::DynamicObjectBuilder</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>ModuleInfo</span> <code class="descname"><a class="reference internal" href="#qi::ModuleBuilder::_moduleInfo__ModuleInfo" title="qi::ModuleBuilder::_moduleInfo"><code class="xref cpp cpp-func docutils literal"><span class="pre">_moduleInfo</span></code></a></code></dt>
+<dt>
+<span>AnyObject</span> <code class="descname"><a class="reference internal" href="#qi::ModuleBuilder::_object__AnyObject" title="qi::ModuleBuilder::_object"><code class="xref cpp cpp-func docutils literal"><span class="pre">_object</span></code></a></code></dt>
+<dt>
+<span>AnyModule</span> <code class="descname"><a class="reference internal" href="#qi::ModuleBuilder::_mod__AnyModule" title="qi::ModuleBuilder::_mod"><code class="xref cpp cpp-func docutils literal"><span class="pre">_mod</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::ModuleBuilder__ModuleInfoCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">ModuleBuilder</span></code></a></code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>mi</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::setModuleInfo__ModuleInfoCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">setModuleInfo</span></code></a></code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>mi</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::setModulePath__ssCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">setModulePath</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>ModuleInfo&amp;</span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::moduleInfo"><code class="xref cpp cpp-func docutils literal"><span class="pre">moduleInfo</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::moduleNameC"><code class="xref cpp cpp-func docutils literal"><span class="pre">moduleName</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>AnyModule</span> <code class="descname"><a class="reference external" href="#qi::ModuleBuilder::module"><code class="xref cpp cpp-func docutils literal"><span class="pre">module</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>class given to the user to building a module</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::ModuleBuilder::_moduleInfo__ModuleInfo">
+ModuleInfo <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">_moduleInfo</code><a class="headerlink" href="#qi::ModuleBuilder::_moduleInfo__ModuleInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="qi::ModuleBuilder::_object__AnyObject">
+AnyObject <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">_object</code><a class="headerlink" href="#qi::ModuleBuilder::_object__AnyObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="qi::ModuleBuilder::_mod__AnyModule">
+AnyModule <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">_mod</code><a class="headerlink" href="#qi::ModuleBuilder::_mod__AnyModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::ModuleBuilder::ModuleBuilder__ModuleInfoCR">
+ <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">ModuleBuilder</code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>mi</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::ModuleBuilder::ModuleBuilder__ModuleInfoCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ModuleBuilder::setModuleInfo__ModuleInfoCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">setModuleInfo</code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>mi</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::ModuleBuilder::setModuleInfo__ModuleInfoCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ModuleBuilder::setModulePath__ssCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">setModulePath</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::ModuleBuilder::setModulePath__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ModuleBuilder::moduleInfo">
+ModuleInfo&amp; <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">moduleInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::ModuleBuilder::moduleInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ModuleBuilder::moduleNameC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">moduleName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::ModuleBuilder::moduleNameC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ModuleBuilder::module">
+AnyModule <code class="descclassname">qi::ModuleBuilder::</code><code class="descname">module</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::ModuleBuilder::module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-anymodule-class-reference">
+<h3>qi::AnyModule Class Reference<a class="headerlink" href="#qi-anymodule-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/anymodule.hpp&gt;</span>
+</pre></div>
+</div>
+<ul>
+<li><strong>Inherits: </strong><a class="reference external" href="anyobject.html"><code class="docutils literal"><span class="pre">qi::Object&lt;</span> <span class="pre">Empty</span> <span class="pre">&gt;</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>ModuleInfo</span> <code class="descname"><a class="reference internal" href="#qi::AnyModule::_moduleInfo__ModuleInfo" title="qi::AnyModule::_moduleInfo"><code class="xref cpp cpp-func docutils literal"><span class="pre">_moduleInfo</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::AnyModule::AnyModule"><code class="xref cpp cpp-func docutils literal"><span class="pre">AnyModule</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::AnyModule::AnyModule__ModuleInfoCR.qi::AnyObjectCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">AnyModule</span></code></a></code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>moduleInfo</em>, const qi::AnyObject&amp; <em>object</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::AnyModule::moduleNameC"><code class="xref cpp cpp-func docutils literal"><span class="pre">moduleName</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const ModuleInfo&amp;</span> <code class="descname"><a class="reference external" href="#qi::AnyModule::moduleInfoC"><code class="xref cpp cpp-func docutils literal"><span class="pre">moduleInfo</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>A qi Module. basically an Object and a ModuleInfo</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::AnyModule::_moduleInfo__ModuleInfo">
+ModuleInfo <code class="descclassname">qi::AnyModule::</code><code class="descname">_moduleInfo</code><a class="headerlink" href="#qi::AnyModule::_moduleInfo__ModuleInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::AnyModule::AnyModule">
+ <code class="descclassname">qi::AnyModule::</code><code class="descname">AnyModule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::AnyModule::AnyModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::AnyModule::AnyModule__ModuleInfoCR.qi::AnyObjectCR">
+ <code class="descclassname">qi::AnyModule::</code><code class="descname">AnyModule</code><span class="sig-paren">(</span>const ModuleInfo&amp; <em>moduleInfo</em>, <a class="reference external" href="anyobject.html#TPD_qi::AnyObject">const qi::AnyObject&amp;</a> <em>object</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::AnyModule::AnyModule__ModuleInfoCR.qi::AnyObjectCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::AnyModule::moduleNameC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::AnyModule::</code><code class="descname">moduleName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::AnyModule::moduleNameC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::AnyModule::moduleInfoC">
+const ModuleInfo&amp; <code class="descclassname">qi::AnyModule::</code><code class="descname">moduleInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::AnyModule::moduleInfoC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<dl class="function">
+<dt>
+<code class="descname">qi::import</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::listModules">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;ModuleInfo&gt;</a> <code class="descclassname">qi::</code><code class="descname">listModules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::listModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>list all available modules (cross language</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">API References</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">C++ qi API Reference</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../base/index.html">C++ qi base API</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="index.html">C++ qi type API</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="anyvalue.html">qi::AnyValue</a></li>
+<li class="toctree-l6"><a class="reference internal" href="anyfunction.html">qi::AnyFunction</a></li>
+<li class="toctree-l6"><a class="reference internal" href="anyobject.html">qi::Object</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">qi::AnyModule</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="buffer.html">qi::Buffer, qi::BufferReader</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dynamicobjectbuilder.html">qi::DynamicObjectBuilder</a></li>
+<li class="toctree-l6"><a class="reference internal" href="metaobject.html">qi::MetaObject, qi::MetaMethod, qi::MetaSignal, qi::MetaProperty</a></li>
+<li class="toctree-l6"><a class="reference internal" href="objecttypebuilder.html">qi::ObjectTypeBuilder</a></li>
+<li class="toctree-l6"><a class="reference internal" href="property.html">qi::Property</a></li>
+<li class="toctree-l6"><a class="reference internal" href="signal.html">qi::Signal</a></li>
+<li class="toctree-l6"><a class="reference internal" href="signature.html">qi::Signature</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../messaging/index.html">C++ qi messaging API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../file.html">qi::File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-classindex.html">C++ Class Index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-funcindex.html">C++ Function Index</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../python/index.html">Python qi API reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../transtyping.html">&gt; Type equivalences between languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">qi::AnyModule</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#creating-a-c-module">Creating a C++ Module</a></li>
+<li><a class="reference internal" href="#using-a-module-in-c">Using a Module in C++</a></li>
+<li><a class="reference internal" href="#module-factory-advanced">Module Factory (advanced)</a></li>
+<li><a class="reference internal" href="#finding-modules-advanced">Finding Modules (advanced)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#qi-moduleinfo-class-reference">qi::ModuleInfo Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-modulebuilder-class-reference">qi::ModuleBuilder Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-anymodule-class-reference">qi::AnyModule Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../../../contents.html">Site map</a>
+      <a title="Index" href="../../../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

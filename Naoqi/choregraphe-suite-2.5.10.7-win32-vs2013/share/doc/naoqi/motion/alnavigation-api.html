@@ -1,0 +1,812 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALNavigation API &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALNavigation" href="alnavigation.html" />
+    <link rel="next" title="Exploration API" href="exploration-api.html" />
+    <link rel="prev" title="ALNavigation" href="alnavigation.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-motion-alnavigation-api">
+                
+  <div class="section" id="alnavigation-api">
+<span id="id1"></span><h1>ALNavigation API<a class="headerlink" href="#alnavigation-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="alnavigation.html#alnavigation"><span>Overview</span></a> | API Navigation | <a class="reference internal" href="exploration-api.html#exploration-api"><span>API Exploration</span></a></p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alnavigationproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><span>ALModule API</span></a>.
+It also has the following specific methods:</p>
+<dl class="class">
+<dt id="ALNavigationProxy">
+<em class="property">class </em><code class="descname">ALNavigationProxy</code><a class="headerlink" href="#ALNavigationProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="pepp-pepper-only">
+<h3><img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <strong>Pepper</strong> only<a class="headerlink" href="#pepp-pepper-only" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="navigation-api">
+<h4>Navigation API:<a class="headerlink" href="#navigation-api" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="#ALNavigationProxy::navigateTo__floatCR.floatCR" title="ALNavigationProxy::navigateTo"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::navigateTo</span></code></a></li>
+<li><a class="reference internal" href="#ALNavigationProxy::moveAlong__AL::ALValueCR" title="ALNavigationProxy::moveAlong"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveAlong</span></code></a></li>
+<li><a class="reference internal" href="#ALNavigationProxy::getFreeZone__float.float" title="ALNavigationProxy::getFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getFreeZone</span></code></a></li>
+<li><a class="reference internal" href="#ALNavigationProxy::findFreeZone__float.float" title="ALNavigationProxy::findFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::findFreeZone</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="exploration-and-localization-api">
+<h4><a class="reference internal" href="exploration-api.html#exploration-api"><span>Exploration and localization API:</span></a><a class="headerlink" href="#exploration-and-localization-api" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::explore__float" title="ALNavigationProxy::explore"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::explore</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::stopExploration" title="ALNavigationProxy::stopExploration"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::stopExploration</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::saveExploration" title="ALNavigationProxy::saveExploration"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::saveExploration</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::getMetricalMap" title="ALNavigationProxy::getMetricalMap"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getMetricalMap</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::navigateToInMap__std::vector:float:CR" title="ALNavigationProxy::navigateToInMap"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::navigateToInMap</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::getRobotPositionInMap" title="ALNavigationProxy::getRobotPositionInMap"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getRobotPositionInMap</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::loadExploration__ss" title="ALNavigationProxy::loadExploration"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::loadExploration</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::relocalizeInMap__std::vector:float:CR" title="ALNavigationProxy::relocalizeInMap"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::relocalizeInMap</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::startLocalization" title="ALNavigationProxy::startLocalization"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::startLocalization</span></code></a></li>
+<li><a class="reference internal" href="exploration-api.html#ALNavigationProxy::stopLocalization" title="ALNavigationProxy::stopLocalization"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::stopLocalization</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="deprecated-methods">
+<h4>Deprecated methods:<a class="headerlink" href="#deprecated-methods" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="#ALNavigationProxy::startFreeZoneUpdate" title="ALNavigationProxy::startFreeZoneUpdate"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::startFreeZoneUpdate</span></code></a></li>
+<li><a class="reference internal" href="#ALNavigationProxy::stopAndComputeFreeZone__float.float" title="ALNavigationProxy::stopAndComputeFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::stopAndComputeFreeZone</span></code></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="event-list">
+<h2>Event list<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/Status" title="Navigation/AvoidanceNavigator/Status"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/Status()</span></code></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/ObstacleDetected" title="Navigation/AvoidanceNavigator/ObstacleDetected"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/ObstacleDetected()</span></code></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/MovingToFreeZone" title="Navigation/AvoidanceNavigator/MovingToFreeZone"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/MovingToFreeZone()</span></code></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/TrajectoryProgress" title="Navigation/AvoidanceNavigator/TrajectoryProgress"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/TrajectoryProgress()</span></code></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/AbsTargetModified" title="Navigation/AvoidanceNavigator/AbsTargetModified"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/AbsTargetModified()</span></code></a></li>
+<li><a class="reference internal" href="#Navigation/MotionDetected" title="Navigation/MotionDetected"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/MotionDetected()</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="alnavigationproxy-navigateto"></span><dl class="function">
+<dt id="ALNavigationProxy::navigateTo__floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">navigateTo</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::navigateTo__floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
+The robot computes a path to avoid obstacles.</p>
+<p>The robot is likely to perform any safety action to ensure the non collision with the environment. For example look with the head,
+stop to replan a new path. Thus, no motion timeline that takes the head resource can be run during a navigateTo.</p>
+<p>Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo</span></code></a>, the robot
+can choose its own path and speed while moving around. The speed decreases the closer the robot gets to obstacles.
+If the obstacle avoidance becomes too dangerous (as soon as it has detected an obstacle in its security area) the robot
+stops like in <code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo</span></code>.</p>
+<p>The target must be closer than 3m from the robot, otherwise the command will be ignored and a warning will be prompted.</p>
+<p>This is a blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; distance along the X axis in meters.</li>
+<li><strong>y</strong> &#8211; distance along the Y axis in meters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>True</em> if the robot reached its target at the end or <em>False</em> if it has been stopped by obstacles or if it cannot find a path to the target.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-guess"><div class="highlight"><pre>navigationProxy.navigateTo(2.0, 0.0)
+</pre></div>
+</div>
+<span class="target" id="alnavigationproxy-movealong"></span><dl class="function">
+<dt id="ALNavigationProxy::moveAlong__AL::ALValueCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">moveAlong</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>trajectory</em><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::moveAlong__AL::ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>trajectory</strong> &#8211; <p>an ALValue describing either a direct trajectory [&#8220;Holonomic&#8221;, pathXY, finalTheta, finalTime],
+or a composed trajectory [&#8220;Composed&#8221;, direct trajectories].</p>
+<p>pathXY is an ALValue describing a 2D path,
+either a direct path or a composed one: [&#8220;Composed&#8221;, direct paths].</p>
+<p>Direct paths can be lines or arc of circles: [&#8220;Line&#8221;, [finalX, finalY]],
+[&#8220;Circle&#8221;, [centerX, centerY], spanAngle].</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>True</em> when the robot executed the trajectory completely, and also when it has been definitely stopped by obstacles.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The following command makes the robot move 1 m forward in 5 s, then 1 m backward in 10 s, without pausing:</p>
+</dd></dl>
+
+<div class="highlight-guess"><div class="highlight"><pre>navigationProxy.moveAlong([&quot;Composed&quot;, [&quot;Holonomic&quot;, [&quot;Line&quot;, [1.0, 0.0]], 0.0, 5.0], [&quot;Holonomic&quot;, [&quot;Line&quot;, [-1.0, 0.0]], 0.0, 10.0]])
+</pre></div>
+</div>
+<span class="target" id="alnavigationproxy-getfreezone"></span><dl class="function">
+<dt id="ALNavigationProxy::getFreeZone__float.float">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">getFreeZone</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>desiredRadius</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>displacementConstraint</em><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::getFreeZone__float.float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current free zone around the robot. Does not make the robot move.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>desiredRadius</strong> &#8211; The radius of free space we want in meters.</li>
+<li><strong>displacementConstraint</strong> &#8211; The max distance we accept to move to reach the found place in meters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an ALValue [<a class="reference internal" href="#freezone-returncodes"><span>Free Zone Error Code</span></a>, result radius (meters), [worldMotionToRobotCenterX (meters), worldMotionToRobotCenterY (meters)]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-findfreezone"></span><dl class="function">
+<dt id="ALNavigationProxy::findFreeZone__float.float">
+<a class="reference external" href="../../dev/libqi/api/cpp/base/future.html">qi::Future&lt;AL::ALValue&gt;</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">findFreeZone</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>desiredRadius</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>displacementConstraint</em><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::findFreeZone__float.float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for a free circular zone of a specified radius not farer than a specified displacement.
+To do this the robot moves and looks around itself. This is a blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>desiredRadius</strong> &#8211; The radius of free space we want in meters.</li>
+<li><strong>displacementConstraint</strong> &#8211; The max distance we accept to move to reach the found place in meters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a cancelable qi::Future&lt;ALValue&gt; [<a class="reference internal" href="#freezone-returncodes"><span>Free Zone Error Code</span></a>, result radius (meters), [worldMotionToRobotCenterX (meters), worldMotionToRobotCenterY (meters)]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-guess"><div class="highlight"><pre>desiredRadius = 0.6
+displacementConstraint = 0.5
+navigationProxy.findFreeZone(desiredRadius, displacementConstraint)
+</pre></div>
+</div>
+<div class="section" id="python-script-for-free-zone">
+<h3>Python script for free zone<a class="headerlink" href="#python-script-for-free-zone" title="Permalink to this headline">¶</a></h3>
+<p>The following command makes the robot move to the center of the free zone if everything went OK.</p>
+<p><a class="reference download internal" href="../../_downloads/freezone.py"><code class="xref download docutils literal"><span class="pre">alnavigation.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use findFreeZone Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">almath</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the findFreeZone method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the services ALNavigation, ALMotion and ALRobotPosture.</span>
+
+    <span class="n">navigation_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALNavigation&quot;</span><span class="p">)</span>
+    <span class="n">motion_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMotion&quot;</span><span class="p">)</span>
+    <span class="n">posture_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALRobotPosture&quot;</span><span class="p">)</span>
+
+    <span class="c"># Wake up robot</span>
+    <span class="n">motion_service</span><span class="o">.</span><span class="n">wakeUp</span><span class="p">()</span>
+
+    <span class="c"># Send robot to Stand Init</span>
+    <span class="n">posture_service</span><span class="o">.</span><span class="n">goToPosture</span><span class="p">(</span><span class="s">&quot;StandInit&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c"># Scanning the environement.</span>
+    <span class="n">navigation_service</span><span class="o">.</span><span class="n">startFreeZoneUpdate</span><span class="p">()</span>
+    <span class="c">###########################################################################</span>
+    <span class="c"># Add here an animation with timelines and moves (less than 60 seconds).  #</span>
+    <span class="c"># For example :</span>
+    <span class="n">motion_service</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="c">###########################################################################</span>
+    <span class="n">desiredRadius</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">displacementConstraint</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">navigation_service</span><span class="o">.</span><span class="n">findFreeZone</span><span class="p">(</span><span class="n">desiredRadius</span><span class="p">,</span> <span class="n">displacementConstraint</span><span class="p">)</span>
+
+    <span class="n">errorCode</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">errorCode</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">worldToCenterFreeZone</span> <span class="o">=</span> <span class="n">almath</span><span class="o">.</span><span class="n">Pose2D</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">worldToRobot</span> <span class="o">=</span> <span class="n">almath</span><span class="o">.</span><span class="n">Pose2D</span><span class="p">(</span><span class="n">motion_service</span><span class="o">.</span><span class="n">getRobotPosition</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>
+        <span class="n">robotToFreeZoneCenter</span> <span class="o">=</span> <span class="n">almath</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">worldToRobot</span><span class="p">)</span> <span class="o">*</span> <span class="n">worldToCenterFreeZone</span>
+        <span class="n">motion_service</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">robotToFreeZoneCenter</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">robotToFreeZoneCenter</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;Problem during the update of the free zone.&quot;</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="ALNavigationProxy::startFreeZoneUpdate">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">startFreeZoneUpdate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::startFreeZoneUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 2.5: </span>No more necessary: instead, directly call <a class="reference internal" href="#ALNavigationProxy::getFreeZone__float.float" title="ALNavigationProxy::getFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getFreeZone</span></code></a>.</p>
+<p>Starts a loop to update the mapping of the free space around the robot. It is like <a class="reference internal" href="#ALNavigationProxy::findFreeZone__float.float" title="ALNavigationProxy::findFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::findFreeZone</span></code></a> but this time the user is responsible for the move of scanning.
+It is a non-blocking call. Call <a class="reference internal" href="#ALNavigationProxy::stopAndComputeFreeZone__float.float" title="ALNavigationProxy::stopAndComputeFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::stopAndComputeFreeZone</span></code></a> to get the result.
+The maximum time for the scanning is 60 seconds. After that the update is stopped automatically.
+Clears the map if called again.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALNavigationProxy::stopAndComputeFreeZone__float.float">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALNavigationProxy::</code><code class="descname">stopAndComputeFreeZone</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>desiredRadius</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <em>displacementConstraint</em><span class="sig-paren">)</span><a class="headerlink" href="#ALNavigationProxy::stopAndComputeFreeZone__float.float" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 2.5: </span>No more necessary: instead, cancel the future of <a class="reference internal" href="#ALNavigationProxy::findFreeZone__float.float" title="ALNavigationProxy::findFreeZone"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::findFreeZone</span></code></a>.</p>
+</div>
+<p>Stops the update and returns the result. If the update was not running it returns error code 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>desiredRadius</strong> &#8211; The radius of free space we want in meters.</li>
+<li><strong>displacementConstraint</strong> &#8211; The max distance we accept to move to reach the found place in meters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an ALValue [<a class="reference internal" href="#freezone-returncodes"><span>Free Zone Error Code</span></a>, result radius (meters), [worldMotionToRobotCenterX (meters), worldMotionToRobotCenterY (meters)]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/Status">
+<div class="line">Event: <code class="descname">&quot;Navigation/AvoidanceNavigator/Status&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> status</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/AvoidanceNavigator/Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when status of the local navigator changes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/Status&#8221;</li>
+<li><strong>status</strong> &#8211; New local navigator status. Please refer to <a class="reference internal" href="alnavigation.html#alnavigation"><span>ALNavigation</span></a> for details.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/ObstacleDetected">
+<div class="line">Event: <code class="descname">&quot;Navigation/AvoidanceNavigator/ObstacleDetected&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> position</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/AvoidanceNavigator/ObstacleDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when an obstacle is detected in the close area.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/ObstacleDetected&#8221;</li>
+<li><strong>position</strong> &#8211; Array formatted as [x, y], representing the position of the detected obstacle in <a class="reference internal" href="../../glossary.html#term-frame-robot"><span class="xref std std-term">FRAME_ROBOT</span></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/MovingToFreeZone">
+<div class="line">Event: <code class="descname">&quot;Navigation/AvoidanceNavigator/MovingToFreeZone&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> status</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/AvoidanceNavigator/MovingToFreeZone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the robot starts or stops a motion to leave an obstacle neighbourhood.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/MovingToFreeZone&#8221;</li>
+<li><strong>status</strong> &#8211; 1.0 when the robot starts and 0.0 when it has finished its motion.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/TrajectoryProgress">
+<div class="line">Event: <code class="descname">&quot;Navigation/AvoidanceNavigator/TrajectoryProgress&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> progress</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/AvoidanceNavigator/TrajectoryProgress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the trajectory progress is updated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/TrajectoryProgress&#8221;</li>
+<li><strong>progress</strong> &#8211; percentage of the current trajectory accomplished, between 0.0 and 1.0.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/AbsTargetModified">
+<div class="line">Event: <code class="descname">&quot;Navigation/AvoidanceNavigator/AbsTargetModified&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> newTarget</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/AvoidanceNavigator/AbsTargetModified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the required target is unreachable because it is inside an obstacle.</p>
+<p>The robot then computes the closest target to the initial one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/AbsTargetModified&#8221;</li>
+<li><strong>newTarget</strong> &#8211; the new target of the robot in <a class="reference internal" href="../../glossary.html#term-frame-world"><span class="xref std std-term">FRAME_WORLD</span></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/MotionDetected">
+<div class="line">Event: <code class="descname">&quot;Navigation/MotionDetected&quot;</code></div>
+callback<span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> sensorData</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Navigation/MotionDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when a sensor detects that something is moving around the robot.</p>
+<p>Current implementation is based solely on Pepper <a class="reference internal" href="../../family/pepper_technical/irspot_pep.html#pepper-irspot"><span>Infra-Red</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/MotionDetected&#8221;</li>
+<li><strong>sensorData</strong> &#8211; Array formated as [Sensor, Position, Detected], where:
+Sensor is the name of the sensor that detected the motion;
+Position is the 3D position, in <a class="reference internal" href="../../glossary.html#term-frame-world"><span class="xref std std-term">FRAME_WORLD</span></a>, of the
+detected movement around Pepper;
+Detected is a boolean equals to true if the movement corresponds
+to something arriving in Pepper&#8217;s vicinity and false if it
+corresponds to something leaving Pepper&#8217;s vicinity.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="free-zone-error-code">
+<span id="freezone-returncodes"></span><h2>Free Zone Error Code<a class="headerlink" href="#free-zone-error-code" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error code</th>
+<th class="head">meanning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td><em>OK</em>. You can trust the result center and radius, and asked constraints were respected.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td><em>KO</em>. There was a problem, do not take into account the returned center and radius.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td><em>CONSTRAINT KO</em>. There was no problem but the asked constraints are not fullfilled,
+returned best approching solution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi Motion</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alanimationplayer.html">ALAnimationPlayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alrobotposture.html">ALRobotPosture</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="alnavigation.html">ALNavigation</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALNavigation API</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="exploration-api.html">Exploration API</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="alrecharge.html">ALRecharge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="almotion.html">ALMotion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">ALTracker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="almotionrecorder.html">ALMotionRecorder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALNavigation API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a><ul>
+<li><a class="reference internal" href="#pepp-pepper-only"> <strong>Pepper</strong> only</a><ul>
+<li><a class="reference internal" href="#navigation-api">Navigation API:</a></li>
+<li><a class="reference internal" href="#exploration-and-localization-api"><code class="docutils literal"><span class="pre">Exploration</span> <span class="pre">and</span> <span class="pre">localization</span> <span class="pre">API:</span></code></a></li>
+<li><a class="reference internal" href="#deprecated-methods">Deprecated methods:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event-list">Event list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a><ul>
+<li><a class="reference internal" href="#python-script-for-free-zone">Python script for free zone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#events">Events</a></li>
+<li><a class="reference internal" href="#free-zone-error-code">Free Zone Error Code</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

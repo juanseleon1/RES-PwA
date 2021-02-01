@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Release Notes - 2.1 &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Release notes - 2.1" href="index.html" />
+    <link rel="next" title="Choregraphe 2.1" href="choregraphe_rn2.0.html" />
+    <link rel="prev" title="Release Notes - 2.1.2" href="whatsnew_2.1.2.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="news-2.0-whatsnew">
+                
+  <div class="section" id="release-notes-2-1">
+<span id="whats-new-2-0"></span><h1>Release Notes - 2.1<a class="headerlink" href="#release-notes-2-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="quick-upgrade-guide">
+<h2>Quick upgrade guide<a class="headerlink" href="#quick-upgrade-guide" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="check-compatibility">
+<h3>1. Check compatibility<a class="headerlink" href="#check-compatibility" title="Permalink to this headline">¶</a></h3>
+<p>Be aware that:</p>
+<ul>
+<li><p class="first">you cannot mix <strong>1.14</strong> and <strong>2.0</strong> pieces of software.</p>
+</li>
+<li><p class="first"><strong>2.x</strong> runs on <strong>NAO</strong> <strong>V4</strong> and <strong>V5</strong>.</p>
+<a class="reference internal image-reference" href="../../_images/compat.png"><img alt="../../_images/compat.png" src="../../_images/compat.png" style="width: 179px; height: 133px;" /></a>
+<div class="line-block">
+<div class="line">Owner of former <a class="reference internal" href="../../family/body_type.html#nao-family-nao-version"><span>NAO - Version</span></a> should contact our customer support.</div>
+<div class="line">For further details, see: <a class="reference internal" href="../../nao/contacting_support.html#contacting-support-nao"><span>Contacting customer support for NAO</span></a>.</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="upgrade-your-robot-first">
+<h3>2. Upgrade your robot first!<a class="headerlink" href="#upgrade-your-robot-first" title="Permalink to this headline">¶</a></h3>
+<p>To upgrade all your tools easily, make sure you follow this order:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Upgrade your robot first, using <strong>Choregraphe 1.14</strong>.</p>
+<p>For further details, see: <a class="reference internal" href="../../nao/upgrade_nao.html#upgrade-from-1-to-2"><span>Upgrading my NAO - from 1.x to 2.x</span></a>.</p>
+<p>Be aware: your <strong>Aldebaran</strong> robot starts moving and seeking your
+attention as soon as you turn it on!</p>
+<p class="last">For further details, see: <a class="reference internal" href="#rn-life"><span>Life on start-up</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Complete the upgrade thanks to the <a class="reference internal" href="#rn-cloud"><span>New Aldebaran Cloud</span></a>.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Upgrade <strong>Choregraphe</strong>.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../../software/choregraphe/installing.html#desktop-installation"><span>Choregraphe suite - Installation Guide</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td>Upgrade all the <strong>SDKs</strong> you usually use.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="port-your-1-14-projects">
+<h3>3. Port your 1.14 projects<a class="headerlink" href="#port-your-1-14-projects" title="Permalink to this headline">¶</a></h3>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/objects/choregraphe_project.html#import-114-project"><span>Porting a 1.14 Project</span></a>.</p>
+</div>
+</div>
+<div class="section" id="keys-features">
+<h2>Keys features<a class="headerlink" href="#keys-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="life-on-start-up">
+<span id="rn-life"></span><h3>Life on start-up<a class="headerlink" href="#life-on-start-up" title="Permalink to this headline">¶</a></h3>
+<p>This version of <strong>NAOqi</strong> comes with a disruptive new feature: the robot is now
+able to launch autonomously any of its installed applications.</p>
+<p>This ability, called <strong>Life</strong> and orchestrated by the module <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a>,
+is active by default and starts to operate after the boot of the robot.</p>
+<p>If needed, <strong>Life</strong> can be temporarily deactivated.
+For further details, see: <a class="reference internal" href="../../nao/nao_freeze.html#nao-freeze"><span>Switching Autonomous life on and off</span></a>.</p>
+<p>When the <strong>Life</strong> is active, what you see depends on the applications installed
+on your robot.
+For further details, see: <a class="reference internal" href="../../nao/nao_life.html#nao-life"><span>Understanding Autonomous Life settings</span></a>.</p>
+</div>
+<div class="section" id="new-web-page">
+<h3>New <strong>Web Page</strong><a class="headerlink" href="#new-web-page" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>Aldebaran</strong> robot Web page has been fully redesigned.</p>
+<p>It is simpler to use and when the robot is configured for the first time,
+a wizard mode welcomes beginners.
+Yet, advanced users may still access to the former and deprecated Web page.</p>
+<p>For further details, see:</p>
+<ul class="simple">
+<li><img alt="nao" class="img-inline" src="../../_images/nao.png" /> <a class="reference internal" href="../../nao/webpage.html#webpage-nao"><span>NAO Web page</span></a> and <a class="reference internal" href="../../nao/first_conf.html#getting-started-nao"><span>NAO - Getting started wizard</span></a>.</li>
+<li><img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <a class="reference internal" href="../../family/pepper_user_guide/webpage.html#webpage-pep"><span>Pepper Web page</span></a> and <a class="reference internal" href="../../family/pepper_user_guide/first_conf_pep.html#getting-started-pepper"><span>Getting started wizard</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="new-aldebaran-cloud">
+<span id="rn-cloud"></span><h3>New <strong>Aldebaran Cloud</strong><a class="headerlink" href="#new-aldebaran-cloud" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve applications and system updates automatically!</p>
+<p>To access to <strong>Aldebaran Cloud</strong>:</p>
+<ul class="simple">
+<li>Follow this link: <a class="reference external" href="https://cloud.aldebaran-robotics.com/">https://cloud.aldebaran-robotics.com/</a></li>
+<li>You can also click the <strong>install new apps</strong> link available from the <strong>Web page</strong>.</li>
+</ul>
+</div>
+<div class="section" id="meet-the-aldebaran-robot-family">
+<h3>Meet the <strong>Aldebaran</strong> robot family<a class="headerlink" href="#meet-the-aldebaran-robot-family" title="Permalink to this headline">¶</a></h3>
+<p><strong>Aldebaran</strong> software suite welcomes new robots:
+<strong>NAO</strong> <strong>V5</strong>, <strong>Romeo</strong> and <strong>Pepper</strong>.</p>
+<ul>
+<li><p class="first">Have a look at their specific documentation corners:</p>
+<p><a class="reference internal" href="../../home_nao.html#home-nao"><span>NAO - Documentation</span></a> | <a class="reference internal" href="../../home_romeo.html#home-romeo"><span>Romeo - Documentation</span></a> | <a class="reference internal" href="../../home_pepper.html#home-pepper"><span>Pepper - Documentation</span></a></p>
+</li>
+<li><p class="first">Or ask <strong>Choregraphe</strong> 2.0 to display them!</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Choose <strong>Edit</strong> &gt; <strong>Preferences</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Click the <strong>Virtual robot</strong> tab.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Choose a <strong>Robot model</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click <strong>OK</strong> button.</p>
+<p class="last"><em>Result</em></p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Choose <strong>Connection</strong> &gt; <strong>Connect to virtual robot</strong>.</p>
+<p class="last">See the new robot model displayed in the <a class="reference internal" href="../../software/choregraphe/panels/robot_3d_view.html#d-nao-panel"><span>Robot View</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">What’s new</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.8.html">Addendum 2.5.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.7.html">Addendum 2.5.7 - For U.S. only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.html">Release Notes - 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/choregraphe_rn2.5.html"><strong>Choregraphe</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_api_rn2.5.html"><strong>NAOqi API</strong> &amp; <strong>SDKs</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_os_rn2.5.html"><strong>NAOqi OS</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html">ChangeLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.4/index.html">Release notes - 2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.3/index.html">Release notes - 2.3</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Release notes - 2.1</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.4.html">Release Notes - 2.1.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.3.html">Release Notes - 2.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.2.html">Release Notes - 2.1.2</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Release Notes - 2.1</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="choregraphe_rn2.0.html"><strong>Choregraphe</strong> 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_api_rn2.1.2.html"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_api_rn2.0.html"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_os_rn2.0.html"><strong>NAOqi OS</strong> 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="known_issues_2.1.html">Known issues 2.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../1.14/index.html">Release notes - 1.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.12/index.html">Release notes - 1.12</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Release Notes - 2.1</a><ul>
+<li><a class="reference internal" href="#quick-upgrade-guide">Quick upgrade guide</a><ul>
+<li><a class="reference internal" href="#check-compatibility">1. Check compatibility</a></li>
+<li><a class="reference internal" href="#upgrade-your-robot-first">2. Upgrade your robot first!</a></li>
+<li><a class="reference internal" href="#port-your-1-14-projects">3. Port your 1.14 projects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keys-features">Keys features</a><ul>
+<li><a class="reference internal" href="#life-on-start-up">Life on start-up</a></li>
+<li><a class="reference internal" href="#new-web-page">New <strong>Web Page</strong></a></li>
+<li><a class="reference internal" href="#new-aldebaran-cloud">New <strong>Aldebaran Cloud</strong></a></li>
+<li><a class="reference internal" href="#meet-the-aldebaran-robot-family">Meet the <strong>Aldebaran</strong> robot family</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

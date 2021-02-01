@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Script editor panel &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Advanced panels" href="../advanced_panels.html" />
+    <link rel="next" title="Resource viewer panel" href="resource_viewer_panel.html" />
+    <link rel="prev" title="Dialog panel" href="dialog_panel.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="software-choregraphe-panels-scritp_editor_panel">
+                
+  <div class="section" id="script-editor-panel">
+<span id="chore-script-editor-panel"></span><h1>Script editor panel<a class="headerlink" href="#script-editor-panel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-script-editor-panel">
+<h2>What is the Script editor panel<a class="headerlink" href="#what-is-the-script-editor-panel" title="Permalink to this headline">¶</a></h2>
+<p>The Script editor panel enables to edit box <strong>scripts</strong>.</p>
+<a class="reference internal image-reference" href="../../../_images/create_script_box_en.png"><img alt="../../../_images/create_script_box_en.png" src="../../../_images/create_script_box_en.png" style="width: 401px; height: 334px;" /></a>
+<p>This editor integrates <strong>syntax highlighting</strong> to ease the edition.</p>
+<p>At the bottom of the panel you can see the <strong>number of the selected line</strong> on
+the left and a field to <strong>search</strong> a specific keyword in the script.</p>
+</div>
+<div class="section" id="how-to-open-the-script-of-a-specific-box">
+<h2>How to open the script of a specific box<a class="headerlink" href="#how-to-open-the-script-of-a-specific-box" title="Permalink to this headline">¶</a></h2>
+<p>In the flow diagram, to open the script of any <a class="reference internal" href="../objects/box.html#choregraphe-reference-box"><span>box</span></a>,
+right-click on it and select <strong>Edit box script</strong>.</p>
+<p>The script is displayed in the <strong>Script editor</strong> panel.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a <a class="reference internal" href="../objects/python_box.html#choregraphe-reference-box-type-python"><span>Python box</span></a> you can also double-click on it.</p>
+</div>
+</div>
+<div class="section" id="script-editor-panel-functionalities">
+<span id="choregraphe-detailed-interface-script-editor-panel"></span><h2>Script editor panel functionalities<a class="headerlink" href="#script-editor-panel-functionalities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="search-functions">
+<h3>Search functions<a class="headerlink" href="#search-functions" title="Permalink to this headline">¶</a></h3>
+<p>You have useful functions at the bottom of the panel:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="first last reference internal image-reference" href="../../../_images/find_menu_en.png"><img alt="../../../_images/find_menu_en.png" src="../../../_images/find_menu_en.png" style="width: 60px; height: 24px;" /></a>
+</td>
+<td>Select the <strong>Find</strong> or the <strong>Replace</strong> function.</td>
+</tr>
+<tr class="row-odd"><td><p class="first"><strong>Search text field</strong></p>
+<a class="last reference internal image-reference" href="../../../_images/chore_script_editor_find_en.png"><img alt="../../../_images/chore_script_editor_find_en.png" src="../../../_images/chore_script_editor_find_en.png" style="width: 214px; height: 63px;" /></a>
+</td>
+<td><p class="first">Enter the string to search or search and replace in the current script.</p>
+<p class="last">It is highlighted in red if the keyword is not found in the script.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p class="first"><strong>Navigation buttons</strong></p>
+<a class="last reference internal image-reference" href="../../../_images/chore_script_editor_find_prevnext.png"><img alt="../../../_images/chore_script_editor_find_prevnext.png" src="../../../_images/chore_script_editor_find_prevnext.png" style="width: 76px; height: 30px;" /></a>
+</td>
+<td><p class="first">Move to the previous or the next matching string:</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the search wraps around the document: if you reach the bottom
+of the the script, it will start again from the top. This option can be
+disabled from the <strong>Setting button</strong>.</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first"><strong>Setting button</strong></p>
+<a class="last reference internal image-reference" href="../../../_images/chore_script_editor_find_settings.png"><img alt="../../../_images/chore_script_editor_find_settings.png" src="../../../_images/chore_script_editor_find_settings.png" style="width: 46px; height: 27px;" /></a>
+</td>
+<td><p class="first">Specify search options:</p>
+<ul class="last simple">
+<li>Match case</li>
+<li>Match whole word</li>
+<li>Wrap around</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="script-editor-functions">
+<h3>Script editor functions<a class="headerlink" href="#script-editor-functions" title="Permalink to this headline">¶</a></h3>
+<p>If you <strong>right-click</strong> in the panel, the following menu is displayed:</p>
+<a class="reference internal image-reference" href="../../../_images/script-editor-context-menu_en.png"><img alt="../../../_images/script-editor-context-menu_en.png" src="../../../_images/script-editor-context-menu_en.png" style="width: 221px; height: 184px;" /></a>
+<p>This <strong>contextual menu</strong> provides fast access to some classic functions for a script editor:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Undo</strong></td>
+<td>Revert last script modification.</td>
+</tr>
+<tr class="row-odd"><td><strong>Redo</strong></td>
+<td>Apply previously reverted modification.</td>
+</tr>
+<tr class="row-even"><td><strong>Cut</strong>, <strong>Copy</strong>, <strong>Paste</strong> or <strong>Delete</strong></td>
+<td>Cut, copy, delete selected text block or paste text at the current
+location of editing cursor.</td>
+</tr>
+<tr class="row-odd"><td><strong>Select All</strong></td>
+<td>Select the complete script.</td>
+</tr>
+<tr class="row-even"><td><strong>Insert Function</strong></td>
+<td>Insert a
+<a class="reference internal" href="../objects/python_script.html#choregraphe-reference-box-script-built-in-functions"><span>built-in function</span></a>
+only available from a box script.</td>
+</tr>
+<tr class="row-odd"><td><strong>Block comment or uncomment</strong></td>
+<td>Toggle the current line or the selected text block commented or uncommented.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="customizing-script-editor-panel">
+<h2>Customizing Script editor panel<a class="headerlink" href="#customizing-script-editor-panel" title="Permalink to this headline">¶</a></h2>
+<p>Several options are available in order to customize the <strong>Script editor panel</strong>:</p>
+<ul class="simple">
+<li>Display mono-spaced font,</li>
+<li>Display code folding buttons,</li>
+<li>Display line numbers,</li>
+<li>Wrap text.</li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../choregraphe_preference.html#choregraphe-detailed-interface-preferences"><span>Choregraphe preferences</span></a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Choregraphe Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installing.html">Choregraphe suite - Installation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../choregraphe_overview.html">What is Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connection_widget.html">Connecting Choregraphe to a robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pose_library_panel.html">Pose library panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dialog_panel.html">Dialog panel</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Script editor panel</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="resource_viewer_panel.html">Resource viewer panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="memory_watcher_panel.html">Memory watcher panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="active_panel.html">Active Content panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="debug_window.html">Log viewer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="undo_stack_panel.html">Undo stack panel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/translations.html">Mastering application localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connecting.html">Managing your robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/memory_backup.html">Memory Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Script editor panel</a><ul>
+<li><a class="reference internal" href="#what-is-the-script-editor-panel">What is the Script editor panel</a></li>
+<li><a class="reference internal" href="#how-to-open-the-script-of-a-specific-box">How to open the script of a specific box</a></li>
+<li><a class="reference internal" href="#script-editor-panel-functionalities">Script editor panel functionalities</a><ul>
+<li><a class="reference internal" href="#search-functions">Search functions</a></li>
+<li><a class="reference internal" href="#script-editor-functions">Script editor functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#customizing-script-editor-panel">Customizing Script editor panel</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>
