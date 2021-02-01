@@ -572,6 +572,10 @@ class Robot:
     def desactivate_voice_recognition(self):
         alSpeechRecognition.unsubscribe(sensorsModule)
 
+    ## Loading the topics directly as text strings
+    def load_topic_content (self, topicName):
+        alDialogProxy.loadTopicContent(topicName)
+
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def activate_conversational_topic(self, topicName):
         alDialogProxy.activateTopic(topicName)
@@ -597,6 +601,12 @@ class Robot:
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
     def set_topic_focus(self, topicName):
         alDialogProxy.setFocus(topicName)
+
+    def set_language(self, language):
+        alDialogProxy.setLanguage(language)
+
+    def subscribe_topic (self, topicName):
+        alDialogProxy.subscribe(topicName)
 
     def hablar(self, text_to_speech, speed=None, pitch=None):
         if speed == None:
