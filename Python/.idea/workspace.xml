@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="766cfaa0-5bab-4646-9798-479f2ac2109b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonProject/.idea/PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/.idea/PythonProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonProject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonProject/ConversationTopics.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/ConversationTopics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +70,10 @@
       <updated>1603399498544</updated>
       <workItem from="1612123367442" duration="2227000" />
       <workItem from="1612127743817" duration="18686000" />
-      <workItem from="1612217853064" duration="1197000" />
+      <workItem from="1612217853064" duration="4171000" />
+      <workItem from="1612388942370" duration="2710000" />
+      <workItem from="1612829272408" duration="1677000" />
+      <workItem from="1613055716424" duration="2803000" />
     </task>
     <servers />
   </component>

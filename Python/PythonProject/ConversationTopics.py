@@ -43,7 +43,7 @@ topic_content_example = (
 #Acciones requeridas para el uso del topico
 #CARGAR EL TOPICO COMO STRING
 
-topico1 = robot.load_topic_content(topic_content)
+topico1 = robot.load_topic_content(topic_content_example)
 #ACTIVAR EL TOPICO CARGADO
 robot.activate_conversational_topic(topico1)
 #SUSCRIBIR AL ROBOT A UTILIZAR EL TOPICO - El parametro es un string cualquiera que se utilizará como identificador
@@ -109,5 +109,20 @@ conversacion_musica = (
 
             
         'u2: (No) Que triste, creo que me deberia ir \n'
+
+)
+
+
+topico_emocional = (
+    'concept: (emociones_positivas) [feliz alegre alegria genial bacano bacana chevere rico] \n'
+    'concept: (emociones_tristes) [triste tristeza achantado dolor mal melancolia melancólico aburrido miedo] \n'
+    'concept: (emociones_enojo) [ira enojo piedra molestia rabia molesto molesta joda jode jodes mamado mamada quiero azare ] \n'
+    'concept: (emociones_normales) [Bien bueno ok alegra agradable "como quiera" nada normal] \n'
+
+    'u: ([muy porque imaginate imaginese estoy super] _~emociones_positivas) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
+    'u: ([Tengo "Me siento" Estoy] _~emociones_tristes) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
+    'u: ([Estoy No Tengo] _~emociones_enojo) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
+    'u: ([Váyase Vete]) Está bien, nos vemos luego \n'
+    'u: ([Está Ah Me Todo Estoy] _~emociones_normales) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE\n'
 
 )

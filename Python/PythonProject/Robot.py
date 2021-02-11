@@ -583,6 +583,7 @@ class Robot:
     # Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine
     def load_conversational_topic(self, topicName):
         #define path
+
         path = "nope"
         alDialogProxy.loadTopic(path)
 
