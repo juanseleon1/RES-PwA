@@ -15,7 +15,8 @@ from main import activities_running, send
 
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
-class pepperModule(ALModule):
+class PepperModule(ALModule):
+    """python class myModule test auto documentation: comment needed to create a new python module"""
     """python class myModule test auto documentation: comment needed to create a new python module"""
 
     def pythondatachanged(self, key, value, message):

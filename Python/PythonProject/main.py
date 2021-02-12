@@ -8,7 +8,7 @@ import argparse
 import datetime
 from Emotion import Emotion
 from Message import messageManager
-from PepperModule import *
+import PepperModule
 from Robot import Robot
 
 #--------------------------------------------------Functions-----------------------------------------------------------------------
@@ -137,7 +137,7 @@ def callFunction(jsonObj):
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
-HOST = '10.195.22.24'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST_LOCAL)
 PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
@@ -199,7 +199,7 @@ alDialogProxy = session.service("ALDialog")
 # Declare the modules --------------------------------------------------------------------------------
 try:
 
-    sensorsModule = pepperModule("sensorsModule")
+    sensorsModule = PepperModule("sensorsModule")
     # Raised when an animated speech is done.
     alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule", "endOfAnimatedSpeech")
     # Raised when the person tracked can no longer be found for some time.
@@ -336,7 +336,7 @@ try:
     alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
     #
 except Exception, e:
-    print "error"
+    print "Main Error"
     print e
     alBroker.shutdown()
     exit(1)
