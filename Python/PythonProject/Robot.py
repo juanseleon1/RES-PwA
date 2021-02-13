@@ -1,18 +1,50 @@
 from naoqi import *
-import socket
-import threading
-import json
-import qi
-import sys
-import argparse
-import datetime
-# ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
-from main import *
+import PepperModule
+from Emotion import Emotion
+from Utils import activities_running
+# ----------------------------------------------------------------------------Robot
+# class---------------------------------------------------------------------------------------------
 
-"""--------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------"""
-# ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
+"""--------------------------------------------------------------------------Robot 
+class--------------------------------------------------------------------------------------------- """
+
+
+# ----------------------------------------------------------------------------Robot
+# class---------------------------------------------------------------------------------------------
 class Robot:
-    def __init__(self):
+    def __init__(self, session, HOST):
+        self.session = session
+        self.alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559)
+        self.alProxy = ALProxy("ALMemory")
+        self.alMood = session.service("ALMood")
+        self.alTexToSpeech = session.service("ALTextToSpeech")
+        self.alAnimationPlayer = session.service("ALAnimationPlayer")
+        self.alMotion = session.service("ALMotion")
+        self.alRobotPosture = session.service("ALRobotPosture")
+        self.alFaceDetection = session.service("ALFaceDetection")
+        self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
+        self.alBackgroundMovement = session.service("ALBackgroundMovement")
+        self.alBasicAwareness = session.service("ALBasicAwareness")
+        self.alListeningMovement = session.service("ALListeningMovement")
+        self.alSpeakingMovementProxy = session.service("ALSpeakingMovement")
+        self.alMotionProxy = session.service("ALMotion")
+        self.alPeoplePerception = session.service("ALPeoplePerception")
+        self.alBatteryProxy = session.service("ALBattery")
+        self.alBodyTemperatureProxy = session.service("ALBodyTemperature")
+        self.alUserSession = session.service("ALUserSession")
+        self.alNavigationProxy = session.service("ALNavigation")
+        self.alLocalizationProxy = session.service("ALLocalization")
+        self.alSensorsProxy = session.service("ALSensors")
+        self.alLedsProxy = session.service("ALLeds")
+        self.alTabletService = session.service("ALTabletService")
+        self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
+        self.alAudioDevice = session.service("ALAudioDevice")
+        self.alAudioPlayer = session.service("ALAudioPlayer")
+        self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
+        self.alSpeechRecognition = session.service("ALSpeechRecognition")
+        self.alDialogProxy = session.service("ALDialog")
+        self.emotionStateRobot = Emotion()
+
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -77,7 +109,8 @@ class Robot:
             "SAY": [self.say, True, "act", True],
             "STOPALL": [self.stop_all, True, "act", False],
             "SETSAYVOLUMN": [self.set_say_volume, True, "act", False],
-            "SAYWITHMOVEMENT": [self.say_with_movement, True, "act", True],  # -------------------------Callback realizado
+            "SAYWITHMOVEMENT": [self.say_with_movement, True, "act", True],
+            # -------------------------Callback realizado
             "SETSYSTEMVOLUME": [self.set_system_volume, True, "act", False],
             "PLAYSOUND": [self.play_sound, True, "act", True],
             "PAUSESOUND": [self.pause_sound, True, "act", False],
@@ -93,6 +126,159 @@ class Robot:
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
 
+        # Declare the modules --------------------------------------------------------------------------------
+
+        try:
+
+            self.sensorsModule = PepperModule.pepperModule("sensorsModule")
+            # Raised when an animated speech is done.
+            self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule", "endOfAnimatedSpeech")
+            # Raised when the person tracked can no longer be found for some time.
+            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanLost", "sensorsModule",
+                                     "humanLost")  # DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
+
+            # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
+            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked", "sensorsModule", "humanTracked")
+
+            # Raised when a stimulus is detected.
+            # types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
+            self.alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected", "sensorsModule", "stimulusDetected")
+
+            # Raised when the battery level is low and will soon need charging.
+            self.alProxy.subscribeToEvent("ALBattery/BatteryLow", "sensorsModule",
+                                     "batteryLow")  # DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
+
+            # Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
+            self.alProxy.subscribeToEvent("ALLocalization/GoToFailed", "sensorsModule", "goToFailed")  # NO MUESTRA NADA -
+
+            # Raised when the robot has successfully reached its destination.
+            self.alProxy.subscribeToEvent("ALLocalization/GoToSuccess", "sensorsModule", "goToSuccess")
+
+            # Raised when the robot gets lost while trying to go to its destination.
+            self.alProxy.subscribeToEvent("ALLocalization/GoToLost", "sensorsModule", "goToLost")
+
+            # Raised when the localization is successful.
+            self.alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess", "sensorsModule", "localizeSuccess")
+
+            # Raised when the localization fails and the robot is lost.
+            self.alProxy.subscribeToEvent("ALLocalization/LocalizeLost", "sensorsModule", "localizeLost")
+
+            # Raised when the orientation of the robot has NOT been successfully retrieved.
+            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost", "sensorsModule", "localizeDirectionLost")
+
+            # Raised when the orientation of the robot has been successfully retrieved.
+            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess", "sensorsModule",
+                                     "localizeDirectionSuccess")
+
+            # Raised when a chain velocity is clipped because an obstacle is too close.
+            self.alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped", "sensorsModule", "chainVelocityClipped")
+
+            # Raised when a move command fails.
+            self.alProxy.subscribeToEvent("ALMotion/MoveFailed", "sensorsModule", "moveFailed")
+
+            # Raised when the awake status of the robot changes.
+            self.alProxy.subscribeToEvent("robotIsWakeUp", "sensorsModule", "robotIsWakeUp")
+
+            # Raised at ALMotionProxy::wakeUp finish.
+            self.alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished", "sensorsModule", "wakeUpFinished")
+            # Raised at ALMotionProxy::rest finish.
+            self.alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished", "sensorsModule", "restFinished")
+
+            # Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
+            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged", "sensorsModule",
+                                     "disabledDevicesChanged")
+
+            # Raised when features (Move, Stiffness...) availability changed.
+            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged", "sensorsModule",
+                                     "disabledFeaturesChanged")
+
+            # Raised when Pepper is correctly docked onto the charging station.
+            self.alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation", "sensorsModule",
+                                     "connectedToChargingStation")
+
+            # Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
+            self.alProxy.subscribeToEvent("ALRecharge/MoveFailed", "sensorsModule", "moveFailedRecharging")
+
+            # Raised when Pepper failed to leave his charging station due to an obstacle in the way.
+            self.alProxy.subscribeToEvent("ALRecharge/LeaveFailed", "sensorsModule", "leaveFailed")
+
+            # Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
+            self.alProxy.subscribeToEvent("WordRecognized", "sensorsModule", "wordRecognized")
+
+            # Raised when the automatic speech recognition engine has detected a voice activity.
+            self.alProxy.subscribeToEvent("SpeechDetected", "sensorsModule", "speechDetected")
+
+            # Raised when an error occurs.
+            self.alProxy.subscribeToEvent("ALTabletService/error", "sensorsModule", "tabletError")
+
+            # Raised when message occurs.
+            self.alProxy.subscribeToEvent("ALTabletService/message", "sensorsModule", "tabletMessage")
+
+            # Raised when text input occurs.
+            self.alProxy.subscribeToEvent("ALTabletService/onInputText", "sensorsModule", "onInputText")
+
+            # Raised when a valid tactile gesture has been detected
+            self.alProxy.subscribeToEvent("ALTactileGesture/Gesture", "sensorsModule", "gesture")
+
+            # Raised when the current sentence synthesis is done.
+            self.alProxy.subscribeToEvent("ALTextToSpeech/TextDone", "sensorsModule", "speechTextDone")
+
+            # Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
+            self.alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted", "sensorsModule", "speechTextInterrupted")
+            # Raised when an utterance has been analyzed.
+            self.alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized", "sensorsModule",
+                                     "voiceEmotionRecognized")
+            # Raised whenever an activity completes its execution and exits.
+            self.alProxy.subscribeToEvent("AutonomousLife/CompletedActivity", "sensorsModule", "autonomousCompletedActivity")
+
+            # Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
+
+            # Raised when the robot touch status changed.
+            self.alProxy.subscribeToEvent("TouchChanged", "sensorsModule", "pythondatachanged")  ###########################
+
+            # Raised when at least one device (joint, actuator, sensor) has a high temperature.
+            self.alProxy.subscribeToEvent("HotDeviceDetected", "sensorsModule", "hotDeviceDetected")
+            # Raised each time the robot catches a human input. Contains the last human input.
+            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "dialogLastInput")
+            # Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
+            self.alProxy.subscribeToEvent("Dialog/IsStarted", "sensorsModule", "dialogIsStarted")
+            # Currently processed human input.
+            self.alProxy.subscribeToEvent("Dialog/CurrentString", "sensorsModule", "dialogCurrentString")
+            # Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
+            self.alProxy.subscribeToEvent("EngagementZones/PersonMovedAway", "sensorsModule", "personMovedAway")
+            # Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
+            self.alProxy.subscribeToEvent("EngagementZones/PersonApproached", "sensorsModule", "personApproached")
+            # Raised when a person has a smile value above the current threshold (default = 0.7).
+            self.alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling", "sensorsModule", "personSmiling")
+            # #Raised when one or several faces are currently being detected.
+            self.alProxy.subscribeToEvent("FaceDetected", "sensorsModule", "faceDetected")
+            # Raised each time the list of people looking at the robot changes.
+            self.alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot", "sensorsModule", "peopleLookingAtRobot")
+            # Raised when someone turns his head away from the robot.
+            self.alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot", "sensorsModule",
+                                     "personStopsLookingAtRobot")
+            # The distance in meters to the tracked human. -1.0 if no one is tracked.
+            self.alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman", "sensorsModule", "distanceOfTrackedHuman")
+            # Raised when an obstacle is detected in the close area.
+            self.alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected", "sensorsModule",
+                                     "obstacleDetected")
+            # Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
+            self.alProxy.subscribeToEvent("PeoplePerception/PeopleDetected", "sensorsModule", "peopleDetected")
+            # Raised when a new preference is added to the system.
+            self.alProxy.subscribeToEvent("preferenceAdded", "sensorsModule", "preferenceAdded")
+            # Raised when the value of a preference has been updated.
+            self.alProxy.subscribeToEvent("preferenceChanged", "sensorsModule", "preferenceChanged")
+            # Raised when something just waved at the robot.
+            self.alProxy.subscribeToEvent("WavingDetection/Waving", "sensorsModule", "wavingDetection")
+            # Raised when someone just waved at the robot.
+            self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
+            #
+        except Exception, e:
+            print "Main Error"
+            print e
+            self.alBroker.shutdown()
+            exit(1)
+
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
 
@@ -105,7 +291,7 @@ class Robot:
     def mustBeResponse(self, fun):
         return self.__modules.get(fun)[3]
 
-    def run_animation(self,params):
+    def run_animation(self, params):
         # Get the function
         animation_name = params.get("TAGSDANCE")
         # Get the params of the function
@@ -115,19 +301,19 @@ class Robot:
 
     def getEmotionalReaction(self):
         # Returns:	The detected reaction.
-        return alMood.getEmotionalReaction()
+        return self.alMood.getEmotionalReaction()
 
     def getAttention(self):
         # "unengaged": attentionLevel < 0.6
         # "semiEngaged" : 0.6 <= attentionLevel < 0.9
         # "fullyEngaged": attentionLevel >= 0.9
-        return alMood.attention()
+        return self.alMood.attention()
 
     def play_animation(self, animation_names, animation_times, animation_keys):
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
+            self.alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
         except BaseException, err:
             print err
 
@@ -272,110 +458,108 @@ class Robot:
 
     # Prueba!!!!!!!!!
 
-
-
     def go_to_posture(self, params):
         posture = params.get("postura")
         speed = params("velocidad")
-        alRobotPosture.goToPosture(posture, speed)
+        self.alRobotPosture.goToPosture(posture, speed)
 
     # Learns a new face and adds it in the database under the specified name.
     def learn_face(self, params):
         person_name = params.get("DETECTPWA")
         # Returns: true if the operation succeeded
-        return alFaceDetection.learnFace(person_name)
+        return self.alFaceDetection.learnFace(person_name)
 
     # Gets a list containing the name of each learned face. The size of this list is always
     # equal to the number of faces in the data base.
     def get_face_list(self):
-        return alFaceDetection.getLearnedFacesList()
+        return self.alFaceDetection.getLearnedFacesList()
 
     # Enables or disables the autonomous blinking.
     def activate_blinking(self, params):
         enabled = params.get("ACTIVATE")
-        alAutonomousBlinking.setEnabled(enabled)
+        self.alAutonomousBlinking.setEnabled(enabled)
 
     # Enables or disables the background movements.
     def activate_life_signals(self, params):
         enabled = params.get("ACTIVATELIFESIGNALS")
-        alBackgroundMovement.setEnabled(enabled)
+        self.alBackgroundMovement.setEnabled(enabled)
 
     # Enables or disables basic awareness.
     def activate_life_signals_awareness(self, params):
         enabled = params.get("ACTIVATELIFESIGNALSINT")
-        alBasicAwareness.setEnabled(enabled)
+        self.alBasicAwareness.setEnabled(enabled)
 
     # Sets the engagement mode.
     # https://developer.softbankrobotics.com/pepper-naoqi-25/naoqi-developer-guide/naoqi-apis/naoqi-interaction-engines/albasicawareness#albasicawareness-engagement-modes
     def set_engagement_type(self, params):
         modeName = params.get("DEFENGAGEMENTTYPE")
-        alBasicAwareness.setEngagementMode(modeName)
+        self.alBasicAwareness.setEngagementMode(modeName)
 
     # Enables or disables the listening movements.
     def activate_hearing_movement(self, params):
         enabled = params.get("ACTIVATEACTIVEHEARING")
-        alListeningMovement.setEnabled(enabled)
+        self.alListeningMovement.setEnabled(enabled)
 
     # Enables or disables the speaking movements.
     def activate_speak_movements(self, params):
         enabled = params.get("ACTIVATESPEAKMOVEMENTS")
-        alSpeakingMovementProxy.setEnabled(enabled)
+        self.alSpeakingMovementProxy.setEnabled(enabled)
 
     # Sets the current speaking movement mode.  Random - Contextual
     def define_conversation_mode(self, mode):
-        alSpeakingMovementProxy.setMode(mode)
+        self.alSpeakingMovementProxy.setMode(mode)
 
     # Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner. If not allowed, an exception is thrown.
     def activate_push_reflexes(self, params):
         enabled = params.get("ACTIVATEPUSHREFLEXES")
-        alMotionProxy.setPushRecoveryEnabled(enabled)
+        self.alMotionProxy.setPushRecoveryEnabled(enabled)
 
     # Starts or stops breathing animation on a chain.
     def activate_breath_movement(self, params):
         extremity_to_enabled = "Body"
         enabled = params.get("ACTIVATEBREATHMOV")
-        alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
+        self.alMotionProxy.setBreathEnabled(extremity_to_enabled, enabled)
 
     # Enables or disables the movement detection to detect people. This can make the overall process slower if enabled
     def activate_movement_detection(self, params):
         enabled = params.get("ACTIVATEMOVDETECTION")
-        alPeoplePerception.setMovementDetectionEnabled(enabled)
+        self.alPeoplePerception.setMovementDetectionEnabled(enabled)
 
     # Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
     def activate_face_detection(self, params):
         enabled = params.get("ACTIVATELIFESIGNALSINT")
-        alFaceDetection.setRecognitionEnabled(enabled)
+        self.alFaceDetection.setRecognitionEnabled(enabled)
 
     # Enable/Disable Anti-collision protection of the arms of the robot.
     def activate_colission_detection(self, params):
         chainName = "Arms"
         enabled = params.get("ACTIVATECOLISSIONDETECT")
-        alMotionProxy.setCollisionProtectionEnabled(chainName, enabled)
+        self.alMotionProxy.setCollisionProtectionEnabled(chainName, enabled)
 
     # Enables or disables power monitoring.
     def activate_monitoring_charge_service(self, params):
         enabled = params.get("ACTIVATEMONITORINGCHARGESERV")
-        alBatteryProxy.enablePowerMonitoring(enabled)
+        self.alBatteryProxy.enablePowerMonitoring(enabled)
 
     # Get battery charge.
     def get_battery(self):
-        return alBatteryProxy.getBatteryCharge()
+        return self.alBatteryProxy.getBatteryCharge()
 
     # Return the actual state of the temperature diagnosis. Only the highest level of failure is returned.
     def get_temperature(self):
-        return alBodyTemperatureProxy.getTemperatureDiagnosis()
+        return self.alBodyTemperatureProxy.getTemperatureDiagnosis()
 
     # Gets the emotional state of the current focused user through a PersonState struct.
     def get_emotion_state(self):
-        return alMood.currentPersonState()
+        return self.alMood.currentPersonState()
 
     #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
 
     # Se verifica el login, es decir, se revisa que alguno de los usuarios con sesion activa coincida con
     # el que esta interactuando con el robot
     def login(self):
-        for i in alUserSession.getOpenUserSessions():
-            if i == alUserSession.getFocusedUser():
+        for i in self.alUserSession.getOpenUserSessions():
+            if i == self.alUserSession.getFocusedUser():
                 return True
 
         return False
@@ -384,229 +568,229 @@ class Robot:
     def search_free_zone(self, params):
         radius = params.get("RADIO")
         displacement = params.get("DISTANCIAMAX")
-        return alNavigationProxy.findFreeZone(radius, displacement)
+        return self.alNavigationProxy.findFreeZone(radius, displacement)
 
     # Looks for a free circular zone of a specified radius not farer than a specified displacement
     def get_free_zone(self, radius, displacement):
-        return alNavigationProxy.getFreeZone(radius, displacement)
+        return self.alNavigationProxy.getFreeZone(radius, displacement)
 
     # Gets the coordinates x, y, theta of the pose2D of the robot
     def get_robot_position(self, params):
         enabled = params.get("GETROBOTPOSITION")
-        return alLocalizationProxy.getRobotPosition(enabled)
+        return self.alLocalizationProxy.getRobotPosition(enabled)
 
     # Makes the robot move at the given velocity, expressed in FRAME_ROBOT
     # Z is rotation
     def move(self, x, y, z):
-        alMotion.move(x, y, z)
+        self.alMotion.move(x, y, z)
 
     # Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
     def move_forward(self, x, y, speed):
-        alMotion.moveTo(x, y, speed)
+        self.alMotion.moveTo(x, y, speed)
 
     # Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
     def move_to(self, params):
         x = params.get("MOVETOX")
         y = params.get("MOVETOY")
-        alNavigationProxy.navigateTo(x, y)
+        self.alNavigationProxy.navigateTo(x, y)
 
     # Go to the given position trying to perform a visual close loop with the image contained in current panorama at theta.
     def move_to_position(self, position):
-        alLocalizationProxy.goToPosition(position)
+        self.alLocalizationProxy.goToPosition(position)
 
     # The robot wakes up
     def wake_up(self):
-        alMotionProxy.wakeUp()
+        self.alMotionProxy.wakeUp()
 
     # The robot rests: goes to a relaxed and safe position and sets Motor off.
     def suspend(self):
-        alMotionProxy.rest()
+        self.alMotionProxy.rest()
 
     # Updates the period if relevant.
     def set_refresh_time_sensors(self, sensor, time):
-        alSensorsProxy.updatePeriod(sensor, time)
+        self.alSensorsProxy.updatePeriod(sensor, time)
 
     # Launch a green/yellow/red rasta animation on all body.
     def activate_rasta(self, duration):
-        alLedsProxy.rasta(duration)
+        self.alLedsProxy.rasta(duration)
 
     # Launch a random animation in eyes
     def random_eyes(self, duration):
-        alLedsProxy.randomEyes(duration)
+        self.alLedsProxy.randomEyes(duration)
 
     # Sets the intensity of a LED or Group of LEDs.
     def set_leds_intensity(self, sensor, intensity):
-        alLedsProxy.setIntensity(sensor, intensity / 100)
+        self.alLedsProxy.setIntensity(sensor, intensity / 100)
 
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        alLedsProxy.fadeRGB(sensor, red_color, green_color, blue_color, duration)
+        self.alLedsProxy.fadeRGB(sensor, red_color, green_color, blue_color, duration)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
-        return alMotion.setSmartStiffnessEnabled(params)
+        return self.alMotion.setSmartStiffnessEnabled(params)
 
     def change_emotion_expression(self, params):
-        emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
-        emotionStateRobot.setLedR(params.get("R"))
-        emotionStateRobot.setLedG(params.get("G"))
-        emotionStateRobot.setLedB(params.get("B"))
-        emotionStateRobot.setLedIntensity(params.get("ledIntens"))
-        emotionStateRobot.setFactorVelocity(params.get("velocidad"))
-        emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
-        self.change_led_color("AllLeds", emotionStateRobot.getLedR(), emotionStateRobot.getLedG(),
-                         emotionStateRobot.getLedB(),
-                         15.0)
-        self.set_leds_intensity("AllLeds", emotionStateRobot.getLedIntensity())
+        self.emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
+        self.emotionStateRobot.setLedR(params.get("R"))
+        self.emotionStateRobot.setLedG(params.get("G"))
+        self.emotionStateRobot.setLedB(params.get("B"))
+        self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
+        self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
+        self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
+        self.change_led_color("AllLeds", self.emotionStateRobot.getLedR(), self.emotionStateRobot.getLedG(),
+                              self.emotionStateRobot.getLedB(),
+                              15.0)
+        self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
     # Turn on/off the tablet screen.
     def tablet_on(self):
-        alTabletService.turnScreenOn(True)
+        self.alTabletService.turnScreenOn(True)
 
     # Wake the tablet (from standby mode).
     def wake_tablet(self):
-        alTabletService.wakeUp()
+        self.alTabletService.wakeUp()
 
     # Put the tablet in sleep mode (standby mode).
     def suspend_tablet(self):
-        alTabletService.goToSleep()
+        self.alTabletService.goToSleep()
 
     # Turn on/off the tablet screen.
     def tablet_off(self):
-        alTabletService.turnScreenOn(False)
+        self.alTabletService.turnScreenOn(False)
 
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
-        alTabletService.playVideo(params.get("SHOWVIDEO"))
+        self.alTabletService.playVideo(params.get("SHOWVIDEO"))
 
     # Close the video player.
     def quit_video(self):
         if activities_running.has_key("SHOWVIDEO"):
             activities_running.pop("SHOWVIDEO")
-        alTabletService.stopVideo()
+        self.alTabletService.stopVideo()
 
     # Pause the video playing but do not close the video player.
     def pause_video(self):
-        alTabletService.pauseVideo()
+        self.alTabletService.pauseVideo()
 
     # Resume the video paused by ALTabletService::pauseVideo .
     def resume_video(self):
-        alTabletService.resumeVideo()
+        self.alTabletService.resumeVideo()
 
     # Load the image to show to de user
     def preload_image(self, url):
-        alTabletService.preLoadImage(url)
+        self.alTabletService.preLoadImage(url)
 
     # Shows the image in the tablet for the user
     def show_image(self, params):
-        alTabletService.showImage(params.get(""))
+        self.alTabletService.showImage(params.get(""))
 
     # Hide image currently displayed.
     def hide_image(self):
         if activities_running.has_key("SHOWIMG"):
             activities_running.pop("SHOWIMG")
-        alTabletService.hideImage()
+        self.alTabletService.hideImage()
 
     # Set tablet brightness.
     def set_tablet_bright(self, params):
         brightness = params.get("SETTABLETBRIGHT")
-        alTabletService.setBrightness(brightness)
+        self.alTabletService.setBrightness(brightness)
 
     # Configure the media volume of the tablet.
     def set_tablet_volume(self, volume):
-        alTabletService.setVolume(volume)
+        self.alTabletService.setVolume(volume)
 
     # Says the specified string of characters.
     def say(self, params, speed=None, pitch=None):
-        if speed == None:
-            speed = emotionStateRobot.getVelocitySpeech()
-        if pitch == None:
-            pitch = emotionStateRobot.getToneSpeech()
-        alTexToSpeech.setParameter("speed", speed)
-        alTexToSpeech.setParameter("pitchShift", pitch)
-        alTexToSpeech.say(params.get("SAY"))
+        if speed is None:
+            speed = self.emotionStateRobot.getVelocitySpeech()
+        if pitch is None:
+            pitch = self.emotionStateRobot.getToneSpeech()
+        self.alTexToSpeech.setParameter("speed", speed)
+        self.alTexToSpeech.setParameter("pitchShift", pitch)
+        self.alTexToSpeech.say(params.get("SAY"))
 
     #   This method stops the current and all the pending tasks immediately.
     def stop_all(self, params):
-        alTexToSpeech.stopAll(params.get("STOPALL"))
+        self.alTexToSpeech.stopAll(params.get("STOPALL"))
 
     # Sets the current gain applied to the signal synthesized by the text to speech engine.
     def set_say_volume(self, params):
         volume = params.get("SETSAYVOLUMEN") / 100
-        alTexToSpeech.setVolume(volume)
+        self.alTexToSpeech.setVolume(volume)
 
     # Say the annotated text given in parameter and animate it with animations inserted in the text.
     def say_with_movement(self, text):
-        alAnimatedSpeech.say(text)
+        self.alAnimatedSpeech.say(text)
 
     # Sets the overall output volume of the system.
     def set_system_volume(self, volume):
-        alAudioDevice.setOutputVolume(volume)
+        self.alAudioDevice.setOutputVolume(volume)
 
     # Starts the playback of the specified file.
     def play_sound(self, sound):
-        alAudioPlayer.playFile(sound)
+        self.alAudioPlayer.playFile(sound)
 
     # Pause the playback of the specified task.
     def pause_sound(self, idSound):
         if activities_running.has_key("PLAYSOUND"):
             activities_running.pop("PLAYSOUND")
-        alAudioPlayer.pause(idSound)
+        self.alAudioPlayer.pause(idSound)
 
     # Subscribes to ALVoiceEmotionAnalysis .
     def activate_voice_emotion_analysis(self, params):
         subscriberName = params.get("ACTIVATEVOICEEMOANAL")
-        alVoiceEmotionAnalysis.subscribe(subscriberName)
+        self.alVoiceEmotionAnalysis.subscribe(subscriberName)
 
     # Unsubscribes to ALVoiceEmotionAnalysis .
     def desactivate_voice_emotion_analysis(self):
-        alVoiceEmotionAnalysis.unsubscribe(sensorsModule)
+        self.alVoiceEmotionAnalysis.unsubscribe(self.sensorsModule)
 
     # Subscribes to ALSpeechRecognition
     def activate_voice_recognition(self, params):
         subscriber = params.get("ACTVOICERECOG")
-        alSpeechRecognition.subscribe(subscriber)
+        self.alSpeechRecognition.subscribe(subscriber)
 
     # Unsubscribes to ALSpeechRecognition
     def desactivate_voice_recognition(self):
-        alSpeechRecognition.unsubscribe(sensorsModule)
+        self.alSpeechRecognition.unsubscribe(self.sensorsModule)
 
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def activate_conversational_topic(self, topicName):
-        alDialogProxy.activateTopic(topicName)
+        self.alDialogProxy.activateTopic(topicName)
 
     # Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine
     def load_conversational_topic(self, topicName):
-        #define path
+        # define path
         path = "nope"
-        alDialogProxy.loadTopic(path)
+        self.alDialogProxy.loadTopic(path)
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, topicName):
-        alDialogProxy.unloadTopic(topicName)
+        self.alDialogProxy.unloadTopic(topicName)
 
     # Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def deactivate_conversational_topic(self, topicName):
-        alDialogProxy.deactivateTopic(topicName)
+        self.alDialogProxy.deactivateTopic(topicName)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
-        alDialogProxy.say(topic, tag)
+        self.alDialogProxy.say(topic, tag)
 
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
     def set_topic_focus(self, topicName):
-        alDialogProxy.setFocus(topicName)
+        self.alDialogProxy.setFocus(topicName)
 
     def hablar(self, text_to_speech, speed=None, pitch=None):
         if speed == None:
-            speed = emotionStateRobot.getVelocitySpeech()
+            speed = self.emotionStateRobot.getVelocitySpeech()
         if pitch == None:
-            pitch = emotionStateRobot.getToneSpeech()
+            pitch = self.emotionStateRobot.getToneSpeech()
 
-        alTexToSpeech.setParameter("speed", speed)
-        alTexToSpeech.setParameter("pitchShift", pitch)
-        alTexToSpeech.say(text_to_speech)
+        self.alTexToSpeech.setParameter("speed", speed)
+        self.alTexToSpeech.setParameter("pitchShift", pitch)
+        self.alTexToSpeech.say(text_to_speech)
 
     def registrar_cuidador(params):
         pass

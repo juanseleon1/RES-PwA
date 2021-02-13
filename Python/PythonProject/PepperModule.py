@@ -1,16 +1,10 @@
 from naoqi import *
-import socket
-import threading
-import json
-import qi
-import sys
-import argparse
-import datetime
 
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
-from main import activities_running, send
+from Utils import activities_running, send
 
-"""--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
+"""--------------------------------------------------------------------------MODULE
+--------------------------------------------------------------------------------------------- """
 
 
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
@@ -18,9 +12,9 @@ from main import activities_running, send
 class pepperModule(ALModule):
     """python class myModule test auto documentation: comment needed to create a new python module"""
     """python class myModule test auto documentation: comment needed to create a new python module"""
-    def  __init__(self,name):
-        ALModule.__init__(self,name)
 
+    def __init__(self, name):
+        ALModule.__init__(self, name)
 
     def pythondatachanged(self, key, value, message):
         """callback when data change"""
@@ -349,4 +343,3 @@ class pepperModule(ALModule):
         # The value is the person ID
         json_params["personWaving"] = value
         send(-1, "int", json_params)
-
