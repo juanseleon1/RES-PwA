@@ -1,4 +1,10 @@
 from naoqi import *
+
+# ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
+from Utils import activities_running, send
+
+"""--------------------------------------------------------------------------MODULE
+--------------------------------------------------------------------------------------------- """
 import socket
 import json
 import datetime
@@ -67,9 +73,9 @@ def json_creator(id_response, responseType, params):
 class pepperModule(ALModule):
     """python class myModule test auto documentation: comment needed to create a new python module"""
     """python class myModule test auto documentation: comment needed to create a new python module"""
-    def  __init__(self,name):
-        ALModule.__init__(self,name)
 
+    def __init__(self, name):
+        ALModule.__init__(self, name)
 
     def pythondatachanged(self, key, value, message):
         """callback when data change"""
@@ -398,4 +404,3 @@ class pepperModule(ALModule):
         # The value is the person ID
         json_params["personWaving"] = value
         send(-1, "int", json_params)
-
