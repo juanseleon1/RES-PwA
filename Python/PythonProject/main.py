@@ -8,7 +8,7 @@ import argparse
 import datetime
 from Emotion import Emotion
 from Message import messageManager
-import PepperModule
+from PepperModule import pepperModule
 from Robot import Robot
 
 #--------------------------------------------------Functions-----------------------------------------------------------------------
@@ -197,9 +197,10 @@ alDialogProxy = session.service("ALDialog")
 # ----------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------
 # Declare the modules --------------------------------------------------------------------------------
+
 try:
 
-    sensorsModule = PepperModule("sensorsModule")
+    sensorsModule = pepperModule("sensorsModule")
     # Raised when an animated speech is done.
     alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule", "endOfAnimatedSpeech")
     # Raised when the person tracked can no longer be found for some time.
@@ -340,6 +341,7 @@ except Exception, e:
     print e
     alBroker.shutdown()
     exit(1)
+
 # ----------------------------------------------------------------------------------------------------
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
