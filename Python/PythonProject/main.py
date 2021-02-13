@@ -10,7 +10,6 @@ from Utils import activities_running, send
 
 
 # --------------------------------------------------Functions-----------------------------------------------------------------------
-
 def timer_activities():
     for key, value in activities_running.items():
         # print (key, value)
@@ -127,14 +126,13 @@ server.bind(ADDR)
 print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
-
 """----------------------------------------------TIMER---------------------------------------------------------"""
 # define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
 t.start()
 
 """ Robot class declaration"""
-robot = Robot(session, HOST, )
+robot = Robot(session, HOST)
 
 while 1:
     conn, addr = server.accept()

@@ -5,8 +5,69 @@ from Utils import activities_running, send
 
 """--------------------------------------------------------------------------MODULE
 --------------------------------------------------------------------------------------------- """
+import socket
+import json
+import datetime
 
+# ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
+from Emotion import Emotion
+from Robot import Robot
 
+""" Robot class declaration"""
+robot = Robot()
+
+''' Emotion class declaration '''
+emotionStateRobot = Emotion()
+FORMAT = 'utf-8'
+"""--------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------"""
+# activities_running is a dictionary which save the activities running on the robot
+activities_running = {}
+
+# responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses sended to BESA
+responsesXTime = {}
+
+def checkTimeMessageSended(params):
+    isCorrectToSend = True
+    if (responsesXTime.get(params).hour - datetime.datetime.now().hour) == 0:
+
+        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == 0:
+
+            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
+                isCorrectToSend = False
+
+        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == -1:
+
+            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
+                isCorrectToSend = False
+
+    return isCorrectToSend
+
+def send(id_response, responseType, params):
+    HOST_LOCAL = '127.0.0.1'
+    PORT = 7897
+    should_send_message = True
+    if responsesXTime.has_key(params.keys()):
+        should_send_message = checkTimeMessageSended(params.keys())
+    else:
+        responsesXTime[params.keys()] = {datetime.datetime.now()}
+
+    if should_send_message:
+        ADDR = (HOST_LOCAL, PORT)
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client.connect(ADDR)
+        msg_to_send = json.dumps(json_creator(id_response, responseType, params))
+        print("send ", msg_to_send)
+
+        client.send(msg_to_send + '\r\n')
+        client.close()
+
+def json_creator(id_response, responseType, params):
+    json_string = {
+        "id": id_response,
+        "respType": responseType,
+        "params": params
+    }
+    return json.loads(json.dumps(json_string))
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 class pepperModule(ALModule):
