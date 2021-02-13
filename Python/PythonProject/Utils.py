@@ -29,7 +29,7 @@ def send(id_response, responseType, params):
     if key in responsesXTime:
         should_send_message = checkTimeMessageSended(key)
     else:
-        responsesXTime[key] = {datetime.now()}
+        responsesXTime[key] = datetime.now()
 
     if should_send_message:
         ADDR = (HOST_LOCAL, PORT)
