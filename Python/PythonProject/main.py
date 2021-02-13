@@ -1,53 +1,11 @@
-from naoqi import *
-import socket
-import threading
-import json
-import qi
-import sys
 import argparse
-import datetime
+
 from Emotion import Emotion
 from Message import messageManager
-from PepperModule import pepperModule
-from Robot import Robot
+from PepperModule import *
+import threading
 
 #--------------------------------------------------Functions-----------------------------------------------------------------------
-def send(id_response, responseType, params):
-    HOST_LOCAL = '127.0.0.1'
-    PORT = 7897
-    FORMAT = 'utf-8'
-    should_send_message = True
-    if responsesXTime.has_key(params.keys()):
-        should_send_message = checkTimeMessageSended(params.keys())
-    else:
-        responsesXTime[params.keys()] = {datetime.datetime.now()}
-
-    if should_send_message:
-        ADDR = (HOST_LOCAL, PORT)
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.connect(ADDR)
-        msg_to_send = json.dumps(json_creator(id_response, responseType, params))
-        print("send ", msg_to_send)
-
-        client.send(msg_to_send + '\r\n')
-        client.close()
-
-
-def checkTimeMessageSended(params):
-    isCorrectToSend = True
-    if (responsesXTime.get(params).hour - datetime.datetime.now().hour) == 0:
-
-        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == 0:
-
-            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
-                isCorrectToSend = False
-
-        if (responsesXTime.get(params).minute - datetime.datetime.now().minute) == -1:
-
-            if (datetime.datetime.now().second - responsesXTime.get(params).second) < 2:
-                isCorrectToSend = False
-
-    return isCorrectToSend
 
 def timer_activities():
     for key, value in activities_running.items():
@@ -354,22 +312,13 @@ print("Server starting...pop4444444444444444444444444444")
 server.listen(5)
 print("[STARTING] server is listening on", HOST_LOCAL)
 
-# activities_running is a dictionary which save the activities running on the robot
-activities_running = {}
 
-# responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses sended to BESA
-responsesXTime = {}
 
 """----------------------------------------------TIMER---------------------------------------------------------"""
 # define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
 t.start()
 
-""" Robot class declaration"""
-robot = Robot()
-
-''' Emotion class declaration '''
-emotionStateRobot = Emotion()
 
 while 1:
     conn, addr = server.accept()
