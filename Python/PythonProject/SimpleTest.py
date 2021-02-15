@@ -78,7 +78,9 @@ def main(session):
     'u: (como se encuentra?) Me encuentro muy bien, muchas gracias, que tal se encuentra usted?\n'
     'u: (_~saludos) Muy buenos dias! Espero que se encuentre muy bien. Que quiere hacer hoy?  .\n'
     'u: ({Hoy} {"Este dia"} Quiero escuchar musica) De acuerdo, que genero quisieras escuchar?\n'
-     'u: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos\n'
+    'u: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos\n'
+    'u: (Di la verdad) Leon tiene cabeza de kiwi\n'
+
 )
 
     topic_content_2 = ('topic: ~dummy_topic()\n'
