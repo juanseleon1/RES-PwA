@@ -609,6 +609,9 @@ class Robot:
     def subscribe_topic (self, topicName):
         alDialogProxy.subscribe(topicName)
 
+    def unsubscibe_topic (self, topicName):
+        alDialogProxy.unsubscribe(topicName)
+
     def hablar(self, text_to_speech, speed=None, pitch=None):
         if speed == None:
             speed = emotionStateRobot.getVelocitySpeech()

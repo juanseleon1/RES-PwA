@@ -24,9 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="766cfaa0-5bab-4646-9798-479f2ac2109b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonProject/ConversationTopics.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/ConversationTopics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonProject/PepperModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/PepperModule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonProject/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +160,7 @@
       <workItem from="1612829272408" duration="1677000" />
       <workItem from="1613055716424" duration="2803000" />
       <workItem from="1613397042950" duration="2391000" />
-      <workItem from="1613400825833" duration="7876000" />
+      <workItem from="1613400825833" duration="12302000" />
     </task>
     <servers />
   </component>
