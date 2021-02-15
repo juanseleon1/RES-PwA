@@ -9,7 +9,7 @@ import datetime
 from Emotion import Emotion
 from Message import messageManager
 from PepperModule import *
-from Robot import Robot
+from Robot import *
 
 #--------------------------------------------------Functions-----------------------------------------------------------------------
 def send(id_response, responseType, params):
@@ -137,7 +137,7 @@ def callFunction(jsonObj):
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 
 print("Server starting...pop")
-HOST = '10.195.22.24'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST_LOCAL)
 PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
