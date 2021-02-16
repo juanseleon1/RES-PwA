@@ -17,7 +17,7 @@ def timer_activities():
         # send the message to BESA
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
-    t = threading.Timer(10.0, timer_activities).start()
+    threading.Timer(10.0, timer_activities).start()
 
 
 def safe_str(obj):
@@ -28,6 +28,7 @@ def safe_str(obj):
 
 
 def handle_client():
+    print(" ID: ", threading.currentThread().getName())
     # while connected:
     msg_length = conn.recv(HEADER)
     msg_length = msg_length.decode(FORMAT, 'ignore')
@@ -39,7 +40,7 @@ def handle_client():
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
 
-    print(" msg:")
+    print(" msg: ", threading.currentThread().getName())
     # y = "{" + y
     print(json_string)
     # print(y)

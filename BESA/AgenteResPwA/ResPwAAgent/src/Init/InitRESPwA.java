@@ -74,7 +74,7 @@ public class InitRESPwA {
             RobotSPAgent SPA= RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI,EAA,SHA,SPA);
             HashMap<String, Object> hm = new HashMap<>();
-            hm.put("SAY", "Juan siempre tiene razon");
+            hm.put("SAY", "Que rico pais");
            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
             p.sendRequest(data);
             

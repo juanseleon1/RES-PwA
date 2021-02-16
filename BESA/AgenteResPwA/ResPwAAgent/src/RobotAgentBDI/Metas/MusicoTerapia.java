@@ -15,12 +15,8 @@ import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
-import Tareas.MusicoTerapia.ActivarLetra;
-import Tareas.MusicoTerapia.CambiarVelocidadMov;
 import Tareas.MusicoTerapia.InicializarBaile;
-import Tareas.MusicoTerapia.MostrarFotos;
 import Tareas.MusicoTerapia.ReproduccionCancion;
-import Tareas.MusicoTerapia.SeleccionarBaile;
 import Tareas.MusicoTerapia.SeleccionarCancion;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,20 +41,23 @@ public class MusicoTerapia extends GoalBDI{
         SeleccionarCancion sCancion = new SeleccionarCancion();
         
         List<String> resources = new ArrayList<>();
-        List<Task> tarea = new ArrayList<>();
+        List<Task> tarea;
         Plan rolePlan = new Plan();
-        
-        rolePlan.addTask(sCancion);
+//
         rolePlan.addTask(iBaile);
-        
-        tarea = new ArrayList<>();
-        tarea.add(sCancion);
-        tarea.add(iBaile);
-        rolePlan.addTask(rCancion,tarea);
-        
-        tarea = new ArrayList<>();
-        tarea.add(rCancion);
-        rolePlan.addTask(retro,tarea);
+        rolePlan.addTask(sCancion);
+
+//        rolePlan.addTask(sCancion);
+//        rolePlan.addTask(iBaile);
+//        
+//        tarea = new ArrayList<>();
+//        tarea.add(sCancion);
+//        tarea.add(iBaile);
+//        rolePlan.addTask(rCancion,tarea);
+//        
+//        tarea = new ArrayList<>();
+//        tarea.add(rCancion);
+//        rolePlan.addTask(retro,tarea);
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
         MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
@@ -86,7 +85,7 @@ public class MusicoTerapia extends GoalBDI{
                 return 1;
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override

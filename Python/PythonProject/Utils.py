@@ -24,7 +24,6 @@ def send(id_response, responseType, params):
     PORT = 7897
     FORMAT = 'utf-8'
     should_send_message = True
-    print(params.keys())
     key = params.keys().pop()
     if key in responsesXTime:
         should_send_message = checkTimeMessageSended(key)
@@ -41,19 +40,20 @@ def send(id_response, responseType, params):
         client.send(msg_to_send + '\r\n')
         client.close()
 
-
 def checkTimeMessageSended(params):
     isCorrectToSend = True
-    if (responsesXTime.get(params).hour - datetime.now().hour) == 0:
+    if (responsesXTime.get(params).hour - datetime.now().hour) < 1:
 
-        if (responsesXTime.get(params).minute - datetime.now().minute) == 0:
+        if (responsesXTime.get(params).minute - datetime.now().minute) < 1:
 
-            if (datetime.now().second - responsesXTime.get(params).second) < 2:
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
+                print("Change")
                 isCorrectToSend = False
 
-        if (responsesXTime.get(params).minute - datetime.now().minute) == -1:
+    """  if (responsesXTime.get(params).minute - datetime.now().minute) == -1:
 
-            if (datetime.now().second - responsesXTime.get(params).second) < 2:
-                isCorrectToSend = False
-
+                if (datetime.now().second - responsesXTime.get(params).second) < 2:
+                    isCorrectToSend = False
+            """
     return isCorrectToSend
+
