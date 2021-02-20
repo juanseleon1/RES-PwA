@@ -35,49 +35,51 @@ public class SuspenderRobot extends ResPwaTask{
         //buscar texto
         infoServicio.put("SAY", "textoDespedir");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
         infoServicio = new HashMap<>();
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
-            infoServicio.put("STOPANIMATION", null);
-            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, infoServicio);
-            requestService(srb);
-            infoServicio = new HashMap<>();
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            infoServicio.put("STOPALL", null);
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, infoServicio);
-            requestService(srb);
-            infoServicio = new HashMap<>();
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
-            infoServicio.put("STOPVIDEO", null);
-            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, infoServicio);
-            requestService(srb);
-            infoServicio = new HashMap<>();
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);
+            requestService(srb,blvs);
         }
         
-        infoServicio.put("SUSPEND", null);
-        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, infoServicio);
-        requestService(srb);
-        infoServicio = new HashMap<>();
-        infoServicio.put("SUSPENDTABLET", null);
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, infoServicio);
-        requestService(srb);
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb,blvs);
+        
+        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
+        requestService(srb,blvs);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Suspender Robot ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Suspender Robot ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            requestService(srb,blvs);
+        }        
     }
 
     @Override

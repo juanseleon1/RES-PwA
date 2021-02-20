@@ -1,0 +1,2 @@
+(robot, speak, whisper)|interaction/speakWhisper
+(robot, speak, normal)|interaction/speakNormal

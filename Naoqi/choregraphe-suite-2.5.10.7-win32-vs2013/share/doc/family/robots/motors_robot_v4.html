@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Motors - V4 &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Motors" href="motors_robot.html" />
+    <link rel="next" title="Motors - V3.3" href="motors_robot_v33.html" />
+    <link rel="prev" title="Motors" href="motors_robot.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="family-robots-motors_robot_v4">
+                
+  <div class="section" id="motors-v4">
+<span id="robot-motors-v4"></span><h1>Motors - V4<a class="headerlink" href="#motors-v4" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="motors_robot.html#robot-motors"><span>V5</span></a> | <strong>V4</strong> | <a class="reference internal" href="motors_robot_v33.html#robot-motors-v33"><span>V3.3</span></a> | <a class="reference internal" href="motors_robot_v32.html#robot-motors-v32"><span>V3.2</span></a></p>
+<p class="last"><a class="reference internal" href="../nao_h25/motors_h25.html#h25-motors"><span>H25 - Motors</span></a> | <a class="reference internal" href="../nao_h21/motors_h21.html#h21-motors"><span>H21 - Motors</span></a> | <a class="reference internal" href="../nao_t14/motors_t14.html#t14-motors"><span>T14 - Motors</span></a> | <a class="reference internal" href="../nao_t2/motors_t2.html#t2-motors"><span>T2 - Motors</span></a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="location">
+<h2>Location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/hardware_motortype_h25V5.png"><img alt="../../_images/hardware_motortype_h25V5.png" src="../../_images/hardware_motortype_h25V5.png" style="width: 313px; height: 416px;" /></a>
+</div>
+<div class="section" id="motors">
+<h3>Motors<a class="headerlink" href="#motors" title="Permalink to this headline">¶</a></h3>
+<p>There are 3 types of motor in NAO - V. 4.0:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="22%" />
+<col width="23%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">Motor type 1</th>
+<th class="head">Motor type 2</th>
+<th class="head">Motor type 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model</td>
+<td>22NT82213P</td>
+<td>17N88208E</td>
+<td>16GT83210E</td>
+</tr>
+<tr class="row-odd"><td>No load speed</td>
+<td>8 300 rpm ±10%</td>
+<td>8 400 rpm ±12%</td>
+<td>10 700 rpm ±10%</td>
+</tr>
+<tr class="row-even"><td>Stall torque</td>
+<td>68 mNm ±8%</td>
+<td>9.4 mNm ±8%</td>
+<td>14.3 mNm ±8%</td>
+</tr>
+<tr class="row-odd"><td>Nominal torque</td>
+<td>16.1 mNm</td>
+<td>4.9 mNm</td>
+<td>6.2 mNm</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="speed-reduction-ratio">
+<h3>Speed Reduction ratio<a class="headerlink" href="#speed-reduction-ratio" title="Permalink to this headline">¶</a></h3>
+<p>For each motor, there are several types of speed reduction ratio:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="28%" />
+<col width="26%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">Motor type 1</th>
+<th class="head">Motor type 2</th>
+<th class="head">Motor type 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type A</td>
+<td>201.3</td>
+<td>50.61</td>
+<td>150.27</td>
+</tr>
+<tr class="row-odd"><td>Type B</td>
+<td>130.85</td>
+<td>36.24</td>
+<td>173.22</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="head">
+<h4>Head<a class="headerlink" href="#head" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="28%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Joint</strong></td>
+<td><strong>Motor</strong></td>
+<td><strong>Reduction ratio</strong></td>
+</tr>
+<tr class="row-even"><td>HeadYaw</td>
+<td>Type 3</td>
+<td>Type A</td>
+</tr>
+<tr class="row-odd"><td>HeadPitch</td>
+<td>Type 3</td>
+<td>Type B</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="arms">
+<h4>Arms<a class="headerlink" href="#arms" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="28%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Joint</strong></td>
+<td><strong>Motor</strong></td>
+<td><strong>Reduction ratio</strong></td>
+</tr>
+<tr class="row-even"><td>ShoulderPitch</td>
+<td>Type 3</td>
+<td>Type A</td>
+</tr>
+<tr class="row-odd"><td>ShoulderRoll</td>
+<td>Type 3</td>
+<td>Type B</td>
+</tr>
+<tr class="row-even"><td>ElbowYaw</td>
+<td>Type 3</td>
+<td>Type A</td>
+</tr>
+<tr class="row-odd"><td>ElbowRoll</td>
+<td>Type 3</td>
+<td>Type B</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hands">
+<h4>Hands<a class="headerlink" href="#hands" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="30%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Joint</strong> / <strong>Actuator</strong></td>
+<td><strong>Motor</strong></td>
+<td><strong>Reduction ratio</strong></td>
+</tr>
+<tr class="row-even"><td>WristYaw</td>
+<td>Type 2</td>
+<td>Type A</td>
+</tr>
+<tr class="row-odd"><td>Hand</td>
+<td>Type 2</td>
+<td>Type B</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="legs">
+<h4>Legs<a class="headerlink" href="#legs" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="28%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Joint</strong></td>
+<td><strong>Motor</strong></td>
+<td><strong>Reduction ratio</strong></td>
+</tr>
+<tr class="row-even"><td>HipYawPitch</td>
+<td>Type 1</td>
+<td>Type A</td>
+</tr>
+<tr class="row-odd"><td>HipRoll</td>
+<td>Type 1</td>
+<td>Type A</td>
+</tr>
+<tr class="row-even"><td>HipPitch</td>
+<td>Type 1</td>
+<td>Type B</td>
+</tr>
+<tr class="row-odd"><td>KneePitch</td>
+<td>Type 1</td>
+<td>Type B</td>
+</tr>
+<tr class="row-even"><td>AnklePitch</td>
+<td>Type 1</td>
+<td>Type B</td>
+</tr>
+<tr class="row-odd"><td>AnkleRoll</td>
+<td>Type 1</td>
+<td>Type A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../nao/index.html"><strong>NAO</strong> - User Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><strong>NAO</strong> - Developer Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index_robots.html">Technical overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dimensions_robot.html">Construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="motherboard_robot.html">Motherboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="battery_robot.html">Battery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="connectivity_nao.html">Connectivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loudspeaker_robot.html">Loudspeakers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="microphone_robot.html">Microphones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="video_robot.html">Video camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="leds_robot.html">LEDs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fsr_robot.html">FSRs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inertial_robot.html">Inertial unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonar_robot.html">Sonars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mre_robot.html">Joint position sensors</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="motors_robot.html">Motors</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">Motors - V4</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="motors_robot_v33.html">Motors - V3.3</a></li>
+<li class="toctree-l5"><a class="reference internal" href="motors_robot_v32.html">Motors - V3.2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="contact-sensors_robot.html">Contact and tactile sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="laser.html">Laser head v.3.2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="languages_nao.html">Supported languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kinematics_nao.html">Kinematics data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html">Actuator &amp; Sensor list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_dcm/diagnosis_key_names.html">Diagnosis key list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../body_type.html">Versions and Body Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Motors - V4</a><ul>
+<li><a class="reference internal" href="#location">Location</a><ul>
+<li><a class="reference internal" href="#motors">Motors</a></li>
+<li><a class="reference internal" href="#speed-reduction-ratio">Speed Reduction ratio</a><ul>
+<li><a class="reference internal" href="#head">Head</a></li>
+<li><a class="reference internal" href="#arms">Arms</a></li>
+<li><a class="reference internal" href="#hands">Hands</a></li>
+<li><a class="reference internal" href="#legs">Legs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

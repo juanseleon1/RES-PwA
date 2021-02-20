@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Japanese Lexicon &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Dialog Lexicon" href="lexicon.html" />
+    <link rel="next" title="French Lexicon" href="lexicon_french.html" />
+    <link rel="prev" title="English Lexicon" href="lexicon_english.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-interaction-dialog-lexicon_japanese">
+                
+  <div class="section" id="japanese-lexicon">
+<span id="lexicon-japanese"></span><h1>Japanese Lexicon<a class="headerlink" href="#japanese-lexicon" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../index_interaction.html#naoqi-interaction"><span>NAOqi Interaction engines</span></a> - <a class="reference internal" href="lexicon.html#lexicon"><span>Dialog Lexicon</span></a></p>
+<p>Full content: <a class="reference internal" href="lexicon_english.html#lexicon-english"><span>English Lexicon</span></a> - Japanese Lexicon - <a class="reference internal" href="lexicon_french.html#lexicon-french"><span>French Lexicon</span></a></p>
+<hr class="docutils" />
+<p><a class="reference download internal" href="../../../_downloads/lexicon_jpj.top"><code class="xref download docutils literal"><span class="pre">lexicon_jpj.top</span></code></a></p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">topic</span>: ~lexicon()
+<span class="ow">language</span>: jpj
+
+<span class="ow">dynamic</span>:robotname
+<span class="ow">dynamic</span>:friendlyname
+<span class="ow">dynamic</span>:all_descriptions
+<span class="ow">dynamic</span>:all_languages
+<span class="ow">dynamic</span>:myrobotname
+
+<span class="ow">dynamic</span>:app-name
+<span class="ow">dynamic</span>:app-dance
+<span class="ow">dynamic</span>:app-game
+<span class="ow">dynamic</span>:app-story
+
+#==================================================================#
+##### Robot concepts #####
+<span class="ow">concept</span>:(ald_robots) [~robotname ~myrobotname ナオ ぺっぱー　ロメオ]
+#==================================================================#
+
+
+###skin:
+#s:(*)^replace(&quot;$user/name&quot;, &quot;$user/name  さん&quot;, 1)
+s:({*}ハスミ{*})^replace(ハスミ, 蓮實三,1)
+s:({*}シバタ{*})^replace(シバタ, 柴田三,1)
+s:({*}ユウホ{*})^replace(ユウホ, ゆうほ三,1)
+s:({*}フミコ{*})^replace(フミコ, 文子三,1)
+s:({*}マコト{*})^replace(マコト,誠さん,1)
+s:({*}レミー{*})^replace(レミー,玲実い三,1)
+s:({*}キョウヘイ{*})^replace(キョウヘイ,恭平さん,1)
+###jpj_global
+
+<span class="ow">concept</span>:(yes)[はい　もちろん うん お願い致します　お願いします 是非　お願い　すばらしい ありがたい　うむ　イエス　頼む　よろしく　いいね いいけど　構わない いいよ　いいですよ　いいですね　&quot;そう{しましょうか　しましょう だよ　だけど　ですけど　だぜ　ですよ　しよう　するか　ですね です　だね　ね　かもね　かも　よ}&quot;　おうよ　わかった　わかりました　オッケー　理解した　理解しました　なるほど　かもね　オーケー　おっけー　ok せやな いいんじゃない]
+
+<span class="ow">concept</span>:(no)[いやいいや　いやいい　嫌いい　いいえ ノー　違う　違います いいや &quot;いらない{です}&quot;　いらん　いりません　ううん　結構です　そうじゃない　そうやない　そうではない　そういうことではない　そういうことじゃない　そんなことない &quot;気が向かない[です　ね]&quot;　気が向きません　今はいい　今はいらない　全然　いや全然　まったく　理解できない　思わない　思いません]
+
+<span class="ow">concept</span>:(confirmation) [~yes]
+
+<span class="ow">concept</span>:(negation) [~no]
+
+<span class="ow">concept</span>:(no_interest)[つまんない　つまらない　興味ない　興味ありません　興味ゼロ　&quot;興味[まったく 全然]ない&quot;　どうでもいい　眼中にない　関心ない　関心ありません　無関心　関心がない]
+
+
+
+<span class="ow">concept</span>:(me) [ぼく　ボク　僕　私 俺　拙者 あたし　あたい　あちし　わし　わたくし　おら　おい わい　うち 己　おのれ　己れ　我　ワレ　ワイ　あちき 自分　しょうせい　わがはい　われこそ　ミー　おいら　おいどん　ぼくちん　わっし　おれさま　てまえ]
+
+<span class="ow">concept</span>:(you)[あなた　君　おまえ　おぬし　そなた　きみ　おたく　あんた　オタク　貴方　其方　そなた　お宅　御宅　おまえ　そちら　貴殿　オヌシ　おぬし　お主 ユー　なんじ　てめえ　おめえ　おまえさん　ぼうず　おにいさん　あんちゃん &quot;なお{君　様　ちゃん　殿　どの　どん}&quot;　&quot;ナオ{君　様　ちゃん　殿　どの　どん}&quot;]
+
+
+<span class="ow">concept</span>:(hesitation)[ええええ　あぁー　うーん うううん　そうだなぁ　そうですねぇ　なんだろう　んとねぇ　なにかなぁ んんんん　なんかなあ　ちょっとまって　考えさせて　考えさせてください　どうなんだろう　考えてます えーと　うーむ　どうだろうか　うんとね　&quot;そうですね{え}&quot;]
+
+<span class="ow">concept</span>:(please)[お願いします　お願い　お願い致します　頼みます お願いしたいです　お願いしたいのだけど　お願いしたいのだが　お願いしたいのですが &quot;お願いしたい[ん　の]{ですが　だけど　だが　ですけど}&quot;　&quot;お願いでき{ます　ますか　ませんか　ますでしょうか　ないですか　ないでしょうか　ないか　んか ねえか　るか　っか}{な　ね}&quot; &quot;頼む{わい　わ　ぜ　ね　よ}&quot;　よろしく　よろ　よろー　プリーズ　お願いね　&quot;頼んだ{わい　わ　ぜ　ね　よ}&quot;]
+
+<span class="ow">concept</span>:(thank_you) [了解　わかった　わかりました　おっけー　ありがとう　ありがとうございます　おおきに &quot;どうも{ね　な　です　ありがとう　ありがとうございます}&quot;　サンキュー　センキュー　サンクス　&quot;あんがと{よ　な　さん}&quot;　&quot;ありがと{よ　な　さん}&quot;]
+
+<span class="ow">concept</span>:(wrong) [いやいや　違う　違います　違う違う　違うよ　そうじゃない　じゃない　じゃなくて　ではなく　そうじゃなくて そうじゃありません　ちゃう　ちゃうで　ちゃうちゃう　こうじゃない　それじゃない　違うな　あってない　あたってない　&quot;ちげー{よ}&quot;　&quot;そうじゃねー{よ}&quot;]
+
+<span class="ow">concept</span>:(tosayno)[いいえ　いやいや　いえいえ　別に　全然　そんなに　&quot;[そうでも　それほどでも　そんなでも　そんなこと　んなこと　んなこた][ない　ねえ　ありません]&quot;]
+
+<span class="ow">concept</span>:(help)[助けて　手伝って　困ってる　お聞きしていい　質問してもいい]
+
+
+<span class="ow">concept</span>:(byebye) [バイバイ じゃあね またね さようなら もう行きます もう行くね 用事があります もう行かなくちゃ またこんど つぎね つぎがあります もう終わり 終わり おしまい &quot;お疲れ様{です　でした}&quot;]
+
+
+###jpj_names
+#concept:(names_jp) [ようこ　ゆうほ　リン こうすけ　えいじ　そん　まさとし　けんた　すみれ　あきら あすか あずさ あずま  あたる あつし あまね あゆみ あらた いおり いく いたる いつき いづる おさむ おん かい かおる かく かずね かなえ かずおき かんじ きょう きょうすけ きよし キリト あや　きわむ ぎん くに くにお くみ けい けん けんじ　げん けんいち こよみ こう ごう こうじ ごろう 藤原　福田 ごえもん　りょうた　しょうた　かんた　ごんた]
+
+#my name is...
+<span class="ow">concept</span>:(my_name_jp)[です と申します　と言います　って言います だけど]
+
+
+###jpj_tel
+<span class="ow">concept</span>:(reason_visit)[&quot;[&quot;携帯{電話}&quot;　電話]{が　を　って　は}[ほしい ください ちょうだい　くれ　ある　あります　ない　故障　壊れた]&quot; 何かがおかしい 機種変更 うごかない 修理がしたい　修理にきました　しゅうりにだしたい　液晶が割れた 音が聞こえない 充電できない 電源が入らない 新しい機種 つながらない インターネットができない メールが届かない メールが送れない　予約]
+
+<span class="ow">concept</span>:(type_product)[IPad &quot;IPhone{4 4s 5}&quot; アイフォン　アイフォンファイヴ　アイフォン5　アイフォンフォー　アイフォン4　アイフォンフォーs アイパッド タブレット　みまもりカメラ　みまもり携帯　みまもりGPS　みまもりジーピーエス　あんしんファミリー携帯　カバー　アイフォンカバー &quot;携帯{の}グッズ&quot;]
+
+<span class="ow">concept</span>:(telephone)[携帯　携帯電話　電話　スマフォ スマートフォン タッチ式携帯　タッチフォン　タッチ式の電話　タッチ式の携帯　&quot;子ども向け{の}携帯&quot;　&quot;子ども用{の}携帯&quot;]
+
+<span class="ow">concept</span>:(user_break)[&quot;[水 トイレの中　下水道　水の中]に[おとしちまった　おとしちまって　落としちゃった 落としました　落としてしまいました]&quot; &quot;{画面を スクリーンを}[壊しちまって　壊しちまった　壊した　こわしちゃった　潰した　潰してしまった　潰しちゃった]&quot;]
+
+<span class="ow">concept</span>:(broken)[壊れました　壊れてしまいました　壊れてしまった　壊れた　壊れたよ　壊れてしまったのですが　壊れたんだけど　壊れたんですが　故障した　故障してしまった]
+
+
+
+
+<span class="ow">concept</span>:(nouveau_tel)[新機種　新しい機種　新しい携帯　最新の機種 最新機種　一番新しい機種　最近販売された機種　機種の新しいモデル　&quot;{春　夏　秋　冬}モデル{の}機種&quot;]
+
+<span class="ow">concept</span>:(nouveau)[新しい　最新の　最近の　最近でた　最近販売された 最新の]
+
+
+
+<span class="ow">concept</span>:(working_bad)[調子悪い　調子が悪い 調子がおかしい　調子がよくない　調子がどうもよくない　ボタンがどうも反応しない　ボタンが反応しない　画面がつかない 画面がこわれた　画面がどうもつかない　繋がらない　どうもつながらない　水に落ちた　反応しない　動かない　うまいこと動かない]
+
+
+
+<span class="ow">concept</span>:(new_contract)[新規契約　新しく契約　ソフトバンクに加入　新規登録 新規 契約 あたらしい電話]
+
+<span class="ow">concept</span>:(change_tel)[機種変　機種の変更　機種変更　機種を変えたい]
+
+<span class="ow">concept</span>:(plan)[料金プラン　料金　プラン]
+
+<span class="ow">concept</span>:(personnal_inf)[個人情報　契約内容 個人情報内容　個人情報の内容　契約の内容　登録されている内容　登録内容　登録している内容　登録されている内容]
+
+<span class="ow">concept</span>:(change)[変更　変えたい　変えようと思うのですが　変えたいと思うのですが　変えたいと思うのだが　変えたいです　変えたいのだが　変えたいんだけど　変えたいのですけど　変えようと思うんだけど　買いかえたい　買いかえよう]
+
+
+
+
+
+
+
+
+
+
+###jpj_recover
+<span class="ow">concept</span>:(staff)[店員　従業員　担当者　責任者　クルー　店長　スタッフ　販売員　売り子 誰か]
+
+
+
+<span class="ow">concept</span>:(what_donna)[どんな　どのような　どの様な　どういう　どういった]
+<span class="ow">concept</span>:(what_nani)[何　なに　なんなの　何なの　何ですか　なんですか　何だろう　なんだろう　何でしょうか　なんでしょうか]
+
+
+<span class="ow">concept</span>:(what_short)[なに　なんて　何　何て なんだ　なんでしょう　なになに]
+
+<span class="ow">concept</span>:(new_equipment)[新機種　新しい機種　最新の機種 最新機種　一番新しい機種　最近販売された機種　機種の新しいモデル　&quot;{春　夏　秋　冬}モデル{の}機種&quot;]
+<span class="ow">concept</span>:(phone)[携帯　スマフォ スマートフォン 携帯電話 アイフォン　アイフォンふぁいヴ　アイフォンご　あいふぉんふぉー　アイフォンよん　アイフォンフォーえす　アイフォンよんえす　電話]
+
+
+###apps
+<span class="ow">concept</span>:(applist_jp) [写真　プリクラ]
+<span class="ow">concept</span>:(apps_jp) [アプリ アプリケーション]
+
+
+
+
+#suffixe
+<span class="ow">concept</span>:(desu)[です　ですね　ですよ　ですわ でしょ　だね　だよ　かな　じゃな　じゃよ　なんです　なんですね　なんですよ　なんだよね　なんだよ　なのかな　なんじゃよ　ね　よね よな　だよな　だよね]
+
+<span class="ow">concept</span>:(desuka)[ですか　かな　かい　なの　でしょうか　なんですか　なんでしょうか　か　なん だっけ　でしょうか　だったっけ でしたっけ　だっけか　やっけ　やったっけ]
+
+<span class="ow">concept</span>:(kanari)[ひかくてき とくに　すごく　すごい　たいへん　ずいぶん　ひじょうに　ずいぶん　かなり　だいぶ　そうとう　ちょう　めっちゃ　めちゃくちゃ　とても　けっこう　よく　しょっちゅう　いつも　常に　とっても　ずいぶんと ものすごく　ずっと　ずばぬけて　ぐんをぬいて　めっさ　バリバリ　ぜんぜん　ばつぐんに　だんぜん　ちょいちょい　ちょくちょく　わりと　わりかし　最高に　死ぬほど]
+
+<span class="ow">concept</span>:(maamaa)[それなりに　わりかし　あるていど まあまあ　なかなか　わりと　わりあいと　わりあいに　ふつうに　どちらかというと　どっちかというと]
+
+<span class="ow">concept</span>:(zenzen)[ぜんぜん　まったく　あんまり　あまり　ほとんど　ちょっとしか　少ししか　絶対　ぜってー　別に　ほぼ　まず　それほど　そこまで　そんな　そんなに]
+
+<span class="ow">concept</span>:(-kudasai)[ください　くれ　くれないかな　くれるかな　くれんかな　くれよ　くれんかのう　くれんかの　くれませんか　くださいませんか　おくれ　よ]
+
+<span class="ow">concept</span>:(-choudai)[ちょ　ちょうだい]
+
+<span class="ow">concept</span>:(-hoshii)[ほしい　ほしいです　ほしいな　ほしいんだけど　ほしいんですけど　ほしいんだが　ほしいんじゃが　ほしいんですが]
+
+<span class="ow">concept</span>:(-moraeru)[もらえる　もらえますか　もらえませんか　もらえないかな　もらえんかな　もらえんかのう　もらえんかの　もらえないでしょうか　もらえないだろうか　もらえんだろうか　もらえるかい　もらえるかいな　もらえるかい　もらえるっすかね　もらえるっすか　もらってもいいですか　もらってもいいでしょうか　もらってもいいかな　もらってもいいかね　もらってもいいかのう　もらってもよろしいでしょうか　もらってもよろしいかな　もらってもよろしいかね　もらってもよろしいですか]
+
+<span class="ow">concept</span>:(-mimashou)[みましょう みよう]
+
+<span class="ow">concept</span>:(の様)[みたい　らしい　のよう　感じ　っぽい]
+
+<span class="ow">concept</span>:(please_suffix)[くれ　ください　ちょうだい　おくれ]
+
+#conjunction
+
+<span class="ow">concept</span>:(conjunction)[を　が　は　って　とか　とかって]
+
+
+
+
+#############################################################################################################################################################ADVERB#################################################################################################################################################################################################################################################################################################################
+
+<span class="ow">concept</span>:(chotto-)[ちょっと　ちょびっと　ちょろっと　ちょこっと　ちょいと　少し　若干]
+
+
+
+
+
+
+###VERB######
+
+
+<span class="ow">concept</span>:(like)[がいい　すき　だいすき]
+
+<span class="ow">concept</span>:(donot)[しないしない　しない　しません　しねえ　&quot;すること{は}ない&quot;　&quot;すること{は}ありません&quot;　&quot;すること{は}ねえ&quot;　してない　してません　してねえ　していない　していません　していねえ　やらない　やりません　やんねえ　&quot;やること{は}ない&quot;　&quot;やること{は}ありません&quot;　&quot;やること{は}ねえ&quot;　やっていない　やってない　やっていません　やってません　やっていねえ　やんないやんない　やらないやらない　やってねえ　しとらん　やっとらん　してハラナイ　やってハラナイ　しなくなった　やらなくなった　やんなくなった]
+
+
+<span class="ow">concept</span>:(neverdone)[&quot;したこと{は}ない&quot;　&quot;したこと{は}ありません&quot;　&quot;したこと{は}ねえ&quot;　&quot;やったこと{は}ない&quot;　&quot;やったこと{は}ありません&quot;　&quot;やったこと{は}ねえ&quot;]
+
+
+<span class="ow">concept</span>:(do)[する　します　すんよ　している　してる　&quot;すること{は}ある&quot;　&quot;すること{は}あります&quot;　してます　しています　&quot;したこと{は}ある&quot;　&quot;したこと{は}あります&quot;　してるしてる　するする　しとります　やる　やります　やんよ　やっている　やってる　&quot;やること{は}ある&quot;　&quot;やること{は}あります&quot;　やっています　やってます　&quot;やったこと{は}ある&quot;　&quot;やったこと{は}あります&quot;　やってるやってる　やるやる　やっとります　してまっせ　やってまっせ　しとる　やっとる　してハル　やってハル　し始めた　やり始めた　するようになった　やるようになった　するようになりました　やるようになりました]
+
+<span class="ow">concept</span>:(dontgo)[いかない　いきません　いってない　いってません　いかないん　いかなくなった　いかねえ　いってねえ　いっとらん　いかん　いくことない　いくことありません　いかないいかない]
+
+<span class="ow">concept</span>:(go)[いく　いきます　いっている　いってる　いってん　いくいく　いくで　いってます　いっとる]
+
+
+<span class="ow">concept</span>:(forget)[わすれた　わすれました　わすれちゃった　おぼえてない　おぼえていない　おぼえとらん　おぼえてねえ　おぼえてません　わすれている　わすれてる　わすれちゃってる　記憶にない　記憶にありません　記憶にねえ　記憶はない　記憶にはない　記憶にはねえ　記憶にゃない　記憶にゃねえ　記憶してない　記憶ない　記憶なし]
+
+
+<span class="ow">concept</span>:(dontthink)[思わない　思いません　思ってない　思ってません　おもわねえ　おもってねえ　おもわん　おもっとらん　思っていない　&quot;思ったこと{は}ない&quot;　&quot;思ったこと{は}ねえ&quot;　&quot;思ったこと{は}ありません&quot;　&quot;思ったこと{は}あらへん&quot;　おもわへん　おもわんおもわん　おもわないおもわない　思わなかった　思いませんでした　おもわんかった　思ってなかった　思ってませんでした]
+
+
+<span class="ow">concept</span>:(think)[思う　思います　思ってます　思ってる　おもっとる　おもうおもう　思った　思いました　思ってた　おもってました　おもったおもった　おもうとった　おもっとった]
+
+
+<span class="ow">concept</span>:(shitai)[したい　しようと思う　しようと思ってる　しようと思ってます　行いたい　行おうと思う したいのですが　したいんだけど　してえんだけど　&quot;しようとおもう{のですが　んだが　のだが　んだがよ　んだけど　んだけどよ}&quot;　&quot;しようとおもって{い}{&quot;るんだ{けど　が　よ}&quot;}{さ　ね}&quot;　&quot;しようとおもってるんです{けど　が　よ}{さ　ね}&quot;　しようとおもってるんだけどさ　しようとおもってるんだけどよ]
+
+
+<span class="ow">concept</span>:(dashitai)[出したい　出したいです　出したいんですが　出したいんだが　出したいと思うのですが　出そうと思うのですが　出そうと思うのだが]
+
+<span class="ow">concept</span>:(i_want_tolook)[見たい　見たいのですが　拝見したい　拝見したいのですが　見せていただけないでしょうか　見せていただけませんか　見せてもらえますか　見せてもらえませんか]
+
+<span class="ow">concept</span>:(want)[欲しい　欲しいとおもう 欲しいんだけど]
+
+<span class="ow">concept</span>:(broken)[壊れました　壊れてしまいました　壊れてしまった 壊れちゃった　壊れた　壊れたよ　壊れてしまったのですが　壊れたんだけど　壊れたんですが　故障した　故障してしまった]
+
+<span class="ow">concept</span>:(i_want_tobuy)[買いたい　買いたいです　買いたいのですが　買おうとおもいます　買います　購入しようと思います　購入しようと思うのですが　購入しようと思っています　購入したいです　購入したいのですが　購入します　買おうと思うのですが]
+
+<span class="ow">concept</span>:(thinkingtobuy)[購入を検討している 購入を考えて &quot;購入を検討して&quot; &quot;購入しようか{と}[検討して 迷って]&quot;　&quot;買おうか{と}[検討して 迷って]&quot;　&quot;購入しようかどうか&quot;　&quot;買おうかどうか&quot;]
+
+<span class="ow">concept</span>:(ask_know)[知らない　知らん　知ってる]
+
+<span class="ow">concept</span>:(call)[呼べ　呼びなさい　呼んで　呼んでください　呼んでくれ &quot;呼んでくれ{ます　ますか　ませんか　る　んか　るかしら　ないですか　ない　ないかしら}&quot;　&quot;呼んでもらえ{る　ますか　ませんか　んか　るかしら　ない　ないかしら　ないか}&quot;　&quot;呼んでもらって{も}{いい　よろしい}{ですか　でしょうか　かな　かい　かね　かしら　かのう}&quot;　&quot;呼んでいただけ{ますか　ませんか　るかしら　る　ないですか　ない　ないか　ないかしら}&quot;　呼んでくだされ　呼ぼうか　呼ぼうよ　呼びましょうか　呼びたまえ]
+
+<span class="ow">concept</span>:(come)[連れてこい　連れてきなさい　連れてきてください　連れてきて　連れてきてくれ &quot;連れてきてくれ{ます　ますか　ませんか　る　んか　るかしら　ないですか　ない　ないかしら}&quot;　&quot;連れてきてもらえ{る　ますか　ませんか　んか　るかしら　ない　ないかしら　ないか}&quot;　&quot;連れてきてもらって{も}{いい　よろしい}{ですか　でしょうか　かな　かい　かね　かしら　かのう}&quot;　&quot;連れてきていただけ{ますか　ませんか　るかしら　る　ないですか　ない　ないか　ないかしら}&quot;　連れてきてくだされ　連れてこようか　連れてこようよ　連れてきましょうか　連れてきたまえ]
+
+<span class="ow">concept</span>:(dowant)[したい　しようと思う　しようと思ってる　しようと思ってます　行いたい　行おうと思う したいのですが　したいんだけど　してえんだけど　&quot;しようとおもう{のですが　んだが　のだが　んだがよ　んだけど　んだけどよ}&quot;　&quot;しようとおもって{い}{&quot;るんだ{けど　が　よ}{さ　ね}&quot;　&quot;るんです{けど　が　よ}{さ　ね}&quot;　るんだけどさ　るんだけどよ}&quot;]
+
+<span class="ow">concept</span>:(ask_is)[ありますか　有りますか　在る　有る　ある　無い　ない　ございません ございますか　ございませんか　あるかな　ありませんか　ないですか　&quot;ないか{な}&quot;　ないでしょうか　ねえか　&quot;さがして{い}るん{ですが　ですけど　だが　だけど}&quot;　&quot;さがしてん{ですが　ですけど　だが　だけど}&quot;]
+
+<span class="ow">concept</span>:(wanttolook)[見たい　&quot;見せて{もらえますか もらえませんか　&quot;もらえる{か}&quot;}&quot; &quot;見たいん[だ　です]{けど　が}&quot;　&quot;見てもいい{かな　ですか　かい　でしょうか}&quot;　&quot;見せてもらっていい{ですか　かな　でしょうか　か}&quot;　&quot;見せていただけ{ますか　る　ませんか　ないでしょうか　んか　ない　ないか}&quot;]
+
+<span class="ow">concept</span>:(ask_put)[置いてる　置いてますか おいてありますか　おいてございますか　&quot;おいてある{か}&quot;]
+
+<span class="ow">concept</span>:(行く)[&quot;行って[くるんだけど きますわ きます くるわ]&quot;　&quot;行くん[だけど だよね　です]&quot;　行くのです　行きますわ　行きます　&quot;行く{わ よ　ぜ}&quot;]
+
+<span class="ow">concept</span>:(行くことになった)[&quot;行くことになったん[だけど ですが]&quot;　&quot;行くことに[なりました なったぜ なったよ なったわ なった]&quot;　&quot;行くことになっちゃった{わ　ぜ　よ}&quot;]
+
+<span class="ow">concept</span>:(話して)[&quot;話してください{ませ　よ}&quot; &quot;話して{ちょうだい　おくれよ　おくれ　くれよ　くれ　よ}&quot; 話しなさい　話せ]
+
+<span class="ow">concept</span>:(doyouknow)[&quot;~conjunction [知ってる　知ってますか　ご存知　しっちょる　知っとる]&quot;]
+
+<span class="ow">concept</span>:(doyoulike)[&quot;~conjunction[好き　愛してる]&quot;]
+
+<span class="ow">concept</span>:(量_無)[全然　まったく　少しも　多少たりとも]
+<span class="ow">concept</span>:(量_少)[あんまり　あんまし　そんなに　そこまで　それほど　ちょっと　少し]
+<span class="ow">concept</span>:(量_中)[まぁまぁ　ぼちぼち　まちまち]
+<span class="ow">concept</span>:(量_多)[超　めっちゃ　かなり　相当　めちゃくちゃ たくさん]
+
+
+<span class="ow">concept</span>:(how)[どうやって　どのように　どうして　どう]
+<span class="ow">concept</span>:(how_much/many_of)[どれくらいの　どれほどの　どんだけの　どれぐらいの　どんくらいの]
+<span class="ow">concept</span>:(how_much/many)[どれくらい　どれほど　どんだけ　どれぐらい　どんくらい　&quot;{お}いくら&quot;　いくつ]
+<span class="ow">concept</span>:(why)[なぜ どうして　なんで　どういった理由で]
+<span class="ow">concept</span>:(do_you_know_int)[わかる　知ってる　知らない　ご存知　わかります　わかんない]
+<span class="ow">concept</span>:(not_ok)[良くない　悪い　駄目　あかん いけない　いかん]
+<span class="ow">concept</span>:(is_there)[ある　ありますか　あるの　あると思う　あると思います　あるか知ってますか　あるか知ってる　あるかしっちょる]
+<span class="ow">concept</span>:(verb_do)[します　する]
+<span class="ow">concept</span>:(adj_dont_like)[嫌い　嫌だ　面倒くさい　つまんない　しょうもない　くだらない　くだんない　どうでもいい　どっちでもいい　面白くない　クソ]
+<span class="ow">concept</span>:(have_int)[ある ありますか　あるの　あるかな　あるか　あったりしますか　あったりする　あったりしませんか　あったりしない　ないの　ありませんか　ないんですか　ないのですか　ないん]
+<span class="ow">concept</span>:(who)[誰　どなた　どちらさん なんて名前]
+<span class="ow">concept</span>:(do_you_understand)[わかる　わかりますか　理解できる　理解出来ますか　理解してる　わかってる　わかってますか]
+<span class="ow">concept</span>:(order_say)[教えて　言って　教えなさい　教えろ　言え　言いなさい]
+<span class="ow">concept</span>:(dont_know)[なんですかね　なんなんだろう　なんすかね　難しい　わからない　わからん　わかんない　わかりません　知りません　さぁね　知らない　知らん　なんだろう　なんでしょう　むずかしい　そんなの知らない　見当もつかない　見当もつきません　どうなんだろう　どうなんでしょうかね　どうなんすかね]
+<span class="ow">concept</span>:(dont_i_want_to_say)[関係ない　教えない　言いたくない　言わない　秘密　教えたくない　&quot;なんで*言わなきゃいけない&quot;]
+<span class="ow">concept</span>:(dont_do)[やらない　やりません　しません　しない　やらん]
+
+
+
+#move_concept#
+
+<span class="ow">concept</span>:(open_please)[&quot;あけて{ちょうだい　ください　くれ　よ　くれないかな　くれないですか　くれない　みて　ごらんなさい　ごらんよ　ごらん}&quot;　あけろ　あけなさい　あけましょう　ひらけろ　&quot;ひらいて{ちょうだい　ください　くれ　よ　くれないかな　くれないですか　くれない　みて　ごらんなさい　ごらんよ　ごらん}&quot;　ひらけて　ひらけなさい　ひらきましょう　ひらけましょう]
+<span class="ow">concept</span>:(close_please)[とじて　とじろ　とじなさい　とじる　とじましょう 閉じてみて　閉じてください　閉じてみてくれない　閉じてみてください]
+<span class="ow">concept</span>:(raise_please)[あげて　あげてください　あげてくれ　あげなさい　あげましょう　あげろ　あげてちょうだい　あげてみて]
+<span class="ow">concept</span>:(lower_please)[さげて　さげてください　さげてくれ　さげなさい　さげろ　さげましょう　さげてちょうだい　さげてみて　おろせ　おろして　おろしなさい　おろしましょう　おろそう　おろしてください　おろしてみて]
+<span class="ow">concept</span>:(bend_please)[まげて　まげてください　まげてみて　まげてちょうだい　まげろ　まげなさい　まげましょう　まげて　まげてくれ]
+<span class="ow">concept</span>:(stretch_please)[伸ばして　伸ばせ　伸ばしてください　伸ばしてちょうだい　伸ばしてくれ　伸ばしてみて　伸ばしてみよう　伸ばそう　伸ばしてみてください]
+<span class="ow">concept</span>:(turn_please)[回して　回してください　回してちょうだい　回してくれ　回してみて　回してみてください　回せ　回しましょう 回してもらえますか　回してもらえませんか 回転して　回転してください　回転しなさい　回転してちょうだい　回転してみてください　回転してみて　回転してくれない　回転しろ]
+<span class="ow">concept</span>:(spread_please)[広げて　広げてください　広げろ　広げなさい　広げてちょうだい　広げてくれますか　広げてちょうだい　広げてみて　広げてみてください　広げてみてくれない]
+<span class="ow">concept</span>:(scratch_please)[かいて　かいてみて　かいてください　かきなさい　かきましょう　かいてみてください　かいてみなさい　かこう　かいてちょうだい]
+<span class="ow">concept</span>:(look_toward_please)[向いて　向け　向いてください　向いてくれない　向いておくれ　向いてちょうだい　向きましょう　向きなさい　向いてみて　向いてみてください]
+<span class="ow">concept</span>:(look_please)[見て　見てください　見てちょうだい　見てください　見てみて　見てみてください　見ろ　見なさい　見ましょう　見てくれないかな　見てよ]
+<span class="ow">concept</span>:(shake_please)[振って　振ってください　振ってみてください　振ってちょうだい　振ってくれないかな　振ってみて]
+
+
+####################################################################################################################
+
+
+<span class="ow">concept</span>:(lets_talk)[話そう　話しましょう　お話ししよう　しゃべろう　しゃべりましょう　話したい　お話ししたい　しゃべりたい]
+<span class="ow">concept</span>:(lets_talk_deep)[語ろう　語りましょう　語ろうじゃないか　語りたい　語りませんか]
+<span class="ow">concept</span>:(dont_like)[微妙　好きじゃない　好きじゃありません　嫌い　だいっきらい　大嫌い　無理　ダメ　駄目　好きではない　好かん]
+<span class="ow">concept</span>:(dont_want)[嫌だ　嫌です]
+<span class="ow">concept</span>:(dont_i_want_to_do)[やりたくない　やらない　やりたくありません　したくない　したくありません　しない　しません]
+<span class="ow">concept</span>:(i_didnt_understand)[わからなかった　何て言った　何言った　理解できなかった　理解できませんでした　わかんなかった　わからんかった　なんだって　なんて　どういうこと　&quot;どういう意味{ですか でしょうか　だ　なの}&quot;　&quot;何の話{ですか　してるの　してるんですか　してるんだい}&quot; なんのこと　&quot;何言ってる{の　んですか　んだい　んだ}&quot;]
+<span class="ow">concept</span>:(i_dont_care)[&quot;どっちでもいい{~desu}&quot;　&quot;どちらでもいい{~desu}&quot;　&quot;なんでもいい{~desu}&quot;　&quot;どれでもいい{~desu}&quot;　&quot;好きにして{いいよ　ください　くれ　おくれ　ちょうだい}&quot; お好みで]
+
+#NOUN#====================================================================================================================
+
+<span class="ow">concept</span>:(name_fem)[リン　アオイ ヒマリ　メイ　アンナ　コトネ　コハル　ミオ　ワカナ　ミウ　ココロ　ココミ　ハルカ ユウナ　サキ　ミサキ　リオ　サラ　アヤカ　カエデ　アイ　ハナ　リコ　ナナミ　ユウカ　ヨウコ　ユナ　アカリ　ハルナ　ミユ　チヒロ　ナナ　ハルナ　アヤ　リサ　アヤノ　カホ　カノン　トモコ　アカネ　アスカ　ユキ　ミホ　カリン　シオリ　マイ　カオリ　アイリ　エミ　サヨカ　カナ　ユウコ　クミコ　アイコ　ナオ　ルナ　ユリ　サナ　ミク　サヤ　ミキ　ユカ　マユ　ミツキ　サエ　ヒナタ　アン　ヒヨリ　マユミ　ナツキ　マナミ　モモカ　アヤナ　ケイコ　リノ　ミカ　リナ　フウカ　モエ　アユミ　レイナ　レナ　ミユウ　ナオコ　モモコ　ミノリ　ユウキ　ナナコ　リンカ　ナツミ　アミ　リエ　ユウリ　ミワ　サチコ　ユミ　クルミ　サオリ　ユイナ　アヤコ　ユミコ　ミナミ　リホ　アズサ　アリサ　レイ　ユメ　シホ　ユラ　アキコ　ルカ　ジュンコ　ノア　ユイカ　アイカ　イチカ　スミレ　マキ　ヒトミ　アキ　アヤネ　ユヅキ　ハヅキ　ノノカ　サワ　エリ　キョウコ　ソラ　ナオミ　マリ　サツキ　ヒカリ　ユア　リエ　ヒナノ　ユカリ　ノリコ　トモカ　ネネ　マヒロ　トモミ　タマキ　ユキナ　ヒナコ　ココナ　レイカ　ユキノ　マナ　イロハ　サアヤ　エリカ　キョウカ　チハル　ミツキ　ノゾミ　ミサ　ナギサ　エミ　ユリカ　ユズキ　ヒロコ　ユキコ　シオン　エマ　カスミ　ジュリ　ミハル　カナコ　ヤヨイ　コトミ　ラン　ミサト　サトミ　ユリナ　モモ　リオン　マナカ　アヤメ　セナ　マヤ　シズク　マリナ　アイナ　チサト　ハル　コトハ　ルリ　カノ　ミドリ　ミユキ　ナミ　マリコ　ミレイ　ミナ　ルイ　マドカ　ノドカ　ミズホ　カナエ　ナナカ　ワカ　スズカ　マサコ　マコ　リョウコ　ニコ　チハル　イオリ　アコ　シノ　リリカ　チアキ　チエ　サホ　リオナ　マイカ　アサミ　カナデ　ココ　ナホ　カズコ　モカ　ユマ　ミヤビ　マユコ　ユズコ　ユリコ　レイコ　アンリ　チサ　リリ　ミヒロ　ヨシコ　ショウコ　サヨ　サナエ　マコト　マイコ　リア　カナミ　アユ　エリコ　オトハ　アマネ　タカコ　アヤミ　ジュンコ　ナルミ　サチ　フミカ　モモコ　ミスズ　エリナ　ユリア　エナ　サユリ　ハルミ　ミチコ　ミオリ　アキラ　ニイナ　コト　マリン　エツコ　サトコ　モエカ　チホ　スズ　ウタ　ハルヒ　ユズカ　ワカバ　コユキ　マリカ　マリア　マキコ　ホナミ　ユズハ　ユキエ　ミア　ヨシノ　アンジュ　ユノ　ヒロミ　チカコ　エミコ　コノカ　サユキ　カヨ　リョウ　サユ　ミナコ　カリナ　リセ　ナノハ　チハル　シズカ　エミリ　カエ　セイラ　レミ　ユウア　ツグミ　ケイ　カズミ　ハンナ　ヒビキ　コノハ　マサミ　ヤヨイ　ヤスコ　ルミ　ココア　ナユ　イツキ　アスミ　リサコ　マミ　マアヤ　ユイ　チサキ　スズナ　チズル　ヒメカ　ツバキ　ツムギ　ユメカ　マユカ　トモミ　アケミ　アイミ　アオバ　イズミ　イブキ　ナツコ　ナツ　クミ　レン　アユカ　セリナ　ミチル　ユイコ　リミ　アズミ　アイラ　コウ　セイナ　カコ　花子　ミヨコ　ヨシエ　ナゴミ　ソナ　ミコ　ミソラ　ハルキ　カヨコ　ヨシミ　サリ　ミリ　アヤハ　セリ　ナナコ　コナツ　スズネ　ニナ　ミイナ　カンナ　チエコ　アキナ　シュリ　リンコ　アサヒ　フミコ　コトノ　ムツミ　ケイト　ウミ　ハナエ　コトリ　コノミ　レイラ　リイナ　ナルミ　トワ　マスミ　ウララ　ユカコ　サキコ　ノブオ　ハツネ　コズエ　マリエ　スズカ　サエコ　モモエ　ノノ　ミミ　モナ　モモナ　サラサ　オウカ　ジュン　レオナ　スミカ　エイコ　コトコ　ミカコ　ユズナ　フタバ　クレア　キララ　ミサコ　ナナセ　マサキ　キラ　アンズ　アサコ　キヨミ　ミトミ　ワコ　セイカ　ヒロカ　イクミ　アユナ　タマミ　サワコ　マホ　ミチカ　ミエ　エレナ　ミコト　メイサ　チナ　ハルコ　モネ　ホノカ　サチカ　ユウ　カノコ　ユウヒ　リエコ　アキホ　キラリ　シキ　ハナカ　エミカ　セイコ　ナノカ　リリア　リク　ナナエ　カオ　クレハ　カズサ　サクヤ　リアン　シオ　イザナミ　アオウ　ソヨカ　モア　キヨカ　ハナノ　ララ　トモヨ　ミエコ　ミキコ　椛　ナツメ　サト　シノン　キコ　ツカサ　ツバサ　キミコ　モモハ　サユミ　ナナハ　コウメ　ノリカ　ユリエ　コハネ　メイカ　アリス　ミオン　ミミ　カズエ　コハク　リンナ　ナナホ　キヨラ　アイル　フミエ　キホ　チヨ　ヒサコ　ユミ　サヤコ　カレン　ココハ　ヒイロ　マチコ　ユミカ　ミチヨ　カヤ　リラ　コトナ　タエコ　ノブコ　ミワコ　シイナ　マシロ　レイア　イクコ　チナミ　サチエ　マサヨ　ハルネ　フミナ　リヨ　ヨウ　メイナ　アサカ　ラナ　ノノハ　スイ　リンカ　シュウ　ワカコ　ミハナ　ヨシカ　チトセ　コハナ　ジュンナ　マミコ　タエ　アイサ　ミチ　マユリ　ミイ　ヒナリ　ウイ　モモネ　ミエコ　ハノン　リツコ　マオ　カズキ　マツリ　ナノ　カイリ　リイ　ユメノ　サヨコ　ホノ　リノア　ヒナカ　イチゴ　ホノミ　ヒオリ　スズハ　トシコ　ミツコ　リマ　ユリノ　チウネ　チエミ　ヒメ　ソノカ　フウ　セリカ　レア　ミヨコ　カズヨ　マヨ　ナズナ　アメリ　サク　ナコ　ユキホ　ノエ　ヨウ　スズ　ユキネ　キナ　コトカ　ヒロエ　マアサ　トモ　ユキミ　キサ　コマチ　アユリ　アヤリ　イヅミ　アキエ　ヒナミ　ユイリ　ヒナタ　カツキ　カヅキ　ミヨコ　キミカ　ミヨ　サヤノ　アミカ　セツコ　アイネ　ルル　マサエ　ミオナ　ミリア　フウナ　キズナ　キエ　リアナ　イマリ　ヒロ　ソウ　ヤエ　サイカ　トア　チエリ　ケイカ　メイコ　マチ　エイミ　マサエ　ユエ　ユメ　シン　キキ　チハヤ　リル　ソノ　ソノコ　エレン　シエ　スズノ　ユウハ　モナミ　アサ　サキナ　サチヨ　ハスミ　ハズミ　ミユナ　メグ　ミハネ　イオ　ルア　シュウカ　ホマレ　コモモ　キイ　ココノ　サオ　ナル　ヒロナ　フウコ　マユキ　キョウ　アリ　アサキ　スミコ　オト　チサコ　タマオ　ユアン　アユム　ノン　リンネ　マヒル　ナナオ　シマ　アノン　ルリカ　ヒメノ　キサキ　ホタル　セラ　カオルコ　リズ　ルリコ　ヒロノ　オトカ　リナコ　サトカ　ヒサキ　ササ　サキホ　ショウ　モトコ　イノリ　リリナ　イク　ソヨ　ヒサエ　ユツキ　チハナ　カイ　イサキ　リト　ユウサ　ヤスヨ　キミ　リユ　ハルア　ルミコ　ユキカ　ジュリア　はぐみ　シイカ　アヤ　ツキノ　リイサ　キリ　マリノ　ユワ　ユウノ　アキヨ　シュカ　ナホコ　イト　アヤセ　リツ　アズ　カオン　ミノ　ユユ　ミラ　アリア　ムツキ　ミズカ　クララ　マノ　サナミ　リエ　ミズハ　ミサオ　ハルエ　アキハ　テルミ　ナチ　ミクル　アヤサ　キヨ　ヒジリ　カエラ　カヤノ　タマエ　シズキ　ナミコ　アスナ　マナエ　サトリ　マオリ　レオ　ヒラリ　アンジ　ユウト　ハルト　リネ　アキノ　ユイノ　ミカン　リンゴ　ユメナ　ハナミ　ミユカ　ヨリコ　キナ　ハツミ　ウタコ　サヤナ　ラム　ソウ　ミナト　セイ　ニチカ　ナツホ　モコ　ユイハ　マリサ　ヒデコ　タクミ　コナ　チユミル　ヨツバ　トオカ　クニコ　チノ　カズナ　ミユリ　チヨコ　マユナ　サエカ　ケイナ　ミオカ　サチホ　マナハ　チオリ　カズハ　ミオウ　モエナ　モワナ　ユウナ　フミノ　チヨリ　レノ　マヒナ　スミエ　キミエ　フキ　イクエ　シオネ　アユコ　ヒナキ　ナオカ　ナツカ　ノイ　アツミ　トモナ　ミフユ　ウノ　アズサ　キノ　モモノ　アゲハ　カナタ　レイミ　エコ　タマエ　ミズエ　タマコ　イチ　ウタノ　チサト　ミツエ　コナミ　タカシ　ルウ　カズネ　ライカ　コウキ　マイミ　ヒノ　ミソノ　アリナ　トキ　サエ　サキエ　ハノ　ユカナ　ツキ　ウイカ　テンカ　アイノ　エリサ　マリイ　コウコ　コヨリ　エル　アオノ　リツカ　サキノ　スズコ　リツカ　リッカ　ネオ　ユメコ　イオナ　コマキ　コノミ　スバル]
+
+<span class="ow">concept</span>:(name_masc)[レミー　ソウタ　コウタ　リョウ　ユウタ　ハヤト　リョウタ　カイト　ショウタ　ヒロト　ソラ　コウスケ　コウセイ　ヒロキ　ユウスケ　ケイタ　ユウヤ　リョウスケ　タケル　ソウスケ　ソウマ　コウタロウ　ルイ　ケイスケ　トモキ　マサト　タクマ　ユウセイ　リュウセイ　シュンスケ　タイガ　タイチ　タクト　タカシ　サトシ　コウ　コタロウ　ナオキ　カンタ　ダイキ　ショウ　カズマ　アキト　リョウマ　アツシ　ケント　トウマ　リクト　タクヤ　ヒロシ　タイキ　ケイゴ　タイセイ　ダイスケ　ショウゴ　ケンタ　ケイ　トモヤ　ヤマト　シオン　ヒカル　ケイト　シュウ　ヒビキ　リュウノスケ　タケシ　カナタ　ワタル　エイタ　コウヘイ　リンタロウ　ミズキ　ショウマ　コウジ　タカヒロ　ジュン　ダイチ　ソウシ　ユイト　タツヤ　ユウジ　マサヒロ　エイト　リュウト　リョウタロウ　ナオト　ツバサ　ハルマ　ケンジ　トワ　シュウト　ユウゴ　マナト　ユウダイ　ヒロユキ　ヨウスケ　オウスケ　セナ　マサヤ　アサヒ　カズヤ　リオ　カイセイ　コウダイ　シン　カケル　セイヤ　ケンシン　シンノスケ　アユム　シュンタ　イチロウ　ケンタロウ　ソウイチロウ　アツキ　リュウキ　ハジメ　アキヒロ　ジン　タツキ　チヒロ　カナト　ミナト　ショウタロウ　ヨシキ　リョウガ　トモヒロ　マヒロ　ヒロアキ　コウイチ　ヨウタ　アラタ　タイヨウ　リュウ　エイジ　ソウタロウ　イオリ　アヤト　シンヤ　キョウスケ　ケン　シンタロウ　ユウリ　ライト　ユタカ　ミツキ　リヒト　アオト　ユウガ　シンジ　タロウ　ナオヤ　ケンゴ　サトル　レント　ユウタロウ　シンゴ　ツカサ　タカユキ　シュンヤ　マサシ　ハルヤ　リョウセイ　トウヤ　ケイジ　トオル　リョウヤ　リキ　ハルカ　リンン　マサユキ　ソウヤ　ナオ　ユウイチ　ヒデキ　リョウヘイ　ナツキ　ケンスケ　ヒロ　リュウタ　ツヨシ　コウガ　セイジ　レオン　カズト　コウシロウ　タイシ　シュウヤ　サクヤ　ゲンキ　ジュンヤ　ユウヒ　コウシ　カズヒロ　ヨシヒロ　シンイチ　テツヤ　シュウタ　コウヤ　ケンイチ　ジョウ　シュウマ　ヨウ　ダイゴ　ヒロム　タカト　シュウジ　ヤスヒロ　ゼン　タスク　リョウト　ヒトシ　ユウシン　リュウジ　トシキ　ガク　ユキト　ヒロヤ　ルカ　リツキ　ユウイチロウ　レイジ　フウガ　ユウシ　マサル　エイスケ　サク　ヨシアキ　ハルヒ　ソウゴ　ジュンペイ　リオン　カオル　マサハル　シュウヘイ　フミヤ　ヨウヘイ　カエデ　リョウジ　ジュンイチ　トウゴ　タク　ハヤテ　シュンタロウ　スバル　コウヨウ　ケイタロウ　トモアキ　コウノスケ　レンタロウ　ミノル　モトキ　トア　マサアキ　ヒロタカ　リュウタロウ　ヨシト　ハク　ヒデアキ　コウイチロウ　ショウヤ　ショウゴ　トモユキ　マサノリ　ハルタ　ユウサク　ケイイチ　ショウヘイ　オサム　リュウヤ　ユズキ　セイタ　タカヤ　イッセイ　フウタ　キイチ　ショウキ　カナメ　マサタカ　シュント　リト　ヨシユキ　タダシ　アツヤ　ヨシノリ　セイ　ヒサシ　ソウキ　タカアキ　タケヒロ　カズシ　セイゴ　マサヨシ　キラ　テッペイ　リュウスケ　シンイチロウ　ケンセイ　ヨシタカ　ゲン　タカノリ　ヒュウガ　アキオ　オウタ　トシヤ　ゴウ　コハク　ユラ　アオバ　アオ　リョウイチ　フウマ　リュウガ　コウメイ　アキヒト　オウガ　キョウヘイ　トシユキ　ソウイチ　ケイシ　トキ　ノア　ミライ　ショウエイ　サクタロウ　マナブ　タカフミ　マサムネ　アツト　マモル　ヨウイチ　マオ　ノゾム　シュウスケ　ツトム　リュウイチ　アキ　マサトシ　シュンペイ　ハルヒト　ソウジ　リツ　ユイ　シリュウ　カンタロウ　ジュンセイ　ケイイチロウ　ユキヤ　タカオ　キヨシ　トモノリ　リュウマ　タイスケ　シュウイチ　チアキ　レンジ　イクト　マサカズ　ユウジン　ヤスシ　ライキ　ミツル　キョウ　カナデ　ヒロカズ　トモハル　アサト　サツキ　タマキ　タケト　カズアキ　アイト　シキ　ショウイチ　ショウスケ　エイキ　シゲル　ヒサト　トシアキ　アツヒロ　ヒロミ　ウタ　トラノスケ　ジョウジ　リント　ガクト　ヒロマサ　ナギ　シンスケ　レイヤ　シュウセイ　ヒデオ　シンタ　タイラ　チカラ　ハクト　ソラト　ジョウタロウ　ユキヒロ　ショウジ　カズオ　セイタロウ　ヒデト　シュンキ　ダイ　ノブユキ　シンペイ　コジロウ　ユウノスケ　ヒロフミ　カズユキ　カツヤ　ムツキ　セイシロウ　カズマサ　ヒデユキ　カズノリ　カツミ　ライ　リンタ　リョウゴ　ヒデトシ　イサオ　ゲンタ　タイト　ジュンノスケ　カイチ　カズヨシ　ルイト　ソウジロウ　ハルアキ　シノブ　シドウ　ヨシハル　ナオユキ　ヨシカズ　ススム　ジュンイチロウ　チハヤ　ノゾミ　ユウジロウ　カツキ　ヤスユキ　レンタ　ハルタカ　ヨウジ　ジュンタ　イチ　ショウセイ　ルキ　スグル　ヒロノリ　テンマ　ヒイロ　テルキ　コウエイ　イッサ　アキノリ　タクロイウ　ダイト　アンジ　マサミ　コウマ　ヒカリ　ユウヘイ　シロウ　ウキョウ　ケンイチロウ　マサヒコ　ハルク　フウト　キョウゴ　ヨシオ　リイチ　サクト　キョウヤ　ハヤタ　カイル　マサオ　サスケ　シユウ　テル　コテツ　ノボル　オウキ　シュンセイ　カンスケ　マサフミ　ヨシノブ　ムサシ　シュンジ　キョウタ　カン　ミツヒロ　ユキオ　ココロ　ホタカ　アスカ　カズサ　ケイシン　ヤスオ　カズナリ　ケンヤ　ヨウセイ　セイイチ　トモ　タカラ　ソウダイ　トシオ　ミサキ　アマネ　ソウヘイ　タカヒト　ヨシマサ　イクマ　トウイ　カズヒコ　ケンゾウ　ナユタ　ホダカ　ユキ　セイイチロウ　エイシン　イサム　カズタカ　ナル　マサヒト　ノリユキ　ナオヒロ　ヨシヒト　リュウゴ　タカマサ　ネオ　ナオタロウ　アオシ　ソウシロウ　セイト　シュンイチ　シュンゴ　カズトシ　タカヨシ　ノブヒロ　トウジ　ケイジロウ　ナギサ　ミノリ　トモカズ　アキヒサ　ウミ　タカキ　キョウタロウ　アユト　トモヒサ　ミキ　ヨウタロウ　ノリアキ　ミヒロ　ヒデノリ　リュウシン　タクム　コウジロウ　イチゴ　ジュンジ　マサノブ　ギンジ　タツミ　チサト　シュウタロウ　テツオ　ソウト　リュウヘイ　イタル　イッシン　ホマレ　ヤスノリ　セイノスケ　エイタロウ　アキヒコ　ヨシヒサ　シュリ　チハル　カズミ　アキヨシ　ダン　アルト　タケオ　キリュウ　クオン　ヨシフミ　ミキト　ユウワ　ヨシヒコ　レンヤ　シュンノスケ　ケンシ　キョウイチ　アタル　タイゾウ　フミト　イクミ　イオ　サクラ　タカトシ　タカハル　リオト　ジロウ　ショウイチロウ　ノブアキ　キッペイ　セイマ　ヤクモ　ミコト　サトキ　エイイチ　イズミ　シゲキ　ヒデカズ　クウガ　ジュンキ　クオシン　カツノリ　マキ　ナギト　ショウト　ケンショウ　ヒロミチ　ハルユキ　アイル　ハルヒコ　ハルオ　キヨト　カイキ　ヤスタカ　アスマ　ヒユウ　ミヅキ　マキト　キラト　ヤスアキ　カツヒロ　ヨシヤ　トモヒト　ミキオ　ヒロヤス　シモン　ユアン　オト　ケイヤ　サキ　リキヤ　ハルヒサ　マサミチ　リョウキ　ゲント　トシヒコ　クラノスケ　テツロウ　セラ　アキマサ　ヒジリ　リンノスケ　コウト　ケンジロウ　アイキ　エイゴ　ナナト　ハルミチ　キヨタカ　テルアキ　メイ　ソウセイ　トキヤ　ヨウイチロウ　イッキ　ノリオ　シゲオ　イチカ　リキト　ゴウキ　オウセイ　アレン　カヅキ　ホクト　キョウシロウ　リクヤ　ユズル　アイ　ミツオ　キョウジ　レオ　トモタカ　テツ　ユウア　ヒロノブ　タカヒサ　タツオ　アラシ　カズヒト　トモナリ　アキフミ　カズヒサ　コハル　フウキ　ライム　トシカズ　アユキ　カスホ　タイシン　ヒュウゴ　エイシ　ハルミ　タイジュ　オトヤ　テンセイ　ケイシロウ　キズナ　リンク　テン　イッペイ　ショウノスケ　トモミ　ノリヒロ　アモン　コウサク　ナツ　マサヒデ　ユキナリ　ケイジュ　フミオ　ノブキ　ダイヤ　ナルキ　ケイマ　ユウショウ　リュウク　トモヒコ　エイ　フミアキ　イク　カツヒコ　カント　マサナリ　アヤ　セイリュウ　コウゾウ　カノン　アサキ　センリ　シュウキ　カナル　ヒナト　ショウダイ　タイジ　ヒデタカ　ヨシナリ　タツヒロ　トキオ　ポトハル　オウタロウ　ルキア　シュウイチロウ　スナオ　レンスケ　ミキヤ　リュウイチロウ　マスミ　キスケ　ヒロヨシ　ルア　ユウナ　トウワ　トム　カツユキ　メグミ　ケイキ　シンジロウ　ミナミ　イクヤ　ヒヨリ　アキナリ　ユウホ　カズハ　タクジ　ジンタ　タケハル　ケイゾウ　レオナ　アキノブ　ミドリ　ハルヒロ　ヨシミ　トシハル　ユウイ　バンリ　ヒサキ　コオ　タツロウ　ヤスト　アユミ　テツジ　ヒデヨシ　アツム　ノブオ　アキトシ　タカノブ　タツト　ミチヒロ　ソウガ　レイタ　ユキマサ　ゴロウ　ヨシトモ　ハルチカ　トオマ　テッタ　モトヒロ　キヨマサ　シュウサク　ソウノスケ　サクマ　テルヤ　ヒロミツ　ミヤビ　トシノリ　ハルセ　トウキ　シュウゾウ　シホ　フウ　ヤスヒト　アキタカ　オウジロウ　カズ　トラ　ヤスヒコ　アンリ　タカヒコ　カオリ　マシュウ　モトヤ　リョウイチロウ　カツトシ　キヒロ　ヒロヒト　マユミ　タツマ　ユカ　セイガ　ロイ　メグル　タケヒコ　ヒロナリ　イサキ　ナナミ　サクタ　マサ　サキト　ハルノブ　カムイ　イサミ　ギンガ　ノブナガ　トモヤス　ユキノリ　セン　ヒダカ　ヨシロウ　ケイセイ　ミチル　ハユマ　ヒロトシ　スイ　ナルミ　オウ　カイシ　ヤスハル　ユウゾウ　タモツ　キオ　ムツミ　ハルヨシ　アヤカ　ジョウイ　ヤスマサ　ヨシヒデ　キシン　トモヨシ　ノブタカ　ジュンイチロウ　ワク　ガイ　ジュンマ　ハナ　タケノリ　ショウイ　リンセイ　キイチロウ　フミヒロ　ケイショウ　カズハル　ヤヒロ　タツノリ　ヤスナリ　ヒトキ　ナチ　ミト　イチタ　エイイチロウ　テルマ　ナオアキ　カイシュウ　ジョウイチロウ　リョウエイ　ヤスキ　ツムギ　マイ　タケアキ　ユメト　ハヅキ　ユウシロウ　タツヒコ　ハルマサ　ナオタカ　タオ　マサミツ　テツシ　ジエイ　ジュント　ナオヒサ　ミハル　ルキヤ　シンセイ　リオウ　シュウジロウ　ケイタツ　セイア　セイジロウ　キヨハル　ライガ　リョウダイ　ナオミ　フトシ　タケヒト　イチロ　レンマ　マサナオ　レンセイ　アカリ　ユウカ　クニオ　イエヤス　シンサク　ミツアキ　ゲンタロウ　ミク　イッケイ　ナオタ　ゴウタ　テルユキ　セイキ　セイスケ　タダヒロ　タカヒデ　ミユキ　ヒトミ　ニコ　マサオミ　トウタ　マサカツ　ゲンジ]
+
+<span class="ow">concept</span>:(name_global)[ハスミ　フクダ　スズキ　シバタ　カツキ]
+
+#clothes#
+
+<span class="ow">concept</span>:(richbrand)[イードアンドレベンスクロフト　レベンスクロフト　イード　エルメス　ヘンリープール　ハンツマン　キルガー　ハーディーエイミス　ハーディー　ロンドンハウス　ターンブルアンドアッサー　ターンブル　アッサー　ヒルディチアンドキー　ヒルディッチ　ジェームスロック　ブリオーニ　マリネッラ　ルイヴィトン　ヴィトン　ルイビトン　ビトン　イヴサンローラン　キートン　ギーブスアンドホークス　ギーブス　チェスターバリー　チェスター　ロロピアーナ　ロロピ　アルニス　ジョンストンズ　バレンティーノ　ドレドレ　アトキンソンズ　ティモシーエベレスト　ティモシー　エベレスト　コーギ　ロエベ　バランタイン　マーロ　アレクサンドラソジュフェール　ソジュフェール　アレクサンドラ　バーバリー　シャネル　ランバン　パンセレラ　アクアスキュータム　ダックス　ディオール　エディモネッティ　モネッティ　エディモネッチ　モネッチ　金洋服店　キンヨウフクテン　イチバンカン　一番館　ラベラサルトリアナポレターナ　ナポレターナ　サルトリアナポレターナ　ラベラサルトリア　ヘルノ　アヴォンチェリ　アボンチェリ　ルイジボレリ　ボレリ　バローンブリーニ　ブリーニ　ルチアーノバルベラ　バルベラ　ボッテガヴェネタ　ボッテガ　ベネタ　ヴェルサーチ　ダンヒル　ジョルジオアルマーニ　アルマーニ　ピエールカルダン　カルダン　ペコラ銀座　ペコラ　バレンシアガ　プラダ　ベルナルドザンス　ザンス　ブルネロクチネリ　クルチアーニ　ピアチェンツァ　ロタ　高橋洋服店　タカハシヨウフクテン　ヤマモトヨウジ　ヨウジヤマモト　ドルチェアンドガバンナ　ドルチェガバンナ　ガバンナ　ドルチェ　オースチンリード　エルメネジルドゼニア　ゼニア　エルメネジルド　ラルフローレン　パープルレーベル　アレキサンダーマックイーン　マックイーン　ベルベスト　ダベンザ　フェデリ　サルフラ　エトロ　イザイア　ジルサンダー　クリスヴァンアッシュ　クリスバンアッシュ　イッセイミヤケ　コムデギャルソン　ギャルソン　カルバンクライン　ラフシモンズ　シモンズ　ニールバレット　ジョンガリアーノ　ガリアーノ　ガリアノ　モンタギュー　ケンゾー　ラファエルカルーゾ　カルーゾ　ドレイクス　ドレークス　アルベルトインカヌティ　インカヌティ　デュシャン　ジュシャン　フェンディー　マークジェイコブス　マルタンマルジェラ　マルジェラ　アンドゥムルメステール　メステール　ドリスヴァンノッテン　ドリバンノッテン　バンノッテン　ヴァンノッテン　ドリスバン　ドリスヴァン　フェラガモ　フェレ　ジャンフランコフェレ　カナーリ　コレネリアーニ　カンタレリ　コスチュームナショナル　コスチューム　ジャンポールゴルチエ　ゴルチエ　ジョンスメドレー　ディースクエアード　バラクータ　ミハラヤスヒロ　ヤスヒロミハラ　ジュンヤワタナベ　ジーゼニア　ヒューゴボス　マッキントッシュ　ステファンシュナイダー　ポールアンドジョー　ヴィヴィアンウエストウッド　ウエストウッド　ブルックスブラザーズ　ブルックス　ポールスミス　プリングル　ヘルムートラング　リケル　ソニアリケル　リキェル　ソニアリキェル　ベルスタッフ　グレンフェル　ブラウアー　ジェイリンドバーグ　リンドバーグ　アンダーカバー　キミノリモリシタ　モリシタキミノリ　マーガレットハウエル　ハウエル]
+
+<span class="ow">concept</span>:(jpnoveler)[阿井景子　あいけいこ　赤さか]
+
+
+#animal#
+
+<span class="ow">concept</span>:(umauma)[アイダハル　アッシー　アルカリレイクモンスター　アルタマハハ　アルラホエール　イゴポゴ　イッシー　イリアムナ湖の怪物　インカニヤンバ　ウィッピー　　ウィニポゴ　ウィラタック　ヴィルコモンスター　ウォリー　ウマウナギ　ウモッカ　エディー　エメラントゥカ　オクラホマオクトパス　オゴポゴ　オランイカン　オルスレイヴィ　ガクラト　カッシー　河童　カバゴン　ガンボ　キャディ　クッシー　クラーケン　グロブスター　ケープコッドクリーチャー　シーサーペント　ジャノ　ステラー　セルマ　タキタロウ　チャイニーズネッシー　チャンプ　チュッシー　ツッキー　トクシー　トッシー　ナウエリート　ナバウ　ナミタロウ　ナメクジヘビ　南極ゴジラ　ニャミニャミ　ニューネッシー　ニンキナンカ　ネスキー　ネッキー　ネッシー　ハーキンマ　ハイール湖の怪物　ハッシー　ヒッシー　ブラッキー　ブループ　ブロックネスモンスター　ペピー　ボウネッシー　ホラディラ　マーレイ湖の怪物　マニポゴ　ミゴー　ムカデクジラ　ムビエルムビエルムビエル　モーゴウル　モケーレムベンベ　モッシー　モラーグ　リーンモンスター　龍魚　レイ　ングマモネネ]
+
+<span class="ow">concept</span>:(mammifere)[犬　猫 くじゃく 孔雀　ひつじ 羊　やぎ ぶた 豚　山羊　ヒメウォンバット　&quot;{アカ　セスジキノボリ}カンガルー&quot;　&quot;{ホフマン}ナマケモノ&quot;　&quot;{ミナミコ オオ}アリクイ&quot;　&quot;{マタコミツオビ}アルマジロ&quot;　&quot;{クビワオオ}コウモリ&quot;　ワオキツネザル　アイアイ　アビシニアコロブス　キンシコウ　&quot;{シロテ}テナガザル&quot;　&quot;{バンドウ}イルカ&quot;　オオカミ　ヒグマ　くま　マレーグマ　メガネグマ　ホッキョクグマ　シロクマ　&quot;{ジャイアント レッサー}パンダ&quot;　コツメカワウソ　ラッコ　シママングース　ミーアキャット　&quot;{ブチ}ハイエナ&quot;　サーバル 　ピューマ　ウンピョウ　トラ　虎　寅　ジャガー　&quot;{くろ}ヒョウ&quot;　チーター　&quot;{カリフォルニア}アシカ&quot;　&quot;{ゴマフ}アザラシ&quot;　ゾウ　ジュゴン　モウコノウマ　&quot;{マレー}バク&quot;　&quot;{クロ}サイ&quot;　カバ　コビトカバ　&quot;{フタコブ}ラクダ&quot;　ジャワマメジカ　キリン　オカピ　バーバリーシープ　ムフロン　ツチブタ　シマリス　プレリードッグ　ハダカデバネズミ　マーラ　ペリカン　うさぎ　兎　りす　栗鼠　ハムスター 鯨　クジラ　猿　狸　狐　キツネ　タヌキ　サル　マンモス]　　  
+
+<span class="ow">concept</span>:(cat)[猫 &quot;アメリカン{ショートヘアー ボブテイル ワイヤーヘア}&quot;　アビシニアン　オーストラリアンミスト　アラビアンマウ　&quot;アジアン{セミロングヘアー}&quot;　ベンガル　バーマン　ボンベイ　ブラジリアンショートヘア　&quot;ブリティッシュ{ショートヘアー ロングヘアー}&quot;　バーミーズ　シャルトリュー　チャウシー　コーニッシュレックス　キムリック　デボンレックス　ドラゴンリー　エジプシャンマウ　ヨーロピアンショートヘア　ジャーマンレックス　ヒマラヤン　&quot;ジャパニーズ{ボブテイル}&quot;　コラット　クリルアイランドボブテイル　ラパーマ　メインクーン　マンクス　マンチカン　ナポレオン　&quot;ノルウェージャン{フォレスト}{キャット}&quot;　オシキャット　&quot;オリエンタル{バイカラー　ショートヘア ロングヘア}&quot;　ピーターボールド　ピクシーボブ　ラガマフィン　ラグドール　ロシアンブルー　サバンナ　&quot;スコテッシュ{フォールド}&quot;　&quot;セルカーク{レックス}&quot;　シャム　サイベリアン　シンガプーラ　スノーシュー　ソマリ　スフィンクス　トンキニーズ　&quot;ターキッシュ{アンゴラ　バン}&quot;]　 　　
+
+<span class="ow">concept</span>:(dog)[犬　雑種　アメリカンコッカースパニエル　イングリッシュコッカースパニエル　イングリッシュセッター　ビズラ　ウェルシュスプリンガースパニエル　オールドイングリッシュシープドッグ　カーリーコーテッドレトリバー　キースホンド　キャバリアキングチャールズスパニエル　コリー　ゴールデンレトリバー　ソフトコーテッドウィートンテリア　ノバスコシアダックトーリングレトリバー　ビアデッドコリー　ビションフリーゼ　フィールドスパニエル　フラットコーテッドレトリバー　ブリタニー　ボーダーテリア　ポーチュギーズウォータードッグ　ラブラドールレトリバー　アイリッシュウルフハウンド　クランバースパニエル　グレートデーン　グレートピレニーズ　スコティッシュディアハウンド　セントバーナード　ニューファンドランド　バセットハウンド　バーニーズマウンテンドッグ　ビーグル　ブービエデフランダース　ブラッドハウンド　ブルドッグ　マスティフ　イタリアングレーハウンド　イングリッシュトイスパニエル　ウィペット　シーリハムテリア　スカイテリア　スタンダードダックスフント　ミニチュアダックスフント　ダンディディンモントテリア　チベタンテリア　チャイニーズクレステッドドッグ　チワワ　ちん　パグ　フレンチブルドッグ　ペキニーズ　ベドリントンテリア　ボストンテリア　ポメラニアン　マルチーズ　ラサアプソ　ウェルシュコーギーカーディガン　ウェルシュコーギーペンブローク　オーストラリアンキャトルドッグ　オーストラリアンシェパード　シェットランドシープドッグ　ジャーマンシェパード　スタンダードプードル　トイプードル　ドーベルマン　パピヨン　ベルジアングローネンダール　ベルジアンタービュレン　ベルジアンマリノア　ボーダーコリー　秋田犬　アメリカンスタッフォードシャーテリア　クーバース　クバーズ　ゴードンセッター　コモンドール　ジャイアントシュナウザー　ジャーマンワイヤーヘアードポインター　スタンダードシュナウザー　スタッフォードシャーブルテリア　チェサピークベイレトリバー　チャウチャウ　プーリー　ブリアード　ブルテリア　ブルマスティフ　ボクサー　ロットワイラー　ローデシアンリッジバック　ワイマラナー　アイリッシュウォータースパニエル　アイリッシュセッター　アフガンハウンド　アメリカンウォータースパニエル　アメリカンフォックスハウンド　アラスカンマラミュート　イングリッシュフォックスハウンド　エアデールテリア　オッターハウンド
+グレーハウンド　サモエド　サルーキ　柴犬　シベリアンハスキー　シャーペイ　ジャーマンショートヘアードポインター　ダルメシアン　ノルウェジアンエルクハウンド　ボルゾイ　アイリッシュテリア　アーフェンピンシャー　ウエストハイランドホワイトテリア　ウェルシュテリア　オーストラリアンテリア　ケアーンテリア　ケリーブルーテリア　シーズー　ジャックラッセルテリア　シルキーテリア　スキッパーキ　スコティッシュテリア　スムースフォックステリア　ノーフォークテリア　ノーリッチテリア　バセンジー　ブリュッセルグリフォン　マンチェスターテリア　ミニチュアシュナウザー　ミニチュアピンシャー　ヨークシャーテリア　レークランドテリア　ワイヤーフォックステリア　ワイヤーヘアードポインティンググリフォン]
+
+<span class="ow">concept</span>:(oiseaux)[ダチョウ　エミュー　&quot;{オウサマ マカロニ　フンボルト　ケープ}ペンギン&quot;　&quot;{モモイロ}ペリカン&quot;　ハシビロコウ　&quot;{ベニイロ　チリー}フラミンゴ&quot;　ハクチョウ　&quot;{アンデス}コンドル&quot;　オオワシ　&quot;{コシジロ}ハゲワシ&quot;　タンチョウ　&quot;{アネ ホオジロカンムリハ}ヅル&quot;　エトピリカ　カバタン　&quot;{ビニコンゴウ}インコ&quot;　&quot;{メン シロ}フクロウ&quot;　&quot;{ワライ}カワセミ&quot;　オニオオハシ　アンデスイワドリ　アカカザリフチョウ　文鳥　カラス　カモメ　アヒル　ハト]
+
+<span class="ow">concept</span>:(reptile)[&quot;{ニューギニア}ナガクビガメ&quot;　スッポンモドキ　アオウミガメ　アカアシガメ　インドホシガメ　ガラパゴスゾウガメ　アルダブラゾウガメ　トッケイヤモリ　マダガスカルヒルヤモリ　サイイグアナ　グリーンイグアナ　アミベイワバトカゲ　&quot;{エボシ パンサー}カメレオン&quot;　&quot;{アメリカドク コモドオオ　ハナブトオオ}トカゲ&quot;　インドシナウォータードラゴン　アナコンダ　アミメニシキヘビ　エメラルドツリーボア　&quot;{ミシシッピー ナイル　イリエ　ニシアフリカコガタ}ワニ&quot;　アメリカアリゲーター　カメ]
+
+<span class="ow">concept</span>:(amphibien)[&quot;{オオ　オオトラフ　トラフ}サンショウウオ&quot; オオサラマンダー　カリフォルニアイモリ　スポッテッドサラマンダー　トラフサンショウウオ　タイガーサラマンダー　アホロートル　ウーパールーパー　ビバビバ　&quot;{ベルツノ　アカメアマ コモリ アフリカツメ マダラヤドク　キオビヤドク　コバルトヤドク　アジアジムグリ　アカトマト}ガエル&quot;]
+
+<span class="ow">concept</span>:(fish)[&quot;[コバン　ジンベエ シュモク]ザメ&quot;　鮫　サメ　ツロワニ　ツマグロ　&quot;{ノコギリ マダラトビ}エイ&quot;　オオカミウオ　チョウチョウウオ　スズメダイ　メガネモチノウオ　イワシ　カレイ　マンボウ　ポーキュパインフィッシュ　&quot;{ハコ イトマキ}フグ&quot;　ミノカサゴ　タツノオトシゴ　ビラルク　アロワナ　&quot;{デンキ}ウナギ&quot;]
+
+<span class="ow">concept</span>:(otheranimals)[&quot;{アオリ モンゴウ}イカ&quot;　コブシメ　クリオネ　ウミウシ　クラゲ　&quot;ミズクラゲ{ナナヘンカ}&quot; イボヤギ]
+
+<span class="ow">concept</span>:(dinausors)[恐竜　ティラノサウルス　トリケラトプス　プテラノドン　スピノサウルス　スコミムス　ディノニクス　ブラキオサウルス　ステゴザウルス　イグアノドン　フクイサウルス
+<span class="p">]</span>
+
+<span class="ow">concept</span>:(getemono)[かえる　犬　猫　ゴキブリ　芋虫　イモリ　虫　かぶとむし　昆虫　くわがた　セミ　ミミズ　幼虫　カマキリ　脳みそ　ナメクジ　やもり　むかで　クモ　サソリ]
+
+#colors
+#concept:(color)
+#[青　赤　白　紫　緑　黒　肌色　茶色　黄色　オレンジ グレー　金色　銀色　蛍光色]
+
+
+###jpj_geography
+<span class="ow">concept</span>:(country) [&quot;アイスランド{共和国}&quot;　アイルランド　&quot;アゼルバイジャン{共和国}&quot;　&quot;アフガニスタ{イスラム}{共和国}&quot; &quot;アブハジア{共和国}&quot; &quot;アメリカ{がっしゅうこく}&quot; &quot;アラブ{首長こくれんぽう}&quot; &quot;アルジェリア{民主}{人民}{共和国}&quot; &quot;アルゼンチン{共和国}&quot; &quot;アルバニア{共和国}&quot;　&quot;アルメニア{共和国}&quot; &quot;アンゴラ{共和国}&quot;　アンティグアバーブーダ　&quot;アンドラ{公国}&quot; &quot;イエメン{共和国}&quot;　イギリス　グレートブリテン及び北アイルランド連合王国　イスラエル{こく}　&quot;イタリア{共和国}&quot;　&quot;イラク{共和国}&quot;　&quot;イラン{イスラム}{共和国}&quot; インド　&quot;インドネシア{共和国}&quot; &quot;ウガンダ{共和国}&quot;　ウクライナ　&quot;ウズベキスタン{共和国}&quot;　&quot;ウルグアイ{東方}{共和国}&quot; &quot;エクアドル{共和国}&quot;　&quot;エジプト{アラブ}{共和国}&quot;　&quot;エストニア{共和国}&quot;　&quot;エチオピア{連邦}{民主}{共和国}&quot;　&quot;エリトリア{こく}&quot; &quot;エルサルバドル{共和国}&quot;　&quot;{えん}ドニエストル{共和国}&quot;　&quot;オーストラリア連邦&quot;　&quot;オーストリア{共和国}&quot; &quot;オマーン{こく}&quot;
+&quot;オランダ{王国}&quot; &quot;ガーナ{共和国}&quot;　&quot;カーボベルデ{共和国}&quot; &quot;ガイアナ{共和国}&quot;　&quot;カザフスタン{共和国}&quot;　&quot;カタール{こく}&quot; カナダ　&quot;ガボン{共和国}&quot;　&quot;カメルーン{共和国}&quot;　&quot;ガンビア{共和国}&quot;　&quot;カンボジア{王国}&quot; &quot;ギニア{共和国}&quot;　&quot;ギニアビサウ{共和国}&quot; &quot;北キプロス{トルコ}{共和国}&quot; &quot;ギプロス{共和国}&quot;　&quot;キューバ{共和国}&quot;　&quot;ギリシャ{共和国}&quot; &quot;キリバス{共和国}&quot;　&quot;キルギス{共和国}&quot;　&quot;グアテマラ{共和国}&quot;　&quot;クウェート{こく}&quot;　&quot;クック諸島&quot;　グルジア　グレナダ　&quot;クロアチア{共和国}&quot; &quot;ケニア{共和国}&quot;　&quot;コートジボワール{共和国}&quot;　&quot;コスタリカ{共和国}&quot;　&quot;コソボ{共和国}&quot;　&quot;コモロ連合&quot;　&quot;コロンビア{共和国}&quot;　&quot;コンゴ{共和国}&quot;　&quot;コンゴ{民主共和国}&quot;　&quot;サハラ{アラブ}{民主}{共和国}&quot; &quot;サウジアラビア{王国}&quot; &quot;サモア{独立国}&quot; &quot;サントメプリシンペ{民主}{共和国}&quot;　&quot;ザンビア{共和国}&quot;　&quot;サンマリノ{共和国}&quot;　&quot;シエラレネオ{共和国}&quot;　&quot;ジブチ{共和国}&quot; ジャマイカ　&quot;シリア{アラブ}{共和国}&quot; &quot;シンガポール{共和国}&quot;　&quot;ジンバブエ{共和国}&quot;　&quot;スイス{連邦}&quot;　&quot;スウェーデン{王国}&quot;　&quot;スーダン{共和国}&quot;　スペイン　&quot;スリナム{共和国}&quot; &quot;スリランカ{民主}{社会主義}{共和国}&quot; &quot;スロバキア{共和国}&quot;　&quot;スロベニア{共和国}&quot;　&quot;スワジランド{共和国}&quot;　&quot;{赤道}ギニア{共和国}&quot; &quot;セーシェル{共和国}&quot;　&quot;セネガル{共和国}&quot;　&quot;セルビア{共和国}&quot;　&quot;セントクリストファー{ネイビス}{連邦}&quot; &quot;セントビンセント{および}{グレナディーン}{諸島}&quot; &quot;グレナディーン{諸島}&quot; 　セントルシア　ソマリア　&quot;ソロモン{諸島}&quot; &quot;タイ{王国}&quot;　大韓民国　韓国　&quot;タジキスタン{共和国}&quot;　&quot;タンザニア{連合}{共和国}&quot; &quot;チェコ{共和国}&quot;　&quot;チャド{共和国}&quot;　&quot;中央アフリカ{共和国}&quot; &quot;中華人民{共和国}&quot;　&quot;中華民国&quot; 中国　&quot;チュニジア{共和国}&quot;　朝鮮民主主義人民共和国 北朝鮮　&quot;チリ{共和国}&quot;　ツバル　&quot;デンマーク{王国}&quot;　&quot;ドイツ{連邦}{共和国}&quot;　&quot;トーゴ{共和国}&quot;　&quot;ドミニカ{共和国}&quot;　&quot;ドミニカ{こく}&quot;　&quot;{トリニダード}トバゴ{共和国}&quot; トルクメニスタン　&quot;トルコ{共和国}&quot;
+&quot;トンガ{王国}&quot;　&quot;ナイジェリア{連邦}{共和国}&quot;　&quot;ナウル{共和国}&quot;　&quot;ナゴルノ{カラバフ}{共和国}&quot;　&quot;ナミビア{共和国}&quot;　&quot;ニウエ&quot; &quot;ニカラグア{共和国}&quot;　&quot;ニジェール{共和国}&quot;　&quot;日本{こく}&quot;　ニュージーランド　&quot;ネパール{連邦}{民主}{共和国}&quot; &quot;ノルウェー{王国}&quot;　&quot;バーレーン{王国}&quot;　&quot;ハイチ{共和国}&quot;　&quot;パキスタン{イスラム}{共和国}&quot; &quot;バチカン{市国}&quot;　&quot;パナマ{共和国}&quot;　&quot;バヌアツ{共和国}&quot;　&quot;バハマ{こく}&quot;　&quot;{パプア}ニューギニア{独立国}&quot;　&quot;パラオ{共和国}&quot;　&quot;パラグアイ{共和国}&quot;　バルバドス　&quot;パレスチナ{国}&quot;　&quot;ハンガリー{共和国}&quot;　&quot;バングラデシュ{人民}{共和国}&quot; &quot;{東}ティモール{民主}{共和国}&quot; &quot;フィジー{共和国}&quot;　&quot;フィリピン{共和国}&quot;　&quot;フィンランド{共和国}&quot;　&quot;ブータン{王国}&quot;　&quot;ブラジル{連邦}{共和国}&quot;　&quot;フランス{共和国}&quot;　&quot;ブルガリア{共和国}&quot;　ブルキナファソ　&quot;ブルネイ{ダルサラーム}{こく}&quot; &quot;ブルンジ{共和国}&quot; &quot;ベトナム{社会主義}{共和国}&quot;　&quot;ベナン{共和国}&quot;　&quot;ベネズエラ{ボリバル}{共和国}&quot;　&quot;ベラルーシ{共和国}&quot;　ベリーズ &quot;ペルー{共和国}&quot;　&quot;ベルギー{王国}&quot;　&quot;ポーランド{共和国}&quot;　&quot;ボスニア{ヘルツェゴビナ}&quot;　&quot;ポツナワ{共和国}&quot;　&quot;ボリビア{多民族国}&quot;　&quot;ポルトガル{共和国}&quot;　&quot;ホンジュラス{共和国}&quot;　&quot;マケドニア{共和国}&quot;　&quot;マーシャル{諸島}{共和国}&quot;　&quot;マダガスカル{共和国}&quot;　&quot;マラウイ{共和国}&quot;　&quot;マリ{共和国}&quot;　&quot;マルタ{共和国}&quot;　&quot;ミクロネシア{連邦}&quot;　&quot;南アフリカ{共和国}&quot;　&quot;{南}オセチア{共和国}&quot;　&quot;{南}スーダン{共和国}&quot; &quot;ミャンマー{連邦}{共和国}&quot; &quot;メキシコ{連合国}&quot; &quot;モリーシャス{共和国}&quot; &quot;モーリタニア{イスラム}{共和国}&quot;　&quot;モザンビーク{共和国}&quot;　&quot;モナコ{公国}&quot;　&quot;モルドバ{共和国}&quot;　&quot;モルディブ{共和国}&quot;　&quot;モロッコ{王国}&quot;　&quot; モンゴル{国}&quot;　モンテネグロ　&quot;ヨルダン{ハンミテ}{王国}&quot;　&quot;ラオス{人民}{民主}{共和国}&quot; &quot;ラトビア{共和国}&quot;　リビア　 &quot;リテンシュタイン{公国}&quot; &quot;リベリア{共和国}&quot;　ルーマニア　&quot;ルクセンブルク{だい}{公国}&quot;　&quot;ルワンダ{共和国}&quot;　&quot;レソト{王国}&quot;　&quot;レバノン{共和国}&quot;　&quot;ロシア{連邦}&quot;]
+
+<span class="ow">concept</span>:(city) [
+アイウン アクラ アシガバート アスンシオン アディスアベバ アテネ アデレード アトランタ アピア アビジャン アブダビ アムステルダム アリススプリングス アルジェ アルマトイ アンカラ アンカレッジ アンタナナリボ イエローナイフ イスタンブール イルクーツク　インディアナポリス　ウィーン　ヴィエンチャン　ウィニペグ　ウィントフック　ヴォルゴグラード　ウラジオストク　ウランバートル　ウルムチ　エカテリンブルグ　エディンバラ　エドモントン　サンサルバドル　エルパソ　エルサレム　エレバン　オークランド　オクラホマシティ　オスロ　オタワ　オムスク　カーディフ　カイロ　ガザ　カサブランカ　カザン　カシュガル　&quot;ガダルカナル{とう}&quot;　カトマンズ　カブール　カムチャッカ　カラカス　カラチ　カリーニングラード　カルガリー　カンザスシティー　カンパラ　カンポグランデ　キエフ　キガリ　キシナウ　キャンベラ　キングストン　キンシャサ　グアヤキル　グアダラハラ　グアテマラシティ　グアム　クアラルンプール　クイアバ　クウェート　クチン　クライストチャーチ　グラスゴー　グレナダ　ケアンズ　ケープタウン　ケルン　広州　コナクリ　コペンハーゲンモロニ　コルカタ　カルキュッタ　コルドバ　コロンボ　&quot;済州{島}&quot;　&quot;サイパン{とう}&quot;　ザグレブ　サハリン　サマーラ　サマルカンド　サラエヴォ　サルタ　三亜 サンクトペテルブルク　サンティアゴ　サントドミンゴ　サントメ　サンパウロ　サンフランシスコ　サンホセ　サンマリノ　シアトル　シカゴ　ジッダ　シドニー　ジブチ　ジブラルタル　ジャカルタ　上海　重慶　シュトゥットガルト　ジュネーヴ　ジュバ　ジョージタウン　シンガポール　スコピエ　ストックホルム　スバ　西安　成都　セブ島　&quot;セントクリストファー{とう}&quot;　セントジョンズ　セントビンセント　セントルシア　ソウル　ソチ　ソフィア　ソルトレイクシティ　ダーウィン　台北　大連　ダカール　タシュケント　ダッカ　&quot;タヒチ{とう}&quot;　ダブリン　ダマスカス　ダラス　&quot;タラワ{環礁}&quot;　タリン　ダルエスサラーム　チェンナイ　&quot;チューク{州}&quot;　チューリッヒ チュニス チワワ 青島 ティファナ ティラナ ディリ ティンプー テグシガルパ デトロイト テヘラン ニューデリー テルアビブ 天津 デンバー ドゥアラ 東京 ドゥシャンベ トゥールーズ ドーハ ドバイ トビリシ &quot;ドミニカ{とう}&quot; トリポリ ドレスデン トロント &quot;トンガタプ{とう}&quot; ナイロビ　ナウル　ナッソー　ナント　ニアメ　ニース　ニコシア　ニジニノヴゴロド　ニューヨーク　ヌアクショット　ヌーク　ノヴォシビルスク　パース　バーミンガム　バイーア　バクー　バグダッド　パゴパゴ　バチカン　&quot;パナマ{市}&quot;　ハノイ　ハノーファー ハバナ ハボローネ バマコ パラオ パラマリボ ハラレ &quot;バリ{とう}&quot; パリ　ハリファックス　バルセロナ　ハルツーム　バルバドス　ハルビン　バンガロール　バンギ　バンクーバー　バンコク　バンジュール　ハンブルク　ビサウ　ビシュケク　ヒューストン　平壌　ビリニュス　ファドゥーツ　フィラデルフィア　フィレンツェ　&quot;プーケット{とう}&quot; フェニックス　ブエノスアイレス　サンフアン　フォルタレザ　ブカレスト　武漢　釜山　ブジュンブラ　ブラザビル　ブダペスト　&quot;フナフティ{とう}&quot; プノンペン プライア ブラジリア ブラチスラヴァ プラハ フランクフルト ブランタイヤ フリータウン ブリュッセル ブリスベン ブルネイ ベイルート ベオグラード 北京 ベリーズシティ ヘルシンキ ベルファスト ベルリン ベレン ボアヴィスタ ホーチミン ポートオブスペイン ポートビラ ポートモレスビー ポートランド ポートルイス ボゴタ ボストン ポドゴリツァ ホノルル ホバート ポルトープランス ボルドー ポルトノボ ホワイトホース 香港 マイアミ &quot;マウイ{とう}&quot; マカオ マガダン マスカット マセイオ マセル マドリード マナーマ マナウス マナグア マニラ マプト マヘ島 マラボ マルセイユ マルタ マレ島 マンチェスター ミネアポリス ミュンヘン ミラノ ミンスク ムババーネ ムンバイ メキシコシティ メッカ　メリダ　メルボルン　メンドーサ　メンフィス　モガディシュ　モスクワ　モナコ　モンテビデオ　モンテレー　モントリオール　モンロビア　ヤクーツク　ヤンゴン　ヨハネスブルグ　ラゴス　ラスベガス　ラパス　ラホール　リーブルヴィル　リール　リオデジャネイロ　リオブランコ　リガ　リスボン　リヴァプール　リマ　リヤド　リュブリャナ　リヨン　ルアンダ　ルイビル　ルクセンブルク　ルクソール　ルサカ　ルブンバシ　レイキャビク　レシフェ　レジャイナ　ローマ　ロサンゼルス　ロメ　ロンドン　ワガドゥグー　&quot;ワシントン{DC}&quot; ワルシャワ ンジャメナ]
+
+
+###jpj_music
+<span class="ow">concept</span>:(instruments)[ホルン　ぴあの　ピアニカ　ギター　サックス　ベース　ドラム　フルート　合唱　トランペット　横笛　しゃくはち　縦笛　ハーモニカ　バイオリン　ビオラ　チェロ　オルガン　木琴　てっきん　三味線　琴　太鼓　ボーカル　コントラバス　コントラ　ハープ　マンドリン　クラリネット　ファゴット　イングリッシュホルン　バスクラリネット　バスクラ　ピッコロ　コントラファゴット　アルトフルート　リコーダー　アルトリコーダー　オカリナ　アルトサックス　アルトサックスホーン　ソプラノサックス　ソプラノサックスホーン　バリトンサックスホーン　トロンボーン　ホルン　チューバ　コルネット　ユーフォニアム　ユーフォニューム　マリンバ　ビブラフォーン　チューフラベル　チューフラ　スネアドラム　ハンドベル　テナードラム　バスドラ　バスドラム　ティンパニー　トライアングル　鈴　カスタネット　タンバリン　モンキータンバリン　マラカス　ボンゴ　コンガ　ギロ　ウッドブロック　シェイカー　クラベス　アゴゴ　スライドホッスル　ホッスル　ラチェット　和太鼓　カウベル　ツリーチャイム　カバサ　あたりがね　パンデイロ　スルド]
+
+<span class="ow">concept</span>:(musicgenre)[ロック　ラテン　エレクトロ　ジャズ　タンゴ　ブラジリアン　キューバ　サンバ　サルサ　ボサノバ　クラブ音楽　クラブミュージック　ハウス　シャンソン　ニューウェイブ　フュージョン　オールドメタル　ハードロック　アンビエント　ワールド　ワールドミュージック　民謡　演歌　アートコア　アイドル歌謡　アイドルミュージック　アイドルソング　アイリッシュ　アカペラ　アシッドジャズ　アシッドトランス　アシッドハウス　アニメソング　アフリカン　アフロ　アラブ　イージーリスニング　イタロ　イビザ　インストロメンタル　インダスとりある　インディーズ　インディーロック　アイディーエム　ヴァイキングメタル　ウエストコーストジャズ　エイオーアール　えーポップ　映画　シネマ　ムービー　エクストラトーン　エスニックフュージョン　エピック　エピックトランス　MPB　エモ　エモーショナルハードコア　LAメタル エレクトロクラッシュ エレクトロニカ エレクトロニックボディミュージック エレクトロポップ 演歌 オーケストラポップ オールドスクール ハードコア オイパンク オペラ オラトリオ オリエンタルメタル オルタナティブ 音響派 カオティックハードコア 雅楽 合唱 ガバ ガムラン 歌謡曲 ガラージュ カリプソ ガレージロック ガレージロックリバイバル カンツォーネ カントリーミュージック カンドンベ ギターポップ グアラニア クールジャズ グライム グラインドコア グラウンドビート クラウトロック クラシック音楽 クラストコア グラムロック グランジ グループサウンズ クレズマー クロスオーバー クロンチョン 軍歌 ケイジャン K-POP ゲームミュージック ケルティック ケルティックメタル 現代音楽 現代邦楽 ゴアトランス 行進曲 黒人音楽 黒人霊歌 ゴシックメタル ゴスペル コマーシャルソング コミックソング コラール コンテンポラリーミュージック コンピュータミュージック サイケデリックトランス サイケデリックロック  
+ サイコビリー サザンソウル サザンロック ザディコ サルサ サンバ サーフィン 賛美歌 Gファンク シカゴソウル シカゴハウス シティポップス ジプシーブラス 渋谷系 ジャーマントランス ジャーマンメタル ジャズ ジャズファンク ジャズロック ジャパニーズメタル ジャパノイズ 
+ジャムセッション シューゲイザー ジュネーブ詩篇歌 シュランツ ショーロ 清楽 シンセポップ シンフォニックメタル シンフォニックジャズ
+吹奏楽 スウィングジャズ スカ スカコア スキンズ スクリーモ スピードガラージュ スピードコア スムーズジャズ スラッシュメタル 青春パンク セツナ系 セレナーデ ソウルジャズ ソウルミュージック ソカ ソフトアンドメロウ ソフトロック ソン ダークコア ターボフォーク ダッチトランス ダブ タンゴ ダンスホールレゲエ ダンスミュージック チカーノラップ チップチューン チャチャ チャマメ チャルガ チルアウト　ツーステップ　ツーステップガラージ　ツートーン　ディープハウス　ディキシーランジャズ　ディスコ　デトロイトテクノ　テクノ　テクノ歌謡　テクノポップ　テクノメタル　デジタルハードコア　デジタルロック　デスメタル　デスラッシュ　デスラッシュバウンド　テックダンス　テックトランス　テックハウス　チョチェク チュチェク　キュチェク　テラーコア　デルタブルース　電子音楽　ドゥームコア　ドゥームメタル　童謡　ドドンパ　トライバルハウス　ドラマチックメタル　ドラムンベース　トランス　トランスコア　ドリームポップ　トリップホップ　ドリルンベース　ニューウェイヴリバイバル　ニューエイジミュージック　ニューオーリンズジャズ　ニュースクールハードコア　ニューソウル　ニューフォーク　ニューミュージック　ニューメタル　ニューレイヴ　ニューロマンティック　ネオアコースティック　ネオクラシカルメタル　ネオソウル　ノイエドイチュベレ　ノイズコア　ノイズミュージック　ノイズロック　ノベルティソング　ノルデスチ　ハードコア　ハードコアテクノ　ハードスタイル　ハードトランス　ハードハウス　ハードバップ　ハードメタル　ハイエナジー　ハイライフ　ハウス　ハッピーハードコア　パブロック　バラード　バレアリックハウス　パワーポップ　パワーメタル　パンク　ハンズアップ　ピアノロック　ピーファンク　ビッグビート　ヒップホップ　ビバップ　ファストコア　ファド　ファンカラティーナ
+ファンキージャズ　ファンク　ファンクメタル　フィルターハウス　フィラデルフィアソウル　ブイロック　ビジュアル　ブーガルー　フォーク　フォークメタル　フォークロック　フォルクローレ　フューチャーポップ　ブラックミュージック　ブラックコンテンポラリー　ブラックメタル　ブラスロック　フリージャズ　フリーフォームハードコア　ブリティッシュトラッド　ブリットポップ　ブルーアイドソウル　ブルーグラス　ブルース　ブルースロック　ブレイクコア　フレンチコア　プログレッシブトランス　プログレッシブハウス　プログレッシブメタル　プログレッシブロック　ベースミュージック　ヘヴィメタル　ヘヴィロック　邦楽　ホーミー　北欧メタル　ポストパンク　ポストパンクリバイバル　ポストロック　ポップパンク　ポップフォーク　ポリフォニー　ポルカ　ボレロ　ホワイトソウル　マキナ　マッドチェスター　マンチェスターサウンド　マンボ　ミクスチャーロック　ミニマル　ミュゼット　ミュジークコンクレート　明楽　明清楽　民族音楽　ムード歌謡　メインストリームジャズ　メタルコア　メロディックデスメタル　メロディックスピードメタル　メロディックハードコア　メロディックパワーメタル　メロディックパンク　モータウン　モードジャズ　モッズ　モダンジャズ　モダンヘヴィネス　ユーフォリックトランス　ユーロトランス　ユーロビート　ユーケーハードコア　ユーケーロック　ユーロロック　ヤンクロック
+　ヨーデル　ライ　ライカ　ラウドロック　ラウンジ　ラグタイム　ラップメタル　ラテンロック　リバプールサウンド　リズムアンドブルース　アールアンドビー　リズム歌謡　リラックスミュージック　ルーツロックレゲエ　ルンバ　レイブ　レゲエ　レゲトン　ロカビリー　ロシアントランス　ロック　ロックステディ　ロックンロール　ロックンロールリバイバル　ロッテルダムテクノ　ロマ音楽　ワイニョ　ワルツ　ワールド] 
+
+<span class="ow">concept</span>:(compoperiodeclassique)[&quot;{ジョヴァンニバッティスタ}サンマルティーニ&quot; &quot;{フェリックス}ベンダ&quot; &quot;{ゲオルク}ロイター2世&quot; &quot;{クリストフ}シャフラート&quot;　&quot;{フランツ}ベンダ&quot;　&quot;{フランツ}{クサヴァー}リヒター&quot;    &quot;{ジョヴァンニ}{バッティスタ}ペルゴレージ&quot;　&quot;{トマス}アーン&quot; &quot;{ウィリアム}ボイス&quot;　&quot;{イグナーツ}ホルツバウアー&quot;　&quot;{ジョン}スタンリー&quot; &quot;{ヨハン}{ゲオルク}ベンダ&quot; &quot;{ニコロ}ヨンメッリ&quot; &quot;{ゴットフリート}{アウグスト}ホミリウス&quot;　&quot;{クリストフ}{ヴィリバルト}グルック&quot; &quot;{ゲオルク}{クリストフ}ヴァーゲンザイル&quot;　&quot;{ジャック}デュフリ&quot; &quot;{ヨハン}{フリードリヒ}ドーレス&quot; &quot;{マティアス}{ゲオルク}モン&quot; &quot;{ヨハン}シュターミッツ&quot; &quot;{ゲオルク}{アントン}ベンダ&quot; &quot;{カール}{フリードリヒ}アーベル&quot;　&quot;{フランソワ}{アンドレ}{ダニカン}フィリドール&quot;　&quot;{トンマーゾ}トラエッタ&quot;　&quot;{ヨハン}{ヴィルヘルム}ヘルテル&quot;　&quot;{ニコロ}ピッチンニ&quot;　&quot;{ヨハン}{アダム}ヒラー&quot;　&quot;{フロリアン}{レオポルト}ガスマン&quot; &quot;{アントニオ}ソレール&quot;　&quot;{ジュゼッペ}サルティ&quot;　&quot;{ドメニコ}ガロ&quot; &quot;{アントニオ}サッキーニ&quot; &quot;{トンマーゾ}ジョルダーニ&quot; &quot;{フランティシェク}{クサヴェル}デュシェック&quot; &quot;{フランティシェク}{クサヴェル}ブリクシ&quot; &quot;{フランソワ}{ジョセフ}ゴセック&quot; &quot;{ヨハン}{ゲオルク}アルブレヒツベルガー&quot; &quot;{ヨゼフ}ミスリヴェチェク&quot; &quot;{ヤン}コジェルフ&quot; &quot;{カール}{ディッタース}{フォン}ディッタースドルフ&quot; &quot;{ヨハン}{バプティスト}ヴァンハル&quot;    &quot;{ジョヴァンニ}パイジエッロ&quot; &quot;{アンドレア}ルケージ&quot;　&quot;{ヴァーツラフ}ピフル&quot; &quot;{アンドレ}{エルネスト}{モデスト}グレトリ&quot; &quot;{ジャンバティスト}クルンプホルツ&quot; &quot;{ルイジ}ボッケリーニ&quot; &quot;{マクシム}ベレゾフスキー&quot;　&quot;{ジョゼフ}{ブローニュ}{シュヴァリエ}{ド}サンジョルジュ&quot; &quot;{カール}シュターミッツ&quot;　&quot;{フリードリヒ}ベンダ&quot; &quot;{ヨハン}{ペーター}ザーロモン&quot; &quot;{ヨハン}{アブラハム}{ペーター}シュルツ&quot; &quot;{レオポルト}{アントニーン}コジェルフ&quot; &quot;{クリスティアン}{ゴットロープ}ネーフェ&quot;　&quot;{ドメニコ}チマローザ&quot; &quot;{アントニオ}ロセッティ&quot;　&quot;{ヨハン}{マティーアス}シュペルガー&quot; &quot;{アントニオ}サリエリ&quot; &quot;{ジュゼッペ}ジョルダーニ&quot;　&quot;{ドミトリー}ボルトニャンスキー&quot; &quot;{ヨハン}{フリードリヒ}ライヒャルト&quot;　&quot;{ムツィオ}クレメンティ&quot;　&quot;{アントン}シュターミッツ&quot; &quot;{ビセンテ}{マルティーン}{イ}ソレール&quot;　&quot;{ジョヴァンニ}{バッティスタ}ヴィオッティ&quot; &quot;{ヨーゼフ}{マルティン}クラウス&quot; &quot;{パヴェル}ヴラニツキー&quot; &quot;{イグナツ}プレイエル&quot; &quot;{フランツ}クロンマー&quot; &quot;{フランソワ}ドヴィエンヌ&quot; &quot;{ヨハン}{ルドルフ}ツムシュテーク&quot; &quot;{ヨハン}{ラディスラウス}デュセック&quot; &quot;{ルイジ}ケルビーニ&quot; &quot;{エティエンヌ}{ニコラ}メユール&quot; &quot;{フランツ}ダンツィ&quot; &quot;{ジモン}マイール&quot; &quot;{アダルベルト}ギロヴェッツ&quot; &quot;{アントン}エーベルル&quot; &quot;{ヤクプ}{シモン}{ヤン}リバ&quot; &quot;{ヨーゼフ}{レオポルト}アイブラー&quot; &quot;{フランツ}{クサヴァー}ジュースマイヤー&quot; &quot;{アンドレーアス}ロンベルク&quot; &quot;{ヴェンツェル}ミュラー&quot; &quot;{ベルンハルト}ロンベルク&quot; &quot;{フェルディナンド}カルリ&quot; &quot;{アントニーン}レイハ&quot;    &quot;{フェルディナンド}パエール&quot; &quot;{プロイセン王子}{ルイ}フェルディナント&quot; &quot;{ヨーゼフ}ヴェルフル&quot; &quot;{シャルル}シモンカテル&quot; &quot;{ピエール}ロード&quot; &quot;{ガスパーレ}{スポンティーニ}&quot; &quot;{フランソワ}{アドリアン}ボイエルデュー&quot; &quot;{カール}{ルートヴィヒ}{ハインリヒ}ベルガー&quot; &quot;{ヨハン}{ネポムク}フンメル&quot; &quot;{フェルナンド}ソル&quot; &quot;{ジギスムント}{フォン}ノイコム&quot; &quot;{アントニオ}ディアベリ&quot; &quot;{ジョン}フィールド&quot; &quot;{ディオニシオ}アグアド&quot; &quot;{フランソワ}{ジョゼフ}フェティス&quot; &quot;{アレクサンドル}アリャービエフ&quot; &quot;ルドルフ大公&quot; &quot;{ヤン}{ヴァーツラフ}ヴォジーシェ&quot;]
+
+###jpj_sports
+<span class="ow">concept</span>:(sports)[野球　ヤキュウ　やきゅう　陸上　水泳　体操　器械体操　ボウリング　ゲートボール　ラクロス　ハンドボール　フロアボール　チュックボール　パークゴルフ　バスケ　バスケットボール　バレー　バレーボール　ラグビー　アメフト　クリケット　ソフトボール　キックベースボール　スカッシュ　タムビーチ　タンブレリ　タンブレロ　テニス　バドミントン　パドルボール　ラケットボール　ハイアライ　卓球 レスリング カポエラ カラリパヤット クラッシュ クラブマガ サンボ スポーツチャンバラ チェスボクシング フェンシング ブラジリアン柔術　ボクシング　キックボクシング　ムエタイ レスリング 居合道　&quot;空手{道}&quot; フルコンタクト空手　空道　形意拳　剣技　合気道　柔術　柔道　銃剣道　剣道　しょうりんじけんぽう　小太刀道　少林寺拳法　杖道　槍道　相撲　総合格闘技　太極拳　短剣道　中国武術　刀道　薙刀道　八卦掌　武術太極拳 躰道　水上スポーツ サーフィン ウィンドサーフィン ボディボード セーリング　アップウインドレース スラローム フリースタイル ウェイブパフォーマンス スピードセイリング 釣り スキムボード　カイトボード フィンスイミング 水上スキー ウェイクボード パラセイリング ライフセービング 上滑走スポーツ 自転車 トラックレース　競輪　ロードレース　マウンテンバイク　ＢＭＸ　マディソン　サイクルサッカー　サッカー　サイクルフィギュア　一輪車　スケートボード　オールテラインボード　射的　弓道　アーチェリー　ターゲットアーチェリー　フィールドアーチェリー　射撃　ライフル射撃　クレー射撃　スポーツ吹き矢　クロッケー　ダーツ　ペタンク　ボッチャ　ローンボウルズ　水中スポーツ　フリーダイビング　スクーバダイビング　スキューバダイビング　テクニカルダイビング　パドルスポーツ　ボート競技　ドラゴンボート　カヌー　フラットウォータースラローム　カヤック　カヤック　カヌーポロ　ラフティング　空中スポーツ　パルクール　バンジージャンプ　スカイダイビングベースジャンピング　グライダー　ハンググライダー　パラグライダー　パラシューティング　熱気球　スキー　ノルディックスキー　クロスカントリースキー　スキージャンプ　ノルディックスキー　コンバインド　アルペンスキー　フリースタイルスキー　テレマークスキー　スピードスキー　スノーボード　アルペンスノーボード　スラローム　フリースタイルスノーボード　ストレートジャンプ　スノーボードクロス　バックカントリースノーボード　アイススケート　スケート　アイスホッケー　カーリング　スピードスケート　フィギュアスケート　ローラースケート　ローラーダービー　ローラーホッケー　ボブスレー　スケルトン　リュージュ　スノースクート　雪合戦　スノーカイト　インディアカ　カヌー　カバディ　セパタクロー　ハーリング　バンディ　フィールドホッケー　パワーリフティング　ボディビル　ウエイトリフティング　モータースポーツ　バイクトライアル　ポイントレース　カートレース　競艇　モーターボート　パーソナルウォータークラフト　ジェットレース　オートレース　貨物自動車レース　ラリー　登山　トレッキング　ハイキング　トレイルランニング　ロッククライミング　フリークライミング　山岳マラソン　ジョギング　ランニング　ウォーキング　ノルディックウォーキング　ロゲイニング　オリエンテーリング　ワンダーフォーゲル　ジオキャッシング　サバイバルゲーム　沢登り　ケイビング　フライングディスク　スポーツカイト　サイクリング　綱引き　馬術　競馬　ポロ　ロデオ　レイニング　障害競走　犬ぞりレース　スポーツスタッキング　ブーメラン　ラケッツ　ロック　スポールブール　チアリーディング　チアリーダー　ダンス　競技ダンス　縄跳び 相撲]
+
+
+###month
+
+<span class="ow">concept</span>:(months)[一月　二月　三月　四月　五月　六月　七月　しち月　九月　十月　十一月　十二月]
+
+
+###hello
+
+<span class="ow">concept</span>:(hello)[こんにちは　こんばんわ　ハロー　おはようございます　おはようさん　おはよう　おばんです　おばんどす　こんちわ　ちわっす]
+
+
+###jpj_golf
+<span class="ow">concept</span>:(japanesemengolfplayer)[&quot;藤田{ひろゆき}&quot;　&quot;たにぐち{とおる}&quot;　&quot;ぶれんだん{じょーんず}&quot;　&quot;池田{ゆうた}&quot;　&quot;ふじもと{よしのり}&quot;　&quot;はん{じゅんごん}&quot; &quot;{はん}じゅんごん&quot;　&quot;石川{りょう}&quot;　&quot;きむ{ひょんそん}&quot;　&quot;きむ{きょんて}&quot;　&quot;いきょんふん&quot; &quot;きょんふん&quot;　&quot;おだ{こうめい}&quot;　&quot;{おだ}こうめい&quot;　&quot;{むとう}たけのり&quot;　&quot;むとう{たけのり}&quot;　&quot;{たにはら}ひでと&quot;　&quot;たにはら{ひでと}&quot;　&quot;{はん}りー&quot;　&quot;はん{りー}&quot;　&quot;くぼたに{けんいち}&quot;　&quot;{くぼたに}けんいち&quot;　&quot;うえひら{まさみち}&quot;　&quot;{うえひら}まさみち&quot;　&quot;あいじぇい{じゃん}&quot;　&quot;{あいじぇい}じゃん&quot;　&quot;かたやま{しんご}&quot;　&quot;{かたやま}しんご&quot;　&quot;かみい{くにひろ}&quot;　&quot;{かみい}くにひろ&quot;　&quot;きむ{どふん}&quot;　&quot;{きむ}どふん&quot;　&quot;りゅー{ひゅぬ}&quot;　&quot;{りゅー}ひゅぬ&quot;　&quot;やました{かずひろ}&quot;　&quot;{やました}かずひろ&quot;　&quot;ぶらっど{けねでぃー}&quot;　&quot;{ぶらっど}けねでぃー&quot;　&quot;{こんどう}ともひろ&quot;　&quot;こんどう{ともひろ}&quot;　&quot;{こばやし}まさのり&quot;　&quot;こばやし{まさのり}&quot;　&quot;おだ{りゅういち}&quot;　&quot;{おだ}りゅういち&quot;　&quot;{じゅっぴぐ}ぱぐんさん&quot;　&quot;じゅっぴぐ{ぱぐんさん}&quot;　&quot;あしゅん{うー}&quot;　&quot;{あしゅん}うー&quot;　&quot;{ぷらやど}まーくせん&quot;　&quot;ぷらやど{まーくせん}&quot;　&quot;{みやざと}ゆうさく&quot;　&quot;みやざと{ゆうさく}&quot;　&quot;{じぇい}ちょい&quot;　&quot;じぇい{ちょい}&quot;]
+
+<span class="ow">concept</span>:(japanesewomengolfplayer)[&quot;{じょん}みじょん&quot;　&quot;じょん{みじょん}&quot;　&quot;いぼみ&quot;　&quot;ありむら{ちえ}&quot;　&quot;{ありむら}ちえ&quot;　&quot;{あん}そんじゅ&quot;　&quot;あん{そんじゅ}&quot;　&quot;さいき{みき}&quot;　&quot;{さいき}みき&quot;　&quot;ふぉん{しゃんしゃん}&quot;　&quot;{ふぉん}しゃんしゃん&quot;　&quot;もりた{りかこ}&quot;　&quot;{もりた}りかこ&quot;　&quot;いちひ&quot;　&quot;ぱく{いんび}&quot;　&quot;{ぱく}いんび&quot;　&quot;はっとり{まゆ}&quot;　&quot;{はっとり}まゆ&quot;]
+
+<span class="ow">concept</span>:(worldmengolfplayer)[&quot;{ろり}{まきろい}&quot;　&quot;{たいがー}{うっず}&quot;　&quot;{りゅーく}{どなるど}&quot;　&quot;{じゃすてぃん}{ろーず}&quot;　&quot;{るいす}{うーすとはいぜん}&quot;　&quot;{ぶらんど}{すねでかー}&quot;　&quot;{りー}{うぇすとうっど}&quot;　&quot;{ぶば}{わとそん}&quot;　&quot;だふなー&quot;]
+
+<span class="ow">concept</span>:(worldwomengolfplayer)[&quot;{ちぇ}なよん&quot;　&quot;ちぇ{なよん}&quot;　&quot;{ステイシー}るいす&quot;　&quot;ステイシー{るいす}&quot;　&quot;{やに}つぇん&quot;　&quot;やに{つぇん}&quot;　&quot;みやざと{あい}&quot;　&quot;{みやざと}あい&quot;　&quot;{りゅー}そよん&quot;　&quot;りゅー{そよん}&quot;　&quot;{あしん}じあい&quot;　&quot;あしん{じあい}&quot;　&quot;{むにょす}あざはら&quot;　&quot;むにょす{あざはら}&quot;　&quot;{すーざん}ぺたーせん&quot;　&quot;すーざん{ぺたーせん}&quot;]
+
+
+
+
+
+
+
+
+###jpj_cinema
+<span class="ow">concept</span>:(film)[となりのトトロ　スターウォーズ　スパイダーマン　ガンダム　ミッションインポッシブル　魔女の宅急便　アウトロー]
+
+
+
+
+
+
+
+###jpj_reading
+<span class="ow">concept</span>:(novel)[ノルウェーの森　1Q84 アンダーグラウンド　采配　神様のカルテ　共喰い　スティーブジョブズ　ディズニー　大聖堂]
+
+
+
+
+
+
+
+#booktypes
+<span class="ow">concept</span>:(book)[エッセー　小説　文学　SF　漫画　料理　建築　音楽　童話　絵本　美術　アート]
+
+<span class="ow">concept</span>:(book_difficult)[ビジネス　経済　政治 哲学]
+
+###jpj_riddles
+<span class="ow">concept</span>:(hayakuchi)[隣の客はよく柿食う客だ　東京特許許可局　青巻紙赤巻紙黄巻紙　すももも桃も桃のうち]
+
+
+
+#robot
+<span class="ow">concept</span>:(robot)[ドラえもん　ドラみちゃん　ミニどら　鉄腕アトム　ナオ　ウランちゃん　アシモ　アイボ　&quot;ムラタセイサク{君}&quot;　&quot;ムラタセイコ{ちゃん}&quot;　ガンダム　マクロス　ロボコン　ハル　エボルタ君　ルンバ コロ介　あられちゃん　&quot;鉄人28号&quot;　&quot;R2D2&quot;　ウォーリー　イヴ　C3PO　キュリオ　アクトロイド　トランスフォーマー キロボ　ターミネーター]
+
+#==================================================================#
+##### BirthDay #####
+#------------------------------------------------------------------#
+<span class="ow">concept</span>:(birth_day) [&quot;1日 $day=1&quot; &quot;2日 $day=2&quot; &quot;3日 $day=3&quot; &quot;4日 $day=4&quot; &quot;5日 $day=5&quot; &quot;6日 $day=6&quot; &quot;7日 $day=7&quot; &quot;8日 $day=8&quot; &quot;9日 $day=9&quot; &quot;10日 $day=10&quot; &quot;11日 $day=11&quot; &quot;12日 $day=12&quot; &quot;13日 $day=13&quot; &quot;14日 $day=14&quot; &quot;15日 $day=15&quot; &quot;16日 $day=16&quot; &quot;17日 $day=17&quot; &quot;18日 $day=18&quot; &quot;19日 $day=19&quot; &quot;20日 $day=20&quot; &quot;21日 $day=21&quot; &quot;22日 $day=22&quot; &quot;23日 $day=23&quot; &quot;24日 $day=24&quot; &quot;25日 $day=25&quot; &quot;26日 $day=26&quot; &quot;27日 $day=27&quot; &quot;28日 $day=28&quot; &quot;29日 $day=29&quot; &quot;30日 $day=30&quot; &quot;31日 $day=31&quot;]
+
+<span class="ow">concept</span>:(birth_month) [&quot;1月 $month=1&quot; &quot;2月 $month=2&quot; &quot;3月 $month=3&quot; &quot;4月 $month=4&quot; &quot;5月 $month=5&quot; &quot;6月 $month=6&quot; &quot;7月 $month=7&quot; &quot;8月 $month=8&quot; &quot;9月 $month=9&quot; &quot;10月 $month=10&quot; &quot;11月 $month=11&quot; &quot;12月 $month=12&quot;]
+
+<span class="ow">concept</span>:(birth_year) [1900 1901 1902 1903 1904 1905 1906 1907 1908 1909 1910 1911 1912 1913 1914 1915 1916 1917 1918 1919 1920 1921 1922 1923 1924 1925 1926 1927 1928 1929 1930 1931 1932 1933 1934 1935 1936 1937 1938 1939 1940 1941 1942 1943 1944 1945 1946 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957 1958 1959 1960 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016]
+
+
+#==================================================================#
+##### Food #####
+#------------------------------------------------------------------#
+<span class="ow">concept</span>:(fat_food) [&quot;ポテトフライ&quot; &quot;フライドポテト&quot; &quot;ハンバーガー&quot; &quot;ピザ&quot; &quot;パスタ&quot;] $foodtype=fat
+<span class="ow">concept</span>:(healthy_food) [&quot;サラダ&quot; &quot;スープ&quot;] $foodtype=healthy
+
+#==================================================================#
+##### Color #####
+#------------------------------------------------------------------#
+<span class="ow">concept</span>:(color) [&quot;赤 $color_enu=red&quot; &quot;青 $color_enu=blue&quot; &quot;緑 $color_enu=green&quot; &quot;黄色 $color_enu=yellow&quot; &quot;白 $color_enu=white&quot; &quot;ピンク $color_enu=pink&quot; &quot;紫 $color_enu=purple&quot; &quot;オレンジ $color_enu=orange&quot; &quot;褐色 $color_enu=brown&quot; &quot;黒 $color_enu=black&quot; &quot;グレー $color_enu=gray&quot;]
+
+#def:translateColor($color) [&quot;$color==black $color_jpj=黒&quot; &quot;$color==white $color_jpj=白&quot; &quot;$color==red $color_jpj=赤&quot; &quot;$color==orange $color_jpj=オレンジ&quot; &quot;$color==green $color_jpj=緑&quot; &quot;$color==blue $color_jpj=青&quot; &quot;$color==gray $color_jpj=グレー&quot; &quot;$color==yellow $color_jpj=黄色&quot;　&quot;$color==pink $color_jpj=ピンク&quot;]
+</pre></div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index_interaction.html">NAOqi Interaction engines</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../autonomouslife.html">ALAutonomousLife</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autonomousabilities/alautonomousblinking.html">ALAutonomousBlinking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autonomousabilities/albackgroundmovement.html">ALBackgroundMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autonomousabilities/albasicawareness.html">ALBasicAwareness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autonomousabilities/allisteningmovement.html">ALListeningMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../autonomousabilities/alspeakingmovement.html">ALSpeakingMovement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aldialog.html">ALDialog</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="lexicon.html">Dialog Lexicon</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="lexicon_english.html">English Lexicon</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Japanese Lexicon</a></li>
+<li class="toctree-l5"><a class="reference internal" href="lexicon_french.html">French Lexicon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

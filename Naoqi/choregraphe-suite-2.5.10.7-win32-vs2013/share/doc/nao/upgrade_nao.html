@@ -1,0 +1,637 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrading my NAO &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../index.html" />
+    <link rel="up" title="Taking care of NAO" href="taking-care.html" />
+    <link rel="next" title="Upgrading using NAOFlasher" href="../software/naoflasher/naoflasher.html" />
+    <link rel="prev" title="Best practices" href="practices.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="nao-upgrade_nao">
+                
+  <div class="section" id="upgrading-my-nao">
+<span id="software-update"></span><h1>Upgrading my <strong>NAO</strong><a class="headerlink" href="#upgrading-my-nao" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-an-automatic-update">
+<h2>Setting an automatic update<a class="headerlink" href="#setting-an-automatic-update" title="Permalink to this headline">¶</a></h2>
+<p>Once your <strong>Aldebaran</strong> robot has been updated with a <strong>2.x</strong> release,
+you can use the new <strong>Aldebaran Cloud</strong> to set an automatic system update.</p>
+<p>For further details, see: <a class="reference internal" href="nao_store_sysupdate.html#nao-store-sysupdate"><span>Setting automatic system update</span></a>.</p>
+</div>
+<div class="section" id="upgrading-my-nao-from-1-x-to-2-x">
+<span id="upgrade-from-1-to-2"></span><h2>Upgrading my <strong>NAO</strong> - from 1.x to 2.x<a class="headerlink" href="#upgrading-my-nao-from-1-x-to-2-x" title="Permalink to this headline">¶</a></h2>
+<p>To upgrade your <strong>NAO</strong> from version 1.x to 2.x, follow these steps:</p>
+<div class="section" id="making-nao-ready-for-upgrade">
+<span id="prepare-upgrade"></span><h3>1/4 - Making <strong>NAO</strong> ready for upgrade<a class="headerlink" href="#making-nao-ready-for-upgrade" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>NAO</strong> <em>only</em>: make sure your <strong>NAO</strong> is a <strong>V4</strong> or a <strong>V5</strong>.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../family/body_type.html#nao-family-nao-version"><span>NAO - Version</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Check the battery level.</p>
+<p><strong>Important</strong>: make sure the robot battery is fully charged: a power
+shortage during upgrading could leave the robot in a fatal state.</p>
+<p class="last"><strong>Tips</strong>: if your battery has a limited autonomy, you should leave
+the charger plugged during the upgrade. However it could be wise
+to order a new battery.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Make sure the sound level is high.</p>
+<p class="last">A very sensitive step will be prompted by a sound, you need to hear it.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Factory reset Option</strong>: if you plan to ask a <a class="reference internal" href="#factory-reset-nao"><span>Factory reset option</span></a>,
+get an Ethernet cable, and make sure you have all relevant information
+to restore the WiFi connection settings afterward.</p>
+<p class="last">For further details, see: <a class="reference internal" href="nao-connecting.html#nao-connecting"><span>Setting NAO&#8217;s WiFi connection</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uploading-the-release">
+<span id="choose-upgrade-mode-bis"></span><h3>2/4 - Uploading the release<a class="headerlink" href="#uploading-the-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Retrieve the <strong>NAO</strong> system image:</p>
+<p><code class="docutils literal"><span class="pre">nao-atom-system-image-x.x.opn</span></code> or</p>
+<p><code class="docutils literal"><span class="pre">opennao-atom-system-image-x.x.opn</span></code></p>
+<p class="last">You can download the latest release from <strong>Aldebaran Community</strong> website.
+For further details, see: <a class="reference internal" href="../dev/community_software.html#retrieving-software"><span>Downloading &amp; Installing SoftBank Robotics Software</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>In <strong>Choregraphe</strong>, choose <strong>Connection</strong> &gt; <strong>Advanced</strong> &gt;
+<strong>Update robot system</strong>.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>A wizard opens asking for your robot password.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Type the password of your robot.</p>
+<ul class="simple">
+<li><strong>Password</strong> is the password you have set on <a class="reference internal" href="webpage.html#webpage-nao"><span>NAO Web page</span></a>.</li>
+</ul>
+<p class="last">Then click the <strong>Next</strong> button.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Select the system image to upload.</p>
+<p class="last">Then click the <strong>Next</strong> button.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="6">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Choose between a simple <strong>update</strong> or a <strong>factory reset</strong>.</p>
+<p>For further details, see: <a class="reference internal" href="#factory-reset-nao"><span>Factory reset option</span></a>.</p>
+<p class="last">Then click the <strong>Update</strong> button.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="7">
+<li></li>
+</ol>
+</td>
+<td><p class="first">A progression bar is displayed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not switch the robot off while the flashing process is running.</p>
+</div>
+<p class="last">Then a message let you know you can shut down and restart your robot.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="8">
+<li></li>
+</ol>
+</td>
+<td>Click the <strong>Finish</strong> or <strong>Restart robot now</strong> button.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Troubleshooting</em></p>
+<ul>
+<li><p class="first">If something goes wrong during the system update process, and
+<strong>Choregraphe</strong> ends it prematurely, an <strong>error message</strong> is given in the
+wizard.</p>
+<p>For further details, see:
+<a class="reference internal" href="../software/choregraphe/troubleshooting.html#choregraphe-troubleshooting-errorcode"><span>Robot system update failure</span></a>.</p>
+</li>
+<li><p class="first">For specific cases, if you cannot use <strong>Choregraphe</strong> to upload the system,
+you may also use <strong>NAOFlasher</strong>.</p>
+<p>Note that this method, is more complex and requires a USB key and sometimes an
+Ethernet cable.
+For further details, see: <a class="reference internal" href="../software/naoflasher/naoflasher.html#naoflasher-upgrade"><span>Upgrading using NAOFlasher</span></a>.</p>
+</li>
+</ul>
+<div class="section" id="factory-reset-option">
+<span id="factory-reset-nao"></span><h4>Factory reset option<a class="headerlink" href="#factory-reset-option" title="Permalink to this headline">¶</a></h4>
+<p>The <strong>Factory reset</strong> option resets the whole system in a similar state
+as if the robot was just out of the factory.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>After a <strong>Factory reset</strong>:</p>
+<ul class="last simple">
+<li>all user&#8217;s data put on the robot will be irreparably lost;</li>
+<li>all settings will be reset to their default values.</li>
+</ul>
+</div>
+<p><strong>When should I do a Factory reset</strong></p>
+<p>When:</p>
+<ul class="simple">
+<li>You need to <strong>downgrade</strong> to a <em>former</em> <strong>NAOqi</strong> software release.</li>
+<li>Something goes wrong,
+and <strong>NAO</strong> does not boot normally anymore.</li>
+<li>You have lost the <strong>password</strong> of your robot,
+and cannot connect to the <a class="reference internal" href="webpage.html#webpage-nao"><span>NAO Web page</span></a>.</li>
+<li>You want to completely reset <strong>NAO</strong> to a known state.</li>
+</ul>
+<p><strong>When should I simply upgrade</strong></p>
+<p>When:</p>
+<ul class="simple">
+<li><strong>NAO</strong> boots normally,</li>
+<li>you do not want to use a release older than the current one, and</li>
+<li>you want to keep all user&#8217;s data and settings.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="restarting-nao-to-launch-the-upgrade">
+<span id="launching-upgrade"></span><h3>3/4 - Restarting <strong>NAO</strong> to launch the upgrade<a class="headerlink" href="#restarting-nao-to-launch-the-upgrade" title="Permalink to this headline">¶</a></h3>
+<p>To restart <strong>NAO</strong> after a system update:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Press and hold the robot <strong>Chest</strong> button for about 5 seconds until
+it gets blue.</p>
+<p>Ear LEDs shows the progression.</p>
+<p class="last">For further details, see: <img alt="nao" class="img-inline" src="../_images/nao.png" /> <a class="reference internal" href="boot_process_nao.html#upgrading-process-nao"><span>Upgrading</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>Remain alert</strong>: a strong beep sound (echoing), indicates that one of
+the cards has its firmware updated.
+This could occur once or several times according to the
+release content (i.e. the number of firmwares to update).</p>
+<p><strong>Warning</strong>: it may occur, on some robots, that the upgrade of the card
+controlling the <strong>Inertial sensor</strong> gets disturbed when the charger is plugged.
+In that case, the upgrade will be retried, up to 6 times, so you should hear
+the sound many times.</p>
+<p class="last"><strong>Tips</strong>: in order to avoid this problem, simply unplug the charger once you
+have heard the first sound.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Optionally, in case of persistent disturbances <strong>Aldebaran</strong> robot may say:
+&#8220;To complete my upgrade, please make sure that I am well charged,
+unplug my charger and re-boot me&#8221;.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">When the upgrade process is completed, <strong>Aldebaran</strong> robot may ask you to perform an
+auto-diagnostic by saying: &#8220;put me in an open space on the floor
+and touch my head or my bumper ...&#8221;.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">During this auto-diagnostic, all safety reflexes are intentionally
+removed: do not shake nor push your <strong>Aldebaran</strong> robot and make sure it is
+in a safe place.</p>
+</div>
+<p class="last">If you don&#8217;t feel confident about the upgrade, for example if a repeated sound
+makes you think that the inertial sensor card may not be properly updated,
+do not proceed as asked and shutdown the robot:
+It gives you another chance to perform the upgrade properly.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first"><strong>NAOFlasher option</strong>: do not forget to remove the USB stick from
+<strong>Aldebaran</strong> robot&#8217;s head and to close the <a class="reference internal" href="../family/robots/connectivity_nao.html#term-hatch-behind-the-head-of-the-robot"><span class="xref std std-term">Hatch behind the head of the robot</span></a>.</p>
+<p><strong>Factory reset option</strong>: if you have requested a <a class="reference internal" href="#factory-reset-nao"><span>Factory reset option</span></a>,
+then all settings have been reset, therefore you need to restore the WiFi
+connection settings.</p>
+<p class="last">For further details, see: <a class="reference internal" href="nao-connecting.html#nao-connecting"><span>Setting NAO&#8217;s WiFi connection</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="last-checking">
+<span id="check-upgrade"></span><h3>4/4 - Last checking<a class="headerlink" href="#last-checking" title="Permalink to this headline">¶</a></h3>
+<p>The tricky upgrade of the <strong>Inertial sensor</strong> card could put your robot in danger,
+so better double-check that everything went well before performing acrobatics!</p>
+<p>So make sure the <strong>Fall Manager reflex</strong> is activated or at least available on the
+<img alt="nao" class="img-inline" src="../_images/nao.png" /> <span class="xref std std-ref">opennao-web-page-settings_nao</span>.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><strong>NAO</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction_nao.html">First steps with <strong>NAO</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_nao.html">Apps 2.1 Store</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="taking-care.html">Taking care of NAO</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="replacing-battery.html">Replacing the battery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="removing-head.html">Removing <strong>NAO</strong>&#8216;s head</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contacting_support.html">Contacting customer support for <strong>NAO</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="practices.html">Best practices</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Upgrading my <strong>NAO</strong></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../software/naoflasher/naoflasher.html">Upgrading using NAOFlasher</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="understanding_nao.html">More details about <strong>NAO</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><strong>NAO</strong> - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Upgrading my <strong>NAO</strong></a><ul>
+<li><a class="reference internal" href="#setting-an-automatic-update">Setting an automatic update</a></li>
+<li><a class="reference internal" href="#upgrading-my-nao-from-1-x-to-2-x">Upgrading my <strong>NAO</strong> - from 1.x to 2.x</a><ul>
+<li><a class="reference internal" href="#making-nao-ready-for-upgrade">1/4 - Making <strong>NAO</strong> ready for upgrade</a></li>
+<li><a class="reference internal" href="#uploading-the-release">2/4 - Uploading the release</a><ul>
+<li><a class="reference internal" href="#factory-reset-option">Factory reset option</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restarting-nao-to-launch-the-upgrade">3/4 - Restarting <strong>NAO</strong> to launch the upgrade</a></li>
+<li><a class="reference internal" href="#last-checking">4/4 - Last checking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../glossary.html">Glossary</a>
+      <a title="Site map" href="../contents.html">Site map</a>
+      <a title="Index" href="../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1934 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qi::Promise, qi::Future &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../../../index.html" />
+    <link rel="up" title="C++ qi base API" href="index.html" />
+    <link rel="next" title="qi::Future groups" href="futuregroup.html" />
+    <link rel="prev" title="qi::EventLoop" href="eventloop.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-api-cpp-base-future">
+                
+  <div class="section" id="qi-promise-qi-future">
+<h1>qi::Promise, qi::Future<a class="headerlink" href="#qi-promise-qi-future" title="Permalink to this headline">¶</a></h1>
+<p>The promise and future concepts allow one to provide a result asynchronously.
+The implementor creates a promise for the result and returns the future
+contained in the promise. The caller can then use the result of the future
+later.</p>
+<p>You can see a <a class="reference internal" href="#future-usage"><span>complete usage example</span></a> at the end of this
+document.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<strong><p class="rubric">Global Namespaces</p>
+</strong><ul>
+<li><p class="first">namespace qi</p>
+<dl class="docutils">
+<strong><p class="rubric">Classes (namespace qi)</p>
+</strong><ul>
+<li><p class="first">class qi::Future</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::Future)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::Future:T:::then__FutureCallbackType.AFRR">qi::Future&lt;T&gt;::then</a><p><a class="reference internal" href="#qi::Future:T:::_connect__boost::function:void:CR">qi::Future&lt;T&gt;::_connect</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::castto-ValueTypeCastCR-operatorC">qi::Future&lt;T&gt;::operator const ValueTypeCast&amp;</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::uniqueIdC">qi::Future&lt;T&gt;::uniqueId</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::thenR__FutureCallbackType.AFRR">qi::Future&lt;T&gt;::thenR</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::Future">qi::Future&lt;T&gt;::Future</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::andThen__FutureCallbackType.AFRR">qi::Future&lt;T&gt;::andThen</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::assign-operator__Future:T:CR">qi::Future&lt;T&gt;::operator=</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::cancel">qi::Future&lt;T&gt;::cancel</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::isCancelableC">qi::Future&lt;T&gt;::isCancelable</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::hasError__iC">qi::Future&lt;T&gt;::hasError</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::makeCanceler">qi::Future&lt;T&gt;::makeCanceler</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::hasValue__iC">qi::Future&lt;T&gt;::hasValue</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::sync">qi::Future&lt;T&gt;::sync</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::isFinishedC">qi::Future&lt;T&gt;::isFinished</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::error__iC">qi::Future&lt;T&gt;::error</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::wait__iC">qi::Future&lt;T&gt;::wait</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::waitUntil__qi::SteadyClock::time_pointC">qi::Future&lt;T&gt;::waitUntil</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::lt-operator__Future:T:CRC">qi::Future&lt;T&gt;::operator&lt;</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::impl">qi::Future&lt;T&gt;::impl</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::value__iC">qi::Future&lt;T&gt;::value</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::isValidC">qi::Future&lt;T&gt;::isValid</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::isRunningC">qi::Future&lt;T&gt;::isRunning</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::andThenR__FutureCallbackType.AFRR">qi::Future&lt;T&gt;::andThenR</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::isCanceledC">qi::Future&lt;T&gt;::isCanceled</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::eq-operator__Future:T:CRC">qi::Future&lt;T&gt;::operator==</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::waitFor__qi::DurationC">qi::Future&lt;T&gt;::waitFor</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::connectWithStrand__qi::StrandP.boost::function:void__X:CR">qi::Future&lt;T&gt;::connectWithStrand</a></p>
+<p><a class="reference internal" href="#qi::Future:T:::connect__AFCR.FutureCallbackType">qi::Future&lt;T&gt;::connect</a></p>
+</ul>
+</dl>
+</li>
+<li><p class="first">class qi::Promise</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::Promise)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::Promise:T:::isCancelRequestedC">qi::Promise&lt;T&gt;::isCancelRequested</a><p><a class="reference internal" href="#qi::Promise:T:::Promise__FutureCallbackType">qi::Promise&lt;T&gt;::Promise</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::setOnCancel__boost::function:void__X:">qi::Promise&lt;T&gt;::setOnCancel</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::setValue__ValueTypeCR">qi::Promise&lt;T&gt;::setValue</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::value">qi::Promise&lt;T&gt;::value</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::~Promise">qi::Promise&lt;T&gt;::~Promise</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::trigger">qi::Promise&lt;T&gt;::trigger</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::setError__ssCR">qi::Promise&lt;T&gt;::setError</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::setCanceled">qi::Promise&lt;T&gt;::setCanceled</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::assign-operator__Promise:T:CR">qi::Promise&lt;T&gt;::operator=</a></p>
+<p><a class="reference internal" href="#qi::Promise:T:::futureC">qi::Promise&lt;T&gt;::future</a></p>
+</ul>
+</dl>
+</li>
+<li><p class="first">class qi::FutureSync</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::FutureSync)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::FutureSync:T:::assign-operator__FutureSync:T:CR">qi::FutureSync&lt;T&gt;::operator=</a><p><a class="reference internal" href="#qi::FutureSync:T:::lt-operator__FutureSync:T:CRC">qi::FutureSync&lt;T&gt;::operator&lt;</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::_connect__boost::function:void:CR">qi::FutureSync&lt;T&gt;::_connect</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::isValidC">qi::FutureSync&lt;T&gt;::isValid</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::castto-Future:T:-operator">qi::FutureSync&lt;T&gt;::operator Future&lt;T&gt;</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::wait__iC">qi::FutureSync&lt;T&gt;::wait</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::value__iC">qi::FutureSync&lt;T&gt;::value</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::waitUntil__qi::SteadyClock::time_pointC">qi::FutureSync&lt;T&gt;::waitUntil</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::uniqueIdC">qi::FutureSync&lt;T&gt;::uniqueId</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::hasValue__iC">qi::FutureSync&lt;T&gt;::hasValue</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::castto-typename-Future:T:::ValueTypeCastCR-operatorC">qi::FutureSync&lt;T&gt;::operator const typename Future&lt;T&gt;::ValueTypeCast&amp;</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::error__iC">qi::FutureSync&lt;T&gt;::error</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::isRunningC">qi::FutureSync&lt;T&gt;::isRunning</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::isCancelableC">qi::FutureSync&lt;T&gt;::isCancelable</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::waitFor__qi::DurationC">qi::FutureSync&lt;T&gt;::waitFor</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::connect__ConnectionCR">qi::FutureSync&lt;T&gt;::connect</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::async">qi::FutureSync&lt;T&gt;::async</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::isFinishedC">qi::FutureSync&lt;T&gt;::isFinished</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::FutureSync">qi::FutureSync&lt;T&gt;::FutureSync</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::isCanceledC">qi::FutureSync&lt;T&gt;::isCanceled</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::hasError__iC">qi::FutureSync&lt;T&gt;::hasError</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::cancel">qi::FutureSync&lt;T&gt;::cancel</a></p>
+<p><a class="reference internal" href="#qi::FutureSync:T:::~FutureSync">qi::FutureSync&lt;T&gt;::~FutureSync</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+<strong><p class="rubric">Functions (namespace qi)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::PromiseNoop__X">qi::PromiseNoop</a></ul>
+</dl>
+</li>
+</ul>
+</dl>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qi-future">
+<h3>qi::Future<a class="headerlink" href="#qi-future" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> provides a way to wait for and get the result of an asynchronous
+operation. It is the receiving end of a <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Future</span></code></a> - <a class="reference internal" href="#qi::Promise" title="qi::Promise"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Promise</span></code></a> pair.</p>
+<p><em>Future</em> is templated by the type of the underlying value. <em>void</em> is permitted.</p>
+<div class="section" id="the-different-states-of-a-future">
+<h4>The different states of a Future<a class="headerlink" href="#the-different-states-of-a-future" title="Permalink to this headline">¶</a></h4>
+<p>A future can be in multiple states represented by <code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureState</span></code>:</p>
+<ul class="simple">
+<li>FutureState_None: The Future is not tied to a Promise, and will never change
+state.</li>
+<li>FutureState_Running: The future is tied to a Promise, and the asynchronous
+operation has not finished yet.</li>
+<li>FutureState_Canceled: The operation was successfully canceled.</li>
+<li>FutureState_FinishedWithError: The operation finished with an error.</li>
+<li>FutureState_FinishedWithValue: The operation finished and its return value is
+available.</li>
+</ul>
+</div>
+<div class="section" id="getting-the-state-and-waiting-for-a-future">
+<h4>Getting the state and waiting for a Future<a class="headerlink" href="#getting-the-state-and-waiting-for-a-future" title="Permalink to this headline">¶</a></h4>
+<p>There are multiple ways to handle a future. The first is to use the
+<a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Future&lt;T&gt;::value</span></code></a> method. In that case, the call will block until the
+Future leaves the <em>running</em> state.  Then if a value if available, it will be
+returned. Otherwise a <code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureException</span></code> will be raised:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">someOperation</span><span class="p">();</span>
+
+<span class="kt">int</span> <span class="nf">callIt</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">someOperation</span><span class="p">().</span><span class="n">value</span><span class="p">();</span> <span class="c1">// wait, then get the value or throw</span>
+  <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you do not wish to wait forever, or want to handle Future error without
+catching an exception, you can use <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future&lt;T&gt;::wait</span></code></a> (timeout):
+this function waits at most the specified time in milliseconds, and return
+a <code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureState</span></code>. You can then safely call <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future&lt;T&gt;::value</span></code></a> or
+<a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future&lt;T&gt;::error</span></code></a>, if future is in state <code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureState_FinishedWithValue</span></code> or
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureState_FinishedWithError</span></code> respectively:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">someOperation</span><span class="p">();</span>
+<span class="k">switch</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="p">{</span>
+   <span class="k">case</span> <span class="nl">FutureState_Running</span><span class="p">:</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Still not ready&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">break</span><span class="p">;</span>
+   <span class="k">case</span> <span class="nl">FutureState_Canceled</span><span class="p">:</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Canceled&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">break</span><span class="p">;</span>
+   <span class="k">case</span> <span class="nl">FutureState_FinishedWithError</span><span class="p">:</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">.</span><span class="n">error</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">break</span><span class="p">;</span>
+   <span class="k">case</span> <span class="nl">FutureState_FinishedWithValue</span><span class="p">:</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Value: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">.</span><span class="n">value</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+     <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="future-notification">
+<h4>Future notification<a class="headerlink" href="#future-notification" title="Permalink to this headline">¶</a></h4>
+<p>Alternatively, you can get notified of Future completion asynchronously using
+<a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future&lt;T&gt;::connect</span></code></a>. This function accepts a callback function or
+functor with signature <code class="docutils literal"><span class="pre">void</span> <span class="pre">(qi::Future&lt;T&gt;</span> <span class="pre">f)</span></code>.</p>
+<p>The Future guarantees you that your callback function will be called once and
+only once, when or if the Future leaves the <em>Running</em> state (that is, enters
+one of <em>Canceled</em>, <em>FinishedWithError</em> or <em>FinishedWithValue</em>):</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">myCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">f</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FutureState</span> <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span> <span class="c1">// will return immediately, Future has finished.</span>
+  <span class="k">switch</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{...}</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+<span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">someOperation</span><span class="p">();</span>
+<span class="n">f</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myCallback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p id="future-connect">connect() accepts extra arguments after the callback: values or placeholders
+that will be bound to the call(similarly to how <code class="docutils literal"><span class="pre">boost::bind</span></code> works). If
+the first argument is a <code class="docutils literal"><span class="pre">boost::weak_ptr</span></code>, or inherits from <a class="reference internal" href="trackable.html#qi::Trackable" title="qi::Trackable"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Trackable</span></code></a>,
+then the callback will not be called if the weak_ptr cannot be locked, or
+if the Trackable was destroyed:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">onOpFinished</span><span class="p">(</span><span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">op</span><span class="p">,</span> <span class="kt">int</span> <span class="n">opNumber</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">safe_async_op</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">opNumber</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">future</span> <span class="o">=</span> <span class="n">someOperation</span><span class="p">();</span>
+  <span class="c1">// This version will keep foo alive at least until the Future finished</span>
+  <span class="n">future</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Foo</span><span class="o">::</span><span class="n">onOpFinished</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">_1</span><span class="p">,</span> <span class="n">opNumber</span><span class="p">);</span>
+  <span class="c1">// This version is safe in case foo is destroyed before the Future finishes.</span>
+  <span class="n">future</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Foo</span><span class="o">::</span><span class="n">onOpFinished</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="n">foo</span><span class="p">),</span> <span class="n">_1</span><span class="p">,</span> <span class="n">opNumber</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="future-callback-synchronousness">
+<h4>Future callback synchronousness<a class="headerlink" href="#future-callback-synchronousness" title="Permalink to this headline">¶</a></h4>
+<p>The callback can be run in two modes that we call Sync and Async. Async means
+that the callback will be run in its own thread. Sync means one of the two:</p>
+<ul class="simple">
+<li>if the future is finished when connect() is called, the callback is run on
+that same thread and connect() will block</li>
+<li>if the future is not yet finished when connect() is called, the callback will
+be run on the promise thread and setValue() will block</li>
+</ul>
+<p>There are two parameters that influence if the call will be Sync or Async. The
+algorithm is the following:</p>
+<ul class="simple">
+<li>if the type argument in connect() is different from Auto, respect it</li>
+<li>if the type argument of the Promise constructor is different from Auto,
+respect it</li>
+<li>otherwise, be asynchronous</li>
+</ul>
+</div>
+<div class="section" id="future-cancellation">
+<h4>Future cancellation<a class="headerlink" href="#future-cancellation" title="Permalink to this headline">¶</a></h4>
+<p>An async operation that returns a Future can support cancellation.</p>
+<p>You can try to abort the operation by calling <code class="xref cpp cpp-guess docutils literal"><span class="pre">cancel</span></code>. Depending on the
+operation implementation and on the timing of your call, your cancel request
+might be ignored (for example, if it is received too late and a value is
+already available). But you can expect the Future to hastily leave the
+<em>Running</em> state one way or an other.</p>
+<p>A helper container, <a class="reference internal" href="futuregroup.html#qi::ScopedFutureGroup" title="qi::ScopedFutureGroup"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::ScopedFutureGroup</span></code></a>, can be used to manage a set of
+futures that must be cancelled once the container is destroyed.
+It helps managing automatically future cancelation when destroying a system
+which is represented by a class.</p>
+</div>
+</div>
+<div class="section" id="qi-promise">
+<h3>qi::Promise<a class="headerlink" href="#qi-promise" title="Permalink to this headline">¶</a></h3>
+<p id="api-promise">A <a class="reference internal" href="#qi::Promise" title="qi::Promise"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Promise</span></code></a> is an object that can create and satisfy a <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Future</span></code></a>.
+Like <em>Future</em>, it has shared semantics (all copies of a Promise represent the
+same object). The next example illustrates it&#8217;s basic use case:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myFunctionReturningAFuture</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">;</span>
+  <span class="c1">// start an asynchronous operation, holding the promise</span>
+  <span class="c1">// note that starting threads like that is bad practice, use qi::async</span>
+  <span class="n">boost</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span><span class="n">someAsynchronousOp</span><span class="p">,</span> <span class="n">promise</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">promise</span><span class="p">.</span><span class="n">future</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">someAsynchronousOp</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">try</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">performSomeTask</span><span class="p">();</span>
+    <span class="n">promise</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">catch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">promise</span><span class="p">.</span><span class="n">setError</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In plain English:</p>
+<ul class="simple">
+<li>Create a <a class="reference internal" href="#qi::Promise" title="qi::Promise"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise</span></code></a> and return the <code class="docutils literal"><span class="pre">future()</span></code> obtained with
+<a class="reference internal" href="#qi::Promise:T:::futureC" title="qi::Promise&lt;T&gt;::future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::future</span></code></a>.</li>
+<li>Transmit the <em>Promise</em> to the asynchronously executing code.</li>
+<li>Notify of successful completion with <a class="reference internal" href="#qi::Promise:T:::setValue__ValueTypeCR" title="qi::Promise&lt;T&gt;::setValue"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::setValue</span></code></a> or
+<a class="reference internal" href="#qi::Promise:T:::setError__ssCR" title="qi::Promise&lt;T&gt;::setError"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::setError</span></code></a>.</li>
+<li>Only one of the two functions above must be called, and only once per
+<a class="reference internal" href="#qi::Promise" title="qi::Promise"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise</span></code></a>.</li>
+</ul>
+<div class="section" id="supporting-cancellation">
+<h4>Supporting cancellation<a class="headerlink" href="#supporting-cancellation" title="Permalink to this headline">¶</a></h4>
+<p>In order to support cancellation of your asynchronous operation you can either
+provide a callback with signature <code class="docutils literal"><span class="pre">void(qi::Promise&lt;T&gt;)</span></code> to the <a class="reference internal" href="#qi::Promise" title="qi::Promise"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise</span></code></a>
+constructor or use <a class="reference internal" href="#qi::Promise:T:::isCancelRequestedC" title="qi::Promise&lt;T&gt;::isCancelRequested"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::isCancelRequested</span></code></a> to check at a given point
+if the user requested a cancellation.</p>
+<p>If you provide a callback, it will be called if a cancellation request is
+received by a connected <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a>. This callback is expected to ensure that
+the connected <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> hastily leaves the <em>Running</em> state, by calling one of
+<a class="reference internal" href="#qi::Promise:T:::setValue__ValueTypeCR" title="qi::Promise&lt;T&gt;::setValue"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::setValue</span></code></a>, <a class="reference internal" href="#qi::Promise:T:::setError__ssCR" title="qi::Promise&lt;T&gt;::setError"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::setError</span></code></a> and <a class="reference internal" href="#qi::Promise:T:::setCanceled" title="qi::Promise&lt;T&gt;::setCanceled"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Promise::setCanceled</span></code></a>.
+However this call does not have to be made synchronously in the cancellation
+callback.</p>
+<p>You can see <a class="reference internal" href="#future-usage-cancel"><span>an example with cancellation support</span></a> at
+the end of this document.</p>
+</div>
+<div class="section" id="controlling-callback-execution">
+<h4>Controlling callback execution<a class="headerlink" href="#controlling-callback-execution" title="Permalink to this headline">¶</a></h4>
+<p>When one of the three state-changing functions listed above is called on
+a <em>Promise</em>, callbacks registered to the connected <em>Future</em> will be
+invoked. You can control whether this invocation is made synchronously,
+or asynchronously using a thread from an internal thread pool, by passing
+one of <em>FutureCallbackType_Sync</em> and <em>FutureCallbackType_Async</em> to the
+<em>Promise</em> constructor.</p>
+</div>
+</div>
+<div class="section" id="qi-futuresync">
+<h3>qi::FutureSync<a class="headerlink" href="#qi-futuresync" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FutureSync</span></code> is a lightweight wrapper on top of
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Future</span></code> that will wait on the <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> in its destructor
+if the <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> was ignored by the user.</p>
+<p>It is intended to be used as a way to provide a default apparent
+synchronous-blocking behavior to a function, that can be changed into
+an asynchronous behavior by handling the resulting <a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a>.</p>
+<div class="section" id="returning-a-futuresync">
+<h4>Returning a FutureSync<a class="headerlink" href="#returning-a-futuresync" title="Permalink to this headline">¶</a></h4>
+<p>You can simply change the returned type from <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> to <a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a> in the
+<a class="reference internal" href="#api-promise"><span>basic example</span></a>. The returned <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> will transparently
+convert to a <a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a>.</p>
+</div>
+<div class="section" id="calling-a-function-returning-a-futuresync">
+<h4>Calling a function returning a FutureSync<a class="headerlink" href="#calling-a-function-returning-a-futuresync" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a> follow this simple rule: The destructor will call
+<a class="reference internal" href="#qi::Future:T:::wait__iC" title="qi::Future&lt;T&gt;::wait"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future::wait</span></code></a> from its destructor, unless:</p>
+<ul class="simple">
+<li>It is copied into another <a class="reference internal" href="#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Future</span></code></a> or <a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a></li>
+<li><a class="reference internal" href="#qi::FutureSync:T:::async" title="qi::FutureSync&lt;T&gt;::async"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync::async</span></code></a> or any of the Future function is called (<code class="xref cpp cpp-guess docutils literal"><span class="pre">wait</span></code>,
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">connect</span></code>, ...)</li>
+</ul>
+<p><a class="reference internal" href="#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">FutureSync</span></code></a> also has a cast operator that allows you to use the returned value
+transparently.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">FutureSync</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">someFunction</span><span class="p">();</span>
+
+<span class="kt">void</span> <span class="nf">test</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">someFunction</span><span class="p">();</span> <span class="c1">// will wait</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FutureSync</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">someFunction</span><span class="p">();</span> <span class="c1">// will wait at end of scope</span>
+  <span class="n">someFunction</span><span class="p">().</span><span class="n">async</span><span class="p">();</span>                 <span class="c1">// will not wait</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">someFunction</span><span class="p">();</span>    <span class="c1">// will not wait</span>
+  <span class="n">someFunction</span><span class="p">().</span><span class="n">value</span><span class="p">();</span>                 <span class="c1">// will wait, because of value()</span>
+  <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">someFunction</span><span class="p">();</span>               <span class="c1">// will wait, does the same as</span>
+                                          <span class="c1">// value(), may throw on error</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implementing-an-asynchronous-function">
+<span id="future-usage"></span><h3>Implementing an asynchronous function<a class="headerlink" href="#implementing-an-asynchronous-function" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="simple-implementation">
+<h4>Simple implementation<a class="headerlink" href="#simple-implementation" title="Permalink to this headline">¶</a></h4>
+<p>Here is an example of an asynchronous function implementation that supports
+cancellation.</p>
+<p>Let&#8217;s implement this class and make <code class="docutils literal"><span class="pre">calculate()</span></code> asynchronous.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Worker</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">calculate</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>First, <code class="docutils literal"><span class="pre">calculate</span></code> must return a future and we must create a function to do
+the actual work.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/future.hpp&gt;</span>
+
+<span class="k">class</span> <span class="nc">Worker</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">calculate</span><span class="p">();</span>
+
+  <span class="k">private</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">doWork</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>For the sake of this example, we&#8217;ll use a simple function to simulate work:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">Worker</span><span class="o">::</span><span class="n">doWork</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">os</span><span class="o">::</span><span class="n">msleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// working...</span>
+    <span class="n">acc</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">promise</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And then, we must call this function asynchronously and return the
+corresponding future:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Worker</span><span class="o">::</span><span class="n">calculate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">;</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Worker</span><span class="o">::</span><span class="n">doWork</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">promise</span><span class="p">));</span>
+  <span class="k">return</span> <span class="n">promise</span><span class="p">.</span><span class="n">future</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, <code class="docutils literal"><span class="pre">calculate</span></code> is asynchronous! But this isn&#8217;t useful at all, our code is
+more complex and this could have been done just by calling <a class="reference internal" href="eventloop.html#qi::async__boost::function:R:.uint64_t" title="qi::async"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::async</span></code></a>. What we
+can do now is to support cancellation so that one can call <code class="xref cpp cpp-guess docutils literal"><span class="pre">cancel()</span></code> on the
+returned future to abort the action.</p>
+</div>
+<div class="section" id="cancellation-support">
+<span id="future-usage-cancel"></span><h4>Cancellation support<a class="headerlink" href="#cancellation-support" title="Permalink to this headline">¶</a></h4>
+<p>Promises can support cancellation either using a cancellation callback or
+checking if a cancel request has been made. This example shows the second
+solution.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">Worker</span><span class="o">::</span><span class="n">calculate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">;</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Worker</span><span class="o">::</span><span class="n">doWork</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">promise</span><span class="p">));</span>
+  <span class="k">return</span> <span class="n">promise</span><span class="p">.</span><span class="n">future</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">doWork()</span></code> can now check if the future has been cancelled.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">Worker</span><span class="o">::</span><span class="n">doWork</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">Promise</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">promise</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">promise</span><span class="p">.</span><span class="n">isCancelRequested</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;cancel requested&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="n">promise</span><span class="p">.</span><span class="n">setCanceled</span><span class="p">();</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">os</span><span class="o">::</span><span class="n">msleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// working...</span>
+    <span class="n">acc</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">promise</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">acc</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="E_qi::FutureState">
+<!--[E_qi::FutureState]--><em>enum</em> <code class="descname">qi::FutureState</code><a class="headerlink" href="#E_qi::FutureState" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Brief</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FutureState_None</span></code></td>
+<td>Future is not tied to a promise. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">FutureState_Running</span></code></td>
+<td>Operation pending. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FutureState_Canceled</span></code></td>
+<td>The future has been canceled. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">FutureState_FinishedWithError</span></code></td>
+<td>The operation is finished with an error. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FutureState_FinishedWithValue</span></code></td>
+<td>The operation is finished with a value. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="qi-future-class-reference">
+<h3>qi::Future Class Reference<a class="headerlink" href="#qi-future-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/future.hpp&gt;</span>
+</pre></div>
+</div>
+<ul>
+<li><strong>Inherits: </strong><code class="docutils literal"><span class="pre">qi::detail::AddUnwrap&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span></code></li>
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Future:T:::Future"><code class="xref cpp cpp-func docutils literal"><span class="pre">Future</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Future:T:::Future__Future:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">Future</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::eq-operator__Future:T:CRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator==</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>Future&lt;T&gt;&amp;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::assign-operator__Future:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::lt-operator__Future:T:CRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator&lt;</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureUniqueId</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::uniqueIdC"><code class="xref cpp cpp-func docutils literal"><span class="pre">uniqueId</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::isValidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isValid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Future:T:::Future__ValueTypeCR.FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">Future</span></code></a></code><span class="sig-paren">(</span>const ValueType&amp; <em>v</em>, FutureCallbackType <em>async</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>const ValueType&amp;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::value__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">value</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Future:T:::castto-ValueTypeCastCR-operatorC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator</span> <span class="pre">const</span> <span class="pre">ValueTypeCast&amp;</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::wait__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::wait__qi::DurationC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>qi::Duration <em>duration</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::waitFor__qi::DurationC"><code class="xref cpp cpp-func docutils literal"><span class="pre">waitFor</span></code></a></code><span class="sig-paren">(</span>qi::Duration <em>duration</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::wait__qi::SteadyClock::time_pointC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>qi::SteadyClock::time_point <em>timepoint</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::waitUntil__qi::SteadyClock::time_pointC"><code class="xref cpp cpp-func docutils literal"><span class="pre">waitUntil</span></code></a></code><span class="sig-paren">(</span>qi::SteadyClock::time_point <em>timepoint</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::isFinishedC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isFinished</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::isRunningC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isRunning</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::isCanceledC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isCanceled</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::hasError__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">hasError</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::hasValue__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">hasValue</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::error__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">error</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureSync&lt;T&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::sync"><code class="xref cpp cpp-func docutils literal"><span class="pre">sync</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::cancel"><code class="xref cpp cpp-func docutils literal"><span class="pre">cancel</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::isCancelableC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isCancelable</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF&gt;</dt>
+<dt>
+<span>Future&lt;R&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::thenR__FutureCallbackType.AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">thenR</span></code></a></code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF&gt;</dt>
+<dt>
+<span>Future&lt;R&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::thenR__AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">thenR</span></code></a></code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF, typename Arg0, typename... Args&gt;</dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF, typename Arg0, typename... Args&gt;</dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename AF&gt;</dt>
+<dt>
+<span>auto</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::then__FutureCallbackType.AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">then</span></code></a></code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename AF&gt;</dt>
+<dt>
+<span>auto</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::then__AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">then</span></code></a></code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF&gt;</dt>
+<dt>
+<span>Future&lt;R&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::andThenR__FutureCallbackType.AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">andThenR</span></code></a></code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename R, typename AF&gt;</dt>
+<dt>
+<span>Future&lt;R&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::andThenR__AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">andThenR</span></code></a></code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename AF&gt;</dt>
+<dt>
+<span>auto</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::andThen__FutureCallbackType.AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">andThen</span></code></a></code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename AF&gt;</dt>
+<dt>
+<span>auto</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::andThen__AFRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">andThen</span></code></a></code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>boost::function&lt;void()&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::makeCanceler"><code class="xref cpp cpp-func docutils literal"><span class="pre">makeCanceler</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename AF&gt;</dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::connect__AFCR.FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">connect</span></code></a></code><span class="sig-paren">(</span>const AF&amp; <em>fun</em>, FutureCallbackType <em>type</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename FUNCTYPE, typename ARG0&gt;</dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::connect__FUNCTYPE.ARG0.X.FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">connect</span></code></a></code><span class="sig-paren">(</span>FUNCTYPE <em>fun</em>, ARG0 <em>tracked</em>, <em>...</em>, FutureCallbackType <em>type</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::connectWithStrand__qi::StrandP.boost::function:void__X:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">connectWithStrand</span></code></a></code><span class="sig-paren">(</span>qi::Strand* <em>strand</em>, const boost::function&lt;void(const Future&lt;T&gt;&amp;)&gt;&amp; <em>cb</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::connectWithStrand__qi::StrandR.boost::function:void__X:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">connectWithStrand</span></code></a></code><span class="sig-paren">(</span>qi::Strand&amp; <em>strand</em>, const boost::function&lt;void(const Future&lt;T&gt;&amp;)&gt;&amp; <em>cb</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::_connect__boost::function:void:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">_connect</span></code></a></code><span class="sig-paren">(</span>const boost::function&lt;void()&gt;&amp; <em>s</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>boost::shared_ptr&lt;detail::FutureBaseTyped&lt;T&gt;&gt;</span> <code class="descname"><a class="reference external" href="#qi::Future:T:::impl"><code class="xref cpp cpp-func docutils literal"><span class="pre">impl</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Future:T:::Future__boost::shared_ptr:detail::FutureBaseTyped:T::"><code class="xref cpp cpp-func docutils literal"><span class="pre">Future</span></code></a></code><span class="sig-paren">(</span>boost::shared_ptr&lt;detail::FutureBaseTyped&lt;T&gt;&gt; <em>p</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="types">
+<h4>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="TPD_qi::Future::ValueType">
+<!--[TPD_qi::Future::ValueType]--><span><em>typedef </em>typename detail::FutureType&lt; T &gt;::type</span> <span>ValueType</span><a class="headerlink" href="#TPD_qi::Future::ValueType" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::Future::ValueTypeCast">
+<span><em>typedef </em>typename detail::FutureType&lt; T &gt;::typecast</span> <span>ValueTypeCast</span><a class="headerlink" href="#TPD_qi::Future::ValueTypeCast" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::Future::TemplateValue">
+<span><em>typedef </em>T</span> <span>TemplateValue</span><a class="headerlink" href="#TPD_qi::Future::TemplateValue" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::Future::Connection">
+<span><em>typedef </em>boost::function&lt; void(Future&lt; T &gt;)&gt;</span> <span>Connection</span><a class="headerlink" href="#TPD_qi::Future::Connection" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span></dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Class that represents a value that will be set later in time.</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::Future:T:::Future">
+ <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">Future</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::Future" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::Future__Future:T:CR">
+ <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">Future</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::Future__Future:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::eq-operator__Future:T:CRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">operator==</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>other</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::eq-operator__Future:T:CRC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::assign-operator__Future:T:CR">
+Future&lt;T&gt;&amp; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">operator=</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::assign-operator__Future:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::lt-operator__Future:T:CRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">operator&lt;</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::lt-operator__Future:T:CRC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::uniqueIdC">
+FutureUniqueId <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">uniqueId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::uniqueIdC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::isValidC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::isValidC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if this future is associated to a promise, false otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::Future__ValueTypeCR.FutureCallbackType">
+ <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">Future</code><span class="sig-paren">(</span>const ValueType&amp; <em>v</em>, FutureCallbackType <em>async</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::Future__ValueTypeCR.FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Future that already contains a value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::value__iC">
+const ValueType&amp; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">value</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::value__iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em>Return the value associated to a Future. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msecs</strong> &#8211; timeout </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the value</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function can throw for many reason:
+wait timeoutuser errorfuture canceled</p>
+<p>if an error is set, then value throw a FutureUserException, others errors are FutureException.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::castto-ValueTypeCastCR-operatorC">
+ <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">operator</code> const ValueTypeCast&amp;<span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::castto-ValueTypeCastCR-operatorC" title="Permalink to this definition">¶</a></dt>
+<dd><p>same as value() with an infinite timeout.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::wait__iC">
+FutureState <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::wait__iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msecs</strong> &#8211; Maximum time to wait in milliseconds, 0 means return immediately. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a FutureState corresponding to the state of the future. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Wait for future to contain a value or an error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::wait__qi::DurationC">
+FutureState <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::Duration">qi::Duration</a> <em>duration</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::wait__qi::DurationC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>duration</strong> &#8211; Maximum time to wait </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a FutureState corresponding to the state of the future. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Wait for future to contain a value or an error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::waitFor__qi::DurationC">
+FutureState <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">waitFor</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::Duration">qi::Duration</a> <em>duration</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::waitFor__qi::DurationC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::wait__qi::SteadyClock::time_pointC">
+FutureState <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::SteadyClock::time_point">qi::SteadyClock::time_point</a> <em>timepoint</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::wait__qi::SteadyClock::time_pointC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timepoint</strong> &#8211; Time until which we can wait </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a FutureState corresponding to the state of the future. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Wait for future to contain a value or an error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::waitUntil__qi::SteadyClock::time_pointC">
+FutureState <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">waitUntil</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::SteadyClock::time_point">qi::SteadyClock::time_point</a> <em>timepoint</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::waitUntil__qi::SteadyClock::time_pointC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::isFinishedC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">isFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::isFinishedC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the future is finished do not throw </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::isRunningC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">isRunning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::isRunningC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the future is running do not throw </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::isCanceledC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">isCanceled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::isCanceledC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the future has been canceled This means that the future has been fully canceled, not that a cancel was requested. do not throw </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::hasError__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">hasError</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::hasError__iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msecs</strong> &#8211; timeout </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the future has an error. throw in the following case:
+timeout 
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::hasValue__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">hasValue</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::hasValue__iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msecs</strong> &#8211; timeout </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the future has a value. throw in the following case:
+timeout 
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::error__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">error</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::error__iC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msecs</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the error throw on timeout throw if the future do not have an actual error. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::sync">
+FutureSync&lt;T&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the future sync Should not be useful, use wait().</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::cancel">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>cancel() the asynchronous operation if possible Exact effect is controlled by the cancel implementation, but it is expected to set a value or an error to the Future as fast as possible. Note that cancelation may be asynchronous.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::isCancelableC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">isCancelable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Future:T:::isCancelableC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">always true</td>
+</tr>
+</tbody>
+</table>
+<p>Deprecatedsince 2.5</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename R, typename AF&gt;</dt>
+<dt id="qi::Future:T:::thenR__FutureCallbackType.AFRR">
+<p><em>Brief: </em>Execute a callback when the future is finished. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a future that will receive the value returned by the callback or an error if the callback threw.</td>
+</tr>
+</tbody>
+</table>
+Future&lt;R&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">thenR</code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::thenR__FutureCallbackType.AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The callback will receive this future as argument and all other arguments passed to this function.</p>
+<p>If the first argument bound to this function is a weak_ptr it will be locked. If it is a Trackable, the callback won&#8217;t be called after the object&#8217;s destruction. If it is an Actor, the call will be stranded.</p>
+<p>Deprecatedsince 2.5 use then()</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename R, typename AF&gt;</dt>
+<dt id="qi::Future:T:::thenR__AFRR">
+Future&lt;R&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">thenR</code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::thenR__AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecatedsince 2.5 use then()</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename AF&gt;</dt>
+<dt id="qi::Future:T:::then__FutureCallbackType.AFRR">
+<p><em>Brief: </em>Execute a callback when the future is finished. </p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a future that will receive the value returned by the callback or an error if the callback threw. </td>
+</tr>
+</tbody>
+</table>
+auto <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">then</code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::then__FutureCallbackType.AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The callback will receive this future as argument and all other arguments passed to this function.</p>
+<p>If the first argument bound to this function is a weak_ptr it will be locked. If it is a Trackable, the callback won&#8217;t be called after the object&#8217;s destruction. If it is an Actor, the call will be stranded.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename AF&gt;</dt>
+<dt id="qi::Future:T:::then__AFRR">
+auto <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">then</code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::then__AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as then(), but with type defaulted to FutureCallbackType_Auto.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename R, typename AF&gt;</dt>
+<dt id="qi::Future:T:::andThenR__FutureCallbackType.AFRR">
+Future&lt;R&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">andThenR</code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::andThenR__FutureCallbackType.AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The callback will receive the value of this future, as opposed to this future itself.</p>
+<p>If this future finishes with an error or a cancel, the callback will not be called and the returned future will finish in the same state.</p>
+<p>Deprecatedsince 2.5 use andThen()</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename R, typename AF&gt;</dt>
+<dt id="qi::Future:T:::andThenR__AFRR">
+Future&lt;R&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">andThenR</code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::andThenR__AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecatedsince 2.5 use andThen()</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename AF&gt;</dt>
+<dt id="qi::Future:T:::andThen__FutureCallbackType.AFRR">
+auto <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">andThen</code><span class="sig-paren">(</span>FutureCallbackType <em>type</em>, AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::andThen__FutureCallbackType.AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The callback will receive the value of this future, as opposed to this future itself.</p>
+<p>If this future finishes with an error or a cancel, the callback will not be called and the returned future will finish in the same state.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename AF&gt;</dt>
+<dt id="qi::Future:T:::andThen__AFRR">
+auto <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">andThen</code><span class="sig-paren">(</span>AF&amp;&amp; <em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::andThen__AFRR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as andThen(), but with type defaulted to FutureCallbackType_Auto.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::makeCanceler">
+boost::function&lt;void()&gt; <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">makeCanceler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::makeCanceler" title="Permalink to this definition">¶</a></dt>
+<dd><p>This functor will not keep the future alive, which is useful to avoid reference cycles. If the future does not exist anymore, this is a no-op.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename AF&gt;</dt>
+<dt id="qi::Future:T:::connect__AFCR.FutureCallbackType">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">connect</code><span class="sig-paren">(</span>const AF&amp; <em>fun</em>, FutureCallbackType <em>type</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::connect__AFCR.FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect a callback function that will be called once when the Future finishes (that is, switches from running to an other state).</p>
+<p>If type is sync, connect may block and call the callback synchronously if the future is already set.</p>
+<p>It guaranteed that your callback will be called exactly once (unless the promise is never set or the promise is reset, which is deprecated).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename FUNCTYPE, typename ARG0&gt;</dt>
+<dt id="qi::Future:T:::connect__FUNCTYPE.ARG0.X.FutureCallbackType">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">connect</code><span class="sig-paren">(</span>FUNCTYPE <em>fun</em>, ARG0 <em>tracked</em>, <em>...</em>, FutureCallbackType <em>type</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::connect__FUNCTYPE.ARG0.X.FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect a callback with binding and tracking support.</p>
+<p>If the first argument is a weak_ptr or a pointer inheriting from qi::Trackable, the callback will not be called if tracked object was destroyed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::connectWithStrand__qi::StrandP.boost::function:void__X:CR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">connectWithStrand</code><span class="sig-paren">(</span><a class="reference external" href="actor.html">qi::Strand*</a> <em>strand</em>, const boost::function&lt;void(const Future&lt;T&gt;&amp;)&gt;&amp; <em>cb</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::connectWithStrand__qi::StrandP.boost::function:void__X:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::connectWithStrand__qi::StrandR.boost::function:void__X:CR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">connectWithStrand</code><span class="sig-paren">(</span><a class="reference external" href="actor.html">qi::Strand&amp;</a> <em>strand</em>, const boost::function&lt;void(const Future&lt;T&gt;&amp;)&gt;&amp; <em>cb</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::connectWithStrand__qi::StrandR.boost::function:void__X:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::_connect__boost::function:void:CR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">_connect</code><span class="sig-paren">(</span>const boost::function&lt;void()&gt;&amp; <em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::_connect__boost::function:void:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::impl">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#boost::shared_ptr:AL::ALHierarchyOwner:" title="boost::shared_ptr&lt;AL::ALHierarchyOwner&gt;">boost::shared_ptr&lt;detail::FutureBaseTyped&lt;T&gt;&gt;</a> <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">impl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::impl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Future:T:::Future__boost::shared_ptr:detail::FutureBaseTyped:T::">
+ <code class="descclassname">qi::Future&lt;T&gt;::</code><code class="descname">Future</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#boost::shared_ptr:AL::ALHierarchyOwner:" title="boost::shared_ptr&lt;AL::ALHierarchyOwner&gt;">boost::shared_ptr&lt;detail::FutureBaseTyped&lt;T&gt;&gt;</a> <em>p</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Future:T:::Future__boost::shared_ptr:detail::FutureBaseTyped:T::" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-promise-class-reference">
+<h3>qi::Promise Class Reference<a class="headerlink" href="#qi-promise-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/future.hpp&gt;</span>
+</pre></div>
+</div>
+<ul>
+<li><strong>Inherited by: </strong><code class="docutils literal"><span class="pre">qi::detail::DelayedPromise&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span></code></li>
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::Promise__FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">Promise</span></code></a></code><span class="sig-paren">(</span>FutureCallbackType <em>async</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename FUNC, typename std::enable_if&lt;!std::is_same&lt; typename std::decay&lt; FUNC &gt;::type, typename std::decay&lt;  &gt;</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::Promise__FUNCRR.FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">Promise</span></code></a></code><span class="sig-paren">(</span>FUNC&amp;&amp; <em>cancelCallback</em>, FutureCallbackType <em>async</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::Promise__boost::function:void__X:.FutureCallbackType"><code class="xref cpp cpp-func docutils literal"><span class="pre">Promise</span></code></a></code><span class="sig-paren">(</span>boost::function&lt;void(qi::Promise&lt;T&gt;)&gt; <em>cancelCallback</em>, FutureCallbackType <em>async</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::Promise__qi::Promise:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">Promise</span></code></a></code><span class="sig-paren">(</span>const qi::Promise&lt;T&gt;&amp; <em>rhs</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::~Promise"><code class="xref cpp cpp-func docutils literal"><span class="pre">~Promise</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::setValue__ValueTypeCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">setValue</span></code></a></code><span class="sig-paren">(</span>const ValueType&amp; <em>value</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::setError__ssCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">setError</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>msg</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::setCanceled"><code class="xref cpp cpp-func docutils literal"><span class="pre">setCanceled</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::isCancelRequestedC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isCancelRequested</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>Future&lt;T&gt;</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::futureC"><code class="xref cpp cpp-func docutils literal"><span class="pre">future</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>ValueType&amp;</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::value"><code class="xref cpp cpp-func docutils literal"><span class="pre">value</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::trigger"><code class="xref cpp cpp-func docutils literal"><span class="pre">trigger</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::setOnCancel__boost::function:void__X:"><code class="xref cpp cpp-func docutils literal"><span class="pre">setOnCancel</span></code></a></code><span class="sig-paren">(</span>boost::function&lt;void(qi::Promise&lt;T&gt;&amp;)&gt; <em>cancelCallback</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>Promise&lt;T&gt;&amp;</span> <code class="descname"><a class="reference external" href="#qi::Promise:T:::assign-operator__Promise:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>const Promise&lt;T&gt;&amp; <em>rhs</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="types">
+<h4>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="TPD_qi::Promise::ValueType">
+<!--[TPD_qi::Promise::ValueType]--><span><em>typedef </em>typename detail::FutureType&lt; T &gt;::type</span> <span>ValueType</span><a class="headerlink" href="#TPD_qi::Promise::ValueType" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span></dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>A Promise is used to create and satisfy a Future.</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::Promise:T:::Promise__FutureCallbackType">
+ <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">Promise</code><span class="sig-paren">(</span>FutureCallbackType <em>async</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::Promise__FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>async</strong> &#8211; specify how callbacks registered with Future::connect are called: synchronously from the Promise setter, or asynchronously from a thread pool. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a standard promise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename FUNC, typename std::enable_if&lt;!std::is_same&lt; typename std::decay&lt; FUNC &gt;::type, typename std::decay&lt;  &gt;</dt>
+<dt id="qi::Promise:T:::Promise__FUNCRR.FutureCallbackType">
+ <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">Promise</code><span class="sig-paren">(</span>FUNC&amp;&amp; <em>cancelCallback</em>, FutureCallbackType <em>async</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::Promise__FUNCRR.FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a canceleable promise. If Future&lt;T&gt;::cancel is invoked, onCancel() will be called. It is expected to call setValue(), setError() or setCanceled() as quickly as possible, but can do so in an asynchronous way.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::Promise__boost::function:void__X:.FutureCallbackType">
+ <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">Promise</code><span class="sig-paren">(</span>boost::function&lt;void(qi::Promise&lt;T&gt;)&gt; <em>cancelCallback</em>, FutureCallbackType <em>async</em> = FutureCallbackType_Auto<span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::Promise__boost::function:void__X:.FutureCallbackType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::Promise__qi::Promise:T:CR">
+ <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">Promise</code><span class="sig-paren">(</span><a class="reference external" href="">const qi::Promise&lt;T&gt;&amp;</a> <em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::Promise__qi::Promise:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::~Promise">
+ <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">~Promise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::~Promise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::setValue__ValueTypeCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">setValue</code><span class="sig-paren">(</span>const ValueType&amp; <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::setValue__ValueTypeCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>notify all future that a value has been set. throw if state != running If T is void value must be 0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::setError__ssCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">setError</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::setError__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the error, and notify all futures throw if state != running</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::setCanceled">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">setCanceled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::setCanceled" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the cancel state, and notify all futures throw if state != running</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::isCancelRequestedC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">isCancelRequested</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Promise:T:::isCancelRequestedC" title="Permalink to this definition">¶</a></dt>
+<dd><p>return true if cancel has been called on the promise (even if the cancel callback did not run yet).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::futureC">
+Future&lt;T&gt; <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">future</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::Promise:T:::futureC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a future linked to this promise. Can be called multiple times.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::value">
+ValueType&amp; <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives access to the underlying value for in-place modification. trigger() must be called after the value is written to trigger the promise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::trigger">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">trigger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::trigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger the promise with the current value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::setOnCancel__boost::function:void__X:">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">setOnCancel</code><span class="sig-paren">(</span>boost::function&lt;void(qi::Promise&lt;T&gt;&amp;)&gt; <em>cancelCallback</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::setOnCancel__boost::function:void__X:" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a cancel callback. If the cancel is requested, calls this callback immediately.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::Promise:T:::assign-operator__Promise:T:CR">
+Promise&lt;T&gt;&amp; <code class="descclassname">qi::Promise&lt;T&gt;::</code><code class="descname">operator=</code><span class="sig-paren">(</span>const Promise&lt;T&gt;&amp; <em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::Promise:T:::assign-operator__Promise:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-futuresync-class-reference">
+<h3>qi::FutureSync Class Reference<a class="headerlink" href="#qi-futuresync-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qi/future.hpp&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::FutureSync"><code class="xref cpp cpp-func docutils literal"><span class="pre">FutureSync</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::FutureSync__Future:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">FutureSync</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::FutureSync__FutureSync:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">FutureSync</span></code></a></code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::FutureSync__ValueTypeCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">FutureSync</span></code></a></code><span class="sig-paren">(</span>const ValueType&amp; <em>v</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>FutureSync&lt;T&gt;&amp;</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::assign-operator__FutureSync:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>FutureSync&lt;T&gt;&amp;</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::assign-operator__Future:T:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::~FutureSync"><code class="xref cpp cpp-func docutils literal"><span class="pre">~FutureSync</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::castto-Future:T:-operator"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator</span> <span class="pre">Future&lt;T&gt;</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::lt-operator__FutureSync:T:CRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator&lt;</span></code></a></code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureUniqueId</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::uniqueIdC"><code class="xref cpp cpp-func docutils literal"><span class="pre">uniqueId</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const ValueType&amp;</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::value__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">value</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::castto-typename-Future:T:::ValueTypeCastCR-operatorC"><code class="xref cpp cpp-func docutils literal"><span class="pre">ValueTypeCast&amp;</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::wait__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::wait__qi::DurationC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>qi::Duration <em>duration</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::waitFor__qi::DurationC"><code class="xref cpp cpp-func docutils literal"><span class="pre">waitFor</span></code></a></code><span class="sig-paren">(</span>qi::Duration <em>duration</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::wait__qi::SteadyClock::time_pointC"><code class="xref cpp cpp-func docutils literal"><span class="pre">wait</span></code></a></code><span class="sig-paren">(</span>qi::SteadyClock::time_point <em>timepoint</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>FutureState</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::waitUntil__qi::SteadyClock::time_pointC"><code class="xref cpp cpp-func docutils literal"><span class="pre">waitUntil</span></code></a></code><span class="sig-paren">(</span>qi::SteadyClock::time_point <em>timepoint</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::isValidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isValid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::isRunningC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isRunning</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::isFinishedC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isFinished</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::isCanceledC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isCanceled</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::hasError__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">hasError</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::hasValue__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">hasValue</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::error__iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">error</span></code></a></code><span class="sig-paren">(</span>int <em>msecs</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::cancel"><code class="xref cpp cpp-func docutils literal"><span class="pre">cancel</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::isCancelableC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isCancelable</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::connect__ConnectionCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">connect</span></code></a></code><span class="sig-paren">(</span>const Connection&amp; <em>s</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::_connect__boost::function:void:CR"><code class="xref cpp cpp-func docutils literal"><span class="pre">_connect</span></code></a></code><span class="sig-paren">(</span>const boost::function&lt;void()&gt;&amp; <em>s</em><span class="sig-paren">)</span></dt>
+<dt>
+<span> </span> template&lt;typename FUNCTYPE, typename ARG0&gt;</dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::connect__FUNCTYPE.ARG0.X"><code class="xref cpp cpp-func docutils literal"><span class="pre">connect</span></code></a></code><span class="sig-paren">(</span>FUNCTYPE <em>fun</em>, ARG0 <em>tracked</em>, <em>...</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>Future&lt;T&gt;</span> <code class="descname"><a class="reference external" href="#qi::FutureSync:T:::async"><code class="xref cpp cpp-func docutils literal"><span class="pre">async</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="types">
+<h4>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="TPD_qi::FutureSync::ValueType">
+<!--[TPD_qi::FutureSync::ValueType]--><span><em>typedef </em>typename Future&lt; T &gt;::ValueType</span> <span>ValueType</span><a class="headerlink" href="#TPD_qi::FutureSync::ValueType" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::FutureSync::ValueTypeCast">
+<span><em>typedef </em>typename Future&lt; T &gt;::ValueTypeCast</span> <span>ValueTypeCast</span><a class="headerlink" href="#TPD_qi::FutureSync::ValueTypeCast" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::FutureSync::Connection">
+<span><em>typedef </em>typename Future&lt; T &gt;::Connection</span> <span>Connection</span><a class="headerlink" href="#TPD_qi::FutureSync::Connection" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span></dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p><p>This class allow throwing on error and being synchronous when the future is not handled by the client.</p>
+<p>This class should only be used as return type. If you want to store it, use qi::Future.</p>
+</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::FutureSync:T:::FutureSync">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">FutureSync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::FutureSync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::FutureSync__Future:T:CR">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">FutureSync</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::FutureSync__Future:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::FutureSync__FutureSync:T:CR">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">FutureSync</code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::FutureSync__FutureSync:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::FutureSync__ValueTypeCR">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">FutureSync</code><span class="sig-paren">(</span>const ValueType&amp; <em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::FutureSync__ValueTypeCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::assign-operator__FutureSync:T:CR">
+FutureSync&lt;T&gt;&amp; <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">operator=</code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::assign-operator__FutureSync:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::assign-operator__Future:T:CR">
+FutureSync&lt;T&gt;&amp; <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">operator=</code><span class="sig-paren">(</span>const Future&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::assign-operator__Future:T:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::~FutureSync">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">~FutureSync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::~FutureSync" title="Permalink to this definition">¶</a></dt>
+<dd><p>will block until the future returns if the future is kept synchronous</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::castto-Future:T:-operator">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">operator</code> Future&lt;T&gt;<span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::castto-Future:T:-operator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::lt-operator__FutureSync:T:CRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">operator&lt;</code><span class="sig-paren">(</span>const FutureSync&lt;T&gt;&amp; <em>b</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::lt-operator__FutureSync:T:CRC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::uniqueIdC">
+FutureUniqueId <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">uniqueId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::uniqueIdC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::value__iC">
+const ValueType&amp; <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">value</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::value__iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::castto-typename-Future:T:::ValueTypeCastCR-operatorC">
+ <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">operator</code> const typename Future&lt;T&gt;::ValueTypeCast&amp;<span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::castto-typename-Future:T:::ValueTypeCastCR-operatorC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::wait__iC">
+FutureState <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::wait__iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::wait__qi::DurationC">
+FutureState <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::Duration">qi::Duration</a> <em>duration</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::wait__qi::DurationC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::waitFor__qi::DurationC">
+FutureState <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">waitFor</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::Duration">qi::Duration</a> <em>duration</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::waitFor__qi::DurationC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::wait__qi::SteadyClock::time_pointC">
+FutureState <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">wait</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::SteadyClock::time_point">qi::SteadyClock::time_point</a> <em>timepoint</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::wait__qi::SteadyClock::time_pointC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::waitUntil__qi::SteadyClock::time_pointC">
+FutureState <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">waitUntil</code><span class="sig-paren">(</span><a class="reference external" href="clock.html#TPD_qi::SteadyClock::time_point">qi::SteadyClock::time_point</a> <em>timepoint</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::waitUntil__qi::SteadyClock::time_pointC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::isValidC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::isValidC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::isRunningC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">isRunning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::isRunningC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::isFinishedC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">isFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::isFinishedC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::isCanceledC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">isCanceled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::isCanceledC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::hasError__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">hasError</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::hasError__iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::hasValue__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">hasValue</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::hasValue__iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::error__iC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">error</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <em>msecs</em> = FutureTimeout_Infinite<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::error__iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::cancel">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::cancel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::isCancelableC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">isCancelable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FutureSync:T:::isCancelableC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::connect__ConnectionCR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">connect</code><span class="sig-paren">(</span>const Connection&amp; <em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::connect__ConnectionCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::_connect__boost::function:void:CR">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">_connect</code><span class="sig-paren">(</span>const boost::function&lt;void()&gt;&amp; <em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::_connect__boost::function:void:CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+template&lt;typename FUNCTYPE, typename ARG0&gt;</dt>
+<dt id="qi::FutureSync:T:::connect__FUNCTYPE.ARG0.X">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">connect</code><span class="sig-paren">(</span>FUNCTYPE <em>fun</em>, ARG0 <em>tracked</em>, <em>...</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::connect__FUNCTYPE.ARG0.X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect a callback with binding and tracking support.</p>
+<p>If the first argument is a weak_ptr or a pointer inheriting from qi::Trackable, the callback will not be called if tracked object was destroyed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FutureSync:T:::async">
+Future&lt;T&gt; <code class="descclassname">qi::FutureSync&lt;T&gt;::</code><code class="descname">async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FutureSync:T:::async" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<dl class="function">
+<dt>
+template&lt;typename T&gt;</dt>
+<dt id="qi::PromiseNoop__X">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::</code><code class="descname">PromiseNoop</code><span class="sig-paren">(</span><em>qi::Promise&lt;T&gt;&amp;</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::PromiseNoop__X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that does nothing on future cancelation.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">API References</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">C++ qi API Reference</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="index.html">C++ qi base API</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="actor.html">qi::Actor and qi::Strand</a></li>
+<li class="toctree-l6"><a class="reference internal" href="application.html">qi::Application</a></li>
+<li class="toctree-l6"><a class="reference internal" href="atomic.html">qi::Atomic</a></li>
+<li class="toctree-l6"><a class="reference internal" href="clock.html">qi clocks</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eventloop.html">qi::EventLoop</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">qi::Promise, qi::Future</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="futuregroup.html">qi::Future groups</a></li>
+<li class="toctree-l6"><a class="reference internal" href="iocolor.html">qi::IOColor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="log.html">qi::log</a></li>
+<li class="toctree-l6"><a class="reference internal" href="macro.html">qi helper macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="os.html">qi::os</a></li>
+<li class="toctree-l6"><a class="reference internal" href="path.html">qi::path namespace</a></li>
+<li class="toctree-l6"><a class="reference internal" href="periodictask.html">qi::PeriodicTask</a></li>
+<li class="toctree-l6"><a class="reference internal" href="preproc.html">qi preprocessor macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="stats.html">qi::stats namespace</a></li>
+<li class="toctree-l6"><a class="reference internal" href="trackable.html">qi::Trackable</a></li>
+<li class="toctree-l6"><a class="reference internal" href="translator.html">qi::Translator</a></li>
+<li class="toctree-l6"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="version.html">qi::Version</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../type/index.html">C++ qi type API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../messaging/index.html">C++ qi messaging API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../file.html">qi::File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-classindex.html">C++ Class Index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-funcindex.html">C++ Function Index</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../python/index.html">Python qi API reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../transtyping.html">&gt; Type equivalences between languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">qi::Promise, qi::Future</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#qi-future">qi::Future</a><ul>
+<li><a class="reference internal" href="#the-different-states-of-a-future">The different states of a Future</a></li>
+<li><a class="reference internal" href="#getting-the-state-and-waiting-for-a-future">Getting the state and waiting for a Future</a></li>
+<li><a class="reference internal" href="#future-notification">Future notification</a></li>
+<li><a class="reference internal" href="#future-callback-synchronousness">Future callback synchronousness</a></li>
+<li><a class="reference internal" href="#future-cancellation">Future cancellation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-promise">qi::Promise</a><ul>
+<li><a class="reference internal" href="#supporting-cancellation">Supporting cancellation</a></li>
+<li><a class="reference internal" href="#controlling-callback-execution">Controlling callback execution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-futuresync">qi::FutureSync</a><ul>
+<li><a class="reference internal" href="#returning-a-futuresync">Returning a FutureSync</a></li>
+<li><a class="reference internal" href="#calling-a-function-returning-a-futuresync">Calling a function returning a FutureSync</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementing-an-asynchronous-function">Implementing an asynchronous function</a><ul>
+<li><a class="reference internal" href="#simple-implementation">Simple implementation</a></li>
+<li><a class="reference internal" href="#cancellation-support">Cancellation support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#qi-future-class-reference">qi::Future Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-promise-class-reference">qi::Promise Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-futuresync-class-reference">qi::FutureSync Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../../../contents.html">Site map</a>
+      <a title="Index" href="../../../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Stiffness control &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALMotion" href="almotion.html" />
+    <link rel="next" title="Stiffness control API" href="control-stiffness-api.html" />
+    <link rel="prev" title="Motion - advanced" href="advanced.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-motion-control-stiffness">
+                
+  <div class="section" id="stiffness-control">
+<span id="control-stiffness"></span><h1>Stiffness control<a class="headerlink" href="#stiffness-control" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="index.html#naoqi-motion"><span>NAOqi Motion</span></a> - Overview | <a class="reference internal" href="control-stiffness-api.html#control-stiffness-api"><span>API</span></a></p>
+<hr class="docutils" />
+<div class="section" id="what-it-does">
+<h2>What it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">These API control the <a class="reference internal" href="../../glossary.html#term-stiffness"><span class="xref std std-term">Stiffness</span></a> of one or several joint(s).</div>
+<div class="line">The <a class="reference internal" href="../../glossary.html#term-stiffness"><span class="xref std std-term">Stiffness</span></a> of the joint is equivalent to a torque limitation into the motors.</div>
+</div>
+<ul class="simple">
+<li>If the joint stiffness is set to 0.0, the joint controller does nothing and the joint is free.</li>
+<li>Else with a value at 1.0 the joint is allowed to use full torque power to reach a given position.</li>
+<li>Between these two extremes, the joint is more or less compliant (tries to reach a position but if
+torque need to move is higher than the limitation of Stiffness, the joint doesn&#8217;t reach the
+target position).</li>
+</ul>
+<div class="line-block">
+<div class="line">The <a class="reference internal" href="../../glossary.html#term-stiffness"><span class="xref std std-term">Stiffness</span></a> can be managed:</div>
+</div>
+<ul class="simple">
+<li>globally, on the whole robot using:
+<a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::wakeUp" title="ALMotionProxy::wakeUp"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::wakeUp</span></code></a> and <a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::rest" title="ALMotionProxy::rest"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::rest</span></code></a></li>
+<li>specifically, for one or several joint(s) using:
+<a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::stiffnessInterpolation__AL::ALValueCR.AL::ALValueCR.AL::ALValueCR" title="ALMotionProxy::stiffnessInterpolation"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::stiffnessInterpolation</span></code></a>,
+<a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::getStiffnesses__AL::ALValueCR" title="ALMotionProxy::getStiffnesses"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getStiffnesses</span></code></a> or
+<a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::setStiffnesses__AL::ALValueCR.AL::ALValueCR" title="ALMotionProxy::setStiffnesses"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setStiffnesses</span></code></a></li>
+</ul>
+<div class="line-block">
+<div class="line">A robot is considered awake when it can stand and move around, that is, when its leg joints are stiffnessed. The <a class="reference internal" href="control-stiffness-api.html#robotIsWakeUp" title="robotIsWakeUp"><code class="xref naoqi naoqi-event docutils literal"><span class="pre">robotIsWakeUp()</span></code></a> event is raised when the awake status of the robot changes.</div>
+</div>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>These API just create a higher level of the <a class="reference internal" href="../../glossary.html#term-dcm"><span class="xref std std-term">DCM</span></a> hardness definition and provide
+interpolation in order to have more smooth behavior.</p>
+</div>
+<div class="section" id="performances-and-limitations">
+<h2>Performances and limitations<a class="headerlink" href="#performances-and-limitations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pepp-pepper-only">
+<h3><img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <strong>Pepper</strong> <em>only</em><a class="headerlink" href="#pepp-pepper-only" title="Permalink to this headline">¶</a></h3>
+<p>Manual <strong>Stiffness</strong> control is forbidden for <strong>Pepper</strong>&#8216;s lower part.</p>
+<p>With the following methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::stiffnessInterpolation__AL::ALValueCR.AL::ALValueCR.AL::ALValueCR" title="ALMotionProxy::stiffnessInterpolation"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::stiffnessInterpolation</span></code></a></li>
+<li><a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::setStiffnesses__AL::ALValueCR.AL::ALValueCR" title="ALMotionProxy::setStiffnesses"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setStiffnesses</span></code></a></li>
+</ul>
+<p>You could only use:</p>
+<ul class="simple">
+<li>&#8220;Head&#8221;, &#8220;LArm&#8221; and &#8220;RArm&#8221;</li>
+<li>&#8220;LHand&#8221; and &#8220;RHand&#8221;</li>
+</ul>
+<p>Workaround:</p>
+<p>use <a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::wakeUp" title="ALMotionProxy::wakeUp"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::wakeUp</span></code></a> and <a class="reference internal" href="control-stiffness-api.html#ALMotionProxy::rest" title="ALMotionProxy::rest"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::rest</span></code></a> methods.</p>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="case-1-stiffness-on">
+<h3>Case 1: Stiffness On<a class="headerlink" href="#case-1-stiffness-on" title="Permalink to this headline">¶</a></h3>
+<p>When the robot is switched on, he initially has zero Stiffness. When at
+zero Stiffness, you can send any commands to the motors, but he will not
+move.</p>
+<p>To give power to the motors, you can call one of Motion&#8217;s Stiffness methods:</p>
+<p><a class="reference download internal" href="../../_downloads/almotion_stiffnessOn.py"><code class="xref download docutils literal"><span class="pre">almotion_stiffnessOn.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Stiffness On - Active Stiffness of All Joints and Actuators&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stiffness On - Active Stiffness of All Joints and Actuators.</span>
+<span class="sd">    This example is only compatible with NAO.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the services ALMotion &amp; ALRobotPosture.</span>
+
+    <span class="n">motion_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMotion&quot;</span><span class="p">)</span>
+
+    <span class="c"># We use the &quot;Body&quot; name to signify the collection of all joints</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="s">&quot;Body&quot;</span>
+    <span class="n">stiffnessLists</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">timeLists</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">motion_service</span><span class="o">.</span><span class="n">stiffnessInterpolation</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">stiffnessLists</span><span class="p">,</span> <span class="n">timeLists</span><span class="p">)</span>
+
+    <span class="c"># print motion state</span>
+    <span class="k">print</span> <span class="n">motion_service</span><span class="o">.</span><span class="n">getSummary</span><span class="p">()</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="c"># Go to rest position</span>
+    <span class="n">motion_service</span><span class="o">.</span><span class="n">rest</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="avoiding-judder">
+<h4>Avoiding judder<a class="headerlink" href="#avoiding-judder" title="Permalink to this headline">¶</a></h4>
+<p>When changing Stiffness away from zero, it is best to do it gently so
+as to reduce the chance of a judder when powering up the motors.</p>
+</div>
+<div class="section" id="adapting-the-stiffness-to-task">
+<h4>Adapting the Stiffness to task<a class="headerlink" href="#adapting-the-stiffness-to-task" title="Permalink to this headline">¶</a></h4>
+<p>Many tasks can be achieved at less than maximum Stiffness (Stiffness = 0.6),
+but tasks such as &#8220;Get up&#8221; require all the power they can get (Stiffness = 1.0).</p>
+</div>
+</div>
+<div class="section" id="case-2-stiffness-off">
+<h3>Case 2: Stiffness Off<a class="headerlink" href="#case-2-stiffness-off" title="Permalink to this headline">¶</a></h3>
+<p>When you reduce the Stiffness to zero, you cut all the power to the motors,
+so you should be careful that the robot is in a self-stable pose, otherwise he
+could fall.</p>
+<p><a class="reference download internal" href="../../_downloads/almotion_stiffnessOff.py"><code class="xref download docutils literal"><span class="pre">almotion_stiffnessOff.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example : Stiffness Off - remove stiffness of all joints and actuators&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stiffness Off - remove stiffness of all joints and actuators.</span>
+<span class="sd">    This example is only compatible with NAO.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALMotion.</span>
+
+    <span class="n">motion_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMotion&quot;</span><span class="p">)</span>
+
+    <span class="c"># We use the &quot;Body&quot; name to signify the collection of all joints</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="s">&quot;Body&quot;</span>
+    <span class="n">stiffnessLists</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">timeLists</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">motion_service</span><span class="o">.</span><span class="n">stiffnessInterpolation</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">stiffnessLists</span><span class="p">,</span> <span class="n">timeLists</span><span class="p">)</span>
+
+    <span class="c"># print motion state</span>
+    <span class="k">print</span> <span class="n">motion_service</span><span class="o">.</span><span class="n">getSummary</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="case-3-stiffness-trajectories">
+<h3>Case 3: Stiffness Trajectories<a class="headerlink" href="#case-3-stiffness-trajectories" title="Permalink to this headline">¶</a></h3>
+<p>Should you wish to vary the Stiffness of a joint over time, you can
+request a &#8216;trajectory&#8217; of Stiffness.</p>
+<div class="highlight-guess"><div class="highlight"><pre># Example showing a stiffness trajectory
+# Here the stiffness of the HeadYaw Joint, rises to
+# 0.8, then goes back to zero.
+pNames          = &quot;HeadYaw&quot;
+pStiffnessLists = [0.0, 0.8, 0.0]
+pTimeLists      = [0.5, 1.0, 1.5]
+proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
+</pre></div>
+</div>
+<p>Like angle interpolation commands, multiple trajectories can be specified
+in the same command.</p>
+<div class="highlight-guess"><div class="highlight"><pre># Example showing multiple stiffness trajectories
+# Here the stiffness of the HeadYaw Joint, rises to
+# 0.5, then goes back to zero, while the HeadPitch
+# joint rises to 1.0
+pNames          = [&quot;HeadYaw&quot;, &quot;HeadPitch&quot;]
+pStiffnessLists = [[0.0, 0.5, 0.0], [0.0, 1.0, 0.0]]
+pTimeLists      = [[0.5, 1.0, 1.5], [0.5, 1.0, 1.5]]
+proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi Motion</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alanimationplayer.html">ALAnimationPlayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alrobotposture.html">ALRobotPosture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alnavigation.html">ALNavigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alrecharge.html">ALRecharge</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="almotion.html">ALMotion</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="almotion-api.html">ALMotion API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="advanced.html">Motion - advanced</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Stiffness control</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="control-stiffness-api.html">Stiffness control API</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="control-joint.html">Joint control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="control-walk.html">Locomotion control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="control-cartesian.html">Cartesian control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="control-wholebody.html">Whole Body control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="reflexes-collision-avoidance.html">Self-collision avoidance</a></li>
+<li class="toctree-l5"><a class="reference internal" href="reflexes-external-collision.html">External-collision avoidance</a></li>
+<li class="toctree-l5"><a class="reference internal" href="reflexes-fall-manager.html">Fall manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="reflexes-smart-stiffness.html">Smart Stiffness</a></li>
+<li class="toctree-l5"><a class="reference internal" href="reflexes-diagnosis.html">Diagnosis effect</a></li>
+<li class="toctree-l5"><a class="reference internal" href="push_recovery.html">Push Recovery</a></li>
+<li class="toctree-l5"><a class="reference internal" href="slope_compensation.html">Slope compensation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="idle.html">Idle</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tools-general.html">General tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tools-motion-task.html">Motion task</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">ALTracker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="almotionrecorder.html">ALMotionRecorder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Stiffness control</a><ul>
+<li><a class="reference internal" href="#what-it-does">What it does</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li><a class="reference internal" href="#performances-and-limitations">Performances and limitations</a><ul>
+<li><a class="reference internal" href="#pepp-pepper-only"> <strong>Pepper</strong> <em>only</em></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a><ul>
+<li><a class="reference internal" href="#case-1-stiffness-on">Case 1: Stiffness On</a><ul>
+<li><a class="reference internal" href="#avoiding-judder">Avoiding judder</a></li>
+<li><a class="reference internal" href="#adapting-the-stiffness-to-task">Adapting the Stiffness to task</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#case-2-stiffness-off">Case 2: Stiffness Off</a></li>
+<li><a class="reference internal" href="#case-3-stiffness-trajectories">Case 3: Stiffness Trajectories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

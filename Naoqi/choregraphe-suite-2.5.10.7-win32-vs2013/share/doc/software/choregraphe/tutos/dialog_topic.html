@@ -1,0 +1,739 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating Dialog boxes &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Choregraphe - Tutorials" href="index.html" />
+    <link rel="next" title="Creating a Solitary activity" href="create_solitary_activity.html" />
+    <link rel="prev" title="Testing the speech recognition" href="speech_recognition.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="software-choregraphe-tutos-dialog_topic">
+                
+  <div class="section" id="creating-dialog-boxes">
+<span id="aldialog-tuto"></span><span id="how-to-create-a-dialog"></span><h1>Creating Dialog boxes<a class="headerlink" href="#creating-dialog-boxes" title="Permalink to this headline">¶</a></h1>
+<p><strong>See also</strong>: <a class="reference internal" href="../../../naoqi/interaction/dialog/aldialog_syntax_toc.html#dialog-toc"><span>QiChat</span></a></p>
+<hr class="docutils" />
+<p>This tutorial starts like the <a class="reference internal" href="../../../getting_started/helloworld_choregraphe_dialog.html#helloworld-choregraphe-dialog"><span>Hello World 3 - using Dialog topic in Choregraphe</span></a> tutorial, then
+goes deeper in mastering <strong>Dialog boxes</strong> and <strong>QiChat</strong> scripting.</p>
+<div class="section" id="hello-world">
+<h2>1 - Hello World<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Start <strong>Choregraphe</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Drag the <strong>Speech</strong> &gt; <strong>Speech Settings</strong> &gt; <strong>Set Language</strong> box on the grey area.</p>
+<p>Click the <img alt="parameter-button" class="img-inline" src="../../../_images/parameter_button.png" /> <strong>parameter</strong> button and set
+the language as <strong>English</strong>.</p>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_00.png"><img alt="../../../_images/helloworld_cho_dlg_00.png" src="../../../_images/helloworld_cho_dlg_00.png" style="width: 484px; height: 350px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Right click the grey area and choose, in the contextual menu,
+<strong>Create a new Box</strong> &gt; <strong>Dialog...</strong>.</p>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_01.png"><img alt="../../../_images/helloworld_cho_dlg_01.png" src="../../../_images/helloworld_cho_dlg_01.png" style="width: 562px; height: 405px;" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <strong>Add a new topic</strong> button, then type a name without spaces,
+for example: <em>HelloWorld</em>.</p>
+<p>Click the <strong>Add</strong> button, then the <strong>OK</strong> button.</p>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_02.png"><img alt="../../../_images/helloworld_cho_dlg_02.png" src="../../../_images/helloworld_cho_dlg_02.png" style="width: 442px; height: 498px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Create links as below.</p>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_05.png"><img alt="../../../_images/helloworld_cho_dlg_05.png" src="../../../_images/helloworld_cho_dlg_05.png" style="width: 538px; height: 386px;" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="6">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the <strong>Project content</strong>, double click the HelloWorld_enu.top file.</p>
+<p>The <strong>Script editor</strong> appears.</p>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_06.png"><img alt="../../../_images/helloworld_cho_dlg_06.png" src="../../../_images/helloworld_cho_dlg_06.png" style="width: 581px; height: 459px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="7">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Type those rules:</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="o">u:</span><span class="nv">(Hello)</span> Hello, young Padawan
+
+<span class="o">u:</span><span class="nv">(Good morning)</span> Let&#39;s start a wonderful day
+</pre></div>
+</div>
+<a class="last reference internal image-reference" href="../../../_images/helloworld_cho_dlg_07.png"><img alt="../../../_images/helloworld_cho_dlg_07.png" src="../../../_images/helloworld_cho_dlg_07.png" style="width: 359px; height: 325px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="testing-on-a-simulated-robot">
+<h3>Testing on a simulated robot<a class="headerlink" href="#testing-on-a-simulated-robot" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Make sure you are connected on a virtual robot.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../connection_widget.html#choregraphe-howto-connect-to-simulated-nao"><span>How to connect Choregraphe to a simulated robot</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="play-button" class="img-inline" src="../../../_images/beginning_play_button.png" /> <strong>Play</strong> button.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the <a class="reference internal" href="../panels/dialog_panel.html#dialog-panel"><span>Dialog panel</span></a>, enter &#8220;Hello&#8221; and press <strong>Enter</strong>.</p>
+<p>You can see the result both in <strong>Dialog</strong> panel and in the <strong>Robot view</strong>.</p>
+<a class="last reference internal image-reference" href="../../../_images/dialog_tuto2.png"><img alt="../../../_images/dialog_tuto2.png" src="../../../_images/dialog_tuto2.png" style="width: 533px; height: 383px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-on-a-real-robot">
+<h3>Testing on a real robot<a class="headerlink" href="#testing-on-a-real-robot" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Make sure you are connected on a real robot.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../connection_widget.html#chore-howto-connect"><span>How to connect Choregraphe to a robot</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="play-button" class="img-inline" src="../../../_images/beginning_play_button.png" /> <strong>Play</strong> button.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Wait for the signal indicating that the robot is listening:</p>
+<ul class="last simple">
+<li>A &#8220;bip&#8221; sound  is played and</li>
+<li>Eye LEDs become <strong>Blue</strong> and turn.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Say &#8220;Hello&#8221;.</p>
+<p>The robot says &#8220;hello young padavan&#8221;.</p>
+<p class="last">You can also see the result both in <strong>Dialog</strong> panel
+and in the <strong>Robot view</strong>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="hi-hello-in-one-rule">
+<h2>2 - &#8220;Hi&#8221;, &#8220;Hello&#8221;... in one rule<a class="headerlink" href="#hi-hello-in-one-rule" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">To make your first rule a little bit more complex, enrich your script:</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="o">u:</span><span class="nv">([hi hello wassup])</span> hello young padawan
+<span class="o">u:</span><span class="nv">([&quot;tell me&quot; &quot;give me&quot;] your name)</span> of course, my name is NAO
+</pre></div>
+</div>
+<a class="last reference internal image-reference" href="../../../_images/dialog_tuto3.png"><img alt="../../../_images/dialog_tuto3.png" src="../../../_images/dialog_tuto3.png" style="width: 470px; height: 202px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To go further, see: <a class="reference internal" href="../../../naoqi/interaction/dialog/dialog-syntax_full.html#delimiter-rule"><span>Delimiters</span></a>.</p>
+</div>
+<div class="section" id="connecting-qichat-script-and-animations">
+<h2>3 - Connecting QiChat script and animations<a class="headerlink" href="#connecting-qichat-script-and-animations" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Add these new rules:</p>
+<div class="last highlight-QiChat"><div class="highlight"><pre><span class="o">u:</span><span class="nv">([&quot;can you&quot; please] sit down {now})</span> ok i sit down $sit=1
+<span class="o">u:</span><span class="nv">([&quot;can you&quot; please] stand up {now})</span> ok i stand up $standup=1
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Add two <a class="reference internal" href="../objects/box_input_output.html#choregraphe-reference-box-output"><span>outputs</span></a> to the
+<strong>Hello world</strong> box.</p>
+<ul class="simple">
+<li>one called &#8220;sit&#8221;,</li>
+<li>one called &#8220;standup&#8221;.</li>
+</ul>
+<a class="reference internal image-reference" href="../../../_images/dialog_tuto4.png"><img alt="../../../_images/dialog_tuto4.png" src="../../../_images/dialog_tuto4.png" style="width: 326px; height: 333px;" /></a>
+<p>For further details, see:
+<a class="reference internal" href="../objects/box_optional_components.html#choregraphe-howto-add-remove-box-in-out-param"><span>How to add/remove inputs, outputs, parameters in a box</span></a>.</p>
+<p class="last"><strong>Note</strong>: here we use <strong>Bang</strong> type, an easy way to propagate an event.
+If you need a typed variable, see: <a class="reference internal" href="#send-variable"><span>Sending QiChat variable through box output</span></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Add two <strong>Programming</strong> &gt; <strong>Time</strong> &gt; <strong>Wait</strong> boxes and
+connect them to the outputs you have created.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Add and connect a <strong>Movement</strong> &gt; <strong>Posture</strong> &gt; <strong>Sit Down</strong> and
+a <strong>Movement</strong> &gt; <strong>Posture</strong> &gt; <strong>Stand Up</strong> boxes.</p>
+<a class="last reference internal image-reference" href="../../../_images/dialog_tuto5.png"><img alt="../../../_images/dialog_tuto5.png" src="../../../_images/dialog_tuto5.png" style="width: 448px; height: 372px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To go further, see: <a class="reference internal" href="../../../naoqi/interaction/dialog/dialog.html#dialog-doc-variables"><span>Variables and events</span></a>.</p>
+</div>
+<div class="section" id="jumping-from-one-topic-to-another">
+<h2>4 - Jumping from one topic to another<a class="headerlink" href="#jumping-from-one-topic-to-another" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>In a new <strong>Project</strong>, add an <strong>Speech</strong> &gt; <strong>Speech Settings</strong> &gt; <strong>Set Language</strong>
+box.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Create two different <strong>Dialog topic</strong> boxes, called <strong>Food</strong> and
+<strong>Sport</strong> with the following content:</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">topic</span>: ~Food()
+<span class="ow">language</span>: enu
+
+<span class="o">u:</span><span class="nv">(let&#39;s talk about food)</span> OK, guess what I like
+
+<span class="o">u:</span>^private(do you like fish) yes and sea food too
+<span class="o">u:</span>^private(do you like meat) no, I don&#39;t
+</pre></div>
+</div>
+<div class="last highlight-QiChat"><div class="highlight"><pre><span class="ow">topic</span>: ~Sport()
+<span class="ow">language</span>: enu
+
+<span class="o">u:</span><span class="nv">(let&#39;s talk about sport)</span> OK, guess what sport I like
+
+<span class="o">u:</span>^private(do you like tennis) no, I can&#39;t play tennis
+<span class="o">u:</span>^private(do you like yoga) yes, would you like to do yoga with me?
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Link the tree boxes as follows:</p>
+<a class="last reference internal image-reference" href="../../../_images/dialog_tuto6.png"><img alt="../../../_images/dialog_tuto6.png" src="../../../_images/dialog_tuto6.png" style="width: 397px; height: 337px;" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Test it.</p>
+<p>To jump from a topic to another and give it the focus,
+use the one of their user rules:</p>
+<p>In our example :
+&#8220;Let&#8217;s talk about food&#8221; or &#8220;Let&#8217;s talk about sport&#8221;.</p>
+<p>Once a topic (food or sport) has the focus:</p>
+<ul class="last simple">
+<li>all its <strong>private user rules</strong> are activated,</li>
+<li>while the <strong>private user rules</strong> of the other topic are not.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To go further, see: <a class="reference internal" href="../../../naoqi/interaction/dialog/dialog.html#activation"><span>Activated / deactivated</span></a>.</p>
+</div>
+<div class="section" id="advanced-tips">
+<h2>Advanced tips<a class="headerlink" href="#advanced-tips" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sending-qichat-variable-through-box-output">
+<span id="send-variable"></span><h3>Sending QiChat variable through box output<a class="headerlink" href="#sending-qichat-variable-through-box-output" title="Permalink to this headline">¶</a></h3>
+<p>Be aware: in QiChat, a variable has no defined type.</p>
+<p>Workaround:</p>
+<ul>
+<li><p class="first">Use a <strong>Bang</strong> Output if you are just looking for sending a signal to another box.</p>
+</li>
+<li><p class="first">Use a <strong>Dynamic</strong> Output, if you want to use the value of the variable in another box;
+then cast it into the type you want in your box script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">onInput_dyn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+       <span class="c"># If p is a string you may have an exception.</span>
+       <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="to-go-further">
+<h2>To go further<a class="headerlink" href="#to-go-further" title="Permalink to this headline">¶</a></h2>
+<p>You can enrich the dialog with other, more complex rules.</p>
+<p>To go further see: <a class="reference internal" href="../../../naoqi/interaction/dialog/dialog-syntax_full.html#dialog-rules"><span>QiChat - Syntax</span></a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Choregraphe - Tutorials</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_first_steps.html">Your first steps in Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="life.html">Testing Autonomous Life</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic.html">Playing music</a></li>
+<li class="toctree-l4"><a class="reference internal" href="movements.html">Moving my limbs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="animated_speech.html">Testing the Body language</a></li>
+<li class="toctree-l4"><a class="reference internal" href="speech_recognition.html">Testing the speech recognition</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Creating Dialog boxes</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="create_solitary_activity.html">Creating a Solitary activity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="create_interactive_activity.html">Creating an Interactive activity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="get_age.html">Face Characteristics - Get Age</a></li>
+<li class="toctree-l4"><a class="reference internal" href="get_expression.html">Face Characteristics - Get Expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flow_control.html">Using Flow Control boxes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="attached_files.html">Using attached files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boxes.html">Creating Python boxes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="resource_manager.html">Resources manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="application_internationalization.html">Application Internationalization (i18n)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="recognize_objects.html">Recognizing objects</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/tools/robot-simulation.html">Working with a simulated robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/tutorials.html">Python SDK - Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/tutorials.html">C++ SDK - Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Creating Dialog boxes</a><ul>
+<li><a class="reference internal" href="#hello-world">1 - Hello World</a><ul>
+<li><a class="reference internal" href="#testing-on-a-simulated-robot">Testing on a simulated robot</a></li>
+<li><a class="reference internal" href="#testing-on-a-real-robot">Testing on a real robot</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hi-hello-in-one-rule">2 - &#8220;Hi&#8221;, &#8220;Hello&#8221;... in one rule</a></li>
+<li><a class="reference internal" href="#connecting-qichat-script-and-animations">3 - Connecting QiChat script and animations</a></li>
+<li><a class="reference internal" href="#jumping-from-one-topic-to-another">4 - Jumping from one topic to another</a></li>
+<li><a class="reference internal" href="#advanced-tips">Advanced tips</a><ul>
+<li><a class="reference internal" href="#sending-qichat-variable-through-box-output">Sending QiChat variable through box output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#to-go-further">To go further</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

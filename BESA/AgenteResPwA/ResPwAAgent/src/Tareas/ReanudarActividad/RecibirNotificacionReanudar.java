@@ -35,24 +35,38 @@ public class RecibirNotificacionReanudar extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        infoServicio.put("WAKEUP", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
-        requestService(srb);
-        infoServicio = new HashMap<>();
-        infoServicio.put("WAKETABLET", null);
-        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.WAKETABLET, infoServicio);
-        requestService(srb);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+        requestService(srb,blvs);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.WAKETABLET, null);
+        requestService(srb,blvs);
+        
+        //boostActividadActual
         
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Recibir Notificacion Reanudar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
+        requestService(srb,blvs);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb,blvs);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Recibir Notificar Reanudar ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
+        requestService(srb,blvs);
+        
+        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
+        requestService(srb,blvs);
     }
 
     @Override

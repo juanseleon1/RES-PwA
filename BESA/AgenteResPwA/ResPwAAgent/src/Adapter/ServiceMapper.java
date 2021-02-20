@@ -75,7 +75,7 @@ public abstract class ServiceMapper<M> {
     public void printMapper()
     {
         mapper.keySet().stream().forEach((keyval) -> {
-            System.out.println("K: "+keyval+"V:"+mapper.get(keyval));
+//            System.out.println("K: "+keyval+"V:"+mapper.get(keyval));
         });
     }
     

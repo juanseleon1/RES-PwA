@@ -1,0 +1,1521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qi::File &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../../index.html" />
+    <link rel="up" title="C++ qi API Reference" href="index.html" />
+    <link rel="next" title="C++ Class Index" href="../../cpp-classindex.html" />
+    <link rel="prev" title="qi::Url" href="messaging/url.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-api-cpp-file">
+                
+  <div class="section" id="qi-file">
+<h1>qi::File<a class="headerlink" href="#qi-file" title="Permalink to this headline">¶</a></h1>
+<p>Include: <code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;qicore/file.hpp&gt;</span></code></p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#qi::File" title="qi::File"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::File</span></code></a> provides a way to open a file in read-only mode on the local file system
+and share the content of this file with potentially remote services.</p>
+<p>We provide algorithms to copy a remote file&#8217;s content to make a local copy of it,
+using the <a class="reference internal" href="#qi::copyToLocal__FilePtr.Path" title="qi::copyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::copyToLocal</span></code></a> or <a class="reference internal" href="#qi::FileOperation" title="qi::FileOperation"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileOperation</span></code></a> algorithms.</p>
+</div>
+<div class="section" id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<strong><p class="rubric">Global Namespaces</p>
+</strong><ul>
+<li><p class="first">namespace qi</p>
+<dl class="docutils">
+<strong><p class="rubric">Classes (namespace qi)</p>
+</strong><ul>
+<li><p class="first">class qi::FileCopyToLocal</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::FileCopyToLocal)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::FileCopyToLocal::FileCopyToLocal__qi::FilePtr.qi::Path">qi::FileCopyToLocal::FileCopyToLocal</a></ul>
+</dl>
+</li>
+<li><p class="first">class qi::File</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::File)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::File::operationProgressC">qi::File::operationProgress</a><p><a class="reference internal" href="#qi::File::close">qi::File::close</a></p>
+<p><a class="reference internal" href="#qi::File::seek__std::streamoff">qi::File::seek</a></p>
+<p><a class="reference internal" href="#qi::File::read__std::streamsize">qi::File::read</a></p>
+<p><a class="reference internal" href="#qi::File::isRemoteC">qi::File::isRemote</a></p>
+<p><a class="reference internal" href="#qi::File::sizeC">qi::File::size</a></p>
+<p><a class="reference internal" href="#qi::File::isOpenC">qi::File::isOpen</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::File)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::File::MAX_READ_SIZE__std::streamsizeC">qi::File::MAX_READ_SIZE</a></ul>
+</dl>
+</li>
+<li><p class="first">class qi::ProgressNotifier</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::ProgressNotifier)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::ProgressNotifier::notifyCanceled">qi::ProgressNotifier::notifyCanceled</a><p><a class="reference internal" href="#qi::ProgressNotifier::notifyFailed">qi::ProgressNotifier::notifyFailed</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::waitForFinished">qi::ProgressNotifier::waitForFinished</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::isRunningC">qi::ProgressNotifier::isRunning</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::notifyFinished">qi::ProgressNotifier::notifyFinished</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::reset">qi::ProgressNotifier::reset</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::notifyProgressed__double">qi::ProgressNotifier::notifyProgressed</a></p>
+<p><a class="reference internal" href="#qi::ProgressNotifier::notifyRunning">qi::ProgressNotifier::notifyRunning</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::ProgressNotifier)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::ProgressNotifier::status__Property:Status:">qi::ProgressNotifier::status</a><p><a class="reference internal" href="#qi::ProgressNotifier::progress__Property:double:">qi::ProgressNotifier::progress</a></p>
+</ul>
+</dl>
+</li>
+<li><p class="first">class qi::FileOperation</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::FileOperation)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::FileOperation::detach">qi::FileOperation::detach</a><p><a class="reference internal" href="#qi::FileOperation::isValidC">qi::FileOperation::isValid</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::call-operator">qi::FileOperation::operator()</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::FileOperation__FileOperationRR">qi::FileOperation::FileOperation</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::~FileOperation">qi::FileOperation::~FileOperation</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::castto-b-operatorC">qi::FileOperation::operator bool</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::assign-operator__FileOperationRR">qi::FileOperation::operator=</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::start">qi::FileOperation::start</a></p>
+<p><a class="reference internal" href="#qi::FileOperation::notifierC">qi::FileOperation::notifier</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+<strong><p class="rubric">Functions (namespace qi)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::openLocalFile__qi::PathCR">qi::openLocalFile</a><p><a class="reference internal" href="#qi::createProgressNotifier__Future:void:">qi::createProgressNotifier</a></p>
+<p><a class="reference internal" href="#qi::copyToLocal__FilePtr.Path">qi::copyToLocal</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+</dl>
+</div>
+<div class="section" id="detailed-usage-description">
+<span id="api-file-usage"></span><h2>Detailed Usage Description<a class="headerlink" href="#detailed-usage-description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="opening-a-file-in-read-only-mode-for-sharing-access">
+<h3>Opening a file in read-only mode for sharing access<a class="headerlink" href="#opening-a-file-in-read-only-mode-for-sharing-access" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="#qi::openLocalFile__qi::PathCR" title="qi::openLocalFile"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::openLocalFile</span></code></a> to open the file in sharing read-only mode:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">openLocalFile</span><span class="p">(</span><span class="s">&quot;valid/path/to/file.ext&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, the <code class="xref cpp cpp-guess docutils literal"><span class="pre">file</span></code> object can be passed to a service API requesting a <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>,
+making the content of the file available to the service even if remote.</p>
+<p>If the file does not exist, a <code class="xref cpp cpp-guess docutils literal"><span class="pre">std::runtime_error</span></code> exception will be thrown.</p>
+</div>
+<div class="section" id="file-access-lifetime">
+<h3>File access lifetime<a class="headerlink" href="#file-access-lifetime" title="Permalink to this headline">¶</a></h3>
+<p>The lifetime of the file access is extended by the shared ownership between all the <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>,
+even if the instance is remote.</p>
+<p>The <a class="reference internal" href="#qi::File" title="qi::File"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::File</span></code></a> object is kept alive and the file access open by default until all <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>
+objects referring owning it are destroyed.
+The file access is automatically closed when <a class="reference internal" href="#qi::File" title="qi::File"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::File</span></code></a> is destroyed.</p>
+<p>Once you don&#8217;t need it anymore and want to explicitly stop owning the access,
+you can use the <code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::File::reset</span></code> member of <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>.
+The file access will be closed if there is no other owner still using it.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">someServiceOperation</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Do some work  with file...</span>
+
+  <span class="c1">// No need to work with the file anymore.</span>
+  <span class="n">file</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span> <span class="c1">// From now on, `file` is not usable anymore.</span>
+  <span class="c1">// If we were the only one accessing this file,</span>
+  <span class="c1">// access to it&#39;s content is now closed.</span>
+
+  <span class="c1">//...</span>
+
+  <span class="n">file</span><span class="o">-&gt;</span><span class="n">isOpen</span><span class="p">();</span> <span class="c1">// ERROR</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="request-or-provide-read-only-access-to-the-content-of-a-file">
+<h3>Request or provide read-only access to the content of a file<a class="headerlink" href="#request-or-provide-read-only-access-to-the-content-of-a-file" title="Permalink to this headline">¶</a></h3>
+<p>A service can request read-only access to the content of a file by using
+<a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a> as argument.</p>
+<p>Similarly, a service can provide read-only access to a file by having
+a function return a <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>.</p>
+<p>For example:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MY_API</span> <span class="n">MyService</span>
+<span class="p">{</span>
+  <span class="c1">//...</span>
+<span class="k">public</span><span class="o">:</span>
+
+  <span class="c1">// Store a copy of the provided file, associated with the provided name.</span>
+  <span class="kt">void</span> <span class="n">storeFile</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">fileToStore</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">);</span>
+
+  <span class="c1">// Provide access to a stored file found by name.</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">getFile</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">);</span>
+
+  <span class="c1">//...</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">qi</span><span class="o">::</span><span class="n">Object</span><span class="o">&lt;</span><span class="n">MyService</span><span class="o">&gt;</span> <span class="n">MyServicePtr</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In this example, the user of the service can provide access to a file this way:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">backup</span><span class="p">(</span><span class="n">MyServicePtr</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span><span class="o">&amp;</span> <span class="n">fileToStore</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">openLocalFile</span><span class="p">(</span><span class="n">fileToStore</span><span class="p">);</span>
+  <span class="c1">// Now we can share reading access to this file.</span>
+  <span class="n">service</span><span class="o">-&gt;</span><span class="n">storeFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+  <span class="c1">// At this point, the service have a copy of the file and can start to work with it.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and acquire access to a file content provided by the service this way:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">restore</span><span class="p">(</span><span class="n">MyServicePtr</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Get Access to the file.</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span> <span class="o">=</span> <span class="n">service</span><span class="o">-&gt;</span><span class="n">getFile</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Then work with the file content.</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-a-local-copy-of-a-provided-file">
+<h3>Make a local copy of a provided file<a class="headerlink" href="#make-a-local-copy-of-a-provided-file" title="Permalink to this headline">¶</a></h3>
+<p>We can use the <a class="reference internal" href="#qi::copyToLocal__FilePtr.Path" title="qi::copyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::copyToLocal</span></code></a> function to make a local copy of the file provided through a <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>.
+The <a class="reference internal" href="#qi::copyToLocal__FilePtr.Path" title="qi::copyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::copyToLocal</span></code></a> function will transfer a copy of the content of the file to the local file system, even if the original file is on a remote file system.</p>
+<p>For example, if we want a service function to make a full copy of a provided file, in a
+local temporary location, before doing any more work:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">MyService</span><span class="o">::</span><span class="n">storeFile</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">fileToStore</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// First, make a local copy in a temporary files directory:</span>
+  <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span> <span class="n">tempFilePath</span> <span class="o">=</span> <span class="n">generateTemporaryFilePath</span><span class="p">();</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">copyToLocal</span><span class="p">(</span><span class="n">fileToStore</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">);</span> <span class="c1">// This call wait for the end of the copy.</span>
+
+  <span class="c1">// We now have a local copy of the remote file,</span>
+  <span class="c1">// we don&#39;t need the remote access anymore.</span>
+  <span class="n">fileToStore</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+  <span class="c1">// Now we can work with the local copy of the file:</span>
+  <span class="n">storeFileInDatabase</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the same way, we can provide access to the data of the file by returning a <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a>:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">FilePtr</span> <span class="n">MyService</span><span class="o">::</span><span class="n">getFile</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span> <span class="n">fileLocation</span> <span class="o">=</span> <span class="n">findFileLocation</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">fileLocation</span><span class="p">.</span><span class="n">exists</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">fileLocation</span><span class="p">.</span><span class="n">isfile</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="c1">// Now we can open it and provide it to the user for reading.</span>
+    <span class="k">return</span> <span class="n">qi</span><span class="o">::</span><span class="n">openLocalFile</span><span class="p">(</span><span class="n">fileLocation</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// We didn&#39;t find the file!</span>
+  <span class="k">return</span> <span class="n">FilePtr</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then the user can retrieve a copy of the file and work with it:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">restore</span><span class="p">(</span><span class="n">MyServicePtr</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span><span class="o">&amp;</span> <span class="n">fileLocation</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Get access to the file.</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span> <span class="o">=</span> <span class="n">service</span><span class="o">-&gt;</span><span class="n">getFile</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1">// The file was found.</span>
+  <span class="p">{</span>
+    <span class="c1">// We want to make a local copy before working on the file.</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">copyToLocal</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">fileLocation</span><span class="p">);</span>
+
+    <span class="c1">// We don&#39;t need the remote access anymore.</span>
+    <span class="n">file</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+    <span class="c1">// Now work on the file located at `fileLocation`.</span>
+    <span class="n">workOnFile</span><span class="p">(</span><span class="n">fileLocation</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="observe-the-progression-of-a-file-copy-transfer-or-other-long-operations">
+<h3>Observe the progression of a file copy, transfer or other long operations<a class="headerlink" href="#observe-the-progression-of-a-file-copy-transfer-or-other-long-operations" title="Permalink to this headline">¶</a></h3>
+<p>Potentially long file operations like <a class="reference internal" href="#qi::copyToLocal__FilePtr.Path" title="qi::copyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::copyToLocal</span></code></a> returns a <a class="reference internal" href="base/future.html#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FutureSync</span></code></a>.
+This imply that the call will wait for the end of the operation if the <a class="reference internal" href="base/future.html#qi::FutureSync" title="qi::FutureSync"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FutureSync</span></code></a>
+is not used by the user or not put into a <a class="reference internal" href="base/future.html#qi::Future" title="qi::Future"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::Future</span></code></a> for later usage.</p>
+<p>To wait for the end of the operation, we just wait for the future to be set:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">printFinished</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;File Transfer Finished! &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">fetchFile</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span> <span class="n">temporaryFilePath</span> <span class="o">=</span> <span class="n">makeTemporaryFilePath</span><span class="p">();</span>
+
+    <span class="c1">// We copy the file on a temporary work location on the local filesystem,</span>
+    <span class="c1">// but we don&#39;t wait for the transfer to end.</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">transfer</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">copyToLocal</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">temporaryFilePath</span><span class="p">);</span>
+
+    <span class="c1">// We want to log the end of the transfer:</span>
+    <span class="n">transfer</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printFinished</span><span class="p">);</span>
+
+    <span class="c1">// Do some additional work while the file is transfered.</span>
+    <span class="n">someAdditionalWork</span><span class="p">();</span>
+
+    <span class="c1">// Now we wait until the end of the operation if it&#39;s not finished yet.</span>
+    <span class="n">transfer</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span> <span class="c1">// Don&#39;t wait for futures in real code, you should .connect() instead.</span>
+    <span class="n">file</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+    <span class="n">workOnFile</span><span class="p">(</span><span class="n">temporaryFilePath</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example we want to be notified about the end of the operation,
+so we can connect a callback to the future.
+However, using only a future, we cannot get progress information about the transfer.</p>
+<p>To get progress information and be able to connect callbacks to the different steps of the operation
+before the operation starts,
+we can use the <a class="reference internal" href="#qi::FileCopyToLocal" title="qi::FileCopyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileCopyToLocal</span></code></a> type instead of <a class="reference internal" href="#qi::copyToLocal__FilePtr.Path" title="qi::copyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::copyToLocal</span></code></a> function:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">printStatus</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FileOperation</span><span class="o">::</span><span class="n">Status</span> <span class="n">status</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">switch</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">Status_Finished</span><span class="p">:</span>
+      <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;File Transfer Finished! &quot;</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">Status_Failed</span><span class="p">:</span>
+      <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;File Transfer Failed! &quot;</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+     <span class="k">case</span> <span class="nl">Status_Canceled</span><span class="p">:</span>
+      <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;File Transfer Canceled! &quot;</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// We ignore the other status.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">printProgress</span><span class="p">(</span><span class="kt">double</span> <span class="n">progress</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qiLogInfo</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;#### File Transfer Progress = &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">progress</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;%&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">fetchFile</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span> <span class="n">temporaryFilePath</span> <span class="o">=</span> <span class="n">makeTemporaryFilePath</span><span class="p">();</span>
+
+    <span class="c1">// Instead of launching the copy immediately, we prepare it by setting up</span>
+    <span class="c1">// the object which represent that operation.</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">FileCopyToLocal</span> <span class="n">fileCopy</span> <span class="p">{</span><span class="n">file</span><span class="p">,</span> <span class="n">temporaryFilePath</span><span class="p">};</span>
+
+    <span class="c1">// We extract the progress notifier associated with the operation.</span>
+    <span class="n">qi</span><span class="o">::</span><span class="n">ProgressNotifierPtr</span> <span class="n">notifier</span> <span class="o">=</span> <span class="n">fileCopy</span><span class="o">-&gt;</span><span class="n">notifier</span><span class="p">();</span>
+
+    <span class="c1">// We want to log the state changes of the transfer.</span>
+    <span class="n">notifier</span><span class="o">-&gt;</span><span class="n">status</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printStatus</span><span class="p">);</span>
+
+    <span class="c1">// We also to log the progress of the transfer.</span>
+    <span class="n">notifier</span><span class="o">-&gt;</span><span class="n">progress</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printProgress</span><span class="p">);</span>
+
+    <span class="c1">// We are ready to launch the copy now.</span>
+    <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">ft</span> <span class="o">=</span> <span class="n">fileCopy</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+    <span class="c1">// Do some additional work while the file is transfered.</span>
+    <span class="n">someAdditionalWork</span><span class="p">();</span>
+
+    <span class="c1">// Now we wait until the end of the operation if it&#39;s not finished yet.</span>
+    <span class="n">ft</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span> <span class="c1">// Don&#39;t wait for futures in real code, you should .connect() instead.</span>
+
+    <span class="c1">// We don&#39;t need the file access anymore.</span>
+    <span class="n">file</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+    <span class="n">workOnFile</span><span class="p">(</span><span class="n">temporaryFilePath</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#qi::FileCopyToLocal" title="qi::FileCopyToLocal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileCopyToLocal</span></code></a> type is an implementation of <a class="reference internal" href="#qi::FileOperation" title="qi::FileOperation"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileOperation</span></code></a> which represents the copy/transfer
+operation but does not start.
+As this example demonstrates, the user can then plug callbacks to signals and properties provided
+by <a class="reference internal" href="#qi::ProgressNotifier" title="qi::ProgressNotifier"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::ProgressNotifier</span></code></a> which is provided by the <code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileOperation::notifier()</span></code> member function.
+The user can then start the copy operation by calling the <a class="reference external" href="#qi::FileOperation::start"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FileOperation::start()</span></code></a> member function.</p>
+<p>Similarly, the side of the code which opened the file and provided access to it can also follow
+the progression of the on-going operations on the file by using
+the <code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::File::operationProgress()</span></code> member function.
+This function provides access to a <a class="reference internal" href="#qi::ProgressNotifier" title="qi::ProgressNotifier"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::ProgressNotifier</span></code></a> which is updated by the current file
+operation on the file.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">printStatus</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">FileOperation</span><span class="o">::</span><span class="n">Status</span> <span class="n">status</span><span class="p">);</span> <span class="c1">// as before</span>
+<span class="kt">void</span> <span class="nf">printProgress</span><span class="p">(</span><span class="kt">double</span> <span class="n">progress</span><span class="p">);</span> <span class="c1">// as before</span>
+
+<span class="kt">void</span> <span class="nf">storeFile</span><span class="p">(</span><span class="n">MyServicePtr</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">Path</span><span class="o">&amp;</span> <span class="n">fileToStore</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">FilePtr</span> <span class="n">file</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">openLocalFile</span><span class="p">(</span><span class="n">fileToStore</span><span class="p">);</span>
+
+  <span class="c1">// Before sending the access to the file, connect progress logging callbacks.</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">ProgressNotifierPtr</span> <span class="n">copyProgress</span> <span class="o">=</span> <span class="n">file</span><span class="o">-&gt;</span><span class="n">operationProgress</span><span class="p">();</span>
+  <span class="n">copyProgress</span><span class="o">-&gt;</span><span class="n">status</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printStatus</span><span class="p">);</span>
+  <span class="n">copyProgress</span><span class="o">-&gt;</span><span class="n">progress</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printProgress</span><span class="p">);</span>
+
+  <span class="c1">// Now we can share reading access to this file.</span>
+  <span class="n">service</span><span class="o">-&gt;</span><span class="n">storeFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+
+  <span class="c1">// At this point, the service have a copy of the file and can start to work with it.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="complete-example-alice-s-image-store-service">
+<span id="api-file-complete-example"></span><h2>Complete example : Alice&#8217;s Image Store Service<a class="headerlink" href="#complete-example-alice-s-image-store-service" title="Permalink to this headline">¶</a></h2>
+<p>The following code samples are extracted from the complete example project located in the worktree at sdk/libqicore/libqicore/example/file/</p>
+<p>In this example, Alice design a naoqi service which provide storage for images files.
+Then Bob writes an application which access Alice&#8217;s image storage service and work with it.</p>
+<div class="section" id="imagestore">
+<h3>ImageStore<a class="headerlink" href="#imagestore" title="Permalink to this headline">¶</a></h3>
+<p>Alice&#8217;s ImageStore service is simple and straightforward:</p>
+<p>This is very similar to the example code in previous sections.
+In particular:</p>
+<p>Note the <a class="reference external" href="#TPD_qi::FilePtr"><code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::FilePtr</span></code></a> usage which allow the user to provide access to a file,
+or to acquire a stored file access.</p>
+<p>To implement the <code class="xref cpp cpp-guess docutils literal"><span class="pre">storeImage</span></code> function, Alice first acquire and copy the user file
+in a temporary location, then do some work to register it in the store&#8217;s database.</p>
+<p>This is of course a simpler implementation, similar to the <code class="xref cpp cpp-guess docutils literal"><span class="pre">getImage</span></code> function implementation:</p>
+</div>
+<div class="section" id="imagestore-user-code">
+<h3>ImageStore User Code<a class="headerlink" href="#imagestore-user-code" title="Permalink to this headline">¶</a></h3>
+<p>Meanwhile, Bob wrote his application to acquire Alice&#8217;s ImageStore instance,
+than do some basic work with it.</p>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qi::openLocalFile__qi::PathCR">
+FilePtr <code class="descclassname">qi::</code><code class="descname">openLocalFile</code><span class="sig-paren">(</span><a class="reference external" href="base/path.html">const qi::Path&amp;</a> <em>localPath</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::openLocalFile__qi::PathCR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>localPath</strong> &#8211; Path to a file on the local file system that can be open. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A shareable access to the opened local file. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Open a local file located at the specified path and provide it for reading as a sharable file access.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::copyToLocal__FilePtr.Path">
+FutureSync&lt;void&gt; <code class="descclassname">qi::</code><code class="descname">copyToLocal</code><span class="sig-paren">(</span>FilePtr <em>file</em>, Path <em>localPath</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::copyToLocal__FilePtr.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file</strong> &#8211; Source file to copy. </li>
+<li><strong>localPath</strong> &#8211; Local file system location where the specified file will be copied. No file or directory should be located at this path otherwise the operation will fail. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A synchronous future associated with the operation. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Copy an open local or remote file to a local file system location.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::createProgressNotifier__Future:void:">
+ProgressNotifierPtr <code class="descclassname">qi::</code><code class="descname">createProgressNotifier</code><span class="sig-paren">(</span>Future&lt;void&gt; <em>operationFuture</em> = {}<span class="sig-paren">)</span><a class="headerlink" href="#qi::createProgressNotifier__Future:void:" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>operationFuture</strong> &#8211; Optional future of an operation to associate the notifier with. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A progress notifier, associated to the operation of the future if provided. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create and provide a remotely shareable ProgressNotifier object.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="TPD_qi::FilePtr">
+<!--[TPD_qi::FilePtr]--><span><em>typedef </em>qi::Object&lt; File &gt;</span> <span>FilePtr</span><a class="headerlink" href="#TPD_qi::FilePtr" title="Permalink to this definition">¶</a></dt>
+<span>
+
+Pointer to a file with shared/remote semantic.         
+
+        </span></dl>
+
+<dl class="type">
+<dt id="TPD_qi::FileOperationPtr">
+<!--[TPD_qi::FileOperationPtr]--><span><em>typedef </em>Object&lt; FileOperation &gt;</span> <span>FileOperationPtr</span><a class="headerlink" href="#TPD_qi::FileOperationPtr" title="Permalink to this definition">¶</a></dt>
+<span>
+
+Pointer to a file operation with sharing semantic.         
+
+        </span></dl>
+
+<dl class="type">
+<dt id="TPD_qi::ProgressNotifierPtr">
+<!--[TPD_qi::ProgressNotifierPtr]--><span><em>typedef </em>qi::Object&lt; ProgressNotifier &gt;</span> <span>ProgressNotifierPtr</span><a class="headerlink" href="#TPD_qi::ProgressNotifierPtr" title="Permalink to this definition">¶</a></dt>
+<span>
+
+Pointer to a ProgressNotifier with shared/remote semantic.         
+
+        </span></dl>
+
+<div class="section" id="qi-file-class-reference">
+<h3>qi::File Class Reference<a class="headerlink" href="#qi-file-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qicore/file.hpp&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>const std::streamsize</span> <code class="descname"><a class="reference internal" href="#qi::File::MAX_READ_SIZE__std::streamsizeC" title="qi::File::MAX_READ_SIZE"><code class="xref cpp cpp-func docutils literal"><span class="pre">MAX_READ_SIZE</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>std::streamsize</span> <code class="descname"><a class="reference external" href="#qi::File::sizeC"><code class="xref cpp cpp-func docutils literal"><span class="pre">size</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::File::isOpenC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isOpen</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::File::isRemoteC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isRemote</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>ProgressNotifierPtr</span> <code class="descname"><a class="reference external" href="#qi::File::operationProgressC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operationProgress</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>Buffer</span> <code class="descname"><a class="reference external" href="#qi::File::read__std::streamsize"><code class="xref cpp cpp-func docutils literal"><span class="pre">read</span></code></a></code><span class="sig-paren">(</span>std::streamsize <em>countBytesToRead</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>Buffer</span> <code class="descname"><a class="reference external" href="#qi::File::read__std::streamoff.std::streamsize"><code class="xref cpp cpp-func docutils literal"><span class="pre">read</span></code></a></code><span class="sig-paren">(</span>std::streamoff <em>beginOffset</em>, std::streamsize <em>countBytesToRead</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::File::seek__std::streamoff"><code class="xref cpp cpp-func docutils literal"><span class="pre">seek</span></code></a></code><span class="sig-paren">(</span>std::streamoff <em>offsetFromBegin</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::File::close"><code class="xref cpp cpp-func docutils literal"><span class="pre">close</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Provide access to the content of a local or remote file.    Should be obtained using openLocalFile() or through a service API if the file is potentially remote.</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::File::MAX_READ_SIZE__std::streamsizeC">
+const std::streamsize <code class="descclassname">qi::File::</code><code class="descname">MAX_READ_SIZE</code><a class="headerlink" href="#qi::File::MAX_READ_SIZE__std::streamsizeC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum count of bytes that you can read by reading functions call.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::File::sizeC">
+std::streamsize <code class="descclassname">qi::File::</code><code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::sizeC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Total count of bytes contained in the file or 0 if the file is closed. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::isOpenC">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::File::</code><code class="descname">isOpen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::isOpenC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the file is currently open for reading, false otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::isRemoteC">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::File::</code><code class="descname">isRemote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::isRemoteC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the file is located on a remote filesystem, false otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::operationProgressC">
+ProgressNotifierPtr <code class="descclassname">qi::File::</code><code class="descname">operationProgress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::operationProgressC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide the progress notifier used by the operations manipulating this file. The notifier is associated with this file. Therefore, no concurrent operation should be used by this notifier object, as it is not safe to have concurrent operations running on the same file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::read__std::streamsize">
+Buffer <code class="descclassname">qi::File::</code><code class="descname">read</code><span class="sig-paren">(</span>std::streamsize <em>countBytesToRead</em><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::read__std::streamsize" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>countBytesToRead</strong> &#8211; Count of bytes to read from the file, starting from the current position of the file cursor. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A buffer of data read from the file, empty if there is no data in the specified byte range to read or if the file have been closed. If there is less data to read in the file than the required count, if we try reading past the end of the file for example, then the buffer will only contain the available data, nothing more. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Read a specified count of bytes starting from the current cursor position.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::read__std::streamoff.std::streamsize">
+Buffer <code class="descclassname">qi::File::</code><code class="descname">read</code><span class="sig-paren">(</span>std::streamoff <em>beginOffset</em>, std::streamsize <em>countBytesToRead</em><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::read__std::streamoff.std::streamsize" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>beginOffset</strong> &#8211; Position in the file to start reading from. </li>
+<li><strong>countBytesToRead</strong> &#8211; Count of bytes to read from the file starting at the current position of the file cursor. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A buffer of data read from the file, empty if:
+there is no data in the specified byte range to readif the file have been closed;if the start position is outside the available range of data in the file. If there is less data to read in the file than the required count, if we try reading past the end of the file for example, then the buffer will only contain the available data, nothing more 
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Read a specified count of bytes starting from a specified byte position in the file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::seek__std::streamoff">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::File::</code><code class="descname">seek</code><span class="sig-paren">(</span>std::streamoff <em>offsetFromBegin</em><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::seek__std::streamoff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>offsetFromBegin</strong> &#8211; New position of the read cursor in the file. If it is out of the range of data in the file, the cursor will not be changed at all. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">true if the position is in the range of data available in the file, false otherwise, in which case the cursor have not been changed. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Move the read cursor to the specified position in the file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::File::close">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::File::</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::File::close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the file. Once this function is called, calling most other operation will throw a std::runtime_error. The size(), isOpen() and isRemote() calls will return work as expected.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-progressnotifier-class-reference">
+<h3>qi::ProgressNotifier Class Reference<a class="headerlink" href="#qi-progressnotifier-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qicore/file.hpp&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="enumerations">
+<h4>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="E_Status">
+<!--[E_Status]--><em>enum</em> <code class="descname">Status</code><a class="headerlink" href="#E_Status" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Brief</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Status_Idle</span></code></td>
+<td>The operation has not start yet. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Status_Running</span></code></td>
+<td>The operation is currently running. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Status_Finished</span></code></td>
+<td>The operation finished successfully. </td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Status_Failed</span></code></td>
+<td>The operation has failed. </td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Status_Canceled</span></code></td>
+<td>The operation has been canceled by the user. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>Property&lt;Status&gt;</span> <code class="descname"><a class="reference internal" href="#qi::ProgressNotifier::status__Property:Status:" title="qi::ProgressNotifier::status"><code class="xref cpp cpp-func docutils literal"><span class="pre">status</span></code></a></code></dt>
+<dt>
+<span>Property&lt;double&gt;</span> <code class="descname"><a class="reference internal" href="#qi::ProgressNotifier::progress__Property:double:" title="qi::ProgressNotifier::progress"><code class="xref cpp cpp-func docutils literal"><span class="pre">progress</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::isRunningC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isRunning</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>Future&lt;void&gt;</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::waitForFinished"><code class="xref cpp cpp-func docutils literal"><span class="pre">waitForFinished</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::reset"><code class="xref cpp cpp-func docutils literal"><span class="pre">reset</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::notifyRunning"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifyRunning</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::notifyFinished"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifyFinished</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::notifyCanceled"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifyCanceled</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::notifyFailed"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifyFailed</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>void</span> <code class="descname"><a class="reference external" href="#qi::ProgressNotifier::notifyProgressed__double"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifyProgressed</span></code></a></code><span class="sig-paren">(</span>double <em>newProgress</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Provide information about the state of a potentially long remote or async operation.</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::ProgressNotifier::status__Property:Status:">
+Property&lt;Status&gt; <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">status</code><a class="headerlink" href="#qi::ProgressNotifier::status__Property:Status:" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current status of the operation associated to this notifier. ProgressNotifier::Status</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="qi::ProgressNotifier::progress__Property:double:">
+Property&lt;double&gt; <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">progress</code><a class="headerlink" href="#qi::ProgressNotifier::progress__Property:double:" title="Permalink to this definition">¶</a></dt>
+<dd><p>Progress state of the operation associated with this notifier. By default you can assume a normalized value ranging between 0.0 (no work is done) to 1.0 (all work is done). The semantic of this value is defined by the operation implementation and could be different from the default but should then be documented.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::isRunningC">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">isRunning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::isRunningC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if the operation associated to this notifier has started and is neither finished nor canceled nor failed yet, false otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::waitForFinished">
+Future&lt;void&gt; <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">waitForFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::waitForFinished" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::reset">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the status of the algorithm to the idle state with no progress.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::notifyRunning">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">notifyRunning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::notifyRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify the observers that the operation associated with this notifier is now running.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::notifyFinished">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">notifyFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::notifyFinished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify the observers that the operation has successfully ended.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::notifyCanceled">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">notifyCanceled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::notifyCanceled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify the observers that the operation has been canceled by the user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::notifyFailed">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">notifyFailed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::notifyFailed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify the observers that the operation has failed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::ProgressNotifier::notifyProgressed__double">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#void" title="void">void</a> <code class="descclassname">qi::ProgressNotifier::</code><code class="descname">notifyProgressed</code><span class="sig-paren">(</span>double <em>newProgress</em><span class="sig-paren">)</span><code class="descclassname"> = 0</code><a class="headerlink" href="#qi::ProgressNotifier::notifyProgressed__double" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>newProgress</strong> &#8211; New value representing the total progress of the operation. By default, uses a range from 0.0 (no work has been done yet) to 1.0 (all work is done). The operation implementation is free to use another range if necessary but should clarify the meaning of this value in its documentation. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Notify the observers that the operation progressed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-fileoperation-class-reference">
+<h3>qi::FileOperation Class Reference<a class="headerlink" href="#qi-fileoperation-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;qicore/file.hpp&gt;</span>
+</pre></div>
+</div>
+<ul>
+<li><strong>Inherited by: </strong><a class="reference external" href=""><code class="docutils literal"><span class="pre">qi::FileCopyToLocal</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FileOperation::~FileOperation"><code class="xref cpp cpp-func docutils literal"><span class="pre">~FileOperation</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><code class="xref cpp cpp-func docutils literal"></code></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FileOperation::FileOperation__FileOperationRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">FileOperation</span></code></a></code><span class="sig-paren">(</span>FileOperation&amp;&amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>FileOperation&amp;</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::assign-operator__FileOperationRR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>FileOperation&amp;&amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>qi::Future&lt;void&gt;</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::start"><code class="xref cpp cpp-func docutils literal"><span class="pre">start</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>qi::Future&lt;void&gt;</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::detach"><code class="xref cpp cpp-func docutils literal"><span class="pre">detach</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>auto</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::call-operator"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator()</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>ProgressNotifierPtr</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::notifierC"><code class="xref cpp cpp-func docutils literal"><span class="pre">notifier</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::FileOperation::isValidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isValid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FileOperation::castto-b-operatorC"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator</span> <span class="pre">bool</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+</dl>
+
+</div>
+<div class="section" id="types">
+<h4>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="TPD_qi::FileOperation::TaskPtr">
+<!--[TPD_qi::FileOperation::TaskPtr]--><span><em>typedef </em>boost::shared_ptr&lt; Task &gt;</span> <span>TaskPtr</span><a class="headerlink" href="#TPD_qi::FileOperation::TaskPtr" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span></dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Base type for file operation exposing information about its progress state. Exposes a ProgressNotifier, associated to the operation.</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::FileOperation::~FileOperation">
+ <code class="descclassname">qi::FileOperation::</code><code class="descname">~FileOperation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::~FileOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destructor. Cancel the operations&#8217;s task if is still running and this object is valid.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">()</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::FileOperation__FileOperationRR">
+ <code class="descclassname">qi::FileOperation::</code><code class="descname">FileOperation</code><span class="sig-paren">(</span>FileOperation&amp;&amp; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::FileOperation__FileOperationRR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>other</strong> &#8211; Object that will be moved-from. Will be in invalid state after this call, until being assigned to a vallid state. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Move construction.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::assign-operator__FileOperationRR">
+FileOperation&amp; <code class="descclassname">qi::FileOperation::</code><code class="descname">operator=</code><span class="sig-paren">(</span>FileOperation&amp;&amp; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::assign-operator__FileOperationRR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>other</strong> &#8211; Object that will be moved-from. Will be in invalid state after this call, until being assigned to a vallid state. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Move assignation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::start">
+<a class="reference external" href="base/future.html">qi::Future&lt;void&gt;</a> <code class="descclassname">qi::FileOperation::</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::start" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A future corresponding to the end of the operation. </td>
+</tr>
+</tbody>
+</table>
+<p>Starts the operation&#8217;s task. This function must be called only once. Throws a std::runtime_error if start() has already been called before at least once or if this object is in an invalid state.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::detach">
+<a class="reference external" href="base/future.html">qi::Future&lt;void&gt;</a> <code class="descclassname">qi::FileOperation::</code><code class="descname">detach</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::detach" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A future corresponding to the end of the operation. </td>
+</tr>
+</tbody>
+</table>
+<p>Detach the running operation from this object. Useful to dissociate the on-going operation from the lifetime of the object, in order to allow its continuation after object destruction. The object destructor will cancel any still running operation if not dissociated beforehand.</p>
+<p>Once called, this object will be in invalid state. The task must have been started before calling this function, otherwise a std::runtime_exception will be thrown.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::call-operator">
+auto <code class="descclassname">qi::FileOperation::</code><code class="descname">operator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileOperation::call-operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call operator: calls start()</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::notifierC">
+ProgressNotifierPtr <code class="descclassname">qi::FileOperation::</code><code class="descname">notifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FileOperation::notifierC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A progress notifier associated to the operation if the operation&#8217;s task is owned and this object is valid, null otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::isValidC">
+<a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::FileOperation::</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FileOperation::isValidC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if this object is in a valid state, false otherwise. In an invalid state, all of this object&#8217;s member function calls will result in exception thrown except validity checks functions and move-assignation. An invalid object can be re-assigned to a valid state. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::FileOperation::castto-b-operatorC">
+ <code class="descclassname">qi::FileOperation::</code><code class="descname">operator</code> <a class="reference internal" href="../../../../naoqi/stdtypes.html#b" title="bool">bool</a><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::FileOperation::castto-b-operatorC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if this object owns the operation&#8217;s task, false otherwise. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-filecopytolocal-class-reference">
+<h3>qi::FileCopyToLocal Class Reference<a class="headerlink" href="#qi-filecopytolocal-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul>
+<li><strong>Inherits: </strong><a class="reference external" href=""><code class="docutils literal"><span class="pre">qi::FileOperation</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::FileCopyToLocal::FileCopyToLocal__qi::FilePtr.qi::Path"><code class="xref cpp cpp-func docutils literal"><span class="pre">FileCopyToLocal</span></code></a></code><span class="sig-paren">(</span>qi::FilePtr <em>file</em>, qi::Path <em>localPath</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Copies a potentially remote file to the local file system.</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::FileCopyToLocal::FileCopyToLocal__qi::FilePtr.qi::Path">
+ <code class="descclassname">qi::FileCopyToLocal::</code><code class="descname">FileCopyToLocal</code><span class="sig-paren">(</span><a class="reference external" href="#TPD_qi::FilePtr">qi::FilePtr</a> <em>file</em>, <a class="reference external" href="base/path.html">qi::Path</a> <em>localPath</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::FileCopyToLocal::FileCopyToLocal__qi::FilePtr.qi::Path" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>file</strong> &#8211; Access to a potentially remote file to copy to the local file system. </li>
+<li><strong>localPath</strong> &#8211; Local file system location where the specified file will be copied. No file or directory should be located at this path otherwise the operation will fail. </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructor.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">API References</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">C++ qi API Reference</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="base/index.html">C++ qi base API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="type/index.html">C++ qi type API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="messaging/index.html">C++ qi messaging API</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qi::File</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../cpp-classindex.html">C++ Class Index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../cpp-funcindex.html">C++ Function Index</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../python/index.html">Python qi API reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../transtyping.html">&gt; Type equivalences between languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">qi::File</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#glossary">Glossary</a></li>
+<li><a class="reference internal" href="#detailed-usage-description">Detailed Usage Description</a><ul>
+<li><a class="reference internal" href="#opening-a-file-in-read-only-mode-for-sharing-access">Opening a file in read-only mode for sharing access</a></li>
+<li><a class="reference internal" href="#file-access-lifetime">File access lifetime</a></li>
+<li><a class="reference internal" href="#request-or-provide-read-only-access-to-the-content-of-a-file">Request or provide read-only access to the content of a file</a></li>
+<li><a class="reference internal" href="#make-a-local-copy-of-a-provided-file">Make a local copy of a provided file</a></li>
+<li><a class="reference internal" href="#observe-the-progression-of-a-file-copy-transfer-or-other-long-operations">Observe the progression of a file copy, transfer or other long operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-example-alice-s-image-store-service">Complete example : Alice&#8217;s Image Store Service</a><ul>
+<li><a class="reference internal" href="#imagestore">ImageStore</a></li>
+<li><a class="reference internal" href="#imagestore-user-code">ImageStore User Code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#qi-file-class-reference">qi::File Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-progressnotifier-class-reference">qi::ProgressNotifier Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#enumerations">Enumerations</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-fileoperation-class-reference">qi::FileOperation Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-filecopytolocal-class-reference">qi::FileCopyToLocal Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../../contents.html">Site map</a>
+      <a title="Index" href="../../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -31,17 +31,21 @@ public class PeticionAyuda extends ResPwaTask{
         //dar respuesta a petición
         infoServicio.put("SAY", "DarRespuesta");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Peticion Ayuda ---");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+        requestService(srb, (RobotAgentBelieves) believes);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Peticion Ayuda ---");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+        requestService(srb, (RobotAgentBelieves) believes);
     }
 
     @Override

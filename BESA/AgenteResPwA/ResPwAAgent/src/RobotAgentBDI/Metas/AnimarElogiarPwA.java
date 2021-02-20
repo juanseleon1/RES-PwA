@@ -11,9 +11,8 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
 import Init.InitRESPwA;
-import Tareas.AnimarElogiarPwA.SeleccionarEstrategiaAnimar;
+import Tareas.AnimarElogiarPwA.EvaluarEstrategiaAnimar;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,15 +33,12 @@ public class AnimarElogiarPwA extends GoalBDI{
     public static AnimarElogiarPwA buildGoal() {
 
         //evaluar estado emocional
-        SeleccionarEstrategiaAnimar seleccionarEstrategia = new SeleccionarEstrategiaAnimar();
-        EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
+        EvaluarEstrategiaAnimar evaluarEstrategia = new EvaluarEstrategiaAnimar();
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
 
         Plan rolePlan= new Plan();
-        
-        rolePlan.addTask(seleccionarEstrategia);
-        rolePlan.addTask(ejecutarEstrategia);
+        rolePlan.addTask(evaluarEstrategia);
         
         descrip = "animate";
         RationalRole animateRole = new RationalRole(descrip, rolePlan);

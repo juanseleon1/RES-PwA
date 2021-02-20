@@ -1,0 +1,14 @@
+-/INICIO REDIRECCIÓN PARA EL ROUTER EMULADO DE LA TABLET
+-Panel de control
+-Programas y carácteristicas
+-Activar o desactivar características de Windows
+-Activar Telnet
+
+-Abrir directorio principal (C:/users/.emulator_console_auth_token)
+-Abrir el archivo .emulator_console_auth_token
+-Copiar ese token del archivo
+-Abrir cmd
+-Escribir en el cmd 'telnet localhost 5575'
+-Escribir en el cmd auth y pegar el token del archivo
+-Escribir en el cmd redir add tcp:7896:7896
+-/FIN

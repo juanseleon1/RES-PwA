@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="7" localization="8" tooltip="This box returns the gender of every person in front of the robot.&#x0A;The detection fails when there is no person in front of the robot or when the timeout is exceeded.&#x0A;&#x0A;It is possible to set up the Confidence Threshold and the Timeout parameters for this box. " x="431" y="206">
+        <bitmap>media/images/box/interaction/gender.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.faceC = ALProxy("ALFaceCharacteristics")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+        self.confidence = self.getParameter("Confidence Threshold")
+        self.gender = []
+        self.counter = 0
+        self.bIsRunning = False
+        self.delayed = []
+        self.errorMes = ""
+
+    def onUnload(self):
+        self.counter = 0
+        self.gender = []
+        self.bIsRunning = False
+        self.cancelDelays()
+
+    def onInput_onStart(self):
+        try:
+            #start timer
+            import qi
+            import functools
+            delay_future = qi.async(self.onTimeout, delay=int(self.getParameter("Timeout (s)") * 1000 * 1000))
+            self.delayed.append(delay_future)
+            bound_clean = functools.partial(self.cleanDelay, delay_future)
+            delay_future.addCallback(bound_clean)
+
+            self.bIsRunning = True
+            while self.bIsRunning:
+                if self.counter < 4:
+                    try:
+                        #identify user
+                        ids = ALMemory.getData("PeoplePerception/PeopleList")
+                        if len(ids) == 0:
+                            self.errorMes = "No face detected"
+                            self.onUnload()
+                        else:
+                            #analyze age properties
+                            index = -1
+                            for id in ids:
+                                index += 1
+                                self.faceC.analyzeFaceCharacteristics(id)
+                                time.sleep(0.1)
+                                value = ALMemory.getData("PeoplePerception/Person/"+str(id)+"/GenderProperties")
+                                if value[1] > self.confidence:
+                                    elem = [x for x in self.gender if x[0] == id]
+                                    if elem !=[]:
+                                        elemIndex = self.gender.index(elem[0])
+                                        self.gender[elemIndex][1] += value[0]
+                                        self.gender[elemIndex][2] += 1
+                                    else:
+                                        self.gender.append([id, value[0], 1])
+                                    self.counter += 1
+                    except Exception as e:
+                        ids = []
+                else:
+                    #calculate mean value
+                    results = []
+                    for res in self.gender:
+                        gender = res[1]/res[2]
+                        if gender < 0.5:
+                            results.append([res[0], "female"])
+                        else:
+                            results.append([res[0], "male"])
+                    self.onStopped(results)
+                    self.onUnload()
+                    return
+            raise RuntimeError(self.errorMes)
+        except Exception as e:
+            raise RuntimeError(str(e))
+            self.onUnload()
+
+    def onTimeout(self):
+        self.errorMes = "Timeout"
+        self.onUnload()
+
+    def cleanDelay(self, fut, fut_ref):
+        self.delayed.remove(fut)
+
+    def cancelDelays(self):
+        cancel_list = list(self.delayed)
+        for d in cancel_list:
+            d.cancel()
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip='Returns an array containing [userId, gender] for every user. The userId is the ID of the person as defined by the ALPeoplePerception API and gender can be: &#x0A;- &quot;female&quot;&#x0A;- &quot;male&quot;' id="4" />
+        <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip='Triggered when gender detection failed. &#x0A;Possible error messages:&#x0A;- &quot;No face detected&quot;&#x0A;- &quot;Timeout&quot;' id="5" />
+        <Parameter name="Confidence Threshold" inherits_from_parent="0" content_type="2" value="0.35" default_value="0.6" min="0" max="1" tooltip="Set the confidence threshold for the age detection." id="6" />
+        <Parameter name="Timeout (s)" inherits_from_parent="0" content_type="2" value="10" default_value="5" min="1" max="60" tooltip="" id="7" />
+    </Box>
+</ChoregrapheBox>

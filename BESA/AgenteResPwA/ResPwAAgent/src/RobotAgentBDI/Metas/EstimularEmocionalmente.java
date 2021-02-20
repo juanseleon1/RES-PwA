@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import Tareas.AnimarElogiarPwA.EjecutarEstrategiaAnimar;
+import Tareas.EstimularEmocionalmente.EjecutarEstrategiaEstimular;
 import Init.InitRESPwA;
 import Tareas.EstimularEmocionalmente.ContinuarActividad;
 import Tareas.EstimularEmocionalmente.InterpretarEstadoFlujo;
@@ -37,7 +37,7 @@ public class EstimularEmocionalmente extends GoalBDI{
 
         //evaluar estado emocional
         ContinuarActividad continuarActividad = new ContinuarActividad();
-        EjecutarEstrategiaAnimar ejecutarEstrategia = new EjecutarEstrategiaAnimar();
+        EjecutarEstrategiaEstimular ejecutarEstrategia = new EjecutarEstrategiaEstimular();
         InterpretarEstadoFlujo interpretarEstadoFlujo = new InterpretarEstadoFlujo();
         SeleccionarEstrategiaEmocional seleccionarEstrategiaE = new SeleccionarEstrategiaEmocional();
         RetroalimentarBDI retroalimentar = new RetroalimentarBDI();
@@ -48,10 +48,18 @@ public class EstimularEmocionalmente extends GoalBDI{
 
         //evaluar estado emocional
         rolePlan.addTask(interpretarEstadoFlujo);
-        rolePlan.addTask(seleccionarEstrategiaE);
-        rolePlan.addTask(ejecutarEstrategia);
-        rolePlan.addTask(retroalimentar);
-        rolePlan.addTask(continuarActividad);
+        taskList = new ArrayList<>();
+        taskList.add(interpretarEstadoFlujo);
+        rolePlan.addTask(seleccionarEstrategiaE,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(seleccionarEstrategiaE);
+        rolePlan.addTask(ejecutarEstrategia,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(ejecutarEstrategia);
+        rolePlan.addTask(retroalimentar,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(retroalimentar);
+        rolePlan.addTask(continuarActividad,taskList);
 
         RationalRole estimEmoRole = new RationalRole(descrip, rolePlan);
         EstimularEmocionalmente b= new EstimularEmocionalmente(InitRESPwA.getPlanID(), estimEmoRole, descrip, GoalBDITypes.DUTY);

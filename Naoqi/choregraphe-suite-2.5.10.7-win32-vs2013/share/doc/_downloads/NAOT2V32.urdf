@@ -1,0 +1,260 @@
+<robot name="NaoT2V32">
+    <material name="LightGrey">
+        <texture />
+        <color rgba="0.9 0.9 0.9 1" />
+    </material>
+    <link name="Accelerometer" />
+    <link name="Battery" />
+    <link name="CameraBottom" />
+    <link name="CameraTop" />
+    <link name="ChestBoard/Button" />
+    <link name="Gyrometer" />
+    <link name="Head/Touch/Front" />
+    <link name="Head/Touch/Middle" />
+    <link name="Head/Touch/Rear" />
+    <link name="HeadPitch" />
+    <link name="HeadYaw" />
+    <link name="Head_effector" />
+    <link name="InfraredL" />
+    <link name="InfraredR" />
+    <link name="MicroFront" />
+    <link name="MicroLeft" />
+    <link name="MicroRear" />
+    <link name="MicroRight" />
+    <link name="Sonar/Left" />
+    <link name="Sonar/Right" />
+    <link name="SpeakerLeft" />
+    <link name="SpeakerRight" />
+    <link name="Torso_link">
+        <inertial>
+            <mass value="1.03983" />
+            <origin xyz="-0.00538 0 -0.01026" rpy="0 -0 0" />
+            <inertia ixx="0.00425049" ixy="8.2162e-07" ixz="-3.14329e-05" iyy="0.0037889" iyz="-1.05487e-05" izz="0.00209012" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="file:////share/alrobotmodel/meshes/nao/V32T2/Torso.mesh" scale="1 1 1" />
+            </geometry>
+            <material name="LightGrey">
+                <texture />
+                <color rgba="0.9 0.9 0.9 1" />
+            </material>
+        </visual>
+    </link>
+    <link name="HeadYaw_link">
+        <inertial>
+            <mass value="0.05959" />
+            <origin xyz="-3e-05 0 -0.02573" rpy="0 -0 0" />
+            <inertia ixx="2.27831e-05" ixy="-4.2e-10" ixz="-2.84825e-08" iyy="2.37937e-05" iyz="-1.0416e-07" izz="5.49457e-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="file:////share/alrobotmodel/meshes/nao/V32/HeadYaw.mesh" scale="1 1 1" />
+            </geometry>
+            <material name="LightGrey">
+                <texture />
+                <color rgba="0.9 0.9 0.9 1" />
+            </material>
+        </visual>
+    </link>
+    <link name="HeadPitch_link">
+        <inertial>
+            <mass value="0.47672" />
+            <origin xyz="0.05156 0.00383 -2.25376e-09" rpy="1.5708 5.55112e-17 1.5708" />
+            <inertia ixx="0.0036122" ixy="1.42859e-05" ixz="0.000289597" iyy="0.00342929" iyz="-2.22459e-05" izz="0.00156014" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 5.55112e-17 1.5708" />
+            <geometry>
+                <mesh filename="file:////share/alrobotmodel/meshes/nao/V32/HeadPitch.mesh" scale="1 1 1" />
+            </geometry>
+            <material name="LightGrey">
+                <texture />
+                <color rgba="0.9 0.9 0.9 1" />
+            </material>
+        </visual>
+    </link>
+    <link name="USSensor1" />
+    <link name="USSensor2" />
+    <link name="USSensor3" />
+    <link name="USSensor4" />
+    <link name="base_link" />
+    <joint name="Accelerometer_fixedjoint" type="fixed">
+        <origin xyz="-0.008 0.00606 0.027" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="Accelerometer" />
+    </joint>
+    <joint name="Battery_fixedjoint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="Battery" />
+    </joint>
+    <joint name="CameraBottom_fixedjoint" type="fixed">
+        <origin xyz="0.02381 0.0488 0" rpy="1.5708 -0 2.2689" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="CameraBottom" />
+    </joint>
+    <joint name="CameraTop_fixedjoint" type="fixed">
+        <origin xyz="0.0679 0.0539 0" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="CameraTop" />
+    </joint>
+    <joint name="ChestBoard/Button_fixedjoint" type="fixed">
+        <origin xyz="0.049871 0.001588 0.055163" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="ChestBoard/Button" />
+    </joint>
+    <joint name="Gyrometer_fixedjoint" type="fixed">
+        <origin xyz="-0.008 0.006 0.029" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="Gyrometer" />
+    </joint>
+    <joint name="Head/Touch/Front_fixedjoint" type="fixed">
+        <origin xyz="0.1014 0.0312 0" rpy="1.5708 -0 0.384697" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="Head/Touch/Front" />
+    </joint>
+    <joint name="Head/Touch/Middle_fixedjoint" type="fixed">
+        <origin xyz="0.1099 0.001 0" rpy="1.5708 4.23516e-22 -4e-06" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="Head/Touch/Middle" />
+    </joint>
+    <joint name="Head/Touch/Rear_fixedjoint" type="fixed">
+        <origin xyz="0.1045 -0.0257 0" rpy="1.5708 -0 -0.237603" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="Head/Touch/Rear" />
+    </joint>
+    <joint name="HeadPitch_fixedjoint" type="fixed">
+        <origin xyz="0 0 0" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="HeadPitch" />
+    </joint>
+    <joint name="HeadYaw" type="revolute">
+        <origin xyz="0 0 0.1265" rpy="0 -0 0" />
+        <axis xyz="0 0 1" />
+        <parent link="Torso_link" />
+        <child link="HeadYaw_link" />
+        <limit effort="1.547" velocity="8.26797" lower="-2.08567" upper="2.08567" />
+    </joint>
+    <joint name="HeadPitch" type="revolute">
+        <origin xyz="0 0 0" rpy="1.5708 -1.5708 -3.14159" />
+        <axis xyz="0 0 1" />
+        <parent link="HeadYaw_link" />
+        <child link="HeadPitch_link" />
+        <limit effort="1.532" velocity="7.19407" lower="-0.671952" upper="0.514872" />
+    </joint>
+    <joint name="HeadYaw_fixedjoint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadYaw_link" />
+        <child link="HeadYaw" />
+    </joint>
+    <joint name="Head_effector_fixedjoint" type="fixed">
+        <origin xyz="0 0 0" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="Head_effector" />
+    </joint>
+    <joint name="InfraredL_fixedjoint" type="fixed">
+        <origin xyz="0.0466 0.0441 0.0257" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="InfraredL" />
+    </joint>
+    <joint name="InfraredR_fixedjoint" type="fixed">
+        <origin xyz="0.0466 0.0441 -0.0257" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="InfraredR" />
+    </joint>
+    <joint name="MicroFront_fixedjoint" type="fixed">
+        <origin xyz="0.091 0.041 0" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="MicroFront" />
+    </joint>
+    <joint name="MicroLeft_fixedjoint" type="fixed">
+        <origin xyz="0.0331 -0.0195 0.0606" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="MicroLeft" />
+    </joint>
+    <joint name="MicroRear_fixedjoint" type="fixed">
+        <origin xyz="0.0693 -0.0577 0" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="MicroRear" />
+    </joint>
+    <joint name="MicroRight_fixedjoint" type="fixed">
+        <origin xyz="0.0331 -0.0195 -0.0606" rpy="1.5708 5.55112e-17 1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="MicroRight" />
+    </joint>
+    <joint name="Sonar/Left_fixedjoint" type="fixed">
+        <origin xyz="0.00558253 0.0192068 0.0623853" rpy="-0.00478508 0.0436497 0.392441" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="Sonar/Left" />
+    </joint>
+    <joint name="Sonar/Right_fixedjoint" type="fixed">
+        <origin xyz="0.00558253 -0.0192068 0.0623853" rpy="0.00478508 0.0436497 -0.392441" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="Sonar/Right" />
+    </joint>
+    <joint name="SpeakerLeft_fixedjoint" type="fixed">
+        <origin xyz="0.0526 0.0038 0.0453" rpy="-1.5708 -1.57079 -1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="SpeakerLeft" />
+    </joint>
+    <joint name="SpeakerRight_fixedjoint" type="fixed">
+        <origin xyz="0.0526 0.0038 -0.0453" rpy="-1.5708 1.57079 -1.5708" />
+        <axis xyz="0 0 0" />
+        <parent link="HeadPitch_link" />
+        <child link="SpeakerRight" />
+    </joint>
+    <joint name="USSensor1_fixedjoint" type="fixed">
+        <origin xyz="0.0537 -0.0341 0.0698" rpy="1.8999e-07 -0.1745 -0.349" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="USSensor1" />
+    </joint>
+    <joint name="USSensor2_fixedjoint" type="fixed">
+        <origin xyz="0.0477 -0.0416 0.0509" rpy="-5.21541e-07 0.2618 -0.436301" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="USSensor2" />
+    </joint>
+    <joint name="USSensor3_fixedjoint" type="fixed">
+        <origin xyz="0.0537 0.0341 0.0698" rpy="-1.8999e-07 -0.1745 0.349" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="USSensor3" />
+    </joint>
+    <joint name="USSensor4_fixedjoint" type="fixed">
+        <origin xyz="0.0477 0.0416 0.0509" rpy="5.21541e-07 0.2618 0.436301" />
+        <axis xyz="0 0 0" />
+        <parent link="Torso_link" />
+        <child link="USSensor4" />
+    </joint>
+    <joint name="base_link_fixedjoint" type="fixed">
+        <origin xyz="0 0 0.0526" rpy="0 -0 0" />
+        <axis xyz="0 0 0" />
+        <parent link="base_link" />
+        <child link="Torso_link" />
+    </joint>
+</robot>

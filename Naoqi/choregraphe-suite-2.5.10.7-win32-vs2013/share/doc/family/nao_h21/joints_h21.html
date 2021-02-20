@@ -1,0 +1,909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>H21 - Joints &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="NAO H21" href="index_h21.html" />
+    <link rel="next" title="H21 - Joints - V3.3" href="joints_h21_v33.html" />
+    <link rel="prev" title="H21 - Links - V3.2" href="links_h21_v32.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="family-nao_h21-joints_h21">
+                
+  <div class="section" id="h21-joints">
+<span id="id1"></span><h1>H21 - Joints<a class="headerlink" href="#h21-joints" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><strong>V4</strong> | <a class="reference internal" href="joints_h21_v33.html#h21-joints-v33"><span>V3.3</span></a> | <a class="reference internal" href="joints_h21_v32.html#h21-joints-v32"><span>V3.2</span></a></p>
+<p class="last"><a class="reference internal" href="index_h21.html#nao-h21"><span>NAO H21</span></a> | <a class="reference internal" href="../robots/joints_robot.html#robot-joints"><span>Joints</span></a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="sign-convention">
+<h2>Sign convention<a class="headerlink" href="#sign-convention" title="Permalink to this headline">¶</a></h2>
+<p>Given a joint that links two body parts of the robot, the body part that is closer to the trunk is considered to be fixed and the body part that is farther from the trunk is the one that rotates around the joint axis.</p>
+<p>To perform the rotation of the body parts, we place a frame at each joint. When the robot is at the zero pose, all joint frames have the same orientation. Then, roll rotations take place around the X axis, pitch rotations around the Y axis and yaw rotations around the Z axis.</p>
+<a class="reference internal image-reference" href="../../_images/rollPitchYaw.png"><img alt="../../_images/rollPitchYaw.png" src="../../_images/rollPitchYaw.png" style="width: 195px; height: 190px;" /></a>
+</div>
+<div class="section" id="head-joints">
+<h2>Head joints<a class="headerlink" href="#head-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_headjoint_3.3.png"><img alt="../../_images/hardware_headjoint_3.3.png" src="../../_images/hardware_headjoint_3.3.png" style="width: 523px; height: 343px;" /></a>
+<p><strong>Motion range</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="36%" />
+<col width="22%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range <em>(degrees)</em></th>
+<th class="head">Range <em>(radians)</em></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#headyaw"><span>HeadYaw</span></a></td>
+<td>Head joint twist (Z)</td>
+<td>-119.5 to 119.5</td>
+<td>-2.0857 to 2.0857</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#headpitch"><span>HeadPitch</span></a></td>
+<td>Head joint front and back (Y)</td>
+<td>-38.5 to 29.5</td>
+<td>-0.6720 to 0.5149</td>
+</tr>
+<tr class="row-even"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Anti collision limitation</strong></p>
+<p>Due to potential shell collision at the head level, the <strong>Pitch</strong> motion range
+is limited according to the <strong>Yaw</strong> value.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="18%" />
+<col width="18%" />
+<col width="1%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">HeadYaw</th>
+<th class="head">HeadPitch Min</th>
+<th class="head">HeadPitch Max</th>
+<th class="head" rowspan="2">&nbsp;</th>
+<th class="head">HeadYaw</th>
+<th class="head">HeadPitch Min</th>
+<th class="head">HeadPitch Max</th>
+</tr>
+<tr class="row-even"><th class="head" colspan="3"><em>(degrees)</em></th>
+<th class="head" colspan="3"><em>(radians)</em></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>-119.52</td>
+<td>-25.73</td>
+<td>18.91</td>
+<td rowspan="13">&nbsp;</td>
+<td>-2.086017</td>
+<td>-0.449073</td>
+<td>0.330041</td>
+</tr>
+<tr class="row-even"><td>-87.49</td>
+<td>-18.91</td>
+<td>11.46</td>
+<td>-1.526988</td>
+<td>-0.330041</td>
+<td>0.200015</td>
+</tr>
+<tr class="row-odd"><td>-62.45</td>
+<td>-24.64</td>
+<td>17.19</td>
+<td>-1.089958</td>
+<td>-0.430049</td>
+<td>0.300022</td>
+</tr>
+<tr class="row-even"><td>-51.74</td>
+<td>-27.50</td>
+<td>18.91</td>
+<td>-0.903033</td>
+<td>-0.479965</td>
+<td>0.330041</td>
+</tr>
+<tr class="row-odd"><td>-43.32</td>
+<td>-31.40</td>
+<td>21.20</td>
+<td>-0.756077</td>
+<td>-0.548033</td>
+<td>0.370010</td>
+</tr>
+<tr class="row-even"><td>-27.85</td>
+<td>-38.50</td>
+<td>24.18</td>
+<td>-0.486074</td>
+<td>-0.671951</td>
+<td>0.422021</td>
+</tr>
+<tr class="row-odd"><td>0.0</td>
+<td>-38.50</td>
+<td>29.51</td>
+<td>0.000000</td>
+<td>-0.671951</td>
+<td>0.515047</td>
+</tr>
+<tr class="row-even"><td>27.85</td>
+<td>-38.50</td>
+<td>24.18</td>
+<td>0.486074</td>
+<td>-0.671951</td>
+<td>0.422021</td>
+</tr>
+<tr class="row-odd"><td>43.32</td>
+<td>-31.40</td>
+<td>21.20</td>
+<td>0.756077</td>
+<td>-0.548033</td>
+<td>0.370010</td>
+</tr>
+<tr class="row-even"><td>51.74</td>
+<td>-27.50</td>
+<td>18.91</td>
+<td>0.903033</td>
+<td>-0.479965</td>
+<td>0.330041</td>
+</tr>
+<tr class="row-odd"><td>62.45</td>
+<td>-24.64</td>
+<td>17.19</td>
+<td>1.089958</td>
+<td>-0.430049</td>
+<td>0.300022</td>
+</tr>
+<tr class="row-even"><td>87.49</td>
+<td>-18.91</td>
+<td>11.46</td>
+<td>1.526988</td>
+<td>-0.330041</td>
+<td>0.200015</td>
+</tr>
+<tr class="row-odd"><td>119.52</td>
+<td>-25.73</td>
+<td>18.91</td>
+<td>2.086017</td>
+<td>-0.449073</td>
+<td>0.330041</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="left-arm-joints">
+<h2>Left Arm joints<a class="headerlink" href="#left-arm-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_larmjoint_h21_3.3.png"><img alt="../../_images/hardware_larmjoint_h21_3.3.png" src="../../_images/hardware_larmjoint_h21_3.3.png" style="width: 556px; height: 800px;" /></a>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="40%" />
+<col width="17%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range (degrees)</th>
+<th class="head">Range (radians)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rshoulderpitch"><span>RShoulderPitch</span></a></td>
+<td>Left shoulder joint front and back (Y)</td>
+<td>-119.5 to 119.5</td>
+<td>-2.0857 to 2.0857</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rshoulderroll"><span>RShoulderRoll</span></a></td>
+<td>Left shoulder joint right and left (Z)</td>
+<td>-18 to 76</td>
+<td>-0.3142 to 1.3265</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#relbowyaw"><span>RElbowYaw</span></a></td>
+<td>Left shoulder joint twist (X)</td>
+<td>-119.5 to 119.5</td>
+<td>-2.0857 to 2.0857</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#relbowroll"><span>RElbowRoll</span></a></td>
+<td>Left elbow joint (Z)</td>
+<td>-88.5 to -2</td>
+<td>1.5446 to 0.0349</td>
+</tr>
+<tr class="row-even"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="right-arm-joints">
+<h2>Right Arm joints<a class="headerlink" href="#right-arm-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_rarmjoint_h21_3.3.png"><img alt="../../_images/hardware_rarmjoint_h21_3.3.png" src="../../_images/hardware_rarmjoint_h21_3.3.png" style="width: 500px; height: 700px;" /></a>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="41%" />
+<col width="17%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range (degrees)</th>
+<th class="head">Range (radians)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lshoulderpitch"><span>LShoulderPitch</span></a></td>
+<td>Right shoulder joint front and back (Y)</td>
+<td>-119.5 to 119.5</td>
+<td>-2.0857 to 2.0857</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lshoulderroll"><span>LShoulderRoll</span></a></td>
+<td>Right shoulder joint right and left (Z)</td>
+<td>-76 to 18</td>
+<td>-1.3265 to 0.3142</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lelbowyaw"><span>LElbowYaw</span></a></td>
+<td>Right shoulder joint twist (X)</td>
+<td>-119.5 to 119.5</td>
+<td>-2.0857 to 2.0857</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lelbowroll"><span>LElbowRoll</span></a></td>
+<td>Right elbow joint (Z)</td>
+<td>2 to 88.5</td>
+<td>0.0349 to 1.5446</td>
+</tr>
+<tr class="row-even"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pelvis-joints">
+<h2>Pelvis joints<a class="headerlink" href="#pelvis-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_pelvisjoint.png"><img alt="../../_images/hardware_pelvisjoint.png" src="../../_images/hardware_pelvisjoint.png" style="width: 452px; height: 301px;" /></a>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="35%" />
+<col width="18%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range (degrees)</th>
+<th class="head">Range (radians)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lhipyawpitch"><span>LHipYawPitch</span></a></td>
+<td>Left hip joint twist (Y-Z 45°)</td>
+<td>-65.62 to 42.44</td>
+<td>-1.145303 to 0.740810</td>
+</tr>
+<tr class="row-odd"><td>RHipYawPitch*</td>
+<td>Right hip joint twist (Y-Z 45°)</td>
+<td>-65.62 to 42.44</td>
+<td>-1.145303 to 0.740810</td>
+</tr>
+<tr class="row-even"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>LHipYawPitch</strong> and <strong>RHipYawPitch</strong> are physically just one motor so they
+cannot be controlled independently.
+In case of conflicting orders, <strong>LHipYawPitch</strong> always takes the priority.</p>
+</div>
+</div>
+<div class="section" id="left-leg-joints">
+<h2>Left Leg joints<a class="headerlink" href="#left-leg-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_llegjoint.png"><img alt="../../_images/hardware_llegjoint.png" src="../../_images/hardware_llegjoint.png" style="width: 433px; height: 259px;" /></a>
+<p><strong>Motion range</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="38%" />
+<col width="18%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range (degrees)</th>
+<th class="head">Range (radians)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lhiproll"><span>LHipRoll</span></a></td>
+<td>Left hip joint right and left (X)</td>
+<td>-21.74 to 45.29</td>
+<td>-0.379472 to 0.790477</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lhippitch"><span>LHipPitch</span></a></td>
+<td>Left hip joint front and back (Y)</td>
+<td>-88.00 to 27.73</td>
+<td>-1.535889 to 0.484090</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lkneepitch"><span>LKneePitch</span></a></td>
+<td>Left knee joint (Y)</td>
+<td>-5.29 to 121.04</td>
+<td>-0.092346 to 2.112528</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lanklepitch"><span>LAnklePitch</span></a></td>
+<td>Left ankle joint front and back (Y)</td>
+<td>-68.15 to 52.86</td>
+<td>-1.189516 to 0.922747</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#lankleroll"><span>LAnkleRoll</span></a></td>
+<td>Left ankle joint right and left (X)</td>
+<td>-22.79 to 44.06</td>
+<td>-0.397880 to 0.769001</td>
+</tr>
+<tr class="row-odd"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Anti collision limitation</strong></p>
+<p>Due to potential shell collision at the ankle level, the <strong>Roll</strong> motion range
+is limited according to the <strong>Pitch</strong> value.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="18%" />
+<col width="18%" />
+<col width="1%" />
+<col width="14%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">LAnklePitch</th>
+<th class="head">LAnkleRoll Min</th>
+<th class="head">LAnkleRoll Max</th>
+<th class="head" rowspan="2">&nbsp;</th>
+<th class="head">LAnklePitch</th>
+<th class="head">LAnkleRoll Min</th>
+<th class="head">LAnkleRoll Max</th>
+</tr>
+<tr class="row-even"><th class="head" colspan="3"><em>(degrees)</em></th>
+<th class="head" colspan="3"><em>(radians)</em></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>-68.15</td>
+<td>-2.86</td>
+<td>4.30</td>
+<td rowspan="7">&nbsp;</td>
+<td>-1.189442</td>
+<td>-0.049916</td>
+<td>0.075049</td>
+</tr>
+<tr class="row-even"><td>-48.13</td>
+<td>-10.31</td>
+<td>9.74</td>
+<td>-0.840027</td>
+<td>-0.179943</td>
+<td>0.169995</td>
+</tr>
+<tr class="row-odd"><td>-40.11</td>
+<td>-22.80</td>
+<td>12.61</td>
+<td>-0.700051</td>
+<td>-0.397935</td>
+<td>0.220086</td>
+</tr>
+<tr class="row-even"><td>-25.78</td>
+<td>-22.80</td>
+<td>44.06</td>
+<td>-0.449946</td>
+<td>-0.397935</td>
+<td>0.768992</td>
+</tr>
+<tr class="row-odd"><td>5.73</td>
+<td>-22.80</td>
+<td>44.06</td>
+<td>0.100007</td>
+<td>-0.397935</td>
+<td>0.768992</td>
+</tr>
+<tr class="row-even"><td>20.05</td>
+<td>-22.80</td>
+<td>31.54</td>
+<td>0.349938</td>
+<td>-0.397935</td>
+<td>0.550477</td>
+</tr>
+<tr class="row-odd"><td>52.87</td>
+<td>0.00</td>
+<td>2.86</td>
+<td>0.922755</td>
+<td>-0.000000</td>
+<td>0.049916</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="right-leg-joints">
+<h2>Right Leg joints<a class="headerlink" href="#right-leg-joints" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/hardware_rlegjoint.png"><img alt="../../_images/hardware_rlegjoint.png" src="../../_images/hardware_rlegjoint.png" style="width: 473px; height: 292px;" /></a>
+<p><strong>Motion range</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="38%" />
+<col width="18%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Joint name</th>
+<th class="head">Motion</th>
+<th class="head">Range (degrees)</th>
+<th class="head">Range (radians)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rhiproll"><span>RHipRoll</span></a></td>
+<td>Right hip joint right and left (X)</td>
+<td>-45.29 to 21.74</td>
+<td>-0.790477 to 0.379472</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rhippitch"><span>RHipPitch</span></a></td>
+<td>Right hip joint front and back (Y)</td>
+<td>-88.00 to 27.73</td>
+<td>-1.535889 to 0.484090</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rkneepitch"><span>RKneePitch</span></a></td>
+<td>Right knee joint (Y)</td>
+<td>-5.90 to 121.47</td>
+<td>-0.103083 to 2.120198</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#ranklepitch"><span>RAnklePitch</span></a></td>
+<td>Right ankle joint front and back (Y)</td>
+<td>-67.97 to 53.40</td>
+<td>-1.186448 to 0.932056</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html#rankleroll"><span>RAnkleRoll</span></a></td>
+<td>Right ankle joint right and left (X)</td>
+<td>-44.06 to 22.80</td>
+<td>-0.768992 to 0.397935</td>
+</tr>
+<tr class="row-odd"><td colspan="4"><em>Click the joint name to see all related</em> <a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><span>ALMemory</span></a> <em>key names</em>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Anti collision limitation</strong></p>
+<p>Due to potential shell collision at the ankle level, the <strong>Roll</strong> motion range
+is limited according to the <strong>Pitch</strong> value.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="18%" />
+<col width="18%" />
+<col width="1%" />
+<col width="14%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">RAnklePitch</th>
+<th class="head">RAnkleRoll Min</th>
+<th class="head">RAnkleRoll Max</th>
+<th class="head" rowspan="2">&nbsp;</th>
+<th class="head">RAnklePitch</th>
+<th class="head">RAnkleRoll Min</th>
+<th class="head">RAnkleRoll Max</th>
+</tr>
+<tr class="row-even"><th class="head" colspan="3"><em>(degrees)</em></th>
+<th class="head" colspan="3"><em>(radians)</em></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>-68.15</td>
+<td>-4.30</td>
+<td>2.86</td>
+<td rowspan="7">&nbsp;</td>
+<td>-1.189442</td>
+<td>-0.075049</td>
+<td>0.049916</td>
+</tr>
+<tr class="row-even"><td>-48.13</td>
+<td>-9.74</td>
+<td>10.31</td>
+<td>-0.840027</td>
+<td>-0.169995</td>
+<td>0.179943</td>
+</tr>
+<tr class="row-odd"><td>-40.11</td>
+<td>-12.61</td>
+<td>22.80</td>
+<td>-0.700051</td>
+<td>-0.220086</td>
+<td>0.397935</td>
+</tr>
+<tr class="row-even"><td>-25.78</td>
+<td>-44.06</td>
+<td>22.80</td>
+<td>-0.449946</td>
+<td>-0.768992</td>
+<td>0.397935</td>
+</tr>
+<tr class="row-odd"><td>5.73</td>
+<td>-44.06</td>
+<td>22.80</td>
+<td>0.100007</td>
+<td>-0.768992</td>
+<td>0.397935</td>
+</tr>
+<tr class="row-even"><td>20.05</td>
+<td>-31.54</td>
+<td>22.80</td>
+<td>0.349938</td>
+<td>-0.550477</td>
+<td>0.397935</td>
+</tr>
+<tr class="row-odd"><td>52.87</td>
+<td>-2.86</td>
+<td>0.00</td>
+<td>0.922755</td>
+<td>-0.049916</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../nao/index.html"><strong>NAO</strong> - User Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><strong>NAO</strong> - Developer Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../robots/index_robots.html">Technical overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robots/languages_nao.html">Supported languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robots/kinematics_nao.html">Kinematics data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_dcm/actuator_sensor_names.html">Actuator &amp; Sensor list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_dcm/diagnosis_key_names.html">Diagnosis key list</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../body_type.html">Versions and Body Types</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../nao_h25/index_h25.html">NAO H25</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index_h21.html">NAO H21</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="dimensions_h21.html">H21 - Dimensions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="leds_h21.html">H21 - LEDs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="mre_h21.html">H21 - Joint position sensors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="motors_h21.html">H21 - Motors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="contact-sensors_h21.html">H21 - Contact and tactile sensors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="links_h21.html">H21 - Links</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">H21 - Joints</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="joints_h21_v33.html">H21 - Joints - V3.3</a></li>
+<li class="toctree-l6"><a class="reference internal" href="joints_h21_v32.html">H21 - Joints - V3.2</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="masses_h21.html">H21 - Masses</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../nao_t14/index_t14.html">NAO T14</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nao_t2/index_t2.html">NAO T2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">H21 - Joints</a><ul>
+<li><a class="reference internal" href="#sign-convention">Sign convention</a></li>
+<li><a class="reference internal" href="#head-joints">Head joints</a></li>
+<li><a class="reference internal" href="#left-arm-joints">Left Arm joints</a></li>
+<li><a class="reference internal" href="#right-arm-joints">Right Arm joints</a></li>
+<li><a class="reference internal" href="#pelvis-joints">Pelvis joints</a></li>
+<li><a class="reference internal" href="#left-leg-joints">Left Leg joints</a></li>
+<li><a class="reference internal" href="#right-leg-joints">Right Leg joints</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Functions to create targets &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../../../index.html" />
+    <link rel="up" title="qiBuild CMake API" href="../api.html" />
+    <link rel="next" title="Staging targets" href="stage.html" />
+    <link rel="prev" title="CMake API syntax" href="../cmake_api_syntax.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="../../../beginner/index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../../index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../../../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="advanced-cmake-api-target">
+                
+  <div class="section" id="functions-to-create-targets">
+<h1>Functions to create targets<a class="headerlink" href="#functions-to-create-targets" title="Permalink to this headline">¶</a></h1>
+<p>This is the main qiBuild module. It encapsulates the creation of programs,
+scripts and libraries, handling dependencies and install rules,
+in an easy, elegant and standard way.</p>
+<p>There can be different targets:</p>
+<ul class="simple">
+<li><em>bin</em> : a program</li>
+<li><em>lib</em> : a library</li>
+<li><em>script</em> : a script</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="submodule.html#using-submodules"><span>Using submodules</span></a></li>
+</ul>
+</div>
+<dl class="function">
+<dt id="qi_create_bin">
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_bin</span><span class="p">(</span><span class="s">name</span> <span class="s">[&lt;remaining</span> <span class="s">args&gt;</span> <span class="s">...]</span>
+    <span class="s">[NO_INSTALL]</span>
+    <span class="s">[NO_RPATH]</span>
+    <span class="s">[EXCLUDE_FROM_ALL]</span>
+    <span class="s">[WIN32]</span>
+    <span class="s">[MACOSX_BUNDLE]</span>
+    <span class="s">[SUBFOLDER</span> <span class="s">&lt;subfolder&gt;]</span>
+    <span class="s">[SRC</span> <span class="s">&lt;src&gt;</span> <span class="s">...]</span>
+    <span class="s">[DEPENDS</span> <span class="s">&lt;depends&gt;</span> <span class="s">...]</span>
+    <span class="s">[SUBMODULE</span> <span class="s">&lt;submodule&gt;</span> <span class="s">...]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<a class="headerlink" href="#qi_create_bin" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; the target name</li>
+<li><strong>args</strong> (<em>remaining</em>) &#8211; source files, like the SRC group, argn and SRC will be merged</li>
+<li><strong>NO_INSTALL</strong> &#8211; Do not create install rules for the target</li>
+<li><strong>NO_RPATH</strong> &#8211; Do not try to fix rpath By default, qibuild runs chrpath on the targets so everything work even when project is installed to a non-standard location. Use this to prevent chrpath to be run.</li>
+<li><strong>EXCLUDE_FROM_ALL</strong> &#8211; Do not include the target in the &#8216;all&#8217; target, this target will not be build by default, you will have to compile the target explicitly. Warning: you will NOT be able to create install rules for this target.</li>
+<li><strong>WIN32</strong> &#8211; Build an executable with a WinMain entry point on windows.</li>
+<li><strong>MACOSX_BUNDLE</strong> &#8211; Refer to the add_executable documentation.</li>
+<li><strong>SUBFOLDER</strong> &#8211; The destination subfolder. The install rules generated will be sdk/bin/&lt;subfolder&gt;</li>
+<li><strong>SRC</strong> &#8211; The list of source files</li>
+<li><strong>DEPENDS</strong> &#8211; The list of source files</li>
+<li><strong>SUBMODULE</strong> &#8211; The list of source files</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create an executable.
+The target name should be unique.</p>
+</dd></dl>
+
+<p><strong>Example</strong></p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">## target examples</span>
+<span class="c">##</span>
+
+
+<span class="nb">project</span><span class="p">(</span><span class="s">SampleTarget</span><span class="p">)</span>
+
+<span class="c">#add_subdirectory(fooscript)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">foolib</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">foobin</span><span class="p">)</span>
+
+<span class="nb">qi_create_bin</span><span class="p">(</span><span class="s">myprog</span> <span class="s">SRC</span> <span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">mylib</span> <span class="s">SRC</span> <span class="s">mylib.h</span> <span class="s">mylib.c</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="qi_create_script">
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_script</span><span class="p">(</span><span class="s">name</span> <span class="s">source</span> <span class="s">[NO_INSTALL]</span>
+    <span class="s">[SUBFOLDER</span> <span class="s">&lt;subfolder&gt;]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<a class="headerlink" href="#qi_create_script" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the target script</li>
+<li><strong>source</strong> &#8211; The source script, that will be copied in the sdk to bin/&lt;name&gt;</li>
+<li><strong>NO_INSTALL</strong> &#8211; Do not generate install rule for the script</li>
+<li><strong>SUBFOLDER</strong> &#8211; The subfolder in sdk/bin to install the script into. (sdk/bin/&lt;subfolder&gt;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a script. This will generate rules to install it in the sdk.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi_create_lib">
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">name</span> <span class="s">[&lt;remaining</span> <span class="s">args&gt;</span> <span class="s">...]</span>
+    <span class="s">[STATIC]</span>
+    <span class="s">[SHARED]</span>
+    <span class="s">[MODULE]</span>
+    <span class="s">[NO_INSTALL]</span>
+    <span class="s">[EXCLUDE_FROM_ALL]</span>
+    <span class="s">[NO_RPATH]</span>
+    <span class="s">[NO_FPIC]</span>
+    <span class="s">[SUBFOLDER</span> <span class="s">&lt;subfolder&gt;]</span>
+    <span class="s">[SRC</span> <span class="s">&lt;src&gt;</span> <span class="s">...]</span>
+    <span class="s">[SUBMODULE</span> <span class="s">&lt;submodule&gt;</span> <span class="s">...]</span>
+    <span class="s">[DEPENDS</span> <span class="s">&lt;depends&gt;</span> <span class="s">...]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<a class="headerlink" href="#qi_create_lib" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; the target name</li>
+<li><strong>args</strong> (<em>remaining</em>) &#8211; sources files, like the SRC group, argn and SRC will be merged</li>
+<li><strong>STATIC</strong> &#8211; force a static library</li>
+<li><strong>SHARED</strong> &#8211; force a shared library</li>
+<li><strong>MODULE</strong> &#8211; build a module (library loadable at runtime)</li>
+<li><strong>NO_INSTALL</strong> &#8211; Do not create install rules for the target</li>
+<li><strong>EXCLUDE_FROM_ALL</strong> &#8211; Do not include the target in the &#8216;all&#8217; target, This target will not be built by default, you will have to compile the target explicitly. Warning: you will NOT be able to create install rules for this target.</li>
+<li><strong>NO_RPATH</strong> &#8211; Do not set a rpath to $ORIGIN/..lib when linking on linux.</li>
+<li><strong>NO_FPIC</strong> &#8211; Do not set -fPIC on static libraries (will be set for shared lib by CMake anyway)</li>
+<li><strong>SUBFOLDER</strong> &#8211; The destination subfolder. The install rules generated will be sdk/lib/&lt;subfolder&gt;</li>
+<li><strong>SRC</strong> &#8211; The list of source files (private headers and sources)</li>
+<li><strong>SUBMODULE</strong> &#8211; Submodule to include in the lib</li>
+<li><strong>DEPENDS</strong> &#8211; List of dependencies</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a library or a module</p>
+<p>The target name should be unique.</p>
+<p><strong>Static vs shared</strong></p>
+<p>To build a module (library loaded at runtime), use:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">myLib</span> <span class="s">MODULE</span> <span class="s">SRC</span> <span class="s">....</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you need your library to be static, use:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">mylib</span> <span class="s">STATIC</span> <span class="s">SRC</span> <span class="s">....</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you need your library to be shared, use:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">mylib</span> <span class="s">SHARED</span> <span class="s">SRC</span> <span class="s">....</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to let the user choose, use:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">mylib</span> <span class="s">SRC</span> <span class="s">....</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>The library will be:</dt>
+<dd><ul class="first last simple">
+<li>built as a shared library on UNIX</li>
+<li>built as a static library on windows</li>
+</ul>
+</dd>
+</dl>
+<p>But the user can set BUILD_SHARED_LIBS=OFF to compile
+everything in static by default.</p>
+<p>Warning ! This is quite not the standard CMake behavior</p>
+</dd></dl>
+
+<p><strong>Example</strong></p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c">##</span>
+<span class="c">## target examples</span>
+<span class="c">##</span>
+
+
+<span class="nb">project</span><span class="p">(</span><span class="s">SampleTarget</span><span class="p">)</span>
+
+<span class="c">#add_subdirectory(fooscript)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">foolib</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">foobin</span><span class="p">)</span>
+
+<span class="nb">qi_create_bin</span><span class="p">(</span><span class="s">myprog</span> <span class="s">SRC</span> <span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">mylib</span> <span class="s">SRC</span> <span class="s">mylib.h</span> <span class="s">mylib.c</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="qi_create_config_h">
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_config_h</span><span class="p">(</span><span class="s">OUT_PATH</span> <span class="s">source</span> <span class="s">dest</span> <span class="s">[&lt;remaining</span> <span class="s">args&gt;</span> <span class="s">...]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<a class="headerlink" href="#qi_create_config_h" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>OUT_PATH</strong> &#8211; Path to the generated file</li>
+<li><strong>source</strong> &#8211; The source file</li>
+<li><strong>dest</strong> &#8211; The destination</li>
+<li><strong>args</strong> (<em>remaining</em>) &#8211; passed to the configure_file() called</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a configuration file</p>
+<p>Configures a header named ${dest} using the source file from
+${source} using <code class="docutils literal"><span class="pre">configure_file</span></code>
+In addition:</p>
+<ul class="simple">
+<li>Make sure the path where the header is generated is
+added to the include path</li>
+<li>Create the necessary install rules</li>
+</ul>
+<p>If you need the header to be generated in a subdirectory
+(recommended), simply use something like:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_create_config_h</span><span class="p">(</span><span class="s">_out</span> <span class="s">config.h.in</span> <span class="s">foo/config.h</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that both arguments must be <em>relative</em> paths</p>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guide/index.html">qibuild Programming guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html">qiBuild CMake API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cmake_api_syntax.html">CMake API syntax</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Functions to create targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stage.html">Staging targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="codegen.html">Source code generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submodule.html">Using submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Logging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="option.html">Using options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Tools to run Python commands from CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find.html">Functions to find libraries and include directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flags.html">Handling compile flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gettext.html">Translation support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git.html">Git tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subdirectory.html">Subdirectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swig/python.html">CMake wrapper for swig / Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swig/java.html">CMake wrapper for swig / Java</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cfg/index.html">Configuration files syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../../../changelog.html">Changelog</a>
+        <a title="CMake index" href="../../../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../../../py-modindex.html">Python index</a>
+        <a title="Index" href="../../../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

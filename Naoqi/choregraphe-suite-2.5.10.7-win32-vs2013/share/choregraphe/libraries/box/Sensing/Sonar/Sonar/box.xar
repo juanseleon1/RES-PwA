@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="2" localization="8" tooltip="Detect obstacle with ultrasonic sensors.&#x0A;This box is only supported on a non-virtual Nao robot." x="450" y="216">
+        <bitmap>media/images/box/sensors/ultrasound.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+        try:
+            robotType = ALMemory.getData("HAL/Robot/Type")
+        except:
+            robotType = None
+        if robotType != "Nao":
+            raise RuntimeError("This box is only supported on a non-virtual Nao robot.")
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload()
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="SonarLeftNothingDetected" type="0" type_size="1" nature="4" stm_value_name="SonarLeftNothingDetected" inner="1" tooltip="SonarLeftNothingDetected desc" id="4" />
+        <Input name="SonarRightNothingDetected" type="0" type_size="1" nature="4" stm_value_name="SonarRightNothingDetected" inner="1" tooltip="SonarRightNothingDetected desc" id="5" />
+        <Input name="SonarLeftDetected" type="0" type_size="1" nature="4" stm_value_name="SonarLeftDetected" inner="1" tooltip="SonarLeftDetected desc" id="6" />
+        <Input name="SonarRightDetected" type="0" type_size="1" nature="4" stm_value_name="SonarRightDetected" inner="1" tooltip="SonarRightDetected desc" id="7" />
+        <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Signal sent when sonar module cannot be loaded, as it is not supported by your current robot." id="8" />
+        <Output name="onNothingLeft" type="1" type_size="1" nature="2" inner="0" tooltip="There is no obstacle in front of NAO nor on his left side." id="9" />
+        <Output name="onNothingRight" type="1" type_size="1" nature="2" inner="0" tooltip="There is no obstacle in front of NAO nor on his right side," id="10" />
+        <Output name="onObstacle" type="3" type_size="1" nature="2" inner="0" tooltip='An obstacle has been detected. This output can be:&#x0A;- &quot;left&quot;: There is something in front of the robot (left side) at less than 0.5m.&#x0A;- &quot;right&quot; There is something in front of the robot (right side) at less than 0.5m. ' id="11" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="toString" id="2" localization="8" tooltip="Send a string corresponding to the side selected." x="294" y="118">
+                            <bitmap>media/images/box/box-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self):
+        #~ self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass
+
+    def onInput_left(self):
+        self.side("left")
+
+    def onInput_right(self):
+        self.side("right")]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="left" type="1" type_size="1" nature="2" inner="0" tooltip='When this input is activated, the string &quot;left&quot; is sent to the output.' id="2" />
+                            <Input name="right" type="1" type_size="1" nature="2" inner="0" tooltip='When this input is activated, the string &quot;right&quot; is sent to the output.' id="3" />
+                            <Output name="side" type="3" type_size="1" nature="1" inner="0" tooltip='The side selected with the inputs. This output can be:&#x0A;- &quot;left&quot; when the left input is activated.&#x0A;- &quot;right&quot; when the right input is activated.' id="4" />
+                        </Box>
+                        <Link inputowner="0" indexofinput="11" outputowner="2" indexofoutput="4" />
+                        <Link inputowner="2" indexofinput="3" outputowner="0" indexofoutput="7" />
+                        <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="6" />
+                        <Link inputowner="0" indexofinput="10" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="9" outputowner="0" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheBox>

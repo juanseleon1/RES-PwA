@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="DoubleLeftHandBump_LeanRight_01" />
+    <Node name="DoubleRightHandBump_LeanRight_01" />
+    <Node name="LeftArmBump_LeanRight_01" />
+    <Node name="LeftArmSpreadAndBack_01" />
+    <Node name="LittleFancyBothArmsInFront_01" />
+    <Node name="OfferLeftHandThenRightHand_01" />
+    <Node name="OpenBothHandsInFrontWithBump_01" />
+    <Node name="GoToStance_Enumeration_Center" />
+    <Node name="GoToStance_Enumeration_LeanRight" />
+</Folder>

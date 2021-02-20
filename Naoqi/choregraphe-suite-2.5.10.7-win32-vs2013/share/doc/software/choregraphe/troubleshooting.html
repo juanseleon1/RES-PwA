@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Troubleshooting &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Choregraphe Suite" href="index.html" />
+    <link rel="next" title="Monitor" href="../monitor/index.html" />
+    <link rel="prev" title="Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline" href="reference.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="software-choregraphe-troubleshooting">
+                
+  <div class="section" id="troubleshooting">
+<span id="choregraphe-troubleshooting"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="connection-troubles">
+<span id="choregraphe-troubleshooting-connection"></span><h2>Connection troubles<a class="headerlink" href="#connection-troubles" title="Permalink to this headline">¶</a></h2>
+<p>For connection troubles, see Connection Management <a class="reference internal" href="connection_widget.html#chore-connection-troubleshooting"><span>Troubleshooting</span></a>.</p>
+</div>
+<div class="section" id="robot-system-update-failure">
+<span id="choregraphe-troubleshooting-errorcode"></span><h2>Robot system update failure<a class="headerlink" href="#robot-system-update-failure" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="choregraphe_update_system.html#choregraphe-howto-update-rob-system"><span>Updating robot system</span></a> using <strong>Choregraphe</strong>
+may failed (may occur only if the current NAO system version is 1.12 or greater).</p>
+<p>The error code tab is given hereafter:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="42%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error
+code</th>
+<th class="head">Meaning</th>
+<th class="head">Solution</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Error while flashing, no valid connection given.</td>
+<td>Check your robot connection and retry.</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>The file to upload does not exist.</td>
+<td>Retry and select an existing file.</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>SSH error.</td>
+<td>Retry.</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Connection to the robot lost.</td>
+<td>Retry.</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Authentication error.</td>
+<td>Check your robot password and retry.</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Invalid upload job.</td>
+<td>Retry, if it appends again contact
+<strong>Aldebaran Customer Support</strong> at: <a class="reference external" href="http://support.aldebaran.com">http://support.aldebaran.com</a></td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>Error during transfer: <em>more details</em>.</td>
+<td><p class="first">Retry.</p>
+<p class="last">A common issue is lake of space on the robot.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>126</td>
+<td>Error while planning the upgrade: <em>more details</em>.</td>
+<td>Check your image file and retry.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="d-card-problem">
+<h2>3D card problem<a class="headerlink" href="#d-card-problem" title="Permalink to this headline">¶</a></h2>
+<p>Choregraphe does not work with all the 3D card. If it crashes at start up, it probably means that there is a conflict with your 3D card.
+Please update your graphics card driver and try again. If it does not work, you will see a pop up with an Internet link to the supported graphics card.
+You should check it out (<a class="reference external" href="http://www.ogre3d.org/tikiwiki/Hardware">http://www.ogre3d.org/tikiwiki/Hardware</a>).</p>
+<p>Additionally, on Ubuntu, an official AMD driver is known to cause problems with Choregraphe.
+Its version is <code class="code docutils literal"><span class="pre">13.101-0ubuntu0.0.1</span></code>.
+The previous version, which version is <code class="code docutils literal"><span class="pre">2:8.960-0ubuntu1</span></code>, does not have these problems.
+If you want to downgrade the version of the driver, you can do the following:</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get remove fglrx fglrx-updates fglrx-amdcccle fglrx-amdcccle-updates
+sudo apt-get install <span class="nv">fglrx</span><span class="o">=</span>2:8.960-0ubuntu1 fglrx-amdcccle<span class="o">=</span>2:8.960-0ubuntu1
+</pre></div>
+</div>
+<p>To block the version of your AMD driver, you can do the following:</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-mark hold fglrx fglrx-amdcccle
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-out-why-a-behavior-does-not-work-debug">
+<h2>Find out why a behavior does not work (debug)<a class="headerlink" href="#find-out-why-a-behavior-does-not-work-debug" title="Permalink to this headline">¶</a></h2>
+<p>You have created a behavior. It is not yet operational. Here is how you can fix the bugs. That it is only possible if the current behavior is playing.</p>
+<div class="section" id="testing-the-boxes-one-by-one">
+<h3>Testing the boxes one by one<a class="headerlink" href="#testing-the-boxes-one-by-one" title="Permalink to this headline">¶</a></h3>
+<p>To control a behavior you can: click on Play to load it on the robot.
+You can double-click on an input or output to stimulate it.</p>
+</div>
+<div class="section" id="in-timeline-mute-a-layer">
+<h3>In Timeline mute a layer<a class="headerlink" href="#in-timeline-mute-a-layer" title="Permalink to this headline">¶</a></h3>
+<p>The small eye next to each layer allows you to &#8220;mute&#8221; a layer: it will be ignored when the behavior is played.
+This can be useful when you want to debug your behavior.</p>
+</div>
+<div class="section" id="checking-the-modules-running-on-the-robot">
+<h3>Checking the modules running on the robot<a class="headerlink" href="#checking-the-modules-running-on-the-robot" title="Permalink to this headline">¶</a></h3>
+<p>Go to the web page of the robot. The modules running on NAO are listed. You can see the details by clicking on their name.</p>
+</div>
+<div class="section" id="following-the-box-execution">
+<h3>Following the box execution<a class="headerlink" href="#following-the-box-execution" title="Permalink to this headline">¶</a></h3>
+<p>Each time the link between 2 boxes is simulated, the color of the link changes. It is a good way to check the execution.</p>
+</div>
+<div class="section" id="checking-the-output-value">
+<h3>Checking the output value<a class="headerlink" href="#checking-the-output-value" title="Permalink to this headline">¶</a></h3>
+<p>When a box has a value as output, the last value displays in the Tooltip.</p>
+</div>
+<div class="section" id="understand-why-your-box-become-red">
+<h3>Understand why your box become red<a class="headerlink" href="#understand-why-your-box-become-red" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>It becomes red during the execution: an exception raised. It can be because a module cannot be loaded (local NAOqi), does not exist, etc.</li>
+<li>It becomes red before the execution (just after clicking the Play button): the box code contains an error. It can be a typing problem in a Python script.</li>
+<li>It becomes red when finishing execution (on unloading time) and you get a
+backtrace where an unexpected call to your python box method happens (for
+example &#8220;onInput_onStart&#8221;, typically): the method call did not finish before
+the unloading of the box finished; you must make sure that onUnload call does
+not finish before any other calls in your box. You can use Python&#8217;s threading
+module and its Lock object to prevent this problem.</li>
+</ul>
+</div>
+<div class="section" id="using-self-logger-in-a-python-script">
+<h3>Using self.logger in a Python script<a class="headerlink" href="#using-self-logger-in-a-python-script" title="Permalink to this headline">¶</a></h3>
+<p>self.logger is standard Python logger created with the Python module Logging.</p>
+<p>The log information can be categorized by level of severity (each level has its associated font color in the debug window):</p>
+<ul class="simple">
+<li>debug (grey)</li>
+<li>info (black)</li>
+<li>warning (orange)</li>
+<li>error (red)</li>
+<li>critical (purple)</li>
+</ul>
+<p>In your Python script, we recommend you to add warning, error and critical logs to inform when you behavior dangerous or erroneous state.</p>
+<p>You can also use info and debug to trace execution flow of your behavior.</p>
+<ol class="arabic">
+<li><p class="first">Open the script of a box.</p>
+</li>
+<li><p class="first">Add the self.logger line in a function as below:</p>
+<div class="highlight-guess"><div class="highlight"><pre>def onLoad(self):
+self.logger.debug(&quot;Loaded box %s&quot;, self.getName())
+</pre></div>
+</div>
+</li>
+<li><p class="first">In the Debug window, select the minimum level of information you want, Debug in our case.</p>
+</li>
+<li><p class="first">Execute the box.</p>
+</li>
+<li><p class="first">All debug message display in the debug window to let you understand what is going on. The potential debug, info, warning, error and critical messages of other functions also display as the minimum level asked is debug.</p>
+<p>If you choose error, you see only error and critical messages.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="naoqi-disconnected-unexpectedly">
+<h2>NAOqi disconnected unexpectedly<a class="headerlink" href="#naoqi-disconnected-unexpectedly" title="Permalink to this headline">¶</a></h2>
+<p>If you get this message while launching Choregraphe, it means the application database NAOqi uses is already locked and therefore the new NAOqi launched by Choregraphe exited/disconnected unexpectedly.
+To ensure there is no lock, be sure to exit well all NAOqi instances or kill its processes (&#8220;killall naoqi-bin&#8221; command line under Linux/MacOSX, application manager under Windows).</p>
+</div>
+<div class="section" id="windows-only-choregraphe-temporary-directories">
+<span id="choregraphe-temporary-directories-fix"></span><h2>Windows only - Choregraphe temporary directories<a class="headerlink" href="#windows-only-choregraphe-temporary-directories" title="Permalink to this headline">¶</a></h2>
+<p>In version 1.12.0 and previous ones, Choregraphe could have created temporary directories
+in a wrong path where the Windows <strong>Cleaning disk</strong> command hasn&#8217;t access.</p>
+<p>Those directories, named alprojectXXXX_X, can be safely manually removed from the disk.</p>
+<p>Their most common locations depend on Windows version:</p>
+<ul>
+<li><p class="first">on Windows XP:</p>
+<p><cite>C:\Documents and settings\[username]\Local Settings\</cite></p>
+</li>
+<li><p class="first">on Windows 7:</p>
+<p><cite>C:\Users\[username]\AppData\Local\</cite></p>
+<p>Where <cite>[username]</cite> is your own user login.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="ubuntu-12-04-only-cannot-drag-and-drop-boxes">
+<span id="linux-drag-and-drop"></span><h2>Ubuntu 12.04 only - Cannot drag and drop boxes<a class="headerlink" href="#ubuntu-12-04-only-cannot-drag-and-drop-boxes" title="Permalink to this headline">¶</a></h2>
+<p>There is an <strong>Ubuntu</strong> known issue, impacting <strong>Choregraphe</strong>,
+when using unity-2D Window Manager with the Launcher bar in auto-hide mode,
+or awesome Window Manager.</p>
+<p>This bug is documented for unity-2d here: <a class="reference external" href="https://bugs.launchpad.net/unity-2d/+bug/987857">https://bugs.launchpad.net/unity-2d/+bug/987857</a></p>
+<p><strong>Note</strong>: This issue is fixed on latest Ubuntu versions (14.04).</p>
+<p>To avoid it on Ubuntu 12.04, change:</p>
+<ul class="simple">
+<li>your window manager on login screen, or</li>
+<li>your Launcher bar display mode in the settings.</li>
+</ul>
+<p>If you have two screens, you can also avoid it by moving the <strong>Choregraphe</strong>
+window to the screen where the Launcher bar is not present.</p>
+<p>Also, you can drag your box to the screen edge to make appear the Launcher bar,
+then you will be able to drop it into the <strong>Choregraphe</strong> diagram.</p>
+<p>To check what is your window manager, just type in a shell:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nb">echo</span> <span class="nv">$GDMSESSION</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ubuntu-french-keyboard-and-ibus-cannot-type-circumflex-accent">
+<h2>Ubuntu, French keyboard and IBus - cannot type circumflex accent<a class="headerlink" href="#ubuntu-french-keyboard-and-ibus-cannot-type-circumflex-accent" title="Permalink to this headline">¶</a></h2>
+<p>You are using a software such as <strong>IBus</strong>, enabling you to type Chinese or
+Japanese characters while having only a French keyboard.</p>
+<p>But if you wish to type French characters, unfortunately, in
+<strong>Choregraphe</strong>, you will obtain: &#8216;^o&#8217; instead of &#8216;ô&#8217;.</p>
+<p>To avoid this, you have to temporarily disable <strong>IBus</strong> when running
+<strong>Choregraphe</strong>.</p>
+<p>To do so:</p>
+<p>Set the environment variable XMODIFIERS to an empty string when you are running
+Choregraphe:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nv">$ XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;&#39;</span> ./choregraphe
+</pre></div>
+</div>
+<p>To get <strong>IBus</strong> functionalities back, restart <strong>Choregraphe</strong> while not
+modifying the XMODIFIERS variable.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Choregraphe Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installing.html">Choregraphe suite - Installation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="choregraphe_overview.html">What is Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connection_widget.html">Connecting Choregraphe to a robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting_discovery.html">Main panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="main_objects.html">Main objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mouvement.html">Mastering movements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripting.html">Mastering script creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="objects/translations.html">Mastering application localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting.html">Managing your robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Troubleshooting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../monitor/index.html">Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../embedded/memory_backup.html">Memory Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#connection-troubles">Connection troubles</a></li>
+<li><a class="reference internal" href="#robot-system-update-failure">Robot system update failure</a></li>
+<li><a class="reference internal" href="#d-card-problem">3D card problem</a></li>
+<li><a class="reference internal" href="#find-out-why-a-behavior-does-not-work-debug">Find out why a behavior does not work (debug)</a><ul>
+<li><a class="reference internal" href="#testing-the-boxes-one-by-one">Testing the boxes one by one</a></li>
+<li><a class="reference internal" href="#in-timeline-mute-a-layer">In Timeline mute a layer</a></li>
+<li><a class="reference internal" href="#checking-the-modules-running-on-the-robot">Checking the modules running on the robot</a></li>
+<li><a class="reference internal" href="#following-the-box-execution">Following the box execution</a></li>
+<li><a class="reference internal" href="#checking-the-output-value">Checking the output value</a></li>
+<li><a class="reference internal" href="#understand-why-your-box-become-red">Understand why your box become red</a></li>
+<li><a class="reference internal" href="#using-self-logger-in-a-python-script">Using self.logger in a Python script</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#naoqi-disconnected-unexpectedly">NAOqi disconnected unexpectedly</a></li>
+<li><a class="reference internal" href="#windows-only-choregraphe-temporary-directories">Windows only - Choregraphe temporary directories</a></li>
+<li><a class="reference internal" href="#ubuntu-12-04-only-cannot-drag-and-drop-boxes">Ubuntu 12.04 only - Cannot drag and drop boxes</a></li>
+<li><a class="reference internal" href="#ubuntu-french-keyboard-and-ibus-cannot-type-circumflex-accent">Ubuntu, French keyboard and IBus - cannot type circumflex accent</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

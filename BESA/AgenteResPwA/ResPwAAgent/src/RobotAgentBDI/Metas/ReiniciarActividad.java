@@ -23,8 +23,8 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class ReiniciarActividad extends GoalBDI{
-    
+public class ReiniciarActividad extends GoalBDI {
+
     private static String descrip = "ReiniciarActividad";
 
     public static ReiniciarActividad buildGoal() {
@@ -33,13 +33,13 @@ public class ReiniciarActividad extends GoalBDI{
         ReiniciarActividadTask reiniciarActividad = new ReiniciarActividadTask();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        
-        Plan rolePlan= new Plan();
+
+        Plan rolePlan = new Plan();
 
         rolePlan.addTask(reiniciarActividad);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
-        ReiniciarActividad b= new ReiniciarActividad(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
+        ReiniciarActividad b = new ReiniciarActividad(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
 
@@ -57,15 +57,14 @@ public class ReiniciarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReiniciarActividad detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if(blvs.getbEstadoInteraccion().isReiniciarInt()) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoInteraccion().isReiniciarInt()) {
+                return 1.0;
+            }
         }
-        }
-        
-        
+
         return 0;
     }
 
@@ -78,7 +77,7 @@ public class ReiniciarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReiniciarActividad evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostReiniciarActividad();
     }
 
@@ -93,5 +92,5 @@ public class ReiniciarActividad extends GoalBDI{
         System.out.println("Meta ReiniciarActividad goalSucceeded");
         return true;
     }
-    
+
 }

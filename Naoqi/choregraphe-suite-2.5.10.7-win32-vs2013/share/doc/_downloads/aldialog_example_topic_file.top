@@ -1,0 +1,16 @@
+topic: ~example_topic()
+language: enu
+
+concept:(food) [fruits chicken beef eggs]
+
+u: (I [want "would like"] {some} _~food) Sure! You must really like $1 .
+u: (how are you today) Hello human, I am fine thank you and you?
+u: (Good morning Nao did you sleep well) No damn! You forgot to switch me off!
+
+u: ([e:FrontTactilTouched e:MiddleTactilTouched e:RearTactilTouched]) You touched my head!
+
+u: (Do you want to be tested) %testing Yes, please, test me now!
+u: (test test test) Yes, it works!
+    u1: ([cool awesome]) isn't it?
+
+u:(start counting) 0, 1, 2, 3, 4, 5.

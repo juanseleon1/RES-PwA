@@ -1,0 +1,25 @@
+filter CloseObjectDetection
+{
+ComputeClosePixelsMask closepixels;
+ImprovedLabelize lab;
+ExtractObjects extract;
+
+closepixels:irImage<=irImageIn;
+closepixels:depthImage<=depthImageIn;
+closepixels:saturationThreshold<=saturationThreshold;
+closepixels:closePixelsMask->lab:inputImage;
+lab:labelizedImage->extract:segmentated;
+
+extract:cameraPositionTorso<=cameraPositionTorso;
+extract:cameraPositionRobot<=cameraPositionRobot;
+extract:cameraPositionWorld<=cameraPositionWorld;
+
+extract:objectsArray=>closeObjects;
+
+# Parameters
+lab:kernel<=labkernel;
+lab:toleranceH<=labtolerance;
+lab:toleranceV<=labtolerance;
+lab:min<=labmin;
+lab:max<=labmax;
+}

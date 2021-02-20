@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Animation typeVersion="1.0">
+  <ActuatorList model="">
+    <ActuatorCurve actuator="HeadPitch" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" smooth="1" symmetrical="1" value="-7.63918">
+        <Tangent abscissaParam="-0.154952" interpType="bezier" ordinateParam="1.54952e-05" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+      <Key frame="13" smooth="1" symmetrical="1" value="-7.63918">
+        <Tangent abscissaParam="-1.85942" interpType="bezier" ordinateParam="0.000185942" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+      <Key frame="29" value="4.80994" />
+      <Key frame="41" smooth="1" symmetrical="1" value="2.82611">
+        <Tangent abscissaParam="-1.85943" interpType="bezier" ordinateParam="0.000185943" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+    </ActuatorCurve>
+    <ActuatorCurve actuator="HeadYaw" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="0.931224">
+        <Tangent abscissaParam="-0.333333" interpType="bezier" ordinateParam="0" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+      <Key frame="13" value="0.931224">
+        <Tangent abscissaParam="-4" interpType="bezier" ordinateParam="0" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+      <Key frame="41" value="20.6726">
+        <Tangent abscissaParam="-9.33333" interpType="bezier" ordinateParam="0" side="left" />
+        <Tangent abscissaParam="0" interpType="bezier" ordinateParam="0" side="right" />
+      </Key>
+    </ActuatorCurve>
+    <ActuatorCurve actuator="HipPitch" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="-7.10728" />
+      <Key frame="13" value="-7.11827" />
+      <Key frame="40" value="-7.11827" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="HipRoll" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="0" />
+      <Key frame="10" value="-0.218084" />
+      <Key frame="19" value="1.85" />
+      <Key frame="40" value="-0.351564" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="KneePitch" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="0.447218" />
+      <Key frame="13" value="0.451746" />
+      <Key frame="40" value="0.451746" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LElbowRoll" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="-11.1657" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LElbowYaw" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="-81.5857" />
+      <Key frame="10" value="-81.6302" />
+      <Key frame="15" value="-87.8652" />
+      <Key frame="43" value="-81.6302" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LHand" fps="25" mute="0" name="value" unit="dimensionless">
+      <Key frame="1" value="0.490581" />
+      <Key frame="10" value="0.402707" />
+      <Key frame="16" value="0.740651" />
+      <Key frame="33" value="0.189349" />
+      <Key frame="43" value="0.402707" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LShoulderPitch" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="91.8449" />
+      <Key frame="10" value="91.8099" />
+      <Key frame="15" value="93.5915" />
+      <Key frame="40" value="91.8099" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LShoulderRoll" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="1.76401" />
+      <Key frame="10" value="1.77299" />
+      <Key frame="17" value="4.69057" />
+      <Key frame="37" value="1.77299" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="LWristYaw" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="-21.5301" />
+      <Key frame="10" value="-21.647" />
+      <Key frame="18" value="-32.0938" />
+      <Key frame="39" value="-21.647" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RElbowRoll" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="11.45" />
+      <Key frame="12" value="11.4528" />
+      <Key frame="23" value="16.2966" />
+      <Key frame="41" value="11.4528" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RElbowYaw" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="84.2738" />
+      <Key frame="12" value="84.2979" />
+      <Key frame="23" value="98.3395" />
+      <Key frame="41" value="84.2979" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RHand" fps="25" mute="0" name="value" unit="dimensionless">
+      <Key frame="1" value="0.543645" />
+      <Key frame="12" value="0.458408" />
+      <Key frame="23" value="0.0810793" />
+      <Key frame="32" value="0.0810793" />
+      <Key frame="43" value="0.458408" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RShoulderPitch" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="91.8283" />
+      <Key frame="12" value="91.8459" />
+      <Key frame="19" value="94.476" />
+      <Key frame="35" value="91.8459" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RShoulderRoll" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="-1.33598" />
+      <Key frame="12" value="-1.33618" />
+      <Key frame="22" value="-1.94817" />
+      <Key frame="38" value="-1.33618" />
+    </ActuatorCurve>
+    <ActuatorCurve actuator="RWristYaw" fps="25" mute="0" name="value" unit="degree">
+      <Key frame="1" value="20.7953" />
+      <Key frame="12" value="20.7824" />
+      <Key frame="23" value="-0.297737" />
+      <Key frame="43" value="20.7824" />
+    </ActuatorCurve>
+  </ActuatorList>
+</Animation>

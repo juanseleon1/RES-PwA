@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="BothArmsUpAndDown_HeadShake_01" />
+    <Node name="DoubleHorizontalBumpRightArm_01" />
+    <Node name="LittleSpreadRightArm_HeadShake_01" />
+    <Node name="RightArmUpAndDownWithBump_HeadShake_01" />
+    <Node name="StrongBothArmsUpAndDown_LeanLeft_01" />
+    <Node name="WideHorizontalRightArm_LeanLeft_HeadShake_01" />
+    <Node name="GoToStance_Negation_Center" />
+    <Node name="GoToStance_Negation_LeanLeft" />
+</Folder>

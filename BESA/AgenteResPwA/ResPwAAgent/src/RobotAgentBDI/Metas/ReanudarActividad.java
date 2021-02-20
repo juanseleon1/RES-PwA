@@ -24,7 +24,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class ReanudarActividad extends GoalBDI{
+public class ReanudarActividad extends GoalBDI {
 
     private static String descrip = "ReanudarActividad";
 
@@ -35,16 +35,18 @@ public class ReanudarActividad extends GoalBDI{
         SolicitarPosicionPwA solicitarPosicion = new SolicitarPosicionPwA();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
-        
-        Plan rolePlan= new Plan();
+
+        Plan rolePlan = new Plan();
 
         rolePlan.addTask(recibirNotificacionR);
-        rolePlan.addTask(solicitarPosicion);
-        
+        taskList.add(recibirNotificacionR);
+        rolePlan.addTask(solicitarPosicion, taskList);
+
         RationalRole reaActnRole = new RationalRole(descrip, rolePlan);
-        ReanudarActividad b= new ReanudarActividad(InitRESPwA.getPlanID(), reaActnRole, descrip, GoalBDITypes.DUTY);
+        ReanudarActividad b = new ReanudarActividad(InitRESPwA.getPlanID(), reaActnRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+
     public ReanudarActividad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         //System.out.println("Meta ReanudarActividad created");
@@ -59,17 +61,16 @@ public class ReanudarActividad extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
 
         //estaba suspendido
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if(blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoRobot().isEstaSuspendido()) {
-            return 1.0;
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoRobot().isEstaSuspendido()) {
+                return 1.0;
+            }
         }
-        }
-        
-        
+
         return 0;
     }
 
@@ -82,7 +83,7 @@ public class ReanudarActividad extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReanudarActividad evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostReanudarActividad();
     }
 
@@ -97,5 +98,5 @@ public class ReanudarActividad extends GoalBDI{
         System.out.println("Meta ReanudarActividad goalSucceeded");
         return true;
     }
-    
+
 }

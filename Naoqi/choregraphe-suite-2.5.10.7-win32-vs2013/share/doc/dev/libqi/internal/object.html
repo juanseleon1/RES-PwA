@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Object type erasure &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="qi Framework" href="../index.html" />
+    <link rel="next" title="Registering template types" href="template.html" />
+    <link rel="prev" title="Type system" href="typesystem.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-internal-object">
+                
+  <div class="section" id="object-type-erasure">
+<span id="internal-object"></span><h1>Object type erasure<a class="headerlink" href="#object-type-erasure" title="Permalink to this headline">¶</a></h1>
+<p>One kind of type is <em>Object</em>, which is complex enough to have its own section.</p>
+<p>An object is something that has shared semantics. It can contain methods,
+signals and properties. It has no data exposed through type erasure (but you can
+expose accessor methods if you want).</p>
+<p>The &#8220;signature&#8221; of an object is a <a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaObject" title="qi::MetaObject"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaObject</span></code></a>, it is unique for all instances
+of a same object. The <a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaObject" title="qi::MetaObject"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaObject</span></code></a> contains a list of <a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaMethod" title="qi::MetaMethod"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaMethod</span></code></a>,
+<a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaSignal" title="qi::MetaSignal"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaSignal</span></code></a> and <a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaProperty" title="qi::MetaProperty"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaProperty</span></code></a>. These three classes contain all the
+information required to characterize their respective entity.</p>
+<p>Each method, signal and property has an id, which is fixed and stored in the
+meta object. Overloading is only supported for methods, over their arguments,
+as in C++.</p>
+<p>Though it may be possible to change the meta object of an object after it has
+been created, it is not a good idea. This feature has not been well tested and
+is known not to work on the messaging layer because it caches the meta object
+to avoid sending them every time.</p>
+<p>The <a class="reference internal" href="../api/cpp/type/metaobject.html#qi::MetaObject" title="qi::MetaObject"><code class="xref cpp cpp-guess docutils literal"><span class="pre">MetaObject</span></code></a> is returned by the <code class="xref cpp cpp-guess docutils literal"><span class="pre">ObjectTypeInterface</span></code>. The method receives
+a <code class="docutils literal"><span class="pre">void*</span></code>, so different instances of the same type may have different meta
+objects (this feature is used by the <code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeInterface</span></code>, discussed
+below).</p>
+<div class="section" id="typing">
+<h2>Typing<a class="headerlink" href="#typing" title="Permalink to this headline">¶</a></h2>
+<p>There are two classes that inherit from <code class="xref cpp cpp-guess docutils literal"><span class="pre">ObjectTypeInterface</span></code>,
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">StaticObjectTypeBase</span></code> (which is not a base, this name is misleading) and
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeInterface</span></code>. It is of course possible to create your own
+implementation by inheriting from <code class="xref cpp cpp-guess docutils literal"><span class="pre">ObjectTypeInterface</span></code>, but these two classes
+seem to handle all the cases already.</p>
+<p>The names may be misleading, but <code class="xref cpp cpp-guess docutils literal"><span class="pre">StaticObjectTypeBase</span></code> is for C++ objects and
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectInterface</span></code> is for all other objects (from other languages, but
+also objects over the messaging layer). C++ is the only statically typed
+language that we support for the moment, but I think that if we are to support
+others, they must be implemented through <code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeInterface</span></code> or have
+their own class.</p>
+<p>With <code class="xref cpp cpp-guess docutils literal"><span class="pre">StaticObjectTypeBase</span></code>, the meta object is contained in the type, but with
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeBase</span></code>, there is only one instance of that class per process
+and the meta objects are contained in the storage.</p>
+<div class="section" id="dynamicobjecttypeinterface">
+<h3>DynamicObjectTypeInterface<a class="headerlink" href="#dynamicobjecttypeinterface" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeInterface</span></code> is never really used, the class is in the private
+file <strong>dynamicobject.cpp</strong>, and the only public access you have to it is
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">qi::getDynamicTypeInterface</span></code> which returns a singleton of that class. The
+storage corresponding to that class is a <code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObject</span></code> which contains all the
+information needed for the type to work. That class is defined in
+<strong>dynamicobject.hpp</strong>.</p>
+<p>It is usually not necessary to deal with <code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObject</span></code> either actually. It is
+possible to use a builder to create a dynamic object. Such a builder create an
+abstraction that simplifies the task in C++.</p>
+<p>The corresponding builder for dynamic objects is <a class="reference internal" href="../api/cpp/type/dynamicobjectbuilder.html#qi::DynamicObjectBuilder" title="qi::DynamicObjectBuilder"><code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectBuilder</span></code></a>,
+defined in <strong>dynamicobjectbuilder.hpp</strong>. It does not expose type interfaces,
+nor dynamic objects, but directly an <code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyObject</span></code> that you can manipulate. There
+is only one <code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyObject</span></code> per <a class="reference internal" href="../api/cpp/type/dynamicobjectbuilder.html#qi::DynamicObjectBuilder" title="qi::DynamicObjectBuilder"><code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectBuilder</span></code></a>, the <code class="docutils literal"><span class="pre">object</span></code> method
+always return the same instance.</p>
+<p><a class="reference internal" href="../api/cpp/type/dynamicobjectbuilder.html#qi::DynamicObjectBuilder" title="qi::DynamicObjectBuilder"><code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectBuilder</span></code></a> allows you to create an object with C++ functions,
+signals and properties easily. There is no <code class="docutils literal"><span class="pre">this</span></code> instance though, it is the
+user&#8217;s task to keep track of it. Here&#8217;s an example usage:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Data</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">auto</span> <span class="n">self</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="n">DynamicObjectBuilder</span> <span class="n">builder</span><span class="p">;</span>
+
+<span class="c1">// the builder can&#39;t deduce the signature of a lambda (thanks C++), so we</span>
+<span class="c1">// need an explicit cast</span>
+<span class="c1">// builders recognize anything AnyFunction recognizes</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">advertiseMethod</span><span class="p">(</span><span class="s">&quot;get&quot;</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span><span class="p">([</span><span class="n">self</span><span class="p">](){</span>
+    <span class="k">return</span> <span class="n">self</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+  <span class="p">}));</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">advertiseMethod</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">([</span><span class="n">self</span><span class="p">](</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="n">self</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+  <span class="p">}));</span>
+
+<span class="k">auto</span> <span class="n">object</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="n">object</span><span class="p">();</span> <span class="c1">// can specify a destructor here</span>
+</pre></div>
+</div>
+<p>It is still a bit cumbersome. Dynamic objects like that are only used in tests.
+You can find a real example of dynamic object usage in the Python bindings in
+<strong>pyobject.cpp</strong>.</p>
+</div>
+<div class="section" id="staticobjecttypebase">
+<h3>StaticObjectTypeBase<a class="headerlink" href="#staticobjecttypebase" title="Permalink to this headline">¶</a></h3>
+<p>Similarly to <code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectTypeInterface</span></code>, you don&#8217;t need to deal with
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">StaticObjectTypeBase</span></code> directly. For that too, you use a builder.</p>
+<p>The corresponding builder is <a class="reference internal" href="../api/cpp/type/objecttypebuilder.html#qi::ObjectTypeBuilder" title="qi::ObjectTypeBuilder"><code class="xref cpp cpp-guess docutils literal"><span class="pre">ObjectTypeBuilder</span></code></a> (yes, the name is not very
+explicit), defined in <strong>objecttypebuilder.hpp</strong>. Its interface is similar to
+that of <a class="reference internal" href="../api/cpp/type/dynamicobjectbuilder.html#qi::DynamicObjectBuilder" title="qi::DynamicObjectBuilder"><code class="xref cpp cpp-guess docutils literal"><span class="pre">DynamicObjectBuilder</span></code></a>, but has some more features.</p>
+<p>First, it is templated on the class you want to register. This allows you to
+advertise the method pointers of the class directly.</p>
+<p>It also has an <code class="docutils literal"><span class="pre">inherits</span></code> method that declares that your type inherits from
+another. This allows casting to parent types in type-erased contexts.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Virtual inheritance is not supported and this method will crash if used in
+that case.</p>
+<p>This method relies on undefined behavior in C++, it was realized by
+professionals, do not try this at home.</p>
+<p>You can see the definition of <code class="docutils literal"><span class="pre">inherits</span></code> in <strong>objecttypebuilder.hxx</strong>. It
+tries to create a pointer to a random address in memory, casts it, and
+saves the difference, without ever dereferencing it.</p>
+<p>The problem with virtual inheritance is that the shift between the base class
+and the derived class is not fixed and is thus saved somewhere in the derived
+object&#8217;s memory. This means that this cast actually dereferences that invalid
+pointer and tries to read the address of the base class there.</p>
+<p class="last">We couldn&#8217;t find how to overcome this limitation in pure C++.</p>
+</div>
+<p>In the end, the <code class="docutils literal"><span class="pre">registerType</span></code> function must be called. It will register the
+type in the global map so that every time you use an object of type T, the
+correct type interface will be retrieved.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Objects are usually handled by <code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyObject</span></code>, which contains a shared pointer to
+a <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject</span></code>.</p>
+<div class="section" id="genericobject">
+<h3>GenericObject<a class="headerlink" href="#genericobject" title="Permalink to this headline">¶</a></h3>
+<p>At the lowest level, the object is type-erased as a <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject</span></code>, defined in
+<strong>genericobject.hpp</strong>. This class contains a <code class="docutils literal"><span class="pre">void*</span></code> and an
+<code class="docutils literal"><span class="pre">ObjectTypeInterface*</span></code>. It does not own the object. It provides all the
+functions you need to call methods, trigger signals, connect to them and access
+properties.</p>
+<p>It inherits from <code class="xref cpp cpp-guess docutils literal"><span class="pre">Manageable</span></code> which adds some hidden methods for tracing and
+statistics. These methods are also exposed through type erasure.</p>
+</div>
+<div class="section" id="anyobject">
+<h3>AnyObject<a class="headerlink" href="#anyobject" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyObject</span></code> wraps a <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject</span></code>. It is defined in <strong>object.hxx</strong>. It owns
+the <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject</span></code> through a shared pointer and this shared pointer owns the
+real object thanks to a custom destructor (or shared pointer refcount sharing).</p>
+<p>It re-exposes all the methods of <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject</span></code> through <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObjectBounce</span></code>.</p>
+</div>
+<div class="section" id="object">
+<h3>Object<a class="headerlink" href="#object" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref cpp cpp-guess docutils literal"><span class="pre">AnyObject</span></code> is actually not a class but only an alias to <code class="docutils literal"><span class="pre">Object&lt;qi::Empty&gt;</span></code>.</p>
+<p><a class="reference internal" href="../api/cpp/type/anyobject.html#qi::Object" title="qi::Object"><code class="xref cpp cpp-guess docutils literal"><span class="pre">Object</span></code></a> is defined in <strong>object.hxx</strong>. It has an <code class="docutils literal"><span class="pre">operator-&gt;()</span></code> that returns
+the <code class="docutils literal"><span class="pre">T</span></code> it has been specialized to (after a runtime check in the function
+<code class="docutils literal"><span class="pre">checkT</span></code> which can throw).</p>
+<p>This allows you to write code like:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">Object</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">obj</span><span class="p">(</span><span class="k">new</span> <span class="n">MyClass</span><span class="p">());</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">directCall</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Assuming <code class="docutils literal"><span class="pre">MyClass</span></code> is a type registered in the type system.</p>
+</div>
+</div>
+<div class="section" id="about-futures">
+<span id="internal-object-futuremethod"></span><h2>About futures<a class="headerlink" href="#about-futures" title="Permalink to this headline">¶</a></h2>
+<p>Futures are not part of the function signature. A function returning a type
+<code class="docutils literal"><span class="pre">T</span></code> has the same signature as a function returning a <code class="docutils literal"><span class="pre">Future&lt;T&gt;</span></code> in the
+type system.</p>
+<p>This implies some complex code to extract the potential future the method
+returns and unwrapping it. The code to do that is in <code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject::call</span></code> and
+<code class="xref cpp cpp-guess docutils literal"><span class="pre">GenericObject::async</span></code>, in <strong>genericobject.hpp</strong>. This task is accomplished by
+<code class="docutils literal"><span class="pre">extractFuture</span></code> and <code class="docutils literal"><span class="pre">adaptFutureUnwrap</span></code>.</p>
+<p>There is one more trick to that: futures <em>are</em> registered in the type system, as
+<em>Objects</em>. This case is explained in <a class="reference internal" href="template.html#internal-template"><span>Registering template types</span></a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html">API References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="typesystem.html">Type system</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Object type erasure</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Object type erasure</a><ul>
+<li><a class="reference internal" href="#typing">Typing</a><ul>
+<li><a class="reference internal" href="#dynamicobjecttypeinterface">DynamicObjectTypeInterface</a></li>
+<li><a class="reference internal" href="#staticobjecttypebase">StaticObjectTypeBase</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#genericobject">GenericObject</a></li>
+<li><a class="reference internal" href="#anyobject">AnyObject</a></li>
+<li><a class="reference internal" href="#object">Object</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#about-futures">About futures</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

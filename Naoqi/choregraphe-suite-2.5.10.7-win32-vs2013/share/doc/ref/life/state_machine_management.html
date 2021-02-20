@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>State machine management &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Programming for a living robot" href="index.html" />
+    <link rel="next" title="Autonomous Abilities" href="autonomous_abilities_management.html" />
+    <link rel="prev" title="Programming for a living robot" href="index.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="ref-life-state_machine_management">
+                
+  <div class="section" id="state-machine-management">
+<span id="id1"></span><h1>State machine management<a class="headerlink" href="#state-machine-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="activities">
+<h2>Activities<a class="headerlink" href="#activities" title="Permalink to this headline">¶</a></h2>
+<p>Activities are what you develop to extend the abilities and personality of the
+robot.  In essence, you create his life! An <strong>Activity</strong> is a <strong>Behavior</strong> that
+is developed with <strong>Choregraphe</strong>, which has been given a <strong>Solitary</strong> or <strong>Interactive</strong>
+nature.  This <strong>Nature</strong> registers it to function within <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a>.
+The <a class="reference internal" href="../../software/choregraphe/objects/activity.html#choregraphe-reference-activity"><span>Choregraphe Activity documentation</span></a>
+discusses how adjust these project properties.</p>
+<div class="section" id="how-are-activities-started">
+<h3>How are Activities started?<a class="headerlink" href="#how-are-activities-started" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>By a user interacting with the robot, if they specifically ask the robot to
+start an activity.</li>
+<li>Autonomously by <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a>, through the use of <a class="reference internal" href="../../naoqi/interaction/triggerconditions.html#launchtriggerconditions"><span>Launch trigger conditions</span></a>.</li>
+<li>Programatically through <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a>, by
+the <a class="reference internal" href="../../naoqi/interaction/autonomouslife-api.html#alautonomouslifeproxy-switchfocus"><span>switchFocus() API</span></a>.
+Thus, your Activities can switch focus to other Activities.</li>
+</ul>
+<p>Before an activity is focused, Autonomous Life will enforce a
+<a class="reference internal" href="#autonomouslife-states"><span>State change</span></a>.  This cleans up the robot&#8217;s State
+so that your Activity will always be started in the same predictable State.
+Likewise, you can do anything to the robot&#8217;s State during your activity, and
+Autonomous Life will clean it up after your activity exits.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only one Activity can be running or &#8220;focused&#8221; at a time.
+The <a class="reference internal" href="#autonomouslife-prioritization"><span>Autonomous prioritization</span></a> determines how an Activity may be
+interrupted.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When your robot is loading an activity which will be focused, he may say
+&#8220;ummm&#8221;, or other <a class="reference internal" href="../../software/choregraphe/panels/project_content_panel.html#loading-responses"><span>Loading Responses</span></a>.  See the
+<a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-advanced"><span>ALAutonomousLife advanced</span></a> <a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-thinking-expression"><span>Thinking Expression</span></a>
+documentation for more details.</p>
+</div>
+</div>
+<div class="section" id="what-are-solitary-and-interactive-activities">
+<h3>What are Solitary and Interactive Activities?<a class="headerlink" href="#what-are-solitary-and-interactive-activities" title="Permalink to this headline">¶</a></h3>
+<p>See below for more information of the meaning of the <a class="reference internal" href="#autonomouslife-states"><span>States</span></a>
+and their <a class="reference internal" href="#autonomouslife-prioritization"><span>Autonomous prioritization</span></a>.</p>
+<p>Some tutorials are available: <a class="reference internal" href="../../software/choregraphe/tutos/create_solitary_activity.html#create-solitary-activity-tuto"><span>Creating a Solitary activity</span></a>,
+<a class="reference internal" href="../../software/choregraphe/tutos/create_interactive_activity.html#create-interactive-activity-tuto"><span>Creating an Interactive activity</span></a>.</p>
+</div>
+<div class="section" id="why-don-t-i-have-control-of-the-robot-during-my-activity">
+<h3>Why don&#8217;t I have control of the robot during my Activity?<a class="headerlink" href="#why-don-t-i-have-control-of-the-robot-during-my-activity" title="Permalink to this headline">¶</a></h3>
+<p>Though the robot is acting autonomously, in fact you do have control!
+Autonomous Life will act during your Activity only in the following cases:</p>
+<ul class="simple">
+<li>Actions coming from running <a class="reference internal" href="autonomous_abilities_management.html#autonomous-abilities-management"><span>Autonomous Abilities</span></a>.
+You can selectively parameterize or disable these to gain full control when you need to.
+The abilities will not be re-enabled until you tell them to.  The Autonomous
+Abilities are low-priority; your own control of the robot will take priority.  So
+under normal circumstances it is not necessary to disabled these services.
+<strong>Please keep these abilties running as much as possible to keep your robot
+continuously alive!</strong></li>
+<li>Solitary Activities are interrupted in favor of Interactive Activities,
+see <a class="reference internal" href="#autonomouslife-states"><span>States</span></a> and <a class="reference internal" href="#autonomouslife-prioritization"><span>Autonomous prioritization</span></a>.</li>
+<li>If something causes the robot to enter <strong>Safeguard</strong>
+<a class="reference internal" href="#autonomouslife-states"><span>State</span></a>, which will stop your activity.</li>
+<li>If the <a class="reference internal" href="#autonomouslife-context"><span>Context</span></a> of the robot is no longer compatible
+with your Activity, it will be stopped.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="context">
+<span id="autonomouslife-context"></span><h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
+<p>The Context is everything that <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> knows about the robot,
+and about the environment from NAOqi&#8217;s Extractors. The current
+<a class="reference internal" href="#autonomouslife-states"><span>State</span></a> is one variable of this Context.</p>
+<p>This Context is how <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> can make decisions about what <strong>Activity</strong>
+it may start, or the <strong>Safeguard</strong> <a class="reference internal" href="#autonomouslife-states"><span>State</span></a> must be
+entered.</p>
+<div class="section" id="using-context-to-start-your-activity">
+<h3>Using Context to start your activity<a class="headerlink" href="#using-context-to-start-your-activity" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> provides some special events for you to help make it easier
+to start your <strong>Activities</strong> autonomously.  Use <a class="reference internal" href="../../naoqi/interaction/triggerconditions.html#launchpad-keys"><span>these events</span></a>
+for your <strong>Launch Trigger Conditions</strong>.</p>
+<p>An API is available for your <strong>Activity</strong> to query what the Context was at the
+moment that <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> focused it:
+<a class="reference internal" href="../../naoqi/interaction/autonomouslife-api.html#alautonomouslifeproxy-getfocuscontext"><span>getFocusContext()</span></a></p>
+<p><a class="reference internal" href="../../software/choregraphe/tutos/create_solitary_activity.html#create-solitary-activity-tuto"><span>Creating a Solitary activity</span></a> tutorial shows how to autonomously start an Activity.</p>
+</div>
+<div class="section" id="permission-to-run-in-a-context">
+<h3>Permission to run in a Context<a class="headerlink" href="#permission-to-run-in-a-context" title="Permalink to this headline">¶</a></h3>
+<p>Depending on the Context your activity may not be permitted to start, or it may be stopped.
+For example if the robot is on the charging station or if the robot is asleep.
+See the <a class="reference internal" href="../../software/choregraphe/panels/project_content_panel.html#behavior-permissions"><span>Permissions</span></a> documentation for more details.</p>
+</div>
+</div>
+<div class="section" id="states">
+<span id="autonomouslife-states"></span><h2>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h2>
+<p>As previously mentioned, whenever an <strong>Activity</strong> is focused, <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a>
+will enforce a State change to provide consistent runtime configuration appropriate for
+the current Context.  This gives a deterministic setup to your Activities,
+and a consistent experience to users.</p>
+<p>Please see accompanying documentation for details about <a class="reference internal" href="extractors_management.html#extractors-management"><span>Extractors management</span></a>
+and <a class="reference internal" href="autonomous_abilities_management.html#autonomous-abilities-management"><span>Autonomous Abilities</span></a> for how they are configured in a State change.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">State name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>solitary</td>
+<td><p class="first">This is the default State of the robot when Autonomous Life starts, and when no Activity
+is running.</p>
+<p>The main purpose of the Solitary State and Solitary Activities is to prepare the robot
+for future interaction with people.  Thus, in this State the robot is optimally
+configured for finding them.  This State consumes higher baseline CPU than Interactive.</p>
+<p>Another purpose of Solitary is to prepare people to interact with the robot.  The robot
+primarily does this by looking alive. For example responding to stimulus originating
+from the environment and people, or possibly doing things to attract people.</p>
+<p>As the robot is not currently busy in a one-to-one interaction with a person, the
+Solitary State is an opportunity for the robot to do things &#8220;for himself&#8221;, such
+as exploring or learning passively. But ultimately this is done for the sake of better
+future interaction with people.</p>
+<p>The robot&#8217;s main goal is to Interact with people, so Solitary State and Activities are
+interrupted in favor of the Interactive State and Activities, to better serve people.
+See <a class="reference internal" href="#autonomouslife-prioritization"><span>Autonomous prioritization</span></a>.</p>
+<p>So, though the word &#8220;Solitary&#8221; is used, it does not necessarily mean that the robot is
+alone in the room.  It means that the robot&#8217;s main concern is not currently a specific
+one-to-one Interaction.</p>
+<p class="last">The Solitary State can be thought of as <strong>self driven</strong>, the robot is making decisions
+by himself.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>interactive</td>
+<td><p class="first">The Interactive State will be entered when an Interactive Activity is focused.</p>
+<p>The main purpose of the Interactive state is to specifically serve people in a
+one-to-one interaction.  This is ultimately the robot&#8217;s main goal in life.</p>
+<p>In Interactive State, the robot assumes that he has found the humans who he should be
+interacting with, and they are in very close proximity.  Thus he is no longer configured
+for finding them, but for interacting with them.  The baseline CPU consumption is
+lower than Solitary State to provide an optimal <a class="reference internal" href="../../naoqi/interaction/dialog/aldialog.html#aldialog"><span>ALDialog</span></a> experience.</p>
+<p>The Interactive State can be thought of as <strong>people driven</strong>, the robot is obeying
+commands from people.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the user comes close to Pepper, a default <a class="reference internal" href="../../naoqi/interaction/dialog/aldialog.html#aldialog"><span>ALDialog</span></a> Activity may be
+started, see <img alt="nao" class="img-inline" src="../../_images/nao.png" /> <a class="reference internal" href="../../nao/nao_interacting.html#talking-with-nao"><span>Talking with NAO</span></a> or <img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <a class="reference internal" href="../../family/pepper_user_guide/interacting_pep.html#talking-with-pep"><span>Talking with Pepper</span></a>.</p>
+</div>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As Interactive Activities are not interrupted by <a class="reference internal" href="#autonomouslife-prioritization"><span>Autonomous prioritization</span></a>,
+be sure that your Interactive Activity has implemented an exit path, or it will never
+be stopped (unless the user explicitly does so, see <img alt="nao" class="img-inline" src="../../_images/nao.png" /> <a class="reference internal" href="../../nao/activity_nao.html#activity-exit-nao"><span>Exiting an Activity</span></a> or
+<img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <a class="reference internal" href="../../family/pepper_user_guide/activity_pep.html#activity-exit-pep"><span>Exiting an Activity</span></a>).</p>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>safeguard</td>
+<td><p class="first">If the robot&#8217;s hardware is having trouble, or if the environment is unsafe, this State
+will be entered and the current Activity stopped.  After the trouble has passed, the
+Solitary State will be re-entered.</p>
+<p>See the <a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-advanced"><span>ALAutonomousLife advanced</span></a> <a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-safeguard-causes"><span>Safeguard causes</span></a>
+documentation documentation for a full description of why the Safeguard State may be
+entered.</p>
+<p class="last">If your Activity is equipped to handle a specific Safeguard case, you may use the
+<a class="reference internal" href="../../naoqi/interaction/autonomouslife-api.html#alautonomouslifeproxy-setsafeguardenabled"><span>setSafeguardEnabled() API</span></a> to tell
+<a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> to not enter Safeguard State in this case.
+For example, if your Activity has implemented special handling for when the robot is
+pushed, it is not necessary for your Activity to be stopped.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>disabled</td>
+<td><p class="first">From Disabled State, all Autonomous Abilities are stopped, and no Activities may be
+focused.  Safeguard State may not be entered.</p>
+<p class="last">If you would prefer <a class="reference internal" href="../../naoqi/interaction/autonomouslife.html#autonomouslife"><span>ALAutonomousLife</span></a> to be in Disabled State upon bootup, this can
+be configured for <img alt="nao" class="img-inline" src="../../_images/nao.png" /> <a class="reference internal" href="../../nao/nao_life.html#nao-life"><span>NAO</span></a> and <img alt="pepp" class="img-inline" src="../../_images/pepp.png" /> <a class="reference internal" href="../../family/pepper_user_guide/life_pep.html#life-pep"><span>Pepper</span></a>.  This
+may be useful for specific research or testing scenarios.  but we encourage you to keep
+your robot alive because living robots are the future and provide a more enriching
+experience!</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="autonomous-prioritization">
+<span id="autonomouslife-prioritization"></span><h3>Autonomous prioritization<a class="headerlink" href="#autonomous-prioritization" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>During a Solitary Activity, an Interactive Activity may interrupt it to take the focus.</li>
+<li>If a Solitary and Interactive Activity both have true conditions at the same time,
+the Interactive will get priority.</li>
+<li>A Solitary Activity will not interrupt another Solitary Activity.</li>
+<li>An Interactive Activity will not interrupt another Interactive Activity.</li>
+<li>When multiple Activities have true conditions at the same time,
+the one that was focused least recently will get priority.</li>
+<li>Safeguard State has the priority over all Activities.</li>
+<li>Programmatic calls to <a class="reference internal" href="../../naoqi/interaction/autonomouslife-api.html#alautonomouslifeproxy-switchfocus"><span>switchFocus()</span></a>
+permit you to start an Interactive Activity from either Solitary/Interactive
+State, or a Solitary Activity from Solitary State.  But you cannot start a
+Solitary Activity from Interactive State.</li>
+</ul>
+</div>
+<div class="section" id="what-else-happens-in-a-state-change">
+<h3>What else happens in a State change?<a class="headerlink" href="#what-else-happens-in-a-state-change" title="Permalink to this headline">¶</a></h3>
+<p>In addition to setting up Autonomous Abilities and Extractors, Autonomous Life
+does some other cleaning of the robot&#8217;s State as described in the
+<a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-advanced"><span>ALAutonomousLife advanced</span></a> <a class="reference internal" href="../../naoqi/interaction/autonomouslife_advanced.html#autonomouslife-state-cleanup"><span>State change cleanup</span></a>
+documentation for more details.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Programming for a living robot</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">State machine management</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autonomous_abilities_management.html">Autonomous Abilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extractors_management.html">Extractors management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">State machine management</a><ul>
+<li><a class="reference internal" href="#activities">Activities</a><ul>
+<li><a class="reference internal" href="#how-are-activities-started">How are Activities started?</a></li>
+<li><a class="reference internal" href="#what-are-solitary-and-interactive-activities">What are Solitary and Interactive Activities?</a></li>
+<li><a class="reference internal" href="#why-don-t-i-have-control-of-the-robot-during-my-activity">Why don&#8217;t I have control of the robot during my Activity?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#context">Context</a><ul>
+<li><a class="reference internal" href="#using-context-to-start-your-activity">Using Context to start your activity</a></li>
+<li><a class="reference internal" href="#permission-to-run-in-a-context">Permission to run in a Context</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#states">States</a><ul>
+<li><a class="reference internal" href="#autonomous-prioritization">Autonomous prioritization</a></li>
+<li><a class="reference internal" href="#what-else-happens-in-a-state-change">What else happens in a State change?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

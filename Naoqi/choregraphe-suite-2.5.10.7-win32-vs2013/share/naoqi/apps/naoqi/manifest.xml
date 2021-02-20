@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- service manager relies on naoqi service being system.Naoqi -->
+<package version="2.1.6" uuid="system" typeVersion="1.0">
+  <names>
+    <name lang="en_US">NAOqi services</name>
+    <name lang="fr_FR">Services NAOqi</name>
+  </names>
+  <descriptions>
+    <description lang="en_US">NAOqi system services</description>
+    <description lang="fr_FR">Services système de NAOqi</description>
+  </descriptions>
+
+  <services>
+    <service name="Naoqi" autorun="true" execStart="naoqi-service --qi-url [URL] --qi-listen-url tcp://127.0.0.1:0" />
+    <service name="MdnsRegistrarService" autorun="true" execStart="qilaunch -n mdns -f mdnsservice.mdnsRegistration --qi-url [URL] --keep-running" />
+  </services>
+  <requirements>
+    <naoqiRequirement minVersion="2.0"/>
+  </requirements>
+</package>

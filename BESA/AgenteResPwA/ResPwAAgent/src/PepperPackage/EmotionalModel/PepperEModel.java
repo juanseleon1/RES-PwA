@@ -9,8 +9,12 @@ import BESA.ExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import Tareas.Cuenteria.LedsColor;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,20 +30,64 @@ public class PepperEModel extends EmotionalModel{
     private double speechBase=1.1;
     private double speechVBase=100;
     private double ledsIntBase=1;
+    private double velf;
+    private double velh;
+    private double pitch;
+    private double ledInt;
+    private static final double CHANGE_FACT=0.3; 
+    private LedsColor lc;
 
     public PepperEModel(double normalState) {
         this.state = normalState;
         this.refreshRate = 0;
         this.normalState = normalState;
     }
-    
-    protected enum EmoTypes{
-        EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);
-        private double perc;
-        private EmoTypes(double perc){
-            this.perc=perc;
+
+    @Override
+    public Map<String, Object> filterFromEM(Map<String, Object> map) {
+        Map<String,Object> map2= new HashMap<>();
+        map2.putAll(map);
+        double velf1=0,velh1=0,pitch1=0,ledInt1=0;
+        String s="";
+        if(map2.containsKey(PepperEMParams.HVel.getTipo()))
+        {
+            velh1=(double) map2.get(PepperEMParams.HVel.getTipo());
+            velh1+=((velh-velh1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.HVel.getTipo(), velh1);
         }
-    };
+        if(map2.containsKey(PepperEMParams.FVel.getTipo()))
+        {
+            velf1=(double) map2.get(PepperEMParams.FVel.getTipo());
+            velf1+=((velf-velf1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.FVel.getTipo(), velf1);
+        }
+        if(map2.containsKey(PepperEMParams.LEDINT.getTipo()))
+        {
+            ledInt1=(double) map2.get(PepperEMParams.LEDINT.getTipo());
+            ledInt1+=((ledInt-ledInt1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.LEDINT.getTipo(), ledInt1);
+        }
+        if(map2.containsKey(PepperEMParams.TONOH.getTipo()))
+        {
+            pitch1=(double) map2.get(PepperEMParams.TONOH.getTipo());
+            ledInt1+=((ledInt-ledInt1)*CHANGE_FACT);
+            map2.replace(PepperEMParams.TONOH.getTipo(), pitch1);
+        }
+        if(map2.containsKey(PepperEMParams.ANIMSTATE.getTipo()))
+        {
+            s=(String) map2.get(PepperEMParams.ANIMSTATE.getTipo());
+            map2.replace(PepperEMParams.ANIMSTATE.getTipo(), s);
+        }
+        return map2;
+    }
+    
+//    protected enum EmoTypes{
+//        EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);
+//        private double perc;
+//        private EmoTypes(double perc){
+//            this.perc=perc;
+//        }
+//    };
     
     @Override
     public void updateModel() {
@@ -114,15 +162,13 @@ public class PepperEModel extends EmotionalModel{
         else if(sowval>=joyval && angval<=sowval)
             emoP=EmotionPwA.SADNESS;
         
-        double change;
         map.put("relajacion",relval);
         map.put("atencion",atval);
         map.put("predEm", emoP);
         calcNewEmotionalParams(map);
-    }//mariela angela
+    }
+    
     private void calcNewEmotionalParams(Map<String, Object> map) {
-        LedsColor lc=null;
-        double velf=0,velh=0,pitch=0,ledInt=0;
          if(state>=1 && state<1.4)
          {
              lc=LedsColor.BLUE;
@@ -144,12 +190,20 @@ public class PepperEModel extends EmotionalModel{
         pitch=(speechBase*state)/normalState;
         ledInt=(speechVBase*state)/normalState;
         //x= baseV*actual/baseE
-        
         map.put("LEDS", lc.name());
-        map.put("velocidad", velf);
+        map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);
         map.put("ledIntens", ledInt);
+        HashMap<String,Object> map2= new HashMap<>();
+        map2.putAll(map);
+        map2.remove("LEDS");
+        map2.put("R",lc.getR() );
+        map2.put("G",lc.getG() );
+        map2.put("B",lc.getB() );
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
+        requestService(srb);
     }
 
+    
 }

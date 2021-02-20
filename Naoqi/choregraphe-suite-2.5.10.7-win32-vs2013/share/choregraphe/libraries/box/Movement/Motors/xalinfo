@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="Hands" />
+    <Node name="Motor Heat" />
+    <Node name="Motor On/Off" />
+    <Node name="Rest" />
+    <Node name="Set Stiffness" />
+    <Node name="WakeUp" />
+</Folder>

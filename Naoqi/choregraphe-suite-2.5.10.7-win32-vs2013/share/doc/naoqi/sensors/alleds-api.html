@@ -1,0 +1,1099 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALLeds API &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALLeds" href="alleds.html" />
+    <link rel="next" title="ALSensors" href="alsensors.html" />
+    <link rel="prev" title="ALLeds" href="alleds.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-sensors-alleds-api">
+                
+  <div class="section" id="alleds-api">
+<span id="id1"></span><h1>ALLeds API<a class="headerlink" href="#alleds-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-sensors"><span>NAOqi Sensors &amp; LEDs</span></a> - <a class="reference internal" href="alleds.html#alleds"><span>Overview</span></a> | API</p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alledsproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><span>ALModule API</span></a>.
+It also has the following specific methods:</p>
+<dl class="class">
+<dt id="ALLedsProxy">
+<em class="property">class </em><code class="descname">ALLedsProxy</code><a class="headerlink" href="#ALLedsProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><a class="reference internal" href="#ALLedsProxy::createGroup__ssCR.std::vector:ss:CR" title="ALLedsProxy::createGroup"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::createGroup</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::earLedsSetAngle__iCR.floatCR.bCR" title="ALLedsProxy::earLedsSetAngle"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::earLedsSetAngle</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::fade__ssCR.floatCR.floatCR" title="ALLedsProxy::fade"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::fade</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::fadeListRGB__ssCR.AL::ALValueCR.AL::ALValueCR" title="ALLedsProxy::fadeListRGB"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::fadeListRGB</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::fadeRGB__ssCR.floatCR.floatCR.floatCR.floatCR" title="ALLedsProxy::fadeRGB"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::fadeRGB</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::getIntensity__ssCR" title="ALLedsProxy::getIntensity"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::getIntensity</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::listGroup__ssCR" title="ALLedsProxy::listGroup"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::listGroup</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::listGroups" title="ALLedsProxy::listGroups"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::listGroups</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::listLED__ssCR" title="ALLedsProxy::listLED"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::listLED</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::listLEDs" title="ALLedsProxy::listLEDs"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::listLEDs</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::off__ssCR" title="ALLedsProxy::off"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::off</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::on__ssCR" title="ALLedsProxy::on"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::on</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::randomEyes__floatCR" title="ALLedsProxy::randomEyes"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::randomEyes</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::rasta__floatCR" title="ALLedsProxy::rasta"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::rasta</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::reset__ssCR" title="ALLedsProxy::reset"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::reset</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::rotateEyes__iCR.floatCR.floatCR" title="ALLedsProxy::rotateEyes"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::rotateEyes</span></code></a></li>
+<li><a class="reference internal" href="#ALLedsProxy::setIntensity__ssCR.floatCR" title="ALLedsProxy::setIntensity"><code class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::setIntensity</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALLedsProxy::createGroup__ssCR.std::vector:ss:CR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">createGroup</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>groupName</em>, const std::vector&lt;std::string&gt;&amp; <em>ledNames</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::createGroup__ssCR.std::vector:ss:CR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a group name for ease of setting multiple LEDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>groupName</strong> &#8211; The name of the group.</li>
+<li><strong>ledNames</strong> &#8211; A vector of the names of the LEDs in the group.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="python">
+<h3>Python:<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre># Replace &quot;127.0.0.1&quot; with the IP of your robot
+leds = ALProxy(&quot;ALLeds&quot;,&quot;127.0.0.1&quot;,9559)
+# Create a new group
+names = [
+&quot;Face/Led/Red/Left/0Deg/Actuator/Value&quot;,
+&quot;Face/Led/Red/Left/90Deg/Actuator/Value&quot;,
+&quot;Face/Led/Red/Left/180Deg/Actuator/Value&quot;,
+&quot;Face/Led/Red/Left/270Deg/Actuator/Value&quot;]
+leds.createGroup(&quot;MyGroup&quot;,names)
+# Switch the new group on
+leds.on(&quot;MyGroup&quot;)
+</pre></div>
+</div>
+</div>
+<div class="section" id="c">
+<h3>C++:<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;</span> <span class="nt">leds</span> <span class="o">=</span> <span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;(</span><span class="nt">new</span> <span class="nt">ALLedsProxy</span><span class="o">(</span><span class="nt">getParentBroker</span><span class="o">()));</span>
+<span class="o">//</span> <span class="nt">Create</span> <span class="nt">a</span> <span class="nt">new</span> <span class="nt">group</span>
+<span class="nt">std</span><span class="o">:</span><span class="nd">:vector</span><span class="o">&lt;</span><span class="nt">std</span><span class="o">:</span><span class="nd">:string</span><span class="o">&gt;</span> <span class="nt">names</span><span class="o">;</span>
+<span class="nt">names</span><span class="nc">.push_back</span><span class="o">(</span><span class="s2">&quot;Face/Led/Red/Left/0Deg/Actuator/Value&quot;</span><span class="o">);</span>
+<span class="nt">names</span><span class="nc">.push_back</span><span class="o">(</span><span class="s2">&quot;Face/Led/Red/Left/90Deg/Actuator/Value&quot;</span><span class="o">);</span>
+<span class="nt">names</span><span class="nc">.push_back</span><span class="o">(</span><span class="s2">&quot;Face/Led/Red/Left/180Deg/Actuator/Value&quot;</span><span class="o">);</span>
+<span class="nt">names</span><span class="nc">.push_back</span><span class="o">(</span><span class="s2">&quot;Face/Led/Red/Left/270Deg/Actuator/Value&quot;</span><span class="o">);</span>
+<span class="nt">leds</span><span class="nc">.createGroup</span><span class="o">(</span><span class="s2">&quot;MyGroup&quot;</span><span class="o">,</span><span class="nt">names</span><span class="o">);</span>
+<span class="o">//</span> <span class="nt">Switch</span> <span class="nt">the</span> <span class="nt">new</span> <span class="nt">group</span> <span class="nt">on</span>
+<span class="nt">leds</span><span class="nc">.on</span><span class="o">(</span><span class="s2">&quot;MyGroup&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="ALLedsProxy::earLedsSetAngle__iCR.floatCR.bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">earLedsSetAngle</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>degrees</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em>, <a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>leaveOnAtEnd</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::earLedsSetAngle__iCR.floatCR.bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>An animation to show a direction with the ears.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>degrees</strong> &#8211; The angle you want to show in degrees (int). 0 is up, 90 is forwards, 180 is down and 270 is back.</li>
+<li><strong>duration</strong> &#8211; The duration in seconds of the animation.</li>
+<li><strong>leaveOnAtEnd</strong> &#8211; If true the last led is left on at the end of the animation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::fade__ssCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">fade</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>intensity</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::fade__ssCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the intensity of a LED or Group of LEDs within a given time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+<li><strong>intensity</strong> &#8211; The intensity of the LED or Group (a value between 0 and 1).</li>
+<li><strong>duration</strong> &#8211; The duration of the fade in seconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alleds_fade.cpp"><code class="xref download docutils literal"><span class="pre">alleds_fade.cpp</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;alproxies/alledsproxy.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: leds_ledsfade pIp&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pIp</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Create a proxy to ALLeds.</span>
+  <span class="n">AL</span><span class="o">::</span><span class="n">ALLedsProxy</span> <span class="n">leds</span><span class="p">(</span><span class="n">pIp</span><span class="p">);</span>
+
+  <span class="c1">// Example showing how to fade the left eye group to mid-intensity</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;EarLeds&quot;</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">intensity</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
+  <span class="n">leds</span><span class="p">.</span><span class="n">fade</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Faded &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">intensity</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; in &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">duration</span>
+            <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference download internal" href="../../_downloads/alleds_fade.py"><code class="xref download docutils literal"><span class="pre">alleds_fade.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use fade Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the fade method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALLeds.</span>
+
+    <span class="n">leds_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALLeds&quot;</span><span class="p">)</span>
+
+    <span class="c"># Example showing how to fade the ears group to mid-intensity</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;EarLeds&#39;</span>
+    <span class="n">intensity</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">leds_service</span><span class="o">.</span><span class="n">fade</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::fadeListRGB__ssCR.AL::ALValueCR.AL::ALValueCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">fadeListRGB</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>rgbList</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>timeList</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::fadeListRGB__ssCR.AL::ALValueCR.AL::ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a list of color commands for a LED or a group of LEDs (like a timeline for LEDs).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+<li><strong>rgbList</strong> &#8211; List of RGB led value, RGB as seen in hexa-decimal: 0x00RRGGBB.</li>
+<li><strong>timeList</strong> &#8211; List of respective time to reach each RGB value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alledsproxy-fadergb1"></span><dl class="function">
+<dt id="ALLedsProxy::fadeRGB__ssCR.floatCR.floatCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">fadeRGB</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>red</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>green</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>blue</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::fadeRGB__ssCR.floatCR.floatCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are three overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alledsproxy-fadergb1"><span>ALLedsProxy::fadeRGB</span></a> with RGB color code.</li>
+<li><a class="reference internal" href="#alledsproxy-fadergb2"><span>ALLedsProxy::fadeRGB</span></a> with color names.</li>
+<li><a class="reference internal" href="#alledsproxy-fadergb3"><span>ALLedsProxy::fadeRGB</span></a> with hexadecimal color code.</li>
+</ul>
+<p>Sets the color of an RGB led using RGB color code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the RGB LED or Group.</li>
+<li><strong>red</strong> &#8211; The intensity of red channel (0-1).</li>
+<li><strong>green</strong> &#8211; The intensity of green channel (0-1).</li>
+<li><strong>blue</strong> &#8211; The intensity of blue channel (0-1).</li>
+<li><strong>duration</strong> &#8211; Time used to fade in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alledsproxy-fadergb2"></span><dl class="function">
+<dt id="ALLedsProxy::fadeRGB__ssCR.ssCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">fadeRGB</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>colorName</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::fadeRGB__ssCR.ssCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the color of an RGB led using color names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the RGB LED or Group.</li>
+<li><strong>colorName</strong> &#8211; The name of the color (supported colors: &#8220;white&#8221;, &#8220;red&#8221;, &#8220;green&#8221;, &#8220;blue&#8221;, &#8220;yellow&#8221;, &#8220;magenta&#8221;, &#8220;cyan&#8221;).</li>
+<li><strong>duration</strong> &#8211; Time used to fade in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alledsproxy-fadergb3"></span><dl class="function">
+<dt id="ALLedsProxy::fadeRGB__ssCR.iCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">fadeRGB</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>rgb</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::fadeRGB__ssCR.iCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the color of an RGB led using hexadecimal color code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the RGB LED or Group.</li>
+<li><strong>rgb</strong> &#8211; The RGB value led, RGB as seen in hexadecimal: 0x00RRGGBB.</li>
+<li><strong>duration</strong> &#8211; Time used to fade in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::getIntensity__ssCR">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">getIntensity</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::getIntensity__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the intensity of a LED.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the LED.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The intensity of the LED.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::listGroup__ssCR">
+std::vector&lt;std::string&gt; <code class="descclassname">ALLedsProxy::</code><code class="descname">listGroup</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>groupName</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::listGroup__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the devices in the group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>groupName</strong> &#8211; The name of the Group.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A vector of string device names.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>Python:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre># Replace &quot;127.0.0.1&quot; with the IP of your robot
+leds = ALProxy(&quot;ALLeds&quot;,&quot;127.0.0.1&quot;,9559)
+# Print the names of all the groups
+print(leds.listGroup(&quot;FaceLedsLeftExternal&quot;))
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>C++:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;</span> <span class="nt">leds</span> <span class="o">=</span> <span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;(</span><span class="nt">new</span> <span class="nt">ALLedsProxy</span><span class="o">(</span><span class="nt">getParentBroker</span><span class="o">()));</span>
+<span class="o">//</span>  <span class="nt">Print</span> <span class="nt">the</span> <span class="nt">names</span> <span class="nt">of</span> <span class="nt">all</span> <span class="nt">the</span> <span class="nt">devices</span> <span class="nt">in</span> <span class="nt">the</span> <span class="nt">group</span>
+<span class="nt">std</span><span class="o">:</span><span class="nd">:vector</span><span class="o">&lt;</span><span class="nt">std</span><span class="o">:</span><span class="nd">:string</span><span class="o">&gt;</span> <span class="nt">deviceNames</span> <span class="o">=</span> <span class="nt">leds</span><span class="nc">.listGroup</span><span class="o">(</span><span class="s2">&quot;FaceLedsLeftExternal&quot;</span><span class="o">);</span>
+<span class="nt">for</span><span class="o">(</span><span class="nt">unsigned</span> <span class="nt">int</span> <span class="nt">i</span><span class="o">=</span><span class="nt">0</span><span class="o">;</span> <span class="nt">i</span> <span class="o">&lt;</span> <span class="nt">deviceNames</span><span class="nc">.size</span><span class="o">();</span> <span class="nt">i</span><span class="o">++)</span> <span class="p">{</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">deviceNames</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="ALLedsProxy::listGroups">
+std::vector&lt;std::string&gt; <code class="descclassname">ALLedsProxy::</code><code class="descname">listGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::listGroups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists available group names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A vector of group names.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::listLED__ssCR">
+std::vector&lt;std::string&gt; <code class="descclassname">ALLedsProxy::</code><code class="descname">listLED</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>arg1</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::listLED__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the devices aliased by a short LED name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arg1</strong> &#8211; arg</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A vector of device names.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::listLEDs">
+std::vector&lt;std::string&gt; <code class="descclassname">ALLedsProxy::</code><code class="descname">listLEDs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::listLEDs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the short LED names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A vector of LED names.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::off__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">off</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::off__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch to a minimum intensity a LED or Group of LEDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>samples/cpp/alleds/alleds_off.cpp</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;alproxies/alledsproxy.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: leds_off pIp&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pIp</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Create a proxy to ALLeds.</span>
+  <span class="n">AL</span><span class="o">::</span><span class="n">ALLedsProxy</span> <span class="n">leds</span><span class="p">(</span><span class="n">pIp</span><span class="p">);</span>
+
+  <span class="c1">// Example showing how to switch off a group</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;FaceLeds&quot;</span><span class="p">;</span>
+  <span class="n">leds</span><span class="p">.</span><span class="n">off</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;LEDs from &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; group are now off&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>samples/python/alleds/alleds_off.py</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use off Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the off method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALLeds.</span>
+
+    <span class="n">leds_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALLeds&quot;</span><span class="p">)</span>
+
+    <span class="c"># Example showing how to switch off a group</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;FaceLeds&#39;</span>
+    <span class="n">leds_service</span><span class="o">.</span><span class="n">off</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::on__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">on</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::on__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch to a maximum intensity a LED or Group of LEDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../_downloads/alleds_on.cpp"><code class="xref download docutils literal"><span class="pre">alleds_on.cpp</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;alproxies/alledsproxy.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage: leds_on pIp&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pIp</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Create a proxy to ALLeds.</span>
+  <span class="n">AL</span><span class="o">::</span><span class="n">ALLedsProxy</span> <span class="n">leds</span><span class="p">(</span><span class="n">pIp</span><span class="p">);</span>
+
+  <span class="c1">// Example showing how to switch on a group</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;FaceLeds&quot;</span><span class="p">;</span>
+  <span class="n">leds</span><span class="p">.</span><span class="n">on</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;LEDs from &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; group are now on.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference download internal" href="../../_downloads/alleds_on.py"><code class="xref download docutils literal"><span class="pre">alleds_on.py</span></code></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use on Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the on method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALLeds.</span>
+
+    <span class="n">leds_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALLeds&quot;</span><span class="p">)</span>
+
+    <span class="c"># Example showing how to switch on a group</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;FaceLeds&#39;</span>
+    <span class="n">leds_service</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::randomEyes__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">randomEyes</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::randomEyes__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch a random animation in eyes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>duration</strong> &#8211; Approximate duration of the animation in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::rasta__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">rasta</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::rasta__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch a green/yellow/red rasta animation on all body.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>duration</strong> &#8211; Approximate duration of the animation in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>samples/cpp/alleds/alleds_rasta.cpp</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;alproxies/alledsproxy.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Usage &#39;leds_on pIp&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pIp</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">// Create a proxy to ALLeds.</span>
+  <span class="n">AL</span><span class="o">::</span><span class="n">ALLedsProxy</span> <span class="n">leds</span><span class="p">(</span><span class="n">pIp</span><span class="p">);</span>
+
+  <span class="c1">// Example showing a two seconds rasta animation</span>
+  <span class="kt">float</span> <span class="n">duration</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="p">;</span>
+  <span class="n">leds</span><span class="p">.</span><span class="n">rasta</span><span class="p">(</span><span class="n">duration</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;LED animation complete.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>samples/python/alleds/alleds_rasta.py</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="c"># -*- encoding: UTF-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Example: Use rasta Method&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This example uses the rasta method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Get the service ALLeds.</span>
+
+    <span class="n">leds_service</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALLeds&quot;</span><span class="p">)</span>
+
+    <span class="c"># Example showing a one second rasta animation</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">leds_service</span><span class="o">.</span><span class="n">rasta</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--ip&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Robot IP address. On robot or Local Naoqi: use &#39;127.0.0.1&#39;.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--port&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">9559</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Naoqi port number&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Can&#39;t connect to Naoqi at ip </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="o">.</span><span class="n">ip</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s"> on port &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;.</span><span class="se">\n</span><span class="s">&quot;</span>
+               <span class="s">&quot;Please check your script arguments. Run with -h option for help.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::reset__ssCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">reset</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::reset__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a LED or Group of LEDs to their default state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::rotateEyes__iCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">rotateEyes</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>rgb</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>timeForRotation</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>totalDuration</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::rotateEyes__iCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch a rotation using the leds of the eyes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rgb</strong> &#8211; the RGB value led, RGB as seen in hexa-decimal: 0x00RRGGBB.</li>
+<li><strong>timeForRotation</strong> &#8211; Approximate time to make one turn.</li>
+<li><strong>totalDuration</strong> &#8211; Approximate duration of the animation in seconds.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALLedsProxy::setIntensity__ssCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <code class="descclassname">ALLedsProxy::</code><code class="descname">setIntensity</code><span class="sig-paren">(</span><a class="reference internal" href="../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>intensity</em><span class="sig-paren">)</span><a class="headerlink" href="#ALLedsProxy::setIntensity__ssCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the intensity of a LED or Group of LEDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> &#8211; The name of the LED or Group.</li>
+<li><strong>intensity</strong> &#8211; The intensity of the LED or Group (a value between 0 and 1).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="id4">
+<h3>Python:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre># Replace &quot;127.0.0.1&quot; with the IP of your robot
+leds = ALProxy(&quot;ALLeds&quot;,&quot;127.0.0.1&quot;,9559)
+# Turn the red LED of the left foot half on
+leds.setIntensity(&quot;LFoot/Led/Red/Actuator/Value&quot;, 0.5)
+# Turn the green face LEDs half on
+leds.setIntensity(&quot;LeftFaceLedsGreen&quot;, 0.5)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>C++:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;</span> <span class="nt">leds</span> <span class="o">=</span> <span class="nt">boost</span><span class="o">:</span><span class="nd">:shared_ptr</span><span class="o">&lt;</span><span class="nt">ALLedsProxy</span><span class="o">&gt;(</span><span class="nt">new</span> <span class="nt">ALLedsProxy</span><span class="o">(</span><span class="nt">getParentBroker</span><span class="o">()));</span>
+<span class="o">//</span> <span class="nt">Turn</span> <span class="nt">the</span> <span class="nt">red</span> <span class="nt">LED</span> <span class="nt">of</span> <span class="nt">the</span> <span class="nt">left</span> <span class="nt">foot</span> <span class="nt">half</span> <span class="nt">on</span>
+<span class="nt">leds-</span><span class="o">&gt;</span><span class="nt">setIntensity</span><span class="o">(</span><span class="s2">&quot;LFoot/Led/Red/Actuator/Value&quot;</span><span class="o">,</span> <span class="nt">0</span><span class="nc">.5f</span><span class="o">);</span>
+<span class="o">//</span> <span class="nt">Turn</span> <span class="nt">the</span> <span class="nt">green</span> <span class="nt">face</span> <span class="nt">LEDs</span> <span class="nt">half</span> <span class="nt">on</span>
+<span class="nt">leds-</span><span class="o">&gt;</span><span class="nt">setIntensity</span><span class="o">(</span><span class="s2">&quot;LeftFaceLedsGreen&quot;</span><span class="o">,</span> <span class="nt">0</span><span class="nc">.5f</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peopleperception/index.html">NAOqi People Perception</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi Sensors &amp; LEDs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="altactilegesture.html">ALTactileGesture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="albattery.html">ALBattery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="albodytemperature.html">ALBodyTemperature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alchestbutton.html">ALChestButton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alfsr.html">ALFsr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="altouch.html">ALTouch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="allaser.html">ALLaser</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="alleds.html">ALLeds</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALLeds API</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="alsensors.html">ALSensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alsonar.html">ALSonar</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALLeds API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a><ul>
+<li><a class="reference internal" href="#python">Python:</a></li>
+<li><a class="reference internal" href="#c">C++:</a></li>
+<li><a class="reference internal" href="#id2">Python:</a></li>
+<li><a class="reference internal" href="#id3">C++:</a></li>
+<li><a class="reference internal" href="#id4">Python:</a></li>
+<li><a class="reference internal" href="#id5">C++:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>
