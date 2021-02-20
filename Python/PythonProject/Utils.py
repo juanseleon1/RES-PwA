@@ -30,7 +30,7 @@ def send(id_response, responseType, params):
     else:
         responsesXTime[key] = datetime.now()
 
-    if should_send_message:
+    if should_send_message == 0:
         ADDR = (HOST_LOCAL, PORT)
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
@@ -40,20 +40,18 @@ def send(id_response, responseType, params):
         client.send(msg_to_send + '\r\n')
         client.close()
 
+
 def checkTimeMessageSended(params):
-    isCorrectToSend = True
+    isCorrectToSend = 0
     if (responsesXTime.get(params).hour - datetime.now().hour) < 1:
 
         if (responsesXTime.get(params).minute - datetime.now().minute) < 1:
 
             if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
                 print("Change")
-                isCorrectToSend = False
+                isCorrectToSend = 1
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 40:
+                print("Erase")
+                isCorrectToSend = 2
 
-    """  if (responsesXTime.get(params).minute - datetime.now().minute) == -1:
-
-                if (datetime.now().second - responsesXTime.get(params).second) < 2:
-                    isCorrectToSend = False
-            """
     return isCorrectToSend
-

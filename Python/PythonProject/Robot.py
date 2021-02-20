@@ -273,6 +273,10 @@ class Robot:
             # Raised when someone just waved at the robot.
             self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
             #
+            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "getDialogInput")
+            #
+            self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
+
         except Exception, e:
             print "Main Error"
             print e

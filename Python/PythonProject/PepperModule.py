@@ -1,6 +1,8 @@
 from naoqi import *
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
+
+
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 class pepperModule(ALModule):
@@ -336,4 +338,9 @@ class pepperModule(ALModule):
         json_params = {}
         # The value is the person ID
         json_params["personWaving"] = value
+        send(-1, "int", json_params)
+
+    def getDialogInput(self, key, value, message):
+        json_params = {"DialogInput": value}
+        print("HABLE " + value)
         send(-1, "int", json_params)
