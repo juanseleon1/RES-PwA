@@ -1,7 +1,9 @@
 from naoqi import *
 import PepperModule
 from Emotion import Emotion
+from Topics import topic_content_1
 from Utils import activities_running
+
 # ----------------------------------------------------------------------------Robot
 # class---------------------------------------------------------------------------------------------
 
@@ -46,7 +48,10 @@ class Robot:
         self.emotionStateRobot = Emotion()
         self.alDialogProxy.setLanguage("Spanish")
         self.topicMap = {}
+        self.topicContentMap = {"basic": topic_content_1}
+
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
+
         self.__modules = {
             # ActivityServices-------------------------------------------------------
             "RUNANIMATION": [self.run_animation, True, "act", True],  # funcionando
@@ -132,10 +137,11 @@ class Robot:
 
             self.sensorsModule = PepperModule.pepperModule("sensorsModule")
             # Raised when an animated speech is done.
-            self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule", "endOfAnimatedSpeech")
+            self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule",
+                                          "endOfAnimatedSpeech")
             # Raised when the person tracked can no longer be found for some time.
             self.alProxy.subscribeToEvent("ALBasicAwareness/HumanLost", "sensorsModule",
-                                     "humanLost")  # DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
+                                          "humanLost")  # DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
 
             # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
             self.alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked", "sensorsModule", "humanTracked")
@@ -146,10 +152,11 @@ class Robot:
 
             # Raised when the battery level is low and will soon need charging.
             self.alProxy.subscribeToEvent("ALBattery/BatteryLow", "sensorsModule",
-                                     "batteryLow")  # DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
+                                          "batteryLow")  # DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
 
             # Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToFailed", "sensorsModule", "goToFailed")  # NO MUESTRA NADA -
+            self.alProxy.subscribeToEvent("ALLocalization/GoToFailed", "sensorsModule",
+                                          "goToFailed")  # NO MUESTRA NADA -
 
             # Raised when the robot has successfully reached its destination.
             self.alProxy.subscribeToEvent("ALLocalization/GoToSuccess", "sensorsModule", "goToSuccess")
@@ -164,14 +171,16 @@ class Robot:
             self.alProxy.subscribeToEvent("ALLocalization/LocalizeLost", "sensorsModule", "localizeLost")
 
             # Raised when the orientation of the robot has NOT been successfully retrieved.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost", "sensorsModule", "localizeDirectionLost")
+            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost", "sensorsModule",
+                                          "localizeDirectionLost")
 
             # Raised when the orientation of the robot has been successfully retrieved.
             self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess", "sensorsModule",
-                                     "localizeDirectionSuccess")
+                                          "localizeDirectionSuccess")
 
             # Raised when a chain velocity is clipped because an obstacle is too close.
-            self.alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped", "sensorsModule", "chainVelocityClipped")
+            self.alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped", "sensorsModule",
+                                          "chainVelocityClipped")
 
             # Raised when a move command fails.
             self.alProxy.subscribeToEvent("ALMotion/MoveFailed", "sensorsModule", "moveFailed")
@@ -186,15 +195,15 @@ class Robot:
 
             # Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
             self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged", "sensorsModule",
-                                     "disabledDevicesChanged")
+                                          "disabledDevicesChanged")
 
             # Raised when features (Move, Stiffness...) availability changed.
             self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged", "sensorsModule",
-                                     "disabledFeaturesChanged")
+                                          "disabledFeaturesChanged")
 
             # Raised when Pepper is correctly docked onto the charging station.
             self.alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation", "sensorsModule",
-                                     "connectedToChargingStation")
+                                          "connectedToChargingStation")
 
             # Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
             self.alProxy.subscribeToEvent("ALRecharge/MoveFailed", "sensorsModule", "moveFailedRecharging")
@@ -227,14 +236,16 @@ class Robot:
             self.alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted", "sensorsModule", "speechTextInterrupted")
             # Raised when an utterance has been analyzed.
             self.alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized", "sensorsModule",
-                                     "voiceEmotionRecognized")
+                                          "voiceEmotionRecognized")
             # Raised whenever an activity completes its execution and exits.
-            self.alProxy.subscribeToEvent("AutonomousLife/CompletedActivity", "sensorsModule", "autonomousCompletedActivity")
+            self.alProxy.subscribeToEvent("AutonomousLife/CompletedActivity", "sensorsModule",
+                                          "autonomousCompletedActivity")
 
             # Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
 
             # Raised when the robot touch status changed.
-            self.alProxy.subscribeToEvent("TouchChanged", "sensorsModule", "pythondatachanged")  ###########################
+            self.alProxy.subscribeToEvent("TouchChanged", "sensorsModule",
+                                          "pythondatachanged")  ###########################
 
             # Raised when at least one device (joint, actuator, sensor) has a high temperature.
             self.alProxy.subscribeToEvent("HotDeviceDetected", "sensorsModule", "hotDeviceDetected")
@@ -256,12 +267,12 @@ class Robot:
             self.alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot", "sensorsModule", "peopleLookingAtRobot")
             # Raised when someone turns his head away from the robot.
             self.alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot", "sensorsModule",
-                                     "personStopsLookingAtRobot")
+                                          "personStopsLookingAtRobot")
             # The distance in meters to the tracked human. -1.0 if no one is tracked.
             self.alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman", "sensorsModule", "distanceOfTrackedHuman")
             # Raised when an obstacle is detected in the close area.
             self.alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected", "sensorsModule",
-                                     "obstacleDetected")
+                                          "obstacleDetected")
             # Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
             self.alProxy.subscribeToEvent("PeoplePerception/PeopleDetected", "sensorsModule", "peopleDetected")
             # Raised when a new preference is added to the system.
@@ -760,17 +771,27 @@ class Robot:
 
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def load_conversational_topic(self, params):
-        topicName=params.get("name")
-        topic = self.alDialogProxy.loadTopicContent(topicName)
+        topicName = params.get("name")
+        tContent = self.topicContentMap.get(topicName)
+        topic = self.alDialogProxy.loadTopicContent(tContent)
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
+        self.alDialogProxy.suscribe(topic)
+
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
-        topicName = params.get("name")
-        topic = self.topicMap[topicName]
-        self.alDialogProxy.deactivateTopic(topic)
-        self.alDialogProxy.unloadTopic(topicName)
+        if not self.topicMap:
+            lista = self.alDialogProxy.getAllLoadedTopics()
+            if lista:
+                self.alDialogProxy.stopTopics(lista)
+        else:
+            topicName = params.get("name")
+            topic = self.topicMap.get(topicName)
+            self.alDialogProxy.unsubscribe(topic)
+            tContent = self.topicContentMap.get(topicName)
+            self.alDialogProxy.deactivateTopic(topic)
+            self.alDialogProxy.unloadTopic(tContent)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
@@ -792,8 +813,10 @@ class Robot:
 
     def activate_conversational_topic(self):
         pass
+
     def desactivate_conversational_topic(self):
         pass
+
     def registrar_cuidador(params):
         pass
 
@@ -853,5 +876,3 @@ class Robot:
             4: "la ira te indispone y dificulta que pienses con claridad"
         }
         frase_principal = "si quieres podemos escuchar una cancion para relajarnos?"
-
-

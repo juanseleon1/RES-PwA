@@ -2,7 +2,6 @@ from naoqi import *
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
 
-
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 class pepperModule(ALModule):
@@ -341,6 +340,8 @@ class pepperModule(ALModule):
         send(-1, "int", json_params)
 
     def getDialogInput(self, key, value, message):
+        f = open("/demofile.txt", "a")
         json_params = {"DialogInput": value}
-        print("HABLE " + value)
+        f.write("A: "+value)
+        f.close()
         send(-1, "int", json_params)
