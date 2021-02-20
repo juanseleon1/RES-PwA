@@ -38,7 +38,7 @@ public class RobotAgentBelieves implements Believes {
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
         this.em=em;
-        getPerfilBD(cedula);
+//        getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
     }
 

@@ -65,7 +65,7 @@ public class InitRESPwA {
     
     public static void main(String[] args) {
        try {
-            String cedula=obtenerUsuario();
+            String cedula=null;//obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
             PepperEModel emoModel = new PepperEModel(predefEmoState);
