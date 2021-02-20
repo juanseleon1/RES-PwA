@@ -333,17 +333,15 @@ class Robot:
     # def run_animation( animation_path, animation_tag):
     #    alAnimationPlayer.runTag(animation_path, animation_tag)
 
-
-    #Animations
+    # Animations
     def change_speed(self, factor, times):
         timesfinal = list()
         for i in times:
             times2 = list()
             for j in i:
-                times2.append(j*factor)
+                times2.append(j * factor)
             timesfinal.append(times2)
         return timesfinal
-    
 
     def dance_macarena(self, factor=1):
         names = list()
@@ -352,11 +350,14 @@ class Robot:
 
         names.append("HeadPitch")
         times.append([0, 1.16, 2.36, 4.76, 5.96, 8.36, 9.56, 11.96, 14.36, 16.36])
-        keys.append([-0.211185, -0.211185, -0.211185, 0.123918, 0.123918, 0.445059, 0.123918, 0.123918, 0.123918, 0.123918])
+        keys.append(
+            [-0.211185, -0.211185, -0.211185, 0.123918, 0.123918, 0.445059, 0.123918, 0.123918, 0.123918, 0.123918])
 
         names.append("HeadYaw")
         times.append([0, 1.16, 2.36, 4.76, 5.96, 8.36, 9.56, 11.96, 13.16, 14.36, 16.36])
-        keys.append([-0.00698132, 0.219911, -0.00698132, -0.364774, -0.0174533, -0.00698132, -0.00698132, 0.329867, -0.118682, 0.127409, -0.0314159])
+        keys.append(
+            [-0.00698132, 0.219911, -0.00698132, -0.364774, -0.0174533, -0.00698132, -0.00698132, 0.329867, -0.118682,
+             0.127409, -0.0314159])
 
         names.append("HipPitch")
         times.append([0, 1.16, 8.36])
@@ -412,24 +413,24 @@ class Robot:
 
         names.append("RShoulderRoll")
         times.append([0, 1.16, 4.76, 5.96, 7.16, 10.76, 11.96, 15.56, 17.56])
-        keys.append([-0.792379, -0.792379, -0.792379, -0.0314159, -0.00872665, -0.200713, -0.00872665, -0.539307, -0.539307])
+        keys.append(
+            [-0.792379, -0.792379, -0.792379, -0.0314159, -0.00872665, -0.200713, -0.00872665, -0.539307, -0.539307])
 
         names.append("RWristYaw")
         times.append([0, 1.16, 4.76, 5.96, 10.76, 15.56, 17.56])
         keys.append([0.708604, -0.708604, 0.708604, 0.708604, 0.708604, 0.29147, 0.29147])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-    
-    def walk_animation(self, factor=1)
+    def walk_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -491,17 +492,16 @@ class Robot:
         keys.append([0.0296706, 0.0296706])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
-    
+            print err
 
-    def celebrate_animation(self, factor=1)
+    def celebrate_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -571,17 +571,16 @@ class Robot:
         keys.append([0.0314159, 1.80118, 1.80118])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def complete_conversation(self, factor=1)
+    def complete_conversation(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -655,101 +654,162 @@ class Robot:
         keys.append([1.05941, 1.05941, 1.05941, 1.05941, 1.05941])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def happiness_animation(self, factor=1)
+    def happiness_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0, 0, 0, 0, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0, -0.211185])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [0, 0, 0, 0, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059, -0.307178, 0.445059,
+             -0.307178, 0.445059, -0.307178, 0, -0.211185])
 
         names.append("HeadYaw")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0.733038, -0.733038, 0, 0, 0, 0, -0.600393, 0.441568, 0.603884, -0.335103, -0.680678, -0.668461, 0.593412, 0.413643, 0, 0, 0, -0.00698132])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [0.733038, -0.733038, 0, 0, 0, 0, -0.600393, 0.441568, 0.603884, -0.335103, -0.680678, -0.668461, 0.593412,
+             0.413643, 0, 0, 0, -0.00698132])
 
         names.append("HipPitch")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [-0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799,
+             -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799, -0.0261799,
+             -0.0261799])
 
         names.append("HipRoll")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.240855, -0.240855, -0.00523599, 0.240855, 0.240855, -0.00523599, -0.00523599])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [-0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599, -0.00523599,
+             -0.00523599, -0.00523599, -0.00523599, -0.240855, -0.240855, -0.00523599, 0.240855, 0.240855, -0.00523599,
+             -0.00523599])
 
         names.append("KneePitch")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
         keys.append([0, 0, 0, 0, 0, 0, 0.127409, 0.144862, 0, -0.127409, -0.144862, 0, 0, 0, 0, 0, 0, 0])
 
         names.append("LElbowRoll")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.00872665, -0.518363])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([-0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363,
+                     -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.518363, -0.00872665,
+                     -0.518363])
 
         names.append("LElbowYaw")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([-1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824,
+                     -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824, -1.21824])
 
         names.append("LHand")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.95, 0.59])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.95,
+             0.59])
 
         names.append("LShoulderPitch")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([1.57952, 1.57952, 1.57952, -0.403171, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, -1.26711, 1.57952])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [1.57952, 1.57952, 1.57952, -0.403171, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, 1.60919,
+             -0.865683, 1.60919, -0.865683, 1.60919, -0.865683, -1.26711, 1.57952])
 
         names.append("LShoulderRoll")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.340339, 0.116937])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197,
+                     0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.300197, 0.340339, 0.116937])
 
         names.append("LWristYaw")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 0.792379, -0.0314159])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387, 1.028, -1.82387,
+             1.028, -1.82387, 1.028, -1.82387, 0.792379, -0.0314159])
 
         names.append("RElbowRoll")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.00872665, 0.518363])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363,
+                     0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.00872665, 0.518363])
 
         names.append("RElbowYaw")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, -1.72089, 1.22522])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522,
+             1.22522, 1.22522, 1.22522, 1.22522, -1.72089, 1.22522])
 
         names.append("RHand")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.586477, 0.59, 0.59, 0.59, 0.95, 0.59])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.59, 0.586477, 0.59, 0.59, 0.59, 0.95,
+             0.59])
 
         names.append("RShoulderPitch")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([1.57952, 1.57952, 1.57952, -0.403171, -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098, -1.26711, 1.57952])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([1.57952, 1.57952, 1.57952, -0.403171, -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098,
+                     -0.403171, 1.50098, -0.403171, 1.50098, -0.403171, 1.50098, -1.26711, 1.57952])
 
         names.append("RShoulderRoll")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.340339, -0.115192])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append([-0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192,
+                     -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.340339, -0.115192])
 
         names.append("RWristYaw")
-        times.append([0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12, 19.32, 20.52])
-        keys.append([-1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, 1.82387, 0.0279253])
+        times.append(
+            [0.16, 1.32, 2.52, 3.72, 4.92, 6.12, 7.32, 8.52, 9.72, 10.92, 12.12, 13.32, 14.52, 15.72, 16.92, 18.12,
+             19.32, 20.52])
+        keys.append(
+            [-1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387, -1.028, 1.82387,
+             -1.028, 1.82387, -1.028, 1.82387, 1.82387, 0.0279253])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def frag_conv_right(self, factor=1)
+    def frag_conv_right(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -811,17 +871,16 @@ class Robot:
         keys.append([-0.0279253, 1.05941])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def frag_conv_right_without_focus(self, factor=1)
+    def frag_conv_right_without_focus(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -883,17 +942,16 @@ class Robot:
         keys.append([-0.0279253, 1.05941])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def frag_conv_left(self, factor=1)
+    def frag_conv_left(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -955,17 +1013,16 @@ class Robot:
         keys.append([-0.0279253, 1.05941])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def frag_conv_left_without_focus(self, factor=1)
+    def frag_conv_left_without_focus(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -1027,17 +1084,16 @@ class Robot:
         keys.append([-0.0279253, 1.05941])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-    
-    def question_animation(self, factor=1)
+    def question_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -1111,17 +1167,16 @@ class Robot:
         keys.append([0.0279253, 0.0279253, 0.0279253, 0.0279253, 0.0279253])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def myself_animation(self, factor=1)
+    def myself_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -1195,17 +1250,16 @@ class Robot:
         keys.append([0.0279253, 0.0279253])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
+            print err
 
-
-    def emotion_rise_arms(self, factor=1)
+    def emotion_rise_arms(self, factor=1):
         names = list()
         times = list()
         keys = list()
@@ -1259,16 +1313,14 @@ class Robot:
         keys.append([0.567859, -0.00872665, 0.720498])
 
         try:
-        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-        # motion = ALProxy("ALMotion", IP, 9559)
-        # motion = ALProxy("ALMotion")
-        # motion.angleInterpolation(names, keys, times, True)
-        times = change_speed(factor, times)
-        self.play_animation(names, times, keys)
+            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+            # motion = ALProxy("ALMotion", IP, 9559)
+            # motion = ALProxy("ALMotion")
+            # motion.angleInterpolation(names, keys, times, True)
+            times = self.change_speed(factor, times)
+            self.play_animation(names, times, keys)
         except BaseException, err:
-        print err
-
-
+            print err
 
     # Prueba!!!!!!!!!
 
@@ -1578,7 +1630,6 @@ class Robot:
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
         self.alDialogProxy.suscribe(topic)
-
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
