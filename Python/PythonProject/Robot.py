@@ -121,6 +121,7 @@ class Robot:
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
+            "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
@@ -789,6 +790,10 @@ class Robot:
         self.alTexToSpeech.setParameter("pitchShift", pitch)
         self.alTexToSpeech.say(text_to_speech)
 
+    def activate_conversational_topic(self):
+        pass
+    def desactivate_conversational_topic(self):
+        pass
     def registrar_cuidador(params):
         pass
 
