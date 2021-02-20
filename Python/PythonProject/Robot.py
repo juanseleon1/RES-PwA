@@ -44,6 +44,7 @@ class Robot:
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
         self.alDialogProxy = session.service("ALDialog")
         self.emotionStateRobot = Emotion()
+        self.alDialogProxy.setLanguage("Spanish")
 
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
@@ -274,8 +275,6 @@ class Robot:
             self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
             #
             self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "getDialogInput")
-            #
-            self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
 
         except Exception, e:
             print "Main Error"
@@ -761,22 +760,16 @@ class Robot:
         self.alSpeechRecognition.unsubscribe(self.sensorsModule)
 
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
-    def activate_conversational_topic(self, topicName):
-        self.alDialogProxy.activateTopic(topicName)
-
-    # Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine
-    def load_conversational_topic(self, topicName):
-        # define path
-        path = "nope"
-        self.alDialogProxy.loadTopic(path)
+    def load_conversational_topic(self, params):
+        topicName=params.get()
+        topic = self.alDialogProxy.loadTopicContent(topicName)
+        self.alDialogProxy.activateTopic(topic)
 
     # Unloads the specified topic and frees the associated memory.
-    def unload_conversational_topic(self, topicName):
-        self.alDialogProxy.unloadTopic(topicName)
-
-    # Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the human's inputs.
-    def deactivate_conversational_topic(self, topicName):
-        self.alDialogProxy.deactivateTopic(topicName)
+    def unload_conversational_topic(self, params):
+        topicName=params.get()
+        topic = self.alDialogProxy.unloadTopic(topicName)
+        self.alDialogProxy.deactivateTopic(topic)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
@@ -787,9 +780,9 @@ class Robot:
         self.alDialogProxy.setFocus(topicName)
 
     def hablar(self, text_to_speech, speed=None, pitch=None):
-        if speed == None:
+        if speed is None:
             speed = self.emotionStateRobot.getVelocitySpeech()
-        if pitch == None:
+        if pitch is None:
             pitch = self.emotionStateRobot.getToneSpeech()
 
         self.alTexToSpeech.setParameter("speed", speed)
@@ -855,3 +848,5 @@ class Robot:
             4: "la ira te indispone y dificulta que pienses con claridad"
         }
         frase_principal = "si quieres podemos escuchar una cancion para relajarnos?"
+
+

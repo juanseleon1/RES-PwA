@@ -20,11 +20,13 @@ import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.ReanudarActividad;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
+import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.RobotSPAgent;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.Test.TestTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -127,7 +129,8 @@ public class InitRESPwA {
         List<GoalBDI> RAGoals= new ArrayList<>();
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -137,7 +140,8 @@ public class InitRESPwA {
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-        RAGoals.add(musicoTGoal);
+          RAGoals.add(tp);
+//        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
