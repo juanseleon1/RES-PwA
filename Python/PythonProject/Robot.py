@@ -119,10 +119,8 @@ class Robot:
             "DESACTIVVOICEEMOANAL": [self.desactivate_voice_emotion_analysis, True, "act", False],
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
-            "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "act", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
-            "DEACTCONVTOPIC": [self.deactivate_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
@@ -761,16 +759,17 @@ class Robot:
 
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def load_conversational_topic(self, params):
-        topicName=params.get()
+        topicName=params.get("name")
         topic = self.alDialogProxy.loadTopicContent(topicName)
+        self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
         topicName = params.get("name")
-        topic = self.alDialogProxy.unloadTopic(topicName)
-        topicMap[] =
+        topic = self.topicMap[topicName]
         self.alDialogProxy.deactivateTopic(topic)
+        self.alDialogProxy.unloadTopic(topicName)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
