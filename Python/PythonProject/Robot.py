@@ -45,7 +45,7 @@ class Robot:
         self.alDialogProxy = session.service("ALDialog")
         self.emotionStateRobot = Emotion()
         self.alDialogProxy.setLanguage("Spanish")
-
+        self.topicMap = {}
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -767,8 +767,9 @@ class Robot:
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
-        topicName=params.get()
+        topicName = params.get("name")
         topic = self.alDialogProxy.unloadTopic(topicName)
+        topicMap[] =
         self.alDialogProxy.deactivateTopic(topic)
 
     # Says a tagged sentence from a topic.
