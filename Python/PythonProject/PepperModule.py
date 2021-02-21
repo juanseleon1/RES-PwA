@@ -30,7 +30,7 @@ class pepperModule(ALModule):
         # json_creator(-1, responseTypeBESAFunction(key), getParams(key, value))
 
         # send(msg_to_send)
-        print "datachanged:", key, " value:", value, " message:", message
+        # print "datachanged:", key, " value:", value, " message:", message
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, key, value, message):

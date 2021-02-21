@@ -51,7 +51,8 @@ def checkTimeMessageSended(params):
             if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
                 print("Change")
                 isCorrectToSend = 1
-            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20 :
+
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
                 print("Erase")
                 isCorrectToSend = 2
                 deleteExpiredAction( params )
