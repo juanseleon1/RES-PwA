@@ -48,7 +48,7 @@ class Robot:
         self.emotionStateRobot = Emotion()
         self.alDialogProxy.setLanguage("Spanish")
         self.topicMap = {}
-        self.topicContentMap = {"basic": topic_content_1}
+        self.topicContentMap = {"basicoConv": topic_content_1}
 
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
 
@@ -250,7 +250,7 @@ class Robot:
             # Raised when at least one device (joint, actuator, sensor) has a high temperature.
             self.alProxy.subscribeToEvent("HotDeviceDetected", "sensorsModule", "hotDeviceDetected")
             # Raised each time the robot catches a human input. Contains the last human input.
-            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "dialogLastInput")
+            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "getDialogInputx|")
             # Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
             self.alProxy.subscribeToEvent("Dialog/IsStarted", "sensorsModule", "dialogIsStarted")
             # Currently processed human input.
@@ -283,8 +283,6 @@ class Robot:
             self.alProxy.subscribeToEvent("WavingDetection/Waving", "sensorsModule", "wavingDetection")
             # Raised when someone just waved at the robot.
             self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
-            #
-            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "getDialogInput")
 
         except Exception, e:
             print "Main Error"
@@ -1624,12 +1622,15 @@ class Robot:
 
     # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
     def load_conversational_topic(self, params):
+        print(str(params))
         topicName = params.get("name")
+        if not self.topicMap:
+            self.alDialogProxy.unloadTopic(topicName)
+            print("Se fue Papi")
         tContent = self.topicContentMap.get(topicName)
         topic = self.alDialogProxy.loadTopicContent(tContent)
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
-        self.alDialogProxy.suscribe(topic)
 
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
@@ -1640,10 +1641,10 @@ class Robot:
         else:
             topicName = params.get("name")
             topic = self.topicMap.get(topicName)
+            self.topicMap.pop(topicName)
             self.alDialogProxy.unsubscribe(topic)
-            tContent = self.topicContentMap.get(topicName)
+            self.topicContentMap.pop(topicName)
             self.alDialogProxy.deactivateTopic(topic)
-            self.alDialogProxy.unloadTopic(tContent)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
