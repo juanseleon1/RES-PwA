@@ -32,17 +32,12 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("name", "basic");
-        
+        infoServicio.put("name", "basicoConv");
+
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.UNLOADCONVTOPIC, infoServicio);
-        requestService(srb, blvs);
-        
-        try {
-            wait(10);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TestTask.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
         requestService(srb, blvs);
 
     }

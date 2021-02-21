@@ -2,6 +2,7 @@ from naoqi import *
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
 
+
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 class pepperModule(ALModule):
@@ -10,6 +11,7 @@ class pepperModule(ALModule):
 
     def __init__(self, name):
         ALModule.__init__(self, name)
+        print("ENTRE AL MODULO")
 
     def pythondatachanged(self, key, value, message):
         """callback when data change"""
@@ -342,6 +344,6 @@ class pepperModule(ALModule):
     def getDialogInput(self, key, value, message):
         f = open("/demofile.txt", "a")
         json_params = {"DialogInput": value}
-        f.write("A: "+value)
+        f.write("A: " + value)
         f.close()
         send(-1, "int", json_params)
