@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
 
-from pepperPython import emotionStateRobot
 
 activities_running = {}
 
@@ -53,7 +52,7 @@ def checkTimeMessageSended(params):
             if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
                 print("Change")
                 isCorrectToSend = 1
-            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20 * 100 / emotionStateRobot.getVelocitySpeech():
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
                 print("Erase")
                 isCorrectToSend = 2
                 deleteExpiredAction( params )
