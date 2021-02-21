@@ -77,12 +77,9 @@ def callFunction(jsonObj):
         activity_params = {jsonObj["methodName"]: True}
         robot_activity.setParams(activity_params)
         activities_running[jsonObj["methodName"]] = robot_activity
-
-
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 """---------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
-
 print("Server starting...pop")
 HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'

@@ -2,9 +2,10 @@ from naoqi import *
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
 
-
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
+
+
 class pepperModule(ALModule):
     """python class myModule test auto documentation: comment needed to create a new python module"""
     """python class myModule test auto documentation: comment needed to create a new python module"""
