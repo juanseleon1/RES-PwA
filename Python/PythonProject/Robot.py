@@ -135,8 +135,9 @@ class Robot:
         # Declare the modules --------------------------------------------------------------------------------
 
         try:
-            self.module_name = "myModule"
-            self.sensorsModule = PepperModule.pepperModule(self.module_name)
+
+            self.sensorsModule = PepperModule.pepperModule(self.session)
+            """
             # Raised when an animated speech is done.
             self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", self.module_name,
                                           "endOfAnimatedSpeech")
@@ -284,12 +285,13 @@ class Robot:
             self.alProxy.subscribeToEvent("WavingDetection/Waving", self.module_name, "wavingDetection")
             # Raised when someone just waved at the robot.
             self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", self.module_name, "personWaving")
-
+"""
         except Exception, e:
             print "Main Error"
             print e
             self.alBroker.shutdown()
             exit(1)
+
 
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
