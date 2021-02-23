@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
 
-
 activities_running = {}
 
 # responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses
@@ -52,6 +51,7 @@ def checkTimeMessageSended(params):
             if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
                 print("Change")
                 isCorrectToSend = 1
+
             if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
                 print("Erase")
                 isCorrectToSend = 2
