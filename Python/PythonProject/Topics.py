@@ -12,9 +12,12 @@ topic_content_1 = ('topic: ~basicoConv()\n'
                    'u: (Dime algo) Tengo una vaca lechera, no es una vaca cualquiera\n'
                    'u: (Que se dice) Que se narra? la mojarrra\n'
                    'u: (Mafe me cae mal) A mi tambien\n'
-                   'u: (Estoy cansado) Callese, perro\n'
-                   'u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high\n'
-                   'u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.\n'
+                    'u: (Estoy cansado) Callese, perro\n'
+                    'u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high\n'
+                    'u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.\n'
+                    'u: (Mafe es facil) La Mafacil, le dicen\n'
+                    'u: (Mafe no me quiere) A nadie, solo se quiere a si misma\n'
+
                    )
 topico_emocional = (
     'concept: (emociones_positivas) [feliz alegre alegria genial bacano bacana chevere rico] \n'

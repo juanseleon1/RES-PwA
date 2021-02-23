@@ -1,6 +1,7 @@
-from naoqi import *
 
-import PepperModule
+import time
+import PepperModuleV2
+from Dance import Dance
 from Animation import Animation
 from Emotion import Emotion
 from Topics import topic_content_1
@@ -16,42 +17,65 @@ class---------------------------------------------------------------------------
 # ----------------------------------------------------------------------------Robot
 # class---------------------------------------------------------------------------------------------
 class Robot:
-    def __init__(self, session, HOST):
+    def __init__(self, session):
+        print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
-        self.alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559)
-        self.alProxy = ALProxy("ALMemory")
-        self.alMood = session.service("ALMood")
+        self.alProxy = session.service("ALMemory")
+        self.alLedsProxy = session.service("ALLeds")
         self.alTexToSpeech = session.service("ALTextToSpeech")
+        """
+        self.alMood = session.service("ALMood")
         self.alAnimationPlayer = session.service("ALAnimationPlayer")
         self.alMotion = session.service("ALMotion")
         self.alRobotPosture = session.service("ALRobotPosture")
-        self.alFaceDetection = session.service("ALFaceDetection")
+        
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
-        self.alBasicAwareness = session.service("ALBasicAwareness")
         self.alListeningMovement = session.service("ALListeningMovement")
         self.alSpeakingMovementProxy = session.service("ALSpeakingMovement")
         self.alMotionProxy = session.service("ALMotion")
-        self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alBatteryProxy = session.service("ALBattery")
         self.alBodyTemperatureProxy = session.service("ALBodyTemperature")
         self.alUserSession = session.service("ALUserSession")
         self.alNavigationProxy = session.service("ALNavigation")
         self.alLocalizationProxy = session.service("ALLocalization")
         self.alSensorsProxy = session.service("ALSensors")
-        self.alLedsProxy = session.service("ALLeds")
         self.alTabletService = session.service("ALTabletService")
         self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
         self.alAudioDevice = session.service("ALAudioDevice")
         self.alAudioPlayer = session.service("ALAudioPlayer")
+        print "MEDIO ROBOT CARGADO Y LISTO"
         self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
-        self.alDialogProxy = session.service("ALDialog")
+        self.Dance = Dance(self.session, HOST)
+        """
+        self.specchRecog = session.service("ALSpeechRecognition")
+        self.specchRecog.pause(True)
+        self.alFaceDetection = session.service("ALFaceDetection")
+        self.alFaceDetection.setRecognitionEnabled(False)
+        self.alFaceDetection.setTrackingEnabled(False)
+        self.alBasicAwareness = session.service("ALBasicAwareness")
         self.emotionStateRobot = Emotion()
-        self.alDialogProxy.setLanguage("Spanish")
+        self.alBasicAwareness.setEngagementMode("FullyEngaged")
+        self.alBasicAwareness.setTrackingMode("BodyRotation")
+        self.alBasicAwareness.setStimulusDetectionEnabled("People", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("Sound", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("Movement", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("NavigationMotion", False)
+        self.alBasicAwareness.startAwareness()
+        self.alPeoplePerception = session.service("ALPeoplePerception")
+        self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
+
         self.animation = Animation()
+
         self.topicContentMap = {"basicoConv": topic_content_1}
+        #self.alDialogProxy = session.service("ALDialog")
+        #self.alDialogProxy.setLanguage("Spanish")
+        #self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
+        print "ROBOT CARGADO Y LISTO"
+        time.sleep(20)
+        self.alTexToSpeech.say("Ya estoy listo para ser usado")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -135,8 +159,9 @@ class Robot:
         # Declare the modules --------------------------------------------------------------------------------
 
         try:
-            self.module_name = "myModule"
-            self.sensorsModule = PepperModule.pepperModule(self.module_name)
+
+            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+            """
             # Raised when an animated speech is done.
             self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", self.module_name,
                                           "endOfAnimatedSpeech")
@@ -284,12 +309,12 @@ class Robot:
             self.alProxy.subscribeToEvent("WavingDetection/Waving", self.module_name, "wavingDetection")
             # Raised when someone just waved at the robot.
             self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", self.module_name, "personWaving")
-
+"""
         except Exception, e:
             print "Main Error"
             print e
-            self.alBroker.shutdown()
             exit(1)
+
 
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
@@ -537,7 +562,8 @@ class Robot:
 
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        self.alLedsProxy.fadeRGB(sensor, red_color, green_color, blue_color, duration)
+        color = 0x8251e6
+        self.alLedsProxy.rotateEyes(color, 0.1, duration)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
