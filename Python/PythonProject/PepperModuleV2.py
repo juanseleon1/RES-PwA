@@ -1,6 +1,6 @@
-from naoqi import *
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
+
 
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
@@ -13,7 +13,8 @@ class pepperModuleV2(object):
     def __init__(self, session):
         super(pepperModuleV2, self).__init__()
         self.session = session
-        self.alProxy = ALProxy("ALMemory")
+
+        self.alProxy = session.service("ALMemory")
         self.tts = session.service("ALTextToSpeech")
         self.alDialogProxy = session.service("ALDialog")
         self.topicInputSub = self.alProxy.subscriber("Dialog/LastInput")
@@ -21,26 +22,7 @@ class pepperModuleV2(object):
         self.alDialogProxy.subscribe("pepperModuleV2")
         self.sayDoneSub = self.alProxy.subscriber("ALTextToSpeech/TextDone")
         self.sayDoneSub.signal.connect(self.speechTextDone)
-        self.tts.subscribe("pepperModuleV2")
         print("ENTRE AL MODULO")
-
-    def pythondatachanged(self, key, value, message):
-        """callback when data change"""
-        """HOST_LOCAL = '127.0.0.1'
-        PORT = 7897
-        FORMAT = 'utf-8'
-        ADDR = (HOST_LOCAL, PORT)
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.connect(ADDR)
-        msg_to_send = json.dumbs(json_creator(-1, "ROB", True))
-        client.send(msg_to_send)
-        client.close() 
-        """
-        # print("send ", msg_to_send)
-        # json_creator(-1, responseTypeBESAFunction(key), getParams(key, value))
-
-        # send(msg_to_send)
-        # print "datachanged:", key, " value:", value, " message:", message
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, key, value, message):
@@ -211,7 +193,7 @@ class pepperModuleV2(object):
         json_params["gesture"] = value
         send(-1, "int", json_params)
 
-    def speechTextDone(self, key, value, message):
+    def speechTextDone(self, value):
         json_params = {}
         # The value should be True
         if activities_running.has_key("SAY"):
@@ -352,9 +334,8 @@ class pepperModuleV2(object):
         json_params["personWaving"] = value
         send(-1, "int", json_params)
 
-    def getDialogInput(self, key, value, message):
-        f = open("/demofile.txt", "a")
-        json_params = {"DialogInput": value}
-        f.write("A: " + value)
-        f.close()
-        send(-1, "int", json_params)
+    def getDialogInput(self, value):
+        if value:
+            print "enviar", value
+            json_params = {"DialogInput": value}
+            send(-1, "int", json_params)

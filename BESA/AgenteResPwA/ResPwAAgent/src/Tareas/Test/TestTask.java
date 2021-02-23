@@ -34,9 +34,35 @@ public class TestTask extends ResPwaTask {
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
 //        requestService(srb, blvs);
 
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "A mafe le gustan los toxicos");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, blvs);
 
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Quiero perreo intenso");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Mami chula");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Oye chuzca");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Tu papa es carpintero?");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Y esas tablas?");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
     }
 
     @Override

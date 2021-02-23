@@ -15,4 +15,6 @@ topic_content_1 = ('topic: ~basicoConv()\n'
                     'u: (Estoy cansado) Callese, perro\n'
                     'u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high\n'
                     'u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.\n'
+                    'u: (Mafe es facil) La Mafacil, le dicen\n'
+                    'u: (Mafe no me quiere) A nadie, solo se quiere a si misma\n'
                    )
