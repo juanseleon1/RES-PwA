@@ -1,8 +1,11 @@
-from Robot import *
-from naoqi import *
 
+from naoqi import *
+from Robot import *
+from main import robot
 
 # --------------------------------------------------EJEMPLO DE TOPICOS-----------------------------------------------------------#
+
+
 topic_content_example = (
     # TOPIC - NAME
     'topic: ~ejemploSimple()\n'
