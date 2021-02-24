@@ -15,13 +15,150 @@ class pepperModuleV2(object):
         self.session = session
 
         self.alProxy = session.service("ALMemory")
-        self.tts = session.service("ALTextToSpeech")
         self.alDialogProxy = session.service("ALDialog")
+
         self.topicInputSub = self.alProxy.subscriber("Dialog/LastInput")
         self.topicInputSub.signal.connect(self.getDialogInput)
+
+        self.dialogIsStartedS = self.alProxy.subscriber("Dialog/IsStarted")
+        self.dialogIsStartedS.signal.connect(self.dialogIsStarted)
+
+        self.dialogCurrentStringS = self.alProxy.subscriber("Dialog/CurrentString")
+        self.dialogCurrentStringS.signal.connect(self.dialogCurrentString)
+
         self.alDialogProxy.subscribe("pepperModuleV2")
+
         self.sayDoneSub = self.alProxy.subscriber("ALTextToSpeech/TextDone")
         self.sayDoneSub.signal.connect(self.speechTextDone)
+
+        self.endAnimSpeech = self.alProxy.subscriber("ALAnimatedSpeech/EndOfAnimatedSpeech")
+        self.endAnimSpeech.signal.connect(self.endOfAnimatedSpeech)
+
+        self.noHuman = self.alProxy.subscriber("ALBasicAwareness/HumanLost")
+        self.noHuman.signal.connect(self.humanLost)
+
+        self.trackedPerson = self.alProxy.subscriber("ALBasicAwareness/HumanTracked")
+        self.trackedPerson.signal.connect(self.humanTracked)
+
+        self.lowBat = self.alProxy.subscriber("ALBattery/BatteryLow")
+        self.lowBat.signal.connect(self.batteryLow)
+
+        self.stimuDetected = self.alProxy.subscriber("ALBasicAwareness/StimulusDetecte")
+        self.stimuDetected.signal.connect(self.stimulusDetected)
+
+        self.fallaGoTo = self.alProxy.subscriber("ALLocalization/GoToFailed")
+        self.fallaGoTo.signal.connect(self.goToFailed)
+
+        self.bienGoTo = self.alProxy.subscriber("ALLocalization/GoToSuccess")
+        self.bienGoTo.signal.connect(self.goToSuccess)
+
+        self.goToLostS = self.alProxy.subscriber("ALLocalization/GoToLost")
+        self.goToLostS.signal.connect(self.goToLost)
+
+        self.localizeSuccessS = self.alProxy.subscriber("ALLocalization/LocalizeSuccess")
+        self.localizeSuccessS.signal.connect(self.localizeSuccess)
+
+        self.localizeLostS = self.alProxy.subscriber("ALLocalization/LocalizeLost")
+        self.localizeLostS.signal.connect(self.localizeLost)
+
+        self.localizeDirectionLostS = self.alProxy.subscriber("ALLocalization/LocalizeDirectionLost")
+        self.localizeDirectionLostS.signal.connect(self.localizeDirectionLost)
+
+        self.localizeDirectionSuccessS = self.alProxy.subscriber("ALLocalization/LocalizeDirectionSuccess")
+        self.localizeDirectionSuccessS.signal.connect(self.localizeDirectionSuccess)
+
+        self.chainVelocityClippedS = self.alProxy.subscriber("ALMotion/Safety/ChainVelocityClipped")
+        self.chainVelocityClippedS.signal.connect(self.chainVelocityClipped)
+
+        self.moveFailedS = self.alProxy.subscriber("ALMotion/MoveFailed")
+        self.moveFailedS.signal.connect(self.moveFailed)
+
+        self.robotIsWakeUpS = self.alProxy.subscriber("robotIsWakeUp")
+        self.robotIsWakeUpS.signal.connect(self.robotIsWakeUp)
+
+        self.wakeUpFinishedS = self.alProxy.subscriber("ALMotion/Stiffness/wakeUpFinished")
+        self.wakeUpFinishedS.signal.connect(self.wakeUpFinished)
+
+        self.restFinishedS = self.alProxy.subscriber("ALMotion/Stiffness/restFinished")
+        self.restFinishedS.signal.connect(self.restFinished)
+
+        self.disabledDevicesChangedS = self.alProxy.subscriber("ALMotion/Protection/DisabledDevicesChanged")
+        self.disabledDevicesChangedS.signal.connect(self.disabledDevicesChanged)
+
+        self.disabledFeaturesChangedS = self.alProxy.subscriber("ALMotion/Protection/DisabledFeaturesChanged")
+        self.disabledFeaturesChangedS.signal.connect(self.disabledFeaturesChanged)
+
+        self.connectedToChargingStationS = self.alProxy.subscriber("ALRecharge/ConnectedToChargingStation")
+        self.connectedToChargingStationS.signal.connect(self.connectedToChargingStation)
+
+        self.moveFailedRechargingS = self.alProxy.subscriber("ALRecharge/MoveFailed")
+        self.moveFailedRechargingS.signal.connect(self.moveFailedRecharging)
+
+        self.leaveFailedS = self.alProxy.subscriber("ALRecharge/LeaveFailed")
+        self.leaveFailedS.signal.connect(self.leaveFailed)
+
+
+        self.wordRecognizedS = self.alProxy.subscriber("WordRecognized")
+        self.wordRecognizedS.signal.connect(self.wordRecognized)
+
+        self.speechDetectedS = self.alProxy.subscriber("SpeechDetected")
+        self.speechDetectedS.signal.connect(self.speechDetected)
+
+        self.tabletErrorS = self.alProxy.subscriber("ALTabletService/error")
+        self.tabletErrorS.signal.connect(self.tabletError)
+
+        self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
+        self.tabletMessageS.signal.connect(self.tabletMessage)
+
+        self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
+        self.onInputTextS.signal.connect(self.onInputText)
+
+        self.gestureS = self.alProxy.subscriber("ALTactileGesture/Gesture")
+        self.gestureS.signal.connect(self.gesture)
+
+        self.speechTextInterruptedS = self.alProxy.subscriber("ALTextToSpeech/TextInterrupted")
+        self.speechTextInterruptedS.signal.connect(self.speechTextInterrupted)
+
+        self.voiceEmotionRecognizedS = self.alProxy.subscriber("ALVoiceEmotionAnalysis/EmotionRecognized")
+        self.voiceEmotionRecognizedS.signal.connect(self.voiceEmotionRecognized)
+
+        self.hotDeviceDetectedS = self.alProxy.subscriber("HotDeviceDetected")
+        self.hotDeviceDetectedS.signal.connect(self.hotDeviceDetected)
+
+        self.personMovedAwayS = self.alProxy.subscriber("EngagementZones/PersonMovedAway")
+        self.personMovedAwayS.signal.connect(self.personMovedAway)
+
+        self.personApproachedS = self.alProxy.subscriber("EngagementZones/PersonApproached")
+        self.personApproachedS.signal.connect(self.personApproached)
+
+        self.personSmilingS = self.alProxy.subscriber("FaceCharacteristics/PersonSmiling")
+        self.personSmilingS.signal.connect(self.personSmiling)
+
+        self.faceDetectedS = self.alProxy.subscriber("FaceDetected")
+        self.faceDetectedS.signal.connect(self.faceDetected)
+
+        self.peopleLookingAtRobotS = self.alProxy.subscriber("GazeAnalysis/PeopleLookingAtRobot")
+        self.peopleLookingAtRobotS.signal.connect(self.peopleLookingAtRobot)
+
+        self.personStopsLookingAtRobotS = self.alProxy.subscriber("GazeAnalysis/PersonStopsLookingAtRobot")
+        self.personStopsLookingAtRobotS.signal.connect(self.personStopsLookingAtRobot)
+
+        self.distanceOfTrackedHumanS = self.alProxy.subscriber("Launchpad/DistanceOfTrackedHuman")
+        self.distanceOfTrackedHumanS.signal.connect(self.distanceOfTrackedHuman)
+
+        self.obstacleDetectedS = self.alProxy.subscriber("Navigation/AvoidanceNavigator/ObstacleDetected")
+        self.obstacleDetectedS.signal.connect(self.obstacleDetected)
+
+        self.peopleDetectedS = self.alProxy.subscriber("PeoplePerception/PeopleDetected")
+        self.peopleDetectedS.signal.connect(self.peopleDetected)
+
+        self.wavingDetectionS = self.alProxy.subscriber("WavingDetection/Waving")
+        self.wavingDetectionS.signal.connect(self.wavingDetection)
+
+        self.personWavingS = self.alProxy.subscriber("WavingDetection/PersonWaving")
+        self.personWavingS.signal.connect(self.personWaving)
+
+
         print("ENTRE AL MODULO")
 
     # Raised when an animated speech is done.

@@ -1,6 +1,6 @@
 
 class Animation:
-    def __init__(self, session, HOST):
+    def __init__(self, session):
         self.__modules = {
             # ActivityServices-------------------------------------------------------
             "MACARENA": self.dance_macarena,

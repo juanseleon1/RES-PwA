@@ -1,7 +1,6 @@
 
 import time
 import PepperModuleV2
-from Dance import Dance
 from Animation import Animation
 from Emotion import Emotion
 from Topics import topic_content_1
@@ -23,12 +22,10 @@ class Robot:
         self.alProxy = session.service("ALMemory")
         self.alLedsProxy = session.service("ALLeds")
         self.alTexToSpeech = session.service("ALTextToSpeech")
-        """
         self.alMood = session.service("ALMood")
         self.alAnimationPlayer = session.service("ALAnimationPlayer")
         self.alMotion = session.service("ALMotion")
         self.alRobotPosture = session.service("ALRobotPosture")
-        
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
         self.alListeningMovement = session.service("ALListeningMovement")
@@ -47,8 +44,7 @@ class Robot:
         print "MEDIO ROBOT CARGADO Y LISTO"
         self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
-        self.Dance = Dance(self.session, HOST)
-        """
+        #self.Dance = Dance(self.session, HOST)
         self.specchRecog = session.service("ALSpeechRecognition")
         self.specchRecog.pause(True)
         self.alFaceDetection = session.service("ALFaceDetection")
@@ -67,12 +63,12 @@ class Robot:
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
 
-        self.animation = Animation()
+        self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoConv": topic_content_1}
-        #self.alDialogProxy = session.service("ALDialog")
-        #self.alDialogProxy.setLanguage("Spanish")
-        #self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
+        self.alDialogProxy = session.service("ALDialog")
+        self.alDialogProxy.setLanguage("Spanish")
+        self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
         print "ROBOT CARGADO Y LISTO"
         time.sleep(20)
         self.alTexToSpeech.say("Ya estoy listo para ser usado")
@@ -159,157 +155,7 @@ class Robot:
         # Declare the modules --------------------------------------------------------------------------------
 
         try:
-
             self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-            """
-            # Raised when an animated speech is done.
-            self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", self.module_name,
-                                          "endOfAnimatedSpeech")
-            # Raised when the person tracked can no longer be found for some time.
-            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanLost", self.module_name,
-                                          "humanLost")  # DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
-
-            # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
-            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked", self.module_name, "humanTracked")
-
-            # Raised when a stimulus is detected.
-            # types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
-            self.alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected", self.module_name, "stimulusDetected")
-
-            # Raised when the battery level is low and will soon need charging.
-            self.alProxy.subscribeToEvent("ALBattery/BatteryLow", self.module_name,
-                                          "batteryLow")  # DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
-
-            # Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToFailed", self.module_name,
-                                          "goToFailed")  # NO MUESTRA NADA -
-
-            # Raised when the robot has successfully reached its destination.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToSuccess", self.module_name, "goToSuccess")
-
-            # Raised when the robot gets lost while trying to go to its destination.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToLost", self.module_name, "goToLost")
-
-            # Raised when the localization is successful.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess", self.module_name, "localizeSuccess")
-
-            # Raised when the localization fails and the robot is lost.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeLost", self.module_name, "localizeLost")
-
-            # Raised when the orientation of the robot has NOT been successfully retrieved.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost", self.module_name,
-                                          "localizeDirectionLost")
-
-            # Raised when the orientation of the robot has been successfully retrieved.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess", self.module_name,
-                                          "localizeDirectionSuccess")
-
-            # Raised when a chain velocity is clipped because an obstacle is too close.
-            self.alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped", self.module_name,
-                                          "chainVelocityClipped")
-
-            # Raised when a move command fails.
-            self.alProxy.subscribeToEvent("ALMotion/MoveFailed", self.module_name, "moveFailed")
-
-            # Raised when the awake status of the robot changes.
-            self.alProxy.subscribeToEvent("robotIsWakeUp", self.module_name, "robotIsWakeUp")
-
-            # Raised at ALMotionProxy::wakeUp finish.
-            self.alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished", self.module_name, "wakeUpFinished")
-            # Raised at ALMotionProxy::rest finish.
-            self.alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished", self.module_name, "restFinished")
-
-            # Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
-            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged", self.module_name,
-                                          "disabledDevicesChanged")
-
-            # Raised when features (Move, Stiffness...) availability changed.
-            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged", self.module_name,
-                                          "disabledFeaturesChanged")
-
-            # Raised when Pepper is correctly docked onto the charging station.
-            self.alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation", self.module_name,
-                                          "connectedToChargingStation")
-
-            # Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
-            self.alProxy.subscribeToEvent("ALRecharge/MoveFailed", self.module_name, "moveFailedRecharging")
-
-            # Raised when Pepper failed to leave his charging station due to an obstacle in the way.
-            self.alProxy.subscribeToEvent("ALRecharge/LeaveFailed", self.module_name, "leaveFailed")
-
-            # Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
-            self.alProxy.subscribeToEvent("WordRecognized", self.module_name, "wordRecognized")
-
-            # Raised when the automatic speech recognition engine has detected a voice activity.
-            self.alProxy.subscribeToEvent("SpeechDetected", self.module_name, "speechDetected")
-
-            # Raised when an error occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/error", self.module_name, "tabletError")
-
-            # Raised when message occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/message", self.module_name, "tabletMessage")
-
-            # Raised when text input occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/onInputText", self.module_name, "onInputText")
-
-            # Raised when a valid tactile gesture has been detected
-            self.alProxy.subscribeToEvent("ALTactileGesture/Gesture", self.module_name, "gesture")
-
-            # Raised when the current sentence synthesis is done.
-            self.alProxy.subscribeToEvent("ALTextToSpeech/TextDone", self.module_name, "speechTextDone")
-
-            # Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
-            self.alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted", self.module_name, "speechTextInterrupted")
-            # Raised when an utterance has been analyzed.
-            self.alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized", self.module_name,
-                                          "voiceEmotionRecognized")
-            # Raised whenever an activity completes its execution and exits.
-            self.alProxy.subscribeToEvent("AutonomousLife/CompletedActivity", self.module_name,
-                                          "autonomousCompletedActivity")
-
-            # Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
-
-            # Raised when the robot touch status changed.
-            self.alProxy.subscribeToEvent("TouchChanged", self.module_name,
-                                          "pythondatachanged")  ###########################
-
-            # Raised when at least one device (joint, actuator, sensor) has a high temperature.
-            self.alProxy.subscribeToEvent("HotDeviceDetected", self.module_name, "hotDeviceDetected")
-            # Raised each time the robot catches a human input. Contains the last human input.
-            self.alProxy.subscribeToEvent("Dialog/LastInput", self.module_name, "getDialogInput")
-            # Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
-            self.alProxy.subscribeToEvent("Dialog/IsStarted", self.module_name, "dialogIsStarted")
-            # Currently processed human input.
-            self.alProxy.subscribeToEvent("Dialog/CurrentString", self.module_name, "dialogCurrentString")
-            # Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
-            self.alProxy.subscribeToEvent("EngagementZones/PersonMovedAway", self.module_name, "personMovedAway")
-            # Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
-            self.alProxy.subscribeToEvent("EngagementZones/PersonApproached", self.module_name, "personApproached")
-            # Raised when a person has a smile value above the current threshold (default = 0.7).
-            self.alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling", self.module_name, "personSmiling")
-            # #Raised when one or several faces are currently being detected.
-            self.alProxy.subscribeToEvent("FaceDetected", self.module_name, "faceDetected")
-            # Raised each time the list of people looking at the robot changes.
-            self.alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot", self.module_name, "peopleLookingAtRobot")
-            # Raised when someone turns his head away from the robot.
-            self.alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot", self.module_name,
-                                          "personStopsLookingAtRobot")
-            # The distance in meters to the tracked human. -1.0 if no one is tracked.
-            self.alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman", self.module_name, "distanceOfTrackedHuman")
-            # Raised when an obstacle is detected in the close area.
-            self.alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected", self.module_name,
-                                          "obstacleDetected")
-            # Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
-            self.alProxy.subscribeToEvent("PeoplePerception/PeopleDetected", self.module_name, "peopleDetected")
-            # Raised when a new preference is added to the system.
-            self.alProxy.subscribeToEvent("preferenceAdded", self.module_name, "preferenceAdded")
-            # Raised when the value of a preference has been updated.
-            self.alProxy.subscribeToEvent("preferenceChanged", self.module_name, "preferenceChanged")
-            # Raised when something just waved at the robot.
-            self.alProxy.subscribeToEvent("WavingDetection/Waving", self.module_name, "wavingDetection")
-            # Raised when someone just waved at the robot.
-            self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", self.module_name, "personWaving")
-"""
         except Exception, e:
             print "Main Error"
             print e
@@ -337,11 +183,7 @@ class Robot:
         animation_name(animation_factor)
 
         try:
-            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-            # motion = ALProxy("ALMotion", IP, 9559)
-            # motion = ALProxy("ALMotion")
-            # motion.angleInterpolation(names, keys, times, True)
-            animation_function = animation.getAnimation( animation_name )
+            animation_function = self.animation.getAnimation(animation_name)
             names, times, keys = animation_function()
             times = self.change_speed(animation_factor, times)
             self.play_animation(names, times, keys)
