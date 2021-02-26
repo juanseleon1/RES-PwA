@@ -9,6 +9,8 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
@@ -63,6 +65,13 @@ public class TestTask extends ResPwaTask {
         infoServicio.put("SAY", "Y esas tablas?");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, blvs);
+        
+        infoServicio = new HashMap<>();
+        infoServicio.put("TAGSDANCE", "HAPPINESS");
+        infoServicio.put("FACTOR", 0);
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb, blvs);
+        
     }
 
     @Override

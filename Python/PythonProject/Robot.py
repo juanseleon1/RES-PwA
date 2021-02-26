@@ -180,7 +180,7 @@ class Robot:
         # Get the params of the function
         animation_factor = params.get("FACTOR")
         # Invoke the function
-        animation_name(animation_factor)
+        # animation_name(animation_factor)
 
         try:
             animation_function = self.animation.getAnimation(animation_name)
