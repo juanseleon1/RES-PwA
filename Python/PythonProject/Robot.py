@@ -404,8 +404,8 @@ class Robot:
 
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        color = 0x8251e6
-        self.alLedsProxy.rotateEyes(color, 0.1, duration)
+        color = 0xC7CEEA
+        self.alLedsProxy.rotateEyes(color, 1, duration)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
