@@ -162,7 +162,7 @@ class pepperModuleV2(object):
         print("ENTRE AL MODULO")
 
     # Raised when an animated speech is done.
-    def endOfAnimatedSpeech(self, key, value, message):
+    def endOfAnimatedSpeech(self, value):
         if activities_running.has_key("SAYWITHMOVEMENT"):
             activities_running.pop("SAYWITHMOVEMENT")
         json_params = {}
@@ -170,77 +170,77 @@ class pepperModuleV2(object):
         send(-1, "int", json_params)
 
     # Raised when the person tracked can no longer be found for some time.
-    def humanLost(self, key, value, message):
+    def humanLost(self, value):
         json_params = {}
         json_params["humanLost"] = True
         send(-1, "int", json_params)
 
     # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is
-    def humanTracked(self, key, value, message):
+    def humanTracked(self, value):
         json_params = {}
         json_params["humanTracked"] = value
         send(-1, "int", json_params)
 
-    def stimulusDetected(self, key, value, message):
+    def stimulusDetected(self, value):
         json_params = {}
         json_params["stimulusDetected"] = value
         send(-1, "int", json_params)
 
-    def batteryLow(self, key, value, message):
+    def batteryLow(self, value):
         json_params = {}
         # Supposedly the value always is True
         json_params["batteryLow"] = value
         send(-1, "rob", json_params)
 
-    def goToFailed(self, key, value, message):
+    def goToFailed(self, value):
         json_params = {}
         # The value should be True
         json_params["goToFailed"] = value
         send(-1, "rob", json_params)
 
-    def goToSuccess(self, key, value, message):
+    def goToSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["goToSuccess"] = value
         send(-1, "rob", json_params)
 
-    def goToLost(self, key, value, message):
+    def goToLost(self, value):
         json_params = {}
         # The value should be True
         json_params["goToLost"] = value
         send(-1, "rob", json_params)
 
-    def localizeSuccess(self, key, value, message):
+    def localizeSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeSuccess"] = value
         send(-1, "rob", json_params)
 
-    def localizeLost(self, key, value, message):
+    def localizeLost(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeLost"] = value
         send(-1, "rob", json_params)
 
-    def localizeDirectionLost(self, key, value, message):
+    def localizeDirectionLost(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeDirectionLost"] = value
         send(-1, "rob", json_params)
 
-    def localizeDirectionSuccess(self, key, value, message):
+    def localizeDirectionSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeDirectionSuccess"] = value
         send(-1, "rob", json_params)
 
-    def chainVelocityClipped(self, key, value, message):
+    def chainVelocityClipped(self, value):
         json_params = {}
         # The value should be True
         json_params["chainVelocityClipped"] = value
         send(-1, "rob", json_params)
 
-    def moveFailed(self, key, value, message):
+    def moveFailed(self, value):
         json_params = {}
         # The value should be True
         if activities_running.has_key("MOVE"):
@@ -249,31 +249,31 @@ class pepperModuleV2(object):
         json_params["moveFailed"] = value
         send(-1, "int", json_params)
 
-    def robotIsWakeUp(self, key, value, message):
+    def robotIsWakeUp(self, value):
         json_params = {}
         # The value should be True
         json_params["robotIsWakeUp"] = value
         send(-1, "int", json_params)
 
-    def wakeUpFinished(self, key, value, message):
+    def wakeUpFinished(self, value):
         json_params = {}
         # The value should be True
         json_params["wakeUpFinished"] = value
         send(-1, "int", json_params)
 
-    def restFinished(self, key, value, message):
+    def restFinished(self, value):
         json_params = {}
         # The value should be True
         json_params["restFinished"] = value
         send(-1, "int", json_params)
 
-    def disabledDevicesChanged(self, key, value, message):
+    def disabledDevicesChanged(self, value):
         json_params = {}
         # The value is a map with the devices of the robot whose are able/disabled
         json_params["disabledDevicesChanged"] = value
         send(-1, "int", json_params)
 
-    def disabledFeaturesChanged(self, key, value, message):
+    def disabledFeaturesChanged(self, value):
         json_params = {}
         # The value is a map with the features of the robot whose are able/disabled
         json_params["disabledFeaturesChanged"] = value
@@ -296,13 +296,13 @@ class pepperModuleV2(object):
         json_params["leaveFailed"] = True
         send(-1, "int", json_params)
 
-    def wordRecognized(self, key, value, message):
+    def wordRecognized(self, value):
         json_params = {}
         # The value is a map with the word recognized
         json_params["wordRecognized"] = value
         send(-1, "int", json_params)
 
-    def speechDetected(self, key, value, message):
+    def speechDetected(self, value):
         json_params = {}
         # The value should be True
         json_params["speechDetected"] = value
@@ -324,7 +324,7 @@ class pepperModuleV2(object):
         json_params["onInputText"] = True
         send(-1, "int", json_params)
 
-    def gesture(self, key, value, message):
+    def gesture(self, value):
         json_params = {}
         # The value is the name of the gesture
         json_params["gesture"] = value
@@ -338,7 +338,7 @@ class pepperModuleV2(object):
         json_params["speechTextDone"] = value
         send(-1, "int", json_params)
 
-    def speechTextInterrupted(self, key, value, message):
+    def speechTextInterrupted(self, value):
         json_params = {}
         if activities_running.has_key("SAY"):
             activities_running.pop("SAY")
@@ -346,91 +346,91 @@ class pepperModuleV2(object):
         json_params["speechTextInterrupted"] = value
         send(-1, "int", json_params)
 
-    def voiceEmotionRecognized(self, key, value, message):
+    def voiceEmotionRecognized(self, value):
         json_params = {}
         # The value is the emotion detected
         json_params["voiceEmotionRecognized"] = value
         send(-1, "int", json_params)
 
-    def autonomousCompletedActivity(self, key, value, message):
+    def autonomousCompletedActivity(self, value):
         json_params = {}
         # The value is the activity name
         json_params["autonomousCompletedActivity"] = value
         send(-1, "int", json_params)
 
-    def hotDeviceDetected(self, key, value, message):
+    def hotDeviceDetected(self, value):
         json_params = {}
         # The value is a list of the devices with high temperature
         json_params["hotDeviceDetected"] = value
         send(-1, "int", json_params)
 
-    def dialogLastInput(self, key, value, message):
+    def dialogLastInput(self, value):
         json_params = {}
         # The value is the last human input
         json_params["dialogLastInput"] = value
         send(-1, "int", json_params)
 
-    def dialogIsStarted(self, key, value, message):
+    def dialogIsStarted(self, value):
         json_params = {}
         # The value is "1" for start, "0" for stop.
         json_params["dialogIsStarted"] = value
         send(-1, "int", json_params)
 
-    def dialogCurrentString(self, key, value, message):
+    def dialogCurrentString(self, value):
         json_params = {}
         # The value is currently processed human input.
         json_params["dialogCurrentString"] = value
         send(-1, "int", json_params)
 
-    def personMovedAway(self, key, value, message):
+    def personMovedAway(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personMovedAway"] = value
         send(-1, "int", json_params)
 
-    def personApproached(self, key, value, message):
+    def personApproached(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personApproached"] = value
         send(-1, "int", json_params)
 
-    def personSmiling(self, key, value, message):
+    def personSmiling(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personSmiling"] = value
         send(-1, "int", json_params)
 
-    def faceDetected(self, key, value, message):
+    def faceDetected(self, value):
         json_params = {}
         # The value is an ALvalue which contains the info of the face, but we aren't going to send that
         json_params["faceDetected"] = True
         send(-1, "int", json_params)
 
-    def peopleLookingAtRobot(self, key, value, message):
+    def peopleLookingAtRobot(self, value):
         json_params = {}
         # The value is a list of IDs with people whose are looking the robot
         json_params["peopleLookingAtRobot"] = value
         send(-1, "int", json_params)
 
-    def personStopsLookingAtRobot(self, key, value, message):
+    def personStopsLookingAtRobot(self, value):
         json_params = {}
         # The value is the person ID
         json_params["personStopsLookingAtRobot"] = value
         send(-1, "int", json_params)
 
-    def distanceOfTrackedHuman(self, key, value, message):
+    def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
         json_params["distanceOfTrackedHuman"] = value
         # send(-1, "int", json_params)
 
-    def obstacleDetected(self, key, value, message):
+    def obstacleDetected(self, value):
         json_params = {}
         # The value is an array formatted as [x, y], representing the position of the detected obstacle
         json_params["position"] = value
         send(-1, "int", json_params)
 
-    def peopleDetected(self, key, value, message):
+    def peopleDetected(self, value):
         json_params = {}
         # The value has the information of the detected people and is organizated as follow MovementInfo =
         # [
@@ -443,7 +443,7 @@ class pepperModuleV2(object):
         json_params["peopleDetected"] = value
         send(-1, "int", json_params)
 
-    def preferenceAdded(self, key, value, message):
+    def preferenceAdded(self, value):
         json_params = {}
         # The value is the id - An array of two values identifying the preference:
         # id[0] - The preference domain.
@@ -451,7 +451,7 @@ class pepperModuleV2(object):
         json_params["preferenceAdded"] = value
         send(-1, "int", json_params)
 
-    def preferenceChanged(self, key, value, message):
+    def preferenceChanged(self, value):
         json_params = {}
         # The value is the id - An array of two values identifying the preference:
         # id[0] - The preference domain.
@@ -459,13 +459,13 @@ class pepperModuleV2(object):
         json_params["preferenceChanged"] = value
         send(-1, "int", json_params)
 
-    def wavingDetection(self, key, value, message):
+    def wavingDetection(self, value):
         json_params = {}
         # The value contains the info of the waving (pixels and some info more), we won't send that
         json_params["wavingDetection"] = True
         send(-1, "int", json_params)
 
-    def personWaving(self, key, value, message):
+    def personWaving(self, value):
         json_params = {}
         # The value is the person ID
         json_params["personWaving"] = value
