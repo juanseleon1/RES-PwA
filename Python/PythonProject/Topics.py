@@ -66,7 +66,6 @@ topico_ira = (
     
     'u: ([Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? \n'
     'u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) Entiendo que te sientas asi, pero si no te     \n'
-    
     'u: ([Vayase Vete]) Esta bien nos vemos luego \n'
 )
 
@@ -82,7 +81,7 @@ topico_normal= (
 
 
 conversacion_musica = (
-    'concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco] \n'
+    'concept: (generos) [clasica jazz soul blus flamenco tango pop haus rock punk metal disco] \n'
     
     'u: (hablar sobre musica) Te gusta la musica? \n'
         'u1: (si) Enserio? Que genero te gusta escuchar?\n'
@@ -103,5 +102,4 @@ conversacion_musica = (
                 'u3: (no) Entonces escuchemos musica llanera variada.\n'
             'u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?\n'
         'u1: (No) Que triste, creo que me deberia ir \n'
-
 )
