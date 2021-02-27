@@ -77,12 +77,9 @@ def callFunction(jsonObj):
         activity_params = {jsonObj["methodName"]: True}
         robot_activity.setParams(activity_params)
         activities_running[jsonObj["methodName"]] = robot_activity
-
-
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
-"""--------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
+"""---------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
-
 print("Server starting...pop")
 HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
@@ -93,25 +90,30 @@ ADDR = (HOST_LOCAL, PORT)
 server = None
 HEADER = 1024
 FORMAT = 'utf-8'
-print("Server starting...pop1111111111111111111")
+
 # send( "id", "ROB", True)
 # ------------------------------------------------------------------------------------------------
 parser = argparse.ArgumentParser()
 parser.add_argument("--ip", type=str, default=HOST, help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
 parser.add_argument("--port", type=int, default=9559, help="Naoqi port number")
 args = parser.parse_args()
-session = qi.Session()
+
+
 try:
-    session.connect("tcp://" + args.ip + ":" + str(args.port))
+    connection_url = "tcp://" + args.ip + ":" + str(args.port)
+    app = qi.Application(["ResPwa", "--qi-url=" + connection_url])
+    app.start()
+    session = app.session
+    #session.connect("tcp://" + args.ip + ":" + str(args.port))
 except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) + ".\n"
                                                                                           "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
-
+print("achu")
+print("Server starting...pop11111111111111111112")
 # ----------------------------------------------------------------------------------------------------
 
 # Declare the Naoqi variables --------------------------------------------------------------------
-
 
 # ----------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------
@@ -133,7 +135,7 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 
 """ Robot class declaration"""
-robot = Robot(session, HOST)
+robot = Robot(session)
 
 while 1:
     conn, addr = server.accept()

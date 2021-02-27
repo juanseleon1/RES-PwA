@@ -31,6 +31,7 @@ def send(id_response, responseType, params):
         responsesXTime[key] = datetime.now()
 
     if should_send_message:
+        print "ENVIANDO"
         ADDR = (HOST_LOCAL, PORT)
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
@@ -40,8 +41,10 @@ def send(id_response, responseType, params):
         client.send(msg_to_send + '\r\n')
         client.close()
 
+
 def checkTimeMessageSended(params):
     isCorrectToSend = True
+    print("PARAMS: " + str( responsesXTime.get( params ) ))
     if (responsesXTime.get(params).hour - datetime.now().hour) < 1:
 
         if (responsesXTime.get(params).minute - datetime.now().minute) < 1:
@@ -50,10 +53,13 @@ def checkTimeMessageSended(params):
                 print("Change")
                 isCorrectToSend = False
 
-    """  if (responsesXTime.get(params).minute - datetime.now().minute) == -1:
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
+                print("Erase")
+                isCorrectToSend = False
+                deleteExpiredAction( params )
 
-                if (datetime.now().second - responsesXTime.get(params).second) < 2:
-                    isCorrectToSend = False
-            """
     return isCorrectToSend
 
+def deleteExpiredAction( expiredAction ):
+    if activities_running:
+        activities_running.pop( expiredAction )

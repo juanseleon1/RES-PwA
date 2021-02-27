@@ -1,7 +1,11 @@
-from naoqi import *
-import PepperModule
+
+import time
+import PepperModuleV2
+from Animation import Animation
 from Emotion import Emotion
+from Topics import topic_content_1
 from Utils import activities_running
+
 # ----------------------------------------------------------------------------Robot
 # class---------------------------------------------------------------------------------------------
 
@@ -12,39 +16,61 @@ class---------------------------------------------------------------------------
 # ----------------------------------------------------------------------------Robot
 # class---------------------------------------------------------------------------------------------
 class Robot:
-    def __init__(self, session, HOST):
+    def __init__(self, session):
+        print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
-        self.alBroker = ALBroker("myBroker", "0.0.0.0", 7896, HOST, 9559)
-        self.alProxy = ALProxy("ALMemory")
-        self.alMood = session.service("ALMood")
+        self.alProxy = session.service("ALMemory")
+        self.alLedsProxy = session.service("ALLeds")
         self.alTexToSpeech = session.service("ALTextToSpeech")
+        self.alMood = session.service("ALMood")
         self.alAnimationPlayer = session.service("ALAnimationPlayer")
         self.alMotion = session.service("ALMotion")
         self.alRobotPosture = session.service("ALRobotPosture")
-        self.alFaceDetection = session.service("ALFaceDetection")
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
-        self.alBasicAwareness = session.service("ALBasicAwareness")
         self.alListeningMovement = session.service("ALListeningMovement")
         self.alSpeakingMovementProxy = session.service("ALSpeakingMovement")
         self.alMotionProxy = session.service("ALMotion")
-        self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alBatteryProxy = session.service("ALBattery")
         self.alBodyTemperatureProxy = session.service("ALBodyTemperature")
         self.alUserSession = session.service("ALUserSession")
         self.alNavigationProxy = session.service("ALNavigation")
         self.alLocalizationProxy = session.service("ALLocalization")
         self.alSensorsProxy = session.service("ALSensors")
-        self.alLedsProxy = session.service("ALLeds")
         self.alTabletService = session.service("ALTabletService")
         self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
         self.alAudioDevice = session.service("ALAudioDevice")
         self.alAudioPlayer = session.service("ALAudioPlayer")
+        print "MEDIO ROBOT CARGADO Y LISTO"
         self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
-        self.alDialogProxy = session.service("ALDialog")
+        self.specchRecog = session.service("ALSpeechRecognition")
+        self.specchRecog.pause(True)
+        self.alFaceDetection = session.service("ALFaceDetection")
+        self.alFaceDetection.setRecognitionEnabled(False)
+        self.alFaceDetection.setTrackingEnabled(False)
+        self.alBasicAwareness = session.service("ALBasicAwareness")
         self.emotionStateRobot = Emotion()
+        self.alBasicAwareness.setEngagementMode("FullyEngaged")
+        self.alBasicAwareness.setTrackingMode("BodyRotation")
+        self.alBasicAwareness.setStimulusDetectionEnabled("People", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("Sound", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("Movement", False)
+        self.alBasicAwareness.setStimulusDetectionEnabled("NavigationMotion", False)
+        self.alBasicAwareness.startAwareness()
+        self.alPeoplePerception = session.service("ALPeoplePerception")
+        self.alPeoplePerception.setMovementDetectionEnabled(False)
+        self.topicMap = {}
 
+        self.animation = Animation(self.session)
+
+        self.topicContentMap = {"basicoConv": topic_content_1}
+        self.alDialogProxy = session.service("ALDialog")
+        self.alDialogProxy.setLanguage("Spanish")
+        self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
+        print "ROBOT CARGADO Y LISTO"
+        #time.sleep(10)
+        self.alTexToSpeech.say("Ya estoy listo para ser usado")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -118,10 +144,9 @@ class Robot:
             "DESACTIVVOICEEMOANAL": [self.desactivate_voice_emotion_analysis, True, "act", False],
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
-            "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "act", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
-            "DEACTCONVTOPIC": [self.deactivate_conversational_topic, True, "act", False],
+            "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
@@ -129,155 +154,12 @@ class Robot:
         # Declare the modules --------------------------------------------------------------------------------
 
         try:
-
-            self.sensorsModule = PepperModule.pepperModule("sensorsModule")
-            # Raised when an animated speech is done.
-            self.alProxy.subscribeToEvent("ALAnimatedSpeech/EndOfAnimatedSpeech", "sensorsModule", "endOfAnimatedSpeech")
-            # Raised when the person tracked can no longer be found for some time.
-            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanLost", "sensorsModule",
-                                     "humanLost")  # DEBE TENER DETECTADA UNA CARA PARA FUNCIONAR
-
-            # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is|
-            self.alProxy.subscribeToEvent("ALBasicAwareness/HumanTracked", "sensorsModule", "humanTracked")
-
-            # Raised when a stimulus is detected.
-            # types of stimulus: http://doc.aldebaran.com/2-5/naoqi/interaction/autonomousabilities/albasicawareness.html#albasicawareness-stimuli-types
-            self.alProxy.subscribeToEvent("ALBasicAwareness/StimulusDetected", "sensorsModule", "stimulusDetected")
-
-            # Raised when the battery level is low and will soon need charging.
-            self.alProxy.subscribeToEvent("ALBattery/BatteryLow", "sensorsModule",
-                                     "batteryLow")  # DEBE TENER LA BATERiA BAJA PARA FUNCIONAR
-
-            # Raised when the robot could not reach its destination, either because it was lost or because it was interrupted by an obstacle.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToFailed", "sensorsModule", "goToFailed")  # NO MUESTRA NADA -
-
-            # Raised when the robot has successfully reached its destination.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToSuccess", "sensorsModule", "goToSuccess")
-
-            # Raised when the robot gets lost while trying to go to its destination.
-            self.alProxy.subscribeToEvent("ALLocalization/GoToLost", "sensorsModule", "goToLost")
-
-            # Raised when the localization is successful.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeSuccess", "sensorsModule", "localizeSuccess")
-
-            # Raised when the localization fails and the robot is lost.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeLost", "sensorsModule", "localizeLost")
-
-            # Raised when the orientation of the robot has NOT been successfully retrieved.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionLost", "sensorsModule", "localizeDirectionLost")
-
-            # Raised when the orientation of the robot has been successfully retrieved.
-            self.alProxy.subscribeToEvent("ALLocalization/LocalizeDirectionSuccess", "sensorsModule",
-                                     "localizeDirectionSuccess")
-
-            # Raised when a chain velocity is clipped because an obstacle is too close.
-            self.alProxy.subscribeToEvent("ALMotion/Safety/ChainVelocityClipped", "sensorsModule", "chainVelocityClipped")
-
-            # Raised when a move command fails.
-            self.alProxy.subscribeToEvent("ALMotion/MoveFailed", "sensorsModule", "moveFailed")
-
-            # Raised when the awake status of the robot changes.
-            self.alProxy.subscribeToEvent("robotIsWakeUp", "sensorsModule", "robotIsWakeUp")
-
-            # Raised at ALMotionProxy::wakeUp finish.
-            self.alProxy.subscribeToEvent("ALMotion/Stiffness/wakeUpFinished", "sensorsModule", "wakeUpFinished")
-            # Raised at ALMotionProxy::rest finish.
-            self.alProxy.subscribeToEvent("ALMotion/Stiffness/restFinished", "sensorsModule", "restFinished")
-
-            # Raised when devices availability changed. When a device is not available the stiffness and movement on this device are prohibited.
-            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledDevicesChanged", "sensorsModule",
-                                     "disabledDevicesChanged")
-
-            # Raised when features (Move, Stiffness...) availability changed.
-            self.alProxy.subscribeToEvent("ALMotion/Protection/DisabledFeaturesChanged", "sensorsModule",
-                                     "disabledFeaturesChanged")
-
-            # Raised when Pepper is correctly docked onto the charging station.
-            self.alProxy.subscribeToEvent("ALRecharge/ConnectedToChargingStation", "sensorsModule",
-                                     "connectedToChargingStation")
-
-            # Raised when Pepper interrupts his operation because a safety rule prevents the usage of ALMotion module.
-            self.alProxy.subscribeToEvent("ALRecharge/MoveFailed", "sensorsModule", "moveFailedRecharging")
-
-            # Raised when Pepper failed to leave his charging station due to an obstacle in the way.
-            self.alProxy.subscribeToEvent("ALRecharge/LeaveFailed", "sensorsModule", "leaveFailed")
-
-            # Raised when one of the specified words set with ALSpeechRecognitionProxy::setVocabulary has been recognized. When no word is currently recognized, this value is reinitialized.
-            self.alProxy.subscribeToEvent("WordRecognized", "sensorsModule", "wordRecognized")
-
-            # Raised when the automatic speech recognition engine has detected a voice activity.
-            self.alProxy.subscribeToEvent("SpeechDetected", "sensorsModule", "speechDetected")
-
-            # Raised when an error occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/error", "sensorsModule", "tabletError")
-
-            # Raised when message occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/message", "sensorsModule", "tabletMessage")
-
-            # Raised when text input occurs.
-            self.alProxy.subscribeToEvent("ALTabletService/onInputText", "sensorsModule", "onInputText")
-
-            # Raised when a valid tactile gesture has been detected
-            self.alProxy.subscribeToEvent("ALTactileGesture/Gesture", "sensorsModule", "gesture")
-
-            # Raised when the current sentence synthesis is done.
-            self.alProxy.subscribeToEvent("ALTextToSpeech/TextDone", "sensorsModule", "speechTextDone")
-
-            # Raised when the current sentence synthesis is interrupted, for example by ALTextToSpeechProxy::stopAll.
-            self.alProxy.subscribeToEvent("ALTextToSpeech/TextInterrupted", "sensorsModule", "speechTextInterrupted")
-            # Raised when an utterance has been analyzed.
-            self.alProxy.subscribeToEvent("ALVoiceEmotionAnalysis/EmotionRecognized", "sensorsModule",
-                                     "voiceEmotionRecognized")
-            # Raised whenever an activity completes its execution and exits.
-            self.alProxy.subscribeToEvent("AutonomousLife/CompletedActivity", "sensorsModule", "autonomousCompletedActivity")
-
-            # Revisar esto para ver si se va a colocar!!!!!!!!!!!!!!!!!!!!!!!!
-
-            # Raised when the robot touch status changed.
-            self.alProxy.subscribeToEvent("TouchChanged", "sensorsModule", "pythondatachanged")  ###########################
-
-            # Raised when at least one device (joint, actuator, sensor) has a high temperature.
-            self.alProxy.subscribeToEvent("HotDeviceDetected", "sensorsModule", "hotDeviceDetected")
-            # Raised each time the robot catches a human input. Contains the last human input.
-            self.alProxy.subscribeToEvent("Dialog/LastInput", "sensorsModule", "dialogLastInput")
-            # Raised when the dialog engine starts or stops. The value is "1" for start, "0" for stop.
-            self.alProxy.subscribeToEvent("Dialog/IsStarted", "sensorsModule", "dialogIsStarted")
-            # Currently processed human input.
-            self.alProxy.subscribeToEvent("Dialog/CurrentString", "sensorsModule", "dialogCurrentString")
-            # Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
-            self.alProxy.subscribeToEvent("EngagementZones/PersonMovedAway", "sensorsModule", "personMovedAway")
-            # Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
-            self.alProxy.subscribeToEvent("EngagementZones/PersonApproached", "sensorsModule", "personApproached")
-            # Raised when a person has a smile value above the current threshold (default = 0.7).
-            self.alProxy.subscribeToEvent("FaceCharacteristics/PersonSmiling", "sensorsModule", "personSmiling")
-            # #Raised when one or several faces are currently being detected.
-            self.alProxy.subscribeToEvent("FaceDetected", "sensorsModule", "faceDetected")
-            # Raised each time the list of people looking at the robot changes.
-            self.alProxy.subscribeToEvent("GazeAnalysis/PeopleLookingAtRobot", "sensorsModule", "peopleLookingAtRobot")
-            # Raised when someone turns his head away from the robot.
-            self.alProxy.subscribeToEvent("GazeAnalysis/PersonStopsLookingAtRobot", "sensorsModule",
-                                     "personStopsLookingAtRobot")
-            # The distance in meters to the tracked human. -1.0 if no one is tracked.
-            self.alProxy.subscribeToEvent("Launchpad/DistanceOfTrackedHuman", "sensorsModule", "distanceOfTrackedHuman")
-            # Raised when an obstacle is detected in the close area.
-            self.alProxy.subscribeToEvent("Navigation/AvoidanceNavigator/ObstacleDetected", "sensorsModule",
-                                     "obstacleDetected")
-            # Raised whenever at least one person is visible by the robot. Contains information about the detected people, it is used by ALTracker to track people.
-            self.alProxy.subscribeToEvent("PeoplePerception/PeopleDetected", "sensorsModule", "peopleDetected")
-            # Raised when a new preference is added to the system.
-            self.alProxy.subscribeToEvent("preferenceAdded", "sensorsModule", "preferenceAdded")
-            # Raised when the value of a preference has been updated.
-            self.alProxy.subscribeToEvent("preferenceChanged", "sensorsModule", "preferenceChanged")
-            # Raised when something just waved at the robot.
-            self.alProxy.subscribeToEvent("WavingDetection/Waving", "sensorsModule", "wavingDetection")
-            # Raised when someone just waved at the robot.
-            self.alProxy.subscribeToEvent("WavingDetection/PersonWaving", "sensorsModule", "personWaving")
-            #
+            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
         except Exception, e:
             print "Main Error"
             print e
-            self.alBroker.shutdown()
             exit(1)
+
 
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
@@ -297,7 +179,15 @@ class Robot:
         # Get the params of the function
         animation_factor = params.get("FACTOR")
         # Invoke the function
-        animation_name(animation_factor)
+        # animation_name(animation_factor)
+
+        try:
+            animation_function = self.animation.getAnimation(animation_name)
+            names, times, keys = animation_function()
+            # times = self.change_speed(animation_factor, times)
+            self.play_animation(names, times, keys)
+        except BaseException, err:
+            print err
 
     def getEmotionalReaction(self):
         # Returns:	The detected reaction.
@@ -313,148 +203,36 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            self.alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
+            print "TIMES  -> ", animation_times
+            self.alMotion.angleInterpolation(animation_names,  animation_keys, animation_times, True)
         except BaseException, err:
             print err
 
     # def run_animation( animation_path, animation_tag):
     #    alAnimationPlayer.runTag(animation_path, animation_tag)
-    # Choregraphe bezier export in Python.
 
-    def dance_macarena(self, factor=1):
-        # Choregraphe bezier export in Python.
-        names = list()
-        times = list()
-        keys = list()
+    # Animations
+    def change_speed(self, factor, times):
+        timesfinal = list()
+        for i in times:
+            times2 = list()
+            for j in i:
+                times2.append(j * factor)
+            timesfinal.append(times2)
+        return timesfinal
 
-        names.append("HeadPitch")
-        times.append([0, 1.16, 2.36, 4.76, 5.96, 8.36, 9.56, 11.96, 14.36, 16.36])
-        keys.append([[-0.211185, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.211185, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-0.211185, [3, -0.4, 0], [3, 0.8, 0]], [0.123918, [3, -0.8, 0], [3, 0.4, 0]],
-                     [0.123918, [3, -0.4, 0], [3, 0.8, 0]], [0.445059, [3, -0.8, 0], [3, 0.4, 0]],
-                     [0.123918, [3, -0.4, 0], [3, 0.8, 0]], [0.123918, [3, -0.8, 0], [3, 0.8, 0]],
-                     [0.123918, [3, -0.8, 0], [3, 0.666667, 0]], [0.123918, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("HeadYaw")
-        times.append([0, 1.16, 2.36, 4.76, 5.96, 8.36, 9.56, 11.96, 13.16, 14.36, 16.36])
-        keys.append([[-0.00698132, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.219911, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-0.00698132, [3, -0.4, 0.064965], [3, 0.8, -0.12993]], [-0.364774, [3, -0.8, 0], [3, 0.4, 0]],
-                     [-0.0174533, [3, -0.4, -0.00523599], [3, 0.8, 0.010472]], [-0.00698132, [3, -0.8, 0], [3, 0.4, 0]],
-                     [-0.00698132, [3, -0.4, 0], [3, 0.8, 0]], [0.329867, [3, -0.8, 0], [3, 0.4, 0]],
-                     [-0.118682, [3, -0.4, 0], [3, 0.4, 0]], [0.127409, [3, -0.4, 0], [3, 0.666667, 0]],
-                     [-0.0314159, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("HipPitch")
-        times.append([0, 1.16, 8.36])
-        keys.append([[-0.0357826, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.0474347, [3, -0.386667, 0], [3, 2.4, 0]],
-                     [0, [3, -2.4, 0], [3, 0, 0]]])
-
-        names.append("HipRoll")
-        times.append([0, 1.16, 8.36])
-        keys.append([[-0.0041018, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.00654055, [3, -0.386667, 0], [3, 2.4, 0]],
-                     [-0.00523599, [3, -2.4, 0], [3, 0, 0]]])
-
-        names.append("KneePitch")
-        times.append([0, 1.16, 8.36])
-        keys.append([[-0.0133719, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.0163339, [3, -0.386667, 0], [3, 2.4, 0]],
-                     [0, [3, -2.4, 0], [3, 0, 0]]])
-
-        names.append("LElbowRoll")
-        times.append([0, 1.16, 2.36, 4.76, 9.56, 13.16, 14.36, 16.36])
-        keys.append([[-1.56207, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.00872665, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-0.00872665, [3, -0.4, 0], [3, 0.8, 0]], [-0.00872665, [3, -0.8, 0], [3, 1.6, 0]],
-                     [-0.00872665, [3, -1.6, 0], [3, 1.2, 0]], [-1.37357, [3, -1.2, 0.120428], [3, 0.4, -0.0401426]],
-                     [-1.41372, [3, -0.4, 0], [3, 0.666667, 0]], [-1.41372, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("LElbowYaw")
-        times.append([0, 1.16, 2.36, 3.56, 4.76, 9.56, 13.16, 14.36, 16.36])
-        keys.append([[-0.118682, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.118682, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-0.118682, [3, -0.4, 0], [3, 0.4, 0]], [0.722566, [3, -0.4, 0], [3, 0.4, 0]],
-                     [0.722566, [3, -0.4, 0], [3, 1.6, 0]], [-1.80816, [3, -1.6, 0], [3, 1.2, 0]],
-                     [-0.197222, [3, -1.2, 0], [3, 0.4, 0]],
-                     [-0.830777, [3, -0.4, 0.0115192], [3, 0.666667, -0.0191987]],
-                     [-0.849975, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("LHand")
-        times.append([0, 1.16, 2.36, 3.56])
-        keys.append([[0.02, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.2, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [0.2, [3, -0.4, 0], [3, 0.4, 0]], [0.87, [3, -0.4, 0], [3, 0, 0]]])
-
-        names.append("LShoulderPitch")
-        times.append([0, 1.16, 2.36, 3.56, 4.76, 9.56, 13.16, 14.36, 16.36])
-        keys.append([[1.32994, [3, -0.0133333, 0], [3, 0.386667, 0]], [1.7558, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-1.22173, [3, -0.4, 0], [3, 0.4, 0]], [0.0837758, [3, -0.4, 0], [3, 0.4, 0]],
-                     [0.0837758, [3, -0.4, 0], [3, 1.6, 0]], [0.0837758, [3, -1.6, 0], [3, 1.2, 0]],
-                     [0.0837758, [3, -1.2, 0], [3, 0.4, 0]], [-0.289725, [3, -0.4, 0], [3, 0.666667, 0]],
-                     [1.69821, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("LShoulderRoll")
-        times.append([0, 1.16, 2.36, 3.56, 4.76, 9.56, 13.16, 14.36, 16.36])
-        keys.append([[0.792379, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.792379, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [0.00872665, [3, -0.4, 0], [3, 0.4, 0]], [0.198968, [3, -0.4, 0], [3, 0.4, 0]],
-                     [0.198968, [3, -0.4, 0], [3, 1.6, 0]], [0.198968, [3, -1.6, 0], [3, 1.2, 0]],
-                     [0.0226893, [3, -1.2, 0], [3, 0.4, 0]],
-                     [0.525344, [3, -0.4, -0.00837757], [3, 0.666667, 0.0139626]],
-                     [0.539307, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("LWristYaw")
-        times.append([0, 1.16, 2.36, 4.76, 9.56, 13.16, 14.36])
-        keys.append([[-0.708604, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.708604, [3, -0.386667, 0], [3, 0.4, 0]],
-                     [-0.708604, [3, -0.4, 0], [3, 0.8, 0]], [-0.708604, [3, -0.8, 0], [3, 1.6, 0]],
-                     [-0.708604, [3, -1.6, 0], [3, 1.2, 0]], [-0.301942, [3, -1.2, -0.0314158], [3, 0.4, 0.0104719]],
-                     [-0.29147, [3, -0.4, 0], [3, 0, 0]]])
-
-        names.append("RElbowRoll")
-        times.append([0, 1.16, 4.76, 5.96, 10.76, 11.96, 15.56, 17.56])
-        keys.append([[1.56207, [3, -0.0133333, 0], [3, 0.386667, 0]], [1.56207, [3, -0.386667, 0], [3, 1.2, 0]],
-                     [0.00872665, [3, -1.2, 0], [3, 0.4, 0]], [0.00872665, [3, -0.4, 0], [3, 1.6, 0]],
-                     [0.00872665, [3, -1.6, 0], [3, 0.4, 0]], [1.41372, [3, -0.4, 0], [3, 1.2, 0]],
-                     [1.41372, [3, -1.2, 0], [3, 0.666667, 0]], [1.41372, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("RElbowYaw")
-        times.append([0, 1.16, 4.76, 5.96, 7.16, 10.76, 11.96, 14.36, 15.56, 17.56])
-        keys.append([[0.118682, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.118682, [3, -0.386667, 0], [3, 1.2, 0]],
-                     [0.118682, [3, -1.2, 0], [3, 0.4, 0]], [0.118682, [3, -0.4, 0], [3, 0.4, 0]],
-                     [-0.722566, [3, -0.4, 0], [3, 1.2, 0]], [1.80816, [3, -1.2, 0], [3, 0.4, 0]],
-                     [0.13439, [3, -0.4, 0], [3, 0.8, 0]], [0.150098, [3, -0.8, -0.015708], [3, 0.4, 0.00785399]],
-                     [0.849975, [3, -0.4, 0], [3, 0.666667, 0]], [0.849975, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("RHand")
-        times.append([0, 1.16, 7.16, 10.76])
-        keys.append([[0.02, [3, -0.0133333, 0], [3, 0.386667, 0]], [0.2, [3, -0.386667, -0.0459032], [3, 2, 0.23743]],
-                     [0.87, [3, -2, 0], [3, 1.2, 0]], [0.87, [3, -1.2, 0], [3, 0, 0]]])
-
-        names.append("RShoulderPitch")
-        times.append([0, 1.16, 4.76, 5.96, 7.16, 10.76, 15.56, 17.56])
-        keys.append([[1.32994, [3, -0.0133333, 0], [3, 0.386667, 0]], [1.32994, [3, -0.386667, 0], [3, 1.2, 0]],
-                     [0.127409, [3, -1.2, 0.605629], [3, 0.4, -0.201876]], [-1.09258, [3, -0.4, 0], [3, 0.4, 0]],
-                     [0.0837758, [3, -0.4, 0], [3, 1.2, 0]], [0.0837758, [3, -1.2, 0], [3, 1.6, 0]],
-                     [-0.300197, [3, -1.6, 0], [3, 0.666667, 0]], [1.69821, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("RShoulderRoll")
-        times.append([0, 1.16, 4.76, 5.96, 7.16, 10.76, 11.96, 15.56, 17.56])
-        keys.append([[-0.792379, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.792379, [3, -0.386667, 0], [3, 1.2, 0]],
-                     [-0.792379, [3, -1.2, 0], [3, 0.4, 0]], [-0.0314159, [3, -0.4, -0.0226893], [3, 0.4, 0.0226893]],
-                     [-0.00872665, [3, -0.4, 0], [3, 1.2, 0]], [-0.200713, [3, -1.2, 0], [3, 0.4, 0]],
-                     [-0.00872665, [3, -0.4, 0], [3, 1.2, 0]], [-0.539307, [3, -1.2, 0], [3, 0.666667, 0]],
-                     [-0.539307, [3, -0.666667, 0], [3, 0, 0]]])
-
-        names.append("RWristYaw")
-        times.append([0, 1.16, 4.76, 5.96, 10.76, 15.56, 17.56])
-        keys.append([[0.708604, [3, -0.0133333, 0], [3, 0.386667, 0]], [-0.708604, [3, -0.386667, 0], [3, 1.2, 0]],
-                     [0.708604, [3, -1.2, 0], [3, 0.4, 0]], [0.708604, [3, -0.4, 0], [3, 1.6, 0]],
-                     [0.708604, [3, -1.6, 0], [3, 1.6, 0]], [0.29147, [3, -1.6, 0], [3, 0.666667, 0]],
-                     [0.29147, [3, -0.666667, 0], [3, 0, 0]]])
-
-        try:
-            # uncomment the following line and modify the IP if you use this script outside Choregraphe.
-            # motion = ALProxy("ALMotion", IP, 9559)
-            # motion = ALProxy("ALMotion")
-            # motion.angleInterpolationBezier(names, times, keys)
-            map(lambda i: i * factor, times)
-            self.play_animation(names, times, keys)
-        except BaseException, err:
-            print err
+    # def dance( self, animation, factor = 1 ):
+    #     try:
+    #         # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+    #         # motion = ALProxy("ALMotion", IP, 9559)
+    #         # motion = ALProxy("ALMotion")
+    #         # motion.angleInterpolation(names, keys, times, True)
+    #         animationFunction = Dance.getAnimation( animation )
+    #         names, times, keys = animationFunction()
+    #         times = self.change_speed(factor, times)
+    #         self.play_animation(names, times, keys)
+    #     except BaseException, err:
+    #         print err
 
     # Prueba!!!!!!!!!
 
@@ -586,10 +364,12 @@ class Robot:
 
     # Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT
     def move_forward(self, x, y, speed):
+        self.alMotion.moveInit()
         self.alMotion.moveTo(x, y, speed)
 
     # Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
     def move_to(self, params):
+        self.alMotion.moveInit()
         x = params.get("MOVETOX")
         y = params.get("MOVETOY")
         self.alNavigationProxy.navigateTo(x, y)
@@ -623,10 +403,18 @@ class Robot:
         self.alLedsProxy.setIntensity(sensor, intensity / 100)
 
     # Sets the color of an RGB led using  color code.
-    def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        self.alLedsProxy.fadeRGB(sensor, red_color, green_color, blue_color, duration)
+    def change_led_color(self, color, duration):
+        # color is an hexa number
+        # self.alLedsProxy.rotateEyes( color, 1, duration)
+        morado = 0xDAA2F8
+        azul = 0x8BCCEC
+        amarillo = 0xF8FE2E
+        rojito = 0xFA3421
+        blanco = 0xFFFFFF
+        verde = 0x7FF764
+        self.alLedsProxy.rotateEyes(verde, 2, duration)
 
-    # Enable or Disable the smart stiffness reflex for all the joints (True by default).
+    # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
         return self.alMotion.setSmartStiffnessEnabled(params)
@@ -756,23 +544,34 @@ class Robot:
     def desactivate_voice_recognition(self):
         self.alSpeechRecognition.unsubscribe(self.sensorsModule)
 
-    # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
-    def activate_conversational_topic(self, topicName):
-        self.alDialogProxy.activateTopic(topicName)
+    ## Loading the topics directly as text strings
+    def load_topic_content (self, topicName):
+        self.alDialogProxy.loadTopicContent(topicName)
 
-    # Loads the topic, exports and compiles the corresponding context files so that they are ready to be used by the speech recognition engine
-    def load_conversational_topic(self, topicName):
-        # define path
-        path = "nope"
-        self.alDialogProxy.loadTopic(path)
-
+    def load_conversational_topic(self, params):
+        print(str(params))
+        topicName = params.get("name")
+        if not self.topicMap:
+            lista = self.alDialogProxy.getAllLoadedTopics()
+            if topicName in lista:
+                self.alDialogProxy.unloadTopic(topicName)
+        tContent = self.topicContentMap.get(topicName)
+        topic = self.alDialogProxy.loadTopicContent(tContent)
+        self.topicMap[topicName] = topic
+        self.alDialogProxy.activateTopic(topic)
     # Unloads the specified topic and frees the associated memory.
-    def unload_conversational_topic(self, topicName):
-        self.alDialogProxy.unloadTopic(topicName)
-
-    # Removes the specified topic from list of the topics that are currently used by the dialog engine to parse the human's inputs.
-    def deactivate_conversational_topic(self, topicName):
-        self.alDialogProxy.deactivateTopic(topicName)
+    def unload_conversational_topic(self, params):
+        if not self.topicMap:
+            lista = self.alDialogProxy.getAllLoadedTopics()
+            if lista:
+                self.alDialogProxy.stopTopics(lista)
+        else:
+            topicName = params.get("name")
+            topic = self.topicMap.get(topicName)
+            self.topicMap.pop(topicName)
+            self.alDialogProxy.unsubscribe(topic)
+            self.topicContentMap.pop(topicName)
+            self.alDialogProxy.deactivateTopic(topic)
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
@@ -782,15 +581,30 @@ class Robot:
     def set_topic_focus(self, topicName):
         self.alDialogProxy.setFocus(topicName)
 
+    def set_language(self, language):
+        self.alDialogProxy.setLanguage(language)
+
+    def subscribe_topic (self, topicName):
+        self.alDialogProxy.subscribe(topicName)
+
+    def unsubscibe_topic (self, topicName):
+        self.alDialogProxy.unsubscribe(topicName)
+
     def hablar(self, text_to_speech, speed=None, pitch=None):
-        if speed == None:
+        if speed is None:
             speed = self.emotionStateRobot.getVelocitySpeech()
-        if pitch == None:
+        if pitch is None:
             pitch = self.emotionStateRobot.getToneSpeech()
 
         self.alTexToSpeech.setParameter("speed", speed)
         self.alTexToSpeech.setParameter("pitchShift", pitch)
         self.alTexToSpeech.say(text_to_speech)
+
+    def activate_conversational_topic(self):
+        pass
+
+    def desactivate_conversational_topic(self):
+        pass
 
     def registrar_cuidador(params):
         pass
