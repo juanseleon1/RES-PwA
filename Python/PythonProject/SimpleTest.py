@@ -80,8 +80,6 @@ def main(session):
     'u: ({Hoy} {"Este dia"} Quiero escuchar musica) De acuerdo, que genero quisieras escuchar?\n'
     'u: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos\n'
     'u: (Di la verdad) Leon tiene cabeza de kiwi\n'
-    'u: (Dime algo) Tengo una vaca lecheraaaa, no es una vaca cualquieraaaaaa\n'
-
 )
 
     topic_content_2 = ('topic: ~dummy_topic()\n'
