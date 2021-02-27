@@ -26,15 +26,16 @@ import java.util.logging.Logger;
 public class PepperEModel extends EmotionalModel {
 
     private double state;
-    private double refreshRate;
-    private double normalState;
-    private double speechBase = 1.1;
-    private double speechVBase = 100;
-    private double ledsIntBase = 1;
+    private final double refreshRate;
+    private final double normalState;
+    private final double speechBase = 1.1;
+    private final double speechVBase = 100;
+    private final double ledsIntBase = 1;
     private double velf;
     private double velh;
     private double pitch;
     private double ledInt;
+    private double ledRotVel;
     private static final double CHANGE_FACT = 0.3;
     private LedsColor lc;
 
@@ -48,7 +49,7 @@ public class PepperEModel extends EmotionalModel {
     public Map<String, Object> filterFromEM(Map<String, Object> map) {
         Map<String, Object> map2 = new HashMap<>();
         map2.putAll(map);
-        double velf1 = 0, velh1 = 0, pitch1 = 0, ledInt1 = 0;
+        double velf1 = 0, velh1 = 0, pitch1 = 0, ledInt1 = 0, ledRotVel1 = 0;
         String s = "";
         if (map2.containsKey(PepperEMParams.HVel.getTipo())) {
             velh1 = (double) map2.get(PepperEMParams.HVel.getTipo());
@@ -67,12 +68,17 @@ public class PepperEModel extends EmotionalModel {
         }
         if (map2.containsKey(PepperEMParams.TONOH.getTipo())) {
             pitch1 = (double) map2.get(PepperEMParams.TONOH.getTipo());
-            ledInt1 += ((ledInt - ledInt1) * CHANGE_FACT);
+            pitch1 += ((pitch - pitch1) * CHANGE_FACT);
             map2.replace(PepperEMParams.TONOH.getTipo(), pitch1);
         }
         if (map2.containsKey(PepperEMParams.ANIMSTATE.getTipo())) {
             s = (String) map2.get(PepperEMParams.ANIMSTATE.getTipo());
             map2.replace(PepperEMParams.ANIMSTATE.getTipo(), s);
+        }
+        if (map2.containsKey(PepperEMParams.LEDROT.getTipo())) {
+            ledRotVel1 = (double) map2.get(PepperEMParams.LEDROT.getTipo());
+            ledRotVel1 += ((ledRotVel - ledRotVel1) * CHANGE_FACT);
+            map2.replace(PepperEMParams.LEDROT.getTipo(), ledRotVel1);
         }
         return map2;
     }
@@ -169,31 +175,28 @@ public class PepperEModel extends EmotionalModel {
         if (state >= 1 && state < 1.4) {
             lc = LedsColor.BLUE;
         } else if (state >= 1.4 && state < 1.8) {
-            lc = LedsColor.BLGRE;
+            lc = LedsColor.PURPLE;
         } else if (state >= 1.8 && state < 2.4) {
             lc = LedsColor.GREEN;
         } else if (state >= 2.3 && state < 2.6) {
-            lc = LedsColor.GREYEL;
+            lc = LedsColor.RED;
         } else if (state >= 2.6 && state <= 3) {
             lc = LedsColor.YELLOW;
         }
-        lc = LedsColor.YELLOW;
+        lc = LedsColor.WHITE;
         velf = 0;
         velh = (speechVBase * state) / normalState;
         pitch = (speechBase * state) / normalState;
         ledInt = (speechVBase * state) / normalState;
         //x= baseV*actual/baseE
-        map.put("LEDS", lc.name());
         map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);
         map.put("ledIntens", ledInt);
         HashMap<String, Object> map2 = new HashMap<>();
         map2.putAll(map);
-        map2.remove("LEDS");
-        map2.put("R", lc.getR());
-        map2.put("G", lc.getG());
-        map2.put("B", lc.getB());
+        map2.put("COLOR", lc.getHexa());
+        map2.put("DURATION",ledRotVel);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
         requestService(srb);
     }

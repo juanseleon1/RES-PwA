@@ -39,8 +39,6 @@ def handle_client():
     json_string = ""
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
-
-    print(" msg: ", threading.currentThread().getName())
     # y = "{" + y
     print(json_string)
     # print(y)
