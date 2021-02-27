@@ -74,13 +74,14 @@ class Robot:
         self.alDialogProxy = session.service("ALDialog")
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
-        self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+        #self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+        self.alSpeechRecognition.pause(False)
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
         #time.sleep(10)
-        self.alTexToSpeech.say("Ya estoy listo para ser usado")
+        self.alTexToSpeech.say("Ya estoy listo para ser usado, sugar Brayan")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -430,8 +431,7 @@ class Robot:
         self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
-        self.change_led_color("AllLeds", self.emotionStateRobot.getLedColor(),
-                              self.emotionStateRobot.getRotationEyesColor())
+        self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
     # Turn on/off the tablet screen.
@@ -540,7 +540,7 @@ class Robot:
     # Subscribes to ALSpeechRecognition
     def activate_voice_recognition(self, params):
         subscriber = params.get("ACTVOICERECOG")
-        self.alSpeechRecognition.subscribe(subscriber)
+        self.alSpeechRecognition.subscribe(self.sensorsModule)
 
     # Unsubscribes to ALSpeechRecognition
     def desactivate_voice_recognition(self):
@@ -550,21 +550,16 @@ class Robot:
     def load_topic_content (self, topicName):
         self.alDialogProxy.loadTopicContent(topicName)
 
-    def load_conversational_topic(self, params):
-        print(str(params))
-        topicName = params.get("name")
-        if not self.topicMap:
-            lista = self.alDialogProxy.getAllLoadedTopics()
-            if topicName in lista:
-                print "Sacando: ", topicName
-                self.alDialogProxy.unloadTopic(topicName)
-        tContent = self.topicContentMap.get(topicName)
+    def init_topics(self):
+        for topicName,tContent in self.topicContentMap:
+            topic = self.alDialogProxy.loadTopicContent(tContent)
+            self.topicMap[topicName] = topic
 
-        topic = self.alDialogProxy.loadTopicContent(tContent)
-        self.topicMap[topicName] = topic
+    def load_conversational_topic(self, params):
+        topicName = params.get("name")
+        topic = self.topicMap[topicName]
         self.alDialogProxy.activateTopic(topic)
-        self.alDialogProxy.setFocus(topicName)
-        self.alDialogProxy.setFocus(topic)
+        self.alDialogProxy.forceInput("Estoy feliz")
         print "Cargando: ", topic
         print "TOPICOS Load: ", self.alDialogProxy.getAllLoadedTopics()
         print "TOPICOS Activos: ", self.alDialogProxy.getActivatedTopics()

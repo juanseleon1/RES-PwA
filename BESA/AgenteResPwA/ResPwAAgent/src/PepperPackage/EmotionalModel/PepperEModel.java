@@ -31,11 +31,11 @@ public class PepperEModel extends EmotionalModel {
     private final double speechBase = 1.1;
     private final double speechVBase = 100;
     private final double ledsIntBase = 1;
-    private double velf;
-    private double velh;
-    private double pitch;
-    private double ledInt;
-    private double ledRotVel;
+    private double velf=1;
+    private double velh=100;
+    private double pitch=1.1;
+    private double ledInt=1;
+    private final double ledRotVel=2;
     private static final double CHANGE_FACT = 0.3;
     private LedsColor lc;
 
@@ -125,7 +125,6 @@ public class PepperEModel extends EmotionalModel {
         } catch (ExceptionBESA ex) {
             Logger.getLogger(PepperEModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private void calcNewEmotionalParams(Map<String, Object> map, SensorData sd) {

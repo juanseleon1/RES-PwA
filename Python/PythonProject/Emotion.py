@@ -11,7 +11,7 @@ class Emotion:
         self.__factorVelocity = 0.0
         self.__velocitySpeech = 100
         self.__rotationEyesColor = 1
-        self.__durationEyesColor = 5
+        self.__durationEyesColor = 4
     #Getters
 
     def getDurationEyesColor(self):
