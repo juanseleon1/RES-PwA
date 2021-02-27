@@ -44,7 +44,6 @@ class Robot:
         print "MEDIO ROBOT CARGADO Y LISTO"
         self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
-        #self.Dance = Dance(self.session, HOST)
         self.specchRecog = session.service("ALSpeechRecognition")
         self.specchRecog.pause(True)
         self.alFaceDetection = session.service("ALFaceDetection")
@@ -70,7 +69,7 @@ class Robot:
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
         print "ROBOT CARGADO Y LISTO"
-        time.sleep(20)
+        #time.sleep(10)
         self.alTexToSpeech.say("Ya estoy listo para ser usado")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
@@ -404,10 +403,15 @@ class Robot:
 
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        color = 0xC7CEEA
-        self.alLedsProxy.rotateEyes(color, 1, duration)
+        morado = 0xDAA2F8
+        azul = 0x8BCCEC
+        amarillo = 0xF8FE2E
+        rojito = 0xFA3421
+        blanco = 0xFFFFFF
+        verde = 0x7FF764
+        self.alLedsProxy.rotateEyes(verde, 2, duration)
 
-    # Enable or Disable the smart stiffness reflex for all the joints (True by default).
+    # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
         return self.alMotion.setSmartStiffnessEnabled(params)
