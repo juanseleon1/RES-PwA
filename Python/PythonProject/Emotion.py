@@ -6,26 +6,25 @@
 class Emotion:
     def __init__(self):
         self.__toneSpeech = 1.1
-        self.__ledR = 1
-        self.__ledG = 1
-        self.__ledB = 1
+        self.__ledColor = 0xDAA2F8
         self.__ledIntensity = 1
         self.__factorVelocity = 0.0
         self.__velocitySpeech = 100
-
+        self.__rotationEyesColor = 1
+        self.__durationEyesColor = 5
     #Getters
+
+    def getDurationEyesColor(self):
+        return self.__durationEyesColor
+
+    def getRotationEyesColor(self):
+        return self.__rotationEyesColor
 
     def getToneSpeech(self):
         return self.__toneSpeech
 
-    def getLedR(self):
-        return self.__ledR
-
-    def getLedG(self):
-        return self.__ledG
-
-    def getLedB(self):
-        return self.__ledB
+    def getLedColor(self):
+        return self.__ledColor
 
     def getLedIntensity(self):
         return self.__ledIntensity
@@ -41,14 +40,8 @@ class Emotion:
     def setToneSpeech(self, tone):
         self.__toneSpeech = tone
 
-    def setLedR(self, ledR):
-        self.__ledR = ledR
-
-    def setLedG(self, ledG):
-        self.__ledG = ledG
-
-    def setLedB(self, ledB):
-        self.__ledB = ledB
+    def setLedR(self, ledColor):
+        self.__ledColor = ledColor
 
     def setLedIntensity(self, ledIntensity ):
         self.__ledIntensity = ledIntensity
@@ -58,3 +51,6 @@ class Emotion:
 
     def setVelocitySpeech(self, velocitySpeech ):
         self.__velocitySpeech = velocitySpeech
+
+    def setRotationEyesColor(self, rotationEyesColor ):
+        self.__rotationEyesColor = rotationEyesColor

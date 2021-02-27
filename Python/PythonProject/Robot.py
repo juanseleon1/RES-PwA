@@ -413,7 +413,7 @@ class Robot:
         self.alLedsProxy.setIntensity(sensor, intensity / 100)
 
     # Sets the color of an RGB led using  color code.
-    def change_led_color(self, color, duration):
+    def change_led_color(self, color, rotationDuration):
         # color is an hexa number
         # self.alLedsProxy.rotateEyes( color, 1, duration)
         morado = 0xDAA2F8
@@ -422,7 +422,8 @@ class Robot:
         rojito = 0xFA3421
         blanco = 0xFFFFFF
         verde = 0x7FF764
-        self.alLedsProxy.rotateEyes(verde, 2, duration)
+        duration = self.emotionStateRobot.getDurationEyesColor()
+        self.alLedsProxy.rotateEyes(color, rotationDuration, duration)
 
     # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
@@ -431,15 +432,13 @@ class Robot:
 
     def change_emotion_expression(self, params):
         self.emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
-        self.emotionStateRobot.setLedR(params.get("R"))
-        self.emotionStateRobot.setLedG(params.get("G"))
-        self.emotionStateRobot.setLedB(params.get("B"))
+        self.emotionStateRobot.setLedColor(params.get("COLOR"))
+        self.emotionStateRobot.setRotationEyesColor(params.get("DURATION"))
         self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
-        self.change_led_color("AllLeds", self.emotionStateRobot.getLedR(), self.emotionStateRobot.getLedG(),
-                              self.emotionStateRobot.getLedB(),
-                              15.0)
+        self.change_led_color("AllLeds", self.emotionStateRobot.getLedColor(),
+                              self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
     # Turn on/off the tablet screen.
