@@ -409,7 +409,9 @@ class Robot:
         self.alLedsProxy.setIntensity(sensor, intensity / 100)
 
     # Sets the color of an RGB led using  color code.
-    def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
+    def change_led_color(self, color, duration):
+        # color is an hexa number
+        # self.alLedsProxy.rotateEyes( color, 1, duration)
         morado = 0xDAA2F8
         azul = 0x8BCCEC
         amarillo = 0xF8FE2E
