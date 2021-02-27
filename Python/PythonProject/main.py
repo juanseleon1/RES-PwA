@@ -39,8 +39,6 @@ def handle_client():
     json_string = ""
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
-
-    print(" msg: ", threading.currentThread().getName())
     # y = "{" + y
     print(json_string)
     # print(y)
@@ -135,9 +133,14 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 
 """ Robot class declaration"""
-robot = Robot(session)
+try:
+    robot = Robot(session)
 
-while 1:
-    conn, addr = server.accept()
-    thread = threading.Thread(target=handle_client)
-    thread.start()
+    while 1:
+        conn, addr = server.accept()
+        thread = threading.Thread(target=handle_client)
+        thread.start()
+finally:
+
+    if robot:
+        robot.alDialogProxy.stopTopics(robot.alDialogProxy.getAllLoadedTopics())
