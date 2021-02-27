@@ -141,5 +141,6 @@ try:
         thread = threading.Thread(target=handle_client)
         thread.start()
 finally:
+
     if robot:
         robot.alDialogProxy.stopTopics(robot.alDialogProxy.getAllLoadedTopics())

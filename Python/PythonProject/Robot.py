@@ -72,6 +72,10 @@ class Robot:
                                 "normTopic":topico_normal,
                                 "musicTopic":conversacion_musica}
         self.alDialogProxy = session.service("ALDialog")
+        print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
+        # Clean Topics
+        self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+        print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
