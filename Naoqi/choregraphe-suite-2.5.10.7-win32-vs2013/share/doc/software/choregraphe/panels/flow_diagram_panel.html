@@ -1,0 +1,849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Flow diagram panel &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Main panels" href="../starting_discovery.html" />
+    <link rel="next" title="Robot View" href="robot_3d_view.html" />
+    <link rel="prev" title="Box libraries panel" href="box_libraries_panel.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="software-choregraphe-panels-flow_diagram_panel">
+                
+  <div class="section" id="flow-diagram-panel">
+<span id="chore-flow-diagram-panel"></span><h1>Flow diagram panel<a class="headerlink" href="#flow-diagram-panel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-flow-diagram-panel">
+<h2>What is the Flow diagram panel<a class="headerlink" href="#what-is-the-flow-diagram-panel" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Flow diagram panel</strong> is the place where you can compose NAO&#8217;s
+<a class="reference internal" href="../objects/behavior.html#choregraphe-reference-behavior"><span>Behaviors</span></a>.</p>
+<a class="reference internal image-reference" href="../../../_images/chore-flow-diagram.png"><img alt="../../../_images/chore-flow-diagram.png" src="../../../_images/chore-flow-diagram.png" style="width: 537px; height: 321px;" /></a>
+<p>The table below describes the main parts of the <strong>Flow diagram panel</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="17%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Part</th>
+<th class="head">Name</th>
+<th class="head">Allows you to ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>A</strong></td>
+<td><strong>Box path</strong></td>
+<td><p class="first">Browse the different levels of the <strong>Flow diagram</strong>
+(when a box contains other boxes).</p>
+<p class="last">For further details, see <a class="reference internal" href="#choregraphe-browse-mulitlevel-diagram"><span>How to navigate in a multilevel diagram</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>B</strong></td>
+<td><strong>Flow diagram</strong></td>
+<td><p class="first">Create or edit the <a class="reference internal" href="#choregraphe-reference-box-flow-diagram"><span>Flow diagram</span></a>
+of the current <a class="reference internal" href="../objects/behavior.html#choregraphe-reference-behavior"><span>Behavior</span></a> or
+<a class="reference internal" href="../objects/box.html#box"><span>Box</span></a>.</p>
+<p class="last">For further details, see <a class="reference internal" href="#choregraphe-create-flowdiagram"><span>How to create a Flow diagram</span></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><strong>C</strong></td>
+<td><strong>Input border</strong></td>
+<td><p class="first">Add, edit or delete inputs of the current
+<a class="reference internal" href="../objects/behavior.html#choregraphe-reference-behavior"><span>Behavior</span></a> or
+<a class="reference internal" href="../objects/box.html#box"><span>Box</span></a>.</p>
+<p class="last">For further details, see <a class="reference internal" href="#flow-diagram-input-ouput"><span>Managing Flow diagram inputs and outputs</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>D</strong></td>
+<td><strong>Output border</strong></td>
+<td><p class="first">Add, edit or delete outputs of the current
+<a class="reference internal" href="../objects/behavior.html#choregraphe-reference-behavior"><span>Behavior</span></a> or
+<a class="reference internal" href="../objects/box.html#box"><span>Box</span></a>.</p>
+<p class="last">For further details, see <a class="reference internal" href="#flow-diagram-input-ouput"><span>Managing Flow diagram inputs and outputs</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-a-flow-diagram">
+<span id="choregraphe-reference-box-flow-diagram"></span><h2>What is a Flow diagram<a class="headerlink" href="#what-is-a-flow-diagram" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>Flow diagram</strong> is a group of boxes linked with each other
+and with at least an input.</p>
+<p><strong>Flow diagram</strong> can be seen at the first level of a <a class="reference internal" href="../objects/behavior.html#behavior"><span>Behavior</span></a>.
+It can also be embedded in a <a class="reference internal" href="../objects/box.html#box"><span>Box</span></a>, itself included in a <strong>Flow diagram</strong>.</p>
+<a class="reference internal image-reference" href="../../../_images/chore_flow_diagram_detailed.png"><img alt="../../../_images/chore_flow_diagram_detailed.png" src="../../../_images/chore_flow_diagram_detailed.png" style="width: 545px; height: 359px;" /></a>
+<p>In the example above, from the left to the right:</p>
+<ul class="simple">
+<li>the main <strong>onStart</strong> input of the Flow diagram <strong>(1)</strong> is linked to
+the <strong>onStart</strong> input of <strong>Localized Text</strong> box <strong>(2)</strong>;</li>
+<li>the <strong>onStopped</strong> output of <strong>Localized Text</strong> box <strong>(3)</strong> is linked to the
+<strong>onStart</strong> input of <strong>Say Text</strong> box <strong>(4)</strong>;</li>
+<li>the <strong>onStopped</strong> output of <strong>Say Text</strong> box <strong>(5)</strong> is linked to the main
+<strong>onStopped</strong> output of the Flow diagram <strong>(6)</strong>.</li>
+</ul>
+<div class="section" id="how-to-create-a-flow-diagram">
+<span id="choregraphe-create-flowdiagram"></span><h3>How to create a Flow diagram<a class="headerlink" href="#how-to-create-a-flow-diagram" title="Permalink to this headline">¶</a></h3>
+<p>To create a <strong>Flow diagram</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="52%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+<th class="head">For further details, see ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Create a new <strong>Behavior</strong> or a new <strong>Flow diagram box</strong>.</td>
+<td><p class="first"><a class="reference internal" href="../choregraphe_first_steps.html#choregraphe-howto-create-a-behavior"><span>How to create a Behavior</span></a></p>
+<p class="last"><a class="reference internal" href="../objects/flow_diagram_box.html#choregraphe-howto-create-flow-diagram-box"><span>How to create a Flow diagram box</span></a></p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Add or create boxes.</td>
+<td><a class="reference internal" href="#choregraphe-add-boxes"><span>How to add boxes to a Flow diagram</span></a></td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Connect the boxes.</td>
+<td><a class="reference internal" href="#choregraphe-link-boxes"><span>How to create links</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-add-boxes-to-a-flow-diagram">
+<span id="choregraphe-add-boxes"></span><h3>How to add boxes to a Flow diagram<a class="headerlink" href="#how-to-add-boxes-to-a-flow-diagram" title="Permalink to this headline">¶</a></h3>
+<p>To add a box to the current <strong>Flow diagram</strong>:</p>
+<ul class="simple">
+<li>Drag and drop a ready-made box from the <a class="reference internal" href="box_libraries_panel.html#chore-box-libary-panel"><span>Box libraries panel</span></a>.</li>
+</ul>
+<p>Once you become familiar with <strong>Choregraphe</strong>, you will be also able to create your
+own new box.</p>
+<p>To create:</p>
+<ul class="simple">
+<li>a new box grouping existing ones,
+see <a class="reference internal" href="#choregraphe-howto-convert-boxes-to-one-box"><span>How to group several boxes into a single one</span></a>.</li>
+<li>a new box from scratch, see <a class="reference internal" href="../objects/box.html#choregraphe-create-box"><span>How to create a new box</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="how-to-create-links">
+<span id="choregraphe-link-boxes"></span><h3>How to create links<a class="headerlink" href="#how-to-create-links" title="Permalink to this headline">¶</a></h3>
+<p>To create a link:</p>
+<ul>
+<li><p class="first">Drag the mouse between the two points you want to link.</p>
+<p>For example, drag the mouse from the <img alt="onstopped-outside-button" class="img-inline" src="../../../_images/chore_output_onstopped_outside.png" /> <strong>onStopped</strong>
+output of a box to the <img alt="onstart-outside-button" class="img-inline" src="../../../_images/chore_input_onstart_outside.png" /> <strong>onStart</strong> input of another box.</p>
+<p>This link carries a <strong>simple event</strong>, activating a box when the previous one has done
+its execution.</p>
+</li>
+</ul>
+<p>Once you become familiar with Choregraphe, you will be also able to create links
+carrying data.</p>
+<p>For further details, see <a class="reference internal" href="#link-carrying-data"><span>How to create links carrying data</span></a>.</p>
+</div>
+</div>
+<div class="section" id="the-flow-diagram-editor">
+<h2>The Flow diagram Editor<a class="headerlink" href="#the-flow-diagram-editor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="managing-flow-diagram-inputs-and-outputs">
+<span id="flow-diagram-input-ouput"></span><h3>Managing Flow diagram inputs and outputs<a class="headerlink" href="#managing-flow-diagram-inputs-and-outputs" title="Permalink to this headline">¶</a></h3>
+<p>Buttons appear on the <strong>Input</strong> and <strong>Output</strong> borders of the <strong>Flow diagram</strong>:</p>
+<a class="reference internal image-reference" href="../../../_images/flow_diagram_add_buttons_114.png"><img alt="../../../_images/flow_diagram_add_buttons_114.png" src="../../../_images/flow_diagram_add_buttons_114.png" style="width: 393px; height: 169px;" /></a>
+<p>To toggle the display of their names, use the shortcut <strong>Shift-F1</strong>:</p>
+<a class="reference internal image-reference" href="../../../_images/flow_diagram_add_buttons_infobulle_en.png"><img alt="../../../_images/flow_diagram_add_buttons_infobulle_en.png" src="../../../_images/flow_diagram_add_buttons_infobulle_en.png" style="width: 452px; height: 192px;" /></a>
+<p>To add an input or an output to the <strong>Flow diagram</strong>:</p>
+<ul>
+<li><p class="first">Click one of the plus (+) buttons, or</p>
+</li>
+<li><p class="first">Right-click the <strong>Input border</strong> or the <strong>Output border</strong>, and choose the relevant command:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Add input</td>
+<td>Add an input to the current <strong>Flow diagram</strong>.</td>
+</tr>
+<tr class="row-odd"><td>Add event from ALMemory</td>
+<td><p class="first">Add an event from <strong>ALMemory</strong> to the current <strong>Flow diagram</strong>.</p>
+<p class="last">For further details, see the tutorial:
+<a class="reference internal" href="../tutos/boxes.html#choregraphe-tuto-right-bumper-almemory"><span>Creating a box to retrieve right bumper value using ALMemory</span></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>Add output</td>
+<td>Add an output to the current <strong>Flow diagram</strong>.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>To edit or delete an input or an output:</p>
+<ul>
+<li><p class="first">Right-click the input or the output and choose the relevant command:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Edit input/output</td>
+<td>Displays the <a class="reference internal" href="../objects/box_input_output.html#choregraphe-detailed-interface-ioparam-edition-widget"><span>Input, and output  edition widgets</span></a>.</td>
+</tr>
+<tr class="row-odd"><td>Delete input/output</td>
+<td>Delete the selected input or output.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<div class="section" id="managing-boxes">
+<h3>Managing boxes<a class="headerlink" href="#managing-boxes" title="Permalink to this headline">¶</a></h3>
+<p>The table below summarizes the commands allowing you to manage boxes inside a <strong>Flow diagram</strong>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">To ...</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Select several boxes</td>
+<td>Drag the mouse so that the square drawn by your mouse includes
+the boxes you want to select.</td>
+</tr>
+<tr class="row-odd"><td>Cut, Copy or Paste one or several box(es)</td>
+<td>Right-click it and choose <strong>Cut</strong>, <strong>Copy</strong> or <strong>Paste</strong>.</td>
+</tr>
+<tr class="row-even"><td>Select all the boxes of a diagram</td>
+<td>Right-click anywhere on the diagram and choose <strong>Select All</strong>.</td>
+</tr>
+<tr class="row-odd"><td>Zoom in or out the diagram</td>
+<td><p class="first">Right-click anywhere on the <strong>Flow diagram</strong>, choose
+<strong>Zoom</strong> and then the zoom level you want.</p>
+<p class="last">By default the auto-zoom is set so that you can see as many
+boxes as possible within the <strong>Flow diagram panel</strong>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>Create a new box from scratch</td>
+<td><p class="first">Right-click the box and choose <strong>Add a new box</strong>.</p>
+<p class="last">For further details, see <a class="reference internal" href="../objects/box.html#choregraphe-create-box"><span>How to create a new box</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Store a box in a box library</td>
+<td>Right-click the box and choose <strong>Add to library</strong>.</td>
+</tr>
+<tr class="row-even"><td>Group several boxes into a single one</td>
+<td><p class="first">Right-click the box and choose <strong>Convert to box</strong>.</p>
+<p class="last">For further details, see
+<a class="reference internal" href="#choregraphe-howto-convert-boxes-to-one-box"><span>How to group several boxes into a single one</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Delete the selected box(es)</td>
+<td>Right-click one of them or the background and choose
+<strong>Delete selection</strong>.</td>
+</tr>
+<tr class="row-even"><td>Edit a box and its properties</td>
+<td><p class="first">Right-click the box and choose <strong>Edit box</strong>.</p>
+<p>The <a class="reference internal" href="../objects/box.html#choregraphe-detailed-interface-box-edition"><span>Edit Box widget</span></a>
+appears.</p>
+<p class="last">You can also use the <a class="reference internal" href="inspector_panel.html#chore-inspector-panel"><span>Inspector panel</span></a> to get
+a faster access to those data (see
+<a class="reference internal" href="../objects/box.html#chore-inspec-flow-diagram-panel"><span>Editing a Box</span></a>).</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Edit the script of the box</td>
+<td><p class="first">Right-click the box and choose <strong>Edit box script</strong>.</p>
+<p class="last">The <a class="reference internal" href="scritp_editor_panel.html#chore-script-editor-panel"><span>Script editor panel</span></a> appears.</p>
+</td>
+</tr>
+<tr class="row-even"><td>Edit the <a class="reference internal" href="../objects/box_optional_components.html#choregraphe-reference-box-resource"><span>Resource of a box</span></a></td>
+<td><p class="first">Right-click the box and choose <strong>Edit resources</strong>.</p>
+<p class="last">This action opens the
+<a class="reference internal" href="../objects/box_optional_components.html#choregraphe-detailed-interface-box-edition-resources"><span>Box resource selector</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Set the value of the parameters of a box</td>
+<td><p class="first">Click the <img alt="parameter-button" class="img-inline" src="../../../_images/parameter_button.png" /> <strong>parameter</strong> button of the
+box or</p>
+<p>Right-click the box and choose <strong>Set Parameters</strong>.</p>
+<p class="last">The <a class="reference internal" href="../objects/box_optional_components.html#choregraphe-detailed-interface-setting-box-parameter"><span>Widget to set the value of box parameters</span></a>
+appears.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shortcuts-to-manage-box-inputs-and-outputs">
+<h3>Shortcuts to manage box inputs and outputs<a class="headerlink" href="#shortcuts-to-manage-box-inputs-and-outputs" title="Permalink to this headline">¶</a></h3>
+<p>The table below lists the shortcuts allowing to manage quickly inputs and outputs.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">To ...</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Add a new input (or output) to a box</td>
+<td>Right-click one of the existing inputs (or outputs) and select
+<strong>Add input</strong> (or <strong>Add output</strong>).</td>
+</tr>
+<tr class="row-odd"><td>Edit an existing input (or output) of a box</td>
+<td>Right-click it and choose <strong>Edit</strong>.</td>
+</tr>
+<tr class="row-even"><td>Delete an existing input (or output) of a box</td>
+<td>Right-click it and choose <strong>Delete</strong>.</td>
+</tr>
+<tr class="row-odd"><td>Simulate a signal on an input (or an output)</td>
+<td><p class="first">Double-click the input (or the output).</p>
+<p>This action is only available while the behavior is <strong>running</strong>.</p>
+<p class="last">If the event carries a <strong>data</strong>, then you will be asked to enter
+the data value you want to send through the input (or the output).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>These commands - except simulate a signal - are also available from the
+<a class="reference internal" href="../objects/box.html#choregraphe-detailed-interface-box-edition"><span>Edit Box widget</span></a>.</p>
+</div>
+<div class="section" id="how-to-create-links-carrying-data">
+<span id="link-carrying-data"></span><h3>How to create links carrying data<a class="headerlink" href="#how-to-create-links-carrying-data" title="Permalink to this headline">¶</a></h3>
+<p>To create a link carrying data:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Drag the mouse from the output of the source box to the <img alt="parameter-button" class="img-inline" src="../../../_images/parameter_button.png" />
+<strong>Parameter</strong> button of the destination box.</p>
+<p class="last">The window <strong>Connect link to a parameter</strong> appears.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Choose the parameter which you want to change the value of.
+For instance, you can have a link that changes the speed of the text
+synthesis on the box <strong>Say</strong>:</p>
+<img alt="../../../_images/chore_parameters_link.png" class="last" src="../../../_images/chore_parameters_link.png" />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="multilevel-diagrams">
+<h2>Multilevel diagrams<a class="headerlink" href="#multilevel-diagrams" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-parent-box-and-child-box-or-sub-box">
+<span id="choregraphe-reference-box-parent"></span><h3>What are parent box and child box (or sub-box)<a class="headerlink" href="#what-are-parent-box-and-child-box-or-sub-box" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>parent box</strong> of a box is the box which
+<a class="reference internal" href="#choregraphe-reference-box-flow-diagram"><span>Flow diagram</span></a> directly contains this other box.</p>
+<p>A <strong>child box</strong> (or a sub-box) of an other box is then a box which is contained
+in the <a class="reference internal" href="#choregraphe-reference-box-flow-diagram"><span>Flow diagram</span></a> of this other box.</p>
+<a class="reference internal image-reference" href="../../../_images/chore_ref_parent_child_box.png"><img alt="../../../_images/chore_ref_parent_child_box.png" src="../../../_images/chore_ref_parent_child_box.png" style="width: 476px; height: 386px;" /></a>
+<p>You can also say that a box is <strong>a parent box</strong> of another if it is its indirect parent
+(for example if it is the parent of its parent box or the parent of the parent of its parent box).</p>
+</div>
+<div class="section" id="how-to-group-several-boxes-into-a-single-one">
+<span id="choregraphe-howto-convert-boxes-to-one-box"></span><h3>How to group several boxes into a single one<a class="headerlink" href="#how-to-group-several-boxes-into-a-single-one" title="Permalink to this headline">¶</a></h3>
+<p>In order to have clear and organized diagram it is possible to gather several
+boxes into one, to do so:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Select all the boxes you want to gather, provided that they are linked
+together and also linked to the main <strong>Flow diagram</strong>.</p>
+<a class="reference internal image-reference" href="../../../_images/gather_boxes.png"><img alt="../../../_images/gather_boxes.png" src="../../../_images/gather_boxes.png" style="width: 454px; height: 339px;" /></a>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the selected boxes are not linked to the main <strong>Flow diagram</strong>
+( i.e. to another box which is not selected nor to the main inputs
+or outputs), the resulting box will have no <strong>input</strong> nor <strong>output</strong>.</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Right click the diagram and choose <strong>Convert to box</strong> in the contextual
+menu.</p>
+<p>The following window appears:</p>
+<a class="last reference internal image-reference" href="../../../_images/chore_group_boxes_en.png"><img alt="../../../_images/chore_group_boxes_en.png" src="../../../_images/chore_group_boxes_en.png" style="width: 303px; height: 369px;" /></a>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Complete the <strong>Name</strong>, <strong>Description</strong> and <strong>Image</strong> fields,
+then click <strong>OK</strong> button.</p>
+<p>The new box replaces the selected boxes.</p>
+<a class="reference internal image-reference" href="../../../_images/gather_boxes_result.png"><img alt="../../../_images/gather_boxes_result.png" src="../../../_images/gather_boxes_result.png" style="width: 454px; height: 340px;" /></a>
+<p>It is a <strong>Flow diagram</strong> box.</p>
+<p class="last">If you double click on the created box you will see that all the selected
+boxes are in it.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-navigate-in-a-multilevel-diagram">
+<span id="choregraphe-browse-mulitlevel-diagram"></span><h3>How to navigate in a multilevel diagram<a class="headerlink" href="#how-to-navigate-in-a-multilevel-diagram" title="Permalink to this headline">¶</a></h3>
+<p>To access the inner <strong>Flow diagram</strong> of a box (if any):</p>
+<ul class="simple">
+<li>Double-click the box.</li>
+</ul>
+<p>The inner <strong>Flow diagram</strong> of the box is displayed,
+and the name of the box is added on the <strong>Box path</strong>:</p>
+<a class="reference internal image-reference" href="../../../_images/chore_flow_diagram_upper_line.png"><img alt="../../../_images/chore_flow_diagram_upper_line.png" src="../../../_images/chore_flow_diagram_upper_line.png" style="width: 502px; height: 37px;" /></a>
+<p>To come back to the <strong>parent diagram</strong> (if any):</p>
+<ul class="simple">
+<li>Click the label of the parent box on the <strong>Box path</strong>, or</li>
+<li>Double-click the background of the <strong>Flow diagram</strong>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>A <strong>script box</strong> has no <strong>Flow diagram</strong>.
+So when you double-click on it, it is the <strong>Script Editor</strong> with the box script which is displayed.
+Fore further details about this panel, see <a class="reference internal" href="scritp_editor_panel.html#chore-script-editor-panel"><span>Script editor panel</span></a>.</p>
+<p class="last">A <strong>Timeline box</strong> has also a different structure,
+so when you double-click on it, the <a class="reference internal" href="timeline_panel.html#choregraphe-interface-timeline-panel"><span>Timeline panel</span></a>
+is displayed. For further details, see <a class="reference internal" href="#timeline-flow-diagram"><span>Timeline box Flow diagrams</span></a>.</p>
+</div>
+</div>
+<div class="section" id="timeline-box-flow-diagrams">
+<span id="timeline-flow-diagram"></span><h3>Timeline box Flow diagrams<a class="headerlink" href="#timeline-box-flow-diagrams" title="Permalink to this headline">¶</a></h3>
+<p>If the <a class="reference internal" href="timeline_panel.html#choregraphe-reference-box-timeline"><span>Timeline of the box</span></a> has no
+<a class="reference internal" href="timeline_panel.html#choregraphe-reference-box-behavior-layer"><span>behavior layer</span></a>, it has no
+<strong>Flow diagram</strong> and then the Flow Diagram panel is empty as shown below.</p>
+<a class="reference internal image-reference" href="../../../_images/flow_diagram_empty_en.png"><img alt="../../../_images/flow_diagram_empty_en.png" src="../../../_images/flow_diagram_empty_en.png" style="width: 450px; height: 323px;" /></a>
+<p>If it has at least one <a class="reference internal" href="timeline_panel.html#choregraphe-reference-box-behavior-layer"><span>Behavior layer</span></a>
+and one <a class="reference internal" href="timeline_panel.html#choregraphe-reference-box-behavior-keyframe"><span>Behavior keyframe</span></a>,
+the diagram of the selected <strong>Behavior keyframe</strong> is displayed.</p>
+<a class="reference internal image-reference" href="../../../_images/flow_diagram_timeline_en.png"><img alt="../../../_images/flow_diagram_timeline_en.png" src="../../../_images/flow_diagram_timeline_en.png" style="width: 449px; height: 327px;" /></a>
+<p>Each <strong>Behavior keyframe</strong> has its own diagram.
+Each <strong>Behavior keyframe diagram</strong> has an <strong>onLoad input</strong>
+stimulated as soon as the diagram is loaded.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Choregraphe Suite</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../installing.html">Choregraphe suite - Installation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../choregraphe_overview.html">What is Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connection_widget.html">Connecting Choregraphe to a robot</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../starting_discovery.html">Main panels</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="project_content_panel.html">Project files panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="box_libraries_panel.html">Box libraries panel</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Flow diagram panel</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="robot_3d_view.html">Robot View</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inspector_panel.html">Inspector panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project_objects_panel.html">Project objects panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="video_monitor_panel.html">Video monitor panel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="robot_applications.html">Robot applications panel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/translations.html">Mastering application localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connecting.html">Managing your robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/memory_backup.html">Memory Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Flow diagram panel</a><ul>
+<li><a class="reference internal" href="#what-is-the-flow-diagram-panel">What is the Flow diagram panel</a></li>
+<li><a class="reference internal" href="#what-is-a-flow-diagram">What is a Flow diagram</a><ul>
+<li><a class="reference internal" href="#how-to-create-a-flow-diagram">How to create a Flow diagram</a></li>
+<li><a class="reference internal" href="#how-to-add-boxes-to-a-flow-diagram">How to add boxes to a Flow diagram</a></li>
+<li><a class="reference internal" href="#how-to-create-links">How to create links</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-flow-diagram-editor">The Flow diagram Editor</a><ul>
+<li><a class="reference internal" href="#managing-flow-diagram-inputs-and-outputs">Managing Flow diagram inputs and outputs</a></li>
+<li><a class="reference internal" href="#managing-boxes">Managing boxes</a></li>
+<li><a class="reference internal" href="#shortcuts-to-manage-box-inputs-and-outputs">Shortcuts to manage box inputs and outputs</a></li>
+<li><a class="reference internal" href="#how-to-create-links-carrying-data">How to create links carrying data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multilevel-diagrams">Multilevel diagrams</a><ul>
+<li><a class="reference internal" href="#what-are-parent-box-and-child-box-or-sub-box">What are parent box and child box (or sub-box)</a></li>
+<li><a class="reference internal" href="#how-to-group-several-boxes-into-a-single-one">How to group several boxes into a single one</a></li>
+<li><a class="reference internal" href="#how-to-navigate-in-a-multilevel-diagram">How to navigate in a multilevel diagram</a></li>
+<li><a class="reference internal" href="#timeline-box-flow-diagrams">Timeline box Flow diagrams</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

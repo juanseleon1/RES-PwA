@@ -23,7 +23,6 @@ public class ProcessEmotionGuard extends GuardBESA{
         infoRecibida.setDataPE(eaState.getEaStrategy().processEmotion(infoRecibida));
         infoRecibida.setDataP(null);
         eaState.getEaModel().updtModelFromEvt(infoRecibida);
-        
     }
 
     

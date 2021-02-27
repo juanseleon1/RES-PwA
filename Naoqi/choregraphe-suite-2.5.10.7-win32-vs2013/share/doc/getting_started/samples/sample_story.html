@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sample 3: a first story application &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Creating an application" href="../creating_applications/index.html" />
+    <link rel="next" title="Sample 4: a first solitary application" href="sample_solitary.html" />
+    <link rel="prev" title="Sample 2: a first interactive application" href="sample_interactive.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="getting_started-samples-sample_story">
+                
+  <div class="section" id="sample-3-a-first-story-application">
+<span id="sample3"></span><h1>Sample 3: a first story application<a class="headerlink" href="#sample-3-a-first-story-application" title="Permalink to this headline">¶</a></h1>
+<p>This is a typical, well designed, simple story application which uses <a class="reference internal" href="../../naoqi/interaction/dialog/dialog.html#dialog-concepts"><span>QiChat</span></a>.</p>
+<a class="reference internal image-reference" href="../../_images/story1_musketeers_top.gif"><img alt="../../_images/story1_musketeers_top.gif" src="../../_images/story1_musketeers_top.gif" style="width: 534px; height: 379px;" /></a>
+<p><strong>Content outline</strong>: <strong>Pepper</strong> tells a story based on Alexandre Dumas&#8217; novel:
+<strong>The Three Musketeers</strong>.</p>
+<p><a class="reference download internal" href="../../_downloads/Three_Musketeers_Story.crg"><code class="xref download docutils literal"><span class="pre">Three_Musketeers_Story.crg</span></code></a></p>
+<div class="section" id="guided-tour">
+<h2>Guided Tour<a class="headerlink" href="#guided-tour" title="Permalink to this headline">¶</a></h2>
+<p>Let’s discover how it works.</p>
+<p>The main behavior of this application contains 3 boxes: <a class="reference internal" href="#init-box"><span>Init &amp; Reset</span></a>,
+<a class="reference internal" href="#dialog-box"><span>Dialog Box</span></a> and a modified <a class="reference internal" href="#image-box"><span>Show Image Box</span></a>.</p>
+<div class="section" id="init-reset">
+<span id="init-box"></span><h3>Init &amp; Reset<a class="headerlink" href="#init-reset" title="Permalink to this headline">¶</a></h3>
+<p><strong>Aim</strong></p>
+<p>Ensure that <strong>Pepper</strong>:</p>
+<ul class="simple">
+<li>is in the right state before starting the story,</li>
+<li>is set back to its initial state after the story is finished.</li>
+</ul>
+<p><strong>How it works</strong></p>
+<p>This is the first box being triggered, because it is directly linked to the
+to the <strong>onStart</strong> input of the Application.</p>
+<p>Double-click the <strong>Init &amp; Reset</strong> box to open it.</p>
+<p>Let&#8217;s read the 2 main methods: <strong>onInput_onStart</strong> and <strong>onUnload</strong>.</p>
+<p>The <strong>onInput_onStart</strong> method is executed when the application is started, to:</p>
+<ul>
+<li><p class="first">Deactivate <strong>ALAutonomousMoves</strong> and <strong>ALBasicAwareness</strong>.</p>
+</li>
+<li><p class="first">Disable the <strong>body language</strong> of <strong>ALAnimatedSpeech</strong>.</p>
+</li>
+<li><p class="first"><strong>Set up</strong> the tablet by changing its background color and displaying the first image.</p>
+</li>
+<li><p class="first">Preload all <strong>tablet images</strong> contained in the <strong>html</strong> folder.</p>
+</li>
+<li><p class="first">Go to the <strong>Stand</strong> posture.</p>
+</li>
+<li><p class="first">Depending on the success or the failure of the
+<strong>goToPosture</strong> function call, it will be the
+success or the failure output.</p>
+<p>If successful, the <a class="reference internal" href="#dialog-box"><span>Dialog Box</span></a> is started, otherwise the application quits.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">onInput_onStart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amoves</span><span class="o">.</span><span class="n">setBackgroundStrategy</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to disable autonomous moves: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ba</span><span class="o">.</span><span class="n">stopAwareness</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to stop awareness: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animatedSpeech</span><span class="o">.</span><span class="n">setBodyLanguageModeFromStr</span><span class="p">(</span><span class="s">&quot;disabled&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to disable body language: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_tablet</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_preload_images</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">postureProxy</span><span class="o">.</span><span class="n">setMaxTryNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">postureProxy</span><span class="o">.</span><span class="n">goToPosture</span><span class="p">(</span><span class="s">&quot;Stand&quot;</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The <strong>onUnload</strong> method of the box is executed when the application quits, to:</p>
+<ul>
+<li><p class="first">Reactivate <strong>ALAutonomousMoves</strong> and <strong>ALBasicAwareness</strong>.</p>
+</li>
+<li><p class="first">Hide the current <strong>tablet image</strong>.</p>
+</li>
+<li><p class="first">Enable the <strong>body language</strong> of <strong>ALAnimatedSpeech</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">onUnload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amoves</span><span class="o">.</span><span class="n">setBackgroundStrategy</span><span class="p">(</span><span class="s">&quot;backToNeutral&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to enable breathing: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ba</span><span class="o">.</span><span class="n">startAwareness</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to start awareness: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">postureProxy</span><span class="o">.</span><span class="n">stopMove</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tablet</span><span class="o">.</span><span class="n">hideImage</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to hide image: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animatedSpeech</span><span class="o">.</span><span class="n">setBodyLanguageModeFromStr</span><span class="p">(</span><span class="s">&quot;contextual&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Unable to enable body language: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="dialog-box">
+<span id="id1"></span><h3>Dialog Box<a class="headerlink" href="#dialog-box" title="Permalink to this headline">¶</a></h3>
+<p><strong>Aim</strong></p>
+<p>Ensure that <strong>Pepper</strong>:</p>
+<ul class="simple">
+<li>tells the story in the right order,</li>
+<li>launches animations and sounds when needed,</li>
+<li>displays the right images on his tablet using the <a class="reference internal" href="#image-box"><span>Show Image Box</span></a>.</li>
+</ul>
+<p><strong>How it works</strong></p>
+<p>This box is triggered when the <strong>Init &amp; Reset</strong> box ends successfully,
+thanks to its <strong>onStart</strong> input linked to the success output of the <strong>Init &amp; Reset</strong> box.</p>
+<p>Double-click the <strong>3-musketeer-story_enu.top</strong> file in the
+<strong>Project Files</strong> &gt; <strong>dialog</strong> folder to open the topic file.</p>
+<a class="reference internal image-reference" href="../../_images/story_topic.png"><img alt="../../_images/story_topic.png" src="../../_images/story_topic.png" style="width: 289px; height: 321px;" /></a>
+<p>Let&#8217;s read the <a class="reference internal" href="../../naoqi/interaction/dialog/dialog.html#dialog-concepts"><span>QiChat</span></a> syntax of the topic file.</p>
+<ul>
+<li><p class="first">The <a class="reference internal" href="../../naoqi/interaction/dialog/lexicon.html#lexicon"><span>Dialog Lexicon</span></a> is included to get access to global concepts <strong>~yes</strong>,
+<strong>~no</strong>, <strong>~joyful</strong> and <strong>~neutral</strong>.</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">topic</span>: ~3-musketeer-story()
+<span class="ow">language</span>: enu
+<span class="ow">include</span>:lexicon_enu.top
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Concepts</strong> are used to store the content of the story.
+including necessary breaks, speaking rate and body language mode.</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">concept</span>:(louis) \RSPD=85\ \pau=500\
+    Under Louis the 14th&#39;s reign, in the great city of Paris \Pau=500\, the cardinal is plotting.
+    \RSPD=100\
+</pre></div>
+</div>
+</li>
+<li><p class="first">When the <strong>onStart</strong> input of the Dialog box is triggered,
+the topic is activated and launches the <strong>first proposal</strong>.</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="o">u:</span><span class="nv">(e:onStart)</span>
+    ^nextProposal
+
+<span class="ow">proposal</span>: ^run(peppers-three-musketeers-story/animations/brass-band)
+    ~break2000
+    ^nextProposal
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Animations</strong> are behaviors in the <strong>Project Files</strong> &gt; <strong>animations</strong> folder
+and are launched either by the <strong>^run</strong> tag, if speech needs to be suspended,
+or by the <strong>^start</strong> and <strong>^wait</strong> tags, if speech needs to be executed in parallel with the animation.</p>
+<a class="reference internal image-reference" href="../../_images/story_animations.png"><img alt="../../_images/story_animations.png" src="../../_images/story_animations.png" style="width: 289px; height: 294px;" /></a>
+</li>
+<li><p class="first">Every proposal calls the next proposal when it is finished. However, in the <strong>last proposal</strong> the robot
+waits for a <strong>human input</strong> or the event <strong>Dialog/NotSpeaking20</strong> to be triggered.
+In any case the <strong>$onStopped</strong> event/output of the <a class="reference internal" href="#dialog-box"><span>Dialog Box</span></a> is triggered and thus the application quits.</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">proposal</span>: ^start(peppers-three-musketeers-story/animations/louis)
+    ~louis
+    ^wait(peppers-three-musketeers-story/animations/louis)
+    ^nextProposal
+
+<span class="ow">proposal</span>: ^run(peppers-three-musketeers-story/animations/cardinal)
+    ~break3000
+    ^nextProposal
+</pre></div>
+</div>
+</li>
+<li><p class="first">Tablet <strong>Images</strong> are changed either by <strong>Show Image</strong> boxes inside the animation behaviors
+or by the <strong>$showImage</strong> event inside QiChat, which triggers the <a class="reference internal" href="#image-box"><span>Show Image Box</span></a> in the main behavior.</p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">proposal</span>: ~end
+    $showImage=end.png
+    ~question
+    $showImage=credits.png
+    <span class="o">u1:</span><span class="nv">(~yes)</span> ~answerYes $onStopped=1
+    <span class="o">u1:</span><span class="nv">(~no)</span> ~answerNo $onStopped=1
+    <span class="o">u1:</span><span class="nv">(e:Dialog/NotSpeaking20)</span> $onStopped=1
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="show-image-box">
+<span id="image-box"></span><h3>Show Image Box<a class="headerlink" href="#show-image-box" title="Permalink to this headline">¶</a></h3>
+<p><strong>Aim</strong></p>
+<p>Display an image on the tablet, when the <strong>showImage</strong> output of the
+<a class="reference internal" href="#dialog-box"><span>Dialog Box</span></a> is triggered.</p>
+<p><strong>How it works</strong></p>
+<p>This is a modified <strong>Show Image</strong> box, which receives the <strong>ImageUrl</strong> as a
+string through its <strong>onStart</strong> input instead of retrieving it from its
+<strong>ImageUrl</strong> parameter.</p>
+<a class="reference internal image-reference" href="../../_images/story_show_image.png"><img alt="../../_images/story_show_image.png" src="../../_images/story_show_image.png" style="width: 113px; height: 99px;" /></a>
+</div>
+</div>
+<div class="section" id="try-it">
+<h2>Try it!<a class="headerlink" href="#try-it" title="Permalink to this headline">¶</a></h2>
+<p>Try the application.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>In the <a class="reference internal" href="../../software/choregraphe/panels/robot_applications.html#chore-robot-applications-panel"><span>Robot applications panel</span></a> panel, click the
+<img alt="install-app" class="img-inline" src="../../_images/application_manager_add_current.png" />
+<strong>Package and install the current project on the robot</strong> button.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Make sure <strong>autonomous life</strong> is on.</p>
+<p class="last">If not, click the <img alt="life" class="img-inline" src="../../_images/chore_life_button.png" /> <strong>Turn autonomous life on</strong> button.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Launch the application.</p>
+<p><strong>Orally</strong></p>
+<ul>
+<li><p class="first">Make sure <strong>Pepper</strong>&#8216;s language is set to English.</p>
+</li>
+<li><p class="first">Say one of the <strong>Trigger sentences</strong>:</p>
+<p>&#8220;the three musketeers story&#8221;, &#8220;three musketeers&#8221;,
+&#8220;pepper&#8217;s three musketeers story&#8221;, or</p>
+<p>You can also use the <strong>Application title</strong> by saying:</p>
+<p>&#8220;start Pepper&#8217;s Three Musketeers Story&#8221;</p>
+</li>
+</ul>
+<p><strong>Through the tablet</strong></p>
+<ul class="last simple">
+<li>Press the application&#8217;s icon in the <strong>App Launcher</strong>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>You may also try the behavior only, by clicking on the <img alt="play-button" class="img-inline" src="../../_images/beginning_play_button.png" /> <strong>Play</strong> button.</p>
+<p>Note that this example will only works correctly on a real <strong>Pepper</strong>, since
+<strong>Dialog Lexicon</strong> and <strong>ALTabletService</strong> are not present on a virtual robot.</p>
+</div>
+<div class="section" id="make-it-yours">
+<h2>Make it yours!<a class="headerlink" href="#make-it-yours" title="Permalink to this headline">¶</a></h2>
+<p>Edit the part of the content you want to customize:
+let’s say the concepts in the topic file.</p>
+</div>
+<div class="section" id="want-to-package-it">
+<h2>Want to package it?<a class="headerlink" href="#want-to-package-it" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Customize its properties.</p>
+<p>You can keep most of the properties as they are, but the following
+ones must be adapted:</p>
+<ul class="last simple">
+<li>Icon</li>
+<li>Application title</li>
+<li>Application ID</li>
+<li>Application description</li>
+<li>Trigger sentences</li>
+<li>Loading responses</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Package it.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../creating_applications/index.html">Creating an application</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sample_dance1.html">Sample 1: a first dance application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_interactive.html">Sample 2: a first interactive application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Sample 3: a first story application</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sample_solitary.html">Sample 4: a first solitary application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../software/choregraphe/tutos/create_application.html">Creating an Application from scratch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../creating_applications/using_peppers_tablet.html">Using Pepper&#8217;s Tablet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dev/tutos/create_a_new_service.html">Creating a new application outside Choregraphe using the qi Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../creating_applications/using_interactive_features.html">Interactive features -  Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../creating_applications/apps_requirements.html">Robot Application Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Sample 3: a first story application</a><ul>
+<li><a class="reference internal" href="#guided-tour">Guided Tour</a><ul>
+<li><a class="reference internal" href="#init-reset">Init &amp; Reset</a></li>
+<li><a class="reference internal" href="#dialog-box">Dialog Box</a></li>
+<li><a class="reference internal" href="#show-image-box">Show Image Box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#try-it">Try it!</a></li>
+<li><a class="reference internal" href="#make-it-yours">Make it yours!</a></li>
+<li><a class="reference internal" href="#want-to-package-it">Want to package it?</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+topic: ~mytopic_2()
+language: enu
+
+proposal: human, how was your day?
+   u1: ([cool OK]) I'm so happy!
+   u1: (too bad) I'm so sad
+
+proposal: Do you like robots?

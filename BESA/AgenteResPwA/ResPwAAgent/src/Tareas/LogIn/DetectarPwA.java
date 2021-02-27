@@ -48,7 +48,7 @@ public class DetectarPwA extends ResPwaTask{
         //hay que cambiar este parametro
         infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
-        requestService(srb);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -65,6 +65,7 @@ public class DetectarPwA extends ResPwaTask{
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDetectaPwA()) {
+            System.out.println("///////////////TF//////////////");
             return true;
         }
         return false;

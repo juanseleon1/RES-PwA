@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating a new application outside Choregraphe using the qi Framework &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Creating an application" href="../../getting_started/creating_applications/index.html" />
+    <link rel="next" title="Interactive features - Getting started" href="../../getting_started/creating_applications/using_interactive_features.html" />
+    <link rel="prev" title="Using Pepper’s Tablet" href="../../getting_started/creating_applications/using_peppers_tablet.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-tutos-create_a_new_service">
+                
+  <div class="section" id="creating-a-new-application-outside-choregraphe-using-the-qi-framework">
+<span id="dev-tuto-create-service"></span><span id="cpp-create-module"></span><h1>Creating a new application outside Choregraphe using the qi Framework<a class="headerlink" href="#creating-a-new-application-outside-choregraphe-using-the-qi-framework" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="step-one-choose-your-langage">
+<h2>Step one: choose your langage<a class="headerlink" href="#step-one-choose-your-langage" title="Permalink to this headline">¶</a></h2>
+<p>You can do this using either <strong>C++</strong> or <strong>Python</strong>.</p>
+<div class="section" id="c">
+<h3>C++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<p>If you choose to do this in <strong>C++</strong>, please follow the <a class="reference internal" href="../cpp/install_guide.html#cpp-install-guide"><span>C++ SDK - Installation Guide</span></a> first.</p>
+</div>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>If you choose to do this in <strong>Python</strong>, please follow the <a class="reference internal" href="../python/install_guide.html#python-install-guide"><span>Python SDK - Installation Guide</span></a>.</p>
+</div>
+</div>
+<div class="section" id="step-two-write-the-service">
+<h2>Step two: write the service<a class="headerlink" href="#step-two-write-the-service" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>C++<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Create a new service</strong></p>
+<p>Your layout will look like this</p>
+<div class="highlight-python"><div class="highlight"><pre>worktree
+|__ myapp
+    |__ qiproject.xml
+    |__ CMakeLists.txt
+    |__ main.cpp
+    |__ myservice.cpp
+    |__ myservice.hpp
+</pre></div>
+</div>
+<p>For an example of service in C++, refer to <a class="reference internal" href="../libqi/guide/cxx-service.html#guide-cxx-service"><span>C++ - How to write a qimessaging service</span></a>. If you
+want to write just a client which does not expose an API, refer to
+<a class="reference internal" href="../libqi/guide/cxx-client.html#guide-cxx-client"><span>C++ - How to write a qimessaging client</span></a>.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in qiproject.xml --&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">version=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;qibuild</span> <span class="na">name=</span><span class="s">&quot;myapp&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;depends</span> <span class="na">runtime=</span><span class="s">&quot;true&quot;</span> <span class="na">buildtime=</span><span class="s">&quot;true&quot;</span> <span class="na">names=</span><span class="s">&quot;libnaoqi&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/qibuild&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you do not specify a runtime dependency on libnaoqi, your application
+may not work when the system is upgraded to a later version of NAOqi OS.</p>
+</div>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c"># In CMakeLists.txt</span>
+
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">myapp</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">qibuild</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="nb">qi_create_bin</span><span class="p">(</span><span class="s">myservice</span>
+    <span class="s">main.cpp</span> <span class="s">myservice.hpp</span> <span class="s">myservice.cpp</span>
+    <span class="s">DEPENDS</span> <span class="s">QI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Python<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>Create a new service</strong></p>
+<p>Your layout will look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>worktree
+  |__ myapp
+    |__ qiproject.xml
+    |__ myservice.py
+    |__ helper.py
+    |__ mylib
+      |__ __init__.py
+      |__ stuff.py
+</pre></div>
+</div>
+<p>For an example of service in Python, refer to <a class="reference internal" href="../libqi/guide/py-service.html#guide-py-service"><span>Python - How to write a qimessaging service</span></a>.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in qiproject.xml --&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">version=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;qipython</span> <span class="na">name=</span><span class="s">&quot;myapp&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- this is your executable that will go in bin/ --&gt;</span>
+    <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;myservice.py&quot;</span> <span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- this is an helper that will go in lib/python2.7/site-packages/ --&gt;</span>
+    <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&quot;helper&quot;</span> <span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- this is a package that will go in lib/python2.7/site-packages/ too --&gt;</span>
+    <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;mylib&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/qipython&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># in myservice.py</span>
+
+<span class="kn">import</span> <span class="nn">qi</span>
+<span class="kn">import</span> <span class="nn">helper</span>
+<span class="kn">import</span> <span class="nn">mylib</span>
+
+<span class="k">class</span> <span class="nc">MyService</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">message</span>
+
+    <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Application</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">session</span>
+    <span class="n">myService</span> <span class="o">=</span> <span class="n">MyService</span><span class="p">()</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">registerService</span><span class="p">(</span><span class="s">&quot;MyService&quot;</span><span class="p">,</span> <span class="n">myService</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="step-three-c-only-configure-and-build-the-project">
+<h2>Step three: C++ only - configure and build the project<a class="headerlink" href="#step-three-c-only-configure-and-build-the-project" title="Permalink to this headline">¶</a></h2>
+<p>At this stage you should have installed the cross-toolchain and configure
+qibuild to use it.
+If not, please go back to the <a class="reference internal" href="../cpp/install_guide.html#cpp-install-guide"><span>C++ SDK - Installation Guide</span></a> section.</p>
+<p>Basically it boils down to:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qitoolchain create atom /path/to/ctc/toolchain.xml</span>
+</pre></div>
+</div>
+<p>Then configure and build the project with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd myapp</span>
+<span class="go">qibuild configure -c atom</span>
+<span class="go">qibuild make -c atom</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-four-generate-a-package-for-the-aldebaran-store">
+<h2>Step four: generate a package for the Aldebaran store<a class="headerlink" href="#step-four-generate-a-package-for-the-aldebaran-store" title="Permalink to this headline">¶</a></h2>
+<p>Create the following files in order to generate a package:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in manifest.xml --&gt;</span>
+
+<span class="nt">&lt;package</span> <span class="na">uuid=</span><span class="s">&quot;myapp&quot;</span> <span class="na">version=</span><span class="s">&quot;0.1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;services&gt;</span>
+
+    <span class="c">&lt;!-- if written in Python --&gt;</span>
+    <span class="nt">&lt;service</span> <span class="na">name=</span><span class="s">&quot;myservice&quot;</span> <span class="na">autorun=</span><span class="s">&quot;true&quot;</span> <span class="na">execStart=</span><span class="s">&quot;./python bin/myservice.py&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;executableFiles&gt;</span>
+      <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">&quot;python&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/executableFiles&gt;</span>
+
+    <span class="c">&lt;!-- if written in C++ --&gt;</span>
+    <span class="nt">&lt;service</span> <span class="na">name=</span><span class="s">&quot;myservice&quot;</span> <span class="na">autorun=</span><span class="s">&quot;true&quot;</span> <span class="na">execStart=</span><span class="s">&quot;bin/myservice&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;executableFiles&gt;</span>
+      <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">&quot;bin/myservice&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/executableFiles&gt;</span>
+
+  <span class="nt">&lt;/services&gt;</span>
+
+<span class="nt">&lt;/package&gt;</span>
+</pre></div>
+</div>
+<p>Set the autorun attribute to true if you want your service to be started when the robot starts.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in myapp.pml --&gt;</span>
+
+<span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;myapp&quot;</span> <span class="na">format_version=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Manifest</span> <span class="na">src=</span><span class="s">&quot;manifest.xml&quot;</span> <span class="nt">/&gt;</span>
+  <span class="c">&lt;!-- optional resources : --&gt;</span>
+  <span class="c">&lt;!--</span>
+<span class="c">  &lt;Resources&gt;</span>
+<span class="c">    &lt;File src=&quot;path/to/some/data&quot; /&gt;</span>
+<span class="c">  &lt;/Resources&gt;</span>
+<span class="c">  --&gt;</span>
+
+  <span class="c">&lt;!-- if written in Python --&gt;</span>
+  <span class="nt">&lt;qipython</span> <span class="na">name=</span><span class="s">&quot;myservice&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="c">&lt;!-- if written in C++ --&gt;</span>
+  <span class="nt">&lt;qibuild</span> <span class="na">name=</span><span class="s">&quot;myservice&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/Package&gt;</span>
+</pre></div>
+</div>
+<p>At this point, you should add the project to your worktree with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc add .</span>
+</pre></div>
+</div>
+<p>Then you can generate the package using:</p>
+<p><strong>Python</strong>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qipkg make-package myapp.pml</span>
+</pre></div>
+</div>
+<p><strong>C++</strong>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qipkg make-package myapp.pml -c atom</span>
+</pre></div>
+</div>
+<p>This will generate a file named <code class="docutils literal"><span class="pre">myapp-0.1.0.pkg</span></code>
+in the current working directory.</p>
+</div>
+<div class="section" id="step-five-deploy-the-package-to-the-robot">
+<h2>Step five: deploy the package to the robot<a class="headerlink" href="#step-five-deploy-the-package-to-the-robot" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you have installed the Python SDK, and run:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qipkg deploy-package myapp-0.1.0.pkg --url nao@nao.local</span>
+</pre></div>
+</div>
+<p>If everything works fine, you can then submit your package to the <strong>Aldebaran store</strong>.</p>
+</div>
+<div class="section" id="step-six-start-and-stop-your-service">
+<h2>Step six: start and stop your service<a class="headerlink" href="#step-six-start-and-stop-your-service" title="Permalink to this headline">¶</a></h2>
+<p>You can execute operations on the services registered with a manifest
+by using <a class="reference internal" href="../../naoqi/core/servicemanager-api.html#servicemanager-api"><span>ServiceManager API</span></a>.</p>
+<p>To start a service:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qicli call ALServiceManager.startService myapp.myservice</span>
+</pre></div>
+</div>
+<p>To stop a running service:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qicli call ALServiceManager.stopService myapp.myservice</span>
+</pre></div>
+</div>
+<p>You can also call these methods from a behavior or another service.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If you get this warning when your service is supposed to start:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">[W] 16967 core.processmanager.qt: myservice: service failed to start (Permission denied)</span>
+</pre></div>
+</div>
+<p>You may have not set your file as an executable file. So it does not have the rights to be launched.
+Make sure to use the <em>executableFiles</em> tag.</p>
+<p>You can see the standard output and error streams of the process in
+<code class="docutils literal"><span class="pre">/var/log/naoqi/servicemanager</span></code></p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/samples/sample_dance1.html">Sample 1: a first dance application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/samples/sample_interactive.html">Sample 2: a first interactive application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/samples/sample_story.html">Sample 3: a first story application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/samples/sample_solitary.html">Sample 4: a first solitary application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../software/choregraphe/tutos/create_application.html">Creating an Application from scratch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/creating_applications/using_peppers_tablet.html">Using Pepper&#8217;s Tablet</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Creating a new application outside Choregraphe using the qi Framework</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/creating_applications/using_interactive_features.html">Interactive features -  Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../getting_started/creating_applications/apps_requirements.html">Robot Application Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Creating a new application outside Choregraphe using the qi Framework</a><ul>
+<li><a class="reference internal" href="#step-one-choose-your-langage">Step one: choose your langage</a><ul>
+<li><a class="reference internal" href="#c">C++</a></li>
+<li><a class="reference internal" href="#python">Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#step-two-write-the-service">Step two: write the service</a><ul>
+<li><a class="reference internal" href="#id1">C++</a></li>
+<li><a class="reference internal" href="#id2">Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#step-three-c-only-configure-and-build-the-project">Step three: C++ only - configure and build the project</a></li>
+<li><a class="reference internal" href="#step-four-generate-a-package-for-the-aldebaran-store">Step four: generate a package for the Aldebaran store</a></li>
+<li><a class="reference internal" href="#step-five-deploy-the-package-to-the-robot">Step five: deploy the package to the robot</a></li>
+<li><a class="reference internal" href="#step-six-start-and-stop-your-service">Step six: start and stop your service</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

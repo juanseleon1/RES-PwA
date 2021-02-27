@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="Behavior Control" />
+    <Node name="Data Edition" />
+    <Node name="Logic" />
+    <Node name="Math" />
+    <Node name="Memory" />
+    <Node name="Robot Information" />
+    <Node name="System Actions" />
+    <Node name="Templates" />
+    <Node name="Time" />
+    <Node name="Tools" />
+</Folder>

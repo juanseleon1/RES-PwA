@@ -11,8 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
-import Tareas.MantenerAtencionPwA.EjecutarEstrategiaAtencion;
-import Tareas.MantenerAtencionPwA.SeleccionarEstrategiaAtencion;
+import Tareas.MantenerAtencionPwA.EvaluarEstrategiaAtencion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -31,16 +30,13 @@ public class MantenerAtencionPwA extends GoalBDI {
     public static MantenerAtencionPwA buildGoal() {
 
         //evaluar atencion, estado emocional
-        SeleccionarEstrategiaAtencion seleccionarEstrategiaA = new SeleccionarEstrategiaAtencion();
-        EjecutarEstrategiaAtencion ejecutarEstrategia = new EjecutarEstrategiaAtencion();
+        EvaluarEstrategiaAtencion evaluarEstrategiaA = new EvaluarEstrategiaAtencion();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
 
         Plan rolePlan = new Plan();
 
-        rolePlan.addTask(seleccionarEstrategiaA);
-        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
-        rolePlan.addTask(ejecutarEstrategia);
+        rolePlan.addTask(evaluarEstrategiaA);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
         MantenerAtencionPwA b = new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);

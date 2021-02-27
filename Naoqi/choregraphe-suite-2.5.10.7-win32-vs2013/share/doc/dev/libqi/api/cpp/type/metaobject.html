@@ -1,0 +1,1233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qi::MetaObject, qi::MetaMethod, qi::MetaSignal, qi::MetaProperty &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../../../index.html" />
+    <link rel="up" title="C++ qi type API" href="index.html" />
+    <link rel="next" title="qi::ObjectTypeBuilder" href="objecttypebuilder.html" />
+    <link rel="prev" title="qi::DynamicObjectBuilder" href="dynamicobjectbuilder.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-api-cpp-type-metaobject">
+                
+  <div class="section" id="qi-metaobject-qi-metamethod-qi-metasignal-qi-metaproperty">
+<h1>qi::MetaObject, qi::MetaMethod, qi::MetaSignal, qi::MetaProperty<a class="headerlink" href="#qi-metaobject-qi-metamethod-qi-metasignal-qi-metaproperty" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<strong><p class="rubric">Global Classes</p>
+</strong><ul>
+<li><p class="first">class qi::MetaObject</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::MetaObject)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaObject::methodId__ssCRC">qi::MetaObject::methodId</a><p><a class="reference internal" href="#qi::MetaObject::signalId__ssCRC">qi::MetaObject::signalId</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::property__unsigned-i">qi::MetaObject::property</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::assign-operator__MetaObjectCR">qi::MetaObject::operator=</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::signal__unsigned-i">qi::MetaObject::signal</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::method__unsigned-i">qi::MetaObject::method</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::descriptionC">qi::MetaObject::description</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::MetaObject">qi::MetaObject::MetaObject</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::signalMapC">qi::MetaObject::signalMap</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::propertyId__ssCRC">qi::MetaObject::propertyId</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::isPrivateMember__ssCR.unsigned-i">qi::MetaObject::isPrivateMember</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::~MetaObject">qi::MetaObject::~MetaObject</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::methodMapC">qi::MetaObject::methodMap</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::findMethod__ssCR.GenericFunctionParametersCR.bPC">qi::MetaObject::findMethod</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::findCompatibleMethod__ssCRC">qi::MetaObject::findCompatibleMethod</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::merge__qi::MetaObjectCR.qi::MetaObjectCR">qi::MetaObject::merge</a></p>
+<p><a class="reference internal" href="#qi::MetaObject::propertyMapC">qi::MetaObject::propertyMap</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::MetaObject)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaObject::_p__MetaObjectPrivateP">qi::MetaObject::_p</a></ul>
+</dl>
+</li>
+<li><p class="first">class qi::MetaSignal</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::MetaSignal)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaSignal::~MetaSignal">qi::MetaSignal::~MetaSignal</a><p><a class="reference internal" href="#qi::MetaSignal::toStringC">qi::MetaSignal::toString</a></p>
+<p><a class="reference internal" href="#qi::MetaSignal::parametersSignatureC">qi::MetaSignal::parametersSignature</a></p>
+<p><a class="reference internal" href="#qi::MetaSignal::MetaSignal__unsigned-i.ssCR.qi::SignatureCR">qi::MetaSignal::MetaSignal</a></p>
+<p><a class="reference internal" href="#qi::MetaSignal::isPrivateC">qi::MetaSignal::isPrivate</a></p>
+<p><a class="reference internal" href="#qi::MetaSignal::nameC">qi::MetaSignal::name</a></p>
+<p><a class="reference internal" href="#qi::MetaSignal::uidC">qi::MetaSignal::uid</a></p>
+</ul>
+</dl>
+</li>
+<li><p class="first">class qi::MetaMethod</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::MetaMethod)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaMethod::isPrivateC">qi::MetaMethod::isPrivate</a><p><a class="reference internal" href="#qi::MetaMethod::descriptionC">qi::MetaMethod::description</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::parametersC">qi::MetaMethod::parameters</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::toStringC">qi::MetaMethod::toString</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::nameC">qi::MetaMethod::name</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::uidC">qi::MetaMethod::uid</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::returnSignatureC">qi::MetaMethod::returnSignature</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::returnDescriptionC">qi::MetaMethod::returnDescription</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::parametersSignatureC">qi::MetaMethod::parametersSignature</a></p>
+<p><a class="reference internal" href="#qi::MetaMethod::MetaMethod">qi::MetaMethod::MetaMethod</a></p>
+</ul>
+<strong><p class="rubric">Members (class qi::MetaMethod)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaMethod::_p__boost::shared_ptr:MetaMethodPrivate:">qi::MetaMethod::_p</a></ul>
+</dl>
+</li>
+<li><p class="first">class qi::MetaProperty</p>
+<dl class="docutils">
+<strong><p class="rubric">Functions (class qi::MetaProperty)</p>
+</strong><ul class="simple">
+<a class="reference internal" href="#qi::MetaProperty::signatureC">qi::MetaProperty::signature</a><p><a class="reference internal" href="#qi::MetaProperty::uidC">qi::MetaProperty::uid</a></p>
+<p><a class="reference internal" href="#qi::MetaProperty::nameC">qi::MetaProperty::name</a></p>
+<p><a class="reference internal" href="#qi::MetaProperty::isPrivateC">qi::MetaProperty::isPrivate</a></p>
+<p><a class="reference internal" href="#qi::MetaProperty::toStringC">qi::MetaProperty::toString</a></p>
+<p><a class="reference internal" href="#qi::MetaProperty::MetaProperty__unsigned-i.ssCR.qi::SignatureCR">qi::MetaProperty::MetaProperty</a></p>
+</ul>
+</dl>
+</li>
+</ul>
+</dl>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qi-metaobject-class-reference">
+<h3>qi::MetaObject Class Reference<a class="headerlink" href="#qi-metaobject-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p>Description of the signals and methods accessible on an ObjectTypeInterface.  <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>MetaObjectPrivate*</span> <code class="descname"><a class="reference internal" href="#qi::MetaObject::_p__MetaObjectPrivateP" title="qi::MetaObject::_p"><code class="xref cpp cpp-func docutils literal"><span class="pre">_p</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaObject::MetaObject"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaObject</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaObject::MetaObject__MetaObjectCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaObject</span></code></a></code><span class="sig-paren">(</span>const MetaObject&amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>MetaObject&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::assign-operator__MetaObjectCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">operator=</span></code></a></code><span class="sig-paren">(</span>const MetaObject&amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaObject::~MetaObject"><code class="xref cpp cpp-func docutils literal"><span class="pre">~MetaObject</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>int</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::methodId__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">methodId</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>nameWithSignature</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>int</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::signalId__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">signalId</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>int</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::propertyId__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">propertyId</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>MethodMap</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::methodMapC"><code class="xref cpp cpp-func docutils literal"><span class="pre">methodMap</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>SignalMap</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::signalMapC"><code class="xref cpp cpp-func docutils literal"><span class="pre">signalMap</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>PropertyMap</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::propertyMapC"><code class="xref cpp cpp-func docutils literal"><span class="pre">propertyMap</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>MetaMethod*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::method__unsigned-i"><code class="xref cpp cpp-func docutils literal"><span class="pre">method</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>const MetaMethod*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::method__unsigned-iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">method</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>MetaSignal*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::signal__unsigned-i"><code class="xref cpp cpp-func docutils literal"><span class="pre">signal</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>const MetaSignal*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::signal__unsigned-iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">signal</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const MetaSignal*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::signal__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">signal</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>MetaProperty*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::property__unsigned-i"><code class="xref cpp cpp-func docutils literal"><span class="pre">property</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>const MetaProperty*</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::property__unsigned-iC"><code class="xref cpp cpp-func docutils literal"><span class="pre">property</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>id</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>int</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::findMethod__ssCR.GenericFunctionParametersCR.bPC"><code class="xref cpp cpp-func docutils literal"><span class="pre">findMethod</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>nameWithOptionalSignature</em>, const GenericFunctionParameters&amp; <em>args</em>, bool* <em>canCache</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::vector&lt;MetaMethod&gt;</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::findMethod__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">findMethod</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::vector&lt;CompatibleMethod&gt;</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::findCompatibleMethod__ssCRC"><code class="xref cpp cpp-func docutils literal"><span class="pre">findCompatibleMethod</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>nameOrSignature</em><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::descriptionC"><code class="xref cpp cpp-func docutils literal"><span class="pre">description</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaObject::MetaObject__MethodMapCR.SignalMapCR.PropertyMapCR.ssCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaObject</span></code></a></code><span class="sig-paren">(</span>const MethodMap&amp; <em>methodMap</em>, const SignalMap&amp; <em>signalMap</em>, const PropertyMap&amp; <em>propertyMap</em>, const std::string&amp; <em>description</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="public-static-functions">
+<h4>Public Static Functions<a class="headerlink" href="#public-static-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::isPrivateMember__ssCR.unsigned-i"><code class="xref cpp cpp-func docutils literal"><span class="pre">isPrivateMember</span></code></a></code><span class="sig-paren">(</span>const std::string&amp; <em>name</em>, unsigned int <em>uid</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>qi::MetaObject</span> <code class="descname"><a class="reference external" href="#qi::MetaObject::merge__qi::MetaObjectCR.qi::MetaObjectCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">merge</span></code></a></code><span class="sig-paren">(</span>const qi::MetaObject&amp; <em>source</em>, const qi::MetaObject&amp; <em>dest</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="types">
+<h4>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h4>
+<dl class="type">
+<dt id="TPD_qi::MetaObject::MethodMap">
+<!--[TPD_qi::MetaObject::MethodMap]--><span><em>typedef </em>std::map&lt; unsigned int, MetaMethod &gt;</span> <span>MethodMap</span><a class="headerlink" href="#TPD_qi::MetaObject::MethodMap" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::MetaObject::SignalMap">
+<span><em>typedef </em>std::map&lt; unsigned int, MetaSignal &gt;</span> <span>SignalMap</span><a class="headerlink" href="#TPD_qi::MetaObject::SignalMap" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::MetaObject::PropertyMap">
+<span><em>typedef </em>std::map&lt; unsigned int, MetaProperty &gt;</span> <span>PropertyMap</span><a class="headerlink" href="#TPD_qi::MetaObject::PropertyMap" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span><dt id="TPD_qi::MetaObject::CompatibleMethod">
+<span><em>typedef </em>std::pair&lt; MetaMethod, float &gt;</span> <span>CompatibleMethod</span><a class="headerlink" href="#TPD_qi::MetaObject::CompatibleMethod" title="Permalink to this definition">¶</a></dt>
+<span>
+
+        
+
+        </span></dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Description of the signals and methods accessible on an ObjectTypeInterface.</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::MetaObject::_p__MetaObjectPrivateP">
+MetaObjectPrivate* <code class="descclassname">qi::MetaObject::</code><code class="descname">_p</code><a class="headerlink" href="#qi::MetaObject::_p__MetaObjectPrivateP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::MetaObject::isPrivateMember__ssCR.unsigned-i">
+<em class="property">static</em> <a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">isPrivateMember</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>uid</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::isPrivateMember__ssCR.unsigned-i" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The member&#8217;s name. </li>
+<li><strong>uid</strong> &#8211; The uid&#8217;s name. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the member is considered internal, and should not be listed. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::merge__qi::MetaObjectCR.qi::MetaObjectCR">
+<em class="property">static</em> <a class="reference external" href="">qi::MetaObject</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">merge</code><span class="sig-paren">(</span><a class="reference external" href="">const qi::MetaObject&amp;</a> <em>source</em>, <a class="reference external" href="">const qi::MetaObject&amp;</a> <em>dest</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::merge__qi::MetaObjectCR.qi::MetaObjectCR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> &#8211; The source object. </li>
+<li><strong>dest</strong> &#8211; The destination object. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The merge&#8217;s result of the two objects. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Merge two MetaObject. Dest method and signal ids will be incremented by offset.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::MetaObject">
+ <code class="descclassname">qi::MetaObject::</code><code class="descname">MetaObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::MetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::MetaObject__MetaObjectCR">
+ <code class="descclassname">qi::MetaObject::</code><code class="descname">MetaObject</code><span class="sig-paren">(</span>const MetaObject&amp; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::MetaObject__MetaObjectCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::assign-operator__MetaObjectCR">
+MetaObject&amp; <code class="descclassname">qi::MetaObject::</code><code class="descname">operator=</code><span class="sig-paren">(</span>const MetaObject&amp; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::assign-operator__MetaObjectCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::~MetaObject">
+ <code class="descclassname">qi::MetaObject::</code><code class="descname">~MetaObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::~MetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::methodId__ssCRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">methodId</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>nameWithSignature</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::methodId__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nameWithSignature</strong> &#8211; The complete full signature (name::signature) for example myMethod::(s). </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The method&#8217;s id or -1 if the method wasn&#8217;t found. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::signalId__ssCRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">signalId</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::signalId__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the signal or its full signature. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The signal&#8217;s id or -1 if the signal wasn&#8217;t found. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::propertyId__ssCRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">propertyId</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::propertyId__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The property&#8217;s name. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The property&#8217;s id or -1 if the property wasn&#8217;t found. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::methodMapC">
+MethodMap <code class="descclassname">qi::MetaObject::</code><code class="descname">methodMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::methodMapC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The map of all the methods. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::signalMapC">
+SignalMap <code class="descclassname">qi::MetaObject::</code><code class="descname">signalMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::signalMapC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The map of all the signals. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::propertyMapC">
+PropertyMap <code class="descclassname">qi::MetaObject::</code><code class="descname">propertyMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::propertyMapC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The map of all the properties. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::method__unsigned-i">
+MetaMethod* <code class="descclassname">qi::MetaObject::</code><code class="descname">method</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::method__unsigned-i" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> &#8211; The method&#8217;s id. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The desired method or null if the id is invalid. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::method__unsigned-iC">
+const MetaMethod* <code class="descclassname">qi::MetaObject::</code><code class="descname">method</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::method__unsigned-iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::signal__unsigned-i">
+MetaSignal* <code class="descclassname">qi::MetaObject::</code><code class="descname">signal</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::signal__unsigned-i" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> &#8211; The signal&#8217;s id. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The desired signal or null if the id is invalid. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::signal__unsigned-iC">
+const MetaSignal* <code class="descclassname">qi::MetaObject::</code><code class="descname">signal</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::signal__unsigned-iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::signal__ssCRC">
+const MetaSignal* <code class="descclassname">qi::MetaObject::</code><code class="descname">signal</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::signal__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The name of the signal or its full signature. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The desired signal or null if the signal wasn&#8217;t found. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::property__unsigned-i">
+MetaProperty* <code class="descclassname">qi::MetaObject::</code><code class="descname">property</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::property__unsigned-i" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> &#8211; The property&#8217;s id. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The desired property of null if the id is invalid. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::property__unsigned-iC">
+const MetaProperty* <code class="descclassname">qi::MetaObject::</code><code class="descname">property</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>id</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::property__unsigned-iC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::findMethod__ssCR.GenericFunctionParametersCR.bPC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">int</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">findMethod</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>nameWithOptionalSignature</em>, const GenericFunctionParameters&amp; <em>args</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool*</a> <em>canCache</em> = 0<span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::findMethod__ssCR.GenericFunctionParametersCR.bPC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nameWithOptionalSignature</strong> &#8211; The method&#8217;s name or its full signature. </li>
+<li><strong>args</strong> &#8211; The parameters&#8217; type of the method. </li>
+<li><strong>canCache</strong> &#8211; If set, will be filled with true if the returned method can be cached regardless of the arguments types (but not argument count), and false otherwise. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The mathing method id, or -1 if none or an ambiguous set was found. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Find a method matching nameWithOptionalSignature that can be called with arguments args.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::findMethod__ssCRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;MetaMethod&gt;</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">findMethod</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::findMethod__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; The exact method&#8217;s name. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A vector containing all the overloaded version of the method. </p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::findCompatibleMethod__ssCRC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;CompatibleMethod&gt;</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">findCompatibleMethod</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>nameOrSignature</em><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::findCompatibleMethod__ssCRC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nameOrSignature</strong> &#8211; Either the name or the signature of the method. </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A vector containing all the compatible method and their associated compatibility&#8217;s score. </p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Find all the methods compatible with nameOrSignature. If no signature is specified, the method relies on findMethod.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::descriptionC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaObject::</code><code class="descname">description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaObject::descriptionC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Brief: </em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The object&#8217;s description. </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaObject::MetaObject__MethodMapCR.SignalMapCR.PropertyMapCR.ssCR">
+ <code class="descclassname">qi::MetaObject::</code><code class="descname">MetaObject</code><span class="sig-paren">(</span>const MethodMap&amp; <em>methodMap</em>, const SignalMap&amp; <em>signalMap</em>, const PropertyMap&amp; <em>propertyMap</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>description</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaObject::MetaObject__MethodMapCR.SignalMapCR.PropertyMapCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-metamethod-class-reference">
+<h3>qi::MetaMethod Class Reference<a class="headerlink" href="#qi-metamethod-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p>Representation of a method in an GenericObject.  <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-members">
+<h4>Public Members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span>boost::shared_ptr&lt;MetaMethodPrivate&gt;</span> <code class="descname"><a class="reference internal" href="#qi::MetaMethod::_p__boost::shared_ptr:MetaMethodPrivate:" title="qi::MetaMethod::_p"><code class="xref cpp cpp-func docutils literal"><span class="pre">_p</span></code></a></code></dt>
+</dl>
+
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::MetaMethod"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaMethod</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::MetaMethod__unsigned-i.MetaMethodCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaMethod</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>newUid</em>, const MetaMethod&amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<span>unsigned int</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::uidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">uid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::nameC"><code class="xref cpp cpp-func docutils literal"><span class="pre">name</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::toStringC"><code class="xref cpp cpp-func docutils literal"><span class="pre">toString</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const Signature&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::parametersSignatureC"><code class="xref cpp cpp-func docutils literal"><span class="pre">parametersSignature</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const Signature&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::returnSignatureC"><code class="xref cpp cpp-func docutils literal"><span class="pre">returnSignature</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::descriptionC"><code class="xref cpp cpp-func docutils literal"><span class="pre">description</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>MetaMethodParameterVector</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::parametersC"><code class="xref cpp cpp-func docutils literal"><span class="pre">parameters</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::returnDescriptionC"><code class="xref cpp cpp-func docutils literal"><span class="pre">returnDescription</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::isPrivateC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isPrivate</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaMethod::MetaMethod__unsigned-i.qi::SignatureCR.ssCR.qi::SignatureCR.ssCR.MetaMethodParameterVectorCR.ssCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaMethod</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>uid</em>, const qi::Signature&amp; <em>returnSignature</em>, const std::string&amp; <em>name</em>, const qi::Signature&amp; <em>parametersSignature</em>, const std::string&amp; <em>description</em>, const MetaMethodParameterVector&amp; <em>parameters</em>, const std::string&amp; <em>returnDescription</em><span class="sig-paren">)</span></dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Representation of a method in an GenericObject.</p>
+</div>
+<div class="section" id="members-documentation">
+<h4>Members Documentation<a class="headerlink" href="#members-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="member">
+<dt id="qi::MetaMethod::_p__boost::shared_ptr:MetaMethodPrivate:">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#boost::shared_ptr:AL::ALHierarchyOwner:" title="boost::shared_ptr&lt;AL::ALHierarchyOwner&gt;">boost::shared_ptr&lt;MetaMethodPrivate&gt;</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">_p</code><a class="headerlink" href="#qi::MetaMethod::_p__boost::shared_ptr:MetaMethodPrivate:" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::MetaMethod::MetaMethod">
+ <code class="descclassname">qi::MetaMethod::</code><code class="descname">MetaMethod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaMethod::MetaMethod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::MetaMethod__unsigned-i.MetaMethodCR">
+ <code class="descclassname">qi::MetaMethod::</code><code class="descname">MetaMethod</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>newUid</em>, const MetaMethod&amp; <em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaMethod::MetaMethod__unsigned-i.MetaMethodCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::uidC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">uid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::uidC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::nameC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::nameC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::toStringC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::toStringC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::parametersSignatureC">
+const Signature&amp; <code class="descclassname">qi::MetaMethod::</code><code class="descname">parametersSignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::parametersSignatureC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::returnSignatureC">
+const Signature&amp; <code class="descclassname">qi::MetaMethod::</code><code class="descname">returnSignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::returnSignatureC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::descriptionC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::descriptionC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::parametersC">
+MetaMethodParameterVector <code class="descclassname">qi::MetaMethod::</code><code class="descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::parametersC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::returnDescriptionC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">returnDescription</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::returnDescriptionC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::isPrivateC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::MetaMethod::</code><code class="descname">isPrivate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaMethod::isPrivateC" title="Permalink to this definition">¶</a></dt>
+<dd><p>return true if method is considered internal, and should not be listed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaMethod::MetaMethod__unsigned-i.qi::SignatureCR.ssCR.qi::SignatureCR.ssCR.MetaMethodParameterVectorCR.ssCR">
+ <code class="descclassname">qi::MetaMethod::</code><code class="descname">MetaMethod</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>uid</em>, <a class="reference external" href="signature.html">const qi::Signature&amp;</a> <em>returnSignature</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference external" href="signature.html">const qi::Signature&amp;</a> <em>parametersSignature</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>description</em>, const MetaMethodParameterVector&amp; <em>parameters</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>returnDescription</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaMethod::MetaMethod__unsigned-i.qi::SignatureCR.ssCR.qi::SignatureCR.ssCR.MetaMethodParameterVectorCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-metasignal-class-reference">
+<h3>qi::MetaSignal Class Reference<a class="headerlink" href="#qi-metasignal-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p>Representation of a Signal in an GenericObject.  <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::MetaSignal__unsigned-i.ssCR.qi::SignatureCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaSignal</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>uid</em>, const std::string&amp; <em>name</em>, const qi::Signature&amp; <em>sig</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::MetaSignal"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaSignal</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::~MetaSignal"><code class="xref cpp cpp-func docutils literal"><span class="pre">~MetaSignal</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::nameC"><code class="xref cpp cpp-func docutils literal"><span class="pre">name</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::toStringC"><code class="xref cpp cpp-func docutils literal"><span class="pre">toString</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const Signature&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::parametersSignatureC"><code class="xref cpp cpp-func docutils literal"><span class="pre">parametersSignature</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>unsigned int</span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::uidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">uid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::MetaSignal::isPrivateC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isPrivate</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p>Representation of a Signal in an GenericObject.</p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::MetaSignal::MetaSignal__unsigned-i.ssCR.qi::SignatureCR">
+ <code class="descclassname">qi::MetaSignal::</code><code class="descname">MetaSignal</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>uid</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference external" href="signature.html">const qi::Signature&amp;</a> <em>sig</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaSignal::MetaSignal__unsigned-i.ssCR.qi::SignatureCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::MetaSignal">
+ <code class="descclassname">qi::MetaSignal::</code><code class="descname">MetaSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaSignal::MetaSignal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::~MetaSignal">
+ <code class="descclassname">qi::MetaSignal::</code><code class="descname">~MetaSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaSignal::~MetaSignal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::nameC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::MetaSignal::</code><code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaSignal::nameC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::toStringC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaSignal::</code><code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaSignal::toStringC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::parametersSignatureC">
+const Signature&amp; <code class="descclassname">qi::MetaSignal::</code><code class="descname">parametersSignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaSignal::parametersSignatureC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::uidC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <code class="descclassname">qi::MetaSignal::</code><code class="descname">uid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaSignal::uidC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaSignal::isPrivateC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::MetaSignal::</code><code class="descname">isPrivate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaSignal::isPrivateC" title="Permalink to this definition">¶</a></dt>
+<dd><p>return true if signal is considered internal, and should not be listed</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="qi-metaproperty-class-reference">
+<h3>qi::MetaProperty Class Reference<a class="headerlink" href="#qi-metaproperty-class-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="introduction">
+<h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h4>
+<p> <a class="reference external" href="#detailed-description"><code class="docutils literal"><span class="pre">More...</span></code></a></p>
+<p></p>
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="public-functions">
+<h4>Public Functions<a class="headerlink" href="#public-functions" title="Permalink to this headline">¶</a></h4>
+<dl class="function function-index">
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::MetaProperty__unsigned-i.ssCR.qi::SignatureCR"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaProperty</span></code></a></code><span class="sig-paren">(</span>unsigned int <em>uid</em>, const std::string&amp; <em>name</em>, const qi::Signature&amp; <em>sig</em><span class="sig-paren">)</span></dt>
+<dt>
+<span></span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::MetaProperty"><code class="xref cpp cpp-func docutils literal"><span class="pre">MetaProperty</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt>
+<span>const std::string&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::nameC"><code class="xref cpp cpp-func docutils literal"><span class="pre">name</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>const qi::Signature&amp;</span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::signatureC"><code class="xref cpp cpp-func docutils literal"><span class="pre">signature</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>std::string</span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::toStringC"><code class="xref cpp cpp-func docutils literal"><span class="pre">toString</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>unsigned int</span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::uidC"><code class="xref cpp cpp-func docutils literal"><span class="pre">uid</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dt>
+<span>bool</span> <code class="descname"><a class="reference external" href="#qi::MetaProperty::isPrivateC"><code class="xref cpp cpp-func docutils literal"><span class="pre">isPrivate</span></code></a></code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+</dl>
+
+</div>
+<div class="section" id="detailed-description">
+<h4>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h4>
+<p></p>
+</div>
+<div class="section" id="function-documentation">
+<h4>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="qi::MetaProperty::MetaProperty__unsigned-i.ssCR.qi::SignatureCR">
+ <code class="descclassname">qi::MetaProperty::</code><code class="descname">MetaProperty</code><span class="sig-paren">(</span><a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <em>uid</em>, <a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>name</em>, <a class="reference external" href="signature.html">const qi::Signature&amp;</a> <em>sig</em><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaProperty::MetaProperty__unsigned-i.ssCR.qi::SignatureCR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::MetaProperty">
+ <code class="descclassname">qi::MetaProperty::</code><code class="descname">MetaProperty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qi::MetaProperty::MetaProperty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::nameC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">const std::string&amp;</a> <code class="descclassname">qi::MetaProperty::</code><code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaProperty::nameC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::signatureC">
+<a class="reference external" href="signature.html">const qi::Signature&amp;</a> <code class="descclassname">qi::MetaProperty::</code><code class="descname">signature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaProperty::signatureC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::toStringC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#ss" title="std::string">std::string</a> <code class="descclassname">qi::MetaProperty::</code><code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaProperty::toStringC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::uidC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#i" title="int">unsigned int</a> <code class="descclassname">qi::MetaProperty::</code><code class="descname">uid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaProperty::uidC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="qi::MetaProperty::isPrivateC">
+<a class="reference internal" href="../../../../../naoqi/stdtypes.html#b" title="bool">bool</a> <code class="descclassname">qi::MetaProperty::</code><code class="descname">isPrivate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><code class="descclassname"> const</code><a class="headerlink" href="#qi::MetaProperty::isPrivateC" title="Permalink to this definition">¶</a></dt>
+<dd><p>return true if property is considered internal, and should not be listed</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">API References</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">C++ qi API Reference</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../base/index.html">C++ qi base API</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="index.html">C++ qi type API</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="anyvalue.html">qi::AnyValue</a></li>
+<li class="toctree-l6"><a class="reference internal" href="anyfunction.html">qi::AnyFunction</a></li>
+<li class="toctree-l6"><a class="reference internal" href="anyobject.html">qi::Object</a></li>
+<li class="toctree-l6"><a class="reference internal" href="anymodule.html">qi::AnyModule</a></li>
+<li class="toctree-l6"><a class="reference internal" href="buffer.html">qi::Buffer, qi::BufferReader</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dynamicobjectbuilder.html">qi::DynamicObjectBuilder</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">qi::MetaObject, qi::MetaMethod, qi::MetaSignal, qi::MetaProperty</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="objecttypebuilder.html">qi::ObjectTypeBuilder</a></li>
+<li class="toctree-l6"><a class="reference internal" href="property.html">qi::Property</a></li>
+<li class="toctree-l6"><a class="reference internal" href="signal.html">qi::Signal</a></li>
+<li class="toctree-l6"><a class="reference internal" href="signature.html">qi::Signature</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../messaging/index.html">C++ qi messaging API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../file.html">qi::File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-classindex.html">C++ Class Index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cpp-funcindex.html">C++ Function Index</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../python/index.html">Python qi API reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../transtyping.html">&gt; Type equivalences between languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guide/index.html">Hands-on Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">qi::MetaObject, qi::MetaMethod, qi::MetaSignal, qi::MetaProperty</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#qi-metaobject-class-reference">qi::MetaObject Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#public-static-functions">Public Static Functions</a></li>
+<li><a class="reference internal" href="#types">Types</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-metamethod-class-reference">qi::MetaMethod Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-members">Public Members</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#members-documentation">Members Documentation</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-metasignal-class-reference">qi::MetaSignal Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qi-metaproperty-class-reference">qi::MetaProperty Class Reference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#public-functions">Public Functions</a></li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a></li>
+<li><a class="reference internal" href="#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../../../contents.html">Site map</a>
+      <a title="Index" href="../../../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../index.html" />
+    <link rel="up" title="Welcome to qiBuild documentation !" href="index.html" />
+    <link rel="next" title="Managing git projects with qisrc" href="qisrc/tutorial.html" />
+    <link rel="prev" title="qiBuild and autotools" href="qibuild/other/autotools.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../advanced/index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="beginner-getting_started">
+                
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p><strong>qiBuild</strong> is a set of command line tools written in <strong>Python</strong>.</p>
+<p>Only <strong>Python 2.7</strong> is supported.</p>
+<p>Note that most linux distributions now comes with <strong>Python3</strong>
+by default now, so you may need to install <strong>python 2</strong> first.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Install <code class="docutils literal"><span class="pre">qibuild</span></code> with <a class="reference external" href="http://www.pip-installer.org/en/latest/">pip</a>.</p>
+<p>It is recommended to install qibuild with the <code class="docutils literal"><span class="pre">--user</span></code> option,
+in order to keep your system clean.</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">pip install qibuild --user</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Add <code class="docutils literal"><span class="pre">$HOME/.local/bin</span></code> to your <code class="docutils literal"><span class="pre">$PATH</span></code>.</p>
+<p>One way to that is to add the following line at the end of
+your ~/.bashrc file:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">PATH=$PATH:$HOME/.local/bin</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Install <code class="docutils literal"><span class="pre">qibuild</span></code> with <a class="reference external" href="http://www.pip-installer.org/en/latest/">pip</a>.</p>
+<p>It is recommended to install qibuild with the <code class="docutils literal"><span class="pre">--user</span></code> option,
+in order to keep your system clean.</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">pip install qibuild --user</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Add <code class="docutils literal"><span class="pre">$HOME/Library/Python/2.7/bin</span></code> to your <code class="docutils literal"><span class="pre">$PATH</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Install <code class="docutils literal"><span class="pre">qibuild</span></code> with <a class="reference external" href="http://www.pip-installer.org/en/latest/">pip</a>.</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">pip install qibuild</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Add <code class="docutils literal"><span class="pre">C:\Python27</span></code> and
+<code class="docutils literal"><span class="pre">c:\Python27\Scripts</span></code> in your <code class="docutils literal"><span class="pre">PATH</span></code>.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>If you&#8217;d like to have nice colors in your console, you can install
+the Python readline library: <a class="reference external" href="http://pypi.python.org/pypi/pyreadline">http://pypi.python.org/pypi/pyreadline</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="continue-with-the-tutorials">
+<h2>Continue with the tutorials<a class="headerlink" href="#continue-with-the-tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qisrc/tutorial.html">Managing git projects with qisrc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qisrc/templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qibuild/tutorial.html">Building C++ projects with qibuild</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">qiBuild: the build framework</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qisrc/tutorial.html">Managing git projects with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qisrc/templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qibuild/tutorial.html">Building C++ projects with qibuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">qiBuild tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#mac">Mac</a></li>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#continue-with-the-tutorials">Continue with the tutorials</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../changelog.html">Changelog</a>
+        <a title="CMake index" href="../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../py-modindex.html">Python index</a>
+        <a title="Index" href="../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

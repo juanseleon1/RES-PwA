@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=false;
+    private boolean logged=true;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -27,19 +27,22 @@ public class BEstadoInteraccion implements Believes{
     private boolean sistemaSuspendidoInt=false;
     private long nivelEnriquecimiento=0;
     private long velocidadAnim=0;
-    private long distanciaPwA=0;
+    private double distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
+    private boolean estaKaraokeando=false;
     private boolean desplazandose=false;
     private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
+    private boolean recibirRespuestaPwA=false;
     private LedsColor leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
+    private boolean movError;
 
     
     @Override
@@ -54,11 +57,14 @@ public class BEstadoInteraccion implements Believes{
         {
             confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
         }
-        if(infoRecibida.getDataP().containsKey("hayPwA")){
-            detectaPwA= Boolean.valueOf((String)infoRecibida.getDataP().get("hayPwA"));
-            if(detectaPwA)
-                tiempoSinInt=0;
-            else
+        if(infoRecibida.getDataP().containsKey("faceDetected")){
+            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
+            detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
+            tiempoSinInt=0;
+        }
+        
+        if(infoRecibida.getDataP().containsKey("humanLost")){
+            detectaPwA= false;
             tiempoSinInt=System.currentTimeMillis();
         }
         if(infoRecibida.getDataP().containsKey("canto")){
@@ -70,9 +76,8 @@ public class BEstadoInteraccion implements Believes{
                 nivelEnriquecimiento++;
             else if(!quiereEnriquec && nivelEnriquecimiento>0)
                 nivelEnriquecimiento--;
-        }if(infoRecibida.getDataP().containsKey("suspension")){
-            sistemaSuspendido= Boolean.valueOf((String)infoRecibida.getDataP().get("suspension"));
-            
+        }if(infoRecibida.getDataP().containsKey("wakeUpFinished")){
+            sistemaSuspendido= true;
         }if(infoRecibida.getDataP().containsKey("pausarint")){
            pausarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("pausarint"));
             
@@ -82,23 +87,38 @@ public class BEstadoInteraccion implements Believes{
         }if(infoRecibida.getDataP().containsKey("reiniciarint")){
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
-        }if(infoRecibida.getDataP().containsKey("distancia")){
-          distanciaPwA  = Long.valueOf((String)infoRecibida.getDataP().get("distancia"));
+        }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
+          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
            
-        }if(infoRecibida.getDataP().containsKey("hablando")){
-          estaHablando = Boolean.valueOf((String)infoRecibida.getDataP().get("hablando"));
+        }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
+          estaHablando = true;
             
-        }if(infoRecibida.getDataP().containsKey("moviendo")){
-          estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("moviendo"));
+        }if(infoRecibida.getDataP().containsKey("endOfAnimatedSpeech")){
+          estaHablando = false;
             
-        }if(infoRecibida.getDataP().containsKey("desplazandose")){
-          desplazandose = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
+        }if(infoRecibida.getDataP().containsKey("goToSuccess")){
+          desplazandose = false;
             
-        }if(infoRecibida.getDataP().containsKey("fisicaint")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("fisicaint"));
+        }
+        if(infoRecibida.getDataP().containsKey("goToFailed")){
+          desplazandose = false;
+          movError=true;
+            
+        }
+        if(infoRecibida.getDataP().containsKey("moviendose")){
+          estaMoviendo = Boolean.valueOf((String)infoRecibida.getDataP().get("desplazandose"));
+            
+        }if(infoRecibida.getDataP().containsKey("stimulusDetected")){
+           hayInteraccionFisica = true;
         }
         if(infoRecibida.getDataP().containsKey("initServ")){
-           hayInteraccionFisica = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+           confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
+        }
+        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+           recibirRespuestaPwA = true;
+        }if(infoRecibida.getDataP().containsKey("karaokeando")){
+          estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
+            
         }
         return true;
     }
@@ -183,11 +203,11 @@ public class BEstadoInteraccion implements Believes{
         this.velocidadAnim = velocidad;
     }
 
-    public long getDistanciaPwA() {
+    public double getDistanciaPwA() {
         return distanciaPwA;
     }
 
-    public void setDistanciaPwA(long distanciaPwA) {
+    public void setDistanciaPwA(double distanciaPwA) {
         this.distanciaPwA = distanciaPwA;
     }
 
@@ -311,6 +331,22 @@ public class BEstadoInteraccion implements Believes{
 
     public void setConfirmarActServicios(boolean confirmarActServicios) {
         this.confirmarActServicios = confirmarActServicios;
+    }
+
+    public boolean isRecibirRespuestaPwA() {
+        return recibirRespuestaPwA;
+    }
+
+    public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
+        this.recibirRespuestaPwA = recibirRespuestaPwA;
+    }
+
+    public boolean isEstaKaraokeando() {
+        return estaKaraokeando;
+    }
+
+    public void setEstaKaraokeando(boolean estaKaraokeando) {
+        this.estaKaraokeando = estaKaraokeando;
     }
     
     

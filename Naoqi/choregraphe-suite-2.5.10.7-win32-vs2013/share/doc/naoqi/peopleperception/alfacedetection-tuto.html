@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALFaceDetection Tutorial &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="ALFaceDetection" href="alfacedetection.html" />
+    <link rel="next" title="ALGazeAnalysis" href="algazeanalysis.html" />
+    <link rel="prev" title="ALFaceDetection API" href="alfacedetection-api.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="naoqi-peopleperception-alfacedetection-tuto">
+                
+  <div class="section" id="alfacedetection-tutorial">
+<span id="alfacedetection-tuto"></span><h1>ALFaceDetection Tutorial<a class="headerlink" href="#alfacedetection-tutorial" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-peopleperception"><span>NAOqi People Perception</span></a> - <a class="reference internal" href="alfacedetection.html#alfacedetection"><span>Overview</span></a> |
+<a class="reference internal" href="alfacedetection-api.html#alfacedetection-api"><span>API</span></a> | Tutorial</p>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial explains how to run the ALFaceDetection module using Python. We
+use the following approach: we regularly check the ALMemory&#8217;s result variable.
+Information about the detected faces is printed on the screen.</p>
+<p><a class="reference download internal" href="../../_downloads/vision_faceDetection.py"><code class="xref download docutils literal"><span class="pre">vision_faceDetection.py</span></code></a></p>
+</div>
+<div class="section" id="getting-a-proxy-to-alfacedetection">
+<h2>Getting a proxy to ALFaceDetection<a class="headerlink" href="#getting-a-proxy-to-alfacedetection" title="Permalink to this headline">¶</a></h2>
+<p>After some initialization steps, we first instantiate a proxy to the ALFaceDetection module.</p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="c"># This test demonstrates how to use the ALFaceDetection module.</span>
+<span class="c"># Note that you might not have this module depending on your distribution</span>
+<span class="c">#</span>
+<span class="c"># - We first instantiate a proxy to the ALFaceDetection module</span>
+<span class="c">#     Note that this module should be loaded on the robot&#39;s NAOqi.</span>
+<span class="c">#     The module output its results in ALMemory in a variable</span>
+<span class="c">#     called &quot;FaceDetected&quot;</span>
+<span class="c"># - We then read this ALMemory value and check whether we get</span>
+<span class="c">#   interesting things.</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">naoqi</span> <span class="kn">import</span> <span class="n">ALProxy</span>
+
+<span class="c"># Replace this with your robot&#39;s IP address</span>
+<span class="n">IP</span> <span class="o">=</span> <span class="s">&quot;10.0.252.91&quot;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">9559</span>
+
+<span class="c"># Create a proxy to ALFaceDetection</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">faceProxy</span> <span class="o">=</span> <span class="n">ALProxy</span><span class="p">(</span><span class="s">&quot;ALFaceDetection&quot;</span><span class="p">,</span> <span class="n">IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+  <span class="k">print</span> <span class="s">&quot;Error when creating face detection proxy:&quot;</span>
+  <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+  <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Subscribe to the ALFaceDetection proxy</span>
+<span class="c"># This means that the module will write in ALMemory with</span>
+<span class="c"># the given period below</span>
+<span class="n">period</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">faceProxy</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">&quot;Test_Face&quot;</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-results-in-the-almemory-variable">
+<h2>Reading the results in the ALMemory variable<a class="headerlink" href="#reading-the-results-in-the-almemory-variable" title="Permalink to this headline">¶</a></h2>
+<p>Now we need to get a proxy to ALMemory and check the ALFaceDetection output variable.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ALMemory variable where the ALFaceDetection module</span>
+<span class="c"># outputs its results.</span>
+<span class="n">memValue</span> <span class="o">=</span> <span class="s">&quot;FaceDetected&quot;</span>
+
+<span class="c"># Create a proxy to ALMemory</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">memoryProxy</span> <span class="o">=</span> <span class="n">ALProxy</span><span class="p">(</span><span class="s">&quot;ALMemory&quot;</span><span class="p">,</span> <span class="n">IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+  <span class="k">print</span> <span class="s">&quot;Error when creating memory proxy:&quot;</span>
+  <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+  <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># A simple loop that reads the memValue and checks whether faces are detected.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+  <span class="n">val</span> <span class="o">=</span> <span class="n">memoryProxy</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="n">memValue</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s">&quot;&quot;</span>
+  <span class="k">print</span> <span class="s">&quot;\*****&quot;</span>
+  <span class="k">print</span> <span class="s">&quot;&quot;</span>
+
+<span class="c"># Check whether we got a valid output: a list with two fields.</span>
+<span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+  <span class="c"># We detected faces !</span>
+  <span class="c"># For each face, we can read its shape info and ID.</span>
+  <span class="c"># First Field = TimeStamp.</span>
+  <span class="n">timeStamp</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="c"># Second Field = array of face_Info&#39;s.</span>
+  <span class="n">faceInfoArray</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+  <span class="k">try</span><span class="p">:</span>
+  <span class="c"># Browse the faceInfoArray to get info on each detected face.</span>
+    <span class="k">for</span> <span class="n">faceInfo</span> <span class="ow">in</span> <span class="n">faceInfoArray</span><span class="p">:</span>
+    <span class="c"># First Field = Shape info.</span>
+    <span class="n">faceShapeInfo</span> <span class="o">=</span> <span class="n">faceInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c"># Second Field = Extra info (empty for now).</span>
+    <span class="n">faceExtraInfo</span> <span class="o">=</span> <span class="n">faceInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">print</span> <span class="s">&quot;  alpha </span><span class="si">%.3f</span><span class="s"> - beta </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">faceShapeInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">faceShapeInfo</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s">&quot;  width </span><span class="si">%.3f</span><span class="s"> - height </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">faceShapeInfo</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">faceShapeInfo</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+  <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;faces detected, but it seems getData is invalid. ALValue =&quot;</span>
+    <span class="k">print</span> <span class="n">val</span>
+    <span class="k">print</span> <span class="s">&quot;Error msg </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">print</span> <span class="s">&quot;Error with getData. ALValue = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+  <span class="c"># Unsubscribe the module.</span>
+
+<span class="n">faceProxy</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="s">&quot;Test_Face&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Test terminated successfully.&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Here is what you get when you execute the above script. We get different results
+as we occult or present new faces to the robot.</p>
+<div class="highlight-guess"><div class="highlight"><pre>\*****
+alpha 0.243 - beta 0.005
+width 0.167 - height 0.167
+\*****
+alpha 0.243 - beta 0.005
+width 0.167 - height 0.167
+\*****
+alpha 0.243 - beta 0.005
+width 0.167 - height 0.167
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">SDKs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">NAOqi APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interaction/index_interaction.html">NAOqi Interaction engines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NAOqi People Perception</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alengagementzones.html">ALEngagementZones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alfacecharacteristics.html">ALFaceCharacteristics</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="alfacedetection.html">ALFaceDetection</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="alfacedetection-api.html">ALFaceDetection API</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALFaceDetection Tutorial</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="algazeanalysis.html">ALGazeAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alpeopleperception.html">ALPeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alsittingpeopledetection.html">ALSittingPeopleDetection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="alwavingdetection.html">ALWavingDetection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors &amp; LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/libqi/index.html">qi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">ALFaceDetection Tutorial</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#getting-a-proxy-to-alfacedetection">Getting a proxy to ALFaceDetection</a></li>
+<li><a class="reference internal" href="#reading-the-results-in-the-almemory-variable">Reading the results in the ALMemory variable</a></li>
+<li><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

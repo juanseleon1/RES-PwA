@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="1" localization="8" tooltip="Retrieve the localized text of the parameter and send it to the box&apos;s output. You have to localized the value of the parameter." x="234" y="29">
+        <bitmap>media/images/box/box-python-script.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        try:
+            self.onStopped(self.getParameter("Text"))
+        except:
+            self.onError()
+
+        pass]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+        <Output name="onError" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+        <Parameter name="Text" inherits_from_parent="0" content_type="5" value="Hello" default_value="" tooltip="The text you want to be localized." id="5" />
+    </Box>
+</ChoregrapheBox>

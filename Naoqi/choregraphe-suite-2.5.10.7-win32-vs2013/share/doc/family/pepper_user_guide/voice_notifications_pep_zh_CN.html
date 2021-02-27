@@ -1,0 +1,866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Event and state notifications &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Event and state notifications" href="voice_notifications_pep.html" />
+    <link rel="next" title="Understanding the boot process" href="boot_process_pep.html" />
+    <link rel="prev" title="Event and state notifications" href="voice_notifications_pep_ja_JP.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="family-pepper_user_guide-voice_notifications_pep_zh_CN">
+                
+  <div class="section" id="event-and-state-notifications">
+<h1>Event and state notifications<a class="headerlink" href="#event-and-state-notifications" title="Permalink to this headline">¶</a></h1>
+<p>You may receive notifications from <strong>Pepper</strong> system or from an application.</p>
+<p>In that case, a small sound is played and the status LEDs remain still white but
+blink once in a while with a color indicating the severity of the notification.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="30%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Status LEDs is ...</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="3"><p class="first"><a class="img-inline reference internal" href="../../_images/gs_white_led.png"><img alt="white_chest" class="img-inline" src="../../_images/gs_white_led.png" style="width: 51px; height: 49px;" /></a></p>
+<p>Steady White light,</p>
+<p>cut by a brief</p>
+<p class="last">blinking in ...</p>
+</td>
+<td>Green <a class="img-inline reference internal" href="../../_images/notif-info.gif"><img alt="green_chest_anim" class="img-inline" src="../../_images/notif-info.gif" style="width: 50px; height: 50px;" /></a></td>
+<td><strong>Pepper</strong> gives you some feed-back by
+an <strong>Info</strong> notification about an ongoing
+action.</td>
+</tr>
+<tr class="row-odd"><td>Yellow <a class="img-inline reference internal" href="../../_images/notif-warning.gif"><img alt="yellow_chest_anim" class="img-inline" src="../../_images/notif-warning.gif" style="width: 50px; height: 50px;" /></a></td>
+<td><p class="first"><strong>Warning</strong> notification occurs when an
+issue requires your attention and/or
+action.</p>
+<p class="last"><strong>Pepper</strong> is still usable but, it may
+either run in a degraded mode in which
+some features may be not available or it
+may soon become unusable if you don&#8217;t
+solve the problem.</p>
+</td>
+</tr>
+<tr class="row-even"><td>Red <a class="img-inline reference internal" href="../../_images/notif-error.gif"><img alt="red_chest_anim" class="img-inline" src="../../_images/notif-error.gif" style="width: 50px; height: 50px;" /></a></td>
+<td><p class="first"><strong>Error</strong> notification occurs when one or
+all functionality(ies) of <strong>Pepper</strong>
+become unusable.</p>
+<p class="last">Try to solve the problem using the tips.
+If the problem persists, contact the
+customer support and provide them with the
+error ID.
+For further details, see:
+<a class="reference internal" href="contacting_support_pep.html#contacting-support-pep"><span>Contacting customer support for Pepper</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Error and Warning notification messages are prefixed by their severity and their
+ID when they are said, so that you can give them to the customer support to
+describe more easily your problem.</p>
+<p>To ask <strong>Pepper</strong> to read the notification, see: <a class="reference internal" href="request_pep.html#pepp-request"><span>Requesting technical information</span></a>.</p>
+<div class="section" id="list-of-notifications">
+<h2>List of notifications<a class="headerlink" href="#list-of-notifications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="boot-process">
+<span id="bp-zh-cn"></span><h3>Boot process<a class="headerlink" href="#boot-process" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="voice_notifications_pep.html#bp-en"><span>English</span></a> - <a class="reference internal" href="voice_notifications_pep_ja_JP.html#bp-jp"><span>日本語</span></a> - 普通话</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="47%" />
+<col width="47%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">#</th>
+<th class="head">Message</th>
+<th class="head">Tips</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>10 11</td>
+<td>我取消了系统更新。系统镜像无效。我仍在运行版本 ◯◯。</td>
+<td>The file containing the system image seems unusable,
+try again to retrieve the relevant system file.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>100</td>
+<td>我成功地更新了我的系统。我现在在运行版本 ◯◯。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-even"><td>101 102 103</td>
+<td><ul class="first last simple">
+<li>我取消了系统更新。系统镜像我的更新程序不兼容。我仍在运行版本 ◯◯。</li>
+<li>我取消了系统更新。系统镜像与我的处理器不兼容 。我仍在运行版本 ◯◯。</li>
+<li>我取消了系统更新。系统镜像与我的身体不兼容。我仍在运行版本 ◯◯。</li>
+</ul>
+</td>
+<td>The system image used for the update is not compatible
+with your robot hardware.
+Check what system image version supports your robot
+version and model, and retry with one of the supported
+system image version.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>104</td>
+<td>我取消了系统更新。系统镜像已损坏。我仍在运行版本 ◯◯。</td>
+<td>The system image is corrupted.
+Try downloading it again then restart the update
+process.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>105</td>
+<td>我取消了系统更新。我目前的系统似乎崩溃了。我仍在运行版本 ◯◯。</td>
+<td>The update program cannot recognize your robot
+hardware.
+Some changes done on the hardware damage it.
+Contact the support.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>110 111</td>
+<td>我无法更新我的系统。请尝试再次更新我。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>120</td>
+<td>我成功地恢复了出厂设置。我的所有数据和设置都已经重置。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>200 201 202</td>
+<td>我不能恢复出厂设置。我的一些数据或设置可能没有被重置。请重试恢复出厂设置，以便删除所有数据和设置。</td>
+<td><p class="first">Retry the update with factory reset enabled.</p>
+<p class="last">If the problem persists, contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>203</td>
+<td>我成功地恢复了出厂设置。我的所有数据和设置都已经重置。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>204 205</td>
+<td>我无法访问我的一些数据。我的用户磁盘分区似乎损坏了。请重启我以便解决这个问题。</td>
+<td><p class="first">The memory space dedicated to the user is not
+accessible due to some hardware failure.</p>
+<p>Try to reboot the robot.</p>
+<p class="last">If the problem persists, contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>214 215</td>
+<td>我无法访问我的一些数据。我的内部磁盘分区似乎损坏了。请重启我以便解决这个问题。</td>
+<td><p class="first">The memory space dedicated to internal usage is not
+accessible due to some hardware failure.</p>
+<p>Try to reboot the robot.</p>
+<p class="last">If the problem persists, contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>400 401 402</td>
+<td><ul class="first last simple">
+<li>我不能移动。我目前的系统与我的身体不兼容。用一个兼容的系统镜像，重新更新我。</li>
+<li>我不能移动。我目前的系统对我的身体来说版本太旧了。请用一个稍新的系统镜像再次更新我。</li>
+<li>我不能移动。目前的系统对我的身体来说版本过新。用一个较新的系统镜像重新更新我。</li>
+</ul>
+</td>
+<td>The current system image of your robot is not
+compatible with your robot hardware.
+Check what system image version supports your robot
+version and model, and retry with one of the supported
+system image version.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>404</td>
+<td>我不能移动。我无法连接身体。请重启我以便解决这个问题。</td>
+<td><p class="first">The head does not find or recognize its body. The
+robot is unusable.</p>
+<p class="last">Try to reboot to fix this.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>405</td>
+<td>我更新了一些固件。请重启我以便完成更新。</td>
+<td><p class="first">Some new firmwares have been installed but will not be
+enabled until a reboot of the robot.</p>
+<p>Turn off the robot using the standard procedure, then
+start it again.</p>
+<p>If this warning occurs on every boot, it means:</p>
+<ul class="simple">
+<li>either some hardware is too old and cannot be
+updated;</li>
+<li>or some hardware is broken and cannot be updated.</li>
+</ul>
+<p class="last">In either case, you should contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>500</td>
+<td>我无法连接到云服务。我无法检测到我的头部序列号。请联系售后服务。</td>
+<td>Contact the support.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>501</td>
+<td>我无法连接到云服务。我的系统日期出错了。请确保我连接网络，并重新启动，以便解决这个问题。</td>
+<td>Make sure your robot is connected to the Internet then
+restart it to update the date.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>600</td>
+<td>我這樣不太安全。请帮助我坐下来或是弯腰</td>
+<td>The robot is not in a good position to start
+autonomous life. Put it in sitting or crouching
+position and it will start life.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="diagnosis-pepper">
+<span id="diag-zh-cn"></span><h3>Diagnosis - <strong>Pepper</strong><a class="headerlink" href="#diagnosis-pepper" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="voice_notifications_pep.html#diag-en"><span>English</span></a> - <a class="reference internal" href="voice_notifications_pep_ja_JP.html#diag-jp"><span>日本語</span></a> - 普通话</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="47%" />
+<col width="47%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">#</th>
+<th class="head">Message</th>
+<th class="head">Tips</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>710</td>
+<td>我不能再动了。我检测到我的关键设备◯◯上有一个错误：◯◯。请重启我以便解决这个问题。</td>
+<td><p class="first">This will have an impact on your robot,</p>
+<p>see <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><span>Diagnosis effect</span></a>.</p>
+<p class="last">If the problem persists after a reboot,
+contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>711</td>
+<td>我检测到我的关键设备◯◯上有一个错误：◯◯。请重启我以便解决这个问题。</td>
+<td><p class="first">This will have an impact on your robot,</p>
+<p>see <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><span>Diagnosis effect</span></a>.</p>
+<p class="last">If the problem persists after a reboot,
+contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>712</td>
+<td>我检测到一个系统错误：我的某个软件无法正常运行。请重启我以便解决这个问题。</td>
+<td><p class="first">If the problem persists after a reboot,</p>
+<p class="last">contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>713</td>
+<td>我不能再动了。我检测到我的关键设备◯◯上有一个错误：◯◯。请重启我以便解决这个问题。</td>
+<td><p class="first">This will have an impact on your robot,
+see <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><span>Diagnosis effect</span></a>.</p>
+<p class="last">If the problem persists after a reboot,
+contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>714</td>
+<td>我检测到我的关键设备◯◯上有一个错误：◯◯。请重启我以便解决这个问题。</td>
+<td><p class="first">This will have an impact on your robot,
+see <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><span>Diagnosis effect</span></a>.</p>
+<p class="last">If the problem persists after a reboot,
+contact the support.</p>
+</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>720</td>
+<td>我的◯◯中的一些马达的温度正在升高。我很快就需要休息了。</td>
+<td>Robot motors are getting hot or are already too
+hot to be able to move.
+Put the robot in crouch and unstiffened and
+wait for few tens of minutes to let its motors
+cool down before you can use it again.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>721</td>
+<td>我身体的一部分不能再动了。我的◯◯中的一些电机的温度过高。让我休息一会儿吧。</td>
+<td>Robot motors are getting hot or are already too
+hot to be able to move.
+Put the robot in crouch and unstiffened and
+wait for few tens of minutes to let its motors
+cool down before you can use it again.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>722</td>
+<td>我不能再动了。我的◯◯中的一些电机的温度过高。让我休息一会儿吧。</td>
+<td>Robot motors are getting hot or are already too
+hot to be able to move.
+Put the robot in crouch and unstiffened and
+wait for few tens of minutes to let its motors
+cool down before you can use it again.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>723</td>
+<td>我的◯◯中的一些马达的温度正在升高。我很快就需要休息了。</td>
+<td>Robot motors are getting hot or are already too
+hot to be able to move.
+Put the robot in crouch and unstiffened and
+wait for few tens of minutes to let its motors
+cool down before you can use it again.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>724</td>
+<td>我的◯◯中的一些电机的温度过高。让我休息一会儿吧。</td>
+<td>Robot motors are getting hot or are already too
+hot to be able to move.
+Put the robot in crouch and unstiffened and
+wait for few tens of minutes to let its motors
+cool down before you can use it again.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>725</td>
+<td>我的内存快满了。请重启我以便解决这个问题。</td>
+<td>Robot RAM is full.
+Reboot the robot.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>726</td>
+<td>我的内存快满了。请删除一些应用或者数据以便腾出一些空间。</td>
+<td>Robot user partition is full.
+Remove some applications or some data.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>730</td>
+<td>我头部处理器的温度正在上升。我很快就需要休息了。</td>
+<td>Robot head processor is getting or is already
+too hot.
+Shut down the robot for few tens of minutes.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>731</td>
+<td>我头部处理器的温度过高。让我休息一会儿吧。</td>
+<td>Robot head processor is getting or is already
+too hot.
+Shut down the robot for few tens of minutes.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="battery-notifications">
+<span id="bat-zh-cn"></span><h3>Battery - notifications<a class="headerlink" href="#battery-notifications" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="voice_notifications_pep.html#bat-en"><span>English</span></a> - <a class="reference internal" href="voice_notifications_pep_ja_JP.html#bat-jp"><span>日本語</span></a> - 普通话</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="47%" />
+<col width="47%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">#</th>
+<th class="head">Message</th>
+<th class="head">Tips</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>800</td>
+<td>我没法使用电池。请重启我以便解决这个问题。</td>
+<td>If the problem persists after a reboot,
+contact the support.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>801</td>
+<td>我的电池快需要充电了。</td>
+<td>The battery level reached a low level. See:
+<a class="reference internal" href="battery-charging_pep.html#charging-battery-pep"><span>Charging the battery</span></a>.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>802</td>
+<td>我的电池需要紧急充电。</td>
+<td>The battery level reached a very low level. See:
+<a class="reference internal" href="battery-charging_pep.html#charging-battery-pep"><span>Charging the battery</span></a>.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>803</td>
+<td>我的电量完全不足。我正在关机。</td>
+<td>The robot ran out of battery so it shut down.
+See: <a class="reference internal" href="battery-charging_pep.html#charging-battery-pep"><span>Charging the battery</span></a>.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>805</td>
+<td>现在我的电池充好电了。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>806</td>
+<td>我检测到我的电池温度异常。我正在关机。请让我休息至少2小时以上，再重启。</td>
+<td>If the problem persists after 2 hours with the robot off,
+contact the support.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>810</td>
+<td>我无法离开我的充电底座。请帮助我从它身边移开。</td>
+<td>The robot is in an unknown and unsafe position.
+Push him away from its charging station like described in
+section <a class="reference internal" href="move_manually.html#move-manually-pepper"><span>Moving Pepper while off</span></a>.</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="store-notifications">
+<span id="stor-zh-cn"></span><h3><strong>Store</strong> - notifications<a class="headerlink" href="#store-notifications" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="voice_notifications_pep.html#stor-en"><span>English</span></a> - <a class="reference internal" href="voice_notifications_pep_ja_JP.html#stor-jp"><span>日本語</span></a> - 普通话</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="47%" />
+<col width="47%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">#</th>
+<th class="head">Message</th>
+<th class="head">Tips</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>830</td>
+<td>我已经安装了 ◯◯。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>832</td>
+<td>我已经更新了 ◯◯。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-even"><td>834</td>
+<td>我已经删除了 ◯◯。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>840</td>
+<td>我已经下载了系统版本 ◯◯。请重新启动我以便安装它。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_yellow_led.png"><img alt="yellow_chest" class="img-inline" src="../../_images/gs_yellow_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="robot-backup-tool-notifications">
+<span id="back-zh-cn"></span><h3>Robot backup tool - notifications<a class="headerlink" href="#robot-backup-tool-notifications" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="voice_notifications_pep.html#back-en"><span>English</span></a>  - <a class="reference internal" href="voice_notifications_pep_ja_JP.html#back-jp"><span>日本語</span></a> - 普通话</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%" />
+<col width="47%" />
+<col width="47%" />
+<col width="5%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">#</th>
+<th class="head">Message</th>
+<th class="head">Tips</th>
+<th class="head">Severity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>900</td>
+<td>我成功备份了数据。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>901</td>
+<td>我无法备份我的数据。我的系统版本无法与这个操作兼容。请更新我的版本并重试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>902</td>
+<td>我无法备份我的数据。这个文件无法读取。请再试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>903</td>
+<td>我无法备份我的数据。与云端备份应用的连接被断开。请确保我连接网络，并重试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>920</td>
+<td>我成功地重新存储了数据。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_green_led.png"><img alt="green_chest" class="img-inline" src="../../_images/gs_green_led.png" style="width: 40px; height: 56px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>921</td>
+<td>我无法储存数据。我的系统版本无法与这个操作兼容。请更新我的版本并重试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-even"><td>922</td>
+<td>我无法储存数据。这个文件无法写入。请再试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+<tr class="row-odd"><td>923</td>
+<td>我无法储存数据。与云端备份应用的连接被断开。请确保我连接网络，并重试一次。</td>
+<td>&nbsp;</td>
+<td><a class="img-inline reference internal" href="../../_images/gs_red_led.png"><img alt="red_chest" class="img-inline" src="../../_images/gs_red_led.png" style="width: 66px; height: 58px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index_pepper_user.html"><strong>Pepper</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction.html">First steps with <strong>Pepper</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_pep.html">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_pep.html"><strong>Store</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="remote_access_pep.html">Remote access to <strong>Pepper</strong> settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repair/index_repair.html">Taking care of <strong>Pepper</strong></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="understanding_pep.html">More details about <strong>Pepper</strong></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="chest_button_usages_pep.html">Main usages of the Chest button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voice_notifications_pep_ja_JP.html">Event and state notifications</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Event and state notifications</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="voice_notifications_pep.html">Event and state notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boot_process_pep.html">Understanding the boot process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shutdown_process_pep.html"> Understanding the shut down process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="life_pep.html">Understanding Autonomous Life settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="basic_channel_conversation_pep.html">Basic Channel - What can I say to <strong>Pepper</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pepper_technical/index_dev_pepper.html"><strong>Pepper</strong> - Developer Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Event and state notifications</a><ul>
+<li><a class="reference internal" href="#list-of-notifications">List of notifications</a><ul>
+<li><a class="reference internal" href="#boot-process">Boot process</a></li>
+<li><a class="reference internal" href="#diagnosis-pepper">Diagnosis - <strong>Pepper</strong></a></li>
+<li><a class="reference internal" href="#battery-notifications">Battery - notifications</a></li>
+<li><a class="reference internal" href="#store-notifications"><strong>Store</strong> - notifications</a></li>
+<li><a class="reference internal" href="#robot-backup-tool-notifications">Robot backup tool - notifications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

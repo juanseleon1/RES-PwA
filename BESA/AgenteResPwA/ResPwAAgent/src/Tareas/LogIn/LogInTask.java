@@ -29,15 +29,15 @@ public class LogInTask extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task LogIn ---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, null);
-        requestService(srb);
+        requestService(srb, (RobotAgentBelieves) parameters);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task LogIn ---");
+        
     }
 
     @Override
@@ -48,6 +48,8 @@ public class LogInTask extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+                    System.out.println("///////////////TF2//////////////");
+
         if(blvs.getbEstadoInteraccion().isLogged()) {
             return true;
         }

@@ -2,13 +2,23 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+<<<<<<< HEAD
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/PythonProject/Environment" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv2" />
+>>>>>>> develop
     </content>
     <orderEntry type="jdk" jdkName="Python 2.7 (Python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+<<<<<<< HEAD
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />
     <option name="myDocStringFormat" value="Plain" />
   </component>
+=======
+>>>>>>> develop
 </module>

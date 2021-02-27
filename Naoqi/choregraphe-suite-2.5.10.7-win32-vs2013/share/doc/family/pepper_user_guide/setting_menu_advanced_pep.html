@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuring &amp; managing Pepper &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Settings" href="configuring_pep.html" />
+    <link rel="next" title="Setting Pepper‘s preferred language" href="setting_language_pep.html" />
+    <link rel="prev" title="Registering and updating your Pepper" href="webpage_registering_pep.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="family-pepper_user_guide-setting_menu_advanced_pep">
+                
+  <div class="section" id="configuring-managing-pepper">
+<h1>Configuring &amp; managing <strong>Pepper</strong><a class="headerlink" href="#configuring-managing-pepper" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="advanced-settings">
+<span id="advanced-settings-pep"></span><h2>Advanced settings<a class="headerlink" href="#advanced-settings" title="Permalink to this headline">¶</a></h2>
+<p><strong>Advanced settings</strong> section displays the advanced settings of the robot.</p>
+<a class="reference internal image-reference" href="../../_images/setting_home_advanced.png"><img alt="../../_images/setting_home_advanced.png" src="../../_images/setting_home_advanced.png" style="width: 416px; height: 271px;" /></a>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Robot
+language</strong></td>
+<td><p class="first">List of languages installed on <strong>Pepper</strong>.</p>
+<p>Allows you to select the Language currently used
+by <strong>Pepper</strong>.</p>
+<p class="last"><strong>Note</strong>: Avoid setting <strong>Robot language</strong> while
+<a class="reference internal" href="life_pep.html#alife-pep"><span>Autonomous Life</span></a> is on.
+For further details see: <a class="reference internal" href="freeze_pep.html#pep-freeze"><span>Switching Autonomous life on and off</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>Timezone</strong></td>
+<td><p class="first">Allows you to set the time zone.</p>
+<p class="last">This setting is required for the WiFi connection.</p>
+</td>
+</tr>
+<tr class="row-even"><td><strong>Factory
+reset</strong> button</td>
+<td>Starts a <strong>Factory reset</strong> of <strong>Pepper</strong>.
+For further details see: <a class="reference internal" href="#factory-reset-menu-pep"><span>Factory reset</span></a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Settings and tools</strong></p>
+<p>According to the presetting of your <strong>Pepper</strong>, the following setting could appear:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Turn off</strong>
+button</td>
+<td>Allows you to shut down <strong>Pepper</strong>.</td>
+</tr>
+<tr class="row-odd"><td><strong>Reboot</strong>
+button</td>
+<td>Allows you to reboot <strong>Pepper</strong>.</td>
+</tr>
+<tr class="row-even"><td><strong>Robot name</strong></td>
+<td>Allows you to set the name of your <strong>Pepper</strong>.</td>
+</tr>
+<tr class="row-odd"><td><strong>Robot
+password</strong></td>
+<td>Allows you to set the password of your <strong>Pepper</strong>.</td>
+</tr>
+<tr class="row-even"><td><strong>Alive by
+default</strong></td>
+<td><p class="first">Allows you to enable or disable the <strong>Autonomous
+Life</strong> at startup.</p>
+<p><strong>Warning</strong>: if you disable <strong>Autonomous Life</strong> at
+startup, your <strong>Pepper</strong> will remain static, and you
+will not be able to chat or launch activities by
+voice.</p>
+<p class="last">For further details, see: <a class="reference internal" href="life_pep.html#alife-pep"><span>Autonomous Life</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>Usage
+Feedback</strong></td>
+<td>Allows you to enable or disable the <strong>Usage Feedback</strong>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="factory-reset">
+<span id="factory-reset-menu-pep"></span><h2>Factory reset<a class="headerlink" href="#factory-reset" title="Permalink to this headline">¶</a></h2>
+<p>Performs a <strong>Factory reset</strong> of the robot: this command resets the whole system
+in a similar state as if the robot was just out of the factory.</p>
+<a class="reference internal image-reference" href="../../_images/factory_reset_warning.png"><img alt="../../_images/factory_reset_warning.png" src="../../_images/factory_reset_warning.png" style="width: 416px; height: 271px;" /></a>
+<p>Before performing a <strong>Factory reset</strong>, make sure you have previously
+backed up your robot data.</p>
+<p>For further details, see: <a class="reference internal" href="../../embedded/backup_robot_data.html#backup-robot-data"><span>Back up my Aldebaran robot user data</span></a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index_pepper_user.html"><strong>Pepper</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction.html">First steps with <strong>Pepper</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="configuring_pep.html">Settings</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="setting_menu_pep.html">Settings menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="connecting_pep.html">Setting <strong>Pepper</strong>&#8216;s WiFi connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="webpage_registering_pep.html">Registering and updating your <strong>Pepper</strong></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Configuring &amp; managing <strong>Pepper</strong></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="setting_language_pep.html">Setting <strong>Pepper</strong>&#8216;s preferred language</a></li>
+<li class="toctree-l4"><a class="reference internal" href="settings_charging_pep.html">Charging Station Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_pep.html"><strong>Store</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="remote_access_pep.html">Remote access to <strong>Pepper</strong> settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="repair/index_repair.html">Taking care of <strong>Pepper</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="understanding_pep.html">More details about <strong>Pepper</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pepper_technical/index_dev_pepper.html"><strong>Pepper</strong> - Developer Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Configuring &amp; managing <strong>Pepper</strong></a><ul>
+<li><a class="reference internal" href="#advanced-settings">Advanced settings</a></li>
+<li><a class="reference internal" href="#factory-reset">Factory reset</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

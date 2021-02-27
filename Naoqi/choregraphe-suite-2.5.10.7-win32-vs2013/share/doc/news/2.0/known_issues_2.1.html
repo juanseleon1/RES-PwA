@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Known issues 2.1 &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Release notes - 2.1" href="index.html" />
+    <link rel="next" title="Release notes - 1.14" href="../1.14/index.html" />
+    <link rel="prev" title="NAOqi OS 2.1" href="naoqi_os_rn2.0.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="news-2.0-known_issues_2.1">
+                
+  <div class="section" id="known-issues-2-1">
+<h1>Known issues 2.1<a class="headerlink" href="#known-issues-2-1" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first"><strong>WPA2-Enterprise</strong> not yet supported.</p>
+</li>
+<li><p class="first"><strong>ALVisionRecognition</strong>: several issues, impacting performances.</p>
+</li>
+<li><p class="first">Bug #26657 Deadlock when change language.</p>
+</li>
+<li><p class="first">Bug #25810 crash in libaudiodevicemanager when installing language packages
+during life and asr on.</p>
+</li>
+<li><p class="first">Bug #25614 Parameters of the box &#8220;Set external anti-collision&#8221; need reworking.</p>
+</li>
+<li><p class="first">Bug #23590 Long connection times / timeouts - improved, not fully fixed.</p>
+</li>
+<li><p class="first">Bug #22971 MoveAlong only works on <strong>Pepper</strong>. Planar moves is not yet available
+for <strong>NAO</strong>.</p>
+</li>
+<li><p class="first">Bug #22733 Cannot switch language from a Choregraphe Application.</p>
+</li>
+<li><p class="first">Bug #13709 Ubuntu 12.04 only - Cannot drag and drop boxes.</p>
+<p>There is an <strong>Ubuntu</strong> known issue, impacting <strong>Choregraphe</strong>,
+when using ubuntu-2D for Window Manager with the Launcher bar in auto-hide mode.</p>
+<p>The issue is fixed on latest Ubuntu versions (14.04).</p>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/troubleshooting.html#linux-drag-and-drop"><span>Ubuntu 12.04 only - Cannot drag and drop boxes</span></a>.</p>
+</li>
+<li><p class="first">Bug #6622 and #8502 Hand touch sometimes activated by motor usage (<strong>NAO</strong> V4).</p>
+</li>
+<li><p class="first">Bug #6412 On Vista, you need to be administrator to use the flasher.</p>
+</li>
+</ul>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">What’s new</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.8.html">Addendum 2.5.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.7.html">Addendum 2.5.7 - For U.S. only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.html">Release Notes - 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/choregraphe_rn2.5.html"><strong>Choregraphe</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_api_rn2.5.html"><strong>NAOqi API</strong> &amp; <strong>SDKs</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_os_rn2.5.html"><strong>NAOqi OS</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html">ChangeLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.4/index.html">Release notes - 2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.3/index.html">Release notes - 2.3</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Release notes - 2.1</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.4.html">Release Notes - 2.1.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.3.html">Release Notes - 2.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew_2.1.2.html">Release Notes - 2.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew.html">Release Notes - 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="choregraphe_rn2.0.html"><strong>Choregraphe</strong> 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_api_rn2.1.2.html"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_api_rn2.0.html"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_os_rn2.0.html"><strong>NAOqi OS</strong> 2.1</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Known issues 2.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../1.14/index.html">Release notes - 1.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.12/index.html">Release notes - 1.12</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

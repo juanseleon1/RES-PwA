@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using toolchains &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../../index.html" />
+    <link rel="up" title="qibuild Programming guide" href="index.html" />
+    <link rel="next" title="Managing build configurations" href="build_configs.html" />
+    <link rel="prev" title="Porting a CMake project to qiBuild" href="porting_to_qibuild.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="../../beginner/index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="advanced-guide-using_toolchains">
+                
+  <div class="section" id="using-toolchains">
+<span id="id1"></span><h1>Using toolchains<a class="headerlink" href="#using-toolchains" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, you will learn how to build your projects using pre-compiled
+packages.</p>
+<div class="section" id="using-aldebaran-toolchains">
+<h2>Using Aldebaran toolchains<a class="headerlink" href="#using-aldebaran-toolchains" title="Permalink to this headline">¶</a></h2>
+<p>Aldebaran C++ SDKs and cross-toolchains are, by definition, toolchains.</p>
+<p>Using them is done with</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create &lt;name&gt; /path/to/toolchain.xml
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../beginner/qibuild/aldebaran.html#qibuild-using-aldebaran-packages"><span>Using qibuild with Aldebaran C++ SDKs</span></a></p>
+</div>
+</div>
+<div class="section" id="adding-packages-to-a-toolchain">
+<h2>Adding packages to a toolchain<a class="headerlink" href="#adding-packages-to-a-toolchain" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>The requirements for this tutorial are the same as in
+the <a class="reference internal" href="overview/managing_deps.html#qibuild-managing-deps"><span>Managing dependencies between projects</span></a> tutorial.</p>
+<p>You should have:</p>
+<ul class="simple">
+<li>a properly configured qiBuild worktree</li>
+<li>two projects, world and hello, with hello depending on the world library.</li>
+</ul>
+<p>You can find these two projects here <a class="reference download internal" href="../../_downloads/helloworld.zip"><code class="xref download docutils literal"><span class="pre">helloworld.zip</span></code></a></p>
+<p>The goal of this tutorial is to manage to compile <code class="docutils literal"><span class="pre">hello</span></code>, using a pre-compiled
+binary of <code class="docutils literal"><span class="pre">world</span></code>.</p>
+</div>
+<div class="section" id="creating-the-world-package">
+<h3>Creating the world package<a class="headerlink" href="#creating-the-world-package" title="Permalink to this headline">¶</a></h3>
+<p>Generating a package for the <code class="docutils literal"><span class="pre">world</span></code> project is done with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild package world
+</pre></div>
+</div>
+<p>This will create a package named <code class="docutils literal"><span class="pre">world.tar.gz</span></code> in
+<code class="docutils literal"><span class="pre">QI_WORK_TREE/package/world.tar.gz</span></code> (or <code class="docutils literal"><span class="pre">world.tar.gz</span></code> on windows)</p>
+<p>Inside the package, you will have:</p>
+<div class="highlight-python"><div class="highlight"><pre>include
+  |__ world
+      |__ world.hpp
+lib
+      |__ libworld.so
+share
+   cmake
+      |__ world-config.cmake
+package.xml
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The archive generated by qibuild does not contain
+a top directory, so be careful if you extract the archive
+by hand.
+Use <code class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">extract-package</span></code> to put the extracted files
+in a properly named directory</p>
+</div>
+<p>The LFS hierarchy is still preserved, and it is the same as in <code class="docutils literal"><span class="pre">build/sdk</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">world-config.cmake</span></code> is a standard CMake file, but it can be used even after
+installing the world package, because it only uses relative paths.</p>
+<p>So the world package is usable anywhere.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The world-config.cmake does not even requires qibuild to be used by
+an other CMake project, all it does is calling standard CMake functions.</p>
+</div>
+</div>
+<div class="section" id="create-a-toolchain-from-scratch">
+<h3>Create a toolchain from scratch<a class="headerlink" href="#create-a-toolchain-from-scratch" title="Permalink to this headline">¶</a></h3>
+<p>If you are already using a Aldebaran toolchain, you can skip this section.</p>
+<p>Otherwise, you have to create a <strong>toolchain</strong> from scratch for qibuild to use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create &lt;TOOLCHAIN_NAME&gt;
+</pre></div>
+</div>
+<p>You are free to choose any name for your toolchain, but it is advised
+to pick one from this set of configurations:</p>
+<ul class="simple">
+<li>linux32</li>
+<li>linux64</li>
+<li>mac32</li>
+<li>mac64</li>
+<li>win32-vs2008</li>
+<li>win32-vs2010</li>
+<li>mingw</li>
+</ul>
+<p>Here we will assume you chose <code class="docutils literal"><span class="pre">linux32</span></code>.</p>
+<p>This will create a directory looking like:
+<code class="docutils literal"><span class="pre">~/.local/share/qi/toolchains/linux32/</span></code>
+where every packages will be put.</p>
+<p>You can check that your toolchain has been created with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain info
+
+<span class="go">Toolchain linux32</span>
+<span class="go">No feed</span>
+<span class="go">No packages</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-the-world-package-to-the-toolchain">
+<h3>Adding the world package to the toolchain<a class="headerlink" href="#adding-the-world-package-to-the-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>Now you can use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain add-package -c linux32 /path/to/worktree/package/world.tar.gz
+</pre></div>
+</div>
+<p>You can check that your package has been added with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain info
+
+<span class="go">Toolchain linux32</span>
+<span class="go">No feed</span>
+<span class="go">  Packages:</span>
+<span class="go">    world</span>
+<span class="go">      in /home/user/.local/share/qi/toolchains/linux32/world</span>
+</pre></div>
+</div>
+<p>This will simply:</p>
+<ul class="simple">
+<li>copy the <code class="docutils literal"><span class="pre">world</span></code> package somewhere in you toolchain directory.</li>
+<li>configure some files so that qibuild knows that the
+<code class="docutils literal"><span class="pre">linux32</span></code> toolchain can provide the <code class="docutils literal"><span class="pre">world</span></code> package</li>
+</ul>
+<p>When resolving dependencies of the <code class="docutils literal"><span class="pre">hello</span></code> project, qibuild will see that you
+use a toolchain called <code class="docutils literal"><span class="pre">linux32</span></code> and that this toolchain provides the
+<code class="docutils literal"><span class="pre">world</span></code> project, so it’s enough to set <code class="docutils literal"><span class="pre">CMAKE_MODULE_PATHS</span></code> to
+<code class="docutils literal"><span class="pre">path/to/linux/toolchain/world</span></code></p>
+<p>The next step is to create a build config that matches the toolchain
+for qibuild to use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild add-config linux32 --toolchain linux32</span>
+</pre></div>
+</div>
+<p>You can now remove the project <code class="docutils literal"><span class="pre">world</span></code> from your worktree, and
+configure <code class="docutils literal"><span class="pre">hello</span></code> using the <code class="docutils literal"><span class="pre">linux32</span></code> build config:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc remove world</span>
+<span class="go">qibuild configure -c linux32 hello</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-toolchain-feeds">
+<h2>Creating toolchain feeds<a class="headerlink" href="#creating-toolchain-feeds" title="Permalink to this headline">¶</a></h2>
+<p>Now, that you have a nice local toolchain, and a <code class="docutils literal"><span class="pre">world</span></code> package,
+you may want other people to be able to use the <code class="docutils literal"><span class="pre">world</span></code> package,
+without them having to recompile it from source.</p>
+<p>So here we are going to create a remote configuration file, so
+that other developers can simply download the <code class="docutils literal"><span class="pre">world</span></code> package from
+a server.</p>
+<p>We will assume you have access to a FTP or a HTTP sever.</p>
+<p>First, upload the world package, so that is accessible with the url:
+<code class="docutils literal"><span class="pre">http://example.com/packages/world.tar.gz</span></code></p>
+<p>Next, create a <code class="docutils literal"><span class="pre">feed.xml</span></code> accessible with the url:
+<code class="docutils literal"><span class="pre">http://example.com/feed.xml</span></code>, looking like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;toolchain&gt;</span>
+
+  <span class="nt">&lt;package</span>
+    <span class="na">name=</span><span class="s">&quot;world&quot;</span>
+    <span class="na">url =</span> <span class="s">&quot;http://example.com/packages/world.tar.gz&quot;</span>
+  <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/toolchain&gt;</span>
+</pre></div>
+</div>
+<p>Then, from an other machine, run</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create linux32 http://example.com/feed.xml
+
+<span class="go">Getting package world from http://example.com/packages/world.tar.gz</span>
+<span class="go">Toolchain linux32: adding package world</span>
+</pre></div>
+</div>
+<p>You can see that the feed has been stored in your qibuild configuration:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain info
+
+<span class="go">Toolchain linux32</span>
+<span class="go">Using feed from http://example.com/feed.xml</span>
+<span class="go">  Packages:</span>
+<span class="go">    foo</span>
+<span class="go">      in /home/user/.local/share/qi/toolchains/linux32/world</span>
+</pre></div>
+</div>
+<p>Note: if you HTTP or FTP server is protected by a password, you can put
+the username and password in the <code class="docutils literal"><span class="pre">.config/qi/qibuild.xml</span></code> configuration file.</p>
+<p>See the section <a class="reference internal" href="../cfg/qibuild_xml_syntax.html#qibuild-xml-syntax"><span>qibuild.xml configuration file syntax</span></a> for details.</p>
+<p>You can also add the Aldebaran C++ SDKs or cross toolchains as if they were packages.
+(This sound a bit weird, but it works)</p>
+<p>For instance, assuming you were using the atom cross-toolchain and cross-compiled
+the world package, you can create a feed looking like</p>
+<div class="highlight-xml"><div class="highlight"><pre> <span class="nt">&lt;toolchain&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;atom-ctc&quot;</span>  <span class="na">url=</span><span class="s">&quot;http://example.com/packages/aldebaran-ctc.tar.gz&quot;</span>
+    <span class="na">toolchain_file=</span><span class="s">&quot;cross-config.cmake&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;hello&quot;</span>  <span class="na">url=</span><span class="s">&quot;http://example.com/packages/world.tar.gz&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/toolchain&gt;</span>
+</pre></div>
+</div>
+<p>Don&#8217;t forget the <code class="docutils literal"><span class="pre">toolchain_file</span></code> attribute of the <code class="docutils literal"><span class="pre">atom-ctc</span></code> package, though.</p>
+</div>
+<div class="section" id="full-feed-xml-specification">
+<h2>Full feed.xml specification<a class="headerlink" href="#full-feed-xml-specification" title="Permalink to this headline">¶</a></h2>
+<p>The full specification can be found in the
+<a class="reference internal" href="../cfg/toolchain_feed_syntax.html#toolchain-feed-syntax"><span>Toolchain feed syntax</span></a> section</p>
+</div>
+<div class="section" id="just-for-fun">
+<h2>Just for fun<a class="headerlink" href="#just-for-fun" title="Permalink to this headline">¶</a></h2>
+<p>You can always add something like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="cp">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;../xsl/toolchain.xsl&quot;?&gt;</span>
+</pre></div>
+</div>
+<p>With an xsl looking like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xsl:version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;body</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;h2&gt;</span> Packages <span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;xsl:for-each</span> <span class="na">select=</span><span class="s">&quot;toolchain/package&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li&gt;</span>
+        <span class="nt">&lt;a&gt;</span>
+        <span class="nt">&lt;xsl:attribute</span> <span class="na">name=</span><span class="s">&quot;href&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;@url&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xsl:attribute&gt;</span>
+        <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;@name&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/xsl:for-each&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;h2&gt;</span> Feeds <span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;xsl:for-each</span> <span class="na">select=</span><span class="s">&quot;toolchain/feed&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li&gt;</span>
+        <span class="nt">&lt;a&gt;</span>
+        <span class="nt">&lt;xsl:attribute</span> <span class="na">name=</span><span class="s">&quot;href&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;@url&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xsl:attribute&gt;</span>
+        <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">&quot;@url&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/xsl:for-each&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">qibuild Programming guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview/index.html">qiBuild overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake/index.html">Using qiBuild CMake API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="porting_to_qibuild.html">Porting a CMake project to qiBuild</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Using toolchains</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build_configs.html">Managing build configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_write_a_library.html">How to write a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extending_qibuild_actions.html">Extending qiBuild actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tips_and_tricks.html">qiBuild tips and tricks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake/api.html">qiBuild CMake API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cfg/index.html">Configuration files syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Using toolchains</a><ul>
+<li><a class="reference internal" href="#using-aldebaran-toolchains">Using Aldebaran toolchains</a></li>
+<li><a class="reference internal" href="#adding-packages-to-a-toolchain">Adding packages to a toolchain</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#creating-the-world-package">Creating the world package</a></li>
+<li><a class="reference internal" href="#create-a-toolchain-from-scratch">Create a toolchain from scratch</a></li>
+<li><a class="reference internal" href="#adding-the-world-package-to-the-toolchain">Adding the world package to the toolchain</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-toolchain-feeds">Creating toolchain feeds</a></li>
+<li><a class="reference internal" href="#full-feed-xml-specification">Full feed.xml specification</a></li>
+<li><a class="reference internal" href="#just-for-fun">Just for fun</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../../changelog.html">Changelog</a>
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        <a title="Index" href="../../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

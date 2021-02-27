@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to write a library &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../../index.html" />
+    <link rel="up" title="qibuild Programming guide" href="index.html" />
+    <link rel="next" title="Extending qiBuild actions" href="extending_qibuild_actions.html" />
+    <link rel="prev" title="Managing build configurations" href="build_configs.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="../../beginner/index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="advanced-guide-how_to_write_a_library">
+                
+  <div class="section" id="how-to-write-a-library">
+<span id="id1"></span><h1>How to write a library<a class="headerlink" href="#how-to-write-a-library" title="Permalink to this headline">¶</a></h1>
+<p>This is merely a convention, but you are advised to follow it, especially if
+you are working in a large project.</p>
+<p>Let&#8217;s say you have a <code class="docutils literal"><span class="pre">foo</span></code> library.</p>
+<p>You have the following files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">foo.hpp</span></code>: the public header of the <code class="docutils literal"><span class="pre">foo</span></code> library. It contains the public
+API, and include the least possible number of other headers. (Use of forward
+declarations, and PIMPL implementations are recommended)</li>
+<li><code class="docutils literal"><span class="pre">foo.cpp</span></code> : implementation of the <code class="docutils literal"><span class="pre">foo.hpp</span></code> functions</li>
+<li><code class="docutils literal"><span class="pre">foo_p.hpp</span></code>: private header of the <code class="docutils literal"><span class="pre">foo</span></code> library. This one may
+include third-party headers (say <code class="docutils literal"><span class="pre">zeromq.h),</span></code> without having the
+<code class="docutils literal"><span class="pre">foo.hpp</span></code> header depending on <code class="docutils literal"><span class="pre">zeromq.h,</span></code> which is nice for the users of
+your library. If you link statically with <code class="docutils literal"><span class="pre">zeromq,</span></code> users of <code class="docutils literal"><span class="pre">foo</span></code> won&#8217;t
+even need to know about <code class="docutils literal"><span class="pre">zeromq</span></code>
+(well, this is true if <code class="docutils literal"><span class="pre">foo</span></code> is a dynamic library, but that&#8217;s an other
+topic)</li>
+<li><code class="docutils literal"><span class="pre">foo_p.cpp</span></code> : private implementation.</li>
+<li><code class="docutils literal"><span class="pre">test_foo.cpp</span></code> : You would not dare writing a library without unit tests,
+would you?</li>
+</ul>
+<div class="section" id="proposed-layout">
+<h2>Proposed layout<a class="headerlink" href="#proposed-layout" title="Permalink to this headline">¶</a></h2>
+<p>This is what your layout should look like:</p>
+<div class="highlight-python"><div class="highlight"><pre>fooproject
+|__ libfoo
+    | CMakeLists.txt
+    |__ foo
+    |   |__ foo.hpp
+    |__ src
+    |   |__ foo.cpp
+    |   |__ foo_p.hpp
+    |   |__ foo_p.cpp
+    |__ test
+        |__ CMakeLists.txt
+        |__ foo_test.cpp
+</pre></div>
+</div>
+<ul class="simple">
+<li>The full path to the public header is <code class="docutils literal"><span class="pre">libfoo/foo/foo.hpp</span></code>. Note that the name
+of the root directory is <code class="docutils literal"><span class="pre">fooproject</span></code></li>
+<li>The private code is put in a <code class="docutils literal"><span class="pre">src</span></code> sub-directory. Private and public
+directories are separated, it&#8217;s easy to search only in public headers.</li>
+</ul>
+<p>Note: you can download an archive containing the foo project here:
+<a class="reference download internal" href="../../_downloads/fooproject.zip"><code class="xref download docutils literal"><span class="pre">fooproject.zip</span></code></a></p>
+</div>
+<div class="section" id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s what the <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> should look like</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include_directories</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+<span class="nb">qi_create_lib</span><span class="p">(</span><span class="s">foo</span>
+  <span class="s">SRC</span> <span class="s">foo/foo.hpp</span>
+      <span class="s">src/foo.cpp</span>
+      <span class="s">src/foo_p.hpp</span>
+      <span class="s">src/foo_p.cpp</span>
+  <span class="s">SHARED</span>
+<span class="p">)</span>
+
+
+<span class="c"># Add dependencies to the foo library here:</span>
+<span class="c"># qi_use_lib(foo ... )</span>
+
+<span class="nb">qi_install_header</span><span class="p">(</span><span class="s">KEEP_RELATIVE_PATHS</span> <span class="s">foo/foo.hpp</span><span class="p">)</span>
+
+<span class="nb">qi_stage_lib</span><span class="p">(</span><span class="s">foo</span><span class="p">)</span>
+
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please note that the location of the CMake list file matters.</p>
+</div>
+<div class="section" id="rationale">
+<h2>Rationale<a class="headerlink" href="#rationale" title="Permalink to this headline">¶</a></h2>
+<p>You will note that:</p>
+<ul class="simple">
+<li>The only time we call <code class="docutils literal"><span class="pre">include_directories()</span></code> is when we are staging the foo
+library.</li>
+<li>The <code class="docutils literal"><span class="pre">foo.hpp</span></code> header is in a directory named <code class="docutils literal"><span class="pre">foo</span></code>, and will be
+installed to <code class="docutils literal"><span class="pre">foo/foo.hpp</span></code>.
+It&#8217;s advised you use the same name for the target and the subdirectory.</li>
+<li>Everything that need a <code class="docutils literal"><span class="pre">foo</span></code> header must use</li>
+</ul>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;foo/...&gt;</span>
+</pre></div>
+</div>
+<p>This way, we are sure that the code we use can be re-distributed when the
+headers are installed, and that the path to find the headers while in the
+source tree does not differ from the paths to find the installed headers. This
+works because:</p>
+<ul class="simple">
+<li>We have put <code class="docutils literal"><span class="pre">foo.hpp</span></code> in a <code class="docutils literal"><span class="pre">foo</span></code> subdirectory.</li>
+<li>We have used <a class="reference internal" href="../cmake/api/install.html#qi_install_header" title="qi_install_header"><code class="xref cmake cmake-function docutils literal"><span class="pre">qi_install_header</span></code></a> with the <code class="docutils literal"><span class="pre">KEEP_RELATIVE_PATHS</span></code>
+argument. You could also have used it with a <code class="docutils literal"><span class="pre">SUBFOLDER</span></code> argument, like
+this:</li>
+</ul>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_install_header</span><span class="p">(</span><span class="s">foo/foo.hpp</span> <span class="s">SUBFOLDER</span> <span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Let&#8217;s assume you have two libraries, <code class="docutils literal"><span class="pre">foo</span></code> and <code class="docutils literal"><span class="pre">bar</span></code>, and a <code class="docutils literal"><span class="pre">foobar</span></code>
+executable that needs code from <code class="docutils literal"><span class="pre">foo</span></code> and <code class="docutils literal"><span class="pre">bar</span></code>.</li>
+</ul>
+<p>With the proposed layout, you have something like:</p>
+<div class="highlight-python"><div class="highlight"><pre>foooproject
+|__ libfoo
+|    |__ foo
+|         |__ foo.hpp
+|__ libbar
+|    |__ bar
+|         |__ bar.hpp
+|__ foobar
+     |__ foobar.cpp
+</pre></div>
+</div>
+<p>You may want to get rid of the <code class="docutils literal"><span class="pre">libfoo/foo</span></code>, <code class="docutils literal"><span class="pre">libbar/bar</span></code> redundancy  and do this
+instead:</p>
+<div class="highlight-python"><div class="highlight"><pre>fooproject
+|__ foo
+|   |__ foo.hpp
+|__ bar
+|   |__ bar.hpp
+|__ foobar
+    |__ foobar.cpp
+</pre></div>
+</div>
+<p>But, let&#8217;s assume you make a mistake, and write</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_use_lib</span><span class="p">(</span><span class="s">foobar</span> <span class="s">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>instead of</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">qi_use_lib</span><span class="p">(</span><span class="s">foobar</span> <span class="s">foo</span> <span class="s">bar</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the first layout, you will have an error during compile time, looking like:</p>
+<div class="highlight-python"><div class="highlight"><pre>bar/bar.hpp : no such file or directory
+</pre></div>
+</div>
+<p>because the include directory that has been staged for foo is different from
+the include directory that has been staged for bar. Using the second layout,
+you will have an error during link time, looking like:</p>
+<div class="highlight-python"><div class="highlight"><pre>undefined reference to `bar_func&#39;
+</pre></div>
+</div>
+<p>because the include directory that was staged was always the same: fooproject.
+The additional nesting level helps you catch this king of errors early.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For large libraries, also consider using submodules. The
+documentation can be found <a class="reference internal" href="../cmake/api/submodule.html#using-submodules"><span>here</span></a></p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">qibuild Programming guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview/index.html">qiBuild overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake/index.html">Using qiBuild CMake API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="porting_to_qibuild.html">Porting a CMake project to qiBuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using_toolchains.html">Using toolchains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_configs.html">Managing build configurations</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">How to write a library</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extending_qibuild_actions.html">Extending qiBuild actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tips_and_tricks.html">qiBuild tips and tricks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake/api.html">qiBuild CMake API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cfg/index.html">Configuration files syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">How to write a library</a><ul>
+<li><a class="reference internal" href="#proposed-layout">Proposed layout</a></li>
+<li><a class="reference internal" href="#cmake">CMake</a></li>
+<li><a class="reference internal" href="#rationale">Rationale</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../../changelog.html">Changelog</a>
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        <a title="Index" href="../../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

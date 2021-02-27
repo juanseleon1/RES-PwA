@@ -1,0 +1,596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qibuild.xml configuration file syntax &mdash; qiBuild 3.11.18 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.11.18',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 3.11.18 documentation" href="../../index.html" />
+    <link rel="up" title="Configuration files syntax" href="index.html" />
+    <link rel="next" title="qiproject.xml syntax" href="qiproject_xml_syntax.html" />
+    <link rel="prev" title="Configuration files syntax" href="index.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  
+  content: 'qiBuild 3.11.18';
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">qiBuild documentation</a>
+      
+      
+      </h1>
+      <div id="global-nav">
+        
+        
+        <a class="beginner" title="Beginner documentation" href="../../beginner/index.html">Beginner</a>
+        <a class="advanced" title="Advanced qiBuild usage" href="../index.html">Advanced</a>
+        <a class="hacking" title="Hacking qiBuild" href="../../hacking/index.html">Hacking</a>
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="advanced-cfg-qibuild_xml_syntax">
+                
+  <div class="section" id="qibuild-xml-configuration-file-syntax">
+<span id="qibuild-xml-syntax"></span><h1><code class="docutils literal"><span class="pre">qibuild.xml</span></code> configuration file syntax<a class="headerlink" href="#qibuild-xml-configuration-file-syntax" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<p>There are two configuration files named <code class="docutils literal"><span class="pre">qibuild.xml</span></code></p>
+<p>The first one is in <code class="docutils literal"><span class="pre">.config/qi/qibuild.xml</span></code>.</p>
+<p>It contains settings that will be shared across every worktree.</p>
+<p>It is called the &#8220;global&#8221; configuration file.</p>
+<p>The other is always found in the <code class="docutils literal"><span class="pre">.qi</span></code> directory
+at the root of a <a class="reference internal" href="../../hacking/design/python/index.html#term-worktree"><span class="xref std std-term">worktree</span></a></p>
+<p>Note: the presence of the file is not necessary for qibuild
+to find a work tree, only the <code class="docutils literal"><span class="pre">.qi</span></code> directory is used.</p>
+</div>
+<div class="section" id="global-configuration-file">
+<h2>Global configuration file<a class="headerlink" href="#global-configuration-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qibuild-global-node">
+<span id="qibuild-xml-global-node"></span><h3>qibuild global node<a class="headerlink" href="#qibuild-global-node" title="Permalink to this headline">¶</a></h3>
+<p>The schema of the global xml file looks like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;qibuild</span> <span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;defaults&gt;</span>
+    <span class="nt">&lt;env</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/defaults&gt;</span>
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;config1&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;env</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/config&gt;</span>
+
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;config2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;env</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/config&gt;</span>
+
+  <span class="nt">&lt;ide</span> <span class="na">name=</span><span class="s">&quot;ide1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ide</span> <span class="na">name=</span><span class="s">&quot;ide2&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/qibuild&gt;</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal"><span class="pre">version</span></code> attribute of the <code class="docutils literal"><span class="pre">qibuild</span></code> node.
+It will be used for backward compatibility in case the format changes.</p>
+<p>It accepts:</p>
+<ul class="simple">
+<li>One or zero <a class="reference internal" href="#qibuild-xml-node-defaults"><span>defaults node</span></a></li>
+<li>Any number of <a class="reference internal" href="#qibuild-xml-node-config"><span>config nodes</span></a></li>
+<li>Any number of <a class="reference internal" href="#qibuild-xml-node-ide"><span>ide nodes</span></a></li>
+<li>Any number of <a class="reference internal" href="#qibuild-xml-node-server"><span>server nodes</span></a></li>
+</ul>
+</div>
+<div class="section" id="defaults-node">
+<span id="qibuild-xml-node-defaults"></span><h3>defaults node<a class="headerlink" href="#defaults-node" title="Permalink to this headline">¶</a></h3>
+<p>The defaults node accepts two kinds of children:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#qibuild-xml-node-env"><span>env node</span></a></li>
+<li><a class="reference internal" href="#qibuild-xml-node-cmake"><span>cmake node</span></a></li>
+</ul>
+<p>It also accepts a <code class="docutils literal"><span class="pre">ide</span></code> attribute, which should match
+the <code class="docutils literal"><span class="pre">name</span></code> attribute of a <a class="reference internal" href="#qibuild-xml-node-ide"><span>ide node</span></a>.</p>
+</div>
+<div class="section" id="env-node">
+<span id="qibuild-xml-node-env"></span><h3>env node<a class="headerlink" href="#env-node" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">env</span></code> node accepts the following attributes:</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">path</span></code> : A list of paths to be prepended to the PATH environment variable</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">bat_file</span></code>: A .bat file that will be sourced to get new environment.
+This makes it possible to use <code class="docutils literal"><span class="pre">cl.exe</span></code> from the command line</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">editor</span></code> : Used by <code class="docutils literal"><span class="pre">qibuild</span> <span class="pre">config</span> <span class="pre">--edit</span></code></p>
+</li>
+<li><p class="first">It also accepts a list of <code class="docutils literal"><span class="pre">var</span></code> children, like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;env&gt;</span>
+  <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">&quot;NAME&quot;</span><span class="nt">&gt;</span>VALUE<span class="nt">&lt;/var&gt;</span>
+<span class="nt">&lt;/env&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="cmake-node">
+<span id="qibuild-xml-node-cmake"></span><h3>cmake node<a class="headerlink" href="#cmake-node" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">cmake</span></code> node accepts the following attributes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">generator</span></code> The CMake generator to use</li>
+</ul>
+</div>
+<div class="section" id="config-node">
+<span id="qibuild-xml-node-config"></span><h3>config node<a class="headerlink" href="#config-node" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">config</span></code> node must contain a <code class="docutils literal"><span class="pre">name</span></code> attribute.</p>
+<p>It accepts the same kinds of children as the <code class="docutils literal"><span class="pre">defaults</span></code> node does:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#qibuild-xml-node-env"><span>env node</span></a></li>
+<li><a class="reference internal" href="#qibuild-xml-node-cmake"><span>cmake node</span></a></li>
+</ul>
+<p>See <a class="reference internal" href="#qibuild-config-merging"><span>Configuration merging</span></a> to see how the configurations
+are merged</p>
+</div>
+<div class="section" id="qibuild-xml-node-ide">
+<span id="ide-node"></span><h3>ide node<a class="headerlink" href="#qibuild-xml-node-ide" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">ide</span></code> node must contain a <code class="docutils literal"><span class="pre">name</span></code> attribute.</p>
+<p>It accepts the following attributes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">path</span></code> The full path to the IDE. Used by <code class="docutils literal"><span class="pre">qibuild</span> <span class="pre">open</span></code></li>
+</ul>
+</div>
+<div class="section" id="server-node">
+<span id="qibuild-xml-node-server"></span><h3>server node<a class="headerlink" href="#server-node" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">server</span></code> node must contain a <code class="docutils literal"><span class="pre">name</span></code> attribute.</p>
+<p>It accepts a child named <code class="docutils literal"><span class="pre">access</span></code></p>
+<p>The <code class="docutils literal"><span class="pre">access</span></code> child accepts the following attributes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">username</span></code></li>
+<li><code class="docutils literal"><span class="pre">password</span></code></li>
+<li><code class="docutils literal"><span class="pre">root</span></code> : When using ftp, this will be the root directory of
+the ftp server.</li>
+</ul>
+<p>For instance to use <code class="docutils literal"><span class="pre">john</span></code> username with password <code class="docutils literal"><span class="pre">p4ssw0rd</span></code>
+on <code class="docutils literal"><span class="pre">ftp://example.com</span></code> using root <code class="docutils literal"><span class="pre">pub</span></code>, you can use</p>
+<div class="highlight-xml"><div class="highlight"><pre> <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">&quot;example.com&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;access</span>
+    <span class="na">username=</span><span class="s">&quot;john&quot;</span>
+    <span class="na">password=</span><span class="s">&quot;p4ssw0rd&quot;</span>
+    <span class="na">root=</span><span class="s">&quot;pub&quot;</span>
+   <span class="nt">/&gt;</span>
+<span class="nt">&lt;/server&gt;</span>
+</pre></div>
+</div>
+<p>This is for instance used by <code class="docutils literal"><span class="pre">qitoolchain</span></code> in case you need
+a login/password to download packages and feeds.</p>
+<p>This is also where <code class="docutils literal"><span class="pre">qisrc</span></code> stores your gerrit username.</p>
+</div>
+</div>
+<div class="section" id="local-settings">
+<h2>Local Settings<a class="headerlink" href="#local-settings" title="Permalink to this headline">¶</a></h2>
+<p>The schema of the local xml file looks like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;qibuild</span> <span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;defaults</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;build</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/qibuild&gt;</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal"><span class="pre">version</span></code> attribute of the <code class="docutils literal"><span class="pre">qibuild</span></code> node.
+It will be used for backward compatibility in case the format syntax changes.</p>
+<p>The root element accepts:</p>
+<ul class="simple">
+<li>One or zero <a class="reference internal" href="#qibuild-xml-node-local-defaults"><span>local defaults node</span></a></li>
+<li>One or zero <a class="reference internal" href="#qibuild-xml-node-local-build"><span>local build node</span></a></li>
+</ul>
+<div class="section" id="local-defaults-node">
+<span id="qibuild-xml-node-local-defaults"></span><h3>local defaults node<a class="headerlink" href="#local-defaults-node" title="Permalink to this headline">¶</a></h3>
+<p>The local <code class="docutils literal"><span class="pre">defaults</span></code> node accepts the following attributes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">config</span></code> : A configuration to use by default in this worktree
+(see <a class="reference internal" href="#qibuild-config-merging"><span>Configuration merging</span></a>)</li>
+<li><code class="docutils literal"><span class="pre">ide</span></code> : An IDE to use by default in this worktree. Can override
+the default IDE in <a class="reference internal" href="#qibuild-xml-node-defaults"><span>defaults node</span></a>
+(see <a class="reference internal" href="#qibuild-config-merging"><span>Configuration merging</span></a>)</li>
+</ul>
+</div>
+<div class="section" id="local-build-node">
+<span id="qibuild-xml-node-local-build"></span><h3>local build node<a class="headerlink" href="#local-build-node" title="Permalink to this headline">¶</a></h3>
+<p>The local <code class="docutils literal"><span class="pre">build</span></code> nodes accepts the following attributes:</p>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">prefix</span></code> : Instead of scattering build directories inside each project
+source directory, create them under the provided directory.</p>
+<p>This enables &#8220;out of worktree&#8221; builds, and is mandatory if you are using
+Eclipse CDT.</p>
+<p>For instance, given two projects &#8220;hello&#8221; and &#8220;world&#8221; and two build
+configurations &#8220;cross&#8221; and &#8220;linux&#8221;, the default layout would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>~/src/hello/build-cross
+~/src/hello/build-linux
+~/src/world/build-cross
+~/src/world/build-linux
+</pre></div>
+</div>
+<p>with <code class="docutils literal"><span class="pre">prefix=&quot;/path/to/build.prefix&quot;</span></code>, it becomes:</p>
+<div class="highlight-python"><div class="highlight"><pre>/path/to/build.prefix/build-cross/hello
+/path/to/build.prefix/build-cross/world
+/path/to/build.prefix/build-linux/hello
+/path/to/build.prefix/build-linux/world
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="configuration-merging">
+<span id="qibuild-config-merging"></span><h2>Configuration merging<a class="headerlink" href="#configuration-merging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-c-option">
+<h3>Using &#8220;-c&#8221; option<a class="headerlink" href="#using-c-option" title="Permalink to this headline">¶</a></h3>
+<p>You may want to have several configurations for the same
+work tree, and for instance have a <code class="docutils literal"><span class="pre">vs2010</span></code> and a <code class="docutils literal"><span class="pre">mingw</span></code> configuration.</p>
+<p>In this case, the CMake generators will be different, so you
+will need to have something like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;qibuild</span> <span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;defaults&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="na">generator=</span><span class="s">&quot;Unix Makefiles&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/defaults&gt;</span>
+
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;vs2010&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="na">generator=</span><span class="s">&quot;Visual Studio 10&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/config&gt;</span>
+
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;mingw&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;cmake</span> <span class="na">generator =</span> <span class="s">&quot;MinGW Makefiles&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/qibuild&gt;</span>
+</pre></div>
+</div>
+<p>Here are the generators that will be used depending on the
+configuration specified by the <code class="docutils literal"><span class="pre">-c</span></code> option of qibuild:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure
+
+<span class="go">Using cmake generator: Unix Makefiles</span>
+<span class="go">(from &#39;defaults&#39; section)</span>
+
+<span class="gp">$</span> qibuild configure -c vs2010
+
+<span class="go">Using cmake generator: Visual Studio 10</span>
+<span class="go">(from &#39;vs2010&#39; config)</span>
+
+<span class="gp">$</span> qibuild config -c mingw
+
+<span class="go">Using cmake generator: MinGW Makefiles</span>
+<span class="go">(from &#39;mingw&#39; section)</span>
+</pre></div>
+</div>
+<p>A default configuration can be specified in the
+<a class="reference internal" href="#qibuild-xml-node-local-defaults"><span>local defaults node</span></a> if you do not want
+to have to specify <code class="docutils literal"><span class="pre">-c</span></code> for this worktree:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;qibuild</span> <span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;defaults</span> <span class="na">config=</span><span class="s">&quot;vs2010&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/qibuild&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="environment-merging">
+<h3>Environment merging<a class="headerlink" href="#environment-merging" title="Permalink to this headline">¶</a></h3>
+<p>You may want to use <code class="docutils literal"><span class="pre">swig</span></code> in several projects, so you need to have
+<code class="docutils literal"><span class="pre">swig.exe</span></code> in your path, but sometimes you use <code class="docutils literal"><span class="pre">QtCreator</span></code> with MinGW,
+so you need to have <code class="docutils literal"><span class="pre">c:\QtSdk\Desktop\Qt\bin</span></code> in your PATH too.</p>
+<p>Here is what you could use:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;qibuild</span> <span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;defaults&gt;</span>
+    <span class="nt">&lt;env</span> <span class="na">path=</span><span class="s">&quot;c:\swig\bin&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/defaults&gt;</span>
+
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;mingw&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;env</span> <span class="na">path=</span><span class="s">&quot;C:\QtSDK\bin&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/config&gt;</span>
+
+  <span class="nt">&lt;config</span> <span class="na">name=</span><span class="s">&quot;vs2010&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/qibuild&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>When using <code class="docutils literal"><span class="pre">-c</span> <span class="pre">mingw</span></code>, <code class="docutils literal"><span class="pre">%PATH%</span></code> will look like:
+<code class="docutils literal"><span class="pre">c:\swig\bin;C:\QtSDK\bin;...</span></code></li>
+<li>When using <code class="docutils literal"><span class="pre">-c</span> <span class="pre">vs2010</span></code>, <code class="docutils literal"><span class="pre">%PATH%</span></code> will look like:
+<code class="docutils literal"><span class="pre">c:\swig\bin;...</span></code></li>
+<li>Other environment variables (set in <code class="docutils literal"><span class="pre">&lt;var&gt;</span></code> tags) are simply merged using the
+<code class="docutils literal"><span class="pre">update</span></code> method of Python dictionaries.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guide/index.html">qibuild Programming guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake/api.html">qiBuild CMake API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuration files syntax</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href=""><code class="docutils literal"><span class="pre">qibuild.xml</span></code> configuration file syntax</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="qiproject_xml_syntax.html">qiproject.xml syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qisrc_manifest_syntax.html">qisrc manifest syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchain_feed_syntax.html">Toolchain feed syntax</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">qibuild.xml</span></code> configuration file syntax</a><ul>
+<li><a class="reference internal" href="#general">General</a></li>
+<li><a class="reference internal" href="#global-configuration-file">Global configuration file</a><ul>
+<li><a class="reference internal" href="#qibuild-global-node">qibuild global node</a></li>
+<li><a class="reference internal" href="#defaults-node">defaults node</a></li>
+<li><a class="reference internal" href="#env-node">env node</a></li>
+<li><a class="reference internal" href="#cmake-node">cmake node</a></li>
+<li><a class="reference internal" href="#config-node">config node</a></li>
+<li><a class="reference internal" href="#qibuild-xml-node-ide">ide node</a></li>
+<li><a class="reference internal" href="#server-node">server node</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#local-settings">Local Settings</a><ul>
+<li><a class="reference internal" href="#local-defaults-node">local defaults node</a></li>
+<li><a class="reference internal" href="#local-build-node">local build node</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-merging">Configuration merging</a><ul>
+<li><a class="reference internal" href="#using-c-option">Using &#8220;-c&#8221; option</a></li>
+<li><a class="reference internal" href="#environment-merging">Environment merging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      
+        <a title="Changelog" href="../../changelog.html">Changelog</a>
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        <a title="Index" href="../../genindex.html">Index</a>
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

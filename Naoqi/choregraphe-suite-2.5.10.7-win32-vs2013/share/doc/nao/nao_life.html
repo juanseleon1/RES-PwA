@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Understanding Autonomous Life settings &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../index.html" />
+    <link rel="up" title="More details about NAO" href="understanding_nao.html" />
+    <link rel="next" title="Basic Channel - What can I say to NAO" href="basic_channel_conversation_nao.html" />
+    <link rel="prev" title="Understanding the shut down process" href="shutdown_process_nao.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="nao-nao_life">
+                
+  <div class="section" id="understanding-autonomous-life-settings">
+<span id="nao-life"></span><h1>Understanding Autonomous Life settings<a class="headerlink" href="#understanding-autonomous-life-settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="autonomous-life">
+<span id="alife-nao"></span><h2>Autonomous Life<a class="headerlink" href="#autonomous-life" title="Permalink to this headline">¶</a></h2>
+<p><strong>Autonomous Life</strong> is the key element making <strong>NAO</strong> alive and responsive.
+To be fully effective, it requires to be combined with <a class="reference internal" href="#basic-channel-nao"><span>Basic Channel</span></a>
+and <a class="reference internal" href="#installed-apps-nao"><span>Installed Activities</span></a>.</p>
+<p>To activate or deactivate <strong>Autonomous Life</strong>, see: <a class="reference internal" href="nao_freeze.html#nao-freeze"><span>Switching Autonomous life on and off</span></a>.</p>
+<div class="section" id="default-settings">
+<h3>Default settings<a class="headerlink" href="#default-settings" title="Permalink to this headline">¶</a></h3>
+<p>By default, when you receive your <strong>NAO</strong>, only the <strong>Autonomous Life</strong> is
+installed and turned on:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Alive, but deaf and dumb</strong>:
+<a class="reference internal" href="#alife-nao"><span>Autonomous Life</span></a>: <strong>ON</strong> - <a class="reference internal" href="#basic-channel-nao"><span>Basic Channel</span></a>: <strong>OFF</strong></td>
+</tr>
+<tr class="row-even"><td><p class="first">On startup:</p>
+<ul class="simple">
+<li>If he is on his feet, <strong>NAO</strong> gets up,</li>
+<li>If he is sitting, <strong>NAO</strong> remains seated.</li>
+</ul>
+<p>In all cases, <strong>NAO</strong> wags slightly, and seems to be waiting for something
+to happen.</p>
+<p class="last">But he cannot understand your questions and has no conversation skills.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="recommended-settings">
+<h3>Recommended settings<a class="headerlink" href="#recommended-settings" title="Permalink to this headline">¶</a></h3>
+<p>We recommend to subscribe to the <a class="reference internal" href="#basic-channel-nao"><span>Basic Channel</span></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Alive and responsive</strong>:
+<a class="reference internal" href="#alife-nao"><span>Autonomous Life</span></a>: <strong>ON</strong> - <a class="reference internal" href="#basic-channel-nao"><span>Basic Channel</span></a>: <strong>ON</strong></td>
+</tr>
+<tr class="row-even"><td><p class="first">On startup:</p>
+<ul class="simple">
+<li>If he is on his feet, <strong>NAO</strong> gets up,</li>
+<li>If he is sitting, <strong>NAO</strong> remains seated.</li>
+</ul>
+<p>Then, <strong>NAO</strong>
+orientates its head towards human, and
+is able to react to basic stimuli, such as sounds, movements, or tactile
+contacts.</p>
+<ul class="simple">
+<li>If you stay away, <strong>NAO</strong> does not talk, but looks for people willing to
+talk and interact.</li>
+<li>If you come closer, <strong>NAO</strong> listens and tries to make a relevant answer.</li>
+</ul>
+<p class="last">For further details, see: <a class="reference internal" href="nao_interacting.html#nao-interacting"><span>Interacting with NAO</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basic-channel">
+<span id="basic-channel-nao"></span><h3>Basic Channel<a class="headerlink" href="#basic-channel" title="Permalink to this headline">¶</a></h3>
+<p>Subscribing to the <strong>Basic Channel</strong> will install several items on <strong>NAO</strong>,
+providing mainly dialog abilities, but also push and fall recovery abilities, and
+useful sounds gathered in the <strong>Aldebaran soundSet</strong>.</p>
+<p>Subscribing to the <strong>Basic Channel</strong> is mandatory to fully use
+<strong>Autonomous life</strong>, and more specifically, to run <strong>Applications</strong> using
+<strong>Trigger sentences</strong>, or <strong>Aldebaran soundSet</strong>.</p>
+<p>For further details, see:</p>
+<ul class="simple">
+<li><a class="reference internal" href="nao_store_channel.html#nao-store-channel"><span>Subscribing to a Channel</span></a>.</li>
+<li>For developers: <a class="reference internal" href="../software/choregraphe/panels/project_content_panel.html#beha-properties"><span>Behavior property list</span></a>, <a class="reference internal" href="../naoqi/audio/alaudioplayer.html#soundset"><span>Soundset</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="installed-activities">
+<span id="installed-apps-nao"></span><h3>Installed Activities<a class="headerlink" href="#installed-activities" title="Permalink to this headline">¶</a></h3>
+<p>Additionally, <strong>Applications</strong> can be installed, from the <strong>Store</strong> and/or from
+<strong>Choregraphe</strong>.</p>
+<p>For further details, see: <a class="reference internal" href="nao_store.html#nao-store"><span>Retrieving applications</span></a>.</p>
+<p><strong>Applications</strong> may content <strong>Solitary</strong> and/or <strong>Interactive Activities</strong>.</p>
+<p>Depending on the launch conditions of these <strong>Activities</strong>,
+you see them either autonomously launched at some point,
+or explicitly launched by voice when you talk to him.</p>
+<p>For further details, see: <a class="reference internal" href="activity_nao.html#activity-launch-nao"><span>Launching an Activity</span></a>.</p>
+<p>The more applications you installed on <strong>NAO</strong>, the richer his living behavior
+will be.</p>
+</div>
+</div>
+<div class="section" id="what-if-i-do-not-want-autonomous-life">
+<h2>What if I do not want autonomous life<a class="headerlink" href="#what-if-i-do-not-want-autonomous-life" title="Permalink to this headline">¶</a></h2>
+<p>You may disable <strong>Autonomous Life</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Still and motionless</strong>:
+<a class="reference internal" href="#alife-nao"><span>Autonomous Life</span></a>: <strong>OFF</strong> - <a class="reference internal" href="#basic-channel-nao"><span>Basic Channel</span></a>: <strong>OFF</strong></td>
+</tr>
+<tr class="row-even"><td><p class="first">In this state, you can use <strong>NAO</strong> as an experimental tool, to test a
+new program or to study a very specific skill of your robot.</p>
+<p class="last">But if you want to use or to create interactive <strong>Applications</strong>,
+you should create and test them with the recommended settings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><strong>NAO</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction_nao.html">First steps with <strong>NAO</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_nao.html">Apps 2.1 Store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="taking-care.html">Taking care of NAO</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="understanding_nao.html">More details about <strong>NAO</strong></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="chest_button_usages.html">Main usages of the Chest button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voice_notifications_nao.html">Event and state notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boot_process_nao.html">Understanding the boot process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shutdown_process_nao.html">Understanding the shut down process</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Understanding Autonomous Life settings</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="basic_channel_conversation_nao.html">Basic Channel - What can I say to <strong>NAO</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><strong>NAO</strong> - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Understanding Autonomous Life settings</a><ul>
+<li><a class="reference internal" href="#autonomous-life">Autonomous Life</a><ul>
+<li><a class="reference internal" href="#default-settings">Default settings</a></li>
+<li><a class="reference internal" href="#recommended-settings">Recommended settings</a></li>
+<li><a class="reference internal" href="#basic-channel">Basic Channel</a></li>
+<li><a class="reference internal" href="#installed-activities">Installed Activities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-if-i-do-not-want-autonomous-life">What if I do not want autonomous life</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../glossary.html">Glossary</a>
+      <a title="Site map" href="../contents.html">Site map</a>
+      <a title="Index" href="../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Best practices &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../index.html" />
+    <link rel="up" title="Taking care of NAO" href="taking-care.html" />
+    <link rel="next" title="Upgrading my NAO" href="upgrade_nao.html" />
+    <link rel="prev" title="Contacting customer support for NAO" href="contacting_support.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="nao-practices">
+                
+  <div class="section" id="best-practices">
+<h1>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="charging-nao">
+<h2>Charging <strong>NAO</strong><a class="headerlink" href="#charging-nao" title="Permalink to this headline">¶</a></h2>
+<p>Plug the adaptor into <strong>NAO</strong>&#8216;s back while he&#8217;s in a stable position and leave him
+to charge for at least 2 hours. He should not walk or lie down while charging.</p>
+<img alt="../_images/nao_assis_dos.png" src="../_images/nao_assis_dos.png" />
+</div>
+<div class="section" id="ethernet-cable">
+<h2>Ethernet cable<a class="headerlink" href="#ethernet-cable" title="Permalink to this headline">¶</a></h2>
+<p>When plugged into Ethernet, <strong>NAO</strong> should not walk, lie down or perform behaviors
+which could move his head too far (particularly tilting his head back), as the
+plug could damage his head. The WiFi connection is the recommended connection.</p>
+</div>
+<div class="section" id="hands">
+<h2>Hands<a class="headerlink" href="#hands" title="Permalink to this headline">¶</a></h2>
+<p>Avoid playing with <strong>NAO</strong>&#8216;s fingers and rotating his hands when turned off.</p>
+</div>
+<div class="section" id="safe-poses">
+<h2>Safe Poses<a class="headerlink" href="#safe-poses" title="Permalink to this headline">¶</a></h2>
+<p><strong>NAO</strong> needs to be in a stable position when he&#8217;s not in use or while charging,
+like in this picture.</p>
+<div class="section" id="nao-h21-h25">
+<h3><strong>NAO</strong> H21/H25<a class="headerlink" href="#nao-h21-h25" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/nao_pose_secu_face_3_4.png" src="../_images/nao_pose_secu_face_3_4.png" />
+</div>
+<div class="section" id="nao-t2-t14">
+<h3><strong>NAO</strong> T2/T14<a class="headerlink" href="#nao-t2-t14" title="Permalink to this headline">¶</a></h3>
+<p>Fix <strong>NAO</strong>&#8216;s base onto a horizontal surface with 4 screws.</p>
+<img alt="../_images/assemblage_nao_sur_socle.png" src="../_images/assemblage_nao_sur_socle.png" />
+</div>
+</div>
+<div class="section" id="safe-area">
+<h2>Safe Area<a class="headerlink" href="#safe-area" title="Permalink to this headline">¶</a></h2>
+<p>You should prevent <strong>NAO</strong> from falling. Yet if he falls, he should not hurt any
+object or fall from a high surface, such as a table. A safe working area is
+shown in the figures opposite.</p>
+<img alt="../_images/safearea.png" src="../_images/safearea.png" />
+<p>The way you position <strong>NAO</strong> is also important to prevent <strong>NAO</strong> from falling
+or hurting himself. Place him in a stable position when pressing his chest button,
+or when plugging a cable. before starting a move, make sure he can perform it
+from his current position.</p>
+<p>When turned off, the best position is to have <strong>NAO</strong> lying down on his back,
+with no cable plugged.</p>
+</div>
+<div class="section" id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Precautions: take all necessary precautions to ensure that <strong>NAO</strong> will not be
+directly or indirectly damaged by its surroundings. Do not exert strong forces
+on <strong>NAO</strong> and protect it from falls. Do not make <strong>NAO</strong> walk on thick carpets
+or rugs, mattresses, clothes. <strong>NAO</strong> will move about properly if the floor is
+flat, hard and smooth. Do not block its sensors or introduce foreign objects
+into its body. Do not use <strong>NAO</strong> outdoors.</li>
+<li>Handling: if you need to handle or move <strong>NAO</strong>, it is best to hold it with
+both hands by the waist/torso. Do not pull it by the arms, legs or head.</li>
+<li>Water: do not expose <strong>NAO</strong> to any form of water as permanent damage may occur.
+In particular, if <strong>NAO</strong> switches from a cold environment to a warm one,
+condensation may occur on its surface or inside. In that case, let <strong>NAO</strong>
+dry before turning it on.</li>
+<li>Temperature: <strong>NAO</strong> is designed to function between 10 and 35 °C ( 50-95 F).</li>
+<li>Humidity: <strong>NAO</strong> is designed to function within 10% to 90% relative humidity.</li>
+<li>Electrical shock: do not attempt to disassemble or modify <strong>NAO</strong>, as this can
+cause malfunction/damage or result in electrical shock.</li>
+<li>Children and pets: do not let children or pets interact with <strong>NAO</strong>.</li>
+<li>Storage: when not intending to use <strong>NAO</strong> for a long time, remove the battery
+and store it in a dry location, at temperatures between 0 and 45 °C (32- 113 F).
+Be aware that during storage, the battery will be subject to discharge. Also
+bear in mind that the charge capacity of the battery will decrease in time.</li>
+<li>Transport: the robot must always be transported in its original packing or in
+a specific suitcase sold by <strong>SoftBank Robotics</strong>. Any other packing may damage
+the robot and void the warranty.</li>
+<li>Battery handling: do not expose the battery to temperatures above 45 °C (113°F).
+Protect the battery terminals from dust or foreign objects.</li>
+<li>Cleaning: clean <strong>NAO</strong> and charger with a soft, dry cloth only. Do not use
+solvents.</li>
+<li>Do not oil <strong>NAO</strong>&#8216;s joints or other movable parts.</li>
+<li>Lithium-ion rechargeable batteries are recyclable. You can help preserve our
+environment by returning your used rechargeable battery to the collection and
+recycling location nearest you.</li>
+<li>For information regarding the AC adapter, please refer to the manual provided
+separately.</li>
+</ul>
+</div>
+<div class="section" id="safety">
+<span id="nao-safety"></span><h2>Safety<a class="headerlink" href="#safety" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Periodically examine the AC adapter for conditions that may result in the risk
+of fire, electric shock, or injury to persons (such as damage to the cords,
+blades, housing). In the event of such conditions, the AC adapter should not
+be used until properly replaced.</li>
+<li>The robot must be used only with the recommended AC adapter and battery. Use
+of another type of adapter and/or battery may result in malfunction and voids
+the warranty.</li>
+<li>If the external flexible cable or cord is damaged, it must be replaced or
+repaired only by the manufacturer, an authorized service agent or a similar
+qualified person in order to avoid a hazard.</li>
+<li>All material for fastening or packing purposes are not part of the robot and
+should be disregarded for children&#8217;s safety.</li>
+<li>Do not handle damaged or leaking lithium ion batteries.</li>
+<li>There is a risk of explosion if the battery is incorrectly replaced. Replace
+only with an Aldebaran battery. Discard used batteries according to the
+manufacturer&#8217;s instructions.</li>
+<li>The battery pack used in this device may present a fire or chemical burn hazard
+if mistreated. Do not disassemble, heat above 60 °C (140 °F ) or incinerate.
+Dispose of used battery promptly. Keep away from children. Do not disassemble
+and do not dispose of in fire.</li>
+<li>Do not drop the battery pack or place heavy object on it. Do not apply strong
+pressure or physical shock to the battery pack.</li>
+<li>In case of troubles with your electrical power circuit, immediately unplug
+<strong>NAO</strong>&#8216;s charger.</li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><strong>NAO</strong> - Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><strong>NAO</strong> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction_nao.html">First steps with <strong>NAO</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="interacting.html">Daily use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home_nao.html">Apps 2.1 Store</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="taking-care.html">Taking care of NAO</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="replacing-battery.html">Replacing the battery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="removing-head.html">Removing <strong>NAO</strong>&#8216;s head</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contacting_support.html">Contacting customer support for <strong>NAO</strong></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Best practices</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="upgrade_nao.html">Upgrading my <strong>NAO</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../software/naoflasher/naoflasher.html">Upgrading using NAOFlasher</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="understanding_nao.html">More details about <strong>NAO</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><strong>NAO</strong> - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">Best practices</a><ul>
+<li><a class="reference internal" href="#charging-nao">Charging <strong>NAO</strong></a></li>
+<li><a class="reference internal" href="#ethernet-cable">Ethernet cable</a></li>
+<li><a class="reference internal" href="#hands">Hands</a></li>
+<li><a class="reference internal" href="#safe-poses">Safe Poses</a><ul>
+<li><a class="reference internal" href="#nao-h21-h25"><strong>NAO</strong> H21/H25</a></li>
+<li><a class="reference internal" href="#nao-t2-t14"><strong>NAO</strong> T2/T14</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#safe-area">Safe Area</a></li>
+<li><a class="reference internal" href="#recommendations">Recommendations</a></li>
+<li><a class="reference internal" href="#safety">Safety</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../glossary.html">Glossary</a>
+      <a title="Site map" href="../contents.html">Site map</a>
+      <a title="Index" href="../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

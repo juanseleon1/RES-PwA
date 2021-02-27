@@ -33,9 +33,8 @@ public class ReiniciarActividadTask extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //revisar esto blvs.getbEstadoActividad().getActividadActual()
-        infoServicio.put("WAKEUP", null);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, infoServicio);
-        requestService(srb);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+        requestService(srb,blvs);
     }
 
     @Override
@@ -50,11 +49,7 @@ public class ReiniciarActividadTask extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
-            return true;
-        }
-        return false;
+        return true;
     }
     
 }

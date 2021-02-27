@@ -17,7 +17,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy{
 
     @Override
     public Map<String, Object> processEmotion(SensorData sd) {
-        System.out.println("Emotion Processing");
+//        System.out.println("Emotion Processing");
         Map<String, Object> ret = sd.getDataP();
         return ret;
     }

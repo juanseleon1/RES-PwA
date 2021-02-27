@@ -7,7 +7,7 @@ package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
 import SensorHandlerAgent.SensorData;
-import Tareas.CambiarEnriquecimientoHistoria.LedsColor;
+import Tareas.Cuenteria.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -17,7 +17,7 @@ import rational.mapping.Believes;
  */
 public class BEstadoRobot implements Believes {
 
-    private int bateria;
+    private boolean bateria;
     private int volumenVoz;
     private double velocidad = 0;
     private boolean activadoParpadear = false;
@@ -26,6 +26,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoRecuperacionEmpuje = false;
     private int rigidezExtremidades;
     private String postura;
+    private boolean libreEntorno = false;
     private boolean activadoMovEscucha = false;
     private boolean activadoConsciente = false;
     private boolean activadoSeñalesDeVida = false;
@@ -37,16 +38,16 @@ public class BEstadoRobot implements Believes {
     private double distanciaY;
     private double ledIntensity;
     private LedsColor leds=null;
-    private int red;
-    private int green;
-    private int blue;
     @Override
     public boolean update(InfoData si) {
 
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
-            if (infoRecibida.getDataP().containsKey("bateria")) {
-                bateria = Integer.valueOf((String) infoRecibida.getDataP().get("bateria"));
+            if (infoRecibida.getDataP().containsKey("batteryLow")) {
+                bateria = (boolean) infoRecibida.getDataP().get("batteryLow");
+            }
+            if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
+//                BinfoRecibida.getDataP().get("ROBOTEMOTION"));
             }
             if (infoRecibida.getDataP().containsKey("activadoParpadear")) {
                 activadoParpadear = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoParpadear"));
@@ -78,8 +79,11 @@ public class BEstadoRobot implements Believes {
             if (infoRecibida.getDataP().containsKey("activadoMovHabla")) {
                 activadoMovHabla = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovHabla"));
             }
-            if (infoRecibida.getDataP().containsKey("estaSuspendido")) {
-                estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("estaSuspendido"));
+            if (infoRecibida.getDataP().containsKey("robotIsWakeUp")) {
+                estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("robotIsWakeUp"));
+            }
+            if (infoRecibida.getDataP().containsKey("libreEntorno")) {
+                libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
@@ -102,11 +106,11 @@ public class BEstadoRobot implements Believes {
         return true;
     }
 
-    public int getBateria() {
+    public boolean getBateria() {
         return bateria;
     }
 
-    public void setBateria(int bateria) {
+    public void setBateria(boolean bateria) {
         this.bateria = bateria;
     }
 
@@ -248,5 +252,14 @@ public class BEstadoRobot implements Believes {
         this.distanciaY = distanciaY;
     }
 
+    public boolean isLibreEntorno() {
+        return libreEntorno;
+    }
+
+    public void setLibreEntorno(boolean libreEntorno) {
+        this.libreEntorno = libreEntorno;
+    }
+
+    
     
 }

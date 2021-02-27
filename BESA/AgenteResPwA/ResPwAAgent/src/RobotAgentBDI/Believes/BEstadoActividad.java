@@ -29,7 +29,7 @@ import rational.mapping.Believes;
 public class BEstadoActividad implements Believes {
 
     private long tiempoInicioActividad = 0;
-    private ResPwAActivity actividadActual;
+    private ResPwAActivity actividadActual=ResPwAActivity.CUENTERIA;
     private String estadoInit = null;
     private boolean actividadEnCurso = false;
     private boolean mejoraEmocional = false;
@@ -52,6 +52,7 @@ public class BEstadoActividad implements Believes {
     private Integer boostSeleccionarCancionGusto = 0;
     private Integer boostSeleccionarCuentoGusto = 0;
     private String cedula;
+    private Integer indexCuento = 0;
     private RobotAgentBelieves blvs = null;
 
     public BEstadoActividad(String cedula, RobotAgentBelieves blvs) {
@@ -299,6 +300,15 @@ public class BEstadoActividad implements Believes {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
+
+    public Integer getIndexCuento() {
+        return indexCuento;
+    }
+
+    public void setIndexCuento(Integer indexCuento) {
+        this.indexCuento = indexCuento;
+    }
+    
 
     @Override
     public Believes clone() throws CloneNotSupportedException {

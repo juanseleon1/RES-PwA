@@ -1,0 +1,10 @@
+source WavingDetection_Threshold {0.6}
+
+process WavingDetection_process(WavingDetection2D, 3, 0)
+{
+movementsIn<=MovementDetection_process:movements;
+#populationIn<=PeoplePerception_process:population;
+thresholdIn<=WavingDetection_Threshold;
+
+wavingOut=>wavingOut;
+}

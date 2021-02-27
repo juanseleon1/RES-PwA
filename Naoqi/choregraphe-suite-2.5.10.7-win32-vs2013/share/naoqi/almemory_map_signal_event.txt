@@ -1,0 +1,15 @@
+#ALTabletService
+ALTabletService.onTouch:tabletTouched
+
+#Package Manager
+PackageManager._onPackageInstalled:packageInstalled
+PackageManager._onPackageRemoved:packageRemoved
+
+#ALStore
+ALStore.systemImageDownloaded:ALStore/SystemImageDownloaded
+ALStore.updated:ALStore/Updated
+
+#ALMood
+ALMood.cloudCurrentFocusedUserMoodEvent:cloud_current_focused_user_mood_event
+ALMood.cloudTagMoodEvent:cloud_tag_mood_event
+ALMood.averageMoodToCloud:cloud_tag_average_mood_event

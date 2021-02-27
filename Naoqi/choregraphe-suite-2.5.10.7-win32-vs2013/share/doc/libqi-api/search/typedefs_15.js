@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['wrap_5ftype',['wrap_type',['../structqi_1_1detail_1_1ObjectWrap_3_01T_00_01false_01_4.html#a09b4c7c582ec29279f8ae1fc2d67cae2',1,'qi::detail::ObjectWrap&lt; T, false &gt;::wrap_type()'],['../structqi_1_1detail_1_1ObjectWrap_3_01T_00_01true_01_4.html#a9e08f5d9c5995640fd16b416768a8e0c',1,'qi::detail::ObjectWrap&lt; T, true &gt;::wrap_type()'],['../structqi_1_1detail_1_1BindTransformImpl.html#a4fa2bf594a433963c0dc48cb445650f5',1,'qi::detail::BindTransformImpl::wrap_type()'],['../structqi_1_1detail_1_1BindTransformImpl_3_01T_01_5_00_01false_01_4.html#a010a63803dcfda62ea496087ade29ff3',1,'qi::detail::BindTransformImpl&lt; T *, false &gt;::wrap_type()'],['../structqi_1_1detail_1_1BindTransformImpl_3_01T_01_5_00_01true_01_4.html#a53f7edc255f8327249b00cf4e251986c',1,'qi::detail::BindTransformImpl&lt; T *, true &gt;::wrap_type()']]]
+];

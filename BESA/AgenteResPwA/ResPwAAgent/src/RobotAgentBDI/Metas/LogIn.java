@@ -44,12 +44,19 @@ public class LogIn extends GoalBDI{
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan();
-
         rolePlan.addTask(detectarPwA);
-        rolePlan.addTask(loginT);
-        rolePlan.addTask(iniciarServicios);
-        rolePlan.addTask(saludar);
-        rolePlan.addTask(conversacion);
+        taskList = new ArrayList<>();
+        taskList.add(detectarPwA);
+        rolePlan.addTask(loginT,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(loginT);
+        rolePlan.addTask(iniciarServicios,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(loginT);
+        rolePlan.addTask(saludar,taskList);
+        taskList = new ArrayList<>();
+        taskList.add(saludar);
+        rolePlan.addTask(conversacion,taskList);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
         LogIn b= new LogIn(InitRESPwA.getPlanID(), reiActRole, descrip, GoalBDITypes.DUTY);
@@ -70,15 +77,15 @@ public class LogIn extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn detectGoal");
+        System.out.println("Meta LogIn detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
+        System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
         if (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged()) {
             return 1.0;
         }
         
-        return 1.0;
+        return 0;
     }
 
     @Override
@@ -90,7 +97,7 @@ public class LogIn extends GoalBDI{
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn evaluateContribution");
+        System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
     }
@@ -104,7 +111,7 @@ public class LogIn extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta LogIn goalSucceeded");
-        return true;
+        return false;
     }
     
 }

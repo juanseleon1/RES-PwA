@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Choregraphe 2.3.0 &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../index.html" />
+    <link rel="up" title="Release notes - 2.3" href="index.html" />
+    <link rel="next" title="NAOqi API &amp; SDKs 2.3.0" href="naoqi_api_rn2.3.html" />
+    <link rel="prev" title="Release Notes - 2.3.0" href="whatsnew.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="news-2.3-choregraphe_rn2.3">
+                
+  <div class="section" id="choregraphe-2-3-0">
+<span id="whats-new-choregraphe-2-3"></span><h1><strong>Choregraphe</strong> 2.3.0<a class="headerlink" href="#choregraphe-2-3-0" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="behavior-has-evolved">
+<h2>Behavior has evolved<a class="headerlink" href="#behavior-has-evolved" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-root-box-type">
+<h3>New: Root box type<a class="headerlink" href="#new-root-box-type" title="Permalink to this headline">¶</a></h3>
+<p><strong>Behaviors</strong> used to contain a <strong>Flow diagram</strong> as a root box type,
+now it can also contain directly a <strong>Timeline</strong>.</p>
+<p>The <strong>Root box type</strong> is now requested when creating a new <strong>Behavior</strong>.</p>
+<a class="reference internal image-reference" href="../../_images/create_behavior.png"><img alt="../../_images/create_behavior.png" src="../../_images/create_behavior.png" style="width: 228px; height: 164px;" /></a>
+<p><strong>TODO</strong>, see: <a class="reference internal" href="../../software/choregraphe/objects/behavior.html#behavior"><span>Behavior</span></a>.</p>
+</div>
+<div class="section" id="new-properties-permissions">
+<h3>New properties: Permissions<a class="headerlink" href="#new-properties-permissions" title="Permalink to this headline">¶</a></h3>
+<p><strong>Permissions</strong> allows you to define the permissions needed for the launching
+of the <strong>Behavior</strong>:</p>
+<ul class="simple">
+<li>If the field &#8220;Behavior can be run on charging station&#8221; is not checked,
+you will not be able to launch the <strong>Behavior</strong> while the robot is on his
+<strong>Charging station</strong>.</li>
+<li>A new field has been added to choose whether an <strong>Activity</strong>
+may start on user request.</li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/panels/project_content_panel.html#beha-properties"><span>Behavior property list</span></a>.</p>
+</div>
+</div>
+<div class="section" id="usability">
+<h2>Usability<a class="headerlink" href="#usability" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-panel-project-objects">
+<h3>New panel: Project objects<a class="headerlink" href="#new-panel-project-objects" title="Permalink to this headline">¶</a></h3>
+<p><strong>Project objects</strong> panel shows the complete boxes tree of the current <strong>Behavior</strong>.
+It eases the navigation from a box level to another, and also provides a search
+field to find boxes by name.</p>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/panels/project_objects_panel.html#chore-project-objects"><span>Project objects panel</span></a>.</p>
+</div>
+<div class="section" id="new-panel-active-content">
+<h3>New panel: Active content<a class="headerlink" href="#new-panel-active-content" title="Permalink to this headline">¶</a></h3>
+<p><strong>Active content</strong> panel lists running <strong>Behaviors</strong>, <strong>Services</strong> and <strong>Dialog topics</strong>.
+It gives the possibility to stop and restart them, and keeps a brief history of
+the last active contents.</p>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/panels/active_panel.html#active-content-panel"><span>Active Content panel</span></a>.</p>
+</div>
+<div class="section" id="new-panel-inspector">
+<h3>New panel: Inspector<a class="headerlink" href="#new-panel-inspector" title="Permalink to this headline">¶</a></h3>
+<p><strong>Inspector</strong> panel  gives a centralized view of main objects in <strong>Choregraphe</strong>:
+<strong>Behaviors</strong>, <strong>Boxes</strong> in the diagram and in box library, applications.</p>
+<p><strong>Note</strong>: The <a class="reference internal" href="../../software/choregraphe/panels/robot_3d_view.html#choregraphe-detailed-interface-motion-widget"><span>Limb properties</span></a> also appears in the inspector.</p>
+<p><strong>Note</strong>: if you select a pure animation box, the <strong>Inspector</strong> shows a
+3D preview of the animation.</p>
+<p>For further details, see: <a class="reference internal" href="../../software/choregraphe/panels/inspector_panel.html#chore-inspector-panel"><span>Inspector panel</span></a>.</p>
+</div>
+<div class="section" id="improved-panel-box-library">
+<h3>Improved panel: Box library<a class="headerlink" href="#improved-panel-box-library" title="Permalink to this headline">¶</a></h3>
+<p><strong>Box library</strong> has been completely reworked:</p>
+<ul class="simple">
+<li>a more intuitive tree structure,</li>
+<li>no more tabs, even for user&#8217;s box library,</li>
+<li>search filter has been improved,</li>
+<li>box properties are now displayed through the <a class="reference internal" href="../../software/choregraphe/panels/inspector_panel.html#chore-inspector-panel"><span>Inspector panel</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="improved-panel-robot-applications">
+<h3>Improved panel: Robot applications<a class="headerlink" href="#improved-panel-robot-applications" title="Permalink to this headline">¶</a></h3>
+<p><strong>Robot applications</strong> now displays <strong>Behaviors</strong>, <strong>Dialogs</strong> and <strong>Services</strong>.</p>
+</div>
+<div class="section" id="better-display">
+<h3>Better display<a class="headerlink" href="#better-display" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Clearer <strong>Behavior</strong> loading indication bar.</li>
+<li>When linking boxes, inputs and outputs names are displayed.</li>
+<li><strong>Trigger conditions</strong> edition offers auto-completion, syntax highlighting and
+syntax checking.</li>
+<li>New stand-alone condition editor.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="language">
+<h2>Language<a class="headerlink" href="#language" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="supported-languages">
+<h3>Supported Languages<a class="headerlink" href="#supported-languages" title="Permalink to this headline">¶</a></h3>
+<p>New languages are supported in the <strong>Dialog</strong>.</p>
+<p>For further details, see: <a class="reference internal" href="../../family/robots/languages_nao.html#language-codes-nao"><span>Supported languages</span></a>.</p>
+</div>
+<div class="section" id="new-choice-box">
+<h3>New Choice box<a class="headerlink" href="#new-choice-box" title="Permalink to this headline">¶</a></h3>
+<p><strong>Choice</strong> boxes are much more efficient and are compatible with dialogs,
+you are encouraged to replace them!</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">What’s new</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.8.html">Addendum 2.5.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.7.html">Addendum 2.5.7 - For U.S. only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/whatsnew2.5.html">Release Notes - 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/choregraphe_rn2.5.html"><strong>Choregraphe</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_api_rn2.5.html"><strong>NAOqi API</strong> &amp; <strong>SDKs</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.5/naoqi_os_rn2.5.html"><strong>NAOqi OS</strong> 2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html">ChangeLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2.4/index.html">Release notes - 2.4</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Release notes - 2.3</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="whatnew_rn2.3.1.html">Release Notes - 2.3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="whatsnew.html">Release Notes - 2.3.0</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href=""><strong>Choregraphe</strong> 2.3.0</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_api_rn2.3.html"><strong>NAOqi API</strong> &amp; <strong>SDKs</strong> 2.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naoqi_os_rn2.3.html"><strong>NAOqi OS</strong> 2.3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../2.0/index.html">Release notes - 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.14/index.html">Release notes - 1.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.12/index.html">Release notes - 1.12</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi - Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#"><strong>Choregraphe</strong> 2.3.0</a><ul>
+<li><a class="reference internal" href="#behavior-has-evolved">Behavior has evolved</a><ul>
+<li><a class="reference internal" href="#new-root-box-type">New: Root box type</a></li>
+<li><a class="reference internal" href="#new-properties-permissions">New properties: Permissions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usability">Usability</a><ul>
+<li><a class="reference internal" href="#new-panel-project-objects">New panel: Project objects</a></li>
+<li><a class="reference internal" href="#new-panel-active-content">New panel: Active content</a></li>
+<li><a class="reference internal" href="#new-panel-inspector">New panel: Inspector</a></li>
+<li><a class="reference internal" href="#improved-panel-box-library">Improved panel: Box library</a></li>
+<li><a class="reference internal" href="#improved-panel-robot-applications">Improved panel: Robot applications</a></li>
+<li><a class="reference internal" href="#better-display">Better display</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#language">Language</a><ul>
+<li><a class="reference internal" href="#supported-languages">Supported Languages</a></li>
+<li><a class="reference internal" href="#new-choice-box">New Choice box</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../contents.html">Site map</a>
+      <a title="Index" href="../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

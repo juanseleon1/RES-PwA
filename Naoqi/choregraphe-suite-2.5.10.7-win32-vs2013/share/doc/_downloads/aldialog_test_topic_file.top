@@ -1,0 +1,32 @@
+topic: ~mytopic()
+language: enu
+
+concept:(cake) [pie kinder crisps]
+dynamic: things_you_can_ride
+
+proposal: human, how are you ?
+   u1: (yes) I'm so happy!
+   u1: (no) I'm so sad
+
+proposal: %dynamicTest What do you want to do ?
+
+u:(I want to ride a _~things_you_can_ride) Of course you can ride a $1 ! I'm going with you !
+
+u: (Hello Nao how are you today) Hello human, I am fine thank you and you?
+u: (Good morning Nao did you sleep well) No damn! You forgot to switch me off!
+
+u:([e:FrontTactilTouched e:MiddleTactilTouched e:RearTactilTouched]) You touched my head!
+
+u: (Do you want to be tested) %testing Yes, please, test me now!
+u: (test test test) I love it! and you?
+    u1: (yes) soooo cooool!
+    u1: (no) too bad
+
+u:(single-tagged rule %mytag_0) single-tagged rule test answer
+u:(single-tagged output) %mytag_1 single-tagged output test answer
+u:(double-tagged rule %mytag_2 %mytag_3) double-tagged rule test answer
+u:(double-tagged output) %mytag_4 %mytag_5 double-tagged output test answer
+u:(e:Dialog/SpeakFailure) I have matched a rule with an empty answer!
+u:(e:Dialog/NotUnderstood) I haven't matched any rule!
+
+u:(start counting) 0, 1, 2, 3, 4, 5.

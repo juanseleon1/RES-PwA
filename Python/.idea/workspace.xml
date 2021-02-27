@@ -24,12 +24,16 @@
   <component name="ChangeListManager">
     <list default="true" id="766cfaa0-5bab-4646-9798-479f2ac2109b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/PythonProject/SimpleTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/SimpleTest.py" afterDir="false" />
 =======
       <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PythonProject/Topics.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Topics.py" afterDir="false" />
 >>>>>>> Stashed changes
+=======
+      <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
+>>>>>>> develop
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +79,7 @@
       </console-settings>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Python.SimpleTest">
     <configuration name="ConversationTopics" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python" />
@@ -120,6 +125,14 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+=======
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Universidad\10 semestre\TG\Pepper\SASE-PwD\Python\PythonProject" />
+    </key>
+  </component>
+  <component name="RunManager">
+>>>>>>> develop
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,9 +157,13 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="Python.SimpleTest" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.ConversationTopics" />
+=======
+        <item itemvalue="Python.main" />
+>>>>>>> develop
       </list>
     </recent_temporary>
   </component>
@@ -158,6 +175,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603399498544</updated>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       <workItem from="1612123367442" duration="2227000" />
       <workItem from="1612127743817" duration="18686000" />
@@ -168,15 +186,21 @@
       <workItem from="1613397042950" duration="2391000" />
       <workItem from="1613400825833" duration="14114000" />
 =======
+=======
+>>>>>>> develop
       <workItem from="1613169373441" duration="1178000" />
       <workItem from="1613170580357" duration="342000" />
       <workItem from="1613171033361" duration="377000" />
       <workItem from="1613171423944" duration="133000" />
       <workItem from="1613171688347" duration="555000" />
       <workItem from="1614038528552" duration="63000" />
+<<<<<<< HEAD
       <workItem from="1614091490172" duration="9296000" />
       <workItem from="1614370284136" duration="1020000" />
 >>>>>>> Stashed changes
+=======
+      <workItem from="1614382840145" duration="2962000" />
+>>>>>>> develop
     </task>
     <servers />
   </component>
@@ -196,8 +220,12 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/Python$ConversationTopics.coverage" NAME="ConversationTopics Coverage Results" MODIFIED="1613401686549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
     <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1613401882630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
     <SUITE FILE_PATH="coverage/Python$SimpleTest.coverage" NAME="SimpleTest Coverage Results" MODIFIED="1613425415543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
+=======
+    <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1614386200318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
+>>>>>>> develop
   </component>
 </project>

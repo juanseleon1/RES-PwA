@@ -60,11 +60,11 @@ public class  ConexManager extends Thread {
                 socket = serverSocket.accept();
                 in = new ObjectInputStream(socket.getInputStream());
                 received = in.readObject();
-
-                switch ((int) received) {
+                JSONObject.class.cast(received);
+                switch ( (int) received) {
                     case 0:
                         Animation myAnimation = AnimationBuilder.with(qiContext)
-                                .withResources(R.raw.animationresource)
+                                .withResources(R.raw.macarena)
                                 .build();
 
                         Animate animate = AnimateBuilder.with(qiContext)

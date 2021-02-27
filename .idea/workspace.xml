@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3f1c1b8-fbf9-4157-b555-ddc12bcb9224" name="Default Changelist" comment="" />
+    <list default="true" id="e3f1c1b8-fbf9-4157-b555-ddc12bcb9224" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Naoqi/RESPwA/RESPwA.pml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Naoqi/RESPwA/behavior_1/behavior.xar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Naoqi/RESPwA/manifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Naoqi/RESPwA/translations/translation_en_US.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Python/.idea/Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/pepperPython.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/pepperPython.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/pruebaservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/pruebaservice.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,11 +23,12 @@
   <component name="ProjectId" id="1i9liOullhID4FtlgjBrzrybbHZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -31,6 +42,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601327814827</updated>
+      <workItem from="1612056084282" duration="343000" />
     </task>
     <servers />
   </component>

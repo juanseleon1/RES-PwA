@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ModulePreference name="aldebaran-robotics.com@VideoDevice" xmlns="http://www.aldebaran-robotics.com/ns/ALPreference" schemaLocation="ModulePreference.xsd">
+
+    <!-- uncomment the wanted Module -->
+    <Preference name="videoDeviceModule" description="Name of the videoDevice module to be loaded" type="string" value="Simulator"/>
+    <Preference name="cameraTopBottom" description="Top and bottom camera to simulate" type="string" value="3"/>
+    <Preference name="cameraDepth" description="Depth camera to simulate" type="string" value="4"/>
+    <Preference name="cameraStereo" description="Stereo camera to simulate" type="string" value="5"/>
+    <!-- Camera available for 2D simulation -->
+    <!--  2: MT9M114 -->
+    <!--  3: OV5640  -->
+
+    <!-- Camera available for Stereo simulation -->
+    <!-- "": None    -->
+    <!--  5: OV4689  -->
+
+    <!-- Camera available for 3D simulation -->
+    <!-- "": None                -->
+    <!--  0: Compute from stereo -->
+    <!--  4: XTION               -->
+    <!--  5: OV4689              -->
+</ModulePreference>

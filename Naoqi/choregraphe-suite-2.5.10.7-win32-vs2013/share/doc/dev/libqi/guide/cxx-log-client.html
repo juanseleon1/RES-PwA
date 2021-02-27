@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to receive and send logs &mdash; Aldebaran 2.5.9.8-r3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.5.9.8-r3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.5.9.8-r3 documentation" href="../../../index.html" />
+    <link rel="up" title="Hands-on Guide" href="index.html" />
+    <link rel="next" title="Internationalization Guide" href="cxx-linguist.html" />
+    <link rel="prev" title="Using qi::log" href="cxx-log.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115894784-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115894784-1');
+</script>
+
+<script type="text/javascript" src="https://cloud.aldebaran-robotics.com/static/js/topbar.js"></script>
+<style>
+div#hd::after {
+  
+  
+  content: 'NAOqi 2.5';
+  
+  
+  
+  position: absolute;
+  margin-top: -54px;
+  right: -4px;
+  font-size: 125%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+</style>
+<script>
+
+$(window).ready(function () {
+
+    //Aldebaran Top bar
+     var barLinks = [];
+     barLinks.push({'name':'Aldebaran Site', 'url':'http://www.aldebaran-robotics.com', 'click':'', 'img':'https://cloud.aldebaran-robotics.com/static/img/aldeb.png'});
+     barLinks.push({'name':'Documentation', 'url':'../../../index.html', 'click':"", 'img':''});
+     function ShowBar(name, email, usertype) {
+        var barParams = {
+            'name'    : name,
+            'email'   : email,
+            'usertype': usertype,
+            'loginfct': "FctLogin"
+        }
+        try { InitTopBar(barParams, barLinks); } catch (e) { console.log('Top Bar Init Failed'); }
+    }
+    ShowBar();
+
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+    $('.sig-paren').width('auto');
+
+    // first level navigation
+
+    var buttonIds = [".naoqi", "pepper", "nao", "romeo"];
+    for(id in buttonIds){
+        $(id).removeClass("active");
+    }
+    //Aldebaran project
+    if ($('.toctree-l1.current a').text().indexOf("Romeo ")==0){
+        $(".romeo").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Pepper ")==0){
+        $(".pepper").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("NAO ")==0){
+        $(".nao").toggleClass('active');
+    }
+    else if($('.toctree-l1.current a').text().indexOf("NAOqi ")==0){
+        $(".naoqi").toggleClass('active');
+    }
+
+    //qibuild project
+    if ($('.toctree-l1.current a').text().indexOf("Welcome to qiBuild documentation !")==0){
+        $(".beginner").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Advanced qibuild usage")==0){
+        $(".advanced").toggleClass('active');
+    }
+    else if ($('.toctree-l1.current a').text().indexOf("Hacking qiBuild")==0){
+        $(".hacking").toggleClass('active');
+    }
+
+    // add "On this page", add cssClasses
+    if($('.yui-g .section h1').length > 0){
+        $('.yui-g .section h1:first').addClass("titleWrapper");
+        $('.yui-g .section h1:first').after($("#on-this-page").html())
+    }
+    else if($('.yui-g .section h2').length > 0){
+        $('.yui-g .section h2:first').addClass("titleWrapper");
+        $('.yui-g .section h2:first').after($("#on-this-page").html())
+    }
+    //remove first element on this page
+    if($("#on-this-page").length > 0){
+        var doms = $(".yui-g .section :first").nextUntil("#toc-list");
+        doms = doms.add($("#toc-list"));
+        doms.wrapAll('<div class="iNavWrapper"></div>');
+        $("#toc-list ul li a:first").remove()
+        $("#toc-list ul:first").replaceWith($("#toc-list ul li").html())
+    }
+    $("#toc-list").hide();
+    $("#otp-link").click(function(){
+        $("#toc-list").slideToggle();
+        if($("h2#otp-link").hasClass("change-before")){
+            $("h2#otp-link").removeClass("change-before")
+        }
+        else{
+            $("h2#otp-link").addClass("change-before")
+        }
+    });
+
+    if($("a.current.reference.internal").length>0){
+        var left = $("a.current.reference.internal").position().left-1;
+        var width = $("a.current.reference.internal").width();
+        var offset = 51;
+        var sidebarWidth = 339;
+        var right = sidebarWidth - (left + width + offset);
+        if($("a.current.reference.internal").height() <= 15){
+            $("a.current.reference.internal").css("white-space","nowrap");
+            $("a.current.reference.internal").css({"backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        else{
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+            left = $("a.current.reference.internal").position().left-1;
+            width = $("a.current.reference.internal").width();
+            right = sidebarWidth - (left + width + offset);
+            $("a.current.reference.internal").css({"float":"right","backgroundColor":"#0F2939","paddingTop":"2px", "paddingBottom":"2px","paddingLeft":left+"px","marginLeft":"-"+left+"px", "paddingRight":right+"px","marginRight":"-"+right+"px", "boxShadow":"0px 0px 1px rgb(15, 41, 57)"});
+        }
+        $("a.current.reference.internal").parent().css("list-style-type","none");
+    }
+
+    //back to top
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700;
+    //grab the "back to top" link
+    var back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+        //back to top button
+        ( $(this).scrollTop() > offset ) ? back_to_top.addClass('cd-is-visible') : back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if( $(this).scrollTop() > offset_opacity ) {
+            back_to_top.addClass('cd-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    back_to_top.click(function(event){
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0 ,
+        }, scroll_top_duration
+        );
+    });
+    //add show source button
+
+    //replace "go" with "search"
+    $("#searchbox form input[type=submit]").val("Search")
+
+    //trigger click on version triangle to jump to whats new
+    $("#hd").click(function(e){if(e.pageX >= this.offsetWidth && e.pageY<120){$(".whatsnew")[0].click()}})
+})
+
+</script>
+
+
+  </head>
+  <body role="document">
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      
+      <h1><a href="../../../index.html">SoftBank Robotics documentation</a>
+      
+      
+      <span><a class="whatsnew" href="../../../news/index.html" >
+      
+          What's new in NAOqi 2.5?
+      
+      </a></span>
+      
+      </h1>
+      <div id="global-nav">
+        
+        <a class="naoqi" title="NAOqi Developer guide" href="../../../index_dev_guide.html">NAOqi</a>
+        <a class="pepper" title="Pepper documentation" href="../../../home_pepper.html">Pepper</a>
+        <a class="nao" title="NAO documentation" href="../../../home_nao.html">NAO</a>
+        <a class="romeo" title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+        
+        
+        
+        <div class="nav">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script></div>
+      </div>
+
+    </div>
+    <main class="cd-container">
+        <div id="bd">
+          <div id="yui-main">
+            <div class="yui-b">
+              <div class="yui-g" id="dev-libqi-guide-cxx-log-client">
+                
+  <div class="section" id="how-to-receive-and-send-logs">
+<span id="guide-cxx-log-client"></span><h1>How to receive and send logs<a class="headerlink" href="#how-to-receive-and-send-logs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This guide will teach you how to subscribe to LogManager qimessaging services,
+configure your listener, receive logs from NAOqi and send logs to it.</p>
+<p>NAOqi has a unique logs system service named LogManager. You can:</p>
+<ul class="simple">
+<li>use a listener to <span class="xref std std-ref">&lt;cxx-log-listener&gt;</span>,</li>
+<li><span class="xref std std-ref">&lt;cxx-log-publisher&gt;</span> to dispatch logs to all clients listeners subscribed to LogManager.</li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>An installed NAOqi SDK for your operating system.</li>
+<li>A C++ project setup in your favorite C++ development environment, ready
+to use the headers and libraries provided by the NAOqi SDK.</li>
+<li>Read guilde <a class="reference internal" href="cxx-client.html#guide-cxx-client"><span>C++: Writing a client</span></a></li>
+</ul>
+</div>
+<div class="section" id="subscribe-to-logmanager-to-obtain-logs">
+<span id="cxx-log-listener"></span><h2>Subscribe to LogManager to obtain logs<a class="headerlink" href="#subscribe-to-logmanager-to-obtain-logs" title="Permalink to this headline">¶</a></h2>
+<p>The first step is to get a LogManager service using a <a class="reference internal" href="../api/python/session.html#qi.Session" title="qi.Session"><code class="xref py py-class docutils literal"><span class="pre">qi.Session</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+
+<span class="cp">#include &lt;qicore/logmessage.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logmanager.hpp&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogManagerPtr</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;LogManager&quot;</span><span class="p">);</span>
+
+  <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once you have your LogManager service, you need to get a Listener and connect
+the onLogMessage signal to your own callback.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You must never use qiLog or call a methods that use qiLog inside your callback. Otherwise you will have an infinite loop.</p>
+</div>
+<p>You can change some settings of your local Listener
+(verbosity level, filters <a class="reference internal" href="#cxx-log-listener-conf"><span>see below</span></a>).</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+
+<span class="cp">#include &lt;qicore/logmessage.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logmanager.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/loglistener.hpp&gt;</span>
+
+<span class="c1">// More information on logmessage document into LogManager API</span>
+<span class="kt">void</span> <span class="nf">onMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogMessage</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+  <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">msg</span><span class="p">.</span><span class="n">category</span>
+     <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">msg</span><span class="p">.</span><span class="n">source</span>
+     <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">msg</span><span class="p">.</span><span class="n">message</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogManagerPtr</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;LogManager&quot;</span><span class="p">);</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogListenerPtr</span> <span class="n">listener</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">getListener</span><span class="p">();</span>
+  <span class="n">listener</span><span class="o">-&gt;</span><span class="n">onLogMessage</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">onMessage</span><span class="p">);</span>
+
+  <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p id="cxx-log-listener-conf">Once you have your listener you can change some verbosity settings:</p>
+<ul class="simple">
+<li>clearFilters() will reset/initialize to default all changes made to the listener,</li>
+<li>addFilter(category, level) changes the verbosity for the specific category,</li>
+<li>setLevel(level) changes the verbosity for all categories (setLevel(level) == addFilter(&#8220;*&#8221;, level))</li>
+</ul>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">qi</span><span class="o">::</span><span class="n">LogListenerPtr</span> <span class="n">listener</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">getListener</span><span class="p">();</span>
+
+<span class="c1">// initialize listener</span>
+<span class="n">listener</span><span class="o">-&gt;</span><span class="n">clearFilters</span><span class="p">();</span>
+
+<span class="c1">// All logs with severity lower or equal to DEBUG will be received</span>
+<span class="n">listener</span><span class="o">-&gt;</span><span class="n">setLevel</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Debug</span><span class="p">)</span>
+
+<span class="c1">// receive logs with &#39;foo.bar&#39; category and severity lower or equal than SILENT</span>
+<span class="c1">// ei: &quot;foo.bar&quot; logs are never received.</span>
+<span class="n">listener</span><span class="o">-&gt;</span><span class="n">addFilter</span><span class="p">(</span><span class="s">&quot;foo.bar&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Silent</span><span class="p">)</span>
+
+<span class="c1">// receive logs with &#39;foo.baz.*&#39; category and severity lower or equal than ERROR</span>
+<span class="c1">// globbing works fine</span>
+<span class="n">listener</span><span class="o">-&gt;</span><span class="n">addFilter</span><span class="p">(</span><span class="s">&quot;foo.baz.*&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-publisher-to-send-logs">
+<span id="cxx-log-publisher"></span><h2>Add a publisher to send logs<a class="headerlink" href="#add-a-publisher-to-send-logs" title="Permalink to this headline">¶</a></h2>
+<p>A log publisher is an entity you register to LogManager that sends logs to it.
+Then the LogManager will dispatch logs coming from all publishers to all
+listeners having subscribed to it.</p>
+<p>Be careful, it&#8217;s recommended to have one publisher per process. Otherwise you
+will send the same log as many times as you have publishers in your process.</p>
+<div class="section" id="send-logs-to-already-started-naoqi">
+<h3>Send logs to already started NAOqi<a class="headerlink" href="#send-logs-to-already-started-naoqi" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="cp">#include &lt;qi/log.hpp&gt;</span>
+<span class="cp">#include &lt;qi/os.hpp&gt;</span>
+
+<span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+
+<span class="cp">#include &lt;qicore/logmessage.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logmanager.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logprovider.hpp&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+  <span class="c1">// Get LogManager service</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogManagerPtr</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;LogManager&quot;</span><span class="p">);</span>
+
+  <span class="c1">// Create LogProvider</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogProviderPtr</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">makeLogProvider</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+
+  <span class="c1">// Register LogProvider to LogManager</span>
+  <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">addProvider</span><span class="p">(</span><span class="n">provider</span><span class="p">);</span>
+
+  <span class="c1">// Logs!!!</span>
+  <span class="n">qiLogFatal</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my fatal log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogError</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my error log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogWarning</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my warning log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogInfo</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my info log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogVerbose</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my verbose log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogDebug</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my debug log&quot;</span><span class="p">;</span>
+
+  <span class="c1">// Remove explicitly provider from LogManager.</span>
+  <span class="c1">// It will flush remaining logs</span>
+  <span class="n">logger</span><span class="o">-&gt;</span><span class="n">removeProvider</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="send-logs-to-naoqi-before-naoqi-is-started">
+<h3>Send logs to NAOqi before NAOqi is started<a class="headerlink" href="#send-logs-to-naoqi-before-naoqi-is-started" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="cp">#include &lt;qi/log.hpp&gt;</span>
+<span class="cp">#include &lt;qi/os.hpp&gt;</span>
+
+<span class="cp">#include &lt;qi/applicationsession.hpp&gt;</span>
+
+<span class="cp">#include &lt;qicore/logmessage.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logmanager.hpp&gt;</span>
+<span class="cp">#include &lt;qicore/logprovider.hpp&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">ApplicationSession</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+
+  <span class="c1">// Create LogProvider</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogProviderPtr</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">makeLogProvider</span><span class="p">();</span>
+
+  <span class="c1">// Logs!!!</span>
+  <span class="n">qiLogFatal</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my fatal log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogError</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my error log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogWarning</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my warning log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogInfo</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my info log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogVerbose</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my verbose log&quot;</span><span class="p">;</span>
+  <span class="n">qiLogDebug</span><span class="p">(</span><span class="s">&quot;myfoo.bar&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;my debug log&quot;</span><span class="p">;</span>
+
+
+  <span class="c1">// NAOqi starts</span>
+  <span class="c1">// Get LogManager service</span>
+  <span class="n">qi</span><span class="o">::</span><span class="n">LogManagerPtr</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">session</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;LogManager&quot;</span><span class="p">);</span>
+  <span class="c1">// Register LogProvider to LogManager</span>
+  <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">addProvider</span><span class="p">(</span><span class="n">provider</span><span class="p">);</span>
+
+  <span class="c1">// link LogManager to LogProvider</span>
+  <span class="n">provider</span><span class="o">-&gt;</span><span class="n">setLogger</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+  <span class="c1">// Add LogProvider to LogManager</span>
+  <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">addProvider</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+
+
+  <span class="c1">// Remove explicitly provider from LogManager.</span>
+  <span class="c1">// It will flush remaining logs</span>
+  <span class="n">logger</span><span class="o">-&gt;</span><span class="n">removeProvider</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p id="cxx-log-provider-conf">The provider settings are set by default to:</p>
+<ul class="simple">
+<li>verbosity: qi::LogLevel_Info</li>
+<li>filters: &#8220;qitype.*&#8221; to qi::LogLevel_Silent, &#8220;qimessaging.*&#8221; to qi::LogLevel_Silent, &#8220;qi.*&#8221; to qi::LogLevel_Silent. Those filters are NEEDED to avoid infinite recursion. You cannot change those filters.</li>
+</ul>
+<p>However, you can add/reset filters or change the verbosity with 3 methods:</p>
+<ul class="simple">
+<li>addFilter(category, level) changes the verbosity for the specific category,</li>
+<li>setLevel(level) changes the verbosity for all categories (setLevel(level) == addFilter(&#8220;*&#8221;, level))</li>
+<li>setFilters(filters) will set categories&#8217; filters to filters. Filters is a list of pair containing filtering rules (ei: pair(&#8220;filter&#8221;, level))</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// Create LogProvider</span>
+<span class="n">qi</span><span class="o">::</span><span class="n">LogProviderPtr</span> <span class="n">provider</span> <span class="o">=</span> <span class="n">qi</span><span class="o">::</span><span class="n">makeLogProvider</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+
+<span class="c1">// All logs with severity lower or equal to DEBUG will be sent</span>
+<span class="n">provider</span><span class="o">-&gt;</span><span class="n">setLevel</span><span class="p">(</span><span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Debug</span><span class="p">)</span>
+
+<span class="c1">// Send logs with &#39;foo.bar&#39; category and severity lower or equal than SILENT</span>
+<span class="c1">// ei: &quot;foo.bar&quot; logs are never sent.</span>
+<span class="n">provider</span><span class="o">-&gt;</span><span class="n">addFilter</span><span class="p">(</span><span class="s">&quot;foo.bar&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Silent</span><span class="p">)</span>
+
+<span class="c1">// Send logs with &#39;foo.baz.*&#39; category and severity lower or equal than ERROR</span>
+<span class="c1">// globbing works fine</span>
+<span class="n">provider</span><span class="o">-&gt;</span><span class="n">addFilter</span><span class="p">(</span><span class="s">&quot;foo.baz.*&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Error</span><span class="p">)</span>
+
+<span class="c1">// The following code has the same behavior than two previous examples</span>
+<span class="c1">// except that it resets filters.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">filters</span><span class="p">;</span>
+<span class="n">filters</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;foo.bar&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Silent</span><span class="p">));</span>
+<span class="n">filters</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;foo.baz.*&quot;</span><span class="p">,</span> <span class="n">qi</span><span class="o">::</span><span class="n">LogLevel_Error</span><span class="p">));</span>
+<span class="n">provider</span><span class="o">-&gt;</span><span class="n">setFilters</span><span class="p">(</span><span class="n">filters</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+          
+            
+              <div class="yui-b" id="sidebar">
+                
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi - Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/creating_applications/index.html">Creating an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/life/index.html">Programming for a living robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index_tuto.html">Other tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../software/choregraphe/index.html">Choregraphe Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../programming_index.html">SDKs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naoqi/index.html">NAOqi APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html">API References</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Hands-on Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cxx-client.html">C++ - How to write a qimessaging client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-service.html">C++ - How to write a qimessaging service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-register-types.html">Registering types in the type system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-async.html">Asynchronous operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-log.html">Using qi::log</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">How to receive and send logs</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-linguist.html">Internationalization Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-path.html">Handling Paths Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cxx-qilang.html">Using qilang to generate strongly-typed proxies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="py-client.html">Python - How to write a qimessaging client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="py-service.html">Python - How to write a qimessaging service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="py-log-client.html">Python - How to receive and send logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="py-tonaoqi2.html">How to switch from NAOqi to qi Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qi-app-arguments.html">qi application arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qicli.html">Using qicli commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qilaunch.html">Using qilaunch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../design/index.html">Design Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internal/typesystem.html">Type system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internal/object.html">Object type erasure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internal/template.html">Registering template types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internal/call.html">Call code path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internal/messaging.html">Messaging system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog/index.html">qi Framework - ChangeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog/interface.html">qi Framework - Deprecation history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">Former NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><strong>NAO</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_pepper.html"><strong>Pepper</strong> - Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><strong>Romeo</strong> - Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <div id="on-this-page" style="display:none;">
+        <h2 id="otp-link">On this page</h2>
+        <div id="toc-list">
+            <ul>
+<li><a class="reference internal" href="#">How to receive and send logs</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#subscribe-to-logmanager-to-obtain-logs">Subscribe to LogManager to obtain logs</a></li>
+<li><a class="reference internal" href="#add-a-publisher-to-send-logs">Add a publisher to send logs</a><ul>
+<li><a class="reference internal" href="#send-logs-to-already-started-naoqi">Send logs to already started NAOqi</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#send-logs-to-naoqi-before-naoqi-is-started">Send logs to NAOqi before NAOqi is started</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Example</a></li>
+<li><a class="reference internal" href="#id2">Example</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+    </div>
+        </div>
+      </div>
+              </div>
+            
+          
+        </div>
+    </main>
+    <a href="#0" class="cd-top"></a>
+    <div id="ft">
+      
+      <a title="Glossary" href="../../../glossary.html">Glossary</a>
+      <a title="Site map" href="../../../contents.html">Site map</a>
+      <a title="Index" href="../../../genindex.html">Index</a>
+      <a title="Support" target="_blank" href="https://account.aldebaran.com/support/">Support</a>
+      <a title="Contact" target="_blank" href="https://www.aldebaran.com/en/contact">Contact</a>
+      <a title="Legal Notices" href="../../../legal/notice.html">Legal Notices</a>
+      
+      
+      <img src="https://www.ald.softbankrobotics.com/sites/aldebaran/files/logos-picture/2016_digital_logo_sbr_112x31_0.png" alt="">
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

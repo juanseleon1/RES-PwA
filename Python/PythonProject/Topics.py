@@ -82,7 +82,12 @@ topico_normal= (
 
 conversacion_musica = (
     'concept: (generos) [clasica jazz soul blus flamenco tango pop haus rock punk metal disco] \n'
-    
+    'u: ([Esta Ah Me Todo Estoy] _~emociones_normales) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE\n'
+
+)
+
+conversacion_musica = (
+    'concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco] \n'    
     'u: (hablar sobre musica) Te gusta la musica? \n'
         'u1: (si) Enserio? Que genero te gusta escuchar?\n'
             'u2: (Vallenato) A mi tambien me gusta mucho el vallenato, te gusta diomedez?\n'
