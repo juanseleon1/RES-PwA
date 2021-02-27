@@ -10,45 +10,15 @@ package Tareas.Cuenteria;
  * @author mafegarces
  */
 public enum LedsColor {
-    BLUE(0.28,0.72,0.96),
-    BLGRE(0.46,0.79,0.79),
-    GREEN(0.63,0.84,0.49),
-    GREYEL(0.80,0.91,0.44),
-    YELLOW(0.99,0.98,0.11);
+    BLUE(0x8BCCEC),RED(0xFA3421),GREEN(0x7FF764),WHITE(0xFFFFFF),PURPLE(0xDAA2F8),YELLOW(0xF8FE2E);
     
-    private double r;
-    private double g;
-    private double b;
+    private int hexa;
     
-    private LedsColor(double r, double g, double b) {
-        this.r=r;
-        this.g=g;
-        this.b=b;
+    private LedsColor(int hexa) {
+        this.hexa=hexa;
     }
 
-    public double getR() {
-        return r;
+    public int getHexa() {
+        return hexa;
     }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
-    public double getG() {
-        return g;
-    }
-
-    public void setG(double g) {
-        this.g = g;
-    }
-
-    public double getB() {
-        return b;
-    }
-
-    public void setB(double b) {
-        this.b = b;
-    }
-    
-    
 }
