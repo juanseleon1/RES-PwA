@@ -404,7 +404,7 @@ class pepperModuleV2(object):
         json_params = {}
         # The value is an ALvalue which contains the info of the face, but we aren't going to send that
         json_params["faceDetected"] = True
-        send(-1, "int", json_params)
+        #send(-1, "int", json_params)
 
     def peopleLookingAtRobot(self, value):
         json_params = {}
@@ -441,7 +441,7 @@ class pepperModuleV2(object):
         # Camera_Id
         # ]
         json_params["peopleDetected"] = value
-        send(-1, "int", json_params)
+        #send(-1, "int", json_params)
 
     def preferenceAdded(self, value):
         json_params = {}

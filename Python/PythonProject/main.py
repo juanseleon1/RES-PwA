@@ -133,14 +133,10 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 
 """ Robot class declaration"""
-try:
-    robot = Robot(session)
 
-    while 1:
-        conn, addr = server.accept()
-        thread = threading.Thread(target=handle_client)
-        thread.start()
-finally:
+robot = Robot(session)
 
-    if robot:
-        robot.alDialogProxy.stopTopics(robot.alDialogProxy.getAllLoadedTopics())
+while 1:
+    conn, addr = server.accept()
+    thread = threading.Thread(target=handle_client)
+    thread.start()

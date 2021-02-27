@@ -61,5 +61,5 @@ def checkTimeMessageSended(params):
     return isCorrectToSend
 
 def deleteExpiredAction( expiredAction ):
-    if activities_running and activities_running.contains_key( expiredAction ):
+    if activities_running and (expiredAction in activities_running.keys()):
         activities_running.pop( expiredAction )
