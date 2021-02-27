@@ -9,12 +9,11 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -32,19 +31,64 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("name", "basic");
-        
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.UNLOADCONVTOPIC, infoServicio);
-        requestService(srb, blvs);
-        
-        try {
-            wait(10);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TestTask.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+        infoServicio.put("name", "basicoConv");
+
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "A mafe le gustan los toxicos");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, blvs);
 
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Tengo muchas ganas de bailar");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Buenas noches profe enrrique");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+        
+        infoServicio = new HashMap<>();
+        infoServicio.put("TAGSDANCE", "HAPPINESS");
+        infoServicio.put("FACTOR", 1);
+        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Vamos a bailar con los viejitos");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Mafe, quieres bailar conmigo?");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Me voy a mareaaaaaaaar");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+        
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Yo te lo dije no me iba a enamorar, te lo advertí a mi manera");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+        
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Y grabe la penca de un magu ei tu nombre, juntito al mido entrelazadooooo");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+        
+        infoServicio = new HashMap<>();
+        infoServicio.put("SAY", "Me voy a marear");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, blvs);
+        
+        
+        
     }
 
     @Override
