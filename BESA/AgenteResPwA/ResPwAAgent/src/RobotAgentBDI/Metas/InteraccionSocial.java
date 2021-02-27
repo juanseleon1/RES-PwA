@@ -52,6 +52,12 @@ public class InteraccionSocial extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta InteraccionSocial detectGoal");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        //revisar tiempo
+        if(blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() > 20000)
+        {
+            return 1;
+        }
         return 0;
     }
 

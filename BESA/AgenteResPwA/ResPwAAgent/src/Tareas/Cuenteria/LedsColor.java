@@ -10,15 +10,27 @@ package Tareas.Cuenteria;
  * @author mafegarces
  */
 public enum LedsColor {
-    BLUE(0x8BCCEC),RED(0xFA3421),GREEN(0x7FF764),WHITE(0xFFFFFF),PURPLE(0xDAA2F8),YELLOW(0xF8FE2E);
+    BLUE(0x8BCCEC, 1, 1.4),RED(0xFA3421, 2.3, 2.6),GREEN(0x7FF764, 1.8, 2.4),WHITE(0xFFFFFF, 0, 0),PURPLE(0xDAA2F8, 1.4, 1.8),YELLOW(0xF8FE2E, 2.6, 3);
     
     private int hexa;
+    private double min;
+    private double max;
     
-    private LedsColor(int hexa) {
-        this.hexa=hexa;
+    private LedsColor(int hexa, double min, double max) {
+        this.hexa = hexa;
+        this.min = min;
+        this.max = max;
     }
 
     public int getHexa() {
         return hexa;
+    }
+    
+    public double getMin() {
+        return min;
+    }
+    
+    public double getMax() {
+        return max;
     }
 }
