@@ -198,4 +198,8 @@ public class PepperEModel extends EmotionalModel {
         requestService(srb);
     }
 
+    public double getState() {
+        return state;
+    }
+
 }
