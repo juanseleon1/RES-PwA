@@ -179,12 +179,12 @@ class Robot:
         # Get the params of the function
         animation_factor = params.get("FACTOR")
         # Invoke the function
-        animation_name(animation_factor)
+        # animation_name(animation_factor)
 
         try:
             animation_function = self.animation.getAnimation(animation_name)
             names, times, keys = animation_function()
-            times = self.change_speed(animation_factor, times)
+            # times = self.change_speed(animation_factor, times)
             self.play_animation(names, times, keys)
         except BaseException, err:
             print err
@@ -203,7 +203,8 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            self.alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
+            print "TIMES  -> ", animation_times
+            self.alMotion.angleInterpolation(animation_names,  animation_keys, animation_times, True)
         except BaseException, err:
             print err
 
