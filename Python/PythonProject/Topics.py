@@ -29,13 +29,65 @@ topico_emocional = (
     'u: ([Tengo "Me siento" Estoy] _~emociones_tristes) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
     'u: ([Estoy No Tengo] _~emociones_enojo) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
     'u: ([Vayase Vete]) Esta bien nos vemos luego \n'
+    'u: ([Esta Ah Me Todo Estoy] _~emociones_normales) Me alegra, no hay nada como sentirse bien\n'
+    'rn1: ("Respuesta Normal Tipo uno") Eso esta de lujo\n'
+    'rn2: ("Respuesta Normal Tipo dos") Que bueno escuchar eso! Yo me alegro por ti\n'
+)
+
+
+topico_alegre = (
+    'concept: (bloque_uno) [feliz alegre emocionado chevere animado animada emocionada contento contenta] \n'
+    'concept: (bloque_dos) [alegria felicidad esperanza emocion gratitud serenidad diversion] \n'
+    'concept: (bloque_tres) [amor orgullo ] \n'
+    
+    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Verte tan alegre te hace lucir genial, te ves muy bien hoy! \n'
+    'u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) La alegria te da una sonrisa muy hermosa \n'
+    'u: ([Siento Tengo] {[mucho muchisimo tantisimo demasiado]} _~bloque_tres) Esos son los sentimientos mas hermosos de una persona \n'
+
+)
+
+
+topico_triste = (
+    'concept: (bloque_uno) [aburrido cansado fastidiado mamado] \n'
+    'concept: (bloque_dos) [mal terrible horrible] \n'
+    'concept: (bloque_tres) [triste melancolica melancolico adolorido dolido ] \n'
+    'concept: (bloque_cuatro ) [tristeza melancolia ] \n'
+    
+    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? \n'
+    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_dos) Aca estoy para ayudarte con eso, esos sentimientos nos ayudan a sanar heridas\n'
+    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_tres) Tranquilo, todo pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor \n'
+    'u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_cuatro) Te comprendo, pero piensa que podras verte a ti mismo de otra manera y saldras adelante mucho mejor\n'
+)
+
+
+topico_ira = (
+    'concept: (bloque_uno) [molesto emputado enojado jodido fastidiado mamado mamada] \n'
+    'concept: (bloque_dos) [piedra rabia ira furia colera] \n'
+    
+    'u: ([Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? \n'
+    'u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) Entiendo que te sientas asi, pero si no te     \n'
+    'u: ([Vayase Vete]) Esta bien nos vemos luego \n'
+)
+
+
+topico_normal= (
+    'concept: (bloque_uno) [bueno "ah bueno" okey "Esta bien" ] \n'
+    'concept: (bloque_dos) ["todo bien" "Esta agradable" "Me siento bien" bien "Esta Bueno"] \n'
+    'concept: (bloque_tres) ["me alegra" "Estoy normal" ] \n'
+    'u: (_~bloque_uno) Me alegra, no hay nada como sentirse bien\n'
+    'u: (_~bloque_dos) Que bueno escuchar eso! Yo me alegro por ti\n'
+    'u: (_~bloque_tres) Eso esta de lujo\n'
+)
+
+
+conversacion_musica = (
+    'concept: (generos) [clasica jazz soul blus flamenco tango pop haus rock punk metal disco] \n'
     'u: ([Esta Ah Me Todo Estoy] _~emociones_normales) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE\n'
 
 )
 
 conversacion_musica = (
-    'concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco] \n'
-    
+    'concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco] \n'    
     'u: (hablar sobre musica) Te gusta la musica? \n'
         'u1: (si) Enserio? Que genero te gusta escuchar?\n'
             'u2: (Vallenato) A mi tambien me gusta mucho el vallenato, te gusta diomedez?\n'
@@ -55,5 +107,4 @@ conversacion_musica = (
                 'u3: (no) Entonces escuchemos musica llanera variada.\n'
             'u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?\n'
         'u1: (No) Que triste, creo que me deberia ir \n'
-
 )

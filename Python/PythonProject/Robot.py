@@ -44,7 +44,6 @@ class Robot:
         print "MEDIO ROBOT CARGADO Y LISTO"
         self.alVoiceEmotionAnalysis = session.service("ALVoiceEmotionAnalysis")
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
-        #self.Dance = Dance(self.session, HOST)
         self.specchRecog = session.service("ALSpeechRecognition")
         self.specchRecog.pause(True)
         self.alFaceDetection = session.service("ALFaceDetection")
@@ -70,7 +69,7 @@ class Robot:
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
         print "ROBOT CARGADO Y LISTO"
-        time.sleep(20)
+        #time.sleep(10)
         self.alTexToSpeech.say("Ya estoy listo para ser usado")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
@@ -185,7 +184,7 @@ class Robot:
         try:
             animation_function = self.animation.getAnimation(animation_name)
             names, times, keys = animation_function()
-            times = self.change_speed(animation_factor, times)
+            # times = self.change_speed(animation_factor, times)
             self.play_animation(names, times, keys)
         except BaseException, err:
             print err
@@ -204,7 +203,8 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            self.alMotion.angleInterpolationBezier(animation_names, animation_times, animation_keys)
+            print "TIMES  -> ", animation_times
+            self.alMotion.angleInterpolation(animation_names,  animation_keys, animation_times, True)
         except BaseException, err:
             print err
 
@@ -405,9 +405,16 @@ class Robot:
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, color, duration):
         # color is an hexa number
-        self.alLedsProxy.rotateEyes( color, 1, duration)
+        # self.alLedsProxy.rotateEyes( color, 1, duration)
+        morado = 0xDAA2F8
+        azul = 0x8BCCEC
+        amarillo = 0xF8FE2E
+        rojito = 0xFA3421
+        blanco = 0xFFFFFF
+        verde = 0x7FF764
+        self.alLedsProxy.rotateEyes(verde, 2, duration)
 
-    # Enable or Disable the smart stiffness reflex for all the joints (True by default).
+    # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
         return self.alMotion.setSmartStiffnessEnabled(params)
@@ -537,7 +544,10 @@ class Robot:
     def desactivate_voice_recognition(self):
         self.alSpeechRecognition.unsubscribe(self.sensorsModule)
 
-    # Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse the human's inputs.
+    ## Loading the topics directly as text strings
+    def load_topic_content (self, topicName):
+        self.alDialogProxy.loadTopicContent(topicName)
+
     def load_conversational_topic(self, params):
         print(str(params))
         topicName = params.get("name")
@@ -549,7 +559,6 @@ class Robot:
         topic = self.alDialogProxy.loadTopicContent(tContent)
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
-
     # Unloads the specified topic and frees the associated memory.
     def unload_conversational_topic(self, params):
         if not self.topicMap:
@@ -571,6 +580,15 @@ class Robot:
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
     def set_topic_focus(self, topicName):
         self.alDialogProxy.setFocus(topicName)
+
+    def set_language(self, language):
+        self.alDialogProxy.setLanguage(language)
+
+    def subscribe_topic (self, topicName):
+        self.alDialogProxy.subscribe(topicName)
+
+    def unsubscibe_topic (self, topicName):
+        self.alDialogProxy.unsubscribe(topicName)
 
     def hablar(self, text_to_speech, speed=None, pitch=None):
         if speed is None:
