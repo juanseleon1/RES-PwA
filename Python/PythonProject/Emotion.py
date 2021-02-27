@@ -40,7 +40,7 @@ class Emotion:
     def setToneSpeech(self, tone):
         self.__toneSpeech = tone
 
-    def setLedR(self, ledColor):
+    def setLedColor(self, ledColor):
         self.__ledColor = ledColor
 
     def setLedIntensity(self, ledIntensity ):
