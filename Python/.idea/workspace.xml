@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="766cfaa0-5bab-4646-9798-479f2ac2109b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
     </list>
@@ -108,7 +107,7 @@
       <workItem from="1613171423944" duration="133000" />
       <workItem from="1613171688347" duration="555000" />
       <workItem from="1614038528552" duration="63000" />
-      <workItem from="1614382840145" duration="536000" />
+      <workItem from="1614382840145" duration="2962000" />
     </task>
     <servers />
   </component>
@@ -128,6 +127,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1614383282961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
+    <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1614386200318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PythonProject" />
   </component>
 </project>
