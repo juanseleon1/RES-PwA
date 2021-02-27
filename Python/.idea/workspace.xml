@@ -24,7 +24,12 @@
   <component name="ChangeListManager">
     <list default="true" id="766cfaa0-5bab-4646-9798-479f2ac2109b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/PythonProject/SimpleTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/SimpleTest.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/PythonProject/Robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Robot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonProject/Topics.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonProject/Topics.py" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +158,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603399498544</updated>
+<<<<<<< Updated upstream
       <workItem from="1612123367442" duration="2227000" />
       <workItem from="1612127743817" duration="18686000" />
       <workItem from="1612217853064" duration="4171000" />
@@ -161,6 +167,16 @@
       <workItem from="1613055716424" duration="2803000" />
       <workItem from="1613397042950" duration="2391000" />
       <workItem from="1613400825833" duration="14114000" />
+=======
+      <workItem from="1613169373441" duration="1178000" />
+      <workItem from="1613170580357" duration="342000" />
+      <workItem from="1613171033361" duration="377000" />
+      <workItem from="1613171423944" duration="133000" />
+      <workItem from="1613171688347" duration="555000" />
+      <workItem from="1614038528552" duration="63000" />
+      <workItem from="1614091490172" duration="9296000" />
+      <workItem from="1614370284136" duration="1020000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
