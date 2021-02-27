@@ -3,7 +3,7 @@ import time
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
-from Topics import topic_content_1
+from Topics import *
 from Utils import activities_running
 
 # ----------------------------------------------------------------------------Robot
@@ -64,10 +64,16 @@ class Robot:
 
         self.animation = Animation(self.session)
 
-        self.topicContentMap = {"basicoConv": topic_content_1}
+        self.topicContentMap = {"basicoTopic": topic_content_1,
+                                "emoTopic": topico_emocional,
+                                "alegreTopic": topico_alegre,
+                                "sadTopic":topico_triste,
+                                "iraTopic":topico_ira,
+                                "normTopic":topico_normal,
+                                "musicTopic":conversacion_musica}
         self.alDialogProxy = session.service("ALDialog")
         self.alDialogProxy.setLanguage("Spanish")
-        self.alDialogProxy.setConfidenceThreshold("BNF", 0.2, "Spanish")
+        self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
         #time.sleep(10)
         self.alTexToSpeech.say("Ya estoy listo para ser usado")
@@ -554,25 +560,36 @@ class Robot:
         if not self.topicMap:
             lista = self.alDialogProxy.getAllLoadedTopics()
             if topicName in lista:
+                print "Sacando: ", topicName
                 self.alDialogProxy.unloadTopic(topicName)
         tContent = self.topicContentMap.get(topicName)
+
         topic = self.alDialogProxy.loadTopicContent(tContent)
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
+        self.alDialogProxy.setFocus(topicName)
+        self.alDialogProxy.setFocus(topic)
+        print "Cargando: ", topic
+        print "TOPICOS Load: ", self.alDialogProxy.getAllLoadedTopics()
+        print "TOPICOS Activos: ", self.alDialogProxy.getActivatedTopics()
     # Unloads the specified topic and frees the associated memory.
 
     def unload_conversational_topic(self, params):
+        topicName = params.get("name")
+        print "Iniciando Unload"
         if not self.topicMap:
+            print "Unload 1 ", topicName
             lista = self.alDialogProxy.getAllLoadedTopics()
-            if lista:
-                self.alDialogProxy.stopTopics(lista)
-        else:
-            topicName = params.get("name")
-            topic = self.topicMap.get(topicName)
-            self.topicMap.pop(topicName)
-            self.alDialogProxy.unsubscribe(topic)
-            self.topicContentMap.pop(topicName)
-            self.alDialogProxy.deactivateTopic(topic)
+            if topicName in lista:
+                print "Unload 2"
+                if self.topicMap:
+                    self.topicMap.pop(topicName)
+                    self.topicContentMap.pop(topicName)
+                self.alDialogProxy.unsubscribe(topicName)
+                self.alDialogProxy.deactivateTopic(topicName)
+                print "Unloadeando: ", topicName
+        print "TOPICOS LoadS: ", self.alDialogProxy.getAllLoadedTopics()
+        print "TOPICOS ActivosS: ", self.alDialogProxy.getActivatedTopics()
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):

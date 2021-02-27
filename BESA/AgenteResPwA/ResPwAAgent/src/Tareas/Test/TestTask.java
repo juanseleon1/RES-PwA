@@ -31,64 +31,48 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("name", "basicoConv");
+        infoServicio.put("name", "basicoTopic");
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.UNLOADCONVTOPIC, infoServicio);
+        requestService(srb, blvs);
 
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "alegreTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
 //        requestService(srb, blvs);
 
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "emoTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+//
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "alegreTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+//
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "sadTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+//
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "iraTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+//
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "normTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("name", "musicTopic");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
         infoServicio = new HashMap<>();
         infoServicio.put("SAY", "A mafe le gustan los toxicos");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, blvs);
 
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Tengo muchas ganas de bailar");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Buenas noches profe enrrique");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-        
-        infoServicio = new HashMap<>();
-        infoServicio.put("TAGSDANCE", "HAPPINESS");
-        infoServicio.put("FACTOR", 1);
-        srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
-        requestService(srb, blvs);
-
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Vamos a bailar con los viejitos");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Mafe, quieres bailar conmigo?");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Me voy a mareaaaaaaaar");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-        
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Yo te lo dije no me iba a enamorar, te lo advertí a mi manera");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-        
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Y grabe la penca de un magu ei tu nombre, juntito al mido entrelazadooooo");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-        
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "Me voy a marear");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
-        
-        
-        
     }
 
     @Override
