@@ -415,13 +415,6 @@ class Robot:
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
-        # self.alLedsProxy.rotateEyes( color, 1, duration)
-        morado = 0xDAA2F8
-        azul = 0x8BCCEC
-        amarillo = 0xF8FE2E
-        rojito = 0xFA3421
-        blanco = 0xFFFFFF
-        verde = 0x7FF764
         duration = self.emotionStateRobot.getDurationEyesColor()
         self.alLedsProxy.rotateEyes(color, rotationDuration, duration)
 
