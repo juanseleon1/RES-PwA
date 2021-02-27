@@ -560,6 +560,7 @@ class Robot:
         self.topicMap[topicName] = topic
         self.alDialogProxy.activateTopic(topic)
     # Unloads the specified topic and frees the associated memory.
+
     def unload_conversational_topic(self, params):
         if not self.topicMap:
             lista = self.alDialogProxy.getAllLoadedTopics()
