@@ -180,7 +180,7 @@ class Robot:
         # Get the params of the function
         animation_factor = params.get("FACTOR")
         # Invoke the function
-        animation_name(animation_factor)
+        # animation_name(animation_factor)
 
         try:
             animation_function = self.animation.getAnimation(animation_name)
@@ -403,9 +403,9 @@ class Robot:
         self.alLedsProxy.setIntensity(sensor, intensity / 100)
 
     # Sets the color of an RGB led using  color code.
-    def change_led_color(self, sensor, red_color, green_color, blue_color, duration):
-        color = 0xC7CEEA
-        self.alLedsProxy.rotateEyes(color, 1, duration)
+    def change_led_color(self, color, duration):
+        # color is an hexa number
+        self.alLedsProxy.rotateEyes( color, 1, duration)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
