@@ -556,7 +556,9 @@ class Robot:
     def init_topics(self):
         for topicName in self.topicContentMap:
             tContent = self.topicContentMap.get( topicName )
-            topic = self.alDialogProxy.loadTopicContent(tContent)
+            tContent= tContent.decode('utf-8')
+            # topic = self.alDialogProxy.loadTopicContent(tContent)
+            topic = self.alDialogProxy.loadTopic(tContent.decode('utf-8'))
             self.topicMap[topicName] = topic
 
     def load_conversational_topic(self, params):

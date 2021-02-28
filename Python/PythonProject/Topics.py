@@ -1,4 +1,4 @@
-topic_content_1 = ('topic: ~basicoTopic()\n'
+"""topic_content_1 = ('topic: ~basicoTopic()\n'
                    'language: spe\n'
                    'concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]\n'
                    'concept:(respuestas_simples) [si no "tal vez"]\n'
@@ -109,4 +109,5 @@ conversacion_musica = (
                 'u3: (no) Entonces escuchemos musica llanera variada.\n'
             'u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?\n'
         'u1: (No) Que triste, creo que me deberia ir \n'
-)
+)"""
+topic_content_1= "/data/home/nao/topics/basicTopic.top"

@@ -3,6 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/LedsColor.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
+=======
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
@@ -10,6 +16,7 @@
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEMParams.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
             <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
+>>>>>>> 82691d1d080c1e4a21ad370e1d9b9fd956dd35ef
         </group>
     </open-files>
 </project-private>
