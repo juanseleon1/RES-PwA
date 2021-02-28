@@ -43,7 +43,7 @@ class pepperModuleV2(object):
         self.lowBat = self.alProxy.subscriber("ALBattery/BatteryLow")
         self.lowBat.signal.connect(self.batteryLow)
 
-        self.stimuDetected = self.alProxy.subscriber("ALBasicAwareness/StimulusDetecte")
+        self.stimuDetected = self.alProxy.subscriber("ALBasicAwareness/StimulusDetected")
         self.stimuDetected.signal.connect(self.stimulusDetected)
 
         self.fallaGoTo = self.alProxy.subscriber("ALLocalization/GoToFailed")
@@ -96,7 +96,6 @@ class pepperModuleV2(object):
 
         self.leaveFailedS = self.alProxy.subscriber("ALRecharge/LeaveFailed")
         self.leaveFailedS.signal.connect(self.leaveFailed)
-
 
         self.wordRecognizedS = self.alProxy.subscriber("WordRecognized")
         self.wordRecognizedS.signal.connect(self.wordRecognized)

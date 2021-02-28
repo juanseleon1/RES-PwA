@@ -65,17 +65,20 @@ class Robot:
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
-                                "emoTopic": topico_emocional,
-                                "alegreTopic": topico_alegre,
-                                "sadTopic":topico_triste,
-                                "iraTopic":topico_ira,
-                                "normTopic":topico_normal,
-                                "musicTopic":conversacion_musica}
+                                # "emoTopic": topico_emocional,
+                                # "alegreTopic": topico_alegre,
+                                # "sadTopic":topico_triste,
+                                # "iraTopic":topico_ira,
+                                # "normTopic":topico_normal,
+                                # "musicTopic":conversacion_musica
+                                }
         self.alDialogProxy = session.service("ALDialog")
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
-        #self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+        # self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+        # self.alSpeechRecognition.setParameter()
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+        self.init_topics()
         self.alSpeechRecognition.pause(False)
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
@@ -551,15 +554,18 @@ class Robot:
         self.alDialogProxy.loadTopicContent(topicName)
 
     def init_topics(self):
-        for topicName,tContent in self.topicContentMap:
-            topic = self.alDialogProxy.loadTopicContent(tContent)
+        for topicName in self.topicContentMap:
+            tContent = self.topicContentMap.get( topicName )
+            tContent= tContent.decode('utf-8')
+            # topic = self.alDialogProxy.loadTopicContent(tContent)
+            topic = self.alDialogProxy.loadTopic(tContent.decode('utf-8'))
             self.topicMap[topicName] = topic
 
     def load_conversational_topic(self, params):
         topicName = params.get("name")
-        topic = self.topicMap[topicName]
+        topic = self.topicMap.get( topicName )
         self.alDialogProxy.activateTopic(topic)
-        self.alDialogProxy.forceInput("Estoy feliz")
+        #self.alDialogProxy.forceInput("Estoy feliz")
         print "Cargando: ", topic
         print "TOPICOS Load: ", self.alDialogProxy.getAllLoadedTopics()
         print "TOPICOS Activos: ", self.alDialogProxy.getActivatedTopics()
