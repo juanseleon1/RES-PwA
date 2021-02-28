@@ -79,7 +79,7 @@ class Robot:
         # self.alSpeechRecognition.setParameter()
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         self.init_topics()
-        #self.alSpeechRecognition.pause(False)
+        self.alSpeechRecognition.pause(False)
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
