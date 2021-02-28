@@ -39,7 +39,7 @@ topico_emocional = (
 
 topico_alegre = (
     'topic: ~alegreTopic()\n'
-   'language: spe\n'
+    'language: spe\n'
     'concept: (bloque_uno) [feliz alegre emocionado chevere animado animada emocionada contento contenta] \n'
     'concept: (bloque_dos) [alegria felicidad esperanza emocion gratitud serenidad diversion] \n'
     'concept: (bloque_tres) [amor orgullo ] \n'
