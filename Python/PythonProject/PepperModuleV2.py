@@ -97,7 +97,6 @@ class pepperModuleV2(object):
         self.leaveFailedS = self.alProxy.subscriber("ALRecharge/LeaveFailed")
         self.leaveFailedS.signal.connect(self.leaveFailed)
 
-
         self.wordRecognizedS = self.alProxy.subscriber("WordRecognized")
         self.wordRecognizedS.signal.connect(self.wordRecognized)
 
