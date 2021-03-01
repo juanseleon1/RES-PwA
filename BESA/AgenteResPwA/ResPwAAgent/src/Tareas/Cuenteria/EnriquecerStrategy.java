@@ -53,14 +53,12 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
                 break;
             case 3: //luces
-                double r = Math.random()*(2);
-                double g = Math.random()*(2);
-                double b = Math.random()*(2);
+                Random obj = new Random();
+                int rand_num = obj.nextInt(0xffffff + 1);
+                String color = String.format("0x%06x", rand_num);
+                System.out.println(color);
                                
-                infoServicio.put("NAME", "AllLeds");
-                infoServicio.put("RED", r);
-                infoServicio.put("GREEN", g);
-                infoServicio.put("BLUE", b);
+                infoServicio.put("COLOR", color);
                 infoServicio.put("DURATION", 1.0);
                 srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
                 break;

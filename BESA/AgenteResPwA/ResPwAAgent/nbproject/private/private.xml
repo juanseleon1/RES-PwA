@@ -3,10 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapter.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/SensorHandlerAgent/SensorData.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapterReceiver.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/InteraccionSocial.java</file>
+=======
+<<<<<<< HEAD
+>>>>>>> b24e0a1311d78d4b5abbe3a973b98b6412da8cfa
             <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/LedsColor.java</file>
             <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
             <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
             <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
+<<<<<<< HEAD
+=======
+=======
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEModel.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapterReceiver.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEMParams.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
+            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
+>>>>>>> 82691d1d080c1e4a21ad370e1d9b9fd956dd35ef
+>>>>>>> 2a363eea05a6cbf12b52c477f437c3801c193979
+>>>>>>> b24e0a1311d78d4b5abbe3a973b98b6412da8cfa
         </group>
     </open-files>
 </project-private>

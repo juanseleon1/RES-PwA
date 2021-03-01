@@ -171,17 +171,18 @@ public class PepperEModel extends EmotionalModel {
     }
 
     private void calcNewEmotionalParams(Map<String, Object> map) {
-        if (state >= 1 && state < 1.4) {
+        if (state >= LedsColor.BLUE.getMin() && state < LedsColor.BLUE.getMax()) {
             lc = LedsColor.BLUE;
-        } else if (state >= 1.4 && state < 1.8) {
+        } else if (state >= LedsColor.PURPLE.getMin() && state < LedsColor.PURPLE.getMax()) {
             lc = LedsColor.PURPLE;
-        } else if (state >= 1.8 && state < 2.4) {
+        } else if (state >= LedsColor.GREEN.getMin() && state < LedsColor.GREEN.getMax()) {
             lc = LedsColor.GREEN;
-        } else if (state >= 2.3 && state < 2.6) {
+        } else if (state >= LedsColor.RED.getMin() && state < LedsColor.RED.getMax()) {
             lc = LedsColor.RED;
-        } else if (state >= 2.6 && state <= 3) {
+        } else if (state >= LedsColor.YELLOW.getMin() && state <= LedsColor.YELLOW.getMax()) {
             lc = LedsColor.YELLOW;
         }
+       
         lc = LedsColor.WHITE;
         velf = 0;
         velh = (speechVBase * state) / normalState;
@@ -198,6 +199,10 @@ public class PepperEModel extends EmotionalModel {
         map2.put("DURATION",ledRotVel);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
         requestService(srb);
+    }
+
+    public double getState() {
+        return state;
     }
 
 }
