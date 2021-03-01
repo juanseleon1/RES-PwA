@@ -65,8 +65,8 @@ class Robot:
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
-                                # "emoTopic": topico_emocional,
-                                # "alegreTopic": topico_alegre,
+                                #"emoTopic": topico_emocional,
+                                "alegreTopic": topico_alegre,
                                 # "sadTopic":topico_triste,
                                 # "iraTopic":topico_ira,
                                 # "normTopic":topico_normal,
@@ -78,6 +78,8 @@ class Robot:
         # self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
         # self.alSpeechRecognition.setParameter()
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+        print "MILTON", self.alDialogProxy.getActivatedTopics()
+
         self.init_topics()
         self.alSpeechRecognition.pause(False)
         self.alDialogProxy.setLanguage("Spanish")
@@ -554,12 +556,15 @@ class Robot:
         self.alDialogProxy.loadTopicContent(topicName)
 
     def init_topics(self):
+        """
         for topicName in self.topicContentMap:
             tContent = self.topicContentMap.get( topicName )
             tContent= tContent.decode('utf-8')
             # topic = self.alDialogProxy.loadTopicContent(tContent)
             topic = self.alDialogProxy.loadTopic(tContent.decode('utf-8'))
             self.topicMap[topicName] = topic
+            """
+        self.alDialogProxy.runTopics(topic_list)
 
     def load_conversational_topic(self, params):
         topicName = params.get("name")
