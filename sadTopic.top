@@ -1,0 +1,10 @@
+topic: ~sadTopic()
+   language: spe
+    concept: (bloque_uno) [aburrido cansado fastidiado mamado] 
+    concept: (bloque_dos) [mal terrible horrible] 
+    concept: (bloque_tres) [triste melancolica melancolico adolorido dolido ] 
+    concept: (bloque_cuatro ) [tristeza melancolia ] 
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_dos) Aca estoy para ayudarte con eso, esos sentimientos nos ayudan a sanar heridas
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_tres) Tranquilo, to do pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor 
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_cuatro) Te comprendo, pero piensa que podras verte a ti mismo de otra manera y saldras adelante mucho mejor

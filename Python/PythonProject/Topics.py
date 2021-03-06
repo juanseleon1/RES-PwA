@@ -31,7 +31,7 @@ topico_emocional = (
     'u: ([Tengo "Me siento" Estoy] _~emociones_tristes) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
     'u: ([Estoy No Tengo] _~emociones_enojo) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE \n'
     'u: ([Vayase Vete]) Esta bien nos vemos luego \n'
-    'u: ([Esta Ah Me Todo Estoy] _~emociones_normales) Me alegra, no hay nada como sentirse bien\n'
+    'u: ([Esta Ah Me "To do" Estoy  _~emociones_normales) Me alegra, no hay nada como sentirse bien\n'
     'rn1: ("Respuesta Normal Tipo uno") Eso esta de lujo\n'
     'rn2: ("Respuesta Normal Tipo dos") Que bueno escuchar eso! Yo me alegro por ti\n'
 )
@@ -59,7 +59,7 @@ topico_triste = (
     'concept: (bloque_cuatro ) [tristeza melancolia ] \n'
     'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? \n'
     'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_dos) Aca estoy para ayudarte con eso, esos sentimientos nos ayudan a sanar heridas\n'
-    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_tres) Tranquilo, todo pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor \n'
+    'u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_tres) Tranquilo, to do pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor \n'
     'u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_cuatro) Te comprendo, pero piensa que podras verte a ti mismo de otra manera y saldras adelante mucho mejor\n'
 )
 
@@ -79,7 +79,7 @@ topico_normal= (
     'topic: ~normTopic()\n'
     'language: spe\n'
     'concept: (bloque_uno) [bueno "ah bueno" okey "Esta bien" ] \n'
-    'concept: (bloque_dos) ["todo bien" "Esta agradable" "Me siento bien" bien "Esta Bueno"] \n'
+    'concept: (bloque_dos) ["to do bien" "Esta agradable" "Me siento bien" bien "Esta Bueno"] \n'
     'concept: (bloque_tres) ["me alegra" "Estoy normal" ] \n'
     'u: (_~bloque_uno) Me alegra, no hay nada como sentirse bien\n'
     'u: (_~bloque_dos) Que bueno escuchar eso! Yo me alegro por ti\n'
@@ -112,5 +112,10 @@ conversacion_musica = (
 )"""
 topic_content_1 = "/data/home/nao/topics/basicTopic.top"
 topico_alegre = "/data/home/nao/topics/alegreTopic.top"
+topico_triste = "/data/home/nao/topics/tristeTopic.top"
+topico_ira = "/data/home/nao/topics/iraTopic.top"
+topico_emocional = "/data/home/nao/topics/emocionalTopic.top"
+topico_normal = "/data/home/nao/topics/normalTopic.top"
+conversacion_musica = "/data/home/nao/topics/musicTopic.top"
 
-topic_list = [topic_content_1, topico_alegre]
+topic_list = [topic_content_1, topico_emocional, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
