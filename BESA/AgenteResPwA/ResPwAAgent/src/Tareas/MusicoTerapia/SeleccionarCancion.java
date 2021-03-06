@@ -61,6 +61,16 @@ public class SeleccionarCancion extends ResPwaTask {
         blvs.getbEstadoActividad().setCancionActual(cancionEleg);
         //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
     }
+    
+    public Cancion mejorCancionParaColocar(List<Cancion> canciones){
+        
+        Cancion cancionParaColocar = null;
+//        Se busca en la lista cual tiene la mejor probabilidad para colocar esa cancion
+        for( int i=0; i < canciones.size(); i++ ){
+            
+        }
+        return cancionParaColocar;
+    }
 
     @Override
     public void interruptTask(Believes believes) {
