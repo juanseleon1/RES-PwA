@@ -1,0 +1,74 @@
+topic: ~topicorron()
+    concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]
+    concept:(respuestas_simples) [si no "tal vez"]
+    concept:(emociones_positivos) ["bien feliz alegre sonriente animado chevere "]
+    concept:(emociones_negativas) [mal fatal terrible horrible aburrido triste desanimado]
+    concept: (emociones_positivas) [feliz alegre alegria genial bacano bacana chevere rico] 
+    concept: (emociones_tristes) [triste tristeza achantado dolor mal melancolia melancolico aburrido miedo] 
+    concept: (emociones_enojo) [ira enojo piedra molestia rabia molesto molesta joda jode jodes mamado mamada quiero azare ] 
+    concept: (emociones_normales) [Bien bueno ok alegra agradable "como quiera" nada normal] 
+    concept: (bloque_uno_feliz) [feliz alegre emocionado chevere animado animada emocionada contento contenta] 
+    concept: (bloque_dos_feliz) [alegria felicidad esperanza emocion gratitud serenidad diversion] 
+    concept: (bloque_tres_feliz) [amor orgullo ] 
+    concept: (bloque_uno_triste) [aburrido cansado fastidiado mamado] 
+    concept: (bloque_dos_triste) [mal terrible horrible] 
+    concept: (bloque_tres_triste) [triste melancolica melancolico adolorido dolido ] 
+    concept: (bloque_cuatro_triste ) [tristeza melancolia ] 
+    concept: (bloque_uno_ira) [molesto emputado enojado jodido fastidiado mamado mamada] 
+    concept: (bloque_dos_ira) [piedra rabia ira furia colera] 
+    concept: (bloque_uno_normal) [bueno "ah bueno" okey "Esta bien" ] 
+    concept: (bloque_dos_normal) ["todo bien" "Esta agradable" "Me siento bien" bien "Esta Bueno"] 
+    concept: (bloque_tres_normal) ["me alegra" "Estoy normal" ] 
+    concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco]  
+    
+    
+    u: (como se encuentra?) Me encuentro muy bien, muchas gracias, que tal se encuentra usted?
+    u: (_~saludos) Muy buenos dias! Espero que se encuentre muy bien. Que quiere hacer hoy?  .
+    u: ({Hoy} {"Este dia"} Quiero escuchar musica) De acuerdo, que genero quisieras escuchar?
+    u: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos
+    u: (Di la verdad) Leon tiene cabeza de kiwi
+    u: (Dime algo) Tengo una vaca lechera, no es una vaca cualquiera
+    u: (Que se dice) Que se narra? la mojarrra
+    u: (Mafe me cae mal) A mi tambien
+    u: (Estoy cansado) Callese, perro
+    u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high
+    u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.
+    u: (Mafe es facil) La Mafacil, le dicen
+    u: (Mafe no me quiere) A nadie, solo se quiere a si misma
+    
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno_feliz) Verte tan alegre te hace lucir genial, te ves muy bien hoy! 
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos_feliz) La alegria te da una sonrisa muy hermosa 
+    u: ([Siento Tengo] {[mucho muchisimo tantisimo demasiado]} _~bloque_tres_feliz) Esos son los sentimientos mas hermosos de una persona 
+    
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno_triste) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_dos_triste) Aca estoy para ayudarte con eso, esos sentimientos nos ayudan a sanar heridas
+    u: ({"Imaginese que"}[Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_tres_triste) Tranquilo, todo pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor 
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_cuatro_triste) Te comprendo, pero piensa que podras verte a ti mismo de otra manera y saldras adelante mucho mejor
+    
+    u: ([Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) Entiendo que te sientas asi, pero si no te     
+    u: ([Vayase Vete]) Esta bien nos vemos luego 
+
+    u: (_~bloque_uno_normal) Me alegra, no hay nada como sentirse bien
+    u: (_~bloque_dos_normal) Que bueno escuchar eso! Yo me alegro por ti
+    u: (_~bloque_tres_normal) Eso esta de lujo
+
+    u: (hablar sobre musica) Te gusta la musica? 
+        u1: (si) Enserio? Que genero te gusta escuchar?
+            u2: (Vallenato) A mi tambien me gusta mucho el vallenato, te gusta diomedez?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos musica vallenata variada.
+            u2: (Reggaeton) A mi tambien me gusta mucho el reggaeton, te gusta Bad Bunny?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos reggaeton variado.
+            u2: (Salsa) A mi tambien me gusta mucho la salsa, te gusta el Joe Arroyo?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos una buena salsa variada.
+            u2: (Balada) A mi tambien me gusta mucho el reggaeton, te gusta Ricardo Montaner?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos unas baladas variadas.
+            u2: (Llanera) A mi tambien me gusta mucho el reggaeton, te gusta Reynaldo Armas?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos musica llanera variada.
+            u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?
+        u1: (No) Que triste, creo que me deberia ir     
