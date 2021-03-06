@@ -24,32 +24,29 @@ import rational.guards.InformationFlowGuard;
  *
  * @author juans
  */
-public class GetInfoGuard extends GuardBESA{
+public class GetInfoGuard extends GuardBESA {
 
     @Override
     public void funcExecGuard(EventBESA ebesa) {
         try {
-            SensorData infoRecibida = (SensorData)ebesa.getData();
+            SensorData infoRecibida = (SensorData) ebesa.getData();
             //ACTIVIDAD,EMOCIONES,INACTIVIDAD,INTHABLA,INTSENSORES,BATERIA,RETROALIM
-            System.out.println("GetInfoGuard Event Received: "+infoRecibida);
+            System.out.println("GetInfoGuard Event Received: " + infoRecibida);
             AgHandlerBESA handler;
             EventBESA sensorEvtA;
-            if(infoRecibida.getDataType().equals(SensorDataType.EMOTIONS))
-            {
-            handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasEAAgent);
-            sensorEvtA= new EventBESA(ProcessEmotionGuard.class.getName(),infoRecibida);
-            handler.sendEvent(sensorEvtA);  
-            }else
-            {
-            handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
-            sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
-            handler.sendEvent(sensorEvtA);  
-            }
+            if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS)) {
+                handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasEAAgent);
+                sensorEvtA = new EventBESA(ProcessEmotionGuard.class.getName(), infoRecibida);
+            } else {
+                handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
+                sensorEvtA = new EventBESA(InformationFlowGuard.class.getName(), infoRecibida);
 
+            }
+            handler.sendEvent(sensorEvtA);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(GetInfoGuard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }  
-    
+
+    }
+
 }
