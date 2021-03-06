@@ -457,7 +457,13 @@ class Robot:
 
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
-        self.alTabletService.playVideo(params.get("SHOWVIDEO"))
+        #print "CRACK", params.get("SHOWVIDEO")
+        self.alTabletService.enableWifi()
+        print "CRACK", self.alTabletService.getWifiStatus()
+        if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
+
+
+        self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
 
     # Close the video player.
     def quit_video(self):
