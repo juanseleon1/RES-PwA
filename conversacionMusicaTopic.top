@@ -1,0 +1,22 @@
+topic: ~musicTopic()
+    language: spe
+    concept: (generos) [clasica jazz soul blues flamenco tango pop house rock punk metal disco]    
+    u: (hablar sobre musica) Te gusta la musica? 
+        u1: (si) Enserio? Que genero te gusta escuchar?
+            u2: (Vallenato) A mi tambien me gusta mucho el vallenato, te gusta diomedez?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos musica vallenata variada.
+            u2: (Reggaeton) A mi tambien me gusta mucho el reggaeton, te gusta Bad Bunny?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos reggaeton variado.
+            u2: (Salsa) A mi tambien me gusta mucho la salsa, te gusta el Joe Arroyo?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos una buena salsa variada.
+            u2: (Balada) A mi tambien me gusta mucho el reggaeton, te gusta Ricardo Montaner?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos unas baladas variadas.
+            u2: (Llanera) A mi tambien me gusta mucho el reggaeton, te gusta Reynaldo Armas?
+                u3: (si) Es muy bueno! Escuchemos una cancion de el
+                u3: (no) Entonces escuchemos musica llanera variada.
+            u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?
+        u1: (No) Que triste, creo que me deberia ir 

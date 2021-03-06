@@ -1,0 +1,7 @@
+topic: ~iraTopic()
+    language: spe
+    concept: (bloque_uno) [molesto emputado enojado jodido fastidiado mamado mamada] 
+    concept: (bloque_dos) [piedra rabia ira furia colera] 
+    u: ([Estoy "Me siento" ]{super}{mega}{re}{"re contra"} _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) Entiendo que te sientas asi, pero si no te     
+    u: ([Vayase Vete]) Esta bien nos vemos luego 

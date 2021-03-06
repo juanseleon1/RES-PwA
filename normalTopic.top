@@ -1,0 +1,8 @@
+topic: ~normTopic()
+    language: spe
+    concept: (bloque_uno) [bueno "ah bueno" okey "Esta bien" ] 
+    concept: (bloque_dos) ["todo bien" "Esta agradable" "Me siento bien" bien "Esta Bueno"] 
+    concept: (bloque_tres) ["me alegra" "Estoy normal" ] 
+    u: (_~bloque_uno) Me alegra, no hay nada como sentirse bien
+    u: (_~bloque_dos) Que bueno escuchar eso! Yo me alegro por ti
+    u: (_~bloque_tres) Eso esta de lujo
