@@ -110,7 +110,7 @@ conversacion_musica = (
             'u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?\n'
         'u1: (No) Que triste, creo que me deberia ir \n'
 )"""
-topic_content_1 = "/data/home/nao/topics/basicTopic.top"
-topico_alegre = "/data/home/nao/topics/alegreTopic.top"
 
-topic_list = [topic_content_1, topico_alegre]
+
+topicorron = "/data/home/nao/topics/super_mega_topico.top"
+topic_list = [topicorron]
