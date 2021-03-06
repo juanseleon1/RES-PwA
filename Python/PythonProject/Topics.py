@@ -110,6 +110,7 @@ conversacion_musica = (
             'u2: (_~generos) No conozco mucho de ese genero, que te gusta mas de ese genero?\n'
         'u1: (No) Que triste, creo que me deberia ir \n'
 )"""
+
 topic_content_1 = "/data/home/nao/topics/basicTopic.top"
 topico_alegre = "/data/home/nao/topics/alegreTopic.top"
 topico_triste = "/data/home/nao/topics/tristeTopic.top"
@@ -117,5 +118,7 @@ topico_ira = "/data/home/nao/topics/iraTopic.top"
 topico_emocional = "/data/home/nao/topics/emocionalTopic.top"
 topico_normal = "/data/home/nao/topics/normalTopic.top"
 conversacion_musica = "/data/home/nao/topics/musicTopic.top"
+topicorron = "/data/home/nao/topics/super_mega_topico.top"
 
-topic_list = [topic_content_1, topico_emocional, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
+topic_list = [topic_content_1, topico_emocional, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica, topicorron]
+
