@@ -75,7 +75,7 @@ class Robot:
         self.alDialogProxy = session.service("ALDialog")
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
-        # self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+        self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
         # self.alSpeechRecognition.setParameter()
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
@@ -569,6 +569,7 @@ class Robot:
     def load_conversational_topic(self, params):
         topicName = params.get("name")
         topic = self.topicMap.get( topicName )
+        print "TOPICO ", topic
         self.alDialogProxy.activateTopic(topic)
         #self.alDialogProxy.forceInput("Estoy feliz")
         print "Cargando: ", topic

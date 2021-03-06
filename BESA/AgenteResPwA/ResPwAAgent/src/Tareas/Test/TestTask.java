@@ -31,9 +31,9 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("name", "alegreTopic"); //sadTopic
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-        requestService(srb, blvs);
+//        infoServicio.put("name", "alegreTopic"); //sadTopic
+//        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
+//        requestService(srb, blvs);
 
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("name", "alegreTopic");
