@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class PepperEModel extends EmotionalModel {
+public class PepperEmotionalModel extends EmotionalModel {
 
     private double state;
     private final double refreshRate;
@@ -31,15 +31,17 @@ public class PepperEModel extends EmotionalModel {
     private final double speechBase = 1.1;
     private final double speechVBase = 100;
     private final double ledsIntBase = 1;
-    private double velf=1;
-    private double velh=100;
-    private double pitch=1.1;
-    private double ledInt=1;
-    private final double ledRotVel=2;
+    private double velf = 1;
+    private double velh = 100;
+    private double pitch = 1.1;
+    private double ledInt = 1;
+    private final double ledRotVel = 2;
     private static final double CHANGE_FACT = 0.3;
+    private static final double CHANGEEMO_FACT = 0.01;
+
     private LedsColor lc;
 
-    public PepperEModel(double normalState) {
+    public PepperEmotionalModel(double normalState) {
         this.state = normalState;
         this.refreshRate = 0;
         this.normalState = normalState;
@@ -110,7 +112,7 @@ public class PepperEModel extends EmotionalModel {
             e.setInfo(map);
             sendAct(e);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(PepperEModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PepperEmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,54 +125,68 @@ public class PepperEModel extends EmotionalModel {
             e.setInfo(map);
             sendAct(e);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(PepperEModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PepperEmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void calcNewEmotionalParams(Map<String, Object> map, SensorData sd) {
         Map<String, Object> pe = sd.getDataPE(), aux, auxEmo;
-        aux = (Map<String, Object>) pe.get("bodyLanguageState");
-        aux = (Map<String, Object>) aux.get("ease");
-        double relval = (double) aux.get("level") * (double) aux.get("confidence");
+        double angval = 0, joyval = 0, sowval = 0;
+        if (pe.get("bodyLanguageState") != null) {
+            aux = (Map<String, Object>) pe.get("bodyLanguageState");
+            aux = (Map<String, Object>) aux.get("ease");
+            double relval = (double) aux.get("level") * (double) aux.get("confidence");
 //        System.out.println("Es esta: "+pe);
-        aux = (Map<String, Object>) pe.get("smile");
-        double smval = (double) aux.get("confidence") * (double) aux.get("value");
-        aux = (Map<String, Object>) pe.get("expressions");
-        auxEmo = (Map<String, Object>) aux.get("joy");
-        double joyval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("sorrow");
-        double sowval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("excitement");
-        double excval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("calm");
-        double calval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("anger");
-        double angval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("surprise");
-        double surval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        auxEmo = (Map<String, Object>) aux.get("laughter");
-        double lauval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
-        aux = (Map<String, Object>) pe.get("valence");
-        double valval = (double) aux.get("confidence") * (double) aux.get("value");
-        aux = (Map<String, Object>) pe.get("attention");
-        double atval = (double) aux.get("confidence") * (double) aux.get("value");
+            aux = (Map<String, Object>) pe.get("smile");
+            double smval = (double) aux.get("confidence") * (double) aux.get("value");
+            aux = (Map<String, Object>) pe.get("expressions");
+            auxEmo = (Map<String, Object>) aux.get("joy");
+            joyval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("sorrow");
+            sowval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("excitement");
+            double excval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("calm");
+            double calval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("anger");
+            angval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("surprise");
+            double surval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            auxEmo = (Map<String, Object>) aux.get("laughter");
+            double lauval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
+            aux = (Map<String, Object>) pe.get("valence");
+            double valval = (double) aux.get("confidence") * (double) aux.get("value");
+            aux = (Map<String, Object>) pe.get("attention");
+            double atval = (double) aux.get("confidence") * (double) aux.get("value");
 
+            map.put("relajacion", relval);
+            map.put("atencion", atval);
+
+        } else {
+            int i;
+            for (PepperPersonEmotion ppe : PepperPersonEmotion.values()) {
+                i = (int) pe.get(ppe.getId());
+            }
+
+        }
         EmotionPwA emoP = null;
         if (angval >= joyval && angval >= sowval) {
             emoP = EmotionPwA.ANGER;
+            state -= CHANGEEMO_FACT;
         } else if (angval <= joyval && joyval >= sowval) {
             emoP = EmotionPwA.HAPPINESS;
+            state += CHANGEEMO_FACT;
         } else if (sowval >= joyval && angval <= sowval) {
             emoP = EmotionPwA.SADNESS;
+            state -= CHANGEEMO_FACT;
         }
-
-        map.put("relajacion", relval);
-        map.put("atencion", atval);
+        
         map.put("predEm", emoP);
         calcNewEmotionalParams(map);
     }
 
     private void calcNewEmotionalParams(Map<String, Object> map) {
+        lc = LedsColor.WHITE;
         if (state >= LedsColor.BLUE.getMin() && state < LedsColor.BLUE.getMax()) {
             lc = LedsColor.BLUE;
         } else if (state >= LedsColor.PURPLE.getMin() && state < LedsColor.PURPLE.getMax()) {
@@ -182,8 +198,6 @@ public class PepperEModel extends EmotionalModel {
         } else if (state >= LedsColor.YELLOW.getMin() && state <= LedsColor.YELLOW.getMax()) {
             lc = LedsColor.YELLOW;
         }
-       
-        lc = LedsColor.WHITE;
         velf = 0;
         velh = (speechVBase * state) / normalState;
         pitch = (speechBase * state) / normalState;
@@ -196,7 +210,7 @@ public class PepperEModel extends EmotionalModel {
         HashMap<String, Object> map2 = new HashMap<>();
         map2.putAll(map);
         map2.put("COLOR", lc.getHexa());
-        map2.put("DURATION",ledRotVel);
+        map2.put("DURATION", ledRotVel);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, (HashMap<String, Object>) map2);
         requestService(srb);
     }

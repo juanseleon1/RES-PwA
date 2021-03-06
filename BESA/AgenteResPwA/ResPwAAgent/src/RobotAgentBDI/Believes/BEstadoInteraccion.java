@@ -38,6 +38,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
+    private boolean movManoSaludo=false;
     private LedsColor leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
@@ -119,7 +120,10 @@ public class BEstadoInteraccion implements Believes{
         }if(infoRecibida.getDataP().containsKey("karaokeando")){
           estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
             
+        }if(infoRecibida.getDataP().containsKey("wavingDetection")){
+            movManoSaludo = true;
         }
+        
         return true;
     }
 
@@ -347,6 +351,10 @@ public class BEstadoInteraccion implements Believes{
 
     public void setEstaKaraokeando(boolean estaKaraokeando) {
         this.estaKaraokeando = estaKaraokeando;
+    }
+
+    public boolean isMovManoSaludo() {
+        return movManoSaludo;
     }
     
     

@@ -16,6 +16,7 @@ import SensorHandlerAgent.SensorData;
 /**
  *
  * @author juans
+ * @param <T>
  */
 public abstract class  ResPwaAdapterReceiver<T>{
     

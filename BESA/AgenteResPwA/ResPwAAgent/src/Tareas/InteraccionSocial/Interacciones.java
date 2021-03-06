@@ -7,7 +7,7 @@ package Tareas.InteraccionSocial;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
-import PepperPackage.EmotionalModel.PepperEModel;
+import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -37,7 +37,7 @@ public class Interacciones extends ResPwaTask{
         
         //mensajitos de acuerdo a sus emociones
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        double state = ((PepperEModel)blvs.getEm()).getState();
+        double state = ((PepperEmotionalModel)blvs.getEm()).getState();
         
         //toca modificar la emocion y color, depende de la encuesta
         if(state >= LedsColor.RED.getMin() && state < LedsColor.RED.getMax())

@@ -86,7 +86,7 @@ class Robot:
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
         #time.sleep(10)
-        self.alTexToSpeech.say("Ya estoy listo para ser usado, sugar Brayan")
+        self.alTexToSpeech.say("Ya estoy listo para ser usado, shugar Brayan equis de")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
