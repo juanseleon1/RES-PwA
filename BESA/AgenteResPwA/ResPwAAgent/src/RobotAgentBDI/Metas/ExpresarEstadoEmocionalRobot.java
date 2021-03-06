@@ -23,11 +23,11 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class InteraccionSocial extends GoalBDI{
+public class ExpresarEstadoEmocionalRobot extends GoalBDI{
     
-    private static String descrip = "InteraccionSocial";
+    private static String descrip = "ExpresarEmocional";
     
-    public static InteraccionSocial buildGoal() {
+    public static ExpresarEstadoEmocionalRobot buildGoal() {
         
         Interacciones inter = new Interacciones();
         List<Task> taskList = new ArrayList<>();
@@ -35,11 +35,11 @@ public class InteraccionSocial extends GoalBDI{
         rolePlan.addTask(inter);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        InteraccionSocial b = new InteraccionSocial(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        ExpresarEstadoEmocionalRobot b = new ExpresarEstadoEmocionalRobot(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
         return b;
     }
 
-    public InteraccionSocial(long id, RationalRole role, String description, GoalBDITypes type) {
+    public ExpresarEstadoEmocionalRobot(long id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
     }
 

@@ -27,63 +27,61 @@ import java.util.logging.Logger;
  *
  * @author juans
  */
-public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> implements Runnable{
+public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> implements Runnable {
 
-    public static final int revPort=7897;
+    public static final int revPort = 7897;
     protected AtomicBoolean ready;
     protected ServerSocket ss;
-    public PepperAdapterReceiver() throws IOException{
-        ready= new AtomicBoolean(true);
-        ss=new ServerSocket(revPort);
+
+    public PepperAdapterReceiver() throws IOException {
+        ready = new AtomicBoolean(true);
+        ss = new ServerSocket(revPort);
         System.out.println("PepperAdptRecvReady");
     }
-    
+
     @Override
     public void run() {
-        
-        while(ready.get())
-        {
+
+        while (ready.get()) {
             try {
-                Socket s=ss.accept();
-                //DataInputStream  in = new DataInputStream(s.getInputStream());
+                Socket s = ss.accept();
                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                String json = in.readLine(); 
-             Thread t1= new Thread(){
-                @Override
-                public void run()
-                {
-                    try {
-                        SensorData sd=toSensorData(json);
-                        System.out.println("Llego: "+json);
-                        updateBlvs(sd);
-                    } catch (ExceptionBESA ex) {
-                        Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
+                String json = in.readLine();
+                Thread t1 = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            SensorData sd = toSensorData(json);
+                            System.out.println("Llego: " + json);
+                            updateBlvs(sd);
+                        } catch (ExceptionBESA ex) {
+                            Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
                 };
                 t1.start();
             } catch (IOException ex) {
                 Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
-    public void close()
-    {
+
+    public void close() {
         ready.set(false);
     }
 
     @Override
     protected synchronized SensorData toSensorData(String json) {
-        
-        SensorData resp= new SensorData();
+
+        SensorData resp = new SensorData();
         try {
 //            System.out.println("toSensorData "+json);
-            Map<String, Object> map= new ObjectMapper().readValue(json, new TypeReference<Map<String,Object>>(){});
+            Map<String, Object> map = new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {
+            });
 //            System.out.println("-------To sensor data: "+map.toString()+ "-------------------");
-            resp.setDataType(SensorDataType.getFromId((String)map.get("respType")));
-            
+            resp.setDataType(SensorDataType.getFromId((String) map.get("respType")));
+
 //            System.out.println("MIRE:"+ (String)map.get("respType") + "\n"+SensorDataType.getFromId((String)map.get("respType")));
             resp.setAck((int) map.get("id"));
             resp.setDataP((Map<String, Object>) map.get("params"));
@@ -91,7 +89,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         } catch (JsonProcessingException | InterruptedException ex) {
             Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return resp;
     }
 }

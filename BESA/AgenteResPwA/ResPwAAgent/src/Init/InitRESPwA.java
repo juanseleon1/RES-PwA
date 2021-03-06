@@ -6,8 +6,8 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
-import PepperPackage.PepperEAStrategy;
-import PepperPackage.EmotionalModel.PepperEModel;
+import PepperPackage.EmotionalModel.PepperEAStrategy;
+import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Metas.Cuenteria;
@@ -44,8 +44,8 @@ import java.util.logging.Logger;
  * sesion. 3. Le avisa que no lo conoce y que hable con su cuidador para poder
  * hacerle un perfil. Conversacion Casual. "Hola, como estas hoy" y muestra en
  * tablet y espera respuesta oral. Como estas como te fue hoy. Y luego, lo
- * escucha por un rato. y le dice que hagan una actividad.  *
- * Luego empieza la sesion.  *
+ * escucha por un rato. y le dice que hagan una actividad. * Luego empieza la
+ * sesion. *
  */
 public class InitRESPwA {
 
@@ -62,22 +62,21 @@ public class InitRESPwA {
             String cedula = null;//obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
-            PepperEModel emoModel = new PepperEModel(predefEmoState);
+            PepperEmotionalModel emoModel = new PepperEmotionalModel(predefEmoState);
             RobotAgentBDI RABDI = new RobotAgentBDI(aliasRobotAgent, createRobotAgentGoals(), cedula, emoModel);
             EmotionalAnalyzerAgent EAA = new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), emoModel);
             SensorHandlerAgent SHA = new SensorHandlerAgent(aliasSHAAgent);
             PepperAdapter p = new PepperAdapter();
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
-            HashMap<String, Object> hm = new HashMap<>(),hm1=new HashMap<>();
-            hm.put("SAY", "Quiero perrear, soy la Pepper");
+            HashMap<String, Object> hm = new HashMap<>(), hm1 = new HashMap<>();
+            hm.put(VoiceServiceRequestType.SAY.getServiceType(), "Mafe y Camacho, se dan besitos bajo el arbol. xd xd xd");
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
             p.sendRequest(data);
-            
-//            hm1.put("MOVETOX", 5);
-//            hm1.put("MOVETOY", 5);
-//            data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
-//            p.sendRequest(data);
+            hm1.put("MOVETOX", 5);
+            hm1.put("MOVETOY", 5);
+            data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
+            p.sendRequest(data);
 
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);

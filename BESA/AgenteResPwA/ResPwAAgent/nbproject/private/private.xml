@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/AnimarElogiarPwA.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/CancelarActividad.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/EstimularEmocionalmente.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/CancelarActividad/CancelarActividadTask.java</file>
@@ -44,6 +47,7 @@
 >>>>>>> 2a363eea05a6cbf12b52c477f437c3801c193979
 >>>>>>> b24e0a1311d78d4b5abbe3a973b98b6412da8cfa
 >>>>>>> 6a5447beef62f735174eeb660f248f75aea2d6ce
+>>>>>>> d78d845a9fb47b163bfa64324380d74d0f98c646
         </group>
     </open-files>
 </project-private>
