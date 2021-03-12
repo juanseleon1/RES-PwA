@@ -162,13 +162,14 @@ public class PepperEmotionalModel extends EmotionalModel {
             map.put("relajacion", relval);
             map.put("atencion", atval);
 
-        } else {
-            int i;
-            for (PepperPersonEmotion ppe : PepperPersonEmotion.values()) {
-                i = (int) pe.get(ppe.getId());
-            }
-
-        }
+        } 
+//        else {
+//            int i;
+//            for (PepperPersonEmotion ppe : PepperPersonEmotion.values()) {
+//                i = (int) pe.get(ppe.getId());
+//            }
+//
+//        }
         EmotionPwA emoP = null;
         if (angval >= joyval && angval >= sowval) {
             emoP = EmotionPwA.ANGER;

@@ -52,6 +52,7 @@ public class SeleccionarCancion extends ResPwaTask {
         Cancion cancionEleg = null;
         List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
         for (Cancion c : canciones) {
+
             if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
                 cancionEleg = c;
                 gusto = (float) (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3);
@@ -59,6 +60,16 @@ public class SeleccionarCancion extends ResPwaTask {
         }
         blvs.getbEstadoActividad().setCancionActual(cancionEleg);
         //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
+    }
+    
+    public Cancion mejorCancionParaColocar(List<Cancion> canciones){
+        
+        Cancion cancionParaColocar = null;
+//        Se busca en la lista cual tiene la mejor probabilidad para colocar esa cancion
+        for( int i=0; i < canciones.size(); i++ ){
+            
+        }
+        return cancionParaColocar;
     }
 
     @Override

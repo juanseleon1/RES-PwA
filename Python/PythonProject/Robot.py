@@ -86,7 +86,7 @@ class Robot:
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         print "ROBOT CARGADO Y LISTO"
         #time.sleep(10)
-        self.alTexToSpeech.say("Ya estoy listo para ser usado, sugar Brayan")
+        self.alTexToSpeech.say("Ya estoy listo para ser usado, shugar Brayan equis de")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -457,7 +457,13 @@ class Robot:
 
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
-        self.alTabletService.playVideo(params.get("SHOWVIDEO"))
+        #print "CRACK", params.get("SHOWVIDEO")
+        self.alTabletService.enableWifi()
+        print "CRACK", self.alTabletService.getWifiStatus()
+        if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
+
+
+        self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
 
     # Close the video player.
     def quit_video(self):
