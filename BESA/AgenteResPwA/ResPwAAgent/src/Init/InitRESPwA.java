@@ -20,6 +20,7 @@ import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.ReanudarActividad;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
+import RobotAgentBDI.Metas.Saludar;
 import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
@@ -135,7 +136,8 @@ public class InitRESPwA {
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-        RAGoals.add(tp);
+        Saludar s = Saludar.buildGoal();
+        RAGoals.add(s);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
