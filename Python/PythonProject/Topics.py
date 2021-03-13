@@ -1,24 +1,26 @@
 """topic_content_1 = ('topic: ~basicoTopic()\n'
-                   'language: spe\n'
-                   'concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]\n'
-                   'concept:(respuestas_simples) [si no "tal vez"]\n'
-                   'concept:(emociones_positivos) ["bien feliz alegre sonriente animado chevere "]\n'
-                   'concept:(emociones_negativas) [mal fatal terrible horrible aburrido triste desanimado]\n'
-                   'u: (como se encuentra?) Me encuentro muy bien, muchas gracias, que tal se encuentra usted?\n'
-                   'u: (_~saludos) Muy buenos dias! Espero que se encuentre muy bien. Que quiere hacer hoy?  .\n'
-                   'u: ({Hoy} {"Este dia"} Quiero escuchar musica) De acuerdo, que genero quisieras escuchar?\n'
-                   'u: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos\n'
-                   'u: (Di la verdad) Leon tiene cabeza de kiwi\n'
-                   'u: (Dime algo) Tengo una vaca lechera, no es una vaca cualquiera\n'
-                   'u: (Que se dice) Que se narra? la mojarrra\n'
-                   'u: (Mafe me cae mal) A mi tambien\n'
-                    'u: (Estoy cansado) Callese, perro\n'
-                    'u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high\n'
-                    'u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.\n'
-                    'u: (Mafe es facil) La Mafacil, le dicen\n'
-                    'u: (Mafe no me quiere) A nadie, solo se quiere a si misma\n'
-                   'u: (Tengo hambre) Vamos a criollo\n'
-                   )
+        'language: spe\n'
+        'concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]\n'
+        'concept:(respuestas_simples) [si no "tal vez"]\n'
+        'concept:(emociones_positivos) ["bien feliz alegre sonriente animado chevere "]\n'
+        'concept:(emociones_negativas) [mal fatal terrible horrible aburrido triste desanimado]\n'
+        'u: (como se encuentra?) Me encuentro muy bien, muchas gracias, que tal se encuentra usted?\n'
+        'u: (_~saludos) Muy buenos dias! Espero que se encuentre muy bien. Que quiere hacer hoy?  .\n'
+        'u: ({Hoy} {"Este dia"} Quiero escuchar musica) De acuerdo, que genero quisieras escuchar?\n'
+            'u2: ([Vallenato Reggaeton Champeta Salsa Balada]) Con mucho gusto, ahorita lo pondremos\n'
+        'u: (Di la verdad) Leon tiene cabeza de kiwi\n'
+        'u: (Dime algo) Tengo una vaca lechera, no es una vaca cualquiera\n'
+        'u: (Que se dice) Que se narra? la mojarrra\n'
+        'u: (Mafe me cae mal) A mi tambien\n'
+        'u: (Estoy cansado) Callese, perro\n'
+        'u: (Canta porfavor) Guatermelon shugar...high, Guatermelon shugar...high\n'
+        'u: (Chiste)La foca le dice a su mama: I lof llu, moder foca.\n'
+        'u: (Mafe es facil) La Mafacil, le dicen\n'
+        'u: (Mafe no me quiere) A nadie, solo se quiere a si misma\n'
+        'u: (Tengo hambre) Vamos a criollo\n'
+        'u: (Quien es laion?) Es el chico oracol\n'
+        'u: (Mafe tiene hambre) solo traga dulces pa desayunar  \n'
+        )
 
 topico_emocional = (
      'topic: ~emoTopic()\n'
@@ -120,5 +122,10 @@ topico_normal = "/data/home/nao/topics/normalTopic.top"
 conversacion_musica = "/data/home/nao/topics/conversacionMusicaTopic.top"
 #topicorron = "/data/home/nao/topics/superTopico.top"
 # , topico_emocional
+<<<<<<< HEAD
 topic_list = [topic_content_1, topico_alegre, topico_ira]
 #topic_list = [topicorron]
+=======
+#topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
+topic_list = [topico_alegre, topico_ira, topic_content_1]
+>>>>>>> 2590160efa789ea5e5d20a27531e721279289511

@@ -32,6 +32,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoSeñalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
+    private boolean conectadoInternet = false;
     private double velHabla;
     private double tonoHabla;
     private double distanciaX;
@@ -81,6 +82,9 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("robotIsWakeUp")) {
                 estaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("robotIsWakeUp"));
+            }
+            if (infoRecibida.getDataP().containsKey("libreEntorno")) {
+                libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
             }
             if (infoRecibida.getDataP().containsKey("libreEntorno")) {
                 libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));

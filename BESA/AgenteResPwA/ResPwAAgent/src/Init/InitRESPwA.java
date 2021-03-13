@@ -138,6 +138,8 @@ public class InitRESPwA {
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
+        Saludar s = Saludar.buildGoal();
+        RAGoals.add(s);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);

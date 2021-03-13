@@ -131,7 +131,7 @@ t.start()
 """ Robot class declaration"""
 
 robot = Robot(session)
-
+robot.show_video(None)
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client)
