@@ -122,10 +122,8 @@ topico_normal = "/data/home/nao/topics/normalTopic.top"
 conversacion_musica = "/data/home/nao/topics/conversacionMusicaTopic.top"
 #topicorron = "/data/home/nao/topics/superTopico.top"
 # , topico_emocional
-<<<<<<< HEAD
 topic_list = [topic_content_1, topico_alegre, topico_ira]
 #topic_list = [topicorron]
-=======
+
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
 topic_list = [topico_alegre, topico_ira, topic_content_1]
->>>>>>> 2590160efa789ea5e5d20a27531e721279289511
