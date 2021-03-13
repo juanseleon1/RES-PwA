@@ -463,8 +463,8 @@ class Robot:
         #print "CRACK", params.get("SHOWVIDEO")
         self.alTabletService.enableWifi()
         print "CRACK", self.alTabletService.getWifiStatus()
-        if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-            self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
+        self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
 
     # Close the video player.
     def quit_video(self):
@@ -572,6 +572,16 @@ class Robot:
             self.topicMap[topicName] = topic
             """
         self.alDialogProxy.runTopics(topic_list)
+        self.deactivate_topics(topic_list)
+        self.alDialogProxy.activateTopic("topic_content_1")
+
+    # def
+
+    def deactivate_topics(self, topicsList):
+        for topic in topicsList:
+            self.alDialogProxy.deactivateTopic(topic)
+
+    # def
 
     def load_conversational_topic(self, params):
         topicName = params.get("name")
