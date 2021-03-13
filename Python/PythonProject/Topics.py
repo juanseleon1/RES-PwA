@@ -113,7 +113,7 @@ conversacion_musica = (
         'u1: (No) Que triste, creo que me deberia ir \n'
 )"""
 
-topic_content_1 = "/data/home/nao/t opics/basicTopic.top"
+topic_content_1 = "/data/home/nao/topics/basicTopic.top"
 topico_alegre = "/data/home/nao/topics/alegreTopic.top"
 topico_triste = "/data/home/nao/topics/sadTopic.top"
 topico_ira = "/data/home/nao/topics/iraTopic.top"

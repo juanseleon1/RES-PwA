@@ -62,11 +62,11 @@ public class AnimarElogiarPwA extends GoalBDI{
         
         //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-       
+        
         //alto numero de errores, tiene aciertos, cierto tiempo activo
         //!blvs.getbEstadoActividad().isFinalizoActividad() ?
         //|| finalActividad || dice que se siente triste/enojado || Al escoger actividad por primera vez
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged()&&  blvs.getbEstadoInteraccion().isLogged()){
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged() &&  blvs.getbEstadoInteraccion().isLogged()){
             if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
             return 1.0;
             }

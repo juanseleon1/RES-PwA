@@ -575,6 +575,14 @@ class Robot:
         self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
 
 
+        #self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
+        #self.alDialogProxy.activateTopic("basicoTopic")
+        #time.sleep(25.4)
+        #print "Cambio"
+        #self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
+        #self.alDialogProxy.activateTopic("alegreTopic")
+
+
     # def
 
     def deactivate_topics(self, topicsList):
