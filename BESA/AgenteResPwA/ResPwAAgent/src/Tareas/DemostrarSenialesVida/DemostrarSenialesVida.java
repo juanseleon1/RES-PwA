@@ -9,6 +9,6 @@ package Tareas.DemostrarSenialesVida;
  *
  * @author mafegarces
  */
-public class prueba {
+public class DemostrarSenialesVida {
     
 }
