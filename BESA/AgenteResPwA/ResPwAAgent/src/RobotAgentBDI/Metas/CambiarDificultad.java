@@ -55,6 +55,7 @@ public class CambiarDificultad extends GoalBDI{
         CambiarDificultad b= new CambiarDificultad(InitRESPwA.getPlanID(), cambiarDifRole, descrip, GoalBDITypes.DUTY);
         return b;
     }
+    
     public CambiarDificultad(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         //System.out.println("Meta CambiarDificultad created");

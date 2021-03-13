@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.VerificarDispositivos.VerificacionDispositivos;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -24,9 +25,9 @@ public class VerificarDispositivos extends GoalBDI{
     private static String descrip = "VerificarDispositivos";
     
     public static VerificarDispositivos buildGoal() {
-        //MandarSaludo ms = new MandarSaludo();
+        VerificacionDispositivos vd = new VerificacionDispositivos();
         Plan rolePlan= new Plan();
-        //rolePlan.addTask(ms);
+        rolePlan.addTask(vd);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
         VerificarDispositivos b = new VerificarDispositivos(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);

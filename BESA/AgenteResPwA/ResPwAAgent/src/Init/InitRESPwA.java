@@ -15,7 +15,6 @@ import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.LogIn;
 import RobotAgentBDI.Metas.MantenerAtencionPwA;
 import RobotAgentBDI.Metas.MusicoTerapia;
-import RobotAgentBDI.Metas.PausarInteraccion;
 import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.Saludar;
