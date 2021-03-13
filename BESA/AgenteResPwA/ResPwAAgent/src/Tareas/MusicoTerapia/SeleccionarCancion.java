@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -51,24 +52,22 @@ public class SeleccionarCancion extends ResPwaTask {
         float gusto = -1;
         Cancion cancionEleg = null;
         List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
-        for (Cancion c : canciones) {
-
-            if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
-                cancionEleg = c;
-                gusto = (float) (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3);
-            }
-        }
+//        for (Cancion c : canciones) {
+//
+//            if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
+//                cancionEleg = c;
+//                gusto = (float) (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3);
+//            }
+//        }
+        cancionEleg = cancionParaColocar( canciones );
         blvs.getbEstadoActividad().setCancionActual(cancionEleg);
         //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
     }
     
-    public Cancion mejorCancionParaColocar(List<Cancion> canciones){
-        
-        Cancion cancionParaColocar = null;
-//        Se busca en la lista cual tiene la mejor probabilidad para colocar esa cancion
-        for( int i=0; i < canciones.size(); i++ ){
-            
-        }
+    public Cancion cancionParaColocar(List<Cancion> canciones){
+        Random rand = new Random();
+        int randomSong = rand.nextInt(canciones.size());
+        Cancion cancionParaColocar = canciones.get(randomSong);
         return cancionParaColocar;
     }
 
