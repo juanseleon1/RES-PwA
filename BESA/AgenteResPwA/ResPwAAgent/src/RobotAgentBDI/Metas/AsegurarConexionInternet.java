@@ -51,7 +51,7 @@ public class AsegurarConexionInternet extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoRobot().isConexionInternet())
         {
-            return 1;
+            return 1;            
         }
         return 0;
     }
