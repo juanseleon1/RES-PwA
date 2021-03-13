@@ -5,8 +5,6 @@
  */
 package PepperPackage.EmotionalModel;
 
-import static PepperPackage.EmotionalModel.PepperEmoResponses.values;
-
 /**
  *
  * @author jsleon

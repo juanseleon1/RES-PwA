@@ -85,13 +85,6 @@ public class PepperEmotionalModel extends EmotionalModel {
         return map2;
     }
 
-//    protected enum EmoTypes{
-//        EASE(0),SMILE(0),JOY(0),SORROW(0),EXCT(0),CALM(0),ANGER(0),SURP(0),LAUGH(0),VALEN(0),ATTENT(0);
-//        private double perc;
-//        private EmoTypes(double perc){
-//            this.perc=perc;
-//        }
-//    };
     @Override
     public void updateModel() {
         try {
@@ -117,26 +110,22 @@ public class PepperEmotionalModel extends EmotionalModel {
     }
 
     @Override
-    public void updtModelFromEvt(SensorData sd) {
+    public void updtModelFromEvt(EmotionalData e) {
         try {
-            EmotionalData e = new EmotionalData();
-            Map<String, Object> map = e.getInfo();
-            calcNewEmotionalParams(map, sd);
-            e.setInfo(map);
+            calcNewEmotionalParams(e);
             sendAct(e);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(PepperEmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void calcNewEmotionalParams(Map<String, Object> map, SensorData sd) {
-        Map<String, Object> pe = sd.getDataPE(), aux, auxEmo;
+    private void calcNewEmotionalParams(EmotionalData sd) {
+        Map<String, Object> pe = sd.getInfo(), aux, auxEmo,map = new HashMap();
         double angval = 0, joyval = 0, sowval = 0;
         if (pe.get("bodyLanguageState") != null) {
             aux = (Map<String, Object>) pe.get("bodyLanguageState");
             aux = (Map<String, Object>) aux.get("ease");
             double relval = (double) aux.get("level") * (double) aux.get("confidence");
-//        System.out.println("Es esta: "+pe);
             aux = (Map<String, Object>) pe.get("smile");
             double smval = (double) aux.get("confidence") * (double) aux.get("value");
             aux = (Map<String, Object>) pe.get("expressions");
@@ -168,18 +157,15 @@ public class PepperEmotionalModel extends EmotionalModel {
                 if (pe.containsKey(ppe.getId())) {
                     if (ppe.equals(PepperPersonEmotion.ANGER)) {
                         angval = Double.parseDouble(pe.get(ppe.getId()).toString());
-
                     }
                     if (ppe.equals(PepperPersonEmotion.JOY)) {
                         joyval = Double.parseDouble(pe.get(ppe.getId()).toString());
                     }
-
                     if (ppe.equals(PepperPersonEmotion.SORROW)) {
                         sowval = Double.parseDouble(pe.get(ppe.getId()).toString());
                     }
                 }
             }
-
         }
         EmotionPwA emoP = null;
         if (angval >= joyval && angval >= sowval) {
@@ -192,7 +178,6 @@ public class PepperEmotionalModel extends EmotionalModel {
             emoP = EmotionPwA.SADNESS;
             state -= CHANGEEMO_FACT * (sowval / 100);
         }
-
         map.put("predEm", emoP);
         calcNewEmotionalParams(map);
     }
@@ -236,5 +221,4 @@ public class PepperEmotionalModel extends EmotionalModel {
     public double getState() {
         return state;
     }
-
 }
