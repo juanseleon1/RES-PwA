@@ -50,7 +50,7 @@ public abstract class ResPwaTask extends Task{
         }
     }
     
-    public void ActivateTopic(PepperTopicsNames topic, Believes parameters){
+    public void activateTopic(PepperTopicsNames topic, Believes parameters){
         
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;

@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -39,6 +40,7 @@ public class LlamarCuidador extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task LlamarCuidador ---");
+        activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("SAY", "guiu guiu guiu cuidadoooooor guiu guiu guiu"); 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);

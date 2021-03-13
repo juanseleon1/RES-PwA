@@ -622,10 +622,13 @@ class Robot:
         self.alTexToSpeech.say(text_to_speech)
 
     def activate_conversational_topic(self, topic_name):
-        self.alDialogProxy.activateTopic(topic_name)
+        if topic_name not in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.activateTopic(topic_name)
+
 
     def desactivate_conversational_topic(self, topic_name):
-        self.alDialogProxy.deactivateTopic(topic_name)
+        if topic_name in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.deactivateTopic(topic_name)
 
     def registrar_cuidador(params):
         pass
