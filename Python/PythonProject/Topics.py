@@ -124,7 +124,6 @@ topico_ayuda = "/data/home/nao/topics/ayudaTopic.top"
 
 #topicorron = "/data/home/nao/topics/superTopico.top"
 
-
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
 topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda]
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
