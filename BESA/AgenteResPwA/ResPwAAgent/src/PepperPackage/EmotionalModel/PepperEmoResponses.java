@@ -11,7 +11,7 @@ package PepperPackage.EmotionalModel;
  */
 public enum PepperEmoResponses {
 
-        VOICEEMOTION("voiceEmotionRecognized"), GETEMOSTATE("getPersonState");
+        VOICEEMOTION("voiceEmotionRecognized"), GETEMOSTATE("PersonData");
         private final String emoType;
 
         private PepperEmoResponses(String emoType) {

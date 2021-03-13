@@ -22,12 +22,11 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
     @Override
     public Map<String, Object> processEmotion(SensorData sd) {
         Map<String, Object> ret = sd.getDataP();
-        Map<String, Object> params = (Map<String, Object>) ret.get(paramsString);
-        PepperEmoResponses resp = PepperEmoResponses.getFromId(params.keySet().iterator().next());
+        PepperEmoResponses resp = PepperEmoResponses.getFromId(ret.keySet().iterator().next());
         switch (resp) {
             case VOICEEMOTION:
                 Map<String, Object> map = new HashMap<>();
-                List<Object> list = (List<Object>) params.get(PepperEmoResponses.VOICEEMOTION.getEmoType());
+                List<Object> list = (List<Object>) ret.get(PepperEmoResponses.VOICEEMOTION.getEmoType());
                 List<Integer> auxList = (List<Integer>) list.get(1);
                 for (int i = 0; i < auxList.size(); i++) {
                     map.put(PepperPersonEmotion.getFromId(i), auxList.get(i));
@@ -37,6 +36,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
                 int auxInt = (int) list.get(2);
                 map.put(PepperPersonEmotion.EXCITEMENT.getId(), auxInt);
                 ret = map;
+                
                 break;
             case GETEMOSTATE:
             default:

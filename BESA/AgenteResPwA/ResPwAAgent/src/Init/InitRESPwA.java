@@ -20,6 +20,7 @@ import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.ReanudarActividad;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.ReiniciarActividad;
+import RobotAgentBDI.Metas.Saludar;
 import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
@@ -125,7 +126,7 @@ public class InitRESPwA {
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-        TestPlan tp = TestPlan.buildGoal();
+//        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -133,9 +134,10 @@ public class InitRESPwA {
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
+          Saludar saludar = Saludar.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-        RAGoals.add(tp);
+//        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
@@ -144,6 +146,7 @@ public class InitRESPwA {
 //        RAGoals.add(recargarBateriaGoal);
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
+          RAGoals.add(saludar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);

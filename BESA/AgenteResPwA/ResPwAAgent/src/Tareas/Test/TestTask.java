@@ -68,10 +68,10 @@ public class TestTask extends ResPwaTask {
 //        infoServicio.put("name", "musicTopic");
 //        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
 //        requestService(srb, blvs);
-        infoServicio = new HashMap<>();
-        infoServicio.put("SAY", "OYE CHUZCA, CONOCES A BRAYAN?");
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
+//        infoServicio = new HashMap<>();
+//        infoServicio.put("SAY", "OYE CHUZCA, CONOCES A BRAYAN?");
+//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+//        requestService(srb, blvs);
 
     }
 

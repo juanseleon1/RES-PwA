@@ -120,5 +120,5 @@ topico_normal = "/data/home/nao/topics/normalTopic.top"
 conversacion_musica = "/data/home/nao/topics/conversacionMusicaTopic.top"
 #topicorron = "/data/home/nao/topics/superTopico.top"
 # , topico_emocional
-topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
+topic_list = [topic_content_1, topico_alegre, topico_ira]
 #topic_list = [topicorron]

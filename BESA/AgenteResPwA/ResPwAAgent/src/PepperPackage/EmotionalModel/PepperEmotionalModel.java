@@ -163,24 +163,36 @@ public class PepperEmotionalModel extends EmotionalModel {
             map.put("atencion", atval);
 
         } else {
-            int i;
+            int i = 0;
             for (PepperPersonEmotion ppe : PepperPersonEmotion.values()) {
-                i = (int) pe.get(ppe.getId());
+                if (pe.containsKey(ppe.getId())) {
+                    if (ppe.equals(PepperPersonEmotion.ANGER)) {
+                        angval = Double.parseDouble(pe.get(ppe.getId()).toString());
+
+                    }
+                    if (ppe.equals(PepperPersonEmotion.JOY)) {
+                        joyval = Double.parseDouble(pe.get(ppe.getId()).toString());
+                    }
+
+                    if (ppe.equals(PepperPersonEmotion.SORROW)) {
+                        sowval = Double.parseDouble(pe.get(ppe.getId()).toString());
+                    }
+                }
             }
 
         }
         EmotionPwA emoP = null;
         if (angval >= joyval && angval >= sowval) {
             emoP = EmotionPwA.ANGER;
-            state -= CHANGEEMO_FACT;
+            state -= CHANGEEMO_FACT * (angval / 100);
         } else if (angval <= joyval && joyval >= sowval) {
             emoP = EmotionPwA.HAPPINESS;
-            state += CHANGEEMO_FACT;
+            state += CHANGEEMO_FACT * (joyval / 100);
         } else if (sowval >= joyval && angval <= sowval) {
             emoP = EmotionPwA.SADNESS;
-            state -= CHANGEEMO_FACT;
+            state -= CHANGEEMO_FACT * (sowval / 100);
         }
-        
+
         map.put("predEm", emoP);
         calcNewEmotionalParams(map);
     }
@@ -201,8 +213,14 @@ public class PepperEmotionalModel extends EmotionalModel {
         velf = 0;
         velh = (speechVBase * state) / normalState;
         pitch = (speechBase * state) / normalState;
-        ledInt = (speechVBase * state) / normalState;
-        //x= baseV*actual/baseE
+        if(ledInt<1 && ledInt>0)
+        {
+            ledInt = (speechVBase * state) / normalState;
+        }else if (ledInt >1){
+            ledInt=1;
+        }else{
+            ledInt=0;
+        }
         map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);
