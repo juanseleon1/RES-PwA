@@ -161,6 +161,8 @@ class Robot:
             "DESACTIVVOICEEMOANAL": [self.desactivate_voice_emotion_analysis, True, "act", False],
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
+            "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "rob", False],
+            "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "act", False],
@@ -571,19 +573,13 @@ class Robot:
             """
         self.alDialogProxy.runTopics(topic_list)
         self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
-        self.alDialogProxy.activateTopic("basicoTopic")
-        time.sleep(25.4)
-        print "Cambio"
-        self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
-        self.alDialogProxy.activateTopic("alegreTopic")
+
 
     # def
 
     def deactivate_topics(self, topicsList):
         for topic in topicsList:
-            self.alDialogProxy.deactivateTopic(topic)
-            print topic
-        print self.alDialogProxy.getActivatedTopics()
+            self.desactivate_conversational_topic(topic)
 
 
     # def
@@ -625,11 +621,11 @@ class Robot:
         self.alTexToSpeech.setParameter("pitchShift", pitch)
         self.alTexToSpeech.say(text_to_speech)
 
-    def activate_conversational_topic(self):
-        pass
+    def activate_conversational_topic(self, topic_name):
+        self.alDialogProxy.activateTopic(topic_name)
 
-    def desactivate_conversational_topic(self):
-        pass
+    def desactivate_conversational_topic(self, topic_name):
+        self.alDialogProxy.deactivateTopic(topic_name)
 
     def registrar_cuidador(params):
         pass

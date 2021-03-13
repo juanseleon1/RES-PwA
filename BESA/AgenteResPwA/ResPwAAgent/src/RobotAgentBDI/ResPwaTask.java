@@ -11,7 +11,12 @@ import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import ServiceAgentResPwA.VoiceServices.VoiceService;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -25,6 +30,7 @@ import rational.services.ActivateAsynchronousServiceGuard;
  * @author juans
  */
 public abstract class ResPwaTask extends Task{
+    
     public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs)
     {
          try {
@@ -43,4 +49,23 @@ public abstract class ResPwaTask extends Task{
             Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void ActivateTopic(PepperTopicsNames topic, Believes parameters){
+        
+        HashMap<String, Object> infoServicio = new HashMap<>();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("TOPICNAME", topic.getTopic());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATECONVTOPIC, infoServicio);
+        requestService(srb, blvs);
+                
+    }
+    
+    public void DeactivateTopic(PepperTopicsNames topic, Believes parameters){
+        HashMap<String, Object> infoServicio = new HashMap<>();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        infoServicio.put("TOPICNAME", topic.getTopic());
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.DEACTCONVTOPIC, infoServicio);
+        requestService(srb, blvs);
+    }
+    
 }
