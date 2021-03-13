@@ -12,7 +12,7 @@ import static PepperPackage.EmotionalModel.PepperEmoResponses.values;
  * @author jsleon
  */
 public enum PepperPersonEmotion {
-    UNKWONN(0,"UNKWONN"), CALM(1,"CALM"), ANGER(2,"ANGER"), JOY(3,"JOY"), SORROW(4,"SORROW"),LAUGHTER(5,"LAUGHTER"),EXCITEMENT(6,"EXCITEMENT"),;
+    UNKWONN(0,"UNKWONN"), CALM(1,"CALM"), ANGER(2,"ANGER"), JOY(3,"JOY"), SORROW(4,"SORROW"),LAUGHTER(5,"LAUGHTER"),EXCITEMENT(6,"EXCITEMENT");
     private final int num;
     private final String id;
 

@@ -1,10 +1,10 @@
-
+import threading
 import time
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
 from Topics import *
-from Utils import activities_running
+from Utils import activities_running, send
 
 # ----------------------------------------------------------------------------Robot
 # class---------------------------------------------------------------------------------------------
@@ -574,31 +574,13 @@ class Robot:
 
     def load_conversational_topic(self, params):
         topicName = params.get("name")
-        topic = self.topicMap.get( topicName )
-        print "TOPICO ", topic
-        self.alDialogProxy.activateTopic(topic)
-        #self.alDialogProxy.forceInput("Estoy feliz")
-        print "Cargando: ", topic
-        print "TOPICOS Load: ", self.alDialogProxy.getAllLoadedTopics()
-        print "TOPICOS Activos: ", self.alDialogProxy.getActivatedTopics()
+        self.alDialogProxy.activateTopic(topicName)
     # Unloads the specified topic and frees the associated memory.
 
     def unload_conversational_topic(self, params):
         topicName = params.get("name")
-        print "Iniciando Unload"
-        if not self.topicMap:
-            print "Unload 1 ", topicName
-            lista = self.alDialogProxy.getAllLoadedTopics()
-            if topicName in lista:
-                print "Unload 2"
-                if self.topicMap:
-                    self.topicMap.pop(topicName)
-                    self.topicContentMap.pop(topicName)
-                self.alDialogProxy.unsubscribe(topicName)
-                self.alDialogProxy.deactivateTopic(topicName)
-                print "Unloadeando: ", topicName
-        print "TOPICOS LoadS: ", self.alDialogProxy.getAllLoadedTopics()
-        print "TOPICOS ActivosS: ", self.alDialogProxy.getActivatedTopics()
+        self.alDialogProxy.deactivateTopic(topicName)
+
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, topic, tag):
@@ -692,3 +674,10 @@ class Robot:
             4: "la ira te indispone y dificulta que pienses con claridad"
         }
         frase_principal = "si quieres podemos escuchar una cancion para relajarnos?"
+
+    def timer_currentState(self):
+        json_params = {}
+        # The value should be True
+        json_params["PersonData"] = self.get_emotion_state()
+        send(-1, "emo", json_params)
+        threading.Timer(10.0, self.timer_currentState).start()

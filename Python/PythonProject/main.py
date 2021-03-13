@@ -12,9 +12,6 @@ from Utils import activities_running, send
 # --------------------------------------------------Functions-----------------------------------------------------------------------
 def timer_activities():
     for key, value in activities_running.items():
-        # print (key, value)
-        # create Json message
-        # send the message to BESA
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
     threading.Timer(10.0, timer_activities).start()
@@ -131,7 +128,6 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 # define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
 t.start()
-
 """ Robot class declaration"""
 
 robot = Robot(session)
