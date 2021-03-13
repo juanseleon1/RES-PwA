@@ -69,7 +69,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged()&&  blvs.getbEstadoInteraccion().isLogged()){
             if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
             return 1.0;
-        }
+            }
         }
         
         return 0;

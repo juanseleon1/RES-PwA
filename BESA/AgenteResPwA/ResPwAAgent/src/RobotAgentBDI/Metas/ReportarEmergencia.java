@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -46,7 +47,13 @@ public class ReportarEmergencia extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReportarEmergencia detectGoal");
-        return 0;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        //¿si dice ayuda? - topicos
+        if(blvs.getbEstadoInteraccion().isDetectaPwA())
+        {
+            return 0;
+        }
+        return 1;
     }
 
     @Override

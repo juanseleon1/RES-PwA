@@ -8,8 +8,9 @@ package Tareas.VerificarDispositivos;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.RobotStateServices.RobotStateService;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -22,14 +23,14 @@ public class VerificacionDispositivos extends ResPwaTask{
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
     public VerificacionDispositivos() {
-//        System.out.println("--- Task LlamarCuidador PwA Iniciada ---");
+//        System.out.println("--- Task VerificacionDispositivos PwA Iniciada ---");
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-        System.out.println("--- Check Finish LlamarCuidador ---");
+        System.out.println("--- Check Finish VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isHayInteraccionFisica() && blvs.getbEstadoInteraccion().isDetectaPersona())
+        if (blvs.getbEstadoRobot().isVerificacionDispositivos())
         {
             return true;
         }
@@ -38,21 +39,21 @@ public class VerificacionDispositivos extends ResPwaTask{
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task LlamarCuidador ---");
+        System.out.println("--- Execute Task VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("SAY", "guiu guiu guiu cuidadoooooor guiu guiu guiu"); 
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        infoServicio.put("VERIFYDEVICES", false); 
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.VERIFYDEVICES, infoServicio);
         requestService(srb,blvs);
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task LlamarCuidador ---");
+        System.out.println("--- Interrupt Task VerificacionDispositivos ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task LlamarCuidador ---");
+        System.out.println("--- Cancel Task VerificacionDispositivos ---");
     }
     
 }
