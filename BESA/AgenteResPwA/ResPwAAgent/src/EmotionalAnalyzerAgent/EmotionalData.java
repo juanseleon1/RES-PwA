@@ -6,6 +6,7 @@
 package EmotionalAnalyzerAgent;
 
 import SensorHandlerAgent.SensorData;
+import com.google.common.collect.HashBiMap;
 import java.util.HashMap;
 import java.util.Map;
 import rational.data.InfoData;
@@ -14,25 +15,32 @@ import rational.data.InfoData;
  *
  * @author juans
  */
-public class EmotionalData extends InfoData{
+public class EmotionalData extends InfoData {
 
     private Map<String, Object> info;
     private WHO who;
     private EmotionalEventType emoType;
-    
-    
+
     public static EmotionalData fromSensorData(SensorData infoRecibida) {
         EmotionalData em = new EmotionalData();
-        em.who=WHO.PWA;
-        em.info= infoRecibida.getDataP();
-        em.emoType=em.getEmotionalEventMapping();
+        em.who = WHO.PWA;
+        em.info = infoRecibida.getDataP();
+        em.emoType = em.getEmotionalEventMapping();
         return em;
     }
+
+    public static EmotionalData getPeriodicData(){
+        EmotionalData em = new EmotionalData();
+        em.who = WHO.ROBOT;
+        em.info = new HashMap<>();
+        em.emoType = EmotionalEventType.INTERNALUPDT;
+        return em;
+        
+    }
     
-    
-    public EmotionalData(){
+    public EmotionalData() {
         super("emodata");
-        info=new HashMap<>();
+        info = new HashMap<>();
     }
 
     public Map<String, Object> getInfo() {
@@ -60,14 +68,8 @@ public class EmotionalData extends InfoData{
     }
 
     private EmotionalEventType getEmotionalEventMapping() {
-        
-        if(this.info.containsKey("")){
-            
-        }
-        
-        
-        return null;        
+        EmotionalEventType resp = EmotionalEventType.getFromId(this.info.keySet().iterator().next());
+        return resp;
     }
 
-    
 }

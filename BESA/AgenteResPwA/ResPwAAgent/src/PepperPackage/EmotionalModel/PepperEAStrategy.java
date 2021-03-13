@@ -8,7 +8,6 @@ package PepperPackage.EmotionalModel;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerStrategy;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalEventType;
-import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
     public Map<String, Object> processEmotion(EmotionalData sd) {
         Map<String, Object> ret = sd.getInfo();
         System.out.println("EMO: "+ret.toString());
-        EmotionalEventType resp = EmotionalEventType.getFromId(ret.keySet().iterator().next());
+        EmotionalEventType resp = sd.getEmoType();
         switch (resp) {
             case VOICEEMOTION:
                 Map<String, Object> map = new HashMap<>();
@@ -41,6 +40,13 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
                 ret = map;
                 break;
             case GETEMOSTATE:
+            case MOVEDAWAY:
+            case NORESPONSE:
+            case NOTLOOKING:
+            case APPROACHED:
+            case NOTDETECTED:
+            case SMILING:
+            case SPOKE:
             default:
                             
                 break;

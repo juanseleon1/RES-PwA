@@ -10,7 +10,6 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import SensorHandlerAgent.SensorData;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import Tareas.Cuenteria.LedsColor;
@@ -30,7 +29,8 @@ public class PepperEmotionalModel extends EmotionalModel {
     private final double normalState;
     private final double speechBase = 1.1;
     private final double speechVBase = 100;
-    private final double ledsIntBase = 1;
+    private final double mvtBase = 1;
+    private final double ledsIntBase = 0.5;
     private double velf = 1;
     private double velh = 100;
     private double pitch = 1.1;
@@ -86,7 +86,7 @@ public class PepperEmotionalModel extends EmotionalModel {
     }
 
     @Override
-    public void updateModel() {
+    public void updateModel(EmotionalData e) {
         try {
             double act = refreshRate, dif = normalState - state, fact = 1;
             if (dif < 0) {
@@ -99,9 +99,8 @@ public class PepperEmotionalModel extends EmotionalModel {
             if (dif != 0) {
                 state += act;
             }
-            EmotionalData e = new EmotionalData();
             Map<String, Object> map = e.getInfo();
-            calcNewEmotionalParams(map);
+            calcNewEmotionalParams(map, e);
             e.setInfo(map);
             sendAct(e);
         } catch (ExceptionBESA ex) {
@@ -120,7 +119,7 @@ public class PepperEmotionalModel extends EmotionalModel {
     }
 
     private void calcNewEmotionalParams(EmotionalData sd) {
-        Map<String, Object> pe = sd.getInfo(), aux, auxEmo,map = new HashMap();
+        Map<String, Object> pe = sd.getInfo(), aux, auxEmo, map = new HashMap();
         double angval = 0, joyval = 0, sowval = 0;
         if (pe.get("bodyLanguageState") != null) {
             aux = (Map<String, Object>) pe.get("bodyLanguageState");
@@ -168,21 +167,25 @@ public class PepperEmotionalModel extends EmotionalModel {
             }
         }
         EmotionPwA emoP = null;
+        double adFact = sd.getEmoType().getValue()*sd.getWho().getValue()*CHANGEEMO_FACT, fact = 1;
         if (angval >= joyval && angval >= sowval) {
             emoP = EmotionPwA.ANGER;
-            state -= CHANGEEMO_FACT * (angval / 100);
+            fact= -1*(adFact * (angval / 100));
         } else if (angval <= joyval && joyval >= sowval) {
             emoP = EmotionPwA.HAPPINESS;
-            state += CHANGEEMO_FACT * (joyval / 100);
+            fact = adFact * (joyval / 100);
         } else if (sowval >= joyval && angval <= sowval) {
             emoP = EmotionPwA.SADNESS;
-            state -= CHANGEEMO_FACT * (sowval / 100);
+            fact = -1*adFact * (sowval / 100);
         }
+        fact*=100;
+        System.out.println("Factor de Cambio emocional: "+fact);
+        state+=fact;
         map.put("predEm", emoP);
-        calcNewEmotionalParams(map);
+        calcNewEmotionalParams(map, sd);
     }
 
-    private void calcNewEmotionalParams(Map<String, Object> map) {
+    private void calcNewEmotionalParams(Map<String, Object> map, EmotionalData emo) {
         lc = LedsColor.WHITE;
         if (state >= LedsColor.BLUE.getMin() && state < LedsColor.BLUE.getMax()) {
             lc = LedsColor.BLUE;
@@ -195,17 +198,15 @@ public class PepperEmotionalModel extends EmotionalModel {
         } else if (state >= LedsColor.YELLOW.getMin() && state <= LedsColor.YELLOW.getMax()) {
             lc = LedsColor.YELLOW;
         }
-        velf = 0;
+        velf = (mvtBase * state)/ normalState;
         velh = (speechVBase * state) / normalState;
         pitch = (speechBase * state) / normalState;
-        if(ledInt<1 && ledInt>0)
-        {
-            ledInt = (speechVBase * state) / normalState;
-        }else if (ledInt >1){
-            ledInt=1;
-        }else{
-            ledInt=0;
-        }
+        if (ledInt < 1 && ledInt > 0) {
+            ledInt = (ledsIntBase * state) / normalState;
+        } else {
+            ledInt = 1;
+        } 
+        System.out.println("velf: " + velf + " velh" + velh + " pitch " + pitch + " ledInt " + ledInt);
         map.put("factorVelocidad", velf);
         map.put("velHabla", velh);
         map.put("tonoHabla", pitch);

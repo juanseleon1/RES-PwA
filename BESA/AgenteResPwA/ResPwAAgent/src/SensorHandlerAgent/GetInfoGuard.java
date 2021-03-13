@@ -11,6 +11,7 @@ import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.EmotionalEventType;
 import EmotionalAnalyzerAgent.ProcessEmotionGuard;
 import Init.InitRESPwA;
 import java.util.logging.Level;
@@ -28,13 +29,14 @@ public class GetInfoGuard extends GuardBESA {
         try {
             SensorData infoRecibida = (SensorData) ebesa.getData();
             System.out.println("GetInfoGuard Event Received: " + infoRecibida);
-            AgHandlerBESA handler;
-            EventBESA sensorEvtA;
-            if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS)) {
+            AgHandlerBESA handler = null;
+            EventBESA sensorEvtA = null;
+            if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS) || EmotionalEventType.isImpact(infoRecibida.getDataP())) {
                 handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasEAAgent);
                 EmotionalData emData = EmotionalData.fromSensorData(infoRecibida);
                 sensorEvtA = new EventBESA(ProcessEmotionGuard.class.getName(), emData);
-            } else {
+            }
+            if (!infoRecibida.getDataType().equals(SensorDataType.EMOTIONS)) {
                 handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
                 sensorEvtA = new EventBESA(InformationFlowGuard.class.getName(), infoRecibida);
             }

@@ -28,7 +28,7 @@ public class updateEmotionalState extends PeriodicGuardBESA {
             SensorData infoRecibida = (SensorData) event.getData();
             System.out.println("ProcessEmotionGuard Event Received: " + infoRecibida);
             EmotionalAnalyzerState eaState = (EmotionalAnalyzerState) this.agent.getState();
-            eaState.getEaModel().updateModel();
+            eaState.getEaModel().updateModel(EmotionalData.getPeriodicData());
             AgHandlerBESA handler;
             EventBESA sensorEvtA;
             handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);

@@ -23,7 +23,7 @@ import rational.services.ActivateAsynchronousServiceGuard;
  * @author juans
  */
 public abstract class EmotionalModel {
-    public abstract void updateModel();
+    public abstract void updateModel(EmotionalData e);
     public abstract void updtModelFromEvt(EmotionalData sd);
     public abstract Map<String,Object> filterFromEM(Map<String,Object> map);
 
