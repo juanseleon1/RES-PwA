@@ -1,5 +1,8 @@
 import threading
 import time
+
+import self as self
+
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
@@ -461,9 +464,7 @@ class Robot:
         self.alTabletService.enableWifi()
         print "CRACK", self.alTabletService.getWifiStatus()
         if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-
-
-        self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+            self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
 
     # Close the video player.
     def quit_video(self):
