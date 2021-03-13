@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -46,6 +47,11 @@ public class AsegurarConexionInternet extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta AsegurarConexionInternet detectGoal");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if()
+        {
+            
+        }
         return 0;
     }
 
