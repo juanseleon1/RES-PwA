@@ -1,8 +1,6 @@
 import threading
 import time
 
-import self as self
-
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
@@ -572,14 +570,21 @@ class Robot:
             self.topicMap[topicName] = topic
             """
         self.alDialogProxy.runTopics(topic_list)
-        self.deactivate_topics(topic_list)
-        self.alDialogProxy.activateTopic("topic_content_1")
+        self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
+        self.alDialogProxy.activateTopic("basicoTopic")
+        time.sleep(25.4)
+        print "Cambio"
+        self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
+        self.alDialogProxy.activateTopic("alegreTopic")
 
     # def
 
     def deactivate_topics(self, topicsList):
         for topic in topicsList:
             self.alDialogProxy.deactivateTopic(topic)
+            print topic
+        print self.alDialogProxy.getActivatedTopics()
+
 
     # def
 

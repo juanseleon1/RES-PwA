@@ -113,7 +113,7 @@ conversacion_musica = (
         'u1: (No) Que triste, creo que me deberia ir \n'
 )"""
 
-topic_content_1 = "/data/home/nao/topics/basicTopic.top"
+topic_content_1 = "/data/home/nao/t opics/basicTopic.top"
 topico_alegre = "/data/home/nao/topics/alegreTopic.top"
 topico_triste = "/data/home/nao/topics/sadTopic.top"
 topico_ira = "/data/home/nao/topics/iraTopic.top"
@@ -123,9 +123,8 @@ conversacion_musica = "/data/home/nao/topics/conversacionMusicaTopic.top"
 topico_ayuda = "/data/home/nao/topics/ayudaTopic.top"
 
 #topicorron = "/data/home/nao/topics/superTopico.top"
-# , topico_emocional
-topic_list = [topic_content_1, topico_alegre, topico_ira]
-#topic_list = [topicorron]
 
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
-topic_list = [topico_alegre, topico_ira, topic_content_1]
+topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda]
+#topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
+# topic_list = [topico_alegre, topico_ira, topic_content_1]
