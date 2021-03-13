@@ -70,7 +70,7 @@ public class InitRESPwA {
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
             HashMap<String, Object> hm = new HashMap<>(), hm1 = new HashMap<>();
-            hm.put(VoiceServiceRequestType.SAY.getServiceType(), "Mafe y Camacho, se dan besitos bajo el arbol. xd xd xd");
+            hm.put(VoiceServiceRequestType.SAY.getServiceType(), "Enrique nos cogio de maricas pa mejorar su vejez");
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
             p.sendRequest(data);
             hm1.put("MOVETOX", 5);
@@ -134,12 +134,10 @@ public class InitRESPwA {
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
-          Saludar saludar = Saludar.buildGoal();
-        //Agregar a Lista
+//          Saludar saludar = Saludar.buildGoal();
+              //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-        Saludar s = Saludar.buildGoal();
-        RAGoals.add(s);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
@@ -148,7 +146,7 @@ public class InitRESPwA {
 //        RAGoals.add(recargarBateriaGoal);
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
-          RAGoals.add(saludar);
+//          RAGoals.add(saludar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);

@@ -29,15 +29,15 @@ public class MandarSaludo extends ResPwaTask{
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Mandar Saludo ---");
-        infoServicio.put("SAY", "jelou bish");
+        infoServicio.put("SAY", "jelou bitch. Soy pepper camila");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, (RobotAgentBelieves) parameters);
     }

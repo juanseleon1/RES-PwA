@@ -53,7 +53,7 @@ public class Saludar extends GoalBDI{
         if (blvs.getbEstadoInteraccion().isMovManoSaludo() || (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().getTiempoSinInt() > 10000)){
             return 1;
         }
-        return 0;
+        return 1;
     }
 
     @Override
