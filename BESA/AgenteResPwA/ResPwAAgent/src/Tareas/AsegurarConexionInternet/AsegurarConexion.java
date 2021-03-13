@@ -7,6 +7,9 @@ package Tareas.AsegurarConexionInternet;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -33,6 +36,10 @@ public class AsegurarConexion extends ResPwaTask{
         System.out.println("--- Execute Task AsegurarConexion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         //enviar mirar conexion
+        
+        infoServicio.put("RADIO", );
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
+        requestService(srb,blvs);
     }
 
     @Override

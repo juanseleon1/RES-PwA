@@ -47,12 +47,13 @@ public class AsegurarConexionInternet extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta AsegurarConexionInternet detectGoal");
+        //meta mas importante
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        /*if(blvs.)
+        if(!blvs.getbEstadoRobot().isConexionInternet())
         {
-            
+            return 1;
         }
-        return 0;*/
+        return 0;
     }
 
     @Override
