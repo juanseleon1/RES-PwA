@@ -1,5 +1,8 @@
 import threading
 import time
+
+import self as self
+
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion

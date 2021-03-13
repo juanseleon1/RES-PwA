@@ -32,7 +32,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoSeñalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
-    private boolean conectadoInternet = false;
+    private boolean conexionInternet = false;
     private double velHabla;
     private double tonoHabla;
     private double distanciaX;
@@ -88,6 +88,9 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("libreEntorno")) {
                 libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
+            }
+            if (infoRecibida.getDataP().containsKey("conexionInternet")) {
+                conexionInternet = Boolean.valueOf((String) infoRecibida.getDataP().get("conexionInternet"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
@@ -262,6 +265,10 @@ public class BEstadoRobot implements Believes {
 
     public void setLibreEntorno(boolean libreEntorno) {
         this.libreEntorno = libreEntorno;
+    }
+
+    public boolean isConexionInternet() {
+        return conexionInternet;
     }
 
     

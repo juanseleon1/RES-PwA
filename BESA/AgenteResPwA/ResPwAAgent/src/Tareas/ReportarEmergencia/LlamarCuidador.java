@@ -9,6 +9,6 @@ package Tareas.ReportarEmergencia;
  *
  * @author mafegarces
  */
-public class prueba {
+public class LlamarCuidador {
     
 }
