@@ -51,8 +51,8 @@ public class AsegurarConexionInternet extends GoalBDI{
         /*if(blvs.)
         {
             
-        }
-        return 0;*/
+        }*/
+        return 0;
     }
 
     @Override
