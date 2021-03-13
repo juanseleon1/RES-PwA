@@ -35,11 +35,7 @@ public class AsegurarConexion extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task AsegurarConexion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //enviar mirar conexion
-        
-        infoServicio.put("RADIO", );
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-        requestService(srb,blvs);
+        //¿Está conectado?
     }
 
     @Override
