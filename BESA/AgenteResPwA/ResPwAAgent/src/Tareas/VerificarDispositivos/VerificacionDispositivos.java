@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.ReportarEmergencia;
+package Tareas.VerificarDispositivos;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
@@ -17,11 +17,11 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class LlamarCuidador extends ResPwaTask{
-    
+public class VerificacionDispositivos extends ResPwaTask{
+
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public LlamarCuidador() {
+    public VerificacionDispositivos() {
 //        System.out.println("--- Task LlamarCuidador PwA Iniciada ---");
     }
 
