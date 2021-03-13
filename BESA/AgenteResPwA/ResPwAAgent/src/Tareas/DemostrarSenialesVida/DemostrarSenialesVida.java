@@ -26,16 +26,21 @@ public class DemostrarSenialesVida extends ResPwaTask{
     
     @Override
     public boolean checkFinish(Believes believes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("--- Check Finish DemostrarSenialesVida ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void executeTask(Believes parameters) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put( ACTIVATE_LIFE_SIGNALS, true); 
+        infoServicio.put(ACTIVATE_LIFE_SIGNALS, true); 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.ACTIVATELIFESIGNALS , infoServicio);
         requestService(srb, blvs);
-        
     }
 
     @Override
