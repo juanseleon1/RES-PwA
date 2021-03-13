@@ -26,7 +26,7 @@ public class AnimarStrategy implements ResPwAStrategy{
         ServiceDataRequest srb = null;
         switch (nombre)
         {
-            case "frase elogiante":
+            case "fraseElogiante":
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
@@ -38,11 +38,11 @@ public class AnimarStrategy implements ResPwAStrategy{
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "dato curioso":
+            case "datoCurioso":
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "pregunta empatica":
+            case "preguntaEmpatica":
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
@@ -50,7 +50,7 @@ public class AnimarStrategy implements ResPwAStrategy{
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "llamar pwa":
+            case "llamarPwa":
                 infoServicio.put("SAY", nombre);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
