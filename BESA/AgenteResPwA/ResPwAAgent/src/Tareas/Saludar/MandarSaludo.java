@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -29,15 +30,16 @@ public class MandarSaludo extends ResPwaTask{
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Mandar Saludo ---");
         infoServicio.put("SAY", "jelou bish");
+        activateTopic( PepperTopicsNames.BASICTOPIC, parameters);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, (RobotAgentBelieves) parameters);
     }

@@ -36,9 +36,9 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
         
-        //animar con frases elogiantes, chistes
         Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Frase elogiante", "Chiste");
+        List<String> estrategias = Arrays.asList("fraseElogiante", "chiste", "adivinanza", "datoCurioso", "preguntaEmpatica", "consejo", "llamarPwa");
+        //falta decidir como escoger estrategia
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
         AnimarStrategy as = new AnimarStrategy();
         as.setNombre(estrategia);

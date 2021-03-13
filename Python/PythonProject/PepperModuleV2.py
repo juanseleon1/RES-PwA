@@ -20,6 +20,9 @@ class pepperModuleV2(object):
         self.topicInputSub = self.alProxy.subscriber("Dialog/LastInput")
         self.topicInputSub.signal.connect(self.getDialogInput)
 
+        self.topicActivate = self.alProxy.subscriber("Dialog/ActivateTopic")
+        self.topicInputSub.signal.connect(self.activateTopic)
+
         self.dialogIsStartedS = self.alProxy.subscriber("Dialog/IsStarted")
         self.dialogIsStartedS.signal.connect(self.dialogIsStarted)
 
@@ -159,6 +162,12 @@ class pepperModuleV2(object):
 
 
         print("ENTRE AL MODULO")
+
+    def activateTopic(self, value):
+        json_params = {}
+        json_params["ActivateTopic"] = True
+        send(-1, "rob", json_params)
+    # def
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, value):
