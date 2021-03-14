@@ -17,11 +17,10 @@ public class ProcessEmotionGuard extends GuardBESA{
 
     @Override
     public void funcExecGuard(EventBESA ebesa) {
-        SensorData infoRecibida = (SensorData)ebesa.getData();
+        EmotionalData infoRecibida = (EmotionalData)ebesa.getData();
         System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
         EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
-        infoRecibida.setDataPE(eaState.getEaStrategy().processEmotion(infoRecibida));
-        infoRecibida.setDataP(null);
+        infoRecibida.setInfo(eaState.getEaStrategy().processEmotion(infoRecibida));
         eaState.getEaModel().updtModelFromEvt(infoRecibida);
     }
 

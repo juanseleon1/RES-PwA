@@ -20,24 +20,23 @@ import rational.guards.InformationFlowGuard;
  *
  * @author juans
  */
-public class updateEmotionalState  extends PeriodicGuardBESA{
+public class updateEmotionalState extends PeriodicGuardBESA {
 
-   @Override
+    @Override
     public void funcPeriodicExecGuard(EventBESA event) {
-       try {
-           SensorData infoRecibida = (SensorData)event.getData();
-           System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
-           EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
-           eaState.getEaModel().updateModel();
-           AgHandlerBESA handler;
-           EventBESA sensorEvtA;
-           handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
-           sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),infoRecibida);
-           handler.sendEvent(sensorEvtA);
-                   } catch (ExceptionBESA ex) {
-           Logger.getLogger(updateEmotionalState.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            SensorData infoRecibida = (SensorData) event.getData();
+            System.out.println("ProcessEmotionGuard Event Received: " + infoRecibida);
+            EmotionalAnalyzerState eaState = (EmotionalAnalyzerState) this.agent.getState();
+            eaState.getEaModel().updateModel(EmotionalData.getPeriodicData());
+            AgHandlerBESA handler;
+            EventBESA sensorEvtA;
+            handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
+            sensorEvtA = new EventBESA(InformationFlowGuard.class.getName(), infoRecibida);
+            handler.sendEvent(sensorEvtA);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(updateEmotionalState.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    
 }

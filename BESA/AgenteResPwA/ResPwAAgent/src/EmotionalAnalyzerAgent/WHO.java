@@ -5,15 +5,20 @@
  */
 package EmotionalAnalyzerAgent;
 
-import SensorHandlerAgent.SensorData;
-import java.util.Map;
-
 /**
  *
- * @author juans
+ * @author jsleon
  */
-public interface EmotionalAnalyzerStrategy {
+public enum WHO {
+    ROBOT(0.2),PWA(0.3);
+    private final double value;
     
-    public Map<String,Object> processEmotion(EmotionalData sd);
+    private WHO(double value){
+        this.value=value;
+        
+    }
     
+    public double getValue(){
+        return value;
+    }
 }

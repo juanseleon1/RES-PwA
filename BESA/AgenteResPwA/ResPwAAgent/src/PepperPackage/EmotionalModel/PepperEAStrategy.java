@@ -6,7 +6,8 @@
 package PepperPackage.EmotionalModel;
 
 import EmotionalAnalyzerAgent.EmotionalAnalyzerStrategy;
-import SensorHandlerAgent.SensorData;
+import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.EmotionalEventType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,14 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
     String paramsString = "params";
 
     @Override
-    public Map<String, Object> processEmotion(SensorData sd) {
-        Map<String, Object> ret = sd.getDataP();
-        PepperEmoResponses resp = PepperEmoResponses.getFromId(ret.keySet().iterator().next());
+    public Map<String, Object> processEmotion(EmotionalData sd) {
+        Map<String, Object> ret = sd.getInfo();
+        System.out.println("EMO: "+ret.toString());
+        EmotionalEventType resp = sd.getEmoType();
         switch (resp) {
             case VOICEEMOTION:
                 Map<String, Object> map = new HashMap<>();
-                List<Object> list = (List<Object>) ret.get(PepperEmoResponses.VOICEEMOTION.getEmoType());
+                List<Object> list = (List<Object>) ret.get(EmotionalEventType.VOICEEMOTION.getEmoType());
                 List<Integer> auxList = (List<Integer>) list.get(1);
                 for (int i = 0; i < auxList.size(); i++) {
                     map.put(PepperPersonEmotion.getFromId(i), auxList.get(i));
@@ -36,10 +38,17 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
                 int auxInt = (int) list.get(2);
                 map.put(PepperPersonEmotion.EXCITEMENT.getId(), auxInt);
                 ret = map;
-                
                 break;
             case GETEMOSTATE:
+            case MOVEDAWAY:
+            case NORESPONSE:
+            case NOTLOOKING:
+            case APPROACHED:
+            case NOTDETECTED:
+            case SMILING:
+            case SPOKE:
             default:
+                            
                 break;
 
         }
