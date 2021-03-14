@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -29,6 +30,7 @@ public class PeticionAyuda extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Peticion Ayuda ---");
         //dar respuesta a petición
+        activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
         infoServicio.put("SAY", "DarRespuesta");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, (RobotAgentBelieves) parameters);
@@ -37,6 +39,7 @@ public class PeticionAyuda extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Peticion Ayuda ---");
+        deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
         requestService(srb, (RobotAgentBelieves) believes);
     }

@@ -58,7 +58,7 @@ public abstract class ResPwaTask extends Task{
                 
     }
     
-    public void DeactivateTopic(PepperTopicsNames topic, Believes parameters){
+    public void deactivateTopic(PepperTopicsNames topic, Believes parameters){
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("TOPICNAME", topic.getTopic());
