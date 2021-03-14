@@ -23,7 +23,6 @@ def safe_str(obj):
     except UnicodeEncodeError:
         return obj.encode(FORMAT, 'ignore').decode(FORMAT)
 
-
 def handle_client():
     print(" ID: ", threading.currentThread().getName())
     # while connected:

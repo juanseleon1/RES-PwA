@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ReportarEmergencia.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/VerificarDispositivos.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/EstimularEmocionalmente.java</file>
@@ -10,6 +11,23 @@
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/Cuenteria.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
             <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/InteraccionSocial/Interacciones.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/SensorHandlerAgent/GetInfoGuard.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalData.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEAStrategy.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerStrategy.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/AsegurarConexionInternet.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEmotionalModel.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/updateEmotionalState.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/WHO.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/ProcessEmotionGuard.java</file>
+=======
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/VerificarDispositivos/VerificacionDispositivos.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
+            <file>file:/Users/mafegarces/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ReportarEmergencia/LlamarCuidador.java</file>
+>>>>>>> c9724b27de204ce9420ce08f12de2644c337dc24
+>>>>>>> 447d4f5e4ee491a146fd79de6a8a4043220f4b00
         </group>
     </open-files>
 </project-private>
