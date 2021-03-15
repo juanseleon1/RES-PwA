@@ -40,7 +40,7 @@ public class LlamarCuidador extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task LlamarCuidador ---");
-        activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
+        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("SAY", "guiu guiu guiu cuidadoooooor guiu guiu guiu"); 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);

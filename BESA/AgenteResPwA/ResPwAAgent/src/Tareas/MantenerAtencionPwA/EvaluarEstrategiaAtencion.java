@@ -42,6 +42,7 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         //adivinanzas, dato curioso
         //si se va, irlo a buscar
         
+        //  ACÁ DEBE ACTIVARSE EL TOPICO PARA LLAMAR LA ATENCION
         Random rand = new Random();
         List<String> estrategias = Arrays.asList("Adivinanza","DatoCurioso");
         String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
