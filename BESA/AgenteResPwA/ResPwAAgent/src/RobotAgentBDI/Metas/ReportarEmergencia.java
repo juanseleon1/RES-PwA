@@ -36,7 +36,7 @@ public class ReportarEmergencia extends GoalBDI{
 
     public ReportarEmergencia(long id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
-        //System.out.println("Meta ReportarEmergencia created
+        //System.out.println("Meta ReportarEmergencia created");
     }
 
     @Override
