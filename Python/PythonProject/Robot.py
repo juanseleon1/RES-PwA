@@ -73,21 +73,24 @@ class Robot:
                                 # "normTopic":topico_normal,
                                 # "musicTopic":conversacion_musica
                                 }
+
         self.alDialogProxy = session.service("ALDialog")
+
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
+
         self.alDialogProxy.stopTopics( self.alDialogProxy.getAllLoadedTopics() )
+
         # self.alSpeechRecognition.setParameter()
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
-
-        self.init_topics()
-        self.alSpeechRecognition.pause(False)
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
+        self.init_topics()
+
         print "ROBOT CARGADO Y LISTO"
         #time.sleep(10)
-        self.alTexToSpeech.say("Ya estoy listo para ser usado, shugar Brayan equis de")
+        self.alTexToSpeech.say("Estoy preparado")
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -588,6 +591,8 @@ class Robot:
     def deactivate_topics(self, topicsList):
         for topic in topicsList:
             self.desactivate_conversational_topic(topic)
+            time.sleep(5)
+
 
 
     # def
