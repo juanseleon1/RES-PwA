@@ -19,14 +19,14 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class DemostrarSenialesVida extends ResPwaTask{
+public class ActivarSenialesVida extends ResPwaTask{
     
     private HashMap<String, Object> infoServicio = new HashMap<>();
     private static final String ACTIVATE_LIFE_SIGNALS = "ACTIVATELIFESIGNALS";
     
     @Override
     public boolean checkFinish(Believes believes) {
-        System.out.println("--- Check Finish DemostrarSenialesVida ---");
+        System.out.println("--- Check Finish ActivarSenialesVida ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
         {
@@ -45,12 +45,12 @@ public class DemostrarSenialesVida extends ResPwaTask{
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task DemostrarSenialesVida ---");
+        System.out.println("--- Interrupt Task ActivarSenialesVida ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task DemostrarSenialesVida ---");
+        System.out.println("--- Cancel Task ActivarSenialesVida ---");
     }
     
 }

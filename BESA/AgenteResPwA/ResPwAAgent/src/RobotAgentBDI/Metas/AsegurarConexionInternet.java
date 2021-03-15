@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.AsegurarConexionInternet.AsegurarConexion;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -24,9 +25,9 @@ public class AsegurarConexionInternet extends GoalBDI{
     private static String descrip = "AsegurarConexionInternet";
     
     public static AsegurarConexionInternet buildGoal() {
-        //MandarSaludo ms = new MandarSaludo();
+        AsegurarConexion ms = new AsegurarConexion();
         Plan rolePlan= new Plan();
-        //rolePlan.addTask(ms);
+        rolePlan.addTask(ms);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
         AsegurarConexionInternet b = new AsegurarConexionInternet(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);

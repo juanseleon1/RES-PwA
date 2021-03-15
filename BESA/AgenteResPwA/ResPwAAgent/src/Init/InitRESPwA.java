@@ -66,13 +66,10 @@ public class InitRESPwA {
             PepperAdapter p = new PepperAdapter();
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
-            HashMap<String, Object> hm = new HashMap<>(), hm1 = new HashMap<>();
-            hm.put(VoiceServiceRequestType.SAY.getServiceType(), "Enrique nos cogio de maricas pa mejorar su vejez");
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-            p.sendRequest(data);
+            HashMap<String, Object>  hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
-            hm1.put("MOVETOY", 5);
-            data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
+            hm1.put("MOVETOY", 2);
+            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
             p.sendRequest(data);
 
         } catch (ExceptionBESA ex) {

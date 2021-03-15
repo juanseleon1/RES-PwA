@@ -11,6 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import Tareas.ReportarEmergencia.LlamarCuidador;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -24,9 +25,9 @@ public class ReportarEmergencia extends GoalBDI{
     private static String descrip = "ReportarEmergencia";
     
     public static ReportarEmergencia buildGoal() {
-        //MandarSaludo ms = new MandarSaludo();
+        LlamarCuidador lc = new LlamarCuidador();
         Plan rolePlan= new Plan();
-        //rolePlan.addTask(ms);
+        rolePlan.addTask(lc);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
         ReportarEmergencia b = new ReportarEmergencia(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
