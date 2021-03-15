@@ -18,7 +18,7 @@ import rational.mapping.Believes;
 public class BEstadoRobot implements Believes {
 
     private boolean bateria;
-    private double batteryPerc; 
+    private double batteryPerc;
     private int volumenVoz;
     private double velocidad = 0;
     private boolean activadoParpadear = false;
@@ -40,11 +40,12 @@ public class BEstadoRobot implements Believes {
     private double distanciaX;
     private double distanciaY;
     private double ledIntensity;
-    private LedsColor leds=null;
-    
+    private LedsColor leds = null;
+
     @Override
     public boolean update(InfoData si) {
-
+        
+        System.out.println("******Act Estado Robot********* "+si.toString());
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {
@@ -101,19 +102,19 @@ public class BEstadoRobot implements Believes {
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;
             if (infoRecibida.getInfo().containsKey("LEDS")) {
-                leds=LedsColor.valueOf((String)infoRecibida.getInfo().get("LEDS"));
+                leds = LedsColor.valueOf((String) infoRecibida.getInfo().get("LEDS"));
             }
             if (infoRecibida.getInfo().containsKey("velocidad")) {
-                velocidad = (double)infoRecibida.getInfo().get("velocidad");
+                velocidad = (double) infoRecibida.getInfo().get("velocidad");
             }
             if (infoRecibida.getInfo().containsKey("velHabla")) {
-                velHabla=(double)infoRecibida.getInfo().get("velHabla");
+                velHabla = (double) infoRecibida.getInfo().get("velHabla");
             }
             if (infoRecibida.getInfo().containsKey("tonoHabla")) {
-                tonoHabla=(double)infoRecibida.getInfo().get("tonoHabla");
+                tonoHabla = (double) infoRecibida.getInfo().get("tonoHabla");
             }
             if (infoRecibida.getInfo().containsKey("ledIntens")) {
-                ledIntensity=(double)infoRecibida.getInfo().get("ledIntens");
+                ledIntensity = (double) infoRecibida.getInfo().get("ledIntens");
             }
         }
         return true;
@@ -281,6 +282,27 @@ public class BEstadoRobot implements Believes {
         return verificacionDispositivos;
     }
 
-    
-    
+    public double getBatteryPerc() {
+        return batteryPerc;
+    }
+
+    public void setBatteryPerc(double batteryPerc) {
+        this.batteryPerc = batteryPerc;
+    }
+
+    public double getLedIntensity() {
+        return ledIntensity;
+    }
+
+    public void setLedIntensity(double ledIntensity) {
+        this.ledIntensity = ledIntensity;
+    }
+
+    public LedsColor getLeds() {
+        return leds;
+    }
+
+    public void setLeds(LedsColor leds) {
+        this.leds = leds;
+    }
 }
