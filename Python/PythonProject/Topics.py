@@ -121,10 +121,11 @@ topico_ira = "/data/home/nao/topics/iraTopic.top"
 topico_normal = "/data/home/nao/topics/normalTopic.top"
 conversacion_musica = "/data/home/nao/topics/conversacionMusicaTopic.top"
 topico_ayuda = "/data/home/nao/topics/ayudaTopic.top"
-
+topico_retro = "/data/home/nao/topics/retroalimentacionTopic.top"
+topico_saludable = "/data/home/nao/topics/saludarTopic.top"
 #topicorron = "/data/home/nao/topics/superTopico.top"
 
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
-topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda]
+topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda,topico_retro,topico_saludable]
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
 # topic_list = [topico_alegre, topico_ira, topic_content_1]
