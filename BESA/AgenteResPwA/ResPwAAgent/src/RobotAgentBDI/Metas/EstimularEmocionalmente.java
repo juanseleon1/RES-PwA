@@ -47,6 +47,7 @@ public class EstimularEmocionalmente extends GoalBDI{
         Plan rolePlan= new Plan();
 
         //evaluar estado emocional
+        
         rolePlan.addTask(interpretarEstadoFlujo);
         taskList = new ArrayList<>();
         taskList.add(interpretarEstadoFlujo);

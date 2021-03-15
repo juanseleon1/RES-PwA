@@ -18,6 +18,7 @@ import rational.mapping.Believes;
 public class BEstadoRobot implements Believes {
 
     private boolean bateria;
+    private double batteryPerc; 
     private int volumenVoz;
     private double velocidad = 0;
     private boolean activadoParpadear = false;
@@ -40,6 +41,7 @@ public class BEstadoRobot implements Believes {
     private double distanciaY;
     private double ledIntensity;
     private LedsColor leds=null;
+    
     @Override
     public boolean update(InfoData si) {
 
@@ -47,6 +49,9 @@ public class BEstadoRobot implements Believes {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {
                 bateria = (boolean) infoRecibida.getDataP().get("batteryLow");
+            }
+            if (infoRecibida.getDataP().containsKey("batteryPerc")) {
+                batteryPerc = (double) infoRecibida.getDataP().get("batteryPerc");
             }
             if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
 //                BinfoRecibida.getDataP().get("ROBOTEMOTION"));
@@ -87,14 +92,11 @@ public class BEstadoRobot implements Believes {
             if (infoRecibida.getDataP().containsKey("libreEntorno")) {
                 libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
             }
-            if (infoRecibida.getDataP().containsKey("libreEntorno")) {
-                libreEntorno = Boolean.valueOf((String) infoRecibida.getDataP().get("libreEntorno"));
-            }
             if (infoRecibida.getDataP().containsKey("conexionInternet")) {
                 conexionInternet = Boolean.valueOf((String) infoRecibida.getDataP().get("conexionInternet"));
             }
-            if (infoRecibida.getDataP().containsKey("verificacionDispositivos")) {
-                verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("verificacionDispositivos"));
+            if (infoRecibida.getDataP().containsKey("hotDeviceDetected")) {
+                verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData infoRecibida = (EmotionalData) si;

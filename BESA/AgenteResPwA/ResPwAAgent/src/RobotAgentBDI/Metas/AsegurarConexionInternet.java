@@ -30,7 +30,7 @@ public class AsegurarConexionInternet extends GoalBDI{
         rolePlan.addTask(ms);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        AsegurarConexionInternet b = new AsegurarConexionInternet(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        AsegurarConexionInternet b = new AsegurarConexionInternet(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
     
