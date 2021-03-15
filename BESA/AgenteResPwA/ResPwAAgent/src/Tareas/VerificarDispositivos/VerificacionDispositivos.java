@@ -41,7 +41,7 @@ public class VerificacionDispositivos extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("VERIFYDEVICES", false); 
+        infoServicio.put("VERIFYDEVICES", false);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.VERIFYDEVICES, infoServicio);
         requestService(srb,blvs);
     }
