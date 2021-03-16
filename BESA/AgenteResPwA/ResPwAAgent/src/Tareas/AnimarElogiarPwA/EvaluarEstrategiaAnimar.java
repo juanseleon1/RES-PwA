@@ -36,14 +36,12 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
         
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("fraseElogiante", "chiste", "adivinanza", "datoCurioso", "preguntaEmpatica", "consejo", "llamarPwa");
-        //falta decidir como escoger estrategia
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        AnimarStrategy as = new AnimarStrategy();
-        as.setNombre(estrategia);
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        //falta escoger estrategia, segun perfil
+        OpcionesAnimar estrategia = blvs.getbPerfilPwA().getAnimarStrategy();
+        AnimarStrategy as = new AnimarStrategy();
+        as.setOpcion(estrategia);
+        
         blvs.getbEstadoActividad().setEstrategia(as);
         
         ServiceDataRequest srb = as.execStrategy();

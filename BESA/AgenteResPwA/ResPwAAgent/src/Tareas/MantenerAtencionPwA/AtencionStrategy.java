@@ -18,32 +18,32 @@ import rational.mapping.Believes;
  */
 public class AtencionStrategy implements ResPwAStrategy{
     
-    private String nombre;
+    private OpcionesAtencion opcion;
     
     @Override
     public ServiceDataRequest execStrategy() {
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
-        switch (nombre)
+        switch (opcion)
         {
-            case "Adivinanza":
-                infoServicio.put("SAY", nombre);
+            case SILBAR:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "Dato Curioso":
-                infoServicio.put("SAY", nombre);
+            case LLAMARPWA:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
         }
         return srb;
     }
 
-    public String getNombre() {
-        return nombre;
+    public OpcionesAtencion getOpcion() {
+        return opcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(OpcionesAtencion opcion) {
+        this.opcion = opcion;
     }
 
     @Override
