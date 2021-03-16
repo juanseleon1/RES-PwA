@@ -71,10 +71,7 @@ public class DesuspenderRobot extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
-            return true;
-        }
-        return false;
+        return !blvs.getbEstadoInteraccion().isSistemaSuspendido();
     }
     
 }
