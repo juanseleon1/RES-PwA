@@ -42,7 +42,7 @@ public class AtencionStrategy implements ResPwAStrategy{
         return opcion;
     }
 
-    public void setNombre(OpcionesAtencion opcion) {
+    public void setOpcion(OpcionesAtencion opcion) {
         this.opcion = opcion;
     }
 

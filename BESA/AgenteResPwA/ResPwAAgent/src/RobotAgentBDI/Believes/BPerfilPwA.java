@@ -97,7 +97,7 @@ public class BPerfilPwA implements Believes {
         return opcs[rand.nextInt(opcs.length)];
     }
     
-    public OpcionesAtencion getAtencionStrategy(
+    public OpcionesAtencion getAtencionStrategy()
     {
         Random rand = new Random();
         OpcionesAtencion[]opcs = OpcionesAtencion.values();

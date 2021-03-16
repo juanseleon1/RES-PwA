@@ -43,13 +43,13 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         //si se va, irlo a buscar
         
         //  ACÁ DEBE ACTIVARSE EL TOPICO PARA LLAMAR LA ATENCION
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("silbar","llamarPwa");
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        ConversarStrategy cs = new ConversarStrategy();
-        cs.setNombre(estrategia);
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        
+        OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
+        AtencionStrategy cs = new AtencionStrategy();
+        cs.setOpcion(estrategia);
+        
         blvs.getbEstadoActividad().setEstrategia(cs);
         
         ServiceDataRequest srb = cs.execStrategy();

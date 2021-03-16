@@ -67,13 +67,7 @@ public class RecargarBateria extends GoalBDI {
                 return 1.0;
             }
         }
-<<<<<<< HEAD
-        
         return 0;
-=======
-
-        return 1;
->>>>>>> 8cedc20235ee5261e04c7eff927bd7435b08c8ae
     }
 
     @Override
