@@ -52,7 +52,7 @@ public class BEstadoRobot implements Believes {
                 bateria = (boolean) infoRecibida.getDataP().get("batteryLow");
             }
             if (infoRecibida.getDataP().containsKey("batteryPerc")) {
-                batteryPerc = (double) infoRecibida.getDataP().get("batteryPerc");
+                batteryPerc = Double.parseDouble(String.valueOf(infoRecibida.getDataP().get("batteryPerc")));
             }
             if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
 //                BinfoRecibida.getDataP().get("ROBOTEMOTION"));

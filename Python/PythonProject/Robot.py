@@ -82,12 +82,14 @@ class Robot:
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
 
         # self.alSpeechRecognition.setParameter()
-        print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
-        print "MILTON", self.alDialogProxy.getActivatedTopics()
+
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         self.init_topics()
         self.init_timers()
+
+        print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+        print "MILTON", self.alDialogProxy.getActivatedTopics()
 
         print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
