@@ -120,24 +120,24 @@ public class InitRESPwA {
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-//        TestPlan tp = TestPlan.buildGoal();
+        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
-        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
+//        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
               //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-//        RAGoals.add(tp);
+        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);
-        RAGoals.add(recargarBateriaGoal);
+//        RAGoals.add(recargarBateriaGoal);
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);

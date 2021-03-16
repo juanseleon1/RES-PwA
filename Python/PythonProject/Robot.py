@@ -86,7 +86,7 @@ class Robot:
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         self.init_topics()
-        self.init_timers()
+
 
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
@@ -94,6 +94,7 @@ class Robot:
         print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
+        self.init_timers()
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -168,7 +169,7 @@ class Robot:
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
             "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "rob", False],
-            "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "rob", False],
+            "DEACTCONVTOPIC": [self.desactivate_conversational_topic_json, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
@@ -466,7 +467,7 @@ class Robot:
     def show_video(self, params):
         # print "CRACK", params.get("SHOWVIDEO")
         self.alTabletService.enableWifi()
-        print "CRACK", self.alTabletService.getWifiStatus()
+        # print "CRACK", self.alTabletService.getWifiStatus()
         # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
         self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
 
@@ -632,6 +633,7 @@ class Robot:
         self.alTexToSpeech.say(text_to_speech)
 
     def activate_conversational_topic(self, params):
+        print "CRACK: ", params
         topicName = params.get("TOPICNAME")
         if topicName not in self.alDialogProxy.getActivatedTopics():
             self.alDialogProxy.activateTopic(topicName)
@@ -642,6 +644,12 @@ class Robot:
             self.alDialogProxy.deactivateTopic(topic_name)
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+    # def
+
+    def desactivate_conversational_topic_json(self, params):
+        topicName = params.get("TOPICNAME")
+        self.desactivate_conversational_topic(topicName)
+    # def
 
     def registrar_cuidador(params):
         pass
