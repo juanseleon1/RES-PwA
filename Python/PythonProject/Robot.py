@@ -169,7 +169,6 @@ class Robot:
             "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
-            "DEACTCONVTOPIC": [self.desactivate_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
@@ -630,13 +629,18 @@ class Robot:
         self.alTexToSpeech.setParameter("pitchShift", pitch)
         self.alTexToSpeech.say(text_to_speech)
 
-    def activate_conversational_topic(self, topic_name):
-        if topic_name not in self.alDialogProxy.getActivatedTopics():
-            self.alDialogProxy.activateTopic(topic_name)
+    def activate_conversational_topic(self, params):
+        topicName = params.get("TOPICNAME")
+        if topicName not in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.activateTopic(topicName)
 
-    def desactivate_conversational_topic(self, topic_name):
-        if topic_name in self.alDialogProxy.getActivatedTopics():
-            self.alDialogProxy.deactivateTopic(topic_name)
+
+    def desactivate_conversational_topic(self, params):
+        topicName = params.get("TOPICNAME")
+        if topicName in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.deactivateTopic(topicName)
+        elif topicName == "allTopics":
+            self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
 
     def registrar_cuidador(params):
         pass

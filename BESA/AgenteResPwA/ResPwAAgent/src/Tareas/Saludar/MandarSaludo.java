@@ -48,6 +48,8 @@ public class MandarSaludo extends ResPwaTask{
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Mandar Saludo ---");
         deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb, (RobotAgentBelieves) believes);
     }
     
     @Override
