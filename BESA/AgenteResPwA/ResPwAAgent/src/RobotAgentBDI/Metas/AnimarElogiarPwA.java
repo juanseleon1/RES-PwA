@@ -41,7 +41,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         rolePlan.addTask(evaluarEstrategia);
 
         RationalRole animateRole = new RationalRole(descrip, rolePlan);
-        AnimarElogiarPwA b= new AnimarElogiarPwA(InitRESPwA.getPlanID(), animateRole, descrip, GoalBDITypes.DUTY);
+        AnimarElogiarPwA b= new AnimarElogiarPwA(InitRESPwA.getPlanID(), animateRole, descrip, GoalBDITypes.REQUIREMENT);
         return b;
     }
     

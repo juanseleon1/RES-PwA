@@ -12,6 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
 import Tareas.RecargarBateria.SuspenderRobot;
+import Tareas.SalirDeSuspension.DesuspenderRobot;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -23,30 +24,26 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class RecargarBateria extends GoalBDI {
+public class SalirDeSuspension extends GoalBDI {
 
-    private static String descrip = "RecargarBateria";
+    private static String descrip = "SalirDeSuspension";
 
-    public static RecargarBateria buildGoal() {
+    public static SalirDeSuspension buildGoal() {
 
-        //MoverseEstacionCarga moverseEstacionCarga = new MoverseEstacionCarga();
-        SuspenderRobot suspenderRobot = new SuspenderRobot();//Suspender a robot y notificar/decir
-        //UbicarEstacionCarga ubicarEstacionCarga = new UbicarEstacionCarga();
+        DesuspenderRobot desuspenderRobot = new DesuspenderRobot();//Suspender a robot y notificar/decir
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
 
         Plan rolePlan = new Plan();
 
-        //rolePlan.addTask(ubicarEstacionCarga);
-        //rolePlan.addTask(moverseEstacionCarga);
-        rolePlan.addTask(suspenderRobot);
+        rolePlan.addTask(desuspenderRobot);
 
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);
-        RecargarBateria b = new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.DUTY);
+        SalirDeSuspension b = new SalirDeSuspension(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
 
-    public RecargarBateria(int id, RationalRole role, String description, GoalBDITypes type) {
+    public SalirDeSuspension(int id, RationalRole role, String description, GoalBDITypes type) {
         super(id, role, description, type);
         //System.out.println("Meta RecargarBateria created");
     }
@@ -62,18 +59,10 @@ public class RecargarBateria extends GoalBDI {
         //System.out.println("Meta RecargarBateria detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
-            if (blvs.getbEstadoRobot().getBateria()) {
+        if (blvs.getbEstadoRobot().getBatteryPerc()>30.0 && blvs.getbEstadoRobot().getBateria()) {
                 return 1.0;
-            }
         }
-<<<<<<< HEAD
-        
         return 0;
-=======
-
-        return 1;
->>>>>>> 8cedc20235ee5261e04c7eff927bd7435b08c8ae
     }
 
     @Override
@@ -86,8 +75,7 @@ public class RecargarBateria extends GoalBDI {
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta RecargarBateria evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-//        return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
-        return 1;
+        return blvs.getbEstadoRobot().getBateria() ? 1:0;
     }
 
     @Override
@@ -98,8 +86,8 @@ public class RecargarBateria extends GoalBDI {
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria goalSucceeded");
-        return true;
+                RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return !blvs.getbEstadoRobot().getBateria();
     }
 
 }
