@@ -86,8 +86,8 @@ public class SalirDeSuspension extends GoalBDI {
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria goalSucceeded");
-        return true;
+                RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return !blvs.getbEstadoRobot().getBateria();
     }
 
 }
