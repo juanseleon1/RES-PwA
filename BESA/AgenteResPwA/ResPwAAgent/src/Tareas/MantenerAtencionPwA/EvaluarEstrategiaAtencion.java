@@ -12,7 +12,6 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
