@@ -68,7 +68,7 @@ public class RecargarBateria extends GoalBDI {
             }
         }
 
-        return 0;
+        return 1;
     }
 
     @Override
@@ -81,7 +81,8 @@ public class RecargarBateria extends GoalBDI {
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta RecargarBateria evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-        return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
+//        return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
+        return 1;
     }
 
     @Override

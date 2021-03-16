@@ -17,6 +17,7 @@ import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
@@ -42,6 +43,7 @@ public class SuspenderRobot extends ResPwaTask{
         requestService(srb, (RobotAgentBelieves) parameters);
         infoServicio = new HashMap<>();
         
+        deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
