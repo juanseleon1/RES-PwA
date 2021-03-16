@@ -635,11 +635,10 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
 
-    def desactivate_conversational_topic(self, params):
-        topicName = params.get("TOPICNAME")
-        if topicName in self.alDialogProxy.getActivatedTopics():
-            self.alDialogProxy.deactivateTopic(topicName)
-        elif topicName == "allTopics":
+    def desactivate_conversational_topic(self, topic_name):
+        if topic_name in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.deactivateTopic(topic_name)
+        elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
 
     def registrar_cuidador(params):
