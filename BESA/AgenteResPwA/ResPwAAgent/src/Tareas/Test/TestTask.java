@@ -13,6 +13,7 @@ import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
@@ -32,49 +33,7 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("SHOWVIDEO", "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"); //sadTopic
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-        requestService(srb, blvs);
-
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "alegreTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "emoTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "alegreTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "sadTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "iraTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "normTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("name", "musicTopic");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.LOADCONVTOPIC, infoServicio);
-//        requestService(srb, blvs);
-//        infoServicio = new HashMap<>();
-//        infoServicio.put("SAY", "OYE CHUZCA, CONOCES A BRAYAN?");
-//        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-//        requestService(srb, blvs);
-
-
+        this.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
     }
 
     @Override
