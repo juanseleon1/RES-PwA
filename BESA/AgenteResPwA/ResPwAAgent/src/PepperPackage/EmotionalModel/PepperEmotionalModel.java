@@ -9,6 +9,7 @@ import BESA.ExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
+import EmotionalAnalyzerAgent.EmotionalState;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -219,7 +220,9 @@ public class PepperEmotionalModel extends EmotionalModel {
         requestService(srb);
     }
 
-    public double getState() {
-        return state;
+    @Override
+    public EmotionalState getState() {
+//        return state;
+        return null;
     }
 }

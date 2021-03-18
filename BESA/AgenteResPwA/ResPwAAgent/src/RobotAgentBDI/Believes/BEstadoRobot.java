@@ -45,7 +45,7 @@ public class BEstadoRobot implements Believes {
     @Override
     public boolean update(InfoData si) {
         
-        System.out.println("******Act Estado Robot********* "+si.toString());
+        System.out.println("******Act Estado Robot********* "+ si.toString());
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {

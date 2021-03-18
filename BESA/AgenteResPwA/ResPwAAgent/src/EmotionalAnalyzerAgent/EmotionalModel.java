@@ -26,6 +26,7 @@ public abstract class EmotionalModel {
     public abstract void updateModel(EmotionalData e);
     public abstract void updtModelFromEvt(EmotionalData sd);
     public abstract Map<String,Object> filterFromEM(Map<String,Object> map);
+    public abstract EmotionalState getState();
 
     protected void sendAct(EmotionalData ed) throws ExceptionBESA{
         AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
@@ -46,4 +47,5 @@ public abstract class EmotionalModel {
             Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

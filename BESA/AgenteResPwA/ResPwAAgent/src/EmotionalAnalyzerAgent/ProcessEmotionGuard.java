@@ -21,7 +21,7 @@ public class ProcessEmotionGuard extends GuardBESA{
         System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
         EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
         infoRecibida.setInfo(eaState.getEaStrategy().processEmotion(infoRecibida));
-        eaState.getEaModel().updtModelFromEvt(infoRecibida);
+        //ENVIAR A INFORMATION FLOW
     }
 
     
