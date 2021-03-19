@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalData.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerAgent.java</file>
             <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/RecargarBateria/SuspenderRobot.java</file>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalEventType.java</file>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEmotionalModel.java</file>
-            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
+            <file>file:/C:/Users/jsleon/Desktop/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/ProcessEmotionGuard.java</file>
         </group>
     </open-files>
 </project-private>
