@@ -24,10 +24,9 @@ import rational.services.ActivateAsynchronousServiceGuard;
  */
 public abstract class EmotionalModel {
     public abstract void updateModel(EmotionalData e);
-    public abstract void updtModelFromEvt(EmotionalData sd);
-    public abstract Map<String,Object> filterFromEM(Map<String,Object> map);
     public abstract EmotionalState getState();
 
+    
     protected void sendAct(EmotionalData ed) throws ExceptionBESA{
         AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
         EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),ed);
