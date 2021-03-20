@@ -1,0 +1,12 @@
+docker exec -it oracle-db bash -c "source /home/oracle/.bashrc; sqlplus /nolog"
+
+DB Cred:
+ORCLCDB
+sys AS SYSDBA
+Oradoc_db1
+
+
+por si acaso:
+alter system set "_ORACLE_SCRIPT"=true SCOPE=SPFILE;
+alter session set "_ORACLE_SCRIPT"=true;
+docker exec -it oracle-db bash -c "source /home/oracle/.bashrc; sqlplus /nolog"
