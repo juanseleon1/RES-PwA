@@ -15,6 +15,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -41,7 +42,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         tarea.add(preguntarSentimientos);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
-        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
+        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.REQUIREMENT);
         return b;
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -58,11 +59,12 @@ public class ConversarEmpaticamente extends GoalBDI{
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ConversarEmpaticamente detectGoal");
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) 
+            if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion()!=null &&(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.ANGER)) && 
+                    blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()>=0.8)//revisar valor 
             {
                 return 1.0;
             }
@@ -81,7 +83,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
+        return blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
     }
 
     @Override

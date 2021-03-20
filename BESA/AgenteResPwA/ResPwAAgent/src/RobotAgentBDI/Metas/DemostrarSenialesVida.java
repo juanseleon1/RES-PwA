@@ -30,7 +30,7 @@ public class DemostrarSenialesVida extends GoalBDI {
         rolePlan.addTask(asv);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        DemostrarSenialesVida b = new DemostrarSenialesVida(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        DemostrarSenialesVida b = new DemostrarSenialesVida(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.NEED);
         return b;
     }
 

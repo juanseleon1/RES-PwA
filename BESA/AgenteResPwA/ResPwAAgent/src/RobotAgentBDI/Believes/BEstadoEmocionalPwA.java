@@ -18,8 +18,6 @@ import rational.mapping.Believes;
  */
 public class BEstadoEmocionalPwA implements Believes{
 
-    private EmotionPwA emocionPredominante;
-    private long tiempoEmocionPredominante;
     private long tiempoAtencion;
     private long tiempoSinAtencion;
     private long tiempoRelajacion;
@@ -53,32 +51,8 @@ public class BEstadoEmocionalPwA implements Believes{
                tiempoSinRelajacion=0;
            }
         }
-        if(infoRecibida.getInfo().containsKey("predEm"))
-        {
-          EmotionPwA emo=(EmotionPwA)infoRecibida.getInfo().get("predEm");
-           if(infoRecibida.getInfo().get("predEm")!=null && !emo.equals(emocionPredominante))
-           {
-               emocionPredominante=emo;
-               tiempoEmocionPredominante=System.currentTimeMillis();
-           }
-        }
+        
         return true;
-    }
-
-    public EmotionPwA getEmocionPredominante() {
-        return emocionPredominante;
-    }
-
-    public void setEmocionPredominante(EmotionPwA emocionPredominante) {
-        this.emocionPredominante = emocionPredominante;
-    }
-
-    public long getTiempoEmocionPredominante() {
-        return System.currentTimeMillis()-tiempoEmocionPredominante;
-    }
-
-    public void setTiempoEmocionPredominante(long tiempoEmocionPredominante) {
-        this.tiempoEmocionPredominante = tiempoEmocionPredominante;
     }
 
     public long getTiempoAtencion() {

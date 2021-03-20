@@ -9,11 +9,13 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionalState;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.InteraccionSocial.Interacciones;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -35,7 +37,7 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         rolePlan.addTask(inter);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        ExpresarEstadoEmocionalRobot b = new ExpresarEstadoEmocionalRobot(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        ExpresarEstadoEmocionalRobot b = new ExpresarEstadoEmocionalRobot(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.NEED);
         return b;
     }
 
@@ -53,8 +55,9 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta InteraccionSocial detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //revisar tiempo, si pasa de 15 min debe decir hola
-        if(blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() > 20000)
+        
+        Random rand = new Random();
+        if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor())
         {
             return 1;
         }

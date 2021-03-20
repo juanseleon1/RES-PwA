@@ -30,7 +30,7 @@ public class VerificarDispositivos extends GoalBDI{
         rolePlan.addTask(vd);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        VerificarDispositivos b = new VerificarDispositivos(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        VerificarDispositivos b = new VerificarDispositivos(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
 

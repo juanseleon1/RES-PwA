@@ -39,7 +39,7 @@ public class MantenerAtencionPwA extends GoalBDI {
         rolePlan.addTask(evaluarEstrategiaA);
 
         RationalRole mantAtenRole = new RationalRole(descrip, rolePlan);
-        MantenerAtencionPwA b = new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.DUTY);
+        MantenerAtencionPwA b = new MantenerAtencionPwA(InitRESPwA.getPlanID(), mantAtenRole, descrip, GoalBDITypes.REQUIREMENT);
         return b;
     }
 

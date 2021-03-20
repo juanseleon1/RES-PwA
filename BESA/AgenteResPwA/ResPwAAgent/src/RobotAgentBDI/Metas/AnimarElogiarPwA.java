@@ -67,7 +67,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         //!blvs.getbEstadoActividad().isFinalizoActividad() ?
         //|| finalActividad || dice que se siente triste/enojado || Al escoger actividad por primera vez
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt()&&  blvs.getbEstadoInteraccion().isLogged() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
+            if (blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion()!=null && blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.SADNESS) && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
             return 1.0;
             }
         }
@@ -87,7 +87,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)) {
+        if (blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.SADNESS)) {
             return 1.0 + blvs.getbEstadoActividad().getBoostAnimarElogiarPwA();
         }
         return blvs.getbEstadoActividad().getBoostAnimarElogiarPwA();

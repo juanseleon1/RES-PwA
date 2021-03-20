@@ -62,7 +62,7 @@ public class Cuenteria extends GoalBDI {
         rolePlan.addTask(retro,tarea);
         
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
-        Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.DUTY);
+        Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.OPORTUNITY);
         return b;
     }
 
@@ -107,7 +107,7 @@ public class Cuenteria extends GoalBDI {
             }
         }
         
-        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return valor+blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
     }
 
     @Override

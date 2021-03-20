@@ -60,7 +60,7 @@ public class MusicoTerapia extends GoalBDI{
 //        rolePlan.addTask(retro,tarea);
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
-        MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
+        MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.OPORTUNITY);
         return b;
     }
     
@@ -81,7 +81,7 @@ public class MusicoTerapia extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoActividad().getActividadActual()!=null && (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA)) && !blvs.getbEstadoActividad().isFinalizoActividad()
-                    && blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))) {
+                    && blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion()!=null && (blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.ANGER))) {
                 return 1;
             }
         }
@@ -106,8 +106,7 @@ public class MusicoTerapia extends GoalBDI{
                 valor = act.getGusto();
             }
         }
-        
-        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return valor+blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
     }
 
     @Override

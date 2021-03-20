@@ -42,7 +42,7 @@ public class RecargarBateria extends GoalBDI {
         rolePlan.addTask(suspenderRobot);
 
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);
-        RecargarBateria b = new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.DUTY);
+        RecargarBateria b = new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
 
