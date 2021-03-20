@@ -18,7 +18,7 @@ public class BEstadoEmocionalRobot implements Believes {
 
     private EmotionalModel em;
     private LocalTime lastUpdate;
-    private EmotionalModulationStrategy ems;
+    private ModulationStrategy ems;
     BEstadoEmocionalRobot(EmotionalModel em) {
         this.em = em;
 
@@ -51,11 +51,11 @@ public class BEstadoEmocionalRobot implements Believes {
         this.lastUpdate = lastUpdate;
     }
 
-    public EmotionalModulationStrategy getEms() {
+    public ModulationStrategy getEms() {
         return ems;
     }
 
-    public void setEms(EmotionalModulationStrategy ems) {
+    public void setEms(ModulationStrategy ems) {
         this.ems = ems;
     }
     
