@@ -6,9 +6,9 @@
 package EmotionalAnalyzerAgent;
 
 /**
- *
  * @author jsleon
  */
+
 public class EmotionalState {
     
     private EmotionPwA dominantEmotion;
