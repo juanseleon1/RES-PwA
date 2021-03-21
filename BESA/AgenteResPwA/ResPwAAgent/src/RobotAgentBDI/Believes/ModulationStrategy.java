@@ -5,7 +5,6 @@
  */
 package RobotAgentBDI.Believes;
 
-import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalState;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.Map;

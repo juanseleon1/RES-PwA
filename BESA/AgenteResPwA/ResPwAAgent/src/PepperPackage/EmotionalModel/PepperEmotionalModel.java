@@ -10,14 +10,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
 import EmotionalAnalyzerAgent.EmotionalState;
-import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
 import Tareas.Cuenteria.LedsColor;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +29,8 @@ public class PepperEmotionalModel extends EmotionalModel {
 
     @Override
     public void updateModel(EmotionalData e) {
+        
+//        TODO
 
     }
 
