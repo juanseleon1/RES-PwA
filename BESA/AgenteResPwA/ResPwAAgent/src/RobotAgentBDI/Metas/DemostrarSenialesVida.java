@@ -47,13 +47,15 @@ public class DemostrarSenialesVida extends GoalBDI {
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta DemostrarSenialesVida detectGoal");
+        System.out.println("Meta DemostrarSenialesVida detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
-        {
-            return 0;
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if(!blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
+            {
+                return 1.0;
+            }
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class DemostrarSenialesVida extends GoalBDI {
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta DemostrarSenialesVida goalSucceeded");
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoRobot().isActivadoSeñalesDeVida();
     }
-    
 }

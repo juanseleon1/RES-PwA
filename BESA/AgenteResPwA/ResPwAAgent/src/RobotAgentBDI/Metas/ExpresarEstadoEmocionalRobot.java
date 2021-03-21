@@ -9,10 +9,11 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalState;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.InteraccionSocial.Interacciones;
+import Tareas.ExpresarEstadoEmocionalRobot.Interacciones;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,9 +58,12 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         Random rand = new Random();
-        if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor())
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            return 1;
+            if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()*rand.nextDouble())
+            {
+                return 1;
+            }
         }
         return 0;
     }
@@ -72,19 +76,26 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
 
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta InteraccionSocial evaluateContribution");
-        return 1.0;
+        //System.out.println("Meta InteraccionSocial evaluateContribution");
+        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        double value = 0;
+        if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.HAPPINESS)){
+            value = blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
+        }
+        return 1.0 + value;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta InteraccionSocial predictResultUnlegality");
+        //System.out.println("Meta InteraccionSocial predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta InteraccionSocial goalSucceeded");
+        //System.out.println("Meta InteraccionSocial goalSucceeded");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        //FALTAAAAA
         return false;
     }
     

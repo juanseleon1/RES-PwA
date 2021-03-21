@@ -53,7 +53,7 @@ public class DesuspenderRobot extends ResPwaTask{
         System.out.println("--- Interrupt Task DesSuspender Robot ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
             requestService(srb,blvs);
         }
     }
@@ -63,7 +63,7 @@ public class DesuspenderRobot extends ResPwaTask{
         System.out.println("--- Cancel Task Desuspender Robot ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
             requestService(srb,blvs);
         }        
     }

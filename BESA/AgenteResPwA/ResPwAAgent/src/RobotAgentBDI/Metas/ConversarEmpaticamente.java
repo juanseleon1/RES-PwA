@@ -58,13 +58,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ConversarEmpaticamente detectGoal");
+        System.out.println("Meta ConversarEmpaticamente detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion()!=null &&(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.ANGER)) && 
-                    blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()>=0.8)//revisar valor 
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
+                    blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
             {
                 return 1.0;
             }
@@ -83,20 +83,24 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
+        //System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+            return true;
+        }
+        return false;
     }
     
 }

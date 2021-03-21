@@ -56,11 +56,10 @@ public class MantenerAtencionPwA extends GoalBDI {
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta MantenerAtencionPwA detectGoal");
+        System.out.println("Meta MantenerAtencionPwA detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
-
             //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
             if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 1) {
                 return 1.0;
@@ -79,20 +78,24 @@ public class MantenerAtencionPwA extends GoalBDI {
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MantenerAtencionPwA evaluateContribution");
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() + blvs.getbEstadoActividad().getBoostMantenerAtencionPwA();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA predictResultUnlegality");
+        //System.out.println("Meta MantenerAtencionPwA predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MantenerAtencionPwA goalSucceeded");
-        return true;
+        //System.out.println("Meta MantenerAtencionPwA goalSucceeded");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if ((blvs.getbEstadoEmocionalPwA().getTiempoAtencion()/1000) > 300)
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -9,6 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
+import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
@@ -78,7 +79,7 @@ public class Cuenteria extends GoalBDI {
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta Cuenteria detectGoal");
+        System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoActividad().getActividadActual() != null && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && !blvs.getbEstadoActividad().isFinalizoActividad()) {
@@ -107,18 +108,22 @@ public class Cuenteria extends GoalBDI {
             }
         }
         
-        return valor+blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
+        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Cuenteria predictResultUnlegability");
+        //System.out.println("Meta Cuenteria predictResultUnlegability");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta Cuenteria evaluateViability");
-        return true;
+        //System.out.println("Meta Cuenteria evaluateViability");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if((System.currentTimeMillis()-blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+            return true;
+        }
+        return false;
     }
 }

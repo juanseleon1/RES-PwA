@@ -40,6 +40,9 @@ public class BEstadoInteraccion implements Believes{
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
     private boolean movManoSaludo=false;
+    private boolean ayudaExitosa=false;
+    private double tiempoEmergenciaTrans=0;
+    private boolean saludo=false;
     private LedsColor leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
@@ -79,7 +82,7 @@ public class BEstadoInteraccion implements Believes{
             else if(!quiereEnriquec && nivelEnriquecimiento>0)
                 nivelEnriquecimiento--;
         }if(infoRecibida.getDataP().containsKey("wakeUpFinished")){
-            sistemaSuspendido= true;
+            sistemaSuspendido = Boolean.valueOf((String)infoRecibida.getDataP().get("wakeUpFinished"));
         }if(infoRecibida.getDataP().containsKey("pausarint")){
            pausarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("pausarint"));
             
@@ -123,10 +126,20 @@ public class BEstadoInteraccion implements Believes{
             
         }
         if(infoRecibida.getDataP().containsKey("wavingDetection")){
-            movManoSaludo = true;
+            movManoSaludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
+            saludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
         }
         if(infoRecibida.getDataP().containsKey("detectaPersona")){
-            detectaPersona = true;
+            detectaPersona = Boolean.valueOf((String)infoRecibida.getDataP().get("detectaPersona"));
+            if(!detectaPersona){
+                tiempoEmergenciaTrans = System.currentTimeMillis();
+            }
+        }
+        if(infoRecibida.getDataP().containsKey("peticionAyuda")){
+            ayudaActividadSolicitada = Boolean.valueOf((String)infoRecibida.getDataP().get("peticionAyuda"));
+        }
+        if(infoRecibida.getDataP().containsKey("ayudaExitosa")){
+            ayudaActividadSolicitada = Boolean.valueOf((String)infoRecibida.getDataP().get("ayudaExitosa"));
         }
         
         return true;
@@ -364,6 +377,30 @@ public class BEstadoInteraccion implements Believes{
 
     public boolean isMovManoSaludo() {
         return movManoSaludo;
+    }
+
+    public void setSaludo(boolean saludo) {
+        this.saludo = saludo;
+    }
+
+    public boolean isSaludo() {
+        return saludo;
+    }
+
+    public boolean isAyudaExitosa() {
+        return ayudaExitosa;
+    }
+
+    public void setAyudaExitosa(boolean ayudaExitosa) {
+        this.ayudaExitosa = ayudaExitosa;
+    }
+
+    public double getTiempoEmergenciaTrans() {
+        return tiempoEmergenciaTrans;
+    }
+
+    public void setTiempoEmergenciaTrans(double tiempoEmergenciaTrans) {
+        this.tiempoEmergenciaTrans = tiempoEmergenciaTrans;
     }
     
     
