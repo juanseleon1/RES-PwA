@@ -5,6 +5,7 @@
  */
 package PepperPackage.EmotionalModel;
 
+import EmotionalAnalyzerAgent.EmotionalState;
 import RobotAgentBDI.Believes.ModulationStrategy;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class PepperModulationStrategy extends ModulationStrategy{
     private static final double CHANGEEMO_FACT = 0.01;
 
     @Override
-    public Map<String, Object> modulateAction(ServiceDataRequest sdr) {
+    public Map<String, Object> modulateAction(ServiceDataRequest sdr, EmotionalState currentEmotions) {
         return null;
     }
 

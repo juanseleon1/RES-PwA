@@ -5,6 +5,8 @@
  */
 package RobotAgentBDI.Believes;
 
+import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.EmotionalState;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ import java.util.Map;
  */
 public abstract class ModulationStrategy {
     private RelationProfile relProf;
-    public abstract Map<String,Object> modulateAction(ServiceDataRequest sdr);
+    public abstract Map<String,Object> modulateAction(ServiceDataRequest sdr, EmotionalState currentEmotions);
     protected abstract Map<String,Object> calculateModulateValues();
 
     public RelationProfile getRelProf() {
@@ -24,4 +26,5 @@ public abstract class ModulationStrategy {
     public void setRelProf(RelationProfile relProf) {
         this.relProf = relProf;
     }
+
 }
