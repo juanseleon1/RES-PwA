@@ -5,8 +5,12 @@
  */
 package RobotAgentBDI.Believes;
 
+import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalModel;
+import EmotionalAnalyzerAgent.EmotionalState;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.time.LocalTime;
+import java.util.Map;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -59,6 +63,9 @@ public class BEstadoEmocionalRobot implements Believes {
         this.ems = ems;
     }
     
-    
+    public Map<String,Object>  modulateAction(ServiceDataRequest sdr){
+        EmotionalState emoData= em.getState();
+        return ems.modulateAction(sdr, emoData);
+    }
 
 }

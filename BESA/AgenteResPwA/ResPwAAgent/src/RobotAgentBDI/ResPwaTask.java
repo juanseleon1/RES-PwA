@@ -34,7 +34,7 @@ public abstract class ResPwaTask extends Task{
          try {
              if(sdr.getParams()!=null)
              {
-                 Map<String, Object> map = blvs.getbEstadoEmocionalRobot().getEms().modulateAction(sdr);
+                 Map<String, Object> map = blvs.getbEstadoEmocionalRobot().modulateAction(sdr);
                 sdr.setParams((HashMap<String, Object>) map);
              }
             String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());

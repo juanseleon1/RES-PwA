@@ -71,11 +71,10 @@ class Robot:
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
 
-        self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
-        # self.alSpeechRecognition.setParameter()
+       # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
-        self.init_topics()
+        #self.init_topics()
 
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
