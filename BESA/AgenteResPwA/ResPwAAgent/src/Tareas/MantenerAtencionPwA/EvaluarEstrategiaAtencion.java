@@ -12,7 +12,6 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -43,13 +42,13 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         //si se va, irlo a buscar
         
         //  ACÁ DEBE ACTIVARSE EL TOPICO PARA LLAMAR LA ATENCION
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Adivinanza","DatoCurioso");
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        ConversarStrategy cs = new ConversarStrategy();
-        cs.setNombre(estrategia);
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        
+        OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
+        AtencionStrategy cs = new AtencionStrategy();
+        cs.setOpcion(estrategia);
+        
         blvs.getbEstadoActividad().setEstrategia(cs);
         
         ServiceDataRequest srb = cs.execStrategy();

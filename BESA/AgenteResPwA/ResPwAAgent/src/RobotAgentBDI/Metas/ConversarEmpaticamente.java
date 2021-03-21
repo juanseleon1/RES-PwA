@@ -12,8 +12,6 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.ConversarEmpaticamente.EjecutarEstrategiaConversar;
-import Tareas.ConversarEmpaticamente.EvaluarEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +32,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
         //evaluar estado emocional
         PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
-        EvaluarEstrategiaConversar evaluarEstrategiaC = new EvaluarEstrategiaConversar();
     
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan();
 
         rolePlan.addTask(preguntarSentimientos);
-        
         tarea.add(preguntarSentimientos);
-        rolePlan.addTask(evaluarEstrategiaC,tarea);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
         ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
@@ -65,14 +60,13 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-       if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
-       {
-           if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
-            return 1.0;
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        {
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) 
+            {
+                return 1.0;
+            }
         }
-        
-       }
-        
         return 0;
     }
 

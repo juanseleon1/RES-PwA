@@ -10,7 +10,6 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
-import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

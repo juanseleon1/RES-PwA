@@ -18,52 +18,48 @@ import rational.mapping.Believes;
  */
 public class AnimarStrategy implements ResPwAStrategy{
     
-    private String nombre;
+    private OpcionesAnimar opcion;
     
     @Override
     public ServiceDataRequest execStrategy() {
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
-        switch (nombre)
+        switch (opcion)
         {
-            case "fraseElogiante":
-                infoServicio.put("SAY", nombre);
+            case FRASEELOGIANTE:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "chiste":
-                infoServicio.put("SAY", nombre);
+            case CHISTE:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "adivinanza":
-                infoServicio.put("SAY", nombre);
+            case ADIVINANZA:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "datoCurioso":
-                infoServicio.put("SAY", nombre);
+            case DATOCURIOSO:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "preguntaEmpatica":
-                infoServicio.put("SAY", nombre);
+            case PREGUNTAEMPATICA:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "consejo":
-                infoServicio.put("SAY", nombre);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case "llamarPwa":
-                infoServicio.put("SAY", nombre);
+            case CONSEJO:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
         }
         return srb;
     }
 
-    public String getNombre() {
-        return nombre;
+    public OpcionesAnimar getOpcion() {
+        return opcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setOpcion(OpcionesAnimar opcion) {
+        this.opcion = opcion;
     }
 
     @Override

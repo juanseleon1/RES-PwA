@@ -8,8 +8,11 @@ import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
+import Tareas.AnimarElogiarPwA.OpcionesAnimar;
+import Tareas.MantenerAtencionPwA.OpcionesAtencion;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Random;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -125,5 +128,19 @@ public class BPerfilPwA implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
+    }
+    
+    public OpcionesAnimar getAnimarStrategy()
+    {
+        Random rand = new Random();
+        OpcionesAnimar[]opcs = OpcionesAnimar.values();
+        return opcs[rand.nextInt(opcs.length)];
+    }
+    
+    public OpcionesAtencion getAtencionStrategy()
+    {
+        Random rand = new Random();
+        OpcionesAtencion[]opcs = OpcionesAtencion.values();
+        return opcs[rand.nextInt(opcs.length)];
     }
 }

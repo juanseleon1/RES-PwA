@@ -46,9 +46,6 @@ public class PreguntarSentimientos extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Sentimientos ---");
-        deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
-        deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
-        deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
@@ -70,7 +67,11 @@ public class PreguntarSentimientos extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        //debe revisar que el estado animo haya cambiado y cierto tiempo
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
+            deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
+            deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
             return true;
         }
         return false;

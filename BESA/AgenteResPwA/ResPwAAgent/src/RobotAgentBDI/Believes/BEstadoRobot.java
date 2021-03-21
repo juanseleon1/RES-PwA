@@ -34,7 +34,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
     private boolean conexionInternet = false;
-    private boolean verificacionDispositivos = false;
+    private boolean verificacionDispositivos = true;
     private double velHabla;
     private double tonoHabla;
     private double distanciaX;

@@ -21,16 +21,18 @@ import rational.mapping.Believes;
 public class VerificacionDispositivos extends ResPwaTask{
 
     private HashMap<String,Object> infoServicio = new HashMap<>();
+    private long tiempoInicio = 0;
 
     public VerificacionDispositivos() {
 //        System.out.println("--- Task VerificacionDispositivos PwA Iniciada ---");
+        tiempoInicio = System.currentTimeMillis();
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         System.out.println("--- Check Finish VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().isVerificacionDispositivos())
+        if (blvs.getbEstadoRobot().isVerificacionDispositivos() && (System.currentTimeMillis()-tiempoInicio) >= 30000)
         {
             return true;
         }
