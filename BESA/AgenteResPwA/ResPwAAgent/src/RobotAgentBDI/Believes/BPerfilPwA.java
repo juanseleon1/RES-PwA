@@ -78,6 +78,46 @@ public class BPerfilPwA implements Believes {
         return true;
     }
 
+    Cancion selectSong( ) { // BEstadoEmocionalPwa estadoEmocional,
+//        si la emocion es displacentera se traen las canciones aptas para dar el soporte y se toma aleatoriamente
+        
+//        si la emocion es placentera, la cancion se escoge por un factor
+        
+        List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
+        double factor;
+        Cancion songSelected = null;
+        int posCancion = 0;
+        
+        factor = getFactor(canciones);
+              
+        while(songSelected == null){
+            posCancion = (int)(Math.random() * canciones.size());
+            if ( canciones.get( posCancion ).getGusto() > factor  ){
+                songSelected = canciones.get( posCancion );
+            }   
+        }
+          
+        return new Cancion();
+    }
+    
+    double getFactor( List<Cancion> canciones ){
+        double factor = Math.abs(Math.random() - 0.5);
+        double prom = 0.0;
+        int contadorCancionesMayoresFactor = 0;
+        for (Cancion cancion : canciones) {
+            if( cancion.getGusto() > factor ){
+                contadorCancionesMayoresFactor ++;
+            }
+            prom += cancion.getGusto();
+        }
+        if (contadorCancionesMayoresFactor <= 1 ){
+            prom = prom / canciones.size();
+            factor = prom;
+        }
+        
+        return factor;
+    }
+    
     void getFromDB(String cedula) {
         perfil = RESPwABDInterface.getProfile(cedula);
     }
