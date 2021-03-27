@@ -56,10 +56,10 @@ public class SalirDeSuspension extends GoalBDI {
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta RecargarBateria detectGoal");
+        System.out.println("Meta RecargarBateria detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().getBatteryPerc()>30.0 && blvs.getbEstadoRobot().getBateria()) {
+        if (blvs.getbEstadoRobot().getBatteryPerc()>30.0 && !blvs.getbEstadoRobot().getBateria() && blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
                 return 1.0;
         }
         return 0;
@@ -75,18 +75,18 @@ public class SalirDeSuspension extends GoalBDI {
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta RecargarBateria evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-        return blvs.getbEstadoRobot().getBateria() ? 1:0;
+        return blvs.getbEstadoRobot().getBateria() ? 1 : 0;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria predictResultUnlegality");
+        //System.out.println("Meta RecargarBateria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-                RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         return !blvs.getbEstadoRobot().getBateria();
     }
 

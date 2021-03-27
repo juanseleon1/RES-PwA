@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.InteraccionSocial;
+package Tareas.ExpresarEstadoEmocionalRobot;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerState;

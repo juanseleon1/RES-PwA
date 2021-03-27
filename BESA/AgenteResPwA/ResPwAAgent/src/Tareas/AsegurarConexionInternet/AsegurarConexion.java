@@ -10,6 +10,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -28,24 +29,28 @@ public class AsegurarConexion extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         System.out.println("--- Check Finish AsegurarConexion ---");
-        return false;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoRobot().isConexionInternet();
     }
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task AsegurarConexion ---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //¿Está conectado?
+        //System.out.println("--- Execute Task AsegurarConexion ---");
+        System.out.println("----REVISAR CONEXIÓN INTERNET ROBOT----");
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task AsegurarConexion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoRobot().setTiempoSinConexionInternet(0);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task AsegurarConexion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoRobot().setTiempoSinConexionInternet(0);
     }
     
 }

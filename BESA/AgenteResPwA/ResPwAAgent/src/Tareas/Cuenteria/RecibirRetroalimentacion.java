@@ -33,7 +33,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         //buscar texto
-        if(!blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()||true) {
+        if(!blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             infoServicio.put("SAY", "AskRetroCuento");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb, (RobotAgentBelieves) parameters);
