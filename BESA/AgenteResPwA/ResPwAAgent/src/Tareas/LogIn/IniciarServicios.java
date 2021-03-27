@@ -67,7 +67,7 @@ public class IniciarServicios extends ResPwaTask{
 
         infoServicio = new HashMap<>();
         infoServicio.put("ACTIVATEBREATHMOV", true);
-        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACIVATEBREATHMOV, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEBREATHMOV, infoServicio);
         requestService(srb,blvs);
 
         infoServicio = new HashMap<>();
@@ -121,7 +121,7 @@ public class IniciarServicios extends ResPwaTask{
         
         infoServicio = new HashMap<>();
         infoServicio.put("SETSAYVOLUMEN", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 0-1.0
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUMN, infoServicio);
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUME, infoServicio);
         requestService(srb,blvs);
         
         infoServicio = new HashMap<>();
