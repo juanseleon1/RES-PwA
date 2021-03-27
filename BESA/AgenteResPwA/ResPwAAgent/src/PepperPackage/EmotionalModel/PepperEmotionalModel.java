@@ -18,29 +18,52 @@ import Tareas.Cuenteria.LedsColor;
  */
 public class PepperEmotionalModel extends EmotionalModel {
 
-    private final double a;
+    private final double m;
+    private double currState;
+    private final double predetValue;
     private LedsColor lc;
-    private double qState;
+    private long lastUpdt;
+    private double emoLifeTime;
+    private static final double CHANGE_FACT = 0.3;
 
-    public PepperEmotionalModel() {
-        this.qState = 0;
-        this.a=0;
+    public PepperEmotionalModel(double predetValue) {
+        this.predetValue = predetValue;
+        this.m = 1;
     }
 
     @Override
     public void updateModel(EmotionalData e) {
-        
-//        TODO
-
+        updateModelValue();
+        lastUpdt = System.currentTimeMillis();
     }
 
     @Override
     public EmotionalState getState() {
+        double currTime = System.currentTimeMillis()-lastUpdt;
         EmotionalState ret = new EmotionalState();
         EmotionPwA emo = null;
-//        qState=qState+ (a*());
-        ret.setInfluenceFactor(qState);
+        updateModelValue();
+        lastUpdt = System.currentTimeMillis();
         ret.setDominantEmotion(emo);
         return ret;
+    }
+
+    public LedsColor getLc() {
+        return lc;
+    }
+
+    public void setLc(LedsColor lc) {
+        this.lc = lc;
+    }
+
+    private void updateModelValue() {
+        currState = (m) + (predetValue);
+    }
+    
+    
+    private double calculateDecayFactor(double currTime){
+       double decay=0;
+       //TODO
+       return 0;
     }
 }

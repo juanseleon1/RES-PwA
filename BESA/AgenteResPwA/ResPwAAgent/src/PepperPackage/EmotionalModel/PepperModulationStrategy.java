@@ -25,8 +25,6 @@ public class PepperModulationStrategy extends ModulationStrategy{
     private double pitch = 1.1;
     private double ledInt = 1;
     private final double ledRotVel = 2;
-    private static final double CHANGE_FACT = 0.3;
-    private static final double CHANGEEMO_FACT = 0.01;
 
     @Override
     public Map<String, Object> modulateAction(ServiceDataRequest sdr, EmotionalState currentEmotions) {

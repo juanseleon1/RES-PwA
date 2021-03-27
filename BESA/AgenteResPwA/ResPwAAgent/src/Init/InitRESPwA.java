@@ -52,14 +52,14 @@ public class InitRESPwA {
     public static String aliasSPAgent = "SPAgent";
     public static String emf = "ResPwAEntitiesPU";
     private static int PLANID = 0;
-    private static final double predefEmoState = 2.3;
+    private static final double predefEmoState = 0.3;
 
     public static void main(String[] args) {
         try {
             String cedula = null;//obtenerUsuario();
             AdmBESA.getInstance();
             System.out.println("Iniciando RES-PwA");
-            PepperEmotionalModel emoModel = new PepperEmotionalModel();
+            PepperEmotionalModel emoModel = new PepperEmotionalModel(predefEmoState);
             RobotAgentBDI RABDI = new RobotAgentBDI(aliasRobotAgent, createRobotAgentGoals(), cedula, emoModel);
             EmotionalAnalyzerAgent EAA = new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy());
             SensorHandlerAgent SHA = new SensorHandlerAgent(aliasSHAAgent);

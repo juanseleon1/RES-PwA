@@ -23,6 +23,7 @@ import rational.services.ActivateAsynchronousServiceGuard;
  * @author juans
  */
 public abstract class EmotionalModel {
+    private Personality personality;
     public abstract void updateModel(EmotionalData e);
     public abstract EmotionalState getState();
 
@@ -47,4 +48,12 @@ public abstract class EmotionalModel {
         }
     }
 
+    public Personality getPersonality() {
+        return personality;
+    }
+
+    public void setPersonality(Personality personality) {
+        this.personality = personality;
+    }
+    
 }
