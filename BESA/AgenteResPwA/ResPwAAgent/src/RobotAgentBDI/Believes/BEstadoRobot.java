@@ -34,6 +34,7 @@ public class BEstadoRobot implements Believes {
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
     private boolean conexionInternet = false;
+    private long tiempoSinConexionInternet = 0;
     private boolean verificacionDispositivos = true;
     private double velHabla;
     private double tonoHabla;
@@ -95,6 +96,9 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("conexionInternet")) {
                 conexionInternet = Boolean.valueOf((String) infoRecibida.getDataP().get("conexionInternet"));
+                if(conexionInternet){
+                    tiempoSinConexionInternet = System.currentTimeMillis();
+                }
             }
             if (infoRecibida.getDataP().containsKey("hotDeviceDetected")) {
                 verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
@@ -305,4 +309,14 @@ public class BEstadoRobot implements Believes {
     public void setLeds(LedsColor leds) {
         this.leds = leds;
     }
+
+    public long getTiempoSinConexionInternet() {
+        return System.currentTimeMillis()-tiempoSinConexionInternet;
+    }
+
+    public void setTiempoSinConexionInternet(long tiempoSinConexionInternet) {
+        this.tiempoSinConexionInternet = tiempoSinConexionInternet;
+    }
+    
+    
 }
