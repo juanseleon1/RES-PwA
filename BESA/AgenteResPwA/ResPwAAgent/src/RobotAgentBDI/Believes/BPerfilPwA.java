@@ -1,6 +1,8 @@
 package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
+import Personalizacion.Modelo.CromosomaCancion;
+import Personalizacion.Modelo.ModeloSeleccion;
 import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Cancion;
@@ -87,39 +89,31 @@ public class BPerfilPwA implements Believes {
 //        si la emocion es placentera, la cancion se escoge por un factor
         
         List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
-        double factor;
-        Cancion songSelected = null;
-        int posCancion = 0;
+        ModeloSeleccion modeloSeleccionCancion = new ModeloSeleccion(canciones);
         
-        factor = getFactor(canciones);
-              
-        while(songSelected == null){
-            posCancion = (int)(Math.random() * canciones.size());
-            if ( canciones.get( posCancion ).getGusto() > factor  ){
-                songSelected = canciones.get( posCancion );
-            }   
-        }
+        CromosomaCancion cromCancion = (CromosomaCancion) modeloSeleccionCancion.selectCromosoma();
+        Cancion songSelected = cromCancion.getCancion();
           
-        return new Cancion();
+        return songSelected;
     }
     
-    double getFactor( List<Cancion> canciones ){
-        double factor = Math.abs(Math.random() - 0.5);
-        double prom = 0.0;
-        int contadorCancionesMayoresFactor = 0;
-        for (Cancion cancion : canciones) {
-            if( cancion.getGusto() > factor ){
-                contadorCancionesMayoresFactor ++;
-            }
-            prom += cancion.getGusto();
-        }
-        if (contadorCancionesMayoresFactor <= 1 ){
-            prom = prom / canciones.size();
-            factor = prom;
-        }
-        
-        return factor;
-    }
+//    double getFactor( List<Cancion> canciones ){
+//        double factor = Math.abs(Math.random() - 0.5);
+//        double prom = 0.0;
+//        int contadorCancionesMayoresFactor = 0;
+//        for (Cancion cancion : canciones) {
+//            if( cancion.getGusto() > factor ){
+//                contadorCancionesMayoresFactor ++;
+//            }
+//            prom += cancion.getGusto();
+//        }
+//        if (contadorCancionesMayoresFactor <= 1 ){
+//            prom = prom / canciones.size();
+//            factor = prom;
+//        }
+//        
+//        return factor;
+//    }
     
     void getFromDB(String cedula) {
         perfil = RESPwABDInterface.getProfile(cedula);

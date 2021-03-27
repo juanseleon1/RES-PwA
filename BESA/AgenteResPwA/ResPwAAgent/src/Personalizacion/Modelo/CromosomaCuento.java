@@ -19,16 +19,13 @@ public class CromosomaCuento extends Cromosoma{
         this.cuento = cuento;
     }
     
-
-    
     @Override
     protected void calculateObjectiveValue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        objectiveValue = (float) this.cuento.getGusto();
     }
 
-    @Override
-    protected void calculateSelectionProbability(float totalObjectiveValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cuento getCuento() {
+        return cuento;
     }
     
 }

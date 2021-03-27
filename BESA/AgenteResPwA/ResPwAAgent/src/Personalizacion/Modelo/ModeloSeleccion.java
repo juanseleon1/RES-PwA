@@ -34,7 +34,7 @@ public class ModeloSeleccion<T> {
         }
 
         for (Cromosoma cromosoma : cromosomas) {
-            cromosoma.calculateSelectionProbability(valObjAcum);
+            calculateSelectionProbability(valObjAcum, cromosoma);
         }
 
         //SE REALIZA EL PUNTO 4 DEL DOCUMENTO EN ESTE PUNTO, EL RESTO ESTA BIEN
@@ -98,6 +98,11 @@ public class ModeloSeleccion<T> {
                 cromosomaCuento.setAverageSelectionProbability(probaCromAcum);
             }
         }
+    }
+    
+    public void calculateSelectionProbability(float totalObjectiveValue, Cromosoma crom) {
+        float selectionProbability = crom.getObjectiveValue() / totalObjectiveValue;
+        crom.setSelectionProbability(selectionProbability);
     }
 
     void initialize() {

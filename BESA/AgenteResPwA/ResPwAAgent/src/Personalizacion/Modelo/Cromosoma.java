@@ -15,7 +15,6 @@ public abstract class Cromosoma {
     protected float averageSelectionProbability;
     
     abstract protected void calculateObjectiveValue(  );
-    abstract protected void calculateSelectionProbability( float totalObjectiveValue );
 
     public float getObjectiveValue() {
         return objectiveValue;
@@ -40,7 +39,5 @@ public abstract class Cromosoma {
     public void setAverageSelectionProbability(float averageSelectionProbability) {
         this.averageSelectionProbability = averageSelectionProbability;
     }
-    
-    
     
 }

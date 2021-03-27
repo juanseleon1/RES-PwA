@@ -28,9 +28,10 @@ public class CromosomaCancion extends Cromosoma{
         }
     }
 
-    @Override
-    protected void calculateSelectionProbability(float totalObjectiveValue) {
-        selectionProbability = objectiveValue / totalObjectiveValue;
+    public Cancion getCancion() {
+        return cancion;
     }
+    
+     
     
 }
