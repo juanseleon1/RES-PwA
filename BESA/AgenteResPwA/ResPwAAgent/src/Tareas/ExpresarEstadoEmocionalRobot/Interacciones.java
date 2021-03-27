@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.InteraccionSocial;
+package Tareas.ExpresarEstadoEmocionalRobot;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
+import EmotionalAnalyzerAgent.EmotionalState;
 import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
@@ -37,8 +38,8 @@ public class Interacciones extends ResPwaTask{
         
         //mensajitos de acuerdo a sus emociones
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        double state = ((PepperEmotionalModel)blvs.getEm()).getState();
-        
+        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
+        double state= emoState.getInfluenceFactor();
         //toca modificar la emocion y color, depende de la encuesta
         if(state >= LedsColor.RED.getMin() && state < LedsColor.RED.getMax())
         {

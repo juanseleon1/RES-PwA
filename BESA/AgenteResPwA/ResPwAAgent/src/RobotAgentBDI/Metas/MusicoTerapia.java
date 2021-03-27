@@ -60,7 +60,7 @@ public class MusicoTerapia extends GoalBDI{
 //        rolePlan.addTask(retro,tarea);
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
-        MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.DUTY);
+        MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.OPORTUNITY);
         return b;
     }
     
@@ -77,7 +77,7 @@ public class MusicoTerapia extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta MusicoTerapia detectGoal");
+        System.out.println("Meta MusicoTerapia detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoActividad().getActividadActual()!=null && (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA)) && !blvs.getbEstadoActividad().isFinalizoActividad()
@@ -106,19 +106,22 @@ public class MusicoTerapia extends GoalBDI{
                 valor = act.getGusto();
             }
         }
-        
         return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MusicoTerapia predictResultUnlegability");
+        //System.out.println("Meta MusicoTerapia predictResultUnlegability");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta MusicoTerapia evaluateViability");
-        return true;
+        //System.out.println("Meta MusicoTerapia evaluateViability");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if((System.currentTimeMillis()-blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+            return true;
+        }
+        return false;
     }
 }

@@ -563,7 +563,7 @@ def activate_movement_detection(params):
     
 #Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
 def activate_face_detection(params):
-    enabled = params.get("ACTIVATELIFESIGNALSINT")
+    enabled = params.get("ACTIVATEFACEDETEC")
     alFaceDetection.setRecognitionEnabled(enabled)
 
 #Enable/Disable Anti-collision protection of the arms of the robot.

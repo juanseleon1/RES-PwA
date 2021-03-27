@@ -30,7 +30,7 @@ public class VerificarDispositivos extends GoalBDI{
         rolePlan.addTask(vd);
         
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
-        VerificarDispositivos b = new VerificarDispositivos(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.DUTY);
+        VerificarDispositivos b = new VerificarDispositivos(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
 
@@ -47,13 +47,13 @@ public class VerificarDispositivos extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta VerificarDispositivos detectGoal");
+        System.out.println("Meta VerificarDispositivos detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isVerificacionDispositivos())
+        if(!blvs.getbEstadoRobot().isVerificacionDispositivos() && !blvs.getbEstadoRobot().getBateria())
         {
-            return 0;
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -77,7 +77,8 @@ public class VerificarDispositivos extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta VerificarDispositivos goalSucceeded");
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoRobot().isVerificacionDispositivos();
     }
     
 }

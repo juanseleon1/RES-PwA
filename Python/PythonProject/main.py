@@ -9,13 +9,13 @@ from Robot import Robot
 from Utils import activities_running, send
 
 
+
 # --------------------------------------------------Functions-----------------------------------------------------------------------
 def timer_activities():
     for key, value in activities_running.items():
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
     threading.Timer(10.0, timer_activities).start()
-
 
 def safe_str(obj):
     try:
@@ -43,7 +43,6 @@ def handle_client():
     # msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
 
     callFunction(jsonObj)
-
 
 def callFunction(jsonObj):
     function = robot.getFunction(jsonObj["methodName"])
@@ -128,7 +127,6 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
-
 robot = Robot(session)
 while 1:
     conn, addr = server.accept()

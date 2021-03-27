@@ -10,6 +10,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityService;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
+import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class ActivarSenialesVida extends ResPwaTask{
     public void executeTask(Believes parameters) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put(ACTIVATE_LIFE_SIGNALS, true); 
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.ACTIVATELIFESIGNALS , infoServicio);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS , infoServicio);
         requestService(srb, blvs);
     }
 

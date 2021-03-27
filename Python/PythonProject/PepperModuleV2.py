@@ -1,7 +1,6 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
-
-
+import re
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 
@@ -484,8 +483,26 @@ class pepperModuleV2(object):
 
     def getDialogInput(self, value):
         # The value is the last human input
-        if value:
-            print "enviar", value
-            json_params = {"DialogInput": value}
+        #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+
+        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
+        resultValue = None
+
+        for word in value:
+            if((len(re.findall(r'mu\w+',word)) == 1 or len(re.findall(r'sub\w+',word)) != 0) and (len(re.findall(r'brill\w+',word)) != 0)):
+                resultValue = 'decrease brigthness'
+
+            if(len(re.findall(r'baj\w+',word)) == 1 and len(re.findall(r'brill\w+',word)) != 0):
+                resultValue = 'increase brigthness'
+
+            if((len(re.findall(r'baj\w+',word)) == 1 or len(re.findall(r'dur\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'dur\w+',word)) != 0)):
+                resultValue = 'decrease volume'
+
+            if((len(re.findall(r'sub\w+',word)) == 1 or len(re.findall(r'nada\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'hab\w+',word)) != 0)):
+                resultValue = 'decrease volume'
+
+        if resultValue:
+            print "enviar", resultValue
+            json_params = {"DialogInput": resultValue}
             send(-1, "int", json_params)
 

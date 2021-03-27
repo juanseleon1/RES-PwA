@@ -23,10 +23,11 @@ import rational.services.ActivateAsynchronousServiceGuard;
  * @author juans
  */
 public abstract class EmotionalModel {
+    private Personality personality;
     public abstract void updateModel(EmotionalData e);
-    public abstract void updtModelFromEvt(EmotionalData sd);
-    public abstract Map<String,Object> filterFromEM(Map<String,Object> map);
+    public abstract EmotionalState getState();
 
+    
     protected void sendAct(EmotionalData ed) throws ExceptionBESA{
         AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
         EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),ed);
@@ -46,4 +47,13 @@ public abstract class EmotionalModel {
             Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Personality getPersonality() {
+        return personality;
+    }
+
+    public void setPersonality(Personality personality) {
+        this.personality = personality;
+    }
+    
 }

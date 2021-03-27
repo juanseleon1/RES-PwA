@@ -1,21 +1,13 @@
 import threading
 import time
-
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
 from Topics import *
 from Utils import activities_running, send
 
-# ----------------------------------------------------------------------------Robot
-# class---------------------------------------------------------------------------------------------
 
-"""--------------------------------------------------------------------------Robot 
-class--------------------------------------------------------------------------------------------- """
-
-
-# ----------------------------------------------------------------------------Robot
-# class---------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
     def __init__(self, session):
         print "INICIA ROBOT CARGADO Y LISTO"
@@ -79,14 +71,10 @@ class Robot:
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
 
-        self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
-
-        # self.alSpeechRecognition.setParameter()
-
+       # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
-        self.init_topics()
-
+        #self.init_topics()
 
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
@@ -639,17 +627,18 @@ class Robot:
         if topicName not in self.alDialogProxy.getActivatedTopics():
             self.alDialogProxy.activateTopic(topicName)
 
-
     def desactivate_conversational_topic(self, topic_name):
         if topic_name in self.alDialogProxy.getActivatedTopics():
             self.alDialogProxy.deactivateTopic(topic_name)
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+
     # def
 
     def desactivate_conversational_topic_json(self, params):
         topicName = params.get("TOPICNAME")
         self.desactivate_conversational_topic(topicName)
+
     # def
 
     def registrar_cuidador(params):

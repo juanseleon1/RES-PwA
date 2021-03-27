@@ -52,7 +52,7 @@ public class InitRESPwA {
     public static String aliasSPAgent = "SPAgent";
     public static String emf = "ResPwAEntitiesPU";
     private static int PLANID = 0;
-    private static final double predefEmoState = 2.3;
+    private static final double predefEmoState = 0.3;
 
     public static void main(String[] args) {
         try {
@@ -61,7 +61,7 @@ public class InitRESPwA {
             System.out.println("Iniciando RES-PwA");
             PepperEmotionalModel emoModel = new PepperEmotionalModel(predefEmoState);
             RobotAgentBDI RABDI = new RobotAgentBDI(aliasRobotAgent, createRobotAgentGoals(), cedula, emoModel);
-            EmotionalAnalyzerAgent EAA = new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy(), emoModel);
+            EmotionalAnalyzerAgent EAA = new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy());
             SensorHandlerAgent SHA = new SensorHandlerAgent(aliasSHAAgent);
             PepperAdapter p = new PepperAdapter();
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
@@ -155,8 +155,6 @@ public class InitRESPwA {
         EAA.start();
         SHA.start();
         SHA.subscribeServices();
-        EAA.startEmotionalModel();
-
     }
 
 }
