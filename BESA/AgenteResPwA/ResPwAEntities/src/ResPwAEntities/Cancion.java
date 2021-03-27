@@ -44,6 +44,9 @@ public class Cancion implements Serializable {
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
+    @Basic(optional = false)
+    @Column(name = "REMINISCENCIA")
+    private boolean reminiscencia;
     @JoinTable(name = "LISTATAGS", joinColumns = {
         @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
         @JoinColumn(name = "TAGS_ID", referencedColumnName = "ID")})
@@ -78,6 +81,14 @@ public class Cancion implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean isReminiscencia() {
+        return reminiscencia;
+    }
+
+    public void setReminiscencia(boolean reminiscencia) {
+        this.reminiscencia = reminiscencia;
     }
 
     public double getGusto() {

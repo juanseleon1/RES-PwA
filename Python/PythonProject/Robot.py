@@ -94,6 +94,7 @@ class Robot:
         print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
+        time.sleep(5)
         self.init_timers()
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
