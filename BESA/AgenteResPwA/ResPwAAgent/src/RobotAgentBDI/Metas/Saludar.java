@@ -47,10 +47,11 @@ public class Saludar extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta Saludar detectGoal");
+        System.out.println("Meta Saludar detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isMovManoSaludo() || (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().getTiempoSinInt() > 10000)){
+        if (blvs.getbEstadoInteraccion().isMovManoSaludo() || (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().getTiempoSinInt() > 10000) && 
+                !blvs.getbEstadoRobot().isEstaSuspendido() && !blvs.getbEstadoRobot().getBateria()){
             return 1;
         }
         return 1;
@@ -77,7 +78,8 @@ public class Saludar extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Saludar goalSucceeded");
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoInteraccion().isSaludo();
     }
     
 }

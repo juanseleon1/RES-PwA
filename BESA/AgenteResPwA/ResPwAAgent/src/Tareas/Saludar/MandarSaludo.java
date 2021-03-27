@@ -29,10 +29,12 @@ public class MandarSaludo extends ResPwaTask{
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando()) {
-            return false;
+        if(blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            blvs.getbEstadoInteraccion().setSaludo(true);
+            activateTopic( PepperTopicsNames.BASICTOPIC, believes);
+            return true;
         }
-        return true;
+        return false;
     }
     
     @Override
@@ -48,13 +50,12 @@ public class MandarSaludo extends ResPwaTask{
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Mandar Saludo ---");
         deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) believes);
     }
     
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Mandar Saludo ---");
+        deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
     }
     
 }

@@ -23,21 +23,24 @@ import rational.mapping.Believes;
  */
 public class RobotAgentBelieves implements Believes {
 
-    private BEstadoInteraccion bEstadoInteraccion = new BEstadoInteraccion();
-    private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
+    private BEstadoInteraccion bEstadoInteraccion;
+    private BEstadoEmocionalPwA bEstadoEmocionalPwA;
     private BEstadoActividad bEstadoActividad;
     private BPerfilPwA bPerfilPwA;
-    private BEstadoRobot bEstadoRobot = new BEstadoRobot();
+    private BEstadoRobot bEstadoRobot;
     private Map<String, List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
-    private EmotionalModel em;
+    private BEstadoEmocionalRobot bEstadoEmocionalRobot;
 
     public RobotAgentBelieves(String cedula, EmotionalModel em) {
+        bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
+        bEstadoInteraccion = new BEstadoInteraccion();
+        bEstadoRobot = new BEstadoRobot();
+        bEstadoEmocionalRobot = new BEstadoEmocionalRobot(em);
         imgCuentos = new HashMap<>();
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
-        this.em=em;
 //        getPerfilBD(cedula);
         FBaseUtils.initResPwa(this);
     }
@@ -153,14 +156,16 @@ public class RobotAgentBelieves implements Believes {
     @Override
     public Believes clone() throws CloneNotSupportedException {
         return this;
+    }    
+
+    public BEstadoEmocionalRobot getbEstadoEmocionalRobot() {
+        return bEstadoEmocionalRobot;
     }
 
-    public EmotionalModel getEm() {
-        return em;
+    public void setbEstadoEmocionalRobot(BEstadoEmocionalRobot bEstadoEmocionalRobot) {
+        this.bEstadoEmocionalRobot = bEstadoEmocionalRobot;
     }
-
-    public void setEm(EmotionalModel em) {
-        this.em = em;
-    }
+    
+    
     
 }

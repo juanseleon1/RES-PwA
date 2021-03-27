@@ -48,7 +48,7 @@ HIDEIMG,ALTabletService/hideImage
 SETTABLETBRIGHT,ALTabletService/setBrightness 
 SETTABLETVOL,ALTabletService/setVolume
 SAY,ALTextToSpeech/say 
-SETSAYVOLUMN,ALTextToSpeech/setVolume 
+SETSAYVOLUME,ALTextToSpeech/setVolume 
 SAYWITHMOVEMENT,ALAnimatedSpeec/say
 SETSYSTEMVOLUME,ALAudioDevice/setOutputVolume 
 PLAYSOUND,ALAudioPlayer/playFile 

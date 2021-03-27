@@ -23,6 +23,7 @@ import rational.mapping.Plan;
 public class ReportarEmergencia extends GoalBDI{
     
     private static String descrip = "ReportarEmergencia";
+    private double tiempo = 0;
     
     public static ReportarEmergencia buildGoal() {
         LlamarCuidador lc = new LlamarCuidador();
@@ -47,14 +48,15 @@ public class ReportarEmergencia extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ReportarEmergencia detectGoal");
+        System.out.println("Meta ReportarEmergencia detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //¿si dice ayuda? - topicos
-        if(blvs.getbEstadoInteraccion().isDetectaPwA())
+        //PwA diga ayuda
+        if(!blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged() 
+                && (System.currentTimeMillis()-blvs.getbEstadoInteraccion().getTiempoEmergenciaTrans())/1000 >= 60)
         {
-            return 0;
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -78,7 +80,11 @@ public class ReportarEmergencia extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta ReportarEmergencia goalSucceeded");
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isDetectaPersona() || blvs.getbEstadoInteraccion().isDetectaPwA()){
+            return true;
+        }
+        return false;
     }
     
 }

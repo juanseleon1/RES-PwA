@@ -12,6 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.AsegurarConexionInternet.AsegurarConexion;
+import java.util.Random;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -47,14 +48,14 @@ public class AsegurarConexionInternet extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta AsegurarConexionInternet detectGoal");
+        System.out.println("Meta AsegurarConexionInternet detectGoal");
         //meta mas importante
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isConexionInternet())
+        if(!blvs.getbEstadoRobot().isConexionInternet() && !blvs.getbEstadoRobot().getBateria() && (blvs.getbEstadoRobot().getTiempoSinConexionInternet())/1000 > 60)
         {
-            return 0;
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -78,7 +79,8 @@ public class AsegurarConexionInternet extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta AsegurarConexionInternet goalSucceeded");
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoRobot().isConexionInternet();
     }
     
 }

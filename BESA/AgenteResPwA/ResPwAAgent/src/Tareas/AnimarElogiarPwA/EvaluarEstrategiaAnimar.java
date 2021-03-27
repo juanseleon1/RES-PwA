@@ -51,6 +51,11 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Animar PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()){
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
@@ -58,7 +63,7 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
         System.out.println("--- Cancel Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if(blvs.getbEstadoInteraccion().isEstaHablando()){
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb,blvs);
         }

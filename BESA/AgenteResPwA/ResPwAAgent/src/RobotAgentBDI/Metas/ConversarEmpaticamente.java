@@ -15,6 +15,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -41,7 +42,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         tarea.add(preguntarSentimientos);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
-        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
+        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.REQUIREMENT);
         return b;
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -57,12 +58,13 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ConversarEmpaticamente detectGoal");
-        
+        System.out.println("Meta ConversarEmpaticamente detectGoal");
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) 
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
+                    blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
             {
                 return 1.0;
             }
@@ -86,15 +88,19 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
+        //System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+            return true;
+        }
+        return false;
     }
     
 }

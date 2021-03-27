@@ -68,7 +68,7 @@ public class BEstadoActividad implements Believes {
             actividadEnCurso = Boolean.valueOf((String) infoRecibida.getDataP().get("actividadEnCurso"));
             if (actividadEnCurso) {
                 tiempoInicioActividad = System.currentTimeMillis();
-                estadoInit = blvs.getbEstadoEmocionalPwA().getEmocionPredominante().toString();
+                estadoInit = blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().toString();
             } else {
 
                 tiempoInicioActividad = 0;
