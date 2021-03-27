@@ -87,6 +87,7 @@ public class Cancion implements Serializable {
         return reminiscencia;
     }
 
+    
     public void setReminiscencia(boolean reminiscencia) {
         this.reminiscencia = reminiscencia;
     }
