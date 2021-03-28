@@ -48,7 +48,10 @@ public class BEstadoInteraccion implements Believes{
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
     private boolean movError;
+    private boolean modificarPreferencias = false;
+    private String respuestaPreferencia = null;
 
+    
     
     @Override
     public boolean update(InfoData si) {
@@ -142,6 +145,14 @@ public class BEstadoInteraccion implements Believes{
         }
         if(infoRecibida.getDataP().containsKey("ayudaExitosa")){
             ayudaActividadSolicitada = Boolean.valueOf((String)infoRecibida.getDataP().get("ayudaExitosa"));
+        }
+        
+        if (infoRecibida.getDataP().containsKey("DialogInput")){
+            respuestaPreferencia = (String)infoRecibida.getDataP().get("DialogInput");
+            String resulSet[] = respuestaPreferencia.split(" ");
+            if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
+                modificarPreferencias = true;
+            }
         }
         
         return true;
@@ -404,7 +415,21 @@ public class BEstadoInteraccion implements Believes{
     public void setTiempoEmergenciaTrans(double tiempoEmergenciaTrans) {
         this.tiempoEmergenciaTrans = tiempoEmergenciaTrans;
     }
-    
-    
+    public boolean isModificarPreferencias() {
+        return modificarPreferencias;
+    }
+
+    public void setModificarPreferencias(boolean modificarPreferencias) {
+        this.modificarPreferencias = modificarPreferencias;
+    }
+
+    public String getRespuestaPreferencia() {
+        return respuestaPreferencia;
+    }
+
+    public void setRespuestaPreferencia(String respuestaPreferencia) {
+        this.respuestaPreferencia = respuestaPreferencia;
+    }
+
     
 }

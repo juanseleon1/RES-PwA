@@ -42,6 +42,15 @@ public class BEstadoRobot implements Believes {
     private double distanciaY;
     private double ledIntensity;
     private LedsColor leds = null;
+    private double brilloRobot = 0;
+
+    public void setBrilloRobot(double brilloRobot) {
+        this.brilloRobot = brilloRobot;
+    }
+
+    public double getBrilloRobot() {
+        return brilloRobot;
+    }
 
     @Override
     public boolean update(InfoData si) {
