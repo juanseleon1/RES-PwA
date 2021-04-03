@@ -55,27 +55,36 @@ public class ModeloSeleccion<T> {
         List<Cromosoma> auxCromosomas = cromosomas;
 
         percentSelected = Math.random();
-        
-        if ( percentSelected < auxCromosomas.get(0).getAverageSelectionProbability()  ){
+//        System.out.println("percentSelected: " + percentSelected);
+        if (percentSelected < auxCromosomas.get(0).getAverageSelectionProbability()) {
             searched = true;
+            cromosomaPosterior = auxCromosomas.get(0);
         }
 
         while (!searched) {
+            
+            if (auxCromosomas.size() > 1) {
+                cromosomaAnterior = auxCromosomas.get((auxCromosomas.size() / 2) - 1);
 
-            cromosomaAnterior = auxCromosomas.get(auxCromosomas.size() / 2);
+                cromosomaPosterior = auxCromosomas.get((auxCromosomas.size() / 2));
 
-            cromosomaPosterior = auxCromosomas.get((auxCromosomas.size() / 2) + 1);
-
-            if (cromosomaAnterior.getAverageSelectionProbability() < percentSelected && percentSelected <= cromosomaPosterior.getAverageSelectionProbability()) {
-                searched = true;
-            } else if (cromosomaAnterior.getAverageSelectionProbability() > percentSelected) {
-                posSuperior = (auxCromosomas.size() / 2);
-                auxCromosomas = auxCromosomas.subList(posAnterior, posSuperior);
-            } else if (cromosomaPosterior.getAverageSelectionProbability() < percentSelected) {
-                posAnterior = (auxCromosomas.size() / 2);
-                auxCromosomas = auxCromosomas.subList(posAnterior, posSuperior);
+                if (cromosomaAnterior.getAverageSelectionProbability() < percentSelected && percentSelected <= cromosomaPosterior.getAverageSelectionProbability()) {
+                    searched = true;
+                } else if (cromosomaAnterior.getAverageSelectionProbability() > percentSelected) {
+                    posSuperior = (auxCromosomas.size() / 2);
+                    auxCromosomas = auxCromosomas.subList(posAnterior, posSuperior);
+                } else if (cromosomaPosterior.getAverageSelectionProbability() < percentSelected) {
+                    posAnterior = (auxCromosomas.size() / 2);
+                    auxCromosomas = auxCromosomas.subList(posAnterior, posSuperior);
+                    posSuperior = auxCromosomas.size();
+                    posAnterior = 0;
+                }
             }
-        } 
+            else{
+                cromosomaPosterior = auxCromosomas.get(0);
+                searched = true;
+            }
+        }
 
         return cromosomaPosterior;
     }
@@ -99,7 +108,7 @@ public class ModeloSeleccion<T> {
             }
         }
     }
-    
+
     public void calculateSelectionProbability(float totalObjectiveValue, Cromosoma crom) {
         float selectionProbability = crom.getObjectiveValue() / totalObjectiveValue;
         crom.setSelectionProbability(selectionProbability);
