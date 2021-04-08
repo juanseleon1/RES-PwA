@@ -5,6 +5,7 @@
  */
 package Personalizacion.Modelo;
 
+import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class TestingModeloSeleccion {
     public static void main(String args[]) {
         pruebaModeloCuento();
         pruebaModeloCancion();
+        pruebaModeloBaile();
 
     }
     
@@ -49,6 +51,37 @@ public class TestingModeloSeleccion {
                 System.out.println("NULL");
             }
         } while (cuentoSelected.getNombre() != "awita4");
+    }
+    
+    public static void pruebaModeloBaile(){
+        System.out.println("BAILE");
+        List<Baile> bailes = new ArrayList<>();
+        Baile baile0 = new Baile("awita0", 0.6);
+        Baile baile1 = new Baile("awita1", 0.6);
+        Baile baile2 = new Baile("awita2", 0.6);
+        Baile baile3 = new Baile("awita3", 1.0);
+        Baile baile4 = new Baile("awita4", 0.1);
+
+        bailes.add(baile0);
+        bailes.add(baile1);
+        bailes.add(baile2);
+        bailes.add(baile3);
+        bailes.add(baile4);
+        
+        System.out.println("siize: " + bailes.size());
+        ModeloSeleccion<Baile> modeloBaile = new ModeloSeleccion<Baile>(bailes);
+        
+        Baile baileSelected = null;
+        CromosomaBaile cromosoma = null;
+        do {
+            cromosoma = (CromosomaBaile) modeloBaile.selectCromosoma();
+            if (cromosoma != null) {
+                baileSelected = cromosoma.getBaile();
+                System.out.println(baileSelected.getNombre());
+            } else {
+                System.out.println("NULL");
+            }
+        } while (baileSelected.getNombre() != "awita4");
     }
     
     public static void pruebaModeloCancion(){

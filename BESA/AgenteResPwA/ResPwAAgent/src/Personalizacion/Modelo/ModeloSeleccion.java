@@ -5,6 +5,7 @@
  */
 package Personalizacion.Modelo;
 
+import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import java.util.ArrayList;
@@ -91,7 +92,6 @@ public class ModeloSeleccion<T> {
 
     public void calculateProbabilitiesForSelection() {
         float probaCromAcum = (float) 0.0;
-
         if (cromosomas.get(0) instanceof CromosomaCancion) {
             CromosomaCancion cromosomaCancion;
             for (Cromosoma cromosoma : cromosomas) {
@@ -106,7 +106,15 @@ public class ModeloSeleccion<T> {
                 probaCromAcum += cromosoma.getSelectionProbability();
                 cromosomaCuento.setAverageSelectionProbability(probaCromAcum);
             }
+        } else if (cromosomas.get(0) instanceof CromosomaBaile) {
+            CromosomaBaile cromosomaBaile;
+            for (Cromosoma cromosoma : cromosomas) {
+                cromosomaBaile = (CromosomaBaile) cromosoma;
+                probaCromAcum += cromosoma.getSelectionProbability();
+                cromosomaBaile.setAverageSelectionProbability(probaCromAcum);
+            }
         }
+        
     }
 
     public void calculateSelectionProbability(float totalObjectiveValue, Cromosoma crom) {
@@ -121,7 +129,10 @@ public class ModeloSeleccion<T> {
                 cromosomas.add(new CromosomaCancion((Cancion) t));
             } else if (t instanceof Cuento) {
                 cromosomas.add(new CromosomaCuento((Cuento) t));
+            } else if (t instanceof Baile) {
+                cromosomas.add(new CromosomaBaile((Baile) t));
             }
+            
 
         }
     }
