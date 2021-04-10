@@ -42,7 +42,7 @@ public class RobotAgentBelieves implements Believes {
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
 //        getPerfilBD(cedula);
-        FBaseUtils.initResPwa(this);
+//        FBaseUtils.initResPwa(this);
     }
 
     //AQUI SE MANDA LO DE INFORMATIONFLOW

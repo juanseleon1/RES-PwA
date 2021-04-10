@@ -2,42 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/ResPwaTask.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Saludar/MandarSaludo.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEAStrategy.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperServiceMapper.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/RecibirRetroalimentacion.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BPerfilPwA.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/InteraccionSocial/Interacciones.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/SeleccionarBaile.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/EnriquecerStrategy.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/PedirAyuda/PeticionAyuda.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/ServiceAgentResPwA/VoiceServices/VoiceServiceRequestType.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/EvaluarEstrategiaEnriquecer.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapterReceiver.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEMParams.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/ReproduccionCancion.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ReportarEmergencia/LlamarCuidador.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MantenerAtencionPwA/EvaluarEstrategiaAtencion.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/ServiceAgentResPwA/TabletServices/TabletService.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Test/TestTask.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/SeleccionarCancion.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/RecargarBateria/SuspenderRobot.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/RecargarBateria.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/ServiceAgentResPwA/ActivityServices/ActivityServiceRequestType.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/ServiceRequestDataBuilder/ServiceRequestBuilder.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/ServiceAgentResPwA/VoiceServices/PepperTopicsNames.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ConversarEmpaticamente/PreguntarSentimientos.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/EstimularEmocionalmente/EjecutarEstrategiaEstimular.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/EstimularEmocionalmente/RetroalimentarBDI.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
-            <file>file:/D:/Universidad/10%20semestre/TG/Pepper/SASE-PwD/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEmotionalModel.java</file>
-
-        </group>
+        <group/>
     </open-files>
 </project-private>
