@@ -16,7 +16,11 @@ public class EmotionalActor {
     }
 
     public void addEmotionAxis(EmotionAxis ea) {
-        emotionalState.addEmotionAxis(ea.clone());
+        try {
+            emotionalState.addEmotionAxis(ea.clone());
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(EmotionalActor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setPersonRelationship(String person, String relationship) {

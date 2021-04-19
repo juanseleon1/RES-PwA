@@ -54,12 +54,12 @@ public class EmotionAxis {
         this.forgetFactor = forgetFactor;
     }
 
-    protected final void setCurrentValue(float value) {
+    public final void setCurrentValue(float value) {
         this.currentValue = Utils.checkNegativeOneToOneLimits(value);
         this.lastForgetUpdateTime = new Date();
     }
 
-    protected final void setBaseValue(float value) {
+    public final void setBaseValue(float value) {
         this.baseValue = Utils.checkNegativeOneToOneLimits(value);
     }
 
@@ -88,7 +88,7 @@ public class EmotionAxis {
         return eventInfluence;
     }
 
-    protected void updateIntensity(String event, float intensity) {
+    public void updateIntensity(String event, float intensity) {
         Float influence = getEventInfluence(event);
         if (influence != null) {
             intensity = influence * intensity;
@@ -105,7 +105,7 @@ public class EmotionAxis {
     }
 
     @Override
-    public EmotionAxis clone() {
+    public EmotionAxis clone() throws CloneNotSupportedException {
         EmotionAxis e = new EmotionAxis(this.positiveName, this.negativeName, this.getCurrentValue(), this.baseValue, this.forgetFactor);
         Iterator itr = eventInfluence.keySet().iterator();
         if (itr != null) {

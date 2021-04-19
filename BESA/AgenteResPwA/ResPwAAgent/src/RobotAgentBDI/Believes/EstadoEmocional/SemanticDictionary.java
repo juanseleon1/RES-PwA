@@ -27,12 +27,15 @@ public class SemanticDictionary {
     }
 
     private Map getList(EmotionElementType t) {
-        if (t.equals(EmotionElementType.Object)) {
-            return this.objectRelationships;
-        } else if (t.equals(EmotionElementType.Person)) {
-            return this.personRelationships;
-        } else if (t.equals(EmotionElementType.Event)) {
-            return this.eventDesirability;
+        switch (t) {
+            case Object:
+                return this.objectRelationships;
+            case Person:
+                return this.personRelationships;
+            case Event:
+                return this.eventDesirability;
+            default:
+                break;
         }
         return null;
     }

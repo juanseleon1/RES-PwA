@@ -1,5 +1,6 @@
 package RobotAgentBDI.Believes.EstadoEmocional;
 
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -51,7 +52,7 @@ public class EmotionalState {
         return emotions.toString();
     }
 
-    protected EmotionAxis getMostActivatedEmotion() {
+    protected EmotionAxis getMostActivatedEmotion() throws CloneNotSupportedException {
         EmotionAxis ea = null;
         Iterator itr = emotions.iterator();
         if (itr != null) {
@@ -69,7 +70,7 @@ public class EmotionalState {
         }
     }
 
-    protected List<EmotionAxis> getEmotionsListCopy() {
+    protected List<EmotionAxis> getEmotionsListCopy() throws CloneNotSupportedException {
         List<EmotionAxis> list = new ArrayList<>();
         Iterator itr = emotions.iterator();
         if (itr != null) {
