@@ -41,7 +41,7 @@ public class Cuidador implements Serializable {
     @Column(name = "NOMBREUSUARIO")
     private String nombreusuario;
     @Basic(optional = false)
-    @Column(name = "CONTRASE\u00d1A")
+    @Column(name = "CONTRASENA")
     private String contraseña;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
