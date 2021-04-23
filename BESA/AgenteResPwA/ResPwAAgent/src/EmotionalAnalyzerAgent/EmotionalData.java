@@ -5,6 +5,7 @@
  */
 package EmotionalAnalyzerAgent;
 
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import SensorHandlerAgent.SensorData;
 import com.google.common.collect.HashBiMap;
 import java.util.HashMap;
@@ -18,23 +19,17 @@ import rational.data.InfoData;
 public class EmotionalData extends InfoData {
 
     private Map<String, Object> info;
-    private WHO who;
-    private EmotionalEventType emoType;
-    private double objImpact;
-
+    private EmotionalEvent emoEv;
     public static EmotionalData fromSensorData(SensorData infoRecibida) {
         EmotionalData em = new EmotionalData();
-        em.who = WHO.PWA;
         em.info = infoRecibida.getDataP();
-        em.emoType = em.getEmotionalEventMapping();
+        em.emoEv = null;
         return em;
     }
 
     public static EmotionalData getPeriodicData() {
         EmotionalData em = new EmotionalData();
-        em.who = WHO.ROBOT;
         em.info = new HashMap<>();
-        em.emoType = EmotionalEventType.INTERNALUPDT;
         return em;
 
     }
@@ -52,47 +47,18 @@ public class EmotionalData extends InfoData {
         this.info = info;
     }
 
-    public WHO getWho() {
-        return who;
-    }
-
-    public void setWho(WHO who) {
-        this.who = who;
-    }
-
-    public EmotionalEventType getEmoType() {
-        return emoType;
-    }
-
-    public void setEmoType(EmotionalEventType emoType) {
-        this.emoType = emoType;
-    }
-
     private EmotionalEventType getEmotionalEventMapping() {
         EmotionalEventType resp = EmotionalEventType.getFromId(this.info.keySet().iterator().next());
         return resp;
     }
 
-    public double getObjImpact() {
-        return objImpact;
+    public EmotionalEvent getEmoEv() {
+        return emoEv;
     }
 
-    public void setObjImpact(double objImpact) {
-        this.objImpact = objImpact;
+    public void setEmoEv(EmotionalEvent emoEv) {
+        this.emoEv = emoEv;
     }
-
-    public int getEventValence() {
-        int valence = 1;
-        boolean c1 = emoType.getValue()<0 && who.getValue() < 0 && objImpact>0;
-        boolean c2 = emoType.getValue()>0 && who.getValue() < 0 && objImpact<0;
-        boolean c3 = emoType.getValue()>0 && who.getValue() < 0 && objImpact>0;
-        boolean c4 = emoType.getValue()<0 && who.getValue() > 0 && objImpact>0;
-        boolean c5 = emoType.getValue()>0 && who.getValue() > 0 && objImpact<0;
-
-        if (c1 || c2 || c3 || c4 || c5) {
-            valence = -1;
-        }
-        return valence;
-
-    }
+    
+    
 }

@@ -38,8 +38,8 @@ public class Interacciones extends ResPwaTask{
         
         //mensajitos de acuerdo a sus emociones
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
-        double state= emoState.getInfluenceFactor();
+//        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
+        double state= 0;//emoState.getInfluenceFactor();
         //toca modificar la emocion y color, depende de la encuesta
         if(state >= LedsColor.RED.getMin() && state < LedsColor.RED.getMax())
         {

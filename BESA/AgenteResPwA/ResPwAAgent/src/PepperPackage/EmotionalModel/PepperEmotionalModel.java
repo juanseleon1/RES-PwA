@@ -5,12 +5,7 @@
  */
 package PepperPackage.EmotionalModel;
 
-import BESA.ExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
-import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalModel;
-import EmotionalAnalyzerAgent.EmotionalState;
-import Tareas.Cuenteria.LedsColor;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 
 /**
  *
@@ -18,52 +13,25 @@ import Tareas.Cuenteria.LedsColor;
  */
 public class PepperEmotionalModel extends EmotionalModel {
 
-    private final double m;
-    private double currState;
-    private final double predetValue;
-    private LedsColor lc;
-    private long lastUpdt;
-    private double emoLifeTime;
-    private static final double CHANGE_FACT = 0.3;
 
-    public PepperEmotionalModel(double predetValue) {
-        this.predetValue = predetValue;
-        this.m = 1;
+    public PepperEmotionalModel() {
+
     }
 
     @Override
-    public void updateModel(EmotionalData e) {
-        updateModelValue();
-        lastUpdt = System.currentTimeMillis();
+    public void loadSemanticDictionary() {
+
     }
 
     @Override
-    public EmotionalState getState() {
-        double currTime = System.currentTimeMillis()-lastUpdt;
-        EmotionalState ret = new EmotionalState();
-        EmotionPwA emo = null;
-        updateModelValue();
-        lastUpdt = System.currentTimeMillis();
-        ret.setDominantEmotion(emo);
-        return ret;
-    }
-
-    public LedsColor getLc() {
-        return lc;
-    }
-
-    public void setLc(LedsColor lc) {
-        this.lc = lc;
-    }
-
-    private void updateModelValue() {
-        currState = (m) + (predetValue);
-    }
+    public void loadCharacterDescriptor() {
     
-    
-    private double calculateDecayFactor(double currTime){
-       double decay=0;
-       //TODO
-       return 0;
     }
+
+    @Override
+    public void emotionalStateChanged() {
+
+    }
+
+
 }

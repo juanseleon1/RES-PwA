@@ -7,7 +7,6 @@ package EmotionalAnalyzerAgent;
 
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
-import SensorHandlerAgent.SensorData;
 
 /**
  *
@@ -20,7 +19,7 @@ public class ProcessEmotionGuard extends GuardBESA{
         EmotionalData infoRecibida = (EmotionalData)ebesa.getData();
         System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
         EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
-        infoRecibida.setInfo(eaState.getEaStrategy().processEmotion(infoRecibida));
+        infoRecibida.setEmoEv(eaState.getEaStrategy().processEmotion(infoRecibida));
         //ENVIAR A INFORMATION FLOW
     }
 

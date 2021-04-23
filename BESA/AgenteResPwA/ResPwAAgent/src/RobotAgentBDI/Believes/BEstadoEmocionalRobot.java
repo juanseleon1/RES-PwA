@@ -6,11 +6,9 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalModel;
-import EmotionalAnalyzerAgent.EmotionalState;
-import ServiceAgentResPwA.ServiceDataRequest;
-import java.time.LocalTime;
-import java.util.Map;
+import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -20,17 +18,18 @@ import rational.mapping.Believes;
  */
 public class BEstadoEmocionalRobot implements Believes {
 
-    private EmotionalModel em;
-    private LocalTime lastUpdate;
-    private ModulationStrategy ems;
-    BEstadoEmocionalRobot(EmotionalModel em) {
-        this.em = em;
+private EmotionalModel emoModel;
 
-    }
+public BEstadoEmocionalRobot(){
+    emoModel=new PepperEmotionalModel();
+}
 
     @Override
     public boolean update(InfoData si) {
-
+        
+        EmotionalData emoDat= (EmotionalData) si;
+        EmotionalEvent emoEv= emoDat.getEmoEv();
+        emoModel.processEmotionalEvent(emoEv);
         return true;
     }
 
@@ -39,33 +38,12 @@ public class BEstadoEmocionalRobot implements Believes {
         return this;
     }
 
-    public EmotionalModel getEm() {
-        return em;
+    public EmotionalModel getEmoModel() {
+        return emoModel;
     }
 
-    public void setEm(EmotionalModel em) {
-        this.em = em;
-    }
-
-    public LocalTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public ModulationStrategy getEms() {
-        return ems;
-    }
-
-    public void setEms(ModulationStrategy ems) {
-        this.ems = ems;
-    }
-    
-    public Map<String,Object>  modulateAction(ServiceDataRequest sdr){
-        EmotionalState emoData= em.getState();
-        return ems.modulateAction(sdr, emoData);
+    public void setEmoModel(EmotionalModel emoModel) {
+        this.emoModel = emoModel;
     }
 
 }

@@ -6,8 +6,6 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalModel;
-import ResPwaUtils.FBaseUtils;
 import ResPwaUtils.Imagen;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
@@ -32,11 +30,11 @@ public class RobotAgentBelieves implements Believes {
     private List<Imagen> imgsPerfil;
     private BEstadoEmocionalRobot bEstadoEmocionalRobot;
 
-    public RobotAgentBelieves(String cedula, EmotionalModel em) {
+    public RobotAgentBelieves(String cedula) {
         bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
         bEstadoInteraccion = new BEstadoInteraccion();
         bEstadoRobot = new BEstadoRobot();
-        bEstadoEmocionalRobot = new BEstadoEmocionalRobot(em);
+        bEstadoEmocionalRobot = new BEstadoEmocionalRobot();
         imgCuentos = new HashMap<>();
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
