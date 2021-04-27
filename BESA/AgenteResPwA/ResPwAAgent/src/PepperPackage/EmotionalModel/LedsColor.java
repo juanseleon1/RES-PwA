@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.Cuenteria;
+package PepperPackage.EmotionalModel;
 
 /**
  *
  * @author mafegarces
  */
 public enum LedsColor {
-    BLUE(0x8BCCEC, 1, 1.4),RED(0xFA3421, 2.3, 2.6),GREEN(0x7FF764, 1.8, 2.4),WHITE(0xFFFFFF, 0, 0),PURPLE(0xDAA2F8, 1.4, 1.8),YELLOW(0xF8FE2E, 2.6, 3);
+    BLUE(0x8BCCEC, -1, -0.6),RED(0xFA3421, -0.6, -0.2),WHITE(0xFFFFFF, -0-2, 0.2),GREEN(0x7FF764, 0.2, 0.6),YELLOW(0xF8FE2E, 0.6, 1);
     
     private int hexa;
     private double min;

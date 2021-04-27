@@ -28,13 +28,11 @@ public class RobotAgentBelieves implements Believes {
     private BEstadoRobot bEstadoRobot;
     private Map<String, List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
-    private BEstadoEmocionalRobot bEstadoEmocionalRobot;
 
     public RobotAgentBelieves(String cedula) {
         bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
         bEstadoInteraccion = new BEstadoInteraccion();
         bEstadoRobot = new BEstadoRobot();
-        bEstadoEmocionalRobot = new BEstadoEmocionalRobot();
         imgCuentos = new HashMap<>();
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
@@ -47,14 +45,16 @@ public class RobotAgentBelieves implements Believes {
     //Aqui se accede a BD y se pide info de otros believes. 
     @Override
     public boolean update(InfoData si) {
-        if(si!=null && si.getMessage() != null && si.getMessage().equals("emodata")) {
-            EmotionalData se=(EmotionalData)si;
-            System.out.println("RobotAgentBelieves update Received: "+se.getInfo() );
-            bEstadoRobot.update(si);
+        if (si != null && si instanceof EmotionalData) {
+            EmotionalData se = (EmotionalData) si;
+            System.out.println("RobotAgentBelieves update Received: " + se.getInfo());
+            if (se.getEmoEv() != null) {
+                bEstadoRobot.update(se);
+            }
             bEstadoEmocionalPwA.update(si);
-        } else if(si!=null){
+        } else if (si != null) {
             SensorData infoRecibida = (SensorData) si;
-            System.out.println("RobotAgentBelieves update Received: "+infoRecibida.getDataP() );
+            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
@@ -71,7 +71,6 @@ public class RobotAgentBelieves implements Believes {
                 default:
                     break;
             }
-            return true;
         }
 
         return true;
@@ -154,16 +153,6 @@ public class RobotAgentBelieves implements Believes {
     @Override
     public Believes clone() throws CloneNotSupportedException {
         return this;
-    }    
-
-    public BEstadoEmocionalRobot getbEstadoEmocionalRobot() {
-        return bEstadoEmocionalRobot;
     }
 
-    public void setbEstadoEmocionalRobot(BEstadoEmocionalRobot bEstadoEmocionalRobot) {
-        this.bEstadoEmocionalRobot = bEstadoEmocionalRobot;
-    }
-    
-    
-    
 }

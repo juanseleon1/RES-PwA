@@ -7,7 +7,6 @@ package EmotionalAnalyzerAgent;
 
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import SensorHandlerAgent.SensorData;
-import com.google.common.collect.HashBiMap;
 import java.util.HashMap;
 import java.util.Map;
 import rational.data.InfoData;
@@ -45,11 +44,6 @@ public class EmotionalData extends InfoData {
 
     public void setInfo(Map<String, Object> info) {
         this.info = info;
-    }
-
-    private EmotionalEventType getEmotionalEventMapping() {
-        EmotionalEventType resp = EmotionalEventType.getFromId(this.info.keySet().iterator().next());
-        return resp;
     }
 
     public EmotionalEvent getEmoEv() {

@@ -15,7 +15,7 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import Tareas.Cuenteria.LedsColor;
+import PepperPackage.EmotionalModel.LedsColor;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -62,7 +62,7 @@ public class Interacciones extends ResPwaTask{
             requestService(srb,blvs);
         }
         
-        if(state >= LedsColor.PURPLE.getMin() && state < LedsColor.PURPLE.getMax())
+        if(state >= LedsColor.WHITE.getMin() && state < LedsColor.WHITE.getMax())
         {
             infoServicio.put("SAY", "iu");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);

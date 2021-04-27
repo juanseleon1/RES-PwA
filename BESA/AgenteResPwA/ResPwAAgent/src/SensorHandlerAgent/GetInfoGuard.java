@@ -31,7 +31,7 @@ public class GetInfoGuard extends GuardBESA {
             System.out.println("GetInfoGuard Event Received: " + infoRecibida);
             AgHandlerBESA handler = null;
             EventBESA sensorEvtA = null;
-            if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS) || EmotionalEventType.isImpact(infoRecibida.getDataP())) {
+            if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS)) {
                 handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasEAAgent);
                 EmotionalData emData = EmotionalData.fromSensorData(infoRecibida);
                 sensorEvtA = new EventBESA(ProcessEmotionGuard.class.getName(), emData);

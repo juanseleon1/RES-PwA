@@ -5,20 +5,27 @@
  */
 package EmotionalAnalyzerAgent;
 
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalConfig;
+
 /**
  *
  * @author jsleon
  */
 public enum WHO {
-    ROBOT(0.2),PWA(0.3);
-    private final double value;
     
-    private WHO(double value){
-        this.value=value;
-        
+    ROBOT(EmotionalConfig.People.Amigo),PWA(EmotionalConfig.People.Cercano);
+    
+    private EmotionalConfig.People config;
+    
+    private WHO(EmotionalConfig.People config){
+        this.config=config;
     }
     
-    public double getValue(){
-        return value;
+    public EmotionalConfig.People getConfigEnum(){
+        return config;
+    }
+    
+    public String getConfig(){
+        return config.toString();
     }
 }

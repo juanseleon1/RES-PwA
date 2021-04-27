@@ -131,27 +131,28 @@ public abstract class EmotionalModel {
         handler.sendEvent(sensorEvtA);
     }
     
-    public void requestService(ServiceDataRequest sdr)
-    {
-         try {
-            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
-            String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
-            AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
-            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
-            evt.setSenderAgId(SHID);
-            agH.sendEvent(evt);
-        } catch (ExceptionBESA ex) {
-            Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public final void configureEmotionalModel(){
+    private void configureEmotionalModel(){
         loadSemanticDictionary();
         loadCharacterDescriptor();
+        loadEmotionalAxes();
+    }
+    
+        protected EmotionAxis getTopEmotionAxis() throws CloneNotSupportedException {
+            EmotionAxis maxAx=null;
+            double val=Double.MIN_VALUE;
+        for (EmotionAxis e : emotionalState.getEmotionsListCopy()) {
+                if(e.getCurrentValue()> val){
+                    maxAx=e;
+                    val=e.getCurrentValue();
+                }
+        }
+        return maxAx;
     }
     
     public abstract void loadSemanticDictionary();
     public abstract void loadCharacterDescriptor();
+    public abstract void loadEmotionalAxes();
+
 
 
 

@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
-import Tareas.Cuenteria.LedsColor;
+import PepperPackage.EmotionalModel.LedsColor;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
