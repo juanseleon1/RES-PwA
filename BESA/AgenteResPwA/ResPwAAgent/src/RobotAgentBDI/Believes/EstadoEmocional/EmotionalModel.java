@@ -1,25 +1,36 @@
 package RobotAgentBDI.Believes.EstadoEmocional;
 
+import BESA.ExceptionBESA;
+import BESA.Kernel.Agent.Event.EventBESA;
+import BESA.Kernel.System.AdmBESA;
+import BESA.Kernel.System.Directory.AgHandlerBESA;
+import EmotionalAnalyzerAgent.EmotionalData;
+import Init.InitRESPwA;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality.EmotionElementType;
+import RobotAgentBDI.ResPwaTask;
+import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rational.guards.InformationFlowGuard;
+import rational.services.ActivateAsynchronousServiceGuard;
 
-public class EmotionalActor {
+public abstract class EmotionalModel {
 
     private final EmotionalState emotionalState;
     private final Personality personality;
 
-    public EmotionalActor() {
+    public EmotionalModel() {
         this.emotionalState = new EmotionalState();
         this.personality = new Personality();
+        this.configureEmotionalModel();
     }
 
     public void addEmotionAxis(EmotionAxis ea) {
         try {
             emotionalState.addEmotionAxis(ea.clone());
         } catch (CloneNotSupportedException ex) {
-            Logger.getLogger(EmotionalActor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,15 +94,13 @@ public class EmotionalActor {
         return v;
     }
 
-    public void emotionalStateChanged() {
-
-    }
-
-    public EmotionAxis getMostActivatedEmotion() {
+    public abstract void emotionalStateChanged();
+    
+    public EmotionAxis getMostActivatedEmotion() throws CloneNotSupportedException {
         return this.emotionalState.getMostActivatedEmotion();
     }
 
-    public List<EmotionAxis> getEmotionsListCopy() {
+    public List<EmotionAxis> getEmotionsListCopy() throws CloneNotSupportedException {
         return this.emotionalState.getEmotionsListCopy();
     }
 
@@ -111,8 +120,40 @@ public class EmotionalActor {
                 typeName = "Objetos";
             }
             String msg = "El diccionario semántico de " + typeName + " no contiene un item con el nombre " + key;
-            Logger.getLogger(EmotionalActor.class.getName()).log(Level.WARNING, msg);
+            Logger.getLogger(EmotionalModel.class.getName()).log(Level.WARNING, msg);
         }
     }
+    
+    
+        protected void sendAct(EmotionalData ed) throws ExceptionBESA{
+        AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
+        EventBESA sensorEvtA= new EventBESA(InformationFlowGuard.class.getName(),ed);
+        handler.sendEvent(sensorEvtA);
+    }
+    
+    private void configureEmotionalModel(){
+        loadSemanticDictionary();
+        loadCharacterDescriptor();
+        loadEmotionalAxes();
+    }
+    
+        protected EmotionAxis getTopEmotionAxis() throws CloneNotSupportedException {
+            EmotionAxis maxAx=null;
+            double val=Double.MIN_VALUE;
+        for (EmotionAxis e : emotionalState.getEmotionsListCopy()) {
+                if(e.getCurrentValue()> val){
+                    maxAx=e;
+                    val=e.getCurrentValue();
+                }
+        }
+        return maxAx;
+    }
+    
+    public abstract void loadSemanticDictionary();
+    public abstract void loadCharacterDescriptor();
+    public abstract void loadEmotionalAxes();
+
+
+
 
 }

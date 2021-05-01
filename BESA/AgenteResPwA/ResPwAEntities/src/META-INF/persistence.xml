@@ -22,6 +22,8 @@
     <class>ResPwAEntities.Perfilpwa</class>
     <class>ResPwAEntities.Registroactividad</class>
     <class>ResPwAEntities.Tags</class>
+    <class>ResPwAEntities.EmotionalEntities.EmotionAxisConfig</class>
+    <class>ResPwAEntities.EmotionalEntities.EventInfluence</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>
       <property name="javax.persistence.jdbc.user" value="respwa1"/>

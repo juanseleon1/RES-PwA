@@ -5,7 +5,9 @@
  */
 package EmotionalAnalyzerAgent;
 
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import SensorHandlerAgent.SensorData;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,6 @@ import java.util.Map;
  */
 public interface EmotionalAnalyzerStrategy {
     
-    public Map<String,Object> processEmotion(EmotionalData sd);
+    public List<EmotionalEvent> processEmotion(EmotionalData sd);
     
 }

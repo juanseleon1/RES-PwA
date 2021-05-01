@@ -5,65 +5,102 @@
  */
 package PepperPackage.EmotionalModel;
 
+import BDInterface.RESPwABDInterface;
 import BESA.ExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
+import BESA.Kernel.Agent.Event.EventBESA;
+import BESA.Kernel.System.AdmBESA;
+import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalModel;
-import EmotionalAnalyzerAgent.EmotionalState;
-import Tareas.Cuenteria.LedsColor;
+import EmotionalAnalyzerAgent.EmotionalEventType;
+import EmotionalAnalyzerAgent.WHO;
+import Init.InitRESPwA;
+import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
+import ResPwAEntities.EmotionalEntities.EventInfluence;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalConfig;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
+import RobotAgentBDI.Believes.EstadoEmocional.Personality;
+import RobotAgentBDI.Believes.EstadoEmocional.SemanticDictionary;
+import RobotAgentBDI.Believes.EstadoEmocional.SemanticValue;
+import RobotAgentBDI.ResPwaTask;
+import ServiceAgentResPwA.ServiceDataRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rational.guards.InformationFlowGuard;
+import rational.services.ActivateAsynchronousServiceGuard;
 
 /**
  *
  * @author juans
  */
-public class PepperEmotionalModel extends EmotionalModel {
+public abstract class PepperEmotionalModel extends EmotionalModel {
 
-    private final double m;
-    private double currState;
-    private final double predetValue;
-    private LedsColor lc;
-    private long lastUpdt;
-    private double emoLifeTime;
-    private static final double CHANGE_FACT = 0.3;
 
-    public PepperEmotionalModel(double predetValue) {
-        this.predetValue = predetValue;
-        this.m = 1;
+    public PepperEmotionalModel() {
+
     }
 
     @Override
-    public void updateModel(EmotionalData e) {
-        updateModelValue();
-        lastUpdt = System.currentTimeMillis();
+    public void loadSemanticDictionary() {
+        
+        SemanticDictionary sd = SemanticDictionary.getInstance();
+         for(EmotionalConfig.People who:EmotionalConfig.People.values()){
+            sd.addSemanticItem(Personality.EmotionElementType.Person, new SemanticValue(who.toString(), who.getValue()));
+         }
+         
+         for(EmotionalConfig.Events evt: EmotionalConfig.Events.values()){
+            sd.addSemanticItem(Personality.EmotionElementType.Event, new SemanticValue(evt.toString(),evt.getValue()));
+         }
+         
+        for(EmotionalConfig.Objects obj: EmotionalConfig.Objects.values()){
+            sd.addSemanticItem(Personality.EmotionElementType.Object, new SemanticValue(obj.toString(),obj.getValue()));
+         }
+
     }
 
     @Override
-    public EmotionalState getState() {
-        double currTime = System.currentTimeMillis()-lastUpdt;
-        EmotionalState ret = new EmotionalState();
-        EmotionPwA emo = null;
-        updateModelValue();
-        lastUpdt = System.currentTimeMillis();
-        ret.setDominantEmotion(emo);
-        return ret;
+    public void loadCharacterDescriptor() {
+        
+         for(WHO who:WHO.values()){
+             setPersonRelationship(who.toString(), who.getConfig());
+         }
+         
+         for(EmotionalEventType evt: EmotionalEventType.values()){
+             setEventDesirability(evt.toString(), evt.getConfig());
+         }
     }
 
-    public LedsColor getLc() {
-        return lc;
-    }
-
-    public void setLc(LedsColor lc) {
-        this.lc = lc;
-    }
-
-    private void updateModelValue() {
-        currState = (m) + (predetValue);
+    
+    @Override
+    public void loadEmotionalAxes() {
+        List <EmotionAxis> emoax= new ArrayList<>();
+        EmotionAxis emoAxis;
+        List <EmotionAxisConfig> aux= RESPwABDInterface.getEmotionalAxisConfig();
+        List<EventInfluence> evtinf;
+        for (EmotionAxisConfig emotionAxisConfig : aux) {
+            emoAxis= new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
+            evtinf=emotionAxisConfig.getEventInfluence();
+            for (EventInfluence eventInfluence : evtinf) {
+                emoAxis.setEventInfluence(eventInfluence.getEventName(), eventInfluence.getEventInfluence());
+            }
+            emoax.add(emoAxis);
+        }
     }
     
     
-    private double calculateDecayFactor(double currTime){
-       double decay=0;
-       //TODO
-       return 0;
+    public void requestService(ServiceDataRequest sdr)
+    {
+         try {
+            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
+            String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
+            AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
+            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
+            evt.setSenderAgId(SHID);
+            agH.sendEvent(evt);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(PepperEmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
