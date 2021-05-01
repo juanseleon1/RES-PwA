@@ -11,6 +11,8 @@ import BESA.Kernel.Agent.GuardBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.InitRESPwA;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.guards.InformationFlowGuard;
@@ -27,7 +29,8 @@ public class ProcessEmotionGuard extends GuardBESA{
             EmotionalData infoRecibida = (EmotionalData)ebesa.getData();
             System.out.println("ProcessEmotionGuard Event Received: "+infoRecibida);
             EmotionalAnalyzerState eaState = (EmotionalAnalyzerState)this.agent.getState();
-            infoRecibida.setEmoEv(eaState.getEaStrategy().processEmotion(infoRecibida));
+            List<EmotionalEvent> emoList = eaState.getEaStrategy().processEmotion(infoRecibida);
+            infoRecibida.setEmoEv(emoList);
             AgHandlerBESA handler = AdmBESA.getInstance().getHandlerByAlias(InitRESPwA.aliasRobotAgent);
             EventBESA sensorEvtA = new EventBESA(InformationFlowGuard.class.getName(), infoRecibida);
             handler.sendEvent(sensorEvtA);

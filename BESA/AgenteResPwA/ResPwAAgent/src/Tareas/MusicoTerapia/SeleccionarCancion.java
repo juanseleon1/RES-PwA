@@ -85,6 +85,8 @@ public class SeleccionarCancion extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoActividad().getCancionActual() != null) {
             return true;

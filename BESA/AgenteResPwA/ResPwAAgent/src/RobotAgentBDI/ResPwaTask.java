@@ -16,7 +16,6 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rational.mapping.Believes;
@@ -27,43 +26,54 @@ import rational.services.ActivateAsynchronousServiceGuard;
  *
  * @author juans
  */
-public abstract class ResPwaTask extends Task{
-    
-    public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs)
-    {
-         try {
-             if(sdr.getParams()!=null)
-             {
-//                 Map<String, Object> map = blvs.getbEstadoEmocionalRobot().modulateAction(sdr);
-//                sdr.setParams((HashMap<String, Object>) map);
-             }
+public abstract class ResPwaTask extends Task {
+
+    protected boolean init = true;
+
+    public ResPwaTask() {
+        this.init = true;
+    }
+
+    public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs) {
+        try {
+            blvs.getbEstadoRobot().updateEmotionalVariables();
             String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
             String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
-            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
+            EventBESA evt = new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
             evt.setSenderAgId(SHID);
             agH.sendEvent(evt);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void activateTopic(PepperTopicsNames topic, Believes parameters){
-        
+
+    public void activateTopic(PepperTopicsNames topic, Believes parameters) {
+
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("TOPICNAME", topic.getTopic());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATECONVTOPIC, infoServicio);
         requestService(srb, blvs);
-                
+
     }
-    
-    public void deactivateTopic(PepperTopicsNames topic, Believes parameters){
+
+    public void deactivateTopic(PepperTopicsNames topic, Believes parameters) {
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("TOPICNAME", topic.getTopic());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.DEACTCONVTOPIC, infoServicio);
         requestService(srb, blvs);
     }
-    
+
+    @Override
+    public boolean checkFinish(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if (init) {
+            blvs.getbEstadoRobot().updateEmotionalVariables();
+            init=false;
+        }
+        return init;
+    }
+
 }

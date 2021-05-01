@@ -48,6 +48,8 @@ public class TestTask extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         return false;
     }
 

@@ -28,6 +28,8 @@ public class AsegurarConexion extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish AsegurarConexion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         return blvs.getbEstadoRobot().isConexionInternet();

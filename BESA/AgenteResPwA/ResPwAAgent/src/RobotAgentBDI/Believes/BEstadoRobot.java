@@ -11,7 +11,8 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import SensorHandlerAgent.SensorData;
-import PepperPackage.EmotionalModel.LedsColor;
+import PepperPackage.EmotionalModel.PepperEmotionRanges;
+import PepperPackage.PepperConf;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -54,7 +55,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double distanciaX;
     private double distanciaY;
     private double ledIntensity;
-    private LedsColor leds = null;
+    private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
 
     public BEstadoRobot() {
@@ -130,8 +131,11 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData emoDat = (EmotionalData) si;
-            EmotionalEvent emoEv = emoDat.getEmoEv();
-            this.processEmotionalEvent(emoEv);
+            
+            List<EmotionalEvent> emoEv = emoDat.getEmoEv();
+            for (EmotionalEvent emotionalEvent : emoEv) {
+                this.processEmotionalEvent(emotionalEvent);
+            }
 //            if (infoRecibida.getInfo().containsKey("LEDS")) {
 //                leds = LedsColor.valueOf((String) infoRecibida.getInfo().get("LEDS"));
 //            }
@@ -329,11 +333,11 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.ledIntensity = ledIntensity;
     }
 
-    public LedsColor getLeds() {
+    public PepperEmotionRanges getLeds() {
         return leds;
     }
 
-    public void setLeds(LedsColor leds) {
+    public void setLeds(PepperEmotionRanges leds) {
         this.leds = leds;
     }
 
@@ -349,13 +353,30 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     public void emotionalStateChanged() {
         try {
             HashMap<String, Object> infoServicio = new HashMap<>();
-
             EmotionAxis ea = getTopEmotionAxis();
+            float state = ea.getCurrentValue();
+            leds = PepperEmotionRanges.getFromEmotionalValue(state);
+            infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
+            infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
+            infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
+            infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
+            infoServicio.put("COLOR", leds.getHexa());
+            infoServicio.put("EmotionalTag", leds.toString());
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
             requestService(srb);
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void updateEmotionalVariables(){
+        processEmotionalEvent(new EmotionalEvent());
+    }
+
+    private float normalizeValue(float val, PepperConf conf) {
+        float normalValue = 0,max=conf.getMax(),min=conf.getMin();
+        normalValue= (val-min)/(max-min);
+        return normalValue;
     }
 }

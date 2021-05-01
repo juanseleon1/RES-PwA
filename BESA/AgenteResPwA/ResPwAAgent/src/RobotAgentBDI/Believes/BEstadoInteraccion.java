@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
-import PepperPackage.EmotionalModel.LedsColor;
+import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -43,7 +43,7 @@ public class BEstadoInteraccion implements Believes{
     private boolean ayudaExitosa=false;
     private double tiempoEmergenciaTrans=0;
     private boolean saludo=false;
-    private LedsColor leds=null;
+    private PepperEmotionRanges leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
@@ -360,7 +360,7 @@ public class BEstadoInteraccion implements Believes{
         return this;
     }
 
-    public LedsColor getLeds() {
+    public PepperEmotionRanges getLeds() {
         return leds;
     }
 

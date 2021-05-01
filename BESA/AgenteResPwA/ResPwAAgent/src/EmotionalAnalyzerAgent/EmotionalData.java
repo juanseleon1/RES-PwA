@@ -8,6 +8,7 @@ package EmotionalAnalyzerAgent;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import rational.data.InfoData;
 
@@ -18,7 +19,7 @@ import rational.data.InfoData;
 public class EmotionalData extends InfoData {
 
     private Map<String, Object> info;
-    private EmotionalEvent emoEv;
+    private List<EmotionalEvent> emoEv;
     public static EmotionalData fromSensorData(SensorData infoRecibida) {
         EmotionalData em = new EmotionalData();
         em.info = infoRecibida.getDataP();
@@ -46,13 +47,12 @@ public class EmotionalData extends InfoData {
         this.info = info;
     }
 
-    public EmotionalEvent getEmoEv() {
+    public List<EmotionalEvent> getEmoEv() {
         return emoEv;
     }
 
-    public void setEmoEv(EmotionalEvent emoEv) {
+    public void setEmoEv(List<EmotionalEvent> emoEv) {
         this.emoEv = emoEv;
     }
-    
-    
+
 }

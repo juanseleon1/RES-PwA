@@ -28,6 +28,8 @@ public class LlamarCuidador extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish LlamarCuidador ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isHayInteraccionFisica() && blvs.getbEstadoInteraccion().isDetectaPersona())

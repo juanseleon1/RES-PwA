@@ -30,6 +30,8 @@ public class VerificacionDispositivos extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoRobot().isVerificacionDispositivos() && (System.currentTimeMillis()-tiempoInicio) >= 30000)
