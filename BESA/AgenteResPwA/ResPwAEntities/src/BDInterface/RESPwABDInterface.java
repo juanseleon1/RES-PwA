@@ -148,4 +148,10 @@ public class RESPwABDInterface {
         EmotionAxisConfigJpaController eapc = new EmotionAxisConfigJpaController(Persistence.createEntityManagerFactory(EMF));
         return eapc.findEmotionAxisConfigEntities();
     }
+
+        public static List<Accion> getAcciones(){
+        AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajc.findAccionEntities();
+    }
+
 }
