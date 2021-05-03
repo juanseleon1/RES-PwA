@@ -60,10 +60,10 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         Random rand = new Random();
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()*rand.nextDouble())
-            {
-                return 1;
-            }
+//            if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()*rand.nextDouble())
+//            {
+//                return 1;
+//            }
         }
         return 0;
     }
@@ -79,9 +79,9 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         //System.out.println("Meta InteraccionSocial evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
         double value = 0;
-        if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.HAPPINESS)){
-            value = blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
-        }
+//        if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.HAPPINESS)){
+//            value = blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
+//        }
         return 1.0 + value;
     }
 

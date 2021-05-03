@@ -66,6 +66,8 @@ public class PreguntarSentimientos extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //debe revisar que el estado animo haya cambiado y cierto tiempo
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {

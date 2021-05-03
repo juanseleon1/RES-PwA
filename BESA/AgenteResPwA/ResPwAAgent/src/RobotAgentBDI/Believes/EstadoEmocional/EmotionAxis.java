@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.persistence.Entity;
 
 public class EmotionAxis {
 

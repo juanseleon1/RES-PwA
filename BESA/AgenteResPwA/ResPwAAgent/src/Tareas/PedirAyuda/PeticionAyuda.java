@@ -52,6 +52,8 @@ public class PeticionAyuda extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if((System.currentTimeMillis() - tiempo)/1000 >= 90) {
             return true;

@@ -19,9 +19,11 @@ public class SensorData extends InfoData{
     private Map<String, Object> dataP=null;
     private Map<String, Object> dataPE=null;
     private int ack;
+    private boolean hasEmo;
 
     public SensorData() {
         super(null);
+        hasEmo=false;
     }
 
     public SensorDataType getDataType() {
@@ -64,11 +66,17 @@ public class SensorData extends InfoData{
         this.ack = ack;
     }
 
-    @Override
-    public String toString() {
-        return "SensorData{" + "dataType=" + dataType + ", infoReceived=" + infoReceived + ", dataP=" + dataP + ", dataPE=" + dataPE + ", ack=" + ack + '}';
+    public boolean isHasEmo() {
+        return hasEmo;
     }
 
+    public void setHasEmo(boolean hasEmo) {
+        this.hasEmo = hasEmo;
+    }
 
+    @Override
+    public String toString() {
+        return "SensorData{" + "dataType=" + dataType + ", infoReceived=" + infoReceived + ", dataP=" + dataP + ", dataPE=" + dataPE + ", ack=" + ack + ", hasEmo=" + hasEmo + '}';
+    }
     
 }

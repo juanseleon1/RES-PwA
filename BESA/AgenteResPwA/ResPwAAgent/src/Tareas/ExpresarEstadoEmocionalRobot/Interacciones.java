@@ -15,7 +15,7 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import Tareas.Cuenteria.LedsColor;
+import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -38,38 +38,38 @@ public class Interacciones extends ResPwaTask{
         
         //mensajitos de acuerdo a sus emociones
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
-        double state= emoState.getInfluenceFactor();
+//        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
+        double state= 0;//emoState.getInfluenceFactor();
         //toca modificar la emocion y color, depende de la encuesta
-        if(state >= LedsColor.RED.getMin() && state < LedsColor.RED.getMax())
+        if(state >= PepperEmotionRanges.SAD.getMin() && state < PepperEmotionRanges.SAD.getMax())
         {
             infoServicio.put("SAY", "jeit u bish");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb,blvs);
         }
         
-        if(state >= LedsColor.YELLOW.getMin() && state < LedsColor.YELLOW.getMax())
+        if(state >= PepperEmotionRanges.VHAPPY.getMin() && state < PepperEmotionRanges.VHAPPY.getMax())
         {
             infoServicio.put("SAY", "yupiii");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb,blvs);
         }
         
-        if(state >= LedsColor.BLUE.getMin() && state < LedsColor.BLUE.getMax())
+        if(state >= PepperEmotionRanges.VSAD.getMin() && state < PepperEmotionRanges.VSAD.getMax())
         {
             infoServicio.put("SAY", "juum");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb,blvs);
         }
         
-        if(state >= LedsColor.PURPLE.getMin() && state < LedsColor.PURPLE.getMax())
+        if(state >= PepperEmotionRanges.NEUTRAL.getMin() && state < PepperEmotionRanges.NEUTRAL.getMax())
         {
             infoServicio.put("SAY", "iu");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb,blvs);
         }
         
-        if(state >= LedsColor.GREEN.getMin() && state < LedsColor.GREEN.getMax())
+        if(state >= PepperEmotionRanges.HAPPY.getMin() && state < PepperEmotionRanges.HAPPY.getMax())
         {
             infoServicio.put("SAY", "güii");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
@@ -90,6 +90,8 @@ public class Interacciones extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish Task Interacciones ---");
         return false;
     }

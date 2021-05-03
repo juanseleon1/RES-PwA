@@ -8,6 +8,7 @@ package BDInterface;
 import ResPwAEntities.*;
 import ResPwAEntities.Controllers.*;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
+import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,5 +147,9 @@ public class RESPwABDInterface {
     public static List<Accion> getAcciones(){
         AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajc.findAccionEntities();
+    
+    public static List<EmotionAxisConfig> getEmotionalAxisConfig(){
+        EmotionAxisConfigJpaController eapc = new EmotionAxisConfigJpaController(Persistence.createEntityManagerFactory(EMF));
+        return eapc.findEmotionAxisConfigEntities();
     }
 }

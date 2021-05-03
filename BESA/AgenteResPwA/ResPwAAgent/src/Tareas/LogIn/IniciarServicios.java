@@ -150,7 +150,8 @@ public class IniciarServicios extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-        
+                super.checkFinish(believes);
+
         System.out.println("///////////////TFServicios//////////////");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
             return blvs.getbEstadoInteraccion().isConfirmarActServicios();

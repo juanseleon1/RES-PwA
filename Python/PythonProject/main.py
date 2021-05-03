@@ -10,7 +10,7 @@ from Utils import activities_running, send
 
 
 
-# --------------------------------------------------Functions-----------------------------------------------------------------------
+# ------------------------------------- -------------Functions-----------------------------------------------------------------------
 def timer_activities():
     for key, value in activities_running.items():
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
@@ -74,7 +74,7 @@ def callFunction(jsonObj):
 """---------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 print("Server starting...pop")
-HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '10.195.22.105'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST_LOCAL)
 PORT = 7896  # Port to listen on (non-privileged ports are > 1023)

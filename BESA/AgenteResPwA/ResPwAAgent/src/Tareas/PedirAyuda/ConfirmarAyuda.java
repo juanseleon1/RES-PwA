@@ -27,6 +27,8 @@ public class ConfirmarAyuda extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         //System.out.println("--- Check Finish Confirmar Ayuda ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isAyudaExitosa()) {
