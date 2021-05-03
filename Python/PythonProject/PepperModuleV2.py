@@ -8,6 +8,8 @@ import re
 class pepperModuleV2(object):
     """python class myModule test auto documentation: comment needed to create a new python module"""
     """python class myModule test auto documentation: comment needed to create a new python module"""
+    retroalimentacionCompleta = ""
+
 
     def __init__(self, session):
         super(pepperModuleV2, self).__init__()
@@ -481,14 +483,14 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
-    def getDialogInput(self, value):
-        # The value is the last human input
-        #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+    def sendValue(resultValue):
+        print "enviar", resultValue
+        json_params = {"DialogInput": resultValue}
+        send(-1, "int", json_params)
 
-        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
-        resultValue = None
-
-        for word in value:
+    def preferenceInput (self, completeSentence):
+        resultValue = ""
+        for word in completeSentence:
             if((len(re.findall(r'mu\w+',word)) == 1 or len(re.findall(r'sub\w+',word)) != 0) and (len(re.findall(r'brill\w+',word)) != 0)):
                 resultValue = 'decrease brigthness'
 
@@ -501,8 +503,33 @@ class pepperModuleV2(object):
             if((len(re.findall(r'sub\w+',word)) == 1 or len(re.findall(r'nada\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'hab\w+',word)) != 0)):
                 resultValue = 'decrease volume'
 
-        if resultValue:
-            print "enviar", resultValue
-            json_params = {"DialogInput": resultValue}
-            send(-1, "int", json_params)
+        if (resultValue == ""):
+            return (False, "")
+        return (True, resultValue)
+
+    def retroalimentacionFiller (self,value):
+
+        if( value == 'Bien' or value == 'Regular' or value == 'Mal'):
+            self.retroalimentacionCompleta += " "+value
+
+        #EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+        if (self.retroalimentacionCompleta.split().count() == 8):
+            return (True, self.retroalimentacionCompleta)
+        else:
+            return (False, "")
+
+    def getDialogInput(self, value):
+        # The value is the last human input
+        #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+
+        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
+        preference = self.preferenceInput(value)
+        retroAlimentacion = self.retroalimentacionFiller(value)
+
+
+
+        resultValue = preference[1] + retroAlimentacion[1]
+        if preference[0] or retroAlimentacion[0]:
+            self.sendValue(self, resultValue)
+
 

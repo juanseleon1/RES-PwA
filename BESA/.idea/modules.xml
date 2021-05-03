@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AgentePepper/AgentePepper.iml" filepath="$PROJECT_DIR$/AgentePepper/AgentePepper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FrameWorkBESA/BDIBESA/BDIBESA.iml" filepath="$PROJECT_DIR$/FrameWorkBESA/BDIBESA/BDIBESA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BESA.iml" filepath="$PROJECT_DIR$/.idea/BESA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FrameWorkBESA/KernelBESA/KernelBESA.iml" filepath="$PROJECT_DIR$/FrameWorkBESA/KernelBESA/KernelBESA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FrameWorkBESA/LocalBESA/LocalBESA.iml" filepath="$PROJECT_DIR$/FrameWorkBESA/LocalBESA/LocalBESA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FrameWorkBESA/RationalBESA/RationalBESA.iml" filepath="$PROJECT_DIR$/FrameWorkBESA/RationalBESA/RationalBESA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgenteResPwA/ResPwAAgent/ResPwAAgent.iml" filepath="$PROJECT_DIR$/AgenteResPwA/ResPwAAgent/ResPwAAgent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgenteResPwA/ResPwAEntities/ResPwAEntities.iml" filepath="$PROJECT_DIR$/AgenteResPwA/ResPwAEntities/ResPwAEntities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgenteResPwA/moduloCuidador/moduloCuidador.iml" filepath="$PROJECT_DIR$/AgenteResPwA/moduloCuidador/moduloCuidador.iml" />
+    </modules>
+  </component>
+</project>

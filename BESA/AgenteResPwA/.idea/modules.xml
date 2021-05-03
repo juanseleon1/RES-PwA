@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/AgenteResPwA.iml" filepath="$PROJECT_DIR$/.idea/AgenteResPwA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ResPwAAgent/ResPwAAgent.iml" filepath="$PROJECT_DIR$/ResPwAAgent/ResPwAAgent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ResPwAEntities/ResPwAEntities.iml" filepath="$PROJECT_DIR$/ResPwAEntities/ResPwAEntities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moduloCuidador/moduloCuidador.iml" filepath="$PROJECT_DIR$/moduloCuidador/moduloCuidador.iml" />
+    </modules>
+  </component>
+</project>

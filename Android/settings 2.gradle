@@ -1,0 +1,3 @@
+include ':com.kaazing.gateway.client.android-4.2.5'
+include ':app'
+rootProject.name = "SASEPWA"

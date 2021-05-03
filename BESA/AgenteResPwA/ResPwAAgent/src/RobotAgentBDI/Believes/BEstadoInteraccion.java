@@ -48,8 +48,12 @@ public class BEstadoInteraccion implements Believes{
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
     private boolean movError;
+
+    //TOPICS - REFERENCES
+    private String respuestaDialogInput = null;
     private boolean modificarPreferencias = false;
-    private String respuestaPreferencia = null;
+    private boolean retroalimentar = false;
+
 
     
     
@@ -148,10 +152,13 @@ public class BEstadoInteraccion implements Believes{
         }
         
         if (infoRecibida.getDataP().containsKey("DialogInput")){
-            respuestaPreferencia = (String)infoRecibida.getDataP().get("DialogInput");
-            String resulSet[] = respuestaPreferencia.split(" ");
+            respuestaDialogInput = (String)infoRecibida.getDataP().get("DialogInput");
+            String resulSet[] = respuestaDialogInput.split(" ");
             if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
                 modificarPreferencias = true;
+            }
+            if (resulSet[0].equals("Bien") || resulSet[0].equals("Regular") || resulSet[0].equals("Mal")){
+                retroalimentar = true;
             }
         }
         
@@ -423,13 +430,19 @@ public class BEstadoInteraccion implements Believes{
         this.modificarPreferencias = modificarPreferencias;
     }
 
-    public String getRespuestaPreferencia() {
-        return respuestaPreferencia;
+    public String getRespuestaDialogInput() {
+        return respuestaDialogInput;
     }
 
-    public void setRespuestaPreferencia(String respuestaPreferencia) {
-        this.respuestaPreferencia = respuestaPreferencia;
+    public void setRespuestaDialogInput(String respuestaDialogInput) {
+        this.respuestaDialogInput = respuestaDialogInput;
+    }
+    public boolean isRetroalimentar() {
+        return retroalimentar;
     }
 
+    public void setRetroalimentar(boolean retroalimentar) {
+        this.retroalimentar = retroalimentar;
+    }
     
 }

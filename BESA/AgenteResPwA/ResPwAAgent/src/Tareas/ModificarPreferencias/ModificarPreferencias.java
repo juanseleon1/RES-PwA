@@ -5,14 +5,10 @@
  */
 package Tareas.ModificarPreferencias;
 
-import Tareas.Test.*;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
-import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
@@ -35,7 +31,7 @@ public class ModificarPreferencias extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Modificar Preferencias ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        String preferencia = blvs.getbEstadoInteraccion().getRespuestaPreferencia();
+        String preferencia = blvs.getbEstadoInteraccion().getRespuestaDialogInput();
         String resulset[] = preferencia.split(" ");
         ServiceDataRequest srb = null;
         if (resulset[1].equals("brightness")){

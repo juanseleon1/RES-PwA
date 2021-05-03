@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-753133957/SASEPWA.iml" filepath="$PROJECT_DIR$/.idea/modules/-753133957/SASEPWA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SASEPWA.app.iml" filepath="$PROJECT_DIR$/.idea/modules/SASEPWA.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1360535452/SASEPWA.com.kaazing.gateway.client.android-4.2.5.iml" filepath="$PROJECT_DIR$/.idea/modules/-1360535452/SASEPWA.com.kaazing.gateway.client.android-4.2.5.iml" />
+    </modules>
+  </component>
+</project>

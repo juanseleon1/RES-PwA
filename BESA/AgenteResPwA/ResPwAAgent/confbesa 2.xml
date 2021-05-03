@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <container alias = "RESPWA" password = "0.96" ipaddress= "127.0.0.1"/>
+</config>

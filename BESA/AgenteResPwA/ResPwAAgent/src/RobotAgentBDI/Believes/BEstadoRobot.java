@@ -57,6 +57,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
+    private String retroalimentacionValue;
 
     public BEstadoRobot() {
     }
@@ -68,6 +69,9 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     public double getBrilloRobot() {
         return brilloRobot;
     }
+
+    public void setRetroalimentacionValue (String retroalimentacionValue){this.retroalimentacionValue = retroalimentacionValue;}
+    public String getRetroalimentacionValue (){return this.retroalimentacionValue;}
 
     @Override
     public boolean update(InfoData si) {

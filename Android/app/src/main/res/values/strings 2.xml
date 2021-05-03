@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SASEPWA</string>
+    <string name="title_activity_hello_pepper">helloPepper</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_error">errorActivity</string>
+    <string name="title_activity_question">questionActivity</string>
+    <string name="title_activity_welcome">welcomeActivity</string>
+    <string name="title_activity_message">messageActivity</string>
+    <string name="title_activity_congrats">congratsActivity</string>
+    <string name="title_activity_cheer_message">cheerMessage</string>
+    <string name="title_activity_congrats_message">congratsMessage</string>
+    <string name="title_activity_show_emotion">showEmotion</string>
+    <string name="title_activity_rating_question">ratingQuestion</string>
+    <string name="title_activity_loading">loadingActivity</string>
+</resources>
