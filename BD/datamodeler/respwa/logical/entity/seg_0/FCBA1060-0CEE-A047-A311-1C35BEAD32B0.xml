@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FCBA1060-0CEE-A047-A311-1C35BEAD32B0" name="Joint">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:08:31 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="659A8595-531F-5168-BA5E-28F350814C1B">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:09:52 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="253A5819-3755-E27C-65F0-99A31FCAB238">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:24:08 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="angulo" id="22CACFB6-5A60-1605-CC8A-1A0FF04BE3EC">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:14:49 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tiempo" id="DAA6A215-565C-1385-214B-E538468225E3">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:15:04 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="BE5EB4D2-B33D-C7B5-111C-2EF3CD4B1B0C" name="Joint PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:24:16 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>659A8595-531F-5168-BA5E-28F350814C1B</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
