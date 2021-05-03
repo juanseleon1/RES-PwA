@@ -1,28 +1,26 @@
 package EmotionalAnalyzerAgent;
 
-import java.util.Map;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalConfig;
 
 public enum EmotionalEventType {
 
-    INTERNALUPDT("INTERNAL", 0.1),SPOKE("DialogInput",0.3),NOTLOOKING("personStopsLookingAtRobot",0.3),
-    NOTDETECTED("peopleDetected",0.3),NORESPONSE("NORESPONSE",0.3), MOVEDAWAY("personMovedAway",0.3),
-    APPROACHED("personApproached",0.3),SMILING("personSmiling",0.3),VOICEEMOTION("voiceEmotionRecognized",0.3),
-    GETEMOSTATE("PersonData",0.3), SPEECHDETECTED("speechDetected",0.3);
+    INTERNALPOSPLUS("INTERNALPOSPLUS",  EmotionalConfig.Events.Deseable),INTERNALPOS("INTERNALPOS",  EmotionalConfig.Events.AlgoDeseable),
+    INTERNALNEG("INTERNALNEG",  EmotionalConfig.Events.AlgoIndeseable),INTERNALNEGPLUS("INTERNALNEGPLUS",  EmotionalConfig.Events.Indeseable),
+    SPOKE("DialogInput", EmotionalConfig.Events.AlgoDeseable),
+    NOTLOOKING("personStopsLookingAtRobot", EmotionalConfig.Events.AlgoIndeseable),NOTDETECTED("peopleDetected", EmotionalConfig.Events.AlgoDeseable),
+    NORESPONSE("NORESPONSE", EmotionalConfig.Events.Indeseable), MOVEDAWAY("personMovedAway", EmotionalConfig.Events.AlgoIndeseable),
+    APPROACHED("personApproached", EmotionalConfig.Events.AlgoDeseable),SMILING("personSmiling", EmotionalConfig.Events.Deseable),
+    VOICEEMOTION("voiceEmotionRecognized", EmotionalConfig.Events.Indiferente), POSVOICEEMOTION("POSVOICEEMOTION", EmotionalConfig.Events.AlgoDeseable),
+    NEGVOICEEMOTION("NEGVOICEEMOTION", EmotionalConfig.Events.AlgoIndeseable),  GETEMOSTATE("PersonData", EmotionalConfig.Events.Indiferente),
+    POSEMOSTATE("PersonDataPos", EmotionalConfig.Events.Deseable), NEGEMOSTATE("PersonDataNeg", EmotionalConfig.Events.Indeseable),
+    SPEECHDETECTED("speechDetected", EmotionalConfig.Events.AlgoDeseable);
 
-    public static boolean isImpact(Map<String, Object> dataP) {
-        String ident = dataP.keySet().iterator().next();
-        System.out.println("PrevIsImpact "+ident);
-        boolean ret=getFromId(ident)!=null;
-        System.out.println("isImpact "+ ret);
-        return ret;
-    }
-    
     private final String emoType;
-    private final double value;
+    private final EmotionalConfig.Events config;
 
-    private EmotionalEventType(String emoType,double value) {
+    private EmotionalEventType(String emoType, EmotionalConfig.Events config) {
         this.emoType = emoType;
-        this.value=value;
+        this.config=config;
     }
 
     public static EmotionalEventType getFromId(String ident) {
@@ -40,8 +38,12 @@ public enum EmotionalEventType {
         return emoType;
     }
 
-    public double getValue() {
-        return value;
+    public EmotionalConfig.Events getConfigEnum(){
+        return config;
+    }
+    
+    public String getConfig(){
+        return config.toString();
     }
 
 }

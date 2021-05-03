@@ -92,6 +92,8 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof EnriquecerStrategy && !blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo() && 
                 !blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && blvs.getbEstadoInteraccion().getLeds() != null ){

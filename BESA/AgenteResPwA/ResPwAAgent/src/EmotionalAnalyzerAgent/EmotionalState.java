@@ -30,6 +30,4 @@ public class EmotionalState {
         this.influenceFactor = influenceFactor;
     }
     
-    
-    
 }

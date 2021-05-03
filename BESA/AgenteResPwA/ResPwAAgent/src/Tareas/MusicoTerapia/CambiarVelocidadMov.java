@@ -66,6 +66,8 @@ public class CambiarVelocidadMov extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             return false;

@@ -84,6 +84,8 @@ public class ModificarPreferencias extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         return false;
     }
 

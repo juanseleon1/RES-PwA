@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="44370377-01A6-AF45-28BE-1A5DC19FED16" containerWithKeyObject="7B44EF00-1203-82DC-6485-B8A4D1B77B5E" localFKIndex="C471CDE7-2C6F-48EE-3838-60E66F099D6D" name="PerfilPwa_Robot_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:36:44 UTC</createdTime>
+<generatorID>BCE1A286-0607-EA95-D56C-FAAE9977FDF2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Robot</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>237728EB-86DE-203B-3376-DABB8059F47C</referredTableID>
+<keyObject>085172E8-BDC3-E938-30FB-C567BEC95005</keyObject>
+<referredKeyID>085172E8-BDC3-E938-30FB-C567BEC95005</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

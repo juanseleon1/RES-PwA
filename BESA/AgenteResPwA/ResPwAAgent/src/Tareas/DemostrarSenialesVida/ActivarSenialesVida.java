@@ -27,6 +27,8 @@ public class ActivarSenialesVida extends ResPwaTask{
     
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish ActivarSenialesVida ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoRobot().isActivadoSeñalesDeVida())

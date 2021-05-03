@@ -50,6 +50,8 @@ public class ActivarLetra extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         System.out.println("--- Check Finish Task Activar Letra ---");
         return false;
     }

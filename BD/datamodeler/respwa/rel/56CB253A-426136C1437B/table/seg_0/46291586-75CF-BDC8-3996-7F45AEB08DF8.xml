@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="46291586-75CF-BDC8-3996-7F45AEB08DF8" name="Accion">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>4A823D5F-AC02-F5AC-E93E-3C3C7AB44026</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="8081B17E-AEBF-80BF-E357-7FF00DB4A663">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>8FA6AC2A-9417-7400-20E9-0B79BE89935E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="9E4A5E92-F8E9-B8D5-F592-4A1AC404FAD1">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>BCA0B916-0742-8652-6F4E-250B06A76092</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Emocion_id" id="D388DBDC-CA1C-BBE5-9AC2-0C1E5CE8A99D">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>C0F3D5DD-E913-E692-0015-84A2B34A6999</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6E69F870-C32A-18D5-2436-ABF7774E4551" referredColumn="D155CED5-C484-8685-6B25-4880B3154503"/>
+</associations>
+</Column>
+<Column name="tipo" id="F9106E5E-6AA5-1503-80AA-AE4382545F4C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 21:03:18 UTC</createdTime>
+<generatorID>08616974-CDF2-A282-6660-2B812D79CC4C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Robot_id" id="7EED325B-5DF1-84BF-06F9-53879BF4E120">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:15:41 UTC</createdTime>
+<generatorID>4E34CFFD-DE93-13F3-FF03-0C5EF58271CA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F95694EF-3101-8D41-ED0F-09B79E4B9134" referredColumn="979827FA-1A4A-BB39-B371-777998CF603A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="69B8BF1B-EA8E-86BE-8E7E-D798F250E40F" name="Accion_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>A55DD27D-0C45-AB89-85AC-B351C75CD928</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8081B17E-AEBF-80BF-E357-7FF00DB4A663"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B77C0751-2119-9F1B-CB8D-DA0E0E481E03" name="Accion_Emocion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>72F6438E-515F-ACB7-4D2A-AB7F03EF0F69</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D388DBDC-CA1C-BBE5-9AC2-0C1E5CE8A99D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A81557F6-89EB-9D4E-07B4-75840620124E" name="Accion_Robot_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:15:41 UTC</createdTime>
+<generatorID>1A3B063E-98BF-ADE4-0231-A76D2AE0CB5C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7EED325B-5DF1-84BF-06F9-53879BF4E120"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

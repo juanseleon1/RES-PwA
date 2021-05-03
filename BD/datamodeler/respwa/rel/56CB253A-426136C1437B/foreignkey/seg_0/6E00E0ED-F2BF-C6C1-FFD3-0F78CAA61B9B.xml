@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="6E00E0ED-F2BF-C6C1-FFD3-0F78CAA61B9B" containerWithKeyObject="D0363531-79A0-54CF-4241-FCB5E3E80E74" localFKIndex="4C7077A1-51B1-AC92-DB35-6A95366B9EBF" name="AccionxJoint_Accion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>4D433444-3107-3893-1BFB-186EAFED1C91</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Accion</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>46291586-75CF-BDC8-3996-7F45AEB08DF8</referredTableID>
+<keyObject>69B8BF1B-EA8E-86BE-8E7E-D798F250E40F</keyObject>
+<referredKeyID>69B8BF1B-EA8E-86BE-8E7E-D798F250E40F</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

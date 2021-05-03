@@ -6,8 +6,22 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
+import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import SensorHandlerAgent.SensorData;
-import Tareas.Cuenteria.LedsColor;
+import PepperPackage.EmotionalModel.PepperEmotionRanges;
+import PepperPackage.PepperConf;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -15,7 +29,7 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class BEstadoRobot implements Believes {
+public class BEstadoRobot extends PepperEmotionalModel implements Believes {
 
     private boolean bateria;
     private double batteryPerc;
@@ -41,8 +55,11 @@ public class BEstadoRobot implements Believes {
     private double distanciaX;
     private double distanciaY;
     private double ledIntensity;
-    private LedsColor leds = null;
+    private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
+
+    public BEstadoRobot() {
+    }
 
     public void setBrilloRobot(double brilloRobot) {
         this.brilloRobot = brilloRobot;
@@ -54,8 +71,8 @@ public class BEstadoRobot implements Believes {
 
     @Override
     public boolean update(InfoData si) {
-        
-        System.out.println("******Act Estado Robot********* "+ si.toString());
+
+        System.out.println("******Act Estado Robot********* " + si.toString());
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {
@@ -105,7 +122,7 @@ public class BEstadoRobot implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("conexionInternet")) {
                 conexionInternet = Boolean.valueOf((String) infoRecibida.getDataP().get("conexionInternet"));
-                if(conexionInternet){
+                if (conexionInternet) {
                     tiempoSinConexionInternet = System.currentTimeMillis();
                 }
             }
@@ -113,22 +130,27 @@ public class BEstadoRobot implements Believes {
                 verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
             }
         } else if (si instanceof EmotionalData) {
-            EmotionalData infoRecibida = (EmotionalData) si;
-            if (infoRecibida.getInfo().containsKey("LEDS")) {
-                leds = LedsColor.valueOf((String) infoRecibida.getInfo().get("LEDS"));
+            EmotionalData emoDat = (EmotionalData) si;
+            
+            List<EmotionalEvent> emoEv = emoDat.getEmoEv();
+            for (EmotionalEvent emotionalEvent : emoEv) {
+                this.processEmotionalEvent(emotionalEvent);
             }
-            if (infoRecibida.getInfo().containsKey("velocidad")) {
-                velocidad = (double) infoRecibida.getInfo().get("velocidad");
-            }
-            if (infoRecibida.getInfo().containsKey("velHabla")) {
-                velHabla = (double) infoRecibida.getInfo().get("velHabla");
-            }
-            if (infoRecibida.getInfo().containsKey("tonoHabla")) {
-                tonoHabla = (double) infoRecibida.getInfo().get("tonoHabla");
-            }
-            if (infoRecibida.getInfo().containsKey("ledIntens")) {
-                ledIntensity = (double) infoRecibida.getInfo().get("ledIntens");
-            }
+//            if (infoRecibida.getInfo().containsKey("LEDS")) {
+//                leds = LedsColor.valueOf((String) infoRecibida.getInfo().get("LEDS"));
+//            }
+//            if (infoRecibida.getInfo().containsKey("velocidad")) {
+//                velocidad = (double) infoRecibida.getInfo().get("velocidad");
+//            }
+//            if (infoRecibida.getInfo().containsKey("velHabla")) {
+//                velHabla = (double) infoRecibida.getInfo().get("velHabla");
+//            }
+//            if (infoRecibida.getInfo().containsKey("tonoHabla")) {
+//                tonoHabla = (double) infoRecibida.getInfo().get("tonoHabla");
+//            }
+//            if (infoRecibida.getInfo().containsKey("ledIntens")) {
+//                ledIntensity = (double) infoRecibida.getInfo().get("ledIntens");
+//            }
         }
         return true;
     }
@@ -311,21 +333,50 @@ public class BEstadoRobot implements Believes {
         this.ledIntensity = ledIntensity;
     }
 
-    public LedsColor getLeds() {
+    public PepperEmotionRanges getLeds() {
         return leds;
     }
 
-    public void setLeds(LedsColor leds) {
+    public void setLeds(PepperEmotionRanges leds) {
         this.leds = leds;
     }
 
     public long getTiempoSinConexionInternet() {
-        return System.currentTimeMillis()-tiempoSinConexionInternet;
+        return System.currentTimeMillis() - tiempoSinConexionInternet;
     }
 
     public void setTiempoSinConexionInternet(long tiempoSinConexionInternet) {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
     }
+
+    @Override
+    public void emotionalStateChanged() {
+        try {
+            HashMap<String, Object> infoServicio = new HashMap<>();
+            EmotionAxis ea = getTopEmotionAxis();
+            float state = ea.getCurrentValue();
+            leds = PepperEmotionRanges.getFromEmotionalValue(state);
+            infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
+            infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
+            infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
+            infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
+            infoServicio.put("COLOR", leds.getHexa());
+            infoServicio.put("EmotionalTag", leds.toString());
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
+            requestService(srb);
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
-    
+    public void updateEmotionalVariables(){
+        processEmotionalEvent(new EmotionalEvent());
+    }
+
+    private float normalizeValue(float val, PepperConf conf) {
+        float normalValue = 0,max=conf.getMax(),min=conf.getMin();
+        normalValue= (val-min)/(max-min);
+        return normalValue;
+    }
 }

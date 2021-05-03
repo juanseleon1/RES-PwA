@@ -10,23 +10,8 @@ package EmotionalAnalyzerAgent;
  * @author mafegarces
  */
 public enum EmotionPwA {
-    ANGER("ANGER"),
-    SADNESS("SADNESS"),
-    HAPPINESS("HAPPINESS");
-    
-    private String dict;
-
-    private EmotionPwA(String s)
-    {
-        dict=s;
-    }
-
-    public String getDict() {
-        return dict;
-    }
-
-    public void setDict(String dict) {
-        this.dict = dict;
-    }
+    ANGER(),
+    SADNESS(),
+    HAPPINESS();
     
 }

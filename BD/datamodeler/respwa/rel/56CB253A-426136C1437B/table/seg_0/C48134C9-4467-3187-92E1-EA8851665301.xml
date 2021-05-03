@@ -54,6 +54,23 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="Dificultad_dificultad" id="7F0EB95B-7F6C-A66F-1975-B5DBFB42D819">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>597AE98B-AAA7-D638-4071-342D2F4D0457</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D862FB30-5E42-4B69-7053-945408B113BB" referredColumn="151393CA-7091-48A0-346C-FFB95EBD015E"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="BE3CA0AA-287D-6107-160F-C51217E9A750" name="ActividadPwA_PK">
@@ -66,6 +83,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="BDC71451-A6A3-4718-1D3A-7903BA08D14E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2B215147-C9DC-005A-5AB6-0622379E7786" name="ActividadPwA_Dificultad_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>307FF311-E74E-DFDD-B99C-F34AFC20044D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7F0EB95B-7F6C-A66F-1975-B5DBFB42D819"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

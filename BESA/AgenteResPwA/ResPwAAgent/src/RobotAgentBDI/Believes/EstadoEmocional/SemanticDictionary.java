@@ -26,7 +26,7 @@ public class SemanticDictionary {
         return instance;
     }
 
-    private Map getList(EmotionElementType t) {
+    private Map<String, SemanticValue> getList(EmotionElementType t) {
         switch (t) {
             case Object:
                 return this.objectRelationships;
