@@ -83,6 +83,8 @@ public class Perfilpwa implements Serializable {
     @JoinColumn(name = "NIVEL_EDUCATIVO_TIPONE", referencedColumnName = "TIPONE")
     @ManyToOne
     private NivelEducativo nivelEducativoTipone;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
+    private Robot robot;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwaCedula")
     private List<Registroactividad> registroactividadList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
@@ -227,6 +229,14 @@ public class Perfilpwa implements Serializable {
 
     public void setPerfilPreferencia(PerfilPreferencia perfilPreferencia) {
         this.perfilPreferencia = perfilPreferencia;
+    }
+
+    public Robot getRobot() {
+        return robot;
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
     }
 
     @Override

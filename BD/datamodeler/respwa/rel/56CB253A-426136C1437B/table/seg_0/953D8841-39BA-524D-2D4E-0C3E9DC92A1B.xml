@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="953D8841-39BA-524D-2D4E-0C3E9DC92A1B" name="Joint">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>FCBA1060-0CEE-A047-A311-1C35BEAD32B0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="6A7F83BC-11A7-9FDB-FADC-A3CF61B6DCC8">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>659A8595-531F-5168-BA5E-28F350814C1B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="302610CB-A6BC-4865-4367-C8F799097FD2">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>253A5819-3755-E27C-65F0-99A31FCAB238</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="angulo" id="A7B14155-84BA-B030-9F2B-32B9B3B00694">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:15:41 UTC</createdTime>
+<generatorID>22CACFB6-5A60-1605-CC8A-1A0FF04BE3EC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tiempo" id="5765166A-9451-51A0-8E2B-0DB773E8DB02">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:15:41 UTC</createdTime>
+<generatorID>DAA6A215-565C-1385-214B-E538468225E3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F022832B-5F8A-278C-E02B-E6DED1134043" name="Joint_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:29:28 UTC</createdTime>
+<generatorID>BE5EB4D2-B33D-C7B5-111C-2EF3CD4B1B0C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6A7F83BC-11A7-9FDB-FADC-A3CF61B6DCC8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

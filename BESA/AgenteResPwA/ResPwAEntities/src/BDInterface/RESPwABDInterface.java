@@ -142,4 +142,9 @@ public class RESPwABDInterface {
         return ajp.findActxpreferencia(pk);
 
     }
+
+    public static List<Accion> getAcciones(){
+        AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajc.findAccionEntities();
+    }
 }

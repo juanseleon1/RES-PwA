@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4A823D5F-AC02-F5AC-E93E-3C3C7AB44026" name="Accion">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:07:30 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="8FA6AC2A-9417-7400-20E9-0B79BE89935E">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:31:14 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="BCA0B916-0742-8652-6F4E-250B06A76092">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:23:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo" id="08616974-CDF2-A282-6660-2B812D79CC4C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 21:02:33 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="C0F3D5DD-E913-E692-0015-84A2B34A6999">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:16:44 UTC</createdTime>
+<generatorID>72F6438E-515F-ACB7-4D2A-AB7F03EF0F69</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<referedAttribute>4464F6F1-C239-445B-67D7-9F5A69A57581</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id2" id="4E34CFFD-DE93-13F3-FF03-0C5EF58271CA">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 22:11:03 UTC</createdTime>
+<generatorID>1A3B063E-98BF-ADE4-0231-A76D2AE0CB5C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<referedAttribute>487D3D45-A26B-06DC-86AC-697CA22D378F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A55DD27D-0C45-AB89-85AC-B351C75CD928" name="Accion PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 19:23:57 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>8FA6AC2A-9417-7400-20E9-0B79BE89935E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

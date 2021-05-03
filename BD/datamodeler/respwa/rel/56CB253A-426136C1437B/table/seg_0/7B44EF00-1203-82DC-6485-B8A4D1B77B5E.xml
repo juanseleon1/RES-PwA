@@ -140,17 +140,20 @@
 <colAssociation fkAssociation="67A57C30-8540-19D5-4A1B-548843BF8ABF" referredColumn="C5CD385E-E84E-D239-8842-E1065C77676F"/>
 </associations>
 </Column>
-<Column name="idRobot" id="929C0E37-6A8C-0FFC-FBE5-A05C70DCB8A3">
-<createdBy>juans</createdBy>
-<createdTime>2020-11-18 21:15:35 UTC</createdTime>
-<generatorID>DF22FF47-47A1-4A9C-79E0-6E969E4B2037</generatorID>
+<Column name="Robot_id" id="D5E8B7C8-2B56-B18D-0BFD-D326B2A58ACF">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:36:44 UTC</createdTime>
+<generatorID>325FC881-ABB1-2341-8F83-ABB3E34BDB12</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="44370377-01A6-AF45-28BE-1A5DC19FED16" referredColumn="979827FA-1A4A-BB39-B371-777998CF603A"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -164,6 +167,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="88BAF66E-72E2-0DF8-E219-E7F4F9901998"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F53D64F5-C593-91AF-4DA3-74AC6175D8B3" name="PerfilPwa__IDX">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:36:44 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>BCE1A286-0607-EA95-D56C-FAAE9977FDF2</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="D5E8B7C8-2B56-B18D-0BFD-D326B2A58ACF"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="69B68E10-50B2-7D95-AB64-577C6C5B8E6E" name="PerfilPwa_Cuidador_FK">
@@ -197,6 +211,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="C2ED9D49-4C86-8523-01B0-05B0500FB98A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C471CDE7-2C6F-48EE-3838-60E66F099D6D" name="PerfilPwa_Robot_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-01 20:36:44 UTC</createdTime>
+<generatorID>BCE1A286-0607-EA95-D56C-FAAE9977FDF2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D5E8B7C8-2B56-B18D-0BFD-D326B2A58ACF"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
