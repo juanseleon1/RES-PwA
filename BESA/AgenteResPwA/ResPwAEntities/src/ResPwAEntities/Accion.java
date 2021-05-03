@@ -52,14 +52,14 @@ public class Accion implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO")
     private String tipo;
-    @JoinColumn(name = "ROBOT_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Robot robot;
     @JoinColumn(name = "EMOCION_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Emocion emocion;
-    @ManyToMany(mappedBy = "jointList")
+    @ManyToMany(mappedBy = "accionList")
     private List<Joint> jointList;
+
+    public Accion() {
+    }
 
     public Accion(BigDecimal id, String nombre, String tipo) {
         this.id = id;
@@ -91,13 +91,6 @@ public class Accion implements Serializable {
         this.tipo = tipo;
     }
 
-    public Robot getRobot() {
-        return robot;
-    }
-
-    public void setRobot(Robot robot) {
-        this.robot = robot;
-    }
 
     public Emocion getEmocion() {
         return emocion;

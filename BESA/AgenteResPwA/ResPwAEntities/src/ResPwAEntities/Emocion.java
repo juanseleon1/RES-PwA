@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Emocion.findAll", query = "SELECT e FROM Emocion e")
     , @NamedQuery(name = "Emocion.findById", query = "SELECT e FROM Emocion e WHERE e.id = :id")
-    , @NamedQuery(name = "Emocion.findByValorMaximo", query = "SELECT e FROM Emocion e WHERE e.valormaximo = :valormaximo")
-    , @NamedQuery(name = "Emocion.findByValorMinimo", query = "SELECT e FROM Emocion e WHERE e.valorminimo = :valorminimo")})
+    , @NamedQuery(name = "Emocion.findByValorMaximo", query = "SELECT e FROM Emocion e WHERE e.valorMaximo = :valorMaximo")
+    , @NamedQuery(name = "Emocion.findByValorMinimo", query = "SELECT e FROM Emocion e WHERE e.valorMaximo = :valorMaximo")})
 public class Emocion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +53,9 @@ public class Emocion implements Serializable {
     private double valorMinimo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "emocion")
     private List<Accion> accionList;
+
+    public Emocion() {
+    }
 
     public Emocion(BigDecimal id, double valorMaximo, double valorMinimo) {
         this.id = id;

@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Joint.findAll", query = "SELECT j FROM Joint j")
     , @NamedQuery(name = "Joint.findById", query = "SELECT j FROM Joint j WHERE j.id = :id")
-    , @NamedQuery(name = "Robot.findByNombre", query = "SELECT j FROM Joint j WHERE j.nombre = :nombre")
-    , @NamedQuery(name = "Robot.findByAngulo", query = "SELECT j FROM Joint j WHERE j.angulo = :angulo")
-    , @NamedQuery(name = "Robot.findByTiempo", query = "SELECT j FROM Joint j WHERE j.tiempo = :tiempo")})
+    , @NamedQuery(name = "Joint.findByNombre", query = "SELECT j FROM Joint j WHERE j.nombre = :nombre")
+    , @NamedQuery(name = "Joint.findByAngulo", query = "SELECT j FROM Joint j WHERE j.angulo = :angulo")
+    , @NamedQuery(name = "Joint.findByTiempo", query = "SELECT j FROM Joint j WHERE j.tiempo = :tiempo")})
 public class Joint implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,9 +55,14 @@ public class Joint implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIEMPO")
     private int tiempo;
-    @ManyToMany(mappedBy = "accionList")
+    @ManyToMany
     private List<Accion> accionList;
 
+    
+    public Joint(){
+        
+    }
+    
     public Joint(BigDecimal id, String nombre, double angulo, int tiempo) {
         this.id = id;
         this.nombre = nombre;
