@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ResPwAEntities.Controllers;
 
 import ResPwAEntities.Accion;
-import java.math.BigDecimal;
-import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -16,17 +13,17 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
-import ResPwAEntities.Robot;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import ResPwAEntities.Emocion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class AccionJpaController implements Serializable {
 
@@ -52,11 +49,6 @@ public class AccionJpaController implements Serializable {
                 emocion = em.getReference(emocion.getClass(), emocion.getId());
                 accion.setEmocion(emocion);
             }
-            Robot robot = accion.getRobot();
-            if (robot != null) {
-                robot = em.getReference(robot.getClass(), robot.getId());
-                accion.setRobot(robot);
-            }
             List<Joint> attachedJointList = new ArrayList<Joint>();
             for (Joint jointListJointToAttach : accion.getJointList()) {
                 jointListJointToAttach = em.getReference(jointListJointToAttach.getClass(), jointListJointToAttach.getId());
@@ -68,13 +60,9 @@ public class AccionJpaController implements Serializable {
                 emocion.getAccionList().add(accion);
                 emocion = em.merge(emocion);
             }
-            if (robot != null) {
-                robot.getAccionList().add(accion);
-                robot = em.merge(robot);
-            }
-            for (Joint jointListJoints : accion.getJointList()) {
-                jointListJoints.getAccionList().add(accion);
-                jointListJoints = em.merge(jointListJoints);
+            for (Joint jointListJoint : accion.getJointList()) {
+                jointListJoint.getAccionList().add(accion);
+                jointListJoint = em.merge(jointListJoint);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -89,7 +77,7 @@ public class AccionJpaController implements Serializable {
         }
     }
 
-    public void edit(Accion accion) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Accion accion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -97,29 +85,11 @@ public class AccionJpaController implements Serializable {
             Accion persistentAccion = em.find(Accion.class, accion.getId());
             Emocion emocionOld = persistentAccion.getEmocion();
             Emocion emocionNew = accion.getEmocion();
-            Robot robotOld = persistentAccion.getRobot();
-            Robot robotNew = accion.getRobot();
             List<Joint> jointListOld = persistentAccion.getJointList();
             List<Joint> jointListNew = accion.getJointList();
-            List<String> illegalOrphanMessages = null;
-            for (Joint jointListOldJoint : jointListOld) {
-                if (!jointListNew.contains(jointListOldJoint)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Joint " + jointListOldJoint + " since its accionId field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (emocionNew != null) {
                 emocionNew = em.getReference(emocionNew.getClass(), emocionNew.getId());
                 accion.setEmocion(emocionNew);
-            }
-            if (robotNew != null) {
-                robotNew = em.getReference(robotNew.getClass(), robotNew.getId());
-                accion.setRobot(robotNew);
             }
             List<Joint> attachedJointListNew = new ArrayList<Joint>();
             for (Joint jointListNewJointToAttach : jointListNew) {
@@ -128,7 +98,6 @@ public class AccionJpaController implements Serializable {
             }
             jointListNew = attachedJointListNew;
             accion.setJointList(jointListNew);
-            
             accion = em.merge(accion);
             if (emocionOld != null && !emocionOld.equals(emocionNew)) {
                 emocionOld.getAccionList().remove(accion);
@@ -137,14 +106,6 @@ public class AccionJpaController implements Serializable {
             if (emocionNew != null && !emocionNew.equals(emocionOld)) {
                 emocionNew.getAccionList().add(accion);
                 emocionNew = em.merge(emocionNew);
-            }
-            if (robotOld != null && !robotOld.equals(robotNew)) {
-                robotOld.getAccionList().remove(accion);
-                robotOld = em.merge(robotOld);
-            }
-            if (robotNew != null && !robotNew.equals(robotOld)) {
-                robotNew.getAccionList().add(accion);
-                robotNew = em.merge(robotNew);
             }
             for (Joint jointListOldJoint : jointListOld) {
                 if (!jointListNew.contains(jointListOldJoint)) {
@@ -158,7 +119,6 @@ public class AccionJpaController implements Serializable {
                     jointListNewJoint = em.merge(jointListNewJoint);
                 }
             }
-            
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -176,7 +136,7 @@ public class AccionJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(BigDecimal id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -187,22 +147,6 @@ public class AccionJpaController implements Serializable {
                 accion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The accion with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<Joint> jointListOrphanCheck = accion.getJointList();
-            for (Joint jointListOrphanCheckEnriq : jointListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Accion (" + accion + ") cannot be destroyed since the Joint " + jointListOrphanCheckEnriq + " in its jointList field has a non-nullable accionId field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Robot robot = accion.getRobot();
-            if (robot != null) {
-                robot.getAccionList().remove(accion);
-                robot = em.merge(robot);
             }
             Emocion emocion = accion.getEmocion();
             if (emocion != null) {
