@@ -16,6 +16,9 @@ def json_creator(id_response, responseType, params):
         "respType": responseType,
         "params": params
     }
+    # Check if response is an emotional element of the robot
+    if isAnEmotionalAck(params):
+        json_string["hasEmo"] = True
     return json.loads(json.dumps(json_string))
 
 
@@ -40,7 +43,20 @@ def send(id_response, responseType, params):
 
         client.send(msg_to_send + '\r\n')
         client.close()
+        
+def isAnEmotionalAck(params):
+    encontrado = False
+    emotionalAck = [
+        "peopleDetected",
+        "personStopsLookingAtRobot",
+        "personMovedAway",
+        "speechDetected"
+    ]
+    for i in emotionalAck:
+        if params.__contains__(i):
+            encontrado = True
 
+    return encontrado
 
 def checkTimeMessageSended(params):
     isCorrectToSend = True

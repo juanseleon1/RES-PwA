@@ -450,8 +450,8 @@ class pepperModuleV2(object):
         # CameraPose_InRobotFrame,
         # Camera_Id
         # ]
-        json_params["peopleDetected"] = value
-        #send(-1, "int", json_params)
+        json_params["peopleDetected"] = True
+        send(-1, "int", json_params)
 
     # def preferenceAdded(self, value):
     #     json_params = {}
