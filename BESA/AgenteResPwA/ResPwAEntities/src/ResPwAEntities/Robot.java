@@ -47,10 +47,11 @@ public class Robot implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
-    private Perfilpwa perfilpwa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accionId")
+    @OneToMany
     private List<Accion> accionList;
+
+    public Robot() {
+    }
 
     public Robot(BigDecimal id, String nombre) {
         this.id = id;
@@ -71,14 +72,6 @@ public class Robot implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Perfilpwa getPerfilpwa() {
-        return perfilpwa;
-    }
-
-    public void setPerfilpwa(Perfilpwa perfilpwa) {
-        this.perfilpwa = perfilpwa;
     }
 
     @XmlTransient

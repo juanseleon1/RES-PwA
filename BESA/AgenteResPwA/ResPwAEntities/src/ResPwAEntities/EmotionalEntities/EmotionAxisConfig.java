@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,7 +28,7 @@ public class EmotionAxisConfig implements Serializable {
     @Basic
     @Column(nullable= false, unique=false)
     private float baseValue;
-    @Column(nullable= false)
+    @JoinColumn(name = "EVTINF_ID", referencedColumnName = "ID")
     @OneToMany(fetch = FetchType.EAGER)
     private List<EventInfluence> eventInfluence;
     @Basic

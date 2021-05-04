@@ -57,7 +57,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
-    private boolean robobtInicializado = false;
+    private boolean robotInicializado = false;
 
     public BEstadoRobot() {
     }

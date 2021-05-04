@@ -43,7 +43,7 @@ def send(id_response, responseType, params):
 
         client.send(msg_to_send + '\r\n')
         client.close()
-        
+
 def isAnEmotionalAck(params):
     encontrado = False
     emotionalAck = [
