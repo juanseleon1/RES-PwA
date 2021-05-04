@@ -16,12 +16,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author ASUS
  */
 @Entity
+@Table(name = "REGLA")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Regla.findAll", query = "SELECT r FROM Regla r")
+    , @NamedQuery(name = "Regla.findByEtiqueta", query = "SELECT r FROM Regla r WHERE r.etiqueta= :etiqueta")})
+
 public class Regla implements Serializable {
 
     private static final long serialVersionUID = 1L;
