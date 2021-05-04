@@ -62,7 +62,7 @@ public class RecargarBateria extends GoalBDI {
         System.out.println("Meta RecargarBateria detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoRobot().getBateria()) {
+        if (blvs.getEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoRobot().getBateria()) {
             return 1.0;
         }
         return 0;

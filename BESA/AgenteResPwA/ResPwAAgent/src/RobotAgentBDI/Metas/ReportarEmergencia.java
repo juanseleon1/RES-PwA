@@ -51,7 +51,7 @@ public class ReportarEmergencia extends GoalBDI{
         System.out.println("Meta ReportarEmergencia detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //PwA diga ayuda
-        if(!blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged() 
+        if(blvs.getEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged() 
                 && (System.currentTimeMillis()-blvs.getbEstadoInteraccion().getTiempoEmergenciaTrans())/1000 >= 60)
         {
             return 1;

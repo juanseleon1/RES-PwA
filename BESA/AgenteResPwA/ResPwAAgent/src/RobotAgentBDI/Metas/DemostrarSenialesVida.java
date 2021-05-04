@@ -49,7 +49,7 @@ public class DemostrarSenialesVida extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta DemostrarSenialesVida detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+        if(blvs.getEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
             if(!blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
             {
                 return 1.0;

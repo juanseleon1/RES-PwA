@@ -353,7 +353,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
     }
 
-    public boolean getRobotInicializado(){
+    public boolean isRobotInicializado(){
        return robotInicializado;
     }
 
