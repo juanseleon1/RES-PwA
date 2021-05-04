@@ -43,6 +43,7 @@ public class CreacionJSON extends ResPwaTask{
         infoServicio.put("INITIALCONF", this.json);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
         requestService(srb,blvs);
+        
     }
 
     @Override

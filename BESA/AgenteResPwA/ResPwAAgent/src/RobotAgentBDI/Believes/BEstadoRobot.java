@@ -57,6 +57,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
+    private boolean robobtInicializado = false;
 
     public BEstadoRobot() {
     }
@@ -128,6 +129,9 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("hotDeviceDetected")) {
                 verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
+            }
+            if (infoRecibida.getDataP().containsKey("robotInicializado")) {
+                robotInicializado = Boolean.valueOf((String) infoRecibida.getDataP().get("robotInicializado"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData emoDat = (EmotionalData) si;
@@ -347,6 +351,14 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
 
     public void setTiempoSinConexionInternet(long tiempoSinConexionInternet) {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
+    }
+
+    public boolean getRobotInicializado(){
+       return robotInicializado;
+    }
+
+    public void setRobotInicializado(boolean robotInicializado) {
+        this.robotInicializado = robotInicializado;
     }
 
     @Override
