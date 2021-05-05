@@ -47,6 +47,18 @@
 <colAssociation fkAssociation="AE28F807-BCF1-0AAE-248F-F2D37C05D879" referredColumn="558CDB8C-4784-8B90-780C-01CBFE8DDFAF"/>
 </associations>
 </Column>
+<Column name="reminiscencia" id="66F9E0CB-4899-9E64-6615-8EA7A7A727BB">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 21:03:50 UTC</createdTime>
+<generatorID>1D2AF799-EB12-63EC-351C-14EB473AFD1D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="652C908C-A30E-328F-4A0E-CB126DD3EE3E" name="Cancion_PK">
