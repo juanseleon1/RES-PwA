@@ -44,7 +44,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private boolean libreEntorno = false;
     private boolean activadoMovEscucha = false;
     private boolean activadoConsciente = false;
-    private boolean activadoSeñalesDeVida = false;
+    private boolean activadoSenalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
     private boolean conexionInternet = false;
@@ -111,8 +111,8 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             if (infoRecibida.getDataP().containsKey("activadoConsciente")) {
                 activadoConsciente = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoConsciente"));
             }
-            if (infoRecibida.getDataP().containsKey("activadoSeñalesDeVida")) {
-                activadoSeñalesDeVida = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoSeñalesDeVida"));
+            if (infoRecibida.getDataP().containsKey("activadoSenalesDeVida")) {
+                activadoSenalesDeVida = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoSenalesDeVida"));
             }
             if (infoRecibida.getDataP().containsKey("activadoMovHabla")) {
                 activadoMovHabla = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovHabla"));
@@ -233,12 +233,12 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.activadoConsciente = activadoConsciente;
     }
 
-    public boolean isActivadoSeñalesDeVida() {
-        return activadoSeñalesDeVida;
+    public boolean isActivadoSenalesDeVida() {
+        return activadoSenalesDeVida;
     }
 
-    public void setActivadoSeñalesDeVida(boolean activadoSeñalesDeVida) {
-        this.activadoSeñalesDeVida = activadoSeñalesDeVida;
+    public void setActivadoSenalesDeVida(boolean activadoSenalesDeVida) {
+        this.activadoSenalesDeVida = activadoSenalesDeVida;
     }
 
     public boolean isActivadoMovHabla() {

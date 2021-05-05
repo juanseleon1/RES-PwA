@@ -98,7 +98,7 @@ public class InitRESPwA {
             if (c == null) {
                 System.out.println("Usuario Inexistente");
             } else {
-                login = c.getContraseña().equals(pwd);
+                login = c.getContrasena().equals(pwd);
                 if (!login) {
                     System.out.println("Contrasena no coincide");
                 }
