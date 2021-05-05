@@ -46,21 +46,17 @@ public class Emocion implements Serializable {
     @Column(name = "ID")
     private BigDecimal id;
     @Basic(optional = false)
-    @Column(name = "VALORMAXIMO")
-    private double valorMaximo;
-    @Basic(optional = false)
-    @Column(name = "VALORMINIMO")
-    private double valorMinimo;
+    @Column(name = "EMOTIONALTAG")
+    private String emotionalTag;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Accion> accionList;
 
     public Emocion() {
     }
 
-    public Emocion(BigDecimal id, double valorMaximo, double valorMinimo) {
+    public Emocion(BigDecimal id, String emotionalTag) {
         this.id = id;
-        this.valorMaximo = valorMaximo;
-        this.valorMinimo = valorMinimo;
+        this.emotionalTag = emotionalTag;
     }
 
     public BigDecimal getId() {
@@ -71,20 +67,12 @@ public class Emocion implements Serializable {
         this.id = id;
     }
 
-    public double getValorMaximo() {
-        return valorMaximo;
+    public String getEmotionalTag() {
+        return emotionalTag;
     }
 
-    public void setValorMaximo() {
-        this.valorMaximo = valorMaximo;
-    }
-    
-    public double getValorMinimo() {
-        return valorMinimo;
-    }
-
-    public void setValorMinimo() {
-        this.valorMinimo = valorMinimo;
+    public void setEmotionalTag(String emotionalTag) {
+        this.emotionalTag = emotionalTag;
     }
 
     @XmlTransient

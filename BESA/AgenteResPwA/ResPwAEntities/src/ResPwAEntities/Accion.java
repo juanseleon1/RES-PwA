@@ -53,7 +53,6 @@ public class Accion implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO")
     private String tipo;
-    @JoinColumn(name = "EMOCION_ID", referencedColumnName = "ID")
     @ManyToMany(mappedBy = "accionList", fetch =FetchType.EAGER)
     private List<Joint> jointList;
 

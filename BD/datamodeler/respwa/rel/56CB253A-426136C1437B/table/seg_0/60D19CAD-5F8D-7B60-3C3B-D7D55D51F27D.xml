@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="60D19CAD-5F8D-7B60-3C3B-D7D55D51F27D" name="AccionxJoint">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Accion_id" id="2273527D-824E-7719-B46C-7AEB8C1ED053">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F9FC4DA7-609F-564D-EEAF-0EED3FDD09FB" referredColumn="6CF9228B-36DF-AA17-C626-17D5CD30C8C8"/>
+</associations>
+</Column>
+<Column name="Joint_id" id="57D27500-5FDD-97EE-B7E9-4D253151EE85">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7F58446D-B702-C3BE-2705-AEB96988F525" referredColumn="14A8155D-00B7-877E-F1A0-EB5DCA58CFFC"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="EB9B75CF-4C8D-39BB-2846-BE7F5F296BE4" name="AccionxJoint_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2273527D-824E-7719-B46C-7AEB8C1ED053"/>
+<colUsage columnID="57D27500-5FDD-97EE-B7E9-4D253151EE85"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="09402EC7-52AA-CAC6-AFF8-A1853C2ED3AA" name="AccionxJoint_Accion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<generatorID>D38D62DB-2CD4-F7B2-2102-327E9984633C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2273527D-824E-7719-B46C-7AEB8C1ED053"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AA148110-143C-EA1C-1660-C7F68EF130CA" name="AccionxJoint_Joint_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:52:31 UTC</createdTime>
+<generatorID>D38D62DB-2CD4-F7B2-2102-327E9984633C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="57D27500-5FDD-97EE-B7E9-4D253151EE85"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
