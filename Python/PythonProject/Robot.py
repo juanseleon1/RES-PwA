@@ -55,7 +55,7 @@ class Robot:
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
-        self.prof_emotions = []
+        self.prof_emotions = dict()
         self.sensorsModule = None
         self.animation = Animation(self.session)
 
@@ -392,7 +392,7 @@ class Robot:
             self.prof_emotions[key] = value
 
         print("INITCONF ", self.prof_emotions)
-        if len(dict) == 5:
+        if len(self.prof_emotions) == 5:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)

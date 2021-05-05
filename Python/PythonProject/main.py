@@ -81,7 +81,7 @@ PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
 ADDR = (HOST_LOCAL, PORT)
 server = None
-HEADER = 1024
+HEADER = 10000
 FORMAT = 'utf-8'
 
 # send( "id", "ROB", True)
