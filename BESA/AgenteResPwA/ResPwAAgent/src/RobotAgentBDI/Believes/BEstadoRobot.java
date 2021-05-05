@@ -371,7 +371,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             float state = ea.getCurrentValue();
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
             System.out.println("VALOR DE EMOVAL "+state);
-            infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
+            infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
