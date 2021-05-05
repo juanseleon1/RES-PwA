@@ -82,6 +82,12 @@ public class CreacionJSON extends ResPwaTask{
           for (Accion a: acciones){
             if(i.equals(a.getTipo())){
               accionxtipo = this.json.get(i);
+              
+              for (Joint j: a.getJoints())
+              {
+                
+              }
+
               accionxtipo.add(a);
               this.json.put(i, accionxtipo);
             }
