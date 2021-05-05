@@ -31,7 +31,7 @@ public class ActivarSenialesVida extends ResPwaTask{
 
         System.out.println("--- Check Finish ActivarSenialesVida ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isActivadoSeñalesDeVida())
+        if(blvs.getbEstadoRobot().isActivadoSenalesDeVida())
         {
             return true;
         }

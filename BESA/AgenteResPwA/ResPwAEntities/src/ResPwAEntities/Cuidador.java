@@ -42,7 +42,7 @@ public class Cuidador implements Serializable {
     private String nombreusuario;
     @Basic(optional = false)
     @Column(name = "CONTRASENA")
-    private String contraseña;
+    private String contrasena;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
@@ -62,9 +62,9 @@ public class Cuidador implements Serializable {
         this.nombreusuario = nombreusuario;
     }
 
-    public Cuidador(String nombreusuario, String contraseña, String nombre, String correo, String celular) {
+    public Cuidador(String nombreusuario, String contrasena, String nombre, String correo, String celular) {
         this.nombreusuario = nombreusuario;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
@@ -78,12 +78,12 @@ public class Cuidador implements Serializable {
         this.nombreusuario = nombreusuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {

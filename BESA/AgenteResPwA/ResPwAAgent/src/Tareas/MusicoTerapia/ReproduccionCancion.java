@@ -70,7 +70,7 @@ public class ReproduccionCancion extends ResPwaTask {
             requestService(srb,blvs);
             
             infoServicio = new HashMap<>();
-            String cancion = AudioUtils.getCancion("Feliz cumpleaños");
+            String cancion = AudioUtils.getCancion("Feliz cumpleanos");
             infoServicio.put("PLAYSOUND", cancion);
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
             requestService(srb,blvs);
