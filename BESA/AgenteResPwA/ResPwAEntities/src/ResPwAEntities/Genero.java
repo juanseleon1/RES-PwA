@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,9 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "GENERO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g")
-    , @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero")
-    , @NamedQuery(name = "Genero.findByGusto", query = "SELECT g FROM Genero g WHERE g.gusto = :gusto")})
+    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g"),
+    @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero"),
+    @NamedQuery(name = "Genero.findByGusto", query = "SELECT g FROM Genero g WHERE g.gusto = :gusto")})
 public class Genero implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +41,9 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cuento> cuentoList;
 
     public Genero() {

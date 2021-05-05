@@ -3,46 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "ACCION")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Accion.findAll", query = "SELECT a FROM Accion a")
-    , @NamedQuery(name = "Accion.findById", query = "SELECT a FROM Accion a WHERE a.id = :id")
-    , @NamedQuery(name = "Accion.findByNombre", query = "SELECT a FROM Accion a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Accion.findByTipo", query = "SELECT a FROM Accion a WHERE a.tipo = :tipo")})
+    @NamedQuery(name = "Accion.findAll", query = "SELECT a FROM Accion a"),
+    @NamedQuery(name = "Accion.findById", query = "SELECT a FROM Accion a WHERE a.id = :id"),
+    @NamedQuery(name = "Accion.findByNombre", query = "SELECT a FROM Accion a WHERE a.nombre = :nombre"),
+    @NamedQuery(name = "Accion.findByTipo", query = "SELECT a FROM Accion a WHERE a.tipo = :tipo")})
 public class Accion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
@@ -53,10 +49,20 @@ public class Accion implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPO")
     private String tipo;
-    @ManyToMany(mappedBy = "accionList", fetch =FetchType.EAGER)
+    @JoinTable(name = "ACCIONXJOINT", joinColumns = {
+        @JoinColumn(name = "ACCION_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "JOINT_ID", referencedColumnName = "ID")})
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Joint> jointList;
+    @JoinColumn(name = "EMOCION_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Emocion emocionId;
 
     public Accion() {
+    }
+
+    public Accion(BigDecimal id) {
+        this.id = id;
     }
 
     public Accion(BigDecimal id, String nombre, String tipo) {
@@ -98,6 +104,14 @@ public class Accion implements Serializable {
         this.jointList = jointList;
     }
 
+    public Emocion getEmocionId() {
+        return emocionId;
+    }
+
+    public void setEmocionId(Emocion emocionId) {
+        this.emocionId = emocionId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,7 +122,7 @@ public class Accion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Familiar)) {
+        if (!(object instanceof Accion)) {
             return false;
         }
         Accion other = (Accion) object;
@@ -116,6 +130,11 @@ public class Accion implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ResPwAEntities.Accion[ id=" + id + " ]";
     }
     
 }

@@ -174,12 +174,12 @@ public class InitRESPwA {
         List<HashMap<String, Object>> paramList = new ArrayList<>();
 
         for (Emocion e: emociones){
-            params.put(e.getEmotionalTag(), new ArrayList<>());
+            params.put(e.getEmotionaltag(), new ArrayList<>());
         }
 
         for (String i : params.keySet()){
             for (Emocion e : emociones){
-                if (i.equals(e.getEmotionalTag())){
+                if (i.equals(e.getEmotionaltag())){
                     accion = new HashMap<>();
                     for (Accion a : e.getAccionList()){
                         joints = new ArrayList<>();
@@ -192,9 +192,9 @@ public class InitRESPwA {
                         }
                         accion.put(a.getNombre(), joints);
                     }
-                    paramList = (List<HashMap<String,Object>>)params.get(e.getEmotionalTag());
+                    paramList = (List<HashMap<String,Object>>)params.get(e.getEmotionaltag());
                     paramList.add(accion);
-                    params.put(e.getEmotionalTag(), paramList);
+                    params.put(e.getEmotionaltag(), paramList);
                 }
             }
         }

@@ -66,7 +66,7 @@ public class CdrJpaController implements Serializable {
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findCdr(cdr.getPerfilMedicoCedula()) != null) {
+            if (findCdr(cdr.getPerfilMedicoPerfilpwaCedula()) != null) {
                 throw new PreexistingEntityException("Cdr " + cdr + " already exists.", ex);
             }
             throw ex;
@@ -82,7 +82,7 @@ public class CdrJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cdr persistentCdr = em.find(Cdr.class, cdr.getPerfilMedicoCedula());
+            Cdr persistentCdr = em.find(Cdr.class, cdr.getPerfilMedicoPerfilpwaCedula());
             PerfilMedico perfilMedicoOld = persistentCdr.getPerfilMedico();
             PerfilMedico perfilMedicoNew = cdr.getPerfilMedico();
             List<String> illegalOrphanMessages = null;
@@ -115,7 +115,7 @@ public class CdrJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = cdr.getPerfilMedicoCedula();
+                String id = cdr.getPerfilMedicoPerfilpwaCedula();
                 if (findCdr(id) == null) {
                     throw new NonexistentEntityException("The cdr with id " + id + " no longer exists.");
                 }
@@ -136,7 +136,7 @@ public class CdrJpaController implements Serializable {
             Cdr cdr;
             try {
                 cdr = em.getReference(Cdr.class, id);
-                cdr.getPerfilMedicoCedula();
+                cdr.getPerfilMedicoPerfilpwaCedula();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cdr with id " + id + " no longer exists.", enfe);
             }

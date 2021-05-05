@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ESTADOCIVIL")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadocivil.findAll", query = "SELECT e FROM Estadocivil e")
-    , @NamedQuery(name = "Estadocivil.findByTipoec", query = "SELECT e FROM Estadocivil e WHERE e.tipoec = :tipoec")})
+    @NamedQuery(name = "Estadocivil.findAll", query = "SELECT e FROM Estadocivil e"),
+    @NamedQuery(name = "Estadocivil.findByTipoec", query = "SELECT e FROM Estadocivil e WHERE e.tipoec = :tipoec")})
 public class Estadocivil implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +36,7 @@ public class Estadocivil implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPOEC")
     private String tipoec;
-    @OneToMany(mappedBy = "estadocivilTipoec")
+    @OneToMany(mappedBy = "estadocivilTipoec", fetch = FetchType.EAGER)
     private List<Perfilpwa> perfilpwaList;
 
     public Estadocivil() {

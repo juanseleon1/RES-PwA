@@ -13,6 +13,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -35,15 +36,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFILPWA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Perfilpwa.findAll", query = "SELECT p FROM Perfilpwa p")
-    , @NamedQuery(name = "Perfilpwa.findByNombre", query = "SELECT p FROM Perfilpwa p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Perfilpwa.findByApellido", query = "SELECT p FROM Perfilpwa p WHERE p.apellido = :apellido")
-    , @NamedQuery(name = "Perfilpwa.findByFechanacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.fechanacimiento = :fechanacimiento")
-    , @NamedQuery(name = "Perfilpwa.findByPaisnacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.paisnacimiento = :paisnacimiento")
-    , @NamedQuery(name = "Perfilpwa.findByEdad", query = "SELECT p FROM Perfilpwa p WHERE p.edad = :edad")
-    , @NamedQuery(name = "Perfilpwa.findByCedula", query = "SELECT p FROM Perfilpwa p WHERE p.cedula = :cedula")
-    , @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion")
-    , @NamedQuery(name = "Perfilpwa.findByIdrobot", query = "SELECT p FROM Perfilpwa p WHERE p.idrobot = :idrobot")})
+    @NamedQuery(name = "Perfilpwa.findAll", query = "SELECT p FROM Perfilpwa p"),
+    @NamedQuery(name = "Perfilpwa.findByNombre", query = "SELECT p FROM Perfilpwa p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "Perfilpwa.findByApellido", query = "SELECT p FROM Perfilpwa p WHERE p.apellido = :apellido"),
+    @NamedQuery(name = "Perfilpwa.findByFechanacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.fechanacimiento = :fechanacimiento"),
+    @NamedQuery(name = "Perfilpwa.findByPaisnacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.paisnacimiento = :paisnacimiento"),
+    @NamedQuery(name = "Perfilpwa.findByEdad", query = "SELECT p FROM Perfilpwa p WHERE p.edad = :edad"),
+    @NamedQuery(name = "Perfilpwa.findByCedula", query = "SELECT p FROM Perfilpwa p WHERE p.cedula = :cedula"),
+    @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion"),
+    @NamedQuery(name = "Perfilpwa.findByIdrobot", query = "SELECT p FROM Perfilpwa p WHERE p.idrobot = :idrobot")})
 public class Perfilpwa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,23 +73,23 @@ public class Perfilpwa implements Serializable {
     private String profesion;
     @Column(name = "IDROBOT")
     private BigInteger idrobot;
-    @ManyToMany(mappedBy = "perfilpwaList")
+    @ManyToMany(mappedBy = "perfilpwaList", fetch = FetchType.EAGER)
     private List<Familiar> familiarList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwa", fetch = FetchType.EAGER)
+    private List<Registroactividad> registroactividadList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa", fetch = FetchType.EAGER)
+    private PerfilMedico perfilMedico;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa", fetch = FetchType.EAGER)
+    private PerfilPreferencia perfilPreferencia;
     @JoinColumn(name = "CUIDADOR_NOMBREUSUARIO", referencedColumnName = "NOMBREUSUARIO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cuidador cuidadorNombreusuario;
     @JoinColumn(name = "ESTADOCIVIL_TIPOEC", referencedColumnName = "TIPOEC")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Estadocivil estadocivilTipoec;
     @JoinColumn(name = "NIVEL_EDUCATIVO_TIPONE", referencedColumnName = "TIPONE")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private NivelEducativo nivelEducativoTipone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwaCedula")
-    private List<Registroactividad> registroactividadList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
-    private PerfilMedico perfilMedico;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilpwa")
-    private PerfilPreferencia perfilPreferencia;
 
     public Perfilpwa() {
     }
@@ -180,30 +181,6 @@ public class Perfilpwa implements Serializable {
         this.familiarList = familiarList;
     }
 
-    public Cuidador getCuidadorNombreusuario() {
-        return cuidadorNombreusuario;
-    }
-
-    public void setCuidadorNombreusuario(Cuidador cuidadorNombreusuario) {
-        this.cuidadorNombreusuario = cuidadorNombreusuario;
-    }
-
-    public Estadocivil getEstadocivilTipoec() {
-        return estadocivilTipoec;
-    }
-
-    public void setEstadocivilTipoec(Estadocivil estadocivilTipoec) {
-        this.estadocivilTipoec = estadocivilTipoec;
-    }
-
-    public NivelEducativo getNivelEducativoTipone() {
-        return nivelEducativoTipone;
-    }
-
-    public void setNivelEducativoTipone(NivelEducativo nivelEducativoTipone) {
-        this.nivelEducativoTipone = nivelEducativoTipone;
-    }
-
     @XmlTransient
     public List<Registroactividad> getRegistroactividadList() {
         return registroactividadList;
@@ -227,6 +204,30 @@ public class Perfilpwa implements Serializable {
 
     public void setPerfilPreferencia(PerfilPreferencia perfilPreferencia) {
         this.perfilPreferencia = perfilPreferencia;
+    }
+
+    public Cuidador getCuidadorNombreusuario() {
+        return cuidadorNombreusuario;
+    }
+
+    public void setCuidadorNombreusuario(Cuidador cuidadorNombreusuario) {
+        this.cuidadorNombreusuario = cuidadorNombreusuario;
+    }
+
+    public Estadocivil getEstadocivilTipoec() {
+        return estadocivilTipoec;
+    }
+
+    public void setEstadocivilTipoec(Estadocivil estadocivilTipoec) {
+        this.estadocivilTipoec = estadocivilTipoec;
+    }
+
+    public NivelEducativo getNivelEducativoTipone() {
+        return nivelEducativoTipone;
+    }
+
+    public void setNivelEducativoTipone(NivelEducativo nivelEducativoTipone) {
+        this.nivelEducativoTipone = nivelEducativoTipone;
     }
 
     @Override

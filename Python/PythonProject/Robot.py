@@ -388,15 +388,18 @@ class Robot:
         self.alLocalizationProxy.goToPosition(position)
 
     def initial_conf(self, prof_emotions):
-        self.prof_emotions = prof_emotions
-        print(self.prof_emotions)
-        try:
-            self.init_timers()
-            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-        except Exception, e:
-            print "Main Error"
-            print e
-            exit(1)
+        for key, value in prof_emotions.items():
+            self.prof_emotions[key] = value
+
+        print("INITCONF ", self.prof_emotions)
+        if len(dict) == 5:
+            try:
+                self.init_timers()
+                self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+            except Exception, e:
+                print "Main Error"
+                print e
+                exit(1)
 
     def request_posture_change(self, params):
         actions=self.current_emomap[params.get("ACTION")]

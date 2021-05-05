@@ -269,11 +269,11 @@ public class BEstadoActividad implements Believes {
         Registroactividad ract = new Registroactividad(ractPK);
         List<Actividadpwa> list = RESPwABDInterface.getActivities();
         list.stream().filter((apwa) -> (apwa.getNombre().equalsIgnoreCase(actividadActual.toString()))).forEachOrdered((apwa) -> {
-            ract.setActividadpwaId(apwa);
+            ract.setActividadpwa(apwa);
         });
         ract.setEstadoinicial(cedula);
         ract.setEstadofinal(cedula);
-        ract.setPerfilpwaCedula(blvs.getbPerfilPwA().getPerfil());
+        ract.setPerfilpwa(blvs.getbPerfilPwA().getPerfil());
         RESPwABDInterface.createRegistroAct(ract);
     }
 

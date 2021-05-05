@@ -3,59 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "ROBOT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Robot.findAll", query = "SELECT r FROM Robot r")
-    , @NamedQuery(name = "Robot.findById", query = "SELECT r FROM Robot r WHERE r.id = :id")
-    , @NamedQuery(name = "Robot.findByNombre", query = "SELECT r FROM Robot r WHERE r.nombre = :nombre")})
+    @NamedQuery(name = "Robot.findAll", query = "SELECT r FROM Robot r"),
+    @NamedQuery(name = "Robot.findById", query = "SELECT r FROM Robot r WHERE r.id = :id"),
+    @NamedQuery(name = "Robot.findByNombre", query = "SELECT r FROM Robot r WHERE r.nombre = :nombre")})
 public class Robot implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
     private BigDecimal id;
-    @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "robotId", fetch = FetchType.EAGER)
     private List<Emocion> emocionList;
 
     public Robot() {
     }
 
-    public Robot(BigDecimal id, String nombre) {
+    public Robot(BigDecimal id) {
         this.id = id;
-        this.nombre = nombre;
     }
 
     public BigDecimal getId() {
@@ -93,7 +87,7 @@ public class Robot implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Familiar)) {
+        if (!(object instanceof Robot)) {
             return false;
         }
         Robot other = (Robot) object;
@@ -102,5 +96,10 @@ public class Robot implements Serializable {
         }
         return true;
     }
-   
+
+    @Override
+    public String toString() {
+        return "ResPwAEntities.Robot[ id=" + id + " ]";
+    }
+    
 }

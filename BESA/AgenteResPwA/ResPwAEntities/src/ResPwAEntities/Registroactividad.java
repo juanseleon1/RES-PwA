@@ -6,11 +6,13 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -26,11 +28,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "REGISTROACTIVIDAD")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Registroactividad.findAll", query = "SELECT r FROM Registroactividad r")
-    , @NamedQuery(name = "Registroactividad.findByFecha", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.fecha = :fecha")
-    , @NamedQuery(name = "Registroactividad.findByEstadoinicial", query = "SELECT r FROM Registroactividad r WHERE r.estadoinicial = :estadoinicial")
-    , @NamedQuery(name = "Registroactividad.findByEstadofinal", query = "SELECT r FROM Registroactividad r WHERE r.estadofinal = :estadofinal")
-    , @NamedQuery(name = "Registroactividad.findByTipo", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.tipo = :tipo")})
+    @NamedQuery(name = "Registroactividad.findAll", query = "SELECT r FROM Registroactividad r"),
+    @NamedQuery(name = "Registroactividad.findByFecha", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.fecha = :fecha"),
+    @NamedQuery(name = "Registroactividad.findByEstadoinicial", query = "SELECT r FROM Registroactividad r WHERE r.estadoinicial = :estadoinicial"),
+    @NamedQuery(name = "Registroactividad.findByEstadofinal", query = "SELECT r FROM Registroactividad r WHERE r.estadofinal = :estadofinal"),
+    @NamedQuery(name = "Registroactividad.findByPerfilpwaCedula", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.perfilpwaCedula = :perfilpwaCedula"),
+    @NamedQuery(name = "Registroactividad.findByTipo", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.tipo = :tipo"),
+    @NamedQuery(name = "Registroactividad.findByActividadpwaId", query = "SELECT r FROM Registroactividad r WHERE r.registroactividadPK.actividadpwaId = :actividadpwaId")})
 public class Registroactividad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,12 +46,12 @@ public class Registroactividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "ESTADOFINAL")
     private String estadofinal;
-    @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private Actividadpwa actividadpwaId;
-    @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA")
-    @ManyToOne(optional = false)
-    private Perfilpwa perfilpwaCedula;
+    @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Actividadpwa actividadpwa;
+    @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Perfilpwa perfilpwa;
 
     public Registroactividad() {
     }
@@ -62,8 +66,8 @@ public class Registroactividad implements Serializable {
         this.estadofinal = estadofinal;
     }
 
-    public Registroactividad(Date fecha, String tipo) {
-        this.registroactividadPK = new RegistroactividadPK(fecha, tipo);
+    public Registroactividad(Date fecha, String perfilpwaCedula, String tipo, BigInteger actividadpwaId) {
+        this.registroactividadPK = new RegistroactividadPK(fecha, perfilpwaCedula, tipo, actividadpwaId);
     }
 
     public RegistroactividadPK getRegistroactividadPK() {
@@ -90,20 +94,20 @@ public class Registroactividad implements Serializable {
         this.estadofinal = estadofinal;
     }
 
-    public Actividadpwa getActividadpwaId() {
-        return actividadpwaId;
+    public Actividadpwa getActividadpwa() {
+        return actividadpwa;
     }
 
-    public void setActividadpwaId(Actividadpwa actividadpwaId) {
-        this.actividadpwaId = actividadpwaId;
+    public void setActividadpwa(Actividadpwa actividadpwa) {
+        this.actividadpwa = actividadpwa;
     }
 
-    public Perfilpwa getPerfilpwaCedula() {
-        return perfilpwaCedula;
+    public Perfilpwa getPerfilpwa() {
+        return perfilpwa;
     }
 
-    public void setPerfilpwaCedula(Perfilpwa perfilpwaCedula) {
-        this.perfilpwaCedula = perfilpwaCedula;
+    public void setPerfilpwa(Perfilpwa perfilpwa) {
+        this.perfilpwa = perfilpwa;
     }
 
     @Override

@@ -8,8 +8,10 @@ package ResPwAEntities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "DIFICULTAD")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Dificultad.findAll", query = "SELECT d FROM Dificultad d")
-    , @NamedQuery(name = "Dificultad.findByDificultad", query = "SELECT d FROM Dificultad d WHERE d.dificultad = :dificultad")})
+    @NamedQuery(name = "Dificultad.findAll", query = "SELECT d FROM Dificultad d"),
+    @NamedQuery(name = "Dificultad.findByDificultad", query = "SELECT d FROM Dificultad d WHERE d.dificultad = :dificultad")})
 public class Dificultad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +37,9 @@ public class Dificultad implements Serializable {
     @Basic(optional = false)
     @Column(name = "DIFICULTAD")
     private String dificultad;
-    @OneToMany(mappedBy = "dificultadDificultad")
+    @OneToMany(mappedBy = "dificultadDificultad", fetch = FetchType.EAGER)
+    private List<Actividadpwa> actividadpwaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dificultadDificultad", fetch = FetchType.EAGER)
     private List<Actxpreferencia> actxpreferenciaList;
 
     public Dificultad() {
@@ -51,6 +55,15 @@ public class Dificultad implements Serializable {
 
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
+    }
+
+    @XmlTransient
+    public List<Actividadpwa> getActividadpwaList() {
+        return actividadpwaList;
+    }
+
+    public void setActividadpwaList(List<Actividadpwa> actividadpwaList) {
+        this.actividadpwaList = actividadpwaList;
     }
 
     @XmlTransient

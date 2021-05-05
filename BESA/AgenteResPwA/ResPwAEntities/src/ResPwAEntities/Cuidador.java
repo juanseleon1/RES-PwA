@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,12 +28,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUIDADOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c")
-    , @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario")
-    , @NamedQuery(name = "Cuidador.findByContrasena", query = "SELECT c FROM Cuidador c WHERE c.contrasena = :contrasena")
-    , @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo")
-    , @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
+    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c"),
+    @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario"),
+    @NamedQuery(name = "Cuidador.findByContrasena", query = "SELECT c FROM Cuidador c WHERE c.contrasena = :contrasena"),
+    @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo"),
+    @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
 public class Cuidador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +53,7 @@ public class Cuidador implements Serializable {
     @Basic(optional = false)
     @Column(name = "CELULAR")
     private String celular;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadorNombreusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadorNombreusuario", fetch = FetchType.EAGER)
     private List<Perfilpwa> perfilpwaList;
 
     public Cuidador() {
