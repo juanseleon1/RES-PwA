@@ -54,6 +54,7 @@ class Robot:
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
+        self.prof_emotions = None
 
         self.animation = Animation(self.session)
 
@@ -83,7 +84,7 @@ class Robot:
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
         time.sleep(5)
-        self.init_timers()
+
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -119,6 +120,7 @@ class Robot:
             "MOVEFORWARD": [self.move_forward, True, "act", True],  #
             "MOVETO": [self.move_to, True, "act", True],  #
             "MOVETOPOSITION": [self.move_to_position, True, "act", True],  #
+            "INITIALCONF": [self.initial_conf, False, "rob", True],
             # RobotStateServices-------------------------------------------------------
             "WAKEUP": [self.wake_up, True, "act", False],  #
             "SUSPEND": [self.suspend, True, "act", False],  #
@@ -162,17 +164,11 @@ class Robot:
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
+            "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
 
         # Declare the modules --------------------------------------------------------------------------------
-
-        try:
-            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-        except Exception, e:
-            print "Main Error"
-            print e
-            exit(1)
 
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
@@ -390,6 +386,17 @@ class Robot:
     # Go to the given position trying to perform a visual close loop with the image contained in current panorama at theta.
     def move_to_position(self, position):
         self.alLocalizationProxy.goToPosition(position)
+
+    def initial_conf(self, prof_emotions):
+        self.prof_emotions = prof_emotions
+        print(self.prof_emotions)
+        try:
+            self.init_timers()
+            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+        except Exception, e:
+            print "Main Error"
+            print e
+            exit(1)
 
     # The robot wakes up
     def wake_up(self):

@@ -60,6 +60,8 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private boolean robotInicializado = false;
 
     public BEstadoRobot() {
+        super();
+        robotInicializado = false;
     }
 
     public void setBrilloRobot(double brilloRobot) {
@@ -368,6 +370,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             EmotionAxis ea = getTopEmotionAxis();
             float state = ea.getCurrentValue();
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
+            System.out.println("VALOR DE EMOVAL "+state);
             infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));

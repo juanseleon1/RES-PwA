@@ -115,9 +115,7 @@ public class BPerfilPwA implements Believes {
 //        return factor;
 //    }
     
-    void getFromDB(String cedula) {
-        perfil = RESPwABDInterface.getProfile(cedula);
-    }
+ 
         @Override
     public Believes clone() throws CloneNotSupportedException {
         super.clone();

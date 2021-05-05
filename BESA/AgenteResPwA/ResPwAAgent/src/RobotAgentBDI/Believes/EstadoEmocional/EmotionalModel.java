@@ -24,6 +24,8 @@ public abstract class EmotionalModel {
         this.emotionalState = new EmotionalState();
         this.personality = new Personality();
         this.configureEmotionalModel();
+        System.out.println("Mafe y Juliancito 4 eva");
+
     }
 
     public void addEmotionAxis(EmotionAxis ea) {

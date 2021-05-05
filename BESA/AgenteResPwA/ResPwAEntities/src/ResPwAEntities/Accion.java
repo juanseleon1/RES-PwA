@@ -14,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -53,9 +54,7 @@ public class Accion implements Serializable {
     @Column(name = "TIPO")
     private String tipo;
     @JoinColumn(name = "EMOCION_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Emocion emocion;
-    @ManyToMany(mappedBy = "accionList")
+    @ManyToMany(mappedBy = "accionList", fetch =FetchType.EAGER)
     private List<Joint> jointList;
 
     public Accion() {
@@ -89,15 +88,6 @@ public class Accion implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-
-    public Emocion getEmocion() {
-        return emocion;
-    }
-
-    public void setEmocion(Emocion emocion) {
-        this.emocion = emocion;
     }
 
     @XmlTransient
