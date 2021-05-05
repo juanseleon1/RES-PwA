@@ -390,8 +390,10 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     }
 
     private float normalizeValue(float val, PepperConf conf) {
-        float normalValue = 0,max=conf.getMax(),min=conf.getMin();
-        normalValue= (val-min)/(max-min);
+        float normalValue,max=conf.getMax(),min=conf.getMin(),oldRange,newRange;
+        oldRange = 2;
+        newRange = max-min;
+        normalValue= (((val-min)*newRange)/(oldRange))+ min;
         return normalValue;
     }
 }
