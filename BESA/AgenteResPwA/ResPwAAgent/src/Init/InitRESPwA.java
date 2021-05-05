@@ -126,7 +126,7 @@ public class InitRESPwA {
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-//        TestPlan tp = TestPlan.buildGoal();
+        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -137,7 +137,7 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-//        RAGoals.add(tp);
+        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
