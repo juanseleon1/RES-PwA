@@ -165,7 +165,6 @@ public class InitRESPwA {
     }
 
     public static void startConfig(PepperAdapter p) {
-        List<Accion> acciones = RESPwABDInterface.getAcciones();
         List<Emocion> emociones = RESPwABDInterface.getEmociones();
         HashMap<String, Object> infoServicio = new HashMap<>();
         HashMap<String, Object> params = new HashMap<>();
@@ -181,14 +180,16 @@ public class InitRESPwA {
         for (String i : params.keySet()){
             for (Emocion e : emociones){
                 if (i.equals(e.getEmotionalTag())){
+                    accion = new HashMap<>();
                     for (Accion a : e.getAccionList()){
+                        joints = new ArrayList<>();
                         for (Joint j : a.getJointList()){
+                            joint = new HashMap<>();
                             joint.put("name",j.getNombre());
                             joint.put("time",j.getTiempo());
                             joint.put("key",j.getAngulo());
+                            joints.add(joint);
                         }
-                        joints = (List<HashMap<String,Object>>)accion.get(a.getNombre());
-                        joints.add(joint);
                         accion.put(a.getNombre(), joints);
                     }
                     paramList = (List<HashMap<String,Object>>)params.get(e.getEmotionalTag());
