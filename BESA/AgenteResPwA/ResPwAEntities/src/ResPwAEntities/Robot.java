@@ -48,7 +48,7 @@ public class Robot implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @OneToMany
-    private List<Accion> accionList;
+    private List<Emocion> emocionList;
 
     public Robot() {
     }
@@ -75,12 +75,12 @@ public class Robot implements Serializable {
     }
 
     @XmlTransient
-    public List<Accion> getAccionList() {
-        return accionList;
+    public List<Emocion> getEmocionList() {
+        return emocionList;
     }
 
-    public void setAccionList(List<Accion> accionList) {
-        this.accionList = accionList;
+    public void setEmocionList(List<Emocion> emocionList) {
+        this.emocionList = emocionList;
     }
 
     @Override

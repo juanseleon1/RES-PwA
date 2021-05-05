@@ -154,4 +154,9 @@ public class RESPwABDInterface {
         return ajc.findAccionEntities();
     }
 
+    public static List<Emocion> getEmociones(){
+        EmocionJpaController ejc = new EmocionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ejc.findEmocionEntities();
+    }
+
 }

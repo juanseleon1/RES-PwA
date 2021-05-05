@@ -9,6 +9,8 @@ import PepperPackage.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
 import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import ResPwAEntities.Accion;
+import ResPwAEntities.Emocion;
+import ResPwAEntities.Joint;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Metas.Cuenteria;
@@ -164,27 +166,34 @@ public class InitRESPwA {
 
     public static void startConfig(PepperAdapter p) {
         List<Accion> acciones = RESPwABDInterface.getAcciones();
-        List<String> tipos = new ArrayList<>();
-        List<Accion> accionxtipo = new ArrayList<>();
-        Set<String> uniqueTipos = new HashSet<>();
+        List<Emocion> emociones = RESPwABDInterface.getEmociones();
         HashMap<String, Object> infoServicio = new HashMap<>();
         HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> accion = new HashMap<>();
+        HashMap<String, Object> joint = new HashMap<>();
+        List<HashMap<String, Object>> joints = new ArrayList<>();
+        List<HashMap<String, Object>> paramList = new ArrayList<>();
 
-        for (Accion a : acciones) {
-            tipos.add(a.getTipo());
+        for (Emocion e: emociones){
+            params.put(e.getEmotionalTag(), new ArrayList<>());
         }
 
-        uniqueTipos = new HashSet<String>(tipos);
-        for (String t : uniqueTipos) {
-            params.put(t, new ArrayList<>());
-        }
-
-        for (String i : params.keySet()) {
-            for (Accion a : acciones) {
-                if (i.equals(a.getTipo())) {
-                    accionxtipo = (List<Accion>) params.get(i);
-                    accionxtipo.add(a);
-                    params.put(i, accionxtipo);
+        for (String i : params.keySet()){
+            for (Emocion e : emociones){
+                if (i.equals(e.getEmotionalTag())){
+                    for (Accion a : e.getAccionList()){
+                        for (Joint j : a.getJointList()){
+                            joint.put("name",j.getNombre());
+                            joint.put("time",j.getTiempo());
+                            joint.put("key",j.getAngulo());
+                        }
+                        joints = (List<HashMap<String,Object>>)accion.get(a.getNombre());
+                        joints.add(joint);
+                        accion.put(a.getNombre(), joints);
+                    }
+                    paramList = (List<HashMap<String,Object>>)params.get(e.getEmotionalTag());
+                    paramList.add(accion);
+                    params.put(e.getEmotionalTag(), paramList);
                 }
             }
         }
