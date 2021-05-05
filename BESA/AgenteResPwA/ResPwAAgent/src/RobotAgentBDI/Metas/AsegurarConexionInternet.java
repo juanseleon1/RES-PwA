@@ -51,7 +51,7 @@ public class AsegurarConexionInternet extends GoalBDI{
         System.out.println("Meta AsegurarConexionInternet detectGoal");
         //meta mas importante
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getEstadoRobot().isRobotInicializado() && !blvs.getbEstadoRobot().isConexionInternet() && !blvs.getbEstadoRobot().getBateria() && (blvs.getbEstadoRobot().getTiempoSinConexionInternet())/1000 > 60)
+        if(blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoRobot().isConexionInternet() && !blvs.getbEstadoRobot().getBateria() && (blvs.getbEstadoRobot().getTiempoSinConexionInternet())/1000 > 60)
         {
             return 1;
         }

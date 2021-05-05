@@ -51,7 +51,7 @@ public class Emocion implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALORMINIMO")
     private double valorMinimo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emocion")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Accion> accionList;
 
     public Emocion() {

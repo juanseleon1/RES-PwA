@@ -5,21 +5,18 @@
  */
 package ResPwAEntities.Controllers;
 
+import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
+import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
+import ResPwAEntities.Emocion;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.Accion;
-import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
-import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
-import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
-import ResPwAEntities.Emocion;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -37,29 +34,11 @@ public class EmocionJpaController implements Serializable {
     }
 
     public void create(Emocion emocion) throws PreexistingEntityException, Exception {
-        if (emocion.getAccionList() == null) {
-            emocion.setAccionList(new ArrayList<Accion>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Accion> attachedAccionList = new ArrayList<Accion>();
-            for (Accion accionListAccionToAttach : emocion.getAccionList()) {
-                accionListAccionToAttach = em.getReference(accionListAccionToAttach.getClass(), accionListAccionToAttach.getId());
-                attachedAccionList.add(accionListAccionToAttach);
-            }
-            emocion.setAccionList(attachedAccionList);
             em.persist(emocion);
-            for (Accion accionListAccion : emocion.getAccionList()) {
-                Emocion oldEmocionOfAccionListAccion = accionListAccion.getEmocion();
-                accionListAccion.setEmocion(emocion);
-                accionListAccion = em.merge(accionListAccion);
-                if (oldEmocionOfAccionListAccion != null) {
-                    oldEmocionOfAccionListAccion.getAccionList().remove(accionListAccion);
-                    oldEmocionOfAccionListAccion = em.merge(oldEmocionOfAccionListAccion);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findEmocion(emocion.getId()) != null) {
@@ -73,45 +52,12 @@ public class EmocionJpaController implements Serializable {
         }
     }
 
-    public void edit(Emocion emocion) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Emocion emocion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Emocion persistentEmocion = em.find(Emocion.class, emocion.getId());
-            List<Accion> accionListOld = persistentEmocion.getAccionList();
-            List<Accion> accionListNew = emocion.getAccionList();
-            List<String> illegalOrphanMessages = null;
-            for (Accion accionListOldAccion : accionListOld) {
-                if (!accionListNew.contains(accionListOldAccion)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Accion " + accionListOldAccion + " since its emocion field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<Accion> attachedAccionListNew = new ArrayList<Accion>();
-            for (Accion accionListNewAccionToAttach : accionListNew) {
-                accionListNewAccionToAttach = em.getReference(accionListNewAccionToAttach.getClass(), accionListNewAccionToAttach.getId());
-                attachedAccionListNew.add(accionListNewAccionToAttach);
-            }
-            accionListNew = attachedAccionListNew;
-            emocion.setAccionList(accionListNew);
             emocion = em.merge(emocion);
-            for (Accion accionListNewAccion : accionListNew) {
-                if (!accionListOld.contains(accionListNewAccion)) {
-                    Emocion oldEmocionOfAccionListNewAccion = accionListNewAccion.getEmocion();
-                    accionListNewAccion.setEmocion(emocion);
-                    accionListNewAccion = em.merge(accionListNewAccion);
-                    if (oldEmocionOfAccionListNewAccion != null && !oldEmocionOfAccionListNewAccion.equals(emocion)) {
-                        oldEmocionOfAccionListNewAccion.getAccionList().remove(accionListNewAccion);
-                        oldEmocionOfAccionListNewAccion = em.merge(oldEmocionOfAccionListNewAccion);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -129,7 +75,7 @@ public class EmocionJpaController implements Serializable {
         }
     }
 
-    public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(BigDecimal id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -140,17 +86,6 @@ public class EmocionJpaController implements Serializable {
                 emocion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The emocion with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<Accion> accionListOrphanCheck = emocion.getAccionList();
-            for (Accion accionListOrphanCheckAccion : accionListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Emocion (" + emocion + ") cannot be destroyed since the Accion " + accionListOrphanCheckAccion + " in its accionList field has a non-nullable emocion field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(emocion);
             em.getTransaction().commit();

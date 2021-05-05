@@ -13,7 +13,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -44,11 +43,6 @@ public class AccionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Emocion emocion = accion.getEmocion();
-            if (emocion != null) {
-                emocion = em.getReference(emocion.getClass(), emocion.getId());
-                accion.setEmocion(emocion);
-            }
             List<Joint> attachedJointList = new ArrayList<Joint>();
             for (Joint jointListJointToAttach : accion.getJointList()) {
                 jointListJointToAttach = em.getReference(jointListJointToAttach.getClass(), jointListJointToAttach.getId());
@@ -56,10 +50,6 @@ public class AccionJpaController implements Serializable {
             }
             accion.setJointList(attachedJointList);
             em.persist(accion);
-            if (emocion != null) {
-                emocion.getAccionList().add(accion);
-                emocion = em.merge(emocion);
-            }
             for (Joint jointListJoint : accion.getJointList()) {
                 jointListJoint.getAccionList().add(accion);
                 jointListJoint = em.merge(jointListJoint);
@@ -83,14 +73,8 @@ public class AccionJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Accion persistentAccion = em.find(Accion.class, accion.getId());
-            Emocion emocionOld = persistentAccion.getEmocion();
-            Emocion emocionNew = accion.getEmocion();
             List<Joint> jointListOld = persistentAccion.getJointList();
             List<Joint> jointListNew = accion.getJointList();
-            if (emocionNew != null) {
-                emocionNew = em.getReference(emocionNew.getClass(), emocionNew.getId());
-                accion.setEmocion(emocionNew);
-            }
             List<Joint> attachedJointListNew = new ArrayList<Joint>();
             for (Joint jointListNewJointToAttach : jointListNew) {
                 jointListNewJointToAttach = em.getReference(jointListNewJointToAttach.getClass(), jointListNewJointToAttach.getId());
@@ -99,14 +83,6 @@ public class AccionJpaController implements Serializable {
             jointListNew = attachedJointListNew;
             accion.setJointList(jointListNew);
             accion = em.merge(accion);
-            if (emocionOld != null && !emocionOld.equals(emocionNew)) {
-                emocionOld.getAccionList().remove(accion);
-                emocionOld = em.merge(emocionOld);
-            }
-            if (emocionNew != null && !emocionNew.equals(emocionOld)) {
-                emocionNew.getAccionList().add(accion);
-                emocionNew = em.merge(emocionNew);
-            }
             for (Joint jointListOldJoint : jointListOld) {
                 if (!jointListNew.contains(jointListOldJoint)) {
                     jointListOldJoint.getAccionList().remove(accion);
@@ -147,11 +123,6 @@ public class AccionJpaController implements Serializable {
                 accion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The accion with id " + id + " no longer exists.", enfe);
-            }
-            Emocion emocion = accion.getEmocion();
-            if (emocion != null) {
-                emocion.getAccionList().remove(accion);
-                emocion = em.merge(emocion);
             }
             List<Joint> jointList = accion.getJointList();
             for (Joint jointListJoint : jointList) {

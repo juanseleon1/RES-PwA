@@ -5,7 +5,9 @@
  */
 package RobotAgentBDI.Believes;
 
+import BDInterface.RESPwABDInterface;
 import EmotionalAnalyzerAgent.EmotionalData;
+import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.Imagen;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class RobotAgentBelieves implements Believes {
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
-//        getPerfilBD(cedula);
+        bPerfilPwA.setPerfil(getPerfilBD(cedula));
 //        FBaseUtils.initResPwa(this);
     }
 
@@ -47,7 +49,7 @@ public class RobotAgentBelieves implements Believes {
     public boolean update(InfoData si) {
         if (si != null && si instanceof EmotionalData) {
             EmotionalData se = (EmotionalData) si;
-            System.out.println("RobotAgentBelieves update Received: " + se.getInfo());
+            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
             if (se.getEmoEv() != null) {
                 bEstadoRobot.update(se);
             }
@@ -76,9 +78,14 @@ public class RobotAgentBelieves implements Believes {
         return true;
     }
 
-    private void getPerfilBD(String cedula) {
+    private Perfilpwa getPerfilBD(String cedula) {
         //conectarConBD
-        bPerfilPwA.getFromDB(cedula);
+        return getFromDB(cedula);
+    }
+
+    Perfilpwa getFromDB(String cedula) {
+        Perfilpwa perfil = RESPwABDInterface.getProfile(cedula);
+        return perfil;
     }
 
     public BEstadoInteraccion getbEstadoInteraccion() {

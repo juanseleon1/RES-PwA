@@ -33,10 +33,10 @@
     <class>ResPwAEntities.Regla</class>
     <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value=""/>
-      <property name="javax.persistence.jdbc.user" value=""/>
-      <property name="javax.persistence.jdbc.driver" value=""/>
-      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>
+      <property name="javax.persistence.jdbc.user" value="respwa1"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="respwa"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

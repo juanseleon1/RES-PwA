@@ -502,7 +502,7 @@ class pepperModuleV2(object):
                 resultValue = 'decrease volume'
 
         if resultValue:
-            print "enviar", resultValue
+            print("enviar", resultValue)
             json_params = {"DialogInput": resultValue}
             send(-1, "int", json_params)
 

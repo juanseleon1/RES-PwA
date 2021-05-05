@@ -79,7 +79,7 @@ public class MusicoTerapia extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MusicoTerapia detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+        if(blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoActividad().getActividadActual()!=null && (blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.MUSICOTERAPIA)) && !blvs.getbEstadoActividad().isFinalizoActividad()
                     && blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))) {
                 return 1;

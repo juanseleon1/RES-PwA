@@ -8,6 +8,7 @@ import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
 import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import ResPwAEntities.Accion;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Metas.Cuenteria;
@@ -28,8 +29,10 @@ import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import Tareas.Test.TestTask;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,11 +68,13 @@ public class InitRESPwA {
             PepperAdapter p = new PepperAdapter();
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
-            HashMap<String, Object>  hm1 = new HashMap<>();
+            HashMap<String, Object> hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
             hm1.put("MOVETOY", 2);
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
             p.sendRequest(data);
+            startConfig(p);
+            System.out.println("Fin Main ");
 
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,7 +124,7 @@ public class InitRESPwA {
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-        //TestPlan tp = TestPlan.buildGoal();
+//        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
@@ -128,9 +133,9 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
-              //Agregar a Lista
+        //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-        //RAGoals.add(tp);
+//        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
@@ -144,16 +149,49 @@ public class InitRESPwA {
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
 //      RAGoals.add(estimularEmocionalmenteGoal);
+
         return RAGoals;
     }
 
     private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotSPAgent SPA) throws ExceptionBESA {
         RABDI.start();
-        RABDI.startTimers();
         SPA.start();
         EAA.start();
         SHA.start();
         SHA.subscribeServices();
+        RABDI.startTimers();
+    }
+
+    public static void startConfig(PepperAdapter p) {
+        List<Accion> acciones = RESPwABDInterface.getAcciones();
+        List<String> tipos = new ArrayList<>();
+        List<Accion> accionxtipo = new ArrayList<>();
+        Set<String> uniqueTipos = new HashSet<>();
+        HashMap<String, Object> infoServicio = new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>();
+
+        for (Accion a : acciones) {
+            tipos.add(a.getTipo());
+        }
+
+        uniqueTipos = new HashSet<String>(tipos);
+        for (String t : uniqueTipos) {
+            params.put(t, new ArrayList<>());
+        }
+
+        for (String i : params.keySet()) {
+            for (Accion a : acciones) {
+                if (i.equals(a.getTipo())) {
+                    accionxtipo = (List<Accion>) params.get(i);
+                    accionxtipo.add(a);
+                    params.put(i, accionxtipo);
+                }
+            }
+        }
+
+        infoServicio.put("INITIALCONF", params);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
+        p.sendRequest(srb);
     }
 
 }
