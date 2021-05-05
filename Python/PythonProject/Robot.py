@@ -55,7 +55,7 @@ class Robot:
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
-        self.prof_emotions = None
+        self.prof_emotions = []
         self.sensorsModule = None
         self.animation = Animation(self.session)
 

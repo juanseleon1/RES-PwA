@@ -180,6 +180,7 @@ public class InitRESPwA {
         for (String i : params.keySet()) {
             for (Emocion e : emociones) {
                 if (i.equals(e.getEmotionaltag())) {
+                    params = new HashMap<>();
                     infoServicio = new HashMap<>();
                     accion = new HashMap<>();
                     for (Accion a : e.getAccionList()) {
