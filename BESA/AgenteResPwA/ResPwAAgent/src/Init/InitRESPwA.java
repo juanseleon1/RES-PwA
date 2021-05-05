@@ -180,6 +180,7 @@ public class InitRESPwA {
         for (String i : params.keySet()){
             for (Emocion e : emociones){
                 if (i.equals(e.getEmotionalTag())){
+                    params = new HashMap<>();
                     infoServicio = new HashMap<>();
                     accion = new HashMap<>();
                     for (Accion a : e.getAccionList()){
@@ -197,7 +198,7 @@ public class InitRESPwA {
                     paramList.add(accion);
                     params.put(e.getEmotionalTag(), paramList);
 
-                    infoServicio.put("INITIALCONF", params.get(e.getEmotionalTag()));
+                    infoServicio.put("INITIALCONF", params);
                     ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
                     p.sendRequest(srb);
                 }
