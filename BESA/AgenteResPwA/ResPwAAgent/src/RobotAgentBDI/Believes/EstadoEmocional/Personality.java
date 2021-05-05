@@ -8,8 +8,7 @@ public class Personality {
     public enum EmotionElementType {
 
         Object, Person, Event
-    };
-
+    }
     private final Map<String, String> objectRelationships;
     private final Map<String, String> personRelationships;
     private final Map<String, String> eventDesirability;

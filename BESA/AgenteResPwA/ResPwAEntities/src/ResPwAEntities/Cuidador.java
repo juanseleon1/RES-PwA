@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c")
     , @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario")
-    , @NamedQuery(name = "Cuidador.findByContrase\u00f1a", query = "SELECT c FROM Cuidador c WHERE c.contrase\u00f1a = :contrase\u00f1a")
+    , @NamedQuery(name = "Cuidador.findByContrasena", query = "SELECT c FROM Cuidador c WHERE c.contrasena = :contrasena")
     , @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre")
     , @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo")
     , @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
