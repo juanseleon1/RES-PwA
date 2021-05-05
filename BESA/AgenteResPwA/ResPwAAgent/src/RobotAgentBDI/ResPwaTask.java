@@ -36,7 +36,7 @@ public abstract class ResPwaTask extends Task {
 
     public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs) {
         try {
-//            blvs.getbEstadoRobot().updateEmotionalVariables();
+            blvs.getbEstadoRobot().updateEmotionalVariables();
             String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
             String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
             AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);

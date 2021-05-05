@@ -10,6 +10,7 @@ from Utils import activities_running, send
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
     def __init__(self, session):
+        self.current_emomap = None
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
         self.alProxy = session.service("ALMemory")
@@ -55,7 +56,7 @@ class Robot:
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         self.topicMap = {}
         self.prof_emotions = None
-
+        self.sensorsModule = None
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
@@ -165,7 +166,6 @@ class Robot:
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
-            "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
         }
 
         # Declare the modules --------------------------------------------------------------------------------
@@ -398,6 +398,18 @@ class Robot:
             print e
             exit(1)
 
+    def request_posture_change(self, params):
+        actions=self.current_emomap[params.get("ACTION")]
+        names = list()
+        times = list()
+        keys = list()
+        for action in actions:
+            names.append(action["name"])
+            times.append(action["time"])
+            keys.append(action["key"])
+
+        self.play_animation(names, times, keys)
+
     # The robot wakes up
     def wake_up(self):
         self.alMotionProxy.wakeUp()
@@ -440,6 +452,7 @@ class Robot:
         self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
+        self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 

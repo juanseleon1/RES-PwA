@@ -371,7 +371,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             float state = ea.getCurrentValue();
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
             System.out.println("VALOR DE EMOVAL "+state);
-            infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
+            infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
@@ -390,8 +390,10 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     }
 
     private float normalizeValue(float val, PepperConf conf) {
-        float normalValue = 0,max=conf.getMax(),min=conf.getMin();
-        normalValue= (val-min)/(max-min);
+        float normalValue,max=conf.getMax(),min=conf.getMin(),oldRange,newRange;
+        oldRange = 2;
+        newRange = max-min;
+        normalValue= (((val-min)*newRange)/(oldRange))+ min;
         return normalValue;
     }
 }
