@@ -61,7 +61,7 @@ public class PedirAyuda extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta PedirAyuda detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged() && blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged() && blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
             return 1;
         }
 

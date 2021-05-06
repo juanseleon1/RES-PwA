@@ -175,9 +175,6 @@ public class InitRESPwA {
         List<Double> keys = new ArrayList<>();
         List<Double> times = new ArrayList<>();
 
-//        for (Emocion e : emociones) {
-//            params.put(e.getEmotionaltag(), new ArrayList<>());
-//        }
         params = new HashMap<>();
         for (Emocion e : emociones) {
             if (!params.containsKey(e.getEmotionaltag())) {

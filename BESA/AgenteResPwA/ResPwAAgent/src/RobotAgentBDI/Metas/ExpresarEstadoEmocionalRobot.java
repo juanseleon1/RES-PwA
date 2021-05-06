@@ -58,7 +58,7 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
         Random rand = new Random();
-        if(blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
 //            if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()*rand.nextDouble())
 //            {

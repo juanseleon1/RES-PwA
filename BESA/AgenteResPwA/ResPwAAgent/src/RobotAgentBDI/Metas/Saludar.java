@@ -50,7 +50,7 @@ public class Saludar extends GoalBDI{
         System.out.println("Meta Saludar detectGoal");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().isRobotInicializado() && blvs.getbEstadoInteraccion().isMovManoSaludo() || (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().getTiempoSinInt() > 10000) && 
+        if (blvs.getbEstadoInteraccion().isMovManoSaludo() || (blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().getTiempoSinInt() > 10000) && 
                 !blvs.getbEstadoRobot().isEstaSuspendido() && !blvs.getbEstadoRobot().getBateria()){
             return 1;
         }

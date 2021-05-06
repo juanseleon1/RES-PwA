@@ -35,12 +35,6 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double batteryPerc;
     private int volumenVoz;
     private double velocidad = 0;
-    private boolean activadoParpadear = false;
-    private boolean activadoAutoColision = false;
-    private boolean activadoColisionExterna = false;
-    private boolean activadoRecuperacionEmpuje = false;
-    private int rigidezExtremidades;
-    private String postura;
     private boolean libreEntorno = false;
     private boolean activadoMovEscucha = false;
     private boolean activadoConsciente = false;
@@ -57,11 +51,9 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
-    private boolean robotInicializado = false;
 
     public BEstadoRobot() {
         super();
-        robotInicializado = false;
     }
 
     public void setBrilloRobot(double brilloRobot) {
@@ -83,27 +75,6 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("batteryPerc")) {
                 batteryPerc = Double.parseDouble(String.valueOf(infoRecibida.getDataP().get("batteryPerc")));
-            }
-            if (infoRecibida.getDataP().containsKey("ROBOTEMOTION")) {
-//                BinfoRecibida.getDataP().get("ROBOTEMOTION"));
-            }
-            if (infoRecibida.getDataP().containsKey("activadoParpadear")) {
-                activadoParpadear = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoParpadear"));
-            }
-            if (infoRecibida.getDataP().containsKey("activadoAutoColision")) {
-                activadoAutoColision = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoAutoColision"));
-            }
-            if (infoRecibida.getDataP().containsKey("activadoColisionExterna")) {
-                activadoColisionExterna = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoColisionExterna"));
-            }
-            if (infoRecibida.getDataP().containsKey("activadoRecuperacionEmpuje")) {
-                activadoRecuperacionEmpuje = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoRecuperacionEmpuje"));
-            }
-            if (infoRecibida.getDataP().containsKey("rigidezExtremidades")) {
-                rigidezExtremidades = Integer.valueOf((String) infoRecibida.getDataP().get("rigidezExtremidades"));
-            }
-            if (infoRecibida.getDataP().containsKey("postura")) {
-                postura = (String) infoRecibida.getDataP().get("postura");
             }
             if (infoRecibida.getDataP().containsKey("activadoMovEscucha")) {
                 activadoMovEscucha = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovEscucha"));
@@ -131,9 +102,6 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("hotDeviceDetected")) {
                 verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
-            }
-            if (infoRecibida.getDataP().containsKey("robotInicializado")) {
-                robotInicializado = Boolean.valueOf((String) infoRecibida.getDataP().get("robotInicializado"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData emoDat = (EmotionalData) si;
@@ -167,54 +135,6 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
 
     public void setBateria(boolean bateria) {
         this.bateria = bateria;
-    }
-
-    public boolean isActivadoParpadear() {
-        return activadoParpadear;
-    }
-
-    public void setActivadoParpadear(boolean activadoParpadear) {
-        this.activadoParpadear = activadoParpadear;
-    }
-
-    public boolean isActivadoAutoColision() {
-        return activadoAutoColision;
-    }
-
-    public void setActivadoAutoColision(boolean activadoAutoColision) {
-        this.activadoAutoColision = activadoAutoColision;
-    }
-
-    public boolean isActivadoColisionExterna() {
-        return activadoColisionExterna;
-    }
-
-    public void setActivadoColisionExterna(boolean activadoColisionExterna) {
-        this.activadoColisionExterna = activadoColisionExterna;
-    }
-
-    public boolean isActivadoRecuperacionEmpuje() {
-        return activadoRecuperacionEmpuje;
-    }
-
-    public void setActivadoRecuperacionEmpuje(boolean activadoRecuperacionEmpuje) {
-        this.activadoRecuperacionEmpuje = activadoRecuperacionEmpuje;
-    }
-
-    public int getRigidezExtremidades() {
-        return rigidezExtremidades;
-    }
-
-    public void setRigidezExtremidades(int rigidezExtremidades) {
-        this.rigidezExtremidades = rigidezExtremidades;
-    }
-
-    public String getPostura() {
-        return postura;
-    }
-
-    public void setPostura(String postura) {
-        this.postura = postura;
     }
 
     public boolean isActivadoMovEscucha() {
@@ -353,14 +273,6 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
 
     public void setTiempoSinConexionInternet(long tiempoSinConexionInternet) {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
-    }
-
-    public boolean isRobotInicializado(){
-       return robotInicializado;
-    }
-
-    public void setRobotInicializado(boolean robotInicializado) {
-        this.robotInicializado = robotInicializado;
     }
 
     @Override
