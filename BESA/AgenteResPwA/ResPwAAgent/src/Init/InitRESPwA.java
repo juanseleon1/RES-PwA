@@ -170,34 +170,45 @@ public class InitRESPwA {
         HashMap<String, Object> params = new HashMap<>();
         HashMap<String, Object> accion = new HashMap<>();
         HashMap<String, Object> joint = new HashMap<>();
-        List<HashMap<String, Object>> joints = new ArrayList<>();
+        HashMap<String, Object> joints = new HashMap<>();
         List<HashMap<String, Object>> paramList = new ArrayList<>();
+        List<Double> keys = new ArrayList<>();
+        List<Double> times = new ArrayList<>();
 
 //        for (Emocion e : emociones) {
 //            params.put(e.getEmotionaltag(), new ArrayList<>());
 //        }
+        params = new HashMap<>();
         for (Emocion e : emociones) {
-            params = new HashMap<>();
-//                    params.put(e.getEmotionaltag(), new ArrayList<>());
-            infoServicio = new HashMap<>();
+            if (!params.containsKey(e.getEmotionaltag())) {
+                params.put(e.getEmotionaltag(), new HashMap<String, Object>());
+            }
             accion = new HashMap<>();
             for (Accion a : e.getAccionList()) {
-                joints = new ArrayList<>();
+                joints = new HashMap<>();
                 for (Joint j : a.getJointList()) {
-                    joint = new HashMap<>();
-                    joint.put("name", j.getNombre());
-                    joint.put("time", j.getTiempo());
-                    joint.put("key", j.getAngulo());
-                    joints.add(joint);
+                    if (!joints.containsKey(j.getNombre())) {
+                        joint = new HashMap<>();
+                        joint.put("key", new ArrayList<Double>());
+                        joint.put("time", new ArrayList<Double>());
+                        joints.put(j.getNombre(), joint);
+                    }
+                    joint = (HashMap<String, Object>) joints.get(j.getNombre());
+                    keys = (List<Double>) joint.get("key");
+                    times = (List<Double>) joint.get("time");
+
+                    keys.add(j.getAngulo());
+                    times.add(j.getTiempo().doubleValue());
+
                 }
                 accion.put(a.getNombre(), joints);
             }
-            paramList.add(accion);
-            params.put(e.getEmotionaltag(), paramList);
-            infoServicio.put("INITIALCONF", params);
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
-            p.sendRequest(srb);
+            params.put(e.getEmotionaltag(), accion);
+
         }
+        infoServicio.put("INITIALCONF", params);
+        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
+        p.sendRequest(srb);
     }
 
 }

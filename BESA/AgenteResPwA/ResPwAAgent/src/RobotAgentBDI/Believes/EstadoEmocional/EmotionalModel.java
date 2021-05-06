@@ -17,8 +17,8 @@ import rational.services.ActivateAsynchronousServiceGuard;
 
 public abstract class EmotionalModel {
 
-    private final EmotionalState emotionalState;
-    private final Personality personality;
+    protected final EmotionalState emotionalState;
+    protected final Personality personality;
 
     public EmotionalModel() {
         this.emotionalState = new EmotionalState();

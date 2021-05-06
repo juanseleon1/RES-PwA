@@ -388,10 +388,8 @@ class Robot:
         self.alLocalizationProxy.goToPosition(position)
 
     def initial_conf(self, prof_emotions):
-        for key, value in prof_emotions.items():
-            self.prof_emotions[key] = value
-
-        print("INITCONF ", self.prof_emotions)
+        self.prof_emotions = prof_emotions["INITIALCONF"]
+        print("VER IDENT ", self.prof_emotions)
         if len(self.prof_emotions) == 5:
             try:
                 self.init_timers()

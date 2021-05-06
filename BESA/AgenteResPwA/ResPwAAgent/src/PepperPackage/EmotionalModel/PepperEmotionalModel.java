@@ -88,6 +88,7 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
             }
             this.addEmotionAxis(emoAxis);
         }
+        System.out.println("AAAAAAAAAAAAAAAAA "+emotionalState.getEmotions().size() );
 }
     
     
