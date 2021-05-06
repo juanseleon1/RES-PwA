@@ -34,7 +34,12 @@ public class ModeloRetroalimentacion<T> {
                 c.setGusto( 1.0f );
             }
             else{
-                c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+                if(c.getGusto() + reglaAplicada.getFeedback() < 0.0f){
+                    c.setGusto( 0.0f );
+                }
+                else{
+                    c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+                } 
             }
             
         } else if(activity instanceof Cuento){

@@ -41,16 +41,16 @@ public class Antecedente implements Serializable {
     }
 
     public Antecedente(String Etiqueta, double valor) {
-        this.Etiqueta = Etiqueta;
+        this.etiqueta = Etiqueta;
         this.valor = valor;
     }
 
     
-    public String getId() {
+    public String getEtiqueta() {
         return etiqueta;
     }
 
-    public void setId(String id) {
+    public void setEtiqueta(String id) {
         this.etiqueta = id;
     }
 
