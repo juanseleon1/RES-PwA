@@ -26,45 +26,63 @@ public class ModeloRetroalimentacion<T> {
         this.reglas = reglas;
     }
     
-    private void activityFeedback(List<Antecedente> antecedentes, T activity){
+    public void activityFeedback(List<Antecedente> antecedentes){
         Regla reglaAplicada = findRule(antecedentes);
         if(activity instanceof Cancion){
             Cancion c = (Cancion) activity;
-            c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+            if(c.getGusto() + reglaAplicada.getFeedback() > 1.0f){
+                c.setGusto( 1.0f );
+            }
+            else{
+                c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+            }
+            
         } else if(activity instanceof Cuento){
             Cuento c = (Cuento) activity;
-            c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+            if(c.getGusto() + reglaAplicada.getFeedback() > 1.0f){
+                c.setGusto( 1.0f );
+            }
+            else{
+                c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
+            }
         } else if(activity instanceof Baile){
             Baile b = (Baile) activity;
-            b.setGusto( b.getGusto() + reglaAplicada.getFeedback() );
+            if(b.getGusto() + reglaAplicada.getFeedback() > 1.0f){
+                b.setGusto( 1.0f );
+            }
+            else{
+                b.setGusto( b.getGusto() + reglaAplicada.getFeedback() );
+            }
         }    
     }
     
     private Regla findRule(List<Antecedente> antecedentes){
-        boolean encontrada = false;
+        boolean encontrado = false;
         boolean antecedenteEncontrado = true;
         List<Antecedente> antecedentesXRegla = null;
         Regla findRule = null;
         
-        for (int i = 0; i < reglas.size() && !encontrada; i++) {
-            antecedentesXRegla = reglas.get(i).getAntecedentesList();
-            for (int j = 0; j < antecedentes.size() && antecedenteEncontrado; j++) {
+        for (int i = 0; i < reglas.size() && !encontrado; i++) {
+            encontrado = true;
+            for (int j = 0; j < antecedentes.size() && encontrado; j++) {
+                antecedentesXRegla = reglas.get(i).getAntecedentesList();
                 antecedenteEncontrado = false;
+                
                 for (int k = 0; k < antecedentesXRegla.size() && !antecedenteEncontrado; k++) {
                     if(antecedentes.get(j).equals(antecedentesXRegla.get(k))){
                         antecedenteEncontrado = true;
                     }
                 }
+                
+                if(!antecedenteEncontrado){
+                    encontrado = false;
+                }
             }
-            if(antecedenteEncontrado){
-                encontrada = true;
+            
+            if(encontrado){
                 findRule = reglas.get(i);
             }
         }
-        
         return findRule;
     }
-    
-    
-    
 }

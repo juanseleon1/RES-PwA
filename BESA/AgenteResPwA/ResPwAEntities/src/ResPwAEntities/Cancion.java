@@ -157,7 +157,7 @@ public class Cancion implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Cancion[ nombre=" + nombre + " ]";
+        return "ResPwAEntities.Cancion[ nombre=" + nombre + " gusto=" + gusto +" ]";
     }
     
 }

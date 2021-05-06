@@ -31,6 +31,15 @@ public class Antecedente implements Serializable {
     @Column(name = "VALOR")
     private double valor;
 
+    public Antecedente() {
+    }
+
+    public Antecedente(String Etiqueta, double valor) {
+        this.Etiqueta = Etiqueta;
+        this.valor = valor;
+    }
+
+    
     public String getId() {
         return Etiqueta;
     }
