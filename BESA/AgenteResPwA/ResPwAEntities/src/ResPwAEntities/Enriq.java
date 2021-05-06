@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -26,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ENRIQ")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Enriq.findAll", query = "SELECT e FROM Enriq e")
-    , @NamedQuery(name = "Enriq.findByParams", query = "SELECT e FROM Enriq e WHERE e.params = :params")
-    , @NamedQuery(name = "Enriq.findByValor", query = "SELECT e FROM Enriq e WHERE e.valor = :valor")})
+    @NamedQuery(name = "Enriq.findAll", query = "SELECT e FROM Enriq e"),
+    @NamedQuery(name = "Enriq.findByParams", query = "SELECT e FROM Enriq e WHERE e.params = :params"),
+    @NamedQuery(name = "Enriq.findByValor", query = "SELECT e FROM Enriq e WHERE e.valor = :valor")})
 public class Enriq implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,12 +41,12 @@ public class Enriq implements Serializable {
     @Column(name = "VALOR")
     private String valor;
     @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cancion cancionNombre;
     @JoinColumns({
-        @JoinColumn(name = "FRASES_ORDEN", referencedColumnName = "ORDEN")
-        , @JoinColumn(name = "FRASES_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
-    @ManyToOne
+        @JoinColumn(name = "FRASES_ORDEN", referencedColumnName = "ORDEN"),
+        @JoinColumn(name = "FRASES_CUENTO_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
+    @ManyToOne(fetch = FetchType.EAGER)
     private Frases frases;
 
     public Enriq() {

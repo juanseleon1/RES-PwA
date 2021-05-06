@@ -149,9 +149,14 @@ public class RESPwABDInterface {
         return eapc.findEmotionAxisConfigEntities();
     }
 
-        public static List<Accion> getAcciones(){
+    public static List<Accion> getAcciones(){
         AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajc.findAccionEntities();
+    }
+
+    public static List<Emocion> getEmociones(){
+        EmocionJpaController ejc = new EmocionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ejc.findEmocionEntities();
     }
 
 }

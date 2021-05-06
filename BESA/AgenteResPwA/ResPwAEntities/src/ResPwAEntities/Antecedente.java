@@ -12,18 +12,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author ASUS
  */
+
+@NamedQueries({
+    @NamedQuery(name = "Antecedente.findAll", query = "SELECT a FROM Antecedente a")
+    , @NamedQuery(name = "Antecedente.findByEtiqueta", query = "SELECT a FROM Antecedente a WHERE a.etiqueta= :etiqueta")})
 @Entity
 public class Antecedente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ETIQUETA")
-    private String Etiqueta;
+    private String etiqueta;
     
     @ManyToMany(mappedBy = "antecedentesList")
     private List<Regla> reglaList;
@@ -41,17 +47,17 @@ public class Antecedente implements Serializable {
 
     
     public String getId() {
-        return Etiqueta;
+        return etiqueta;
     }
 
     public void setId(String id) {
-        this.Etiqueta = id;
+        this.etiqueta = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (Etiqueta != null ? Etiqueta.hashCode() : 0);
+        hash += (etiqueta != null ? etiqueta.hashCode() : 0);
         return hash;
     }
 
@@ -62,7 +68,7 @@ public class Antecedente implements Serializable {
             return false;
         }
         Antecedente other = (Antecedente) object;
-        if ((this.Etiqueta == null && other.Etiqueta != null) || (this.Etiqueta != null && !this.Etiqueta.equals(other.Etiqueta))) {
+        if ((this.etiqueta == null && other.etiqueta != null) || (this.etiqueta != null && !this.etiqueta.equals(other.etiqueta))) {
             return false;
         }
         return true;
@@ -70,7 +76,7 @@ public class Antecedente implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Antecedente[ id=" + Etiqueta + " ]";
+        return "ResPwAEntities.Antecedente[ id=" + etiqueta + " ]";
     }
 
     public double getValor() {

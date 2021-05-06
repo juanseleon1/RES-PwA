@@ -39,6 +39,7 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
 
 
     public PepperEmotionalModel() {
+        super();
 
     }
 
@@ -85,9 +86,10 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
             for (EventInfluence eventInfluence : evtinf) {
                 emoAxis.setEventInfluence(eventInfluence.getEventName(), eventInfluence.getEventInfluence());
             }
-            emoax.add(emoAxis);
+            this.addEmotionAxis(emoAxis);
         }
-    }
+        System.out.println("AAAAAAAAAAAAAAAAA "+emotionalState.getEmotions().size() );
+}
     
     
     public void requestService(ServiceDataRequest sdr)

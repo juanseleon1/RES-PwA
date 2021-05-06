@@ -3,45 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "JOINT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Joint.findAll", query = "SELECT j FROM Joint j")
-    , @NamedQuery(name = "Joint.findById", query = "SELECT j FROM Joint j WHERE j.id = :id")
-    , @NamedQuery(name = "Joint.findByNombre", query = "SELECT j FROM Joint j WHERE j.nombre = :nombre")
-    , @NamedQuery(name = "Joint.findByAngulo", query = "SELECT j FROM Joint j WHERE j.angulo = :angulo")
-    , @NamedQuery(name = "Joint.findByTiempo", query = "SELECT j FROM Joint j WHERE j.tiempo = :tiempo")})
+    @NamedQuery(name = "Joint.findAll", query = "SELECT j FROM Joint j"),
+    @NamedQuery(name = "Joint.findById", query = "SELECT j FROM Joint j WHERE j.id = :id"),
+    @NamedQuery(name = "Joint.findByNombre", query = "SELECT j FROM Joint j WHERE j.nombre = :nombre"),
+    @NamedQuery(name = "Joint.findByAngulo", query = "SELECT j FROM Joint j WHERE j.angulo = :angulo"),
+    @NamedQuery(name = "Joint.findByTiempo", query = "SELECT j FROM Joint j WHERE j.tiempo = :tiempo")})
 public class Joint implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
@@ -54,16 +50,18 @@ public class Joint implements Serializable {
     private double angulo;
     @Basic(optional = false)
     @Column(name = "TIEMPO")
-    private int tiempo;
-    @ManyToMany
+    private BigDecimal tiempo;
+    @ManyToMany(mappedBy = "jointList", fetch = FetchType.EAGER)
     private List<Accion> accionList;
 
-    
-    public Joint(){
-        
+    public Joint() {
     }
-    
-    public Joint(BigDecimal id, String nombre, double angulo, int tiempo) {
+
+    public Joint(BigDecimal id) {
+        this.id = id;
+    }
+
+    public Joint(BigDecimal id, String nombre, double angulo, BigDecimal tiempo) {
         this.id = id;
         this.nombre = nombre;
         this.angulo = angulo;
@@ -93,12 +91,12 @@ public class Joint implements Serializable {
     public void setAngulo(double angulo) {
         this.angulo = angulo;
     }
-    
-    public int getTiempo() {
+
+    public BigDecimal getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(int tiempo) {
+    public void setTiempo(BigDecimal tiempo) {
         this.tiempo = tiempo;
     }
 
@@ -121,7 +119,7 @@ public class Joint implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Familiar)) {
+        if (!(object instanceof Joint)) {
             return false;
         }
         Joint other = (Joint) object;
@@ -130,5 +128,10 @@ public class Joint implements Serializable {
         }
         return true;
     }
-}
 
+    @Override
+    public String toString() {
+        return "ResPwAEntities.Joint[ id=" + id + " ]";
+    }
+    
+}

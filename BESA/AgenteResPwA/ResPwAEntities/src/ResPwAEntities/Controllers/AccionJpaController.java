@@ -44,10 +44,10 @@ public class AccionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Emocion emocion = accion.getEmocion();
-            if (emocion != null) {
-                emocion = em.getReference(emocion.getClass(), emocion.getId());
-                accion.setEmocion(emocion);
+            Emocion emocionId = accion.getEmocionId();
+            if (emocionId != null) {
+                emocionId = em.getReference(emocionId.getClass(), emocionId.getId());
+                accion.setEmocionId(emocionId);
             }
             List<Joint> attachedJointList = new ArrayList<Joint>();
             for (Joint jointListJointToAttach : accion.getJointList()) {
@@ -56,9 +56,9 @@ public class AccionJpaController implements Serializable {
             }
             accion.setJointList(attachedJointList);
             em.persist(accion);
-            if (emocion != null) {
-                emocion.getAccionList().add(accion);
-                emocion = em.merge(emocion);
+            if (emocionId != null) {
+                emocionId.getAccionList().add(accion);
+                emocionId = em.merge(emocionId);
             }
             for (Joint jointListJoint : accion.getJointList()) {
                 jointListJoint.getAccionList().add(accion);
@@ -83,13 +83,13 @@ public class AccionJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Accion persistentAccion = em.find(Accion.class, accion.getId());
-            Emocion emocionOld = persistentAccion.getEmocion();
-            Emocion emocionNew = accion.getEmocion();
+            Emocion emocionIdOld = persistentAccion.getEmocionId();
+            Emocion emocionIdNew = accion.getEmocionId();
             List<Joint> jointListOld = persistentAccion.getJointList();
             List<Joint> jointListNew = accion.getJointList();
-            if (emocionNew != null) {
-                emocionNew = em.getReference(emocionNew.getClass(), emocionNew.getId());
-                accion.setEmocion(emocionNew);
+            if (emocionIdNew != null) {
+                emocionIdNew = em.getReference(emocionIdNew.getClass(), emocionIdNew.getId());
+                accion.setEmocionId(emocionIdNew);
             }
             List<Joint> attachedJointListNew = new ArrayList<Joint>();
             for (Joint jointListNewJointToAttach : jointListNew) {
@@ -99,13 +99,13 @@ public class AccionJpaController implements Serializable {
             jointListNew = attachedJointListNew;
             accion.setJointList(jointListNew);
             accion = em.merge(accion);
-            if (emocionOld != null && !emocionOld.equals(emocionNew)) {
-                emocionOld.getAccionList().remove(accion);
-                emocionOld = em.merge(emocionOld);
+            if (emocionIdOld != null && !emocionIdOld.equals(emocionIdNew)) {
+                emocionIdOld.getAccionList().remove(accion);
+                emocionIdOld = em.merge(emocionIdOld);
             }
-            if (emocionNew != null && !emocionNew.equals(emocionOld)) {
-                emocionNew.getAccionList().add(accion);
-                emocionNew = em.merge(emocionNew);
+            if (emocionIdNew != null && !emocionIdNew.equals(emocionIdOld)) {
+                emocionIdNew.getAccionList().add(accion);
+                emocionIdNew = em.merge(emocionIdNew);
             }
             for (Joint jointListOldJoint : jointListOld) {
                 if (!jointListNew.contains(jointListOldJoint)) {
@@ -148,10 +148,10 @@ public class AccionJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The accion with id " + id + " no longer exists.", enfe);
             }
-            Emocion emocion = accion.getEmocion();
-            if (emocion != null) {
-                emocion.getAccionList().remove(accion);
-                emocion = em.merge(emocion);
+            Emocion emocionId = accion.getEmocionId();
+            if (emocionId != null) {
+                emocionId.getAccionList().remove(accion);
+                emocionId = em.merge(emocionId);
             }
             List<Joint> jointList = accion.getJointList();
             for (Joint jointListJoint : jointList) {

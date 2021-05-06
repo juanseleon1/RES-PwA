@@ -20,7 +20,7 @@
 <ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="contraseña" id="32C60189-679A-5EE3-1411-2A8C537C458E">
+<Column name="contrasena" id="32C60189-679A-5EE3-1411-2A8C537C458E">
 <createdBy>juans</createdBy>
 <createdTime>2020-11-18 21:15:35 UTC</createdTime>
 <generatorID>F1A907DB-D4BB-B61A-92ED-40347145C962</generatorID>

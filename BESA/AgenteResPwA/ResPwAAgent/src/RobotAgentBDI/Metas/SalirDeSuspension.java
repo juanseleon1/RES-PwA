@@ -59,7 +59,7 @@ public class SalirDeSuspension extends GoalBDI {
         System.out.println("Meta RecargarBateria detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().getBatteryPerc()>30.0 && !blvs.getbEstadoRobot().getBateria() && blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
+        if (blvs.getbEstadoRobot().isRobotInicializado() && blvs.getbEstadoRobot().getBatteryPerc()>30.0 && !blvs.getbEstadoRobot().getBateria() && blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
                 return 1.0;
         }
         return 0;

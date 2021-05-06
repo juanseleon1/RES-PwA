@@ -3,88 +3,86 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "EMOCION")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Emocion.findAll", query = "SELECT e FROM Emocion e")
-    , @NamedQuery(name = "Emocion.findById", query = "SELECT e FROM Emocion e WHERE e.id = :id")
-    , @NamedQuery(name = "Emocion.findByValorMaximo", query = "SELECT e FROM Emocion e WHERE e.valorMaximo = :valorMaximo")
-    , @NamedQuery(name = "Emocion.findByValorMinimo", query = "SELECT e FROM Emocion e WHERE e.valorMaximo = :valorMaximo")})
+    @NamedQuery(name = "Emocion.findAll", query = "SELECT e FROM Emocion e"),
+    @NamedQuery(name = "Emocion.findById", query = "SELECT e FROM Emocion e WHERE e.id = :id"),
+    @NamedQuery(name = "Emocion.findByEmotionaltag", query = "SELECT e FROM Emocion e WHERE e.emotionaltag = :emotionaltag")})
 public class Emocion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private String id;
     @Basic(optional = false)
-    @Column(name = "VALORMAXIMO")
-    private double valorMaximo;
-    @Basic(optional = false)
-    @Column(name = "VALORMINIMO")
-    private double valorMinimo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emocion")
+    @Column(name = "EMOTIONALTAG")
+    private String emotionaltag;
+    @JoinColumn(name = "ROBOT_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Robot robotId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emocionId", fetch = FetchType.EAGER)
     private List<Accion> accionList;
 
     public Emocion() {
     }
 
-    public Emocion(BigDecimal id, double valorMaximo, double valorMinimo) {
+    public Emocion(String id) {
         this.id = id;
-        this.valorMaximo = valorMaximo;
-        this.valorMinimo = valorMinimo;
     }
 
-    public BigDecimal getId() {
+    public Emocion(String id, String emotionaltag) {
+        this.id = id;
+        this.emotionaltag = emotionaltag;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public double getValorMaximo() {
-        return valorMaximo;
+    public String getEmotionaltag() {
+        return emotionaltag;
     }
 
-    public void setValorMaximo() {
-        this.valorMaximo = valorMaximo;
-    }
-    
-    public double getValorMinimo() {
-        return valorMinimo;
+    public void setEmotionaltag(String emotionaltag) {
+        this.emotionaltag = emotionaltag;
     }
 
-    public void setValorMinimo() {
-        this.valorMinimo = valorMinimo;
+    public Robot getRobotId() {
+        return robotId;
+    }
+
+    public void setRobotId(Robot robotId) {
+        this.robotId = robotId;
     }
 
     @XmlTransient
@@ -106,7 +104,7 @@ public class Emocion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Familiar)) {
+        if (!(object instanceof Emocion)) {
             return false;
         }
         Emocion other = (Emocion) object;
@@ -116,4 +114,9 @@ public class Emocion implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "ResPwAEntities.Emocion[ id=" + id + " ]";
+    }
+    
 }

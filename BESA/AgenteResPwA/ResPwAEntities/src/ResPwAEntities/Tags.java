@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -27,9 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "TAGS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tags.findAll", query = "SELECT t FROM Tags t")
-    , @NamedQuery(name = "Tags.findById", query = "SELECT t FROM Tags t WHERE t.id = :id")
-    , @NamedQuery(name = "Tags.findByTag", query = "SELECT t FROM Tags t WHERE t.tag = :tag")})
+    @NamedQuery(name = "Tags.findAll", query = "SELECT t FROM Tags t"),
+    @NamedQuery(name = "Tags.findById", query = "SELECT t FROM Tags t WHERE t.id = :id"),
+    @NamedQuery(name = "Tags.findByTag", query = "SELECT t FROM Tags t WHERE t.tag = :tag")})
 public class Tags implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +42,7 @@ public class Tags implements Serializable {
     @Basic(optional = false)
     @Column(name = "TAG")
     private String tag;
-    @ManyToMany(mappedBy = "tagsList")
+    @ManyToMany(mappedBy = "tagsList", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
 
     public Tags() {

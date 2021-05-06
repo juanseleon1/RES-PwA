@@ -49,7 +49,7 @@ public class VerificarDispositivos extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta VerificarDispositivos detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoRobot().isVerificacionDispositivos() && !blvs.getbEstadoRobot().getBateria())
+        if(blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoRobot().isVerificacionDispositivos() && !blvs.getbEstadoRobot().getBateria())
         {
             return 1;
         }

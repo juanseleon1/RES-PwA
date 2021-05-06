@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CAUSADEMENCIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Causademencia.findAll", query = "SELECT c FROM Causademencia c")
-    , @NamedQuery(name = "Causademencia.findByCondicion", query = "SELECT c FROM Causademencia c WHERE c.condicion = :condicion")})
+    @NamedQuery(name = "Causademencia.findAll", query = "SELECT c FROM Causademencia c"),
+    @NamedQuery(name = "Causademencia.findByCondicion", query = "SELECT c FROM Causademencia c WHERE c.condicion = :condicion")})
 public class Causademencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +36,7 @@ public class Causademencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONDICION")
     private String condicion;
-    @OneToMany(mappedBy = "causademenciaCondicion")
+    @OneToMany(mappedBy = "causademenciaCondicion", fetch = FetchType.EAGER)
     private List<PerfilMedico> perfilMedicoList;
 
     public Causademencia() {

@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="157BE87E-2F22-BB53-54D2-48CAD3A9A566" name="Accion">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:48:21 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="9AA25624-179C-D4F3-6C05-31D5DFE97708">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:48:28 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="413540FA-D7FA-ED7E-26C9-3B5FA92D38D9">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:48:54 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo" id="9F24E9A0-B29E-E849-8404-6F0747D93C7C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:49:11 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="9D544B35-DC98-7012-35C3-8023D63D8985">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:50:01 UTC</createdTime>
+<generatorID>04E49280-E47C-CB48-C7A7-6C9314A6133B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<referedAttribute>AB2E2F56-44A4-1E31-F1C7-177EBB510070</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="FB584BB6-E7E0-6F29-44DA-209DA6911739" name="Accion PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 02:48:53 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="07DAE087-2073-3B0D-9769-CFEB1507F596" value="true"/>
+<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>9AA25624-179C-D4F3-6C05-31D5DFE97708</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

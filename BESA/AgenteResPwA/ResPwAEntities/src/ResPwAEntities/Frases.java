@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -29,10 +30,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "FRASES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Frases.findAll", query = "SELECT f FROM Frases f")
-    , @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido")
-    , @NamedQuery(name = "Frases.findByOrden", query = "SELECT f FROM Frases f WHERE f.frasesPK.orden = :orden")
-    , @NamedQuery(name = "Frases.findByCuentoNombre", query = "SELECT f FROM Frases f WHERE f.frasesPK.cuentoNombre = :cuentoNombre")})
+    @NamedQuery(name = "Frases.findAll", query = "SELECT f FROM Frases f"),
+    @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido"),
+    @NamedQuery(name = "Frases.findByOrden", query = "SELECT f FROM Frases f WHERE f.frasesPK.orden = :orden"),
+    @NamedQuery(name = "Frases.findByCuentoNombre", query = "SELECT f FROM Frases f WHERE f.frasesPK.cuentoNombre = :cuentoNombre")})
 public class Frases implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,10 +42,10 @@ public class Frases implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONTENIDO")
     private String contenido;
-    @OneToMany(mappedBy = "frases")
+    @OneToMany(mappedBy = "frases", fetch = FetchType.EAGER)
     private List<Enriq> enriqList;
     @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cuento cuento;
 
     public Frases() {

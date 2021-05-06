@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "NIVEL_EDUCATIVO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NivelEducativo.findAll", query = "SELECT n FROM NivelEducativo n")
-    , @NamedQuery(name = "NivelEducativo.findByTipone", query = "SELECT n FROM NivelEducativo n WHERE n.tipone = :tipone")})
+    @NamedQuery(name = "NivelEducativo.findAll", query = "SELECT n FROM NivelEducativo n"),
+    @NamedQuery(name = "NivelEducativo.findByTipone", query = "SELECT n FROM NivelEducativo n WHERE n.tipone = :tipone")})
 public class NivelEducativo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +36,7 @@ public class NivelEducativo implements Serializable {
     @Basic(optional = false)
     @Column(name = "TIPONE")
     private String tipone;
-    @OneToMany(mappedBy = "nivelEducativoTipone")
+    @OneToMany(mappedBy = "nivelEducativoTipone", fetch = FetchType.EAGER)
     private List<Perfilpwa> perfilpwaList;
 
     public NivelEducativo() {

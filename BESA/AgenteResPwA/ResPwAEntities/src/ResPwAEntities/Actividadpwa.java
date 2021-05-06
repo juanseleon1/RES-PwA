@@ -13,7 +13,10 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,11 +32,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ACTIVIDADPWA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Actividadpwa.findAll", query = "SELECT a FROM Actividadpwa a")
-    , @NamedQuery(name = "Actividadpwa.findById", query = "SELECT a FROM Actividadpwa a WHERE a.id = :id")
-    , @NamedQuery(name = "Actividadpwa.findByNombre", query = "SELECT a FROM Actividadpwa a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Actividadpwa.findByTipo", query = "SELECT a FROM Actividadpwa a WHERE a.tipo = :tipo")
-    , @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion")})
+    @NamedQuery(name = "Actividadpwa.findAll", query = "SELECT a FROM Actividadpwa a"),
+    @NamedQuery(name = "Actividadpwa.findById", query = "SELECT a FROM Actividadpwa a WHERE a.id = :id"),
+    @NamedQuery(name = "Actividadpwa.findByNombre", query = "SELECT a FROM Actividadpwa a WHERE a.nombre = :nombre"),
+    @NamedQuery(name = "Actividadpwa.findByTipo", query = "SELECT a FROM Actividadpwa a WHERE a.tipo = :tipo"),
+    @NamedQuery(name = "Actividadpwa.findByDuracion", query = "SELECT a FROM Actividadpwa a WHERE a.duracion = :duracion")})
 public class Actividadpwa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,10 +54,13 @@ public class Actividadpwa implements Serializable {
     @Basic(optional = false)
     @Column(name = "DURACION")
     private BigInteger duracion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa")
-    private List<Actxpreferencia> actxpreferenciaList;
-    @OneToMany(mappedBy = "actividadpwaId")
+    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Dificultad dificultadDificultad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
     private List<Registroactividad> registroactividadList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
+    private List<Actxpreferencia> actxpreferenciaList;
 
     public Actividadpwa() {
     }
@@ -102,13 +108,12 @@ public class Actividadpwa implements Serializable {
         this.duracion = duracion;
     }
 
-    @XmlTransient
-    public List<Actxpreferencia> getActxpreferenciaList() {
-        return actxpreferenciaList;
+    public Dificultad getDificultadDificultad() {
+        return dificultadDificultad;
     }
 
-    public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
-        this.actxpreferenciaList = actxpreferenciaList;
+    public void setDificultadDificultad(Dificultad dificultadDificultad) {
+        this.dificultadDificultad = dificultadDificultad;
     }
 
     @XmlTransient
@@ -118,6 +123,15 @@ public class Actividadpwa implements Serializable {
 
     public void setRegistroactividadList(List<Registroactividad> registroactividadList) {
         this.registroactividadList = registroactividadList;
+    }
+
+    @XmlTransient
+    public List<Actxpreferencia> getActxpreferenciaList() {
+        return actxpreferenciaList;
+    }
+
+    public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
+        this.actxpreferenciaList = actxpreferenciaList;
     }
 
     @Override

@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,14 +32,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFIL_MEDICO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PerfilMedico.findAll", query = "SELECT p FROM PerfilMedico p")
-    , @NamedQuery(name = "PerfilMedico.findByPerfilpwaCedula", query = "SELECT p FROM PerfilMedico p WHERE p.perfilpwaCedula = :perfilpwaCedula")
-    , @NamedQuery(name = "PerfilMedico.findByTomamedicamentos", query = "SELECT p FROM PerfilMedico p WHERE p.tomamedicamentos = :tomamedicamentos")
-    , @NamedQuery(name = "PerfilMedico.findByDiscapauditiva", query = "SELECT p FROM PerfilMedico p WHERE p.discapauditiva = :discapauditiva")
-    , @NamedQuery(name = "PerfilMedico.findByDiscapvisual", query = "SELECT p FROM PerfilMedico p WHERE p.discapvisual = :discapvisual")
-    , @NamedQuery(name = "PerfilMedico.findByDiscapmotora", query = "SELECT p FROM PerfilMedico p WHERE p.discapmotora = :discapmotora")
-    , @NamedQuery(name = "PerfilMedico.findByEstadioenfermedad", query = "SELECT p FROM PerfilMedico p WHERE p.estadioenfermedad = :estadioenfermedad")
-    , @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia")})
+    @NamedQuery(name = "PerfilMedico.findAll", query = "SELECT p FROM PerfilMedico p"),
+    @NamedQuery(name = "PerfilMedico.findByPerfilpwaCedula", query = "SELECT p FROM PerfilMedico p WHERE p.perfilpwaCedula = :perfilpwaCedula"),
+    @NamedQuery(name = "PerfilMedico.findByTomamedicamentos", query = "SELECT p FROM PerfilMedico p WHERE p.tomamedicamentos = :tomamedicamentos"),
+    @NamedQuery(name = "PerfilMedico.findByDiscapauditiva", query = "SELECT p FROM PerfilMedico p WHERE p.discapauditiva = :discapauditiva"),
+    @NamedQuery(name = "PerfilMedico.findByDiscapvisual", query = "SELECT p FROM PerfilMedico p WHERE p.discapvisual = :discapvisual"),
+    @NamedQuery(name = "PerfilMedico.findByDiscapmotora", query = "SELECT p FROM PerfilMedico p WHERE p.discapmotora = :discapmotora"),
+    @NamedQuery(name = "PerfilMedico.findByEstadioenfermedad", query = "SELECT p FROM PerfilMedico p WHERE p.estadioenfermedad = :estadioenfermedad"),
+    @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia")})
 public class PerfilMedico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,16 +65,16 @@ public class PerfilMedico implements Serializable {
     @Basic(optional = false)
     @Column(name = "PERIODOVIGILIA")
     private BigInteger periodovigilia;
-    @OneToMany(mappedBy = "perfilMedicoPerfilpwaCedula")
-    private List<Actividadrutinaria> actividadrutinariaList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilMedico")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilMedico", fetch = FetchType.EAGER)
     private Cdr cdr;
     @JoinColumn(name = "CAUSADEMENCIA_CONDICION", referencedColumnName = "CONDICION")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Causademencia causademenciaCondicion;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
     private Perfilpwa perfilpwa;
+    @OneToMany(mappedBy = "perfilMedicoPerfilpwaCedula", fetch = FetchType.EAGER)
+    private List<Actividadrutinaria> actividadrutinariaList;
 
     public PerfilMedico() {
     }
@@ -148,15 +149,6 @@ public class PerfilMedico implements Serializable {
         this.periodovigilia = periodovigilia;
     }
 
-    @XmlTransient
-    public List<Actividadrutinaria> getActividadrutinariaList() {
-        return actividadrutinariaList;
-    }
-
-    public void setActividadrutinariaList(List<Actividadrutinaria> actividadrutinariaList) {
-        this.actividadrutinariaList = actividadrutinariaList;
-    }
-
     public Cdr getCdr() {
         return cdr;
     }
@@ -179,6 +171,15 @@ public class PerfilMedico implements Serializable {
 
     public void setPerfilpwa(Perfilpwa perfilpwa) {
         this.perfilpwa = perfilpwa;
+    }
+
+    @XmlTransient
+    public List<Actividadrutinaria> getActividadrutinariaList() {
+        return actividadrutinariaList;
+    }
+
+    public void setActividadrutinariaList(List<Actividadrutinaria> actividadrutinariaList) {
+        this.actividadrutinariaList = actividadrutinariaList;
     }
 
     @Override

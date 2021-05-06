@@ -44,7 +44,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private boolean libreEntorno = false;
     private boolean activadoMovEscucha = false;
     private boolean activadoConsciente = false;
-    private boolean activadoSeñalesDeVida = false;
+    private boolean activadoSenalesDeVida = false;
     private boolean activadoMovHabla = false;
     private boolean estaSuspendido = false;
     private boolean conexionInternet = false;
@@ -57,8 +57,11 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
+    private boolean robotInicializado = false;
 
     public BEstadoRobot() {
+        super();
+        robotInicializado = false;
     }
 
     public void setBrilloRobot(double brilloRobot) {
@@ -108,8 +111,8 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             if (infoRecibida.getDataP().containsKey("activadoConsciente")) {
                 activadoConsciente = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoConsciente"));
             }
-            if (infoRecibida.getDataP().containsKey("activadoSeñalesDeVida")) {
-                activadoSeñalesDeVida = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoSeñalesDeVida"));
+            if (infoRecibida.getDataP().containsKey("activadoSenalesDeVida")) {
+                activadoSenalesDeVida = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoSenalesDeVida"));
             }
             if (infoRecibida.getDataP().containsKey("activadoMovHabla")) {
                 activadoMovHabla = Boolean.valueOf((String) infoRecibida.getDataP().get("activadoMovHabla"));
@@ -128,6 +131,9 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
             if (infoRecibida.getDataP().containsKey("hotDeviceDetected")) {
                 verificacionDispositivos = Boolean.valueOf((String) infoRecibida.getDataP().get("hotDeviceDetected"));
+            }
+            if (infoRecibida.getDataP().containsKey("robotInicializado")) {
+                robotInicializado = Boolean.valueOf((String) infoRecibida.getDataP().get("robotInicializado"));
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData emoDat = (EmotionalData) si;
@@ -227,12 +233,12 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.activadoConsciente = activadoConsciente;
     }
 
-    public boolean isActivadoSeñalesDeVida() {
-        return activadoSeñalesDeVida;
+    public boolean isActivadoSenalesDeVida() {
+        return activadoSenalesDeVida;
     }
 
-    public void setActivadoSeñalesDeVida(boolean activadoSeñalesDeVida) {
-        this.activadoSeñalesDeVida = activadoSeñalesDeVida;
+    public void setActivadoSenalesDeVida(boolean activadoSenalesDeVida) {
+        this.activadoSenalesDeVida = activadoSenalesDeVida;
     }
 
     public boolean isActivadoMovHabla() {
@@ -349,6 +355,14 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
     }
 
+    public boolean isRobotInicializado(){
+       return robotInicializado;
+    }
+
+    public void setRobotInicializado(boolean robotInicializado) {
+        this.robotInicializado = robotInicializado;
+    }
+
     @Override
     public void emotionalStateChanged() {
         try {
@@ -356,7 +370,8 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             EmotionAxis ea = getTopEmotionAxis();
             float state = ea.getCurrentValue();
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
-            infoServicio.put("factorVelocidad", normalizeValue(state, PepperConf.SPEED));
+            System.out.println("VALOR DE EMOVAL "+state);
+            infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
@@ -375,8 +390,10 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     }
 
     private float normalizeValue(float val, PepperConf conf) {
-        float normalValue = 0,max=conf.getMax(),min=conf.getMin();
-        normalValue= (val-min)/(max-min);
+        float normalValue,max=conf.getMax(),min=conf.getMin(),oldRange,newRange;
+        oldRange = 2;
+        newRange = max-min;
+        normalValue= (((val-min)*newRange)/(oldRange))+ min;
         return normalValue;
     }
 }
