@@ -65,7 +65,7 @@ public class BEstadoInteraccion implements Believes{
             confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
         }
         if(infoRecibida.getDataP().containsKey("faceDetected")){
-            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
+//            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
             detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
             tiempoSinInt=0;
         }

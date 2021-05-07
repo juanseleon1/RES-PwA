@@ -10,19 +10,19 @@ package PepperPackage.EmotionalModel;
  * @author mafegarces
  */
 public enum PepperEmotionRanges {
-    VSAD(0x8BCCEC, -1, -0.6), SAD(0xFA3421, -0.6, -0.2), NEUTRAL(0xFFFFFF, -0 - 2, 0.2), HAPPY(0x7FF764, 0.2, 0.6), VHAPPY(0xF8FE2E, 0.6, 1);
+    VSAD("0x8BCCEC", -1, -0.6), SAD("0xFA3421", -0.6, -0.2), NEUTRAL("0xFFFFFF", -0.2, 0.2), HAPPY("0x7FF764", 0.2, 0.6), VHAPPY("0xF8FE2E", 0.6, 1);
 
-    private int hexa;
+    private String hexa;
     private double min;
     private double max;
 
-    private PepperEmotionRanges(int hexa, double min, double max) {
+    private PepperEmotionRanges(String hexa, double min, double max) {
         this.hexa = hexa;
         this.min = min;
         this.max = max;
     }
 
-    public int getHexa() {
+    public String getHexa() {
         return hexa;
     }
 

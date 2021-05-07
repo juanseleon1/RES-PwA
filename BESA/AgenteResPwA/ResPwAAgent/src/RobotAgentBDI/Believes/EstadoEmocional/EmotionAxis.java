@@ -85,8 +85,13 @@ public class EmotionAxis {
         return eventInfluence.get(eventName);
     }
 
-    protected Map<String, Float> getEventInfluences() {
+    public Map<String, Float> getEventInfluences() {
         return eventInfluence;
+    }
+    public void printEventInfluences(){
+        for (String object : eventInfluence.keySet()) {
+            System.out.println("Event: "+object+" Object: "+eventInfluence.get(object));
+        }
     }
 
     public void updateIntensity(String event, float intensity) {

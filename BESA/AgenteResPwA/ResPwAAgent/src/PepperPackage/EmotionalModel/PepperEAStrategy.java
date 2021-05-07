@@ -26,10 +26,11 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
     public List<EmotionalEvent> processEmotion(EmotionalData sd) {
         List<EmotionalEvent> emoList = new ArrayList<>();
         Map<String, Object> ret = sd.getInfo(), aux, auxEmo, map = new HashMap<>();
-        System.out.println("EMO: " + ret.toString());
+        System.out.println("PepperEAStrategy: " + ret.toString());
         EmotionalEvent evt = null;
 
         if (ret.get("PersonData") != null) {
+            System.out.println("Evento Reconocido PersonData");
             ret = (Map<String, Object>) ret.get("PersonData");
             aux = (Map<String, Object>) ret.get("bodyLanguageState");
             aux = (Map<String, Object>) aux.get("ease");
@@ -69,21 +70,37 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
             map.put("emotions", emo);
 
         } else if (ret.get("voiceEmotionRecognized") != null) {
-            double joyval = 0, angval = 0, sowval = 0;
-            aux = (Map<String, Object>) ret.get("voiceEmotionRecognized");
+            System.out.println("Evento Reconocido voiceEmotionRecognized");
+            double joyval, angval, sowval, calmval;
+            List<Object> auxL = (List<Object>) ret.get("voiceEmotionRecognized");
+            List<Integer> emotList = (List<Integer>) auxL.get(1);
+            calmval = emotList.get(1).intValue();
+            angval = emotList.get(2).intValue();
+            joyval = emotList.get(3).intValue();
+            sowval = emotList.get(4).intValue();
             double val = ((angval + sowval) / 2);
-            EmotionalEventType emoT = val > joyval ? EmotionalEventType.NEGEMOSTATE : EmotionalEventType.POSEMOSTATE;
-            //TO DO.  [ [4,3], [0,2,1,3,0], 1 ]
+            double lval = ((joyval + calmval) / 2);
+            EmotionalEventType emoT = val > lval ? EmotionalEventType.NEGVOICEEMOTION : EmotionalEventType.POSVOICEEMOTION;
+            evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
+            emoList.add(evt);
 
+            //TO DO.  [ [4,3], [0,2,1,3,0], 1 ]
         } else {
+            System.out.println("Evento Reconocido else");
             String paramsString;
             paramsString = ret.keySet().iterator().next();
+            System.out.println("paramsString: " + paramsString);
             boolean isOk = (boolean) ret.get(paramsString);
+            System.out.println("IsOk: " + isOk);
             if (isOk) {
                 EmotionalEventType emoT = EmotionalEventType.getFromId(paramsString);
                 evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
                 emoList.add(evt);
             }
+        }
+
+        for (EmotionalEvent emotionalEvent : emoList) {
+            System.out.println("Evt:" + emotionalEvent.toString());
         }
         return emoList;
     }

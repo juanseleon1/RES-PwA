@@ -76,7 +76,9 @@ class Robot:
        # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
-        #self.init_topics()
+        if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
+            print "Iniciando Topics"
+            self.init_topics()
 
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
@@ -213,7 +215,7 @@ class Robot:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
             print "TIMES  -> ", animation_times
-            self.alMotion.angleInterpolation(animation_names, animation_keys, animation_times, True)
+            self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
         except BaseException, err:
             print err
 
@@ -439,7 +441,7 @@ class Robot:
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
         duration = self.emotionStateRobot.getDurationEyesColor()
-        self.alLedsProxy.rotateEyes(color, rotationDuration, duration)
+        self.alLedsProxy.rotateEyes(int(color, 16), rotationDuration, duration)
 
     # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
