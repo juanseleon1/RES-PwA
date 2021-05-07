@@ -62,7 +62,7 @@ public class Interacciones extends ResPwaTask{
             requestService(srb,blvs);
         }
         
-        if(state >= PepperEmotionRanges.NEUTRAL.getMin() && state < PepperEmotionRanges.NEUTRAL.getMax())
+        if(state >= PepperEmotionRanges.NORMAL.getMin() && state < PepperEmotionRanges.NORMAL.getMax())
         {
             infoServicio.put("SAY", "iu");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
