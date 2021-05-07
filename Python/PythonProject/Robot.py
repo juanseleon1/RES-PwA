@@ -402,7 +402,7 @@ class Robot:
                 exit(1)
 
     def request_posture_change(self, params):
-        actions=self.current_emomap[params.get("ACTION")]
+        actions = self.current_emomap[params.get("ACTION")]
         names = list()
         times = list()
         keys = list()
@@ -456,6 +456,8 @@ class Robot:
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
         self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
+        emomapParams = { "ACTION": "POSTURA"}
+        self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
