@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C0A78CBF-FF7B-F4F6-A5C3-3C5F5DAA4D3F" name="Antecedente">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:18:54 UTC</createdTime>
+<generatorID>02F66238-D528-43A0-3563-2FFFF191E3C5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="C6A16ABC-6E30-89ED-4FCD-9C4DD5EBDD5D">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:18:54 UTC</createdTime>
+<generatorID>CECFCCAF-EA97-D118-9C54-FE9E79DB1BF6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="etiqueta" id="40349F9E-D39F-6188-6F62-87AE4C0A2B58">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:18:54 UTC</createdTime>
+<generatorID>B9465355-3C0E-89BD-A21A-305EE77A81FF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="valor" id="1A0F180C-79BD-206E-E5D6-8EE7B212904C">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:18:54 UTC</createdTime>
+<generatorID>5B613019-7920-8020-E499-6C9FF0DBC38E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2536072E-CAF1-BD82-2C84-ADFFB17C6733" name="Antecedente_PK">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:18:54 UTC</createdTime>
+<generatorID>DC5CCAA5-19AF-2363-3BEF-0BDE93CEFC00</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6A16ABC-6E30-89ED-4FCD-9C4DD5EBDD5D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
