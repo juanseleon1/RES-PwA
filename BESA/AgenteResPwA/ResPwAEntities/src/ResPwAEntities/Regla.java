@@ -41,7 +41,7 @@ public class Regla implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "FEEDBACK")
-    private float feedback;
+    private double feedback;
     
     @Basic(optional = false)
     @Column(name = "ETIQUETA")
@@ -58,16 +58,27 @@ public class Regla implements Serializable {
 //    @Column(name = "EMOTIONVALUE")
 //    private double emotionValue;
 
+    public Regla() {
+    }
+
+    public Regla(Long id, double feedback, String etiqueta, List<Antecedente> antecedentesList) {
+        this.id = id;
+        this.feedback = feedback;
+        this.etiqueta = etiqueta;
+        this.antecedentesList = antecedentesList;
+    }
+
+    
     public List<Antecedente> getAntecedentesList() {
         return antecedentesList;
     }
 
     
-    public float getFeedback() {
+    public double getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(float feedback) {
+    public void setFeedback(double feedback) {
         this.feedback = feedback;
     }    
     

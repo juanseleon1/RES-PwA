@@ -30,7 +30,7 @@ public class ActivarLetra extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Activar Letra ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {
+        if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5) {
             infoServicio.put("ACTIVATELYRICS", true);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
             requestService(srb,blvs);

@@ -61,7 +61,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         System.out.println("Meta ConversarEmpaticamente detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoRobot().isRobotInicializado() && !blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
             if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
                     blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 

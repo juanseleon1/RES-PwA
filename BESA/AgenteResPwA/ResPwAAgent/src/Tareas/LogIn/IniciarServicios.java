@@ -133,7 +133,7 @@ public class IniciarServicios extends ResPwaTask{
         infoServicio.put("ACTVOICERECOG", "SpeechRecognition"); //revisar nombre
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
         requestService(srb,blvs);
-        blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
+        //blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
         
     }
 
