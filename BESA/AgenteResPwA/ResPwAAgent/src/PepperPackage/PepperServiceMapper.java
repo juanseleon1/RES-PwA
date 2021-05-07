@@ -34,7 +34,7 @@ public class PepperServiceMapper extends ServiceMapper<String>{
                       mapper.put(helper[0], helper[1]);
                 }
             }
-            System.out.println("ServiceMapperLoaded");
+//            System.out.println("ServiceMapperLoaded");
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
     }

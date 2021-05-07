@@ -11,7 +11,7 @@ package PepperPackage;
  */
 public enum PepperConf {
     
-    SPEED(1.5f,0.5f),PITCH(200,100),LEDINTENSITY(1,0.1f),TALKSPEED(70,30);
+    SPEED(1.5f,0.5f),PITCH(200,100),LEDINTENSITY(1,0.1f),TALKSPEED(70,30),DURATION(0.1f,1);
     
     private final float max,min;
 
