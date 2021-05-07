@@ -75,7 +75,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     @Override
     public boolean update(InfoData si) {
 
-        System.out.println("******Act Estado Robot********* " + si.toString());
+        System.out.println("******Act Estado Robot********* \n" + si.toString());
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {
@@ -137,7 +137,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             }
         } else if (si instanceof EmotionalData) {
             EmotionalData emoDat = (EmotionalData) si;
-            
+
             List<EmotionalEvent> emoEv = emoDat.getEmoEv();
             for (EmotionalEvent emotionalEvent : emoEv) {
                 this.processEmotionalEvent(emotionalEvent);
@@ -355,8 +355,8 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         this.tiempoSinConexionInternet = tiempoSinConexionInternet;
     }
 
-    public boolean isRobotInicializado(){
-       return robotInicializado;
+    public boolean isRobotInicializado() {
+        return robotInicializado;
     }
 
     public void setRobotInicializado(boolean robotInicializado) {
@@ -370,13 +370,24 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             EmotionAxis ea = getTopEmotionAxis();
             float state = ea.getCurrentValue();
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
-            System.out.println("VALOR DE EMOVAL "+state);
             infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
+            infoServicio.put("DURATION", normalizeValue(state, PepperConf.DURATION));
             infoServicio.put("COLOR", leds.getHexa());
             infoServicio.put("EmotionalTag", leds.toString());
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("Valores Emocionales para: " + ea.getNegativeName());
+            System.out.println("Valores Emocionales para: " + state);
+            System.out.println("EmotionalTag: " + leds.toString());
+            System.out.println("Velocidad " + normalizeValue(state, PepperConf.SPEED));
+            System.out.println("velHabla " + normalizeValue(state, PepperConf.TALKSPEED));
+            System.out.println("tonoHabla " + normalizeValue(state, PepperConf.PITCH));
+            System.out.println("ledIntens " + normalizeValue(state, PepperConf.LEDINTENSITY));
+            System.out.println("DURATION " + normalizeValue(state, PepperConf.DURATION));
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
             requestService(srb);
         } catch (CloneNotSupportedException ex) {
@@ -384,16 +395,16 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         }
 
     }
-    
-    public void updateEmotionalVariables(){
+
+    public void updateEmotionalVariables() {
         processEmotionalEvent(new EmotionalEvent());
     }
 
     private float normalizeValue(float val, PepperConf conf) {
-        float normalValue,max=conf.getMax(),min=conf.getMin(),oldRange,newRange;
-        oldRange = 2;
-        newRange = max-min;
-        normalValue= (((val-min)*newRange)/(oldRange))+ min;
+        float normalValue, max = conf.getMax(), min = conf.getMin(), oldRange, newRange, oldMin = -1, oldMax = 1;
+        oldRange = oldMax - oldMin;
+        newRange = max - min;
+        normalValue = (((val - oldMin) * newRange) / (oldRange)) + min;
         return normalValue;
     }
 }

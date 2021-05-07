@@ -76,8 +76,6 @@ public class InitRESPwA {
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, hm1);
             p.sendRequest(data);
             startConfig(p);
-            System.out.println("Fin Main ");
-
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
