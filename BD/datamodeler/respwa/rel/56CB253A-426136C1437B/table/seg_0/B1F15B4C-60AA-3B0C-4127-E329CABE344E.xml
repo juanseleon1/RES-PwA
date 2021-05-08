@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B1F15B4C-60AA-3B0C-4127-E329CABE344E" name="EventInfluence">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>83CFAF11-6439-8EB3-E4EE-FB98B7E6AF1B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1EE35E4B-6C64-2FD4-D9C5-82689FDBFC65">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>69AFC6D2-9687-BFF9-F65F-B7B289B2618E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="eventName" id="FCDD9616-0294-6F79-2CD8-8C9EB5C00FF7">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>70583465-1EFE-95E9-2BEA-BC3A325946CF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="eventInfluence" id="E99E8934-83D4-3BFB-E8F6-4623895ED7CF">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>B95A6473-AFAA-34C7-F50B-4E0CB9022DA1</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EmotionAxisConfig_id" id="6EE1CBF3-E93A-5E82-126C-DA203C837DA1">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>E3D48291-8892-D394-9E4A-1AFD7B760923</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AD5D5F2A-C009-A85E-704E-53E7DE686B43" referredColumn="D31D6344-7271-8261-91FF-91EA83F0C980"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D1BF1F36-1318-33D2-E3D0-11F8CF3956D0" name="EventInfluence_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>3C1FA61F-B081-4B0D-C643-40767A266F2C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1EE35E4B-6C64-2FD4-D9C5-82689FDBFC65"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="79C7AC5A-B9B3-98E4-B084-0A6B0E12C956" name="EventInfluence_EmotionAxisConfig_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:21:46 UTC</createdTime>
+<generatorID>415814F3-E994-D4F7-B0A0-3C49650FCB6A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6EE1CBF3-E93A-5E82-126C-DA203C837DA1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

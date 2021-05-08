@@ -40,12 +40,51 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="0886E021-E80F-7A22-4475-EC9C06A4237B" referredColumn="4B1C7E16-0676-08A1-038A-2B260AADFA0D"/>
 </associations>
+</Column>
+<Column name="Accion_id" id="82CCEF8E-F491-F9EB-BBDB-F6089459D54F">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:27:06 UTC</createdTime>
+<generatorID>6ED7CAB7-8C46-470A-3613-01C70826848E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BCA16232-5A19-9DEF-B215-05BB26D85525" referredColumn="6CF9228B-36DF-AA17-C626-17D5CD30C8C8"/>
+</associations>
+</Column>
+<Column name="emotionalEvent" id="75B63382-CED6-D0F6-779E-D2DEFA97BE17">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 15:05:14 UTC</createdTime>
+<generatorID>516BD74A-CFCA-9E34-43D3-CAAABF72698A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="accion" id="98550E40-119A-6FF1-0773-C5488E9FE9E6">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 15:05:14 UTC</createdTime>
+<generatorID>FC01A89C-2981-8358-D661-2001E4ACCA11</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -71,6 +110,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="1D955D0E-6531-73C3-31B7-15C095228AB4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E8F2B27A-86F1-079D-00F1-7596DB251205" name="Frases_Accion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:27:06 UTC</createdTime>
+<generatorID>BB0E4762-E1BD-365E-2AF9-4D61AF6BC03F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="82CCEF8E-F491-F9EB-BBDB-F6089459D54F"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
