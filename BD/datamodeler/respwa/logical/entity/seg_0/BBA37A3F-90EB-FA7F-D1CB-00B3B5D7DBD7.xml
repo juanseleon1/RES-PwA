@@ -4,7 +4,8 @@
 <createdTime>2020-10-27 20:33:15 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -15,12 +16,26 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="orden" id="F6AC9C1B-485C-06BD-A895-CA7723E127BE">
+<createdBy>juans</createdBy>
+<createdTime>2020-10-27 20:34:11 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="contenido" id="53134FF6-B242-E5E7-44A8-AF9F83464236">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:33:46 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -28,32 +43,66 @@
 <dataTypeSize>100 CHAR</dataTypeSize>
 <ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="orden" id="F6AC9C1B-485C-06BD-A895-CA7723E127BE">
-<createdBy>juans</createdBy>
-<createdTime>2020-10-27 20:34:11 UTC</createdTime>
-<ownerDesignName>respwa</ownerDesignName>
-<engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="nombre" id="D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:53:32 UTC</createdTime>
 <generatorID>D51D2B31-BDE8-9C7D-FA90-7D0FEA5AEFB6</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <referedAttribute>0655F14C-D67B-351E-2180-8B86C4D30570</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="emotionalEvent" id="516BD74A-CFCA-9E34-43D3-CAAABF72698A">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:46:54 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="accion" id="FC01A89C-2981-8358-D661-2001E4ACCA11">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 14:46:57 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="urlImagen" id="194E6627-6B7D-6F7D-4491-3ECEB4371C05">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:57:08 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -63,7 +112,8 @@
 <ownerDesignName>respwa</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="false"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

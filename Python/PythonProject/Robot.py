@@ -408,11 +408,11 @@ class Robot:
         names = list()
         times = list()
         keys = list()
-        for action in actions:
-            names.append(action["name"])
-            times.append(action["time"])
+        for name, action in actions.items():
+            names.append(name)
             keys.append(action["key"])
-
+            times.append(action["time"])
+        
         self.play_animation(names, times, keys)
 
     # The robot wakes up
