@@ -1,10 +1,12 @@
 import threading
 import time
+
+import Constants
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
 from Topics import *
-from Utils import activities_running, send
+from Utils import activities_running, send, callbacks_running
 
 
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
@@ -31,7 +33,6 @@ class Robot:
         self.alNavigationProxy = session.service("ALNavigation")
         self.alLocalizationProxy = session.service("ALLocalization")
         self.alSensorsProxy = session.service("ALSensors")
-        self.alTabletService = session.service("ALTabletService")
         self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
         self.alAudioDevice = session.service("ALAudioDevice")
         self.alAudioPlayer = session.service("ALAudioPlayer")
@@ -396,6 +397,8 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+                self.alTabletService = self.session.service("ALTabletService")
+
             except Exception, e:
                 print "Main Error"
                 print e
@@ -483,7 +486,8 @@ class Robot:
         self.alTabletService.enableWifi()
         # print "CRACK", self.alTabletService.getWifiStatus()
         # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/22/res_id/0")
+
+        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):

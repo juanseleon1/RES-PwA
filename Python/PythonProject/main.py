@@ -6,12 +6,19 @@ import sys
 import argparse
 from Message import messageManager
 from Robot import Robot
-from Utils import activities_running, send
-
+from Utils import activities_running, send, callbacks_running
 
 
 # ------------------------------------- -------------Functions-----------------------------------------------------------------------
+def timer_callbacks():
+    # Execute all callback functions to know if all callback-activities are finished
+    for key, function in callbacks_running.items():
+        function()
+
+    threading.Timer(1.0, timer_callbacks).start()
+
 def timer_activities():
+
     for key, value in activities_running.items():
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
@@ -128,6 +135,7 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
 robot = Robot(session)
+robot.show_video(None)
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client)
