@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C8BFA614-4B75-E13D-8B43-24FB0694F0D7" name="Familiar">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>30E2E9B3-A96A-06F1-DF06-01B628E4C77F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="87427252-3FEE-68CA-78EF-637A54872530">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>C4A66A0E-8804-33B8-1BB2-724E95E92F8D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="A19FDD2F-1694-57B7-8448-71532D71830F">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>5C83B178-1B40-30C8-08A1-F577A70674A0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="parentesco" id="4A00462F-0A32-2104-DBB9-77DCB61DF0C0">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>8BA86D62-B5FD-AE16-301B-60BB7631A5A3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="interes" id="20E34EFC-9DDB-1DA3-6C87-BD51C721E72C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>1EFB45E3-89BF-1C4A-9E18-C8F366B97609</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estaVivo" id="8EF76786-391B-F326-1F14-B939B572389A">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>5E1D0128-246D-76C5-AE04-25C935764254</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nacimiento" id="E97B1FB4-351C-6405-362F-770DC0D32CED">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>0FBE0C7D-1D2B-D20C-C4CA-1AE0351EF3A8</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="799D3D6B-7A8B-468E-4953-616499200D60" name="Familiar_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>B95AD323-3CF3-53A9-12DE-C7624000AFBF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="87427252-3FEE-68CA-78EF-637A54872530"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

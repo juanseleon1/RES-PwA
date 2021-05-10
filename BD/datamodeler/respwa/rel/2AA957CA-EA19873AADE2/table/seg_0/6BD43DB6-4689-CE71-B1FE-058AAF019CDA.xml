@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6BD43DB6-4689-CE71-B1FE-058AAF019CDA" name="Perfil_Medico">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>C4C92279-704A-3768-75A6-8851A6F0020C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PerfilPwa_cedula" id="5712D9E4-468A-7063-8689-C64D1BD543FC">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>7A31410F-011D-6E47-0810-0C75FAF9B0C0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="35BCF651-7837-A968-14AB-6C74A10379B2" referredColumn="BD8DF490-D83B-32F6-F6E1-2E6D3B5ACE52"/>
+</associations>
+</Column>
+<Column name="tomaMedicamentos" id="2BC185A7-B5C4-4850-400C-08E2E147927B">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>474D2DC3-EE0C-057A-DEA5-47A8A7FEB183</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapAuditiva" id="21714DE7-7B08-D2B7-0274-2BE51EE8C429">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>80534207-B6FC-0465-0F2D-99CC9FC4F145</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapVisual" id="2DC42D7D-3A1C-77E1-9704-6A205404287A">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>7D9677FD-EFE3-7BF5-E1BA-2FD11D7300AA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapMotora" id="0696038C-32D6-2937-E7B6-BB3FA04CBDCE">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>DC9402DC-D249-E4D7-48B6-89760DEBC525</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estadioEnfermedad" id="7585106D-7347-05AB-E1C6-2F19D4BC494C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>1100357B-323A-3CD5-0309-B4DD2C36D51D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="periodoVigilia" id="5F366B7E-04B8-F132-98A1-01290FF918F9">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>679FD5F4-4A6E-B194-959C-B3678EC6C25F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CausaDemencia_condicion" id="98F25B39-FFF8-FFA8-F4E3-4219B6FA9E65">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>4EA2B744-4C7A-1497-9ADC-28A4E0EC8C3B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="ECF1DE3F-3570-AD25-0FD1-627802727443" referredColumn="A75EC8A4-5648-9E94-80C6-8721CE07633D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7D3F16E8-9B83-274F-DC38-FD35ED8BEEB3" name="Perfil_Medico_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>D18C99DB-D326-BAC9-993C-A138FF237E2C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5712D9E4-468A-7063-8689-C64D1BD543FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CAA361F5-6960-CB8A-DD4A-DD79E5888C8E" name="Perfil_Medico_PerfilPwa_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>D71947AB-04DB-4F6D-B992-39D113A3CB57</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5712D9E4-468A-7063-8689-C64D1BD543FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="948976B4-DD05-D873-8280-E048EF5970B1" name="Perfil_Medico_CausaDemencia_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>137D48F6-359A-2C69-6178-0014EA818688</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="98F25B39-FFF8-FFA8-F4E3-4219B6FA9E65"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

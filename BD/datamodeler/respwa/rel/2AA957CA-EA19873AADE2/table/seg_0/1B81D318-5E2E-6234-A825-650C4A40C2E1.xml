@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1B81D318-5E2E-6234-A825-650C4A40C2E1" name="Cuento">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>B4276BE5-B342-B9A2-0CD9-485F537F71CB</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Genero_genero" id="98F8BC0E-1FC4-9ED4-100E-E7C440192CC1">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>A4C726B9-7FEF-E153-AF45-EC46DED3302E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="31651C72-4E36-82AF-9D3E-59A6CC7674AE" referredColumn="26D022ED-BBAA-72E9-3FCD-9CE228329E2E"/>
+</associations>
+</Column>
+<Column name="Autor" id="547B4A24-115C-1092-A9BA-2CC1778172C5">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>1AF9D65F-2D64-B34D-4C79-44AF823684E3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="gusto" id="95946658-DE45-4EFC-7F10-6C98425753BB">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>6061D79B-ECD5-82B8-C568-D4A7AA4EEEF5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="35224C8C-C687-B652-28DD-5FC9EE4C43DB">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>0655F14C-D67B-351E-2180-8B86C4D30570</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B1DEEAF2-4CF7-2B8A-33F0-34BC8595ED0A" name="Cuento_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>303396C9-580C-218D-F865-DDA34580B70F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="35224C8C-C687-B652-28DD-5FC9EE4C43DB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3284B5F2-FE8F-0C3D-73E1-00DDEB54A0BA" name="Cuento_Genero_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>409E7BDA-8D8B-1B12-3228-1727DFE583B5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="98F8BC0E-1FC4-9ED4-100E-E7C440192CC1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

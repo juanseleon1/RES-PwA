@@ -4,6 +4,7 @@ from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
 
 activities_running = {}
+callbacks_running = {}
 
 # responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses
 # ed to BESA

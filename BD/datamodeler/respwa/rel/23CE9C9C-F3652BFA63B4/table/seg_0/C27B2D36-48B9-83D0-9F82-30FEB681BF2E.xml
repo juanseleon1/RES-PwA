@@ -40,12 +40,36 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>15 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="582C061D-01C8-407C-C295-10890EFF3984" referredColumn="3F0FD611-3501-23D8-DCE4-E89AA8DB7186"/>
 </associations>
+</Column>
+<Column name="emotionalEvent" id="B65F8BB7-3416-6DA8-FB60-CE2D4F3294B0">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:00:27 UTC</createdTime>
+<generatorID>516BD74A-CFCA-9E34-43D3-CAAABF72698A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="accion" id="0F3B0DBF-8E47-60AB-9034-DDA3767D9F92">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:00:27 UTC</createdTime>
+<generatorID>FC01A89C-2981-8358-D661-2001E4ACCA11</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
