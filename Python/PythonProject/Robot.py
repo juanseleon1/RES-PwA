@@ -399,7 +399,7 @@ class Robot:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
                 self.alTabletService = self.session.service("ALTabletService")
-                self.app.start()
+                self.app.run()
             except Exception, e:
                 print "Main Error"
                 print e
