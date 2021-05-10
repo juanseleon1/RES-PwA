@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "ACTXPREFERENCIA")
@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actxpreferencia.findByPerfilPreferenciaCedula", query = "SELECT a FROM Actxpreferencia a WHERE a.actxpreferenciaPK.perfilPreferenciaCedula = :perfilPreferenciaCedula"),
     @NamedQuery(name = "Actxpreferencia.findByActiva", query = "SELECT a FROM Actxpreferencia a WHERE a.activa = :activa"),
     @NamedQuery(name = "Actxpreferencia.findByGusto", query = "SELECT a FROM Actxpreferencia a WHERE a.gusto = :gusto"),
-    @NamedQuery(name = "Actxpreferencia.findByEnriq", query = "SELECT a FROM Actxpreferencia a WHERE a.enriq = :enriq")})
+    @NamedQuery(name = "Actxpreferencia.findByEnriq", query = "SELECT a FROM Actxpreferencia a WHERE a.enriq = :enriq"),
+    @NamedQuery(name = "Actxpreferencia.findByDificultad", query = "SELECT a FROM Actxpreferencia a WHERE a.dificultad = :dificultad")})
 public class Actxpreferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,12 +48,12 @@ public class Actxpreferencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "ENRIQ")
     private BigInteger enriq;
+    @Basic(optional = false)
+    @Column(name = "DIFICULTAD")
+    private String dificultad;
     @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Actividadpwa actividadpwa;
-    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Dificultad dificultadDificultad;
     @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private PerfilPreferencia perfilPreferencia;
@@ -64,11 +65,12 @@ public class Actxpreferencia implements Serializable {
         this.actxpreferenciaPK = actxpreferenciaPK;
     }
 
-    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigInteger activa, double gusto, BigInteger enriq) {
+    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigInteger activa, double gusto, BigInteger enriq, String dificultad) {
         this.actxpreferenciaPK = actxpreferenciaPK;
         this.activa = activa;
         this.gusto = gusto;
         this.enriq = enriq;
+        this.dificultad = dificultad;
     }
 
     public Actxpreferencia(BigInteger actividadpwaId, String perfilPreferenciaCedula) {
@@ -107,20 +109,20 @@ public class Actxpreferencia implements Serializable {
         this.enriq = enriq;
     }
 
+    public String getDificultad() {
+        return dificultad;
+    }
+
+    public void setDificultad(String dificultad) {
+        this.dificultad = dificultad;
+    }
+
     public Actividadpwa getActividadpwa() {
         return actividadpwa;
     }
 
     public void setActividadpwa(Actividadpwa actividadpwa) {
         this.actividadpwa = actividadpwa;
-    }
-
-    public Dificultad getDificultadDificultad() {
-        return dificultadDificultad;
-    }
-
-    public void setDificultadDificultad(Dificultad dificultadDificultad) {
-        this.dificultadDificultad = dificultadDificultad;
     }
 
     public PerfilPreferencia getPerfilPreferencia() {

@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class RobotJpaController implements Serializable {
 

@@ -11,9 +11,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Perfilpwa;
-import ResPwAEntities.Cuento;
+import ResPwAEntities.Baile;
 import java.util.ArrayList;
 import java.util.List;
+import ResPwAEntities.Cuento;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
@@ -25,7 +26,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class PerfilPreferenciaJpaController implements Serializable {
 
@@ -39,6 +40,9 @@ public class PerfilPreferenciaJpaController implements Serializable {
     }
 
     public void create(PerfilPreferencia perfilPreferencia) throws IllegalOrphanException, PreexistingEntityException, Exception {
+        if (perfilPreferencia.getBaileList() == null) {
+            perfilPreferencia.setBaileList(new ArrayList<Baile>());
+        }
         if (perfilPreferencia.getCuentoList() == null) {
             perfilPreferencia.setCuentoList(new ArrayList<Cuento>());
         }
@@ -71,6 +75,12 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwa = em.getReference(perfilpwa.getClass(), perfilpwa.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwa);
             }
+            List<Baile> attachedBaileList = new ArrayList<Baile>();
+            for (Baile baileListBaileToAttach : perfilPreferencia.getBaileList()) {
+                baileListBaileToAttach = em.getReference(baileListBaileToAttach.getClass(), baileListBaileToAttach.getId());
+                attachedBaileList.add(baileListBaileToAttach);
+            }
+            perfilPreferencia.setBaileList(attachedBaileList);
             List<Cuento> attachedCuentoList = new ArrayList<Cuento>();
             for (Cuento cuentoListCuentoToAttach : perfilPreferencia.getCuentoList()) {
                 cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombre());
@@ -93,6 +103,10 @@ public class PerfilPreferenciaJpaController implements Serializable {
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(perfilPreferencia);
                 perfilpwa = em.merge(perfilpwa);
+            }
+            for (Baile baileListBaile : perfilPreferencia.getBaileList()) {
+                baileListBaile.getPerfilPreferenciaList().add(perfilPreferencia);
+                baileListBaile = em.merge(baileListBaile);
             }
             for (Cuento cuentoListCuento : perfilPreferencia.getCuentoList()) {
                 cuentoListCuento.getPerfilPreferenciaList().add(perfilPreferencia);
@@ -132,6 +146,8 @@ public class PerfilPreferenciaJpaController implements Serializable {
             PerfilPreferencia persistentPerfilPreferencia = em.find(PerfilPreferencia.class, perfilPreferencia.getPerfilpwaCedula());
             Perfilpwa perfilpwaOld = persistentPerfilPreferencia.getPerfilpwa();
             Perfilpwa perfilpwaNew = perfilPreferencia.getPerfilpwa();
+            List<Baile> baileListOld = persistentPerfilPreferencia.getBaileList();
+            List<Baile> baileListNew = perfilPreferencia.getBaileList();
             List<Cuento> cuentoListOld = persistentPerfilPreferencia.getCuentoList();
             List<Cuento> cuentoListNew = perfilPreferencia.getCuentoList();
             List<Cancion> cancionListOld = persistentPerfilPreferencia.getCancionList();
@@ -163,6 +179,13 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwaNew = em.getReference(perfilpwaNew.getClass(), perfilpwaNew.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwaNew);
             }
+            List<Baile> attachedBaileListNew = new ArrayList<Baile>();
+            for (Baile baileListNewBaileToAttach : baileListNew) {
+                baileListNewBaileToAttach = em.getReference(baileListNewBaileToAttach.getClass(), baileListNewBaileToAttach.getId());
+                attachedBaileListNew.add(baileListNewBaileToAttach);
+            }
+            baileListNew = attachedBaileListNew;
+            perfilPreferencia.setBaileList(baileListNew);
             List<Cuento> attachedCuentoListNew = new ArrayList<Cuento>();
             for (Cuento cuentoListNewCuentoToAttach : cuentoListNew) {
                 cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombre());
@@ -192,6 +215,18 @@ public class PerfilPreferenciaJpaController implements Serializable {
             if (perfilpwaNew != null && !perfilpwaNew.equals(perfilpwaOld)) {
                 perfilpwaNew.setPerfilPreferencia(perfilPreferencia);
                 perfilpwaNew = em.merge(perfilpwaNew);
+            }
+            for (Baile baileListOldBaile : baileListOld) {
+                if (!baileListNew.contains(baileListOldBaile)) {
+                    baileListOldBaile.getPerfilPreferenciaList().remove(perfilPreferencia);
+                    baileListOldBaile = em.merge(baileListOldBaile);
+                }
+            }
+            for (Baile baileListNewBaile : baileListNew) {
+                if (!baileListOld.contains(baileListNewBaile)) {
+                    baileListNewBaile.getPerfilPreferenciaList().add(perfilPreferencia);
+                    baileListNewBaile = em.merge(baileListNewBaile);
+                }
             }
             for (Cuento cuentoListOldCuento : cuentoListOld) {
                 if (!cuentoListNew.contains(cuentoListOldCuento)) {
@@ -272,6 +307,11 @@ public class PerfilPreferenciaJpaController implements Serializable {
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(null);
                 perfilpwa = em.merge(perfilpwa);
+            }
+            List<Baile> baileList = perfilPreferencia.getBaileList();
+            for (Baile baileListBaile : baileList) {
+                baileListBaile.getPerfilPreferenciaList().remove(perfilPreferencia);
+                baileListBaile = em.merge(baileListBaile);
             }
             List<Cuento> cuentoList = perfilPreferencia.getCuentoList();
             for (Cuento cuentoListCuento : cuentoList) {

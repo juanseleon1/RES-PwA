@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.Dificultad;
 import ResPwAEntities.Registroactividad;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class ActividadpwaJpaController implements Serializable {
 
@@ -50,11 +49,6 @@ public class ActividadpwaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Dificultad dificultadDificultad = actividadpwa.getDificultadDificultad();
-            if (dificultadDificultad != null) {
-                dificultadDificultad = em.getReference(dificultadDificultad.getClass(), dificultadDificultad.getDificultad());
-                actividadpwa.setDificultadDificultad(dificultadDificultad);
-            }
             List<Registroactividad> attachedRegistroactividadList = new ArrayList<Registroactividad>();
             for (Registroactividad registroactividadListRegistroactividadToAttach : actividadpwa.getRegistroactividadList()) {
                 registroactividadListRegistroactividadToAttach = em.getReference(registroactividadListRegistroactividadToAttach.getClass(), registroactividadListRegistroactividadToAttach.getRegistroactividadPK());
@@ -68,10 +62,6 @@ public class ActividadpwaJpaController implements Serializable {
             }
             actividadpwa.setActxpreferenciaList(attachedActxpreferenciaList);
             em.persist(actividadpwa);
-            if (dificultadDificultad != null) {
-                dificultadDificultad.getActividadpwaList().add(actividadpwa);
-                dificultadDificultad = em.merge(dificultadDificultad);
-            }
             for (Registroactividad registroactividadListRegistroactividad : actividadpwa.getRegistroactividadList()) {
                 Actividadpwa oldActividadpwaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getActividadpwa();
                 registroactividadListRegistroactividad.setActividadpwa(actividadpwa);
@@ -109,8 +99,6 @@ public class ActividadpwaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Actividadpwa persistentActividadpwa = em.find(Actividadpwa.class, actividadpwa.getId());
-            Dificultad dificultadDificultadOld = persistentActividadpwa.getDificultadDificultad();
-            Dificultad dificultadDificultadNew = actividadpwa.getDificultadDificultad();
             List<Registroactividad> registroactividadListOld = persistentActividadpwa.getRegistroactividadList();
             List<Registroactividad> registroactividadListNew = actividadpwa.getRegistroactividadList();
             List<Actxpreferencia> actxpreferenciaListOld = persistentActividadpwa.getActxpreferenciaList();
@@ -135,10 +123,6 @@ public class ActividadpwaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (dificultadDificultadNew != null) {
-                dificultadDificultadNew = em.getReference(dificultadDificultadNew.getClass(), dificultadDificultadNew.getDificultad());
-                actividadpwa.setDificultadDificultad(dificultadDificultadNew);
-            }
             List<Registroactividad> attachedRegistroactividadListNew = new ArrayList<Registroactividad>();
             for (Registroactividad registroactividadListNewRegistroactividadToAttach : registroactividadListNew) {
                 registroactividadListNewRegistroactividadToAttach = em.getReference(registroactividadListNewRegistroactividadToAttach.getClass(), registroactividadListNewRegistroactividadToAttach.getRegistroactividadPK());
@@ -154,14 +138,6 @@ public class ActividadpwaJpaController implements Serializable {
             actxpreferenciaListNew = attachedActxpreferenciaListNew;
             actividadpwa.setActxpreferenciaList(actxpreferenciaListNew);
             actividadpwa = em.merge(actividadpwa);
-            if (dificultadDificultadOld != null && !dificultadDificultadOld.equals(dificultadDificultadNew)) {
-                dificultadDificultadOld.getActividadpwaList().remove(actividadpwa);
-                dificultadDificultadOld = em.merge(dificultadDificultadOld);
-            }
-            if (dificultadDificultadNew != null && !dificultadDificultadNew.equals(dificultadDificultadOld)) {
-                dificultadDificultadNew.getActividadpwaList().add(actividadpwa);
-                dificultadDificultadNew = em.merge(dificultadDificultadNew);
-            }
             for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
                 if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
                     Actividadpwa oldActividadpwaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getActividadpwa();
@@ -230,11 +206,6 @@ public class ActividadpwaJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Dificultad dificultadDificultad = actividadpwa.getDificultadDificultad();
-            if (dificultadDificultad != null) {
-                dificultadDificultad.getActividadpwaList().remove(actividadpwa);
-                dificultadDificultad = em.merge(dificultadDificultad);
             }
             em.remove(actividadpwa);
             em.getTransaction().commit();

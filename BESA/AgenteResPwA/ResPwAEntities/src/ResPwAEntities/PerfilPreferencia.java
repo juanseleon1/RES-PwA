@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "PERFIL_PREFERENCIA")
@@ -61,6 +61,8 @@ public class PerfilPreferencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "VOLPREFERIDO")
     private BigInteger volpreferido;
+    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
+    private List<Baile> baileList;
     @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
     private List<Cuento> cuentoList;
     @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
@@ -133,6 +135,15 @@ public class PerfilPreferencia implements Serializable {
 
     public void setVolpreferido(BigInteger volpreferido) {
         this.volpreferido = volpreferido;
+    }
+
+    @XmlTransient
+    public List<Baile> getBaileList() {
+        return baileList;
+    }
+
+    public void setBaileList(List<Baile> baileList) {
+        this.baileList = baileList;
     }
 
     @XmlTransient

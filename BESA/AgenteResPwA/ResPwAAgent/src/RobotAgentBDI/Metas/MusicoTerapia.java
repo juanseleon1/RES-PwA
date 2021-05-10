@@ -46,6 +46,7 @@ public class MusicoTerapia extends GoalBDI{
 //
         rolePlan.addTask(iBaile);
         rolePlan.addTask(sCancion);
+        rolePlan.addTask(retro);
 
 //        rolePlan.addTask(sCancion);
 //        rolePlan.addTask(iBaile);

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "CANCION")
@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c"),
     @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre"),
     @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto"),
-    @NamedQuery(name = "Cancion.findByReminiscencia", query = "SELECT c FROM Cancion c WHERE c.reminiscencia = :reminiscencia")})
+    @NamedQuery(name = "Cancion.findByReminiscencia", query = "SELECT c FROM Cancion c WHERE c.reminiscencia = :reminiscencia"),
+    @NamedQuery(name = "Cancion.findByUrl", query = "SELECT c FROM Cancion c WHERE c.url = :url")})
 public class Cancion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +50,8 @@ public class Cancion implements Serializable {
     private double gusto;
     @Column(name = "REMINISCENCIA")
     private BigInteger reminiscencia;
+    @Column(name = "URL")
+    private String url;
     @JoinTable(name = "LISTATAGS", joinColumns = {
         @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
         @JoinColumn(name = "TAGS_ID", referencedColumnName = "ID")})
@@ -99,6 +102,14 @@ public class Cancion implements Serializable {
 
     public void setReminiscencia(BigInteger reminiscencia) {
         this.reminiscencia = reminiscencia;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @XmlTransient
@@ -158,7 +169,7 @@ public class Cancion implements Serializable {
 
     @Override
     public String toString() {
-        return "ResPwAEntities.Cancion[ nombre=" + nombre + " gusto=" + gusto +" ]";
+        return "ResPwAEntities.Cancion[ nombre=" + nombre + " ]";
     }
     
 }

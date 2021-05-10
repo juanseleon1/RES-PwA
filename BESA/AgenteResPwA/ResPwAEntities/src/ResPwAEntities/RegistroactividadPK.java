@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Embeddable
 public class RegistroactividadPK implements Serializable {
@@ -38,12 +38,6 @@ public class RegistroactividadPK implements Serializable {
     public RegistroactividadPK() {
     }
 
-    public RegistroactividadPK(Date fecha, String tipo) {
-        this.fecha = fecha;
-        this.tipo = tipo;
-    }
-
-    
     public RegistroactividadPK(Date fecha, String perfilpwaCedula, String tipo, BigInteger actividadpwaId) {
         this.fecha = fecha;
         this.perfilpwaCedula = perfilpwaCedula;

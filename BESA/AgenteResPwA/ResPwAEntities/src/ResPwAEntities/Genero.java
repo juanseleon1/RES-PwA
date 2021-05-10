@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "GENERO")
@@ -43,6 +43,8 @@ public class Genero implements Serializable {
     private double gusto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
+    private List<Baile> baileList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cuento> cuentoList;
 
@@ -81,6 +83,15 @@ public class Genero implements Serializable {
 
     public void setCancionList(List<Cancion> cancionList) {
         this.cancionList = cancionList;
+    }
+
+    @XmlTransient
+    public List<Baile> getBaileList() {
+        return baileList;
+    }
+
+    public void setBaileList(List<Baile> baileList) {
+        this.baileList = baileList;
     }
 
     @XmlTransient
