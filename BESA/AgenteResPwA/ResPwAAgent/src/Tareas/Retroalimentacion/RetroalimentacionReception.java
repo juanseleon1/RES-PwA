@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  *
- * @author LaMafecitaBebeLean
+ * @author LaMafecitaBebeLean&BebeWhiskyFumaMari__&TambienSeMeteCr___ySendaBellaconaFrikyTounaFrikyFrikyEsMediaSalvaje
  */
 public class RetroalimentacionReception extends ResPwaTask {
 
