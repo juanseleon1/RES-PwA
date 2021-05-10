@@ -481,28 +481,77 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
-    def getDialogInput(self, value):
-        # The value is the last human input
-        #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+    def sendValue(resultValue):
+        print
+        "enviar", resultValue
+        json_params = {"DialogInput": resultValue}
+        send(-1, "int", json_params)
 
-        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
-        resultValue = None
-
-        for word in value:
-            if((len(re.findall(r'mu\w+',word)) == 1 or len(re.findall(r'sub\w+',word)) != 0) and (len(re.findall(r'brill\w+',word)) != 0)):
+    def preferenceInput(self, completeSentence):
+        resultValue = ""
+        for word in completeSentence:
+            if ((len(re.findall(r'mu\w+', word)) == 1 or len(re.findall(r'sub\w+', word)) != 0) and (
+                    len(re.findall(r'brill\w+', word)) != 0)):
                 resultValue = 'decrease brigthness'
 
-            if(len(re.findall(r'baj\w+',word)) == 1 and len(re.findall(r'brill\w+',word)) != 0):
+            if (len(re.findall(r'baj\w+', word)) == 1 and len(re.findall(r'brill\w+', word)) != 0):
                 resultValue = 'increase brigthness'
 
-            if((len(re.findall(r'baj\w+',word)) == 1 or len(re.findall(r'dur\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'dur\w+',word)) != 0)):
+            if ((len(re.findall(r'baj\w+', word)) == 1 or len(re.findall(r'dur\w+', word)) != 0) and (
+                    len(re.findall(r'vol\w+', word)) != 0 or len(re.findall(r'dur\w+', word)) != 0)):
                 resultValue = 'decrease volume'
 
-            if((len(re.findall(r'sub\w+',word)) == 1 or len(re.findall(r'nada\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'hab\w+',word)) != 0)):
+            if ((len(re.findall(r'sub\w+', word)) == 1 or len(re.findall(r'nada\w+', word)) != 0) and (
+                    len(re.findall(r'vol\w+', word)) != 0 or len(re.findall(r'hab\w+', word)) != 0)):
                 resultValue = 'decrease volume'
 
-        if resultValue:
-            print "enviar", resultValue
-            json_params = {"DialogInput": resultValue}
-            send(-1, "int", json_params)
+        if (resultValue == ""):
+            return (False, "")
+        return (True, resultValue)
+
+    def retroalimentacionFilter(self, value):
+
+        if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
+            self.retroalimentacionCompleta += " " + value
+
+        # EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+        if (self.retroalimentacionCompleta.split().count() == 8):
+            return (True, self.retroalimentacionCompleta)
+        else:
+            return (False, "")
+
+    def emotionalFilter(self, value):
+        aux = ''
+        '''Regex Happy '''
+        if aux == "Happy":
+            return (True, "happy " + value)
+        # Regex Normal '''
+        elif aux == "hola":
+            return (True, "normal " + value)
+        # '''Regex sad '''
+        elif aux == "wenas":
+            return (True, "sad " + value)
+        # '''Regex angry '''
+        elif aux == 'holmeca':
+            return (True, "angry " + value)
+        else:
+            return (False, "")
+
+    def getDialogInput(self, value):
+        # The value is the last human input
+        # The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+
+        # Are all the filters possible in the code - they were simplyfied to get a better knowledge of
+        # Prefences - Retroalimentation - emotion
+        preference = self.preferenceInput(value)
+        retroAlimentacion = self.retroalimentacionFilter(value)
+        emotion = self.emotionalFilter(value)
+
+        resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+        if preference[0] or retroAlimentacion[0] or emotion[0]:
+            self.sendValue(self, resultValue)
+        else:
+            self.sendValue(self, "")
+
+
 

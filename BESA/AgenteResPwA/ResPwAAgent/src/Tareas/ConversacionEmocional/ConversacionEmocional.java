@@ -51,7 +51,7 @@ public class ConversacionEmocional extends ResPwaTask {
             if (resulset[0] == "sad"){
                 activateTopic( PepperTopicsNames.SADTOPIC, blvs);
             }
-            if (resulset[0] == "anger"){
+            if (resulset[0] == "angry"){
                 activateTopic( PepperTopicsNames.IRATOPIC, blvs);
             }
             if (resulset[0] == "normal"){
