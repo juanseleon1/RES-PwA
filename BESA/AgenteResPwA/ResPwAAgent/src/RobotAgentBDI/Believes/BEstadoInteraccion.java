@@ -50,6 +50,24 @@ public class BEstadoInteraccion implements Believes{
     private boolean movError;
     private boolean modificarPreferencias = false;
     private String respuestaPreferencia = null;
+    
+    private String retroalimentacionValue;
+    private String estadoEmocional = "normal";
+
+    public String getEstadoEmocional() {
+        return estadoEmocional;
+    }
+
+    public void setEstadoEmocional(String estadoEmocional) {
+        this.estadoEmocional = estadoEmocional;
+    }
+
+    public void setRetroalimentacionValue (String retroalimentacionValue){
+        this.retroalimentacionValue = retroalimentacionValue;
+    }
+    public String getRetroalimentacionValue (){
+        return this.retroalimentacionValue;
+    }
 
     
     
