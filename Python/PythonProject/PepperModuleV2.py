@@ -110,8 +110,8 @@ class pepperModuleV2(object):
 
         # self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
         # self.tabletMessageS.signal.connect(self.tabletMessage)
-        self.tabletService = self.alProxy.subscriber("ALTabletService")
-        self.tabletService.videoFinished.connect(self.tabletVideoFinished)
+        self.tabletSignalVideoFinished = self.session.service("ALTabletService")
+        self.tabletSignalVideoFinished.videoFinished.connect(self.tabletVideoFinished)
         # tabletService = session.service("ALTabletService")
         # tabletService.videoFinished.connect(self.tabletVideoFinished)
 
@@ -330,6 +330,13 @@ class pepperModuleV2(object):
         json_params["endVideo"] = True
         print "EntraTabletVideoFinished"
         send(-1, "int", json_params)
+
+    def onWifiStatusChange(self, wifi_status):
+        json_params = {}
+        # WiFi status among IDLE, SCANNING, DISCONNECTED, CONNECTED
+        json_params["wifi_status"] = wifi_status
+        print "EntraWifiChangeFinished"
+        send(-1, "rob", json_params)
 
     def tabletError(self, key, message):
         json_params = {}

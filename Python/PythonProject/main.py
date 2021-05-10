@@ -109,7 +109,6 @@ except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) + ".\n"
                                                                                           "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
-print("achu")
 print("Server starting...pop11111111111111111112")
 # ----------------------------------------------------------------------------------------------------
 
