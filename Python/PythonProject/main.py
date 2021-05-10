@@ -102,7 +102,7 @@ args = parser.parse_args()
 try:
     connection_url = "tcp://" + args.ip + ":" + str(args.port)
     app = qi.Application(["ResPwa", "--qi-url=" + connection_url])
-
+    app.start()
     session = app.session
     #session.connect("tcp://" + args.ip + ":" + str(args.port))
 except RuntimeError:
@@ -134,7 +134,7 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
-robot = Robot(app,session)
+robot = Robot(app, session)
 robot.show_video(None)
 while 1:
     conn, addr = server.accept()
