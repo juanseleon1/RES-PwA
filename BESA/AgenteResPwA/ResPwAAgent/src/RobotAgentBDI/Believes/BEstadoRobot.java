@@ -58,6 +58,15 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
     private String retroalimentacionValue;
+    private String estadoEmocional = "normal";
+
+    public String getEstadoEmocional() {
+        return estadoEmocional;
+    }
+
+    public void setEstadoEmocional(String estadoEmocional) {
+        this.estadoEmocional = estadoEmocional;
+    }
 
     public BEstadoRobot() {
     }

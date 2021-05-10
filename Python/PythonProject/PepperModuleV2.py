@@ -507,7 +507,9 @@ class pepperModuleV2(object):
             return (False, "")
         return (True, resultValue)
 
-    def retroalimentacionFiller (self,value):
+
+
+    def retroalimentacionFilter (self,value):
 
         if( value == 'Bien' or value == 'Regular' or value == 'Mal'):
             self.retroalimentacionCompleta += " "+value
@@ -518,18 +520,37 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
+
+    def emotionalFilter (self,value):
+        aux = ''
+        '''Regex Happy '''
+        if aux == "Happy" :
+            return (True,"Happy "+value)
+        #Regex Normal '''
+        elif aux == "hola":
+            return (True, "Normal "+value)
+        #'''Regex sad '''
+        elif aux == "wenas":
+            return (True, "Sad "+value)
+        #'''Regex angry '''
+        elif aux == 'holmeca':
+            return (True, "Angry "+value)
+        else:
+            return (False,"")
+
     def getDialogInput(self, value):
         # The value is the last human input
         #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
 
-        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
+        #Are all the filters possible in the code - they were simplyfied to get a better knowledge of
+        #Prefences - Retroalimentation - emotion
         preference = self.preferenceInput(value)
-        retroAlimentacion = self.retroalimentacionFiller(value)
+        retroAlimentacion = self.retroalimentacionFilter(value)
+        emotion = self.emotionalFilter(value)
 
-
-
-        resultValue = preference[1] + retroAlimentacion[1]
-        if preference[0] or retroAlimentacion[0]:
+        resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+        if preference[0] or retroAlimentacion[0] or emotion[0]:
             self.sendValue(self, resultValue)
-
+        else:
+            self.sendValue(self, "")
 
