@@ -33,7 +33,6 @@ class Robot:
         self.alNavigationProxy = session.service("ALNavigation")
         self.alLocalizationProxy = session.service("ALLocalization")
         self.alSensorsProxy = session.service("ALSensors")
-        self.alTabletService = session.service("ALTabletService")
         self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
         self.alAudioDevice = session.service("ALAudioDevice")
         self.alAudioPlayer = session.service("ALAudioPlayer")
@@ -398,6 +397,8 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+                self.alTabletService = self.session.service("ALTabletService")
+
             except Exception, e:
                 print "Main Error"
                 print e
