@@ -110,6 +110,10 @@ class pepperModuleV2(object):
 
         # self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
         # self.tabletMessageS.signal.connect(self.tabletMessage)
+        self.tabletService = self.alProxy.subscriber("ALTabletService")
+        self.tabletService.videoFinished.connect(self.tabletVideoFinished)
+        # tabletService = session.service("ALTabletService")
+        # tabletService.videoFinished.connect(self.tabletVideoFinished)
 
         # self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
         # self.onInputTextS.signal.connect(self.onInputText)
@@ -160,8 +164,6 @@ class pepperModuleV2(object):
         self.personWavingS.signal.connect(self.personWaving)
 
 
-        print("ENTRE AL MODULO")
-
     def activateTopic(self, value):
         json_params = {}
         json_params["ActivateTopic"] = True
@@ -172,6 +174,7 @@ class pepperModuleV2(object):
     def endOfAnimatedSpeech(self, value):
         if activities_running.has_key("SAYWITHMOVEMENT"):
             activities_running.pop("SAYWITHMOVEMENT")
+
         json_params = {}
         json_params["endOfAnimatedSpeech"] = True
         send(-1, "int", json_params)
@@ -321,6 +324,12 @@ class pepperModuleV2(object):
     #     json_params = {}
     #     json_params["tabletMessage"] = True
     #     send(-1, "int", json_params)
+    def tabletVideoFinished(self):
+        json_params = {}
+        # The value should be True
+        json_params["endVideo"] = True
+        print "EntraTabletVideoFinished"
+        send(-1, "int", json_params)
 
     def tabletError(self, key, message):
         json_params = {}
