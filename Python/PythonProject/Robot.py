@@ -11,7 +11,8 @@ from Utils import activities_running, send, callbacks_running
 
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
-    def __init__(self, session):
+    def __init__(self, app, session):
+        self.app=app
         self.current_emomap = None
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
@@ -398,7 +399,7 @@ class Robot:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
                 self.alTabletService = self.session.service("ALTabletService")
-
+                self.app.run()
             except Exception, e:
                 print "Main Error"
                 print e

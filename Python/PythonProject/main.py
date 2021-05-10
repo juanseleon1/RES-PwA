@@ -134,7 +134,7 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
-robot = Robot(session)
+robot = Robot(app, session)
 robot.show_video(None)
 while 1:
     conn, addr = server.accept()
