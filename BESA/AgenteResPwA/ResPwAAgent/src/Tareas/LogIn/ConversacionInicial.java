@@ -10,6 +10,7 @@ import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -30,8 +31,9 @@ public class ConversacionInicial extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Estado Animo ---");
         RobotAgentBelieves rab= (RobotAgentBelieves)parameters;
-        //buscar texto "¿como estas pepito?"
-        infoServicio.put("SAY", "PreguntaSentimientos");
+        
+        activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
+        infoServicio.put("SAY", "Buen dia, como se encuentra");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb,rab);
         rab.getbEstadoInteraccion().setLogged(true);
