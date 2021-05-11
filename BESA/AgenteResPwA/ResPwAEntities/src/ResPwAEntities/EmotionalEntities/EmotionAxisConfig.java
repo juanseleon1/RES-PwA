@@ -31,10 +31,10 @@ public class EmotionAxisConfig implements Serializable {
     private String negativename;
     @Basic(optional = false)
     @Column(name = "BASEVALUE")
-    private double basevalue;
+    private float basevalue;
     @Basic(optional = false)
     @Column(name = "FORGETFACTOR")
-    private double forgetfactor;
+    private float forgetfactor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "emotionaxisconfigId", fetch = FetchType.EAGER)
     private List<EventInfluence> eventInfluenceList;
 
@@ -48,7 +48,7 @@ public class EmotionAxisConfig implements Serializable {
         this.id = id;
     }
 
-    public EmotionAxisConfig(Long id, String positivename, String negativename, double basevalue, double forgetfactor) {
+    public EmotionAxisConfig(Long id, String positivename, String negativename, float basevalue, float forgetfactor) {
         this.id = id;
         this.positivename = positivename;
         this.negativename = negativename;
@@ -80,19 +80,19 @@ public class EmotionAxisConfig implements Serializable {
         this.negativename = negativename;
     }
 
-    public double getBasevalue() {
+    public float getBasevalue() {
         return basevalue;
     }
 
-    public void setBasevalue(double basevalue) {
+    public void setBasevalue(float basevalue) {
         this.basevalue = basevalue;
     }
 
-    public double getForgetfactor() {
+    public float getForgetfactor() {
         return forgetfactor;
     }
 
-    public void setForgetfactor(double forgetfactor) {
+    public void setForgetfactor(float forgetfactor) {
         this.forgetfactor = forgetfactor;
     }
 

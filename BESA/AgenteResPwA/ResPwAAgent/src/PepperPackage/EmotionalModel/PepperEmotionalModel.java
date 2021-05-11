@@ -82,10 +82,10 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
         List <EmotionAxisConfig> aux= RESPwABDInterface.getEmotionalAxisConfig();
         List<EventInfluence> evtinf;
         for (EmotionAxisConfig emotionAxisConfig : aux) {
-            emoAxis= new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
-            evtinf=emotionAxisConfig.getEventInfluence();
+            emoAxis= new EmotionAxis(emotionAxisConfig.getPositivename(), emotionAxisConfig.getNegativename(), emotionAxisConfig.getBasevalue(), emotionAxisConfig.getBasevalue(), emotionAxisConfig.getForgetfactor());
+            evtinf=emotionAxisConfig.getEventInfluenceList();
             for (EventInfluence eventInfluence : evtinf) {
-                emoAxis.setEventInfluence(eventInfluence.getEventName(), eventInfluence.getEventInfluence());
+                emoAxis.setEventInfluence(eventInfluence.getEventname(), (float) eventInfluence.getEventinfluence());
             }
             System.out.println("Adding emotional axis: "+ emoAxis.toString());
             this.addEmotionAxis(emoAxis);

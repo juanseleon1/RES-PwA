@@ -39,7 +39,7 @@ public class Regla implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigDecimal id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "FEEDBACK")
     private double feedback;
@@ -52,21 +52,28 @@ public class Regla implements Serializable {
     public Regla() {
     }
 
-    public Regla(BigDecimal id) {
+    public Regla(Long id) {
         this.id = id;
     }
 
-    public Regla(BigDecimal id, double feedback, String etiqueta) {
+    public Regla(Long id, double feedback, String etiqueta) {
         this.id = id;
         this.feedback = feedback;
         this.etiqueta = etiqueta;
     }
+    
+    public Regla(Long id, double feedback, String etiqueta, List<Antecedente> antecedenteList) {
+        this.id = id;
+        this.feedback = feedback;
+        this.etiqueta = etiqueta;
+        this.antecedenteList = antecedenteList;
+    }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

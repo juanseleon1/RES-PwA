@@ -65,6 +65,11 @@ public class Baile implements Serializable {
         this.id = id;
     }
 
+    public Baile(String nombre, double gusto) {
+        this.nombre = nombre;
+        this.gusto = gusto;
+    }
+    
     public Baile(BigDecimal id, String nombre, double gusto) {
         this.id = id;
         this.nombre = nombre;

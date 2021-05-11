@@ -80,7 +80,7 @@ public class ModeloRetroalimentacion<T> {
         for (int i = 0; i < reglas.size() && !encontrado; i++) {
             encontrado = true;
             for (int j = 0; j < antecedentes.size() && encontrado; j++) {
-                antecedentesXRegla = reglas.get(i).getAntecedentesList();
+                antecedentesXRegla = reglas.get(i).getAntecedenteList();
                 antecedenteEncontrado = false;
                 
                 for (int k = 0; k < antecedentesXRegla.size() && !antecedenteEncontrado; k++) {
