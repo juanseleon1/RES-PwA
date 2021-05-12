@@ -33,24 +33,15 @@ public class LogIn extends GoalBDI{
 
     public static LogIn buildGoal() {
 
-        //falta mirar iniciarServicios
-        DetectarPwA detectarPwA = new DetectarPwA();
         IniciarServicios iniciarServicios = new IniciarServicios();
         ConversacionInicial conversacion = new ConversacionInicial();
-        LogInTask loginT = new LogInTask();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan();
-        rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(iniciarServicios);
         taskList = new ArrayList<>();
-        taskList.add(detectarPwA);
-        rolePlan.addTask(loginT,taskList);
-        taskList = new ArrayList<>();
-        taskList.add(loginT);
-        rolePlan.addTask(iniciarServicios,taskList);
-        taskList = new ArrayList<>();
-        taskList.add(loginT);
+        taskList.add(iniciarServicios);
         rolePlan.addTask(conversacion,taskList);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
