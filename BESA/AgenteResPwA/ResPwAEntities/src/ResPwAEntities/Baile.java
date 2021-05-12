@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "BAILE")
@@ -49,9 +49,9 @@ public class Baile implements Serializable {
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
-    @JoinTable(name = "BAILEXPERFILPREFERENCIA", joinColumns = {
+    @JoinTable(name = "PREFERENCIAXBAILE", joinColumns = {
         @JoinColumn(name = "BAILE_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
+        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<PerfilPreferencia> perfilPreferenciaList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
@@ -65,11 +65,6 @@ public class Baile implements Serializable {
         this.id = id;
     }
 
-    public Baile(String nombre, double gusto) {
-        this.nombre = nombre;
-        this.gusto = gusto;
-    }
-    
     public Baile(BigDecimal id, String nombre, double gusto) {
         this.id = id;
         this.nombre = nombre;

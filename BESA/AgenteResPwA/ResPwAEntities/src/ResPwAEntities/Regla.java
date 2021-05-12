@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "REGLA")
@@ -39,7 +39,7 @@ public class Regla implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private Long id;
+    private BigDecimal id;
     @Basic(optional = false)
     @Column(name = "FEEDBACK")
     private double feedback;
@@ -52,28 +52,21 @@ public class Regla implements Serializable {
     public Regla() {
     }
 
-    public Regla(Long id) {
+    public Regla(BigDecimal id) {
         this.id = id;
     }
 
-    public Regla(Long id, double feedback, String etiqueta) {
+    public Regla(BigDecimal id, double feedback, String etiqueta) {
         this.id = id;
         this.feedback = feedback;
         this.etiqueta = etiqueta;
     }
-    
-    public Regla(Long id, double feedback, String etiqueta, List<Antecedente> antecedenteList) {
-        this.id = id;
-        this.feedback = feedback;
-        this.etiqueta = etiqueta;
-        this.antecedenteList = antecedenteList;
-    }
 
-    public Long getId() {
+    public BigDecimal getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigDecimal id) {
         this.id = id;
     }
 

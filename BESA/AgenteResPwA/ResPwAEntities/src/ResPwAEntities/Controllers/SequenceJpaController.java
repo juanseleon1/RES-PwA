@@ -19,7 +19,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class SequenceJpaController implements Serializable {
 
