@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Entity
 @Table(name = "ANTECEDENTE")
@@ -61,11 +61,6 @@ public class Antecedente implements Serializable {
         this.id = id;
     }
 
-    public Antecedente(String etiqueta, double valor) {
-        this.etiqueta = etiqueta;
-        this.valor = valor;
-    }
-    
     public Antecedente(BigDecimal id, String etiqueta, double valor) {
         this.id = id;
         this.etiqueta = etiqueta;

@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class RegistroactividadJpaController implements Serializable {
 
@@ -39,8 +39,8 @@ public class RegistroactividadJpaController implements Serializable {
         if (registroactividad.getRegistroactividadPK() == null) {
             registroactividad.setRegistroactividadPK(new RegistroactividadPK());
         }
-        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         registroactividad.getRegistroactividadPK().setActividadpwaId(registroactividad.getActividadpwa().getId());
+        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,8 +78,8 @@ public class RegistroactividadJpaController implements Serializable {
     }
 
     public void edit(Registroactividad registroactividad) throws NonexistentEntityException, Exception {
-        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         registroactividad.getRegistroactividadPK().setActividadpwaId(registroactividad.getActividadpwa().getId());
+        registroactividad.getRegistroactividadPK().setPerfilpwaCedula(registroactividad.getPerfilpwa().getCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();

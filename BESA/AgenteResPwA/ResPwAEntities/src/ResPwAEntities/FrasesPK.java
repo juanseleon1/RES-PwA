@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 @Embeddable
 public class FrasesPK implements Serializable {

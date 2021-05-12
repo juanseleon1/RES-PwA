@@ -5,24 +5,20 @@
  */
 package ResPwAEntities.Controllers;
 
-import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
-import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.EmotionalEntities.EventInfluence;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class EmotionAxisConfigJpaController implements Serializable {
 
@@ -35,54 +31,13 @@ public class EmotionAxisConfigJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(EmotionAxisConfig emotionAxisConfig) throws PreexistingEntityException, Exception {
-        if (emotionAxisConfig.getEventInfluenceList() == null) {
-            emotionAxisConfig.setEventInfluenceList(new ArrayList<EventInfluence>());
-        }
-        if (emotionAxisConfig.getEventInfluenceList() == null) {
-            emotionAxisConfig.setEventInfluenceList(new ArrayList<EventInfluence>());
-        }
+    public void create(EmotionAxisConfig emotionAxisConfig) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<EventInfluence> attachedEventInfluence = new ArrayList<EventInfluence>();
-            for (EventInfluence eventInfluenceEventInfluenceToAttach : emotionAxisConfig.getEventInfluenceList()) {
-                eventInfluenceEventInfluenceToAttach = em.getReference(eventInfluenceEventInfluenceToAttach.getClass(), eventInfluenceEventInfluenceToAttach.getId());
-                attachedEventInfluence.add(eventInfluenceEventInfluenceToAttach);
-            }
-            emotionAxisConfig.setEventInfluenceList(attachedEventInfluence);
-            List<EventInfluence> attachedEventInfluenceList = new ArrayList<EventInfluence>();
-            for (EventInfluence eventInfluenceListEventInfluenceToAttach : emotionAxisConfig.getEventInfluenceList()) {
-                eventInfluenceListEventInfluenceToAttach = em.getReference(eventInfluenceListEventInfluenceToAttach.getClass(), eventInfluenceListEventInfluenceToAttach.getId());
-                attachedEventInfluenceList.add(eventInfluenceListEventInfluenceToAttach);
-            }
-            emotionAxisConfig.setEventInfluenceList(attachedEventInfluenceList);
             em.persist(emotionAxisConfig);
-            for (EventInfluence eventInfluenceEventInfluence : emotionAxisConfig.getEventInfluenceList()) {
-                EmotionAxisConfig oldEmotionaxisconfigIdOfEventInfluenceEventInfluence = eventInfluenceEventInfluence.getEmotionaxisconfigId();
-                eventInfluenceEventInfluence.setEmotionaxisconfigId(emotionAxisConfig);
-                eventInfluenceEventInfluence = em.merge(eventInfluenceEventInfluence);
-                if (oldEmotionaxisconfigIdOfEventInfluenceEventInfluence != null) {
-                    oldEmotionaxisconfigIdOfEventInfluenceEventInfluence.getEventInfluenceList().remove(eventInfluenceEventInfluence);
-                    oldEmotionaxisconfigIdOfEventInfluenceEventInfluence = em.merge(oldEmotionaxisconfigIdOfEventInfluenceEventInfluence);
-                }
-            }
-            for (EventInfluence eventInfluenceListEventInfluence : emotionAxisConfig.getEventInfluenceList()) {
-                EmotionAxisConfig oldEmotionaxisconfigIdOfEventInfluenceListEventInfluence = eventInfluenceListEventInfluence.getEmotionaxisconfigId();
-                eventInfluenceListEventInfluence.setEmotionaxisconfigId(emotionAxisConfig);
-                eventInfluenceListEventInfluence = em.merge(eventInfluenceListEventInfluence);
-                if (oldEmotionaxisconfigIdOfEventInfluenceListEventInfluence != null) {
-                    oldEmotionaxisconfigIdOfEventInfluenceListEventInfluence.getEventInfluenceList().remove(eventInfluenceListEventInfluence);
-                    oldEmotionaxisconfigIdOfEventInfluenceListEventInfluence = em.merge(oldEmotionaxisconfigIdOfEventInfluenceListEventInfluence);
-                }
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findEmotionAxisConfig(emotionAxisConfig.getId()) != null) {
-                throw new PreexistingEntityException("EmotionAxisConfig " + emotionAxisConfig + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -90,73 +45,12 @@ public class EmotionAxisConfigJpaController implements Serializable {
         }
     }
 
-    public void edit(EmotionAxisConfig emotionAxisConfig) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(EmotionAxisConfig emotionAxisConfig) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            EmotionAxisConfig persistentEmotionAxisConfig = em.find(EmotionAxisConfig.class, emotionAxisConfig.getId());
-            List<EventInfluence> eventInfluenceOld = persistentEmotionAxisConfig.getEventInfluenceList();
-            List<EventInfluence> eventInfluenceNew = emotionAxisConfig.getEventInfluenceList();
-            List<EventInfluence> eventInfluenceListOld = persistentEmotionAxisConfig.getEventInfluenceList();
-            List<EventInfluence> eventInfluenceListNew = emotionAxisConfig.getEventInfluenceList();
-            List<String> illegalOrphanMessages = null;
-            for (EventInfluence eventInfluenceOldEventInfluence : eventInfluenceOld) {
-                if (!eventInfluenceNew.contains(eventInfluenceOldEventInfluence)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain EventInfluence " + eventInfluenceOldEventInfluence + " since its emotionaxisconfigId field is not nullable.");
-                }
-            }
-            for (EventInfluence eventInfluenceListOldEventInfluence : eventInfluenceListOld) {
-                if (!eventInfluenceListNew.contains(eventInfluenceListOldEventInfluence)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain EventInfluence " + eventInfluenceListOldEventInfluence + " since its emotionaxisconfigId field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<EventInfluence> attachedEventInfluenceNew = new ArrayList<EventInfluence>();
-            for (EventInfluence eventInfluenceNewEventInfluenceToAttach : eventInfluenceNew) {
-                eventInfluenceNewEventInfluenceToAttach = em.getReference(eventInfluenceNewEventInfluenceToAttach.getClass(), eventInfluenceNewEventInfluenceToAttach.getId());
-                attachedEventInfluenceNew.add(eventInfluenceNewEventInfluenceToAttach);
-            }
-            eventInfluenceNew = attachedEventInfluenceNew;
-            emotionAxisConfig.setEventInfluenceList(eventInfluenceNew);
-            List<EventInfluence> attachedEventInfluenceListNew = new ArrayList<EventInfluence>();
-            for (EventInfluence eventInfluenceListNewEventInfluenceToAttach : eventInfluenceListNew) {
-                eventInfluenceListNewEventInfluenceToAttach = em.getReference(eventInfluenceListNewEventInfluenceToAttach.getClass(), eventInfluenceListNewEventInfluenceToAttach.getId());
-                attachedEventInfluenceListNew.add(eventInfluenceListNewEventInfluenceToAttach);
-            }
-            eventInfluenceListNew = attachedEventInfluenceListNew;
-            emotionAxisConfig.setEventInfluenceList(eventInfluenceListNew);
             emotionAxisConfig = em.merge(emotionAxisConfig);
-            for (EventInfluence eventInfluenceNewEventInfluence : eventInfluenceNew) {
-                if (!eventInfluenceOld.contains(eventInfluenceNewEventInfluence)) {
-                    EmotionAxisConfig oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence = eventInfluenceNewEventInfluence.getEmotionaxisconfigId();
-                    eventInfluenceNewEventInfluence.setEmotionaxisconfigId(emotionAxisConfig);
-                    eventInfluenceNewEventInfluence = em.merge(eventInfluenceNewEventInfluence);
-                    if (oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence != null && !oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence.equals(emotionAxisConfig)) {
-                        oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence.getEventInfluenceList().remove(eventInfluenceNewEventInfluence);
-                        oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence = em.merge(oldEmotionaxisconfigIdOfEventInfluenceNewEventInfluence);
-                    }
-                }
-            }
-            for (EventInfluence eventInfluenceListNewEventInfluence : eventInfluenceListNew) {
-                if (!eventInfluenceListOld.contains(eventInfluenceListNewEventInfluence)) {
-                    EmotionAxisConfig oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence = eventInfluenceListNewEventInfluence.getEmotionaxisconfigId();
-                    eventInfluenceListNewEventInfluence.setEmotionaxisconfigId(emotionAxisConfig);
-                    eventInfluenceListNewEventInfluence = em.merge(eventInfluenceListNewEventInfluence);
-                    if (oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence != null && !oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence.equals(emotionAxisConfig)) {
-                        oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence.getEventInfluenceList().remove(eventInfluenceListNewEventInfluence);
-                        oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence = em.merge(oldEmotionaxisconfigIdOfEventInfluenceListNewEventInfluence);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -174,7 +68,7 @@ public class EmotionAxisConfigJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -185,24 +79,6 @@ public class EmotionAxisConfigJpaController implements Serializable {
                 emotionAxisConfig.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The emotionAxisConfig with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<EventInfluence> eventInfluenceOrphanCheck = emotionAxisConfig.getEventInfluenceList();
-            for (EventInfluence eventInfluenceOrphanCheckEventInfluence : eventInfluenceOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This EmotionAxisConfig (" + emotionAxisConfig + ") cannot be destroyed since the EventInfluence " + eventInfluenceOrphanCheckEventInfluence + " in its eventInfluence field has a non-nullable emotionaxisconfigId field.");
-            }
-            List<EventInfluence> eventInfluenceListOrphanCheck = emotionAxisConfig.getEventInfluenceList();
-            for (EventInfluence eventInfluenceListOrphanCheckEventInfluence : eventInfluenceListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This EmotionAxisConfig (" + emotionAxisConfig + ") cannot be destroyed since the EventInfluence " + eventInfluenceListOrphanCheckEventInfluence + " in its eventInfluenceList field has a non-nullable emotionaxisconfigId field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(emotionAxisConfig);
             em.getTransaction().commit();
