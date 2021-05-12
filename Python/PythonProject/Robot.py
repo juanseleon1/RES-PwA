@@ -56,7 +56,7 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
-        self.alTabletService = None;
+        self.alTabletService = None
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
@@ -90,6 +90,8 @@ class Robot:
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
         time.sleep(5)
+        print "ROBOT CARGADO Y LISTO"
+
 
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
