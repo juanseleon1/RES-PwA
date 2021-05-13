@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=true;
+    private boolean logged=false;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -144,6 +144,7 @@ public class BEstadoInteraccion implements Believes{
             if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
                 modificarPreferencias = true;
             }
+            recibirRespuestaPwA = true;
         }
         
         return true;

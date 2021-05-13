@@ -74,8 +74,8 @@ public class InitRESPwA {
             HashMap<String, Object> hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
             hm1.put("MOVETOY", 2);
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, hm1);
-            p.sendRequest(data);
+            //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, hm1);
+            //p.sendRequest(data);
             startConfig(p);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,8 +125,8 @@ public class InitRESPwA {
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-        TestPlan tp = TestPlan.buildGoal();
-//        LogIn logInGoal = LogIn.buildGoal();
+//        TestPlan tp = TestPlan.buildGoal();
+        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
@@ -136,9 +136,9 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
-        RAGoals.add(tp);
+//        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
-//        RAGoals.add(logInGoal);
+        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);

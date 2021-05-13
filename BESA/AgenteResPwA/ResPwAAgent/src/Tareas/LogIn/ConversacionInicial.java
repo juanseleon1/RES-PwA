@@ -78,6 +78,7 @@ public class ConversacionInicial extends ResPwaTask {
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             blvs.getbEstadoInteraccion().setLogged(true);
+            blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             return true;
         }
         return false;
