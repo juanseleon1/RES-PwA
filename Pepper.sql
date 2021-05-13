@@ -391,5 +391,5 @@ INSERT INTO eventinfluence (id,eventinfluence,eventname,EVTINF_ID) VALUES (15,0.
 
 commit;
 
-update emotionaxisconfig set basevalue=-8;
+update emotionaxisconfig set basevalue=0.2;
 commit;
