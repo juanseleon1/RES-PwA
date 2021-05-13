@@ -118,10 +118,10 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
         }
-        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
-           recibirRespuestaPwA = true;
-           
-        }
+//        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+//           recibirRespuestaPwA = true;
+//           
+//        }
         if(infoRecibida.getDataP().containsKey("wavingDetection")){
             movManoSaludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
             saludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
@@ -361,7 +361,7 @@ public class BEstadoInteraccion implements Believes{
     public boolean isRecibirRespuestaPwA() {
         return recibirRespuestaPwA;
     }
-
+    
     public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
         this.recibirRespuestaPwA = recibirRespuestaPwA;
     }
