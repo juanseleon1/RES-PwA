@@ -85,7 +85,7 @@ public class LogIn extends GoalBDI{
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
+        return blvs.getbEstadoInteraccion().isLogged()? 0: 1.0;
     }
 
     @Override

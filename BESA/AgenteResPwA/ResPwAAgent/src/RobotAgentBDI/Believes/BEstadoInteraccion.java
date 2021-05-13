@@ -91,7 +91,8 @@ public class BEstadoInteraccion implements Believes{
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
         }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
-          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            Double aux =(Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+          distanciaPwA  = aux==null? -1:aux;
            
         }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
           estaHablando = true;
