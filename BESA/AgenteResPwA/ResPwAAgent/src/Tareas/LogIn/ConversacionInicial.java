@@ -33,7 +33,7 @@ public class ConversacionInicial extends ResPwaTask {
     @Override
     public void executeTask(Believes parameters) {
         LocalTime now = LocalTime.now();
-        if (Duration.between(start, now).getSeconds()>30) {
+        //if (Duration.between(start, now).getSeconds()>30) {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
@@ -43,7 +43,7 @@ public class ConversacionInicial extends ResPwaTask {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb, rab);
             start= LocalTime.now();
-        }
+        //}
 
     }
 
@@ -74,7 +74,9 @@ public class ConversacionInicial extends ResPwaTask {
         super.checkFinish(believes);
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: "+blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            System.out.println("--- Check Finish Conversacion Inicial ---");
             deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);

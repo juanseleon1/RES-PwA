@@ -144,6 +144,7 @@ public class BEstadoInteraccion implements Believes{
             if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
                 modificarPreferencias = true;
             }
+            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
             recibirRespuestaPwA = true;
         }
         
