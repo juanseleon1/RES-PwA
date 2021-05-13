@@ -62,10 +62,11 @@ public class ConversacionInicial extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
-
+        super.checkFinish(believes);
+        deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             return true;
         }
         return false;
