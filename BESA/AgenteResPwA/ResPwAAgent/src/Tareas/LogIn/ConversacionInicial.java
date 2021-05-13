@@ -11,9 +11,8 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import rational.mapping.Believes;
 
 /**
@@ -22,18 +21,20 @@ import rational.mapping.Believes;
  */
 public class ConversacionInicial extends ResPwaTask {
 
-    private HashMap<String, Object> infoServicio = new HashMap<>();
-    private LocalTime start;
+    private HashMap<String, Object> infoServicio;
+    private long start;
 
     public ConversacionInicial() {
 //        System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
-        start = LocalTime.now();
+        infoServicio = new HashMap<>();
+        start = System.currentTimeMillis();
     }
 
     @Override
     public void executeTask(Believes parameters) {
-        LocalTime now = LocalTime.now();
-        if (Duration.between(start, now).getSeconds()>30) {
+        long now = System.currentTimeMillis();
+          TimeUnit unit = TimeUnit.SECONDS;
+        if (unit.convert(now-start, TimeUnit.SECONDS)>15) {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
@@ -42,7 +43,7 @@ public class ConversacionInicial extends ResPwaTask {
             }
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb, rab);
-            start= LocalTime.now();
+            start = System.currentTimeMillis(); 
         }
 
     }
