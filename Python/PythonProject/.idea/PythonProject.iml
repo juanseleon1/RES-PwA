@@ -6,7 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv2" />
     </content>
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 2.7 (venv)" jdkType="Python SDK" />
+=======
+    <orderEntry type="inheritedJdk" />
+>>>>>>> 0e229c540249cf3a7d4bb0975d88108fd246098e
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
