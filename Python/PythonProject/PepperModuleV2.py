@@ -497,25 +497,175 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
+    def sendValue(resultValue):
+        print
+        "enviar", resultValue
+        json_params = {"DialogInput": resultValue}
+        send(-1, "int", json_params)
+
+    def preferenceInput(self, completeSentence):
+        resultValue = ""
+        word = completeSentence
+        if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
+            len(re.findall(r'brill\w+', word[1])) != 0)):
+            resultValue = 'decrease brigthness'
+        if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
+            resultValue = 'increase brigthness'
+        if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
+            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
+            resultValue = 'decrease volume'
+        if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
+            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
+            resultValue = 'decrease volume'
+
+        if (resultValue == ""):
+            return (False, "")
+        return (True, resultValue)
+
+    def retroalimentacionFilter(self, value):
+
+        if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
+            self.retroalimentacionCompleta += " " + value
+
+        # EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+        if (self.retroalimentacionCompleta.split().count() == 8):
+            return (True, self.retroalimentacionCompleta)
+        else:
+            return (False, "")
+
+
+    def happyFilter (self,value):
+        aux = ''
+        if (len(value) == 2 ):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        resulset = ''
+
+        if len(re.findall(r'feli\w+', aux)) == 1 or\
+                len(re.findall(r'alegr\w+', aux)) == 1 or\
+                len(re.findall(r'emocion\w+', aux)) == 1 or\
+                len(re.findall(r'feli\w+', aux)) == 1 or\
+                len(re.findall(r'animad\w+', aux)) == 1 or\
+                len(re.findall(r'chever\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+
+    def normalFilter (self,value):
+        aux = ''
+        if (len(value) == 2 ):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        resulset = ''
+
+        if len(re.findall(r'bien\w+', aux)) == 1 or\
+                len(re.findall(r'norma\w+', aux)) == 1 or\
+                len(re.findall(r'agrada\w+', aux)) == 1 or\
+                len(re.findall(r'buen\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+
+    def sadFilter (self,value):
+        resulset = ''
+        aux = ''
+        if (len(value) == 2):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        if len(re.findall(r'aburrid\w+', aux)) == 1 or \
+                len(re.findall(r'cansad\w+', aux)) == 1 or \
+                len(re.findall(r'fastidia\w+', aux)) == 1 or \
+                len(re.findall(r'mamad\w+', aux)) == 1 or\
+                len(re.findall(r'mal\w+', aux)) == 1 or\
+                len(re.findall(r'terribl\w+', aux)) == 1 or\
+                len(re.findall(r'horrib\w+', aux)) == 1 or \
+                len(re.findall(r'trist\w+', aux)) == 1 or \
+                len(re.findall(r'adolid\w+', aux)) == 1 or\
+                len(re.findall(r'melancol\w+', aux)) == 1:
+            resulset = value
+
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+    def angryFilter (self,value):
+        resulset = ''
+        aux = ''
+        if (len(value) == 2):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        elif (len(value) == 4):
+            aux = value[2]
+
+        if len(re.findall(r'cansad\w+', aux)) == 1 or \
+                len(re.findall(r'molest\w+', aux)) == 1 or \
+                len(re.findall(r'enojad\w+', aux)) == 1 or \
+                len(re.findall(r'jodido\w+', aux)) == 1 or \
+                len(re.findall(r'fasti\w+', aux)) == 1 or \
+                len(re.findall(r'piedra\w+', aux)) == 1 or \
+                len(re.findall(r'rabi\w+', aux)) == 1 or \
+                len(re.findall(r'ira\w+', aux)) == 1 or \
+                len(re.findall(r'furi\w+', aux)) == 1 or \
+                len(re.findall(r'coler\w+', aux)) == 1 or\
+                len(re.findall(r'vayase\w+', aux)) == 1 or \
+                len(re.findall(r'vete\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+    def emotionalFilter(self, value):
+        aux = ''
+
+        happyFilter = self.happyFilter(value)
+        normalFilter = self.normalFilter(value)
+        sadFilter = self.sadFilter(value)
+        angryFilter = self.angryFilter(value)
+
+        if happyFilter[0]:
+            return (True, "happy " + happyFilter[1])
+        # Regex Normal '''
+        elif normalFilter[0]:
+            return (True, "normal " + normalFilter[1])
+        # '''Regex sad '''
+        elif sadFilter[0]:
+            return (True, "sad " + sadFilter[1])
+        # '''Regex angry '''
+        elif angryFilter[0]:
+            return (True, "angry " + angryFilter[1])
+        else:
+            return (False, "")
+
     def getDialogInput(self, value):
         # The value is the last human input
-        #The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+        # The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
 
-        #Is the type of order the person wants to do -> Increase or decrease volume or brightness
-        resultValue = None
+        # Are all the filters possible in the code - they were simplyfied to get a better knowledge of
+        # Prefences - Retroalimentation - emotion
+        preference = self.preferenceInput(value)
+        retroAlimentacion = self.retroalimentacionFilter(value)
+        emotion = self.emotionalFilter(value)
 
-        for word in value:
-            if((len(re.findall(r'mu\w+',word)) == 1 or len(re.findall(r'sub\w+',word)) != 0) and (len(re.findall(r'brill\w+',word)) != 0)):
-                resultValue = 'decrease brigthness'
-
-            if(len(re.findall(r'baj\w+',word)) == 1 and len(re.findall(r'brill\w+',word)) != 0):
-                resultValue = 'increase brigthness'
-
-            if((len(re.findall(r'baj\w+',word)) == 1 or len(re.findall(r'dur\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'dur\w+',word)) != 0)):
-                resultValue = 'decrease volume'
-
-            if((len(re.findall(r'sub\w+',word)) == 1 or len(re.findall(r'nada\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'hab\w+',word)) != 0)):
-                resultValue = 'decrease volume'
+        resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+        if preference[0] or retroAlimentacion[0] or emotion[0]:
+            self.sendValue(resultValue)
+        else:
+            self.sendValue(value)
 
         if resultValue:
             print("enviar", resultValue)
