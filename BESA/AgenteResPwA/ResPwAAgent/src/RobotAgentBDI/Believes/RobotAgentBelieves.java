@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import EmotionalAnalyzerAgent.EmotionalData;
+import ResPwAEntities.Antecedente;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
@@ -81,28 +82,69 @@ public class RobotAgentBelieves implements Believes {
 
         return true;
     }
-    
-    public void feedbackActivity(double voiceFeedback){
-        Object activityInCourse = getActivityInCourse();
-        ModeloRetroalimentacion<Object> modeloRetroalimentacion = new ModeloRetroalimentacion<>();
-    }
-    
-    public Object getActivityInCourse(){
+
+    public void feedbackActivity(double voiceFeedback) {
+        double emotionFeedback = 0.0;
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
+        List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
+        //        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+        List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
         
-        switch(activity){
+
+
+        switch (activity) {
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+
+                ModeloRetroalimentacion<Cuento> modeloRetroCuento = new ModeloRetroalimentacion<Cuento>((Cuento) activityInCourse);
+                modeloRetroCuento.activityFeedback(antecedentsForFeedback);
+                break;
+
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                ModeloRetroalimentacion<Cancion> modelRetroCancion = new ModeloRetroalimentacion<Cancion>((Cancion) activityInCourse);
+                modelRetroCancion.activityFeedback(antecedentsForFeedback);
+                break;
+        }
+        if (activityInCourse instanceof Cancion) {
+
+        }
+
+    }
+
+    private List<Antecedente> getAntecedentsForFeedback(double emotionFeedback, double voiceFeedback, List<Antecedente> antecedents) {
+
+        List<Antecedente> antecedentsForFeedback = new ArrayList<>();
+        for (int i = 0; i < antecedents.size(); i++) {
+            if (antecedents.get(i).getEtiqueta().equals("EMOTIONFEEDBACK") && antecedents.get(i).getValor() == emotionFeedback) {
+                antecedentsForFeedback.add(antecedents.get(i));
+            } else {
+                if (antecedents.get(i).getEtiqueta().equals("VOICEFEEDBACK") && antecedents.get(i).getValor() == voiceFeedback) {
+                    antecedentsForFeedback.add(antecedents.get(i));
+                }
+            }
+        }
+        
+        return antecedentsForFeedback;
+    }
+
+    public Object getActivityInCourse() {
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+
+        switch (activity) {
             case CUENTERIA:
                 activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
                 break;
-                
+
             case MUSICOTERAPIA:
                 activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
                 break;
         }
-        
+
         return activityInCourse;
-        
+
     }
 
     private Perfilpwa getPerfilBD(String cedula) {

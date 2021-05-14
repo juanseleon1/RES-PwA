@@ -128,6 +128,16 @@ public class RESPwABDInterface {
         return ajp.findActividadpwaEntities();
 
     }
+    
+    public static List<Antecedente> getActecedents() {
+        AntecedenteJpaController ajp = new AntecedenteJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findAntecedenteEntities();
+    }
+    
+    public static List<Regla> getRules() {
+        ReglaJpaController ajp = new ReglaJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findReglaEntities();
+    }
 
     public static void createRegistroAct(Registroactividad ra) {
         try {
