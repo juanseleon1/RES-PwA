@@ -3,37 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/META-INF/persistence.xml</file>
             <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java</file>
             <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Adapter/ResPwaAdapter.java</file>
-=======
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.xml</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEmotionalModel.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/DemostrarSenialesVida.java</file>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/RobotAgentBDI/Believes/BEstadoRobot.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>358</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-<<<<<<< HEAD
->>>>>>> developBuena
->>>>>>> develop
-=======
->>>>>>> f4c3bb868be5c905ae9121a9f65279e6fe04e7c3
         </group>
     </open-files>
 </project-private>
