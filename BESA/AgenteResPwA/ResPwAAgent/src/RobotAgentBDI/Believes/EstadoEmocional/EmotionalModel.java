@@ -68,8 +68,8 @@ public abstract class EmotionalModel {
                 + Utils.Config.EventWeight * Math.abs(event)
                 + Utils.Config.ObjectWeight * Math.abs(object);
         boolean valence = estimateValence(person, event, object);
-        System.out.println("P:" + person + " E:" + event + " O:" + object);
-        System.out.println("Val: " + valence);
+//        System.out.println("P:" + person + " E:" + event + " O:" + object);
+//        System.out.println("Val: " + valence);
         intensity = (valence ? 1 : -1) * intensity;
         return intensity;
     }
@@ -142,7 +142,7 @@ public abstract class EmotionalModel {
             EmotionAxis maxAx=null;
             double val=Double.NEGATIVE_INFINITY;
         List<EmotionAxis> emoList = emotionalState.getEmotionsListCopy();
-            System.out.println("Ejes de la lista: " + emoList.size());
+//            System.out.println("Ejes de la lista: " + emoList.size());
         for (EmotionAxis e : emoList) {
                 if(e.getCurrentValue()> val){
                     maxAx=e;
