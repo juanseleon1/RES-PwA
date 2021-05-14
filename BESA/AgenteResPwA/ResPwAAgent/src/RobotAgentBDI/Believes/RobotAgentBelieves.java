@@ -7,8 +7,12 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import EmotionalAnalyzerAgent.EmotionalData;
+import ResPwAEntities.Cancion;
+import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.Imagen;
+import Retroalimentacion.Modelo.ModeloRetroalimentacion;
+import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +80,29 @@ public class RobotAgentBelieves implements Believes {
         }
 
         return true;
+    }
+    
+    public void feedbackActivity(double voiceFeedback){
+        Object activityInCourse = getActivityInCourse();
+        ModeloRetroalimentacion<Object> modeloRetroalimentacion = new ModeloRetroalimentacion<>();
+    }
+    
+    public Object getActivityInCourse(){
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+        
+        switch(activity){
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+                break;
+                
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                break;
+        }
+        
+        return activityInCourse;
+        
     }
 
     private Perfilpwa getPerfilBD(String cedula) {

@@ -72,9 +72,9 @@ public class InitRESPwA {
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
             HashMap<String, Object> hm1 = new HashMap<>();
-            hm1.put("MOVETOX", 5);
-            hm1.put("MOVETOY", 2);
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, hm1);
+//            hm1.put("MOVETOX", 5);
+//            hm1.put("MOVETOY", 2);
+            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             p.sendRequest(data);
             startConfig(p);
         } catch (ExceptionBESA ex) {
