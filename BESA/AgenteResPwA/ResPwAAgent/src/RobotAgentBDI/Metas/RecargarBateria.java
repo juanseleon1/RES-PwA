@@ -11,9 +11,7 @@ import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Init.InitRESPwA;
-import Tareas.RecargarBateria.MoverseEstacionCarga;
 import Tareas.RecargarBateria.SuspenderRobot;
-import Tareas.RecargarBateria.UbicarEstacionCarga;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -44,7 +42,7 @@ public class RecargarBateria extends GoalBDI {
         rolePlan.addTask(suspenderRobot);
 
         RationalRole recBatRole = new RationalRole(descrip, rolePlan);
-        RecargarBateria b = new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.DUTY);
+        RecargarBateria b = new RecargarBateria(InitRESPwA.getPlanID(), recBatRole, descrip, GoalBDITypes.SURVIVAL);
         return b;
     }
 
@@ -61,15 +59,12 @@ public class RecargarBateria extends GoalBDI {
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta RecargarBateria detectGoal");
+        System.out.println("Meta RecargarBateria detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
-            if (blvs.getbEstadoRobot().getBateria()) {
-                return 1.0;
-            }
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoRobot().getBateria()) {
+            return 1.0;
         }
-
         return 0;
     }
 
@@ -82,20 +77,22 @@ public class RecargarBateria extends GoalBDI {
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta RecargarBateria evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-        return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
+        //RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
+        //return 1.0 + blvs.getbEstadoActividad().getBoostRecargarBateria();
+        return 1;
     }
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria predictResultUnlegality");
+        //System.out.println("Meta RecargarBateria predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta RecargarBateria goalSucceeded");
-        return true;
+        //System.out.println("Meta RecargarBateria goalSucceeded");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        return blvs.getbEstadoInteraccion().isSistemaSuspendido();
     }
 
 }

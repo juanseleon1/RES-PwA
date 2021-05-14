@@ -18,32 +18,48 @@ import rational.mapping.Believes;
  */
 public class AnimarStrategy implements ResPwAStrategy{
     
-    private String nombre;
+    private OpcionesAnimar opcion;
     
     @Override
     public ServiceDataRequest execStrategy() {
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
-        switch (nombre)
+        switch (opcion)
         {
-            case "Frase elogiante":
-                infoServicio.put("SAY", nombre);
+            case FRASEELOGIANTE:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
-            case "Chiste":
-                infoServicio.put("SAY", nombre);
+            case CHISTE:
+                infoServicio.put("SAY", opcion);
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                break;
+            case ADIVINANZA:
+                infoServicio.put("SAY", opcion);
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                break;
+            case DATOCURIOSO:
+                infoServicio.put("SAY", opcion);
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                break;
+            case PREGUNTAEMPATICA:
+                infoServicio.put("SAY", opcion);
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                break;
+            case CONSEJO:
+                infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 break;
         }
         return srb;
     }
 
-    public String getNombre() {
-        return nombre;
+    public OpcionesAnimar getOpcion() {
+        return opcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setOpcion(OpcionesAnimar opcion) {
+        this.opcion = opcion;
     }
 
     @Override

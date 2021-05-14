@@ -12,11 +12,10 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import Tareas.ConversarEmpaticamente.EjecutarEstrategiaConversar;
-import Tareas.ConversarEmpaticamente.EvaluarEstrategiaConversar;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import rational.RationalRole;
 import rational.mapping.Believes;
 import rational.mapping.Plan;
@@ -34,19 +33,16 @@ public class ConversarEmpaticamente extends GoalBDI{
 
         //evaluar estado emocional
         PreguntarSentimientos preguntarSentimientos = new PreguntarSentimientos();
-        EvaluarEstrategiaConversar evaluarEstrategiaC = new EvaluarEstrategiaConversar();
     
         List<String> resources= new ArrayList<>();
         List<Task> tarea= new ArrayList<>();
         Plan rolePlan= new Plan();
 
         rolePlan.addTask(preguntarSentimientos);
-        
         tarea.add(preguntarSentimientos);
-        rolePlan.addTask(evaluarEstrategiaC,tarea);
         
         RationalRole convEmpRole = new RationalRole(descrip, rolePlan);
-        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.DUTY);
+        ConversarEmpaticamente b= new ConversarEmpaticamente(InitRESPwA.getPlanID(), convEmpRole, descrip, GoalBDITypes.REQUIREMENT);
         return b;
     }
     public ConversarEmpaticamente(int id, RationalRole role, String description, GoalBDITypes type) {
@@ -62,17 +58,17 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta ConversarEmpaticamente detectGoal");
-        
+        System.out.println("Meta ConversarEmpaticamente detectGoal");
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-       if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
-       {
-           if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15) {
-            return 1.0;
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        {
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
+                    blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
+            {
+                return 1.0;
+            }
         }
-        
-       }
-        
         return 0;
     }
 
@@ -92,15 +88,19 @@ public class ConversarEmpaticamente extends GoalBDI{
 
     @Override
     public boolean predictResultUnlegality(StateBDI agentStatus) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
+        //System.out.println("Meta ConversarEmpaticamente predictResultUnlegality");
         return true;
     }
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        System.out.println("Meta ConversarEmpaticamente goalSucceeded");
+        //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
-        return true;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+            return true;
+        }
+        return false;
     }
     
 }

@@ -2,31 +2,46 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ResPwAEntitiesPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>ResPwAEntities.Perfilpwa</class>
+    <class>ResPwAEntities.Accion</class>
+    <class>ResPwAEntities.AccionxJoint</class>
     <class>ResPwAEntities.Actividadpwa</class>
-    <class>ResPwAEntities.Actxpreferencia</class>
     <class>ResPwAEntities.Actividadrutinaria</class>
-    <class>ResPwAEntities.Genero</class>
-    <class>ResPwAEntities.Dificultad</class>
+    <class>ResPwAEntities.Actxpreferencia</class>
+    <class>ResPwAEntities.Cancion</class>
     <class>ResPwAEntities.Causademencia</class>
+    <class>ResPwAEntities.Cdr</class>
     <class>ResPwAEntities.Cuento</class>
+    <class>ResPwAEntities.Cuidador</class>
+    <class>ResPwAEntities.Dificultad</class>
+    <class>ResPwAEntities.Emocion</class>
+    <class>ResPwAEntities.EmotionalEntities.EmotionAxisConfig</class>
+    <class>ResPwAEntities.EmotionalEntities.EventInfluence</class>
+    <class>ResPwAEntities.Enriq</class>
+    <class>ResPwAEntities.Estadocivil</class>
     <class>ResPwAEntities.Familiar</class>
     <class>ResPwAEntities.Frases</class>
-    <class>ResPwAEntities.Estadocivil</class>
-    <class>ResPwAEntities.Cdr</class>
-    <class>ResPwAEntities.Tags</class>
-    <class>ResPwAEntities.Cancion</class>
-    <class>ResPwAEntities.Enriq</class>
-    <class>ResPwAEntities.Registroactividad</class>
+    <class>ResPwAEntities.Genero</class>
+    <class>ResPwAEntities.Joint</class>
     <class>ResPwAEntities.NivelEducativo</class>
-    <class>ResPwAEntities.PerfilPreferencia</class>
     <class>ResPwAEntities.PerfilMedico</class>
-    <class>ResPwAEntities.Cuidador</class>
+    <class>ResPwAEntities.PerfilPreferencia</class>
+    <class>ResPwAEntities.Perfilpwa</class>
+    <class>ResPwAEntities.Registroactividad</class>
+    <class>ResPwAEntities.Robot</class>
+    <class>ResPwAEntities.Tags</class>
+    <class>ResPwAEntities.Antecedente</class>
+    <class>ResPwAEntities.Regla</class>
+    <class>ResPwAEntities.Listatags</class>
+    <class>ResPwAEntities.Preferenciacancion</class>
+    <class>ResPwAEntities.Sequence</class>
+    <class>ResPwAEntities.Baile</class>
+    <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
-      <property name="javax.persistence.jdbc.user" value="is784921"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>
+      <property name="javax.persistence.jdbc.user" value="respwa1"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.password" value="wAGs3vfUQ0"/>
+      <property name="javax.persistence.jdbc.password" value="respwa"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

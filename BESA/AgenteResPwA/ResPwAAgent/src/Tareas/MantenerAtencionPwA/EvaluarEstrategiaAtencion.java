@@ -12,7 +12,6 @@ import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import Tareas.ConversarEmpaticamente.ConversarStrategy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,13 +41,14 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         //adivinanzas, dato curioso
         //si se va, irlo a buscar
         
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Adivinanza","DatoCurioso");
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        ConversarStrategy cs = new ConversarStrategy();
-        cs.setNombre(estrategia);
-        
+        //  ACÁ DEBE ACTIVARSE EL TOPICO PARA LLAMAR LA ATENCION
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        
+        
+        OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
+        AtencionStrategy cs = new AtencionStrategy();
+        cs.setOpcion(estrategia);
+        
         blvs.getbEstadoActividad().setEstrategia(cs);
         
         ServiceDataRequest srb = cs.execStrategy();
@@ -73,6 +73,8 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
             return true;

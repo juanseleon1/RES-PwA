@@ -5,6 +5,10 @@
  */
 package Tareas.RecargarBateria;
 
+/**
+ *
+ * @author mafegarces
+ */
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaTask;
@@ -13,6 +17,7 @@ import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 
@@ -33,11 +38,12 @@ public class SuspenderRobot extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Suspender Robot ---");
         //buscar texto
-        infoServicio.put("SAY", "textoDespedir");
+        infoServicio.put("SAY", "Me voy a descargar");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         requestService(srb, (RobotAgentBelieves) parameters);
         infoServicio = new HashMap<>();
         
+        deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
@@ -84,6 +90,8 @@ public class SuspenderRobot extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
             return true;

@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5C085749-19FB-76D9-4327-FAD921200424" name="Baile">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:41:46 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="032C4C2D-0398-C4E7-EBB6-1F297E445DB8">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:44:03 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="CB4455DE-838D-D293-C0EE-9EC5F742F97D">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:45:39 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="gusto" id="2E7A95CE-8773-3DCF-638F-C0CD6B66FACF">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:46:16 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="genero" id="D75343C3-DA1C-5355-5343-92E743231D25">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 23:08:30 UTC</createdTime>
+<generatorID>059B9774-553B-8A4B-6D61-00262B7A8E02</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<referedAttribute>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7B611313-4C6C-A362-D228-90410987504B" name="Baile PK">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:45:34 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>032C4C2D-0398-C4E7-EBB6-1F297E445DB8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,11 @@
+topic: ~emoTopic()
+     language: spe
+    concept: (emociones_positivas) [feliz alegre alegria genial bacano bacana chevere rico] 
+    concept: (emociones_tristes) [triste tristeza achantado dolor mal melancolia melancolico aburrido miedo] 
+    concept: (emociones_enojo) [ira enojo piedra molestia rabia molesto molesta joda jode jodes mamado mamada quiero azare ] 
+    concept: (emociones_normales) [Bien bueno ok alegra agradable "como quiera" nada normal] 
+    u: ([muy porque imaginate imaginese estoy super] _~emociones_positivas) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE 
+    u: ([Tengo "Me siento" Estoy] _~emociones_tristes) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE 
+    u: ([Estoy No Tengo] _~emociones_enojo) FALTA CONSULTAR CON PAOLA QUE PUEDE RESPONDERSE 
+    u: ([Vayase Vete]) Esta bien nos vemos luego 
+    u: ([Esta Ah Me Todo Estoy] _~emociones_normales) Me alegra, no hay nada como sentirse bien

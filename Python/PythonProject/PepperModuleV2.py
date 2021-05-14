@@ -1,7 +1,6 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
-
-
+import re
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 
@@ -19,6 +18,9 @@ class pepperModuleV2(object):
 
         self.topicInputSub = self.alProxy.subscriber("Dialog/LastInput")
         self.topicInputSub.signal.connect(self.getDialogInput)
+
+        self.topicActivate = self.alProxy.subscriber("Dialog/ActivateTopic")
+        self.topicInputSub.signal.connect(self.activateTopic)
 
         self.dialogIsStartedS = self.alProxy.subscriber("Dialog/IsStarted")
         self.dialogIsStartedS.signal.connect(self.dialogIsStarted)
@@ -43,7 +45,7 @@ class pepperModuleV2(object):
         self.lowBat = self.alProxy.subscriber("ALBattery/BatteryLow")
         self.lowBat.signal.connect(self.batteryLow)
 
-        self.stimuDetected = self.alProxy.subscriber("ALBasicAwareness/StimulusDetecte")
+        self.stimuDetected = self.alProxy.subscriber("ALBasicAwareness/StimulusDetected")
         self.stimuDetected.signal.connect(self.stimulusDetected)
 
         self.fallaGoTo = self.alProxy.subscriber("ALLocalization/GoToFailed")
@@ -85,8 +87,8 @@ class pepperModuleV2(object):
         self.disabledDevicesChangedS = self.alProxy.subscriber("ALMotion/Protection/DisabledDevicesChanged")
         self.disabledDevicesChangedS.signal.connect(self.disabledDevicesChanged)
 
-        self.disabledFeaturesChangedS = self.alProxy.subscriber("ALMotion/Protection/DisabledFeaturesChanged")
-        self.disabledFeaturesChangedS.signal.connect(self.disabledFeaturesChanged)
+        # self.disabledFeaturesChangedS = self.alProxy.subscriber("ALMotion/Protection/DisabledFeaturesChanged")
+        # self.disabledFeaturesChangedS.signal.connect(self.disabledFeaturesChanged)
 
         self.connectedToChargingStationS = self.alProxy.subscriber("ALRecharge/ConnectedToChargingStation")
         self.connectedToChargingStationS.signal.connect(self.connectedToChargingStation)
@@ -97,7 +99,6 @@ class pepperModuleV2(object):
         self.leaveFailedS = self.alProxy.subscriber("ALRecharge/LeaveFailed")
         self.leaveFailedS.signal.connect(self.leaveFailed)
 
-
         self.wordRecognizedS = self.alProxy.subscriber("WordRecognized")
         self.wordRecognizedS.signal.connect(self.wordRecognized)
 
@@ -107,14 +108,17 @@ class pepperModuleV2(object):
         self.tabletErrorS = self.alProxy.subscriber("ALTabletService/error")
         self.tabletErrorS.signal.connect(self.tabletError)
 
-        self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
-        self.tabletMessageS.signal.connect(self.tabletMessage)
+        # self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
+        # self.tabletMessageS.signal.connect(self.tabletMessage)
 
-        self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
-        self.onInputTextS.signal.connect(self.onInputText)
+        # tabletService = session.service("ALTabletService")
+        # tabletService.videoFinished.connect(self.tabletVideoFinished)
 
-        self.gestureS = self.alProxy.subscriber("ALTactileGesture/Gesture")
-        self.gestureS.signal.connect(self.gesture)
+        # self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
+        # self.onInputTextS.signal.connect(self.onInputText)
+
+        # self.gestureS = self.alProxy.subscriber("ALTactileGesture/Gesture")
+        # self.gestureS.signal.connect(self.gesture)
 
         self.speechTextInterruptedS = self.alProxy.subscriber("ALTextToSpeech/TextInterrupted")
         self.speechTextInterruptedS.signal.connect(self.speechTextInterrupted)
@@ -153,18 +157,23 @@ class pepperModuleV2(object):
         self.peopleDetectedS.signal.connect(self.peopleDetected)
 
         self.wavingDetectionS = self.alProxy.subscriber("WavingDetection/Waving")
-        self.wavingDetectionS.signal.connect(self.wavingDetection)
+        self.wavingDetectionS.signal.connect(self.personWaving)
 
         self.personWavingS = self.alProxy.subscriber("WavingDetection/PersonWaving")
         self.personWavingS.signal.connect(self.personWaving)
 
 
-        print("ENTRE AL MODULO")
+    def activateTopic(self, value):
+        json_params = {}
+        json_params["ActivateTopic"] = True
+        send(-1, "rob", json_params)
+    # def
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, value):
         if activities_running.has_key("SAYWITHMOVEMENT"):
             activities_running.pop("SAYWITHMOVEMENT")
+
         json_params = {}
         json_params["endOfAnimatedSpeech"] = True
         send(-1, "int", json_params)
@@ -178,11 +187,13 @@ class pepperModuleV2(object):
     # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is
     def humanTracked(self, value):
         json_params = {}
+        # The value is The ID of the currently tracked person. If no person is tracked, the value is -1.
         json_params["humanTracked"] = value
         send(-1, "int", json_params)
 
     def stimulusDetected(self, value):
         json_params = {}
+        #  The value is the name of the stimulus detected.
         json_params["stimulusDetected"] = value
         send(-1, "int", json_params)
 
@@ -273,11 +284,11 @@ class pepperModuleV2(object):
         json_params["disabledDevicesChanged"] = value
         send(-1, "int", json_params)
 
-    def disabledFeaturesChanged(self, value):
-        json_params = {}
-        # The value is a map with the features of the robot whose are able/disabled
-        json_params["disabledFeaturesChanged"] = value
-        send(-1, "int", json_params)
+    # def disabledFeaturesChanged(self, value):
+    #     json_params = {}
+    #     # The value is a map with the features of the robot whose are able/disabled
+    #     json_params["disabledFeaturesChanged"] = value
+    #     send(-1, "int", json_params)
 
     def connectedToChargingStation(self, key, message):
         json_params = {}
@@ -308,27 +319,40 @@ class pepperModuleV2(object):
         json_params["speechDetected"] = value
         send(-1, "int", json_params)
 
-    def tabletMessage(self, key, message):
+    # def tabletMessage(self, key, message):
+    #     json_params = {}
+    #     json_params["tabletMessage"] = True
+    #     send(-1, "int", json_params)
+    def tabletVideoFinished(self):
         json_params = {}
-        json_params["tabletMessage"] = True
+        # The value should be True
+        json_params["endVideo"] = True
+        print "EntraTabletVideoFinished"
         send(-1, "int", json_params)
+
+    def onWifiStatusChange(self, wifi_status):
+        json_params = {}
+        # WiFi status among IDLE, SCANNING, DISCONNECTED, CONNECTED
+        json_params["wifi_status"] = wifi_status
+        print "EntraWifiChangeFinished"
+        send(-1, "rob", json_params)
 
     def tabletError(self, key, message):
         json_params = {}
         json_params["tabletError"] = True
         send(-1, "int", json_params)
 
-    def onInputText(self, key, message):
-        json_params = {}
-        # The value should be True
-        json_params["onInputText"] = True
-        send(-1, "int", json_params)
+    # def onInputText(self, key, message):
+    #     json_params = {}
+    #     # The value should be True
+    #     json_params["onInputText"] = True
+    #     send(-1, "int", json_params)
 
-    def gesture(self, value):
-        json_params = {}
-        # The value is the name of the gesture
-        json_params["gesture"] = value
-        send(-1, "int", json_params)
+    # def gesture(self, value):
+    #     json_params = {}
+    #     # The value is the name of the gesture
+    #     json_params["gesture"] = value
+    #     send(-1, "int", json_params)
 
     def speechTextDone(self, value):
         json_params = {}
@@ -350,18 +374,18 @@ class pepperModuleV2(object):
         json_params = {}
         # The value is the emotion detected
         json_params["voiceEmotionRecognized"] = value
-        send(-1, "int", json_params)
+        send(-1, "emo", json_params)
 
-    def autonomousCompletedActivity(self, value):
-        json_params = {}
-        # The value is the activity name
-        json_params["autonomousCompletedActivity"] = value
-        send(-1, "int", json_params)
+    # def autonomousCompletedActivity(self, value):
+    #     json_params = {}
+    #     # The value is the activity name
+    #     json_params["autonomousCompletedActivity"] = value
+    #     send(-1, "int", json_params)
 
     def hotDeviceDetected(self, value):
         json_params = {}
         # The value is a list of the devices with high temperature
-        json_params["hotDeviceDetected"] = value
+        json_params["hotDeviceDetected"] = True
         send(-1, "int", json_params)
 
     def dialogLastInput(self, value):
@@ -385,19 +409,19 @@ class pepperModuleV2(object):
     def personMovedAway(self, value):
         json_params = {}
         # The value is the ID of the person
-        json_params["personMovedAway"] = value
+        json_params["personMovedAway"] = True
         send(-1, "int", json_params)
 
     def personApproached(self, value):
         json_params = {}
         # The value is the ID of the person
-        json_params["personApproached"] = value
+        json_params["personApproached"] = True
         send(-1, "int", json_params)
 
     def personSmiling(self, value):
         json_params = {}
         # The value is the ID of the person
-        json_params["personSmiling"] = value
+        json_params["personSmiling"] = True
         send(-1, "int", json_params)
 
     def faceDetected(self, value):
@@ -409,20 +433,21 @@ class pepperModuleV2(object):
     def peopleLookingAtRobot(self, value):
         json_params = {}
         # The value is a list of IDs with people whose are looking the robot
-        json_params["peopleLookingAtRobot"] = value
+        json_params["peopleLookingAtRobot"] = True
         send(-1, "int", json_params)
 
     def personStopsLookingAtRobot(self, value):
         json_params = {}
         # The value is the person ID
-        json_params["personStopsLookingAtRobot"] = value
+        json_params["personStopsLookingAtRobot"] = True
         send(-1, "int", json_params)
 
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
-        json_params["distanceOfTrackedHuman"] = value
-        # send(-1, "int", json_params)
+        if ( value is not -1):
+            json_params["distanceOfTrackedHuman"] = value
+            send(-1, "int", json_params)
 
     def obstacleDetected(self, value):
         json_params = {}
@@ -440,39 +465,209 @@ class pepperModuleV2(object):
         # CameraPose_InRobotFrame,
         # Camera_Id
         # ]
-        json_params["peopleDetected"] = value
+        json_params["peopleDetected"] = True
         send(-1, "int", json_params)
 
-    def preferenceAdded(self, value):
-        json_params = {}
-        # The value is the id - An array of two values identifying the preference:
-        # id[0] - The preference domain.
-        # id[1] - The preference name.
-        json_params["preferenceAdded"] = value
-        send(-1, "int", json_params)
+    # def preferenceAdded(self, value):
+    #     json_params = {}
+    #     # The value is the id - An array of two values identifying the preference:
+    #     # id[0] - The preference domain.
+    #     # id[1] - The preference name.
+    #     json_params["preferenceAdded"] = value
+    #     send(-1, "int", json_params)
 
-    def preferenceChanged(self, value):
-        json_params = {}
-        # The value is the id - An array of two values identifying the preference:
-        # id[0] - The preference domain.
-        # id[1] - The preference name.
-        json_params["preferenceChanged"] = value
-        send(-1, "int", json_params)
+    # def preferenceChanged(self, value):
+    #     json_params = {}
+    #     # The value is the id - An array of two values identifying the preference:
+    #     # id[0] - The preference domain.
+    #     # id[1] - The preference name.
+    #     json_params["preferenceChanged"] = value
+    #     send(-1, "int", json_params)
 
-    def wavingDetection(self, value):
-        json_params = {}
-        # The value contains the info of the waving (pixels and some info more), we won't send that
-        json_params["wavingDetection"] = True
-        send(-1, "int", json_params)
+    # def wavingDetection(self, value):
+    #     json_params = {}
+    #     # The value contains the info of the waving (pixels and some info more), we won't send that
+    #     json_params["wavingDetection"] = True
+    #     send(-1, "int", json_params)
 
     def personWaving(self, value):
         json_params = {}
         # The value is the person ID
-        json_params["personWaving"] = value
+        json_params["personWaving"] = True
         send(-1, "int", json_params)
 
+    def sendValue(resultValue):
+        print
+        "enviar", resultValue
+        json_params = {"DialogInput": resultValue}
+        send(-1, "int", json_params)
+
+    def preferenceInput(self, completeSentence):
+        resultValue = ""
+        word = completeSentence
+        if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
+            len(re.findall(r'brill\w+', word[1])) != 0)):
+            resultValue = 'decrease brigthness'
+        if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
+            resultValue = 'increase brigthness'
+        if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
+            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
+            resultValue = 'decrease volume'
+        if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
+            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
+            resultValue = 'decrease volume'
+
+        if (resultValue == ""):
+            return (False, "")
+        return (True, resultValue)
+
+    def retroalimentacionFilter(self, value):
+
+        if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
+            self.retroalimentacionCompleta += " " + value
+
+        # EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+        if (self.retroalimentacionCompleta.split().count() == 8):
+            return (True, self.retroalimentacionCompleta)
+        else:
+            return (False, "")
+
+
+    def happyFilter (self,value):
+        aux = ''
+        if (len(value) == 2 ):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        resulset = ''
+
+        if len(re.findall(r'feli\w+', aux)) == 1 or\
+                len(re.findall(r'alegr\w+', aux)) == 1 or\
+                len(re.findall(r'emocion\w+', aux)) == 1 or\
+                len(re.findall(r'feli\w+', aux)) == 1 or\
+                len(re.findall(r'animad\w+', aux)) == 1 or\
+                len(re.findall(r'chever\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+
+    def normalFilter (self,value):
+        aux = ''
+        if (len(value) == 2 ):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        resulset = ''
+
+        if len(re.findall(r'bien\w+', aux)) == 1 or\
+                len(re.findall(r'norma\w+', aux)) == 1 or\
+                len(re.findall(r'agrada\w+', aux)) == 1 or\
+                len(re.findall(r'buen\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+
+    def sadFilter (self,value):
+        resulset = ''
+        aux = ''
+        if (len(value) == 2):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        if len(re.findall(r'aburrid\w+', aux)) == 1 or \
+                len(re.findall(r'cansad\w+', aux)) == 1 or \
+                len(re.findall(r'fastidia\w+', aux)) == 1 or \
+                len(re.findall(r'mamad\w+', aux)) == 1 or\
+                len(re.findall(r'mal\w+', aux)) == 1 or\
+                len(re.findall(r'terribl\w+', aux)) == 1 or\
+                len(re.findall(r'horrib\w+', aux)) == 1 or \
+                len(re.findall(r'trist\w+', aux)) == 1 or \
+                len(re.findall(r'adolid\w+', aux)) == 1 or\
+                len(re.findall(r'melancol\w+', aux)) == 1:
+            resulset = value
+
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+
+    def angryFilter (self,value):
+        resulset = ''
+        aux = ''
+        if (len(value) == 2):
+            aux = value[1]
+        elif (len(value) == 3):
+            aux = value[2]
+        elif (len(value) == 4):
+            aux = value[2]
+
+        if len(re.findall(r'cansad\w+', aux)) == 1 or \
+                len(re.findall(r'molest\w+', aux)) == 1 or \
+                len(re.findall(r'enojad\w+', aux)) == 1 or \
+                len(re.findall(r'jodido\w+', aux)) == 1 or \
+                len(re.findall(r'fasti\w+', aux)) == 1 or \
+                len(re.findall(r'piedra\w+', aux)) == 1 or \
+                len(re.findall(r'rabi\w+', aux)) == 1 or \
+                len(re.findall(r'ira\w+', aux)) == 1 or \
+                len(re.findall(r'furi\w+', aux)) == 1 or \
+                len(re.findall(r'coler\w+', aux)) == 1 or\
+                len(re.findall(r'vayase\w+', aux)) == 1 or \
+                len(re.findall(r'vete\w+', aux)) == 1:
+            resulset = value
+        if (resulset != ''):
+            return (True, resulset)
+        else:
+            return (False, "")
+
+    def emotionalFilter(self, value):
+        aux = ''
+
+        happyFilter = self.happyFilter(value)
+        normalFilter = self.normalFilter(value)
+        sadFilter = self.sadFilter(value)
+        angryFilter = self.angryFilter(value)
+
+        if happyFilter[0]:
+            return (True, "happy " + happyFilter[1])
+        # Regex Normal '''
+        elif normalFilter[0]:
+            return (True, "normal " + normalFilter[1])
+        # '''Regex sad '''
+        elif sadFilter[0]:
+            return (True, "sad " + sadFilter[1])
+        # '''Regex angry '''
+        elif angryFilter[0]:
+            return (True, "angry " + angryFilter[1])
+        else:
+            return (False, "")
+
     def getDialogInput(self, value):
-        if value:
-            print "enviar", value
-            json_params = {"DialogInput": value}
+        # The value is the last human input
+        # The function has been made for the comprehension of the human. In this case, is used to detect orders of adjust volume of pepper and bright of the tablet
+
+        # Are all the filters possible in the code - they were simplyfied to get a better knowledge of
+        # Prefences - Retroalimentation - emotion
+        preference = self.preferenceInput(value)
+        retroAlimentacion = self.retroalimentacionFilter(value)
+        emotion = self.emotionalFilter(value)
+
+        resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+        if preference[0] or retroAlimentacion[0] or emotion[0]:
+            self.sendValue(resultValue)
+        else:
+            self.sendValue(value)
+
+        if resultValue:
+            print("enviar", resultValue)
+            json_params = {"DialogInput": resultValue}
             send(-1, "int", json_params)
+

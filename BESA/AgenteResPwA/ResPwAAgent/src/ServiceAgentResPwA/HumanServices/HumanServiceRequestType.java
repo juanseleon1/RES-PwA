@@ -12,7 +12,7 @@ import ServiceAgentResPwA.ServiceRequestType;
  * @author juans
  */
 public enum HumanServiceRequestType implements ServiceRequestType{
-    GETEMOTIONSTATE("GETEMOTIONSTATE"),LOGIN("LOGIN");
+    GETEMOTIONSTATE("GETEMOTIONSTATE"),LOGIN("LOGIN"),WAVINGDETECTION("WAVINGDETECTION");
     
     private String serviceType;
     

@@ -5,7 +5,10 @@
  */
 package EmotionalAnalyzerAgent;
 
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import SensorHandlerAgent.SensorData;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import rational.data.InfoData;
 
@@ -13,13 +16,27 @@ import rational.data.InfoData;
  *
  * @author juans
  */
-public class EmotionalData extends InfoData{
-    
+public class EmotionalData extends InfoData {
+
     private Map<String, Object> info;
-    
-    public EmotionalData(){
+    private List<EmotionalEvent> emoEv;
+    public static EmotionalData fromSensorData(SensorData infoRecibida) {
+        EmotionalData em = new EmotionalData();
+        em.info = infoRecibida.getDataP();
+        em.emoEv = null;
+        return em;
+    }
+
+    public static EmotionalData getPeriodicData() {
+        EmotionalData em = new EmotionalData();
+        em.info = new HashMap<>();
+        return em;
+
+    }
+
+    public EmotionalData() {
         super("emodata");
-        info=new HashMap<>();
+        info = new HashMap<>();
     }
 
     public Map<String, Object> getInfo() {
@@ -28,6 +45,14 @@ public class EmotionalData extends InfoData{
 
     public void setInfo(Map<String, Object> info) {
         this.info = info;
+    }
+
+    public List<EmotionalEvent> getEmoEv() {
+        return emoEv;
+    }
+
+    public void setEmoEv(List<EmotionalEvent> emoEv) {
+        this.emoEv = emoEv;
     }
 
 }

@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -26,14 +27,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "CDR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cdr.findAll", query = "SELECT c FROM Cdr c")
-    , @NamedQuery(name = "Cdr.findByMemoria", query = "SELECT c FROM Cdr c WHERE c.memoria = :memoria")
-    , @NamedQuery(name = "Cdr.findByOrientacion", query = "SELECT c FROM Cdr c WHERE c.orientacion = :orientacion")
-    , @NamedQuery(name = "Cdr.findByJuicio", query = "SELECT c FROM Cdr c WHERE c.juicio = :juicio")
-    , @NamedQuery(name = "Cdr.findByVidaSocial", query = "SELECT c FROM Cdr c WHERE c.vidaSocial = :vidaSocial")
-    , @NamedQuery(name = "Cdr.findByHogar", query = "SELECT c FROM Cdr c WHERE c.hogar = :hogar")
-    , @NamedQuery(name = "Cdr.findByCuidadopersonal", query = "SELECT c FROM Cdr c WHERE c.cuidadopersonal = :cuidadopersonal")
-    , @NamedQuery(name = "Cdr.findByPerfilMedicoCedula", query = "SELECT c FROM Cdr c WHERE c.perfilMedicoCedula = :perfilMedicoCedula")})
+    @NamedQuery(name = "Cdr.findAll", query = "SELECT c FROM Cdr c"),
+    @NamedQuery(name = "Cdr.findByMemoria", query = "SELECT c FROM Cdr c WHERE c.memoria = :memoria"),
+    @NamedQuery(name = "Cdr.findByOrientacion", query = "SELECT c FROM Cdr c WHERE c.orientacion = :orientacion"),
+    @NamedQuery(name = "Cdr.findByJuicio", query = "SELECT c FROM Cdr c WHERE c.juicio = :juicio"),
+    @NamedQuery(name = "Cdr.findByVidaSocial", query = "SELECT c FROM Cdr c WHERE c.vidaSocial = :vidaSocial"),
+    @NamedQuery(name = "Cdr.findByHogar", query = "SELECT c FROM Cdr c WHERE c.hogar = :hogar"),
+    @NamedQuery(name = "Cdr.findByCuidadopersonal", query = "SELECT c FROM Cdr c WHERE c.cuidadopersonal = :cuidadopersonal"),
+    @NamedQuery(name = "Cdr.findByPerfilMedicoCedula", query = "SELECT c FROM Cdr c WHERE c.perfilMedicoCedula = :perfilMedicoCedula")})
 public class Cdr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,7 +61,7 @@ public class Cdr implements Serializable {
     @Column(name = "PERFIL_MEDICO_CEDULA")
     private String perfilMedicoCedula;
     @JoinColumn(name = "PERFIL_MEDICO_CEDULA", referencedColumnName = "PERFILPWA_CEDULA", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
     private PerfilMedico perfilMedico;
 
     public Cdr() {

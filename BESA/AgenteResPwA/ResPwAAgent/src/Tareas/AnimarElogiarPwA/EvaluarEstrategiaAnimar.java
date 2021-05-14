@@ -36,14 +36,12 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
         
-        //animar con frases elogiantes, chistes
-        Random rand = new Random();
-        List<String> estrategias = Arrays.asList("Frase elogiante", "Chiste");
-        String estrategia = estrategias.get(rand.nextInt(estrategias.size()));
-        AnimarStrategy as = new AnimarStrategy();
-        as.setNombre(estrategia);
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        //falta escoger estrategia, segun perfil
+        OpcionesAnimar estrategia = blvs.getbPerfilPwA().getAnimarStrategy();
+        AnimarStrategy as = new AnimarStrategy();
+        as.setOpcion(estrategia);
+        
         blvs.getbEstadoActividad().setEstrategia(as);
         
         ServiceDataRequest srb = as.execStrategy();
@@ -53,6 +51,11 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Animar PwA ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        if(blvs.getbEstadoInteraccion().isEstaHablando()){
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            requestService(srb,blvs);
+        }
     }
 
     @Override
@@ -60,7 +63,7 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
         System.out.println("--- Cancel Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if(blvs.getbEstadoInteraccion().isEstaHablando()){
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             requestService(srb,blvs);
         }
@@ -68,6 +71,7 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+        super.checkFinish(believes);
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {
             return true;

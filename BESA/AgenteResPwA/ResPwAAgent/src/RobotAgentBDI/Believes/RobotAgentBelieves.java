@@ -5,10 +5,15 @@
  */
 package RobotAgentBDI.Believes;
 
+import BDInterface.RESPwABDInterface;
 import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalModel;
-import ResPwaUtils.FBaseUtils;
+import ResPwAEntities.Antecedente;
+import ResPwAEntities.Cancion;
+import ResPwAEntities.Cuento;
+import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.Imagen;
+import Retroalimentacion.Modelo.ModeloRetroalimentacion;
+import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,37 +28,40 @@ import rational.mapping.Believes;
  */
 public class RobotAgentBelieves implements Believes {
 
-    private BEstadoInteraccion bEstadoInteraccion = new BEstadoInteraccion();
-    private BEstadoEmocionalPwA bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
+    private BEstadoInteraccion bEstadoInteraccion;
+    private BEstadoEmocionalPwA bEstadoEmocionalPwA;
     private BEstadoActividad bEstadoActividad;
     private BPerfilPwA bPerfilPwA;
-    private BEstadoRobot bEstadoRobot = new BEstadoRobot();
+    private BEstadoRobot bEstadoRobot;
     private Map<String, List<String>> imgCuentos; //nomCuento //Lista de Strings -> url
     private List<Imagen> imgsPerfil;
-    private EmotionalModel em;
 
-    public RobotAgentBelieves(String cedula, EmotionalModel em) {
+    public RobotAgentBelieves(String cedula) {
+        bEstadoEmocionalPwA = new BEstadoEmocionalPwA();
+        bEstadoInteraccion = new BEstadoInteraccion();
+        bEstadoRobot = new BEstadoRobot();
         imgCuentos = new HashMap<>();
         imgsPerfil = new ArrayList<>();
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
-        this.em=em;
-//        getPerfilBD(cedula);
-        FBaseUtils.initResPwa(this);
+        bPerfilPwA.setPerfil(getPerfilBD(cedula));
+//        FBaseUtils.initResPwa(this);
     }
 
     //AQUI SE MANDA LO DE INFORMATIONFLOW
     //Aqui se accede a BD y se pide info de otros believes. 
     @Override
     public boolean update(InfoData si) {
-        if(si!=null && si.getMessage() != null && si.getMessage().equals("emodata")) {
-            EmotionalData se=(EmotionalData)si;
-            System.out.println("RobotAgentBelieves update Received: "+se.getInfo() );
-            bEstadoRobot.update(si);
+        if (si != null && si instanceof EmotionalData) {
+            EmotionalData se = (EmotionalData) si;
+//            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
+            if (se.getEmoEv() != null) {
+                bEstadoRobot.update(se);
+            }
             bEstadoEmocionalPwA.update(si);
-        } else if(si!=null){
+        } else if (si != null) {
             SensorData infoRecibida = (SensorData) si;
-            System.out.println("RobotAgentBelieves update Received: "+infoRecibida.getDataP() );
+//            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
@@ -70,15 +78,80 @@ public class RobotAgentBelieves implements Believes {
                 default:
                     break;
             }
-            return true;
         }
 
         return true;
     }
 
-    private void getPerfilBD(String cedula) {
+    public void feedbackActivity(double voiceFeedback) {
+        double emotionFeedback = 0.0;
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+        List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
+        //        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+        List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
+        
+
+
+        switch (activity) {
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+
+                ModeloRetroalimentacion<Cuento> modeloRetroCuento = new ModeloRetroalimentacion<Cuento>((Cuento) activityInCourse);
+                modeloRetroCuento.activityFeedback(antecedentsForFeedback);
+                break;
+
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                ModeloRetroalimentacion<Cancion> modelRetroCancion = new ModeloRetroalimentacion<Cancion>((Cancion) activityInCourse);
+                modelRetroCancion.activityFeedback(antecedentsForFeedback);
+                break;
+        }
+
+    }
+
+    private List<Antecedente> getAntecedentsForFeedback(double emotionFeedback, double voiceFeedback, List<Antecedente> antecedents) {
+
+        List<Antecedente> antecedentsForFeedback = new ArrayList<>();
+        for (int i = 0; i < antecedents.size(); i++) {
+            if (antecedents.get(i).getEtiqueta().equals("EMOTIONFEEDBACK") && antecedents.get(i).getValor() == emotionFeedback) {
+                antecedentsForFeedback.add(antecedents.get(i));
+            } else {
+                if (antecedents.get(i).getEtiqueta().equals("VOICEFEEDBACK") && antecedents.get(i).getValor() == voiceFeedback) {
+                    antecedentsForFeedback.add(antecedents.get(i));
+                }
+            }
+        }
+        
+        return antecedentsForFeedback;
+    }
+
+    public Object getActivityInCourse() {
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+
+        switch (activity) {
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+                break;
+
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                break;
+        }
+
+        return activityInCourse;
+
+    }
+
+    private Perfilpwa getPerfilBD(String cedula) {
         //conectarConBD
-        bPerfilPwA.getFromDB(cedula);
+        return getFromDB(cedula);
+    }
+
+    Perfilpwa getFromDB(String cedula) {
+        Perfilpwa perfil = RESPwABDInterface.getProfile(cedula);
+        return perfil;
     }
 
     public BEstadoInteraccion getbEstadoInteraccion() {
@@ -155,12 +228,4 @@ public class RobotAgentBelieves implements Believes {
         return this;
     }
 
-    public EmotionalModel getEm() {
-        return em;
-    }
-
-    public void setEm(EmotionalModel em) {
-        this.em = em;
-    }
-    
 }

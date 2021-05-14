@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="CF91F271-31F5-138D-0034-7438C692CDD9" containerWithKeyObject="ED3EFFDB-BFC8-C9AB-B1FB-DD6B66984E2F" localFKIndex="508C79C5-532E-4F8B-A25C-96A765DF27F6" name="enriq_Frases_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>B639DAF6-C0B0-6FC8-8285-6E1AB73C36D6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Frases</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>57AB4841-7468-3962-EA84-2A6CC16D4B72</referredTableID>
+<keyObject>E8D8C7E9-5979-8ECF-D3EC-47A5240A00D7</keyObject>
+<referredKeyID>E8D8C7E9-5979-8ECF-D3EC-47A5240A00D7</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>orden,Cuento_nombre</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

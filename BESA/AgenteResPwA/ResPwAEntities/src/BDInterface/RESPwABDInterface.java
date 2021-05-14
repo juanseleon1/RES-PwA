@@ -8,6 +8,7 @@ package BDInterface;
 import ResPwAEntities.*;
 import ResPwAEntities.Controllers.*;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
+import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,6 +128,16 @@ public class RESPwABDInterface {
         return ajp.findActividadpwaEntities();
 
     }
+    
+    public static List<Antecedente> getActecedents() {
+        AntecedenteJpaController ajp = new AntecedenteJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findAntecedenteEntities();
+    }
+    
+    public static List<Regla> getRules() {
+        ReglaJpaController ajp = new ReglaJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findReglaEntities();
+    }
 
     public static void createRegistroAct(Registroactividad ra) {
         try {
@@ -142,4 +153,21 @@ public class RESPwABDInterface {
         return ajp.findActxpreferencia(pk);
 
     }
+    
+    public static List<EmotionAxisConfig> getEmotionalAxisConfig(){
+        EmotionAxisConfigJpaController eapc = new EmotionAxisConfigJpaController(Persistence.createEntityManagerFactory(EMF));
+        return eapc.findEmotionAxisConfigEntities();
+    }
+
+    public static List<Accion> getAcciones(){
+        AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajc.findAccionEntities();
+    }
+
+    public static List<Emocion> getEmociones(){
+        EmocionJpaController ejc = new EmocionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ejc.findEmocionEntities();
+    }
+    
+
 }

@@ -10,7 +10,7 @@ package PepperPackage.EmotionalModel;
  * @author juans
  */
 public enum PepperEMParams {
-    LEDS("LEDS"),FVel("factorVelocidad"),HVel("velHabla"),TONOH("tonoHabla"),LEDINT("ledIntens"),ANIMSTATE("animacion");
+    LEDS("LEDS"),FVel("factorVelocidad"),HVel("velHabla"),TONOH("tonoHabla"),LEDINT("ledIntens"),ANIMSTATE("animacion"),LEDROT("rotacion");
     private String tipo;
     private PepperEMParams(String s){
         tipo=s;

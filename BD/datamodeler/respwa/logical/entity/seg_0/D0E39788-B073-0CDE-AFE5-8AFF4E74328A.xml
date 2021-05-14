@@ -4,7 +4,8 @@
 <createdTime>2020-10-27 20:11:45 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -20,7 +21,8 @@
 <createdTime>2020-10-27 20:19:41 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -33,7 +35,8 @@
 <createdTime>2020-10-27 20:20:28 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -46,7 +49,8 @@
 <generatorID>7635C045-CFAB-4757-19B4-1164B4AA8218</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
 </engineerTo>
 <referedAttribute>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -55,14 +59,45 @@
 <dataTypeSize>20 CHAR</dataTypeSize>
 <ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="reminiscencia" id="1D2AF799-EB12-63EC-351C-14EB473AFD1D">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-05 21:03:00 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="url" id="B0B81711-3D49-36C5-5193-31768B9AB6BF">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-10 20:35:20 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="079FE8DD-67EE-E5E9-585E-B05DA2A5A4F6" name="Cancion PK">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:20:08 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="56CB253A-F3A1-0F59-FA75-426136C1437B" value="true"/>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

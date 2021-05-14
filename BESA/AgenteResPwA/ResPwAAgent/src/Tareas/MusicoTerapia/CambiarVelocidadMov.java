@@ -35,7 +35,7 @@ public class CambiarVelocidadMov extends ResPwaTask{
         System.out.println("--- Execute Task Cambiar Velocidad Movimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         //revisar velocidad de acuerdo a estado emocional
-        if(blvs.getbEstadoInteraccion().isEstaKaraokeando()) {
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getCancionActual().getTagsList());
             infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
@@ -66,6 +66,8 @@ public class CambiarVelocidadMov extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
+                super.checkFinish(believes);
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             return false;

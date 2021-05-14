@@ -29,7 +29,7 @@ public class PepperAdapter extends ResPwaAdapter{
         serviceMapper=new PepperServiceMapper();
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         this.rpa=null;
-        System.out.println("PepperAdapter Created");
+        //System.out.println("PepperAdapter Created");
         startPepperRcv();
     }
     
@@ -40,60 +40,60 @@ public class PepperAdapter extends ResPwaAdapter{
     @Override
     public void ActivityServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR = (ServiceDataRequest)data;
-        System.out.println("solicitarInfoActividadAsync Solicitado");
+        //System.out.println("solicitarInfoActividadAsync Solicitado");
         sendRequest(dataR);
     }
 
     @Override
     public void AutonomyServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("setAutonomyAsync Solicitado");
+        //System.out.println("setAutonomyAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void EnergyServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoBatteryAsync Solicitado");
+        //System.out.println("solicitarInfoBatteryAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void HumanServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoHumanAsync Solicitado");
+        //System.out.println("solicitarInfoHumanAsync Solicitado");
         sendRequest(dataR);
     }
     @Override
     public void LocationServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoLocationAsync Solicitado");
+        //System.out.println("solicitarInfoLocationAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void RobotStateServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarInfoStateAsync Solicitado");
+        //System.out.println("solicitarInfoStateAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void VoiceServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarVoiceAsync Solicitado");
+        //System.out.println("solicitarVoiceAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void MovementServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarMovementAsync Solicitado");
+        //System.out.println("solicitarMovementAsync Solicitado");
         sendRequest(dataR);
 
     }
     @Override
     public void TabletServiceReqAsync(SPServiceDataRequest data) {
         ServiceDataRequest dataR=(ServiceDataRequest)data;
-        System.out.println("solicitarTabletAsync Solicitado");
+        //System.out.println("solicitarTabletAsync Solicitado");
         sendRequest(dataR);
 
     }
@@ -103,7 +103,7 @@ public class PepperAdapter extends ResPwaAdapter{
         try {
             String JSON=convertServiceRequest(data);
             try (Socket s = new Socket(IP, robotPort); DataOutputStream oos = new DataOutputStream (s.getOutputStream())) {
-                System.out.println("Enviando solicitud al Robot: \n"+JSON);
+                System.out.println("ENVIANDO \n"+JSON);
                 oos.writeUTF(JSON+"\n\r");
                 oos.flush();
 //                oos.close();

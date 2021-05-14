@@ -6,11 +6,13 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,9 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CANCION")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c")
-    , @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto")})
+    @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c"),
+    @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto"),
+    @NamedQuery(name = "Cancion.findByReminiscencia", query = "SELECT c FROM Cancion c WHERE c.reminiscencia = :reminiscencia"),
+    @NamedQuery(name = "Cancion.findByUrl", query = "SELECT c FROM Cancion c WHERE c.url = :url")})
 public class Cancion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,20 +48,24 @@ public class Cancion implements Serializable {
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
+    @Column(name = "REMINISCENCIA")
+    private BigInteger reminiscencia;
+    @Column(name = "URL")
+    private String url;
     @JoinTable(name = "LISTATAGS", joinColumns = {
         @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
         @JoinColumn(name = "TAGS_ID", referencedColumnName = "ID")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tags> tagsList;
     @JoinTable(name = "PREFERENCIACANCION", joinColumns = {
         @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
         @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<PerfilPreferencia> perfilPreferenciaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancionNombre")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancionNombre", fetch = FetchType.EAGER)
     private List<Enriq> enriqList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero generoGenero;
 
     public Cancion() {
@@ -86,6 +94,22 @@ public class Cancion implements Serializable {
 
     public void setGusto(double gusto) {
         this.gusto = gusto;
+    }
+
+    public BigInteger getReminiscencia() {
+        return reminiscencia;
+    }
+
+    public void setReminiscencia(BigInteger reminiscencia) {
+        this.reminiscencia = reminiscencia;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @XmlTransient

@@ -6,26 +6,29 @@ import sys
 import argparse
 from Message import messageManager
 from Robot import Robot
-from Utils import activities_running, send
+from Utils import activities_running, send, callbacks_running
 
 
-# --------------------------------------------------Functions-----------------------------------------------------------------------
+# ------------------------------------- -------------Functions-----------------------------------------------------------------------
+def timer_callbacks():
+    # Execute all callback functions to know if all callback-activities are finished
+    for key, function in callbacks_running.items():
+        function()
+
+    threading.Timer(1.0, timer_callbacks).start()
+
 def timer_activities():
+
     for key, value in activities_running.items():
-        # print (key, value)
-        # create Json message
-        # send the message to BESA
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
     threading.Timer(10.0, timer_activities).start()
-
 
 def safe_str(obj):
     try:
         return str(obj)
     except UnicodeEncodeError:
         return obj.encode(FORMAT, 'ignore').decode(FORMAT)
-
 
 def handle_client():
     print(" ID: ", threading.currentThread().getName())
@@ -39,8 +42,6 @@ def handle_client():
     json_string = ""
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
-
-    print(" msg: ", threading.currentThread().getName())
     # y = "{" + y
     print(json_string)
     # print(y)
@@ -49,7 +50,6 @@ def handle_client():
     # msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
 
     callFunction(jsonObj)
-
 
 def callFunction(jsonObj):
     function = robot.getFunction(jsonObj["methodName"])
@@ -81,14 +81,14 @@ def callFunction(jsonObj):
 """---------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 print("Server starting...pop")
-HOST = '10.195.22.168'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST = '10.195.22.105'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
 HOST_LOCAL = '127.0.0.1'
 print("Server starting on", HOST_LOCAL)
 PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
 ADDR = (HOST_LOCAL, PORT)
 server = None
-HEADER = 1024
+HEADER = 10000
 FORMAT = 'utf-8'
 
 # send( "id", "ROB", True)
@@ -104,12 +104,10 @@ try:
     app = qi.Application(["ResPwa", "--qi-url=" + connection_url])
     app.start()
     session = app.session
-    #session.connect("tcp://" + args.ip + ":" + str(args.port))
 except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) + ".\n"
                                                                                           "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
-print("achu")
 print("Server starting...pop11111111111111111112")
 # ----------------------------------------------------------------------------------------------------
 
@@ -133,10 +131,8 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 # define Timer to inform BESA
 t = threading.Timer(10.0, timer_activities)
 t.start()
-
 """ Robot class declaration"""
-robot = Robot(session)
-
+robot = Robot(app, session)
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client)

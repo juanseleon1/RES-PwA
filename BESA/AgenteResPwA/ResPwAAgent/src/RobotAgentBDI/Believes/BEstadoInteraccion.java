@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
-import Tareas.Cuenteria.LedsColor;
+import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import rational.data.InfoData;
 import rational.mapping.Believes;
 
@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=true;
+    private boolean logged=false;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -30,25 +30,50 @@ public class BEstadoInteraccion implements Believes{
     private double distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
-    private boolean estaKaraokeando=false;
     private boolean desplazandose=false;
-    private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
+    private boolean detectaPersona = false;
     private boolean confirmacionRepDisp=false;
     private boolean confirmacionRepAud=false;
     private boolean recibirRespuestaPwA=false;
-    private LedsColor leds=null;
+    private boolean movManoSaludo=false;
+    private boolean ayudaExitosa=false;
+    private double tiempoEmergenciaTrans=0;
+    private boolean saludo=false;
+    private PepperEmotionRanges leds=null;
     private boolean confirmarActServicios=false;
     private static final long MAXENRIQ=4;
     private String keyNameConf= "confReproduccion";
     private boolean movError;
+    private boolean modificarPreferencias = false;
+    private String respuestaPreferencia = null;
+    
+    private String retroalimentacionValue;
+    private String estadoEmocional = "normal";
 
+    public String getEstadoEmocional() {
+        return estadoEmocional;
+    }
+
+    public void setEstadoEmocional(String estadoEmocional) {
+        this.estadoEmocional = estadoEmocional;
+    }
+
+    public void setRetroalimentacionValue (String retroalimentacionValue){
+        this.retroalimentacionValue = retroalimentacionValue;
+    }
+    public String getRetroalimentacionValue (){
+        return this.retroalimentacionValue;
+    }
+
+    
     
     @Override
     public boolean update(InfoData si) {
         System.out.println("BEstadoInteraccion update Received: "+si);
         SensorData infoRecibida= (SensorData)si;
+        
         if(infoRecibida.getDataP().containsKey(keyNameConf+"Display"))
         {
             confirmacionRepDisp= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Display"));
@@ -58,7 +83,7 @@ public class BEstadoInteraccion implements Believes{
             confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
         }
         if(infoRecibida.getDataP().containsKey("faceDetected")){
-            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
+//            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
             detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
             tiempoSinInt=0;
         }
@@ -66,10 +91,6 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("humanLost")){
             detectaPwA= false;
             tiempoSinInt=System.currentTimeMillis();
-        }
-        if(infoRecibida.getDataP().containsKey("canto")){
-            quiereCantar= Boolean.valueOf((String)infoRecibida.getDataP().get("canto"));
-
         }if(infoRecibida.getDataP().containsKey("enriq")){
             quiereEnriquec= Boolean.valueOf((String)infoRecibida.getDataP().get("enriq"));
             if(quiereEnriquec && nivelEnriquecimiento < MAXENRIQ)
@@ -77,7 +98,7 @@ public class BEstadoInteraccion implements Believes{
             else if(!quiereEnriquec && nivelEnriquecimiento>0)
                 nivelEnriquecimiento--;
         }if(infoRecibida.getDataP().containsKey("wakeUpFinished")){
-            sistemaSuspendido= true;
+            sistemaSuspendido = Boolean.valueOf((String)infoRecibida.getDataP().get("wakeUpFinished"));
         }if(infoRecibida.getDataP().containsKey("pausarint")){
            pausarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("pausarint"));
             
@@ -88,7 +109,8 @@ public class BEstadoInteraccion implements Believes{
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
         }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
-          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            Double aux =(Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+          distanciaPwA  = aux==null? -1:aux;
            
         }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
           estaHablando = true;
@@ -114,12 +136,37 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
         }
-        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
-           recibirRespuestaPwA = true;
-        }if(infoRecibida.getDataP().containsKey("karaokeando")){
-          estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
-            
+//        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+//           recibirRespuestaPwA = true;
+//           
+//        }
+        if(infoRecibida.getDataP().containsKey("wavingDetection")){
+            movManoSaludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
+            saludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
         }
+        if(infoRecibida.getDataP().containsKey("detectaPersona")){
+            detectaPersona = Boolean.valueOf((String)infoRecibida.getDataP().get("detectaPersona"));
+            if(!detectaPersona){
+                tiempoEmergenciaTrans = System.currentTimeMillis();
+            }
+        }
+        if(infoRecibida.getDataP().containsKey("peticionAyuda")){
+            ayudaActividadSolicitada = Boolean.valueOf((String)infoRecibida.getDataP().get("peticionAyuda"));
+        }
+        if(infoRecibida.getDataP().containsKey("ayudaExitosa")){
+            ayudaActividadSolicitada = Boolean.valueOf((String)infoRecibida.getDataP().get("ayudaExitosa"));
+        }
+        
+        if (infoRecibida.getDataP().containsKey("DialogInput")){
+            respuestaPreferencia = (String)infoRecibida.getDataP().get("DialogInput");
+            String resulSet[] = respuestaPreferencia.split(" ");
+            if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
+                modificarPreferencias = true;
+            }
+            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
+            recibirRespuestaPwA = true;
+        }
+        
         return true;
     }
 
@@ -243,14 +290,6 @@ public class BEstadoInteraccion implements Believes{
         this.detectaPwA = detectaPwA;
     }
 
-    public boolean isQuiereCantar() {
-        return quiereCantar;
-    }
-
-    public void setQuiereCantar(boolean quiereCantar) {
-        this.quiereCantar = quiereCantar;
-    }
-
     public long getVelocidadAnim() {
         return velocidadAnim;
     }
@@ -315,13 +354,17 @@ public class BEstadoInteraccion implements Believes{
         this.logged = logged;
     }
 
+    public boolean isDetectaPersona() {
+        return detectaPersona;
+    }
+
         @Override
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
     }
 
-    public LedsColor getLeds() {
+    public PepperEmotionRanges getLeds() {
         return leds;
     }
 
@@ -336,19 +379,53 @@ public class BEstadoInteraccion implements Believes{
     public boolean isRecibirRespuestaPwA() {
         return recibirRespuestaPwA;
     }
-
+    
     public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
         this.recibirRespuestaPwA = recibirRespuestaPwA;
     }
 
-    public boolean isEstaKaraokeando() {
-        return estaKaraokeando;
+    public boolean isMovManoSaludo() {
+        return movManoSaludo;
     }
 
-    public void setEstaKaraokeando(boolean estaKaraokeando) {
-        this.estaKaraokeando = estaKaraokeando;
+    public void setSaludo(boolean saludo) {
+        this.saludo = saludo;
     }
-    
-    
+
+    public boolean isSaludo() {
+        return saludo;
+    }
+
+    public boolean isAyudaExitosa() {
+        return ayudaExitosa;
+    }
+
+    public void setAyudaExitosa(boolean ayudaExitosa) {
+        this.ayudaExitosa = ayudaExitosa;
+    }
+
+    public double getTiempoEmergenciaTrans() {
+        return tiempoEmergenciaTrans;
+    }
+
+    public void setTiempoEmergenciaTrans(double tiempoEmergenciaTrans) {
+        this.tiempoEmergenciaTrans = tiempoEmergenciaTrans;
+    }
+    public boolean isModificarPreferencias() {
+        return modificarPreferencias;
+    }
+
+    public void setModificarPreferencias(boolean modificarPreferencias) {
+        this.modificarPreferencias = modificarPreferencias;
+    }
+
+    public String getRespuestaPreferencia() {
+        return respuestaPreferencia;
+    }
+
+    public void setRespuestaPreferencia(String respuestaPreferencia) {
+        this.respuestaPreferencia = respuestaPreferencia;
+    }
+
     
 }
