@@ -44,7 +44,6 @@ public class RecomendarCuento extends ResPwaTask{
             if( c.getGusto()*0.7 >= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
                 cuentoEleg = c;
                 gusto = (float) (c.getGusto()*0.7);
-
             }
         }
         blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
