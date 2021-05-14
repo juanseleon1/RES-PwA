@@ -49,14 +49,14 @@ public class RobotAgentBelieves implements Believes {
     public boolean update(InfoData si) {
         if (si != null && si instanceof EmotionalData) {
             EmotionalData se = (EmotionalData) si;
-            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
+//            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
             if (se.getEmoEv() != null) {
                 bEstadoRobot.update(se);
             }
             bEstadoEmocionalPwA.update(si);
         } else if (si != null) {
             SensorData infoRecibida = (SensorData) si;
-            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
+//            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);

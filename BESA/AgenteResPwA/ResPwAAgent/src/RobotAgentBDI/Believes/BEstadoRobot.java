@@ -67,7 +67,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     @Override
     public boolean update(InfoData si) {
 
-        System.out.println("******Act Estado Robot********* \n" + si.toString());
+//        System.out.println("******Act Estado Robot********* \n" + si.toString());
         if (si instanceof SensorData) {
             SensorData infoRecibida = (SensorData) si;
             if (infoRecibida.getDataP().containsKey("batteryLow")) {

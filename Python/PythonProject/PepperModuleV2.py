@@ -110,8 +110,7 @@ class pepperModuleV2(object):
 
         # self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
         # self.tabletMessageS.signal.connect(self.tabletMessage)
-        self.tabletSignalVideoFinished = self.session.service("ALTabletService")
-        self.tabletSignalVideoFinished.videoFinished.connect(self.tabletVideoFinished)
+
         # tabletService = session.service("ALTabletService")
         # tabletService.videoFinished.connect(self.tabletVideoFinished)
 
