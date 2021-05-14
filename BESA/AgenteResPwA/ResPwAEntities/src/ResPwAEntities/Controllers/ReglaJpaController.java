@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class ReglaJpaController implements Serializable {
 
@@ -99,7 +99,7 @@ public class ReglaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = regla.getId();
+                BigDecimal id = regla.getId();
                 if (findRegla(id) == null) {
                     throw new NonexistentEntityException("The regla with id " + id + " no longer exists.");
                 }
@@ -162,7 +162,7 @@ public class ReglaJpaController implements Serializable {
         }
     }
 
-    public Regla findRegla(Long id) {
+    public Regla findRegla(BigDecimal id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Regla.class, id);

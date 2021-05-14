@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class CuidadorJpaController implements Serializable {
 

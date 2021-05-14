@@ -134,7 +134,6 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
 robot = Robot(app, session)
-robot.show_video(None)
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client)

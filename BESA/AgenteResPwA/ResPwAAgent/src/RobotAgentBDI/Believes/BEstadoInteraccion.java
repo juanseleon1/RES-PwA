@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=true;
+    private boolean logged=false;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -91,7 +91,8 @@ public class BEstadoInteraccion implements Believes{
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
         }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
-          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            Double aux =(Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+          distanciaPwA  = aux==null? -1:aux;
            
         }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
           estaHablando = true;
@@ -117,10 +118,10 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
         }
-        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
-           recibirRespuestaPwA = true;
-           
-        }
+//        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+//           recibirRespuestaPwA = true;
+//           
+//        }
         if(infoRecibida.getDataP().containsKey("wavingDetection")){
             movManoSaludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
             saludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
@@ -144,6 +145,8 @@ public class BEstadoInteraccion implements Believes{
             if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
                 modificarPreferencias = true;
             }
+            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
+            recibirRespuestaPwA = true;
         }
         
         return true;
@@ -358,7 +361,7 @@ public class BEstadoInteraccion implements Believes{
     public boolean isRecibirRespuestaPwA() {
         return recibirRespuestaPwA;
     }
-
+    
     public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
         this.recibirRespuestaPwA = recibirRespuestaPwA;
     }

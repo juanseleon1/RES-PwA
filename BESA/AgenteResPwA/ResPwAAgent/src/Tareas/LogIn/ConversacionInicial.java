@@ -8,45 +8,56 @@ package Tareas.LogIn;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import rational.mapping.Believes;
 
 /**
  *
  * @author mafegarces
  */
-public class ConversacionInicial extends ResPwaTask{
-    
-    private HashMap<String,Object> infoServicio = new HashMap<>();
-    
+public class ConversacionInicial extends ResPwaTask {
+
+    private HashMap<String, Object> infoServicio;
+    private long start;
+
     public ConversacionInicial() {
 //        System.out.println("--- Task Preguntar Estado Animo Iniciada ---");
+        infoServicio = new HashMap<>();
+        start = System.currentTimeMillis();
     }
-    
+
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Preguntar Estado Animo ---");
-        RobotAgentBelieves rab= (RobotAgentBelieves)parameters;
-        
-        activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
-        infoServicio.put("SAY", "Buen dia, como se encuentra");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb,rab);
-        rab.getbEstadoInteraccion().setLogged(true);
-        
+
+
+        long now = System.currentTimeMillis();
+          TimeUnit unit = TimeUnit.SECONDS;
+        if (unit.convert(now-start, TimeUnit.SECONDS)>15) {
+            System.out.println("--- Execute Task Preguntar Estado Animo ---");
+            RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
+            activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
+            if(!infoServicio.containsKey("SAY")){
+                infoServicio.put("SAY", "Buen dia, como se encuentra");
+            }
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            requestService(srb, rab);
+            start = System.currentTimeMillis(); 
+        }
+
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            requestService(srb, blvs);
         }
     }
 
@@ -54,22 +65,27 @@ public class ConversacionInicial extends ResPwaTask{
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+        deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            requestService(srb, blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+        super.checkFinish(believes);
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+        System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: "+blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
+        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+            System.out.println("--- Check Finish Conversacion Inicial ---");
+            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+            blvs.getbEstadoInteraccion().setLogged(true);
+            blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             return true;
         }
         return false;
     }
-    
-}
 
+}

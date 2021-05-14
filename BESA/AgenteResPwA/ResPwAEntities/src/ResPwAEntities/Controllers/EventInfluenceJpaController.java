@@ -7,20 +7,19 @@ package ResPwAEntities.Controllers;
 
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
+import ResPwAEntities.EmotionalEntities.EventInfluence;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
-import ResPwAEntities.EmotionalEntities.EventInfluence;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author maria.f.garces.cala
+ * @author juans
  */
 public class EventInfluenceJpaController implements Serializable {
 
@@ -38,16 +37,7 @@ public class EventInfluenceJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            EmotionAxisConfig emotionaxisconfigId = eventInfluence.getEmotionaxisconfigId();
-            if (emotionaxisconfigId != null) {
-                emotionaxisconfigId = em.getReference(emotionaxisconfigId.getClass(), emotionaxisconfigId.getId());
-                eventInfluence.setEmotionaxisconfigId(emotionaxisconfigId);
-            }
             em.persist(eventInfluence);
-            if (emotionaxisconfigId != null) {
-                emotionaxisconfigId.getEventInfluenceList().add(eventInfluence);
-                emotionaxisconfigId = em.merge(emotionaxisconfigId);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findEventInfluence(eventInfluence.getId()) != null) {
@@ -66,22 +56,7 @@ public class EventInfluenceJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            EventInfluence persistentEventInfluence = em.find(EventInfluence.class, eventInfluence.getId());
-            EmotionAxisConfig emotionaxisconfigIdOld = persistentEventInfluence.getEmotionaxisconfigId();
-            EmotionAxisConfig emotionaxisconfigIdNew = eventInfluence.getEmotionaxisconfigId();
-            if (emotionaxisconfigIdNew != null) {
-                emotionaxisconfigIdNew = em.getReference(emotionaxisconfigIdNew.getClass(), emotionaxisconfigIdNew.getId());
-                eventInfluence.setEmotionaxisconfigId(emotionaxisconfigIdNew);
-            }
             eventInfluence = em.merge(eventInfluence);
-            if (emotionaxisconfigIdOld != null && !emotionaxisconfigIdOld.equals(emotionaxisconfigIdNew)) {
-                emotionaxisconfigIdOld.getEventInfluenceList().remove(eventInfluence);
-                emotionaxisconfigIdOld = em.merge(emotionaxisconfigIdOld);
-            }
-            if (emotionaxisconfigIdNew != null && !emotionaxisconfigIdNew.equals(emotionaxisconfigIdOld)) {
-                emotionaxisconfigIdNew.getEventInfluenceList().add(eventInfluence);
-                emotionaxisconfigIdNew = em.merge(emotionaxisconfigIdNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -110,11 +85,6 @@ public class EventInfluenceJpaController implements Serializable {
                 eventInfluence.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The eventInfluence with id " + id + " no longer exists.", enfe);
-            }
-            EmotionAxisConfig emotionaxisconfigId = eventInfluence.getEmotionaxisconfigId();
-            if (emotionaxisconfigId != null) {
-                emotionaxisconfigId.getEventInfluenceList().remove(eventInfluence);
-                emotionaxisconfigId = em.merge(emotionaxisconfigId);
             }
             em.remove(eventInfluence);
             em.getTransaction().commit();
