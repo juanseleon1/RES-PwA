@@ -526,7 +526,11 @@ class pepperModuleV2(object):
         if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
             self.retroalimentacionCompleta += " " + value
 
+<<<<<<< HEAD
         # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+=======
+        # EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+>>>>>>> f4c3bb868be5c905ae9121a9f65279e6fe04e7c3
         if (self.retroalimentacionCompleta.split().count() == 8):
             return (True, self.retroalimentacionCompleta)
         else:
