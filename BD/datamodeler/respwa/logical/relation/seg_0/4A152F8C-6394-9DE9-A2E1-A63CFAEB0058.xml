@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="BaileXPerfilPreferencia" directorySegmentName="seg_0" id="4A152F8C-6394-9DE9-A2E1-A63CFAEB0058">
+<createdBy>ASUS</createdBy>
+<createdTime>2021-05-06 22:47:30 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
+<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+</engineerTo>
+<targetPk>745C5862-9CD3-9CCD-7CAB-997A41EA13AC</targetPk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>5C085749-19FB-76D9-4327-FAD921200424</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>053F5D28-E2D6-F084-8633-F6C00A75B01C</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

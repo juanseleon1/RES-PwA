@@ -52,7 +52,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -100,6 +100,8 @@
 <indexColumnUsage>
 <colUsage columnID="090CE055-E8CC-5446-CC9A-A763F29B39C7"/>
 <colUsage columnID="573B49B0-3B8E-D5AF-E4E1-18A3890E7450"/>
+<colUsage columnID="94D579C4-B422-17E8-1B7B-D14A09B9E993"/>
+<colUsage columnID="3C8FEF3A-13BC-2989-6EF5-FB3C58724F15"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="7712D0BB-4B6F-2A13-BD8A-EC64CD42412D" name="RegistroActividad_ActividadPwA_FK">

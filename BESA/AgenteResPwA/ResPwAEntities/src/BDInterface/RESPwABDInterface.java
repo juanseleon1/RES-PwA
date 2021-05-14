@@ -128,6 +128,16 @@ public class RESPwABDInterface {
         return ajp.findActividadpwaEntities();
 
     }
+    
+    public static List<Antecedente> getActecedents() {
+        AntecedenteJpaController ajp = new AntecedenteJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findAntecedenteEntities();
+    }
+    
+    public static List<Regla> getRules() {
+        ReglaJpaController ajp = new ReglaJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ajp.findReglaEntities();
+    }
 
     public static void createRegistroAct(Registroactividad ra) {
         try {
@@ -149,9 +159,15 @@ public class RESPwABDInterface {
         return eapc.findEmotionAxisConfigEntities();
     }
 
-        public static List<Accion> getAcciones(){
+    public static List<Accion> getAcciones(){
         AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajc.findAccionEntities();
     }
+
+    public static List<Emocion> getEmociones(){
+        EmocionJpaController ejc = new EmocionJpaController(Persistence.createEntityManagerFactory(EMF));
+        return ejc.findEmocionEntities();
+    }
+    
 
 }

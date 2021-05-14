@@ -133,6 +133,7 @@ public class IniciarServicios extends ResPwaTask{
         infoServicio.put("ACTVOICERECOG", "SpeechRecognition"); //revisar nombre
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
         requestService(srb,blvs);
+        
         blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
         
     }
@@ -150,7 +151,7 @@ public class IniciarServicios extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+        super.checkFinish(believes);
 
         System.out.println("///////////////TFServicios//////////////");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;

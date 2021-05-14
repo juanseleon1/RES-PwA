@@ -80,4 +80,11 @@ public class EmotionalState {
         }
         return list;
     }
+
+    public List<EmotionAxis> getEmotions() {
+        return emotions;
+    }
+    
+    
+    
 }

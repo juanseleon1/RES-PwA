@@ -42,12 +42,12 @@ public class ReproduccionCancion extends ResPwaTask {
         //Tener en cuenta opcion seleccionada para mandar info
         //Dependiendo de canción seleccionada, seleccionar baile->se mandan tags, cambio velocidad->segun cancion y activar letra
 
-        if (1==0 && blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
-            String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());
+        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
+            String urlcancion = blvs.getbEstadoActividad().getCancionActual().getUrl();
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
             requestService(srb,blvs);
-        } else {
+        } /*else {
 
             List<Tags> tags = blvs.getbEstadoActividad().getCancionActual().getTagsList();
             List<Imagen> imagenes = new ArrayList<>();
@@ -70,11 +70,11 @@ public class ReproduccionCancion extends ResPwaTask {
             requestService(srb,blvs);
             
             infoServicio = new HashMap<>();
-            String cancion = AudioUtils.getCancion("Feliz cumpleaños");
+            String cancion = AudioUtils.getCancion("Feliz cumpleanos");
             infoServicio.put("PLAYSOUND", cancion);
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
             requestService(srb,blvs);
-        }
+        }*/
     }
 
     @Override

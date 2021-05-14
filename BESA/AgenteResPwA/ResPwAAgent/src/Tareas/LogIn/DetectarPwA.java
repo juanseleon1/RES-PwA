@@ -46,7 +46,7 @@ public class DetectarPwA extends ResPwaTask{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         //hay que cambiar este parametro
-        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getIdrobot());
+        infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getCedula());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
         requestService(srb,blvs);
     }

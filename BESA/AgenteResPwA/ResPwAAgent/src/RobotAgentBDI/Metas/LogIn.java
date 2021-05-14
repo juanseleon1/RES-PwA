@@ -33,24 +33,15 @@ public class LogIn extends GoalBDI{
 
     public static LogIn buildGoal() {
 
-        //falta mirar iniciarServicios
-        DetectarPwA detectarPwA = new DetectarPwA();
         IniciarServicios iniciarServicios = new IniciarServicios();
         ConversacionInicial conversacion = new ConversacionInicial();
-        LogInTask loginT = new LogInTask();
         List<String> resources = new ArrayList<>();
         List<Task> taskList = new ArrayList<>();
         
         Plan rolePlan= new Plan();
-        rolePlan.addTask(detectarPwA);
+        rolePlan.addTask(iniciarServicios);
         taskList = new ArrayList<>();
-        taskList.add(detectarPwA);
-        rolePlan.addTask(loginT,taskList);
-        taskList = new ArrayList<>();
-        taskList.add(loginT);
-        rolePlan.addTask(iniciarServicios,taskList);
-        taskList = new ArrayList<>();
-        taskList.add(loginT);
+        taskList.add(iniciarServicios);
         rolePlan.addTask(conversacion,taskList);
 
         RationalRole reiActRole = new RationalRole(descrip, rolePlan);
@@ -76,7 +67,7 @@ public class LogIn extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
-        if (blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged() && blvs.getbEstadoInteraccion().isSaludo()) {
+        if (blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged() || blvs.getbEstadoInteraccion().isSaludo()) {
             return 1.0;
         }
         
@@ -94,7 +85,7 @@ public class LogIn extends GoalBDI{
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta LogIn evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return 1.0 + blvs.getbEstadoActividad().getBoostLogIn();
+        return blvs.getbEstadoInteraccion().isLogged()? 0: 1.0;
     }
 
     @Override

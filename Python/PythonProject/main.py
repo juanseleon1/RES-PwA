@@ -6,12 +6,19 @@ import sys
 import argparse
 from Message import messageManager
 from Robot import Robot
-from Utils import activities_running, send
-
+from Utils import activities_running, send, callbacks_running
 
 
 # ------------------------------------- -------------Functions-----------------------------------------------------------------------
+def timer_callbacks():
+    # Execute all callback functions to know if all callback-activities are finished
+    for key, function in callbacks_running.items():
+        function()
+
+    threading.Timer(1.0, timer_callbacks).start()
+
 def timer_activities():
+
     for key, value in activities_running.items():
         send(value.getIdResponse(), value.getResponseType(), value.getParams())
 
@@ -81,7 +88,7 @@ PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
 ADDR = (HOST_LOCAL, PORT)
 server = None
-HEADER = 1024
+HEADER = 10000
 FORMAT = 'utf-8'
 
 # send( "id", "ROB", True)
@@ -97,12 +104,10 @@ try:
     app = qi.Application(["ResPwa", "--qi-url=" + connection_url])
     app.start()
     session = app.session
-    #session.connect("tcp://" + args.ip + ":" + str(args.port))
 except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) + ".\n"
                                                                                           "Please check your script arguments. Run with -h option for help.")
     sys.exit(1)
-print("achu")
 print("Server starting...pop11111111111111111112")
 # ----------------------------------------------------------------------------------------------------
 
@@ -127,7 +132,7 @@ print("[STARTING] server is listening on", HOST_LOCAL)
 t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
-robot = Robot(session)
+robot = Robot(app, session)
 while 1:
     conn, addr = server.accept()
     thread = threading.Thread(target=handle_client)

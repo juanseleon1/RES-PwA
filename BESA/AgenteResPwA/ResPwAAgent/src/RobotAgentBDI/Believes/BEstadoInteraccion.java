@@ -15,7 +15,7 @@ import rational.mapping.Believes;
  * @author mafegarces
  */
 public class BEstadoInteraccion implements Believes{
-    private boolean logged=true;
+    private boolean logged=false;
     private boolean cambioDificultadVoz=false;
     private boolean ayudaActividadSolicitada=false;
     private boolean quiereEnriquec=false;
@@ -30,9 +30,7 @@ public class BEstadoInteraccion implements Believes{
     private double distanciaPwA=0;
     private boolean estaHablando=false;
     private boolean estaMoviendo=false;
-    private boolean estaKaraokeando=false;
     private boolean desplazandose=false;
-    private boolean quiereCantar=false;
     private boolean hayInteraccionFisica = false;
     private boolean detectaPwA = false;
     private boolean detectaPersona = false;
@@ -85,7 +83,7 @@ public class BEstadoInteraccion implements Believes{
             confirmacionRepAud= Boolean.valueOf((String)infoRecibida.getDataP().get(keyNameConf+"Audio"));
         }
         if(infoRecibida.getDataP().containsKey("faceDetected")){
-            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
+//            System.out.println("ENTROOOO"+(boolean) infoRecibida.getDataP().get("faceDetected"));
             detectaPwA= (boolean) infoRecibida.getDataP().get("faceDetected");
             tiempoSinInt=0;
         }
@@ -93,10 +91,6 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("humanLost")){
             detectaPwA= false;
             tiempoSinInt=System.currentTimeMillis();
-        }
-        if(infoRecibida.getDataP().containsKey("canto")){
-            quiereCantar= Boolean.valueOf((String)infoRecibida.getDataP().get("canto"));
-
         }if(infoRecibida.getDataP().containsKey("enriq")){
             quiereEnriquec= Boolean.valueOf((String)infoRecibida.getDataP().get("enriq"));
             if(quiereEnriquec && nivelEnriquecimiento < MAXENRIQ)
@@ -115,7 +109,8 @@ public class BEstadoInteraccion implements Believes{
            reiniciarInt = Boolean.valueOf((String)infoRecibida.getDataP().get("reiniciarint"));
             
         }if(infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")){
-          distanciaPwA  = (double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            Double aux =(Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+          distanciaPwA  = aux==null? -1:aux;
            
         }if(infoRecibida.getDataP().containsKey("dialogIsStarted")){
           estaHablando = true;
@@ -141,13 +136,10 @@ public class BEstadoInteraccion implements Believes{
         if(infoRecibida.getDataP().containsKey("initServ")){
            confirmarActServicios = Boolean.valueOf((String)infoRecibida.getDataP().get("initServ"));
         }
-        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
-           recibirRespuestaPwA = true;
-           
-        }if(infoRecibida.getDataP().containsKey("karaokeando")){
-          estaKaraokeando = Boolean.valueOf((String)infoRecibida.getDataP().get("karaokeando"));
-            
-        }
+//        if(infoRecibida.getDataP().containsKey("speechDetected") || infoRecibida.getDataP().containsKey("wordRecognized")){
+//           recibirRespuestaPwA = true;
+//           
+//        }
         if(infoRecibida.getDataP().containsKey("wavingDetection")){
             movManoSaludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
             saludo = Boolean.valueOf((String)infoRecibida.getDataP().get("wavingDetection"));
@@ -171,6 +163,8 @@ public class BEstadoInteraccion implements Believes{
             if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
                 modificarPreferencias = true;
             }
+            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
+            recibirRespuestaPwA = true;
         }
         
         return true;
@@ -296,14 +290,6 @@ public class BEstadoInteraccion implements Believes{
         this.detectaPwA = detectaPwA;
     }
 
-    public boolean isQuiereCantar() {
-        return quiereCantar;
-    }
-
-    public void setQuiereCantar(boolean quiereCantar) {
-        this.quiereCantar = quiereCantar;
-    }
-
     public long getVelocidadAnim() {
         return velocidadAnim;
     }
@@ -393,17 +379,9 @@ public class BEstadoInteraccion implements Believes{
     public boolean isRecibirRespuestaPwA() {
         return recibirRespuestaPwA;
     }
-
+    
     public void setRecibirRespuestaPwA(boolean recibirRespuestaPwA) {
         this.recibirRespuestaPwA = recibirRespuestaPwA;
-    }
-
-    public boolean isEstaKaraokeando() {
-        return estaKaraokeando;
-    }
-
-    public void setEstaKaraokeando(boolean estaKaraokeando) {
-        this.estaKaraokeando = estaKaraokeando;
     }
 
     public boolean isMovManoSaludo() {

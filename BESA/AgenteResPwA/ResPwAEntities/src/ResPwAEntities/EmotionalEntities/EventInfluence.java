@@ -51,4 +51,4 @@ public class EventInfluence implements Serializable {
         this.eventInfluence = eventInfluence;
     }
     
-}
+}   

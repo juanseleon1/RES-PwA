@@ -4,6 +4,7 @@ from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
 
 activities_running = {}
+callbacks_running = {}
 
 # responsesXTime is a dictionary with the responses and the time of each one, to make a restriction of the number of responses
 # ed to BESA
@@ -29,6 +30,7 @@ def send(id_response, responseType, params):
     should_send_message = True
     key = params.keys().pop()
     if key in responsesXTime:
+        print "key: ", key
         should_send_message = checkTimeMessageSended(key)
     else:
         responsesXTime[key] = datetime.now()
@@ -63,9 +65,9 @@ def checkTimeMessageSended(params):
     # print("PARAMS: " + str( responsesXTime.get( params ) ))
     if (responsesXTime.get(params).hour - datetime.now().hour) < 1:
 
-        if (responsesXTime.get(params).minute - datetime.now().minute) < 1:
+        if (responsesXTime.get(params).minute - datetime.now().minute) < 2:
 
-            if (abs(datetime.now().second - responsesXTime.get(params).second)) < 2:
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) < 5:
                 print("Change")
                 isCorrectToSend = False
 

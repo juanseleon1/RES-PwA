@@ -41,9 +41,9 @@ public class RecomendarCuento extends ResPwaTask{
         Cuento cuentoEleg = null;
         List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
         for(Cuento c: cuentos) {
-            if( c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3 >= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
+            if( c.getGusto()*0.7 >= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
                 cuentoEleg = c;
-                gusto = (float) (c.getGusto()*0.7 + c.getGeneroGenero().getGusto()*0.3);
+                gusto = (float) (c.getGusto()*0.7);
             }
         }
         blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);

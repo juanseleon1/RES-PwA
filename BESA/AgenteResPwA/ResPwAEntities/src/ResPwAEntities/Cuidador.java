@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,12 +28,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUIDADOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c")
-    , @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario")
-    , @NamedQuery(name = "Cuidador.findByContrase\u00f1a", query = "SELECT c FROM Cuidador c WHERE c.contrase\u00f1a = :contrase\u00f1a")
-    , @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo")
-    , @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
+    @NamedQuery(name = "Cuidador.findAll", query = "SELECT c FROM Cuidador c"),
+    @NamedQuery(name = "Cuidador.findByNombreusuario", query = "SELECT c FROM Cuidador c WHERE c.nombreusuario = :nombreusuario"),
+    @NamedQuery(name = "Cuidador.findByContrasena", query = "SELECT c FROM Cuidador c WHERE c.contrasena = :contrasena"),
+    @NamedQuery(name = "Cuidador.findByNombre", query = "SELECT c FROM Cuidador c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cuidador.findByCorreo", query = "SELECT c FROM Cuidador c WHERE c.correo = :correo"),
+    @NamedQuery(name = "Cuidador.findByCelular", query = "SELECT c FROM Cuidador c WHERE c.celular = :celular")})
 public class Cuidador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +43,7 @@ public class Cuidador implements Serializable {
     private String nombreusuario;
     @Basic(optional = false)
     @Column(name = "CONTRASENA")
-    private String contraseña;
+    private String contrasena;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
@@ -52,7 +53,7 @@ public class Cuidador implements Serializable {
     @Basic(optional = false)
     @Column(name = "CELULAR")
     private String celular;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadorNombreusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuidadorNombreusuario", fetch = FetchType.EAGER)
     private List<Perfilpwa> perfilpwaList;
 
     public Cuidador() {
@@ -62,9 +63,9 @@ public class Cuidador implements Serializable {
         this.nombreusuario = nombreusuario;
     }
 
-    public Cuidador(String nombreusuario, String contraseña, String nombre, String correo, String celular) {
+    public Cuidador(String nombreusuario, String contrasena, String nombre, String correo, String celular) {
         this.nombreusuario = nombreusuario;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
@@ -78,12 +79,12 @@ public class Cuidador implements Serializable {
         this.nombreusuario = nombreusuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {

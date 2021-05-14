@@ -39,6 +39,7 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
 
 
     public PepperEmotionalModel() {
+        super();
 
     }
 
@@ -70,6 +71,7 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
          for(EmotionalEventType evt: EmotionalEventType.values()){
              setEventDesirability(evt.toString(), evt.getConfig());
          }
+         
     }
 
     
@@ -83,11 +85,14 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
             emoAxis= new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
             evtinf=emotionAxisConfig.getEventInfluence();
             for (EventInfluence eventInfluence : evtinf) {
-                emoAxis.setEventInfluence(eventInfluence.getEventName(), eventInfluence.getEventInfluence());
+                emoAxis.setEventInfluence(eventInfluence.getEventName(), (float) eventInfluence.getEventInfluence());
             }
-            emoax.add(emoAxis);
+            System.out.println("Adding emotional axis: "+ emoAxis.toString());
+            this.addEmotionAxis(emoAxis);
         }
-    }
+//        emotionalState.getEmotions().get(0).printEventInfluences();
+//        System.out.println("Emotions "+emotionalState.getEmotions().get(0).getEventInfluences().size() );
+}
     
     
     public void requestService(ServiceDataRequest sdr)

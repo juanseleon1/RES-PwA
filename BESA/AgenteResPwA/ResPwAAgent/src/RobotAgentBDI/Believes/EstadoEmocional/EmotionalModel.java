@@ -17,8 +17,8 @@ import rational.services.ActivateAsynchronousServiceGuard;
 
 public abstract class EmotionalModel {
 
-    private final EmotionalState emotionalState;
-    private final Personality personality;
+    protected final EmotionalState emotionalState;
+    protected final Personality personality;
 
     public EmotionalModel() {
         this.emotionalState = new EmotionalState();
@@ -68,8 +68,8 @@ public abstract class EmotionalModel {
                 + Utils.Config.EventWeight * Math.abs(event)
                 + Utils.Config.ObjectWeight * Math.abs(object);
         boolean valence = estimateValence(person, event, object);
-        //System.out.println("P:" + person + " E:" + event + " O:" + object);
-        //System.out.println("Val: " + valence);
+        System.out.println("P:" + person + " E:" + event + " O:" + object);
+        System.out.println("Val: " + valence);
         intensity = (valence ? 1 : -1) * intensity;
         return intensity;
     }
@@ -120,6 +120,7 @@ public abstract class EmotionalModel {
                 typeName = "Objetos";
             }
             String msg = "El diccionario semántico de " + typeName + " no contiene un item con el nombre " + key;
+            System.out.println("ERROR: "+msg);
             Logger.getLogger(EmotionalModel.class.getName()).log(Level.WARNING, msg);
         }
     }
@@ -139,8 +140,10 @@ public abstract class EmotionalModel {
     
         protected EmotionAxis getTopEmotionAxis() throws CloneNotSupportedException {
             EmotionAxis maxAx=null;
-            double val=Double.MIN_VALUE;
-        for (EmotionAxis e : emotionalState.getEmotionsListCopy()) {
+            double val=Double.NEGATIVE_INFINITY;
+        List<EmotionAxis> emoList = emotionalState.getEmotionsListCopy();
+            System.out.println("Ejes de la lista: " + emoList.size());
+        for (EmotionAxis e : emoList) {
                 if(e.getCurrentValue()> val){
                     maxAx=e;
                     val=e.getCurrentValue();

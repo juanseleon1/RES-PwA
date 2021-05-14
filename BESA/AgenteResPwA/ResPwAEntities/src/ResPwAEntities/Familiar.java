@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -33,13 +34,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "FAMILIAR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Familiar.findAll", query = "SELECT f FROM Familiar f")
-    , @NamedQuery(name = "Familiar.findById", query = "SELECT f FROM Familiar f WHERE f.id = :id")
-    , @NamedQuery(name = "Familiar.findByNombre", query = "SELECT f FROM Familiar f WHERE f.nombre = :nombre")
-    , @NamedQuery(name = "Familiar.findByParentesco", query = "SELECT f FROM Familiar f WHERE f.parentesco = :parentesco")
-    , @NamedQuery(name = "Familiar.findByInteres", query = "SELECT f FROM Familiar f WHERE f.interes = :interes")
-    , @NamedQuery(name = "Familiar.findByEstavivo", query = "SELECT f FROM Familiar f WHERE f.estavivo = :estavivo")
-    , @NamedQuery(name = "Familiar.findByNacimiento", query = "SELECT f FROM Familiar f WHERE f.nacimiento = :nacimiento")})
+    @NamedQuery(name = "Familiar.findAll", query = "SELECT f FROM Familiar f"),
+    @NamedQuery(name = "Familiar.findById", query = "SELECT f FROM Familiar f WHERE f.id = :id"),
+    @NamedQuery(name = "Familiar.findByNombre", query = "SELECT f FROM Familiar f WHERE f.nombre = :nombre"),
+    @NamedQuery(name = "Familiar.findByParentesco", query = "SELECT f FROM Familiar f WHERE f.parentesco = :parentesco"),
+    @NamedQuery(name = "Familiar.findByInteres", query = "SELECT f FROM Familiar f WHERE f.interes = :interes"),
+    @NamedQuery(name = "Familiar.findByEstavivo", query = "SELECT f FROM Familiar f WHERE f.estavivo = :estavivo"),
+    @NamedQuery(name = "Familiar.findByNacimiento", query = "SELECT f FROM Familiar f WHERE f.nacimiento = :nacimiento")})
 public class Familiar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +67,7 @@ public class Familiar implements Serializable {
     @JoinTable(name = "FAMILIARES", joinColumns = {
         @JoinColumn(name = "FAMILIAR_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfilpwa> perfilpwaList;
 
     public Familiar() {

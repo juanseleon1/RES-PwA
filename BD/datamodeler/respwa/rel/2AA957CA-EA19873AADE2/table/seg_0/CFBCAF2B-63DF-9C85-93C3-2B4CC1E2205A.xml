@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CFBCAF2B-63DF-9C85-93C3-2B4CC1E2205A" name="BaileXPerfilPreferencia">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Baile_id" id="261A7A87-F176-85BF-0672-93D7424B16A3">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F1C1A52E-88F3-EC79-6E0B-0CA4E71BA815" referredColumn="5B115906-05F6-82A8-A7B0-3673DE8467EF"/>
+</associations>
+</Column>
+<Column name="Perfil_Preferencia_cedula" id="E678544B-3A86-6D12-76A0-BE32A0698527">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3A9FE012-E9F3-62F0-4A82-97DAAFE66B48" referredColumn="7BA103AA-E512-DF4D-5B80-054046BE76CF"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AAF544F7-A0E9-9A93-197D-C765127AF77F" name="BaileXPerfilPreferencia_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="261A7A87-F176-85BF-0672-93D7424B16A3"/>
+<colUsage columnID="E678544B-3A86-6D12-76A0-BE32A0698527"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B152DC12-D478-73E1-D232-E0F7392D2959" name="BaileXPerfilPreferencia_Baile_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="261A7A87-F176-85BF-0672-93D7424B16A3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FBE982B9-24B3-D188-BEBF-8837DB8C8A8A" name="BaileXPerfilPreferencia_Perfil_Preferencia_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-08 16:01:29 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E678544B-3A86-6D12-76A0-BE32A0698527"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

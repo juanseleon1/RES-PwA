@@ -11,13 +11,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ResPwAEntities.Registroactividad;
+import java.util.ArrayList;
+import java.util.List;
 import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
-import java.util.ArrayList;
-import java.util.List;
-import ResPwAEntities.Registroactividad;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.EntityManager;
@@ -39,29 +39,38 @@ public class ActividadpwaJpaController implements Serializable {
     }
 
     public void create(Actividadpwa actividadpwa) throws PreexistingEntityException, Exception {
-        if (actividadpwa.getActxpreferenciaList() == null) {
-            actividadpwa.setActxpreferenciaList(new ArrayList<Actxpreferencia>());
-        }
         if (actividadpwa.getRegistroactividadList() == null) {
             actividadpwa.setRegistroactividadList(new ArrayList<Registroactividad>());
+        }
+        if (actividadpwa.getActxpreferenciaList() == null) {
+            actividadpwa.setActxpreferenciaList(new ArrayList<Actxpreferencia>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Actxpreferencia> attachedActxpreferenciaList = new ArrayList<Actxpreferencia>();
-            for (Actxpreferencia actxpreferenciaListActxpreferenciaToAttach : actividadpwa.getActxpreferenciaList()) {
-                actxpreferenciaListActxpreferenciaToAttach = em.getReference(actxpreferenciaListActxpreferenciaToAttach.getClass(), actxpreferenciaListActxpreferenciaToAttach.getActxpreferenciaPK());
-                attachedActxpreferenciaList.add(actxpreferenciaListActxpreferenciaToAttach);
-            }
-            actividadpwa.setActxpreferenciaList(attachedActxpreferenciaList);
             List<Registroactividad> attachedRegistroactividadList = new ArrayList<Registroactividad>();
             for (Registroactividad registroactividadListRegistroactividadToAttach : actividadpwa.getRegistroactividadList()) {
                 registroactividadListRegistroactividadToAttach = em.getReference(registroactividadListRegistroactividadToAttach.getClass(), registroactividadListRegistroactividadToAttach.getRegistroactividadPK());
                 attachedRegistroactividadList.add(registroactividadListRegistroactividadToAttach);
             }
             actividadpwa.setRegistroactividadList(attachedRegistroactividadList);
+            List<Actxpreferencia> attachedActxpreferenciaList = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListActxpreferenciaToAttach : actividadpwa.getActxpreferenciaList()) {
+                actxpreferenciaListActxpreferenciaToAttach = em.getReference(actxpreferenciaListActxpreferenciaToAttach.getClass(), actxpreferenciaListActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaList.add(actxpreferenciaListActxpreferenciaToAttach);
+            }
+            actividadpwa.setActxpreferenciaList(attachedActxpreferenciaList);
             em.persist(actividadpwa);
+            for (Registroactividad registroactividadListRegistroactividad : actividadpwa.getRegistroactividadList()) {
+                Actividadpwa oldActividadpwaOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getActividadpwa();
+                registroactividadListRegistroactividad.setActividadpwa(actividadpwa);
+                registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
+                if (oldActividadpwaOfRegistroactividadListRegistroactividad != null) {
+                    oldActividadpwaOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
+                    oldActividadpwaOfRegistroactividadListRegistroactividad = em.merge(oldActividadpwaOfRegistroactividadListRegistroactividad);
+                }
+            }
             for (Actxpreferencia actxpreferenciaListActxpreferencia : actividadpwa.getActxpreferenciaList()) {
                 Actividadpwa oldActividadpwaOfActxpreferenciaListActxpreferencia = actxpreferenciaListActxpreferencia.getActividadpwa();
                 actxpreferenciaListActxpreferencia.setActividadpwa(actividadpwa);
@@ -69,15 +78,6 @@ public class ActividadpwaJpaController implements Serializable {
                 if (oldActividadpwaOfActxpreferenciaListActxpreferencia != null) {
                     oldActividadpwaOfActxpreferenciaListActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListActxpreferencia);
                     oldActividadpwaOfActxpreferenciaListActxpreferencia = em.merge(oldActividadpwaOfActxpreferenciaListActxpreferencia);
-                }
-            }
-            for (Registroactividad registroactividadListRegistroactividad : actividadpwa.getRegistroactividadList()) {
-                Actividadpwa oldActividadpwaIdOfRegistroactividadListRegistroactividad = registroactividadListRegistroactividad.getActividadpwaId();
-                registroactividadListRegistroactividad.setActividadpwaId(actividadpwa);
-                registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
-                if (oldActividadpwaIdOfRegistroactividadListRegistroactividad != null) {
-                    oldActividadpwaIdOfRegistroactividadListRegistroactividad.getRegistroactividadList().remove(registroactividadListRegistroactividad);
-                    oldActividadpwaIdOfRegistroactividadListRegistroactividad = em.merge(oldActividadpwaIdOfRegistroactividadListRegistroactividad);
                 }
             }
             em.getTransaction().commit();
@@ -99,11 +99,19 @@ public class ActividadpwaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Actividadpwa persistentActividadpwa = em.find(Actividadpwa.class, actividadpwa.getId());
-            List<Actxpreferencia> actxpreferenciaListOld = persistentActividadpwa.getActxpreferenciaList();
-            List<Actxpreferencia> actxpreferenciaListNew = actividadpwa.getActxpreferenciaList();
             List<Registroactividad> registroactividadListOld = persistentActividadpwa.getRegistroactividadList();
             List<Registroactividad> registroactividadListNew = actividadpwa.getRegistroactividadList();
+            List<Actxpreferencia> actxpreferenciaListOld = persistentActividadpwa.getActxpreferenciaList();
+            List<Actxpreferencia> actxpreferenciaListNew = actividadpwa.getActxpreferenciaList();
             List<String> illegalOrphanMessages = null;
+            for (Registroactividad registroactividadListOldRegistroactividad : registroactividadListOld) {
+                if (!registroactividadListNew.contains(registroactividadListOldRegistroactividad)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Registroactividad " + registroactividadListOldRegistroactividad + " since its actividadpwa field is not nullable.");
+                }
+            }
             for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
                 if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
                     if (illegalOrphanMessages == null) {
@@ -115,13 +123,6 @@ public class ActividadpwaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
-            for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
-                actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
-                attachedActxpreferenciaListNew.add(actxpreferenciaListNewActxpreferenciaToAttach);
-            }
-            actxpreferenciaListNew = attachedActxpreferenciaListNew;
-            actividadpwa.setActxpreferenciaList(actxpreferenciaListNew);
             List<Registroactividad> attachedRegistroactividadListNew = new ArrayList<Registroactividad>();
             for (Registroactividad registroactividadListNewRegistroactividadToAttach : registroactividadListNew) {
                 registroactividadListNewRegistroactividadToAttach = em.getReference(registroactividadListNewRegistroactividadToAttach.getClass(), registroactividadListNewRegistroactividadToAttach.getRegistroactividadPK());
@@ -129,7 +130,25 @@ public class ActividadpwaJpaController implements Serializable {
             }
             registroactividadListNew = attachedRegistroactividadListNew;
             actividadpwa.setRegistroactividadList(registroactividadListNew);
+            List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
+            for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
+                actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
+                attachedActxpreferenciaListNew.add(actxpreferenciaListNewActxpreferenciaToAttach);
+            }
+            actxpreferenciaListNew = attachedActxpreferenciaListNew;
+            actividadpwa.setActxpreferenciaList(actxpreferenciaListNew);
             actividadpwa = em.merge(actividadpwa);
+            for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
+                if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
+                    Actividadpwa oldActividadpwaOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getActividadpwa();
+                    registroactividadListNewRegistroactividad.setActividadpwa(actividadpwa);
+                    registroactividadListNewRegistroactividad = em.merge(registroactividadListNewRegistroactividad);
+                    if (oldActividadpwaOfRegistroactividadListNewRegistroactividad != null && !oldActividadpwaOfRegistroactividadListNewRegistroactividad.equals(actividadpwa)) {
+                        oldActividadpwaOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
+                        oldActividadpwaOfRegistroactividadListNewRegistroactividad = em.merge(oldActividadpwaOfRegistroactividadListNewRegistroactividad);
+                    }
+                }
+            }
             for (Actxpreferencia actxpreferenciaListNewActxpreferencia : actxpreferenciaListNew) {
                 if (!actxpreferenciaListOld.contains(actxpreferenciaListNewActxpreferencia)) {
                     Actividadpwa oldActividadpwaOfActxpreferenciaListNewActxpreferencia = actxpreferenciaListNewActxpreferencia.getActividadpwa();
@@ -138,23 +157,6 @@ public class ActividadpwaJpaController implements Serializable {
                     if (oldActividadpwaOfActxpreferenciaListNewActxpreferencia != null && !oldActividadpwaOfActxpreferenciaListNewActxpreferencia.equals(actividadpwa)) {
                         oldActividadpwaOfActxpreferenciaListNewActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListNewActxpreferencia);
                         oldActividadpwaOfActxpreferenciaListNewActxpreferencia = em.merge(oldActividadpwaOfActxpreferenciaListNewActxpreferencia);
-                    }
-                }
-            }
-            for (Registroactividad registroactividadListOldRegistroactividad : registroactividadListOld) {
-                if (!registroactividadListNew.contains(registroactividadListOldRegistroactividad)) {
-                    registroactividadListOldRegistroactividad.setActividadpwaId(null);
-                    registroactividadListOldRegistroactividad = em.merge(registroactividadListOldRegistroactividad);
-                }
-            }
-            for (Registroactividad registroactividadListNewRegistroactividad : registroactividadListNew) {
-                if (!registroactividadListOld.contains(registroactividadListNewRegistroactividad)) {
-                    Actividadpwa oldActividadpwaIdOfRegistroactividadListNewRegistroactividad = registroactividadListNewRegistroactividad.getActividadpwaId();
-                    registroactividadListNewRegistroactividad.setActividadpwaId(actividadpwa);
-                    registroactividadListNewRegistroactividad = em.merge(registroactividadListNewRegistroactividad);
-                    if (oldActividadpwaIdOfRegistroactividadListNewRegistroactividad != null && !oldActividadpwaIdOfRegistroactividadListNewRegistroactividad.equals(actividadpwa)) {
-                        oldActividadpwaIdOfRegistroactividadListNewRegistroactividad.getRegistroactividadList().remove(registroactividadListNewRegistroactividad);
-                        oldActividadpwaIdOfRegistroactividadListNewRegistroactividad = em.merge(oldActividadpwaIdOfRegistroactividadListNewRegistroactividad);
                     }
                 }
             }
@@ -188,6 +190,13 @@ public class ActividadpwaJpaController implements Serializable {
                 throw new NonexistentEntityException("The actividadpwa with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<Registroactividad> registroactividadListOrphanCheck = actividadpwa.getRegistroactividadList();
+            for (Registroactividad registroactividadListOrphanCheckRegistroactividad : registroactividadListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Actividadpwa (" + actividadpwa + ") cannot be destroyed since the Registroactividad " + registroactividadListOrphanCheckRegistroactividad + " in its registroactividadList field has a non-nullable actividadpwa field.");
+            }
             List<Actxpreferencia> actxpreferenciaListOrphanCheck = actividadpwa.getActxpreferenciaList();
             for (Actxpreferencia actxpreferenciaListOrphanCheckActxpreferencia : actxpreferenciaListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
@@ -197,11 +206,6 @@ public class ActividadpwaJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<Registroactividad> registroactividadList = actividadpwa.getRegistroactividadList();
-            for (Registroactividad registroactividadListRegistroactividad : registroactividadList) {
-                registroactividadListRegistroactividad.setActividadpwaId(null);
-                registroactividadListRegistroactividad = em.merge(registroactividadListRegistroactividad);
             }
             em.remove(actividadpwa);
             em.getTransaction().commit();

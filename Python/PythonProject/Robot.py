@@ -1,15 +1,19 @@
 import threading
 import time
+
+import Constants
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
 from Topics import *
-from Utils import activities_running, send
+from Utils import activities_running, send, callbacks_running
 
 
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
-    def __init__(self, session):
+    def __init__(self, app, session):
+        self.app=app
+        self.current_emomap = None
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
         self.alProxy = session.service("ALMemory")
@@ -30,7 +34,6 @@ class Robot:
         self.alNavigationProxy = session.service("ALNavigation")
         self.alLocalizationProxy = session.service("ALLocalization")
         self.alSensorsProxy = session.service("ALSensors")
-        self.alTabletService = session.service("ALTabletService")
         self.alAnimatedSpeech = session.service("ALAnimatedSpeech")
         self.alAudioDevice = session.service("ALAudioDevice")
         self.alAudioPlayer = session.service("ALAudioPlayer")
@@ -53,8 +56,10 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
+        self.alTabletService = None
         self.topicMap = {}
-
+        self.prof_emotions = dict()
+        self.sensorsModule = None
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
@@ -74,7 +79,9 @@ class Robot:
        # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
-        #self.init_topics()
+        if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
+            print "Iniciando Topics"
+            self.init_topics()
 
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
@@ -83,7 +90,9 @@ class Robot:
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
         time.sleep(5)
-        self.init_timers()
+        print "ROBOT CARGADO Y LISTO"
+
+
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
@@ -119,6 +128,7 @@ class Robot:
             "MOVEFORWARD": [self.move_forward, True, "act", True],  #
             "MOVETO": [self.move_to, True, "act", True],  #
             "MOVETOPOSITION": [self.move_to_position, True, "act", True],  #
+            "INITIALCONF": [self.initial_conf, False, "rob", True],
             # RobotStateServices-------------------------------------------------------
             "WAKEUP": [self.wake_up, True, "act", False],  #
             "SUSPEND": [self.suspend, True, "act", False],  #
@@ -162,17 +172,10 @@ class Robot:
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
-            "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False]
+            "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
         }
 
         # Declare the modules --------------------------------------------------------------------------------
-
-        try:
-            self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-        except Exception, e:
-            print "Main Error"
-            print e
-            exit(1)
 
     def getFunction(self, fun):
         return self.__modules.get(fun)[0]
@@ -217,7 +220,7 @@ class Robot:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
             print "TIMES  -> ", animation_times
-            self.alMotion.angleInterpolation(animation_names, animation_keys, animation_times, True)
+            self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
         except BaseException, err:
             print err
 
@@ -391,6 +394,32 @@ class Robot:
     def move_to_position(self, position):
         self.alLocalizationProxy.goToPosition(position)
 
+    def initial_conf(self, prof_emotions):
+        self.prof_emotions = prof_emotions["INITIALCONF"]
+        print("VER IDENT ", self.prof_emotions)
+        if len(self.prof_emotions) == 5:
+            try:
+                self.init_timers()
+                self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+                self.alTabletService = self.session.service("ALTabletService")
+                self.app.run()
+            except Exception, e:
+                print "Main Error"
+                print e
+                exit(1)
+
+    def request_posture_change(self, params):
+        actions = self.current_emomap[params.get("ACTION")]
+        names = list()
+        times = list()
+        keys = list()
+        for name, action in actions.items():
+            names.append(name)
+            keys.append(action["key"])
+            times.append(action["time"])
+        
+        self.play_animation(names, times, keys)
+
     # The robot wakes up
     def wake_up(self):
         self.alMotionProxy.wakeUp()
@@ -419,7 +448,7 @@ class Robot:
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
         duration = self.emotionStateRobot.getDurationEyesColor()
-        self.alLedsProxy.rotateEyes(color, rotationDuration, duration)
+        self.alLedsProxy.rotateEyes(int(color, 16), rotationDuration, duration)
 
     # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
@@ -433,6 +462,9 @@ class Robot:
         self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
+        self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
+        emomapParams = { "ACTION": "POSTURA"}
+        self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
@@ -458,7 +490,8 @@ class Robot:
         self.alTabletService.enableWifi()
         # print "CRACK", self.alTabletService.getWifiStatus()
         # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-        self.alTabletService.playVideo("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+
+        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):

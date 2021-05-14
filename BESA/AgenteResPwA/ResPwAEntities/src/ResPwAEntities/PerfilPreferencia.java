@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -31,13 +32,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PERFIL_PREFERENCIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PerfilPreferencia.findAll", query = "SELECT p FROM PerfilPreferencia p")
-    , @NamedQuery(name = "PerfilPreferencia.findByPerfilpwaCedula", query = "SELECT p FROM PerfilPreferencia p WHERE p.perfilpwaCedula = :perfilpwaCedula")
-    , @NamedQuery(name = "PerfilPreferencia.findByNombrepreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.nombrepreferido = :nombrepreferido")
-    , @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke")
-    , @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica")
-    , @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile")
-    , @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido")})
+    @NamedQuery(name = "PerfilPreferencia.findAll", query = "SELECT p FROM PerfilPreferencia p"),
+    @NamedQuery(name = "PerfilPreferencia.findByPerfilpwaCedula", query = "SELECT p FROM PerfilPreferencia p WHERE p.perfilpwaCedula = :perfilpwaCedula"),
+    @NamedQuery(name = "PerfilPreferencia.findByNombrepreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.nombrepreferido = :nombrepreferido"),
+    @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke"),
+    @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica"),
+    @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile"),
+    @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido")})
 public class PerfilPreferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,15 +61,17 @@ public class PerfilPreferencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "VOLPREFERIDO")
     private BigInteger volpreferido;
-    @ManyToMany(mappedBy = "perfilPreferenciaList")
+    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
+    private List<Baile> baileList;
+    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
     private List<Cuento> cuentoList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList")
+    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia")
-    private List<Actxpreferencia> actxpreferenciaList;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
     private Perfilpwa perfilpwa;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Actxpreferencia> actxpreferenciaList;
 
     public PerfilPreferencia() {
     }
@@ -135,6 +138,15 @@ public class PerfilPreferencia implements Serializable {
     }
 
     @XmlTransient
+    public List<Baile> getBaileList() {
+        return baileList;
+    }
+
+    public void setBaileList(List<Baile> baileList) {
+        this.baileList = baileList;
+    }
+
+    @XmlTransient
     public List<Cuento> getCuentoList() {
         return cuentoList;
     }
@@ -152,6 +164,14 @@ public class PerfilPreferencia implements Serializable {
         this.cancionList = cancionList;
     }
 
+    public Perfilpwa getPerfilpwa() {
+        return perfilpwa;
+    }
+
+    public void setPerfilpwa(Perfilpwa perfilpwa) {
+        this.perfilpwa = perfilpwa;
+    }
+
     @XmlTransient
     public List<Actxpreferencia> getActxpreferenciaList() {
         return actxpreferenciaList;
@@ -159,14 +179,6 @@ public class PerfilPreferencia implements Serializable {
 
     public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
         this.actxpreferenciaList = actxpreferenciaList;
-    }
-
-    public Perfilpwa getPerfilpwa() {
-        return perfilpwa;
-    }
-
-    public void setPerfilpwa(Perfilpwa perfilpwa) {
-        this.perfilpwa = perfilpwa;
     }
 
     @Override

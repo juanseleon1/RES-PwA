@@ -31,6 +31,7 @@
     <class>ResPwAEntities.Joint</class>
     <class>ResPwAEntities.Regla</class>
     <class>ResPwAEntities.Robot</class>
+    <class>ResPwAEntities.Baile</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>
       <property name="javax.persistence.jdbc.user" value="respwa1"/>

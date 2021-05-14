@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,10 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUENTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuento.findAll", query = "SELECT c FROM Cuento c")
-    , @NamedQuery(name = "Cuento.findByAutor", query = "SELECT c FROM Cuento c WHERE c.autor = :autor")
-    , @NamedQuery(name = "Cuento.findByGusto", query = "SELECT c FROM Cuento c WHERE c.gusto = :gusto")
-    , @NamedQuery(name = "Cuento.findByNombre", query = "SELECT c FROM Cuento c WHERE c.nombre = :nombre")})
+    @NamedQuery(name = "Cuento.findAll", query = "SELECT c FROM Cuento c"),
+    @NamedQuery(name = "Cuento.findByAutor", query = "SELECT c FROM Cuento c WHERE c.autor = :autor"),
+    @NamedQuery(name = "Cuento.findByGusto", query = "SELECT c FROM Cuento c WHERE c.gusto = :gusto"),
+    @NamedQuery(name = "Cuento.findByNombre", query = "SELECT c FROM Cuento c WHERE c.nombre = :nombre")})
 public class Cuento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,12 +52,12 @@ public class Cuento implements Serializable {
     @JoinTable(name = "PREFERENCIAXCUENTO", joinColumns = {
         @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
         @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<PerfilPreferencia> perfilPreferenciaList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero generoGenero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuento", fetch = FetchType.EAGER)
     private List<Frases> frasesList;
 
     public Cuento() {
