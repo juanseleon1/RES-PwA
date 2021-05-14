@@ -77,6 +77,9 @@ public class InitRESPwA {
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             p.sendRequest(data);
             startConfig(p);
+            
+            /*ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
+            p.sendRequest(data);*/
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
