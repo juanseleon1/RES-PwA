@@ -516,6 +516,10 @@ class pepperModuleV2(object):
 
             if((len(re.findall(r'sub\w+',word)) == 1 or len(re.findall(r'nada\w+',word)) != 0) and (len(re.findall(r'vol\w+',word)) != 0 or len(re.findall(r'hab\w+',word)) != 0)):
                 resultValue = 'decrease volume'
+        
+        print("HOLAAAAAAA", value)
+        json_params = {"DialogInput": value}
+        send(-1, "int", json_params)
 
         if resultValue:
             print("enviar", resultValue)

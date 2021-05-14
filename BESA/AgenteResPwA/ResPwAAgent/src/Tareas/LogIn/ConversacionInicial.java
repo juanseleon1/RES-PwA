@@ -41,11 +41,11 @@ public class ConversacionInicial extends ResPwaTask {
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
             if(!infoServicio.containsKey("SAY")){
-                infoServicio.put("SAY", "Buen dia, como se encuentra");
+                infoServicio.put("SAY", "Mucho gusto, soy pepper");
             }
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             requestService(srb, rab);
-            start = System.currentTimeMillis(); 
+            start = System.currentTimeMillis();
         }
 
     }
@@ -80,7 +80,6 @@ public class ConversacionInicial extends ResPwaTask {
         System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: "+blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             System.out.println("--- Check Finish Conversacion Inicial ---");
-            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             return true;
