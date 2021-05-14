@@ -107,9 +107,6 @@ public class RobotAgentBelieves implements Believes {
                 modelRetroCancion.activityFeedback(antecedentsForFeedback);
                 break;
         }
-        if (activityInCourse instanceof Cancion) {
-
-        }
 
     }
 

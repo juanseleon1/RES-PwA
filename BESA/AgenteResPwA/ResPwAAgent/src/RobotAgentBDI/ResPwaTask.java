@@ -29,9 +29,10 @@ import rational.services.ActivateAsynchronousServiceGuard;
 public abstract class ResPwaTask extends Task {
 
     protected boolean init = true;
-
+    protected boolean expropiated = false;
     public ResPwaTask() {
         this.init = true;
+        expropiated = false;
     }
 
     public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs) {

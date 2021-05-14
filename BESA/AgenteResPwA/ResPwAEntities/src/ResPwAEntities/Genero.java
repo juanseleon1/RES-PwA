@@ -59,7 +59,6 @@ public class Genero implements Serializable {
         this.genero = genero;
     }
 
-
     @XmlTransient
     public List<Cancion> getCancionList() {
         return cancionList;
