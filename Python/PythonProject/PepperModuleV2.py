@@ -647,9 +647,9 @@ class pepperModuleV2(object):
 
         resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
         if preference[0] or retroAlimentacion[0] or emotion[0]:
-            self.sendValue(self, resultValue)
+            self.sendValue(resultValue)
         else:
-            self.sendValue(self, "")
+            self.sendValue(value)
 
 
 
