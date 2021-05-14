@@ -104,7 +104,6 @@ try:
     app = qi.Application(["ResPwa", "--qi-url=" + connection_url])
     app.start()
     session = app.session
-    #session.connect("tcp://" + args.ip + ":" + str(args.port))
 except RuntimeError:
     print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) + ".\n"
                                                                                           "Please check your script arguments. Run with -h option for help.")
