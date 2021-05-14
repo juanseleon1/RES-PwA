@@ -28,7 +28,7 @@ public class GetInfoGuard extends GuardBESA {
     public void funcExecGuard(EventBESA ebesa) {
         try {
             SensorData infoRecibida = (SensorData) ebesa.getData();
-            System.out.println("GetInfoGuard Event Received: " + infoRecibida);
+//            System.out.println("GetInfoGuard Event Received: " + infoRecibida);
             AgHandlerBESA handler = null;
             EventBESA sensorEvtA = null;
             if (infoRecibida.getDataType().equals(SensorDataType.EMOTIONS) || infoRecibida.isHasEmo()) {

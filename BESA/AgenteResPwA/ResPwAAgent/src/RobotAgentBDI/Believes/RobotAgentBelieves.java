@@ -7,8 +7,13 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import EmotionalAnalyzerAgent.EmotionalData;
+import ResPwAEntities.Antecedente;
+import ResPwAEntities.Cancion;
+import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
 import ResPwaUtils.Imagen;
+import Retroalimentacion.Modelo.ModeloRetroalimentacion;
+import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,14 +54,14 @@ public class RobotAgentBelieves implements Believes {
     public boolean update(InfoData si) {
         if (si != null && si instanceof EmotionalData) {
             EmotionalData se = (EmotionalData) si;
-            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
+//            System.out.println("Emotional RobotAgentBelieves update Received: " + se.getInfo());
             if (se.getEmoEv() != null) {
                 bEstadoRobot.update(se);
             }
             bEstadoEmocionalPwA.update(si);
         } else if (si != null) {
             SensorData infoRecibida = (SensorData) si;
-            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
+//            System.out.println("RobotAgentBelieves update Received: " + infoRecibida.getDataP());
             switch (infoRecibida.getDataType()) {
                 case ACTIVITY:
                     bEstadoActividad.update(si);
@@ -76,6 +81,67 @@ public class RobotAgentBelieves implements Believes {
         }
 
         return true;
+    }
+
+    public void feedbackActivity(double voiceFeedback) {
+        double emotionFeedback = 0.0;
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+        List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
+        //        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+        List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
+        
+
+
+        switch (activity) {
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+
+                ModeloRetroalimentacion<Cuento> modeloRetroCuento = new ModeloRetroalimentacion<Cuento>((Cuento) activityInCourse);
+                modeloRetroCuento.activityFeedback(antecedentsForFeedback);
+                break;
+
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                ModeloRetroalimentacion<Cancion> modelRetroCancion = new ModeloRetroalimentacion<Cancion>((Cancion) activityInCourse);
+                modelRetroCancion.activityFeedback(antecedentsForFeedback);
+                break;
+        }
+
+    }
+
+    private List<Antecedente> getAntecedentsForFeedback(double emotionFeedback, double voiceFeedback, List<Antecedente> antecedents) {
+
+        List<Antecedente> antecedentsForFeedback = new ArrayList<>();
+        for (int i = 0; i < antecedents.size(); i++) {
+            if (antecedents.get(i).getEtiqueta().equals("EMOTIONFEEDBACK") && antecedents.get(i).getValor() == emotionFeedback) {
+                antecedentsForFeedback.add(antecedents.get(i));
+            } else {
+                if (antecedents.get(i).getEtiqueta().equals("VOICEFEEDBACK") && antecedents.get(i).getValor() == voiceFeedback) {
+                    antecedentsForFeedback.add(antecedents.get(i));
+                }
+            }
+        }
+        
+        return antecedentsForFeedback;
+    }
+
+    public Object getActivityInCourse() {
+        ResPwAActivity activity = bEstadoActividad.getActividadActual();
+        Object activityInCourse = null;
+
+        switch (activity) {
+            case CUENTERIA:
+                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+                break;
+
+            case MUSICOTERAPIA:
+                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                break;
+        }
+
+        return activityInCourse;
+
     }
 
     private Perfilpwa getPerfilBD(String cedula) {

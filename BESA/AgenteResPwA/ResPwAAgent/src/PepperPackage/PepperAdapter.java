@@ -103,7 +103,7 @@ public class PepperAdapter extends ResPwaAdapter{
         try {
             String JSON=convertServiceRequest(data);
             try (Socket s = new Socket(IP, robotPort); DataOutputStream oos = new DataOutputStream (s.getOutputStream())) {
-                //System.out.println("Enviando solicitud al Robot: \n"+JSON);
+                System.out.println("ENVIANDO \n"+JSON);
                 oos.writeUTF(JSON+"\n\r");
                 oos.flush();
 //                oos.close();

@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g"),
-    @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero"),
-    @NamedQuery(name = "Genero.findByGusto", query = "SELECT g FROM Genero g WHERE g.gusto = :gusto")})
+    @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero")})
 public class Genero implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,9 +37,6 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "GENERO")
     private String genero;
-    @Basic(optional = false)
-    @Column(name = "GUSTO")
-    private double gusto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
@@ -55,25 +51,12 @@ public class Genero implements Serializable {
         this.genero = genero;
     }
 
-    public Genero(String genero, double gusto) {
-        this.genero = genero;
-        this.gusto = gusto;
-    }
-
     public String getGenero() {
         return genero;
     }
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public double getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(double gusto) {
-        this.gusto = gusto;
     }
 
     @XmlTransient

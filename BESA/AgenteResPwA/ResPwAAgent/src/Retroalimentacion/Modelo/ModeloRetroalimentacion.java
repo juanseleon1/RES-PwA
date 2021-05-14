@@ -5,6 +5,7 @@
  */
 package Retroalimentacion.Modelo;
 
+import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Antecedente;
 import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
@@ -21,9 +22,9 @@ public class ModeloRetroalimentacion<T> {
     private T activity;
     private List<Regla> reglas;
 
-    public ModeloRetroalimentacion(T activity, List<Regla> reglas) {
+    public ModeloRetroalimentacion(T activity) {
         this.activity = activity;
-        this.reglas = reglas;
+        this.reglas = RESPwABDInterface.getRules() ;
     }
     
     public void activityFeedback(List<Antecedente> antecedentes){

@@ -53,6 +53,9 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                         try {
                             SensorData sd = toSensorData(json);
                             //System.out.println("Llego: " + json);
+                            if (sd.getAck()!=-1){
+                                System.out.println("Llego: " + json);
+                        }
                             updateBlvs(sd);
                         } catch (ExceptionBESA ex) {
                             Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
