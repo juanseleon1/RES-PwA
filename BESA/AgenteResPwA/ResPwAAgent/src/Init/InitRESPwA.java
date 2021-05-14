@@ -74,10 +74,6 @@ public class InitRESPwA {
             HashMap<String, Object> hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
             hm1.put("MOVETOY", 2);
-            //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.QUITVIDEO, hm1);
-            //p.sendRequest(data);
-//            hm1.put("MOVETOX", 5);
-//            hm1.put("MOVETOY", 2);
             ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             p.sendRequest(data);
             startConfig(p);
@@ -95,17 +91,17 @@ public class InitRESPwA {
         Cuidador c = null;
 
         do {
-            System.out.println("Ingrese su nombre de usuario: ");
+//            System.out.println("Ingrese su nombre de usuario: ");
             //user=scan.nextLine();
-            System.out.println("Ingrese su contrasena: ");
+//            System.out.println("Ingrese su contrasena: ");
 //          pwd= scan.nextLine();
             c = RESPwABDInterface.getCarer(user);
             if (c == null) {
-                System.out.println("Usuario Inexistente");
+//                System.out.println("Usuario Inexistente");
             } else {
                 login = c.getContrasena().equals(pwd);
                 if (!login) {
-                    System.out.println("Contrasena no coincide");
+//                    System.out.println("Contrasena no coincide");
                 }
             }
 
@@ -113,9 +109,9 @@ public class InitRESPwA {
         List<Perfilpwa> pwalist = c.getPerfilpwaList();
 
         for (int i = 0; i < pwalist.size(); i++) {
-            System.out.println(i + " Paciente: " + pwalist.get(i).getCedula());
+//            System.out.println(i + " Paciente: " + pwalist.get(i).getCedula());
         }
-        System.out.println("Ingrese el numero del paciente que utilizara ResPwa");
+//        System.out.println("Ingrese el numero del paciente que utilizara ResPwa");
         int selec = 0; //scan.nextInt();
         return pwalist.get(selec).getCedula();
     }

@@ -90,7 +90,7 @@ public class EmotionAxis {
     }
     public void printEventInfluences(){
         for (String object : eventInfluence.keySet()) {
-            System.out.println("Event: "+object+" Object: "+eventInfluence.get(object));
+//            System.out.println("Event: "+object+" Object: "+eventInfluence.get(object));
         }
     }
 

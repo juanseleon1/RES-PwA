@@ -16,7 +16,10 @@ class Robot:
         self.current_emomap = None
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
+        self.aLAutonomousLife = session.service("ALAutonomousLife")
+        self.aLAutonomousLife.setState("interactive")
         self.alProxy = session.service("ALMemory")
+        self.alTabletService = self.session.service("ALTabletService")
         self.alLedsProxy = session.service("ALLeds")
         self.alTexToSpeech = session.service("ALTextToSpeech")
         self.alMood = session.service("ALMood")
@@ -56,7 +59,6 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
-        self.alTabletService = None
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
@@ -401,8 +403,6 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-                self.alTabletService = self.session.service("ALTabletService")
-                self.app.run()
             except Exception, e:
                 print "Main Error"
                 print e
@@ -487,10 +487,9 @@ class Robot:
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
         # print "CRACK", params.get("SHOWVIDEO")
-        self.alTabletService.enableWifi()
+        #self.alTabletService.enableWifi()
         # print "CRACK", self.alTabletService.getWifiStatus()
         # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-
         self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.

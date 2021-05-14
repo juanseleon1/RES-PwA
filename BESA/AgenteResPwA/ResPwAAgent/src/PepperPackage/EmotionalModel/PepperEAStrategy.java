@@ -26,7 +26,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
     public List<EmotionalEvent> processEmotion(EmotionalData sd) {
         List<EmotionalEvent> emoList = new ArrayList<>();
         Map<String, Object> ret = sd.getInfo(), aux, auxEmo, map = new HashMap<>();
-        System.out.println("PepperEAStrategy: " + ret.toString());
+//        System.out.println("PepperEAStrategy: " + ret.toString());
         EmotionalEvent evt = null;
 
         if (ret.get("PersonData") != null) {
@@ -89,9 +89,9 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
             System.out.println("Evento Reconocido else");
             String paramsString;
             paramsString = ret.keySet().iterator().next();
-            System.out.println("paramsString: " + paramsString);
+//            System.out.println("paramsString: " + paramsString);
             boolean isOk = (boolean) ret.get(paramsString);
-            System.out.println("IsOk: " + isOk);
+//            System.out.println("IsOk: " + isOk);
             if (isOk) {
                 EmotionalEventType emoT = EmotionalEventType.getFromId(paramsString);
                 evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
@@ -100,7 +100,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
         }
 
         for (EmotionalEvent emotionalEvent : emoList) {
-            System.out.println("Evt:" + emotionalEvent.toString());
+//            System.out.println("Evt:" + emotionalEvent.toString());
         }
         return emoList;
     }
