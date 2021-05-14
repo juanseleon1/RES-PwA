@@ -44,6 +44,8 @@ public class Genero implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cancion> cancionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
+    private List<Baile> baileList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoGenero", fetch = FetchType.EAGER)
     private List<Cuento> cuentoList;
 
     public Genero() {
@@ -81,6 +83,15 @@ public class Genero implements Serializable {
 
     public void setCancionList(List<Cancion> cancionList) {
         this.cancionList = cancionList;
+    }
+
+    @XmlTransient
+    public List<Baile> getBaileList() {
+        return baileList;
+    }
+
+    public void setBaileList(List<Baile> baileList) {
+        this.baileList = baileList;
     }
 
     @XmlTransient

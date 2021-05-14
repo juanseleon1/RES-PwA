@@ -15,8 +15,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -54,9 +52,6 @@ public class Actividadpwa implements Serializable {
     @Basic(optional = false)
     @Column(name = "DURACION")
     private BigInteger duracion;
-    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Dificultad dificultadDificultad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
     private List<Registroactividad> registroactividadList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
@@ -106,14 +101,6 @@ public class Actividadpwa implements Serializable {
 
     public void setDuracion(BigInteger duracion) {
         this.duracion = duracion;
-    }
-
-    public Dificultad getDificultadDificultad() {
-        return dificultadDificultad;
-    }
-
-    public void setDificultadDificultad(Dificultad dificultadDificultad) {
-        this.dificultadDificultad = dificultadDificultad;
     }
 
     @XmlTransient

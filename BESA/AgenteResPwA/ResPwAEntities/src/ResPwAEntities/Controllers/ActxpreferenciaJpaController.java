@@ -15,7 +15,6 @@ import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.ActxpreferenciaPK;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
-import ResPwAEntities.Dificultad;
 import ResPwAEntities.PerfilPreferencia;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -40,8 +39,8 @@ public class ActxpreferenciaJpaController implements Serializable {
         if (actxpreferencia.getActxpreferenciaPK() == null) {
             actxpreferencia.setActxpreferenciaPK(new ActxpreferenciaPK());
         }
-        actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
         actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
+        actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -50,11 +49,6 @@ public class ActxpreferenciaJpaController implements Serializable {
             if (actividadpwa != null) {
                 actividadpwa = em.getReference(actividadpwa.getClass(), actividadpwa.getId());
                 actxpreferencia.setActividadpwa(actividadpwa);
-            }
-            Dificultad dificultadDificultad = actxpreferencia.getDificultadDificultad();
-            if (dificultadDificultad != null) {
-                dificultadDificultad = em.getReference(dificultadDificultad.getClass(), dificultadDificultad.getDificultad());
-                actxpreferencia.setDificultadDificultad(dificultadDificultad);
             }
             PerfilPreferencia perfilPreferencia = actxpreferencia.getPerfilPreferencia();
             if (perfilPreferencia != null) {
@@ -65,10 +59,6 @@ public class ActxpreferenciaJpaController implements Serializable {
             if (actividadpwa != null) {
                 actividadpwa.getActxpreferenciaList().add(actxpreferencia);
                 actividadpwa = em.merge(actividadpwa);
-            }
-            if (dificultadDificultad != null) {
-                dificultadDificultad.getActxpreferenciaList().add(actxpreferencia);
-                dificultadDificultad = em.merge(dificultadDificultad);
             }
             if (perfilPreferencia != null) {
                 perfilPreferencia.getActxpreferenciaList().add(actxpreferencia);
@@ -88,8 +78,8 @@ public class ActxpreferenciaJpaController implements Serializable {
     }
 
     public void edit(Actxpreferencia actxpreferencia) throws NonexistentEntityException, Exception {
-        actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
         actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
+        actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -97,17 +87,11 @@ public class ActxpreferenciaJpaController implements Serializable {
             Actxpreferencia persistentActxpreferencia = em.find(Actxpreferencia.class, actxpreferencia.getActxpreferenciaPK());
             Actividadpwa actividadpwaOld = persistentActxpreferencia.getActividadpwa();
             Actividadpwa actividadpwaNew = actxpreferencia.getActividadpwa();
-            Dificultad dificultadDificultadOld = persistentActxpreferencia.getDificultadDificultad();
-            Dificultad dificultadDificultadNew = actxpreferencia.getDificultadDificultad();
             PerfilPreferencia perfilPreferenciaOld = persistentActxpreferencia.getPerfilPreferencia();
             PerfilPreferencia perfilPreferenciaNew = actxpreferencia.getPerfilPreferencia();
             if (actividadpwaNew != null) {
                 actividadpwaNew = em.getReference(actividadpwaNew.getClass(), actividadpwaNew.getId());
                 actxpreferencia.setActividadpwa(actividadpwaNew);
-            }
-            if (dificultadDificultadNew != null) {
-                dificultadDificultadNew = em.getReference(dificultadDificultadNew.getClass(), dificultadDificultadNew.getDificultad());
-                actxpreferencia.setDificultadDificultad(dificultadDificultadNew);
             }
             if (perfilPreferenciaNew != null) {
                 perfilPreferenciaNew = em.getReference(perfilPreferenciaNew.getClass(), perfilPreferenciaNew.getPerfilpwaCedula());
@@ -121,14 +105,6 @@ public class ActxpreferenciaJpaController implements Serializable {
             if (actividadpwaNew != null && !actividadpwaNew.equals(actividadpwaOld)) {
                 actividadpwaNew.getActxpreferenciaList().add(actxpreferencia);
                 actividadpwaNew = em.merge(actividadpwaNew);
-            }
-            if (dificultadDificultadOld != null && !dificultadDificultadOld.equals(dificultadDificultadNew)) {
-                dificultadDificultadOld.getActxpreferenciaList().remove(actxpreferencia);
-                dificultadDificultadOld = em.merge(dificultadDificultadOld);
-            }
-            if (dificultadDificultadNew != null && !dificultadDificultadNew.equals(dificultadDificultadOld)) {
-                dificultadDificultadNew.getActxpreferenciaList().add(actxpreferencia);
-                dificultadDificultadNew = em.merge(dificultadDificultadNew);
             }
             if (perfilPreferenciaOld != null && !perfilPreferenciaOld.equals(perfilPreferenciaNew)) {
                 perfilPreferenciaOld.getActxpreferenciaList().remove(actxpreferencia);
@@ -171,11 +147,6 @@ public class ActxpreferenciaJpaController implements Serializable {
             if (actividadpwa != null) {
                 actividadpwa.getActxpreferenciaList().remove(actxpreferencia);
                 actividadpwa = em.merge(actividadpwa);
-            }
-            Dificultad dificultadDificultad = actxpreferencia.getDificultadDificultad();
-            if (dificultadDificultad != null) {
-                dificultadDificultad.getActxpreferenciaList().remove(actxpreferencia);
-                dificultadDificultad = em.merge(dificultadDificultad);
             }
             PerfilPreferencia perfilPreferencia = actxpreferencia.getPerfilPreferencia();
             if (perfilPreferencia != null) {

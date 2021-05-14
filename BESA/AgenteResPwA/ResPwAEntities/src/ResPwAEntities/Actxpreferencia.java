@@ -50,9 +50,6 @@ public class Actxpreferencia implements Serializable {
     @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Actividadpwa actividadpwa;
-    @JoinColumn(name = "DIFICULTAD_DIFICULTAD", referencedColumnName = "DIFICULTAD")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Dificultad dificultadDificultad;
     @JoinColumn(name = "PERFIL_PREFERENCIA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private PerfilPreferencia perfilPreferencia;
@@ -113,14 +110,6 @@ public class Actxpreferencia implements Serializable {
 
     public void setActividadpwa(Actividadpwa actividadpwa) {
         this.actividadpwa = actividadpwa;
-    }
-
-    public Dificultad getDificultadDificultad() {
-        return dificultadDificultad;
-    }
-
-    public void setDificultadDificultad(Dificultad dificultadDificultad) {
-        this.dificultadDificultad = dificultadDificultad;
     }
 
     public PerfilPreferencia getPerfilPreferencia() {

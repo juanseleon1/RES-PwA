@@ -31,9 +31,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Frases.findAll", query = "SELECT f FROM Frases f"),
-    @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido"),
     @NamedQuery(name = "Frases.findByOrden", query = "SELECT f FROM Frases f WHERE f.frasesPK.orden = :orden"),
-    @NamedQuery(name = "Frases.findByCuentoNombre", query = "SELECT f FROM Frases f WHERE f.frasesPK.cuentoNombre = :cuentoNombre")})
+    @NamedQuery(name = "Frases.findByContenido", query = "SELECT f FROM Frases f WHERE f.contenido = :contenido"),
+    @NamedQuery(name = "Frases.findByCuentoNombre", query = "SELECT f FROM Frases f WHERE f.frasesPK.cuentoNombre = :cuentoNombre"),
+    @NamedQuery(name = "Frases.findByEmotionalevent", query = "SELECT f FROM Frases f WHERE f.emotionalevent = :emotionalevent"),
+    @NamedQuery(name = "Frases.findByAccion", query = "SELECT f FROM Frases f WHERE f.accion = :accion"),
+    @NamedQuery(name = "Frases.findByUrlimagen", query = "SELECT f FROM Frases f WHERE f.urlimagen = :urlimagen")})
 public class Frases implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +45,12 @@ public class Frases implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONTENIDO")
     private String contenido;
+    @Column(name = "EMOTIONALEVENT")
+    private String emotionalevent;
+    @Column(name = "ACCION")
+    private String accion;
+    @Column(name = "URLIMAGEN")
+    private String urlimagen;
     @OneToMany(mappedBy = "frases", fetch = FetchType.EAGER)
     private List<Enriq> enriqList;
     @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE", insertable = false, updatable = false)
@@ -78,6 +87,30 @@ public class Frases implements Serializable {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public String getEmotionalevent() {
+        return emotionalevent;
+    }
+
+    public void setEmotionalevent(String emotionalevent) {
+        this.emotionalevent = emotionalevent;
+    }
+
+    public String getAccion() {
+        return accion;
+    }
+
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
+
+    public String getUrlimagen() {
+        return urlimagen;
+    }
+
+    public void setUrlimagen(String urlimagen) {
+        this.urlimagen = urlimagen;
     }
 
     @XmlTransient

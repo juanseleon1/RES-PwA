@@ -32,7 +32,8 @@
 /BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.xml
 /BESA/AgenteResPwA/ResPwAEntities/nbproject/private/private.properties
 *.properties
-*.properties
 BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.properties
 *.properties
-BESA/AgenteResPwA/ResPwAAgent/nbproject/private/private.xml
+*/*.class
+./Python/PythonProject/Enviroment/
+./Python/PythonProject/venv/

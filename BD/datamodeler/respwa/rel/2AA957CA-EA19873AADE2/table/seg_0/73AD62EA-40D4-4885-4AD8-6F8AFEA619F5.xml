@@ -59,6 +59,19 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="url" id="D464CBB7-760E-598E-A92A-4D9031590064">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-10 20:37:14 UTC</createdTime>
+<generatorID>B0B81711-3D49-36C5-5193-31768B9AB6BF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="21A70A59-AC7F-F631-9380-EA2604A692AB" name="Cancion_PK">

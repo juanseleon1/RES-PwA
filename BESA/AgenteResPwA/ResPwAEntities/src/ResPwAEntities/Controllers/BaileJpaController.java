@@ -9,17 +9,21 @@ import ResPwAEntities.Baile;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import ResPwAEntities.Genero;
+import ResPwAEntities.PerfilPreferencia;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ASUS
+ * @author juans
  */
 public class BaileJpaController implements Serializable {
 
@@ -33,14 +37,36 @@ public class BaileJpaController implements Serializable {
     }
 
     public void create(Baile baile) throws PreexistingEntityException, Exception {
+        if (baile.getPerfilPreferenciaList() == null) {
+            baile.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Genero generoGenero = baile.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero = em.getReference(generoGenero.getClass(), generoGenero.getGenero());
+                baile.setGeneroGenero(generoGenero);
+            }
+            List<PerfilPreferencia> attachedPerfilPreferenciaList = new ArrayList<PerfilPreferencia>();
+            for (PerfilPreferencia perfilPreferenciaListPerfilPreferenciaToAttach : baile.getPerfilPreferenciaList()) {
+                perfilPreferenciaListPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListPerfilPreferenciaToAttach.getPerfilpwaCedula());
+                attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
+            }
+            baile.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
             em.persist(baile);
+            if (generoGenero != null) {
+                generoGenero.getBaileList().add(baile);
+                generoGenero = em.merge(generoGenero);
+            }
+            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : baile.getPerfilPreferenciaList()) {
+                perfilPreferenciaListPerfilPreferencia.getBaileList().add(baile);
+                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findBaile(baile.getNombre()) != null) {
+            if (findBaile(baile.getId()) != null) {
                 throw new PreexistingEntityException("Baile " + baile + " already exists.", ex);
             }
             throw ex;
@@ -56,12 +82,48 @@ public class BaileJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Baile persistentBaile = em.find(Baile.class, baile.getId());
+            Genero generoGeneroOld = persistentBaile.getGeneroGenero();
+            Genero generoGeneroNew = baile.getGeneroGenero();
+            List<PerfilPreferencia> perfilPreferenciaListOld = persistentBaile.getPerfilPreferenciaList();
+            List<PerfilPreferencia> perfilPreferenciaListNew = baile.getPerfilPreferenciaList();
+            if (generoGeneroNew != null) {
+                generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
+                baile.setGeneroGenero(generoGeneroNew);
+            }
+            List<PerfilPreferencia> attachedPerfilPreferenciaListNew = new ArrayList<PerfilPreferencia>();
+            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferenciaToAttach : perfilPreferenciaListNew) {
+                perfilPreferenciaListNewPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListNewPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListNewPerfilPreferenciaToAttach.getPerfilpwaCedula());
+                attachedPerfilPreferenciaListNew.add(perfilPreferenciaListNewPerfilPreferenciaToAttach);
+            }
+            perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
+            baile.setPerfilPreferenciaList(perfilPreferenciaListNew);
             baile = em.merge(baile);
+            if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
+                generoGeneroOld.getBaileList().remove(baile);
+                generoGeneroOld = em.merge(generoGeneroOld);
+            }
+            if (generoGeneroNew != null && !generoGeneroNew.equals(generoGeneroOld)) {
+                generoGeneroNew.getBaileList().add(baile);
+                generoGeneroNew = em.merge(generoGeneroNew);
+            }
+            for (PerfilPreferencia perfilPreferenciaListOldPerfilPreferencia : perfilPreferenciaListOld) {
+                if (!perfilPreferenciaListNew.contains(perfilPreferenciaListOldPerfilPreferencia)) {
+                    perfilPreferenciaListOldPerfilPreferencia.getBaileList().remove(baile);
+                    perfilPreferenciaListOldPerfilPreferencia = em.merge(perfilPreferenciaListOldPerfilPreferencia);
+                }
+            }
+            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferencia : perfilPreferenciaListNew) {
+                if (!perfilPreferenciaListOld.contains(perfilPreferenciaListNewPerfilPreferencia)) {
+                    perfilPreferenciaListNewPerfilPreferencia.getBaileList().add(baile);
+                    perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = baile.getNombre();
+                BigDecimal id = baile.getId();
                 if (findBaile(id) == null) {
                     throw new NonexistentEntityException("The baile with id " + id + " no longer exists.");
                 }
@@ -74,7 +136,7 @@ public class BaileJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(BigDecimal id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -82,9 +144,19 @@ public class BaileJpaController implements Serializable {
             Baile baile;
             try {
                 baile = em.getReference(Baile.class, id);
-                baile.getNombre();
+                baile.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The baile with id " + id + " no longer exists.", enfe);
+            }
+            Genero generoGenero = baile.getGeneroGenero();
+            if (generoGenero != null) {
+                generoGenero.getBaileList().remove(baile);
+                generoGenero = em.merge(generoGenero);
+            }
+            List<PerfilPreferencia> perfilPreferenciaList = baile.getPerfilPreferenciaList();
+            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : perfilPreferenciaList) {
+                perfilPreferenciaListPerfilPreferencia.getBaileList().remove(baile);
+                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
             }
             em.remove(baile);
             em.getTransaction().commit();
@@ -119,7 +191,7 @@ public class BaileJpaController implements Serializable {
         }
     }
 
-    public Baile findBaile(String id) {
+    public Baile findBaile(BigDecimal id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Baile.class, id);

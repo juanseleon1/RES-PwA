@@ -43,8 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Perfilpwa.findByPaisnacimiento", query = "SELECT p FROM Perfilpwa p WHERE p.paisnacimiento = :paisnacimiento"),
     @NamedQuery(name = "Perfilpwa.findByEdad", query = "SELECT p FROM Perfilpwa p WHERE p.edad = :edad"),
     @NamedQuery(name = "Perfilpwa.findByCedula", query = "SELECT p FROM Perfilpwa p WHERE p.cedula = :cedula"),
-    @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion"),
-    @NamedQuery(name = "Perfilpwa.findByIdrobot", query = "SELECT p FROM Perfilpwa p WHERE p.idrobot = :idrobot")})
+    @NamedQuery(name = "Perfilpwa.findByProfesion", query = "SELECT p FROM Perfilpwa p WHERE p.profesion = :profesion")})
 public class Perfilpwa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,8 +70,6 @@ public class Perfilpwa implements Serializable {
     @Basic(optional = false)
     @Column(name = "PROFESION")
     private String profesion;
-    @Column(name = "IDROBOT")
-    private BigInteger idrobot;
     @ManyToMany(mappedBy = "perfilpwaList", fetch = FetchType.EAGER)
     private List<Familiar> familiarList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilpwa", fetch = FetchType.EAGER)
@@ -162,14 +159,6 @@ public class Perfilpwa implements Serializable {
 
     public void setProfesion(String profesion) {
         this.profesion = profesion;
-    }
-
-    public BigInteger getIdrobot() {
-        return idrobot;
-    }
-
-    public void setIdrobot(BigInteger idrobot) {
-        this.idrobot = idrobot;
     }
 
     @XmlTransient
