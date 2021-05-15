@@ -65,7 +65,7 @@ public class InitRESPwA {
             //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             //p.sendRequest(data);
             startConfig(p);
-            
+
             /*ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             p.sendRequest(data);*/
         } catch (ExceptionBESA ex) {
@@ -125,7 +125,7 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
-           ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
+        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
@@ -138,7 +138,7 @@ public class InitRESPwA {
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
-          RAGoals.add(reportar);
+        RAGoals.add(reportar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
