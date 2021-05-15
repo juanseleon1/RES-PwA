@@ -12,11 +12,18 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
+import RobotAgentBDI.ResPwaGoal;
+import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
 import Tareas.LogIn.LogInTask;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
@@ -27,7 +34,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class LogIn extends GoalBDI{
+public class LogIn extends ResPwaGoal{
     
     private static String descrip = "LogIn";
 
@@ -67,7 +74,7 @@ public class LogIn extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
-        if (blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged() || blvs.getbEstadoInteraccion().isSaludo()) {
+        if ((blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged()) || blvs.getbEstadoInteraccion().isSaludo()) {
             return 1.0;
         }
         
@@ -96,8 +103,11 @@ public class LogIn extends GoalBDI{
 
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta LogIn goalSucceeded");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("Meta LogIn goalSucceeded: " + blvs.getbEstadoInteraccion().isLogged());
+        if(blvs.getbEstadoInteraccion().isLogged()){
+            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+        }
         return blvs.getbEstadoInteraccion().isLogged();
     }
     

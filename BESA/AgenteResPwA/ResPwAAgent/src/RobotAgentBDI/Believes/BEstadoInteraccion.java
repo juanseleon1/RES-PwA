@@ -159,10 +159,14 @@ public class BEstadoInteraccion implements Believes{
         
         if (infoRecibida.getDataP().containsKey("DialogInput")){
             respuestaPreferencia = (String)infoRecibida.getDataP().get("DialogInput");
-            String resulSet[] = respuestaPreferencia.split(" ");
-            if (resulSet[1].equals("brightness") || resulSet[1].equals("volume")){
-                modificarPreferencias = true;
+            System.out.println("Recibiiiir:  " + respuestaPreferencia);
+            String resultSet[] = respuestaPreferencia.split(" ");
+            if (resultSet[0].length() > 1){
+                if (resultSet[1].equals("brightness") || resultSet[1].equals("volume")){
+                    modificarPreferencias = true;
+                }
             }
+            
             System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
             recibirRespuestaPwA = true;
         }

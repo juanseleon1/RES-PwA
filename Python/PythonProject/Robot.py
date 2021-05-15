@@ -25,6 +25,7 @@ class Robot:
         self.alMood = session.service("ALMood")
         self.alAnimationPlayer = session.service("ALAnimationPlayer")
         self.alMotion = session.service("ALMotion")
+        self.alTabletService = self.session.service("ALTabletService")
         self.alRobotPosture = session.service("ALRobotPosture")
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
@@ -59,6 +60,7 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
+        #self.alTabletService = None;
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
@@ -403,6 +405,7 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+                #self.app.run()
             except Exception, e:
                 print "Main Error"
                 print e
