@@ -135,11 +135,6 @@ public class IniciarServicios extends ResPwaTask{
         infoServicio.put("ACTIVATEVOICEEMOANAL", "EmotionAnalysis"); //revisar nombre
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);
         requestService(srb,blvs);
-       
-        infoServicio = new HashMap<>();
-        infoServicio.put("ACTVOICERECOG", "SpeechRecognition"); //revisar nombre
-        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
-        requestService(srb,blvs);
         
         activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
         
