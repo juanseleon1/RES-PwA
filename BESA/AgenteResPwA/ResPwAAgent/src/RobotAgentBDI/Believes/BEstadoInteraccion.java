@@ -161,7 +161,7 @@ public class BEstadoInteraccion implements Believes{
             respuestaPreferencia = (String)infoRecibida.getDataP().get("DialogInput");
             System.out.println("Recibiiiir:  " + respuestaPreferencia);
             String resultSet[] = respuestaPreferencia.split(" ");
-            if (resultSet[0].length() > 1){
+            if (resultSet.length > 1){
                 if (resultSet[1].equals("brightness") || resultSet[1].equals("volume")){
                     modificarPreferencias = true;
                 }
