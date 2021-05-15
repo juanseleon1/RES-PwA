@@ -5,25 +5,16 @@
  */
 package RobotAgentBDI.Metas;
 
-import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAActivity;
 import RobotAgentBDI.ResPwaGoal;
-import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import Tareas.LogIn.ConversacionInicial;
-import Tareas.LogIn.DetectarPwA;
 import Tareas.LogIn.IniciarServicios;
-import Tareas.LogIn.LogInTask;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
-import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import rational.RationalRole;
 import rational.mapping.Believes;
@@ -104,10 +95,7 @@ public class LogIn extends ResPwaGoal{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        System.out.println("Meta LogIn goalSucceeded: " + blvs.getbEstadoInteraccion().isLogged());
-        if(blvs.getbEstadoInteraccion().isLogged()){
-            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
-        }
+        System.out.println("Meta LogIn goalSucceeded: " + blvs.getbEstadoInteraccion().getRespuestasPorContexto());
         return blvs.getbEstadoInteraccion().isLogged();
     }
     

@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Registroactividad;
@@ -36,6 +37,7 @@ public class BEstadoActividad implements Believes {
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     private Cuento cuentoActual;
+    private List<Baile> bailes;
     private Integer boostActivarKaraoke = 0;
     private Integer boostAnimarElogiarPwA = 0;
     private Integer boostBailar = 0;
@@ -142,6 +144,14 @@ public class BEstadoActividad implements Believes {
 
     public Cuento getCuentoActual() {
         return cuentoActual;
+    }
+
+    public List<Baile> getBailes() {
+        return bailes;
+    }
+
+    public void setBailes(List<Baile> bailes) {
+        this.bailes = bailes;
     }
 
     public Integer getBoostActivarKaraoke() {

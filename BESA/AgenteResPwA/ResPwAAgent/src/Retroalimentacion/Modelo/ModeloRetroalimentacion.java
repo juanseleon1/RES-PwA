@@ -54,7 +54,7 @@ public class ModeloRetroalimentacion<T> {
                 }
                 else{
                     c.setGusto( c.getGusto() + reglaAplicada.getFeedback() );
-                } 
+                }
             }
         } else if(activity instanceof Baile){
             Baile b = (Baile) activity;

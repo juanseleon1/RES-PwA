@@ -32,7 +32,7 @@ public class LlamarCuidador extends ResPwaTask{
 
         System.out.println("--- Check Finish LlamarCuidador ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isHayInteraccionFisica() && blvs.getbEstadoInteraccion().isDetectaPersona())
+        if(blvs.getbEstadoInteraccion().isHayInteraccionFisica() || blvs.getbEstadoInteraccion().isDetectaPersona())
         {
             return true;
         }

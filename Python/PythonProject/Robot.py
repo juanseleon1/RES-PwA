@@ -67,14 +67,15 @@ class Robot:
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
-                                # "emoTopic": topico_emocional,
                                 "alegreTopic": topico_alegre,
-                                # "sadTopic":topico_triste,
-                                # "iraTopic":topico_ira,
-                                # "normTopic":topico_normal,
-                                # "musicTopic":conversacion_musica
+                                 "sadTopic":topico_triste,
+                                 "iraTopic":topico_ira,
+                                 "ayudaTopic":topico_ayuda,
+                                 "normalTopic":topico_normal,
+                                 "retroTopic":topico_retro,
+                                 "saludarTopic":topico_saludable,
+                                 "soundTopic": topico_sonido
                                 }
-
         self.alDialogProxy = session.service("ALDialog")
 
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
@@ -326,7 +327,7 @@ class Robot:
     # Enables/disables the face recognition process. The remaining face detection process will be faster if face recognition is disabled. Face recognition is enabled by default.
     def activate_face_detection(self, params):
         enabled = params.get("ACTIVATELIFESIGNALSINT")
-        self.alFaceDetection.setRecognitionEnabled(enabled)
+        self.alFaceDetection.setRecognitionEnabled(True)
 
     # Enable/Disable Anti-collision protection of the arms of the robot.
     def activate_colission_detection(self, params):
@@ -456,7 +457,7 @@ class Robot:
     # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
-        return self.alMotion.setSmartStiffnessEnabled(params)
+        return self.alMotion.setSmartStiffnessEnabled(params.get("ACTIVATESTIFFNESS"))
 
     def change_emotion_expression(self, params):
         self.emotionStateRobot.setToneSpeech(params.get("tonoHabla"))
@@ -631,7 +632,8 @@ class Robot:
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, params):
-        self.alDialogProxy.say(params.get("TOPIC"), params.get("TAGS"))
+        topic_path=self.topicContentMap[params.get("TOPIC")]
+        self.alDialogProxy.say(topic_path, params.get("TAGS"))
 
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
     def set_topic_focus(self, topicName):
