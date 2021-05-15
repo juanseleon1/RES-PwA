@@ -47,34 +47,7 @@ public class ReproduccionCancion extends ResPwaTask {
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
             requestService(srb,blvs);
-        } /*else {
-
-            List<Tags> tags = blvs.getbEstadoActividad().getCancionActual().getTagsList();
-            List<Imagen> imagenes = new ArrayList<>();
-            for (Tags t : tags) {
-                imagenes.addAll(blvs.getImagexTag(t.getTag()));
-            }
-
-            //tags y parentesco -> si lo contiene tengo cuenta interes para usar esa foto
-            List<Familiar> familiares = blvs.getbPerfilPwA().getPerfil().getFamiliarList();
-            List<Imagen> imagenesFinal = new ArrayList<>();
-            for (Familiar f : familiares) {
-                if (f.getInteres() > 0.6) {
-                    imagenesFinal.addAll(getImgxTag(f.getParentesco(), imagenes));   
-                }
-            }
-
-            infoServicio = new HashMap<>();
-            infoServicio.put("SHOWIMG", imagenesFinal);
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
-            requestService(srb,blvs);
-            
-            infoServicio = new HashMap<>();
-            String cancion = AudioUtils.getCancion("Feliz cumpleanos");
-            infoServicio.put("PLAYSOUND", cancion);
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);
-            requestService(srb,blvs);
-        }*/
+        }
     }
 
     @Override
