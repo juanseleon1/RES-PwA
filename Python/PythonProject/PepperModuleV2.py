@@ -500,7 +500,7 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
-    def sendValue(resultValue):
+    def sendValue(self, resultValue):
         print "enviar", resultValue
         json_params = {"DialogInput": resultValue}
         send(-1, "int", json_params)

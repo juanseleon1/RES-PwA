@@ -626,12 +626,12 @@ class Robot:
     # Unloads the specified topic and frees the associated memory.
 
     def unload_conversational_topic(self, params):
-        topicName = params.get("name")
-        self.alDialogProxy.deactivateTopic(topicName)
+        topic_name = params.get("name")
+        self.alDialogProxy.deactivateTopic(topic_name)
 
     # Says a tagged sentence from a topic.
-    def say_under_topic_context(self, topic, tag):
-        self.alDialogProxy.say(topic, tag)
+    def say_under_topic_context(self, params):
+        self.alDialogProxy.say(params.get("TOPIC"), params.get("TAGS"))
 
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
     def set_topic_focus(self, topicName):

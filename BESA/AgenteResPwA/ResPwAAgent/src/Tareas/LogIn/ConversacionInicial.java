@@ -42,7 +42,7 @@ public class ConversacionInicial extends ResPwaTask {
             if(!infoServicio.containsKey("SAY")){
                 infoServicio.put("SAY", "Mucho gusto, soy pepper");
             }
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYUNDERTOPICCONTEXT, infoServicio);
             requestService(srb, rab);
             start = System.currentTimeMillis();
         }
