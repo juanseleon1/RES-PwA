@@ -161,6 +161,8 @@ class pepperModuleV2(object):
 
         self.personWavingS = self.alProxy.subscriber("WavingDetection/PersonWaving")
         self.personWavingS.signal.connect(self.personWaving)
+        self.retroalimentacionCompleta = ""
+    
 
 
     def activateTopic(self, value):
@@ -496,7 +498,7 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
-    def sendValue(resultValue):
+    def sendValue(self, resultValue):
         print
         "enviar", resultValue
         json_params = {"DialogInput": resultValue}
@@ -505,17 +507,19 @@ class pepperModuleV2(object):
     def preferenceInput(self, completeSentence):
         resultValue = ""
         word = completeSentence
-        if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
-            len(re.findall(r'brill\w+', word[1])) != 0)):
-            resultValue = 'decrease brigthness'
-        if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
-            resultValue = 'increase brigthness'
-        if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
-            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
-            resultValue = 'decrease volume'
-        if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
-            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
-            resultValue = 'decrease volume'
+        
+        if(len(word)>0):
+            if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
+                len(re.findall(r'brill\w+', word[1])) != 0)):
+                resultValue = 'decrease brigthness'
+            if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
+                resultValue = 'increase brigthness'
+            if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
+                resultValue = 'decrease volume'
+            if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
+                resultValue = 'decrease volume'
 
         if (resultValue == ""):
             return (False, "")
@@ -527,7 +531,7 @@ class pepperModuleV2(object):
             self.retroalimentacionCompleta += " " + value
 
         # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
-        if (self.retroalimentacionCompleta.split().count() == 8):
+        if (len(self.retroalimentacionCompleta.split()) == 8):
             return (True, self.retroalimentacionCompleta)
         else:
             return (False, "")
@@ -656,18 +660,16 @@ class pepperModuleV2(object):
 
         # Are all the filters possible in the code - they were simplyfied to get a better knowledge of
         # Prefences - Retroalimentation - emotion
-        preference = self.preferenceInput(value)
-        retroAlimentacion = self.retroalimentacionFilter(value)
-        emotion = self.emotionalFilter(value)
+        print ("VALUE: ",value)
+        if value != "":
+            preference = self.preferenceInput(value)
+            retroAlimentacion = self.retroalimentacionFilter(value)
+            emotion = self.emotionalFilter(value)
+            print ("VALUE-AFTER: ",value)
 
-        resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
-        if preference[0] or retroAlimentacion[0] or emotion[0]:
-            self.sendValue(resultValue)
-        else:
-            self.sendValue(value)
-
-        if resultValue:
-            print("enviar", resultValue)
-            json_params = {"DialogInput": resultValue}
-            send(-1, "int", json_params)
+            resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+            if preference[0] or retroAlimentacion[0] or emotion[0]:
+                self.sendValue(resultValue)
+            else:
+                self.sendValue(value)
 

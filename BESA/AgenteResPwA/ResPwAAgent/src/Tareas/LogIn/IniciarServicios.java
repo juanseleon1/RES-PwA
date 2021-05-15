@@ -100,10 +100,11 @@ public class IniciarServicios extends ResPwaTask{
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
         requestService(srb,blvs);
         
+        infoServicio = new HashMap<>();
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);
         requestService(srb,blvs);
 
-        
+        infoServicio = new HashMap<>();
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);
         requestService(srb,blvs);
 

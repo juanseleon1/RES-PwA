@@ -74,8 +74,8 @@ public class InitRESPwA {
             HashMap<String, Object> hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
             hm1.put("MOVETOY", 2);
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
-            p.sendRequest(data);
+            //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
+            //p.sendRequest(data);
             startConfig(p);
             
             /*ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
