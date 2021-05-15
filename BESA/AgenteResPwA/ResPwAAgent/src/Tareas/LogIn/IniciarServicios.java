@@ -13,6 +13,7 @@ import ServiceAgentResPwA.EnergyServices.EnergyServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
@@ -35,6 +36,11 @@ public class IniciarServicios extends ResPwaTask{
         ServiceDataRequest srb = null;
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
+        infoServicio.put("SAY", "Iniciando servicios");
+        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        requestService(srb,blvs);
+        
+        infoServicio = new HashMap<>();
         infoServicio.put("ACTIVATE", true);
         srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
         requestService(srb,blvs);
@@ -134,6 +140,8 @@ public class IniciarServicios extends ResPwaTask{
         infoServicio.put("ACTVOICERECOG", "SpeechRecognition"); //revisar nombre
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);
         requestService(srb,blvs);
+        
+        activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
         
         blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
         

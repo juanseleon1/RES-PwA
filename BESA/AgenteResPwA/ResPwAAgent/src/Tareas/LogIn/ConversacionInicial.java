@@ -39,7 +39,6 @@ public class ConversacionInicial extends ResPwaTask {
         if (unit.convert(now-start, TimeUnit.SECONDS)>15) {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
-            activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
             if(!infoServicio.containsKey("SAY")){
                 infoServicio.put("SAY", "Mucho gusto, soy pepper");
             }
