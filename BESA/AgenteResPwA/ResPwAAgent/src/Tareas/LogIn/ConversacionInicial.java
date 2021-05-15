@@ -40,9 +40,10 @@ public class ConversacionInicial extends ResPwaTask {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             if(!infoServicio.containsKey("SAY")){
-                infoServicio.put("SAY", "Mucho gusto, soy pepper");
+                infoServicio.put("TOPIC", PepperTopicsNames.SALUDARTOPIC);
+                infoServicio.put("TAGS", "%saludo");
             }
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYUNDERTOPICCONTEXT, infoServicio);
             requestService(srb, rab);
             start = System.currentTimeMillis();
         }
