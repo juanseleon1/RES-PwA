@@ -1,6 +1,8 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
 import re
+
+
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 
@@ -162,11 +164,11 @@ class pepperModuleV2(object):
         self.personWavingS = self.alProxy.subscriber("WavingDetection/PersonWaving")
         self.personWavingS.signal.connect(self.personWaving)
 
-
     def activateTopic(self, value):
         json_params = {}
         json_params["ActivateTopic"] = True
         send(-1, "rob", json_params)
+
     # def
 
     # Raised when an animated speech is done.
@@ -445,7 +447,7 @@ class pepperModuleV2(object):
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
-        if ( value is not -1):
+        if (value is not -1):
             json_params["distanceOfTrackedHuman"] = value
             send(-1, "int", json_params)
 
@@ -497,8 +499,7 @@ class pepperModuleV2(object):
         send(-1, "int", json_params)
 
     def sendValue(resultValue):
-        print
-        "enviar", resultValue
+        print "enviar", resultValue
         json_params = {"DialogInput": resultValue}
         send(-1, "int", json_params)
 
@@ -506,15 +507,15 @@ class pepperModuleV2(object):
         resultValue = ""
         word = completeSentence
         if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
-            len(re.findall(r'brill\w+', word[1])) != 0)):
+                len(re.findall(r'brill\w+', word[1])) != 0)):
             resultValue = 'decrease brigthness'
         if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
             resultValue = 'increase brigthness'
         if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
-            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
             resultValue = 'decrease volume'
         if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
-            len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
             resultValue = 'decrease volume'
 
         if (resultValue == ""):
@@ -523,29 +524,28 @@ class pepperModuleV2(object):
 
     def retroalimentacionFilter(self, value):
 
-        if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
+        if value == 'Bien' or value == 'Regular' or value == 'Mal':
             self.retroalimentacionCompleta += " " + value
 
         # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
-        if (self.retroalimentacionCompleta.split().count() == 8):
+        if self.retroalimentacionCompleta.split().count() == 8:
             return (True, self.retroalimentacionCompleta)
         else:
             return (False, "")
 
-
-    def happyFilter (self,value):
+    def happyFilter(self, value):
         aux = ''
-        if (len(value) == 2 ):
+        if (len(value) == 2):
             aux = value[1]
         elif (len(value) == 3):
             aux = value[2]
         resulset = ''
 
-        if len(re.findall(r'feli\w+', aux)) == 1 or\
-                len(re.findall(r'alegr\w+', aux)) == 1 or\
-                len(re.findall(r'emocion\w+', aux)) == 1 or\
-                len(re.findall(r'feli\w+', aux)) == 1 or\
-                len(re.findall(r'animad\w+', aux)) == 1 or\
+        if len(re.findall(r'feli\w+', aux)) == 1 or \
+                len(re.findall(r'alegr\w+', aux)) == 1 or \
+                len(re.findall(r'emocion\w+', aux)) == 1 or \
+                len(re.findall(r'feli\w+', aux)) == 1 or \
+                len(re.findall(r'animad\w+', aux)) == 1 or \
                 len(re.findall(r'chever\w+', aux)) == 1:
             resulset = value
         if (resulset != ''):
@@ -553,19 +553,17 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
-
-
-    def normalFilter (self,value):
+    def normalFilter(self, value):
         aux = ''
-        if (len(value) == 2 ):
+        if (len(value) == 2):
             aux = value[1]
         elif (len(value) == 3):
             aux = value[2]
         resulset = ''
 
-        if len(re.findall(r'bien\w+', aux)) == 1 or\
-                len(re.findall(r'norma\w+', aux)) == 1 or\
-                len(re.findall(r'agrada\w+', aux)) == 1 or\
+        if len(re.findall(r'bien\w+', aux)) == 1 or \
+                len(re.findall(r'norma\w+', aux)) == 1 or \
+                len(re.findall(r'agrada\w+', aux)) == 1 or \
                 len(re.findall(r'buen\w+', aux)) == 1:
             resulset = value
         if (resulset != ''):
@@ -573,9 +571,7 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
-
-
-    def sadFilter (self,value):
+    def sadFilter(self, value):
         resulset = ''
         aux = ''
         if (len(value) == 2):
@@ -585,12 +581,12 @@ class pepperModuleV2(object):
         if len(re.findall(r'aburrid\w+', aux)) == 1 or \
                 len(re.findall(r'cansad\w+', aux)) == 1 or \
                 len(re.findall(r'fastidia\w+', aux)) == 1 or \
-                len(re.findall(r'mamad\w+', aux)) == 1 or\
-                len(re.findall(r'mal\w+', aux)) == 1 or\
-                len(re.findall(r'terribl\w+', aux)) == 1 or\
+                len(re.findall(r'mamad\w+', aux)) == 1 or \
+                len(re.findall(r'mal\w+', aux)) == 1 or \
+                len(re.findall(r'terribl\w+', aux)) == 1 or \
                 len(re.findall(r'horrib\w+', aux)) == 1 or \
                 len(re.findall(r'trist\w+', aux)) == 1 or \
-                len(re.findall(r'adolid\w+', aux)) == 1 or\
+                len(re.findall(r'adolid\w+', aux)) == 1 or \
                 len(re.findall(r'melancol\w+', aux)) == 1:
             resulset = value
 
@@ -599,8 +595,7 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
-
-    def angryFilter (self,value):
+    def angryFilter(self, value):
         resulset = ''
         aux = ''
         if (len(value) == 2):
@@ -619,7 +614,7 @@ class pepperModuleV2(object):
                 len(re.findall(r'rabi\w+', aux)) == 1 or \
                 len(re.findall(r'ira\w+', aux)) == 1 or \
                 len(re.findall(r'furi\w+', aux)) == 1 or \
-                len(re.findall(r'coler\w+', aux)) == 1 or\
+                len(re.findall(r'coler\w+', aux)) == 1 or \
                 len(re.findall(r'vayase\w+', aux)) == 1 or \
                 len(re.findall(r'vete\w+', aux)) == 1:
             resulset = value
@@ -670,4 +665,3 @@ class pepperModuleV2(object):
             print("enviar", resultValue)
             json_params = {"DialogInput": resultValue}
             send(-1, "int", json_params)
-
