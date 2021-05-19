@@ -88,7 +88,8 @@ public class RobotAgentBelieves implements Believes {
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
-        //        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+
         List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
         
 
@@ -96,7 +97,6 @@ public class RobotAgentBelieves implements Believes {
         switch (activity) {
             case CUENTERIA:
                 activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
-
                 ModeloRetroalimentacion<Cuento> modeloRetroCuento = new ModeloRetroalimentacion<Cuento>((Cuento) activityInCourse);
                 modeloRetroCuento.activityFeedback(antecedentsForFeedback);
                 break;

@@ -1,6 +1,11 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 from Utils import activities_running, send
 import re
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> origin/master
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
 # create python module
 
@@ -20,7 +25,14 @@ class pepperModuleV2(object):
         self.topicInputSub.signal.connect(self.getDialogInput)
 
         self.topicActivate = self.alProxy.subscriber("Dialog/ActivateTopic")
+<<<<<<< HEAD
+        self.topicActivate.signal.connect(self.activateTopic)
+
+        self.topicDeact = self.alProxy.subscriber("Dialog/DeactivateTopic")
+        self.topicDeact.signal.connect(self.deactivateTopic)
+=======
         self.topicInputSub.signal.connect(self.activateTopic)
+>>>>>>> origin/master
 
         self.dialogIsStartedS = self.alProxy.subscriber("Dialog/IsStarted")
         self.dialogIsStartedS.signal.connect(self.dialogIsStarted)
@@ -28,7 +40,7 @@ class pepperModuleV2(object):
         self.dialogCurrentStringS = self.alProxy.subscriber("Dialog/CurrentString")
         self.dialogCurrentStringS.signal.connect(self.dialogCurrentString)
 
-        self.alDialogProxy.subscribe("pepperModuleV2")
+        #   self.alDialogProxy.subscribe("pepperModuleV2")
 
         self.sayDoneSub = self.alProxy.subscriber("ALTextToSpeech/TextDone")
         self.sayDoneSub.signal.connect(self.speechTextDone)
@@ -110,6 +122,15 @@ class pepperModuleV2(object):
 
         # self.tabletMessageS = self.alProxy.subscriber("ALTabletService/message")
         # self.tabletMessageS.signal.connect(self.tabletMessage)
+<<<<<<< HEAD
+
+        tabletService = session.service("ALTabletService")
+        tabletService.videoFinished.connect(self.tabletVideoFinished)
+
+        # self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
+        # self.onInputTextS.signal.connect(self.onInputText)
+
+=======
 
         # tabletService = session.service("ALTabletService")
         # tabletService.videoFinished.connect(self.tabletVideoFinished)
@@ -117,6 +138,7 @@ class pepperModuleV2(object):
         # self.onInputTextS = self.alProxy.subscriber("ALTabletService/onInputText")
         # self.onInputTextS.signal.connect(self.onInputText)
 
+>>>>>>> origin/master
         # self.gestureS = self.alProxy.subscriber("ALTactileGesture/Gesture")
         # self.gestureS.signal.connect(self.gesture)
 
@@ -161,12 +183,27 @@ class pepperModuleV2(object):
 
         self.personWavingS = self.alProxy.subscriber("WavingDetection/PersonWaving")
         self.personWavingS.signal.connect(self.personWaving)
+        self.retroalimentacionCompleta = ""
+    
 
+    def activateTopic(self, event_name):
+        json_params = {}
+        json_params["ActivateTopic"] = event_name
+        print "activateTopic", json_params
+        send(-1, "int", json_params)
 
+    def deactivateTopic(self, event_name):
+        json_params = {}
+        json_params["DeactivateTopic"] = event_name
+        send(-1, "int", json_params)
+
+<<<<<<< HEAD
+=======
     def activateTopic(self, value):
         json_params = {}
         json_params["ActivateTopic"] = True
         send(-1, "rob", json_params)
+>>>>>>> origin/master
     # def
 
     # Raised when an animated speech is done.
@@ -445,7 +482,11 @@ class pepperModuleV2(object):
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
+<<<<<<< HEAD
+        if (value is not -1):
+=======
         if ( value is not -1):
+>>>>>>> origin/master
             json_params["distanceOfTrackedHuman"] = value
             send(-1, "int", json_params)
 
@@ -496,15 +537,36 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params)
 
+<<<<<<< HEAD
+    def sendValue(self, resultValue):
+        print "enviar", resultValue
+        json_params = {"DialogInput": resultValue}
+        print "DialogInput", json_params
+=======
     def sendValue(resultValue):
         print
         "enviar", resultValue
         json_params = {"DialogInput": resultValue}
+>>>>>>> origin/master
         send(-1, "int", json_params)
 
     def preferenceInput(self, completeSentence):
         resultValue = ""
         word = completeSentence
+<<<<<<< HEAD
+        if(len(word)>0):
+            if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
+                len(re.findall(r'brill\w+', word[1])) != 0)):
+                resultValue = 'decrease brigthness'
+            if (len(re.findall(r'baj\w+', word[0])) == 1 and len(re.findall(r'brill\w+', word[1])) != 0):
+                resultValue = 'increase brigthness'
+            if ((len(re.findall(r'baj\w+', word[0])) == 1 or len(re.findall(r'dur\w+', word[0])) != 0) and (
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'dur\w+', word[1])) != 0)):
+                resultValue = 'decrease volume'
+            if ((len(re.findall(r'sub\w+', word[0])) == 1 or len(re.findall(r'nada\w+', word[0])) != 0) and (
+                len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
+                resultValue = 'decrease volume'
+=======
         if ((len(re.findall(r'mu\w+', word[0])) == 1 or len(re.findall(r'sub\w+', word[0])) != 0) and (
             len(re.findall(r'brill\w+', word[1])) != 0)):
             resultValue = 'decrease brigthness'
@@ -517,35 +579,58 @@ class pepperModuleV2(object):
             len(re.findall(r'vol\w+', word[1])) != 0 or len(re.findall(r'hab\w+', word[1])) != 0)):
             resultValue = 'decrease volume'
 
+>>>>>>> origin/master
         if (resultValue == ""):
             return (False, "")
         return (True, resultValue)
 
     def retroalimentacionFilter(self, value):
 
+<<<<<<< HEAD
+        if value == 'Bien' or value == 'Regular' or value == 'Mal':
+            self.retroalimentacionCompleta += " " + value
+
+        # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
+        if (len(self.retroalimentacionCompleta.split()) == 8):
+=======
         if (value == 'Bien' or value == 'Regular' or value == 'Mal'):
             self.retroalimentacionCompleta += " " + value
 
         # EL 8 VARIA SEGÚN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
         if (self.retroalimentacionCompleta.split().count() == 8):
+>>>>>>> origin/master
             return (True, self.retroalimentacionCompleta)
         else:
             return (False, "")
 
+<<<<<<< HEAD
+    def happyFilter(self, value):
+        aux = ''
+        if (len(value) == 2):
+=======
 
     def happyFilter (self,value):
         aux = ''
         if (len(value) == 2 ):
+>>>>>>> origin/master
             aux = value[1]
         elif (len(value) == 3):
             aux = value[2]
         resulset = ''
 
+<<<<<<< HEAD
+        if len(re.findall(r'feli\w+', aux)) == 1 or \
+                len(re.findall(r'alegr\w+', aux)) == 1 or \
+                len(re.findall(r'emocion\w+', aux)) == 1 or \
+                len(re.findall(r'feli\w+', aux)) == 1 or \
+                len(re.findall(r'animad\w+', aux)) == 1 or \
+=======
         if len(re.findall(r'feli\w+', aux)) == 1 or\
                 len(re.findall(r'alegr\w+', aux)) == 1 or\
                 len(re.findall(r'emocion\w+', aux)) == 1 or\
                 len(re.findall(r'feli\w+', aux)) == 1 or\
                 len(re.findall(r'animad\w+', aux)) == 1 or\
+>>>>>>> origin/master
                 len(re.findall(r'chever\w+', aux)) == 1:
             resulset = value
         if (resulset != ''):
@@ -553,19 +638,31 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
+<<<<<<< HEAD
+    def normalFilter(self, value):
+        aux = ''
+        if (len(value) == 2):
+=======
 
 
     def normalFilter (self,value):
         aux = ''
         if (len(value) == 2 ):
+>>>>>>> origin/master
             aux = value[1]
         elif (len(value) == 3):
             aux = value[2]
         resulset = ''
 
+<<<<<<< HEAD
+        if len(re.findall(r'bien\w+', aux)) == 1 or \
+                len(re.findall(r'norma\w+', aux)) == 1 or \
+                len(re.findall(r'agrada\w+', aux)) == 1 or \
+=======
         if len(re.findall(r'bien\w+', aux)) == 1 or\
                 len(re.findall(r'norma\w+', aux)) == 1 or\
                 len(re.findall(r'agrada\w+', aux)) == 1 or\
+>>>>>>> origin/master
                 len(re.findall(r'buen\w+', aux)) == 1:
             resulset = value
         if (resulset != ''):
@@ -573,9 +670,13 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
+<<<<<<< HEAD
+    def sadFilter(self, value):
+=======
 
 
     def sadFilter (self,value):
+>>>>>>> origin/master
         resulset = ''
         aux = ''
         if (len(value) == 2):
@@ -585,12 +686,21 @@ class pepperModuleV2(object):
         if len(re.findall(r'aburrid\w+', aux)) == 1 or \
                 len(re.findall(r'cansad\w+', aux)) == 1 or \
                 len(re.findall(r'fastidia\w+', aux)) == 1 or \
+<<<<<<< HEAD
+                len(re.findall(r'mamad\w+', aux)) == 1 or \
+                len(re.findall(r'mal\w+', aux)) == 1 or \
+                len(re.findall(r'terribl\w+', aux)) == 1 or \
+                len(re.findall(r'horrib\w+', aux)) == 1 or \
+                len(re.findall(r'trist\w+', aux)) == 1 or \
+                len(re.findall(r'adolid\w+', aux)) == 1 or \
+=======
                 len(re.findall(r'mamad\w+', aux)) == 1 or\
                 len(re.findall(r'mal\w+', aux)) == 1 or\
                 len(re.findall(r'terribl\w+', aux)) == 1 or\
                 len(re.findall(r'horrib\w+', aux)) == 1 or \
                 len(re.findall(r'trist\w+', aux)) == 1 or \
                 len(re.findall(r'adolid\w+', aux)) == 1 or\
+>>>>>>> origin/master
                 len(re.findall(r'melancol\w+', aux)) == 1:
             resulset = value
 
@@ -599,8 +709,12 @@ class pepperModuleV2(object):
         else:
             return (False, "")
 
+<<<<<<< HEAD
+    def angryFilter(self, value):
+=======
 
     def angryFilter (self,value):
+>>>>>>> origin/master
         resulset = ''
         aux = ''
         if (len(value) == 2):
@@ -619,7 +733,11 @@ class pepperModuleV2(object):
                 len(re.findall(r'rabi\w+', aux)) == 1 or \
                 len(re.findall(r'ira\w+', aux)) == 1 or \
                 len(re.findall(r'furi\w+', aux)) == 1 or \
+<<<<<<< HEAD
+                len(re.findall(r'coler\w+', aux)) == 1 or \
+=======
                 len(re.findall(r'coler\w+', aux)) == 1 or\
+>>>>>>> origin/master
                 len(re.findall(r'vayase\w+', aux)) == 1 or \
                 len(re.findall(r'vete\w+', aux)) == 1:
             resulset = value
@@ -656,6 +774,19 @@ class pepperModuleV2(object):
 
         # Are all the filters possible in the code - they were simplyfied to get a better knowledge of
         # Prefences - Retroalimentation - emotion
+<<<<<<< HEAD
+        if value != "":
+            preference = self.preferenceInput(value)
+            retroAlimentacion = self.retroalimentacionFilter(value)
+            emotion = self.emotionalFilter(value)
+            print ("VALUE-AFTER: ",value)
+
+            resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+            if preference[0] or retroAlimentacion[0] or emotion[0]:
+                self.sendValue(resultValue)
+            else:
+                self.sendValue(value)
+=======
         preference = self.preferenceInput(value)
         retroAlimentacion = self.retroalimentacionFilter(value)
         emotion = self.emotionalFilter(value)
@@ -671,3 +802,4 @@ class pepperModuleV2(object):
             json_params = {"DialogInput": resultValue}
             send(-1, "int", json_params)
 
+>>>>>>> origin/master

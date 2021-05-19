@@ -14,10 +14,10 @@ import ResPwAEntities.Joint;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Metas.Cuenteria;
-import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.LogIn;
-import RobotAgentBDI.Metas.MantenerAtencionPwA;
 import RobotAgentBDI.Metas.MusicoTerapia;
+import RobotAgentBDI.RobotAgentBDI;
+import RobotAgentBDI.Metas.ReportarEmergencia;
 import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.Saludar;
@@ -74,8 +74,8 @@ public class InitRESPwA {
             HashMap<String, Object> hm1 = new HashMap<>();
             hm1.put("MOVETOX", 5);
             hm1.put("MOVETOY", 2);
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
-            p.sendRequest(data);
+            //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
+            //p.sendRequest(data);
             startConfig(p);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,6 +123,8 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
+        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
@@ -134,6 +136,11 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
+//        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
+        //Agregar a Lista
+        RAGoals.add(cuenteriaGoal);
+//        RAGoals.add(tp);
+        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
@@ -146,6 +153,7 @@ public class InitRESPwA {
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
+//        RAGoals.add(reportar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);

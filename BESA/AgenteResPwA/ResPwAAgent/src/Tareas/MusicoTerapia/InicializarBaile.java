@@ -34,24 +34,7 @@ public class InicializarBaile extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Cambiar Baile ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustobaile() > 0.5) {
-            infoServicio.put("RADIO", 0.5);
-            infoServicio.put("DISTANCIAMAX", 0.5);
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-//            requestService(srb, blvs);
-
-//            infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
-//            infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
-            infoServicio.put("MOVETOX", 5);
-            infoServicio.put("MOVETOY", 5);
-            srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
-            requestService(srb, blvs);
-
-            HashMap<String, Object> hm = new HashMap<>();
-            hm.put("SAY", "Kikin! Kikin! ¿Porque eres asi?");
-            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-            requestService(data, blvs);
-        }
+        //buscar baile
     }
 
     @Override

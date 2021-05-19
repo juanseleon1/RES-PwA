@@ -44,12 +44,14 @@ public class RetroalimentacionReception extends ResPwaTask {
             resultados.put("Regular", resulset.stream().filter(retroa -> retroa.equals("Regular")).count()*2);
             resultados.put("Mal", resulset.stream().filter(retroa -> retroa.equals("Mal")).count());
             Double resulRetroAlimentacion = Double.valueOf(resultados.get("bien") + resultados.get("Regular") + resultados.get("Mal") / resulset.size());
-            if (resulRetroAlimentacion >= 2.5)
+            if (resulRetroAlimentacion > 2.5)
                 respuestaRetroalimentacion = 1.0;
             if (resulRetroAlimentacion <= 2.5 && resulRetroAlimentacion >= 1.5)
                 respuestaRetroalimentacion = 0.5;
             if (resulRetroAlimentacion < 1.5)
                 respuestaRetroalimentacion = 0.0;
+            
+            blvs.feedbackActivity(respuestaRetroalimentacion);
            // infoServicio.put("FALTA SABER QUE METER ACA", respuestaRetroalimentacion);
            // srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             

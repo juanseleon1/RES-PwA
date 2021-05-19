@@ -313,7 +313,11 @@ INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (2, 'caminar',4, 'comando'
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (3, 'caminar',0, 'comando'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (4, 'POSTURA',3, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (5, 'POSTURA',1, 'postura'); 
+<<<<<<< HEAD
+INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (6, 'POSTURA',2, 'postura'); 
+=======
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (6, 'POSTURA ',2, 'postura'); 
+>>>>>>> origin/master
 
 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (0, 'HeadPitch',0.333358,0.76); 

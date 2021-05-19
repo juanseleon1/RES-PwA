@@ -6,6 +6,8 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
+import static EmotionalAnalyzerAgent.EmotionPwA.ANGER;
+import static EmotionalAnalyzerAgent.EmotionPwA.SADNESS;
 import EmotionalAnalyzerAgent.EmotionalData;
 import PepperPackage.EmotionalModel.Emotion;
 import SensorHandlerAgent.SensorData;
@@ -75,6 +77,51 @@ public class BEstadoEmocionalPwA implements Believes {
         return true;
     }
 
+    public Map<EmotionPwA, List<Emotion>> getEmoMap() {
+        return emoMap;
+    }
+
+    public void setEmoMap(Map<EmotionPwA, List<Emotion>> emoMap) {
+        this.emoMap = emoMap;
+    }
+    
+//    Return if the emotion is pleasant or unpleasant
+    public double getFeedbackEmotion(){
+        double emotionFeedback = 0.0;
+        double auxEmotionAverage = 0.0;
+        
+        for (EmotionPwA entry : emoMap.keySet()) {
+            
+            auxEmotionAverage = getEmotionAverage(emoMap.get(entry));
+            if(entry == ANGER || entry == SADNESS){
+                auxEmotionAverage *= -1;
+            }
+            if(Math.abs(auxEmotionAverage) > Math.abs(emotionFeedback)){
+                emotionFeedback = auxEmotionAverage;
+            }
+        }
+        
+//        if Pleasant return 1.0
+        if(emotionFeedback > 0){
+            emotionFeedback = 1.0;
+        }
+        else{
+//            if Unpleasant return 0.0
+            emotionFeedback = 0.0;
+        }
+        return emotionFeedback;
+    }
+    
+    private float getEmotionAverage(List<Emotion> historyEmotionsInActivity){
+        float emotionAverage = 0.0f;
+        
+        for (Emotion emotion : historyEmotionsInActivity) {
+            emotionAverage += emotion.getValence();
+        }
+        
+        return emotionAverage / historyEmotionsInActivity.size();
+    }
+    
     public EmotionPwA getEmocionPredominante() {
         return emocionPredominante;
     }
