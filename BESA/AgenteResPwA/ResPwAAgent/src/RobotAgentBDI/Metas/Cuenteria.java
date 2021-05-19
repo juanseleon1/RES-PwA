@@ -35,7 +35,6 @@ public class Cuenteria extends GoalBDI {
     private static String descrip = "Cuenteria";
     
     public static Cuenteria buildGoal() {
-        EvaluarEstrategiaEnriquecer eEstrategia = new EvaluarEstrategiaEnriquecer();
         MoverseFrentePwA moversePwA = new MoverseFrentePwA();
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         RecomendarCuento recomCuento = new RecomendarCuento();
@@ -51,7 +50,6 @@ public class Cuenteria extends GoalBDI {
         tarea = new ArrayList<>();
         tarea.add(moversePwA);
         tarea.add(recomCuento);
-        rolePlan.addTask(eEstrategia,tarea);
         
         tarea = new ArrayList<>();
         tarea.add(recomCuento);

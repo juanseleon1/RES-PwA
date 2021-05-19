@@ -35,15 +35,14 @@ public class ConversacionInicial extends ResPwaTask {
 
         long now = System.currentTimeMillis();
         TimeUnit unit = TimeUnit.SECONDS;
-        if (unit.convert(now - start, TimeUnit.SECONDS) > 15) {
+        if (unit.convert(now - start, TimeUnit.SECONDS) > 20) {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             if (rab.getbEstadoInteraccion().getRespuestasPorContexto() == 0) {
-                if (!infoServicio.containsKey("TOPIC")) {
-                    infoServicio.put("TOPIC", PepperTopicsNames.SALUDARTOPIC.getTopic());
-                    infoServicio.put("TAGS", "saludo");
+                if (!infoServicio.containsKey("SAY")) {
+                    infoServicio.put("SAY", "Mucho gusto, soy Pepper. Que bueno verte");
                 }
-                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYUNDERTOPICCONTEXT, infoServicio);
+                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 requestService(srb, rab);
                 start = System.currentTimeMillis();
             }
@@ -84,8 +83,10 @@ public class ConversacionInicial extends ResPwaTask {
             System.out.println("--- Check Finish Conversacion Inicial ---");
             blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
-            System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+            if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC)){
+                System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+            }
             return true;
         }
         return false;
