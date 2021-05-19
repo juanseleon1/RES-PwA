@@ -89,6 +89,7 @@ public class RobotAgentBelieves implements Believes {
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
         emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+
         List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
         
 
@@ -226,7 +227,5 @@ public class RobotAgentBelieves implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         return this;
     }
-
-
 
 }

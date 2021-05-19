@@ -22,23 +22,23 @@ import rational.mapping.Believes;
  *
  * @author
  */
-public class IniciarServicios extends ResPwaTask{
-    
-    private HashMap<String,Object> infoServicio = new HashMap<>();
+public class IniciarServicios extends ResPwaTask {
+
+    private HashMap<String, Object> infoServicio = new HashMap<>();
 
     public IniciarServicios() {
 //        System.out.println("--- Task Iniciar Servicios Iniciada ---");
     }
-    
+
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Iniciar Servicios ---");
         ServiceDataRequest srb = null;
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
+
         infoServicio.put("SAY", "Iniciando servicios");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb,blvs);
+        requestService(srb, blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATE", true);
@@ -135,17 +135,17 @@ public class IniciarServicios extends ResPwaTask{
 //        infoServicio.put("ACTIVATEVOICEEMOANAL", "EmotionAnalysis"); //revisar nombre
 //        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);
 //        requestService(srb,blvs);
-        
+
         activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
-        
+
         blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
-        
+
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Iniciar Servicios ---");
-        
+
     }
 
     @Override
@@ -157,9 +157,8 @@ public class IniciarServicios extends ResPwaTask{
     public boolean checkFinish(Believes believes) {
         super.checkFinish(believes);
 
-//        System.out.println("///////////////TFServicios//////////////");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-            return blvs.getbEstadoInteraccion().isConfirmarActServicios();
+        return blvs.getbEstadoInteraccion().isConfirmarActServicios();
     }
-    
+
 }

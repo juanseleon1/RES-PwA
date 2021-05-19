@@ -46,7 +46,6 @@ public class MusicoTerapia extends GoalBDI{
 
         rolePlan.addTask(iBaile);
         rolePlan.addTask(sCancion);
-        
         tarea = new ArrayList<>();
         tarea.add(sCancion);
         tarea.add(iBaile);
@@ -55,6 +54,7 @@ public class MusicoTerapia extends GoalBDI{
         tarea = new ArrayList<>();
         tarea.add(rCancion);
         rolePlan.addTask(retro,tarea);
+
         
         RationalRole musicTherapyRole = new RationalRole(descrip, rolePlan);
         MusicoTerapia b = new MusicoTerapia(InitRESPwA.getPlanID(), musicTherapyRole, descrip, GoalBDITypes.OPORTUNITY);

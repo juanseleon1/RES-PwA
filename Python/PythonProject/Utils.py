@@ -30,6 +30,7 @@ def send(id_response, responseType, params):
     should_send_message = True
     key = params.keys().pop()
     if key in responsesXTime:
+        print "key: ", key
         should_send_message = checkTimeMessageSended(key)
     else:
         responsesXTime[key] = datetime.now()
@@ -57,7 +58,10 @@ def isAnEmotionalAck(params):
             encontrado = True
 
     return encontrado
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
 def checkTimeMessageSended(params):
     isCorrectToSend = True
@@ -70,7 +74,11 @@ def checkTimeMessageSended(params):
                 print("Change")
                 isCorrectToSend = False
 
+<<<<<<< HEAD
             if (abs(datetime.now().second - responsesXTime.get(params).second)) > 10:
+=======
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
+>>>>>>> origin/master
                 #print("Erase")
                 isCorrectToSend = False
                 deleteExpiredAction( params )
@@ -78,5 +86,9 @@ def checkTimeMessageSended(params):
     return isCorrectToSend
 
 def deleteExpiredAction( expiredAction ):
+<<<<<<< HEAD
     if activities_running and (expiredAction in activities_running):
+=======
+    if activities_running and (expiredAction in activities_running.keys()):
+>>>>>>> origin/master
         activities_running.pop( expiredAction )

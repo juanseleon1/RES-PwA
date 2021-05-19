@@ -67,6 +67,7 @@ class Robot:
         self.animation = Animation(self.session)
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
+<<<<<<< HEAD
                                 "alegreTopic": topico_alegre,
                                  "sadTopic":topico_triste,
                                  "iraTopic":topico_ira,
@@ -76,6 +77,16 @@ class Robot:
                                  "saludarTopic":topico_saludable,
                                  "soundTopic": topico_sonido
                                 }
+=======
+                                # "emoTopic": topico_emocional,
+                                "alegreTopic": topico_alegre,
+                                # "sadTopic":topico_triste,
+                                # "iraTopic":topico_ira,
+                                # "normTopic":topico_normal,
+                                # "musicTopic":conversacion_musica
+                                }
+
+>>>>>>> origin/master
         self.alDialogProxy = session.service("ALDialog")
 
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
@@ -83,8 +94,11 @@ class Robot:
 
        # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
+<<<<<<< HEAD
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+=======
+>>>>>>> origin/master
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
             print "Iniciando Topics"
@@ -175,10 +189,17 @@ class Robot:
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
             "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "rob", False],
+<<<<<<< HEAD
             "DEACTCONVTOPIC": [self.deactivate_topics, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", False],
+=======
+            "DEACTCONVTOPIC": [self.desactivate_conversational_topic_json, True, "rob", False],
+            "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
+            "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
+            "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
+>>>>>>> origin/master
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
         }
 
@@ -226,7 +247,11 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
+<<<<<<< HEAD
             #print "TIMES  -> ", animation_times
+=======
+            print "TIMES  -> ", animation_times
+>>>>>>> origin/master
             self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
         except BaseException, err:
             print err
@@ -408,15 +433,21 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+<<<<<<< HEAD
                 #self.app.run()
+=======
+>>>>>>> origin/master
             except Exception, e:
                 print "Main Error"
                 print e
                 exit(1)
 
     def request_posture_change(self, params):
+<<<<<<< HEAD
         print "MAPA DE EMOCIONES: "
         print self.current_emomap
+=======
+>>>>>>> origin/master
         actions = self.current_emomap[params.get("ACTION")]
         names = list()
         times = list()
@@ -605,9 +636,13 @@ class Robot:
             topic = self.alDialogProxy.loadTopic(tContent.decode('utf-8'))
             self.topicMap[topicName] = topic
             """
+<<<<<<< HEAD
 
         self.alDialogProxy.runTopics(topic_list)
         print "ANTES DE ENTRAR", self.alDialogProxy.getActivatedTopics()
+=======
+        self.alDialogProxy.runTopics(topic_list)
+>>>>>>> origin/master
         self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
 
         # self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
@@ -620,7 +655,11 @@ class Robot:
     # def
 
     def deactivate_topics(self, topicsList):
+<<<<<<< HEAD
         for topic in self.alDialogProxy.getActivatedTopics():
+=======
+        for topic in topicsList:
+>>>>>>> origin/master
             self.desactivate_conversational_topic(topic)
             time.sleep(5)
 
@@ -633,8 +672,13 @@ class Robot:
     # Unloads the specified topic and frees the associated memory.
 
     def unload_conversational_topic(self, params):
+<<<<<<< HEAD
         topic_name = params.get("name")
         self.alDialogProxy.deactivateTopic(topic_name)
+=======
+        topicName = params.get("name")
+        self.alDialogProxy.deactivateTopic(topicName)
+>>>>>>> origin/master
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, params):
@@ -671,6 +715,7 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
     def desactivate_conversational_topic(self, topic_name):
+<<<<<<< HEAD
         print self.alDialogProxy.getActivatedTopics()
         if topic_name in self.alDialogProxy.getActivatedTopics():
             for topic in self.alDialogProxy.getActivatedTopics():
@@ -684,13 +729,23 @@ class Robot:
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         time.sleep(5)
         print "topicos activos", self.alDialogProxy.getActivatedTopics()
+=======
+        if topic_name in self.alDialogProxy.getActivatedTopics():
+            self.alDialogProxy.deactivateTopic(topic_name)
+        elif topic_name == "allTopics":
+            self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+>>>>>>> origin/master
 
     # def
 
     def desactivate_conversational_topic_json(self, params):
         topicName = params.get("TOPICNAME")
+<<<<<<< HEAD
         print "TOPICNAME", topicName
         self.desactivate_conversational_topic(str(topicName))
+=======
+        self.desactivate_conversational_topic(topicName)
+>>>>>>> origin/master
 
     # def
 

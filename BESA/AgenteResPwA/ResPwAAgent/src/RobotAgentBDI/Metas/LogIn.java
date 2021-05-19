@@ -14,6 +14,7 @@ import RobotAgentBDI.ResPwaGoal;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.IniciarServicios;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import Tareas.LogIn.LogInTask;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -66,6 +67,7 @@ public class LogIn extends ResPwaGoal{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
         if ((blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged()) || blvs.getbEstadoInteraccion().isSaludo()) {
+
             return 1.0;
         }
         
