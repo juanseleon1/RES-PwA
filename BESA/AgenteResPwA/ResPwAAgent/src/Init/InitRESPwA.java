@@ -12,7 +12,9 @@ import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
+import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.Metas.LogIn;
+import RobotAgentBDI.Metas.MusicoTerapia;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.ReportarEmergencia;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -114,8 +116,8 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
-//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
         LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
@@ -125,11 +127,11 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
-        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
+//        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
-//        RAGoals.add(cuenteriaGoal);
+        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-//        RAGoals.add(musicoTGoal);
+        RAGoals.add(musicoTGoal);
         RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
@@ -138,7 +140,7 @@ public class InitRESPwA {
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
-        RAGoals.add(reportar);
+//        RAGoals.add(reportar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
