@@ -22,7 +22,10 @@ class pepperModuleV2(object):
         self.topicInputSub.signal.connect(self.getDialogInput)
 
         self.topicActivate = self.alProxy.subscriber("Dialog/ActivateTopic")
-        self.topicInputSub.signal.connect(self.activateTopic)
+        self.topicActivate.signal.connect(self.activateTopic)
+
+        self.topicDeact = self.alProxy.subscriber("Dialog/DeactivateTopic")
+        self.topicDeact.signal.connect(self.deactivateTopic)
 
         self.dialogIsStartedS = self.alProxy.subscriber("Dialog/IsStarted")
         self.dialogIsStartedS.signal.connect(self.dialogIsStarted)
@@ -30,7 +33,7 @@ class pepperModuleV2(object):
         self.dialogCurrentStringS = self.alProxy.subscriber("Dialog/CurrentString")
         self.dialogCurrentStringS.signal.connect(self.dialogCurrentString)
 
-        self.alDialogProxy.subscribe("pepperModuleV2")
+        #   self.alDialogProxy.subscribe("pepperModuleV2")
 
         self.sayDoneSub = self.alProxy.subscriber("ALTextToSpeech/TextDone")
         self.sayDoneSub.signal.connect(self.speechTextDone)
@@ -166,9 +169,17 @@ class pepperModuleV2(object):
         self.retroalimentacionCompleta = ""
     
 
-    def activateTopic(self, value):
+    def activateTopic(self, event_name):
         json_params = {}
-        json_params["ActivateTopic"] = True
+        json_params["ActivateTopic"] = event_name
+        print "activateTopic", json_params
+        send(-1, "rob", json_params)
+
+    def deactivateTopic(self, event_name):
+        json_params = {}
+        json_params["DeactivateTopic"] = event_name
+        print "deactivateTopic", json_params, self.alDialogProxy.getActivatedTopics()
+
         send(-1, "rob", json_params)
 
     # def

@@ -35,15 +35,14 @@ public class ConversacionInicial extends ResPwaTask {
 
         long now = System.currentTimeMillis();
         TimeUnit unit = TimeUnit.SECONDS;
-        if (unit.convert(now - start, TimeUnit.SECONDS) > 15) {
+        if (unit.convert(now - start, TimeUnit.SECONDS) > 20) {
             System.out.println("--- Execute Task Preguntar Estado Animo ---");
             RobotAgentBelieves rab = (RobotAgentBelieves) parameters;
             if (rab.getbEstadoInteraccion().getRespuestasPorContexto() == 0) {
-                if (!infoServicio.containsKey("TOPIC")) {
-                    infoServicio.put("TOPIC", PepperTopicsNames.SALUDARTOPIC.getTopic());
-                    infoServicio.put("TAGS", "saludo");
+                if (!infoServicio.containsKey("SAY")) {
+                    infoServicio.put("SAY", "Mucho gusto, soy Pepper. Que bueno verte");
                 }
-                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYUNDERTOPICCONTEXT, infoServicio);
+                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 requestService(srb, rab);
                 start = System.currentTimeMillis();
             }
@@ -80,7 +79,7 @@ public class ConversacionInicial extends ResPwaTask {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: " + blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
-        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
+        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 2) {
             System.out.println("--- Check Finish Conversacion Inicial ---");
             blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);

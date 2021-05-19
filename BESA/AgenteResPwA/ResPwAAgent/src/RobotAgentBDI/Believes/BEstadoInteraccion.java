@@ -304,7 +304,7 @@ public class BEstadoInteraccion implements Believes {
 
     public boolean isDetectaPwA() {
         TimeUnit unit = TimeUnit.SECONDS;
-        if (unit.convert(System.currentTimeMillis() - tiempoInt, TimeUnit.SECONDS) > 80 || !detectaPwA) {
+        if (unit.convert(System.currentTimeMillis() - tiempoInt, TimeUnit.SECONDS) > 120 || !detectaPwA) {
             return false;
         }
         return detectaPwA;
@@ -460,4 +460,22 @@ public class BEstadoInteraccion implements Believes {
         this.respuestasPorContexto = respuestasPorContexto;
     }
 
+    public boolean isMovError() {
+        return movError;
+    }
+
+    public void setMovError(boolean movError) {
+        this.movError = movError;
+    }
+
+    public long getTiempoInt() {
+        return tiempoInt;
+    }
+
+    public void setTiempoInt(long tiempoInt) {
+        this.tiempoInt = tiempoInt;
+    }
+
+    
+    
 }

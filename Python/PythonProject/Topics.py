@@ -121,7 +121,7 @@ topico_ira = "/data/home/nao/topics/iraTopic.top"
 topico_normal = "/data/home/nao/topics/normalTopic.top"
 topico_ayuda = "/data/home/nao/topics/ayudaTopic.top"
 topico_retro = "/data/home/nao/topics/retroalimentacionTopic.top"
-topico_saludable = "/data/home/nao/topics/saludarTopic.top"
+topico_saludable = "/data/home/nao/topics/saludaTopic.top"
 topico_sonido = "/data/home/nao/topics/soundTopic.top"
 #topicorron = "/data/home/nao/topics/superTopico.top"
 

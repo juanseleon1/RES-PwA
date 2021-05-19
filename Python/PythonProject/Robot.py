@@ -83,6 +83,8 @@ class Robot:
 
        # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
+        self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
             print "Iniciando Topics"
@@ -173,7 +175,7 @@ class Robot:
             "ACTVOICERECOG": [self.activate_voice_recognition, True, "act", False],
             "DESACTVOICERECOG": [self.desactivate_voice_recognition, True, "act", False],
             "ACTIVATECONVTOPIC": [self.activate_conversational_topic, True, "rob", False],
-            "DEACTCONVTOPIC": [self.desactivate_conversational_topic_json, True, "rob", False],
+            "DEACTCONVTOPIC": [self.deactivate_topics, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
@@ -224,7 +226,7 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            print "TIMES  -> ", animation_times
+            #print "TIMES  -> ", animation_times
             self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
         except BaseException, err:
             print err
@@ -601,7 +603,9 @@ class Robot:
             topic = self.alDialogProxy.loadTopic(tContent.decode('utf-8'))
             self.topicMap[topicName] = topic
             """
+
         self.alDialogProxy.runTopics(topic_list)
+        print "ANTES DE ENTRAR", self.alDialogProxy.getActivatedTopics()
         self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
 
         # self.deactivate_topics(self.alDialogProxy.getActivatedTopics())
@@ -614,7 +618,7 @@ class Robot:
     # def
 
     def deactivate_topics(self, topicsList):
-        for topic in topicsList:
+        for topic in self.alDialogProxy.getActivatedTopics():
             self.desactivate_conversational_topic(topic)
             time.sleep(5)
 
@@ -665,16 +669,26 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
     def desactivate_conversational_topic(self, topic_name):
+        print self.alDialogProxy.getActivatedTopics()
         if topic_name in self.alDialogProxy.getActivatedTopics():
-            self.alDialogProxy.deactivateTopic(topic_name)
+            for topic in self.alDialogProxy.getActivatedTopics():
+                if topic == topic_name:
+                    print "ENTRA"
+                    self.alDialogProxy.deactivateTopic(topic)
+                    self.alDialogProxy.deactivateTopic('saludarTopic')
+                    print "SALE"
+                    break
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        time.sleep(5)
+        print "topicos activos", self.alDialogProxy.getActivatedTopics()
 
     # def
 
     def desactivate_conversational_topic_json(self, params):
         topicName = params.get("TOPICNAME")
-        self.desactivate_conversational_topic(topicName)
+        print "TOPICNAME", topicName
+        self.desactivate_conversational_topic(str(topicName))
 
     # def
 
