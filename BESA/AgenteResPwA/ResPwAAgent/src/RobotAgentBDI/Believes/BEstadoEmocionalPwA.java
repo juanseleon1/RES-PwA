@@ -32,6 +32,9 @@ public class BEstadoEmocionalPwA implements Believes {
     private long tiempoSinAtencion;
     private long tiempoRelajacion;
     private long tiempoSinRelajacion;
+    private double atencion;
+    private double relajacion;
+
 
     public BEstadoEmocionalPwA() {
         emoMap = new HashMap<>();
@@ -45,22 +48,13 @@ public class BEstadoEmocionalPwA implements Believes {
         System.out.println("BEstadoEmocionalPwA update Received: " + si);
         EmotionalData infoRecibida = (EmotionalData) si;
         if (infoRecibida.getInfo().containsKey("atencion")) {
-            if ((double) infoRecibida.getInfo().get("atencion") < 0.5 && tiempoSinAtencion == 0) {
-                tiempoSinAtencion = System.currentTimeMillis();
-                tiempoAtencion = 0;
-            } else if ((double) infoRecibida.getInfo().get("atencion") >= 0.5 && tiempoAtencion == 0) {
-                tiempoAtencion = System.currentTimeMillis();
-                tiempoSinAtencion = 0;
+            if ((double) infoRecibida.getInfo().get("atencion") < 0.5) {
+                atencion = (double) infoRecibida.getInfo().get("atencion") ;
+         
             }
         }
         if (infoRecibida.getInfo().containsKey("relajacion")) {
-            if ((double) infoRecibida.getInfo().get("relajacion") < 0.5 && tiempoSinRelajacion == 0) {
-                tiempoSinRelajacion = System.currentTimeMillis();
-                tiempoRelajacion = 0;
-            } else if ((double) infoRecibida.getInfo().get("relajacion") >= 0.5 && tiempoRelajacion == 0) {
-                tiempoRelajacion = System.currentTimeMillis();
-                tiempoSinRelajacion = 0;
-            }
+            atencion = (double) infoRecibida.getInfo().get("relajacion") ;
         }
         if (infoRecibida.getInfo().containsKey("emotions")) {
             Map<EmotionPwA, Float> emo = (Map<EmotionPwA, Float>) infoRecibida.getInfo().get("emotions");
@@ -174,6 +168,22 @@ public class BEstadoEmocionalPwA implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
+    }
+
+    public double getAtencion() {
+        return atencion;
+    }
+
+    public void setAtencion(double atencion) {
+        this.atencion = atencion;
+    }
+
+    public double getRelajacion() {
+        return relajacion;
+    }
+
+    public void setRelajacion(double relajacion) {
+        this.relajacion = relajacion;
     }
 
 }

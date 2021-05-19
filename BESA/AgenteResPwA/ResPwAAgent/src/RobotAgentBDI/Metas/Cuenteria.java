@@ -80,7 +80,7 @@ public class Cuenteria extends GoalBDI {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
-            if(blvs.getbEstadoActividad().getActividadActual() != null && blvs.getbEstadoActividad().getActividadActual().equals(ResPwAActivity.CUENTERIA) && !blvs.getbEstadoActividad().isFinalizoActividad()) {
+            if(blvs.getbEstadoEmocionalPwA().getAtencion()<0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion()<0.6) {
                 return 1;
             }
         }
