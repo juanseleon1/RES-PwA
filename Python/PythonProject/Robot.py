@@ -415,6 +415,8 @@ class Robot:
                 exit(1)
 
     def request_posture_change(self, params):
+        print "MAPA DE EMOCIONES: "
+        print self.current_emomap
         actions = self.current_emomap[params.get("ACTION")]
         names = list()
         times = list()

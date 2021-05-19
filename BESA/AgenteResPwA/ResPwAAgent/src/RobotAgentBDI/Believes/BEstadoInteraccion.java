@@ -7,6 +7,9 @@ package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import rational.data.InfoData;
 import rational.mapping.Believes;
@@ -55,6 +58,14 @@ public class BEstadoInteraccion implements Believes {
     private String estadoEmocional = "normal";
     private double respuestasPorContexto;
     private long tiempoInt;
+    private Map<String, Boolean> topicos = new HashMap<>();
+
+    public BEstadoInteraccion() {
+        topicos = new HashMap<>();
+        for (PepperTopicsNames topic : PepperTopicsNames.values()) {
+            topicos.put(topic.getTopic(), false);
+        }
+    }
 
     public String getEstadoEmocional() {
         return estadoEmocional;
@@ -187,7 +198,27 @@ public class BEstadoInteraccion implements Believes {
 
         }
 
+        if (infoRecibida.getDataP().containsKey("DeactivateTopic")) {
+            String topic = (String) infoRecibida.getDataP().get("DeactivateTopic");
+            topicos.replace(topic, false);
+        }
+
+        if (infoRecibida.getDataP().containsKey("ActivateTopic")) {
+            String topic = (String) infoRecibida.getDataP().get("ActivateTopic");
+            topicos.replace(topic, true);
+        }
+
+        if (infoRecibida.getDataP().containsKey("speechTextDone")) {
+            Integer done = (Integer) infoRecibida.getDataP().get("speechTextDone");
+            estaHablando = 0 == done;
+
+        }
+
         return true;
+    }
+
+    public boolean isTopicoActivo(PepperTopicsNames topico) {
+        return topicos.get(topico.getTopic());
     }
 
     public boolean isCambioDificultadVoz() {
@@ -476,6 +507,4 @@ public class BEstadoInteraccion implements Believes {
         this.tiempoInt = tiempoInt;
     }
 
-    
-    
 }

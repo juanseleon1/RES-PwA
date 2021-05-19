@@ -138,7 +138,7 @@ public class InitRESPwA {
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
-//        RAGoals.add(reportar);
+        RAGoals.add(reportar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);

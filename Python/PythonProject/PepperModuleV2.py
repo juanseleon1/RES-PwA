@@ -173,14 +173,12 @@ class pepperModuleV2(object):
         json_params = {}
         json_params["ActivateTopic"] = event_name
         print "activateTopic", json_params
-        send(-1, "rob", json_params)
+        send(-1, "int", json_params)
 
     def deactivateTopic(self, event_name):
         json_params = {}
         json_params["DeactivateTopic"] = event_name
-        print "deactivateTopic", json_params, self.alDialogProxy.getActivatedTopics()
-
-        send(-1, "rob", json_params)
+        send(-1, "int", json_params)
 
     # def
 
@@ -514,6 +512,7 @@ class pepperModuleV2(object):
     def sendValue(self, resultValue):
         print "enviar", resultValue
         json_params = {"DialogInput": resultValue}
+        print "DialogInput", json_params
         send(-1, "int", json_params)
 
     def preferenceInput(self, completeSentence):

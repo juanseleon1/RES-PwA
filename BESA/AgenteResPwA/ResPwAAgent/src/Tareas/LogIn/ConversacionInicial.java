@@ -79,12 +79,14 @@ public class ConversacionInicial extends ResPwaTask {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: " + blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
-        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 2) {
+        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
             System.out.println("--- Check Finish Conversacion Inicial ---");
             blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
-            System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+            if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC)){
+                System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
+            }
             return true;
         }
         return false;
