@@ -178,7 +178,7 @@ class Robot:
             "DEACTCONVTOPIC": [self.deactivate_topics, True, "rob", False],
             "LOADCONVTOPIC": [self.load_conversational_topic, True, "act", False],
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
-            "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", True],
+            "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", False],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
         }
 

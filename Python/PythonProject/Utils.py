@@ -30,13 +30,11 @@ def send(id_response, responseType, params):
     should_send_message = True
     key = params.keys().pop()
     if key in responsesXTime:
-        print "key: ", key
         should_send_message = checkTimeMessageSended(key)
     else:
         responsesXTime[key] = datetime.now()
 
     if should_send_message:
-        print "ENVIANDO"
         ADDR = (HOST_LOCAL, PORT)
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
@@ -60,6 +58,7 @@ def isAnEmotionalAck(params):
 
     return encontrado
 
+
 def checkTimeMessageSended(params):
     isCorrectToSend = True
     # print("PARAMS: " + str( responsesXTime.get( params ) ))
@@ -71,7 +70,7 @@ def checkTimeMessageSended(params):
                 print("Change")
                 isCorrectToSend = False
 
-            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 10:
                 #print("Erase")
                 isCorrectToSend = False
                 deleteExpiredAction( params )
@@ -79,5 +78,5 @@ def checkTimeMessageSended(params):
     return isCorrectToSend
 
 def deleteExpiredAction( expiredAction ):
-    if activities_running and (expiredAction in activities_running.keys()):
+    if activities_running and (expiredAction in activities_running):
         activities_running.pop( expiredAction )
