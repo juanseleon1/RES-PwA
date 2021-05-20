@@ -25,7 +25,7 @@ import rational.mapping.Believes;
  */
 public class BEstadoEmocionalPwA implements Believes {
 
-    private EmotionPwA emocionPredominante;
+    private double emocionPredominante;
     private Map<EmotionPwA, List<Emotion>> emoMap;
     private long tiempoEmocionPredominante;
     private long tiempoAtencion;
@@ -83,11 +83,10 @@ public class BEstadoEmocionalPwA implements Believes {
     public double getFeedbackEmotion(){
         double emotionFeedback = 0.0;
         double auxEmotionAverage = 0.0;
-        
         for (EmotionPwA entry : emoMap.keySet()) {
             
             auxEmotionAverage = getEmotionAverage(emoMap.get(entry));
-            if(entry == ANGER || entry == SADNESS){
+            if(entry.equals(ANGER)  || entry.equals(SADNESS) ){
                 auxEmotionAverage *= -1;
             }
             if(Math.abs(auxEmotionAverage) > Math.abs(emotionFeedback)){
@@ -95,14 +94,14 @@ public class BEstadoEmocionalPwA implements Believes {
             }
         }
         
-//        if Pleasant return 1.0
-        if(emotionFeedback > 0){
-            emotionFeedback = 1.0;
-        }
-        else{
-//            if Unpleasant return 0.0
-            emotionFeedback = 0.0;
-        }
+////        if Pleasant return 1.0
+//        if(emotionFeedback > 0){
+//            emotionFeedback = 1.0;
+//        }
+//        else{
+////            if Unpleasant return 0.0
+//            emotionFeedback = 0.0;
+//        }
         return emotionFeedback;
     }
     
@@ -116,11 +115,11 @@ public class BEstadoEmocionalPwA implements Believes {
         return emotionAverage / historyEmotionsInActivity.size();
     }
     
-    public EmotionPwA getEmocionPredominante() {
-        return emocionPredominante;
+    public double getEmocionPredominante() {
+        return getFeedbackEmotion();
     }
 
-    public void setEmocionPredominante(EmotionPwA emocionPredominante) {
+    public void setEmocionPredominante(double emocionPredominante) {
         this.emocionPredominante = emocionPredominante;
     }
 

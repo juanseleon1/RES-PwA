@@ -31,35 +31,35 @@ import rational.mapping.Task;
  * @author mafegarces
  */
 public class Cuenteria extends GoalBDI {
-    
+
     private static String descrip = "Cuenteria";
-    
+
     public static Cuenteria buildGoal() {
         MoverseFrentePwA moversePwA = new MoverseFrentePwA();
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         RecomendarCuento recomCuento = new RecomendarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
-        
+
         List<String> resources = new ArrayList<>();
         List<Task> tarea = new ArrayList<>();
         Plan rolePlan = new Plan();
-        
+
         rolePlan.addTask(recomCuento);
         rolePlan.addTask(moversePwA);
-        
+
         tarea = new ArrayList<>();
         tarea.add(moversePwA);
         tarea.add(recomCuento);
-        
+
         tarea = new ArrayList<>();
         tarea.add(recomCuento);
         tarea.add(moversePwA);
-        rolePlan.addTask(rCuento,tarea);
-        
+        rolePlan.addTask(rCuento, tarea);
+
         tarea = new ArrayList<>();
         tarea.add(rCuento);
-        rolePlan.addTask(retro,tarea);
-        
+        rolePlan.addTask(retro, tarea);
+
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.OPORTUNITY);
         return b;
@@ -79,8 +79,11 @@ public class Cuenteria extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
-            if(blvs.getbEstadoEmocionalPwA().getAtencion()<0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion()<0.6) {
+        System.out.println("Atencion: " + blvs.getbEstadoEmocionalPwA().getAtencion());
+        System.out.println("Relajacion: " + blvs.getbEstadoEmocionalPwA().getRelajacion());
+
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {
                 return 1;
             }
         }
@@ -96,17 +99,18 @@ public class Cuenteria extends GoalBDI {
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Cuenteria evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         List<Actxpreferencia> listaAct = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList();
-        double valor=0;
-        
-        for (Actxpreferencia act: listaAct) {
-            if(act.getActividadpwa().getNombre().equals(ResPwAActivity.CUENTERIA)) {
+        double valor = 0;
+
+        for (Actxpreferencia act : listaAct) {
+            if (act.getActividadpwa().getNombre().equals(ResPwAActivity.CUENTERIA)) {
                 valor = act.getGusto();
             }
         }
-        
-        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
+        System.out.println("Gusto: "+valor);
+        return valor + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override
@@ -119,7 +123,7 @@ public class Cuenteria extends GoalBDI {
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Cuenteria evaluateViability");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if((System.currentTimeMillis()-blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+        if ((System.currentTimeMillis() - blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante()>0) {
             return true;
         }
         return false;

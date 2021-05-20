@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Retroalimentacion/RetroalimentacionReception.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/IniciarServicios.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/ReproduccionCancion.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Retroalimentacion/Modelo/ModeloRetroalimentacion.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BPerfilPwA.java</file>
         </group>
     </open-files>
 </project-private>

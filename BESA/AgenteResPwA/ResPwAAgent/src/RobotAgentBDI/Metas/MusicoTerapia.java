@@ -76,12 +76,14 @@ public class MusicoTerapia extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MusicoTerapia detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getEmocionPredominante());
+
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER))) {
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0) {
                 return 1;
             }
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -102,6 +104,10 @@ public class MusicoTerapia extends GoalBDI{
                 valor = act.getGusto();
             }
         }
+        System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
+        System.out.println("Gusto: "+valor);
+
+
         return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
@@ -115,7 +121,7 @@ public class MusicoTerapia extends GoalBDI{
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MusicoTerapia evaluateViability");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if((System.currentTimeMillis()-blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+        if((System.currentTimeMillis()-blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante() >0){
             return true;
         }
         return false;
