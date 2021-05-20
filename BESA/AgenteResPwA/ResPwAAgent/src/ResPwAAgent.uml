@@ -8352,7 +8352,7 @@ sesion. *</body>
          infoServicio.put(&quot;COLOR&quot;, leds.getHexa());&#xD;
          infoServicio.put(&quot;EmotionalTag&quot;, leds.toString());&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);&#xD;
-         requestService(srb);&#xD;
+         ResPwaUtils.requestService(srb);&#xD;
      } catch (CloneNotSupportedException ex) {&#xD;
          Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);&#xD;
      }&#xD;
@@ -11917,7 +11917,7 @@ sesion. *</body>
           <body>this.init = true;&#xD;
  </body>
         </ownedBehavior>
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5je8q3LEeupusa-cI5onw" name="requestService" specification="_i0O6EK3LEeupusa-cI5onw">
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5je8q3LEeupusa-cI5onw" name="ResPwaUtils.requestService" specification="_i0O6EK3LEeupusa-cI5onw">
           <ownedParameter xmi:id="_i5je863LEeupusa-cI5onw" name="sdr" type="_ij9CYK3LEeupusa-cI5onw"/>
           <ownedParameter xmi:id="_i5je9K3LEeupusa-cI5onw" name="blvs" type="_ii_ZEK3LEeupusa-cI5onw"/>
           <language>java</language>
@@ -11942,7 +11942,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
      infoServicio.put(&quot;TOPICNAME&quot;, topic.getTopic());&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATECONVTOPIC, infoServicio);&#xD;
-     requestService(srb, blvs);&#xD;
+     ResPwaUtils.requestService(srb, blvs);&#xD;
 &#xD;
  </body>
         </ownedBehavior>
@@ -11954,7 +11954,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
      infoServicio.put(&quot;TOPICNAME&quot;, topic.getTopic());&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.DEACTCONVTOPIC, infoServicio);&#xD;
-     requestService(srb, blvs);&#xD;
+     ResPwaUtils.requestService(srb, blvs);&#xD;
  </body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5je-63LEeupusa-cI5onw" name="checkFinish" specification="_i2XBCK3LEeupusa-cI5onw">
@@ -11977,7 +11977,7 @@ sesion. *</body>
           </eAnnotations>
           <ownedParameter xmi:id="_ijnrNK3LEeupusa-cI5onw" type="_ijnrMK3LEeupusa-cI5onw" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_i0O6EK3LEeupusa-cI5onw" name="requestService" method="_i5je8q3LEeupusa-cI5onw">
+        <ownedOperation xmi:id="_i0O6EK3LEeupusa-cI5onw" name="ResPwaUtils.requestService" method="_i5je8q3LEeupusa-cI5onw">
           <ownedParameter xmi:id="_i0O6Ea3LEeupusa-cI5onw" name="sdr" type="_ij9CYK3LEeupusa-cI5onw"/>
           <ownedParameter xmi:id="_i0O6Eq3LEeupusa-cI5onw" name="blvs" type="_ii_ZEK3LEeupusa-cI5onw"/>
         </ownedOperation>
@@ -14383,7 +14383,7 @@ sesion. *</body>
      }&#xD;
 </body>
           </ownedBehavior>
-          <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5LEd63LEeupusa-cI5onw" name="requestService" specification="_izO0gq3LEeupusa-cI5onw">
+          <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5LEd63LEeupusa-cI5onw" name="ResPwaUtils.requestService" specification="_izO0gq3LEeupusa-cI5onw">
             <ownedParameter xmi:id="_i5LEeK3LEeupusa-cI5onw" name="sdr" type="_ij9CYK3LEeupusa-cI5onw"/>
             <language>java</language>
             <body>try {&#xD;
@@ -14407,7 +14407,7 @@ sesion. *</body>
           <ownedOperation xmi:id="_ih9eVK3LEeupusa-cI5onw" name="loadSemanticDictionary" method="_i5LEdK3LEeupusa-cI5onw"/>
           <ownedOperation xmi:id="_ih9eWK3LEeupusa-cI5onw" name="loadCharacterDescriptor" method="_i5LEda3LEeupusa-cI5onw"/>
           <ownedOperation xmi:id="_ih-FY63LEeupusa-cI5onw" name="loadEmotionalAxes" method="_i5LEdq3LEeupusa-cI5onw"/>
-          <ownedOperation xmi:id="_izO0gq3LEeupusa-cI5onw" name="requestService" method="_i5LEd63LEeupusa-cI5onw">
+          <ownedOperation xmi:id="_izO0gq3LEeupusa-cI5onw" name="ResPwaUtils.requestService" method="_i5LEd63LEeupusa-cI5onw">
             <ownedParameter xmi:id="_izO0g63LEeupusa-cI5onw" name="sdr" type="_ij9CYK3LEeupusa-cI5onw"/>
           </ownedOperation>
         </packagedElement>
@@ -14987,7 +14987,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      return false;&#xD;
  </body>
@@ -15105,7 +15105,7 @@ sesion. *</body>
      blvs.getbEstadoActividad().setEstrategia(as);&#xD;
      &#xD;
      ServiceDataRequest srb = as.execStrategy();&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5nJZK3LEeupusa-cI5onw" name="interruptTask" specification="_i2j1U63LEeupusa-cI5onw">
@@ -15115,7 +15115,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()){&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15127,7 +15127,7 @@ sesion. *</body>
      blvs.getbEstadoActividad().setEstrategia(null);&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()){&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15137,7 +15137,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoActividad().getEstrategia()!=null &amp;&amp; blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {&#xD;
          return true;&#xD;
@@ -15266,7 +15266,7 @@ sesion. *</body>
      blvs.getbEstadoActividad().setEstrategia(cs);&#xD;
      &#xD;
      ServiceDataRequest srb = cs.execStrategy();&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5vFLq3LEeupusa-cI5onw" name="interruptTask" specification="_i3BvYK3LEeupusa-cI5onw">
@@ -15283,7 +15283,7 @@ sesion. *</body>
      blvs.getbEstadoActividad().setEstrategia(null);&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15293,7 +15293,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoActividad().getEstrategia()!=null &amp;&amp; blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {&#xD;
@@ -15361,7 +15361,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish AsegurarConexion ---&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -15443,7 +15443,7 @@ sesion. *</body>
      //buscar texto&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;PreguntaSentimientos&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
  &#xD;
  </body>
           </ownedBehavior>
@@ -15455,7 +15455,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15466,7 +15466,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15476,7 +15476,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      //debe revisar que el estado animo haya cambiado y cierto tiempo&#xD;
@@ -15610,7 +15610,7 @@ sesion. *</body>
          blvs.getbEstadoActividad().setEstrategia(es);&#xD;
      &#xD;
          ServiceDataRequest srb = es.execStrategy(parameters);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }        &#xD;
      &#xD;
      //propiedades voz(tono,etc) en blvs&#xD;
@@ -15626,15 +15626,15 @@ sesion. *</body>
      &#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15646,15 +15646,15 @@ sesion. *</body>
      blvs.getbEstadoActividad().setEstrategia(null);&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15664,7 +15664,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoActividad().getEstrategia()!=null &amp;&amp; blvs.getbEstadoActividad().getEstrategia() instanceof EnriquecerStrategy &amp;&amp; !blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; !blvs.getbEstadoInteraccion().isEstaMoviendo() &amp;&amp; &#xD;
@@ -15721,13 +15721,13 @@ sesion. *</body>
      infoServicio.put(&quot;RADIO&quot;, 0.5);&#xD;
      infoServicio.put(&quot;DISTANCIAMAX&quot;, 0.5);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;MOVETOX&quot;, blvs.getbEstadoRobot().getDistanciaX());&#xD;
      infoServicio.put(&quot;MOVETOY&quot;, blvs.getbEstadoRobot().getDistanciaY());&#xD;
      srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
  </body>
           </ownedBehavior>
@@ -15738,7 +15738,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isDesplazandose()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15749,7 +15749,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isDesplazandose()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15759,7 +15759,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoRobot().isLibreEntorno() &amp;&amp; !blvs.getbEstadoInteraccion().isDesplazandose()) {&#xD;
@@ -15815,7 +15815,7 @@ sesion. *</body>
      if(!blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;AskRetroCuento&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+         ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15826,7 +15826,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15837,7 +15837,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15847,7 +15847,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {&#xD;
          return true;&#xD;
@@ -15914,7 +15914,7 @@ sesion. *</body>
      &#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;Voy a contarte el cuento de &quot;+cuentoEleg.getNombre());&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5ploq3LEeupusa-cI5onw" name="interruptTask" specification="_i2uNZa3LEeupusa-cI5onw">
@@ -15924,7 +15924,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15935,7 +15935,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -15945,7 +15945,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() &amp;&amp; blvs.getbEstadoActividad().getCuentoActual() != null) {&#xD;
@@ -16001,7 +16001,7 @@ sesion. *</body>
      //enviar cuento&#xD;
      infoServicio.put(&quot;SAYWITHMOVEMENT&quot;, blvs.getbEstadoActividad().getCuentoActual().getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()));&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento()+1);&#xD;
  </body>
           </ownedBehavior>
@@ -16012,7 +16012,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -16023,7 +16023,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -16033,7 +16033,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {&#xD;
@@ -16101,7 +16101,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish ActivarSenialesVida ---&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -16118,7 +16118,7 @@ sesion. *</body>
             <body>RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
      infoServicio.put(ACTIVATE_LIFE_SIGNALS, true); &#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS , infoServicio);&#xD;
-     requestService(srb, blvs);&#xD;
+     ResPwaUtils.requestService(srb, blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5qMsK3LEeupusa-cI5onw" name="interruptTask" specification="_i2wpqa3LEeupusa-cI5onw">
@@ -16193,7 +16193,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -16259,7 +16259,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -16325,7 +16325,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -16391,7 +16391,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -16457,7 +16457,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -16530,35 +16530,35 @@ sesion. *</body>
      {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;jeit u bish&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(state >= PepperEmotionRanges.VHAPPY.getMin() &amp;&amp; state &lt; PepperEmotionRanges.VHAPPY.getMax())&#xD;
      {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;yupiii&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(state >= PepperEmotionRanges.VSAD.getMin() &amp;&amp; state &lt; PepperEmotionRanges.VSAD.getMax())&#xD;
      {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;juum&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(state >= PepperEmotionRanges.NEUTRAL.getMin() &amp;&amp; state &lt; PepperEmotionRanges.NEUTRAL.getMax())&#xD;
      {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;iu&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(state >= PepperEmotionRanges.HAPPY.getMin() &amp;&amp; state &lt; PepperEmotionRanges.HAPPY.getMax())&#xD;
      {&#xD;
          infoServicio.put(&quot;SAY&quot;, &quot;gÃ¼ii&quot;);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
  </body>
@@ -16581,7 +16581,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish Task Interacciones ---&quot;);&#xD;
      return false;&#xD;
@@ -16637,7 +16637,7 @@ sesion. *</body>
      //buscar texto &quot;Â¿como estas pepito?&quot;&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;PreguntaSentimientos&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb,rab);&#xD;
+     ResPwaUtils.requestService(srb,rab);&#xD;
      rab.getbEstadoInteraccion().setLogged(true);&#xD;
      &#xD;
  </body>
@@ -16649,7 +16649,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -16660,7 +16660,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -16670,7 +16670,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {&#xD;
@@ -16726,11 +16726,11 @@ sesion. *</body>
      /*if(Existeid) {&#xD;
          infoServicio.put(&quot;GETIDROBOT&quot;, &quot;&quot;);&#xD;
          srb = ServiceRequestBuilder.buildRequest(RobotServiceRequestType.IDROBOT, infoServicio);&#xD;
-         requestService(srb);&#xD;
+         ResPwaUtils.requestService(srb);&#xD;
      } else {&#xD;
          infoServicio.put(&quot;DETECTPWA&quot;, blvs.getbPerfilPwA().getNombre()+&quot; &quot;+blvs.getbPerfilPwA().getApellidos());&#xD;
          srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);&#xD;
-         requestService(srb);&#xD;
+         ResPwaUtils.requestService(srb);&#xD;
      }&#xD;
      toca recibir el id*/&#xD;
      &#xD;
@@ -16738,7 +16738,7 @@ sesion. *</body>
      //hay que cambiar este parametro&#xD;
      infoServicio.put(&quot;DETECTPWA&quot;, blvs.getbPerfilPwA().getPerfil().getIdrobot());&#xD;
      srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5tQBK3LEeupusa-cI5onw" name="interruptTask" specification="_i29d9a3LEeupusa-cI5onw">
@@ -16759,7 +16759,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isDetectaPwA()) {&#xD;
@@ -16815,102 +16815,102 @@ sesion. *</body>
      &#xD;
      infoServicio.put(&quot;ACTIVATE&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATELIFESIGNALS&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATELIFESIGNALSINT&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESGINALSINT, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEACTIVEHEARING&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEACTIVEHEARING, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATESPEAKMOVEMENTS&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATESPEAKMOVEMENTS, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEPUSHREFLEXES&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEPUSHREFLEXES, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEBREATHMOV&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEBREATHMOV, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEMOVDETECTION&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEMOVDETECTION, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEFACEDETEC&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEFACEDETEC, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATECOLISSIONDETECT&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATECOLISSIONDETECT, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;DEFENGAGEMENTTYPE&quot;, &quot;FullyEngaged&quot;);&#xD;
      srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.DEFENGAGEMENTTYPE, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEMONITORINGCHARGESERV&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(EnergyServiceRequestType.ACTIVATEMONITORINGCHARGESERV, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATESTIFFNESS&quot;, true);&#xD;
      srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
      &#xD;
      srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;SETTABLETBRIGHT&quot;, 1);&#xD;
      srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
 &#xD;
 &#xD;
 //        infoServicio.put(&quot;SETTABLETVOL&quot;, blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 1-15&#xD;
 //        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);&#xD;
-//        requestService(srb,blvs);&#xD;
+//        ResPwaUtils.requestService(srb,blvs);&#xD;
 //        infoServicio = new HashMap&lt;>();&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;SETSAYVOLUMEN&quot;, blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 0-1.0&#xD;
      srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUME, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTIVATEVOICEEMOANAL&quot;, &quot;EmotionAnalysis&quot;); //revisar nombre&#xD;
      srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
     &#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      infoServicio.put(&quot;ACTVOICERECOG&quot;, &quot;SpeechRecognition&quot;); //revisar nombre&#xD;
      srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTVOICERECOG, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      blvs.getbEstadoInteraccion().setConfirmarActServicios(true);&#xD;
      &#xD;
  </body>
@@ -16934,7 +16934,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;///////////////TFServicios//////////////&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -16984,7 +16984,7 @@ sesion. *</body>
             <body>System.out.println(&quot;--- Execute Task LogIn ---&quot;);&#xD;
 &#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(HumanServiceRequestType.LOGIN, null);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5ueG63LEeupusa-cI5onw" name="interruptTask" specification="_i2_6Na3LEeupusa-cI5onw">
@@ -17006,7 +17006,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
                  System.out.println(&quot;///////////////TF2//////////////&quot;);&#xD;
@@ -17076,7 +17076,7 @@ sesion. *</body>
      if(blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > 0.5 || blvs.getbEstadoInteraccion().isQuiereCantar()) {&#xD;
          infoServicio.put(&quot;ACTIVATELYRICS&quot;, true);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
  </body>
@@ -17099,7 +17099,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish Task Activar Letra ---&quot;);&#xD;
      return false;&#xD;
@@ -17152,7 +17152,7 @@ sesion. *</body>
          infoServicio.put(&quot;TAGSDANCE&quot;, blvs.getbEstadoActividad().getCancionActual().getTagsList());&#xD;
          infoServicio.put(&quot;FACTOR&quot;, blvs.getbEstadoRobot().getVelocidad());&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
  </body>
@@ -17164,7 +17164,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17175,7 +17175,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17185,7 +17185,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
@@ -17240,19 +17240,19 @@ sesion. *</body>
          infoServicio.put(&quot;RADIO&quot;, 0.5);&#xD;
          infoServicio.put(&quot;DISTANCIAMAX&quot;, 0.5);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);&#xD;
-//            requestService(srb, blvs);&#xD;
+//            ResPwaUtils.requestService(srb, blvs);&#xD;
 &#xD;
 //            infoServicio.put(&quot;MOVETOX&quot;, blvs.getbEstadoRobot().getDistanciaX());&#xD;
 //            infoServicio.put(&quot;MOVETOY&quot;, blvs.getbEstadoRobot().getDistanciaY());&#xD;
          infoServicio.put(&quot;MOVETOX&quot;, 5);&#xD;
          infoServicio.put(&quot;MOVETOY&quot;, 5);&#xD;
          srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);&#xD;
-         requestService(srb, blvs);&#xD;
+         ResPwaUtils.requestService(srb, blvs);&#xD;
 &#xD;
          HashMap&lt;String, Object> hm = new HashMap&lt;>();&#xD;
          hm.put(&quot;SAY&quot;, &quot;Kikin! Kikin! Â¿Porque eres asi?&quot;);&#xD;
          ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);&#xD;
-         requestService(data, blvs);&#xD;
+         ResPwaUtils.requestService(data, blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17269,7 +17269,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoInteraccion().isDesplazandose()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);&#xD;
-         requestService(srb, blvs);&#xD;
+         ResPwaUtils.requestService(srb, blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17279,7 +17279,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoRobot().isLibreEntorno() &amp;&amp; !blvs.getbEstadoInteraccion().isDesplazandose()) {&#xD;
@@ -17334,7 +17334,7 @@ sesion. *</body>
      List&lt;String> listUrls= listImgs.stream().map(e-> e.getUrl()).collect(Collectors.toList());&#xD;
      infoServicio.put(&quot;SHOWIMG&quot;, listUrls);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5xhZK3LEeupusa-cI5onw" name="interruptTask" specification="_i3HO963LEeupusa-cI5onw">
@@ -17355,7 +17355,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish Task Mostrar Fotos ---&quot;);&#xD;
      return false;&#xD;
@@ -17410,7 +17410,7 @@ sesion. *</body>
      //buscar texto&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;AskRetroCancion&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
      &#xD;
  </body>
           </ownedBehavior>
@@ -17421,7 +17421,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17432,7 +17432,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }   &#xD;
  </body>
           </ownedBehavior>
@@ -17442,7 +17442,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {&#xD;
@@ -17501,7 +17501,7 @@ sesion. *</body>
          String urlcancion = YTUtils.searchYTVideo(blvs.getbEstadoActividad().getCancionActual().getNombre());&#xD;
          infoServicio.put(&quot;SHOWVIDEO&quot;, urlcancion);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      } else {&#xD;
 &#xD;
          List&lt;Tags> tags = blvs.getbEstadoActividad().getCancionActual().getTagsList();&#xD;
@@ -17522,13 +17522,13 @@ sesion. *</body>
          infoServicio = new HashMap&lt;>();&#xD;
          infoServicio.put(&quot;SHOWIMG&quot;, imagenesFinal);&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
          &#xD;
          infoServicio = new HashMap&lt;>();&#xD;
          String cancion = AudioUtils.getCancion(&quot;Feliz cumpleanos&quot;);&#xD;
          infoServicio.put(&quot;PLAYSOUND&quot;, cancion);&#xD;
          srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.PLAYSOUND, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17552,7 +17552,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isConfirmacionRepDisp() &amp;&amp; !blvs.getbEstadoInteraccion().isConfirmacionRepAud()) {&#xD;
@@ -17638,7 +17638,7 @@ sesion. *</body>
          infoServicio.put(&quot;TAGSDANCE&quot;, blvs.getbEstadoActividad().getCancionActual().getTagsList());&#xD;
          infoServicio.put(&quot;FACTOR&quot;, blvs.getbEstadoRobot().getVelocidad());&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -17647,7 +17647,7 @@ sesion. *</body>
             <language>java</language>
             <body>System.out.println(&quot;--- Interrupt Task Seleccionar Baile ---&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-     requestService(srb, (RobotAgentBelieves) believes);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) believes);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5yvi63LEeupusa-cI5onw" name="cancelTask" specification="_i3LgYq3LEeupusa-cI5onw">
@@ -17655,7 +17655,7 @@ sesion. *</body>
             <language>java</language>
             <body>System.out.println(&quot;--- Cancel Task Seleccionar Baile ---&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-     requestService(srb, (RobotAgentBelieves) believes);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) believes);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5yvja3LEeupusa-cI5onw" name="checkFinish" specification="_i3LgZ63LEeupusa-cI5onw">
@@ -17664,7 +17664,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(!blvs.getbEstadoInteraccion().isEstaBailando()) {&#xD;
@@ -17721,12 +17721,12 @@ sesion. *</body>
      HashMap&lt;String, Object> hm = new HashMap&lt;>();&#xD;
      hm.put(&quot;SAY&quot;, &quot;Estoy seleccionando una cancion&quot;);&#xD;
      ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);&#xD;
-     requestService(data, blvs);&#xD;
+     ResPwaUtils.requestService(data, blvs);&#xD;
      &#xD;
      hm = new HashMap&lt;>();&#xD;
      hm.put(&quot;SAY&quot;, &quot;La changua no deberia existir&quot;);&#xD;
       data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);&#xD;
-     requestService(data, blvs);&#xD;
+     ResPwaUtils.requestService(data, blvs);&#xD;
      float gusto = -1;&#xD;
      Cancion cancionEleg = null;&#xD;
      List&lt;Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();&#xD;
@@ -17772,7 +17772,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if (blvs.getbEstadoActividad().getCancionActual() != null) {&#xD;
@@ -17854,7 +17854,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      //System.out.println(&quot;--- Check Finish Confirmar Ayuda ---&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -17869,7 +17869,7 @@ sesion. *</body>
             <language>java</language>
             <body>infoServicio.put(&quot;SAY&quot;, &quot;Â¿Ya se solucionÃ³ su duda?&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
  </body>
           </ownedBehavior>
           <ownedOperation xmi:id="_ikvskK3LEeupusa-cI5onw" name="ConfirmarAyuda" method="_i5zWnq3LEeupusa-cI5onw">
@@ -17922,7 +17922,7 @@ sesion. *</body>
      activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;Â¿En que te puedo ayudar?&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i5z9pq3LEeupusa-cI5onw" name="interruptTask" specification="_i3Ojta3LEeupusa-cI5onw">
@@ -17943,7 +17943,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if((System.currentTimeMillis() - tiempo)/1000 >= 90) {&#xD;
@@ -18004,7 +18004,7 @@ sesion. *</body>
      //buscar texto&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;Me voy a descargar&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      &#xD;
      deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);&#xD;
@@ -18012,24 +18012,24 @@ sesion. *</body>
      &#xD;
      if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {&#xD;
          srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando()) {&#xD;
          srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {&#xD;
          srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
      &#xD;
      srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      &#xD;
      srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i50ksK3LEeupusa-cI5onw" name="interruptTask" specification="_i3Px1a3LEeupusa-cI5onw">
@@ -18039,7 +18039,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -18050,7 +18050,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }        &#xD;
  </body>
           </ownedBehavior>
@@ -18060,7 +18060,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {&#xD;
@@ -18117,7 +18117,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish LlamarCuidador ---&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -18136,7 +18136,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;guiu guiu guiu cuidadoooooor guiu guiu guiu&quot;); &#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i50kvq3LEeupusa-cI5onw" name="interruptTask" specification="_i3RnAK3LEeupusa-cI5onw">
@@ -18200,13 +18200,13 @@ sesion. *</body>
      //buscar texto&#xD;
      infoServicio.put(&quot;SAY&quot;, &quot;Ya me dieron ganas de despertarme&quot;);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
      infoServicio = new HashMap&lt;>();&#xD;
      &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
             &#xD;
      srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i50kxq3LEeupusa-cI5onw" name="interruptTask" specification="_i3S1I63LEeupusa-cI5onw">
@@ -18216,7 +18216,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }&#xD;
  </body>
           </ownedBehavior>
@@ -18227,7 +18227,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {&#xD;
          ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);&#xD;
-         requestService(srb,blvs);&#xD;
+         ResPwaUtils.requestService(srb,blvs);&#xD;
      }        &#xD;
  </body>
           </ownedBehavior>
@@ -18237,7 +18237,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      return !blvs.getbEstadoInteraccion().isSistemaSuspendido();&#xD;
@@ -18291,7 +18291,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
      if(blvs.getbEstadoInteraccion().isEstaHablando() &amp;&amp; blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {&#xD;
@@ -18309,7 +18309,7 @@ sesion. *</body>
      infoServicio.put(&quot;SAY&quot;, &quot;jelou bish&quot;);&#xD;
      activateTopic( PepperTopicsNames.BASICTOPIC, parameters);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);&#xD;
-     requestService(srb, (RobotAgentBelieves) parameters);&#xD;
+     ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i51Lyq3LEeupusa-cI5onw" name="interruptTask" specification="_i3VRYK3LEeupusa-cI5onw">
@@ -18379,7 +18379,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      System.out.println(&quot;--- Check Finish VerificacionDispositivos ---&quot;);&#xD;
      RobotAgentBelieves blvs = (RobotAgentBelieves) believes;&#xD;
@@ -18397,7 +18397,7 @@ sesion. *</body>
      RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;&#xD;
      infoServicio.put(&quot;VERIFYDEVICES&quot;, false);&#xD;
      ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.VERIFYDEVICES, infoServicio);&#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
  </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_i52Z9a3LEeupusa-cI5onw" name="interruptTask" specification="_i3g3lK3LEeupusa-cI5onw">
@@ -18478,7 +18478,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18544,7 +18544,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18610,7 +18610,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18687,7 +18687,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18753,7 +18753,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18819,7 +18819,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18885,7 +18885,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -18979,7 +18979,7 @@ sesion. *</body>
      }&#xD;
      &#xD;
      &#xD;
-     requestService(srb,blvs);&#xD;
+     ResPwaUtils.requestService(srb,blvs);&#xD;
      this.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);&#xD;
  </body>
           </ownedBehavior>
@@ -19001,7 +19001,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      return false;&#xD;
  </body>
@@ -19072,7 +19072,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -19138,7 +19138,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -19204,7 +19204,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>
@@ -19270,7 +19270,7 @@ sesion. *</body>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
             <language>java</language>
-            <body>super.checkFinish(believes);&#xD;
+            <body>&#xD;
 &#xD;
      throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.&#xD;
  </body>

@@ -6,7 +6,7 @@
 package Tareas.LogIn;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
 import ServiceAgentResPwA.EnergyServices.EnergyServiceRequestType;
@@ -17,12 +17,13 @@ import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author
  */
-public class IniciarServicios extends ResPwaTask {
+public class IniciarServicios extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -38,105 +39,105 @@ public class IniciarServicios extends ResPwaTask {
 
         infoServicio.put("SAY", "Iniciando servicios");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, blvs);
+        ResPwaUtils.requestService(srb, blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATE", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATELIFESIGNALS", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATELIFESIGNALSINT", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESGINALSINT, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEACTIVEHEARING", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEACTIVEHEARING, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATESPEAKMOVEMENTS", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATESPEAKMOVEMENTS, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEPUSHREFLEXES", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEPUSHREFLEXES, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEBREATHMOV", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEBREATHMOV, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEMOVDETECTION", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEMOVDETECTION, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEFACEDETEC", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATEFACEDETEC, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATECOLISSIONDETECT", true);
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATECOLISSIONDETECT, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("DEFENGAGEMENTTYPE", "FullyEngaged");
 //        srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.DEFENGAGEMENTTYPE, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEMONITORINGCHARGESERV", true);
 //        srb = ServiceRequestBuilder.buildRequest(EnergyServiceRequestType.ACTIVATEMONITORINGCHARGESERV, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATESTIFFNESS", true);
 //        srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ACTIVATESTIFFNESS, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //        infoServicio = new HashMap<>();
 //        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.TABLETON, null);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("SETTABLETBRIGHT", 1);
 //        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //
 //
 ////        infoServicio.put("SETTABLETVOL", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 1-15
 ////        srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETVOL, infoServicio);
-////        requestService(srb,blvs);
+////        ResPwaUtils.requestService(srb,blvs);
 ////        infoServicio = new HashMap<>();
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("SETSAYVOLUMEN", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getVolpreferido());//depende perfil del usuario 0-1.0
 //        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SETSAYVOLUME, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 //        
 //        infoServicio = new HashMap<>();
 //        infoServicio.put("ACTIVATEVOICEEMOANAL", "EmotionAnalysis"); //revisar nombre
 //        srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.ACTIVATEVOICEEMOANAL, infoServicio);
-//        requestService(srb,blvs);
+//        ResPwaUtils.requestService(srb,blvs);
 
-        activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
+        ResPwaUtils.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
 
         blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
 
@@ -155,7 +156,7 @@ public class IniciarServicios extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-        super.checkFinish(believes);
+        
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         return blvs.getbEstadoInteraccion().isConfirmarActServicios();

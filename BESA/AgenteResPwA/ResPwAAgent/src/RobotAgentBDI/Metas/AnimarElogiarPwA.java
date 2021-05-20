@@ -81,8 +81,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
-        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS)
-                || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) {
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < 0) {
             return 1.0 + blvs.getbEstadoActividad().getBoostAnimarElogiarPwA() + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
         }
         return blvs.getbEstadoActividad().getBoostAnimarElogiarPwA() + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
@@ -99,7 +98,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         //System.out.println("Meta AnimarPwA goalSucceeded");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //REVISAR, termina cuando ejecuta la accion en la tarea?
-        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()  < 0){
             return true;
         }
         return false;

@@ -6,19 +6,20 @@
 package Tareas.VerificarDispositivos;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateService;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class VerificacionDispositivos extends ResPwaTask{
+public class VerificacionDispositivos extends Task{
 
     private HashMap<String,Object> infoServicio = new HashMap<>();
     private long tiempoInicio = 0;
@@ -30,7 +31,7 @@ public class VerificacionDispositivos extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         System.out.println("--- Check Finish VerificacionDispositivos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -47,7 +48,7 @@ public class VerificacionDispositivos extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("VERIFYDEVICES", false);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.VERIFYDEVICES, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override

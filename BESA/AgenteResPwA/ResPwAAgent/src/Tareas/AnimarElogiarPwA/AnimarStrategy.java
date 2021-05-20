@@ -7,6 +7,7 @@ package Tareas.AnimarElogiarPwA;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
@@ -22,7 +23,7 @@ public class AnimarStrategy implements ResPwAStrategy {
     private OpcionesAnimar opcion;
     
     @Override
-    public ServiceDataRequest execStrategy(Believes believes) {
+    public void execStrategy(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
@@ -31,34 +32,38 @@ public class AnimarStrategy implements ResPwAStrategy {
             this.opcion = OpcionesAnimar.ADIVINANZA;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.CHISTE;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.CONSEJO;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.DATOCURIOSO;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.FRASEELOGIANTE;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.PREGUNTAEMPATICA;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
         }
-        
-        return srb;
     }
 
     public OpcionesAnimar getOpcion() {
@@ -70,9 +75,10 @@ public class AnimarStrategy implements ResPwAStrategy {
     }
 
     @Override
-    public ServiceDataRequest execStrategy() {
+    public void execStrategy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
     
 }

@@ -6,19 +6,20 @@
 package Tareas.Saludar;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class MandarSaludo extends ResPwaTask{
+public class MandarSaludo extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -28,12 +29,12 @@ public class MandarSaludo extends ResPwaTask{
     
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             blvs.getbEstadoInteraccion().setSaludo(true);
-            activateTopic( PepperTopicsNames.BASICTOPIC, believes);
+            ResPwaUtils.activateTopic( PepperTopicsNames.BASICTOPIC, believes);
             return true;
         }
         return false;
@@ -43,21 +44,21 @@ public class MandarSaludo extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Mandar Saludo ---");
         infoServicio.put("SAY", "jelou bish");
-        activateTopic( PepperTopicsNames.BASICTOPIC, parameters);
+        ResPwaUtils.activateTopic( PepperTopicsNames.BASICTOPIC, parameters);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
     }
     
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Mandar Saludo ---");
-        deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
+        ResPwaUtils.deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
     }
     
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Mandar Saludo ---");
-        deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
+        ResPwaUtils.deactivateTopic( PepperTopicsNames.BASICTOPIC, believes);
     }
     
 }

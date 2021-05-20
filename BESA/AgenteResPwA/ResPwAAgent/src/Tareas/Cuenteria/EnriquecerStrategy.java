@@ -7,6 +7,7 @@ package Tareas.Cuenteria;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityService;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
@@ -29,7 +30,7 @@ public class EnriquecerStrategy implements ResPwAStrategy{
     private int nombre;
     
     @Override
-    public ServiceDataRequest execStrategy(Believes believes) {
+    public void execStrategy(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
@@ -38,12 +39,14 @@ public class EnriquecerStrategy implements ResPwAStrategy{
             case 0: //hablar
                 infoServicio.put("SAY", "Frase");
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
             case 1: //movimiento
                 blvs.getbEstadoActividad().getCuentoActual().getFrasesList();
                 infoServicio.put("RUNANIMATION", "MovEnriquecer");
                 infoServicio.put("FACTOR", blvs.getbEstadoRobot().getVelocidad());
                 srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
             case 2:
                 //falta escoger imagenes
@@ -51,6 +54,7 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 List<String> listImgs = imgsCuento.get(blvs.getbEstadoActividad().getCuentoActual().getNombre());
                 infoServicio.put("SHOWIMG", listImgs);
                 srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
             case 3: //luces
                 Random obj = new Random();
@@ -61,9 +65,9 @@ public class EnriquecerStrategy implements ResPwAStrategy{
                 infoServicio.put("COLOR", color);
                 infoServicio.put("DURATION", 1.0);
                 srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.CHANGELEDCOLOR, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
         }
-        return srb;
     }
 
     public int getNombre() {
@@ -75,7 +79,7 @@ public class EnriquecerStrategy implements ResPwAStrategy{
     }
 
     @Override
-    public ServiceDataRequest execStrategy() {
+    public void execStrategy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

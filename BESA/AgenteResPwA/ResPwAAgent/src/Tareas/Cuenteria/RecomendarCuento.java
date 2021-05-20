@@ -7,7 +7,7 @@ package Tareas.Cuenteria;
 
 import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
@@ -16,12 +16,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class RecomendarCuento extends ResPwaTask{
+public class RecomendarCuento extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
@@ -50,7 +51,7 @@ public class RecomendarCuento extends ResPwaTask{
         
         infoServicio.put("SAY", "Voy a contarte el cuento de "+cuentoEleg.getNombre());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class RecomendarCuento extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -69,13 +70,13 @@ public class RecomendarCuento extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() && blvs.getbEstadoActividad().getCuentoActual() != null) {

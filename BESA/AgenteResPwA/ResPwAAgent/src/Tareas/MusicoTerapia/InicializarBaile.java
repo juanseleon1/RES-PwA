@@ -7,7 +7,7 @@ package Tareas.MusicoTerapia;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
@@ -16,12 +16,13 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import java.util.List;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class InicializarBaile extends ResPwaTask {
+public class InicializarBaile extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -48,13 +49,13 @@ public class InicializarBaile extends ResPwaTask {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb, blvs);
+            ResPwaUtils.requestService(srb, blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoRobot().isLibreEntorno() && !blvs.getbEstadoInteraccion().isDesplazandose()) {

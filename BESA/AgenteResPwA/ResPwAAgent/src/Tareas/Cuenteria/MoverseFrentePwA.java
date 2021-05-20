@@ -7,18 +7,19 @@ package Tareas.Cuenteria;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class MoverseFrentePwA extends ResPwaTask{
+public class MoverseFrentePwA extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -36,13 +37,13 @@ public class MoverseFrentePwA extends ResPwaTask{
         infoServicio.put("RADIO", 0.5);
         infoServicio.put("DISTANCIAMAX", 0.5);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(LocationServiceRequestType.SEARCHFREEZONE, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
         
         infoServicio = new HashMap<>();
         infoServicio.put("MOVETOX", blvs.getbEstadoRobot().getDistanciaX());
         infoServicio.put("MOVETOY", blvs.getbEstadoRobot().getDistanciaY());
         srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.MOVETO, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
 
     }
 
@@ -52,7 +53,7 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -62,13 +63,13 @@ public class MoverseFrentePwA extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDesplazandose()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoRobot().isLibreEntorno() && !blvs.getbEstadoInteraccion().isDesplazandose()) {

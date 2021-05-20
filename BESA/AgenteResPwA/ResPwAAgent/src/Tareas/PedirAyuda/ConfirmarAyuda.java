@@ -6,18 +6,19 @@
 package Tareas.PedirAyuda;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class ConfirmarAyuda extends ResPwaTask{
+public class ConfirmarAyuda extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     
@@ -27,7 +28,7 @@ public class ConfirmarAyuda extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         //System.out.println("--- Check Finish Confirmar Ayuda ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -42,7 +43,7 @@ public class ConfirmarAyuda extends ResPwaTask{
         //System.out.println("--- Execute Task Confirmar Ayuda ---");
         infoServicio.put("SAY", "¿Ya se solucionó su duda?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
     }
 
     @Override

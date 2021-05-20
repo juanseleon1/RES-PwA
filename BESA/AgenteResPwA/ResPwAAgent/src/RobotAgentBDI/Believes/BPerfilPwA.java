@@ -84,7 +84,7 @@ public class BPerfilPwA implements Believes {
         return true;
     }
 
-    Cancion selectSong( ) { // BEstadoEmocionalPwa estadoEmocional,
+  public  Cancion selectSong( ) { // BEstadoEmocionalPwa estadoEmocional,
 //        si la emocion es displacentera se traen las canciones aptas para dar el soporte y se toma aleatoriamente
         
 //        si la emocion es placentera, la cancion se escoge por un factor
@@ -121,13 +121,6 @@ public class BPerfilPwA implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
-    }
-    
-    public OpcionesAnimar getAnimarStrategy()
-    {
-        Random rand = new Random();
-        OpcionesAnimar[]opcs = OpcionesAnimar.values();
-        return opcs[rand.nextInt(opcs.length)];
     }
     
     public OpcionesAtencion getAtencionStrategy()

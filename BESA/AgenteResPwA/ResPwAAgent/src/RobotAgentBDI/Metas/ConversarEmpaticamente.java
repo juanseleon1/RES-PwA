@@ -63,8 +63,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
         {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()!=null &&(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.SADNESS) || blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.ANGER)) && 
-                    blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < 0 && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
             {
                 return 1.0;
             }
@@ -97,7 +96,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente goalSucceeded");
         //verificar objetivo cumplido ej: que este feliz en algun punto del plan y este se termine
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante().equals(EmotionPwA.HAPPINESS)){
+        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante() >0){
             return true;
         }
         return false;

@@ -14,7 +14,7 @@ import rational.mapping.Believes;
  */
 public interface ResPwAStrategy{
     
-    public abstract ServiceDataRequest execStrategy();
-    public abstract ServiceDataRequest execStrategy(Believes b);
+    public abstract void execStrategy();
+    public abstract void execStrategy(Believes b);
     
 }

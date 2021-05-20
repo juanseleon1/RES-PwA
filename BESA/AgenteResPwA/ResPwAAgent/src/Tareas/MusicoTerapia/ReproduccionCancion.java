@@ -12,7 +12,7 @@ import ResPwaUtils.Imagen;
 import ResPwaUtils.YTUtils;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -21,12 +21,13 @@ import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class ReproduccionCancion extends ResPwaTask {
+public class ReproduccionCancion extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -46,7 +47,7 @@ public class ReproduccionCancion extends ResPwaTask {
             String urlcancion = blvs.getbEstadoActividad().getCancionActual().getUrl();
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -64,7 +65,7 @@ public class ReproduccionCancion extends ResPwaTask {
     
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && !blvs.getbEstadoInteraccion().isConfirmacionRepAud()) {
