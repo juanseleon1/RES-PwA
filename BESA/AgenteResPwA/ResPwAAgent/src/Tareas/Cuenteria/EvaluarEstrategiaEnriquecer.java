@@ -7,7 +7,7 @@ package Tareas.Cuenteria;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -15,12 +15,13 @@ import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
+public class EvaluarEstrategiaEnriquecer extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -44,7 +45,7 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
             blvs.getbEstadoActividad().setEstrategia(es);
         
             ServiceDataRequest srb = es.execStrategy(parameters);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }        
         
         //propiedades voz(tono,etc) en blvs
@@ -59,15 +60,15 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -78,21 +79,21 @@ public class EvaluarEstrategiaEnriquecer extends ResPwaTask{
         blvs.getbEstadoActividad().setEstrategia(null);
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof EnriquecerStrategy && !blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isEstaMoviendo() && 

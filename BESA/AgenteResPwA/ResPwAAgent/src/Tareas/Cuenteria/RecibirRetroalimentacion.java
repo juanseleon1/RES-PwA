@@ -6,20 +6,21 @@
 package Tareas.Cuenteria;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwaUtils;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class RecibirRetroalimentacion extends ResPwaTask{
+public class RecibirRetroalimentacion extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -36,7 +37,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         if(!blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             infoServicio.put("SAY", "AskRetroCuento");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb, (RobotAgentBelieves) parameters);
+            ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
         }
     }
 
@@ -46,7 +47,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -56,13 +57,13 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-        super.checkFinish(believes);
+        
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;

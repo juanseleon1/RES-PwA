@@ -9,7 +9,7 @@ import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
@@ -20,12 +20,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarCancion extends ResPwaTask {
+public class SeleccionarCancion extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -43,12 +44,12 @@ public class SeleccionarCancion extends ResPwaTask {
         HashMap<String, Object> hm = new HashMap<>();
         hm.put("SAY", "Estoy seleccionando una cancion");
         ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-        requestService(data, blvs);
+        ResPwaUtils.requestService(data, blvs);
         
         hm = new HashMap<>();
         hm.put("SAY", "La changua no deberia existir");
          data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-        requestService(data, blvs);
+        ResPwaUtils.requestService(data, blvs);
         float gusto = -1;
         Cancion cancionEleg = null;
         List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
@@ -85,7 +86,7 @@ public class SeleccionarCancion extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoActividad().getCancionActual() != null) {

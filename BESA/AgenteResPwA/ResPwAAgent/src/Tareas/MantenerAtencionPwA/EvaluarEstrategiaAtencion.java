@@ -7,7 +7,7 @@ package Tareas.MantenerAtencionPwA;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -16,12 +16,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class EvaluarEstrategiaAtencion extends ResPwaTask{
+public class EvaluarEstrategiaAtencion extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -52,7 +53,7 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         blvs.getbEstadoActividad().setEstrategia(cs);
         
         ServiceDataRequest srb = cs.execStrategy();
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override
@@ -67,13 +68,13 @@ public class EvaluarEstrategiaAtencion extends ResPwaTask{
         blvs.getbEstadoActividad().setEstrategia(null);
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
