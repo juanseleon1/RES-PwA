@@ -48,6 +48,9 @@ public class AnimarStrategy implements ResPwAStrategy {
             infoServicio.put("SAY", "Que la pila tiene un lado positivo");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
+            infoServicio.put("SAY", "Ja ja ja jaja");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
         }  else if (blvs.getbEstadoEmocionalPwA().getAtencion() >= 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() >= 0.5) {
             this.opcion = OpcionesAnimar.DATOCURIOSO;
             infoServicio.put("SAY", "En la Antigua Grecia la esperanza de vida era muy alta, hasta el punto de que muchas personas vivían hasta los 100 años o más");
