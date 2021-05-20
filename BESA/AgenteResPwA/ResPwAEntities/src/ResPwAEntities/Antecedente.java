@@ -124,5 +124,5 @@ public class Antecedente implements Serializable {
     public String toString() {
         return "ResPwAEntities.Antecedente[ id=" + id + " ]";
     }
-
+    
 }

@@ -38,6 +38,7 @@ public class EvaluarEstrategiaAnimar extends Task{
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
 
         AnimarStrategy as = new AnimarStrategy();
+
         as.execStrategy();
     }
 

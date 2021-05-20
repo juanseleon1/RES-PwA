@@ -61,6 +61,7 @@ public class AnimarElogiarPwA extends GoalBDI{
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
+
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
             if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000 || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000) {
                 return 1.0;

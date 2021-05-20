@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -61,17 +60,17 @@ public class PerfilPreferencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "VOLPREFERIDO")
     private BigInteger volpreferido;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Baile> baileList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Cuento> cuentoList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Cancion> cancionList;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.EAGER)
     private Perfilpwa perfilpwa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxbaile> preferenciaxbaileList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
     private List<Actxpreferencia> actxpreferenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxcuento> preferenciaxcuentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxcancion> preferenciaxcancionList;
 
     public PerfilPreferencia() {
     }
@@ -137,33 +136,6 @@ public class PerfilPreferencia implements Serializable {
         this.volpreferido = volpreferido;
     }
 
-    @XmlTransient
-    public List<Baile> getBaileList() {
-        return baileList;
-    }
-
-    public void setBaileList(List<Baile> baileList) {
-        this.baileList = baileList;
-    }
-
-    @XmlTransient
-    public List<Cuento> getCuentoList() {
-        return cuentoList;
-    }
-
-    public void setCuentoList(List<Cuento> cuentoList) {
-        this.cuentoList = cuentoList;
-    }
-
-    @XmlTransient
-    public List<Cancion> getCancionList() {
-        return cancionList;
-    }
-
-    public void setCancionList(List<Cancion> cancionList) {
-        this.cancionList = cancionList;
-    }
-
     public Perfilpwa getPerfilpwa() {
         return perfilpwa;
     }
@@ -173,12 +145,39 @@ public class PerfilPreferencia implements Serializable {
     }
 
     @XmlTransient
+    public List<Preferenciaxbaile> getPreferenciaxbaileList() {
+        return preferenciaxbaileList;
+    }
+
+    public void setPreferenciaxbaileList(List<Preferenciaxbaile> preferenciaxbaileList) {
+        this.preferenciaxbaileList = preferenciaxbaileList;
+    }
+
+    @XmlTransient
     public List<Actxpreferencia> getActxpreferenciaList() {
         return actxpreferenciaList;
     }
 
     public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
         this.actxpreferenciaList = actxpreferenciaList;
+    }
+
+    @XmlTransient
+    public List<Preferenciaxcuento> getPreferenciaxcuentoList() {
+        return preferenciaxcuentoList;
+    }
+
+    public void setPreferenciaxcuentoList(List<Preferenciaxcuento> preferenciaxcuentoList) {
+        this.preferenciaxcuentoList = preferenciaxcuentoList;
+    }
+
+    @XmlTransient
+    public List<Preferenciaxcancion> getPreferenciaxcancionList() {
+        return preferenciaxcancionList;
+    }
+
+    public void setPreferenciaxcancionList(List<Preferenciaxcancion> preferenciaxcancionList) {
+        this.preferenciaxcancionList = preferenciaxcancionList;
     }
 
     @Override

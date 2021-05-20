@@ -11,16 +11,16 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Perfilpwa;
-import ResPwAEntities.Baile;
+import ResPwAEntities.Preferenciaxbaile;
 import java.util.ArrayList;
 import java.util.List;
-import ResPwAEntities.Cuento;
-import ResPwAEntities.Cancion;
 import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import ResPwAEntities.PerfilPreferencia;
+import ResPwAEntities.Preferenciaxcuento;
+import ResPwAEntities.Preferenciaxcancion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -40,17 +40,17 @@ public class PerfilPreferenciaJpaController implements Serializable {
     }
 
     public void create(PerfilPreferencia perfilPreferencia) throws IllegalOrphanException, PreexistingEntityException, Exception {
-        if (perfilPreferencia.getBaileList() == null) {
-            perfilPreferencia.setBaileList(new ArrayList<Baile>());
-        }
-        if (perfilPreferencia.getCuentoList() == null) {
-            perfilPreferencia.setCuentoList(new ArrayList<Cuento>());
-        }
-        if (perfilPreferencia.getCancionList() == null) {
-            perfilPreferencia.setCancionList(new ArrayList<Cancion>());
+        if (perfilPreferencia.getPreferenciaxbaileList() == null) {
+            perfilPreferencia.setPreferenciaxbaileList(new ArrayList<Preferenciaxbaile>());
         }
         if (perfilPreferencia.getActxpreferenciaList() == null) {
             perfilPreferencia.setActxpreferenciaList(new ArrayList<Actxpreferencia>());
+        }
+        if (perfilPreferencia.getPreferenciaxcuentoList() == null) {
+            perfilPreferencia.setPreferenciaxcuentoList(new ArrayList<Preferenciaxcuento>());
+        }
+        if (perfilPreferencia.getPreferenciaxcancionList() == null) {
+            perfilPreferencia.setPreferenciaxcancionList(new ArrayList<Preferenciaxcancion>());
         }
         List<String> illegalOrphanMessages = null;
         Perfilpwa perfilpwaOrphanCheck = perfilPreferencia.getPerfilpwa();
@@ -75,46 +75,43 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwa = em.getReference(perfilpwa.getClass(), perfilpwa.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwa);
             }
-            List<Baile> attachedBaileList = new ArrayList<Baile>();
-            for (Baile baileListBaileToAttach : perfilPreferencia.getBaileList()) {
-                baileListBaileToAttach = em.getReference(baileListBaileToAttach.getClass(), baileListBaileToAttach.getId());
-                attachedBaileList.add(baileListBaileToAttach);
+            List<Preferenciaxbaile> attachedPreferenciaxbaileList = new ArrayList<Preferenciaxbaile>();
+            for (Preferenciaxbaile preferenciaxbaileListPreferenciaxbaileToAttach : perfilPreferencia.getPreferenciaxbaileList()) {
+                preferenciaxbaileListPreferenciaxbaileToAttach = em.getReference(preferenciaxbaileListPreferenciaxbaileToAttach.getClass(), preferenciaxbaileListPreferenciaxbaileToAttach.getPreferenciaxbailePK());
+                attachedPreferenciaxbaileList.add(preferenciaxbaileListPreferenciaxbaileToAttach);
             }
-            perfilPreferencia.setBaileList(attachedBaileList);
-            List<Cuento> attachedCuentoList = new ArrayList<Cuento>();
-            for (Cuento cuentoListCuentoToAttach : perfilPreferencia.getCuentoList()) {
-                cuentoListCuentoToAttach = em.getReference(cuentoListCuentoToAttach.getClass(), cuentoListCuentoToAttach.getNombre());
-                attachedCuentoList.add(cuentoListCuentoToAttach);
-            }
-            perfilPreferencia.setCuentoList(attachedCuentoList);
-            List<Cancion> attachedCancionList = new ArrayList<Cancion>();
-            for (Cancion cancionListCancionToAttach : perfilPreferencia.getCancionList()) {
-                cancionListCancionToAttach = em.getReference(cancionListCancionToAttach.getClass(), cancionListCancionToAttach.getNombre());
-                attachedCancionList.add(cancionListCancionToAttach);
-            }
-            perfilPreferencia.setCancionList(attachedCancionList);
+            perfilPreferencia.setPreferenciaxbaileList(attachedPreferenciaxbaileList);
             List<Actxpreferencia> attachedActxpreferenciaList = new ArrayList<Actxpreferencia>();
             for (Actxpreferencia actxpreferenciaListActxpreferenciaToAttach : perfilPreferencia.getActxpreferenciaList()) {
                 actxpreferenciaListActxpreferenciaToAttach = em.getReference(actxpreferenciaListActxpreferenciaToAttach.getClass(), actxpreferenciaListActxpreferenciaToAttach.getActxpreferenciaPK());
                 attachedActxpreferenciaList.add(actxpreferenciaListActxpreferenciaToAttach);
             }
             perfilPreferencia.setActxpreferenciaList(attachedActxpreferenciaList);
+            List<Preferenciaxcuento> attachedPreferenciaxcuentoList = new ArrayList<Preferenciaxcuento>();
+            for (Preferenciaxcuento preferenciaxcuentoListPreferenciaxcuentoToAttach : perfilPreferencia.getPreferenciaxcuentoList()) {
+                preferenciaxcuentoListPreferenciaxcuentoToAttach = em.getReference(preferenciaxcuentoListPreferenciaxcuentoToAttach.getClass(), preferenciaxcuentoListPreferenciaxcuentoToAttach.getPreferenciaxcuentoPK());
+                attachedPreferenciaxcuentoList.add(preferenciaxcuentoListPreferenciaxcuentoToAttach);
+            }
+            perfilPreferencia.setPreferenciaxcuentoList(attachedPreferenciaxcuentoList);
+            List<Preferenciaxcancion> attachedPreferenciaxcancionList = new ArrayList<Preferenciaxcancion>();
+            for (Preferenciaxcancion preferenciaxcancionListPreferenciaxcancionToAttach : perfilPreferencia.getPreferenciaxcancionList()) {
+                preferenciaxcancionListPreferenciaxcancionToAttach = em.getReference(preferenciaxcancionListPreferenciaxcancionToAttach.getClass(), preferenciaxcancionListPreferenciaxcancionToAttach.getPreferenciaxcancionPK());
+                attachedPreferenciaxcancionList.add(preferenciaxcancionListPreferenciaxcancionToAttach);
+            }
+            perfilPreferencia.setPreferenciaxcancionList(attachedPreferenciaxcancionList);
             em.persist(perfilPreferencia);
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(perfilPreferencia);
                 perfilpwa = em.merge(perfilpwa);
             }
-            for (Baile baileListBaile : perfilPreferencia.getBaileList()) {
-                baileListBaile.getPerfilPreferenciaList().add(perfilPreferencia);
-                baileListBaile = em.merge(baileListBaile);
-            }
-            for (Cuento cuentoListCuento : perfilPreferencia.getCuentoList()) {
-                cuentoListCuento.getPerfilPreferenciaList().add(perfilPreferencia);
-                cuentoListCuento = em.merge(cuentoListCuento);
-            }
-            for (Cancion cancionListCancion : perfilPreferencia.getCancionList()) {
-                cancionListCancion.getPerfilPreferenciaList().add(perfilPreferencia);
-                cancionListCancion = em.merge(cancionListCancion);
+            for (Preferenciaxbaile preferenciaxbaileListPreferenciaxbaile : perfilPreferencia.getPreferenciaxbaileList()) {
+                PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxbaileListPreferenciaxbaile = preferenciaxbaileListPreferenciaxbaile.getPerfilPreferencia();
+                preferenciaxbaileListPreferenciaxbaile.setPerfilPreferencia(perfilPreferencia);
+                preferenciaxbaileListPreferenciaxbaile = em.merge(preferenciaxbaileListPreferenciaxbaile);
+                if (oldPerfilPreferenciaOfPreferenciaxbaileListPreferenciaxbaile != null) {
+                    oldPerfilPreferenciaOfPreferenciaxbaileListPreferenciaxbaile.getPreferenciaxbaileList().remove(preferenciaxbaileListPreferenciaxbaile);
+                    oldPerfilPreferenciaOfPreferenciaxbaileListPreferenciaxbaile = em.merge(oldPerfilPreferenciaOfPreferenciaxbaileListPreferenciaxbaile);
+                }
             }
             for (Actxpreferencia actxpreferenciaListActxpreferencia : perfilPreferencia.getActxpreferenciaList()) {
                 PerfilPreferencia oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia = actxpreferenciaListActxpreferencia.getPerfilPreferencia();
@@ -123,6 +120,24 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 if (oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia != null) {
                     oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListActxpreferencia);
                     oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia = em.merge(oldPerfilPreferenciaOfActxpreferenciaListActxpreferencia);
+                }
+            }
+            for (Preferenciaxcuento preferenciaxcuentoListPreferenciaxcuento : perfilPreferencia.getPreferenciaxcuentoList()) {
+                PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxcuentoListPreferenciaxcuento = preferenciaxcuentoListPreferenciaxcuento.getPerfilPreferencia();
+                preferenciaxcuentoListPreferenciaxcuento.setPerfilPreferencia(perfilPreferencia);
+                preferenciaxcuentoListPreferenciaxcuento = em.merge(preferenciaxcuentoListPreferenciaxcuento);
+                if (oldPerfilPreferenciaOfPreferenciaxcuentoListPreferenciaxcuento != null) {
+                    oldPerfilPreferenciaOfPreferenciaxcuentoListPreferenciaxcuento.getPreferenciaxcuentoList().remove(preferenciaxcuentoListPreferenciaxcuento);
+                    oldPerfilPreferenciaOfPreferenciaxcuentoListPreferenciaxcuento = em.merge(oldPerfilPreferenciaOfPreferenciaxcuentoListPreferenciaxcuento);
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListPreferenciaxcancion : perfilPreferencia.getPreferenciaxcancionList()) {
+                PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxcancionListPreferenciaxcancion = preferenciaxcancionListPreferenciaxcancion.getPerfilPreferencia();
+                preferenciaxcancionListPreferenciaxcancion.setPerfilPreferencia(perfilPreferencia);
+                preferenciaxcancionListPreferenciaxcancion = em.merge(preferenciaxcancionListPreferenciaxcancion);
+                if (oldPerfilPreferenciaOfPreferenciaxcancionListPreferenciaxcancion != null) {
+                    oldPerfilPreferenciaOfPreferenciaxcancionListPreferenciaxcancion.getPreferenciaxcancionList().remove(preferenciaxcancionListPreferenciaxcancion);
+                    oldPerfilPreferenciaOfPreferenciaxcancionListPreferenciaxcancion = em.merge(oldPerfilPreferenciaOfPreferenciaxcancionListPreferenciaxcancion);
                 }
             }
             em.getTransaction().commit();
@@ -146,14 +161,14 @@ public class PerfilPreferenciaJpaController implements Serializable {
             PerfilPreferencia persistentPerfilPreferencia = em.find(PerfilPreferencia.class, perfilPreferencia.getPerfilpwaCedula());
             Perfilpwa perfilpwaOld = persistentPerfilPreferencia.getPerfilpwa();
             Perfilpwa perfilpwaNew = perfilPreferencia.getPerfilpwa();
-            List<Baile> baileListOld = persistentPerfilPreferencia.getBaileList();
-            List<Baile> baileListNew = perfilPreferencia.getBaileList();
-            List<Cuento> cuentoListOld = persistentPerfilPreferencia.getCuentoList();
-            List<Cuento> cuentoListNew = perfilPreferencia.getCuentoList();
-            List<Cancion> cancionListOld = persistentPerfilPreferencia.getCancionList();
-            List<Cancion> cancionListNew = perfilPreferencia.getCancionList();
+            List<Preferenciaxbaile> preferenciaxbaileListOld = persistentPerfilPreferencia.getPreferenciaxbaileList();
+            List<Preferenciaxbaile> preferenciaxbaileListNew = perfilPreferencia.getPreferenciaxbaileList();
             List<Actxpreferencia> actxpreferenciaListOld = persistentPerfilPreferencia.getActxpreferenciaList();
             List<Actxpreferencia> actxpreferenciaListNew = perfilPreferencia.getActxpreferenciaList();
+            List<Preferenciaxcuento> preferenciaxcuentoListOld = persistentPerfilPreferencia.getPreferenciaxcuentoList();
+            List<Preferenciaxcuento> preferenciaxcuentoListNew = perfilPreferencia.getPreferenciaxcuentoList();
+            List<Preferenciaxcancion> preferenciaxcancionListOld = persistentPerfilPreferencia.getPreferenciaxcancionList();
+            List<Preferenciaxcancion> preferenciaxcancionListNew = perfilPreferencia.getPreferenciaxcancionList();
             List<String> illegalOrphanMessages = null;
             if (perfilpwaNew != null && !perfilpwaNew.equals(perfilpwaOld)) {
                 PerfilPreferencia oldPerfilPreferenciaOfPerfilpwa = perfilpwaNew.getPerfilPreferencia();
@@ -164,12 +179,36 @@ public class PerfilPreferenciaJpaController implements Serializable {
                     illegalOrphanMessages.add("The Perfilpwa " + perfilpwaNew + " already has an item of type PerfilPreferencia whose perfilpwa column cannot be null. Please make another selection for the perfilpwa field.");
                 }
             }
+            for (Preferenciaxbaile preferenciaxbaileListOldPreferenciaxbaile : preferenciaxbaileListOld) {
+                if (!preferenciaxbaileListNew.contains(preferenciaxbaileListOldPreferenciaxbaile)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxbaile " + preferenciaxbaileListOldPreferenciaxbaile + " since its perfilPreferencia field is not nullable.");
+                }
+            }
             for (Actxpreferencia actxpreferenciaListOldActxpreferencia : actxpreferenciaListOld) {
                 if (!actxpreferenciaListNew.contains(actxpreferenciaListOldActxpreferencia)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Actxpreferencia " + actxpreferenciaListOldActxpreferencia + " since its perfilPreferencia field is not nullable.");
+                }
+            }
+            for (Preferenciaxcuento preferenciaxcuentoListOldPreferenciaxcuento : preferenciaxcuentoListOld) {
+                if (!preferenciaxcuentoListNew.contains(preferenciaxcuentoListOldPreferenciaxcuento)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxcuento " + preferenciaxcuentoListOldPreferenciaxcuento + " since its perfilPreferencia field is not nullable.");
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListOldPreferenciaxcancion : preferenciaxcancionListOld) {
+                if (!preferenciaxcancionListNew.contains(preferenciaxcancionListOldPreferenciaxcancion)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxcancion " + preferenciaxcancionListOldPreferenciaxcancion + " since its perfilPreferencia field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -179,27 +218,13 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwaNew = em.getReference(perfilpwaNew.getClass(), perfilpwaNew.getCedula());
                 perfilPreferencia.setPerfilpwa(perfilpwaNew);
             }
-            List<Baile> attachedBaileListNew = new ArrayList<Baile>();
-            for (Baile baileListNewBaileToAttach : baileListNew) {
-                baileListNewBaileToAttach = em.getReference(baileListNewBaileToAttach.getClass(), baileListNewBaileToAttach.getId());
-                attachedBaileListNew.add(baileListNewBaileToAttach);
+            List<Preferenciaxbaile> attachedPreferenciaxbaileListNew = new ArrayList<Preferenciaxbaile>();
+            for (Preferenciaxbaile preferenciaxbaileListNewPreferenciaxbaileToAttach : preferenciaxbaileListNew) {
+                preferenciaxbaileListNewPreferenciaxbaileToAttach = em.getReference(preferenciaxbaileListNewPreferenciaxbaileToAttach.getClass(), preferenciaxbaileListNewPreferenciaxbaileToAttach.getPreferenciaxbailePK());
+                attachedPreferenciaxbaileListNew.add(preferenciaxbaileListNewPreferenciaxbaileToAttach);
             }
-            baileListNew = attachedBaileListNew;
-            perfilPreferencia.setBaileList(baileListNew);
-            List<Cuento> attachedCuentoListNew = new ArrayList<Cuento>();
-            for (Cuento cuentoListNewCuentoToAttach : cuentoListNew) {
-                cuentoListNewCuentoToAttach = em.getReference(cuentoListNewCuentoToAttach.getClass(), cuentoListNewCuentoToAttach.getNombre());
-                attachedCuentoListNew.add(cuentoListNewCuentoToAttach);
-            }
-            cuentoListNew = attachedCuentoListNew;
-            perfilPreferencia.setCuentoList(cuentoListNew);
-            List<Cancion> attachedCancionListNew = new ArrayList<Cancion>();
-            for (Cancion cancionListNewCancionToAttach : cancionListNew) {
-                cancionListNewCancionToAttach = em.getReference(cancionListNewCancionToAttach.getClass(), cancionListNewCancionToAttach.getNombre());
-                attachedCancionListNew.add(cancionListNewCancionToAttach);
-            }
-            cancionListNew = attachedCancionListNew;
-            perfilPreferencia.setCancionList(cancionListNew);
+            preferenciaxbaileListNew = attachedPreferenciaxbaileListNew;
+            perfilPreferencia.setPreferenciaxbaileList(preferenciaxbaileListNew);
             List<Actxpreferencia> attachedActxpreferenciaListNew = new ArrayList<Actxpreferencia>();
             for (Actxpreferencia actxpreferenciaListNewActxpreferenciaToAttach : actxpreferenciaListNew) {
                 actxpreferenciaListNewActxpreferenciaToAttach = em.getReference(actxpreferenciaListNewActxpreferenciaToAttach.getClass(), actxpreferenciaListNewActxpreferenciaToAttach.getActxpreferenciaPK());
@@ -207,6 +232,20 @@ public class PerfilPreferenciaJpaController implements Serializable {
             }
             actxpreferenciaListNew = attachedActxpreferenciaListNew;
             perfilPreferencia.setActxpreferenciaList(actxpreferenciaListNew);
+            List<Preferenciaxcuento> attachedPreferenciaxcuentoListNew = new ArrayList<Preferenciaxcuento>();
+            for (Preferenciaxcuento preferenciaxcuentoListNewPreferenciaxcuentoToAttach : preferenciaxcuentoListNew) {
+                preferenciaxcuentoListNewPreferenciaxcuentoToAttach = em.getReference(preferenciaxcuentoListNewPreferenciaxcuentoToAttach.getClass(), preferenciaxcuentoListNewPreferenciaxcuentoToAttach.getPreferenciaxcuentoPK());
+                attachedPreferenciaxcuentoListNew.add(preferenciaxcuentoListNewPreferenciaxcuentoToAttach);
+            }
+            preferenciaxcuentoListNew = attachedPreferenciaxcuentoListNew;
+            perfilPreferencia.setPreferenciaxcuentoList(preferenciaxcuentoListNew);
+            List<Preferenciaxcancion> attachedPreferenciaxcancionListNew = new ArrayList<Preferenciaxcancion>();
+            for (Preferenciaxcancion preferenciaxcancionListNewPreferenciaxcancionToAttach : preferenciaxcancionListNew) {
+                preferenciaxcancionListNewPreferenciaxcancionToAttach = em.getReference(preferenciaxcancionListNewPreferenciaxcancionToAttach.getClass(), preferenciaxcancionListNewPreferenciaxcancionToAttach.getPreferenciaxcancionPK());
+                attachedPreferenciaxcancionListNew.add(preferenciaxcancionListNewPreferenciaxcancionToAttach);
+            }
+            preferenciaxcancionListNew = attachedPreferenciaxcancionListNew;
+            perfilPreferencia.setPreferenciaxcancionList(preferenciaxcancionListNew);
             perfilPreferencia = em.merge(perfilPreferencia);
             if (perfilpwaOld != null && !perfilpwaOld.equals(perfilpwaNew)) {
                 perfilpwaOld.setPerfilPreferencia(null);
@@ -216,40 +255,15 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 perfilpwaNew.setPerfilPreferencia(perfilPreferencia);
                 perfilpwaNew = em.merge(perfilpwaNew);
             }
-            for (Baile baileListOldBaile : baileListOld) {
-                if (!baileListNew.contains(baileListOldBaile)) {
-                    baileListOldBaile.getPerfilPreferenciaList().remove(perfilPreferencia);
-                    baileListOldBaile = em.merge(baileListOldBaile);
-                }
-            }
-            for (Baile baileListNewBaile : baileListNew) {
-                if (!baileListOld.contains(baileListNewBaile)) {
-                    baileListNewBaile.getPerfilPreferenciaList().add(perfilPreferencia);
-                    baileListNewBaile = em.merge(baileListNewBaile);
-                }
-            }
-            for (Cuento cuentoListOldCuento : cuentoListOld) {
-                if (!cuentoListNew.contains(cuentoListOldCuento)) {
-                    cuentoListOldCuento.getPerfilPreferenciaList().remove(perfilPreferencia);
-                    cuentoListOldCuento = em.merge(cuentoListOldCuento);
-                }
-            }
-            for (Cuento cuentoListNewCuento : cuentoListNew) {
-                if (!cuentoListOld.contains(cuentoListNewCuento)) {
-                    cuentoListNewCuento.getPerfilPreferenciaList().add(perfilPreferencia);
-                    cuentoListNewCuento = em.merge(cuentoListNewCuento);
-                }
-            }
-            for (Cancion cancionListOldCancion : cancionListOld) {
-                if (!cancionListNew.contains(cancionListOldCancion)) {
-                    cancionListOldCancion.getPerfilPreferenciaList().remove(perfilPreferencia);
-                    cancionListOldCancion = em.merge(cancionListOldCancion);
-                }
-            }
-            for (Cancion cancionListNewCancion : cancionListNew) {
-                if (!cancionListOld.contains(cancionListNewCancion)) {
-                    cancionListNewCancion.getPerfilPreferenciaList().add(perfilPreferencia);
-                    cancionListNewCancion = em.merge(cancionListNewCancion);
+            for (Preferenciaxbaile preferenciaxbaileListNewPreferenciaxbaile : preferenciaxbaileListNew) {
+                if (!preferenciaxbaileListOld.contains(preferenciaxbaileListNewPreferenciaxbaile)) {
+                    PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile = preferenciaxbaileListNewPreferenciaxbaile.getPerfilPreferencia();
+                    preferenciaxbaileListNewPreferenciaxbaile.setPerfilPreferencia(perfilPreferencia);
+                    preferenciaxbaileListNewPreferenciaxbaile = em.merge(preferenciaxbaileListNewPreferenciaxbaile);
+                    if (oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile != null && !oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile.equals(perfilPreferencia)) {
+                        oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile.getPreferenciaxbaileList().remove(preferenciaxbaileListNewPreferenciaxbaile);
+                        oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile = em.merge(oldPerfilPreferenciaOfPreferenciaxbaileListNewPreferenciaxbaile);
+                    }
                 }
             }
             for (Actxpreferencia actxpreferenciaListNewActxpreferencia : actxpreferenciaListNew) {
@@ -260,6 +274,28 @@ public class PerfilPreferenciaJpaController implements Serializable {
                     if (oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia != null && !oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia.equals(perfilPreferencia)) {
                         oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia.getActxpreferenciaList().remove(actxpreferenciaListNewActxpreferencia);
                         oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia = em.merge(oldPerfilPreferenciaOfActxpreferenciaListNewActxpreferencia);
+                    }
+                }
+            }
+            for (Preferenciaxcuento preferenciaxcuentoListNewPreferenciaxcuento : preferenciaxcuentoListNew) {
+                if (!preferenciaxcuentoListOld.contains(preferenciaxcuentoListNewPreferenciaxcuento)) {
+                    PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento = preferenciaxcuentoListNewPreferenciaxcuento.getPerfilPreferencia();
+                    preferenciaxcuentoListNewPreferenciaxcuento.setPerfilPreferencia(perfilPreferencia);
+                    preferenciaxcuentoListNewPreferenciaxcuento = em.merge(preferenciaxcuentoListNewPreferenciaxcuento);
+                    if (oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento != null && !oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento.equals(perfilPreferencia)) {
+                        oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento.getPreferenciaxcuentoList().remove(preferenciaxcuentoListNewPreferenciaxcuento);
+                        oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento = em.merge(oldPerfilPreferenciaOfPreferenciaxcuentoListNewPreferenciaxcuento);
+                    }
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListNewPreferenciaxcancion : preferenciaxcancionListNew) {
+                if (!preferenciaxcancionListOld.contains(preferenciaxcancionListNewPreferenciaxcancion)) {
+                    PerfilPreferencia oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion = preferenciaxcancionListNewPreferenciaxcancion.getPerfilPreferencia();
+                    preferenciaxcancionListNewPreferenciaxcancion.setPerfilPreferencia(perfilPreferencia);
+                    preferenciaxcancionListNewPreferenciaxcancion = em.merge(preferenciaxcancionListNewPreferenciaxcancion);
+                    if (oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion != null && !oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion.equals(perfilPreferencia)) {
+                        oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion.getPreferenciaxcancionList().remove(preferenciaxcancionListNewPreferenciaxcancion);
+                        oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion = em.merge(oldPerfilPreferenciaOfPreferenciaxcancionListNewPreferenciaxcancion);
                     }
                 }
             }
@@ -293,12 +329,33 @@ public class PerfilPreferenciaJpaController implements Serializable {
                 throw new NonexistentEntityException("The perfilPreferencia with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<Preferenciaxbaile> preferenciaxbaileListOrphanCheck = perfilPreferencia.getPreferenciaxbaileList();
+            for (Preferenciaxbaile preferenciaxbaileListOrphanCheckPreferenciaxbaile : preferenciaxbaileListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PerfilPreferencia (" + perfilPreferencia + ") cannot be destroyed since the Preferenciaxbaile " + preferenciaxbaileListOrphanCheckPreferenciaxbaile + " in its preferenciaxbaileList field has a non-nullable perfilPreferencia field.");
+            }
             List<Actxpreferencia> actxpreferenciaListOrphanCheck = perfilPreferencia.getActxpreferenciaList();
             for (Actxpreferencia actxpreferenciaListOrphanCheckActxpreferencia : actxpreferenciaListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This PerfilPreferencia (" + perfilPreferencia + ") cannot be destroyed since the Actxpreferencia " + actxpreferenciaListOrphanCheckActxpreferencia + " in its actxpreferenciaList field has a non-nullable perfilPreferencia field.");
+            }
+            List<Preferenciaxcuento> preferenciaxcuentoListOrphanCheck = perfilPreferencia.getPreferenciaxcuentoList();
+            for (Preferenciaxcuento preferenciaxcuentoListOrphanCheckPreferenciaxcuento : preferenciaxcuentoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PerfilPreferencia (" + perfilPreferencia + ") cannot be destroyed since the Preferenciaxcuento " + preferenciaxcuentoListOrphanCheckPreferenciaxcuento + " in its preferenciaxcuentoList field has a non-nullable perfilPreferencia field.");
+            }
+            List<Preferenciaxcancion> preferenciaxcancionListOrphanCheck = perfilPreferencia.getPreferenciaxcancionList();
+            for (Preferenciaxcancion preferenciaxcancionListOrphanCheckPreferenciaxcancion : preferenciaxcancionListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This PerfilPreferencia (" + perfilPreferencia + ") cannot be destroyed since the Preferenciaxcancion " + preferenciaxcancionListOrphanCheckPreferenciaxcancion + " in its preferenciaxcancionList field has a non-nullable perfilPreferencia field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -307,21 +364,6 @@ public class PerfilPreferenciaJpaController implements Serializable {
             if (perfilpwa != null) {
                 perfilpwa.setPerfilPreferencia(null);
                 perfilpwa = em.merge(perfilpwa);
-            }
-            List<Baile> baileList = perfilPreferencia.getBaileList();
-            for (Baile baileListBaile : baileList) {
-                baileListBaile.getPerfilPreferenciaList().remove(perfilPreferencia);
-                baileListBaile = em.merge(baileListBaile);
-            }
-            List<Cuento> cuentoList = perfilPreferencia.getCuentoList();
-            for (Cuento cuentoListCuento : cuentoList) {
-                cuentoListCuento.getPerfilPreferenciaList().remove(perfilPreferencia);
-                cuentoListCuento = em.merge(cuentoListCuento);
-            }
-            List<Cancion> cancionList = perfilPreferencia.getCancionList();
-            for (Cancion cancionListCancion : cancionList) {
-                cancionListCancion.getPerfilPreferenciaList().remove(perfilPreferencia);
-                cancionListCancion = em.merge(cancionListCancion);
             }
             em.remove(perfilPreferencia);
             em.getTransaction().commit();

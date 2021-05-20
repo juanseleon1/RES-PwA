@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -66,7 +66,7 @@ public class Registroactividad implements Serializable {
         this.estadofinal = estadofinal;
     }
 
-    public Registroactividad(Date fecha, String perfilpwaCedula, String tipo, BigInteger actividadpwaId) {
+    public Registroactividad(Date fecha, String perfilpwaCedula, String tipo, BigDecimal actividadpwaId) {
         this.registroactividadPK = new RegistroactividadPK(fecha, perfilpwaCedula, tipo, actividadpwaId);
     }
 
