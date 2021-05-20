@@ -37,7 +37,7 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //falta escoger estrategia, segun perfil
+        
         OpcionesAnimar estrategia = blvs.getbPerfilPwA().getAnimarStrategy();
         AnimarStrategy as = new AnimarStrategy();
         as.setOpcion(estrategia);
@@ -45,6 +45,7 @@ public class EvaluarEstrategiaAnimar extends ResPwaTask{
         blvs.getbEstadoActividad().setEstrategia(as);
         
         ServiceDataRequest srb = as.execStrategy();
+        blvs.getbEstadoActividad().setEstrategia(as.getOpcion());
         requestService(srb,blvs);
     }
 

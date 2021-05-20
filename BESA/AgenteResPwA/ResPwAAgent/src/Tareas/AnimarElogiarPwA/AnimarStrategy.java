@@ -5,6 +5,7 @@
  */
 package Tareas.AnimarElogiarPwA;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -16,41 +17,47 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class AnimarStrategy implements ResPwAStrategy{
+public class AnimarStrategy implements ResPwAStrategy {
     
     private OpcionesAnimar opcion;
     
     @Override
-    public ServiceDataRequest execStrategy() {
+    public ServiceDataRequest execStrategy(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
-        switch (opcion)
-        {
-            case FRASEELOGIANTE:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case CHISTE:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case ADIVINANZA:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case DATOCURIOSO:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case PREGUNTAEMPATICA:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case CONSEJO:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
+        
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.ADIVINANZA;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         }
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.CHISTE;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        }
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.CONSEJO;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        }
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.DATOCURIOSO;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        }
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.FRASEELOGIANTE;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        }
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+            this.opcion = OpcionesAnimar.PREGUNTAEMPATICA;
+            infoServicio.put("SAY", "");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+        }
+        
         return srb;
     }
 
@@ -63,10 +70,9 @@ public class AnimarStrategy implements ResPwAStrategy{
     }
 
     @Override
-    public ServiceDataRequest execStrategy(Believes b) {
+    public ServiceDataRequest execStrategy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
     
 }
