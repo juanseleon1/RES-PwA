@@ -5,13 +5,18 @@
  */
 package Tareas.Cuenteria;
 
+import EmotionalAnalyzerAgent.EmotionalEventType;
+import EmotionalAnalyzerAgent.WHO;
+import ResPwAEntities.Cuento;
 import ResPwAEntities.Frases;
+import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +38,31 @@ public class ReproducirCuento extends Task{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Buscar Animaciones ---");
-        //busca animaciones y mensajes base de datos
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        //enviar cuento
-        infoServicio.put("SAYWITHMOVEMENT", blvs.getbEstadoActividad().getCuentoActual().getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()));
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        Cuento cuento = blvs.getbEstadoActividad().getCuentoActual();
+        
+        infoServicio.put("SAYWITHMOVEMENT", cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getContenido());
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAYWITHMOVEMENT, infoServicio);
         ResPwaUtils.requestService(srb,blvs);
+        
+        if (!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getUrlimagen().equals(" ")){
+            infoServicio.put("SHOWIMG", cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getUrlimagen());
+            srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWIMG, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
+        }
+        
+        if(!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getAccion().equals(" ")){
+            infoServicio.put("TAGSDANCE", cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getAccion());
+            infoServicio.put("FACTOR", null);
+            ResPwaUtils.requestService(srb,blvs);
+        }
+        
+        if(!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent().equals(" ")){
+            EmotionalEvent evt = new EmotionalEvent(WHO.ROBOT.toString(), cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent(), null);
+            blvs.getbEstadoRobot().processEmotionalEvent(evt);
+        }
+        
         blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento()+1);
     }
 

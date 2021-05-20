@@ -28,39 +28,48 @@ public class AnimarStrategy implements ResPwAStrategy {
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
         
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        //modificar reglas
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.ADIVINANZA;
-            infoServicio.put("SAY", "");
+            infoServicio.put("SAY", "¿Cuál es el animal que come con las patas?");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
+            //tiempo
+            infoServicio.put("SAY", "El pato");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.CHISTE;
-            infoServicio.put("SAY", "");
+            infoServicio.put("SAY", "¿Que le dice una foca a su madre?");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
+            //tiempo
+            infoServicio.put("SAY", "Ai lof iu moder foca");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.CONSEJO;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.DATOCURIOSO;
             infoServicio.put("SAY", "");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.FRASEELOGIANTE;
-            infoServicio.put("SAY", "");
+            infoServicio.put("SAY", "Wow hoy estas muy lindo");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
-        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 || blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
+        if(blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 0 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 0){
             this.opcion = OpcionesAnimar.PREGUNTAEMPATICA;
-            infoServicio.put("SAY", "");
+            infoServicio.put("SAY", "¿Como te sientes?");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
