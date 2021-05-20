@@ -7,6 +7,9 @@ package RobotAgentBDI.Believes;
 
 import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import rational.data.InfoData;
 import rational.mapping.Believes;
@@ -55,6 +58,14 @@ public class BEstadoInteraccion implements Believes {
     private String estadoEmocional = "normal";
     private double respuestasPorContexto;
     private long tiempoInt;
+    private Map<String, Boolean> topicos = new HashMap<>();
+
+    public BEstadoInteraccion() {
+        topicos = new HashMap<>();
+        for (PepperTopicsNames topic : PepperTopicsNames.values()) {
+            topicos.put(topic.getTopic(), false);
+        }
+    }
 
     public String getEstadoEmocional() {
         return estadoEmocional;
@@ -102,11 +113,37 @@ public class BEstadoInteraccion implements Believes {
                 nivelEnriquecimiento--;
             }
         }
+        
         if (infoRecibida.getDataP().containsKey("wakeUpFinished")) {
             sistemaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("wakeUpFinished"));
         }
         if (infoRecibida.getDataP().containsKey("pausarint")) {
             pausarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("pausarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("cancelarint")) {
+            cancelarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("cancelarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("reiniciarint")) {
+            reiniciarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("reiniciarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")) {
+            Double aux = (Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            distanciaPwA = aux == null ? -1 : aux;
+
+        }
+        if (infoRecibida.getDataP().containsKey("dialogIsStarted")) {
+            estaHablando = true;
+
+        }
+        if (infoRecibida.getDataP().containsKey("endOfAnimatedSpeech")) {
+            estaHablando = false;
+
+        }
+        if (infoRecibida.getDataP().containsKey("goToSuccess")) {
+            desplazandose = false;
 
         }
         if (infoRecibida.getDataP().containsKey("cancelarint")) {
@@ -187,7 +224,27 @@ public class BEstadoInteraccion implements Believes {
 
         }
 
+        if (infoRecibida.getDataP().containsKey("DeactivateTopic")) {
+            String topic = (String) infoRecibida.getDataP().get("DeactivateTopic");
+            topicos.replace(topic, false);
+        }
+
+        if (infoRecibida.getDataP().containsKey("ActivateTopic")) {
+            String topic = (String) infoRecibida.getDataP().get("ActivateTopic");
+            topicos.replace(topic, true);
+        }
+
+        if (infoRecibida.getDataP().containsKey("speechTextDone")) {
+            Integer done = (Integer) infoRecibida.getDataP().get("speechTextDone");
+            estaHablando = 0 == done;
+
+        }
+
         return true;
+    }
+
+    public boolean isTopicoActivo(PepperTopicsNames topico) {
+        return topicos.get(topico.getTopic());
     }
 
     public boolean isCambioDificultadVoz() {
@@ -304,7 +361,7 @@ public class BEstadoInteraccion implements Believes {
 
     public boolean isDetectaPwA() {
         TimeUnit unit = TimeUnit.SECONDS;
-        if (unit.convert(System.currentTimeMillis() - tiempoInt, TimeUnit.SECONDS) > 80 || !detectaPwA) {
+        if (unit.convert(System.currentTimeMillis() - tiempoInt, TimeUnit.SECONDS) > 120 || !detectaPwA) {
             return false;
         }
         return detectaPwA;
@@ -458,6 +515,22 @@ public class BEstadoInteraccion implements Believes {
 
     public void setRespuestasPorContexto(double respuestasPorContexto) {
         this.respuestasPorContexto = respuestasPorContexto;
+    }
+
+    public boolean isMovError() {
+        return movError;
+    }
+
+    public void setMovError(boolean movError) {
+        this.movError = movError;
+    }
+
+    public long getTiempoInt() {
+        return tiempoInt;
+    }
+
+    public void setTiempoInt(long tiempoInt) {
+        this.tiempoInt = tiempoInt;
     }
 
 }

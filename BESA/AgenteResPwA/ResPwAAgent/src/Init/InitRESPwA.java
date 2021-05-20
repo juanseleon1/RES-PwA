@@ -7,23 +7,35 @@ import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
+import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import ResPwAEntities.Accion;
 import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
+import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.Metas.LogIn;
+import RobotAgentBDI.Metas.MusicoTerapia;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.ReportarEmergencia;
+import RobotAgentBDI.Metas.PedirAyuda;
+import RobotAgentBDI.Metas.RecargarBateria;
+import RobotAgentBDI.Metas.Saludar;
+import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.RobotSPAgent;
 import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.Test.TestTask;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,9 +77,6 @@ public class InitRESPwA {
             //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
             //p.sendRequest(data);
             startConfig(p);
-
-            /*ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
-            p.sendRequest(data);*/
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -114,6 +123,8 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
+        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
@@ -125,7 +136,11 @@ public class InitRESPwA {
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
-        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
+//        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
+        //Agregar a Lista
+        RAGoals.add(cuenteriaGoal);
+//        RAGoals.add(tp);
+        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
@@ -138,7 +153,7 @@ public class InitRESPwA {
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
-        RAGoals.add(reportar);
+//        RAGoals.add(reportar);
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
