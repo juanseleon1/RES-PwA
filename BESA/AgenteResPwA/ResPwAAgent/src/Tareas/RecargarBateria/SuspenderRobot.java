@@ -11,7 +11,7 @@ package Tareas.RecargarBateria;
  */
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
@@ -20,12 +20,13 @@ import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class SuspenderRobot extends ResPwaTask{
+public class SuspenderRobot extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -40,32 +41,32 @@ public class SuspenderRobot extends ResPwaTask{
         //buscar texto
         infoServicio.put("SAY", "Me voy a descargar");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
         infoServicio = new HashMap<>();
         
-        deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);
+        ResPwaUtils.deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SUSPENDTABLET, null);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
         
         srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.SUSPEND, null);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class SuspenderRobot extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -84,13 +85,13 @@ public class SuspenderRobot extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.WAKEUP, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }        
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isSistemaSuspendido()) {

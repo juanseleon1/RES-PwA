@@ -5,12 +5,12 @@
  */
 package RobotAgentBDI.Metas;
 
+import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaGoal;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.IniciarServicios;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
@@ -26,7 +26,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class LogIn extends ResPwaGoal{
+public class LogIn extends GoalBDI{
     
     private static String descrip = "LogIn";
 

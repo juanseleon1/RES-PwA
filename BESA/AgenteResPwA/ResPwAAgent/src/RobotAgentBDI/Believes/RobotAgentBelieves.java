@@ -84,12 +84,13 @@ public class RobotAgentBelieves implements Believes {
     }
 
     public void feedbackActivity(double voiceFeedback) {
-        double emotionFeedback = 0.0;
+        double emotionFeedback = 0.0, emotionFeedbackAux=0;
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
-        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
-
+        emotionFeedbackAux = bEstadoEmocionalPwA.getFeedbackEmotion();
+        emotionFeedback=0;
+        
         List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
         
 

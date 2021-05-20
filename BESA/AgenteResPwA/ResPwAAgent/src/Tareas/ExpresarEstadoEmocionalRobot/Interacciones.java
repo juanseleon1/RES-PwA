@@ -10,7 +10,7 @@ import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
 import EmotionalAnalyzerAgent.EmotionalState;
 import PepperPackage.EmotionalModel.PepperEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -18,12 +18,13 @@ import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class Interacciones extends ResPwaTask{
+public class Interacciones extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -45,35 +46,35 @@ public class Interacciones extends ResPwaTask{
         {
             infoServicio.put("SAY", "jeit u bish");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.VHAPPY.getMin() && state < PepperEmotionRanges.VHAPPY.getMax())
         {
             infoServicio.put("SAY", "yupiii");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.VSAD.getMin() && state < PepperEmotionRanges.VSAD.getMax())
         {
             infoServicio.put("SAY", "juum");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.NORMAL.getMin() && state < PepperEmotionRanges.NORMAL.getMax())
         {
             infoServicio.put("SAY", "iu");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.HAPPY.getMin() && state < PepperEmotionRanges.HAPPY.getMax())
         {
             infoServicio.put("SAY", "güii");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
         
     }
@@ -90,7 +91,7 @@ public class Interacciones extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         System.out.println("--- Check Finish Task Interacciones ---");
         return false;

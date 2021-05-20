@@ -7,19 +7,20 @@ package Tareas.LogIn;
 
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class DetectarPwA extends ResPwaTask{
+public class DetectarPwA extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>(); 
     
@@ -36,11 +37,11 @@ public class DetectarPwA extends ResPwaTask{
         /*if(Existeid) {
             infoServicio.put("GETIDROBOT", "");
             srb = ServiceRequestBuilder.buildRequest(RobotServiceRequestType.IDROBOT, infoServicio);
-            requestService(srb);
+            ResPwaUtils.requestService(srb);
         } else {
             infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getNombre()+" "+blvs.getbPerfilPwA().getApellidos());
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
-            requestService(srb);
+            ResPwaUtils.requestService(srb);
         }
         toca recibir el id*/
         
@@ -48,7 +49,7 @@ public class DetectarPwA extends ResPwaTask{
         //hay que cambiar este parametro
         infoServicio.put("DETECTPWA", blvs.getbPerfilPwA().getPerfil().getCedula());
         srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.DETECTNEWFACE, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class DetectarPwA extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isDetectaPwA()) {

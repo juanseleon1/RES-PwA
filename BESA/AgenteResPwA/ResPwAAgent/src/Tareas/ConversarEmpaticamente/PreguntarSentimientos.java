@@ -7,7 +7,7 @@ package Tareas.ConversarEmpaticamente;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -15,12 +15,13 @@ import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class PreguntarSentimientos extends ResPwaTask{
+public class PreguntarSentimientos extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -33,13 +34,13 @@ public class PreguntarSentimientos extends ResPwaTask{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
         
-        activateTopic(PepperTopicsNames.ALEGRETOPIC, parameters);
-        activateTopic(PepperTopicsNames.IRATOPIC, parameters);
-        activateTopic(PepperTopicsNames.SADTOPIC, parameters);
+        ResPwaUtils.activateTopic(PepperTopicsNames.ALEGRETOPIC, parameters);
+        ResPwaUtils.activateTopic(PepperTopicsNames.IRATOPIC, parameters);
+        ResPwaUtils.activateTopic(PepperTopicsNames.SADTOPIC, parameters);
         //buscar texto
         infoServicio.put("SAY", "PreguntaSentimientos");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
     
     }
 
@@ -50,7 +51,7 @@ public class PreguntarSentimientos extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -60,20 +61,20 @@ public class PreguntarSentimientos extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //debe revisar que el estado animo haya cambiado y cierto tiempo
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
-            deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
-            deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
-            deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
+            ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
+            ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
+            ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
             return true;
         }
         return false;

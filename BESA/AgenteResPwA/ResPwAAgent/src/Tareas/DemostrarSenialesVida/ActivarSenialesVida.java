@@ -6,7 +6,7 @@
 package Tareas.DemostrarSenialesVida;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityService;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
@@ -15,19 +15,20 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class ActivarSenialesVida extends ResPwaTask{
+public class ActivarSenialesVida extends Task{
     
     private HashMap<String, Object> infoServicio = new HashMap<>();
     private static final String ACTIVATE_LIFE_SIGNALS = "ACTIVATELIFESIGNALS";
     
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         System.out.println("--- Check Finish ActivarSenialesVida ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -43,7 +44,7 @@ public class ActivarSenialesVida extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put(ACTIVATE_LIFE_SIGNALS, true); 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATELIFESIGNALS , infoServicio);
-        requestService(srb, blvs);
+        ResPwaUtils.requestService(srb, blvs);
     }
 
     @Override

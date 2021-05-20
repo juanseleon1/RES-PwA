@@ -6,19 +6,20 @@
 package Tareas.ReportarEmergencia;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class LlamarCuidador extends ResPwaTask{
+public class LlamarCuidador extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -28,7 +29,7 @@ public class LlamarCuidador extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         System.out.println("--- Check Finish LlamarCuidador ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
@@ -46,7 +47,7 @@ public class LlamarCuidador extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("SAY", "guiu guiu guiu cuidadoooooor guiu guiu guiu"); 
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
     }
 
     @Override

@@ -9,6 +9,7 @@ import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
+import BESA.Kernel.System.SystemExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -26,16 +27,14 @@ import rational.services.ActivateAsynchronousServiceGuard;
  *
  * @author juans
  */
-public abstract class ResPwaTask extends Task {
+public class ResPwaUtils{
 
-    protected boolean init = true;
     protected boolean expropiated = false;
-    public ResPwaTask() {
-        this.init = true;
+    public ResPwaUtils() {
         expropiated = false;
     }
 
-    public void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs) {
+    public static void requestService(ServiceDataRequest sdr, RobotAgentBelieves blvs) {
         try {
             blvs.getbEstadoRobot().updateEmotionalVariables();
             String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
@@ -44,12 +43,14 @@ public abstract class ResPwaTask extends Task {
             EventBESA evt = new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
             evt.setSenderAgId(SHID);
             agH.sendEvent(evt);
+        } catch (SystemExceptionBESA ex) {
+            Logger.getLogger(ResPwaUtils.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExceptionBESA ex) {
-            Logger.getLogger(ResPwaTask.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(ResPwaUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
-    public void activateTopic(PepperTopicsNames topic, Believes parameters) {
+    public static void activateTopic(PepperTopicsNames topic, Believes parameters) {
 
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
@@ -59,7 +60,7 @@ public abstract class ResPwaTask extends Task {
 
     }
 
-    public void deactivateTopic(PepperTopicsNames topic, Believes parameters) {
+    public static void deactivateTopic(PepperTopicsNames topic, Believes parameters) {
         HashMap<String, Object> infoServicio = new HashMap<>();
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         infoServicio.put("TOPICNAME", topic.getTopic());
@@ -67,14 +68,23 @@ public abstract class ResPwaTask extends Task {
         requestService(srb, blvs);
     }
 
-    @Override
-    public boolean checkFinish(Believes believes) {
+    public static void updateEmo(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (init) {
             blvs.getbEstadoRobot().updateEmotionalVariables();
-            init=false;
-        }
-        return init;
     }
 
+    public static void requestService(ServiceDataRequest sdr)
+    {
+         try {
+            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
+            String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
+            AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
+            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
+            evt.setSenderAgId(SHID);
+            agH.sendEvent(evt);
+        } catch (ExceptionBESA ex) {
+            Logger.getLogger(ResPwaUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

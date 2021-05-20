@@ -8,7 +8,7 @@ package Tareas.ModificarPreferencias;
 import Tareas.Test.*;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
@@ -18,12 +18,13 @@ import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author LaMafecitaBebeLean
  */
-public class ModificarPreferencias extends ResPwaTask {
+public class ModificarPreferencias extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -68,8 +69,8 @@ public class ModificarPreferencias extends ResPwaTask {
         }
         
         
-        requestService(srb,blvs);
-        this.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
+        ResPwaUtils.requestService(srb,blvs);
+        ResPwaUtils.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class ModificarPreferencias extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         return false;
     }

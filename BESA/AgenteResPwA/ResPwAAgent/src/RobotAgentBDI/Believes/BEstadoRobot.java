@@ -13,6 +13,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import PepperPackage.PepperConf;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -301,7 +302,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
-            requestService(srb);
+            ResPwaUtils.requestService(srb);
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);
         }
