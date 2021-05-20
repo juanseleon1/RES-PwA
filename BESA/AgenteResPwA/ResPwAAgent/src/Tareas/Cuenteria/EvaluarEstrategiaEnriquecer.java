@@ -42,10 +42,7 @@ public class EvaluarEstrategiaEnriquecer extends Task{
         
             EnriquecerStrategy es = new EnriquecerStrategy();
             es.setNombre((int)num);
-            blvs.getbEstadoActividad().setEstrategia(es);
-        
-            ServiceDataRequest srb = es.execStrategy(parameters);
-            ResPwaUtils.requestService(srb,blvs);
+            es.execStrategy(parameters);
         }        
         
         //propiedades voz(tono,etc) en blvs

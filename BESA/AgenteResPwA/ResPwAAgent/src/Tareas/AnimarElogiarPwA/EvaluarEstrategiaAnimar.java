@@ -36,17 +36,10 @@ public class EvaluarEstrategiaAnimar extends Task{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
-        
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //falta escoger estrategia, segun perfil
-        OpcionesAnimar estrategia = blvs.getbPerfilPwA().getAnimarStrategy();
+
         AnimarStrategy as = new AnimarStrategy();
-        as.setOpcion(estrategia);
-        
-        blvs.getbEstadoActividad().setEstrategia(as);
-        
-        ServiceDataRequest srb = as.execStrategy();
-        ResPwaUtils.requestService(srb,blvs);
+
+        as.execStrategy();
     }
 
     @Override

@@ -5,7 +5,9 @@
  */
 package Tareas.MantenerAtencionPwA;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
@@ -21,7 +23,8 @@ public class AtencionStrategy implements ResPwAStrategy{
     private OpcionesAtencion opcion;
     
     @Override
-    public ServiceDataRequest execStrategy() {
+    public void execStrategy(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String,Object> infoServicio = new HashMap<>(); 
         ServiceDataRequest srb = null;
         switch (opcion)
@@ -29,13 +32,14 @@ public class AtencionStrategy implements ResPwAStrategy{
             case SILBAR:
                 infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
             case LLAMARPWA:
                 infoServicio.put("SAY", opcion);
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                ResPwaUtils.requestService(srb,blvs);
                 break;
         }
-        return srb;
     }
 
     public OpcionesAtencion getOpcion() {
@@ -47,7 +51,7 @@ public class AtencionStrategy implements ResPwAStrategy{
     }
 
     @Override
-    public ServiceDataRequest execStrategy(Believes b) {
+    public void execStrategy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

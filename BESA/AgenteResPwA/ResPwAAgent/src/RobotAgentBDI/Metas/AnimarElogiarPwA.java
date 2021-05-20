@@ -58,16 +58,12 @@ public class AnimarElogiarPwA extends GoalBDI{
 
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
-        //System.out.println("Meta AnimarPwA detectGoal");
-        
-        //crear interface estrategia que permita ejecutarEstrategia(), guardar estrategia en believes y despues sacarla de estos
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        //alto numero de errores, tiene aciertos, cierto tiempo activo
-        //!blvs.getbEstadoActividad().isFinalizoActividad() ?
-        //|| finalActividad || dice que se siente triste/enojado || Al escoger actividad por primera vez
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < 0 && blvs.getbEstadoActividad().calcTiempoActividad()/60 > 15 ) {
+
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+            if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000 || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000) {
                 return 1.0;
             }
         }
