@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="E9B556A7-69E3-2D82-51E5-D3D048463892" containerWithKeyObject="9797633E-BC35-406F-A0A8-1D560FED437B" localFKIndex="2C978517-79FD-843B-8DC3-2AEBD5F4D718" name="PerfilPwa_EstadoCivil_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:23:33 UTC</createdTime>
+<generatorID>7015AA22-F310-F0BA-93DF-6D872566877A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>EstadoCivil</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>59F223F5-5B04-9105-1633-01D76AFC7C9B</referredTableID>
+<keyObject>79D5026B-D332-BDD3-1E12-A8CC0AA75D1F</keyObject>
+<referredKeyID>79D5026B-D332-BDD3-1E12-A8CC0AA75D1F</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>tipoEC</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

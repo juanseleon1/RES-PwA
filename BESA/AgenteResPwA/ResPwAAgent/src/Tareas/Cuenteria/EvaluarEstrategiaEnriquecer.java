@@ -42,7 +42,6 @@ public class EvaluarEstrategiaEnriquecer extends Task{
         
             EnriquecerStrategy es = new EnriquecerStrategy();
             es.setNombre((int)num);
-        
             es.execStrategy(parameters);
         }        
         

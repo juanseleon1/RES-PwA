@@ -35,6 +35,10 @@
     <class>ResPwAEntities.Preferenciacancion</class>
     <class>ResPwAEntities.Sequence</class>
     <class>ResPwAEntities.Baile</class>
+    <class>ResPwAEntities.Preferenciaxbaile</class>
+    <class>ResPwAEntities.Preferenciaxcancion</class>
+    <class>ResPwAEntities.Preferenciaxcuento</class>
+    <class>ResPwAEntities.Bailexperfilpreferencia</class>
     <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>

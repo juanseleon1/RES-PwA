@@ -7,6 +7,7 @@ package Tareas.MusicoTerapia;
 
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxcancion;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
@@ -52,7 +53,7 @@ public class SeleccionarCancion extends Task {
         ResPwaUtils.requestService(data, blvs);
         float gusto = -1;
         Cancion cancionEleg = null;
-        List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
+        List<Preferenciaxcancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcancionList();
 //        for (Cancion c : canciones) {
 //
 //            if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
@@ -65,10 +66,10 @@ public class SeleccionarCancion extends Task {
         //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
     }
     
-    public Cancion cancionParaColocar(List<Cancion> canciones){
+    public Cancion cancionParaColocar(List<Preferenciaxcancion> canciones){
         Random rand = new Random();
         int randomSong = rand.nextInt(canciones.size());
-        Cancion cancionParaColocar = canciones.get(randomSong);
+        Cancion cancionParaColocar = canciones.get(randomSong).getCancion();
         return cancionParaColocar;
     }
 

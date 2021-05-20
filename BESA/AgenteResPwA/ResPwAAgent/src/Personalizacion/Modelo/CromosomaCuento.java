@@ -6,6 +6,7 @@
 package Personalizacion.Modelo;
 
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxcuento;
 
 /**
  *
@@ -13,18 +14,18 @@ import ResPwAEntities.Cuento;
  */
 public class CromosomaCuento extends Cromosoma{
 
-    private Cuento cuento;
+    private Preferenciaxcuento cuento;
 
-    public CromosomaCuento(Cuento cuento) {
+    public CromosomaCuento(Preferenciaxcuento cuento) {
         this.cuento = cuento;
     }
     
     @Override
     protected void calculateObjectiveValue() {
-        objectiveValue = (float) this.cuento.getGusto();
+        objectiveValue =  this.cuento.getGusto();
     }
 
-    public Cuento getCuento() {
+    public Preferenciaxcuento getCuento() {
         return cuento;
     }
     

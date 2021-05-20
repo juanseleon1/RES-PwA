@@ -18,8 +18,8 @@ import ResPwAEntities.Genero;
 import ResPwAEntities.Tags;
 import java.util.ArrayList;
 import java.util.List;
-import ResPwAEntities.PerfilPreferencia;
 import ResPwAEntities.Enriq;
+import ResPwAEntities.Preferenciaxcancion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -42,11 +42,11 @@ public class CancionJpaController implements Serializable {
         if (cancion.getTagsList() == null) {
             cancion.setTagsList(new ArrayList<Tags>());
         }
-        if (cancion.getPerfilPreferenciaList() == null) {
-            cancion.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
-        }
         if (cancion.getEnriqList() == null) {
             cancion.setEnriqList(new ArrayList<Enriq>());
+        }
+        if (cancion.getPreferenciaxcancionList() == null) {
+            cancion.setPreferenciaxcancionList(new ArrayList<Preferenciaxcancion>());
         }
         EntityManager em = null;
         try {
@@ -63,18 +63,18 @@ public class CancionJpaController implements Serializable {
                 attachedTagsList.add(tagsListTagsToAttach);
             }
             cancion.setTagsList(attachedTagsList);
-            List<PerfilPreferencia> attachedPerfilPreferenciaList = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferenciaToAttach : cancion.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
-            }
-            cancion.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
             List<Enriq> attachedEnriqList = new ArrayList<Enriq>();
             for (Enriq enriqListEnriqToAttach : cancion.getEnriqList()) {
                 enriqListEnriqToAttach = em.getReference(enriqListEnriqToAttach.getClass(), enriqListEnriqToAttach.getParams());
                 attachedEnriqList.add(enriqListEnriqToAttach);
             }
             cancion.setEnriqList(attachedEnriqList);
+            List<Preferenciaxcancion> attachedPreferenciaxcancionList = new ArrayList<Preferenciaxcancion>();
+            for (Preferenciaxcancion preferenciaxcancionListPreferenciaxcancionToAttach : cancion.getPreferenciaxcancionList()) {
+                preferenciaxcancionListPreferenciaxcancionToAttach = em.getReference(preferenciaxcancionListPreferenciaxcancionToAttach.getClass(), preferenciaxcancionListPreferenciaxcancionToAttach.getPreferenciaxcancionPK());
+                attachedPreferenciaxcancionList.add(preferenciaxcancionListPreferenciaxcancionToAttach);
+            }
+            cancion.setPreferenciaxcancionList(attachedPreferenciaxcancionList);
             em.persist(cancion);
             if (generoGenero != null) {
                 generoGenero.getCancionList().add(cancion);
@@ -84,10 +84,6 @@ public class CancionJpaController implements Serializable {
                 tagsListTags.getCancionList().add(cancion);
                 tagsListTags = em.merge(tagsListTags);
             }
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : cancion.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferencia.getCancionList().add(cancion);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
-            }
             for (Enriq enriqListEnriq : cancion.getEnriqList()) {
                 Cancion oldCancionNombreOfEnriqListEnriq = enriqListEnriq.getCancionNombre();
                 enriqListEnriq.setCancionNombre(cancion);
@@ -95,6 +91,15 @@ public class CancionJpaController implements Serializable {
                 if (oldCancionNombreOfEnriqListEnriq != null) {
                     oldCancionNombreOfEnriqListEnriq.getEnriqList().remove(enriqListEnriq);
                     oldCancionNombreOfEnriqListEnriq = em.merge(oldCancionNombreOfEnriqListEnriq);
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListPreferenciaxcancion : cancion.getPreferenciaxcancionList()) {
+                Cancion oldCancionOfPreferenciaxcancionListPreferenciaxcancion = preferenciaxcancionListPreferenciaxcancion.getCancion();
+                preferenciaxcancionListPreferenciaxcancion.setCancion(cancion);
+                preferenciaxcancionListPreferenciaxcancion = em.merge(preferenciaxcancionListPreferenciaxcancion);
+                if (oldCancionOfPreferenciaxcancionListPreferenciaxcancion != null) {
+                    oldCancionOfPreferenciaxcancionListPreferenciaxcancion.getPreferenciaxcancionList().remove(preferenciaxcancionListPreferenciaxcancion);
+                    oldCancionOfPreferenciaxcancionListPreferenciaxcancion = em.merge(oldCancionOfPreferenciaxcancionListPreferenciaxcancion);
                 }
             }
             em.getTransaction().commit();
@@ -120,10 +125,10 @@ public class CancionJpaController implements Serializable {
             Genero generoGeneroNew = cancion.getGeneroGenero();
             List<Tags> tagsListOld = persistentCancion.getTagsList();
             List<Tags> tagsListNew = cancion.getTagsList();
-            List<PerfilPreferencia> perfilPreferenciaListOld = persistentCancion.getPerfilPreferenciaList();
-            List<PerfilPreferencia> perfilPreferenciaListNew = cancion.getPerfilPreferenciaList();
             List<Enriq> enriqListOld = persistentCancion.getEnriqList();
             List<Enriq> enriqListNew = cancion.getEnriqList();
+            List<Preferenciaxcancion> preferenciaxcancionListOld = persistentCancion.getPreferenciaxcancionList();
+            List<Preferenciaxcancion> preferenciaxcancionListNew = cancion.getPreferenciaxcancionList();
             List<String> illegalOrphanMessages = null;
             for (Enriq enriqListOldEnriq : enriqListOld) {
                 if (!enriqListNew.contains(enriqListOldEnriq)) {
@@ -131,6 +136,14 @@ public class CancionJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Enriq " + enriqListOldEnriq + " since its cancionNombre field is not nullable.");
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListOldPreferenciaxcancion : preferenciaxcancionListOld) {
+                if (!preferenciaxcancionListNew.contains(preferenciaxcancionListOldPreferenciaxcancion)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxcancion " + preferenciaxcancionListOldPreferenciaxcancion + " since its cancion field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -147,13 +160,6 @@ public class CancionJpaController implements Serializable {
             }
             tagsListNew = attachedTagsListNew;
             cancion.setTagsList(tagsListNew);
-            List<PerfilPreferencia> attachedPerfilPreferenciaListNew = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferenciaToAttach : perfilPreferenciaListNew) {
-                perfilPreferenciaListNewPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListNewPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListNewPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaListNew.add(perfilPreferenciaListNewPerfilPreferenciaToAttach);
-            }
-            perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
-            cancion.setPerfilPreferenciaList(perfilPreferenciaListNew);
             List<Enriq> attachedEnriqListNew = new ArrayList<Enriq>();
             for (Enriq enriqListNewEnriqToAttach : enriqListNew) {
                 enriqListNewEnriqToAttach = em.getReference(enriqListNewEnriqToAttach.getClass(), enriqListNewEnriqToAttach.getParams());
@@ -161,6 +167,13 @@ public class CancionJpaController implements Serializable {
             }
             enriqListNew = attachedEnriqListNew;
             cancion.setEnriqList(enriqListNew);
+            List<Preferenciaxcancion> attachedPreferenciaxcancionListNew = new ArrayList<Preferenciaxcancion>();
+            for (Preferenciaxcancion preferenciaxcancionListNewPreferenciaxcancionToAttach : preferenciaxcancionListNew) {
+                preferenciaxcancionListNewPreferenciaxcancionToAttach = em.getReference(preferenciaxcancionListNewPreferenciaxcancionToAttach.getClass(), preferenciaxcancionListNewPreferenciaxcancionToAttach.getPreferenciaxcancionPK());
+                attachedPreferenciaxcancionListNew.add(preferenciaxcancionListNewPreferenciaxcancionToAttach);
+            }
+            preferenciaxcancionListNew = attachedPreferenciaxcancionListNew;
+            cancion.setPreferenciaxcancionList(preferenciaxcancionListNew);
             cancion = em.merge(cancion);
             if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
                 generoGeneroOld.getCancionList().remove(cancion);
@@ -182,18 +195,6 @@ public class CancionJpaController implements Serializable {
                     tagsListNewTags = em.merge(tagsListNewTags);
                 }
             }
-            for (PerfilPreferencia perfilPreferenciaListOldPerfilPreferencia : perfilPreferenciaListOld) {
-                if (!perfilPreferenciaListNew.contains(perfilPreferenciaListOldPerfilPreferencia)) {
-                    perfilPreferenciaListOldPerfilPreferencia.getCancionList().remove(cancion);
-                    perfilPreferenciaListOldPerfilPreferencia = em.merge(perfilPreferenciaListOldPerfilPreferencia);
-                }
-            }
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferencia : perfilPreferenciaListNew) {
-                if (!perfilPreferenciaListOld.contains(perfilPreferenciaListNewPerfilPreferencia)) {
-                    perfilPreferenciaListNewPerfilPreferencia.getCancionList().add(cancion);
-                    perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
-                }
-            }
             for (Enriq enriqListNewEnriq : enriqListNew) {
                 if (!enriqListOld.contains(enriqListNewEnriq)) {
                     Cancion oldCancionNombreOfEnriqListNewEnriq = enriqListNewEnriq.getCancionNombre();
@@ -202,6 +203,17 @@ public class CancionJpaController implements Serializable {
                     if (oldCancionNombreOfEnriqListNewEnriq != null && !oldCancionNombreOfEnriqListNewEnriq.equals(cancion)) {
                         oldCancionNombreOfEnriqListNewEnriq.getEnriqList().remove(enriqListNewEnriq);
                         oldCancionNombreOfEnriqListNewEnriq = em.merge(oldCancionNombreOfEnriqListNewEnriq);
+                    }
+                }
+            }
+            for (Preferenciaxcancion preferenciaxcancionListNewPreferenciaxcancion : preferenciaxcancionListNew) {
+                if (!preferenciaxcancionListOld.contains(preferenciaxcancionListNewPreferenciaxcancion)) {
+                    Cancion oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion = preferenciaxcancionListNewPreferenciaxcancion.getCancion();
+                    preferenciaxcancionListNewPreferenciaxcancion.setCancion(cancion);
+                    preferenciaxcancionListNewPreferenciaxcancion = em.merge(preferenciaxcancionListNewPreferenciaxcancion);
+                    if (oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion != null && !oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion.equals(cancion)) {
+                        oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion.getPreferenciaxcancionList().remove(preferenciaxcancionListNewPreferenciaxcancion);
+                        oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion = em.merge(oldCancionOfPreferenciaxcancionListNewPreferenciaxcancion);
                     }
                 }
             }
@@ -242,6 +254,13 @@ public class CancionJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("This Cancion (" + cancion + ") cannot be destroyed since the Enriq " + enriqListOrphanCheckEnriq + " in its enriqList field has a non-nullable cancionNombre field.");
             }
+            List<Preferenciaxcancion> preferenciaxcancionListOrphanCheck = cancion.getPreferenciaxcancionList();
+            for (Preferenciaxcancion preferenciaxcancionListOrphanCheckPreferenciaxcancion : preferenciaxcancionListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Cancion (" + cancion + ") cannot be destroyed since the Preferenciaxcancion " + preferenciaxcancionListOrphanCheckPreferenciaxcancion + " in its preferenciaxcancionList field has a non-nullable cancion field.");
+            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
@@ -254,11 +273,6 @@ public class CancionJpaController implements Serializable {
             for (Tags tagsListTags : tagsList) {
                 tagsListTags.getCancionList().remove(cancion);
                 tagsListTags = em.merge(tagsListTags);
-            }
-            List<PerfilPreferencia> perfilPreferenciaList = cancion.getPerfilPreferenciaList();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : perfilPreferenciaList) {
-                perfilPreferenciaListPerfilPreferencia.getCancionList().remove(cancion);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
             }
             em.remove(cancion);
             em.getTransaction().commit();

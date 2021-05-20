@@ -9,16 +9,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Baile.findAll", query = "SELECT b FROM Baile b"),
     @NamedQuery(name = "Baile.findById", query = "SELECT b FROM Baile b WHERE b.id = :id"),
-    @NamedQuery(name = "Baile.findByNombre", query = "SELECT b FROM Baile b WHERE b.nombre = :nombre"),
-    @NamedQuery(name = "Baile.findByGusto", query = "SELECT b FROM Baile b WHERE b.gusto = :gusto")})
+    @NamedQuery(name = "Baile.findByNombre", query = "SELECT b FROM Baile b WHERE b.nombre = :nombre")})
 public class Baile implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,14 +45,8 @@ public class Baile implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @Basic(optional = false)
-    @Column(name = "GUSTO")
-    private double gusto;
-    @JoinTable(name = "PREFERENCIAXBAILE", joinColumns = {
-        @JoinColumn(name = "BAILE_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<PerfilPreferencia> perfilPreferenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "baile", fetch = FetchType.EAGER)
+    private List<Preferenciaxbaile> preferenciaxbaileList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero generoGenero;
@@ -65,10 +58,9 @@ public class Baile implements Serializable {
         this.id = id;
     }
 
-    public Baile(BigDecimal id, String nombre, double gusto) {
+    public Baile(BigDecimal id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.gusto = gusto;
     }
 
     public BigDecimal getId() {
@@ -87,21 +79,13 @@ public class Baile implements Serializable {
         this.nombre = nombre;
     }
 
-    public double getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(double gusto) {
-        this.gusto = gusto;
-    }
-
     @XmlTransient
-    public List<PerfilPreferencia> getPerfilPreferenciaList() {
-        return perfilPreferenciaList;
+    public List<Preferenciaxbaile> getPreferenciaxbaileList() {
+        return preferenciaxbaileList;
     }
 
-    public void setPerfilPreferenciaList(List<PerfilPreferencia> perfilPreferenciaList) {
-        this.perfilPreferenciaList = perfilPreferenciaList;
+    public void setPreferenciaxbaileList(List<Preferenciaxbaile> preferenciaxbaileList) {
+        this.preferenciaxbaileList = preferenciaxbaileList;
     }
 
     public Genero getGeneroGenero() {

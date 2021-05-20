@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D58AF455-ED3C-AB45-970D-26E35FDF2C34" containerWithKeyObject="97BDA688-276A-5921-EC3D-9A7049C3F616" localFKIndex="35D4440A-C723-384C-902E-24046E4BCE45" name="Emocion_Robot_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:23:33 UTC</createdTime>
+<generatorID>3E177806-F6A2-AFB6-AE19-FBF1251AC15E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Robot</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>D8871096-0802-DD10-3BA3-FE05EA44E702</referredTableID>
+<keyObject>B24C7007-4315-0300-FBA6-BA3EF2AF0B2E</keyObject>
+<referredKeyID>B24C7007-4315-0300-FBA6-BA3EF2AF0B2E</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

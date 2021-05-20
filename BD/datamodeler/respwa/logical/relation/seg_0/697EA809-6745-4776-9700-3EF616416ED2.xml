@@ -4,8 +4,7 @@
 <createdTime>2020-10-27 20:40:10 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <sourcePk>745C5862-9CD3-9CCD-7CAB-997A41EA13AC</sourcePk>
 <identifying>false</identifying>
@@ -17,4 +16,19 @@
 <targetEntity>B4276BE5-B342-B9A2-0CD9-485F537F71CB</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<attribute name="gusto" id="DED0B69C-51D9-57D4-ACFF-B17282D82903">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:02:21 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</attribute>
+</attributes>
 </Relation>
