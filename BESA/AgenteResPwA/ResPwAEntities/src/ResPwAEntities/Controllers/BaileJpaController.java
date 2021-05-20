@@ -6,6 +6,7 @@
 package ResPwAEntities.Controllers;
 
 import ResPwAEntities.Baile;
+import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Genero;
-import ResPwAEntities.PerfilPreferencia;
+import ResPwAEntities.Preferenciaxbaile;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,8 @@ public class BaileJpaController implements Serializable {
     }
 
     public void create(Baile baile) throws PreexistingEntityException, Exception {
-        if (baile.getPerfilPreferenciaList() == null) {
-            baile.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
+        if (baile.getPreferenciaxbaileList() == null) {
+            baile.setPreferenciaxbaileList(new ArrayList<Preferenciaxbaile>());
         }
         EntityManager em = null;
         try {
@@ -49,20 +50,25 @@ public class BaileJpaController implements Serializable {
                 generoGenero = em.getReference(generoGenero.getClass(), generoGenero.getGenero());
                 baile.setGeneroGenero(generoGenero);
             }
-            List<PerfilPreferencia> attachedPerfilPreferenciaList = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferenciaToAttach : baile.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
+            List<Preferenciaxbaile> attachedPreferenciaxbaileList = new ArrayList<Preferenciaxbaile>();
+            for (Preferenciaxbaile preferenciaxbaileListPreferenciaxbaileToAttach : baile.getPreferenciaxbaileList()) {
+                preferenciaxbaileListPreferenciaxbaileToAttach = em.getReference(preferenciaxbaileListPreferenciaxbaileToAttach.getClass(), preferenciaxbaileListPreferenciaxbaileToAttach.getPreferenciaxbailePK());
+                attachedPreferenciaxbaileList.add(preferenciaxbaileListPreferenciaxbaileToAttach);
             }
-            baile.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
+            baile.setPreferenciaxbaileList(attachedPreferenciaxbaileList);
             em.persist(baile);
             if (generoGenero != null) {
                 generoGenero.getBaileList().add(baile);
                 generoGenero = em.merge(generoGenero);
             }
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : baile.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferencia.getBaileList().add(baile);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
+            for (Preferenciaxbaile preferenciaxbaileListPreferenciaxbaile : baile.getPreferenciaxbaileList()) {
+                Baile oldBaileOfPreferenciaxbaileListPreferenciaxbaile = preferenciaxbaileListPreferenciaxbaile.getBaile();
+                preferenciaxbaileListPreferenciaxbaile.setBaile(baile);
+                preferenciaxbaileListPreferenciaxbaile = em.merge(preferenciaxbaileListPreferenciaxbaile);
+                if (oldBaileOfPreferenciaxbaileListPreferenciaxbaile != null) {
+                    oldBaileOfPreferenciaxbaileListPreferenciaxbaile.getPreferenciaxbaileList().remove(preferenciaxbaileListPreferenciaxbaile);
+                    oldBaileOfPreferenciaxbaileListPreferenciaxbaile = em.merge(oldBaileOfPreferenciaxbaileListPreferenciaxbaile);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -77,7 +83,7 @@ public class BaileJpaController implements Serializable {
         }
     }
 
-    public void edit(Baile baile) throws NonexistentEntityException, Exception {
+    public void edit(Baile baile) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,19 +91,31 @@ public class BaileJpaController implements Serializable {
             Baile persistentBaile = em.find(Baile.class, baile.getId());
             Genero generoGeneroOld = persistentBaile.getGeneroGenero();
             Genero generoGeneroNew = baile.getGeneroGenero();
-            List<PerfilPreferencia> perfilPreferenciaListOld = persistentBaile.getPerfilPreferenciaList();
-            List<PerfilPreferencia> perfilPreferenciaListNew = baile.getPerfilPreferenciaList();
+            List<Preferenciaxbaile> preferenciaxbaileListOld = persistentBaile.getPreferenciaxbaileList();
+            List<Preferenciaxbaile> preferenciaxbaileListNew = baile.getPreferenciaxbaileList();
+            List<String> illegalOrphanMessages = null;
+            for (Preferenciaxbaile preferenciaxbaileListOldPreferenciaxbaile : preferenciaxbaileListOld) {
+                if (!preferenciaxbaileListNew.contains(preferenciaxbaileListOldPreferenciaxbaile)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxbaile " + preferenciaxbaileListOldPreferenciaxbaile + " since its baile field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (generoGeneroNew != null) {
                 generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
                 baile.setGeneroGenero(generoGeneroNew);
             }
-            List<PerfilPreferencia> attachedPerfilPreferenciaListNew = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferenciaToAttach : perfilPreferenciaListNew) {
-                perfilPreferenciaListNewPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListNewPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListNewPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaListNew.add(perfilPreferenciaListNewPerfilPreferenciaToAttach);
+            List<Preferenciaxbaile> attachedPreferenciaxbaileListNew = new ArrayList<Preferenciaxbaile>();
+            for (Preferenciaxbaile preferenciaxbaileListNewPreferenciaxbaileToAttach : preferenciaxbaileListNew) {
+                preferenciaxbaileListNewPreferenciaxbaileToAttach = em.getReference(preferenciaxbaileListNewPreferenciaxbaileToAttach.getClass(), preferenciaxbaileListNewPreferenciaxbaileToAttach.getPreferenciaxbailePK());
+                attachedPreferenciaxbaileListNew.add(preferenciaxbaileListNewPreferenciaxbaileToAttach);
             }
-            perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
-            baile.setPerfilPreferenciaList(perfilPreferenciaListNew);
+            preferenciaxbaileListNew = attachedPreferenciaxbaileListNew;
+            baile.setPreferenciaxbaileList(preferenciaxbaileListNew);
             baile = em.merge(baile);
             if (generoGeneroOld != null && !generoGeneroOld.equals(generoGeneroNew)) {
                 generoGeneroOld.getBaileList().remove(baile);
@@ -107,16 +125,15 @@ public class BaileJpaController implements Serializable {
                 generoGeneroNew.getBaileList().add(baile);
                 generoGeneroNew = em.merge(generoGeneroNew);
             }
-            for (PerfilPreferencia perfilPreferenciaListOldPerfilPreferencia : perfilPreferenciaListOld) {
-                if (!perfilPreferenciaListNew.contains(perfilPreferenciaListOldPerfilPreferencia)) {
-                    perfilPreferenciaListOldPerfilPreferencia.getBaileList().remove(baile);
-                    perfilPreferenciaListOldPerfilPreferencia = em.merge(perfilPreferenciaListOldPerfilPreferencia);
-                }
-            }
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferencia : perfilPreferenciaListNew) {
-                if (!perfilPreferenciaListOld.contains(perfilPreferenciaListNewPerfilPreferencia)) {
-                    perfilPreferenciaListNewPerfilPreferencia.getBaileList().add(baile);
-                    perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
+            for (Preferenciaxbaile preferenciaxbaileListNewPreferenciaxbaile : preferenciaxbaileListNew) {
+                if (!preferenciaxbaileListOld.contains(preferenciaxbaileListNewPreferenciaxbaile)) {
+                    Baile oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile = preferenciaxbaileListNewPreferenciaxbaile.getBaile();
+                    preferenciaxbaileListNewPreferenciaxbaile.setBaile(baile);
+                    preferenciaxbaileListNewPreferenciaxbaile = em.merge(preferenciaxbaileListNewPreferenciaxbaile);
+                    if (oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile != null && !oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile.equals(baile)) {
+                        oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile.getPreferenciaxbaileList().remove(preferenciaxbaileListNewPreferenciaxbaile);
+                        oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile = em.merge(oldBaileOfPreferenciaxbaileListNewPreferenciaxbaile);
+                    }
                 }
             }
             em.getTransaction().commit();
@@ -136,7 +153,7 @@ public class BaileJpaController implements Serializable {
         }
     }
 
-    public void destroy(BigDecimal id) throws NonexistentEntityException {
+    public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -148,15 +165,21 @@ public class BaileJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The baile with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            List<Preferenciaxbaile> preferenciaxbaileListOrphanCheck = baile.getPreferenciaxbaileList();
+            for (Preferenciaxbaile preferenciaxbaileListOrphanCheckPreferenciaxbaile : preferenciaxbaileListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Baile (" + baile + ") cannot be destroyed since the Preferenciaxbaile " + preferenciaxbaileListOrphanCheckPreferenciaxbaile + " in its preferenciaxbaileList field has a non-nullable baile field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Genero generoGenero = baile.getGeneroGenero();
             if (generoGenero != null) {
                 generoGenero.getBaileList().remove(baile);
                 generoGenero = em.merge(generoGenero);
-            }
-            List<PerfilPreferencia> perfilPreferenciaList = baile.getPerfilPreferenciaList();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : perfilPreferenciaList) {
-                perfilPreferenciaListPerfilPreferencia.getBaileList().remove(baile);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
             }
             em.remove(baile);
             em.getTransaction().commit();

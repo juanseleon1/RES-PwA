@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -20,7 +20,7 @@ public class ActxpreferenciaPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "ACTIVIDADPWA_ID")
-    private BigInteger actividadpwaId;
+    private BigDecimal actividadpwaId;
     @Basic(optional = false)
     @Column(name = "PERFIL_PREFERENCIA_CEDULA")
     private String perfilPreferenciaCedula;
@@ -28,16 +28,16 @@ public class ActxpreferenciaPK implements Serializable {
     public ActxpreferenciaPK() {
     }
 
-    public ActxpreferenciaPK(BigInteger actividadpwaId, String perfilPreferenciaCedula) {
+    public ActxpreferenciaPK(BigDecimal actividadpwaId, String perfilPreferenciaCedula) {
         this.actividadpwaId = actividadpwaId;
         this.perfilPreferenciaCedula = perfilPreferenciaCedula;
     }
 
-    public BigInteger getActividadpwaId() {
+    public BigDecimal getActividadpwaId() {
         return actividadpwaId;
     }
 
-    public void setActividadpwaId(BigInteger actividadpwaId) {
+    public void setActividadpwaId(BigDecimal actividadpwaId) {
         this.actividadpwaId = actividadpwaId;
     }
 

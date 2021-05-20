@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -40,13 +40,13 @@ public class Actxpreferencia implements Serializable {
     protected ActxpreferenciaPK actxpreferenciaPK;
     @Basic(optional = false)
     @Column(name = "ACTIVA")
-    private BigInteger activa;
+    private BigDecimal activa;
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
     @Basic(optional = false)
     @Column(name = "ENRIQ")
-    private BigInteger enriq;
+    private BigDecimal enriq;
     @JoinColumn(name = "ACTIVIDADPWA_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Actividadpwa actividadpwa;
@@ -61,14 +61,14 @@ public class Actxpreferencia implements Serializable {
         this.actxpreferenciaPK = actxpreferenciaPK;
     }
 
-    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigInteger activa, double gusto, BigInteger enriq) {
+    public Actxpreferencia(ActxpreferenciaPK actxpreferenciaPK, BigDecimal activa, double gusto, BigDecimal enriq) {
         this.actxpreferenciaPK = actxpreferenciaPK;
         this.activa = activa;
         this.gusto = gusto;
         this.enriq = enriq;
     }
 
-    public Actxpreferencia(BigInteger actividadpwaId, String perfilPreferenciaCedula) {
+    public Actxpreferencia(BigDecimal actividadpwaId, String perfilPreferenciaCedula) {
         this.actxpreferenciaPK = new ActxpreferenciaPK(actividadpwaId, perfilPreferenciaCedula);
     }
 
@@ -80,11 +80,11 @@ public class Actxpreferencia implements Serializable {
         this.actxpreferenciaPK = actxpreferenciaPK;
     }
 
-    public BigInteger getActiva() {
+    public BigDecimal getActiva() {
         return activa;
     }
 
-    public void setActiva(BigInteger activa) {
+    public void setActiva(BigDecimal activa) {
         this.activa = activa;
     }
 
@@ -96,11 +96,11 @@ public class Actxpreferencia implements Serializable {
         this.gusto = gusto;
     }
 
-    public BigInteger getEnriq() {
+    public BigDecimal getEnriq() {
         return enriq;
     }
 
-    public void setEnriq(BigInteger enriq) {
+    public void setEnriq(BigDecimal enriq) {
         this.enriq = enriq;
     }
 

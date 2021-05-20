@@ -6,6 +6,7 @@
 package Tareas.Cuenteria;
 
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -40,10 +41,10 @@ public class RecomendarCuento extends Task{
         
         float gusto = -1;
         Cuento cuentoEleg = null;
-        List<Cuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCuentoList();
-        for(Cuento c: cuentos) {
+        List<Preferenciaxcuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcuentoList();
+        for(Preferenciaxcuento c: cuentos) {
             if( c.getGusto()*0.7 >= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
-                cuentoEleg = c;
+                cuentoEleg = c.getCuento();
                 gusto = (float) (c.getGusto()*0.7);
             }
         }

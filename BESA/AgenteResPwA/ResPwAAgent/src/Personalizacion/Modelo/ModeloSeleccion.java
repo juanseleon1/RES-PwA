@@ -8,6 +8,9 @@ package Personalizacion.Modelo;
 import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,20 +120,20 @@ public class ModeloSeleccion<T> {
         
     }
 
-    public void calculateSelectionProbability(float totalObjectiveValue, Cromosoma crom) {
-        float selectionProbability = crom.getObjectiveValue() / totalObjectiveValue;
+    public void calculateSelectionProbability(double totalObjectiveValue, Cromosoma crom) {
+        double selectionProbability = crom.getObjectiveValue() / totalObjectiveValue;
         crom.setSelectionProbability(selectionProbability);
     }
 
     void initialize() {
 
         for (T t : elementosASeleccionar) {
-            if (t instanceof Cancion) {
-                cromosomas.add(new CromosomaCancion((Cancion) t));
-            } else if (t instanceof Cuento) {
-                cromosomas.add(new CromosomaCuento((Cuento) t));
-            } else if (t instanceof Baile) {
-                cromosomas.add(new CromosomaBaile((Baile) t));
+            if (t instanceof Preferenciaxcancion) {
+                cromosomas.add(new CromosomaCancion((Preferenciaxcancion) t));
+            } else if (t instanceof Preferenciaxcuento) {
+                cromosomas.add(new CromosomaCuento((Preferenciaxcuento) t));
+            } else if (t instanceof Preferenciaxbaile) {
+                cromosomas.add(new CromosomaBaile((Preferenciaxbaile) t));
             }
             
 

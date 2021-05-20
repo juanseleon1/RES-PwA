@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,7 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cuento.findAll", query = "SELECT c FROM Cuento c"),
     @NamedQuery(name = "Cuento.findByAutor", query = "SELECT c FROM Cuento c WHERE c.autor = :autor"),
-    @NamedQuery(name = "Cuento.findByGusto", query = "SELECT c FROM Cuento c WHERE c.gusto = :gusto"),
     @NamedQuery(name = "Cuento.findByNombre", query = "SELECT c FROM Cuento c WHERE c.nombre = :nombre")})
 public class Cuento implements Serializable {
 
@@ -42,18 +39,12 @@ public class Cuento implements Serializable {
     @Basic(optional = false)
     @Column(name = "AUTOR")
     private String autor;
-    @Basic(optional = false)
-    @Column(name = "GUSTO")
-    private double gusto;
     @Id
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @JoinTable(name = "PREFERENCIAXCUENTO", joinColumns = {
-        @JoinColumn(name = "CUENTO_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<PerfilPreferencia> perfilPreferenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuento", fetch = FetchType.EAGER)
+    private List<Preferenciaxcuento> preferenciaxcuentoList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero generoGenero;
@@ -67,10 +58,9 @@ public class Cuento implements Serializable {
         this.nombre = nombre;
     }
 
-    public Cuento(String nombre, String autor, double gusto) {
+    public Cuento(String nombre, String autor) {
         this.nombre = nombre;
         this.autor = autor;
-        this.gusto = gusto;
     }
 
     public String getAutor() {
@@ -79,14 +69,6 @@ public class Cuento implements Serializable {
 
     public void setAutor(String autor) {
         this.autor = autor;
-    }
-
-    public double getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(double gusto) {
-        this.gusto = gusto;
     }
 
     public String getNombre() {
@@ -98,12 +80,12 @@ public class Cuento implements Serializable {
     }
 
     @XmlTransient
-    public List<PerfilPreferencia> getPerfilPreferenciaList() {
-        return perfilPreferenciaList;
+    public List<Preferenciaxcuento> getPreferenciaxcuentoList() {
+        return preferenciaxcuentoList;
     }
 
-    public void setPerfilPreferenciaList(List<PerfilPreferencia> perfilPreferenciaList) {
-        this.perfilPreferenciaList = perfilPreferenciaList;
+    public void setPreferenciaxcuentoList(List<Preferenciaxcuento> preferenciaxcuentoList) {
+        this.preferenciaxcuentoList = preferenciaxcuentoList;
     }
 
     public Genero getGeneroGenero() {

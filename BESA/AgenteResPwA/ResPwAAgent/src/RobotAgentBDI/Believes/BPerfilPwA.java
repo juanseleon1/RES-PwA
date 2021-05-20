@@ -8,6 +8,7 @@ import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
+import ResPwAEntities.Preferenciaxcancion;
 import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;
 import Tareas.AnimarElogiarPwA.OpcionesAnimar;
@@ -89,11 +90,11 @@ public class BPerfilPwA implements Believes {
         
 //        si la emocion es placentera, la cancion se escoge por un factor
         
-        List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
+        List<Preferenciaxcancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcancionList();
         ModeloSeleccion modeloSeleccionCancion = new ModeloSeleccion(canciones);
         
         CromosomaCancion cromCancion = (CromosomaCancion) modeloSeleccionCancion.selectCromosoma();
-        Cancion songSelected = cromCancion.getCancion();
+        Cancion songSelected = cromCancion.getCancion().getCancion();
           
         return songSelected;
     }

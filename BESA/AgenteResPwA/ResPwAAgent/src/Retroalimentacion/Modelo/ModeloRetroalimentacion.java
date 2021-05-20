@@ -8,9 +8,12 @@ package Retroalimentacion.Modelo;
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Antecedente;
 import ResPwAEntities.Baile;
-import ResPwAEntities.Cancion;
+import ResPwAEntities.Preferenciaxcancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcuento;
 import ResPwAEntities.Regla;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,8 +33,9 @@ public class ModeloRetroalimentacion<T> {
 
     public void activityFeedback(List<Antecedente> antecedentes) {
         Regla reglaAplicada = findRule(antecedentes);
-        if (activity instanceof Cancion) {
-            Cancion c = (Cancion) activity;
+        if (activity instanceof Preferenciaxcancion) {
+            Preferenciaxcancion c = (Preferenciaxcancion) activity;
+            
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 c.setGusto(1.0f);
             } else {
@@ -42,25 +46,25 @@ public class ModeloRetroalimentacion<T> {
                 }
             }
 
-        } else if (activity instanceof Cuento) {
-            Cuento c = (Cuento) activity;
+        } else if (activity instanceof Preferenciaxcuento) {
+            Preferenciaxcuento c = (Preferenciaxcuento) activity;
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
-                c.setGusto(1.0f);
+                c.setGusto(1.0);
             } else {
                 if (c.getGusto() + reglaAplicada.getFeedback() < 0.0f) {
-                    c.setGusto(0.0f);
+                    c.setGusto(0.0);
                 } else {
                     c.setGusto(c.getGusto() + reglaAplicada.getFeedback());
                 }
 
             }
-        } else if (activity instanceof Baile) {
-            Baile b = (Baile) activity;
+        } else if (activity instanceof Preferenciaxbaile) {
+            Preferenciaxbaile b = (Preferenciaxbaile) activity;
             if (b.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
-                b.setGusto(1.0f);
+                b.setGusto(1.0);
             } else {
                 if (b.getGusto() + reglaAplicada.getFeedback() < 0.0f) {
-                    b.setGusto(0.0f);
+                    b.setGusto(0.0);
                 } else {
                     b.setGusto(b.getGusto() + reglaAplicada.getFeedback());
                 }
