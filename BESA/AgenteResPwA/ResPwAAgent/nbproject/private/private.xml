@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/ReproduccionCancion.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/InicializarBaile.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/RecibirRetroalimentacion.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/SeleccionarCancion.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/IniciarServicios.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ReportarEmergencia.java</file>
         </group>
     </open-files>
 </project-private>
