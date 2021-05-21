@@ -2,59 +2,8 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
-        <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/DemostrarSenialesVida.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/AnimarElogiarPwA/EvaluarEstrategiaAnimar.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/AsegurarConexionInternet.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/AnimarElogiarPwA/OpcionesAnimar.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/MantenerAtencionPwA.java</file>
-=======
-
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Retroalimentacion/Modelo/ModeloRetroalimentacion.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/LogIn.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/MusicoTerapia.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/AnimarElogiarPwA/EvaluarEstrategiaAnimar.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/LogIn/ConversacionInicial.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/ReproduccionCancion.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/InicializarBaile.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/RecibirRetroalimentacion.java</file>
->>>>>>> eaba4de3c17bf08d88b9849af7fe152fda556862
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/AnimarElogiarPwA.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/AnimarElogiarPwA/AnimarStrategy.java</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/ResPwaUtils.java</file>
-=======
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ReportarEmergencia.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/LogIn.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ReportarEmergencia/LlamarCuidador.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/RobotAgentBelieves.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEmotionalModel.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoActividad.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/DemostrarSenialesVida.java</file>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/RobotAgentBDI/Believes/BEstadoRobot.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>358</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
->>>>>>> eaba4de3c17bf08d88b9849af7fe152fda556862
         </group>
->>>>>>> 095006bffd42ec6446bab41c9bfa2e74b1b1516d
     </open-files>
 </project-private>

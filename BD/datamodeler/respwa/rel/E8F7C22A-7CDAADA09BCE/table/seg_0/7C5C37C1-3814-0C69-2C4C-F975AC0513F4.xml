@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7C5C37C1-3814-0C69-2C4C-F975AC0513F4" name="listaTags">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Cancion_nombre" id="61DC14C8-FE5F-2DC6-CF84-1FC47CA0D86A">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6D3C0842-E929-E49C-3AD2-83C721E76606" referredColumn="52AEDEF6-3B6C-02FB-8AF3-EB1F4C2FB8CB"/>
+</associations>
+</Column>
+<Column name="Tags_id" id="2DE2D501-D851-AAF9-A7BC-31AB552C23F6">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0EC7FE89-E9BE-B44E-46E0-766E83801744" referredColumn="3E51A65F-591A-E8DA-B44F-3E8203905F20"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C9C4D523-D43B-3857-6C03-4621820DED6F" name="listaTags_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="61DC14C8-FE5F-2DC6-CF84-1FC47CA0D86A"/>
+<colUsage columnID="2DE2D501-D851-AAF9-A7BC-31AB552C23F6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CA3CF561-480D-FAB9-42F0-7983EB982D73" name="listaTags_Cancion_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="61DC14C8-FE5F-2DC6-CF84-1FC47CA0D86A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="35B22F2E-BCA5-77E6-ACE6-CC22C1DD1826" name="listaTags_Tags_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2DE2D501-D851-AAF9-A7BC-31AB552C23F6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

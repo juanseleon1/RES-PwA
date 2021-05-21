@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="1B32F72F-5D9D-C908-290C-0BB064E9C220" containerWithKeyObject="D5DE48D8-54B4-19DF-F899-CB01108C9FB7" localFKIndex="40D2AAD9-B5D4-0ADB-0C3B-A2F561CCBC21" name="PreferenciaXBaile_Baile_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Baile</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>220695B9-A9EB-9921-C7D3-BB0B62E0AB0B</referredTableID>
+<keyObject>6DF03C7B-828B-2124-021E-22440F5542EA</keyObject>
+<referredKeyID>6DF03C7B-828B-2124-021E-22440F5542EA</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
