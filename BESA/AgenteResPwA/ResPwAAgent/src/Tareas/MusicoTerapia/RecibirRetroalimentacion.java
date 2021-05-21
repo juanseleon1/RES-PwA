@@ -13,7 +13,9 @@ import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import rational.mapping.Task;
 
 /**
@@ -31,15 +33,27 @@ public class RecibirRetroalimentacion extends Task{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
-        /* 
-         *   ACA DEBE ACTIVAR EL TOPICO DE RETROALIMENTACION
-        *
-        *
-        */
-        //buscar texto
-        infoServicio.put("SAY", "AskRetroCancion");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        String retroalimentacion = blvs.getbEstadoInteraccion().getRetroalimentacionValue();
+        List<String> resulset = Arrays.asList(retroalimentacion.split(" "));
+        ServiceDataRequest srb = null;
+        Double respuestaRetroalimentacion = -1.0;
+        if (resulset != null){
+            HashMap <String, Long> resultados = new HashMap<String, Long>();
+            resultados.put("Bien", resulset.stream().filter(retroa -> retroa.equals("Bien")).count()*3);
+            resultados.put("Regular", resulset.stream().filter(retroa -> retroa.equals("Regular")).count()*2);
+            resultados.put("Mal", resulset.stream().filter(retroa -> retroa.equals("Mal")).count());
+            Double resulRetroAlimentacion = Double.valueOf(resultados.get("bien") + resultados.get("Regular") + resultados.get("Mal") / resulset.size());
+            if (resulRetroAlimentacion > 2.5)
+                respuestaRetroalimentacion = 1.0;
+            if (resulRetroAlimentacion <= 2.5 && resulRetroAlimentacion >= 1.5)
+                respuestaRetroalimentacion = 0.5;
+            if (resulRetroAlimentacion < 1.5)
+                respuestaRetroalimentacion = 0.0;
+            
+            blvs.feedbackActivity(respuestaRetroalimentacion);
+            
+        }
         
     }
 
@@ -66,7 +80,6 @@ public class RecibirRetroalimentacion extends Task{
     @Override
     public boolean checkFinish(Believes believes) {
                 
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;

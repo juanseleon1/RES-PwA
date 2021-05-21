@@ -5,6 +5,10 @@
  */
 package Tareas.MusicoTerapia;
 
+import Personalizacion.Modelo.CromosomaBaile;
+import Personalizacion.Modelo.ModeloSeleccion;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
@@ -36,6 +40,20 @@ public class InicializarBaile extends Task {
         System.out.println("--- Execute Task Cambiar Baile ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         //buscar baile
+        List<Preferenciaxbaile> bailes = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxbaileList();
+        ModeloSeleccion<Preferenciaxbaile> modeloBaile = new ModeloSeleccion<Preferenciaxbaile>(bailes);
+
+        Preferenciaxbaile baileSelected = null;
+        CromosomaBaile cromosoma = null;
+        cromosoma = (CromosomaBaile) modeloBaile.selectCromosoma();
+        if (cromosoma != null) {
+            baileSelected = cromosoma.getBaile();
+            blvs.getbEstadoActividad().setBaileActual(baileSelected.getBaile());
+            infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getBaileActual().getNombre());
+            infoServicio.put("FACTOR", null);
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
+        }
     }
 
     @Override
@@ -46,22 +64,14 @@ public class InicializarBaile extends Task {
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Cambiar Baile---");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isDesplazandose()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.STOPMOVEMENT, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoRobot().isLibreEntorno() && !blvs.getbEstadoInteraccion().isDesplazandose()) {
-            return true;
-        }
-        return false;
+        return blvs.getbEstadoActividad().getBaileActual() != null;
+        
     }
 
 }

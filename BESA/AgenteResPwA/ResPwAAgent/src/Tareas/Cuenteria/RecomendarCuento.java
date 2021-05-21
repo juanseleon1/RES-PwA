@@ -5,6 +5,8 @@
  */
 package Tareas.Cuenteria;
 
+import Personalizacion.Modelo.CromosomaCuento;
+import Personalizacion.Modelo.ModeloSeleccion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
@@ -39,20 +41,19 @@ public class RecomendarCuento extends Task{
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now()); 
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         
-        float gusto = -1;
-        Cuento cuentoEleg = null;
         List<Preferenciaxcuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcuentoList();
-        for(Preferenciaxcuento c: cuentos) {
-            if( c.getGusto()*0.7 >= gusto && !c.equals(blvs.getbEstadoActividad().getCuentoActual())){
-                cuentoEleg = c.getCuento();
-                gusto = (float) (c.getGusto()*0.7);
-            }
-        }
-        blvs.getbEstadoActividad().setCuentoActual(cuentoEleg);
+        ModeloSeleccion<Preferenciaxcuento> modeloCuento = new ModeloSeleccion<Preferenciaxcuento>(cuentos);
+        Preferenciaxcuento cuentoSelected = null;
+        CromosomaCuento cromosoma = null;
+        cromosoma = (CromosomaCuento) modeloCuento.selectCromosoma();
         
-        infoServicio.put("SAY", "Voy a contarte el cuento de " + cuentoEleg.getNombre());
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        ResPwaUtils.requestService(srb,blvs);
+        if (cromosoma != null) {
+            cuentoSelected = cromosoma.getCuento();
+            blvs.getbEstadoActividad().setCuentoActual(cuentoSelected.getCuento());
+            infoServicio.put("SAY", "Voy a contarte el cuento de " + cuentoSelected.getCuento().getNombre());
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb,blvs);
+        }
     }
 
     @Override
@@ -77,10 +78,8 @@ public class RecomendarCuento extends Task{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() && blvs.getbEstadoActividad().getCuentoActual() != null) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual() != null) {
             return true;
         }
         return false;

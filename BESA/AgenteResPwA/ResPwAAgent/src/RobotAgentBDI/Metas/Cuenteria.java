@@ -14,8 +14,6 @@ import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
-import Tareas.Cuenteria.MoverseFrentePwA;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
 import Tareas.Cuenteria.RecomendarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
@@ -35,30 +33,23 @@ public class Cuenteria extends GoalBDI {
     private static String descrip = "Cuenteria";
 
     public static Cuenteria buildGoal() {
-        MoverseFrentePwA moversePwA = new MoverseFrentePwA();
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         RecomendarCuento recomCuento = new RecomendarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
 
         List<String> resources = new ArrayList<>();
-        List<Task> tarea = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         Plan rolePlan = new Plan();
 
         rolePlan.addTask(recomCuento);
-        rolePlan.addTask(moversePwA);
+        
+        taskList = new ArrayList<>();
+        taskList.add(recomCuento);
+        rolePlan.addTask(rCuento, taskList);
 
-        tarea = new ArrayList<>();
-        tarea.add(moversePwA);
-        tarea.add(recomCuento);
-
-        tarea = new ArrayList<>();
-        tarea.add(recomCuento);
-        tarea.add(moversePwA);
-        rolePlan.addTask(rCuento, tarea);
-
-        tarea = new ArrayList<>();
-        tarea.add(rCuento);
-        rolePlan.addTask(retro, tarea);
+        taskList = new ArrayList<>();
+        taskList.add(rCuento);
+        rolePlan.addTask(retro, taskList);
 
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.OPORTUNITY);
