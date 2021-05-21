@@ -37,6 +37,7 @@ public class BEstadoActividad implements Believes {
     private ResPwAStrategy estrategia;
     private Cancion cancionActual;
     private Cuento cuentoActual;
+    private Baile baileActual;
     private List<Baile> bailes;
     private Integer boostActivarKaraoke = 0;
     private Integer boostAnimarElogiarPwA = 0;
@@ -318,6 +319,16 @@ public class BEstadoActividad implements Believes {
     public void setIndexCuento(Integer indexCuento) {
         this.indexCuento = indexCuento;
     }
+
+    public Baile getBaileActual() {
+        return baileActual;
+    }
+
+    public void setBaileActual(Baile baileActual) {
+        this.baileActual = baileActual;
+    }
+    
+    
     
 
     @Override

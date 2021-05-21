@@ -55,6 +55,7 @@ public class ReproducirCuento extends Task{
         if(!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getAccion().equals(" ")){
             infoServicio.put("TAGSDANCE", cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getAccion());
             infoServicio.put("FACTOR", null);
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
         
