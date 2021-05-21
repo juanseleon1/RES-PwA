@@ -104,7 +104,7 @@ INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImage
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Cuando el animal  llegó a casa de la abuela, llamó a la puerta',32, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¿Quién es?, gritó la mujer',33, 'Caperucita roja', ' ', 'QUESTION', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Soy yo, abuelita, tu querida nieta Caperucita',34, 'Caperucita roja', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Ábreme la puerta, dijo el lobo imitando la voz de la niña',35, 'Caperucita roja', ' ', 'FRAGCONVRIGHTOUTFOCUS', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Ábreme la puerta, dijo el lobo imitando la voz de la niña',35, 'Caperucita roja', ' ', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Pasa, querida mía. La puerta está abierta, contestó la abuela',36, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El malvado lobo entró en la casa y sin pensárselo dos veces',37, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'saltó sobre la cama y se comió a la anciana',38, 'Caperucita roja', ' ', ' ', ' ');
@@ -194,7 +194,6 @@ INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (0, 'POSTURA',4, 'postura'
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (1, 'POSTURA',0, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (4, 'POSTURA',3, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (5, 'POSTURA',1, 'postura'); 
-
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (6, 'POSTURA',2, 'postura'); 
 
 

@@ -80,14 +80,15 @@ public class ConversacionInicial extends Task {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: " + blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
+        System.out.println("TOPICO "+blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC));
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
             System.out.println("--- Check Finish Conversacion Inicial ---");
-            blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC)){
                 System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             }
+            blvs.getbEstadoInteraccion().setLogged(true);
             return true;
         }
         return false;

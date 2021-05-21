@@ -23,7 +23,7 @@ def json_creator(id_response, responseType, params):
     return json.loads(json.dumps(json_string))
 
 
-def send(id_response, responseType, params):
+def send(id_response, responseType, params, block=True):
     HOST_LOCAL = '127.0.0.1'
     PORT = 7897
     FORMAT = 'utf-8'
@@ -35,7 +35,7 @@ def send(id_response, responseType, params):
     else:
         responsesXTime[key] = datetime.now()
 
-    if should_send_message:
+    if should_send_message or (block is False):
         ADDR = (HOST_LOCAL, PORT)
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)

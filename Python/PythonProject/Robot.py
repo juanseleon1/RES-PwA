@@ -81,7 +81,7 @@ class Robot:
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
 
-       # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
@@ -556,7 +556,8 @@ class Robot:
 
     # Say the annotated text given in parameter and animate it with animations inserted in the text.
     def say_with_movement(self, text):
-        self.alAnimatedSpeech.say(text)
+        configuration = {"bodyLanguageMode": "contextual"}
+        self.alAnimatedSpeech.say(str(text), configuration)
 
     # Sets the overall output volume of the system.
     def set_system_volume(self, volume):

@@ -70,8 +70,11 @@ public class Cuenteria extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("Logged: " + blvs.getbEstadoInteraccion().isLogged());
         System.out.println("Atencion: " + blvs.getbEstadoEmocionalPwA().getAtencion());
         System.out.println("Relajacion: " + blvs.getbEstadoEmocionalPwA().getRelajacion());
+        System.out.println("susp: " + blvs.getbEstadoInteraccion().isSistemaSuspendido());
+
 
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {

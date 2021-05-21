@@ -173,17 +173,17 @@ class pepperModuleV2(object):
         json_params = {}
         json_params["ActivateTopic"] = event_name
         print "activateTopic", json_params
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def deactivateTopic(self, event_name):
         json_params = {}
         json_params["DeactivateTopic"] = event_name
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def activateTopic(self, value):
         json_params = {}
         json_params["ActivateTopic"] = True
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
     # def
 
     # Raised when an animated speech is done.
@@ -193,80 +193,80 @@ class pepperModuleV2(object):
 
         json_params = {}
         json_params["endOfAnimatedSpeech"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # Raised when the person tracked can no longer be found for some time.
     def humanLost(self, value):
         json_params = {}
         json_params["humanLost"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is
     def humanTracked(self, value):
         json_params = {}
         # The value is The ID of the currently tracked person. If no person is tracked, the value is -1.
         json_params["humanTracked"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def stimulusDetected(self, value):
         json_params = {}
         #  The value is the name of the stimulus detected.
         json_params["stimulusDetected"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def batteryLow(self, value):
         json_params = {}
         # Supposedly the value always is True
         json_params["batteryLow"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def goToFailed(self, value):
         json_params = {}
         # The value should be True
         json_params["goToFailed"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def goToSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["goToSuccess"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def goToLost(self, value):
         json_params = {}
         # The value should be True
         json_params["goToLost"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def localizeSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeSuccess"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def localizeLost(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeLost"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def localizeDirectionLost(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeDirectionLost"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def localizeDirectionSuccess(self, value):
         json_params = {}
         # The value should be True
         json_params["localizeDirectionSuccess"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def chainVelocityClipped(self, value):
         json_params = {}
         # The value should be True
         json_params["chainVelocityClipped"] = value
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def moveFailed(self, value):
         json_params = {}
@@ -275,101 +275,101 @@ class pepperModuleV2(object):
             activities_running.pop("MOVE")
 
         json_params["moveFailed"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def robotIsWakeUp(self, value):
         json_params = {}
         # The value should be True
         json_params["robotIsWakeUp"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def wakeUpFinished(self, value):
         json_params = {}
         # The value should be True
         json_params["wakeUpFinished"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def restFinished(self, value):
         json_params = {}
         # The value should be True
         json_params["restFinished"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def disabledDevicesChanged(self, value):
         json_params = {}
         # The value is a map with the devices of the robot whose are able/disabled
         json_params["disabledDevicesChanged"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # def disabledFeaturesChanged(self, value):
     #     json_params = {}
     #     # The value is a map with the features of the robot whose are able/disabled
     #     json_params["disabledFeaturesChanged"] = value
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     def connectedToChargingStation(self, key, message):
         json_params = {}
         json_params["connectedToChargingStation"] = True
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def moveFailedRecharging(self, key, message):
         json_params = {}
         if activities_running.has_key("MOVE"):
             activities_running.pop("MOVE")
         json_params["moveFailedRecharging"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def leaveFailed(self, key, message):
         json_params = {}
         json_params["leaveFailed"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def wordRecognized(self, value):
         json_params = {}
         # The value is a map with the word recognized
         json_params["wordRecognized"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def speechDetected(self, value):
         json_params = {}
         # The value should be True
         json_params["speechDetected"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # def tabletMessage(self, key, message):
     #     json_params = {}
     #     json_params["tabletMessage"] = True
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
     def tabletVideoFinished(self):
         json_params = {}
         # The value should be True
         json_params["endVideo"] = True
         print "EntraTabletVideoFinished"
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def onWifiStatusChange(self, wifi_status):
         json_params = {}
         # WiFi status among IDLE, SCANNING, DISCONNECTED, CONNECTED
         json_params["wifi_status"] = wifi_status
         print "EntraWifiChangeFinished"
-        send(-1, "rob", json_params)
+        send(-1, "rob", json_params, False)
 
     def tabletError(self, key, message):
         json_params = {}
         json_params["tabletError"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # def onInputText(self, key, message):
     #     json_params = {}
     #     # The value should be True
     #     json_params["onInputText"] = True
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     # def gesture(self, value):
     #     json_params = {}
     #     # The value is the name of the gesture
     #     json_params["gesture"] = value
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     def speechTextDone(self, value):
         json_params = {}
@@ -377,7 +377,7 @@ class pepperModuleV2(object):
         if activities_running.has_key("SAY"):
             activities_running.pop("SAY")
         json_params["speechTextDone"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def speechTextInterrupted(self, value):
         json_params = {}
@@ -385,92 +385,93 @@ class pepperModuleV2(object):
             activities_running.pop("SAY")
         # The value should be True
         json_params["speechTextInterrupted"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def voiceEmotionRecognized(self, value):
         json_params = {}
         # The value is the emotion detected
         json_params["voiceEmotionRecognized"] = value
-        send(-1, "emo", json_params)
+        send(-1, "emo", json_params, False)
 
     # def autonomousCompletedActivity(self, value):
     #     json_params = {}
     #     # The value is the activity name
     #     json_params["autonomousCompletedActivity"] = value
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     def hotDeviceDetected(self, value):
         json_params = {}
         # The value is a list of the devices with high temperature
         json_params["hotDeviceDetected"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def dialogLastInput(self, value):
         json_params = {}
         # The value is the last human input
         json_params["dialogLastInput"] = value
-        send(-1, "int", json_params)
+        print "DIALOGINPUT", value
+        send(-1, "int", json_params, False)
 
     def dialogIsStarted(self, value):
         json_params = {}
         # The value is "1" for start, "0" for stop.
         json_params["dialogIsStarted"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def dialogCurrentString(self, value):
         json_params = {}
         # The value is currently processed human input.
         json_params["dialogCurrentString"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def personMovedAway(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personMovedAway"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def personApproached(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personApproached"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def personSmiling(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personSmiling"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def faceDetected(self, value):
         json_params = {}
         # The value is an ALvalue which contains the info of the face, but we aren't going to send that
         json_params["faceDetected"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def peopleLookingAtRobot(self, value):
         json_params = {}
         # The value is a list of IDs with people whose are looking the robot
         json_params["peopleLookingAtRobot"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def personStopsLookingAtRobot(self, value):
         json_params = {}
         # The value is the person ID
         json_params["personStopsLookingAtRobot"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
         if (value is not -1):
             json_params["distanceOfTrackedHuman"] = value
-            send(-1, "int", json_params)
+            send(-1, "int", json_params, False)
 
     def obstacleDetected(self, value):
         json_params = {}
         # The value is an array formatted as [x, y], representing the position of the detected obstacle
         json_params["position"] = value
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def peopleDetected(self, value):
         json_params = {}
@@ -483,7 +484,7 @@ class pepperModuleV2(object):
         # Camera_Id
         # ]
         json_params["peopleDetected"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     # def preferenceAdded(self, value):
     #     json_params = {}
@@ -491,7 +492,7 @@ class pepperModuleV2(object):
     #     # id[0] - The preference domain.
     #     # id[1] - The preference name.
     #     json_params["preferenceAdded"] = value
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     # def preferenceChanged(self, value):
     #     json_params = {}
@@ -499,25 +500,25 @@ class pepperModuleV2(object):
     #     # id[0] - The preference domain.
     #     # id[1] - The preference name.
     #     json_params["preferenceChanged"] = value
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     # def wavingDetection(self, value):
     #     json_params = {}
     #     # The value contains the info of the waving (pixels and some info more), we won't send that
     #     json_params["wavingDetection"] = True
-    #     send(-1, "int", json_params)
+    #     send(-1, "int", json_params, False)
 
     def personWaving(self, value):
         json_params = {}
         # The value is the person ID
         json_params["personWaving"] = True
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def sendValue(self, resultValue):
         print "enviar", resultValue
         json_params = {"DialogInput": resultValue}
         print "DialogInput", json_params
-        send(-1, "int", json_params)
+        send(-1, "int", json_params, False)
 
     def preferenceInput(self, completeSentence):
         resultValue = ""
