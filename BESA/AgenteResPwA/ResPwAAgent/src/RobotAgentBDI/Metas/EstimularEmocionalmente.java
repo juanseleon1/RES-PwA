@@ -25,6 +25,7 @@ import rational.mapping.Task;
 /**
  *
  * @author mafegarces
+ * No esta dentro del alcance del trabajo de grado RES-PWA, por lo tanto no esta probada
  */
 public class EstimularEmocionalmente extends GoalBDI{
 

@@ -90,13 +90,10 @@ public class RobotAgentBelieves implements Believes {
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
-        emotionFeedbackAux = bEstadoEmocionalPwA.getFeedbackEmotion();
-        emotionFeedback=0;
-        
+        emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
+        emotionFeedback = aproximateEmotionValue(emotionFeedback);
         List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
         
-
-
         switch (activity) {
             case CUENTERIA:
                 activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
@@ -127,6 +124,46 @@ public class RobotAgentBelieves implements Believes {
         }
         
         return antecedentsForFeedback;
+    }
+    
+    private double aproximateEmotionValue(double emotionFeedback){
+        double aproximation = 0.0;
+        final double VERY_PLEASANT = 1;
+        final double PLEASANT = 0.65;
+        final double LITTLE_PLEASANT = 0.35;
+        final double VERY_UNPLEASANT = -1;
+        final double UNPLEASANT = -0.65;
+        final double LITTLE_UNPLEASANT = -0.35;
+        final double ZERO = 0.0;
+        
+        if(emotionFeedback > PLEASANT){
+            aproximation = VERY_PLEASANT;
+        }
+        else{
+            if(emotionFeedback > LITTLE_PLEASANT){
+                aproximation = PLEASANT;
+            }
+            else{
+                if(emotionFeedback > ZERO){
+                    aproximation = LITTLE_PLEASANT;
+                }
+                else{
+                    if(emotionFeedback < UNPLEASANT){
+                        aproximation = VERY_UNPLEASANT;
+                    }
+                    else{
+                        if(emotionFeedback < LITTLE_PLEASANT){
+                            aproximation = UNPLEASANT;
+                        }
+                        else{
+                            aproximation = LITTLE_UNPLEASANT;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return aproximation;
     }
 
     public Object getActivityInCourse() {

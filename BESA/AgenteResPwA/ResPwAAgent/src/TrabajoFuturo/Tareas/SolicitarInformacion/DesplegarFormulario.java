@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.EnviarNotificacion;
+package TrabajoFuturo.Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
@@ -14,28 +14,28 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class SolicitarEstadoEmergencia extends Task{
+public class DesplegarFormulario extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public SolicitarEstadoEmergencia() {
-//        System.out.println("--- Task Solicitar Estado Emergencia Iniciada ---");
+    public DesplegarFormulario() {
+//        System.out.println("--- Task Desplegar Formulario Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Solicitar Estado Emergencia ---");
+        System.out.println("--- Execute Task Desplegar Formulario ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Solicitar Estado Emergencia ---");
+        System.out.println("--- Interrupt Task Desplegar Formulario ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Solicitar Estado Emergencia ---");
+        System.out.println("--- Cancel Task Desplegar Formulario ---");
     }
 
     @Override
