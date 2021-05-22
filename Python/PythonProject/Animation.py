@@ -15,7 +15,9 @@ class Animation:
             "FRAGCONVLEFTOUTFOCUS": self.frag_conv_left_without_focus,
             "QUESTION": self.question_animation,
             "MYSELF": self.myself_animation,
-            "EMOTIONRISEARMS": self.emotion_rise_arms
+            "EMOTIONRISEARMS": self.emotion_rise_arms,
+            "BLOW": self.blow_animation,
+            "HOWL": self.howl_animation
         }
 
     def getAnimation(self, animation):
@@ -24,6 +26,135 @@ class Animation:
     def dance_lambada(self, factor=1):
         pass
 
+    def blow_animation(self, factor = 1):
+        # Choregraphe simplified export in Python.
+        from naoqi import ALProxy
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([0, 0.404916, -0.450295])
+
+        names.append("HeadYaw")
+        times.append([0, 1.96])
+        keys.append([0, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.518363, -1.54985, -1.35961])
+
+        names.append("LElbowYaw")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.0314159, -1.04371, -1.05592])
+
+        names.append("LHand")
+        times.append([0, 3.96])
+        keys.append([0.59, 0.56])
+
+        names.append("LShoulderPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([1.58825, 0.504286, -0.226893])
+
+        names.append("LShoulderRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.113446, 0.00872665, 0.00872665])
+
+        names.append("LWristYaw")
+        times.append([0, 3.96])
+        keys.append([-0.0314159, -0.0279253])
+
+        names.append("RElbowRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.518363, 1.54985, 1.35961])
+
+        names.append("RElbowYaw")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.0314159, 1.04371, 1.05592])
+
+        names.append("RHand")
+        times.append([0, 3.96])
+        keys.append([0.59, 0.56])
+
+        names.append("RShoulderPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([1.58825, 0.504286, -0.226893])
+
+        names.append("RShoulderRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.113446, -0.00872665, -0.00872665])
+
+        names.append("RWristYaw")
+        times.append([0, 3.96])
+        keys.append([0.0314159, 0.0279253])
+
+        return names, times, keys
+
+    def howl_animation(self, factor = 1):
+        # Choregraphe simplified export in Python.
+        from naoqi import ALProxy
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([0, 0.404916, -0.450295])
+
+        names.append("HeadYaw")
+        times.append([0, 1.96])
+        keys.append([0, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.518363, -1.54985, -1.35961])
+
+        names.append("LElbowYaw")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.0314159, -1.04371, -1.05592])
+
+        names.append("LHand")
+        times.append([0, 3.96])
+        keys.append([0.59, 0.56])
+
+        names.append("LShoulderPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([1.58825, 0.504286, -0.226893])
+
+        names.append("LShoulderRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.113446, 0.00872665, 0.00872665])
+
+        names.append("LWristYaw")
+        times.append([0, 3.96])
+        keys.append([-0.0314159, -0.0279253])
+
+        names.append("RElbowRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.518363, 1.54985, 1.35961])
+
+        names.append("RElbowYaw")
+        times.append([0, 1.96, 3.96])
+        keys.append([0.0314159, 1.04371, 1.05592])
+
+        names.append("RHand")
+        times.append([0, 3.96])
+        keys.append([0.59, 0.56])
+
+        names.append("RShoulderPitch")
+        times.append([0, 1.96, 3.96])
+        keys.append([1.58825, 0.504286, -0.226893])
+
+        names.append("RShoulderRoll")
+        times.append([0, 1.96, 3.96])
+        keys.append([-0.113446, -0.00872665, -0.00872665])
+
+        names.append("RWristYaw")
+        times.append([0, 3.96])
+        keys.append([0.0314159, 0.0279253])
+
+        return names, times, keys
 
     def dance_macarena(self, factor=1):
         names = list()
