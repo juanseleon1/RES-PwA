@@ -130,4 +130,11 @@ public class BPerfilPwA implements Believes {
         OpcionesAtencion[]opcs = OpcionesAtencion.values();
         return opcs[rand.nextInt(opcs.length)];
     }
+
+    @Override
+    public String toString() {
+        return "BPerfilPwA{" + "perfil=" + perfil + ", blvs=" + blvs + '}';
+    }
+    
+    
 }

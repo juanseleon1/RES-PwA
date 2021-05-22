@@ -180,11 +180,6 @@ class pepperModuleV2(object):
         json_params["DeactivateTopic"] = event_name
         send(-1, "int", json_params, False)
 
-    def activateTopic(self, value):
-        json_params = {}
-        json_params["ActivateTopic"] = True
-        send(-1, "rob", json_params, False)
-    # def
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, value):
@@ -199,14 +194,14 @@ class pepperModuleV2(object):
     def humanLost(self, value):
         json_params = {}
         json_params["humanLost"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     # Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is
     def humanTracked(self, value):
         json_params = {}
         # The value is The ID of the currently tracked person. If no person is tracked, the value is -1.
         json_params["humanTracked"] = value
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     def stimulusDetected(self, value):
         json_params = {}
@@ -376,6 +371,7 @@ class pepperModuleV2(object):
         # The value should be True
         if activities_running.has_key("SAY"):
             activities_running.pop("SAY")
+        print "MAFE ES FEA", bool(value), value
         json_params["speechTextDone"] = value
         send(-1, "int", json_params, False)
 
@@ -428,19 +424,19 @@ class pepperModuleV2(object):
         json_params = {}
         # The value is the ID of the person
         json_params["personMovedAway"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     def personApproached(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personApproached"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     def personSmiling(self, value):
         json_params = {}
         # The value is the ID of the person
         json_params["personSmiling"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     def faceDetected(self, value):
         json_params = {}
@@ -458,14 +454,14 @@ class pepperModuleV2(object):
         json_params = {}
         # The value is the person ID
         json_params["personStopsLookingAtRobot"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
-        if (value is not -1):
+        if (value != -1):
             json_params["distanceOfTrackedHuman"] = value
-            send(-1, "int", json_params, False)
+            send(-1, "int", json_params)
 
     def obstacleDetected(self, value):
         json_params = {}
@@ -484,7 +480,7 @@ class pepperModuleV2(object):
         # Camera_Id
         # ]
         json_params["peopleDetected"] = True
-        send(-1, "int", json_params, False)
+        send(-1, "int", json_params)
 
     # def preferenceAdded(self, value):
     #     json_params = {}

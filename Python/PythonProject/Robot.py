@@ -46,9 +46,10 @@ class Robot:
         self.alSpeechRecognition = session.service("ALSpeechRecognition")
         self.specchRecog = session.service("ALSpeechRecognition")
         self.specchRecog.pause(True)
+        self.alTabletService.hideImage()
         self.alFaceDetection = session.service("ALFaceDetection")
-        #self.alFaceDetection.setRecognitionEnabled(False)
-        #self.alFaceDetection.setTrackingEnabled(False)
+        self.alFaceDetection.setTrackingEnabled(False)
+        self.alFaceDetection.setRecognitionEnabled(False)
         self.alBasicAwareness = session.service("ALBasicAwareness")
         self.emotionStateRobot = Emotion()
         self.alBasicAwareness.setEngagementMode("FullyEngaged")
@@ -83,7 +84,7 @@ class Robot:
 
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
-        self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        #self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
@@ -226,7 +227,6 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            #print "TIMES  -> ", animation_times
             self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
         except BaseException, err:
             print err
@@ -468,9 +468,11 @@ class Robot:
         self.emotionStateRobot.setLedIntensity(params.get("ledIntens"))
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
-        self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
-        emomapParams = { "ACTION": "POSTURA"}
-        self.request_posture_change(emomapParams)
+        if "EmotionalTag" in params:
+            print "TIENE EMOTAG", params
+            self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
+            emomapParams = { "ACTION": "POSTURA"}
+            self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
@@ -492,11 +494,9 @@ class Robot:
 
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
-        # print "CRACK", params.get("SHOWVIDEO")
-        #self.alTabletService.enableWifi()
-        # print "CRACK", self.alTabletService.getWifiStatus()
-        # if (self.alTabletService.getWifiStatus() is not "CONNECTED"):
-        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
+         print "CRACK", params.get("SHOWVIDEO")
+         value= params.get("SHOWVIDEO")
+         self.alTabletService.playVideo(value)
 
     # Close the video player.
     def quit_video(self):
@@ -518,7 +518,7 @@ class Robot:
 
     # Shows the image in the tablet for the user
     def show_image(self, params):
-        self.alTabletService.showImage(params.get(""))
+        self.alTabletService.showImage(params.get("SHOWIMG"))
 
     # Hide image currently displayed.
     def hide_image(self):
@@ -555,8 +555,9 @@ class Robot:
         self.alTexToSpeech.setVolume(volume)
 
     # Say the annotated text given in parameter and animate it with animations inserted in the text.
-    def say_with_movement(self, text):
-        configuration = {"bodyLanguageMode": "contextual"}
+    def say_with_movement(self, params):
+        text = params.get("SAY")
+        configuration = {"bodyLanguageMode": "random"}
         self.alAnimatedSpeech.say(str(text), configuration)
 
     # Sets the overall output volume of the system.
@@ -754,6 +755,7 @@ class Robot:
         json_params = {}
         # The value should be True
         json_params["PersonData"] = self.get_emotion_state()
+        print "PersonData", self.get_emotion_state()
         send(-1, "emo", json_params)
         threading.Timer(10.0, self.timer_currentState).start()
 

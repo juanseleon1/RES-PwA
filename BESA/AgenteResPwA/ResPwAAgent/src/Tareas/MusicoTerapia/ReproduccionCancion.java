@@ -40,34 +40,30 @@ public class ReproduccionCancion extends Task {
         System.out.println("--- Execute Task Busqueda Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
 
-        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
             String urlcancion = blvs.getbEstadoActividad().getCancionActual().getUrl();
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-            ResPwaUtils.requestService(srb,blvs);
-        }
+            ResPwaUtils.requestService(srb, blvs);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Busqueda Cancion ---");
-        
+
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
-        
+
     }
-    
+
     @Override
     public boolean checkFinish(Believes believes) {
-        
+
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && !blvs.getbEstadoInteraccion().isConfirmacionRepAud()) {
-            return true;
-        }
-        return false;
+        return blvs.getbEstadoInteraccion().isConfirmacionRepDisp();
+        
     }
 
 }

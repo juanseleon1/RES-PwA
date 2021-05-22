@@ -52,9 +52,11 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private double ledIntensity;
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
+    private boolean storyMode;
 
     public BEstadoRobot() {
         super();
+        storyMode = false;
     }
 
     public void setBrilloRobot(double brilloRobot) {
@@ -289,7 +291,12 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
             infoServicio.put("DURATION", normalizeValue(state, PepperConf.DURATION));
             infoServicio.put("COLOR", leds.getHexa());
-            infoServicio.put("EmotionalTag", leds.toString());
+            System.out.println("AfueraStoryMOde" + isStoryMode());
+
+            if (!storyMode) {
+                System.out.println("StoryMOde" + isStoryMode());
+                infoServicio.put("EmotionalTag", leds.toString());
+            }
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Valores Emocionales para: " + ea.getNegativeName());
             System.out.println("Valores Emocionales para: " + state);
@@ -320,4 +327,13 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         normalValue = (((val - oldMin) * newRange) / (oldRange)) + min;
         return normalValue;
     }
+
+    public boolean isStoryMode() {
+        return storyMode;
+    }
+
+    public void setStoryMode(boolean storyMode) {
+        this.storyMode = storyMode;
+    }
+
 }

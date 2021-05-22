@@ -41,6 +41,7 @@ public class InicializarBaile extends Task {
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         //buscar baile
         List<Preferenciaxbaile> bailes = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxbaileList();
+        System.out.println("BaileList");
         ModeloSeleccion<Preferenciaxbaile> modeloBaile = new ModeloSeleccion<Preferenciaxbaile>(bailes);
 
         Preferenciaxbaile baileSelected = null;

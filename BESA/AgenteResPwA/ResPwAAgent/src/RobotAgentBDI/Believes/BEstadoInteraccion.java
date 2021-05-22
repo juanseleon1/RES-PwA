@@ -237,7 +237,6 @@ public class BEstadoInteraccion implements Believes {
         if (infoRecibida.getDataP().containsKey("speechTextDone")) {
             Integer done = (Integer) infoRecibida.getDataP().get("speechTextDone");
             estaHablando = 0 == done;
-
         }
 
         return true;
@@ -428,7 +427,7 @@ public class BEstadoInteraccion implements Believes {
     }
 
     public boolean isLogged() {
-        return logged;
+        return true||logged;
     }
 
     public void setLogged(boolean logged) {

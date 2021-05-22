@@ -45,6 +45,8 @@ public class RobotAgentBelieves implements Believes {
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
         bPerfilPwA.setPerfil(getPerfilBD(cedula));
+        
+        System.out.println("VERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr: "+ bPerfilPwA.getPerfil().getPerfilPreferencia().getActxpreferenciaList().get(0).getGusto());
 //        FBaseUtils.initResPwa(this);
     }
 

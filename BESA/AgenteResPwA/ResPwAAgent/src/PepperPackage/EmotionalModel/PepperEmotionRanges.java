@@ -10,7 +10,7 @@ package PepperPackage.EmotionalModel;
  * @author mafegarces
  */
 public enum PepperEmotionRanges {
-    VSAD("0x8BCCEC", -1, -0.6), SAD("0xFA3421", -0.6, -0.2), NORMAL("0xFFFFFF", -0.2, 0.2), HAPPY("0x7FF764", 0.2, 0.6), VHAPPY("0xF8FE2E", 0.6, 1);
+    VSAD("0x00ebff", -1, -0.6), SAD("0xaff6ff", -0.6, -0.2), NORMAL("0xFFFFFF", -0.2, 0.2), HAPPY("0xffff7a", 0.2, 0.6), VHAPPY("0xffff00", 0.6, 1);
 
     private String hexa;
     private double min;
