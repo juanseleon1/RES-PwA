@@ -122,12 +122,12 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
-        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
         MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
-        LogIn logInGoal = LogIn.buildGoal();
+//        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
@@ -137,14 +137,14 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
-        RAGoals.add(cuenteriaGoal);
-//        RAGoals.add(tp);
-        RAGoals.add(musicoTGoal);
-        //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
-        RAGoals.add(logInGoal);
+        //Agregar a Lista
+//        RAGoals.add(cuenteriaGoal);
+//        RAGoals.add(tp);
+        RAGoals.add(musicoTGoal);
+//        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);

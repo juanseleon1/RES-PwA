@@ -83,7 +83,7 @@ public class MusicoTerapia extends GoalBDI{
                 return 1;
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override
@@ -104,11 +104,10 @@ public class MusicoTerapia extends GoalBDI{
                 valor = act.getGusto();
             }
         }
-        System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
         System.out.println("Gusto: "+valor);
 
 
-        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return valor;
     }
 
     @Override

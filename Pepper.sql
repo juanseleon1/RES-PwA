@@ -1,3 +1,4 @@
+
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Soltero');
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Casado');
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Divorciado');
@@ -23,25 +24,23 @@ INSERT INTO Perfil_Medico (PerfilPwa_cedula,tomaMedicamentos,discapAuditiva,disc
 
 INSERT INTO Perfil_Preferencia (PerfilPwa_cedula,nombrePreferido,gustoKaraoke,gustoMusica,gustoBaile,volPreferido) VALUES(123456789, 'Juanis',0.7,1,1,50);
 
-INSERT INTO Genero (genero,gusto) VALUES( 'Vallenato',0.9);
-INSERT INTO Genero (genero,gusto) VALUES( 'Carranga',0.6);
-INSERT INTO Genero (genero,gusto) VALUES( 'Pop',0.3);
-INSERT INTO Genero (genero,gusto) VALUES( 'Latin',0.8);
+INSERT INTO Genero (genero) VALUES( 'Vallenato');
+INSERT INTO Genero (genero) VALUES( 'Carranga');
+INSERT INTO Genero (genero) VALUES( 'Pop');
+INSERT INTO Genero (genero) VALUES( 'Latin');
 
-INSERT INTO Cancion (nombre,gusto,Genero_genero,reminiscencia,url) VALUES( 'Mi cacharrito',0.8, 'Latin',1, 'http://10.195.22.103:49152/content/media/object_id/22/res_id/0');
-INSERT INTO Cancion (nombre,gusto,Genero_genero,reminiscencia,url) VALUES( 'Mi querido viejo',0.5, 'Pop',1, 'http://10.195.22.103:49152/content/media/object_id/48/res_id/0');
+INSERT INTO Cancion (nombre,Genero_genero,reminiscencia,url) VALUES( 'Mi cacharrito', 'Latin',1, 'http://10.195.22.103:49152/content/media/object_id/22/res_id/0');
+INSERT INTO Cancion (nombre,Genero_genero,reminiscencia,url) VALUES( 'Mi querido viejo', 'Pop',1, 'http://10.195.22.103:49152/content/media/object_id/48/res_id/0');
 
-INSERT INTO PreferenciaCancion (Perfil_Preferencia_PerfilPwa_cedula,Cancion_nombre) VALUES(123456789, 'Mi cacharrito');
-INSERT INTO PreferenciaCancion (Perfil_Preferencia_PerfilPwa_cedula,Cancion_nombre) VALUES(123456789, 'Mi querido viejo');
+INSERT INTO PreferenciaXCancion (Perfil_Preferencia_PerfilPwa_cedula,Cancion_nombre,gusto) VALUES(123456789, 'Mi cacharrito',0.8);
+INSERT INTO PreferenciaXCancion (Perfil_Preferencia_PerfilPwa_cedula,Cancion_nombre,gusto) VALUES(123456789, 'Mi querido viejo',0.5);
 
-INSERT INTO Genero (genero,gusto) VALUES('Literatura Infantil',0.7);
-INSERT INTO Cuento (Genero_genero,Autor,gusto,nombre) VALUES( 'Literatura Infantil', 'Charles Perrault',1, 'Caperucita roja');
-INSERT INTO Cuento (Genero_genero,Autor,gusto,nombre) VALUES( 'Literatura Infantil', 'Jon Scieszka',0.7, 'Los 3 cerditos');
+INSERT INTO Genero (genero) VALUES('Literatura Infantil');
+INSERT INTO Cuento (Genero_genero,Autor,nombre) VALUES( 'Literatura Infantil', 'Charles Perrault', 'Caperucita roja');
+INSERT INTO Cuento (Genero_genero,Autor,nombre) VALUES( 'Literatura Infantil', 'Jon Scieszka', 'Los 3 cerditos');
 
-INSERT INTO PreferenciaXCuento (Perfil_Preferencia_PerfilPwa_cedula,Cuento_nombre) VALUES(123456789, 'Caperucita roja');
-INSERT INTO PreferenciaXCuento (Perfil_Preferencia_PerfilPwa_cedula,Cuento_nombre) VALUES(123456789, 'Los 3 cerditos');
-
-
+INSERT INTO PreferenciaXCuento (Perfil_Preferencia_PerfilPwa_cedula,Cuento_nombre,gusto) VALUES(123456789, 'Caperucita roja',0.3);
+INSERT INTO PreferenciaXCuento (Perfil_Preferencia_PerfilPwa_cedula,Cuento_nombre,gusto) VALUES(123456789, 'Los 3 cerditos',0.6);
 
 INSERT INTO Tags (id,tag) VALUES(0, 'Familia');
 INSERT INTO Tags (id,tag) VALUES(1, 'Matrimonio');
@@ -71,7 +70,6 @@ INSERT INTO familiares (PerfilPwa_cedula,Familiar_id) VALUES(123456789,0);
 INSERT INTO familiares (PerfilPwa_cedula,Familiar_id) VALUES(123456789,1);
 INSERT INTO familiares (PerfilPwa_cedula,Familiar_id) VALUES(123456789,2);
 INSERT INTO familiares (PerfilPwa_cedula,Familiar_id) VALUES(123456789,3);
-
 
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Érase una vez una preciosa niña',1, 'Caperucita roja', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/39/res_id/0');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'que siempre llevaba una capa roja con capucha para protegerse del frío',2, 'Caperucita roja', ' ', ' ', ' ');
@@ -107,7 +105,7 @@ INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImage
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Cuando el animal  llegó a casa de la abuela, llamó a la puerta',32, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¿Quién es?, gritó la mujer',33, 'Caperucita roja', ' ', 'QUESTION', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Soy yo, abuelita, tu querida nieta Caperucita',34, 'Caperucita roja', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Ábreme la puerta, dijo el lobo imitando la voz de la niña',35, 'Caperucita roja', ' ', 'FRAGCONVRIGHTOUTFOCUS', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Ábreme la puerta, dijo el lobo imitando la voz de la niña',35, 'Caperucita roja', ' ', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Pasa, querida mía. La puerta está abierta, contestó la abuela',36, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El malvado lobo entró en la casa y sin pensárselo dos veces',37, 'Caperucita roja', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'saltó sobre la cama y se comió a la anciana',38, 'Caperucita roja', ' ', ' ', ' ');
@@ -186,7 +184,6 @@ INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImage
 
 INSERT INTO Robot (id,nombre) VALUES (0, 'pepper');
 
-
 INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (0,'VHAPPY',0); 
 INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (1,'HAPPY',0); 
 INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (2,'NORMAL',0); 
@@ -195,19 +192,12 @@ INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (4,'VSAD',0);
 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (0, 'POSTURA',4, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (1, 'POSTURA',0, 'postura'); 
-INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (2, 'caminar',4, 'comando'); 
-INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (3, 'caminar',0, 'comando'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (4, 'POSTURA',3, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (5, 'POSTURA',1, 'postura'); 
-<<<<<<< HEAD
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (6, 'POSTURA',2, 'postura'); 
-=======
-INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (6, 'POSTURA ',2, 'postura'); 
->>>>>>> origin/master
 
 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (0, 'HeadPitch',0.333358,0.76); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (1, 'HeadYaw',0.0173742,0.76); 
+
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (2, 'HipPitch',-0.726057,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (3, 'HipRoll',-0.00359941,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (4, 'KneePitch',-0.00905603,0.76); 
@@ -223,8 +213,6 @@ INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (13, 'RHand',0.688049,0.76);
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (14, 'RShoulderPitch',1.20446,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (15, 'RShoulderRoll',-0.117913,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (16, 'RWristYaw',-0.0225847,0.76); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (17, 'HeadPitch',-0.22017,0.76); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (18, 'HeadYaw',0,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (19, 'HipPitch',0.0733038,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (20, 'HipRoll',0,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (21, 'KneePitch',0,0.76); 
@@ -252,15 +240,12 @@ INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (42, 'RShoulderPitch',2.74312
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (43, 'RShoulderPitch',1.02974,1.56); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (44, 'LElbowRoll',-0.698132,0.36); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (45, 'RElbowRoll',0.698132,0.36); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (46, 'HeadPitch',0.174533,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (47, 'HipPitch',-0.436332,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (48, 'LShoulderPitch',1.309,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (49, 'RShoulderPitch',1.309,0.76); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (50, 'HeadPitch',-0.122173,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (51, 'HipPitch',0.0349066,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (52, 'LElbowRoll',-0.959931,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (53, 'RElbowRoll',0.959931,0.76); 
-INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (54, 'HeadPitch',0,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (55, 'HipPitch',0,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (56, 'LElbowRoll',-0.349066,0.76); 
 INSERT INTO Joint (id,nombre,angulo,tiempo) VALUES (57, 'RElbowRoll',0.349066,0.76);
@@ -393,11 +378,12 @@ INSERT INTO eventinfluence (id,eventinfluence,eventname,EVTINF_ID) VALUES (14,0.
 INSERT INTO eventinfluence (id,eventinfluence,eventname,EVTINF_ID) VALUES (15,0.4,'SPEECHDETECTED',0);
 
 
-commit;
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (0, 'Macarena', 'Carranga');
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (1, 'Perrito', 'Vallenato' );
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (2, 'Lambada',  'Pop');
 
-<<<<<<< HEAD
-update emotionaxisconfig set basevalue=0.2;
-=======
-update emotionaxisconfig set basevalue=-8;
->>>>>>> 0e229c540249cf3a7d4bb0975d88108fd246098e
+insert into preferenciaxbaile (BAILE_ID,PERFIL_PREFERENCIA_PERFILPWA_CEDULA,GUSTO) values (0,123456789,0.7);
+insert into preferenciaxbaile (BAILE_ID,PERFIL_PREFERENCIA_PERFILPWA_CEDULA,GUSTO) values (1,123456789,1);
+insert into preferenciaxbaile (BAILE_ID,PERFIL_PREFERENCIA_PERFILPWA_CEDULA,GUSTO) values (2,123456789, 0.4);
+
 commit;

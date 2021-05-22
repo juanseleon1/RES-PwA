@@ -15,7 +15,7 @@ import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
 import Tareas.Cuenteria.RecibirRetroalimentacion;
-import Tareas.Cuenteria.RecomendarCuento;
+import Tareas.Cuenteria.SeleccionarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class Cuenteria extends GoalBDI {
 
     public static Cuenteria buildGoal() {
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
-        RecomendarCuento recomCuento = new RecomendarCuento();
+        SeleccionarCuento recomCuento = new SeleccionarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
 
         List<String> resources = new ArrayList<>();
@@ -70,8 +70,11 @@ public class Cuenteria extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("Logged: " + blvs.getbEstadoInteraccion().isLogged());
         System.out.println("Atencion: " + blvs.getbEstadoEmocionalPwA().getAtencion());
         System.out.println("Relajacion: " + blvs.getbEstadoEmocionalPwA().getRelajacion());
+        System.out.println("susp: " + blvs.getbEstadoInteraccion().isSistemaSuspendido());
+
 
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {
@@ -95,14 +98,17 @@ public class Cuenteria extends GoalBDI {
         double valor = 0;
 
         for (Actxpreferencia act : listaAct) {
-            if (act.getActividadpwa().getNombre().equals(ResPwAActivity.CUENTERIA)) {
+            if (act.getActividadpwa().getNombre().equalsIgnoreCase(ResPwAActivity.CUENTERIA.toString())) {
                 valor = act.getGusto();
+                System.out.println("Entra");
             }
         }
+
         //CORREGIIR TIEMPOOOOOOO
         System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
+
         System.out.println("Gusto: "+valor);
-        return valor + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return valor;
     }
 
     @Override

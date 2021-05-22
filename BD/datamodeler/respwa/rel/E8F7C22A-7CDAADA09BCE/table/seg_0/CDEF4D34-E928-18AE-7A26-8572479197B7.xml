@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CDEF4D34-E928-18AE-7A26-8572479197B7" name="PreferenciaXCuento">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Perfil_Preferencia_PerfilPwa_cedula" id="39DD26FD-E01C-A5DE-DF63-EBD76A8DEFB5">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="184070F7-E648-F8F6-9CEE-13FACCEE285E" referredColumn="E84977A3-7D81-4AAA-B045-54260F048DAB"/>
+</associations>
+</Column>
+<Column name="Cuento_nombre" id="4B7B52C9-E611-A91D-3ADC-0D4F6472C8A8">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A5AAB0D0-7BDF-ECD7-9289-79035FEE9FE4" referredColumn="3A6DF9B2-D604-E120-6532-0406CADF2948"/>
+</associations>
+</Column>
+<Column name="gusto" id="E9840336-E38B-6909-B00E-CC77E65ACC61">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>DED0B69C-51D9-57D4-ACFF-B17282D82903</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D277182C-E833-0551-9EAD-0753B5F564BC" name="PreferenciaXCuento_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="39DD26FD-E01C-A5DE-DF63-EBD76A8DEFB5"/>
+<colUsage columnID="4B7B52C9-E611-A91D-3ADC-0D4F6472C8A8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="40F0ACCC-42B4-3621-4712-16D947031E84" name="PreferenciaXCuento_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>697EA809-6745-4776-9700-3EF616416ED2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="39DD26FD-E01C-A5DE-DF63-EBD76A8DEFB5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0437A597-AB13-C9FD-AC55-2D283F7F598C" name="PreferenciaXCuento_Cuento_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>697EA809-6745-4776-9700-3EF616416ED2</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4B7B52C9-E611-A91D-3ADC-0D4F6472C8A8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

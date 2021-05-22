@@ -25,11 +25,19 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
+<<<<<<< HEAD:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java
 public class RecomendarCuento extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
     public RecomendarCuento() {
+=======
+public class SeleccionarCuento extends Task {
+
+    private HashMap<String, Object> infoServicio = new HashMap<>();
+
+    public SeleccionarCuento() {
+>>>>>>> c7fbc56ce2c806b0dc15ac369728bfc97a789f4b:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/SeleccionarCuento.java
 //        System.out.println("--- Task Recomendar Cuento Iniciada ---");
     }
 
@@ -40,7 +48,9 @@ public class RecomendarCuento extends Task {
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
-
+        if (!blvs.getbEstadoRobot().isStoryMode()) {
+            blvs.getbEstadoRobot().setStoryMode(true);
+        }
         List<Preferenciaxcuento> cuentos = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcuentoList();
         ModeloSeleccion<Preferenciaxcuento> modeloCuento = new ModeloSeleccion<Preferenciaxcuento>(cuentos);
         Preferenciaxcuento cuentoSelected = null;
@@ -54,6 +64,7 @@ public class RecomendarCuento extends Task {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
         }
+        blvs.getbEstadoActividad().setIndexCuento(0);
     }
 
     @Override
@@ -64,6 +75,7 @@ public class RecomendarCuento extends Task {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             ResPwaUtils.requestService(srb, blvs);
         }
+        blvs.getbEstadoRobot().setStoryMode(false);
     }
 
     @Override
@@ -74,12 +86,18 @@ public class RecomendarCuento extends Task {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             ResPwaUtils.requestService(srb, blvs);
         }
+        blvs.getbEstadoRobot().setStoryMode(false);
+
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+<<<<<<< HEAD:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual() != null) {
+=======
+        if (blvs.getbEstadoActividad().getCuentoActual() != null) {
+>>>>>>> c7fbc56ce2c806b0dc15ac369728bfc97a789f4b:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/SeleccionarCuento.java
             return true;
         }
         return false;
