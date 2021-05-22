@@ -181,7 +181,7 @@ class Robot:
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", False],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
-            "FORCEINPUT": [self.force_input, True, "int", False],
+            "FORCEOUT": [self.force_out, True, "int", False],
         }
 
         # Declare the modules --------------------------------------------------------------------------------
@@ -497,7 +497,7 @@ class Robot:
     def show_video(self, params):
          print "CRACK", params.get("SHOWVIDEO")
          value= params.get("SHOWVIDEO")
-         self.alTabletService.playVideo(value)
+         self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):
@@ -776,6 +776,5 @@ class Robot:
         send(-1, "act", json_params)
         threading.Timer(9.0, self.timer_request_finish_anim).start()
 
-    def force_input(self, params):
-        value= params.get("SAY")
-        self.alDialogProxy.forceInput(value)
+    def force_out(self, params):
+        self.alDialogProxy.forceOutput()

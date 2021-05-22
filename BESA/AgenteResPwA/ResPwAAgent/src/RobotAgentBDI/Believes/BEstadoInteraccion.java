@@ -113,7 +113,9 @@ public class BEstadoInteraccion implements Believes {
                 nivelEnriquecimiento--;
             }
         }
-        
+        if(infoRecibida.getDataP().containsKey("retroValue")){
+            retroalimentacionValue = (String)infoRecibida.getDataP().get("retroValue");
+        }
         if (infoRecibida.getDataP().containsKey("wakeUpFinished")) {
             sistemaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("wakeUpFinished"));
         }

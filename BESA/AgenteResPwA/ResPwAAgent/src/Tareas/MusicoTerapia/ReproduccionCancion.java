@@ -98,11 +98,9 @@ public class ReproduccionCancion extends Task {
         if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             envioVideo = false;
             blvs.getbEstadoRobot().setStoryMode(true);
-            ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
-            infoServicio = new HashMap<>();
-            infoServicio.put("SAY", "placeholder");
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.FORCEINPUT, infoServicio);
-            ResPwaUtils.requestService(srb, blvs);
+            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
+                ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, blvs);
+            }
             return true;
         } else {
             setTaskWaitingForExecution();
