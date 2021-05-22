@@ -17,7 +17,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -73,6 +73,17 @@
 <createdBy>juans</createdBy>
 <createdTime>2021-05-20 22:23:33 UTC</createdTime>
 <generatorID>6C154465-13A4-1A18-C2DF-C773F5A5090E</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="brilloPreferido" id="036FB40E-DEE1-51EE-BF51-8A08DB5929BF">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-22 15:47:07 UTC</createdTime>
+<generatorID>EC316B19-D907-7333-367F-8247C5AA1EF7</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>

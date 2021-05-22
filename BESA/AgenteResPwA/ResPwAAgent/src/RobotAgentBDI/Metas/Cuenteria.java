@@ -99,6 +99,7 @@ public class Cuenteria extends GoalBDI {
                 valor = act.getGusto();
             }
         }
+        //CORREGIIR TIEMPOOOOOOO
         System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
         System.out.println("Gusto: "+valor);
         return valor + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();

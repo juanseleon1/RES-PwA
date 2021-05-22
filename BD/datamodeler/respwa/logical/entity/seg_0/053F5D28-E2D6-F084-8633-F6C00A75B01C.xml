@@ -28,7 +28,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="nombrePreferido" id="48EA29D6-8070-967D-8357-F8DECB1F9F4D">
 <createdBy>juans</createdBy>
@@ -91,14 +91,27 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="brilloPreferido" id="EC316B19-D907-7333-367F-8247C5AA1EF7">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-22 15:45:24 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="745C5862-9CD3-9CCD-7CAB-997A41EA13AC" name="Perfil Preferencia PK">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 18:15:27 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
