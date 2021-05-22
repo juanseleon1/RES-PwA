@@ -20,7 +20,6 @@ import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.ReportarEmergencia;
 import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.RecargarBateria;
-import RobotAgentBDI.Metas.Saludar;
 import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;

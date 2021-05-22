@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.SolicitarInformacion;
+package TrabajoFuturo.Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
