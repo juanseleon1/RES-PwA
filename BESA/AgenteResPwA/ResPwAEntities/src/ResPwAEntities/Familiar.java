@@ -7,7 +7,7 @@ package ResPwAEntities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -60,7 +60,7 @@ public class Familiar implements Serializable {
     private double interes;
     @Basic(optional = false)
     @Column(name = "ESTAVIVO")
-    private BigInteger estavivo;
+    private BigDecimal estavivo;
     @Column(name = "NACIMIENTO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date nacimiento;
@@ -77,7 +77,7 @@ public class Familiar implements Serializable {
         this.id = id;
     }
 
-    public Familiar(BigDecimal id, String nombre, String parentesco, double interes, BigInteger estavivo) {
+    public Familiar(BigDecimal id, String nombre, String parentesco, double interes, BigDecimal estavivo) {
         this.id = id;
         this.nombre = nombre;
         this.parentesco = parentesco;
@@ -117,11 +117,11 @@ public class Familiar implements Serializable {
         this.interes = interes;
     }
 
-    public BigInteger getEstavivo() {
+    public BigDecimal getEstavivo() {
         return estavivo;
     }
 
-    public void setEstavivo(BigInteger estavivo) {
+    public void setEstavivo(BigDecimal estavivo) {
         this.estavivo = estavivo;
     }
 

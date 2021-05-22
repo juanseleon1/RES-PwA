@@ -22,7 +22,7 @@ INSERT INTO CausaDemencia (condicion) VALUES ( 'Alzheimer');
 
 INSERT INTO Perfil_Medico (PerfilPwa_cedula,tomaMedicamentos,discapAuditiva,discapVisual,discapMotora,estadioEnfermedad,periodoVigilia,causaDemencia_condicion) VALUES(123456789,1,0,1,0,5,60, 'Alzheimer');
 
-INSERT INTO Perfil_Preferencia (PerfilPwa_cedula,nombrePreferido,gustoKaraoke,gustoMusica,gustoBaile,volPreferido) VALUES(123456789, 'Juanis',0.7,1,1,50);
+INSERT INTO Perfil_Preferencia (PerfilPwa_cedula,nombrePreferido,gustoKaraoke,gustoMusica,gustoBaile,volPreferido,BRILLOPREFERIDO) VALUES(123456789, 'Juanis',0.7,1,1,50,40);
 
 INSERT INTO Genero (genero) VALUES( 'Vallenato');
 INSERT INTO Genero (genero) VALUES( 'Carranga');
@@ -378,9 +378,9 @@ INSERT INTO eventinfluence (id,eventinfluence,eventname,EVTINF_ID) VALUES (14,0.
 INSERT INTO eventinfluence (id,eventinfluence,eventname,EVTINF_ID) VALUES (15,0.4,'SPEECHDETECTED',0);
 
 
-INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (0, 'Macarena', 'Carranga');
-INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (1, 'Perrito', 'Vallenato' );
-INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (2, 'Lambada',  'Pop');
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (0, 'MACARENA', 'Carranga');
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (1, 'CELEBRATE', 'Vallenato' );
+INSERT INTO BAILE (ID, NOMBRE, GENERO_GENERO) VALUES (2, 'LAMBADA',  'Pop');
 
 insert into preferenciaxbaile (BAILE_ID,PERFIL_PREFERENCIA_PERFILPWA_CEDULA,GUSTO) values (0,123456789,0.7);
 insert into preferenciaxbaile (BAILE_ID,PERFIL_PREFERENCIA_PERFILPWA_CEDULA,GUSTO) values (1,123456789,1);

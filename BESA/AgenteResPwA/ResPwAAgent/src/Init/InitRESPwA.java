@@ -24,6 +24,7 @@ import RobotAgentBDI.Metas.Saludar;
 import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import SensorHandlerAgent.SensorHandlerAgent;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
 import ServiceAgentResPwA.RobotSPAgent;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -70,12 +71,11 @@ public class InitRESPwA {
             PepperAdapter p = new PepperAdapter();
             RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
-            HashMap<String, Object> hm1 = new HashMap<>();
-            hm1.put("MOVETOX", 5);
-            hm1.put("MOVETOY", 2);
-            //ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, hm1);
-            //p.sendRequest(data);
             startConfig(p);
+//            HashMap<String, Object> hm1 = new HashMap<>();
+//            hm1.put("TAGSDANCE", "MACARENA");
+//            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, hm1);
+//            p.sendRequest(data);
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -127,7 +127,7 @@ public class InitRESPwA {
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
-//        LogIn logInGoal = LogIn.buildGoal();
+//          LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
@@ -139,11 +139,11 @@ public class InitRESPwA {
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-//        RAGoals.add(musicoTGoal);
+        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-        RAGoals.add(musicoTGoal);
+//        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);

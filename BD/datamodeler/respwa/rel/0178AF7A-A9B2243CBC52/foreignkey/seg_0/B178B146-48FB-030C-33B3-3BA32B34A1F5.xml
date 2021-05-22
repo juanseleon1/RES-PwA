@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B178B146-48FB-030C-33B3-3BA32B34A1F5" containerWithKeyObject="B9524406-9F4D-DE56-F018-CC0FC0902DA8" localFKIndex="B4E8B743-136D-0D5D-8891-163F47DF1A4C" name="PerfilPwa_Cuidador_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>F750D6EC-A11C-203F-7F08-5CC0F55DD1E5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Cuidador</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A7514984-AE99-D6C7-1614-D3A406B8A7DB</referredTableID>
+<keyObject>3A28580C-C23F-398A-2409-465DD042A564</keyObject>
+<referredKeyID>3A28580C-C23F-398A-2409-465DD042A564</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>nombreUsuario</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

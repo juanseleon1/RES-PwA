@@ -25,19 +25,11 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-<<<<<<< HEAD:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java
-public class RecomendarCuento extends Task {
-
-    private HashMap<String, Object> infoServicio = new HashMap<>();
-
-    public RecomendarCuento() {
-=======
 public class SeleccionarCuento extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
     public SeleccionarCuento() {
->>>>>>> c7fbc56ce2c806b0dc15ac369728bfc97a789f4b:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/SeleccionarCuento.java
 //        System.out.println("--- Task Recomendar Cuento Iniciada ---");
     }
 
@@ -93,11 +85,7 @@ public class SeleccionarCuento extends Task {
     @Override
     public boolean checkFinish(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-<<<<<<< HEAD:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/RecomendarCuento.java
-        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual() != null) {
-=======
         if (blvs.getbEstadoActividad().getCuentoActual() != null) {
->>>>>>> c7fbc56ce2c806b0dc15ac369728bfc97a789f4b:BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/SeleccionarCuento.java
             return true;
         }
         return false;

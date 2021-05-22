@@ -30,7 +30,7 @@ import rational.mapping.Believes;
 public class BEstadoActividad implements Believes {
 
     private long tiempoInicioActividad = 0;
-    private ResPwAActivity actividadActual=ResPwAActivity.CUENTERIA;
+    private ResPwAActivity actividadActual = ResPwAActivity.CUENTERIA;
     private String estadoInit = null;
     private boolean actividadEnCurso = false;
     private boolean mejoraEmocional = false;
@@ -57,10 +57,12 @@ public class BEstadoActividad implements Believes {
     private String cedula;
     private Integer indexCuento = 0;
     private RobotAgentBelieves blvs = null;
+    private boolean estaBailando;
 
     public BEstadoActividad(String cedula, RobotAgentBelieves blvs) {
         this.cedula = cedula;
         this.blvs = blvs;
+        this.estaBailando = false;
     }
 
     @Override
@@ -77,6 +79,10 @@ public class BEstadoActividad implements Believes {
                 tiempoInicioActividad = 0;
                 createNewInteResgistry();
             }
+        }
+
+        if (infoRecibida.getDataP().containsKey("finishAnim")) {
+            estaBailando = (boolean) infoRecibida.getDataP().get("finishAnim");
         }
         return true;
     }
@@ -327,9 +333,14 @@ public class BEstadoActividad implements Believes {
     public void setBaileActual(Baile baileActual) {
         this.baileActual = baileActual;
     }
-    
-    
-    
+
+    public boolean isEstaBailando() {
+        return estaBailando;
+    }
+
+    public void setEstaBailando(boolean estaBailando) {
+        this.estaBailando = estaBailando;
+    }
 
     @Override
     public Believes clone() throws CloneNotSupportedException {

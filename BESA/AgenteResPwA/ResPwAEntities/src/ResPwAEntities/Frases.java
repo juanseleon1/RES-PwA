@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -69,7 +69,7 @@ public class Frases implements Serializable {
         this.contenido = contenido;
     }
 
-    public Frases(BigInteger orden, String cuentoNombre) {
+    public Frases(BigDecimal orden, String cuentoNombre) {
         this.frasesPK = new FrasesPK(orden, cuentoNombre);
     }
 

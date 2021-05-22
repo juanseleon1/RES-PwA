@@ -88,8 +88,8 @@ public class BEstadoInteraccion implements Believes {
         System.out.println("BEstadoInteraccion update Received: " + si);
         SensorData infoRecibida = (SensorData) si;
 
-        if (infoRecibida.getDataP().containsKey(keyNameConf + "Display")) {
-            confirmacionRepDisp = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Display"));
+        if (infoRecibida.getDataP().containsKey("endVideo")) {
+            confirmacionRepDisp = (boolean) infoRecibida.getDataP().get("endVideo");
         }
         if (infoRecibida.getDataP().containsKey(keyNameConf + "Audio")) {
             confirmacionRepAud = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Audio"));

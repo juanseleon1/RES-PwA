@@ -38,11 +38,6 @@ public class RegistroactividadPK implements Serializable {
     public RegistroactividadPK() {
     }
 
-    public RegistroactividadPK(Date fecha, String tipo) {
-        this.fecha = fecha;
-        this.tipo = tipo;
-    }
-
     public RegistroactividadPK(Date fecha, String perfilpwaCedula, String tipo, BigDecimal actividadpwaId) {
         this.fecha = fecha;
         this.perfilpwaCedula = perfilpwaCedula;
@@ -117,6 +112,11 @@ public class RegistroactividadPK implements Serializable {
     @Override
     public String toString() {
         return "ResPwAEntities.RegistroactividadPK[ fecha=" + fecha + ", perfilpwaCedula=" + perfilpwaCedula + ", tipo=" + tipo + ", actividadpwaId=" + actividadpwaId + " ]";
+    }
+
+    public RegistroactividadPK(Date fecha, String tipo) {
+        this.fecha = fecha;
+        this.tipo = tipo;
     }
     
 }

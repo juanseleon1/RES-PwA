@@ -55,23 +55,32 @@ public class SeleccionarCancion extends Task {
         Preferenciaxcancion cancionSelected = null;
         CromosomaCancion cromosoma = null;
         cromosoma = (CromosomaCancion) modeloCancion.selectCromosoma();
-        
+
         if (cromosoma != null) {
             cancionSelected = cromosoma.getCancion();
             blvs.getbEstadoActividad().setCancionActual(cancionSelected.getCancion());
+        }
+
+        if (!blvs.getbEstadoRobot().isStoryMode()) {
+            blvs.getbEstadoRobot().setStoryMode(true);
         }
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Cancion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
         blvs.getbEstadoActividad().setCancionActual(null);
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override

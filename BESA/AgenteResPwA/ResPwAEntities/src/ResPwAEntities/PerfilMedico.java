@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -49,22 +49,22 @@ public class PerfilMedico implements Serializable {
     private String perfilpwaCedula;
     @Basic(optional = false)
     @Column(name = "TOMAMEDICAMENTOS")
-    private BigInteger tomamedicamentos;
+    private BigDecimal tomamedicamentos;
     @Basic(optional = false)
     @Column(name = "DISCAPAUDITIVA")
-    private BigInteger discapauditiva;
+    private BigDecimal discapauditiva;
     @Basic(optional = false)
     @Column(name = "DISCAPVISUAL")
-    private BigInteger discapvisual;
+    private BigDecimal discapvisual;
     @Basic(optional = false)
     @Column(name = "DISCAPMOTORA")
-    private BigInteger discapmotora;
+    private BigDecimal discapmotora;
     @Basic(optional = false)
     @Column(name = "ESTADIOENFERMEDAD")
-    private BigInteger estadioenfermedad;
+    private BigDecimal estadioenfermedad;
     @Basic(optional = false)
     @Column(name = "PERIODOVIGILIA")
-    private BigInteger periodovigilia;
+    private BigDecimal periodovigilia;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilMedico", fetch = FetchType.EAGER)
     private Cdr cdr;
     @JoinColumn(name = "CAUSADEMENCIA_CONDICION", referencedColumnName = "CONDICION")
@@ -83,7 +83,7 @@ public class PerfilMedico implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilMedico(String perfilpwaCedula, BigInteger tomamedicamentos, BigInteger discapauditiva, BigInteger discapvisual, BigInteger discapmotora, BigInteger estadioenfermedad, BigInteger periodovigilia) {
+    public PerfilMedico(String perfilpwaCedula, BigDecimal tomamedicamentos, BigDecimal discapauditiva, BigDecimal discapvisual, BigDecimal discapmotora, BigDecimal estadioenfermedad, BigDecimal periodovigilia) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.tomamedicamentos = tomamedicamentos;
         this.discapauditiva = discapauditiva;
@@ -101,51 +101,51 @@ public class PerfilMedico implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public BigInteger getTomamedicamentos() {
+    public BigDecimal getTomamedicamentos() {
         return tomamedicamentos;
     }
 
-    public void setTomamedicamentos(BigInteger tomamedicamentos) {
+    public void setTomamedicamentos(BigDecimal tomamedicamentos) {
         this.tomamedicamentos = tomamedicamentos;
     }
 
-    public BigInteger getDiscapauditiva() {
+    public BigDecimal getDiscapauditiva() {
         return discapauditiva;
     }
 
-    public void setDiscapauditiva(BigInteger discapauditiva) {
+    public void setDiscapauditiva(BigDecimal discapauditiva) {
         this.discapauditiva = discapauditiva;
     }
 
-    public BigInteger getDiscapvisual() {
+    public BigDecimal getDiscapvisual() {
         return discapvisual;
     }
 
-    public void setDiscapvisual(BigInteger discapvisual) {
+    public void setDiscapvisual(BigDecimal discapvisual) {
         this.discapvisual = discapvisual;
     }
 
-    public BigInteger getDiscapmotora() {
+    public BigDecimal getDiscapmotora() {
         return discapmotora;
     }
 
-    public void setDiscapmotora(BigInteger discapmotora) {
+    public void setDiscapmotora(BigDecimal discapmotora) {
         this.discapmotora = discapmotora;
     }
 
-    public BigInteger getEstadioenfermedad() {
+    public BigDecimal getEstadioenfermedad() {
         return estadioenfermedad;
     }
 
-    public void setEstadioenfermedad(BigInteger estadioenfermedad) {
+    public void setEstadioenfermedad(BigDecimal estadioenfermedad) {
         this.estadioenfermedad = estadioenfermedad;
     }
 
-    public BigInteger getPeriodovigilia() {
+    public BigDecimal getPeriodovigilia() {
         return periodovigilia;
     }
 
-    public void setPeriodovigilia(BigInteger periodovigilia) {
+    public void setPeriodovigilia(BigDecimal periodovigilia) {
         this.periodovigilia = periodovigilia;
     }
 

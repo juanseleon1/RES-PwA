@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -45,7 +45,7 @@ public class Cancion implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @Column(name = "REMINISCENCIA")
-    private BigInteger reminiscencia;
+    private BigDecimal reminiscencia;
     @Column(name = "URL")
     private String url;
     @JoinTable(name = "LISTATAGS", joinColumns = {
@@ -76,11 +76,11 @@ public class Cancion implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigInteger getReminiscencia() {
+    public BigDecimal getReminiscencia() {
         return reminiscencia;
     }
 
-    public void setReminiscencia(BigInteger reminiscencia) {
+    public void setReminiscencia(BigDecimal reminiscencia) {
         this.reminiscencia = reminiscencia;
     }
 

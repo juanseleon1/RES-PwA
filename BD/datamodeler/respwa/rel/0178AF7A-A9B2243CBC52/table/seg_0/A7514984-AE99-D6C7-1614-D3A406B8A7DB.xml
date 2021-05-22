@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A7514984-AE99-D6C7-1614-D3A406B8A7DB" name="Cuidador">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>EBCD2ECB-CCC2-1E26-C5D7-8654910F87ED</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="nombreUsuario" id="7B3D2810-BA1A-F75E-6A57-4CED968F1280">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>045ABCC1-1A16-7F30-13C0-3979DE87FA4D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="contrasena" id="BBCC82D4-7828-905D-5BA1-83DDF9BB04A8">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>F1A907DB-D4BB-B61A-92ED-40347145C962</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="F6681C8F-4021-6066-3B5A-CE486A0E3F80">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>80F6D600-683F-7C9D-DDF9-E2A0EA11A901</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="correo" id="586C75E4-66A3-C9EF-D236-92B4BB1EB377">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>DED6BAB7-6CB6-B593-3C18-6AF68B69745F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="celular" id="C972396E-D6E9-7936-CAC6-ACAA58D61240">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>1042DD4E-C214-96CB-33F4-B277372D9500</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 CHAR</dataTypeSize>
+<ownDataTypeParameters>12 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3A28580C-C23F-398A-2409-465DD042A564" name="Cuidador_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>1A1A299E-E5B3-CC9A-0832-44ACE708CD08</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7B3D2810-BA1A-F75E-6A57-4CED968F1280"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

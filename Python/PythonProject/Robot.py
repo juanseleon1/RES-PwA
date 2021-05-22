@@ -181,6 +181,7 @@ class Robot:
             "UNLOADCONVTOPIC": [self.unload_conversational_topic, True, "act", False],
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", False],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
+            "FORCEINPUT": [self.force_input, True, "int", False],
         }
 
         # Declare the modules --------------------------------------------------------------------------------
@@ -767,3 +768,14 @@ class Robot:
     def init_timers(self):
         self.timer_Battery()
         self.timer_currentState()
+        self.timer_request_finish_anim()
+
+    def timer_request_finish_anim(self):
+        dict = self.alMotion.getTaskList()
+        json_params = {"finishAnim": "angleInterpolation" in dict}
+        send(-1, "act", json_params)
+        threading.Timer(9.0, self.timer_request_finish_anim).start()
+
+    def force_input(self, params):
+        value= params.get("SAY")
+        self.alDialogProxy.forceInput(value)

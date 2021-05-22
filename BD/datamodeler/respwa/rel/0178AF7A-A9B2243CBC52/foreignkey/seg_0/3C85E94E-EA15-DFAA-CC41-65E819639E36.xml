@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="3C85E94E-EA15-DFAA-CC41-65E819639E36" containerWithKeyObject="CCDB339A-B7C6-8708-5257-1EA2E051D934" localFKIndex="356BBCB9-0BEB-0867-07AA-F5E3F90F939F" name="EventInfluence_EmotionAxisConfig_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>415814F3-E994-D4F7-B0A0-3C49650FCB6A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>EmotionAxisConfig</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>595E5E0F-8192-0E10-9728-6B9D9C6634F4</referredTableID>
+<keyObject>AF80AE99-820B-16BE-7753-56BA4F959536</keyObject>
+<referredKeyID>AF80AE99-820B-16BE-7753-56BA4F959536</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

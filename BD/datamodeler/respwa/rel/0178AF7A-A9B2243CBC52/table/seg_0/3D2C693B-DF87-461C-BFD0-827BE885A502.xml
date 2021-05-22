@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3D2C693B-DF87-461C-BFD0-827BE885A502" name="PreferenciaXBaile">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Baile_id" id="5AD95FC9-77CB-4540-7502-A342FCF301F6">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BC616505-9691-25D4-C13B-5AAAAF566624" referredColumn="7080B4D5-8826-81C3-74F6-767D870AE140"/>
+</associations>
+</Column>
+<Column name="Perfil_Preferencia_PerfilPwa_cedula" id="F7211D7E-F358-999F-29C3-F68FB2E5E720">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D2127E4D-6268-FFEE-3C94-B27165CD4625" referredColumn="C911E13A-B454-2EA2-0F32-554B1C0E5CF5"/>
+</associations>
+</Column>
+<Column name="gusto" id="376A27AC-0D9A-1FDA-448B-3F1E480D775E">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>D416E39E-D7C3-5893-4578-519FA340ED86</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7A4153E0-3EDF-62CC-60A5-63CF3001B9B2" name="PreferenciaXBaile_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5AD95FC9-77CB-4540-7502-A342FCF301F6"/>
+<colUsage columnID="F7211D7E-F358-999F-29C3-F68FB2E5E720"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="430B2F01-4A16-6A74-D033-445A14A81BB6" name="PreferenciaXBaile_Baile_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5AD95FC9-77CB-4540-7502-A342FCF301F6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9882CF14-B7B0-7DF2-750C-5845C1ED4E1F" name="PreferenciaXBaile_Perfil_Preferencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F7211D7E-F358-999F-29C3-F68FB2E5E720"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

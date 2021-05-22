@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke"),
     @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica"),
     @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile"),
-    @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido")})
+    @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido"),
+    @NamedQuery(name = "PerfilPreferencia.findByBrillopreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.brillopreferido = :brillopreferido")})
 public class PerfilPreferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +60,10 @@ public class PerfilPreferencia implements Serializable {
     private double gustobaile;
     @Basic(optional = false)
     @Column(name = "VOLPREFERIDO")
-    private BigInteger volpreferido;
+    private BigDecimal volpreferido;
+    @Basic(optional = false)
+    @Column(name = "BRILLOPREFERIDO")
+    private BigDecimal brillopreferido;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.EAGER)
     private Perfilpwa perfilpwa;
@@ -79,13 +83,14 @@ public class PerfilPreferencia implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigInteger volpreferido) {
+    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigDecimal volpreferido, BigDecimal brillopreferido) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.nombrepreferido = nombrepreferido;
         this.gustokaraoke = gustokaraoke;
         this.gustomusica = gustomusica;
         this.gustobaile = gustobaile;
         this.volpreferido = volpreferido;
+        this.brillopreferido = brillopreferido;
     }
 
     public String getPerfilpwaCedula() {
@@ -128,12 +133,20 @@ public class PerfilPreferencia implements Serializable {
         this.gustobaile = gustobaile;
     }
 
-    public BigInteger getVolpreferido() {
+    public BigDecimal getVolpreferido() {
         return volpreferido;
     }
 
-    public void setVolpreferido(BigInteger volpreferido) {
+    public void setVolpreferido(BigDecimal volpreferido) {
         this.volpreferido = volpreferido;
+    }
+
+    public BigDecimal getBrillopreferido() {
+        return brillopreferido;
+    }
+
+    public void setBrillopreferido(BigDecimal brillopreferido) {
+        this.brillopreferido = brillopreferido;
     }
 
     public Perfilpwa getPerfilpwa() {

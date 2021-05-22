@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E5EB12D2-D20A-5FAF-2149-8DABAA51ADCB" name="Familiar">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>30E2E9B3-A96A-06F1-DF06-01B628E4C77F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="A6F03387-B20C-F811-5280-FBD7F290A94E">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>C4A66A0E-8804-33B8-1BB2-724E95E92F8D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="2209DA30-DF37-902F-C3A3-88F45AA8C48C">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>5C83B178-1B40-30C8-08A1-F577A70674A0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="parentesco" id="ABF2566F-25C9-3DEF-5F28-06DE4F34059D">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>8BA86D62-B5FD-AE16-301B-60BB7631A5A3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="interes" id="2DB85779-C1DA-611C-DFFA-2DD74DA38CFA">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>1EFB45E3-89BF-1C4A-9E18-C8F366B97609</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estaVivo" id="49981068-02DD-BECC-F028-A9290CF662EA">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>5E1D0128-246D-76C5-AE04-25C935764254</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nacimiento" id="B048879F-E2D7-7A0D-D051-8A32A2EA67DA">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>0FBE0C7D-1D2B-D20C-C4CA-1AE0351EF3A8</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="205FBC96-1E93-A357-22D1-BFC0C735FE04" name="Familiar_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:24 UTC</createdTime>
+<generatorID>B95AD323-3CF3-53A9-12DE-C7624000AFBF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A6F03387-B20C-F811-5280-FBD7F290A94E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

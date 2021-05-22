@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -20,7 +20,7 @@ public class FrasesPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "ORDEN")
-    private BigInteger orden;
+    private BigDecimal orden;
     @Basic(optional = false)
     @Column(name = "CUENTO_NOMBRE")
     private String cuentoNombre;
@@ -28,16 +28,16 @@ public class FrasesPK implements Serializable {
     public FrasesPK() {
     }
 
-    public FrasesPK(BigInteger orden, String cuentoNombre) {
+    public FrasesPK(BigDecimal orden, String cuentoNombre) {
         this.orden = orden;
         this.cuentoNombre = cuentoNombre;
     }
 
-    public BigInteger getOrden() {
+    public BigDecimal getOrden() {
         return orden;
     }
 
-    public void setOrden(BigInteger orden) {
+    public void setOrden(BigDecimal orden) {
         this.orden = orden;
     }
 
