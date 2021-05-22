@@ -88,8 +88,8 @@ public class BEstadoInteraccion implements Believes {
         System.out.println("BEstadoInteraccion update Received: " + si);
         SensorData infoRecibida = (SensorData) si;
 
-        if (infoRecibida.getDataP().containsKey(keyNameConf + "Display")) {
-            confirmacionRepDisp = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Display"));
+        if (infoRecibida.getDataP().containsKey("endVideo")) {
+            confirmacionRepDisp = (boolean) infoRecibida.getDataP().get("endVideo");
         }
         if (infoRecibida.getDataP().containsKey(keyNameConf + "Audio")) {
             confirmacionRepAud = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Audio"));
@@ -113,11 +113,37 @@ public class BEstadoInteraccion implements Believes {
                 nivelEnriquecimiento--;
             }
         }
+        
         if (infoRecibida.getDataP().containsKey("wakeUpFinished")) {
             sistemaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("wakeUpFinished"));
         }
         if (infoRecibida.getDataP().containsKey("pausarint")) {
             pausarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("pausarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("cancelarint")) {
+            cancelarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("cancelarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("reiniciarint")) {
+            reiniciarInt = Boolean.valueOf((String) infoRecibida.getDataP().get("reiniciarint"));
+
+        }
+        if (infoRecibida.getDataP().containsKey("distanceOfTrackedHuman")) {
+            Double aux = (Double) infoRecibida.getDataP().get("distanceOfTrackedHuman");
+            distanciaPwA = aux == null ? -1 : aux;
+
+        }
+        if (infoRecibida.getDataP().containsKey("dialogIsStarted")) {
+            estaHablando = true;
+
+        }
+        if (infoRecibida.getDataP().containsKey("endOfAnimatedSpeech")) {
+            estaHablando = false;
+
+        }
+        if (infoRecibida.getDataP().containsKey("goToSuccess")) {
+            desplazandose = false;
 
         }
         if (infoRecibida.getDataP().containsKey("cancelarint")) {
@@ -211,7 +237,6 @@ public class BEstadoInteraccion implements Believes {
         if (infoRecibida.getDataP().containsKey("speechTextDone")) {
             Integer done = (Integer) infoRecibida.getDataP().get("speechTextDone");
             estaHablando = 0 == done;
-
         }
 
         return true;
@@ -402,7 +427,7 @@ public class BEstadoInteraccion implements Believes {
     }
 
     public boolean isLogged() {
-        return logged;
+        return true||logged;
     }
 
     public void setLogged(boolean logged) {

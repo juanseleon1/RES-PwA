@@ -7,7 +7,6 @@ package ResPwAEntities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -42,7 +41,7 @@ public class Actividadpwa implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private BigInteger id;
+    private BigDecimal id;
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
@@ -51,7 +50,7 @@ public class Actividadpwa implements Serializable {
     private String tipo;
     @Basic(optional = false)
     @Column(name = "DURACION")
-    private BigInteger duracion;
+    private BigDecimal duracion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
     private List<Registroactividad> registroactividadList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividadpwa", fetch = FetchType.EAGER)
@@ -60,22 +59,22 @@ public class Actividadpwa implements Serializable {
     public Actividadpwa() {
     }
 
-    public Actividadpwa(BigInteger id) {
+    public Actividadpwa(BigDecimal id) {
         this.id = id;
     }
 
-    public Actividadpwa(BigInteger id, String nombre, String tipo, BigInteger duracion) {
+    public Actividadpwa(BigDecimal id, String nombre, String tipo, BigDecimal duracion) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.duracion = duracion;
     }
 
-    public BigInteger getId() {
+    public BigDecimal getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(BigDecimal id) {
         this.id = id;
     }
 
@@ -95,11 +94,11 @@ public class Actividadpwa implements Serializable {
         this.tipo = tipo;
     }
 
-    public BigInteger getDuracion() {
+    public BigDecimal getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(BigInteger duracion) {
+    public void setDuracion(BigDecimal duracion) {
         this.duracion = duracion;
     }
 

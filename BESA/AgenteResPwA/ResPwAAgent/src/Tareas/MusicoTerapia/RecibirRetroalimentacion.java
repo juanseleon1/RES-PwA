@@ -7,19 +7,22 @@ package Tareas.MusicoTerapia;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class RecibirRetroalimentacion extends ResPwaTask{
+public class RecibirRetroalimentacion extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -30,15 +33,27 @@ public class RecibirRetroalimentacion extends ResPwaTask{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
-        /* 
-         *   ACA DEBE ACTIVAR EL TOPICO DE RETROALIMENTACION
-        *
-        *
-        */
-        //buscar texto
-        infoServicio.put("SAY", "AskRetroCancion");
-        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        String retroalimentacion = blvs.getbEstadoInteraccion().getRetroalimentacionValue();
+        List<String> resulset = Arrays.asList(retroalimentacion.split(" "));
+        ServiceDataRequest srb = null;
+        Double respuestaRetroalimentacion = -1.0;
+        if (resulset != null){
+            HashMap <String, Long> resultados = new HashMap<String, Long>();
+            resultados.put("Bien", resulset.stream().filter(retroa -> retroa.equals("Bien")).count()*3);
+            resultados.put("Regular", resulset.stream().filter(retroa -> retroa.equals("Regular")).count()*2);
+            resultados.put("Mal", resulset.stream().filter(retroa -> retroa.equals("Mal")).count());
+            Double resulRetroAlimentacion = Double.valueOf(resultados.get("bien") + resultados.get("Regular") + resultados.get("Mal") / resulset.size());
+            if (resulRetroAlimentacion > 2.5)
+                respuestaRetroalimentacion = 1.0;
+            if (resulRetroAlimentacion <= 2.5 && resulRetroAlimentacion >= 1.5)
+                respuestaRetroalimentacion = 0.5;
+            if (resulRetroAlimentacion < 1.5)
+                respuestaRetroalimentacion = 0.0;
+            
+            blvs.feedbackActivity(respuestaRetroalimentacion);
+            
+        }
         
     }
 
@@ -48,7 +63,7 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }
     }
 
@@ -58,14 +73,13 @@ public class RecibirRetroalimentacion extends ResPwaTask{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().isEstaHablando()) {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            requestService(srb,blvs);
+            ResPwaUtils.requestService(srb,blvs);
         }   
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
-
+                
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
             return true;

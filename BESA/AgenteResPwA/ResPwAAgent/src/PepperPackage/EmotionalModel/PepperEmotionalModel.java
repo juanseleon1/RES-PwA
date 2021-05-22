@@ -22,7 +22,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticDictionary;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticValue;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,17 +95,4 @@ public abstract class PepperEmotionalModel extends EmotionalModel {
 }
     
     
-    public void requestService(ServiceDataRequest sdr)
-    {
-         try {
-            String spAgId = AdmBESA.getInstance().lookupSPServiceInDirectory(sdr.getServiceName());
-            String SHID = AdmBESA.getInstance().searchAidByAlias(InitRESPwA.aliasSPAgent);
-            AgHandlerBESA agH = AdmBESA.getInstance().getHandlerByAid(spAgId);
-            EventBESA evt= new EventBESA(ActivateAsynchronousServiceGuard.class.getName(), sdr);
-            evt.setSenderAgId(SHID);
-            agH.sendEvent(evt);
-        } catch (ExceptionBESA ex) {
-            Logger.getLogger(PepperEmotionalModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

@@ -6,6 +6,7 @@
 package Personalizacion.Modelo;
 
 import ResPwAEntities.Cancion;
+import ResPwAEntities.Preferenciaxcancion;
 
 /**
  *
@@ -13,9 +14,9 @@ import ResPwAEntities.Cancion;
  */
 public class CromosomaCancion extends Cromosoma{
     
-    private Cancion cancion;
+    private Preferenciaxcancion cancion;
 
-    public CromosomaCancion( Cancion cancion ) {
+    public CromosomaCancion( Preferenciaxcancion cancion ) {
       this.cancion = cancion;
     }
     
@@ -23,12 +24,12 @@ public class CromosomaCancion extends Cromosoma{
     protected void calculateObjectiveValue() {
         objectiveValue = (float) this.cancion.getGusto();
         
-        if ( cancion.getReminiscencia().floatValue()==1f){
+        if ( cancion.getCancion().getReminiscencia().floatValue()==1f){
             objectiveValue += 0.4;
         }
     }
 
-    public Cancion getCancion() {
+    public Preferenciaxcancion getCancion() {
         return cancion;
     }
     

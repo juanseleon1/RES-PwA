@@ -45,6 +45,8 @@ public class RobotAgentBelieves implements Believes {
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
         bPerfilPwA.setPerfil(getPerfilBD(cedula));
+        
+        System.out.println("VERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr: "+ bPerfilPwA.getPerfil().getPerfilPreferencia().getActxpreferenciaList().get(0).getGusto());
 //        FBaseUtils.initResPwa(this);
     }
 
@@ -84,7 +86,7 @@ public class RobotAgentBelieves implements Believes {
     }
 
     public void feedbackActivity(double voiceFeedback) {
-        double emotionFeedback = 0.0;
+        double emotionFeedback = 0.0, emotionFeedbackAux=0;
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
@@ -265,7 +267,5 @@ public class RobotAgentBelieves implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         return this;
     }
-
-
 
 }

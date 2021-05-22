@@ -52,6 +52,7 @@ public class ReportarEmergencia extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         //PwA diga ayuda
         if(!blvs.getbEstadoInteraccion().isDetectaPwA() && blvs.getbEstadoInteraccion().isLogged() )
+
         {
             return 1;
         }

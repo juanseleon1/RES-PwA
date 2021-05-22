@@ -15,7 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import ResPwAEntities.Genero;
-import ResPwAEntities.PerfilPreferencia;
+import ResPwAEntities.Preferenciaxcuento;
 import java.util.ArrayList;
 import java.util.List;
 import ResPwAEntities.Frases;
@@ -38,8 +38,8 @@ public class CuentoJpaController implements Serializable {
     }
 
     public void create(Cuento cuento) throws PreexistingEntityException, Exception {
-        if (cuento.getPerfilPreferenciaList() == null) {
-            cuento.setPerfilPreferenciaList(new ArrayList<PerfilPreferencia>());
+        if (cuento.getPreferenciaxcuentoList() == null) {
+            cuento.setPreferenciaxcuentoList(new ArrayList<Preferenciaxcuento>());
         }
         if (cuento.getFrasesList() == null) {
             cuento.setFrasesList(new ArrayList<Frases>());
@@ -53,12 +53,12 @@ public class CuentoJpaController implements Serializable {
                 generoGenero = em.getReference(generoGenero.getClass(), generoGenero.getGenero());
                 cuento.setGeneroGenero(generoGenero);
             }
-            List<PerfilPreferencia> attachedPerfilPreferenciaList = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferenciaToAttach : cuento.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaList.add(perfilPreferenciaListPerfilPreferenciaToAttach);
+            List<Preferenciaxcuento> attachedPreferenciaxcuentoList = new ArrayList<Preferenciaxcuento>();
+            for (Preferenciaxcuento preferenciaxcuentoListPreferenciaxcuentoToAttach : cuento.getPreferenciaxcuentoList()) {
+                preferenciaxcuentoListPreferenciaxcuentoToAttach = em.getReference(preferenciaxcuentoListPreferenciaxcuentoToAttach.getClass(), preferenciaxcuentoListPreferenciaxcuentoToAttach.getPreferenciaxcuentoPK());
+                attachedPreferenciaxcuentoList.add(preferenciaxcuentoListPreferenciaxcuentoToAttach);
             }
-            cuento.setPerfilPreferenciaList(attachedPerfilPreferenciaList);
+            cuento.setPreferenciaxcuentoList(attachedPreferenciaxcuentoList);
             List<Frases> attachedFrasesList = new ArrayList<Frases>();
             for (Frases frasesListFrasesToAttach : cuento.getFrasesList()) {
                 frasesListFrasesToAttach = em.getReference(frasesListFrasesToAttach.getClass(), frasesListFrasesToAttach.getFrasesPK());
@@ -70,9 +70,14 @@ public class CuentoJpaController implements Serializable {
                 generoGenero.getCuentoList().add(cuento);
                 generoGenero = em.merge(generoGenero);
             }
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : cuento.getPerfilPreferenciaList()) {
-                perfilPreferenciaListPerfilPreferencia.getCuentoList().add(cuento);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
+            for (Preferenciaxcuento preferenciaxcuentoListPreferenciaxcuento : cuento.getPreferenciaxcuentoList()) {
+                Cuento oldCuentoOfPreferenciaxcuentoListPreferenciaxcuento = preferenciaxcuentoListPreferenciaxcuento.getCuento();
+                preferenciaxcuentoListPreferenciaxcuento.setCuento(cuento);
+                preferenciaxcuentoListPreferenciaxcuento = em.merge(preferenciaxcuentoListPreferenciaxcuento);
+                if (oldCuentoOfPreferenciaxcuentoListPreferenciaxcuento != null) {
+                    oldCuentoOfPreferenciaxcuentoListPreferenciaxcuento.getPreferenciaxcuentoList().remove(preferenciaxcuentoListPreferenciaxcuento);
+                    oldCuentoOfPreferenciaxcuentoListPreferenciaxcuento = em.merge(oldCuentoOfPreferenciaxcuentoListPreferenciaxcuento);
+                }
             }
             for (Frases frasesListFrases : cuento.getFrasesList()) {
                 Cuento oldCuentoOfFrasesListFrases = frasesListFrases.getCuento();
@@ -104,11 +109,19 @@ public class CuentoJpaController implements Serializable {
             Cuento persistentCuento = em.find(Cuento.class, cuento.getNombre());
             Genero generoGeneroOld = persistentCuento.getGeneroGenero();
             Genero generoGeneroNew = cuento.getGeneroGenero();
-            List<PerfilPreferencia> perfilPreferenciaListOld = persistentCuento.getPerfilPreferenciaList();
-            List<PerfilPreferencia> perfilPreferenciaListNew = cuento.getPerfilPreferenciaList();
+            List<Preferenciaxcuento> preferenciaxcuentoListOld = persistentCuento.getPreferenciaxcuentoList();
+            List<Preferenciaxcuento> preferenciaxcuentoListNew = cuento.getPreferenciaxcuentoList();
             List<Frases> frasesListOld = persistentCuento.getFrasesList();
             List<Frases> frasesListNew = cuento.getFrasesList();
             List<String> illegalOrphanMessages = null;
+            for (Preferenciaxcuento preferenciaxcuentoListOldPreferenciaxcuento : preferenciaxcuentoListOld) {
+                if (!preferenciaxcuentoListNew.contains(preferenciaxcuentoListOldPreferenciaxcuento)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Preferenciaxcuento " + preferenciaxcuentoListOldPreferenciaxcuento + " since its cuento field is not nullable.");
+                }
+            }
             for (Frases frasesListOldFrases : frasesListOld) {
                 if (!frasesListNew.contains(frasesListOldFrases)) {
                     if (illegalOrphanMessages == null) {
@@ -124,13 +137,13 @@ public class CuentoJpaController implements Serializable {
                 generoGeneroNew = em.getReference(generoGeneroNew.getClass(), generoGeneroNew.getGenero());
                 cuento.setGeneroGenero(generoGeneroNew);
             }
-            List<PerfilPreferencia> attachedPerfilPreferenciaListNew = new ArrayList<PerfilPreferencia>();
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferenciaToAttach : perfilPreferenciaListNew) {
-                perfilPreferenciaListNewPerfilPreferenciaToAttach = em.getReference(perfilPreferenciaListNewPerfilPreferenciaToAttach.getClass(), perfilPreferenciaListNewPerfilPreferenciaToAttach.getPerfilpwaCedula());
-                attachedPerfilPreferenciaListNew.add(perfilPreferenciaListNewPerfilPreferenciaToAttach);
+            List<Preferenciaxcuento> attachedPreferenciaxcuentoListNew = new ArrayList<Preferenciaxcuento>();
+            for (Preferenciaxcuento preferenciaxcuentoListNewPreferenciaxcuentoToAttach : preferenciaxcuentoListNew) {
+                preferenciaxcuentoListNewPreferenciaxcuentoToAttach = em.getReference(preferenciaxcuentoListNewPreferenciaxcuentoToAttach.getClass(), preferenciaxcuentoListNewPreferenciaxcuentoToAttach.getPreferenciaxcuentoPK());
+                attachedPreferenciaxcuentoListNew.add(preferenciaxcuentoListNewPreferenciaxcuentoToAttach);
             }
-            perfilPreferenciaListNew = attachedPerfilPreferenciaListNew;
-            cuento.setPerfilPreferenciaList(perfilPreferenciaListNew);
+            preferenciaxcuentoListNew = attachedPreferenciaxcuentoListNew;
+            cuento.setPreferenciaxcuentoList(preferenciaxcuentoListNew);
             List<Frases> attachedFrasesListNew = new ArrayList<Frases>();
             for (Frases frasesListNewFrasesToAttach : frasesListNew) {
                 frasesListNewFrasesToAttach = em.getReference(frasesListNewFrasesToAttach.getClass(), frasesListNewFrasesToAttach.getFrasesPK());
@@ -147,16 +160,15 @@ public class CuentoJpaController implements Serializable {
                 generoGeneroNew.getCuentoList().add(cuento);
                 generoGeneroNew = em.merge(generoGeneroNew);
             }
-            for (PerfilPreferencia perfilPreferenciaListOldPerfilPreferencia : perfilPreferenciaListOld) {
-                if (!perfilPreferenciaListNew.contains(perfilPreferenciaListOldPerfilPreferencia)) {
-                    perfilPreferenciaListOldPerfilPreferencia.getCuentoList().remove(cuento);
-                    perfilPreferenciaListOldPerfilPreferencia = em.merge(perfilPreferenciaListOldPerfilPreferencia);
-                }
-            }
-            for (PerfilPreferencia perfilPreferenciaListNewPerfilPreferencia : perfilPreferenciaListNew) {
-                if (!perfilPreferenciaListOld.contains(perfilPreferenciaListNewPerfilPreferencia)) {
-                    perfilPreferenciaListNewPerfilPreferencia.getCuentoList().add(cuento);
-                    perfilPreferenciaListNewPerfilPreferencia = em.merge(perfilPreferenciaListNewPerfilPreferencia);
+            for (Preferenciaxcuento preferenciaxcuentoListNewPreferenciaxcuento : preferenciaxcuentoListNew) {
+                if (!preferenciaxcuentoListOld.contains(preferenciaxcuentoListNewPreferenciaxcuento)) {
+                    Cuento oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento = preferenciaxcuentoListNewPreferenciaxcuento.getCuento();
+                    preferenciaxcuentoListNewPreferenciaxcuento.setCuento(cuento);
+                    preferenciaxcuentoListNewPreferenciaxcuento = em.merge(preferenciaxcuentoListNewPreferenciaxcuento);
+                    if (oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento != null && !oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento.equals(cuento)) {
+                        oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento.getPreferenciaxcuentoList().remove(preferenciaxcuentoListNewPreferenciaxcuento);
+                        oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento = em.merge(oldCuentoOfPreferenciaxcuentoListNewPreferenciaxcuento);
+                    }
                 }
             }
             for (Frases frasesListNewFrases : frasesListNew) {
@@ -200,6 +212,13 @@ public class CuentoJpaController implements Serializable {
                 throw new NonexistentEntityException("The cuento with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<Preferenciaxcuento> preferenciaxcuentoListOrphanCheck = cuento.getPreferenciaxcuentoList();
+            for (Preferenciaxcuento preferenciaxcuentoListOrphanCheckPreferenciaxcuento : preferenciaxcuentoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Cuento (" + cuento + ") cannot be destroyed since the Preferenciaxcuento " + preferenciaxcuentoListOrphanCheckPreferenciaxcuento + " in its preferenciaxcuentoList field has a non-nullable cuento field.");
+            }
             List<Frases> frasesListOrphanCheck = cuento.getFrasesList();
             for (Frases frasesListOrphanCheckFrases : frasesListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
@@ -214,11 +233,6 @@ public class CuentoJpaController implements Serializable {
             if (generoGenero != null) {
                 generoGenero.getCuentoList().remove(cuento);
                 generoGenero = em.merge(generoGenero);
-            }
-            List<PerfilPreferencia> perfilPreferenciaList = cuento.getPerfilPreferenciaList();
-            for (PerfilPreferencia perfilPreferenciaListPerfilPreferencia : perfilPreferenciaList) {
-                perfilPreferenciaListPerfilPreferencia.getCuentoList().remove(cuento);
-                perfilPreferenciaListPerfilPreferencia = em.merge(perfilPreferenciaListPerfilPreferencia);
             }
             em.remove(cuento);
             em.getTransaction().commit();

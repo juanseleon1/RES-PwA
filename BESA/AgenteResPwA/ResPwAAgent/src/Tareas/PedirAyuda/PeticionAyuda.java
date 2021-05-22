@@ -6,19 +6,20 @@
 package Tareas.PedirAyuda;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class PeticionAyuda extends ResPwaTask{
+public class PeticionAyuda extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
     double tiempo = 0;
@@ -32,27 +33,27 @@ public class PeticionAyuda extends ResPwaTask{
         System.out.println("--- Execute Task Peticion Ayuda ---");
         tiempo = System.currentTimeMillis();
         //dar respuesta a petición
-        activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
+        ResPwaUtils.activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
         infoServicio.put("SAY", "¿En que te puedo ayudar?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-        requestService(srb, (RobotAgentBelieves) parameters);
+        ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         //System.out.println("--- Interrupt Task Peticion Ayuda ---");
-        deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         //System.out.println("--- Cancel Task Peticion Ayuda ---");
-        deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if((System.currentTimeMillis() - tiempo)/1000 >= 90) {

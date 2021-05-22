@@ -4,8 +4,7 @@
 <createdTime>2020-10-27 20:11:45 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,8 +20,7 @@
 <createdTime>2020-10-27 20:19:41 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -30,27 +28,13 @@
 <dataTypeSize>20 CHAR</dataTypeSize>
 <ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="gusto" id="74C42A06-8523-66FD-3523-DDA328C01313">
-<createdBy>juans</createdBy>
-<createdTime>2020-10-27 20:20:28 UTC</createdTime>
-<ownerDesignName>respwa</ownerDesignName>
-<engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT021</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="genero" id="A12041AA-7768-7FAA-950C-143C844D46C6">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:38:30 UTC</createdTime>
 <generatorID>7635C045-CFAB-4757-19B4-1164B4AA8218</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <referedAttribute>F65FEBD7-2DB6-F1F9-062B-BFBF0FC79395</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -64,8 +48,7 @@
 <createdTime>2021-05-05 21:03:00 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -78,8 +61,7 @@
 <createdTime>2021-05-10 20:35:20 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -94,10 +76,8 @@
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:20:08 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="false"/>
+<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

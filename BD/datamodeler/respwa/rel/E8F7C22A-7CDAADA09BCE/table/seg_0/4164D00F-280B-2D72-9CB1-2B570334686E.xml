@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4164D00F-280B-2D72-9CB1-2B570334686E" name="Perfil_Medico">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>C4C92279-704A-3768-75A6-8851A6F0020C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PerfilPwa_cedula" id="2B9B9C3F-EB33-CE5D-5A35-F783FB0D96A4">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>7A31410F-011D-6E47-0810-0C75FAF9B0C0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="05EEAB3D-5866-4671-1035-798BD4C21A5A" referredColumn="6705100A-9320-E81E-1F66-B8D9A6C71532"/>
+</associations>
+</Column>
+<Column name="tomaMedicamentos" id="240B4D7A-701C-A7E2-5FA8-06A07CDACFCA">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>474D2DC3-EE0C-057A-DEA5-47A8A7FEB183</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapAuditiva" id="8C3BE07A-B624-7199-EE35-EEA0FB21A8D3">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>80534207-B6FC-0465-0F2D-99CC9FC4F145</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapVisual" id="0F715A86-F3E7-A554-B856-5A7BE5AFF9EF">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>7D9677FD-EFE3-7BF5-E1BA-2FD11D7300AA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="discapMotora" id="A95ABF41-CF2B-68D9-0C11-4623C2BFD228">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>DC9402DC-D249-E4D7-48B6-89760DEBC525</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estadioEnfermedad" id="025B6700-D6D2-A779-5FAA-D8A96085B1B8">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>1100357B-323A-3CD5-0309-B4DD2C36D51D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="periodoVigilia" id="2D55F1A2-6AA5-A949-170B-799060D29BCD">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>679FD5F4-4A6E-B194-959C-B3678EC6C25F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CausaDemencia_condicion" id="29939B26-1851-8350-0497-1531D7447B1B">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>4EA2B744-4C7A-1497-9ADC-28A4E0EC8C3B</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C3E3635B-4136-768E-99B2-41FA748C149A" referredColumn="1C64C8CB-7B90-4B9A-542F-8B6A86138833"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A15F2005-DAEA-DE20-9D2E-668CFE28C9A1" name="Perfil_Medico_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>D18C99DB-D326-BAC9-993C-A138FF237E2C</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2B9B9C3F-EB33-CE5D-5A35-F783FB0D96A4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="52FA9ABE-B19E-04D8-7EB2-E0400D1C0ECC" name="Perfil_Medico_PerfilPwa_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>D71947AB-04DB-4F6D-B992-39D113A3CB57</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2B9B9C3F-EB33-CE5D-5A35-F783FB0D96A4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B654F0F1-DB5C-3E5C-97C9-360865586A92" name="Perfil_Medico_CausaDemencia_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>137D48F6-359A-2C69-6178-0014EA818688</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="29939B26-1851-8350-0497-1531D7447B1B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

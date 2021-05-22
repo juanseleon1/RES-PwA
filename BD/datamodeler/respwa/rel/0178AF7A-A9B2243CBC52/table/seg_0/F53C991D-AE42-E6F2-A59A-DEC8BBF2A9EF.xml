@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F53C991D-AE42-E6F2-A59A-DEC8BBF2A9EF" name="ReglaXAntecedente">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Regla_id" id="47F10D72-F756-657C-7ACD-FD87FA1D6DB4">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E15FE7DF-BA66-7851-E31C-0AE3A580A536" referredColumn="615D256D-7601-D811-50C0-F7C0121A242A"/>
+</associations>
+</Column>
+<Column name="Antecedente_id" id="BB886521-0C5F-5AD5-8CB0-C323B6E94DEC">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6A98EE9F-AB09-B51F-F5A6-4916D2A7F70B" referredColumn="D58BF11E-5C03-EE05-97A7-4D828EC1C666"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A8C66014-D187-48E1-7F4D-917097CC6BB5" name="ReglaXAntecedente_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="47F10D72-F756-657C-7ACD-FD87FA1D6DB4"/>
+<colUsage columnID="BB886521-0C5F-5AD5-8CB0-C323B6E94DEC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FC7616D5-4ABD-0EBA-5737-0F06BCC897E7" name="ReglaXAntecedente_Regla_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>BDE81ED7-2D3A-011D-C1B5-ADB922587734</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="47F10D72-F756-657C-7ACD-FD87FA1D6DB4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="29996730-351A-1407-1D1D-985DD7CDD672" name="ReglaXAntecedente_Antecedente_FK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-22 15:56:25 UTC</createdTime>
+<generatorID>BDE81ED7-2D3A-011D-C1B5-ADB922587734</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BB886521-0C5F-5AD5-8CB0-C323B6E94DEC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

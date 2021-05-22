@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="69BD12B5-1618-1470-785B-6E4D614D36D6" name="CausaDemencia">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>09136CA0-1B86-E78E-0DE7-AF4E5CAB7019</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="condicion" id="1C64C8CB-7B90-4B9A-542F-8B6A86138833">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>E9FA87E9-5605-0DA8-CDAB-74165BC94AE9</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4551EFB9-0ACB-B2CE-C35E-1D43E4C1D0F8" name="CausaDemencia_PK">
+<createdBy>juans</createdBy>
+<createdTime>2021-05-20 22:46:25 UTC</createdTime>
+<generatorID>ED0AE8A8-8583-D219-A0FF-3ECB31E6B431</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1C64C8CB-7B90-4B9A-542F-8B6A86138833"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

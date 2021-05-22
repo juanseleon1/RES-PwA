@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PerfilPreferencia.findByGustokaraoke", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustokaraoke = :gustokaraoke"),
     @NamedQuery(name = "PerfilPreferencia.findByGustomusica", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustomusica = :gustomusica"),
     @NamedQuery(name = "PerfilPreferencia.findByGustobaile", query = "SELECT p FROM PerfilPreferencia p WHERE p.gustobaile = :gustobaile"),
-    @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido")})
+    @NamedQuery(name = "PerfilPreferencia.findByVolpreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.volpreferido = :volpreferido"),
+    @NamedQuery(name = "PerfilPreferencia.findByBrillopreferido", query = "SELECT p FROM PerfilPreferencia p WHERE p.brillopreferido = :brillopreferido")})
 public class PerfilPreferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,18 +60,21 @@ public class PerfilPreferencia implements Serializable {
     private double gustobaile;
     @Basic(optional = false)
     @Column(name = "VOLPREFERIDO")
-    private BigInteger volpreferido;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Baile> baileList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Cuento> cuentoList;
-    @ManyToMany(mappedBy = "perfilPreferenciaList", fetch = FetchType.EAGER)
-    private List<Cancion> cancionList;
+    private BigDecimal volpreferido;
+    @Basic(optional = false)
+    @Column(name = "BRILLOPREFERIDO")
+    private BigDecimal brillopreferido;
     @JoinColumn(name = "PERFILPWA_CEDULA", referencedColumnName = "CEDULA", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.EAGER)
     private Perfilpwa perfilpwa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxbaile> preferenciaxbaileList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
     private List<Actxpreferencia> actxpreferenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxcuento> preferenciaxcuentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilPreferencia", fetch = FetchType.EAGER)
+    private List<Preferenciaxcancion> preferenciaxcancionList;
 
     public PerfilPreferencia() {
     }
@@ -80,13 +83,14 @@ public class PerfilPreferencia implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigInteger volpreferido) {
+    public PerfilPreferencia(String perfilpwaCedula, String nombrepreferido, double gustokaraoke, double gustomusica, double gustobaile, BigDecimal volpreferido, BigDecimal brillopreferido) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.nombrepreferido = nombrepreferido;
         this.gustokaraoke = gustokaraoke;
         this.gustomusica = gustomusica;
         this.gustobaile = gustobaile;
         this.volpreferido = volpreferido;
+        this.brillopreferido = brillopreferido;
     }
 
     public String getPerfilpwaCedula() {
@@ -129,39 +133,20 @@ public class PerfilPreferencia implements Serializable {
         this.gustobaile = gustobaile;
     }
 
-    public BigInteger getVolpreferido() {
+    public BigDecimal getVolpreferido() {
         return volpreferido;
     }
 
-    public void setVolpreferido(BigInteger volpreferido) {
+    public void setVolpreferido(BigDecimal volpreferido) {
         this.volpreferido = volpreferido;
     }
 
-    @XmlTransient
-    public List<Baile> getBaileList() {
-        return baileList;
+    public BigDecimal getBrillopreferido() {
+        return brillopreferido;
     }
 
-    public void setBaileList(List<Baile> baileList) {
-        this.baileList = baileList;
-    }
-
-    @XmlTransient
-    public List<Cuento> getCuentoList() {
-        return cuentoList;
-    }
-
-    public void setCuentoList(List<Cuento> cuentoList) {
-        this.cuentoList = cuentoList;
-    }
-
-    @XmlTransient
-    public List<Cancion> getCancionList() {
-        return cancionList;
-    }
-
-    public void setCancionList(List<Cancion> cancionList) {
-        this.cancionList = cancionList;
+    public void setBrillopreferido(BigDecimal brillopreferido) {
+        this.brillopreferido = brillopreferido;
     }
 
     public Perfilpwa getPerfilpwa() {
@@ -173,12 +158,39 @@ public class PerfilPreferencia implements Serializable {
     }
 
     @XmlTransient
+    public List<Preferenciaxbaile> getPreferenciaxbaileList() {
+        return preferenciaxbaileList;
+    }
+
+    public void setPreferenciaxbaileList(List<Preferenciaxbaile> preferenciaxbaileList) {
+        this.preferenciaxbaileList = preferenciaxbaileList;
+    }
+
+    @XmlTransient
     public List<Actxpreferencia> getActxpreferenciaList() {
         return actxpreferenciaList;
     }
 
     public void setActxpreferenciaList(List<Actxpreferencia> actxpreferenciaList) {
         this.actxpreferenciaList = actxpreferenciaList;
+    }
+
+    @XmlTransient
+    public List<Preferenciaxcuento> getPreferenciaxcuentoList() {
+        return preferenciaxcuentoList;
+    }
+
+    public void setPreferenciaxcuentoList(List<Preferenciaxcuento> preferenciaxcuentoList) {
+        this.preferenciaxcuentoList = preferenciaxcuentoList;
+    }
+
+    @XmlTransient
+    public List<Preferenciaxcancion> getPreferenciaxcancionList() {
+        return preferenciaxcancionList;
+    }
+
+    public void setPreferenciaxcancionList(List<Preferenciaxcancion> preferenciaxcancionList) {
+        this.preferenciaxcancionList = preferenciaxcancionList;
     }
 
     @Override

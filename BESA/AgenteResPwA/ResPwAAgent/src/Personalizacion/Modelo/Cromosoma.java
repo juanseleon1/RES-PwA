@@ -10,33 +10,33 @@ package Personalizacion.Modelo;
  * @author ASUS
  */
 public abstract class Cromosoma {
-    protected float objectiveValue;
-    protected float selectionProbability;
-    protected float averageSelectionProbability;
+    protected double objectiveValue;
+    protected double selectionProbability;
+    protected double averageSelectionProbability;
     
     abstract protected void calculateObjectiveValue(  );
 
-    public float getObjectiveValue() {
+    public double getObjectiveValue() {
         return objectiveValue;
     }
 
-    public void setObjectiveValue(float objectiveValue) {
+    public void setObjectiveValue(double objectiveValue) {
         this.objectiveValue = objectiveValue;
     }
 
-    public float getSelectionProbability() {
+    public double getSelectionProbability() {
         return selectionProbability;
     }
 
-    public void setSelectionProbability(float selectionProbability) {
+    public void setSelectionProbability(double selectionProbability) {
         this.selectionProbability = selectionProbability;
     }
 
-    public float getAverageSelectionProbability() {
+    public double getAverageSelectionProbability() {
         return averageSelectionProbability;
     }
 
-    public void setAverageSelectionProbability(float averageSelectionProbability) {
+    public void setAverageSelectionProbability(double averageSelectionProbability) {
         this.averageSelectionProbability = averageSelectionProbability;
     }
     

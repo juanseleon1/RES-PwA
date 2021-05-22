@@ -5,11 +5,15 @@
  */
 package Tareas.MusicoTerapia;
 
+import Personalizacion.Modelo.CromosomaCancion;
+import Personalizacion.Modelo.ModeloSeleccion;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
@@ -20,12 +24,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class SeleccionarCancion extends ResPwaTask {
+public class SeleccionarCancion extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -43,49 +48,43 @@ public class SeleccionarCancion extends ResPwaTask {
         HashMap<String, Object> hm = new HashMap<>();
         hm.put("SAY", "Estoy seleccionando una cancion");
         ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-        requestService(data, blvs);
-        
-        hm = new HashMap<>();
-        hm.put("SAY", "La changua no deberia existir");
-         data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-        requestService(data, blvs);
-        float gusto = -1;
-        Cancion cancionEleg = null;
-        List<Cancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getCancionList();
-//        for (Cancion c : canciones) {
-//
-//            if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
-//                cancionEleg = c;
-//                gusto = (float) (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3);
-//            }
-//        }
-        cancionEleg = cancionParaColocar( canciones );
-        blvs.getbEstadoActividad().setCancionActual(cancionEleg);
-        //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
-    }
-    
-    public Cancion cancionParaColocar(List<Cancion> canciones){
-        Random rand = new Random();
-        int randomSong = rand.nextInt(canciones.size());
-        Cancion cancionParaColocar = canciones.get(randomSong);
-        return cancionParaColocar;
+        ResPwaUtils.requestService(data, blvs);
+
+        List<Preferenciaxcancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcancionList();
+        ModeloSeleccion<Preferenciaxcancion> modeloCancion = new ModeloSeleccion<Preferenciaxcancion>(canciones);
+        Preferenciaxcancion cancionSelected = null;
+        CromosomaCancion cromosoma = null;
+        cromosoma = (CromosomaCancion) modeloCancion.selectCromosoma();
+
+        if (cromosoma != null) {
+            cancionSelected = cromosoma.getCancion();
+            blvs.getbEstadoActividad().setCancionActual(cancionSelected.getCancion());
+        }
+
+        if (!blvs.getbEstadoRobot().isStoryMode()) {
+            blvs.getbEstadoRobot().setStoryMode(true);
+        }
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Cancion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
         blvs.getbEstadoActividad().setCancionActual(null);
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoActividad().getCancionActual() != null) {

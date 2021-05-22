@@ -9328,7 +9328,7 @@
         </type>
       </outParameters>
     </operations>
-    <operations xmi:id="_lggTHq3LEeupusa-cI5onw" name="requestService">
+    <operations xmi:id="_lggTHq3LEeupusa-cI5onw" name="ResPwaUtils.requestService">
       <modelElement href="ResPwAAgent.uml#_i0O6EK3LEeupusa-cI5onw"/>
       <visibility xmi:id="_lggTH63LEeupusa-cI5onw" label="+"/>
       <cardinality xmi:id="_lggTIK3LEeupusa-cI5onw" label="1" max="1" min="1"/>
@@ -11007,7 +11007,7 @@
       <visibility xmi:id="_meYQpq3LEeupusa-cI5onw" label="+"/>
       <cardinality xmi:id="_meYQp63LEeupusa-cI5onw" label="1" max="1" min="1"/>
     </operations>
-    <operations xmi:id="_meYQqK3LEeupusa-cI5onw" name="requestService">
+    <operations xmi:id="_meYQqK3LEeupusa-cI5onw" name="ResPwaUtils.requestService">
       <modelElement href="ResPwAAgent.uml#_izO0gq3LEeupusa-cI5onw"/>
       <visibility xmi:id="_meYQqa3LEeupusa-cI5onw" label="+"/>
       <cardinality xmi:id="_meYQqq3LEeupusa-cI5onw" label="1" max="1" min="1"/>

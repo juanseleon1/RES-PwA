@@ -6,7 +6,7 @@
 package Tareas.Retroalimentacion;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
@@ -17,12 +17,13 @@ import rational.mapping.Believes;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import rational.mapping.Task;
 
 /**
  *
  * @author LaMafecitaBebeLean&BebeWhiskyFumaMari__&TambienSeMeteCr___ySendaBellaconaFrikyTounaFrikyFrikyEsMediaSalvaje
  */
-public class RetroalimentacionReception extends ResPwaTask {
+public class RetroalimentacionReception extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -56,8 +57,8 @@ public class RetroalimentacionReception extends ResPwaTask {
            // srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             
         }
-        requestService(srb,blvs);
-        this.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
+        ResPwaUtils.requestService(srb,blvs);
+        ResPwaUtils.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class RetroalimentacionReception extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         return false;
     }

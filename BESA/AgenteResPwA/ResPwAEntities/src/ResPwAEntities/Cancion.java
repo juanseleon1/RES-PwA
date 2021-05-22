@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c"),
     @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Cancion.findByGusto", query = "SELECT c FROM Cancion c WHERE c.gusto = :gusto"),
     @NamedQuery(name = "Cancion.findByReminiscencia", query = "SELECT c FROM Cancion c WHERE c.reminiscencia = :reminiscencia"),
     @NamedQuery(name = "Cancion.findByUrl", query = "SELECT c FROM Cancion c WHERE c.url = :url")})
 public class Cancion implements Serializable {
@@ -45,11 +44,8 @@ public class Cancion implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @Basic(optional = false)
-    @Column(name = "GUSTO")
-    private double gusto;
     @Column(name = "REMINISCENCIA")
-    private BigInteger reminiscencia;
+    private BigDecimal reminiscencia;
     @Column(name = "URL")
     private String url;
     @JoinTable(name = "LISTATAGS", joinColumns = {
@@ -57,27 +53,19 @@ public class Cancion implements Serializable {
         @JoinColumn(name = "TAGS_ID", referencedColumnName = "ID")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Tags> tagsList;
-    @JoinTable(name = "PREFERENCIACANCION", joinColumns = {
-        @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE")}, inverseJoinColumns = {
-        @JoinColumn(name = "PERFIL_PREFERENCIA_PERFILPWA_CEDULA", referencedColumnName = "PERFILPWA_CEDULA")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<PerfilPreferencia> perfilPreferenciaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancionNombre", fetch = FetchType.EAGER)
     private List<Enriq> enriqList;
     @JoinColumn(name = "GENERO_GENERO", referencedColumnName = "GENERO")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Genero generoGenero;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancion", fetch = FetchType.EAGER)
+    private List<Preferenciaxcancion> preferenciaxcancionList;
 
     public Cancion() {
     }
 
     public Cancion(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Cancion(String nombre, double gusto) {
-        this.nombre = nombre;
-        this.gusto = gusto;
     }
 
     public String getNombre() {
@@ -88,19 +76,11 @@ public class Cancion implements Serializable {
         this.nombre = nombre;
     }
 
-    public double getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(double gusto) {
-        this.gusto = gusto;
-    }
-
-    public BigInteger getReminiscencia() {
+    public BigDecimal getReminiscencia() {
         return reminiscencia;
     }
 
-    public void setReminiscencia(BigInteger reminiscencia) {
+    public void setReminiscencia(BigDecimal reminiscencia) {
         this.reminiscencia = reminiscencia;
     }
 
@@ -122,15 +102,6 @@ public class Cancion implements Serializable {
     }
 
     @XmlTransient
-    public List<PerfilPreferencia> getPerfilPreferenciaList() {
-        return perfilPreferenciaList;
-    }
-
-    public void setPerfilPreferenciaList(List<PerfilPreferencia> perfilPreferenciaList) {
-        this.perfilPreferenciaList = perfilPreferenciaList;
-    }
-
-    @XmlTransient
     public List<Enriq> getEnriqList() {
         return enriqList;
     }
@@ -145,6 +116,15 @@ public class Cancion implements Serializable {
 
     public void setGeneroGenero(Genero generoGenero) {
         this.generoGenero = generoGenero;
+    }
+
+    @XmlTransient
+    public List<Preferenciaxcancion> getPreferenciaxcancionList() {
+        return preferenciaxcancionList;
+    }
+
+    public void setPreferenciaxcancionList(List<Preferenciaxcancion> preferenciaxcancionList) {
+        this.preferenciaxcancionList = preferenciaxcancionList;
     }
 
     @Override

@@ -6,19 +6,20 @@
 package Tareas.AsegurarConexionInternet;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class AsegurarConexion extends ResPwaTask{
+public class AsegurarConexion extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -28,7 +29,7 @@ public class AsegurarConexion extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         System.out.println("--- Check Finish AsegurarConexion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;

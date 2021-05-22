@@ -23,18 +23,19 @@ def json_creator(id_response, responseType, params):
     return json.loads(json.dumps(json_string))
 
 
-def send(id_response, responseType, params):
+def send(id_response, responseType, params, block=True):
     HOST_LOCAL = '127.0.0.1'
     PORT = 7897
     FORMAT = 'utf-8'
     should_send_message = True
     key = params.keys().pop()
     if key in responsesXTime:
+        print "key: ", key
         should_send_message = checkTimeMessageSended(key)
     else:
         responsesXTime[key] = datetime.now()
 
-    if should_send_message:
+    if should_send_message or (block is False):
         ADDR = (HOST_LOCAL, PORT)
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
@@ -58,7 +59,6 @@ def isAnEmotionalAck(params):
 
     return encontrado
 
-
 def checkTimeMessageSended(params):
     isCorrectToSend = True
     # print("PARAMS: " + str( responsesXTime.get( params ) ))
@@ -70,7 +70,7 @@ def checkTimeMessageSended(params):
                 print("Change")
                 isCorrectToSend = False
 
-            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 10:
+            if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
                 #print("Erase")
                 isCorrectToSend = False
                 deleteExpiredAction( params )

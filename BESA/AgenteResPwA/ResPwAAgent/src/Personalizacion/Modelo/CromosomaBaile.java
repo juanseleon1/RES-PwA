@@ -6,25 +6,26 @@
 package Personalizacion.Modelo;
 
 import ResPwAEntities.Baile;
+import ResPwAEntities.Preferenciaxbaile;
 
 /**
  *
  * @author ASUS
  */
 public class CromosomaBaile extends Cromosoma{
-    private Baile baile;
+    private Preferenciaxbaile baile;
 
-    public CromosomaBaile(Baile baile) {
+    public CromosomaBaile(Preferenciaxbaile baile) {
         this.baile = baile;
     }
 
-    public Baile getBaile() {
+    public Preferenciaxbaile getBaile() {
         return baile;
     }
     
     @Override
     protected void calculateObjectiveValue() {
-        objectiveValue = (float) this.baile.getGusto();
+        objectiveValue = this.baile.getGusto();
     }
     
 }

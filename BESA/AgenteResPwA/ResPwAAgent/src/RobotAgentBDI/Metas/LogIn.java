@@ -5,15 +5,16 @@
  */
 package RobotAgentBDI.Metas;
 
+import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaGoal;
 import Tareas.LogIn.ConversacionInicial;
 import Tareas.LogIn.IniciarServicios;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
+import Tareas.LogIn.LogInTask;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -25,7 +26,7 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class LogIn extends ResPwaGoal{
+public class LogIn extends GoalBDI{
     
     private static String descrip = "LogIn";
 
@@ -66,6 +67,7 @@ public class LogIn extends ResPwaGoal{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("LogIn Params: "+blvs.getbEstadoInteraccion().isDetectaPwA()+ "LogIn Params: "+ blvs.getbEstadoInteraccion().isLogged());
         if ((blvs.getbEstadoInteraccion().isDetectaPwA() && !blvs.getbEstadoInteraccion().isLogged()) || blvs.getbEstadoInteraccion().isSaludo()) {
+
             return 1.0;
         }
         

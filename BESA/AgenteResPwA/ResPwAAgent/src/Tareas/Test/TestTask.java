@@ -7,7 +7,7 @@ package Tareas.Test;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
@@ -16,12 +16,13 @@ import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class TestTask extends ResPwaTask {
+public class TestTask extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -33,9 +34,9 @@ public class TestTask extends ResPwaTask {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("", "");
-        ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-        requestService(data, blvs);
+        infoServicio.put("TAGSDANCE", "QUESTION");
+        ServiceDataRequest data = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+        ResPwaUtils.requestService(data, blvs);
     }
 
     @Override
@@ -50,7 +51,6 @@ public class TestTask extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
 
         return false;
     }

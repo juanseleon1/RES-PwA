@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,21 +33,16 @@ public class RegistroactividadPK implements Serializable {
     private String tipo;
     @Basic(optional = false)
     @Column(name = "ACTIVIDADPWA_ID")
-    private BigInteger actividadpwaId;
+    private BigDecimal actividadpwaId;
 
     public RegistroactividadPK() {
     }
 
-    public RegistroactividadPK(Date fecha, String perfilpwaCedula, String tipo, BigInteger actividadpwaId) {
+    public RegistroactividadPK(Date fecha, String perfilpwaCedula, String tipo, BigDecimal actividadpwaId) {
         this.fecha = fecha;
         this.perfilpwaCedula = perfilpwaCedula;
         this.tipo = tipo;
         this.actividadpwaId = actividadpwaId;
-    }
-
-    public RegistroactividadPK(Date fecha, String tipo) {
-        this.fecha = fecha;
-        this.tipo = tipo;
     }
 
     public Date getFecha() {
@@ -74,11 +69,11 @@ public class RegistroactividadPK implements Serializable {
         this.tipo = tipo;
     }
 
-    public BigInteger getActividadpwaId() {
+    public BigDecimal getActividadpwaId() {
         return actividadpwaId;
     }
 
-    public void setActividadpwaId(BigInteger actividadpwaId) {
+    public void setActividadpwaId(BigDecimal actividadpwaId) {
         this.actividadpwaId = actividadpwaId;
     }
 
@@ -117,6 +112,11 @@ public class RegistroactividadPK implements Serializable {
     @Override
     public String toString() {
         return "ResPwAEntities.RegistroactividadPK[ fecha=" + fecha + ", perfilpwaCedula=" + perfilpwaCedula + ", tipo=" + tipo + ", actividadpwaId=" + actividadpwaId + " ]";
+    }
+
+    public RegistroactividadPK(Date fecha, String tipo) {
+        this.fecha = fecha;
+        this.tipo = tipo;
     }
     
 }

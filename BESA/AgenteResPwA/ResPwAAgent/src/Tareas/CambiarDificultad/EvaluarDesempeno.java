@@ -6,14 +6,15 @@
 package Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class EvaluarDesempeno extends ResPwaTask{
+public class EvaluarDesempeno extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -38,7 +39,7 @@ public class EvaluarDesempeno extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

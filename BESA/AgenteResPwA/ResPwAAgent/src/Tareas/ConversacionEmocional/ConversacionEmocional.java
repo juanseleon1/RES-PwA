@@ -6,7 +6,7 @@
 package Tareas.ConversacionEmocional;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
@@ -17,12 +17,13 @@ import rational.mapping.Believes;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import rational.mapping.Task;
 
 /**
  *
  * @author LaMafecitaBebeLean
  */
-public class ConversacionEmocional extends ResPwaTask {
+public class ConversacionEmocional extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
@@ -45,23 +46,23 @@ public class ConversacionEmocional extends ResPwaTask {
         if (resulset != null){
             
             if (resulset[0] == "happy"){
-                activateTopic( PepperTopicsNames.ALEGRETOPIC, blvs);
+                ResPwaUtils.activateTopic( PepperTopicsNames.ALEGRETOPIC, blvs);
                 //Cambiar algun signal que no se donde se mete
             }
             if (resulset[0] == "sad"){
-                activateTopic( PepperTopicsNames.SADTOPIC, blvs);
+                ResPwaUtils.activateTopic( PepperTopicsNames.SADTOPIC, blvs);
             }
             if (resulset[0] == "angry"){
-                activateTopic( PepperTopicsNames.IRATOPIC, blvs);
+                ResPwaUtils.activateTopic( PepperTopicsNames.IRATOPIC, blvs);
             }
             if (resulset[0] == "normal"){
-                activateTopic( PepperTopicsNames.NORMALTOPIC, blvs);
+                ResPwaUtils.activateTopic( PepperTopicsNames.NORMALTOPIC, blvs);
             }
             //infoServicio.put("FALTA SABER QUE METER ACA", emotionalTalk);
             //srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             
         }
-        requestService(srb,blvs);
+        ResPwaUtils.requestService(srb,blvs);
 
     }
 
@@ -77,7 +78,7 @@ public class ConversacionEmocional extends ResPwaTask {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         return false;
     }

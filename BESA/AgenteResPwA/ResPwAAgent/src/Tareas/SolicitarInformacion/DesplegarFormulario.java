@@ -6,14 +6,15 @@
 package Tareas.SolicitarInformacion;
 
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaTask;
+import RobotAgentBDI.ResPwaUtils;
 import java.util.HashMap;
+import rational.mapping.Task;
 
 /**
  *
  * @author mafegarces
  */
-public class DesplegarFormulario extends ResPwaTask{
+public class DesplegarFormulario extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
@@ -39,7 +40,7 @@ public class DesplegarFormulario extends ResPwaTask{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                super.checkFinish(believes);
+                
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

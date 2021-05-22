@@ -19,7 +19,6 @@ import ResPwAEntities.Controllers.exceptions.IllegalOrphanException;
 import ResPwAEntities.Controllers.exceptions.NonexistentEntityException;
 import ResPwAEntities.Controllers.exceptions.PreexistingEntityException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -164,7 +163,7 @@ public class ActividadpwaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                BigInteger id = actividadpwa.getId();
+                BigDecimal id = actividadpwa.getId();
                 if (findActividadpwa(id) == null) {
                     throw new NonexistentEntityException("The actividadpwa with id " + id + " no longer exists.");
                 }
@@ -240,7 +239,7 @@ public class ActividadpwaJpaController implements Serializable {
         }
     }
 
-    public Actividadpwa findActividadpwa(BigInteger id) {
+    public Actividadpwa findActividadpwa(BigDecimal id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Actividadpwa.class, id);
