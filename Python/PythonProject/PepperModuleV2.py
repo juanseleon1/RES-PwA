@@ -173,6 +173,7 @@ class pepperModuleV2(object):
         json_params = {}
         json_params["ActivateTopic"] = event_name
         print "activateTopic", json_params
+        print "activateTopic", json_params
         send(-1, "int", json_params, False)
 
     def deactivateTopic(self, event_name):
@@ -510,9 +511,12 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params, False)
 
-    def sendValue(self, resultValue):
+    def sendValue(self, resultValue, sirve=True):
         print "enviar", resultValue
-        json_params = {"DialogInput": resultValue}
+        if sirve:
+            json_params = {"DialogInput": resultValue}
+        else:
+            json_params = {"retroValue": resultValue}
         print "DialogInput", json_params
         send(-1, "int", json_params, False)
 
@@ -537,11 +541,11 @@ class pepperModuleV2(object):
 
     def retroalimentacionFilter(self, value):
 
-        if value == 'Bien' or value == 'Regular' or value == 'Mal':
+        if value == 'uno' or value == 'dos' or value == 'tres' or value == 'cuatro' or  value == 'cinco':
             self.retroalimentacionCompleta += " " + value
 
         # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
-        if (len(self.retroalimentacionCompleta.split()) == 8):
+        if (len(self.retroalimentacionCompleta.split()) == 3):
             return (True, self.retroalimentacionCompleta)
         else:
             return (False, "")
@@ -668,10 +672,11 @@ class pepperModuleV2(object):
             preference = self.preferenceInput(value)
             retroAlimentacion = self.retroalimentacionFilter(value)
             emotion = self.emotionalFilter(value)
-            print ("VALUE-AFTER: ",value)
+            print ("VALUE-AFTER: ", preference, retroAlimentacion, emotion )
 
             resultValue = preference[1] + retroAlimentacion[1] + emotion[1]
+            print "Result Value ", resultValue
             if preference[0] or retroAlimentacion[0] or emotion[0]:
-                self.sendValue(resultValue)
+                self.sendValue(resultValue, False)
             else:
                 self.sendValue(value)

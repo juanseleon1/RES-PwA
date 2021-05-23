@@ -35,7 +35,8 @@ public class ModeloRetroalimentacion<T> {
         Regla reglaAplicada = findRule(antecedentes);
         if (activity instanceof Preferenciaxcancion) {
             Preferenciaxcancion c = (Preferenciaxcancion) activity;
-            
+            System.out.println("Old Gusto: " + c.getGusto());
+
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 c.setGusto(1.0f);
             } else {
@@ -45,9 +46,13 @@ public class ModeloRetroalimentacion<T> {
                     c.setGusto(c.getGusto() + reglaAplicada.getFeedback());
                 }
             }
+            System.out.println("New Gusto: " + c.getGusto());
+            RESPwABDInterface.updatePrefXCancion(c);
 
         } else if (activity instanceof Preferenciaxcuento) {
             Preferenciaxcuento c = (Preferenciaxcuento) activity;
+            System.out.println("Old Gusto: " + c.getGusto());
+
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 c.setGusto(1.0);
             } else {
@@ -58,8 +63,13 @@ public class ModeloRetroalimentacion<T> {
                 }
 
             }
+            System.out.println("New Gusto: " + c.getGusto());
+            RESPwABDInterface.updatePrefXCuento(c);
+
         } else if (activity instanceof Preferenciaxbaile) {
             Preferenciaxbaile b = (Preferenciaxbaile) activity;
+            System.out.println("Old Gusto: " + b.getGusto());
+
             if (b.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 b.setGusto(1.0);
             } else {
@@ -69,6 +79,8 @@ public class ModeloRetroalimentacion<T> {
                     b.setGusto(b.getGusto() + reglaAplicada.getFeedback());
                 }
             }
+            System.out.println("New Gusto: " + b.getGusto());
+            RESPwABDInterface.updatePrefXBaile(b);
         }
     }
 

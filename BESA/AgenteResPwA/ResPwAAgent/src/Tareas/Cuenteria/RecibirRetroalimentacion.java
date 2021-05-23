@@ -26,8 +26,11 @@ import rational.mapping.Task;
 public class RecibirRetroalimentacion extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
+    private int num;
 
     public RecibirRetroalimentacion() {
+
+        num = 0;
 //        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
     }
 
@@ -35,24 +38,41 @@ public class RecibirRetroalimentacion extends Task {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Recibir Retroalimentacion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        ServiceDataRequest srb;
 
         if (blvs.getbEstadoInteraccion().getRetroalimentacionValue() == null) {
+            if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
+                if (num == 0) {
+//                    System.out.println("HOLA 1 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
+//                    infoServicio = new HashMap<>();
+//                    infoServicio.put("SAY", "placeholder");
+//                    srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.FORCEINPUT, infoServicio);
+//                    ResPwaUtils.requestService(srb, blvs);
+                    num++;
+                } else if (num == 1) {
+                    System.out.println("HOLA 2 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
+                    infoServicio = new HashMap<>();
+                    infoServicio.put("SAY", "Di una palabra para iniciar");
+                    srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                    ResPwaUtils.requestService(srb, blvs);
+                    num++;
+                }
+            }
+            setTaskWaitingForExecution();
 
-            infoServicio = new HashMap<>();
-            infoServicio.put("SAY", "comenzar");
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.FORCEINPUT, infoServicio);
-            ResPwaUtils.requestService(srb, blvs);
         } else {
+
+            System.out.println("HOLA 3 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
             String retroalimentacion = blvs.getbEstadoInteraccion().getRetroalimentacionValue();
             List<String> resulset = Arrays.asList(retroalimentacion.split(" "));
-            ServiceDataRequest srb = null;
+            srb = null;
             Double respuestaRetroalimentacion = -1.0;
             if (resulset != null) {
-                HashMap<String, Long> resultados = new HashMap<String, Long>();
-                resultados.put("Bien", resulset.stream().filter(retroa -> retroa.equals("Bien")).count() * 3);
-                resultados.put("Regular", resulset.stream().filter(retroa -> retroa.equals("Regular")).count() * 2);
-                resultados.put("Mal", resulset.stream().filter(retroa -> retroa.equals("Mal")).count());
-                Double resulRetroAlimentacion = Double.valueOf(resultados.get("bien") + resultados.get("Regular") + resultados.get("Mal") / resulset.size());
+                HashMap<String, Long> resultados = new HashMap<>();
+                resultados.put("Tres", resulset.stream().filter(retroa -> retroa.equalsIgnoreCase("Tres")).count() * 3);
+                resultados.put("Dos", resulset.stream().filter(retroa -> retroa.equalsIgnoreCase("Dos")).count() * 2);
+                resultados.put("Uno", resulset.stream().filter(retroa -> retroa.equalsIgnoreCase("Uno")).count());
+                Double resulRetroAlimentacion = Double.valueOf(resultados.get("Tres") + resultados.get("Dos") + resultados.get("Uno") / resulset.size());
                 if (resulRetroAlimentacion > 2.5) {
                     respuestaRetroalimentacion = 1.0;
                 }
@@ -64,12 +84,18 @@ public class RecibirRetroalimentacion extends Task {
                 }
 
                 blvs.feedbackActivity(respuestaRetroalimentacion);
+                infoServicio = new HashMap<>();
+                infoServicio.put("SAY", "!Tendre en cuenta tus valoraciones para la proxima vez!");
+                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+                ResPwaUtils.requestService(srb, blvs);
+                
+                ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, parameters);
 
+            } else {
+                setTaskWaitingForExecution();
             }
         }
 
-        //ResPwaUtils.requestService(srb,blvs);
-        //ResPwaUtils.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
     }
 
     @Override
@@ -96,7 +122,7 @@ public class RecibirRetroalimentacion extends Task {
     public boolean checkFinish(Believes believes) {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+        if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
             return true;
         }
         return false;

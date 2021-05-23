@@ -111,6 +111,42 @@ public class RESPwABDInterface {
 
     }
 
+    public static void updatePrefXBaile(Preferenciaxbaile axp) {
+        try {
+            PreferenciaxbaileJpaController axpc = new PreferenciaxbaileJpaController(Persistence.createEntityManagerFactory(EMF));
+            axpc.edit(axp);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void updatePrefXCuento(Preferenciaxcuento axp) {
+        try {
+            PreferenciaxcuentoJpaController axpc = new PreferenciaxcuentoJpaController(Persistence.createEntityManagerFactory(EMF));
+            axpc.edit(axp);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void updatePrefXCancion(Preferenciaxcancion axp) {
+        try {
+            PreferenciaxcancionJpaController axpc = new PreferenciaxcancionJpaController(Persistence.createEntityManagerFactory(EMF));
+            axpc.edit(axp);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RESPwABDInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public static List<Cuento> getCuentos() {
         CuentoJpaController cjp = new CuentoJpaController(Persistence.createEntityManagerFactory(EMF));
         return cjp.findCuentoEntities();
@@ -128,12 +164,12 @@ public class RESPwABDInterface {
         return ajp.findActividadpwaEntities();
 
     }
-    
+
     public static List<Antecedente> getActecedents() {
         AntecedenteJpaController ajp = new AntecedenteJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajp.findAntecedenteEntities();
     }
-    
+
     public static List<Regla> getRules() {
         ReglaJpaController ajp = new ReglaJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajp.findReglaEntities();
@@ -153,21 +189,20 @@ public class RESPwABDInterface {
         return ajp.findActxpreferencia(pk);
 
     }
-    
-    public static List<EmotionAxisConfig> getEmotionalAxisConfig(){
+
+    public static List<EmotionAxisConfig> getEmotionalAxisConfig() {
         EmotionAxisConfigJpaController eapc = new EmotionAxisConfigJpaController(Persistence.createEntityManagerFactory(EMF));
         return eapc.findEmotionAxisConfigEntities();
     }
 
-    public static List<Accion> getAcciones(){
+    public static List<Accion> getAcciones() {
         AccionJpaController ajc = new AccionJpaController(Persistence.createEntityManagerFactory(EMF));
         return ajc.findAccionEntities();
     }
 
-    public static List<Emocion> getEmociones(){
+    public static List<Emocion> getEmociones() {
         EmocionJpaController ejc = new EmocionJpaController(Persistence.createEntityManagerFactory(EMF));
         return ejc.findEmocionEntities();
     }
-    
 
 }
