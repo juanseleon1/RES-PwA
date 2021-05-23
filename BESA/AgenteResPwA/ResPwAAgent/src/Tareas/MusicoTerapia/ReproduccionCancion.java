@@ -57,9 +57,9 @@ public class ReproduccionCancion extends Task {
             cromosoma = (CromosomaBaile) modeloBaile.selectCromosoma();
             if (cromosoma != null) {
                 baileSelected = cromosoma.getBaile();
-                blvs.getbEstadoActividad().setBaileActual(baileSelected.getBaile());
+                blvs.getbEstadoActividad().setBaileActual(baileSelected);
                 infoServicio = new HashMap<>();
-                infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getBaileActual().getNombre());
+                infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getBaileActual().getBaile().getNombre());
                 infoServicio.put("FACTOR", null);
                 ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
                 ResPwaUtils.requestService(srb, blvs);
@@ -67,7 +67,7 @@ public class ReproduccionCancion extends Task {
         }
 
         if (!envioVideo) {
-            String urlcancion = blvs.getbEstadoActividad().getCancionActual().getUrl();
+            String urlcancion = blvs.getbEstadoActividad().getCancionActual().getCancion().getUrl();
             infoServicio = new HashMap<>();
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
@@ -96,11 +96,12 @@ public class ReproduccionCancion extends Task {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
-            envioVideo = false;
-            blvs.getbEstadoRobot().setStoryMode(true);
-            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
-                ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, blvs);
+            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC) && envioVideo) {
+                ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
+                envioVideo = false;
             }
+            blvs.getbEstadoRobot().setStoryMode(false);
+
             return true;
         } else {
             setTaskWaitingForExecution();

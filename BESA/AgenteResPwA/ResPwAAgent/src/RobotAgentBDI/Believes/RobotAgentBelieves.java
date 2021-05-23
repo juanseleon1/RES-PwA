@@ -11,6 +11,9 @@ import ResPwAEntities.Antecedente;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Perfilpwa;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
 import ResPwaUtils.Imagen;
 import Retroalimentacion.Modelo.ModeloRetroalimentacion;
 import RobotAgentBDI.ResPwAActivity;
@@ -45,8 +48,8 @@ public class RobotAgentBelieves implements Believes {
         bEstadoActividad = new BEstadoActividad(cedula, this);
         bPerfilPwA = new BPerfilPwA(this);
         bPerfilPwA.setPerfil(getPerfilBD(cedula));
-        
-        System.out.println("VERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr: "+ bPerfilPwA.getPerfil().getPerfilPreferencia().getActxpreferenciaList().get(0).getGusto());
+
+        System.out.println("VERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr: " + bPerfilPwA.getPerfil().getPerfilPreferencia().getActxpreferenciaList().get(0).getGusto());
 //        FBaseUtils.initResPwa(this);
     }
 
@@ -86,24 +89,25 @@ public class RobotAgentBelieves implements Believes {
     }
 
     public void feedbackActivity(double voiceFeedback) {
-        double emotionFeedback = 0.0, emotionFeedbackAux=0;
+        double emotionFeedback = 0.0, emotionFeedbackAux = 0;
         ResPwAActivity activity = bEstadoActividad.getActividadActual();
         Object activityInCourse = null;
         List<Antecedente> antecedents = RESPwABDInterface.getActecedents();
         emotionFeedback = bEstadoEmocionalPwA.getFeedbackEmotion();
         emotionFeedback = aproximateEmotionValue(emotionFeedback);
         List<Antecedente> antecedentsForFeedback = getAntecedentsForFeedback(emotionFeedback, voiceFeedback, antecedents);
-        
+        System.out.println("ACTIVIDAD ACTUAL" + activity);
+
         switch (activity) {
             case CUENTERIA:
-                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
-                ModeloRetroalimentacion<Cuento> modeloRetroCuento = new ModeloRetroalimentacion<Cuento>((Cuento) activityInCourse);
+                activityInCourse = (Preferenciaxcuento) bEstadoActividad.getCuentoActual();
+                ModeloRetroalimentacion<Preferenciaxcuento> modeloRetroCuento = new ModeloRetroalimentacion<>((Preferenciaxcuento) activityInCourse);
                 modeloRetroCuento.activityFeedback(antecedentsForFeedback);
                 break;
 
             case MUSICOTERAPIA:
-                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
-                ModeloRetroalimentacion<Cancion> modelRetroCancion = new ModeloRetroalimentacion<Cancion>((Cancion) activityInCourse);
+                activityInCourse = (Preferenciaxcancion) bEstadoActividad.getCancionActual();
+                ModeloRetroalimentacion<Preferenciaxcancion> modelRetroCancion = new ModeloRetroalimentacion<>((Preferenciaxcancion) activityInCourse);
                 modelRetroCancion.activityFeedback(antecedentsForFeedback);
                 break;
         }
@@ -122,11 +126,11 @@ public class RobotAgentBelieves implements Believes {
                 }
             }
         }
-        
+
         return antecedentsForFeedback;
     }
-    
-    private double aproximateEmotionValue(double emotionFeedback){
+
+    private double aproximateEmotionValue(double emotionFeedback) {
         double aproximation = 0.0;
         final double VERY_PLEASANT = 1;
         final double PLEASANT = 0.65;
@@ -135,34 +139,29 @@ public class RobotAgentBelieves implements Believes {
         final double UNPLEASANT = -0.65;
         final double LITTLE_UNPLEASANT = -0.35;
         final double ZERO = 0.0;
-        
-        if(emotionFeedback > PLEASANT){
+
+        if (emotionFeedback > PLEASANT) {
             aproximation = VERY_PLEASANT;
-        }
-        else{
-            if(emotionFeedback > LITTLE_PLEASANT){
+        } else {
+            if (emotionFeedback > LITTLE_PLEASANT) {
                 aproximation = PLEASANT;
-            }
-            else{
-                if(emotionFeedback > ZERO){
+            } else {
+                if (emotionFeedback > ZERO) {
                     aproximation = LITTLE_PLEASANT;
-                }
-                else{
-                    if(emotionFeedback < UNPLEASANT){
+                } else {
+                    if (emotionFeedback < UNPLEASANT) {
                         aproximation = VERY_UNPLEASANT;
-                    }
-                    else{
-                        if(emotionFeedback < LITTLE_PLEASANT){
+                    } else {
+                        if (emotionFeedback < LITTLE_PLEASANT) {
                             aproximation = UNPLEASANT;
-                        }
-                        else{
+                        } else {
                             aproximation = LITTLE_UNPLEASANT;
                         }
                     }
                 }
             }
         }
-        
+
         return aproximation;
     }
 
@@ -172,11 +171,11 @@ public class RobotAgentBelieves implements Believes {
 
         switch (activity) {
             case CUENTERIA:
-                activityInCourse = (Cuento) bEstadoActividad.getCuentoActual();
+                activityInCourse = (Preferenciaxcuento) bEstadoActividad.getCuentoActual();
                 break;
 
             case MUSICOTERAPIA:
-                activityInCourse = (Cancion) bEstadoActividad.getCancionActual();
+                activityInCourse = (Preferenciaxcancion) bEstadoActividad.getCancionActual();
                 break;
         }
 
