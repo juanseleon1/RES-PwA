@@ -25,7 +25,8 @@ class Animation:
             "BIGEYES": self.big_eyes_animation,
             "BUILD": self.build_animation,
             "TOCTOC": self.toctoc_animation,
-            "LION": self.lion_animation
+            "LION": self.lion_animation,
+            "PENGUIN": self.penguin_animation
         }
 
     def getAnimation(self, animation):
@@ -33,6 +34,83 @@ class Animation:
 
     def dance_lambada(self, factor=1):
         pass
+
+    def penguin_animation(self, factor=1):
+        # Choregraphe simplified export in Python.
+        from naoqi import ALProxy
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 1.96, 3.96, 5.96, 7.96, 9.96])
+        keys.append([-0.207694, -0.0907571, 0.0872665, -0.0907571, 0.0872665, -0.207694])
+
+        names.append("HeadYaw")
+        times.append([0, 1.96, 3.96, 5.96, 7.96, 9.96])
+        keys.append([0, 0.244346, -0.244346, 0.244346, -0.244346, 0])
+
+        names.append("HipPitch")
+        times.append([0, 3.96, 7.96, 9.96])
+        keys.append([-0.0191986, -0.0226893, -0.0226893, -0.0191986])
+
+        names.append("HipRoll")
+        times.append([0, 1.96, 3.96, 5.96, 7.96, 9.96])
+        keys.append([0, 0.244346, -0.23911, 0.244346, -0.23911, 0])
+
+        names.append("KneePitch")
+        times.append([0, 1.96, 3.96, 5.96, 7.96, 9.96])
+        keys.append([0, 0, 0, 0, 0, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 9.96])
+        keys.append([-0.509636, -0.509636])
+
+        names.append("LElbowYaw")
+        times.append([0, 9.96])
+        keys.append([-1.20777, -1.20777])
+
+        names.append("LHand")
+        times.append([0, 9.96])
+        keys.append([0.6, 0.6])
+
+        names.append("LShoulderPitch")
+        times.append([0, 9.96])
+        keys.append([1.57778, 1.57778])
+
+        names.append("LShoulderRoll")
+        times.append([0, 9.96])
+        keys.append([0.118682, 0.118682])
+
+        names.append("LWristYaw")
+        times.append([0, 9.96])
+        keys.append([-0.0314159, -0.0314159])
+
+        names.append("RElbowRoll")
+        times.append([0, 9.96])
+        keys.append([0.509636, 0.509636])
+
+        names.append("RElbowYaw")
+        times.append([0, 9.96])
+        keys.append([1.20777, 1.20777])
+
+        names.append("RHand")
+        times.append([0, 9.96])
+        keys.append([0.6, 0.6])
+
+        names.append("RShoulderPitch")
+        times.append([0, 9.96])
+        keys.append([1.57778, 1.57778])
+
+        names.append("RShoulderRoll")
+        times.append([0, 9.96])
+        keys.append([-0.118682, -0.118682])
+
+        names.append("RWristYaw")
+        times.append([0, 9.96])
+        keys.append([0.0314159, 0.0314159])
+
+        return names, times, keys
 
     def lion_animation(self, factor=1):
         # Choregraphe simplified export in Python.
