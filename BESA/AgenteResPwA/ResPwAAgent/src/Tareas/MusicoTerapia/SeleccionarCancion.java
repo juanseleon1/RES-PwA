@@ -12,6 +12,7 @@ import ResPwAEntities.Cuento;
 import ResPwAEntities.Preferenciaxcancion;
 import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -43,6 +44,7 @@ public class SeleccionarCancion extends Task {
         System.out.println("--- Execute Task Seleccionar Cancion ---");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setActividadActual(ResPwAActivity.MUSICOTERAPIA);
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         HashMap<String, Object> hm = new HashMap<>();
@@ -58,7 +60,7 @@ public class SeleccionarCancion extends Task {
 
         if (cromosoma != null) {
             cancionSelected = cromosoma.getCancion();
-            blvs.getbEstadoActividad().setCancionActual(cancionSelected.getCancion());
+            blvs.getbEstadoActividad().setCancionActual(cancionSelected);
         }
 
         if (!blvs.getbEstadoRobot().isStoryMode()) {

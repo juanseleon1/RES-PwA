@@ -51,7 +51,7 @@ public class SeleccionarCuento extends Task {
 
         if (cromosoma != null) {
             cuentoSelected = cromosoma.getCuento();
-            blvs.getbEstadoActividad().setCuentoActual(cuentoSelected.getCuento());
+            blvs.getbEstadoActividad().setCuentoActual(cuentoSelected);
             infoServicio.put("SAY", "Voy a contarte el cuento de " + cuentoSelected.getCuento().getNombre());
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);

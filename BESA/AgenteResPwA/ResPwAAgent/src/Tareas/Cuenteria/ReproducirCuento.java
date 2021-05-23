@@ -52,7 +52,7 @@ public class ReproducirCuento extends Task {
         if ((now - start > 3000 || start == -1)&& !blvs.getbEstadoInteraccion().isEstaHablando()) {
             start = now;
 
-            Cuento cuento = blvs.getbEstadoActividad().getCuentoActual();
+            Cuento cuento = blvs.getbEstadoActividad().getCuentoActual().getCuento();
 
             infoServicio = new HashMap<>();
             infoServicio.put("SAY", cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getContenido());
@@ -80,9 +80,9 @@ public class ReproducirCuento extends Task {
             }
             blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento() + 1);
         }
-        System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size());
+        System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size());
         System.out.println("VA EN ESTA FRASE: " + blvs.getbEstadoActividad().getIndexCuento());
-        if (blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size() > blvs.getbEstadoActividad().getIndexCuento()) {
+        if (blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() > blvs.getbEstadoActividad().getIndexCuento()) {
             setTaskWaitingForExecution();
         }
 
@@ -113,9 +113,9 @@ public class ReproducirCuento extends Task {
         System.out.println("--- Check Finish ---");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size());
+        System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size());
         System.out.println("VA EN ESTA FRASE: " + blvs.getbEstadoActividad().getIndexCuento());
-        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
+        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
             blvs.getbEstadoActividad().setIndexCuento(0);
             System.out.println("--- Se acabo ---");         
             infoServicio = new HashMap<>();

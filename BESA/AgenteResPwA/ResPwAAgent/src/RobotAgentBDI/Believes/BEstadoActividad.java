@@ -10,6 +10,9 @@ import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
 import ResPwAEntities.Registroactividad;
 import ResPwAEntities.RegistroactividadPK;
 import RobotAgentBDI.ResPwAStrategy;
@@ -35,9 +38,9 @@ public class BEstadoActividad implements Believes {
     private boolean actividadEnCurso = false;
     private boolean mejoraEmocional = false;
     private ResPwAStrategy estrategia;
-    private Cancion cancionActual;
-    private Cuento cuentoActual;
-    private Baile baileActual;
+    private Preferenciaxcancion cancionActual;
+    private Preferenciaxcuento cuentoActual;
+    private Preferenciaxbaile baileActual;
     private List<Baile> bailes;
     private Integer boostActivarKaraoke = 0;
     private Integer boostAnimarElogiarPwA = 0;
@@ -107,7 +110,7 @@ public class BEstadoActividad implements Believes {
         return actividadEnCurso;
     }
 
-    public Cancion getCancionActual() {
+    public Preferenciaxcancion getCancionActual() {
         return cancionActual;
     }
 
@@ -141,15 +144,15 @@ public class BEstadoActividad implements Believes {
         return time;
     }
 
-    public void setCancionActual(Cancion cancionActual) {
+    public void setCancionActual(Preferenciaxcancion cancionActual) {
         this.cancionActual = cancionActual;
     }
 
-    public void setCuentoActual(Cuento cuentoActual) {
+    public void setCuentoActual(Preferenciaxcuento cuentoActual) {
         this.cuentoActual = cuentoActual;
     }
 
-    public Cuento getCuentoActual() {
+    public Preferenciaxcuento getCuentoActual() {
         return cuentoActual;
     }
 
@@ -326,11 +329,11 @@ public class BEstadoActividad implements Believes {
         this.indexCuento = indexCuento;
     }
 
-    public Baile getBaileActual() {
+    public Preferenciaxbaile getBaileActual() {
         return baileActual;
     }
 
-    public void setBaileActual(Baile baileActual) {
+    public void setBaileActual(Preferenciaxbaile baileActual) {
         this.baileActual = baileActual;
     }
 
