@@ -26,7 +26,9 @@ class Animation:
             "BUILD": self.build_animation,
             "TOCTOC": self.toctoc_animation,
             "LION": self.lion_animation,
-            "PENGUIN": self.penguin_animation
+            "PENGUIN": self.penguin_animation,
+            "FEROCIOUS": self.ferocious_animation,
+            "HAPPINESSDANCE": self.happiness_dance_animation
         }
 
     def getAnimation(self, animation):
@@ -34,6 +36,147 @@ class Animation:
 
     def dance_lambada(self, factor=1):
         pass
+
+    def happiness_animation(self, factor=1):
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 2.96, 4.96])
+        keys.append([-0.207694, -0.156742, -0.207694])
+
+        names.append("HeadYaw")
+        times.append([0, 4.96])
+        keys.append([0, 0])
+
+        names.append("HipPitch")
+        times.append([0, 2.96, 4.96])
+        keys.append([-0.0261799, 0.0174533, -0.0261799])
+
+        names.append("HipRoll")
+        times.append([0, 2.96, 4.96])
+        keys.append([0, 0, 0])
+
+        names.append("KneePitch")
+        times.append([0, 2.96, 4.96])
+        keys.append([0, 0, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 1.96, 4.96])
+        keys.append([-0.525344, -0.705113, -0.525344])
+
+        names.append("LElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-1.22522, -0.537561, -0.677188, -1.22522])
+
+        names.append("LHand")
+        times.append([0, 1.96, 4.96])
+        keys.append([0.59, 0.8, 0.59])
+
+        names.append("LShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.57778, 0.232129, -1.15715, 1.57778])
+
+        names.append("LShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.118682, 0.548033, 0.722566, 0.118682])
+
+        names.append("LWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.0349066, 0.279253, 0.349066, -0.0349066])
+
+        names.append("RElbowRoll")
+        times.append([0, 1.96, 4.96])
+        keys.append([0.525344, 0.705113, 0.525344])
+
+        names.append("RElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.22522, 0.537561, 0.677188, 1.22522])
+
+        names.append("RHand")
+        times.append([0, 1.96, 4.96])
+        keys.append([0.59, 0.8, 0.59])
+
+        names.append("RShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.57778, 0.232129, -1.15715, 1.57778])
+
+        names.append("RShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.118682, -0.548033, -0.722566, -0.118682])
+
+        names.append("RWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.0349066, -0.279253, -0.349066, 0.0349066])
+
+        return names, times, keys
+
+
+    def ferocious_animation(self, factor=1):
+        # Choregraphe simplified export in Python.
+        from naoqi import ALProxy
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.221657, -0.0676186, -0.0676186, -0.221657])
+
+        names.append("HeadYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0, -0.415388, 0.424115, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.520108, -1.2706, -1.2706, -0.520108])
+
+        names.append("LElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-1.22173, -1.48353, -1.48353, -1.22173])
+
+        names.append("LHand")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.59, 0.97, 0.97, 0.59])
+
+        names.append("LShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.5708, 0.226893, 0.226893, 1.5708])
+
+        names.append("LShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.120428, 0.801106, 0.801106, 0.120428])
+
+        names.append("LWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.0261799, 0.733038, 0.733038, -0.0261799])
+
+        names.append("RElbowRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.520108, 1.2706, 1.2706, 0.520108])
+
+        names.append("RElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.22173, 1.48353, 1.48353, 1.22173])
+
+        names.append("RHand")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.59, 0.97, 0.97, 0.59])
+
+        names.append("RShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.5708, 0.226893, 0.226893, 1.5708])
+
+        names.append("RShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.120428, -0.801106, -0.801106, -0.120428])
+
+        names.append("RWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.0261799, -0.733038, -0.733038, 0.0261799])
+
+        return names, times, keys
 
     def penguin_animation(self, factor=1):
         # Choregraphe simplified export in Python.
@@ -835,59 +978,67 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0.1, 1.96])
+        times.append([1.96, 3.96])
         keys.append([-0.211185, -0.211185])
 
         names.append("HeadYaw")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([-0.390954, -0.00698132, 0.3735, -0.00698132])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([0, -0.390954, -0.00698132, 0.3735, -0.00698132, 0])
+
+        names.append("HipPitch")
+        times.append([0, 6.96])
+        keys.append([-0.0191986, -0.0191986])
+
+        names.append("KneePitch")
+        times.append([0, 6.96])
+        keys.append([0, 0])
 
         names.append("LElbowRoll")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([-1.43815, -1.44688, -1.43815, -1.44688])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([-0.513127, -1.43815, -1.44688, -1.43815, -1.44688, -0.513127])
 
         names.append("LElbowYaw")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([-1.57603, -1.57603, -1.57603, -1.57603])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([-1.21824, -1.57603, -1.57603, -1.57603, -1.57603, -1.21824])
 
         names.append("LHand")
-        times.append([0.1, 1.96])
-        keys.append([0.07, 0.07])
+        times.append([0, 1.96, 3.96, 6.96])
+        keys.append([0.6, 0.07, 0.07, 0.6])
 
         names.append("LShoulderPitch")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([1.16937, 2.08567, 1.16937, 2.08567])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([1.57778, 1.16937, 2.08567, 1.16937, 2.08567, 1.57778])
 
         names.append("LShoulderRoll")
-        times.append([0.1, 1.96])
-        keys.append([0.116937, 0.116937])
+        times.append([0, 1.96, 3.96, 6.96])
+        keys.append([0.111701, 0.116937, 0.116937, 0.111701])
 
         names.append("LWristYaw")
-        times.append([0.1, 0.96, 1.96, 2.96])
+        times.append([1.96, 2.96, 3.96, 4.96])
         keys.append([-0.0314159, -0.0314159, -0.0314159, -0.0314159])
 
         names.append("RElbowRoll")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([1.4399, 1.44513, 1.4399, 1.44513])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([0.513127, 1.4399, 1.44513, 1.4399, 1.44513, 0.513127])
 
         names.append("RElbowYaw")
-        times.append([0.1, 1.96])
-        keys.append([1.5708, 1.5708])
+        times.append([0, 1.96, 3.96, 6.96])
+        keys.append([1.21824, 1.5708, 1.5708, 1.21824])
 
         names.append("RHand")
-        times.append([0.1, 1.96])
-        keys.append([0.06, 0.06])
+        times.append([0, 1.96, 3.96, 6.96])
+        keys.append([0.6, 0.06, 0.06, 0.6])
 
         names.append("RShoulderPitch")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([2.08567, 1.17461, 2.08567, 1.17461])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([1.57778, 2.08567, 1.17461, 2.08567, 1.17461, 1.57778])
 
         names.append("RShoulderRoll")
-        times.append([0.1, 0.96, 1.96, 2.96])
-        keys.append([-0.115192, -0.115192, -0.115192, -0.115192])
+        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        keys.append([-0.111701, -0.115192, -0.115192, -0.115192, -0.115192, -0.111701])
 
         names.append("RWristYaw")
-        times.append([0.1, 1.96])
+        times.append([1.96, 3.96])
         keys.append([0.0296706, 0.0296706])
 
         return names, times, keys
@@ -1038,7 +1189,7 @@ class Animation:
 
         return names, times, keys
 
-    def happiness_animation(self, factor=1):
+    def happiness_dance_animation(self, factor=1):
         names = list()
         times = list()
         keys = list()
