@@ -173,12 +173,12 @@ class pepperModuleV2(object):
         json_params = {}
         json_params["ActivateTopic"] = event_name
         print "activateTopic", json_params
-        print "activateTopic", json_params
         send(-1, "int", json_params, False)
 
     def deactivateTopic(self, event_name):
         json_params = {}
         json_params["DeactivateTopic"] = event_name
+        print "DeactivateTopic", json_params
         send(-1, "int", json_params, False)
 
 

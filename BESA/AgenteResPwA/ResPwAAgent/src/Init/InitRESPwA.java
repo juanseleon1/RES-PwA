@@ -15,6 +15,7 @@ import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
 import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.Metas.LogIn;
+import RobotAgentBDI.Metas.MantenerAtencionPwA;
 import RobotAgentBDI.Metas.MusicoTerapia;
 import RobotAgentBDI.RobotAgentBDI;
 import RobotAgentBDI.Metas.ReportarEmergencia;
@@ -122,12 +123,10 @@ public class InitRESPwA {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
-//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
 //          LogIn logInGoal = LogIn.buildGoal();
-//        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
+        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
 //        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
@@ -138,7 +137,7 @@ public class InitRESPwA {
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-        RAGoals.add(musicoTGoal);
+//        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
