@@ -139,6 +139,7 @@ INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImage
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Caperucita y su abuelita, con lágrimas cayendo sobre sus mejillas, se abrazaron',66, 'Caperucita roja', 'INTERNALPOS', ' ', 'http://10.195.22.103:49152/content/media/object_id/51/res_id/0');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El susto había pasado y la niña había aprendido una importante lección:',67, 'Caperucita roja', ' ', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'nunca más desobedecería a su mamá ni se fiaría de extraños',68, 'Caperucita roja', ' ', ' ', ' ');
+commit;
 
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Había una vez tres hermanos cerditos que vivían en el bosque',1, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/42/res_id/0');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Como el malvado lobo siempre los estaba persiguiendo para comérselos dijo un día el mayor:',2, 'Los 3 cerditos', ' ', ' ', ' ');
