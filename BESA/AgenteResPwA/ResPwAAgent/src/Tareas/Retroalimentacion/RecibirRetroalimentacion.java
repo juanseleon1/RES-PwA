@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.Cuenteria;
+package Tareas.Retroalimentacion;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaUtils;
@@ -41,33 +41,23 @@ public class RecibirRetroalimentacion extends Task {
         ServiceDataRequest srb;
         if (blvs.getbEstadoInteraccion().getRetroalimentacionValue() == null) {
             if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
-                if (num == 0) {
-//                    System.out.println("HOLA 1 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
-//                    infoServicio = new HashMap<>();
-//                    infoServicio.put("SAY", "placeholder");
-//                    srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.FORCEINPUT, infoServicio);
-//                    ResPwaUtils.requestService(srb, blvs);
-                    num++;
-                } else if (num == 1) {
+                if (num == 1) {
                     System.out.println("HOLA 2 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
                     infoServicio = new HashMap<>();
-                    infoServicio.put("SAY", "Di una palabra para iniciar");
+                    infoServicio.put("SAY", "Podria hacerte una pregunta?");
                     srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                     ResPwaUtils.requestService(srb, blvs);
                     num++;
                 }
+                num++;
             }
             setTaskWaitingForExecution();
 
         } else {
-
-            System.out.println("HOLA 3 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
             String retroalimentacion = blvs.getbEstadoInteraccion().getRetroalimentacionValue();
             List<String> resulset = Arrays.asList(retroalimentacion.split(" "));
-            srb = null;
             Double respuestaRetroalimentacion = -1.0;
             if (resulset != null) {
-                System.out.println("RESULTSET ENTRA");
                 HashMap<String, Long> resultados = new HashMap<>();
                 resultados.put("Tres", resulset.stream().filter(retroa -> retroa.equalsIgnoreCase("Tres")).count() * 3);
                 resultados.put("Dos", resulset.stream().filter(retroa -> retroa.equalsIgnoreCase("Dos")).count() * 2);
@@ -82,15 +72,12 @@ public class RecibirRetroalimentacion extends Task {
                 if (resulRetroAlimentacion < 1.5) {
                     respuestaRetroalimentacion = 0.0;
                 }
-                System.out.println("RESULTSET Continua");
 
                 blvs.feedbackActivity(respuestaRetroalimentacion);
-                System.out.println("RESULTSET Continua2");
                 infoServicio = new HashMap<>();
-                infoServicio.put("SAY", "Tendre en cuenta tus valoraciones para la proxima vez");
+                infoServicio.put("SAY", "Gracias por tus consejos!");
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 ResPwaUtils.requestService(srb, blvs);
-                System.out.println("RESULTSET sale");
                 ResPwaUtils.deactivateTopic(PepperTopicsNames.RETROTOPIC, parameters);
 
             } else {
@@ -124,10 +111,8 @@ public class RecibirRetroalimentacion extends Task {
     public boolean checkFinish(Believes believes) {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        System.out.println("ACTIVACION: " + blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC));
         if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
-//            blvs.getbEstadoActividad().setActividadActual(null);
-
+            num = 0;
             return true;
         }
         return false;
