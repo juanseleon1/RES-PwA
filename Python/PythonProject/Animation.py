@@ -28,7 +28,8 @@ class Animation:
             "LION": self.lion_animation,
             "PENGUIN": self.penguin_animation,
             "FEROCIOUS": self.ferocious_animation,
-            "HAPPINESSDANCE": self.happiness_dance_animation
+            "HAPPINESSDANCE": self.happiness_dance_animation,
+            "SAD": self.sad_animation
         }
 
     def getAnimation(self, animation):
@@ -36,6 +37,81 @@ class Animation:
 
     def dance_lambada(self, factor=1):
         pass
+
+    def sad_animation(self, factor=1):
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("HeadPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.216421, 0.331613, 0.331613, -0.216421])
+
+        names.append("HeadYaw")
+        times.append([0, 4.96])
+        keys.append([0, 0])
+
+        names.append("HipPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.0261799, -0.162316, -0.162316, -0.0261799])
+
+        names.append("HipRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0, 0, 0, 0])
+
+        names.append("KneePitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0, 0, 0, 0])
+
+        names.append("LElbowRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.514872, -1.46259, -1.46259, -0.514872])
+
+        names.append("LElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-1.22173, -1.08734, -1.08734, -1.22173])
+
+        names.append("LHand")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.59, 0.9, 0.9, 0.59])
+
+        names.append("LShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.5708, 0.279253, 0.279253, 1.5708])
+
+        names.append("LShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.118682, 0.0925025, 0.0925025, 0.118682])
+
+        names.append("LWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.0296706, -1.33518, -1.33518, -0.0296706])
+
+        names.append("RElbowRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.514872, 1.46259, 1.46259, 0.514872])
+
+        names.append("RElbowYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.22173, 1.08734, 1.08734, 1.22173])
+
+        names.append("RHand")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.59, 0.9, 0.9, 0.59])
+
+        names.append("RShoulderPitch")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([1.5708, 0.279253, 0.279253, 1.5708])
+
+        names.append("RShoulderRoll")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([-0.118682, -0.0925025, -0.0925025, -0.118682])
+
+        names.append("RWristYaw")
+        times.append([0, 1.96, 2.96, 4.96])
+        keys.append([0.0296706, 1.33518, 1.33518, 0.0296706])
+
+        return names, times, keys
 
     def happiness_animation(self, factor=1):
         names = list()
