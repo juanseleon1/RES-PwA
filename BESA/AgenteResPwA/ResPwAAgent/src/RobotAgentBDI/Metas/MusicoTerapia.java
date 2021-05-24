@@ -9,12 +9,11 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Cuenteria.RecibirRetroalimentacion;
+import Tareas.Retroalimentacion.RecibirRetroalimentacion;
 import Tareas.MusicoTerapia.ReproduccionCancion;
 import Tareas.MusicoTerapia.SeleccionarCancion;
 import java.util.ArrayList;
@@ -33,12 +32,10 @@ public class MusicoTerapia extends GoalBDI{
     private static String descrip = "MusicoTerapia";
     
     public static MusicoTerapia buildGoal() {
-        
         SeleccionarCancion sCancion = new SeleccionarCancion();
         ReproduccionCancion rCancion = new ReproduccionCancion();
         RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
         
-        List<String> resources = new ArrayList<>();
         List<Task> tarea;
         Plan rolePlan = new Plan();
 
@@ -96,13 +93,10 @@ public class MusicoTerapia extends GoalBDI{
         double valor=0;
         
         for (Actxpreferencia act: listaAct) {
-            if(act.getActividadpwa().getNombre().equals(ResPwAActivity.MUSICOTERAPIA)) {
+            if(act.getActividadpwa().getNombre().equalsIgnoreCase(ResPwAActivity.MUSICOTERAPIA.toString())) {
                 valor = act.getGusto();
             }
         }
-        System.out.println("Gusto: "+valor);
-
-
         return valor;
     }
 

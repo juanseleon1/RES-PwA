@@ -8,7 +8,6 @@ from Emotion import Emotion
 from Topics import *
 from Utils import activities_running, send, callbacks_running
 
-
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
     def __init__(self, app, session):
@@ -455,9 +454,9 @@ class Robot:
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
         duration = self.emotionStateRobot.getDurationEyesColor()
-        self.alLedsProxy.rotateEyes(int(color, 16), rotationDuration, duration)
+        self.alLedsProxy.fadeRGB("AllLeds", color, 0.2)
 
-    # Enable or Disable the smart stif  fness reflex for all the joints (True by default).
+    # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
     def activate_stiffness(self, params):
         return self.alMotion.setSmartStiffnessEnabled(params.get("ACTIVATESTIFFNESS"))
