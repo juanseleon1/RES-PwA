@@ -60,7 +60,6 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
-        self.alSound = session.service("ALSound")
         # self.alTabletService = None;
         self.topicMap = {}
         self.prof_emotions = dict()
