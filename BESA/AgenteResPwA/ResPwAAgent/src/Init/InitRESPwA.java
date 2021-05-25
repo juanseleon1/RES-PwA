@@ -127,8 +127,6 @@ public class InitRESPwA {
 //        TestPlan tp = TestPlan.buildGoal();
 //          LogIn logInGoal = LogIn.buildGoal();
         MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
-//        PausarInteraccion pausarInteraccionGoal=  PausarInteraccion.buildGoal();
-//        ReanudarActividad reanudarActividadGoal=  ReanudarActividad.buildGoal();
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
