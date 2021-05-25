@@ -58,7 +58,7 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
 
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
-            if () {
+            if (blvs.getbEstadoRobot().getTiempoEmocionPredominante() > 600000) {
                 return 1;
             }
         }
@@ -91,8 +91,6 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI {
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta InteraccionSocial goalSucceeded");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //FALTAAAAA
         return false;
     }
 
