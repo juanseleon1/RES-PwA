@@ -10,5 +10,5 @@ package Tareas.AnimarElogiarPwA;
  * @author mafegarces
  */
 public enum OpcionesAnimar {
-    FRASEELOGIANTE,CHISTE,ADIVINANZA,DATOCURIOSO,PREGUNTAEMPATICA,CONSEJO;
+    FRASEELOGIANTE,PREGUNTAEMPATICA,CONSEJO;
 }

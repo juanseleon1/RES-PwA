@@ -16,6 +16,7 @@ import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;
 import rational.mapping.Task;
@@ -37,42 +38,33 @@ public class Interacciones extends Task{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Interacciones ---");
         
-        //mensajitos de acuerdo a sus emociones
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-//        EmotionalState emoState = blvs.getbEstadoEmocionalRobot().getEm().getState();
-        double state= 0;//emoState.getInfluenceFactor();
-        //toca modificar la emocion y color, depende de la encuesta
+        double state= 0;
+        
         if(state >= PepperEmotionRanges.SAD.getMin() && state < PepperEmotionRanges.SAD.getMax())
         {
-            infoServicio.put("SAY", "jeit u bish");
+            infoServicio.put("SAY", "juuum");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.VHAPPY.getMin() && state < PepperEmotionRanges.VHAPPY.getMax())
         {
-            infoServicio.put("SAY", "yupiii");
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            infoServicio.put("EMOTION", "VHAPPY");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.PLAYANIMATION, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.VSAD.getMin() && state < PepperEmotionRanges.VSAD.getMax())
         {
-            infoServicio.put("SAY", "juum");
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-            ResPwaUtils.requestService(srb,blvs);
-        }
-        
-        if(state >= PepperEmotionRanges.NORMAL.getMin() && state < PepperEmotionRanges.NORMAL.getMax())
-        {
-            infoServicio.put("SAY", "iu");
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            infoServicio.put("EMOTION", "VSAD");
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.PLAYANIMATION, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
         
         if(state >= PepperEmotionRanges.HAPPY.getMin() && state < PepperEmotionRanges.HAPPY.getMax())
         {
-            infoServicio.put("SAY", "güii");
+            infoServicio.put("SAY", "jijijiji");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb,blvs);
         }
@@ -91,8 +83,6 @@ public class Interacciones extends Task{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
-
         System.out.println("--- Check Finish Task Interacciones ---");
         return false;
     }

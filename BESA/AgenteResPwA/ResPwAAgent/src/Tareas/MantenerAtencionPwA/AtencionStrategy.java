@@ -9,8 +9,10 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import Tareas.AnimarElogiarPwA.OpcionesAnimar;
 import java.util.HashMap;
 import rational.mapping.Believes;
 
@@ -18,27 +20,43 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class AtencionStrategy implements ResPwAStrategy{
-    
+public class AtencionStrategy implements ResPwAStrategy {
+
     private OpcionesAtencion opcion;
-    
+
     @Override
     public void execStrategy(Believes believes) {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        HashMap<String,Object> infoServicio = new HashMap<>(); 
+        HashMap<String, Object> infoServicio = new HashMap<>();
         ServiceDataRequest srb = null;
-        switch (opcion)
-        {
-            case SILBAR:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                ResPwaUtils.requestService(srb,blvs);
-                break;
-            case LLAMARPWA:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                ResPwaUtils.requestService(srb,blvs);
-                break;
+
+        if (blvs.getbEstadoEmocionalPwA().getAtencion() >= 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.5) {
+            this.opcion = OpcionesAtencion.CHISTE;
+            infoServicio.put("SAY", "¿Qué diferencia hay entre una pila y una suegra?");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+
+            infoServicio.put("SAY", "Que la pila tiene un lado positivo");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+            infoServicio.put("SAY", "Ja ja ja jaja");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+        } else if (blvs.getbEstadoEmocionalPwA().getAtencion() >= 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() >= 0.5) {
+            this.opcion = OpcionesAtencion.DATOCURIOSO;
+            infoServicio.put("SAY", "En la Antigua Grecia la esperanza de vida era muy alta, hasta el punto de que muchas personas vivían hasta los 100 años o más");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+        } else if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() >= 0.5) {
+            this.opcion = OpcionesAtencion.SILBAR;
+            infoServicio.put("EMOTION", "SILBAR");
+            srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.PLAYANIMATION, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+        } else if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.5) {
+            this.opcion = OpcionesAtencion.LLAMARPWA;
+            infoServicio.put("SAY", blvs.getbPerfilPwA().getPerfil().getNombre() + ", no te distraigas");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
         }
     }
 
@@ -54,7 +72,5 @@ public class AtencionStrategy implements ResPwAStrategy{
     public void execStrategy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
 }

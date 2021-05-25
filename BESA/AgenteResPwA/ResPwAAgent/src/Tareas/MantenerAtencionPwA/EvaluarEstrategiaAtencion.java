@@ -34,22 +34,13 @@ public class EvaluarEstrategiaAtencion extends Task{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Atencion ---");
-        
-        //complejidad actividad es baja -> mayor tiempo de interacción 
-        //cambiar actividad, preguntar si desea cambiarla a una de sus favoritas
-        //preguntar si desea cambiar cancion/cuento/dificultad
-        //"Me siento solo" "no me dejes"
-        //adivinanzas, dato curioso
-        //si se va, irlo a buscar
-        
-        //  ACÁ DEBE ACTIVARSE EL TOPICO PARA LLAMAR LA ATENCION
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
         
         OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
         AtencionStrategy cs = new AtencionStrategy();
         
         cs.execStrategy();
+        
     }
 
     @Override
@@ -71,7 +62,6 @@ public class EvaluarEstrategiaAtencion extends Task{
     @Override
     public boolean checkFinish(Believes believes) {
                 
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
             return true;
