@@ -63,7 +63,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         
 
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
-            if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000 || blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 300000) {
+            if (blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() > 60000 && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < -0.5 || blvs.getbEstadoEmocionalPwA().getEmocionPredominante() > 0.5)) {
                 return 1.0;
             }
         }
@@ -97,11 +97,7 @@ public class AnimarElogiarPwA extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta AnimarPwA goalSucceeded");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //REVISAR, termina cuando ejecuta la accion en la tarea?
-        if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()  < 0){
-            return true;
-        }
+       
         return false;
     }
     
