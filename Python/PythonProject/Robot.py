@@ -16,6 +16,8 @@ class Robot:
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
         self.aLAutonomousLife = session.service("ALAutonomousLife")
+        self.aLAutonomousBlinking = session.service("AutonomousBlinkingProxy")
+        self.aLAutonomousBlinking.setEnabled(False)
         self.aLAutonomousLife.setState("interactive")
         self.alProxy = session.service("ALMemory")
         self.alTabletService = self.session.service("ALTabletService")
@@ -459,8 +461,7 @@ class Robot:
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
-        duration = self.emotionStateRobot.getDurationEyesColor()
-        self.alLedsProxy.fadeRGB("AllLeds", color, 0.2)
+        self.alLedsProxy.fadeRGB("AllLeds", 60415, 0)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
@@ -480,7 +481,7 @@ class Robot:
             emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
-        self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
+        #self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
     # Turn on/off the tablet screen.
     def tablet_on(self):
