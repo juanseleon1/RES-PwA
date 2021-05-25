@@ -2,12 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
             <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/MantenerAtencionPwA.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MantenerAtencionPwA/AtencionStrategy.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoEmocionalPwA.java</file>
         </group>
->>>>>>> ad8a2579ce4f3ff813f4ef82c87e33719f187210
     </open-files>
 </project-private>

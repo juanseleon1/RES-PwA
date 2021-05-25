@@ -53,9 +53,12 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
     private PepperEmotionRanges leds = null;
     private double brilloRobot = 0;
     private boolean storyMode;
+    private int valencia;
+    private long tiempoEmocionPredominante;
 
     public BEstadoRobot() {
         super();
+        valencia=0;
         storyMode = false;
     }
 
@@ -283,7 +286,15 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
         try {
             HashMap<String, Object> infoServicio = new HashMap<>();
             EmotionAxis ea = getTopEmotionAxis();
+
             float state = ea.getCurrentValue();
+            if (state > 0 && valencia != 1) {
+                valencia = 1;
+                tiempoEmocionPredominante = System.currentTimeMillis();
+            } else if (state < 0 && valencia != -1) {
+                valencia = -1;
+                tiempoEmocionPredominante = System.currentTimeMillis();
+            }
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
             infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
             infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
@@ -334,6 +345,14 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
 
     public void setStoryMode(boolean storyMode) {
         this.storyMode = storyMode;
+    }
+
+    public long getTiempoEmocionPredominante() {
+        return tiempoEmocionPredominante;
+    }
+
+    public void setTiempoEmocionPredominante(long tiempoEmocionPredominante) {
+        this.tiempoEmocionPredominante = tiempoEmocionPredominante;
     }
 
 }
