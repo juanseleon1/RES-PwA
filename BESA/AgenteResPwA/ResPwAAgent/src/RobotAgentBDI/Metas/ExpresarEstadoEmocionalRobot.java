@@ -57,11 +57,11 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
         System.out.println("Meta InteraccionSocial detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
-        Random rand = new Random();
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged())
         {
             
             return 1;
+            
         }
         return 0;
     }
