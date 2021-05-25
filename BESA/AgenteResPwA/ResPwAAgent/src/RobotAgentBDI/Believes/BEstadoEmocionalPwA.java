@@ -29,12 +29,12 @@ public class BEstadoEmocionalPwA implements Believes {
     private Map<EmotionPwA, List<Emotion>> emoMap;
     private long tiempoEmocionPredominante;
     private long tiempoAtencion;
-    private long tiempoSinAtencion;
+    private Long tiempoSinAtencion;
     private long tiempoRelajacion;
-    private long tiempoSinRelajacion;
+    private Long tiempoSinRelajacion;
     private double atencion;
     private double relajacion;
-
+    private float valencia;
 
     public BEstadoEmocionalPwA() {
         emoMap = new HashMap<>();
@@ -48,13 +48,21 @@ public class BEstadoEmocionalPwA implements Believes {
         System.out.println("BEstadoEmocionalPwA update Received: " + si);
         EmotionalData infoRecibida = (EmotionalData) si;
         if (infoRecibida.getInfo().containsKey("atencion")) {
+            atencion = (double) infoRecibida.getInfo().get("atencion");
+
             if ((double) infoRecibida.getInfo().get("atencion") < 0.5) {
-                atencion = (double) infoRecibida.getInfo().get("atencion") ;
-         
+                tiempoSinAtencion = tiempoSinAtencion != null ? tiempoSinAtencion : System.currentTimeMillis();
+            } else {
+                tiempoSinAtencion = null;
             }
         }
         if (infoRecibida.getInfo().containsKey("relajacion")) {
-            atencion = (double) infoRecibida.getInfo().get("relajacion") ;
+            relajacion = (double) infoRecibida.getInfo().get("relajacion");
+            if ((double) infoRecibida.getInfo().get("relajacion") < 0.5) {
+                tiempoSinRelajacion = tiempoSinRelajacion != null ? tiempoSinRelajacion : System.currentTimeMillis();
+            } else {
+                tiempoSinRelajacion = null;
+            }
         }
         if (infoRecibida.getInfo().containsKey("emotions")) {
             Map<EmotionPwA, Float> emo = (Map<EmotionPwA, Float>) infoRecibida.getInfo().get("emotions");
@@ -78,45 +86,45 @@ public class BEstadoEmocionalPwA implements Believes {
     public void setEmoMap(Map<EmotionPwA, List<Emotion>> emoMap) {
         this.emoMap = emoMap;
     }
-    
+
 //    Return if the emotion is pleasant or unpleasant
-    public double getFeedbackEmotion(){
+    public double getFeedbackEmotion() {
         double emotionFeedback = 0.0;
         double auxEmotionAverage = 0.0;
         for (EmotionPwA entry : emoMap.keySet()) {
-            
+
             auxEmotionAverage = getEmotionAverage(emoMap.get(entry));
-            if(entry.equals(ANGER)  || entry.equals(SADNESS) ){
+            if (entry.equals(ANGER) || entry.equals(SADNESS)) {
                 auxEmotionAverage *= -1;
             }
-            if(Math.abs(auxEmotionAverage) > Math.abs(emotionFeedback)){
+            if (Math.abs(auxEmotionAverage) > Math.abs(emotionFeedback)) {
                 emotionFeedback = auxEmotionAverage;
             }
         }
-        
-////        if Pleasant return 1.0
-//        if(emotionFeedback > 0){
-//            emotionFeedback = 1.0;
-//        }
-//        else{
-////            if Unpleasant return 0.0
-//            emotionFeedback = 0.0;
-//        }
+
         return emotionFeedback;
     }
-    
-    private float getEmotionAverage(List<Emotion> historyEmotionsInActivity){
+
+    private float getEmotionAverage(List<Emotion> historyEmotionsInActivity) {
         float emotionAverage = 0.0f;
-        
+
         for (Emotion emotion : historyEmotionsInActivity) {
             emotionAverage += emotion.getValence();
         }
-        
+
         return emotionAverage / historyEmotionsInActivity.size();
     }
-    
+
     public double getEmocionPredominante() {
-        return getFeedbackEmotion();
+        double aux = getFeedbackEmotion();
+        if (aux > 0 && valencia != 1) {
+            valencia = 1;
+            tiempoEmocionPredominante = System.currentTimeMillis();
+        } else if (aux < 0 && valencia != -1) {
+            valencia = -1;
+            tiempoEmocionPredominante = System.currentTimeMillis();
+        }
+        return aux;
     }
 
     public void setEmocionPredominante(double emocionPredominante) {
