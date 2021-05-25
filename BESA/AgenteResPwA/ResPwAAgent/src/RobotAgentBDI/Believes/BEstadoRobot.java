@@ -301,7 +301,7 @@ public class BEstadoRobot extends PepperEmotionalModel implements Believes {
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
             infoServicio.put("DURATION", normalizeValue(state, PepperConf.DURATION));
-//            infoServicio.put("COLOR", leds.getHexa());
+            infoServicio.put("COLOR", leds.getHexa());
             System.out.println("AfueraStoryMOde" + isStoryMode());
 
             if (!storyMode) {

@@ -16,7 +16,7 @@ class Robot:
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
         self.aLAutonomousLife = session.service("ALAutonomousLife")
-        self.aLAutonomousBlinking = session.service("AutonomousBlinkingProxy")
+        self.aLAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.aLAutonomousBlinking.setEnabled(False)
         self.aLAutonomousLife.setState("interactive")
         self.alProxy = session.service("ALMemory")
@@ -30,6 +30,7 @@ class Robot:
         self.alRobotPosture = session.service("ALRobotPosture")
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
+        self.alBackgroundMovement.setEnabled(False)
         self.alListeningMovement = session.service("ALListeningMovement")
         self.alSpeakingMovementProxy = session.service("ALSpeakingMovement")
         self.alMotionProxy = session.service("ALMotion")
@@ -60,6 +61,7 @@ class Robot:
         self.alBasicAwareness.setStimulusDetectionEnabled("Movement", False)
         self.alBasicAwareness.setStimulusDetectionEnabled("NavigationMotion", False)
         self.alBasicAwareness.startAwareness()
+        #self.alBasicAwareness.setEnabled(False)
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         # self.alTabletService = None;
@@ -461,7 +463,7 @@ class Robot:
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
-        self.alLedsProxy.fadeRGB("AllLeds", 60415, 0)
+        self.alLedsProxy.fadeRGB("AllLeds", int(color), 0)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
