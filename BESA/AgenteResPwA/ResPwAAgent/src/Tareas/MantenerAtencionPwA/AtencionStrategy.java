@@ -50,11 +50,6 @@ public class AtencionStrategy implements ResPwAStrategy{
         this.opcion = opcion;
     }
 
-    @Override
-    public void execStrategy() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     
     
 }

@@ -1,17 +1,17 @@
 import threading
 import time
 
-import Constants
 import PepperModuleV2
 from Animation import Animation
 from Emotion import Emotion
 from Topics import *
-from Utils import activities_running, send, callbacks_running
+from Utils import activities_running, send
+
 
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------
 class Robot:
     def __init__(self, app, session):
-        self.app=app
+        self.app = app
         self.current_emomap = None
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
@@ -60,7 +60,8 @@ class Robot:
         self.alBasicAwareness.startAwareness()
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
-        #self.alTabletService = None;
+        self.alSound = session.service("ALSound")
+        # self.alTabletService = None;
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
@@ -68,22 +69,25 @@ class Robot:
 
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
-                                 "sadTopic":topico_triste,
-                                 "iraTopic":topico_ira,
-                                 "ayudaTopic":topico_ayuda,
-                                 "normalTopic":topico_normal,
-                                 "retroTopic":topico_retro,
-                                 "saludarTopic":topico_saludable,
-                                 "soundTopic": topico_sonido
+                                "sadTopic": topico_triste,
+                                "iraTopic": topico_ira,
+                                "ayudaTopic": topico_ayuda,
+                                "normalTopic": topico_normal,
+                                "retroTopic": topico_retro,
+                                "saludarTopic": topico_saludable,
+                                "soundTopic": topico_sonido
                                 }
+        self.path = {
+            "VSAD": "boston_animation_library/Stand/cry",
+            "VHAPPY": "animations/Stand/Emotions/Positive/Happy_1",
+            "SILBAR": "animations/Stand/Waiting/CallSomeone_1"
+        }
         self.alDialogProxy = session.service("ALDialog")
-
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
-
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
-        #self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
@@ -99,11 +103,11 @@ class Robot:
         time.sleep(5)
         print "ROBOT CARGADO Y LISTO"
 
-
         # The list have the function on the first place, if the activity most return an ack on the second, type on the third and callback response the fourth
         self.__modules = {
             # ActivityServices-------------------------------------------------------
             "RUNANIMATION": [self.run_animation, True, "act", True],  # funcionando
+            "PLAYANIMATION": [self.run_animation_play, True, "act", False],  # funcionando
             "GOTOPOSTURE": [self.go_to_posture, False, "rob", False],  # No hace nada-------------------------
             "DETECTNEWFACE ": [self.learn_face, True, "int", False],  # funcionando
             "GETFACELIST": [self.get_face_list, False, "int", False],  # funcionando
@@ -227,12 +231,15 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
-            self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
+            self.alMotion.angleInterpolation(animation_names, animation_keys,
+                                             self.change_speed(self.emotionStateRobot.getFactorVelocity(),
+                                                               animation_times), True)
         except BaseException, err:
             print err
 
-    # def run_animation( animation_path, animation_tag):
-    #    alAnimationPlayer.runTag(animation_path, animation_tag)
+    def run_animation_play(self, params):
+        path = self.path[params.get("EMOTION")]
+        self.alAnimationPlayer.run(path, _async=True)
 
     # Animations
     def change_speed(self, factor, times):
@@ -408,7 +415,7 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
-                #self.app.run()
+                # self.app.run()
             except Exception, e:
                 print "Main Error"
                 print e
@@ -423,7 +430,7 @@ class Robot:
             names.append(name)
             keys.append(action["key"])
             times.append(action["time"])
-        
+
         self.play_animation(names, times, keys)
 
     # The robot wakes up
@@ -471,7 +478,7 @@ class Robot:
         if "EmotionalTag" in params:
             print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
-            emomapParams = { "ACTION": "POSTURA"}
+            emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
         self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
@@ -494,9 +501,9 @@ class Robot:
 
     # Open a video player on tablet and play video from given url.
     def show_video(self, params):
-         print "CRACK", params.get("SHOWVIDEO")
-         value= params.get("SHOWVIDEO")
-         self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
+        print "CRACK", params.get("SHOWVIDEO")
+        value = params.get("SHOWVIDEO")
+        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):
@@ -636,7 +643,7 @@ class Robot:
 
     # Says a tagged sentence from a topic.
     def say_under_topic_context(self, params):
-        topic_path=self.topicContentMap[params.get("TOPIC")]
+        topic_path = self.topicContentMap[params.get("TOPIC")]
         self.alDialogProxy.say(topic_path, params.get("TAGS"))
 
     # If multiple topics can be active at the same time, only one of them is used to generate proposals.
@@ -771,7 +778,7 @@ class Robot:
 
     def timer_request_finish_anim(self):
         dict = self.alMotion.getTaskList()
-        json_params = {"finishAnim": "angleInterpolation" in dict}
+        json_params = {"finishAnim": "angleInterpolation" in dict or "angleInterpolationBezier" in dict}
         send(-1, "act", json_params)
         threading.Timer(9.0, self.timer_request_finish_anim).start()
 

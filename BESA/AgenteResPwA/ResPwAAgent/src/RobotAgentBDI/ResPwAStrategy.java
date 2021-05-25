@@ -14,7 +14,6 @@ import rational.mapping.Believes;
  */
 public interface ResPwAStrategy{
     
-    public abstract void execStrategy();
     public abstract void execStrategy(Believes b);
     
 }
