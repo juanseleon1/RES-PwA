@@ -39,7 +39,7 @@ public class EvaluarEstrategiaAnimar extends Task{
 
         AnimarStrategy as = new AnimarStrategy();
 
-        as.execStrategy();
+        as.execStrategy(parameters);
     }
 
     @Override
