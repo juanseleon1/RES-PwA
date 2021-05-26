@@ -156,6 +156,9 @@ public class BEstadoEmocionalPwA implements Believes {
     }
 
     public long getTiempoSinAtencion() {
+        if (tiempoSinAtencion == null) {
+            return 0;
+        }
         return System.currentTimeMillis() - tiempoSinAtencion;
     }
 
@@ -164,6 +167,9 @@ public class BEstadoEmocionalPwA implements Believes {
     }
 
     public long getTiempoSinRelajacion() {
+        if (tiempoSinRelajacion == null) {
+            return 0;
+        }
         return System.currentTimeMillis() - tiempoSinRelajacion;
     }
 

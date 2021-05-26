@@ -39,8 +39,8 @@ public class PreferenciaxbaileJpaController implements Serializable {
         if (preferenciaxbaile.getPreferenciaxbailePK() == null) {
             preferenciaxbaile.setPreferenciaxbailePK(new PreferenciaxbailePK());
         }
-        preferenciaxbaile.getPreferenciaxbailePK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxbaile.getPerfilPreferencia().getPerfilpwaCedula());
         preferenciaxbaile.getPreferenciaxbailePK().setBaileId(preferenciaxbaile.getBaile().getId());
+        preferenciaxbaile.getPreferenciaxbailePK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxbaile.getPerfilPreferencia().getPerfilpwaCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,8 +78,8 @@ public class PreferenciaxbaileJpaController implements Serializable {
     }
 
     public void edit(Preferenciaxbaile preferenciaxbaile) throws NonexistentEntityException, Exception {
-        preferenciaxbaile.getPreferenciaxbailePK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxbaile.getPerfilPreferencia().getPerfilpwaCedula());
         preferenciaxbaile.getPreferenciaxbailePK().setBaileId(preferenciaxbaile.getBaile().getId());
+        preferenciaxbaile.getPreferenciaxbailePK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxbaile.getPerfilPreferencia().getPerfilpwaCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();

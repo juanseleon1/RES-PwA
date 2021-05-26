@@ -141,7 +141,7 @@ public class InitRESPwA {
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
-//        RAGoals.add(mantenerAtencionPwAGoal);
+        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);
 //        RAGoals.add(recargarBateriaGoal);

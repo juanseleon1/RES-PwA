@@ -50,7 +50,7 @@ class Robot:
         self.specchRecog.pause(True)
         self.alTabletService.hideImage()
         self.alFaceDetection = session.service("ALFaceDetection")
-        self.alFaceDetection.setTrackingEnabled(False)
+        self.alFaceDetection.setTrackingEnabled(True)
         self.alFaceDetection.setRecognitionEnabled(False)
         self.alBasicAwareness = session.service("ALBasicAwareness")
         self.emotionStateRobot = Emotion()
@@ -61,7 +61,7 @@ class Robot:
         self.alBasicAwareness.setStimulusDetectionEnabled("Movement", False)
         self.alBasicAwareness.setStimulusDetectionEnabled("NavigationMotion", False)
         self.alBasicAwareness.startAwareness()
-        #self.alBasicAwareness.setEnabled(False)
+        self.alBasicAwareness.setEnabled(True)
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         # self.alTabletService = None;
@@ -480,6 +480,7 @@ class Robot:
         if "EmotionalTag" in params:
             print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
+            self.show_image({"SHOWIMG": self.current_emomap["Image"]})
             emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
