@@ -77,6 +77,8 @@ public class ReproducirCuento extends Task {
                 infoServicio = new HashMap<>();
                 EmotionalEvent evt = new EmotionalEvent(WHO.ROBOT.toString(), cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent(), null);
                 blvs.getbEstadoRobot().processEmotionalEvent(evt);
+            }else{
+                 blvs.getbEstadoRobot().emotionalStateChanged();
             }
             blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento() + 1);
         }

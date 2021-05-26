@@ -480,7 +480,7 @@ class Robot:
         if "EmotionalTag" in params:
             print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
-            self.show_image({"SHOWIMG": self.current_emomap["Image"]})
+            self.show_image({"SHOWIMG": self.current_emomap["image"]})
             emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
@@ -506,7 +506,7 @@ class Robot:
     def show_video(self, params):
         print "CRACK", params.get("SHOWVIDEO")
         value = params.get("SHOWVIDEO")
-        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
+        self.alTabletService.playVideo(value)
 
     # Close the video player.
     def quit_video(self):
