@@ -44,71 +44,71 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.216421, 0.331613, 0.331613, -0.216421])
 
         names.append("HeadYaw")
-        times.append([0, 4.96])
+        times.append([1, 4.96])
         keys.append([0, 0])
 
         names.append("HipPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.0261799, -0.162316, -0.162316, -0.0261799])
 
         names.append("HipRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0, 0, 0, 0])
 
         names.append("KneePitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0, 0, 0, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.514872, -1.46259, -1.46259, -0.514872])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-1.22173, -1.08734, -1.08734, -1.22173])
 
         names.append("LHand")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.59, 0.9, 0.9, 0.59])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.5708, 0.279253, 0.279253, 1.5708])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.118682, 0.0925025, 0.0925025, 0.118682])
 
         names.append("LWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.0296706, -1.33518, -1.33518, -0.0296706])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.514872, 1.46259, 1.46259, 0.514872])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.22173, 1.08734, 1.08734, 1.22173])
 
         names.append("RHand")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.59, 0.9, 0.9, 0.59])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.5708, 0.279253, 0.279253, 1.5708])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.118682, -0.0925025, -0.0925025, -0.118682])
 
         names.append("RWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.0296706, 1.33518, 1.33518, 0.0296706])
 
         return names, times, keys
@@ -119,71 +119,71 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0, 2.96, 4.96])
+        times.append([1, 2.96, 4.96])
         keys.append([-0.207694, -0.156742, -0.207694])
 
         names.append("HeadYaw")
-        times.append([0, 4.96])
+        times.append([1, 4.96])
         keys.append([0, 0])
 
         names.append("HipPitch")
-        times.append([0, 2.96, 4.96])
+        times.append([1, 2.96, 4.96])
         keys.append([-0.0261799, 0.0174533, -0.0261799])
 
         names.append("HipRoll")
-        times.append([0, 2.96, 4.96])
+        times.append([1, 2.96, 4.96])
         keys.append([0, 0, 0])
 
         names.append("KneePitch")
-        times.append([0, 2.96, 4.96])
+        times.append([1, 2.96, 4.96])
         keys.append([0, 0, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 4.96])
+        times.append([1, 1.96, 4.96])
         keys.append([-0.525344, -0.705113, -0.525344])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-1.22522, -0.537561, -0.677188, -1.22522])
 
         names.append("LHand")
-        times.append([0, 1.96, 4.96])
+        times.append([1, 1.96, 4.96])
         keys.append([0.59, 0.8, 0.59])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.57778, 0.232129, -1.15715, 1.57778])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.118682, 0.548033, 0.722566, 0.118682])
 
         names.append("LWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.0349066, 0.279253, 0.349066, -0.0349066])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 4.96])
+        times.append([1, 1.96, 4.96])
         keys.append([0.525344, 0.705113, 0.525344])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.22522, 0.537561, 0.677188, 1.22522])
 
         names.append("RHand")
-        times.append([0, 1.96, 4.96])
+        times.append([1, 1.96, 4.96])
         keys.append([0.59, 0.8, 0.59])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.57778, 0.232129, -1.15715, 1.57778])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.118682, -0.548033, -0.722566, -0.118682])
 
         names.append("RWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.0349066, -0.279253, -0.349066, 0.0349066])
 
         return names, times, keys
@@ -197,59 +197,59 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.221657, -0.0676186, -0.0676186, -0.221657])
 
         names.append("HeadYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0, -0.415388, 0.424115, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.520108, -1.2706, -1.2706, -0.520108])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-1.22173, -1.48353, -1.48353, -1.22173])
 
         names.append("LHand")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.59, 0.97, 0.97, 0.59])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.5708, 0.226893, 0.226893, 1.5708])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.120428, 0.801106, 0.801106, 0.120428])
 
         names.append("LWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.0261799, 0.733038, 0.733038, -0.0261799])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.520108, 1.2706, 1.2706, 0.520108])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.22173, 1.48353, 1.48353, 1.22173])
 
         names.append("RHand")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.59, 0.97, 0.97, 0.59])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([1.5708, 0.226893, 0.226893, 1.5708])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([-0.120428, -0.801106, -0.801106, -0.120428])
 
         names.append("RWristYaw")
-        times.append([0, 1.96, 2.96, 4.96])
+        times.append([1, 1.96, 2.96, 4.96])
         keys.append([0.0261799, -0.733038, -0.733038, 0.0261799])
 
         return names, times, keys
@@ -975,75 +975,75 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0, 1.96, 3.96, 7.96, 9.96, 13.96, 15.96, 19.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 7.96, 9.96, 13.96, 15.96, 19.96, 23.96, 27.96])
         keys.append(
             [-0.211185, -0.211185, -0.211185, 0.123918, 0.123918, 0.445059, 0.123918, 0.123918, 0.123918, 0.123918])
 
         names.append("HeadYaw")
-        times.append([0, 1.96, 3.96, 7.96, 9.96, 13.96, 15.96, 19.96, 21.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 7.96, 9.96, 13.96, 15.96, 19.96, 21.96, 23.96, 27.96])
         keys.append(
             [-0.00698132, 0.219911, -0.00698132, -0.364774, -0.0174533, -0.00698132, -0.00698132, 0.329867, -0.118682,
              0.127409, -0.0314159])
 
         names.append("HipPitch")
-        times.append([0, 1.96, 13.96])
+        times.append([1, 1.96, 13.96])
         keys.append([-0.0357826, -0.0474347, 0])
 
         names.append("HipRoll")
-        times.append([0, 1.96, 13.96])
+        times.append([1, 1.96, 13.96])
         keys.append([-0.0041018, -0.00654055, -0.00523599])
 
         names.append("KneePitch")
-        times.append([0, 1.96, 13.96])
+        times.append([1, 1.96, 13.96])
         keys.append([-0.0133719, -0.0163339, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 3.96, 7.96, 15.96, 21.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 7.96, 15.96, 21.96, 23.96, 27.96])
         keys.append([-1.56207, -0.00872665, -0.00872665, -0.00872665, -0.00872665, -1.37357, -1.41372, -1.41372])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
         keys.append([-0.118682, -0.118682, -0.118682, 0.722566, 0.722566, -1.80816, -0.197222, -0.830777, -0.849975])
 
         names.append("LHand")
-        times.append([0, 1.96, 3.96, 5.96])
+        times.append([1, 1.96, 3.96, 5.96])
         keys.append([0.6, 0.2, 0.2, 0.87])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
         keys.append([1.32994, 1.7558, -1.22173, 0.0837758, 0.0837758, 0.0837758, 0.0837758, -0.289725, 1.69821])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
+        times.append([1, 1.96, 3.96, 5.96, 7.96, 15.96, 21.96, 23.96, 27.96])
         keys.append([0.109956, 0.792379, 0.00872665, 0.198968, 0.198968, 0.198968, 0.0226893, 0.525344, 0.539307])
 
         names.append("LWristYaw")
-        times.append([0, 1.96, 3.96, 7.96, 15.96, 21.96, 23.96])
+        times.append([1, 1.96, 3.96, 7.96, 15.96, 21.96, 23.96])
         keys.append([-0.0314159, -0.708604, -0.708604, -0.708604, -0.708604, -0.301942, -0.29147])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 7.96, 9.96, 17.96, 19.96, 25.96, 29.96])
+        times.append([1, 1.96, 7.96, 9.96, 17.96, 19.96, 25.96, 29.96])
         keys.append([1.56207, 1.56207, 0.00872665, 0.00872665, 0.00872665, 1.41372, 1.41372, 1.41372])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 7.96, 9.96, 11.96, 17.96, 19.96, 23.96, 25.96, 29.96])
+        times.append([1, 1.96, 7.96, 9.96, 11.96, 17.96, 19.96, 23.96, 25.96, 29.96])
         keys.append([0.118682, 0.118682, 0.118682, 0.118682, -0.722566, 1.80816, 0.13439, 0.150098, 0.849975, 0.849975])
 
         names.append("RHand")
-        times.append([0, 1.96, 11.96, 17.96])
+        times.append([1, 1.96, 11.96, 17.96])
         keys.append([0.02, 0.2, 0.87, 0.87])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 7.96, 9.96, 11.96, 17.96, 25.96, 29.96])
+        times.append([1, 1.96, 7.96, 9.96, 11.96, 17.96, 25.96, 29.96])
         keys.append([1.32994, 1.32994, 0.127409, -1.09258, 0.0837758, 0.0837758, -0.300197, 1.69821])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 7.96, 9.96, 11.96, 17.96, 19.96, 25.96, 29.96])
+        times.append([1, 1.96, 7.96, 9.96, 11.96, 17.96, 19.96, 25.96, 29.96])
         keys.append(
             [-0.792379, -0.792379, -0.792379, -0.0314159, -0.00872665, -0.200713, -0.00872665, -0.539307, -0.539307])
 
         names.append("RWristYaw")
-        times.append([0, 1.96, 7.96, 9.96, 17.96, 25.96, 29.96])
+        times.append([1, 1.96, 7.96, 9.96, 17.96, 25.96, 29.96])
         keys.append([0.708604, -0.708604, 0.708604, 0.708604, 0.708604, 0.29147, 0.29147])
 
         return names, times, keys
@@ -1058,35 +1058,35 @@ class Animation:
         keys.append([-0.211185, -0.211185])
 
         names.append("HeadYaw")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([0, -0.390954, -0.00698132, 0.3735, -0.00698132, 0])
 
         names.append("HipPitch")
-        times.append([0, 6.96])
+        times.append([1, 6.96])
         keys.append([-0.0191986, -0.0191986])
 
         names.append("KneePitch")
-        times.append([0, 6.96])
+        times.append([1, 6.96])
         keys.append([0, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([-0.513127, -1.43815, -1.44688, -1.43815, -1.44688, -0.513127])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([-1.21824, -1.57603, -1.57603, -1.57603, -1.57603, -1.21824])
 
         names.append("LHand")
-        times.append([0, 1.96, 3.96, 6.96])
+        times.append([1, 1.96, 3.96, 6.96])
         keys.append([0.6, 0.07, 0.07, 0.6])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([1.57778, 1.16937, 2.08567, 1.16937, 2.08567, 1.57778])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 3.96, 6.96])
+        times.append([1, 1.96, 3.96, 6.96])
         keys.append([0.111701, 0.116937, 0.116937, 0.111701])
 
         names.append("LWristYaw")
@@ -1094,23 +1094,23 @@ class Animation:
         keys.append([-0.0314159, -0.0314159, -0.0314159, -0.0314159])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([0.513127, 1.4399, 1.44513, 1.4399, 1.44513, 0.513127])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 3.96, 6.96])
+        times.append([1, 1.96, 3.96, 6.96])
         keys.append([1.21824, 1.5708, 1.5708, 1.21824])
 
         names.append("RHand")
-        times.append([0, 1.96, 3.96, 6.96])
+        times.append([1, 1.96, 3.96, 6.96])
         keys.append([0.6, 0.06, 0.06, 0.6])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([1.57778, 2.08567, 1.17461, 2.08567, 1.17461, 1.57778])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 2.96, 3.96, 4.96, 6.96])
+        times.append([1, 1.96, 2.96, 3.96, 4.96, 6.96])
         keys.append([-0.111701, -0.115192, -0.115192, -0.115192, -0.115192, -0.111701])
 
         names.append("RWristYaw")
@@ -1661,71 +1661,71 @@ class Animation:
         keys = list()
 
         names.append("HeadPitch")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.223402, -0.143117, -0.10821, -0.143117, -0.0436332, -0.223402])
 
         names.append("HeadYaw")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.0453786, -0.155334, -0.555015, -0.155334, 0.300197, -0.0453786])
 
         names.append("HipPitch")
-        times.append([0, 1.96, 3.16, 4.36, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 7.16])
         keys.append([0, 0, 0, 0, 0])
 
         names.append("HipRoll")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.000594313, 0, 0, 0, -0.0296706, -0.000594313])
 
         names.append("KneePitch")
-        times.append([0, 1.96, 3.16, 4.36, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 7.16])
         keys.append([0, 0, 0, 0, 0])
 
         names.append("LElbowRoll")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.5044, -1.44688, -1.44688, -1.44688, -1.3697, -0.5044])
 
         names.append("LElbowYaw")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-1.30202, -0.246091, -0.246091, -0.246091, -0.255843, -1.30202])
 
         names.append("LHand")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([0.59, 0.08, 0.77, 0.08, 0.77, 0.59])
 
         names.append("LShoulderPitch")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([1.57603, -1.26536, -1.26536, -1.26536, -1.25919, 1.57603])
 
         names.append("LShoulderRoll")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([0.123918, 0.645772, 0.645772, 0.645772, 0.727989, 0.123918])
 
         names.append("LWristYaw")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.0401426, -1.45735, -1.45735, -1.45735, -1.44868, -0.0401426])
 
         names.append("RElbowRoll")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([0.518363, 0.518363, 0.518363, 0.518363, 0.518363, 0.518363])
 
         names.append("RElbowYaw")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([1.22522, 1.22522, 1.22522, 1.22522, 1.22522, 1.22522])
 
         names.append("RHand")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([0.59, 0.59, 0.59, 0.59, 0.59, 0.59])
 
         names.append("RShoulderPitch")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([1.57952, 1.57952, 1.57952, 1.57952, 1.57952, 1.57952])
 
         names.append("RShoulderRoll")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([-0.115192, -0.115192, -0.115192, -0.115192, -0.115192, -0.115192])
 
         names.append("RWristYaw")
-        times.append([0, 1.96, 3.16, 4.36, 5.56, 7.16])
+        times.append([1, 1.96, 3.16, 4.36, 5.56, 7.16])
         keys.append([0.0279253, 0.0279253, 0.0279253, 0.0279253, 0.0279253, 0.0279253])
 
         return names, times, keys
