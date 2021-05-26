@@ -67,7 +67,7 @@ public class EvaluarEstrategiaAnimar extends Task{
     public boolean checkFinish(Believes believes) {
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy && blvs.getbEstadoActividad().getEstrategia().isFinished(believes)) {
             return true;
         }
         return false;

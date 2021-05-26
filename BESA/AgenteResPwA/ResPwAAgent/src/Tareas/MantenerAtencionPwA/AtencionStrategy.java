@@ -29,17 +29,21 @@ public class AtencionStrategy implements ResPwAStrategy {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         HashMap<String, Object> infoServicio = new HashMap<>();
         ServiceDataRequest srb = null;
-
+        blvs.getbEstadoEmocionalPwA().setAtencion(0.4);
+        blvs.getbEstadoEmocionalPwA().setRelajacion(0.6);   
         if (blvs.getbEstadoEmocionalPwA().getAtencion() >= 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.5) {
             this.opcion = OpcionesAtencion.CHISTE;
             infoServicio.put("SAY", "¿Qué diferencia hay entre una pila y una suegra?");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
 
+            infoServicio = new HashMap<>();
             infoServicio.put("SAY", "Que la pila tiene un lado positivo");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            
+            infoServicio = new HashMap<>();
             ResPwaUtils.requestService(srb, blvs);
-            infoServicio.put("SAY", "Ja ja ja jaja");
+            infoServicio.put("SAY", "Jajajajaja");
             srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
         } else if (blvs.getbEstadoEmocionalPwA().getAtencion() >= 0.5 && blvs.getbEstadoEmocionalPwA().getRelajacion() >= 0.5) {
@@ -66,5 +70,10 @@ public class AtencionStrategy implements ResPwAStrategy {
 
     public void setOpcion(OpcionesAtencion opcion) {
         this.opcion = opcion;
+    }
+
+    @Override
+    public boolean isFinished(Believes b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -16,7 +16,7 @@ class Robot:
         print "INICIA ROBOT CARGADO Y LISTO"
         self.session = session
         self.aLAutonomousLife = session.service("ALAutonomousLife")
-        self.aLAutonomousBlinking = session.service("AutonomousBlinkingProxy")
+        self.aLAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.aLAutonomousBlinking.setEnabled(False)
         self.aLAutonomousLife.setState("interactive")
         self.alProxy = session.service("ALMemory")
@@ -30,6 +30,7 @@ class Robot:
         self.alRobotPosture = session.service("ALRobotPosture")
         self.alAutonomousBlinking = session.service("ALAutonomousBlinking")
         self.alBackgroundMovement = session.service("ALBackgroundMovement")
+        self.alBackgroundMovement.setEnabled(False)
         self.alListeningMovement = session.service("ALListeningMovement")
         self.alSpeakingMovementProxy = session.service("ALSpeakingMovement")
         self.alMotionProxy = session.service("ALMotion")
@@ -49,7 +50,7 @@ class Robot:
         self.specchRecog.pause(True)
         self.alTabletService.hideImage()
         self.alFaceDetection = session.service("ALFaceDetection")
-        self.alFaceDetection.setTrackingEnabled(False)
+        self.alFaceDetection.setTrackingEnabled(True)
         self.alFaceDetection.setRecognitionEnabled(False)
         self.alBasicAwareness = session.service("ALBasicAwareness")
         self.emotionStateRobot = Emotion()
@@ -60,6 +61,7 @@ class Robot:
         self.alBasicAwareness.setStimulusDetectionEnabled("Movement", False)
         self.alBasicAwareness.setStimulusDetectionEnabled("NavigationMotion", False)
         self.alBasicAwareness.startAwareness()
+        self.alBasicAwareness.setEnabled(True)
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         # self.alTabletService = None;
@@ -461,7 +463,7 @@ class Robot:
     # Sets the color of an RGB led using  color code.
     def change_led_color(self, color, rotationDuration):
         # color is an hexa number
-        self.alLedsProxy.fadeRGB("AllLeds", 60415, 0)
+        self.alLedsProxy.fadeRGB("AllLeds", int(color), 0)
 
     # Enable or Disable the smart stiffness reflex for all the joints (True by default).
     # The update takes one motion cycle.
@@ -478,6 +480,7 @@ class Robot:
         if "EmotionalTag" in params:
             print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
+            self.show_image({"SHOWIMG": self.current_emomap["Image"]})
             emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())

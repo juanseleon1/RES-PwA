@@ -6,6 +6,7 @@
 package Tareas.MantenerAtencionPwA;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
@@ -25,9 +26,11 @@ import rational.mapping.Task;
 public class EvaluarEstrategiaAtencion extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
-
+    private ResPwAStrategy strat;
     public EvaluarEstrategiaAtencion() {
+        
 //        System.out.println("--- Task Seleccionar Estrategia Atencion Iniciada ---");
+        
     }
     
 
@@ -38,7 +41,7 @@ public class EvaluarEstrategiaAtencion extends Task{
         
         OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
         AtencionStrategy cs = new AtencionStrategy();
-
+        blvs.getbEstadoActividad().setEstrategia(cs);
         cs.execStrategy(blvs);
     }
 
@@ -62,7 +65,7 @@ public class EvaluarEstrategiaAtencion extends Task{
     public boolean checkFinish(Believes believes) {
                 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AtencionStrategy && blvs.getbEstadoActividad().getEstrategia().isFinished(believes)) {
             return true;
         }
         return false;
