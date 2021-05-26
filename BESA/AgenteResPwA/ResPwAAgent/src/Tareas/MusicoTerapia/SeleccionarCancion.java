@@ -48,7 +48,7 @@ public class SeleccionarCancion extends Task {
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         HashMap<String, Object> hm = new HashMap<>();
-        hm.put("SAY", "Estoy seleccionando una cancion");
+        hm.put("SAY", "Estoy seleccionando una cancion, quiero que cantes conmigo.");
         ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
         ResPwaUtils.requestService(data, blvs);
 
@@ -66,6 +66,10 @@ public class SeleccionarCancion extends Task {
         if (!blvs.getbEstadoRobot().isStoryMode()) {
             blvs.getbEstadoRobot().setStoryMode(true);
         }
+        hm = new HashMap<>();
+        hm.put("SAY", "La canción seleccionada es " + cancionSelected.getCancion().getNombre());
+        data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
+        ResPwaUtils.requestService(data, blvs);
     }
 
     @Override

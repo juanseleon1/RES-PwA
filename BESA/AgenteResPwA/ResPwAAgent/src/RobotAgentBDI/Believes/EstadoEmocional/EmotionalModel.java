@@ -52,6 +52,7 @@ public abstract class EmotionalModel {
     public void processEmotionalEvent(EmotionalEvent ev) {
         float i = estimateEmotionIntensity(ev);
         emotionalState.updateEmotions(ev.getEvent(), i);
+        System.out.println(ev.toString());
         emotionalStateChanged();
     }
 

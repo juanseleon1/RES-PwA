@@ -68,7 +68,7 @@ public class ConversarEmpaticamente extends GoalBDI{
                 return 1.0;
             }
         }
-        return 0;
+        return 1.0;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + 1;
     }
 
     @Override

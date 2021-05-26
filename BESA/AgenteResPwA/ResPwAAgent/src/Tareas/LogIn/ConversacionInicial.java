@@ -85,7 +85,6 @@ public class ConversacionInicial extends Task {
             System.out.println("--- Check Finish Conversacion Inicial ---");
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC)){
-                System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             }
             blvs.getbEstadoInteraccion().setLogged(true);

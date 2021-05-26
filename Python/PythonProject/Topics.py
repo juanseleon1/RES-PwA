@@ -127,5 +127,5 @@ topico_sonido = "/data/home/nao/topics/soundTopic.top"
 
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
 
-topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda,topico_retro,topico_saludable]
+topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda,topico_retro,topico_saludable,topico_triste]
 

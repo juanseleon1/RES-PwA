@@ -13,6 +13,7 @@ import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
 import ResPwAEntities.Cuidador;
 import ResPwAEntities.Perfilpwa;
+import RobotAgentBDI.Metas.ConversarEmpaticamente;
 import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.Metas.LogIn;
 import RobotAgentBDI.Metas.MantenerAtencionPwA;
@@ -122,8 +123,9 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
+        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
 //          LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
@@ -133,13 +135,14 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
+        RAGoals.add(convEmpatica);
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-        RAGoals.add(musicoTGoal);
+//        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
 //        RAGoals.add(mantenerAtencionPwAGoal);
 //        RAGoals.add(pausarInteraccionGoal);

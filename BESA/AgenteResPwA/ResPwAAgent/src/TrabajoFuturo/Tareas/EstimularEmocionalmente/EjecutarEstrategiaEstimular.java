@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tareas.EstimularEmocionalmente;
+package TrabajoFuturo.Tareas.EstimularEmocionalmente;
 
 import rational.mapping.Believes;
 import RobotAgentBDI.ResPwaUtils;
@@ -14,28 +14,28 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class SeleccionarEstrategiaEmocional extends Task{
+public class EjecutarEstrategiaEstimular extends Task{
     
     private HashMap<String,Object> infoServicio = new HashMap<>();
 
-    public SeleccionarEstrategiaEmocional() {
-//        System.out.println("--- Task Seleccionar Estrategia Emocional Iniciada ---");
+    public EjecutarEstrategiaEstimular() {
+//        System.out.println("--- Task Ejecutar Estrategia Estimular Iniciada ---");
     }
     
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Seleccionar Estrategia Emocional ---");
+        System.out.println("--- Execute Task Ejecutar Estrategia Estimular ---");
     }
 
     @Override
     public void interruptTask(Believes believes) {
-        System.out.println("--- Interrupt Task Seleccionar Estrategia Emocional ---");
+        System.out.println("--- Interrupt Task Ejecutar Estrategia Estimular ---");
     }
 
     @Override
     public void cancelTask(Believes believes) {
-        System.out.println("--- Cancel Task Seleccionar Estrategia Emocional ---");
+        System.out.println("--- Cancel Task Ejecutar Estrategia Estimular ---");
     }
 
     @Override

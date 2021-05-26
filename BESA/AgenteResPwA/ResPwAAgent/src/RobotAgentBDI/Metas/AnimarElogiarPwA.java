@@ -83,9 +83,9 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
 
         if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < 0) {
-            return 1.0 + blvs.getbEstadoActividad().getBoostAnimarElogiarPwA() + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+            return 1.0 + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
         }
-        return blvs.getbEstadoActividad().getBoostAnimarElogiarPwA() + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override

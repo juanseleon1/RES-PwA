@@ -21,63 +21,57 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class PreguntarSentimientos extends Task{
-    
-    private HashMap<String,Object> infoServicio = new HashMap<>();
+public class PreguntarSentimientos extends Task {
+
+    private HashMap<String, Object> infoServicio = new HashMap<>();
+    private long start;
 
     public PreguntarSentimientos() {
 //        System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
     }
-    
 
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
         ResPwaUtils.activateTopic(PepperTopicsNames.ALEGRETOPIC, parameters);
-        ResPwaUtils.activateTopic(PepperTopicsNames.IRATOPIC, parameters);
-        ResPwaUtils.activateTopic(PepperTopicsNames.SADTOPIC, parameters);
-        //buscar texto
-        infoServicio.put("SAY", "PreguntaSentimientos");
+
+        infoServicio.put("SAY", "¿Como te sientes hoy?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
-    
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Preguntar Sentimientos ---");
-        
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Preguntar Sentimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
+        ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //debe revisar que el estado animo haya cambiado y cierto tiempo
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && !blvs.getbEstadoInteraccion().isRecibirRespuestaPwA()) {
+
+        if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1
+                && ((blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.ALEGRETOPIC) || !blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SADTOPIC) || !blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.IRATOPIC)))) {
+            System.out.println("KKKKKKKK: " +blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
             ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
-            ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
-            ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
+            blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             return true;
         }
         return false;
     }
-    
+
 }
