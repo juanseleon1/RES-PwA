@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4785EDA2-F010-79BB-2515-0441F4038DA3" name="ActividadPwA">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>FA9DED35-253B-3272-39BE-11D23D90A4C5</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="678F918B-EBA4-DF5F-3484-53CEED75F55E">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>CED7F308-B878-69DF-1E2B-4261284AAFD6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="568B8BBD-4099-1D10-FB49-62E48E540F84">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>BA8C642A-161E-2494-A112-CEED1309C029</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo" id="820F80A2-051F-31E8-2DC0-8285C05C0451">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>A368FD0C-397E-3742-716B-BC46BC886369</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="duracion" id="2ED360D9-6472-B7BE-FBEF-5670F71E83DD">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>0B21C0B2-1E9F-37B1-C530-90464CA12BAC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="27F4FFFE-ED3B-20D2-C4FC-A2CAF148B502" name="ActividadPwA_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>59B19170-51D5-46DD-7FF6-7773FA6523C6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="678F918B-EBA4-DF5F-3484-53CEED75F55E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

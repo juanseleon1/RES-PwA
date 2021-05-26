@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="83237DBF-C046-B114-2235-2C4DAE11557A" name="ActividadRutinaria">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>901A9438-A603-C064-7A09-F8BD91D2CD12</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="nombre" id="68E1E549-D432-C25D-DDB6-F4501F468471">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>D37300FE-7380-1359-E639-2254FA924A74</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 CHAR</dataTypeSize>
+<ownDataTypeParameters>40 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id" id="0C2F935D-3A7C-BF39-B655-16D36AD6B141">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>94B6D62E-EA7C-49A9-03D2-D9BDF2F67A45</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="duracion" id="E1A6608C-45BB-2142-BE0F-B8BBA4EAA532">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>4736CE5E-9BE4-D3E7-8F85-F8F3A034AF63</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="hora" id="F0F6A774-843C-610F-2845-9B221609E96E">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>B48CBBA1-80EF-72F0-91B0-69201F721B62</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Perfil_Medico_PerfilPwa_cedula" id="3534EC47-81A3-82A4-92AF-D2B5F8130DA2">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>0CAE562A-2BC0-72FB-34D7-ABB2D27AADEA</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C9E32F77-3575-6704-20D2-52F63DBFA581" referredColumn="8E8D8030-10AF-216E-066F-D1505D5F38EB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="822B502E-9AD2-B82C-7F60-22A864028DDE" name="ActividadRutinaria_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>4B9A4A74-6670-7212-BD9D-ACF9BB4CA264</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0C2F935D-3A7C-BF39-B655-16D36AD6B141"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="70AD7D70-362F-DDB0-327B-854F6133DDB2" name="ActividadRutinaria_Perfil_Medico_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>6A267BAD-B2BF-6451-14A9-F0F0FEEC5DCE</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3534EC47-81A3-82A4-92AF-D2B5F8130DA2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="288A04A2-C411-F9D0-3435-E36F818C418E" name="listaTags">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Cancion_nombre" id="F469CA0C-D4CA-7B2E-DABC-83238649E50D">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FDC43B30-A288-EBD5-507E-FB96A0B4A7E0" referredColumn="76A81B15-6277-1AAB-CAB4-A151E13618FC"/>
+</associations>
+</Column>
+<Column name="Tags_id" id="3A008966-683D-F32E-48F8-8CA92AB91234">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9434932C-8E2A-F495-4792-9E10C915F843" referredColumn="56D484B2-9EAF-4C60-3F2F-6E51927D961E"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7A9F0584-5AD0-9EAA-A10E-B191CF49ACF5" name="listaTags_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F469CA0C-D4CA-7B2E-DABC-83238649E50D"/>
+<colUsage columnID="3A008966-683D-F32E-48F8-8CA92AB91234"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="86E2556E-BCB0-E9E8-82C7-57497E123D9F" name="listaTags_Cancion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F469CA0C-D4CA-7B2E-DABC-83238649E50D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D0739BAA-541A-4BFF-1416-FABA44E6377C" name="listaTags_Tags_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>5EBD7188-D8A1-DB0F-C919-86E635A59CEC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3A008966-683D-F32E-48F8-8CA92AB91234"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

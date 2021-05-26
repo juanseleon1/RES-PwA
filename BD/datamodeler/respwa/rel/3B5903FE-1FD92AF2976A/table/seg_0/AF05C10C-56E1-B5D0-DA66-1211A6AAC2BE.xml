@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AF05C10C-56E1-B5D0-DA66-1211A6AAC2BE" name="Tags">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>04E49C61-9B78-5D7E-9CF4-A0A27E6787AC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="56D484B2-9EAF-4C60-3F2F-6E51927D961E">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>A9C916DE-1E47-0AE8-CA57-8ED609C1EFA7</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tag" id="10697E2E-D4CD-AA79-8FF3-00425CCE33DB">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>4169B2D9-48D7-FA4A-1912-5F11068BD07F</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C7A717C3-E428-1E84-CB0A-DCB6FDB51504" name="Tags_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>FEBD2C0D-F679-64FB-0F8F-24894E282BA0</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="56D484B2-9EAF-4C60-3F2F-6E51927D961E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="38D31724-91DC-1D13-BF9C-916D6250A273" name="PreferenciaXCancion">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Perfil_Preferencia_PerfilPwa_cedula" id="72E3FAA0-7E71-384A-7ED5-C65ECCEC5690">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2591E621-629C-C726-DEFF-0181E5C3BCCF" referredColumn="8DF4A2DD-1FC3-7D9A-3705-8AB58C891E82"/>
+</associations>
+</Column>
+<Column name="Cancion_nombre" id="EAA09E86-04A0-4F87-16AC-3465CCBFA3C2">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1108DEC4-990E-029C-4355-4299F39CB04A" referredColumn="76A81B15-6277-1AAB-CAB4-A151E13618FC"/>
+</associations>
+</Column>
+<Column name="gusto" id="F6A80322-6589-CA56-E4BA-53B5C79E1469">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>1101C281-CEDA-8C89-E283-02DF93A0A1EC</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isRelationshipColumn>true</isRelationshipColumn>
+<isDependOnFK_AsMandatory>true</isDependOnFK_AsMandatory>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="60803B51-50C5-F42C-8F6A-372D4F392433" name="PreferenciaXCancion_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="72E3FAA0-7E71-384A-7ED5-C65ECCEC5690"/>
+<colUsage columnID="EAA09E86-04A0-4F87-16AC-3465CCBFA3C2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F227D66E-0BDB-5FCE-6BF4-B1F65D7E8C9B" name="PreferenciaXCancion_Perfil_Preferencia_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>38EB2120-5CB5-7C36-9B78-D105B8F5D3F6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="72E3FAA0-7E71-384A-7ED5-C65ECCEC5690"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="482C5BC1-7804-B4B4-6CC5-C6B0416F4CA9" name="PreferenciaXCancion_Cancion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>38EB2120-5CB5-7C36-9B78-D105B8F5D3F6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EAA09E86-04A0-4F87-16AC-3465CCBFA3C2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

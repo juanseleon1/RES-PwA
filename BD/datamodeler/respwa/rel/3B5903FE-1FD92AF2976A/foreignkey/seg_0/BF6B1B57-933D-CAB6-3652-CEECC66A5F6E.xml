@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BF6B1B57-933D-CAB6-3652-CEECC66A5F6E" containerWithKeyObject="5C8C062A-C2BE-2024-021B-75724361AA8C" localFKIndex="5CB9049D-B9F6-6DE6-1BBF-9ACACFE3968A" name="PreferenciaXBaile_Perfil_Preferencia_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>4A152F8C-6394-9DE9-A2E1-A63CFAEB0058</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Perfil_Preferencia</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>5497219A-A2AC-4D3D-90BB-35F02204DB35</referredTableID>
+<keyObject>149ABE96-4A12-ED3E-272C-25E2E79928AD</keyObject>
+<referredKeyID>149ABE96-4A12-ED3E-272C-25E2E79928AD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>PerfilPwa_cedula</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
