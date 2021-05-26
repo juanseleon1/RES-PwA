@@ -200,10 +200,10 @@ public class InitRESPwA {
                     times.add(j.getTiempo().doubleValue());
 
                 }
+                accion.put("image", e.getImagen());
                 accion.put(a.getNombre(), joints);
             }
             params.put(e.getEmotionaltag(), accion);
-
         }
         infoServicio.put("INITIALCONF", params);
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(MovementServiceRequestType.INITIALCONF, infoServicio);
