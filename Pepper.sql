@@ -1,4 +1,3 @@
-xce
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Soltero');
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Casado');
 INSERT INTO EstadoCivil (tipoEC) VALUES ( 'Divorciado');
@@ -142,54 +141,53 @@ INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImage
 commit;
 
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Había una vez tres hermanos cerditos que vivían en el bosque',1, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/42/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Como el malvado lobo siempre los estaba persiguiendo para comérselos dijo un día el mayor:',2, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Como el malvado lobo siempre los estaba persiguiendo para comérselos dijo un día el mayor:',2, 'Los 3 cerditos', ' ', 'FRAGCONVLEFT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Tenemos que hacer una casa para protegernos de lobo',3, 'Los 3 cerditos', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Así podremos escondernos dentro de ella cada vez que el lobo aparezca por aquí',4, 'Los 3 cerditos', ' ', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'A los otros dos les pareció muy buena idea',5, 'Los 3 cerditos', 'INTERNALPOS', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'pero no se ponían de acuerdo respecto a qué material utilizar',6, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'pero no se ponían de acuerdo respecto a qué material utilizar',6, 'Los 3 cerditos', ' ', 'FRAGCONVLEFT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Al final, y para no discutir, decidieron que cada uno la hiciera de lo que quisiese',7, 'Los 3 cerditos', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El más pequeño optó por utilizar paja, para no tardar mucho y poder irse a jugar después',8, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/45/res_id/0');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El más pequeño optó por utilizar paja, para no tardar mucho y poder irse a jugar después',8, 'Los 3 cerditos', ' ', 'BUILD', 'http://10.195.22.103:49152/content/media/object_id/45/res_id/0');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El mediano prefirió construirla de madera',9, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/63/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'que era más resistente que la paja y tampoco le llevaría mucho tiempo hacerla',10, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'que era más resistente que la paja y tampoco le llevaría mucho tiempo hacerla',10, 'Los 3 cerditos', ' ', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Pero el mayor pensó que aunque tardara más que sus hermanos',11, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/17/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'lo mejor era hacer una casa resistente y fuerte con ladrillos',12, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'lo mejor era hacer una casa resistente y fuerte con ladrillos',12, 'Los 3 cerditos', ' ', 'BUILD', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Además así podré hacer una chimenea con la que calentarme en invierno, pensó el cerdito',13, 'Los 3 cerditos', ' ', 'FRAGCONVLEFT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Cuando los tres acabaron sus casas se metieron cada uno en la suya',14, 'Los 3 cerditos', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y entonces apareció por ahí el malvado lobo',15, 'Los 3 cerditos', 'INTERNALNEG', ' ', 'http://10.195.22.103:49152/content/media/object_id/60/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Se dirigió a la de paja y llamó a la puerta:',16, 'Los 3 cerditos', ' ', 'WALK', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y entonces apareció por ahí el malvado lobo',15, 'Los 3 cerditos', 'INTERNALNEG', 'FEROCIOUS', 'http://10.195.22.103:49152/content/media/object_id/60/res_id/0');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Se dirigió a la de paja y llamó a la puerta:',16, 'Los 3 cerditos', ' ', 'TOCTOC', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Anda cerdito se bueno y déjame entrar',17, 'Los 3 cerditos', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡No! ¡Eso ni pensarlo!',18, 'Los 3 cerditos', 'INTERNALNEG', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡No! ¡Eso ni pensarlo!',18, 'Los 3 cerditos', 'INTERNALNEG', 'FRAGCONVRIGHT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡Pues soplaré y soplaré y la casita derribaré!',19, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/30/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Y el lobo empezó a soplar y a estornudar, la débil casa acabó viniéndose abajo',20, 'Los 3 cerditos', 'INTERNALNEG', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Y el lobo empezó a soplar y a estornudar, la débil casa acabó viniéndose abajo',20, 'Los 3 cerditos', 'INTERNALNEG', 'BLOW', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Pero el cerdito echó a correr y se refugió en la casa de su hermano mediano',21, 'Los 3 cerditos', ' ', 'WALK', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'que estaba hecha de madera',22, 'Los 3 cerditos', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Anda cerditos sed buenos y dejarme entrar',23, 'Los 3 cerditos', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡No! ¡Eso ni pensarlo!, dijeron los dos',24, 'Los 3 cerditos', 'INTERNALNEG', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡No! ¡Eso ni pensarlo!, dijeron los dos',24, 'Los 3 cerditos', 'INTERNALNEG', 'COMPLETECONV', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡Pues soplaré y soplaré y la casita derribaré!',25, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/36/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El lobo empezó a soplar y a estornudar',26, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El lobo empezó a soplar y a estornudar',26, 'Los 3 cerditos', ' ', 'BLOW', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'aunque esta vez tuvo que hacer más esfuerzos para derribar la casa al final la madera acabó cediendo',27, 'Los 3 cerditos', 'INTERNALNEG', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y los cerditos salieron corriendo en dirección hacia la casa de su hermano mayor',28, 'Los 3 cerditos', ' ', 'WALK', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El lobo estaba cada vez más hambriento así que sopló y sopló con todas sus fuerzas',29, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/14/res_id/0');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'El lobo estaba cada vez más hambriento así que sopló y sopló con todas sus fuerzas',29, 'Los 3 cerditos', ' ', 'BLOW', 'http://10.195.22.103:49152/content/media/object_id/14/res_id/0');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'pero esta vez no tenía nada que hacer porque la casa no se movía ni siquiera un poco',30, 'Los 3 cerditos', ' ', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Dentro los cerditos celebraban la resistencia de la casa de su hermano',31, 'Los 3 cerditos', 'INTERNALPOS', 'CELEBRATE', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y cantaban alegres por haberse librado del lobo:',32, 'Los 3 cerditos', 'INTERNALPOSPLUS', ' ', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¿Quien teme al lobo feroz? ¡No, no, no!',33, 'Los 3 cerditos', ' ', 'QUESTION', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Fuera el lobo continuaba soplando en vano, cada vez más enfadado',34, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Fuera el lobo continuaba soplando en vano, cada vez más enfadado',34, 'Los 3 cerditos', ' ', 'BLOW', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Hasta que decidió parar para descansar y entonces reparó en que la casa tenía una chimenea',35, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/27/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡Ja! ¡Pensaban que de mí iban a librarse! ¡Subiré por la chimenea y me los comeré a los tres!',36, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( '¡Ja! ¡Pensaban que de mí iban a librarse! ¡Subiré por la chimenea y me los comeré a los tres!',36, 'Los 3 cerditos', ' ', 'FRAGCONVLEFT', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Pero los cerditos le oyeron, y para darle su merecido llenaron la chimenea de leña',37, 'Los 3 cerditos', ' ', ' ', 'http://10.195.22.103:49152/content/media/object_id/33/res_id/0');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y pusieron al fuego un gran caldero con agua',38, 'Los 3 cerditos', ' ', ' ', ' ');
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'y pusieron al fuego un gran caldero con agua',38, 'Los 3 cerditos', ' ', 'COMPLETECONV', ' ');
 INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'Así cuando el lobo cayó por la chimenea el agua estaba hirviendo',39, 'Los 3 cerditos', ' ', ' ', ' ');
-INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'se quemó tanto que salió gritando de la casa y no volvió a comer cerditos en una larga temporada',40, 'Los 3 cerditos', 'INTERNALNEG', ' ', ' ');
-
+INSERT INTO Frases (contenido,orden,Cuento_nombre,emotionalEvent,accion,urlImagen) VALUES( 'se quemó tanto que salió gritando de la casa y no volvió a comer cerditos en una larga temporada',40, 'Los 3 cerditos', 'INTERNALNEG', 'FRAGCONVRIGHT', ' ');
 
 INSERT INTO Robot (id,nombre) VALUES (0, 'pepper');
 
-INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (0,'VHAPPY',0); 
-INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (1,'HAPPY',0); 
-INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (2,'NORMAL',0); 
-INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (3,'SAD',0); 
-INSERT INTO Emocion (id,emotionalTag,robot_id) VALUES (4,'VSAD',0); 
+INSERT INTO Emocion (id,emotionalTag,robot_id,imagen) VALUES (0, 'VHAPPY',0, 'http://10.195.22.103:49152/content/media/object_id/84/res_id/0'); 
+INSERT INTO Emocion (id,emotionalTag,robot_id,imagen) VALUES (1, 'HAPPY',0, 'http://10.195.22.103:49152/content/media/object_id/75/res_id/0'); 
+INSERT INTO Emocion (id,emotionalTag,robot_id,imagen) VALUES (2, 'NORMAL',0, 'http://10.195.22.103:49152/content/media/object_id/78/res_id/0'); 
+INSERT INTO Emocion (id,emotionalTag,robot_id,imagen) VALUES (3, 'SAD',0, 'http://10.195.22.103:49152/content/media/object_id/81/res_id/0'); 
+INSERT INTO Emocion (id,emotionalTag,robot_id,imagen) VALUES (4, 'VSAD',0,  'http://10.195.22.103:49152/content/media/object_id/72/res_id/0'); 
 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (0, 'POSTURA',4, 'postura'); 
 INSERT INTO Accion (id,nombre,Emocion_id,tipo) VALUES (1, 'POSTURA',0, 'postura'); 

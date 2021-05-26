@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5924E88E-77AF-B5EC-5EDA-9824F380CCBC" name="ReglaXAntecedente">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Regla_id" id="AEA3D913-ACB7-621F-EBAB-E27364EE1697">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AB40A7C8-EF9F-0287-5D35-3A3A75F97F08" referredColumn="C03DC710-A1F9-CAB7-FB24-FF8E73342468"/>
+</associations>
+</Column>
+<Column name="Antecedente_id" id="6E679BA3-9E7B-0A89-AFE9-D20C3338510B">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C3815F54-1213-1063-4436-E82E2EB15D72" referredColumn="BD0C051D-49A7-B5B5-B1E2-CCCA866A98CB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A876401A-60A0-7622-DA52-06EE6053DF11" name="ReglaXAntecedente_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AEA3D913-ACB7-621F-EBAB-E27364EE1697"/>
+<colUsage columnID="6E679BA3-9E7B-0A89-AFE9-D20C3338510B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0BB47BD5-39AB-3D15-59B6-F7E079F12643" name="ReglaXAntecedente_Regla_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>BDE81ED7-2D3A-011D-C1B5-ADB922587734</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AEA3D913-ACB7-621F-EBAB-E27364EE1697"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4D0E9E16-831B-7908-0B67-AFD05DC39237" name="ReglaXAntecedente_Antecedente_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>BDE81ED7-2D3A-011D-C1B5-ADB922587734</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6E679BA3-9E7B-0A89-AFE9-D20C3338510B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

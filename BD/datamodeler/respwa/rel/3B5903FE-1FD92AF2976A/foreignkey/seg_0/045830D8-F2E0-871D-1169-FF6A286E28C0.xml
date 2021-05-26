@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="045830D8-F2E0-871D-1169-FF6A286E28C0" containerWithKeyObject="A00D4C8E-C1DA-50CA-1615-D1FC5B2F6329" localFKIndex="5E28B832-2C19-9BF0-F2BE-1718668B6220" name="enriq_Cancion_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-26 00:10:48 UTC</createdTime>
+<generatorID>3DA2B762-6728-A608-CF1B-F26DC6F6C3F3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<referredTableLongName>Cancion</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>191B5124-2C15-33DA-B17D-F7E463BD25FC</referredTableID>
+<keyObject>016A40AB-D4AA-BE1F-6067-768CCBCB9D7F</keyObject>
+<referredKeyID>016A40AB-D4AA-BE1F-6067-768CCBCB9D7F</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>nombre</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
