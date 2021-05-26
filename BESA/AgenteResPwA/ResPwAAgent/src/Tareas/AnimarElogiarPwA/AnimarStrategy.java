@@ -51,7 +51,8 @@ public class AnimarStrategy implements ResPwAStrategy {
 
     @Override
     public boolean isFinished(Believes b) {
-        return false;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) b;
+        return blvs.getbEstadoInteraccion().isEstaHablando();
     }
 
 }

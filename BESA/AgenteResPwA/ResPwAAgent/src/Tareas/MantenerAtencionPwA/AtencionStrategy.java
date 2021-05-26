@@ -74,6 +74,10 @@ public class AtencionStrategy implements ResPwAStrategy {
 
     @Override
     public boolean isFinished(Believes b) {
-        return false;
+        RobotAgentBelieves blvs = (RobotAgentBelieves) b;
+        if(this.opcion.equals(OpcionesAtencion.SILBAR)){
+           return blvs.getbEstadoInteraccion().isEstaMoviendo();
+        }
+        return blvs.getbEstadoInteraccion().isEstaHablando();
     }
 }

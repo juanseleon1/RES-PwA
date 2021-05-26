@@ -178,8 +178,8 @@ public class BEstadoInteraccion implements Believes {
             movError = true;
 
         }
-        if (infoRecibida.getDataP().containsKey("moviendose")) {
-            estaMoviendo = Boolean.valueOf((String) infoRecibida.getDataP().get("desplazandose"));
+        if (infoRecibida.getDataP().containsKey("finishAnim")) {
+            estaMoviendo = (boolean) infoRecibida.getDataP().get("finishAnim");
 
         }
         if (infoRecibida.getDataP().containsKey("stimulusDetected")) {
@@ -342,14 +342,6 @@ public class BEstadoInteraccion implements Believes {
 
     public void setEstaHablando(boolean estaHablando) {
         this.estaHablando = estaHablando;
-    }
-
-    public boolean isEstaBailando() {
-        return estaMoviendo;
-    }
-
-    public void setEstaBailando(boolean estaBailando) {
-        this.estaMoviendo = estaBailando;
     }
 
     public boolean isHayInteraccionFisica() {
@@ -532,6 +524,10 @@ public class BEstadoInteraccion implements Believes {
 
     public void setTiempoInt(long tiempoInt) {
         this.tiempoInt = tiempoInt;
+    }
+
+    public boolean estaBailando() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

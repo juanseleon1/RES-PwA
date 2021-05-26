@@ -47,7 +47,7 @@ public class SuspenderRobot extends Task{
         ResPwaUtils.deactivateTopic( PepperTopicsNames.ALLTOPICS, parameters);
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         
-        if(blvs.getbEstadoInteraccion().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
+        if(blvs.getbEstadoActividad().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
             ResPwaUtils.requestService(srb,blvs);
         }
