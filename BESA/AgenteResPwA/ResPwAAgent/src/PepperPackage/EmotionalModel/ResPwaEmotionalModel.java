@@ -35,10 +35,10 @@ import rational.services.ActivateAsynchronousServiceGuard;
  *
  * @author juans
  */
-public abstract class PepperEmotionalModel extends EmotionalModel {
+public abstract class ResPwaEmotionalModel extends EmotionalModel {
 
 
-    public PepperEmotionalModel() {
+    public ResPwaEmotionalModel() {
         super();
 
     }

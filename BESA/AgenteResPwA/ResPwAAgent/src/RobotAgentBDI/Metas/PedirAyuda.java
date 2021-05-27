@@ -65,7 +65,7 @@ public class PedirAyuda extends GoalBDI {
             return 1;
         }
 
-        return 0;
+        return 1.0;
     }
 
     @Override

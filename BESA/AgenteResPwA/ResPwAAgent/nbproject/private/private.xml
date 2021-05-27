@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/DemostrarSenialesVida.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ExpresarEstadoEmocionalRobot.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/MusicoTerapia/ReproduccionCancion.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoRobot.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/PedirAyuda.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ConversarEmpaticamente.java</file>
+            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/PedirAyuda/PeticionAyuda.java</file>
             <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-=======
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/Cuenteria.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/ReproducirCuento.java</file>
->>>>>>> a0187613b4e331e050148efac4936cf66a2cdf9d
         </group>
     </open-files>
 </project-private>

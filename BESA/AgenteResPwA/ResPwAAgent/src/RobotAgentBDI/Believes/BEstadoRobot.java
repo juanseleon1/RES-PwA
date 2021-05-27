@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
-import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
@@ -30,7 +30,7 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class BEstadoRobot extends PepperEmotionalModel implements Believes {
+public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
     private boolean bateria;
     private double batteryPerc;

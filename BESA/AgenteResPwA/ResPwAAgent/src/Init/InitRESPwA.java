@@ -7,7 +7,7 @@ import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
-import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import ResPwAEntities.Accion;
 import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;
@@ -123,9 +123,9 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
-        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
+//        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
 //          LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
@@ -135,10 +135,10 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
-        RAGoals.add(convEmpatica);
+//        RAGoals.add(convEmpatica);
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-//        RAGoals.add(musicoTGoal);
+        RAGoals.add(musicoTGoal);
         //Agregar a Lista
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);

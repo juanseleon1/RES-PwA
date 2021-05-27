@@ -68,7 +68,7 @@ public class ConversarEmpaticamente extends GoalBDI{
                 return 1.0;
             }
         }
-        return 1.0;
+        return 1;
     }
 
     @Override
