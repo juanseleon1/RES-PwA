@@ -7,7 +7,7 @@ import BESA.Kernel.System.AdmBESA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
 import PepperPackage.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
-import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import ResPwAEntities.Accion;
 import ResPwAEntities.Emocion;
 import ResPwAEntities.Joint;

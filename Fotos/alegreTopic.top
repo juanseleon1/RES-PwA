@@ -1,0 +1,9 @@
+topic: ~alegreTopic()
+    language: spe
+    concept: (bloque_uno) [feliz alegre emocionado chevere animado animada emocionada contento contenta] 
+    concept: (bloque_dos) [alegria felicidad esperanza emocion gratitud serenidad diversion] 
+    concept: (bloque_tres) [amor orgullo ]
+    u: (*_~bloque_uno) Verte tan alegre te hace lucir genial, te ves muy bien hoy!
+        u2: ("muchas gracias" gracias) A ti por compartir tiempo conmigo
+    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) La alegria te da una sonrisa muy hermosa 
+    u: ([Siento Tengo] {[mucho muchisimo tantisimo demasiado]} _~bloque_tres) Esos son los sentimientos mas hermosos de una persona 

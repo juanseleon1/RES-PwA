@@ -8,7 +8,7 @@ package Tareas.ExpresarEstadoEmocionalRobot;
 import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
 import EmotionalAnalyzerAgent.EmotionalState;
-import PepperPackage.EmotionalModel.PepperEmotionalModel;
+import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
