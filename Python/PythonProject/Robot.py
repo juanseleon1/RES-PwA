@@ -1,6 +1,6 @@
 import threading
 import time
-import easygui
+#import easygui
 
 import PepperModuleV2
 from Animation import Animation
@@ -74,8 +74,8 @@ class Robot:
         self.prof_emotions = dict()
         self.sensorsModule = None
         self.animation = Animation(self.session)
-        self.th = threading.Thread(target=self.show_gui())
-        self.th.start()
+        #self.th = threading.Thread(target=self.show_gui())
+        #self.th.start()
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
                                 "sadTopic": topico_triste,
@@ -815,7 +815,7 @@ class Robot:
     def force_out(self, params):
         self.alDialogProxy.forceOutput()
 
-    def show_gui(self):
+    '''def show_gui(self):
         listChoices = list()
         listChoices.append("Aumentar Estado Emocional")
         listChoices.append("Bajar Estado Emocional")
@@ -849,4 +849,4 @@ class Robot:
                 choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
             else:
                 break
-
+'''

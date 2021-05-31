@@ -123,7 +123,7 @@ public class InitRESPwA {
     private static List<GoalBDI> createRobotAgentGoals() {
         List<GoalBDI> RAGoals = new ArrayList<>();
         //Crear Metas
-        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
+//        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
 //        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
@@ -135,7 +135,7 @@ public class InitRESPwA {
 //          Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
-        RAGoals.add(convEmpatica);
+//        RAGoals.add(convEmpatica);
 //        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);

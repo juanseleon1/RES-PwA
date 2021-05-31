@@ -55,7 +55,7 @@ public class PeticionAyuda extends Task{
     public boolean checkFinish(Believes believes) {
                 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if((System.currentTimeMillis() - tiempo)/1000 >= 90) {
+        if((System.currentTimeMillis() - tiempo)/1000 >= 60) {
             
             return false;
         }

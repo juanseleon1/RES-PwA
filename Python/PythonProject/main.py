@@ -43,7 +43,7 @@ def handle_client():
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
     # y = "{" + y
-    print(json_string)
+    print("Pepperoni: "+json_string)
     # print(y)
     jsonObj = json.loads(json_string)
     # msg_length = len(jsonObj)
