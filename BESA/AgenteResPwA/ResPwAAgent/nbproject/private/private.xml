@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/MusicoTerapia.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/PedirAyuda.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Metas/ConversarEmpaticamente.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/PedirAyuda/PeticionAyuda.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/ResPwaUtils.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Init/InitRESPwA.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/RobotAgentBDI/Believes/BEstadoInteraccion.java</file>
-            <file>file:/C:/Users/maria.f.garces.cala/Documents/RES-PwA/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/ConversarEmpaticamente/PreguntarSentimientos.java</file>
-=======
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionPwA.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerStrategy.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalAnalyzerState.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/PepperAdapter.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Adapter/ResPwaAdapter.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/PepperEAStrategy.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/ServiceAgentResPwA/RobotSPAgent.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/ProcessEmotionGuard.java</file>
-            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/SensorHandlerAgent/GetInfoGuard.java</file>
->>>>>>> 10f739d3b468f0d38824d28d7cfa17e6a051075d
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/PepperPackage/EmotionalModel/ResPwaEmotionalModel.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalObjectType.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/Tareas/Cuenteria/ReproducirCuento.java</file>
+            <file>file:/C:/Users/juans/OneDrive/Escritorio/Tesis/BESA/AgenteResPwA/ResPwAAgent/src/EmotionalAnalyzerAgent/EmotionalEventType.java</file>
         </group>
     </open-files>
 </project-private>
