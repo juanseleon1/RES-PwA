@@ -7,6 +7,7 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
@@ -86,7 +87,17 @@ public class BEstadoActividad implements Believes {
     public ResPwAActivity getActividadActual() {
         return actividadActual;
     }
-
+    
+    public double getGustoActividad(ResPwAActivity actividad){
+        double gusto = 0;
+        for(Actxpreferencia a : blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList()){
+            if(a.getActividadpwa().getNombre().equalsIgnoreCase(actividad.toString())){
+                gusto =  a.getGusto();
+            }
+        }
+        return gusto;
+    }
+    
     public void setActividadActual(ResPwAActivity actividadActual) {
         this.actividadActual = actividadActual;
     }
