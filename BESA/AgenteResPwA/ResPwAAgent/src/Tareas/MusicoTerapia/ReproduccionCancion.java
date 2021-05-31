@@ -10,7 +10,7 @@ import Personalizacion.Modelo.ModeloSeleccion;
 import ResPwAEntities.Preferenciaxbaile;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;

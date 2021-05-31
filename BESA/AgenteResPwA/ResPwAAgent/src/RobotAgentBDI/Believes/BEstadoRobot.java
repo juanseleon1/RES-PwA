@@ -13,7 +13,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import PepperPackage.PepperConf;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;

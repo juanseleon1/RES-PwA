@@ -6,13 +6,14 @@
 package Tareas.Cuenteria;
 
 import EmotionalAnalyzerAgent.EmotionalEventType;
-import EmotionalAnalyzerAgent.WHO;
+import EmotionalAnalyzerAgent.EmotionalObjectType;
+import EmotionalAnalyzerAgent.EmotionalSubjectType;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Frases;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -49,7 +50,7 @@ public class ReproducirCuento extends Task {
         System.out.println("START" + start);
         System.out.println("NOW" + now);
 
-        if ((now - start > 3000 || start == -1)&& !blvs.getbEstadoInteraccion().isEstaHablando()) {
+        if ((now - start > 3000 || start == -1) && !blvs.getbEstadoInteraccion().isEstaHablando()) {
             start = now;
 
             Cuento cuento = blvs.getbEstadoActividad().getCuentoActual().getCuento();
@@ -74,11 +75,12 @@ public class ReproducirCuento extends Task {
             }
 
             if (!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent().equals(" ")) {
-                infoServicio = new HashMap<>();
-                EmotionalEvent evt = new EmotionalEvent(WHO.ROBOT.toString(), cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent(), null);
+                String emoEvt = cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent();
+                String [] emoPos = emoEvt.split("_");
+                EmotionalEvent evt = new EmotionalEvent(EmotionalSubjectType.getFromId(emoPos[0]).toString(), EmotionalEventType.getFromId(emoPos[0]).toString(), EmotionalObjectType.getFromId(emoPos[0]).toString());
                 blvs.getbEstadoRobot().processEmotionalEvent(evt);
-            }else{
-                 blvs.getbEstadoRobot().emotionalStateChanged();
+            } else {
+                blvs.getbEstadoRobot().emotionalStateChanged();
             }
             blvs.getbEstadoActividad().setIndexCuento(blvs.getbEstadoActividad().getIndexCuento() + 1);
         }
@@ -119,12 +121,12 @@ public class ReproducirCuento extends Task {
         System.out.println("VA EN ESTA FRASE: " + blvs.getbEstadoActividad().getIndexCuento());
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
             blvs.getbEstadoActividad().setIndexCuento(0);
-            System.out.println("--- Se acabo ---");         
+            System.out.println("--- Se acabo ---");
             infoServicio = new HashMap<>();
-            infoServicio.put("SAY", "El Fin. Cuentame si te gusto");            
+            infoServicio.put("SAY", "El Fin. Cuentame si te gusto");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
-            infoServicio.put("SHOWIMG", "Placeholder");            
+            infoServicio.put("SHOWIMG", "Placeholder");
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
             ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);

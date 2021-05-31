@@ -9,7 +9,7 @@ import EmotionalAnalyzerAgent.EmotionPwA;
 import EmotionalAnalyzerAgent.EmotionalAnalyzerStrategy;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalEventType;
-import EmotionalAnalyzerAgent.WHO;
+import EmotionalAnalyzerAgent.EmotionalSubjectType;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +63,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
             emo.put(EmotionPwA.SADNESS, sowval);
             double val = ((angval + sowval) / 2);
             EmotionalEventType emoT = val > joyval ? EmotionalEventType.NEGEMOSTATE : EmotionalEventType.POSEMOSTATE;
-            evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
+            evt = new EmotionalEvent(EmotionalSubjectType.PWA.toString(), emoT.toString(), null);
             emoList.add(evt);
             map.put("relajacion", relval);
             map.put("atencion", atval);
@@ -81,7 +81,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
             double val = ((angval + sowval) / 2);
             double lval = ((joyval + calmval) / 2);
             EmotionalEventType emoT = val > lval ? EmotionalEventType.NEGVOICEEMOTION : EmotionalEventType.POSVOICEEMOTION;
-            evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
+            evt = new EmotionalEvent(EmotionalSubjectType.PWA.toString(), emoT.toString(), null);
             emoList.add(evt);
 
             //TO DO.  [ [4,3], [0,2,1,3,0], 1 ]
@@ -94,7 +94,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
 //            System.out.println("IsOk: " + isOk);
             if (isOk) {
                 EmotionalEventType emoT = EmotionalEventType.getFromId(paramsString);
-                evt = new EmotionalEvent(WHO.PWA.toString(), emoT.toString(), null);
+                evt = new EmotionalEvent(EmotionalSubjectType.PWA.toString(), emoT.toString(), null);
                 emoList.add(evt);
             }
         }

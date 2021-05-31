@@ -6,7 +6,7 @@
 package Tareas.Retroalimentacion;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import rational.mapping.Believes;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RobotAgentBDI;
+package ResPwaUtils;
 
 import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
@@ -86,5 +86,6 @@ public class ResPwaUtils{
             Logger.getLogger(ResPwaUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
 }
