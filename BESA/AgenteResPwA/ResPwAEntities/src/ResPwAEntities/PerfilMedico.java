@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "PERFIL_MEDICO")
@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PerfilMedico.findByDiscapvisual", query = "SELECT p FROM PerfilMedico p WHERE p.discapvisual = :discapvisual"),
     @NamedQuery(name = "PerfilMedico.findByDiscapmotora", query = "SELECT p FROM PerfilMedico p WHERE p.discapmotora = :discapmotora"),
     @NamedQuery(name = "PerfilMedico.findByEstadioenfermedad", query = "SELECT p FROM PerfilMedico p WHERE p.estadioenfermedad = :estadioenfermedad"),
-    @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia")})
+    @NamedQuery(name = "PerfilMedico.findByPeriodovigilia", query = "SELECT p FROM PerfilMedico p WHERE p.periodovigilia = :periodovigilia"),
+    @NamedQuery(name = "PerfilMedico.findByFast", query = "SELECT p FROM PerfilMedico p WHERE p.fast = :fast")})
 public class PerfilMedico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +66,9 @@ public class PerfilMedico implements Serializable {
     @Basic(optional = false)
     @Column(name = "PERIODOVIGILIA")
     private BigDecimal periodovigilia;
+    @Basic(optional = false)
+    @Column(name = "FAST")
+    private int fast;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "perfilMedico", fetch = FetchType.EAGER)
     private Cdr cdr;
     @JoinColumn(name = "CAUSADEMENCIA_CONDICION", referencedColumnName = "CONDICION")
@@ -83,7 +87,7 @@ public class PerfilMedico implements Serializable {
         this.perfilpwaCedula = perfilpwaCedula;
     }
 
-    public PerfilMedico(String perfilpwaCedula, BigDecimal tomamedicamentos, BigDecimal discapauditiva, BigDecimal discapvisual, BigDecimal discapmotora, BigDecimal estadioenfermedad, BigDecimal periodovigilia) {
+    public PerfilMedico(String perfilpwaCedula, BigDecimal tomamedicamentos, BigDecimal discapauditiva, BigDecimal discapvisual, BigDecimal discapmotora, BigDecimal estadioenfermedad, BigDecimal periodovigilia, int fast) {
         this.perfilpwaCedula = perfilpwaCedula;
         this.tomamedicamentos = tomamedicamentos;
         this.discapauditiva = discapauditiva;
@@ -91,6 +95,7 @@ public class PerfilMedico implements Serializable {
         this.discapmotora = discapmotora;
         this.estadioenfermedad = estadioenfermedad;
         this.periodovigilia = periodovigilia;
+        this.fast = fast;
     }
 
     public String getPerfilpwaCedula() {
@@ -147,6 +152,14 @@ public class PerfilMedico implements Serializable {
 
     public void setPeriodovigilia(BigDecimal periodovigilia) {
         this.periodovigilia = periodovigilia;
+    }
+
+    public int getFast() {
+        return fast;
+    }
+
+    public void setFast(int fast) {
+        this.fast = fast;
     }
 
     public Cdr getCdr() {

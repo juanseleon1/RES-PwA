@@ -39,6 +39,35 @@
     <class>ResPwAEntities.Preferenciaxcancion</class>
     <class>ResPwAEntities.Preferenciaxcuento</class>
     <class>ResPwAEntities.Bailexperfilpreferencia</class>
+    <class>ResPwAEntities.Entities.Frases</class>
+    <class>ResPwAEntities.Entities.Antecedente</class>
+    <class>ResPwAEntities.Entities.PerfilPreferencia</class>
+    <class>ResPwAEntities.Entities.Cuento</class>
+    <class>ResPwAEntities.Entities.Actividadpwa</class>
+    <class>ResPwAEntities.Entities.Preferenciaxcancion</class>
+    <class>ResPwAEntities.Entities.Cuidador</class>
+    <class>ResPwAEntities.Entities.Perfilpwa</class>
+    <class>ResPwAEntities.Entities.NivelEducativo</class>
+    <class>ResPwAEntities.Entities.Estadocivil</class>
+    <class>ResPwAEntities.Entities.Causademencia</class>
+    <class>ResPwAEntities.Entities.Preferenciaxbaile</class>
+    <class>ResPwAEntities.Entities.Emocion</class>
+    <class>ResPwAEntities.Entities.PerfilMedico</class>
+    <class>ResPwAEntities.Entities.Preferenciaxcuento</class>
+    <class>ResPwAEntities.Entities.Familiar</class>
+    <class>ResPwAEntities.Entities.Enriq</class>
+    <class>ResPwAEntities.Entities.Regla</class>
+    <class>ResPwAEntities.Entities.Tags</class>
+    <class>ResPwAEntities.Entities.Accion</class>
+    <class>ResPwAEntities.Entities.Actxpreferencia</class>
+    <class>ResPwAEntities.Entities.Robot</class>
+    <class>ResPwAEntities.Entities.Registroactividad</class>
+    <class>ResPwAEntities.Entities.Actividadrutinaria</class>
+    <class>ResPwAEntities.Entities.Baile</class>
+    <class>ResPwAEntities.Entities.Joint</class>
+    <class>ResPwAEntities.Entities.Cdr</class>
+    <class>ResPwAEntities.Entities.Genero</class>
+    <class>ResPwAEntities.Entities.Cancion</class>
     <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.195.22.103:1521:ORCLCDB"/>

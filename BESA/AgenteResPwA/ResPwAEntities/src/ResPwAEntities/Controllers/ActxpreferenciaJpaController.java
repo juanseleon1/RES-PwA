@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class ActxpreferenciaJpaController implements Serializable {
 
@@ -39,8 +39,8 @@ public class ActxpreferenciaJpaController implements Serializable {
         if (actxpreferencia.getActxpreferenciaPK() == null) {
             actxpreferencia.setActxpreferenciaPK(new ActxpreferenciaPK());
         }
-        actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
         actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
+        actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,8 +78,8 @@ public class ActxpreferenciaJpaController implements Serializable {
     }
 
     public void edit(Actxpreferencia actxpreferencia) throws NonexistentEntityException, Exception {
-        actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
         actxpreferencia.getActxpreferenciaPK().setActividadpwaId(actxpreferencia.getActividadpwa().getId());
+        actxpreferencia.getActxpreferenciaPK().setPerfilPreferenciaCedula(actxpreferencia.getPerfilPreferencia().getPerfilpwaCedula());
         EntityManager em = null;
         try {
             em = getEntityManager();

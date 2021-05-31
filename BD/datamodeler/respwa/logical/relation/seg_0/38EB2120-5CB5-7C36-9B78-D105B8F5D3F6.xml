@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 20:40:32 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <sourcePk>745C5862-9CD3-9CCD-7CAB-997A41EA13AC</sourcePk>
 <identifying>false</identifying>
@@ -22,12 +22,25 @@
 <createdTime>2021-05-20 22:01:46 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT021</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+</attribute>
+<attribute name="reminiscencia" id="27368CEF-0277-E886-83B5-37B6D068E27C">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 21:35:27 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
 </attribute>
 </attributes>
 </Relation>

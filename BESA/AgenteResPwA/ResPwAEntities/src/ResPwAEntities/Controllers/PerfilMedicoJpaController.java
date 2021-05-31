@@ -25,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class PerfilMedicoJpaController implements Serializable {
 
@@ -62,7 +62,7 @@ public class PerfilMedicoJpaController implements Serializable {
             em.getTransaction().begin();
             Cdr cdr = perfilMedico.getCdr();
             if (cdr != null) {
-                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoCedula());
+                cdr = em.getReference(cdr.getClass(), cdr.getPerfilMedicoPerfilpwaCedula());
                 perfilMedico.setCdr(cdr);
             }
             Causademencia causademenciaCondicion = perfilMedico.getCausademenciaCondicion();
@@ -155,7 +155,7 @@ public class PerfilMedicoJpaController implements Serializable {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (cdrNew != null) {
-                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoCedula());
+                cdrNew = em.getReference(cdrNew.getClass(), cdrNew.getPerfilMedicoPerfilpwaCedula());
                 perfilMedico.setCdr(cdrNew);
             }
             if (causademenciaCondicionNew != null) {

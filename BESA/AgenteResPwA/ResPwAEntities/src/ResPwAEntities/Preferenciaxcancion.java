@@ -6,6 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "PREFERENCIAXCANCION")
@@ -29,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Preferenciaxcancion.findAll", query = "SELECT p FROM Preferenciaxcancion p"),
     @NamedQuery(name = "Preferenciaxcancion.findByPerfilPreferenciaPerfilpwaCedula", query = "SELECT p FROM Preferenciaxcancion p WHERE p.preferenciaxcancionPK.perfilPreferenciaPerfilpwaCedula = :perfilPreferenciaPerfilpwaCedula"),
     @NamedQuery(name = "Preferenciaxcancion.findByCancionNombre", query = "SELECT p FROM Preferenciaxcancion p WHERE p.preferenciaxcancionPK.cancionNombre = :cancionNombre"),
-    @NamedQuery(name = "Preferenciaxcancion.findByGusto", query = "SELECT p FROM Preferenciaxcancion p WHERE p.gusto = :gusto")})
+    @NamedQuery(name = "Preferenciaxcancion.findByGusto", query = "SELECT p FROM Preferenciaxcancion p WHERE p.gusto = :gusto"),
+    @NamedQuery(name = "Preferenciaxcancion.findByReminiscencia", query = "SELECT p FROM Preferenciaxcancion p WHERE p.reminiscencia = :reminiscencia")})
 public class Preferenciaxcancion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +40,9 @@ public class Preferenciaxcancion implements Serializable {
     @Basic(optional = false)
     @Column(name = "GUSTO")
     private double gusto;
+    @Basic(optional = false)
+    @Column(name = "REMINISCENCIA")
+    private BigDecimal reminiscencia;
     @JoinColumn(name = "CANCION_NOMBRE", referencedColumnName = "NOMBRE", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cancion cancion;
@@ -52,9 +57,10 @@ public class Preferenciaxcancion implements Serializable {
         this.preferenciaxcancionPK = preferenciaxcancionPK;
     }
 
-    public Preferenciaxcancion(PreferenciaxcancionPK preferenciaxcancionPK, double gusto) {
+    public Preferenciaxcancion(PreferenciaxcancionPK preferenciaxcancionPK, double gusto, BigDecimal reminiscencia) {
         this.preferenciaxcancionPK = preferenciaxcancionPK;
         this.gusto = gusto;
+        this.reminiscencia = reminiscencia;
     }
 
     public Preferenciaxcancion(String perfilPreferenciaPerfilpwaCedula, String cancionNombre) {
@@ -75,6 +81,14 @@ public class Preferenciaxcancion implements Serializable {
 
     public void setGusto(double gusto) {
         this.gusto = gusto;
+    }
+
+    public BigDecimal getReminiscencia() {
+        return reminiscencia;
+    }
+
+    public void setReminiscencia(BigDecimal reminiscencia) {
+        this.reminiscencia = reminiscencia;
     }
 
     public Cancion getCancion() {

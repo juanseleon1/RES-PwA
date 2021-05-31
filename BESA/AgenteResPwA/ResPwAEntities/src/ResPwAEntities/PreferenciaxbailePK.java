@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Embeddable
 public class PreferenciaxbailePK implements Serializable {

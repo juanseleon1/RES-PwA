@@ -4,7 +4,7 @@
 <createdTime>2020-10-27 18:09:35 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,21 +21,21 @@
 <generatorID>D71947AB-04DB-4F6D-B992-39D113A3CB57</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <referedAttribute>7D8AF2AF-E0B4-67F7-8221-224634856615</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>30 CHAR</dataTypeSize>
-<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="tomaMedicamentos" id="474D2DC3-EE0C-057A-DEA5-47A8A7FEB183">
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 18:58:41 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -47,7 +47,7 @@
 <createdTime>2020-10-27 18:59:41 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -59,7 +59,7 @@
 <createdTime>2020-10-27 19:02:54 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -71,7 +71,7 @@
 <createdTime>2020-10-27 19:03:05 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -83,7 +83,7 @@
 <createdTime>2020-10-27 19:03:16 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -95,7 +95,7 @@
 <createdTime>2020-10-27 19:03:40 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -108,7 +108,7 @@
 <generatorID>137D48F6-359A-2C69-6178-0014EA818688</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="true"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <referedAttribute>E9FA87E9-5605-0DA8-CDAB-74165BC94AE9</referedAttribute>
@@ -118,6 +118,18 @@
 <dataTypeSize>30 CHAR</dataTypeSize>
 <ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="FAST" id="4F53D38F-FD1D-C33F-2090-65585EC92651">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 21:31:15 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="D18C99DB-D326-BAC9-993C-A138FF237E2C" name="Perfil Medico PK">
@@ -126,7 +138,7 @@
 <ownerDesignName>respwa</ownerDesignName>
 <shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="51A1628E-9C0E-3291-7DFB-F879C0E16078" value="false"/>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "ENRIQ")
@@ -45,7 +45,7 @@ public class Enriq implements Serializable {
     private Cancion cancionNombre;
     @JoinColumns({
         @JoinColumn(name = "FRASES_ORDEN", referencedColumnName = "ORDEN"),
-        @JoinColumn(name = "FRASES_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
+        @JoinColumn(name = "FRASES_CUENTO_NOMBRE", referencedColumnName = "CUENTO_NOMBRE")})
     @ManyToOne(fetch = FetchType.EAGER)
     private Frases frases;
 
