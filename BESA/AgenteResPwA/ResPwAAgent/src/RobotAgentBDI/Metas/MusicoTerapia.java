@@ -72,8 +72,9 @@ public class MusicoTerapia extends GoalBDI{
         System.out.println("EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getEmocionPredominante());
 
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0) {
-                return 1;
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0 ) {
+                //gusto por la actividad
+                return 0.4 + blvs.getbPerfilPwA().getPerfil().ge;
             }
         }
         return 1;
