@@ -5,16 +5,16 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalConfig;
 public enum EmotionalObjectType {
 
     //CAPERUCITA    
-   CERDO("",EmotionalConfig.Objects.Valioso),CASA("",EmotionalConfig.Objects.Valioso),EXITO("",EmotionalConfig.Objects.Importante),COLA("",EmotionalConfig.Objects.Importante),
-   REGALO("",EmotionalConfig.Objects.Importante),NATURALEZA("",EmotionalConfig.Objects.Valioso),CAPERUCITA("",EmotionalConfig.Objects.Importante), IDEA_BUENA("",EmotionalConfig.Objects.Valioso),
-   ABUELA("",EmotionalConfig.Objects.Importante),LOBO("",EmotionalConfig.Objects.Importante);
+    CERDO("CERDO", EmotionalConfig.Objects.Valioso), CASA("CASA", EmotionalConfig.Objects.Valioso), EXITO("EXITO", EmotionalConfig.Objects.Importante), COLA("COLA", EmotionalConfig.Objects.Importante),
+    REGALO("REGALO", EmotionalConfig.Objects.Importante), NATURALEZA("NATURALEZA", EmotionalConfig.Objects.Valioso), CAPERUCITA("CAPERUCITA", EmotionalConfig.Objects.Importante), IDEABUENA("IDEABUENA", EmotionalConfig.Objects.Valioso),
+    ABUELA("ABUELA", EmotionalConfig.Objects.Importante), LOBO("LOBO", EmotionalConfig.Objects.Importante);
 
     private final String emoType;
     private final EmotionalConfig.Objects config;
 
     private EmotionalObjectType(String emoType, EmotionalConfig.Objects config) {
         this.emoType = emoType;
-        this.config=config;
+        this.config = config;
     }
 
     public static EmotionalObjectType getFromId(String ident) {
@@ -27,16 +27,16 @@ public enum EmotionalObjectType {
         }
         return ret;
     }
-    
+
     public String getEmoType() {
         return emoType;
     }
 
-    public EmotionalConfig.Objects getConfigEnum(){
+    public EmotionalConfig.Objects getConfigEnum() {
         return config;
     }
-    
-    public String getConfig(){
+
+    public String getConfig() {
         return config.toString();
     }
 
