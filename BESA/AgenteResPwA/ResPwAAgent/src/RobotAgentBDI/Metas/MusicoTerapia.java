@@ -10,6 +10,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
+import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
@@ -73,8 +74,7 @@ public class MusicoTerapia extends GoalBDI{
 
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0 ) {
-                //gusto por la actividad
-                return 0.4 + blvs.getbPerfilPwA().getPerfil().ge;
+                return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.MUSICOTERAPIA)*0.6);
             }
         }
         return 1;
