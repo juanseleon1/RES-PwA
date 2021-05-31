@@ -12,7 +12,8 @@ import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import EmotionalAnalyzerAgent.EmotionalEventType;
-import EmotionalAnalyzerAgent.WHO;
+import EmotionalAnalyzerAgent.EmotionalObjectType;
+import EmotionalAnalyzerAgent.EmotionalSubjectType;
 import Init.InitRESPwA;
 import ResPwAEntities.EmotionalEntities.EmotionAxisConfig;
 import ResPwAEntities.EmotionalEntities.EventInfluence;
@@ -22,7 +23,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticDictionary;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticValue;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,6 @@ import rational.services.ActivateAsynchronousServiceGuard;
  */
 public abstract class ResPwaEmotionalModel extends EmotionalModel {
 
-
     public ResPwaEmotionalModel() {
         super();
 
@@ -45,54 +45,53 @@ public abstract class ResPwaEmotionalModel extends EmotionalModel {
 
     @Override
     public void loadSemanticDictionary() {
-        
+
         SemanticDictionary sd = SemanticDictionary.getInstance();
-         for(EmotionalConfig.People who:EmotionalConfig.People.values()){
+        for (EmotionalConfig.People who : EmotionalConfig.People.values()) {
             sd.addSemanticItem(Personality.EmotionElementType.Person, new SemanticValue(who.toString(), who.getValue()));
-         }
-         
-         for(EmotionalConfig.Events evt: EmotionalConfig.Events.values()){
-            sd.addSemanticItem(Personality.EmotionElementType.Event, new SemanticValue(evt.toString(),evt.getValue()));
-         }
-         
-        for(EmotionalConfig.Objects obj: EmotionalConfig.Objects.values()){
-            sd.addSemanticItem(Personality.EmotionElementType.Object, new SemanticValue(obj.toString(),obj.getValue()));
-         }
+        }
+
+        for (EmotionalConfig.Events evt : EmotionalConfig.Events.values()) {
+            sd.addSemanticItem(Personality.EmotionElementType.Event, new SemanticValue(evt.toString(), evt.getValue()));
+        }
+
+        for (EmotionalConfig.Objects obj : EmotionalConfig.Objects.values()) {
+            sd.addSemanticItem(Personality.EmotionElementType.Object, new SemanticValue(obj.toString(), obj.getValue()));
+        }
 
     }
 
     @Override
     public void loadCharacterDescriptor() {
-        
-         for(WHO who:WHO.values()){
-             setPersonRelationship(who.toString(), who.getConfig());
-         }
-         
-         for(EmotionalEventType evt: EmotionalEventType.values()){
-             setEventDesirability(evt.toString(), evt.getConfig());
-         }
-         
+
+        for (EmotionalSubjectType who : EmotionalSubjectType.values()) {
+            setPersonRelationship(who.toString(), who.getConfig());
+        }
+
+        for (EmotionalEventType evt : EmotionalEventType.values()) {
+            setEventDesirability(evt.toString(), evt.getConfig());
+        }
+
+        for (EmotionalObjectType obj : EmotionalObjectType.values()) {
+            setObjectRelationship(obj.toString(), obj.getConfig());
+        }
+
     }
 
-    
     @Override
     public void loadEmotionalAxes() {
-        List <EmotionAxis> emoax= new ArrayList<>();
+        List<EmotionAxis> emoax = new ArrayList<>();
         EmotionAxis emoAxis;
-        List <EmotionAxisConfig> aux= RESPwABDInterface.getEmotionalAxisConfig();
+        List<EmotionAxisConfig> aux = RESPwABDInterface.getEmotionalAxisConfig();
         List<EventInfluence> evtinf;
         for (EmotionAxisConfig emotionAxisConfig : aux) {
-            emoAxis= new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
-            evtinf=emotionAxisConfig.getEventInfluence();
+            emoAxis = new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
+            evtinf = emotionAxisConfig.getEventInfluence();
             for (EventInfluence eventInfluence : evtinf) {
                 emoAxis.setEventInfluence(eventInfluence.getEventName(), (float) eventInfluence.getEventInfluence());
             }
-//            System.out.println("Adding emotional axis: "+ emoAxis.toString());
             this.addEmotionAxis(emoAxis);
         }
-//        emotionalState.getEmotions().get(0).printEventInfluences();
-//        System.out.println("Emotions "+emotionalState.getEmotions().get(0).getEventInfluences().size() );
-}
-    
-    
+    }
+
 }

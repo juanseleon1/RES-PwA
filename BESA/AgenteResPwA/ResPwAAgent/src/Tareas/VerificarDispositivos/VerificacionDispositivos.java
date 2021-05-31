@@ -6,7 +6,7 @@
 package Tareas.VerificarDispositivos;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateService;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;

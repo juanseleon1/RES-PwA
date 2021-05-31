@@ -13,8 +13,26 @@ public enum EmotionalEventType {
     VOICEEMOTION("voiceEmotionRecognized", EmotionalConfig.Events.Indiferente), POSVOICEEMOTION("POSVOICEEMOTION", EmotionalConfig.Events.AlgoDeseable),
     NEGVOICEEMOTION("NEGVOICEEMOTION", EmotionalConfig.Events.AlgoIndeseable),  GETEMOSTATE("PersonData", EmotionalConfig.Events.Indiferente),
     POSEMOSTATE("PersonDataPos", EmotionalConfig.Events.Deseable), NEGEMOSTATE("PersonDataNeg", EmotionalConfig.Events.Indeseable),
-    SPEECHDETECTED("speechDetected", EmotionalConfig.Events.AlgoDeseable);
+    SPEECHDETECTED("speechDetected", EmotionalConfig.Events.AlgoDeseable),
+    //CAPERUCITA
+    
+   ENFERMAR("ENFERMAR",EmotionalConfig.Events.Indeseable),ALEGRARSE("ALEGRARSE",EmotionalConfig.Events.Deseable),ASUSTAR("ASUSTAR",EmotionalConfig.Events.AlgoIndeseable),
+   VER("VER",EmotionalConfig.Events.Indiferente),
+   EMOCIONAR("EMOCIONAR",EmotionalConfig.Events.AlgoDeseable),DEVORAR("DEVORAR",EmotionalConfig.Events.Indeseable),ESCAPAR("ESCAPAR",EmotionalConfig.Events.Deseable), 
+   HUIR("HUIR",EmotionalConfig.Events.AlgoDeseable),
+   ABRAZAR("ABRAZAR",EmotionalConfig.Events.Deseable),LLEVAR("LLEVAR",EmotionalConfig.Events.Indiferente),OBSERVAR("OBSERVAR",EmotionalConfig.Events.Indiferente),
+   HABLAR("HABLAR",EmotionalConfig.Events.Indiferente),
+   AMENAZAR("AMENAZAR",EmotionalConfig.Events.AlgoIndeseable),
+   APRECIAR("APRECIAR",EmotionalConfig.Events.Deseable),ENGANAR("ENGANAR",EmotionalConfig.Events.Indeseable),TRAICIONAR("TRAICIONAR",EmotionalConfig.Events.Indeseable),
+   SOSPECHAR("SOSPECHAR",EmotionalConfig.Events.Indeseable),SORPRENDER("SORPRENDER",EmotionalConfig.Events.AlgoDeseable),
+   GRITAR("GRITAR",EmotionalConfig.Events.Deseable),
 
+   //cerditos
+   PERSEGUIR("PERSEGUIR",EmotionalConfig.Events.Indeseable),SONAR("SONAR",EmotionalConfig.Events.Indiferente),CONSTRUIR("CONSTRUIR",EmotionalConfig.Events.AlgoDeseable),APARECER("APARECER",EmotionalConfig.Events.Indiferente),
+   DESTRUIR("DESTRUIR",EmotionalConfig.Events.Deseable),REFUGIARSE("REFUGIARSE",EmotionalConfig.Events.AlgoDeseable),CELEBRAR("CELEBRAR",EmotionalConfig.Events.Deseable),VITOREAR("VITOREAR",EmotionalConfig.Events.Deseable),
+   QUEMAR("QUEMAR",EmotionalConfig.Events.Indeseable);
+   
+   
     private final String emoType;
     private final EmotionalConfig.Events config;
 
@@ -45,5 +63,6 @@ public enum EmotionalEventType {
     public String getConfig(){
         return config.toString();
     }
+    
 
 }

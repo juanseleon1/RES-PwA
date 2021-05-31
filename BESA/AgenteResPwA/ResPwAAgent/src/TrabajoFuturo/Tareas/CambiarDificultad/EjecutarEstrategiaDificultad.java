@@ -7,7 +7,7 @@
 package TrabajoFuturo.Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import ResPwaUtils.ResPwaUtils;
 import java.util.HashMap;
 import rational.mapping.Task;
 
