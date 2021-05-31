@@ -74,7 +74,7 @@ public class Cuenteria extends GoalBDI {
 //        System.out.println("susp: " + blvs.getbEstadoInteraccion().isSistemaSuspendido());
 
 
-        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()&& blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
             if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {
                 return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.CUENTERIA)*0.6);
             }

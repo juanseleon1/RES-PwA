@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="015F8ABF-7293-8ED4-D853-92FBAE6FA58E" name="Frases">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>BBA37A3F-90EB-FA7F-D1CB-00B3B5D7DBD7</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="orden" id="DF55669C-A052-1D34-4EAE-925EE562F7A5">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>F6AC9C1B-485C-06BD-A895-CA7723E127BE</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="contenido" id="4F14E46D-EFD3-328A-10A9-A122047BD418">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>53134FF6-B242-E5E7-44A8-AF9F83464236</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cuento_nombre" id="2F1A8955-116D-A48D-2037-8103960F6C02">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>D6EEC1F5-D019-8444-99EB-D9CDC2BF86B3</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0FDA5C4D-69A6-3588-39D1-7C379E2D6DD7" referredColumn="44CCC274-4878-795F-4B03-B119418D9CEA"/>
+</associations>
+</Column>
+<Column name="emotionalEvent" id="BE498D9E-AE20-65DD-C9ED-F53A2C17DF00">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>516BD74A-CFCA-9E34-43D3-CAAABF72698A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="accion" id="FD8E8CF9-1698-2494-8FCD-4CB6E72CCC2B">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>FC01A89C-2981-8358-D661-2001E4ACCA11</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="urlImagen" id="55AC3DC9-61C5-526B-35F4-A10D3825841B">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>194E6627-6B7D-6F7D-4491-3ECEB4371C05</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FBE5148B-7F80-8EED-502E-962FC034A7D2" name="Frases_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>2DE778C9-29DC-B467-0818-9FA2C7E4889D</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DF55669C-A052-1D34-4EAE-925EE562F7A5"/>
+<colUsage columnID="2F1A8955-116D-A48D-2037-8103960F6C02"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="091B5E96-01DE-711A-5534-E7D0A7E35A80" name="Frases_Cuento_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>D51D2B31-BDE8-9C7D-FA90-7D0FEA5AEFB6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2F1A8955-116D-A48D-2037-8103960F6C02"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

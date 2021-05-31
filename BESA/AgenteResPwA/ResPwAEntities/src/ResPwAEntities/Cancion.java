@@ -6,7 +6,6 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -35,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cancion.findAll", query = "SELECT c FROM Cancion c"),
     @NamedQuery(name = "Cancion.findByNombre", query = "SELECT c FROM Cancion c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Cancion.findByReminiscencia", query = "SELECT c FROM Cancion c WHERE c.reminiscencia = :reminiscencia"),
     @NamedQuery(name = "Cancion.findByUrl", query = "SELECT c FROM Cancion c WHERE c.url = :url")})
 public class Cancion implements Serializable {
 
@@ -44,8 +42,6 @@ public class Cancion implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @Column(name = "REMINISCENCIA")
-    private BigDecimal reminiscencia;
     @Column(name = "URL")
     private String url;
     @JoinTable(name = "LISTATAGS", joinColumns = {
@@ -74,14 +70,6 @@ public class Cancion implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public BigDecimal getReminiscencia() {
-        return reminiscencia;
-    }
-
-    public void setReminiscencia(BigDecimal reminiscencia) {
-        this.reminiscencia = reminiscencia;
     }
 
     public String getUrl() {

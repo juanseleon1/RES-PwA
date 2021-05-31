@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ADD7388D-9C57-3BE6-5605-115939D3C44C" name="Cancion">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>D0E39788-B073-0CDE-AFE5-8AFF4E74328A</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="nombre" id="F0518C15-DCC2-BC7D-A653-B108514AD4A2">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>4760F22E-8822-B9CA-4471-25D53FFBBB60</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Genero_genero" id="5247C2A7-96BF-F1F8-A018-36A0C7007C76">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>A12041AA-7768-7FAA-950C-143C844D46C6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="843D0995-575C-23D3-15E4-AAC893506F97" referredColumn="A9009540-EE2B-0560-8140-293ABD559168"/>
+</associations>
+</Column>
+<Column name="url" id="F98796F1-31F8-A2BD-88F6-18B26BE53DA2">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>B0B81711-3D49-36C5-5193-31768B9AB6BF</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F43C0623-8943-912F-BC7C-33AD85FA1F38" name="Cancion_PK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>079FE8DD-67EE-E5E9-585E-B05DA2A5A4F6</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F0518C15-DCC2-BC7D-A653-B108514AD4A2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7D9100DD-DD83-F119-D3ED-72F06A1D1132" name="Cancion_Genero_FK">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-31 22:34:55 UTC</createdTime>
+<generatorID>7635C045-CFAB-4757-19B4-1164B4AA8218</generatorID>
+<ownerDesignName>respwa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5247C2A7-96BF-F1F8-A018-36A0C7007C76"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

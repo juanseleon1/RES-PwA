@@ -62,7 +62,7 @@ public class AnimarElogiarPwA extends GoalBDI{
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         
 
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged()){
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged() && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5){
             if (blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() > 60000 && (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < -0.5 || blvs.getbEstadoEmocionalPwA().getEmocionPredominante() > 0.5)) {
                 return 1.0;
             }

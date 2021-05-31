@@ -62,7 +62,7 @@ public class MantenerAtencionPwA extends GoalBDI {
 
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
 
-            if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.5) {
+            if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.5 && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
                 return 1.0;
             }
         }
