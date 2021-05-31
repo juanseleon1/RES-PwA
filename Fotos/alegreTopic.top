@@ -5,5 +5,5 @@ topic: ~alegreTopic()
     concept: (bloque_tres) [amor orgullo ]
     u: (*_~bloque_uno) Verte tan alegre te hace lucir genial, te ves muy bien hoy!
         u2: ("muchas gracias" gracias) A ti por compartir tiempo conmigo
-    u: ([Siento Tengo] {[mucha muchisima tantisima demasiada]} _~bloque_dos) La alegria te da una sonrisa muy hermosa 
-    u: ([Siento Tengo] {[mucho muchisimo tantisimo demasiado]} _~bloque_tres) Esos son los sentimientos mas hermosos de una persona 
+    u: (*_~bloque_dos) La alegria te da una sonrisa muy hermosa 
+    u: (*_~bloque_tres) Esos son los sentimientos mas hermosos de una persona 

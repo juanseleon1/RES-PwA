@@ -1,5 +1,6 @@
 import threading
 import time
+import easygui
 
 import PepperModuleV2
 from Animation import Animation
@@ -65,11 +66,16 @@ class Robot:
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         # self.alTabletService = None;
+        self.joy= 0
+        self.sorrow=0
+        self.attention=0
+        self.ease=0
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
         self.animation = Animation(self.session)
-
+        self.th = threading.Thread(target=self.show_gui())
+        self.th.start()
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
                                 "sadTopic": topico_triste,
@@ -362,7 +368,28 @@ class Robot:
 
     # Gets the emotional state of the current focused user through a PersonState struct.
     def get_emotion_state(self):
-        return self.alMood.currentPersonState()
+        expressions = {
+            "calm": {0, 0},
+            "anger": {0, 0},
+            "joy": {self.joy, 1},
+            "sorrow": {self.sorrow, 1},
+            "laughter": {0, 0},
+            "excitement": {0, 0},
+            "surprise": {0, 0}
+        }
+        PersonData = {
+            "valence":{ 0, 0 },
+            "attention":{ self.attention, 1 },
+            "bodyLanguageState":
+                {
+                    "ease": {self.ease, 1}
+                },
+            "smile": {0, 0},
+            "expressions" : expressions
+        }
+
+        return PersonData
+        #return self.alMood.currentPersonState()
 
     #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
 
@@ -787,3 +814,39 @@ class Robot:
 
     def force_out(self, params):
         self.alDialogProxy.forceOutput()
+
+    def show_gui(self):
+        listChoices = list()
+        listChoices.append("Aumentar Estado Emocional")
+        listChoices.append("Bajar Estado Emocional")
+        listChoices.append("Aumentar Relajacion")
+        listChoices.append("Bajar Relajacion")
+        listChoices.append("Aumentar Atencion")
+        listChoices.append("Bajar Atencion")
+        s = ""
+        choice = easygui.buttonbox(msg="Escoger" , choices=listChoices, title="Simular Evento Emocional")
+        while True:
+            s = "Escoger \n Joy: "+str(self.joy)+"Sorrow: "+str(self.sorrow)+"Ease: "+str(self.ease)+"Attention: "+str(self.attention)
+            if choice == "Aumentar Estado Emocional":
+                self.joy += 0.1
+                self.sorrow -= 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            elif choice == "Bajar Estado Emocional":
+                self.joy -= 0.1
+                self.sorrow += 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            elif choice == "Aumentar Relajacion":
+                self.ease += 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            elif choice == "Bajar Relajacion":
+                self.ease -= 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            elif choice == "Aumentar Atencion":
+                self.attention += 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            elif choice == "Bajar Atencion":
+                self.attention -= 0.1
+                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
+            else:
+                break
+

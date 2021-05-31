@@ -34,12 +34,13 @@ public class PreguntarSentimientos extends Task {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Preguntar Sentimientos ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
-        ResPwaUtils.activateTopic(PepperTopicsNames.ALEGRETOPIC, parameters);
+
+       
 
         infoServicio.put("SAY", "¿Como te sientes hoy?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         ResPwaUtils.requestService(srb, (RobotAgentBelieves) parameters);
+         ResPwaUtils.activateTopic(PepperTopicsNames.ALEGRETOPIC, parameters);
     }
 
     @Override
@@ -66,9 +67,10 @@ public class PreguntarSentimientos extends Task {
 
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().isRecibirRespuestaPwA() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1
                 && ((blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.ALEGRETOPIC) || !blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SADTOPIC) || !blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.IRATOPIC)))) {
-            System.out.println("KKKKKKKK: " +blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
+            System.out.println("KKKKKKKK: " + blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
             ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
+            blvs.getbEstadoInteraccion().setRespuestasPorContexto(0);
             return true;
         }
         return false;

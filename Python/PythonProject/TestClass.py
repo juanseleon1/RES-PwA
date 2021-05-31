@@ -3,44 +3,40 @@
 
 """Example: Use onTouchDown Method"""
 
-import qi
-import argparse
-import sys
-import time
+import easygui
 
 
-def main(app):
+def main():
     """
     This example uses the onTouchDown method.
     To Test ALTabletService, you need to run the script ON the robot.
     """
     # Get the service ALTabletService.
+    listChoices = list()
+    listChoices.append("Aumentar Estado Emocional")
+    listChoices.append("Bajar Estado Emocional")
+    listChoices.append("Aumentar Relajacion")
+    listChoices.append("Bajar Relajacion")
+    listChoices.append("Aumentar Atencion")
+    listChoices.append("Bajar Atencion")
 
-    try:
-        say = app.session.service("ALTextToSpeech")
-        leds = app.session.service("ALLeds")
-        print "HOLA"
-        say.say("HOLA")
-        leds.fadeRGB("AllLeds",0x00ffff7a,0.2)
-        app.run()
-    except Exception, e:
-        print "Error was: ", e
+    choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+    while True:
+        if choice == "Aumentar Estado Emocional":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        elif choice == "Bajar Estado Emocional":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        elif choice == "Aumentar Relajacion":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        elif choice == "Bajar Relajacion":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        elif choice == "Aumentar Atencion":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        elif choice == "Bajar Atencion":
+            choice = easygui.buttonbox(msg="Escoger", choices=listChoices, title="Simular Evento Emocional")
+        else:
+            break
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="10.195.22.105",
-                        help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
-    parser.add_argument("--port", type=int, default=9559,
-                        help="Naoqi port number")
-
-    args = parser.parse_args()
-    try:
-        connection_url = "tcp://" + args.ip + ":" + str(args.port)
-        app = qi.Application(["TabletModule", "--qi-url=" + connection_url])
-        app.start()
-    except RuntimeError:
-        print ("Can't connect to Naoqi at ip \"" + args.ip + "\" on port " + str(args.port) +".\n"
-               "Please check your script arguments. Run with -h option for help.")
-        sys.exit(1)
-    main(app)
+    main()
