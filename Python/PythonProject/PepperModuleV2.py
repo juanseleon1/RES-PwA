@@ -516,7 +516,10 @@ class pepperModuleV2(object):
         if sirve:
             json_params = {"DialogInput": resultValue}
         else:
-            json_params = {"retroValue": resultValue}
+            if "ayuda" in resultValue:
+                json_params = {"ayudaValue": resultValue}
+            else:
+                json_params = {"retroValue": resultValue}
         print "DialogInput", json_params
         send(-1, "int", json_params, False)
 

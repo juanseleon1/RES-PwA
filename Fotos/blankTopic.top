@@ -1,0 +1,4 @@
+topic: ~blankTopic()
+    language: spe
+    concept: (palabra_clave) [ayuda ayudame] 
+    u: (*_~palabra_clave) ^empty

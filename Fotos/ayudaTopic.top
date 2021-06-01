@@ -2,9 +2,7 @@
         language: spe
         concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]
 
-    
-        u: (carga a mafe) ya puedo ayudar a mafe a dejar el perico
-        u: (comenzar) Cuentame qué es lo que necesitas?
+        u: (ayuda) Cuentame qué es lo que necesitas?
             u1: (["Quien eres" "Quien es usted" ]) Yo me llamo Pepper, soy un robot humanoide. Mucho gusto
             u1: ("Que hago aca") Estas en un taller con robotica muy divertido 
             u1: ("Donde estoy")  Estas conmigo en el laboratorio en Bogota, Colombia
