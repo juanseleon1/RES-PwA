@@ -130,7 +130,7 @@ public class InitRESPwA {
 //          LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
-        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
+//        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
 //          Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
@@ -148,7 +148,7 @@ public class InitRESPwA {
 //        RAGoals.add(pausarInteraccionGoal);
 //        RAGoals.add(reanudarActividadGoal);
 //        RAGoals.add(recargarBateriaGoal);
-        RAGoals.add(pedirAyudaGoal);
+//        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
 //          RAGoals.add(saludar);
 //        RAGoals.add(reportar);
