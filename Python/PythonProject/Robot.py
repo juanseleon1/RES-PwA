@@ -1,6 +1,5 @@
 import threading
 import time
-#import easygui
 
 import PepperModuleV2
 from Animation import Animation
@@ -66,16 +65,15 @@ class Robot:
         self.alPeoplePerception = session.service("ALPeoplePerception")
         self.alPeoplePerception.setMovementDetectionEnabled(False)
         # self.alTabletService = None;
-        self.joy= 0
-        self.sorrow=0
-        self.attention=0
-        self.ease=0
+        self.joy = 0.0
+        self.sorrow = 0.0
+        self.attention = 0.0
+        self.ease = 0.0
         self.topicMap = {}
         self.prof_emotions = dict()
         self.sensorsModule = None
         self.animation = Animation(self.session)
-        #self.th = threading.Thread(target=self.show_gui())
-        #self.th.start()
+        #print "GUI LISTA"
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
                                 "sadTopic": topico_triste,
@@ -106,7 +104,7 @@ class Robot:
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
 
-        print "ROBOT CARGADO Y LISTO"
+        #print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
         time.sleep(5)
@@ -369,25 +367,25 @@ class Robot:
     # Gets the emotional state of the current focused user through a PersonState struct.
     def get_emotion_state(self):
         expressions = {
-            "calm": {0, 0},
-            "anger": {0, 0},
-            "joy": {self.joy, 1},
-            "sorrow": {self.sorrow, 1},
-            "laughter": {0, 0},
-            "excitement": {0, 0},
-            "surprise": {0, 0}
+            "calm": {"value": 0.0, "confidence":0.0},
+            "anger": {"value": 0.0, "confidence":0.0},
+            "joy": {"value":self.joy, "confidence": 1.0},
+            "sorrow": {"value":self.sorrow, "confidence": 1.0},
+            "laughter": {"value": 0.0, "confidence":0.0},
+            "excitement": {"value": 0.0, "confidence":0.0},
+            "surprise": {"value": 0.0, "confidence":0.0}
         }
         PersonData = {
-            "valence":{ 0, 0 },
-            "attention":{ self.attention, 1 },
+            "valence":{"value": 0.0, "confidence": 0.0},
+            "attention":{"value": self.attention, "confidence": 1.0},
             "bodyLanguageState":
                 {
-                    "ease": {self.ease, 1}
+                    "ease": {"level": self.ease, "confidence":1.0}
                 },
-            "smile": {0, 0},
+            "smile": {"value": 0.0, "confidence":0.0},
             "expressions" : expressions
         }
-
+        print PersonData
         return PersonData
         #return self.alMood.currentPersonState()
 
@@ -440,7 +438,7 @@ class Robot:
 
     def initial_conf(self, prof_emotions):
         self.prof_emotions = prof_emotions["INITIALCONF"]
-        print("VER IDENT ", self.prof_emotions)
+        #print("VER IDENT ", self.prof_emotions)
         if len(self.prof_emotions) == 5:
             try:
                 self.init_timers()
@@ -505,7 +503,7 @@ class Robot:
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
         if "EmotionalTag" in params:
-            print "TIENE EMOTAG", params
+           # print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
             self.show_image({"SHOWIMG": self.current_emomap["image"]})
             emomapParams = {"ACTION": "POSTURA"}
@@ -706,13 +704,13 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
     def desactivate_conversational_topic(self, topic_name):
-        print self.alDialogProxy.getActivatedTopics()
+       # print self.alDialogProxy.getActivatedTopics()
         if topic_name in self.alDialogProxy.getActivatedTopics():
             for topic in self.alDialogProxy.getActivatedTopics():
                 if topic == topic_name:
-                    print "ENTRA"
+                   # print "ENTRA"
                     self.alDialogProxy.deactivateTopic(topic)
-                    print "SALE"
+                    #print "SALE"
                     break
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
@@ -792,7 +790,7 @@ class Robot:
         json_params = {}
         # The value should be True
         json_params["PersonData"] = self.get_emotion_state()
-        print "PersonData", self.get_emotion_state()
+        print "PersonData", json_params
         send(-1, "emo", json_params)
         threading.Timer(10.0, self.timer_currentState).start()
 
@@ -814,39 +812,3 @@ class Robot:
 
     def force_out(self, params):
         self.alDialogProxy.forceOutput()
-
-    '''def show_gui(self):
-        listChoices = list()
-        listChoices.append("Aumentar Estado Emocional")
-        listChoices.append("Bajar Estado Emocional")
-        listChoices.append("Aumentar Relajacion")
-        listChoices.append("Bajar Relajacion")
-        listChoices.append("Aumentar Atencion")
-        listChoices.append("Bajar Atencion")
-        s = ""
-        choice = easygui.buttonbox(msg="Escoger" , choices=listChoices, title="Simular Evento Emocional")
-        while True:
-            s = "Escoger \n Joy: "+str(self.joy)+"Sorrow: "+str(self.sorrow)+"Ease: "+str(self.ease)+"Attention: "+str(self.attention)
-            if choice == "Aumentar Estado Emocional":
-                self.joy += 0.1
-                self.sorrow -= 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            elif choice == "Bajar Estado Emocional":
-                self.joy -= 0.1
-                self.sorrow += 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            elif choice == "Aumentar Relajacion":
-                self.ease += 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            elif choice == "Bajar Relajacion":
-                self.ease -= 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            elif choice == "Aumentar Atencion":
-                self.attention += 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            elif choice == "Bajar Atencion":
-                self.attention -= 0.1
-                choice = easygui.buttonbox(msg=s, choices=listChoices, title="Simular Evento Emocional")
-            else:
-                break
-'''

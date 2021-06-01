@@ -14,7 +14,7 @@ import ResPwAEntities.Perfilpwa;
 import ResPwAEntities.Preferenciaxbaile;
 import ResPwAEntities.Preferenciaxcancion;
 import ResPwAEntities.Preferenciaxcuento;
-import ResPwaUtils.Imagen;
+import Utils.Imagen;
 import Retroalimentacion.Modelo.ModeloRetroalimentacion;
 import RobotAgentBDI.ResPwAActivity;
 import SensorHandlerAgent.SensorData;

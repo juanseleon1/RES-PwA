@@ -2,6 +2,7 @@ import socket
 import threading
 import json
 import qi
+import Utils
 import sys
 import argparse
 from Message import messageManager
@@ -29,9 +30,15 @@ def safe_str(obj):
         return str(obj)
     except UnicodeEncodeError:
         return obj.encode(FORMAT, 'ignore').decode(FORMAT)
+def receive_request(robot):
+    while 1:
+        global conn
+        conn,addr = server.accept()
+        thread = threading.Thread(target=handle_client)
+        thread.start()
 
 def handle_client():
-    print(" ID: ", threading.currentThread().getName())
+   # print(" ID: ", threading.currentThread().getName())
     # while connected:
     msg_length = conn.recv(HEADER)
     msg_length = msg_length.decode(FORMAT, 'ignore')
@@ -43,13 +50,38 @@ def handle_client():
     for val in range(1, len(y)):
         json_string = json_string + "{" + y[val]
     # y = "{" + y
-    print("Pepperoni: "+json_string)
+   # print("Pepperoni: "+json_string)
     # print(y)
     jsonObj = json.loads(json_string)
     # msg_length = len(jsonObj)
     # msg = conn.recv((msg_length)).decode(FORMAT, 'ignore')
 
     callFunction(jsonObj)
+
+def my_callback(choice, robot_1):
+    if choice == "Aumentar Estado Emocional":
+
+        if robot_1.joy < 1:
+            robot_1.joy += 0.1
+        if robot_1.sorrow > -1:
+            robot_1.sorrow -= 0.1
+    elif choice == "Bajar Estado Emocional":
+        if robot_1.joy > -1:
+            robot_1.joy -= 0.1
+        if robot_1.sorrow < 1:
+            robot_1.sorrow += 0.1
+    elif choice == "Aumentar Relajacion":
+        if robot_1.ease < 1:
+            robot_1.ease += 0.1
+    elif choice == "Bajar Relajacion":
+        if robot_1.ease > -1:
+            robot_1.ease -= 0.1
+    elif choice == "Aumentar Atencion":
+        if robot_1.attention < 1:
+            robot_1.attention += 0.1
+    elif choice == "Bajar Atencion":
+        if robot_1.attention > -1:
+            robot_1.attention -= 0.1
 
 def callFunction(jsonObj):
     function = robot.getFunction(jsonObj["methodName"])
@@ -133,7 +165,10 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
 robot = Robot(app, session)
-while 1:
-    conn, addr = server.accept()
-    thread = threading.Thread(target=handle_client)
-    thread.start()
+#th = threading.Thread(target=Utils.show_gui, args={robot})
+#th.daemon = True
+#th.start()
+th2 = threading.Thread(target=receive_request, args={robot})
+th2.daemon = True
+th2.start()
+kthread = Utils.KeyboardThread(input_cbk=my_callback,robot=robot)

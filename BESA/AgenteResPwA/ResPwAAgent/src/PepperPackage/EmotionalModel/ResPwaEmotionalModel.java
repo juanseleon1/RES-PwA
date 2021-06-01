@@ -23,7 +23,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticDictionary;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticValue;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +84,7 @@ public abstract class ResPwaEmotionalModel extends EmotionalModel {
         EmotionAxis emoAxis;
         List<EmotionAxisConfig> aux = RESPwABDInterface.getEmotionalAxisConfig();
         List<EventInfluence> evtinf;
+        System.out.println("MRIAR EJES "+ aux.size());
         for (EmotionAxisConfig emotionAxisConfig : aux) {
             emoAxis = new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
             evtinf = emotionAxisConfig.getEventInfluence();

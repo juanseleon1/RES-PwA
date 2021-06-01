@@ -8,7 +8,7 @@ package TrabajoFuturo.Tareas.ModificarPreferencias;
 import Tareas.Test.*;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;

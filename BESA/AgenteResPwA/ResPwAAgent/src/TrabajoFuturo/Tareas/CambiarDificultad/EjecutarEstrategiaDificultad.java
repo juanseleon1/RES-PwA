@@ -7,7 +7,7 @@
 package TrabajoFuturo.Tareas.CambiarDificultad;
 
 import rational.mapping.Believes;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import java.util.HashMap;
 import rational.mapping.Task;
 

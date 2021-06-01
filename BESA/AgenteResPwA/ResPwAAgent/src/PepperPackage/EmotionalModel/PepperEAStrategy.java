@@ -34,7 +34,7 @@ public class PepperEAStrategy implements EmotionalAnalyzerStrategy {
             ret = (Map<String, Object>) ret.get("PersonData");
             aux = (Map<String, Object>) ret.get("bodyLanguageState");
             aux = (Map<String, Object>) aux.get("ease");
-            double relval = (double) aux.get("level") * (double) aux.get("confidence");
+            double relval = (double)  aux.get("level") * (double) aux.get("confidence");
             aux = (Map<String, Object>) ret.get("expressions");
             auxEmo = (Map<String, Object>) aux.get("joy");
             double joyval = (double) auxEmo.get("confidence") * (double) auxEmo.get("value");
