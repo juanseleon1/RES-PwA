@@ -654,11 +654,10 @@ class Robot:
 
     def deactivate_topics(self, topicsList):
         for topic in self.alDialogProxy.getActivatedTopics():
-            self.desactivate_conversational_topic(topic)
+            if topic != "blankTopic":
+                self.desactivate_conversational_topic(topic)
             time.sleep(5)
-
     # def
-
     def load_conversational_topic(self, params):
         topicName = params.get("name")
         self.alDialogProxy.activateTopic(topicName)
