@@ -438,7 +438,7 @@ class Robot:
 
     def initial_conf(self, prof_emotions):
         self.prof_emotions = prof_emotions["INITIALCONF"]
-        #print("VER IDENT ", self.prof_emotions)
+        print("VER IDENT ", self.prof_emotions)
         if len(self.prof_emotions) == 5:
             try:
                 self.init_timers()

@@ -52,11 +52,6 @@ public class SuspenderRobot extends Task{
             ResPwaUtils.requestService(srb,blvs);
         }
         
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
-        
         if(blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.PAUSEVIDEO, null);
             ResPwaUtils.requestService(srb,blvs);

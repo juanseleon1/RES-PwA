@@ -63,10 +63,6 @@ public class SeleccionarCuento extends Task {
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Recomendar Cuento ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
         blvs.getbEstadoRobot().setStoryMode(false);
     }
 
@@ -74,10 +70,6 @@ public class SeleccionarCuento extends Task {
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Recomendar Cuento ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
         blvs.getbEstadoRobot().setStoryMode(false);
 
     }
