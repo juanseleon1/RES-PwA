@@ -73,7 +73,9 @@ public abstract class ResPwaEmotionalModel extends EmotionalModel {
         }
 
         for (EmotionalObjectType obj : EmotionalObjectType.values()) {
-            setObjectRelationship(obj.toString(), obj.getConfig());
+            if(!obj.equals(EmotionalObjectType.NULL)){
+                setObjectRelationship(obj.toString(), obj.getConfig());
+            }
         }
 
     }

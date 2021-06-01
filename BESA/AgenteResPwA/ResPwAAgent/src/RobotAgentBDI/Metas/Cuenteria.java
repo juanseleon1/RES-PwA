@@ -79,7 +79,7 @@ public class Cuenteria extends GoalBDI {
                 return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.CUENTERIA)*0.6);
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Cuenteria extends GoalBDI {
             }
         }       
 
-        return valor;
+        return valor+1;
     }
 
     @Override

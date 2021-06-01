@@ -417,7 +417,7 @@ public class BEstadoInteraccion implements Believes {
     }
 
     public boolean isLogged() {
-        return true||logged;
+        return logged;
     }
 
     public void setLogged(boolean logged) {

@@ -76,9 +76,18 @@ public class ReproducirCuento extends Task {
 
             if (!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent().equals(" ")) {
                 String emoEvt = cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent();
-                String [] emoPos = emoEvt.split("_");
-                EmotionalEvent evt = new EmotionalEvent(EmotionalSubjectType.getFromId(emoPos[0]).toString(), EmotionalEventType.getFromId(emoPos[0]).toString(), EmotionalObjectType.getFromId(emoPos[0]).toString());
-                blvs.getbEstadoRobot().processEmotionalEvent(evt);
+                System.out.println("EVENTOS:");
+
+                String[] emoPos = emoEvt.split("_");
+                if (emoPos.length > 2) {
+                    for (String emoPo : emoPos) {
+                        System.out.println(emoPo);
+
+                    }
+                    EmotionalEvent evt = new EmotionalEvent(EmotionalSubjectType.getFromId(emoPos[0]).toString(), EmotionalEventType.getFromId(emoPos[1]).toString(), EmotionalObjectType.getFromId(emoPos[2]).toString());
+                    blvs.getbEstadoRobot().processEmotionalEvent(evt);
+                }
+
             } else {
                 blvs.getbEstadoRobot().emotionalStateChanged();
             }

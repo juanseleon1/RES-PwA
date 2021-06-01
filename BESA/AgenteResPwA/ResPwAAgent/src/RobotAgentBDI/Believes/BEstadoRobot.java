@@ -58,7 +58,7 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
     public BEstadoRobot() {
         super();
-        valencia=0;
+        valencia = 0;
         storyMode = false;
     }
 
@@ -287,7 +287,7 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             HashMap<String, Object> infoServicio = new HashMap<>();
             EmotionAxis ea = getTopEmotionAxis();
 
-            float state = 0.8f;//ea.getCurrentValue();
+            float state = ea.getCurrentValue();
             if (state > 0 && valencia != 1) {
                 valencia = 1;
                 tiempoEmocionPredominante = System.currentTimeMillis();
@@ -297,7 +297,6 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             }
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
             infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
-            infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
             infoServicio.put("DURATION", normalizeValue(state, PepperConf.DURATION));
@@ -307,6 +306,11 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             if (!storyMode) {
                 System.out.println("StoryMOde" + isStoryMode());
                 infoServicio.put("EmotionalTag", leds.toString());
+            }
+            if (storyMode) {
+                infoServicio.put("velHabla", normalizeValue(state - 0.3f, PepperConf.TALKSPEED));
+            } else {
+                infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             }
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Valores Emocionales para: " + ea.getNegativeName());
