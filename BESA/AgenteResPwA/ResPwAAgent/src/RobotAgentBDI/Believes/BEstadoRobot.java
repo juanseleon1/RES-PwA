@@ -287,7 +287,7 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             HashMap<String, Object> infoServicio = new HashMap<>();
             EmotionAxis ea = getTopEmotionAxis();
 
-            float state = ea.getCurrentValue();
+            float state = 0.8f;//ea.getCurrentValue();
             if (state > 0 && valencia != 1) {
                 valencia = 1;
                 tiempoEmocionPredominante = System.currentTimeMillis();

@@ -84,7 +84,6 @@ public abstract class ResPwaEmotionalModel extends EmotionalModel {
         EmotionAxis emoAxis;
         List<EmotionAxisConfig> aux = RESPwABDInterface.getEmotionalAxisConfig();
         List<EventInfluence> evtinf;
-        System.out.println("MRIAR EJES "+ aux.size());
         for (EmotionAxisConfig emotionAxisConfig : aux) {
             emoAxis = new EmotionAxis(emotionAxisConfig.getPositiveName(), emotionAxisConfig.getNegativeName(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getBaseValue(), emotionAxisConfig.getForgetFactor());
             evtinf = emotionAxisConfig.getEventInfluence();
