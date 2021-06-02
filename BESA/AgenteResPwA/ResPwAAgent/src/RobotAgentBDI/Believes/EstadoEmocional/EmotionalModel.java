@@ -51,6 +51,9 @@ public abstract class EmotionalModel {
 
     public void processEmotionalEvent(EmotionalEvent ev) {
         float i = estimateEmotionIntensity(ev);
+        if(ev.getPerson()!=null){
+          System.out.println("XEREVENTO: "+ev + " Valencia"+i);
+        }
         emotionalState.updateEmotions(ev.getEvent(), i);
         System.out.println(ev.toString());
         emotionalStateChanged();

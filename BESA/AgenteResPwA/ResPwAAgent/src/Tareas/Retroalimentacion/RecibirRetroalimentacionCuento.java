@@ -23,12 +23,12 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class RecibirRetroalimentacion extends Task {
+public class RecibirRetroalimentacionCuento extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
     private int num;
 
-    public RecibirRetroalimentacion() {
+    public RecibirRetroalimentacionCuento() {
 
         num = 0;
 //        System.out.println("--- Task Recibir Retroalimentacion Iniciada ---");
@@ -40,7 +40,7 @@ public class RecibirRetroalimentacion extends Task {
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         ServiceDataRequest srb;
         if (blvs.getbEstadoInteraccion().getRetroalimentacionValue() == null) {
-            if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
+            if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCUENTOTOPIC)) {
                 if (num == 1) {
                     System.out.println("HOLA 2 " + num + "  " + blvs.getbEstadoInteraccion().getRetroalimentacionValue());
                     infoServicio = new HashMap<>();
@@ -78,7 +78,7 @@ public class RecibirRetroalimentacion extends Task {
                 infoServicio.put("SAY", "Gracias por tus consejos!");
                 srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
                 ResPwaUtils.requestService(srb, blvs);
-                ResPwaUtils.deactivateTopic(PepperTopicsNames.RETROTOPIC, parameters);
+                ResPwaUtils.deactivateTopic(PepperTopicsNames.RETROCUENTOTOPIC, parameters);
 
             } else {
                 setTaskWaitingForExecution();
@@ -103,7 +103,8 @@ public class RecibirRetroalimentacion extends Task {
     public boolean checkFinish(Believes believes) {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC)) {
+        if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCUENTOTOPIC)) {
+            ResPwaUtils.activateTopic(PepperTopicsNames.BLANKATOPIC, believes);
             num = 0;
             return true;
         }

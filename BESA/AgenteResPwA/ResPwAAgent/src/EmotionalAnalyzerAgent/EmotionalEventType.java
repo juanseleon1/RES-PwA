@@ -16,12 +16,12 @@ public enum EmotionalEventType {
     SPEECHDETECTED("speechDetected", EmotionalConfig.Events.AlgoDeseable),
     //CAPERUCITA
     
-   ENFERMAR("ENFERMAR",EmotionalConfig.Events.Indeseable),ALEGRARSE("ALEGRARSE",EmotionalConfig.Events.Deseable),ASUSTAR("ASUSTAR",EmotionalConfig.Events.AlgoIndeseable),
+   ENFERMAR("ENFERMAR",EmotionalConfig.Events.Indeseable),ALEGRARSE("ALEGRARSE",EmotionalConfig.Events.Deseable),ASUSTADA("ASUSTADA",EmotionalConfig.Events.Indeseable),
    VER("VER",EmotionalConfig.Events.Indiferente),
    EMOCIONAR("EMOCIONAR",EmotionalConfig.Events.AlgoDeseable),DEVORAR("DEVORAR",EmotionalConfig.Events.Indeseable),ESCAPAR("ESCAPAR",EmotionalConfig.Events.Deseable), 
    HUIR("HUIR",EmotionalConfig.Events.AlgoDeseable),
    ABRAZAR("ABRAZAR",EmotionalConfig.Events.Deseable),LLEVAR("LLEVAR",EmotionalConfig.Events.Indiferente),OBSERVAR("OBSERVAR",EmotionalConfig.Events.Indiferente),
-   HABLAR("HABLAR",EmotionalConfig.Events.Indiferente),
+   HABLA("HABLA",EmotionalConfig.Events.Indiferente),
    AMENAZAR("AMENAZAR",EmotionalConfig.Events.AlgoIndeseable),
    APRECIAR("APRECIAR",EmotionalConfig.Events.Deseable),ENGANAR("ENGANAR",EmotionalConfig.Events.Indeseable),TRAICIONAR("TRAICIONAR",EmotionalConfig.Events.Indeseable),
    SOSPECHAR("SOSPECHAR",EmotionalConfig.Events.Indeseable),SORPRENDER("SORPRENDER",EmotionalConfig.Events.AlgoDeseable),

@@ -83,7 +83,8 @@ class Robot:
                                 "retroCuentoTopic": topico_retroCuento,
                                 "retroCancionTopic": topico_retroCancion,
                                 "saludarTopic": topico_saludable,
-                                "soundTopic": topico_sonido
+                                "soundTopic": topico_sonido,
+                                "blankaTopic": topico_blank
                                 }
         self.path = {
             "VSAD": "boston_animation_library/Stand/cry",
@@ -657,8 +658,7 @@ class Robot:
 
     def deactivate_topics(self, topicsList):
         for topic in self.alDialogProxy.getActivatedTopics():
-            if topic != "blankTopic":
-                self.desactivate_conversational_topic(topic)
+            self.desactivate_conversational_topic(topic)
             time.sleep(5)
 
     # def

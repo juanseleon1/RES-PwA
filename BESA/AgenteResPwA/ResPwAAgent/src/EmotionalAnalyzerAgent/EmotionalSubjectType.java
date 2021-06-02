@@ -14,7 +14,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalConfig;
  */
 public enum EmotionalSubjectType {
 
-    ROBOT("ROBOT",EmotionalConfig.People.Amigo), PWA("PWA",EmotionalConfig.People.Cercano), ABUELITA("ABUELITA",EmotionalConfig.People.Cercano), CAPERUCITA("CAPERUCITA",EmotionalConfig.People.Cercano), 
+    ROBOT("ROBOT",EmotionalConfig.People.Amigo), PWA("PWA",EmotionalConfig.People.Cercano), ABUELA("ABUELA",EmotionalConfig.People.Cercano), CAPERUCITA("CAPERUCITA",EmotionalConfig.People.Cercano), 
     LOBO("LOBO",EmotionalConfig.People.Enemigo),
     CERDO("CERDO",EmotionalConfig.People.Cercano), FAMILIA("FAMILIA",EmotionalConfig.People.Amigo);
    

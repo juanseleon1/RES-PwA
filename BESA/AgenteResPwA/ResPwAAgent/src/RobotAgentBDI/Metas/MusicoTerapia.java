@@ -14,9 +14,10 @@ import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Retroalimentacion.RecibirRetroalimentacion;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
 import Tareas.MusicoTerapia.ReproduccionCancion;
 import Tareas.MusicoTerapia.SeleccionarCancion;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCancion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -35,7 +36,7 @@ public class MusicoTerapia extends GoalBDI{
     public static MusicoTerapia buildGoal() {
         SeleccionarCancion sCancion = new SeleccionarCancion();
         ReproduccionCancion rCancion = new ReproduccionCancion();
-        RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
+        RecibirRetroalimentacionCancion retro = new RecibirRetroalimentacionCancion();
         
         List<Task> tarea;
         Plan rolePlan = new Plan();

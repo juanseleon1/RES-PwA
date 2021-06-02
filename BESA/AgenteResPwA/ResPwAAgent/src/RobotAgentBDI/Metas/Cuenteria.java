@@ -13,7 +13,7 @@ import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Retroalimentacion.RecibirRetroalimentacion;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
 import Tareas.Cuenteria.SeleccionarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class Cuenteria extends GoalBDI {
     private static String descrip = "Cuenteria";
 
     public static Cuenteria buildGoal() {
-        RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
+        RecibirRetroalimentacionCuento retro = new RecibirRetroalimentacionCuento();
         SeleccionarCuento recomCuento = new SeleccionarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
 
