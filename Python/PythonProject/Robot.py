@@ -73,7 +73,7 @@ class Robot:
         self.prof_emotions = dict()
         self.sensorsModule = None
         self.animation = Animation(self.session)
-        #print "GUI LISTA"
+        # print "GUI LISTA"
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
                                 "sadTopic": topico_triste,
@@ -105,7 +105,7 @@ class Robot:
         print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
         print "MILTON", self.alDialogProxy.getActivatedTopics()
 
-        #print "ROBOT CARGADO Y LISTO"
+        # print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
         self.alTexToSpeech.say("Estoy preparado")
         time.sleep(5)
@@ -193,6 +193,8 @@ class Robot:
             "SAYUNDERTOPICCONTEXT": [self.say_under_topic_context, True, "act", False],
             "SETTOPICFOCUS": [self.set_topic_focus, True, "act", False],
             "FORCEOUT": [self.force_out, True, "int", False],
+            "KILLALL": [self.kill_all, True, "int", False],
+
         }
 
         # Declare the modules --------------------------------------------------------------------------------
@@ -213,11 +215,11 @@ class Robot:
         # Get the function
         animation_name = params.get("TAGSDANCE")
         # Get the params of the function
-        animation_factor = params.get("FACTOR")
         # Invoke the function
         # animation_name(animation_factor)
 
         try:
+            print animation_name
             animation_function = self.animation.getAnimation(animation_name)
             names, times, keys = animation_function()
             # times = self.change_speed(animation_factor, times)
@@ -368,27 +370,27 @@ class Robot:
     # Gets the emotional state of the current focused user through a PersonState struct.
     def get_emotion_state(self):
         expressions = {
-            "calm": {"value": 0.0, "confidence":0.0},
-            "anger": {"value": 0.0, "confidence":0.0},
-            "joy": {"value":self.joy, "confidence": 1.0},
-            "sorrow": {"value":self.sorrow, "confidence": 1.0},
-            "laughter": {"value": 0.0, "confidence":0.0},
-            "excitement": {"value": 0.0, "confidence":0.0},
-            "surprise": {"value": 0.0, "confidence":0.0}
+            "calm": {"value": 0.0, "confidence": 0.0},
+            "anger": {"value": 0.0, "confidence": 0.0},
+            "joy": {"value": self.joy, "confidence": 1.0},
+            "sorrow": {"value": self.sorrow, "confidence": 1.0},
+            "laughter": {"value": 0.0, "confidence": 0.0},
+            "excitement": {"value": 0.0, "confidence": 0.0},
+            "surprise": {"value": 0.0, "confidence": 0.0}
         }
         PersonData = {
-            "valence":{"value": 0.0, "confidence": 0.0},
-            "attention":{"value": self.attention, "confidence": 1.0},
+            "valence": {"value": 0.0, "confidence": 0.0},
+            "attention": {"value": self.attention, "confidence": 1.0},
             "bodyLanguageState":
                 {
-                    "ease": {"level": self.ease, "confidence":1.0}
+                    "ease": {"level": self.ease, "confidence": 1.0}
                 },
-            "smile": {"value": 0.0, "confidence":0.0},
-            "expressions" : expressions
+            "smile": {"value": 0.0, "confidence": 0.0},
+            "expressions": expressions
         }
         print PersonData
         return PersonData
-        #return self.alMood.currentPersonState()
+        # return self.alMood.currentPersonState()
 
     #                        NI PINSHI IDEA DE COMO DEJAR EL LOGIN
 
@@ -439,7 +441,7 @@ class Robot:
 
     def initial_conf(self, prof_emotions):
         self.prof_emotions = prof_emotions["INITIALCONF"]
-        #print("VER IDENT ", self.prof_emotions)
+        print("VER IDENT ", self.prof_emotions)
         if len(self.prof_emotions) == 5:
             try:
                 self.init_timers()
@@ -504,13 +506,13 @@ class Robot:
         self.emotionStateRobot.setFactorVelocity(params.get("velocidad"))
         self.emotionStateRobot.setVelocitySpeech(params.get("velHabla"))
         if "EmotionalTag" in params:
-           # print "TIENE EMOTAG", params
+            # print "TIENE EMOTAG", params
             self.current_emomap = self.prof_emotions[params.get("EmotionalTag")]
             self.show_image({"SHOWIMG": self.current_emomap["image"]})
             emomapParams = {"ACTION": "POSTURA"}
             self.request_posture_change(emomapParams)
         self.change_led_color(self.emotionStateRobot.getLedColor(), self.emotionStateRobot.getRotationEyesColor())
-        #self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
+        # self.set_leds_intensity("AllLeds", self.emotionStateRobot.getLedIntensity())
 
     # Turn on/off the tablet screen.
     def tablet_on(self):
@@ -557,7 +559,7 @@ class Robot:
         self.alTabletService.showImage(params.get("SHOWIMG"))
 
     # Hide image currently displayed.
-    def hide_image(self):
+    def hide_image(self, params):
         if activities_running.has_key("SHOWIMG"):
             activities_running.pop("SHOWIMG")
         self.alTabletService.hideImage()
@@ -658,6 +660,7 @@ class Robot:
             if topic != "blankTopic":
                 self.desactivate_conversational_topic(topic)
             time.sleep(5)
+
     # def
     def load_conversational_topic(self, params):
         topicName = params.get("name")
@@ -704,13 +707,13 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
     def desactivate_conversational_topic(self, topic_name):
-       # print self.alDialogProxy.getActivatedTopics()
+        # print self.alDialogProxy.getActivatedTopics()
         if topic_name in self.alDialogProxy.getActivatedTopics():
             for topic in self.alDialogProxy.getActivatedTopics():
                 if topic == topic_name:
-                   # print "ENTRA"
+                    # print "ENTRA"
                     self.alDialogProxy.deactivateTopic(topic)
-                    #print "SALE"
+                    # print "SALE"
                     break
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
@@ -812,3 +815,6 @@ class Robot:
 
     def force_out(self, params):
         self.alDialogProxy.forceOutput()
+
+    def kill_all(self, params):
+        self.alMotion.killAll()

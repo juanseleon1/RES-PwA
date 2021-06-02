@@ -57,10 +57,6 @@ public class ConversacionInicial extends Task {
         System.out.println("--- Interrupt Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
@@ -68,10 +64,6 @@ public class ConversacionInicial extends Task {
         System.out.println("--- Cancel Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override

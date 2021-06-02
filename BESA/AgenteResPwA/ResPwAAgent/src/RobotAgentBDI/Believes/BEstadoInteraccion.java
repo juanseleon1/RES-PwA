@@ -202,11 +202,8 @@ public class BEstadoInteraccion implements Believes {
                 tiempoEmergenciaTrans = System.currentTimeMillis();
             }
         }
-        if (infoRecibida.getDataP().containsKey("peticionAyuda")) {
-            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("peticionAyuda"));
-        }
-        if (infoRecibida.getDataP().containsKey("ayudaExitosa")) {
-            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("ayudaExitosa"));
+        if (infoRecibida.getDataP().containsKey("ayudaValue")) {
+            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("ayudaValue"));
         }
 
         if (infoRecibida.getDataP().containsKey("DialogInput")) {
@@ -218,7 +215,6 @@ public class BEstadoInteraccion implements Believes {
                     modificarPreferencias = true;
                 }
             }
-            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
             if (!respuestaPreferencia.equalsIgnoreCase("")) {
                 recibirRespuestaPwA = true;
                 respuestasPorContexto++;
@@ -421,7 +417,7 @@ public class BEstadoInteraccion implements Believes {
     }
 
     public boolean isLogged() {
-        return true||logged;
+        return logged;
     }
 
     public void setLogged(boolean logged) {

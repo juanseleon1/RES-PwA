@@ -48,6 +48,8 @@ public class EvaluarEstrategiaAtencion extends Task{
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Atencion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoActividad().setEstrategia(null);
     }
 
     @Override
@@ -55,10 +57,6 @@ public class EvaluarEstrategiaAtencion extends Task{
         System.out.println("--- Cancel Task Seleccionar Estrategia Atencion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
     }
 
     @Override

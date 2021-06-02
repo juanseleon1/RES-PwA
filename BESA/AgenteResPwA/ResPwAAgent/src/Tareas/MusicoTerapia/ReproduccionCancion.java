@@ -98,7 +98,12 @@ public class ReproduccionCancion extends Task {
         if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC) && envioVideo) {
                 ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
+                blvs.getbEstadoRobot().setStoryMode(false);
                 envioVideo = false;
+                infoServicio = new HashMap<>();
+                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.KILLALL, infoServicio);
+                ResPwaUtils.requestService(srb, blvs);
+                
             }
             blvs.getbEstadoRobot().setStoryMode(false);
 
