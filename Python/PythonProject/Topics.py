@@ -124,7 +124,7 @@ topico_retroCancion = "/data/home/nao/topics/retroCancionTopic.top"
 topico_retroCuento = "/data/home/nao/topics/retroCuentoTopic.top"
 topico_saludable = "/data/home/nao/topics/saludaTopic.top"
 topico_sonido = "/data/home/nao/topics/soundTopic.top"
-topico_blank = "/data/home/nao/topics/blankTopic.top"
+topico_blank = "/data/home/nao/topics/blankaTopic.top"
 
 #topicorron = "/data/home/nao/topics/superTopico.top"
 
