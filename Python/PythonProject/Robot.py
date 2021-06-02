@@ -80,7 +80,8 @@ class Robot:
                                 "iraTopic": topico_ira,
                                 "ayudaTopic": topico_ayuda,
                                 "normalTopic": topico_normal,
-                                "retroTopic": topico_retro,
+                                "retroCuentoTopic": topico_retroCuento,
+                                "retroCancionTopic": topico_retroCancion,
                                 "saludarTopic": topico_saludable,
                                 "soundTopic": topico_sonido
                                 }
