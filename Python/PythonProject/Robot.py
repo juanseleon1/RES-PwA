@@ -534,7 +534,7 @@ class Robot:
     def show_video(self, params):
         print "CRACK", params.get("SHOWVIDEO")
         value = params.get("SHOWVIDEO")
-        self.alTabletService.playVideo(value)
+        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):
