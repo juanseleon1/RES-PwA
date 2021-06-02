@@ -178,10 +178,7 @@ public class BEstadoInteraccion implements Believes {
             movError = true;
 
         }
-        if (infoRecibida.getDataP().containsKey("finishAnim")) {
-            estaMoviendo = (boolean) infoRecibida.getDataP().get("finishAnim");
 
-        }
         if (infoRecibida.getDataP().containsKey("stimulusDetected")) {
             hayInteraccionFisica = true;
         }

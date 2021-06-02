@@ -54,7 +54,7 @@ public class ReproduccionCancion extends Task {
             Preferenciaxbaile baileSelected = null;
             CromosomaBaile cromosoma = null;
             cromosoma = (CromosomaBaile) modeloBaile.selectCromosoma();
-            if (cromosoma != null) {
+            if (cromosoma != null && !blvs.getbEstadoActividad().isEstaBailando()) {
                 baileSelected = cromosoma.getBaile();
                 blvs.getbEstadoActividad().setBaileActual(baileSelected);
                 infoServicio = new HashMap<>();

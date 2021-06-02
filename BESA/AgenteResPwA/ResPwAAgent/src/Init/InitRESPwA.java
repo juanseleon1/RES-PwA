@@ -126,8 +126,8 @@ public class InitRESPwA {
 //        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
 //      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
 //      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
-        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
-//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
 //        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
@@ -138,9 +138,9 @@ public class InitRESPwA {
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(convEmpatica);
-        RAGoals.add(cuenteriaGoal);
+//        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
-//        RAGoals.add(musicoTGoal);
+        RAGoals.add(musicoTGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
