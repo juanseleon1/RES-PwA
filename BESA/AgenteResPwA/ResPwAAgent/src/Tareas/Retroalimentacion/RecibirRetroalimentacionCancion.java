@@ -103,10 +103,10 @@ public class RecibirRetroalimentacionCancion extends Task {
     public boolean checkFinish(Believes believes) {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCUENTOTOPIC)) {
-            ResPwaUtils.activateTopic(PepperTopicsNames.BLANKTOPIC, believes);
+        if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCANCIONTOPIC)) {
+//            ResPwaUtils.activateTopic(PepperTopicsNames.BLANKTOPIC, believes);
             num = 0;
-            return true;
+            return false;
         }
         return false;
     }

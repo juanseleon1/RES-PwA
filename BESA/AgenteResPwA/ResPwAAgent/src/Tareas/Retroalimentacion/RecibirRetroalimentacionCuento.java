@@ -104,7 +104,7 @@ public class RecibirRetroalimentacionCuento extends Task {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCUENTOTOPIC)) {
-            ResPwaUtils.activateTopic(PepperTopicsNames.BLANKTOPIC, believes);
+            ResPwaUtils.activateTopic(PepperTopicsNames.BLANKATOPIC, believes);
             num = 0;
             return true;
         }

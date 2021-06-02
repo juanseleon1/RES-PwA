@@ -96,7 +96,8 @@ public class ReproduccionCancion extends Task {
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
             if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCANCIONTOPIC) && envioVideo) {
-                ResPwaUtils.deactivateTopic(PepperTopicsNames.BLANKTOPIC, believes);
+                ResPwaUtils.deactivateTopic(PepperTopicsNames.BLANKATOPIC, believes);
+                System.out.println("CALI MIRE VEA");
                 ResPwaUtils.activateTopic(PepperTopicsNames.RETROCANCIONTOPIC, believes);
                 blvs.getbEstadoRobot().setStoryMode(false);
                 envioVideo = false;
