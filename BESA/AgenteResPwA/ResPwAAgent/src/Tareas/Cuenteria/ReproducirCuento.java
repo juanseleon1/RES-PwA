@@ -121,7 +121,6 @@ public class ReproducirCuento extends Task {
         System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size());
         System.out.println("VA EN ESTA FRASE: " + blvs.getbEstadoActividad().getIndexCuento());
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
-            blvs.getbEstadoActividad().setIndexCuento(0);
             System.out.println("--- Se acabo ---");
             infoServicio = new HashMap<>();
             infoServicio.put("SAY", "El Fin. Cuentame si te gusto");
@@ -130,7 +129,7 @@ public class ReproducirCuento extends Task {
             infoServicio.put("SHOWIMG", "Placeholder");
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
-            ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
+            ResPwaUtils.activateTopic(PepperTopicsNames.RETROCUENTOTOPIC, believes);
 
             blvs.getbEstadoRobot().setStoryMode(false);
 

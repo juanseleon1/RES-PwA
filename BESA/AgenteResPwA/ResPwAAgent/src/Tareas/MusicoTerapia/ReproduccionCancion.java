@@ -42,7 +42,6 @@ public class ReproduccionCancion extends Task {
         System.out.println("--- Execute Task Reproducir Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
         List<Preferenciaxbaile> bailes = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxbaileList();
-        System.out.println("BaileList");
         long now = System.currentTimeMillis();
 
 //        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.CHECKANIMATIONFINISH, infoServicio);
@@ -96,8 +95,9 @@ public class ReproduccionCancion extends Task {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
-            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROTOPIC) && envioVideo) {
-                ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
+            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCANCIONTOPIC) && envioVideo) {
+                ResPwaUtils.deactivateTopic(PepperTopicsNames.BLANKTOPIC, believes);
+                ResPwaUtils.activateTopic(PepperTopicsNames.RETROCANCIONTOPIC, believes);
                 blvs.getbEstadoRobot().setStoryMode(false);
                 envioVideo = false;
                 infoServicio = new HashMap<>();

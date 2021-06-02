@@ -191,7 +191,6 @@ class Animation:
 
     def ferocious_animation(self, factor=1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
@@ -256,7 +255,6 @@ class Animation:
 
     def penguin_animation(self, factor=1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
@@ -333,7 +331,6 @@ class Animation:
 
     def lion_animation(self, factor=1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
@@ -398,7 +395,6 @@ class Animation:
 
     def toctoc_animation(self, factor=1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
@@ -648,7 +644,6 @@ class Animation:
 
     def explore_animation(self, factor=1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
@@ -725,7 +720,6 @@ class Animation:
 
     def eat_animation(self, factor = 1):
         # Choregraphe simplified export in Python.
-        from naoqi import ALProxy
         names = list()
         times = list()
         keys = list()
