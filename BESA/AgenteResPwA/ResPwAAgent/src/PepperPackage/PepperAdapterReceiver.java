@@ -43,6 +43,7 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
         ready = new AtomicBoolean(true);
         ss = new ServerSocket(revPort);
         lapses= new HashMap<>();
+        q= new HashMap<>();
     }
 
     @Override
