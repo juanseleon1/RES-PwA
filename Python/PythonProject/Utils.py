@@ -25,7 +25,7 @@ def json_creator(id_response, responseType, params):
 
 
 def send(id_response, responseType, params, block=True):
-    HOST_LOCAL = '192.168.2.4'
+    HOST_LOCAL = '192.168.2.5'
     PORT = 7897
     FORMAT = 'utf-8'
     should_send_message = True

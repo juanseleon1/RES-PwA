@@ -16,7 +16,7 @@ import ServiceAgentResPwA.RobotSPAgent;
 public abstract class ResPwaAdapter extends AdapterBESA{
     protected RobotSPAgent rpa;
     protected final int robotPort=7896;
-    protected final String IP= "127.0.0.1"; 
+    protected final String IP= "192.168.2.5";
     protected ResPwaAdapterReceiver receiver;
     protected static int numPackage=0;
     protected static ServiceMapper serviceMapper;
