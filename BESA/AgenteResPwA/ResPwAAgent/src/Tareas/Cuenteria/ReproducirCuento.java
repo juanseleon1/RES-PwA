@@ -13,7 +13,7 @@ import ResPwAEntities.Frases;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -76,9 +76,18 @@ public class ReproducirCuento extends Task {
 
             if (!cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent().equals(" ")) {
                 String emoEvt = cuento.getFrasesList().get(blvs.getbEstadoActividad().getIndexCuento()).getEmotionalevent();
-                String [] emoPos = emoEvt.split("_");
-                EmotionalEvent evt = new EmotionalEvent(EmotionalSubjectType.getFromId(emoPos[0]).toString(), EmotionalEventType.getFromId(emoPos[0]).toString(), EmotionalObjectType.getFromId(emoPos[0]).toString());
-                blvs.getbEstadoRobot().processEmotionalEvent(evt);
+                System.out.println("EVENTOS:");
+
+                String[] emoPos = emoEvt.split("_");
+                if (emoPos.length > 2) {
+                    for (String emoPo : emoPos) {
+                        System.out.println(emoPo);
+
+                    }
+                    EmotionalEvent evt = new EmotionalEvent(EmotionalSubjectType.getFromId(emoPos[0]).toString(), EmotionalEventType.getFromId(emoPos[1]).toString(), EmotionalObjectType.getFromId(emoPos[2]).toString());
+                    blvs.getbEstadoRobot().processEmotionalEvent(evt);
+                }
+
             } else {
                 blvs.getbEstadoRobot().emotionalStateChanged();
             }
@@ -96,20 +105,12 @@ public class ReproducirCuento extends Task {
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Buscar Animaciones ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Buscar Animaciones ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
@@ -120,7 +121,6 @@ public class ReproducirCuento extends Task {
         System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size());
         System.out.println("VA EN ESTA FRASE: " + blvs.getbEstadoActividad().getIndexCuento());
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() == blvs.getbEstadoActividad().getIndexCuento()) {
-            blvs.getbEstadoActividad().setIndexCuento(0);
             System.out.println("--- Se acabo ---");
             infoServicio = new HashMap<>();
             infoServicio.put("SAY", "El Fin. Cuentame si te gusto");
@@ -129,7 +129,7 @@ public class ReproducirCuento extends Task {
             infoServicio.put("SHOWIMG", "Placeholder");
             srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.HIDEIMG, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
-            ResPwaUtils.activateTopic(PepperTopicsNames.RETROTOPIC, believes);
+            ResPwaUtils.activateTopic(PepperTopicsNames.RETROCUENTOTOPIC, believes);
 
             blvs.getbEstadoRobot().setStoryMode(false);
 

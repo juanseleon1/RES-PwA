@@ -2,6 +2,7 @@
 import json
 from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
+import threading
 
 activities_running = {}
 callbacks_running = {}
@@ -24,13 +25,13 @@ def json_creator(id_response, responseType, params):
 
 
 def send(id_response, responseType, params, block=True):
-    HOST_LOCAL = '127.0.0.1'
+    HOST_LOCAL = '192.168.2.5'
     PORT = 7897
     FORMAT = 'utf-8'
     should_send_message = True
     key = params.keys().pop()
     if key in responsesXTime:
-        print "key: ", key
+        #print "key: ", key
         should_send_message = checkTimeMessageSended(key)
     else:
         responsesXTime[key] = datetime.now()
@@ -67,7 +68,7 @@ def checkTimeMessageSended(params):
         if (responsesXTime.get(params).minute - datetime.now().minute) < 2:
 
             if (abs(datetime.now().second - responsesXTime.get(params).second)) < 5:
-                print("Change")
+                #print("Change")
                 isCorrectToSend = False
 
             if (abs(datetime.now().second - responsesXTime.get(params).second)) > 20:
@@ -80,3 +81,26 @@ def checkTimeMessageSended(params):
 def deleteExpiredAction( expiredAction ):
     if activities_running and (expiredAction in activities_running):
         activities_running.pop( expiredAction )
+
+"""
+("class KeyboardThread(threading.Thread):\n"
+ "\n"
+ "    def __init__(self, input_cbk = None, robot=None, name='keyboard-input-thread'):\n"
+ "        self.input_cbk = input_cbk\n"
+ "        self.robot=robot\n"
+ "        #print input_cbk\n"
+ "        super(KeyboardThread, self).__init__(name=name)\n"
+ "        self.start()\n"
+ "\n"
+ "    def run(self):\n"
+ "        listChoices = list()\n"
+ "        listChoices.append(\"Aumentar Estado Emocional\")\n"
+ "        listChoices.append(\"Bajar Estado Emocional\")\n"
+ "        listChoices.append(\"Aumentar Relajacion\")\n"
+ "        listChoices.append(\"Bajar Relajacion\")\n"
+ "        listChoices.append(\"Aumentar Atencion\")\n"
+ "        listChoices.append(\"Bajar Atencion\")\n"
+ "        s = \"Escoger: \"\n"
+ "        while True:\n"
+ "            self.input_cbk(str(easygui.buttonbox(msg= s, choices=listChoices, title=\"Simular Evento Emocional\")),self.robot)\n"
+ "            ") """

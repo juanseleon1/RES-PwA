@@ -10,7 +10,7 @@ package ServiceAgentResPwA.VoiceServices;
  * @author ASUS
  */
 public enum PepperTopicsNames {
-    ALEGRETOPIC("alegreTopic"), BASICTOPIC("basicoTopic"), AYUDATOPIC("aiudaTopic"), IRATOPIC("iraTopic"), SADTOPIC("sadTopic"), SALUDARTOPIC ("saludaTopic"), RETROTOPIC ("retroTopic"), ALLTOPICS("allTopics"), NORMALTOPIC("normalTopic");
+    ALEGRETOPIC("alegreTopic"), BASICTOPIC("basicoTopic"), AYUDATOPIC("aiudaTopic"), IRATOPIC("iraTopic"), SADTOPIC("sadTopic"), SALUDARTOPIC ("saludaTopic"), RETROCUENTOTOPIC ("retroCuentoTopic"), RETROCANCIONTOPIC ("retroCancionTopic"), ALLTOPICS("allTopics"), NORMALTOPIC("normalTopic"), BLANKATOPIC("blankaTopic");
     
     private String topicName;
     private PepperTopicsNames(String topic)

@@ -47,6 +47,7 @@ public class BEstadoActividad implements Believes {
     private Integer indexCuento = 0;
     private RobotAgentBelieves blvs = null;
     private boolean estaBailando;
+    private boolean estaMoviendo;
 
     public BEstadoActividad(String cedula, RobotAgentBelieves blvs) {
         this.cedula = cedula;
@@ -73,6 +74,10 @@ public class BEstadoActividad implements Believes {
         if (infoRecibida.getDataP().containsKey("finishAnim")) {
             estaBailando = (boolean) infoRecibida.getDataP().get("finishAnim");
         }
+        if (infoRecibida.getDataP().containsKey("finishAnim")) {
+            estaMoviendo = (boolean) infoRecibida.getDataP().get("finishAnim");
+
+        }
         return true;
     }
 
@@ -87,17 +92,17 @@ public class BEstadoActividad implements Believes {
     public ResPwAActivity getActividadActual() {
         return actividadActual;
     }
-    
-    public double getGustoActividad(ResPwAActivity actividad){
+
+    public double getGustoActividad(ResPwAActivity actividad) {
         double gusto = 0;
-        for(Actxpreferencia a : blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList()){
-            if(a.getActividadpwa().getNombre().equalsIgnoreCase(actividad.toString())){
-                gusto =  a.getGusto();
+        for (Actxpreferencia a : blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList()) {
+            if (a.getActividadpwa().getNombre().equalsIgnoreCase(actividad.toString())) {
+                gusto = a.getGusto();
             }
         }
         return gusto;
     }
-    
+
     public void setActividadActual(ResPwAActivity actividadActual) {
         this.actividadActual = actividadActual;
     }
@@ -225,6 +230,14 @@ public class BEstadoActividad implements Believes {
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
+    }
+
+    public boolean isEstaMoviendo() {
+        return estaMoviendo;
+    }
+
+    public void setEstaMoviendo(boolean estaMoviendo) {
+        this.estaMoviendo = estaMoviendo;
     }
 
 }

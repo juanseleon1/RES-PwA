@@ -11,7 +11,7 @@ package Tareas.RecargarBateria;
  */
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
@@ -49,11 +49,6 @@ public class SuspenderRobot extends Task{
         
         if(blvs.getbEstadoActividad().isEstaBailando() || blvs.getbEstadoInteraccion().isEstaMoviendo()) {
             srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.STOPANIMATION, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
-        
-        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
-            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
             ResPwaUtils.requestService(srb,blvs);
         }
         

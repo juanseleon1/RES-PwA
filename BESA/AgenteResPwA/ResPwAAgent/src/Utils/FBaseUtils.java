@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ResPwaUtils;
+package Utils;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import com.google.auth.oauth2.GoogleCredentials;

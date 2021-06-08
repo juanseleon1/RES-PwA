@@ -6,6 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.EmotionalEventType;
 import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionAxis;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
@@ -13,7 +14,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import PepperPackage.PepperConf;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -58,7 +59,7 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
     public BEstadoRobot() {
         super();
-        valencia=0;
+        valencia = 0;
         storyMode = false;
     }
 
@@ -297,7 +298,6 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             }
             leds = PepperEmotionRanges.getFromEmotionalValue(state);
             infoServicio.put("velocidad", normalizeValue(state, PepperConf.SPEED));
-            infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             infoServicio.put("tonoHabla", normalizeValue(state, PepperConf.PITCH));
             infoServicio.put("ledIntens", normalizeValue(state, PepperConf.LEDINTENSITY));
             infoServicio.put("DURATION", normalizeValue(state, PepperConf.DURATION));
@@ -307,6 +307,11 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
             if (!storyMode) {
                 System.out.println("StoryMOde" + isStoryMode());
                 infoServicio.put("EmotionalTag", leds.toString());
+            }
+            if (storyMode) {
+                infoServicio.put("velHabla", normalizeValue(state - 0.3f, PepperConf.TALKSPEED));
+            } else {
+                infoServicio.put("velHabla", normalizeValue(state, PepperConf.TALKSPEED));
             }
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Valores Emocionales para: " + ea.getNegativeName());
@@ -321,6 +326,7 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
             ResPwaUtils.requestService(srb);
+
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -353,6 +359,25 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
     public void setTiempoEmocionPredominante(long tiempoEmocionPredominante) {
         this.tiempoEmocionPredominante = tiempoEmocionPredominante;
+    }
+
+    @Override
+    public void processEmotionalEvent(EmotionalEvent ev) {
+        if (isStoryMode()) {
+            if (ev.getEvent() != null) {
+                System.out.println(ev.getEvent());
+                if (!(ev.getEvent().equals(EmotionalEventType.POSVOICEEMOTION.toString()) || ev.getEvent().equals(EmotionalEventType.NEGVOICEEMOTION.toString()) || ev.getEvent().equals(EmotionalEventType.POSEMOSTATE.toString()) || ev.getEvent().equals(EmotionalEventType.NEGEMOSTATE.toString()))) {
+                    System.out.println("ENTRA "+ev.getEvent());
+                    super.processEmotionalEvent(ev);
+                }
+            } else {
+                super.processEmotionalEvent(ev);
+            }
+
+        } else {
+            super.processEmotionalEvent(ev);
+
+        }
     }
 
 }

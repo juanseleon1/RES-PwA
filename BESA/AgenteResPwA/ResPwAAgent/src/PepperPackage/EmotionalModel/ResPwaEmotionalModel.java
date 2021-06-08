@@ -23,7 +23,7 @@ import RobotAgentBDI.Believes.EstadoEmocional.EmotionalModel;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticDictionary;
 import RobotAgentBDI.Believes.EstadoEmocional.SemanticValue;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,9 @@ public abstract class ResPwaEmotionalModel extends EmotionalModel {
         }
 
         for (EmotionalObjectType obj : EmotionalObjectType.values()) {
-            setObjectRelationship(obj.toString(), obj.getConfig());
+            if(!obj.equals(EmotionalObjectType.NULL)){
+                setObjectRelationship(obj.toString(), obj.getConfig());
+            }
         }
 
     }

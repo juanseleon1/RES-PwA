@@ -6,7 +6,7 @@
 package Tareas.ConversacionEmocional;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;

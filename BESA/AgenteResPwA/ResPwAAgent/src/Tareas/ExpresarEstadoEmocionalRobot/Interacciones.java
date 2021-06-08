@@ -10,7 +10,7 @@ import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
 import EmotionalAnalyzerAgent.EmotionalState;
 import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;

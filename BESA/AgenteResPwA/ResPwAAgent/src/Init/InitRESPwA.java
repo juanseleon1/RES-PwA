@@ -126,21 +126,23 @@ public class InitRESPwA {
 //        ConversarEmpaticamente convEmpatica = ConversarEmpaticamente.buildGoal();
         Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
 //        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
+//      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
+//      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
+//        Cuenteria cuenteriaGoal = Cuenteria.buildGoal();
+//        MusicoTerapia musicoTGoal= MusicoTerapia.buildGoal();
 //        TestPlan tp = TestPlan.buildGoal();
-//          LogIn logInGoal = LogIn.buildGoal();
+//        LogIn logInGoal = LogIn.buildGoal();
 //        MantenerAtencionPwA mantenerAtencionPwAGoal=  MantenerAtencionPwA.buildGoal();
 //        RecargarBateria recargarBateriaGoal=  RecargarBateria.buildGoal();
 //        PedirAyuda pedirAyudaGoal= PedirAyuda.buildGoal();
 //        ReiniciarActividad reiniciarActividadGoal=  ReiniciarActividad.buildGoal();
-//          Saludar saludar = Saludar.buildGoal();
+//        Saludar saludar = Saludar.buildGoal();
 //        ReportarEmergencia reportar = ReportarEmergencia.buildGoal();
         //Agregar a Lista
 //        RAGoals.add(convEmpatica);
         RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
-        //Agregar a Lista
-//        RAGoals.add(cuenteriaGoal);
 //        RAGoals.add(tp);
 //        RAGoals.add(musicoTGoal);
 //        RAGoals.add(logInGoal);
@@ -150,10 +152,8 @@ public class InitRESPwA {
 //        RAGoals.add(recargarBateriaGoal);
 //        RAGoals.add(pedirAyudaGoal);
 //        RAGoals.add(reiniciarActividadGoal);
-//          RAGoals.add(saludar);
+//        RAGoals.add(saludar);
 //        RAGoals.add(reportar);
-//      CambiarDificultad cambiarDificultadGoal=  CambiarDificultad.buildGoal();
-//      EstimularEmocionalmente estimularEmocionalmenteGoal=  EstimularEmocionalmente.buildGoal();
 //      RAGoals.add(cambiarDificultadGoal);
 //      RAGoals.add(estimularEmocionalmenteGoal);
 

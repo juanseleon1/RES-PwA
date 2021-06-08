@@ -6,7 +6,7 @@
 package Tareas.LogIn;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.AutonomyServices.AutonomyServiceRequestType;
 import ServiceAgentResPwA.EnergyServices.EnergyServiceRequestType;
@@ -117,7 +117,7 @@ public class IniciarServicios extends Task {
 
         
         infoServicio = new HashMap<>();
-        infoServicio.put("SETTABLETBRIGHT", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia());
+        infoServicio.put("SETTABLETBRIGHT", blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getBrillopreferido());
         srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SETTABLETBRIGHT, infoServicio);
         ResPwaUtils.requestService(srb,blvs);
 

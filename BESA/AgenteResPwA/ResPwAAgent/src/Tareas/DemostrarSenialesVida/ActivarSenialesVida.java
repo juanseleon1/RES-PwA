@@ -6,7 +6,7 @@
 package Tareas.DemostrarSenialesVida;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import ResPwaUtils.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityService;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
