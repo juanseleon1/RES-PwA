@@ -148,7 +148,7 @@ class Robot:
             "MOVEFORWARD": [self.move_forward, True, "act", True],  #
             "MOVETO": [self.move_to, True, "act", True],  #
             "MOVETOPOSITION": [self.move_to_position, True, "act", True],  #
-            "INITIALCONF": [self.initial_conf, False, "rob", True],
+            "INITIALCONF": [self.initial_conf, True, "rob", True],
             # RobotStateServices-------------------------------------------------------
             "WAKEUP": [self.wake_up, True, "act", False],  #
             "SUSPEND": [self.suspend, True, "act", False],  #
@@ -159,17 +159,17 @@ class Robot:
             "SETLEDSINTENSITY": [self.set_leds_intensity, True, "act", False],  #
             "CHANGELEDCOLOR": [self.change_led_color, True, "act", False],  #
             "ACTIVATESTIFFNESS": [self.activate_stiffness, True, "act", False],  #
-            "ROBOTEMOTION": [self.change_emotion_expression, False, "rob", False],
+            "ROBOTEMOTION": [self.change_emotion_expression, True, "rob", False],
             # TabletServices-------------------------------------------------------
             "TABLETON": [self.tablet_on, True, "act", False],
             "WAKETABLET": [self.wake_tablet, True, "act", False],
             "SUSPENDTABLET": [self.suspend_tablet, True, "act", False],
             "TABLETOFF": [self.tablet_off, True, "act", False],
-            "SHOWVIDEO": [self.show_video, False, "act", True],
-            "QUITVIDEO": [self.quit_video, False, "act", False],
-            "PAUSEVIDEO": [self.pause_video, False, "act", False],
-            "RESUMEVIDEO": [self.resume_video, False, "act", False],
-            "PRELOADIMG": [self.preload_image, False, "act", False],
+            "SHOWVIDEO": [self.show_video, True, "act", True],
+            "QUITVIDEO": [self.quit_video, True, "act", False],
+            "PAUSEVIDEO": [self.pause_video, True, "act", False],
+            "RESUMEVIDEO": [self.resume_video, True, "act", False],
+            "PRELOADIMG": [self.preload_image, True, "act", False],
             "SHOWIMG": [self.show_image, True, "act", True],
             "HIDEIMG": [self.hide_image, True, "act", False],
             "SETTABLETBRIGHT": [self.set_tablet_bright, True, "act", False],
