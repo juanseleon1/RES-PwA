@@ -71,7 +71,6 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                                     PepperAdapter.lista.remove(sd.getAck());
                                     lapses.put(sd.getAck(),lapse);
                                     totalPck--;
-                                    q.put(System.currentTimeMillis()-InitRESPwA.startTime, totalPck);
                                 }
                             }
                             updateBlvs(sd);
