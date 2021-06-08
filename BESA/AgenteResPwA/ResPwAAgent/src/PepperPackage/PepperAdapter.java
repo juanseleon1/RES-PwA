@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,14 +30,14 @@ import java.util.logging.Logger;
 public class PepperAdapter extends ResPwaAdapter{
     
     protected Thread recvThread;
-    public static Map<Integer, Long> lista;
+    public static ConcurrentMap<Integer, Long> lista;
     public PepperAdapter() throws Exception {
         super();
         receiver=new PepperAdapterReceiver();
         serviceMapper=new PepperServiceMapper();
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         this.rpa=null;
-        lista = new HashMap<>();
+        lista = new ConcurrentHashMap<>();
         //System.out.println("PepperAdapter Created");
         startPepperRcv();
     }
