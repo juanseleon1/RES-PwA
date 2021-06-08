@@ -22,9 +22,12 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -105,7 +108,7 @@ public class ReproducirCuento extends Task {
         if (blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() > blvs.getbEstadoActividad().getIndexCuento()) {
             setTaskWaitingForExecution();
         }
-        
+
     }
 
     @Override
@@ -149,15 +152,21 @@ public class ReproducirCuento extends Task {
     private void writeInfo() {
         ObjectOutputStream objectOut = null;
         try {
-            FileOutputStream fileOut = new FileOutputStream("./testFile.txt");
-            objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(PepperAdapterReceiver.lapses);
-            objectOut.close();
-            
-            fileOut = new FileOutputStream("./testFileReg.txt");
-            objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(PepperAdapterReceiver.q);
-            objectOut.close();
+            FileWriter fw = new FileWriter("./testFile.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Integer integer : PepperAdapterReceiver.lapses.keySet()) {
+                bw.write(integer + " : " + PepperAdapterReceiver.lapses.get(integer) +"\n");
+            }
+            bw.flush();
+            bw.close();
+
+            fw = new FileWriter("./testFileReg.txt");
+            bw = new BufferedWriter(fw);
+            for (Long longs : PepperAdapterReceiver.q.keySet()) {
+                bw.write(longs + " : " + PepperAdapterReceiver.q.get(longs)+"\n");
+            }
+            bw.flush();
+            bw.close();
             System.out.println("The Object  was succesfully written to a file");
         } catch (IOException ex) {
             Logger.getLogger(ReproducirCuento.class.getName()).log(Level.SEVERE, null, ex);
