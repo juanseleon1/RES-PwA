@@ -7,12 +7,17 @@ package PepperPackage;
 
 import Adapter.ResPwaAdapter;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
+import Init.InitRESPwA;
 import ServiceAgentResPwA.ServiceDataRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +28,14 @@ import java.util.logging.Logger;
 public class PepperAdapter extends ResPwaAdapter{
     
     protected Thread recvThread;
+    public static Map<Integer, Long> lista;
     public PepperAdapter() throws Exception {
         super();
         receiver=new PepperAdapterReceiver();
         serviceMapper=new PepperServiceMapper();
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         this.rpa=null;
+        lista = new HashMap<>();
         //System.out.println("PepperAdapter Created");
         startPepperRcv();
     }
@@ -117,6 +124,9 @@ public class PepperAdapter extends ResPwaAdapter{
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
        PepperSendable s= new PepperSendable(sendNewSendable(),data.getSubservice(),data.getSubservice(),data.getParams());
+       PepperAdapterReceiver.totalPck++;
+       PepperAdapterReceiver.q.put(System.currentTimeMillis()-InitRESPwA.startTime, PepperAdapterReceiver.totalPck);
+      lista.put(s.getId(), System.currentTimeMillis());
        return new ObjectMapper().writeValueAsString(s);
    }
 }

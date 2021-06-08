@@ -7,6 +7,7 @@ package PepperPackage;
 
 import Adapter.ResPwaAdapterReceiver;
 import BESA.ExceptionBESA;
+import Init.InitRESPwA;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
@@ -32,11 +36,13 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     public static final int revPort = 7897;
     protected AtomicBoolean ready;
     protected ServerSocket ss;
-
+    public static Map<Integer,Long> lapses;
+    public static Map<Long,Integer> q;
+    public static int totalPck=0;
     public PepperAdapterReceiver() throws IOException {
         ready = new AtomicBoolean(true);
         ss = new ServerSocket(revPort);
-//        System.out.println("PepperAdptRecvReady");
+        lapses= new HashMap<>();
     }
 
     @Override
@@ -54,7 +60,15 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                             SensorData sd = toSensorData(json);
                             if (sd.getAck()!=-1){
                                 System.out.println("Llego: " + json);
-                        }
+                        } else{
+                                if(PepperAdapter.lista.containsKey(sd.getAck())){
+                                    long lapse= PepperAdapter.lista.get(sd.getAck());
+                                    PepperAdapter.lista.remove(sd.getAck());
+                                    lapses.put(sd.getAck(),lapse);
+                                    totalPck--;
+                                    q.put(System.currentTimeMillis()-InitRESPwA.startTime, totalPck);
+                                }
+                            }
                             updateBlvs(sd);
                         } catch (ExceptionBESA ex) {
                             Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);
