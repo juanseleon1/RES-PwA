@@ -60,6 +60,7 @@ public class InitRESPwA {
     public static String aliasSPAgent = "SPAgent";
     public static String emf = "ResPwAEntitiesPU";
     private static int PLANID = 0;
+    public static long startTime;
 
     public static void main(String[] args) {
         try {
@@ -77,6 +78,7 @@ public class InitRESPwA {
 //            hm1.put("TAGSDANCE", "MACARENA");
 //            ServiceDataRequest data = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, hm1);
 //            p.sendRequest(data);
+        startTime=System.currentTimeMillis();
         } catch (ExceptionBESA ex) {
             Logger.getLogger(InitRESPwA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

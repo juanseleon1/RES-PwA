@@ -8,6 +8,8 @@ package Tareas.Cuenteria;
 import EmotionalAnalyzerAgent.EmotionalEventType;
 import EmotionalAnalyzerAgent.EmotionalObjectType;
 import EmotionalAnalyzerAgent.EmotionalSubjectType;
+import PepperPackage.PepperAdapter;
+import PepperPackage.PepperAdapterReceiver;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Frases;
 import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
@@ -20,9 +22,14 @@ import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rational.mapping.Task;
 
 /**
@@ -98,7 +105,7 @@ public class ReproducirCuento extends Task {
         if (blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size() > blvs.getbEstadoActividad().getIndexCuento()) {
             setTaskWaitingForExecution();
         }
-
+        
     }
 
     @Override
@@ -132,10 +139,35 @@ public class ReproducirCuento extends Task {
             ResPwaUtils.activateTopic(PepperTopicsNames.RETROCUENTOTOPIC, believes);
 
             blvs.getbEstadoRobot().setStoryMode(false);
+            writeInfo();
 
             return true;
         }
         return false;
+    }
+
+    private void writeInfo() {
+        ObjectOutputStream objectOut = null;
+        try {
+            FileOutputStream fileOut = new FileOutputStream("./testFile.txt");
+            objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(PepperAdapterReceiver.lapses);
+            objectOut.close();
+            
+            fileOut = new FileOutputStream("./testFileReg.txt");
+            objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(PepperAdapterReceiver.q);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+        } catch (IOException ex) {
+            Logger.getLogger(ReproducirCuento.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                objectOut.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ReproducirCuento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }
