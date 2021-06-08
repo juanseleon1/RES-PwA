@@ -170,13 +170,7 @@ public class ReproducirCuento extends Task {
             System.out.println("The Object  was succesfully written to a file");
         } catch (IOException ex) {
             Logger.getLogger(ReproducirCuento.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                objectOut.close();
-            } catch (IOException ex) {
-                Logger.getLogger(ReproducirCuento.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
     }
 
 }

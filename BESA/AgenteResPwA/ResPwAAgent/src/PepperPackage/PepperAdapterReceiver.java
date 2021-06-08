@@ -62,6 +62,10 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                             if (sd.getAck()!=-1){
                                 System.out.println("Llego: " + json);
                         } else{
+                                System.out.println("CHECKING " + sd.toString());
+                                for (Integer integer : PepperAdapter.lista.keySet()) {
+                                    System.out.println("1: " +integer +"2: " + PepperAdapter.lista.get(integer));
+                                }
                                 if(PepperAdapter.lista.containsKey(sd.getAck())){
                                     long lapse= PepperAdapter.lista.get(sd.getAck());
                                     PepperAdapter.lista.remove(sd.getAck());

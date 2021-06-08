@@ -41,7 +41,7 @@ def send(id_response, responseType, params, block=True):
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
         msg_to_send = json.dumps(json_creator(id_response, responseType, params))
-        #print("send ", msg_to_send)
+        print("send ", msg_to_send)
 
         client.send(msg_to_send + '\r\n')
         client.close()
