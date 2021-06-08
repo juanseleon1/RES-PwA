@@ -1,0 +1,8 @@
+topic: ~saludaTopic()
+    language: spe
+    u: (["Buen dia" "como se encuentra?" "Hola" "hola, como estas?" "Buenos dias"]) Muy buenos dias, me llamo Pepper y me encuentro muy bien, usted como se llama?
+        u1: (Me llamo *)  Hola, hoy te ves muy bien
+    u: (["Buena tarde"  "Buenas tardes" "Muy buenas tardes" ]) Muy buenos dias, me llamo Pepper y me encuentro muy bien, usted como se llama?
+        u1: (Me llamo *)  Hola, hoy te ves muy bien
+    u: (["Buenas noches" "Buena noche" "Muy buenas noches"]) Muy buenos dias, me llamo Pepper y me encuentro muy bien, usted como se llama?
+        u1: (Me llamo *)  Hola, hoy te ves muy bien
