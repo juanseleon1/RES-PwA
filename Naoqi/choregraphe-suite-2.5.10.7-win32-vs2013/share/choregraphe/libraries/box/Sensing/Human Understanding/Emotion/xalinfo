@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="no">
-    <Node name="Get Expression" />
-    <Node name="Get Expression (Multi)" />
-    <Node name="Get Smile" />
-    <Node name="Get Smile (Multi)" />
-    <Node name="Preload Mood" />
-    <Node name="Get Mood" />
-</Folder>

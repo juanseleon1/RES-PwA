@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="no">
-    <Node name="Vision" />
-    <Node name="Hearing" />
-    <Node name="Human Understanding" />
-    <Node name="Touch" />
-    <Node name="Sonar" />
-</Folder>

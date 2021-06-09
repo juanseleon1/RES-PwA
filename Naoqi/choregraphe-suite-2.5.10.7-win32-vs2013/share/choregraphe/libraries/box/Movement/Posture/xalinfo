@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="no">
-    <Node name="Apply Posture" />
-    <Node name="Goto Posture" />
-    <Node name="Posture Family" />
-    <Node name="Robot Posture" />
-    <Node name="Sit Down" />
-    <Node name="Stand Up" />
-</Folder>

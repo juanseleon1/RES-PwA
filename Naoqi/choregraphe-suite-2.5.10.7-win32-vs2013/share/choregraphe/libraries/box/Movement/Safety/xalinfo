@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="no">
-    <Node name="Fall Detector" />
-    <Node name="Is In Collision" />
-    <Node name="Set External Anti-Collision" />
-    <Node name="Set Fall Manager" />
-    <Node name="Set Self Anti-Collision" />
-</Folder>
