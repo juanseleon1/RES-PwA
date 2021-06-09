@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "FRASES")
@@ -69,7 +70,7 @@ public class Frases implements Serializable {
         this.contenido = contenido;
     }
 
-    public Frases(BigInteger orden, String cuentoNombre) {
+    public Frases(BigDecimal orden, String cuentoNombre) {
         this.frasesPK = new FrasesPK(orden, cuentoNombre);
     }
 
@@ -154,5 +155,5 @@ public class Frases implements Serializable {
     public String toString() {
         return "ResPwAEntities.Frases[ frasesPK=" + frasesPK + " ]";
     }
-    
+
 }

@@ -5,12 +5,18 @@
  */
 package Tareas.MusicoTerapia;
 
+import Personalizacion.Modelo.CromosomaCancion;
+import Personalizacion.Modelo.ModeloSeleccion;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
+
 import RobotAgentBDI.Believes.RobotAgentBelieves;
+import RobotAgentBDI.ResPwAActivity;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
+
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
@@ -40,54 +46,53 @@ public class SeleccionarCancion extends Task {
         System.out.println("--- Execute Task Seleccionar Cancion ---");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
+        blvs.getbEstadoActividad().setActividadActual(ResPwAActivity.MUSICOTERAPIA);
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
         blvs.getbEstadoActividad().setTiempoInicioActividad(ts.getTime());
         HashMap<String, Object> hm = new HashMap<>();
-        hm.put("SAY", "Estoy seleccionando una cancion");
+        hm.put("SAY", "Estoy seleccionando una cancion, quiero que cantes conmigo.");
         ServiceDataRequest data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
         ResPwaUtils.requestService(data, blvs);
-        
-        hm = new HashMap<>();
-        hm.put("SAY", "La changua no deberia existir");
-         data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
-        ResPwaUtils.requestService(data, blvs);
-        float gusto = -1;
-        Cancion cancionEleg = null;
+
         List<Preferenciaxcancion> canciones = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxcancionList();
-//        for (Cancion c : canciones) {
-//
-//            if (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3 <= gusto) {
-//                cancionEleg = c;
-//                gusto = (float) (c.getGusto() * 0.7 + c.getGeneroGenero().getGusto() * 0.3);
-//            }
-//        }
-        cancionEleg = cancionParaColocar( canciones );
-        blvs.getbEstadoActividad().setCancionActual(cancionEleg);
-        //falta seleccionar si se va a utilizar: mostrarFotos o activarLetra
-    }
-    
-    public Cancion cancionParaColocar(List<Preferenciaxcancion> canciones){
-        Random rand = new Random();
-        int randomSong = rand.nextInt(canciones.size());
-        Cancion cancionParaColocar = canciones.get(randomSong).getCancion();
-        return cancionParaColocar;
+        ModeloSeleccion<Preferenciaxcancion> modeloCancion = new ModeloSeleccion<Preferenciaxcancion>(canciones);
+        Preferenciaxcancion cancionSelected = null;
+        CromosomaCancion cromosoma = null;
+        cromosoma = (CromosomaCancion) modeloCancion.selectCromosoma();
+
+        if (cromosoma != null) {
+            cancionSelected = cromosoma.getCancion();
+            blvs.getbEstadoActividad().setCancionActual(cancionSelected);
+        }
+
+        if (!blvs.getbEstadoRobot().isStoryMode()) {
+            blvs.getbEstadoRobot().setStoryMode(true);
+        }
+        hm = new HashMap<>();
+        hm.put("SAY", "La canción seleccionada es " + cancionSelected.getCancion().getNombre());
+        data = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, hm);
+        ResPwaUtils.requestService(data, blvs);
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Cancion ---");
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Seleccionar Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
         blvs.getbEstadoActividad().setCancionActual(null);
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if (blvs.getbEstadoActividad().getCancionActual() != null) {

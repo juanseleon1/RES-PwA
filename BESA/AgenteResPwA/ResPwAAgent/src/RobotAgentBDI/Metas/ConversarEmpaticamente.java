@@ -61,14 +61,14 @@ public class ConversarEmpaticamente extends GoalBDI{
         System.out.println("Meta ConversarEmpaticamente detectGoal");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
+        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged() && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5)
         {
             if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < 0 && blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante()>15)//revisar valor 
             {
                 return 1.0;
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ConversarEmpaticamente extends GoalBDI{
         //System.out.println("Meta ConversarEmpaticamente evaluateContribution");
         
         RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + blvs.getbEstadoActividad().getBoostConversarEmpaticamente();
+        return blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante() + 1;
     }
 
     @Override

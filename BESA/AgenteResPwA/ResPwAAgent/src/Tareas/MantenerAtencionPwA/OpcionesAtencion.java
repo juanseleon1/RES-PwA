@@ -10,5 +10,5 @@ package Tareas.MantenerAtencionPwA;
  * @author mafegarces
  */
 public enum OpcionesAtencion {
-    SILBAR, LLAMARPWA;
+    SILBAR, LLAMARPWA, CHISTE, DATOCURIOSO;
 }

@@ -6,7 +6,7 @@
 package Tareas.PedirAyuda;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
@@ -32,7 +32,6 @@ public class PeticionAyuda extends Task{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Peticion Ayuda ---");
         tiempo = System.currentTimeMillis();
-        //dar respuesta a petición
         ResPwaUtils.activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
         infoServicio.put("SAY", "¿En que te puedo ayudar?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
@@ -53,10 +52,10 @@ public class PeticionAyuda extends Task{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if((System.currentTimeMillis() - tiempo)/1000 >= 90) {
+        if(blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
+            ResPwaUtils.deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);
+            blvs.getbEstadoInteraccion().setRespuestasPorContexto(0);
             return true;
         }
         return false;

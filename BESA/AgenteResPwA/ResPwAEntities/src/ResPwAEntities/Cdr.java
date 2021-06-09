@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "CDR")
@@ -40,22 +40,22 @@ public class Cdr implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "MEMORIA")
-    private BigInteger memoria;
+    private BigDecimal memoria;
     @Basic(optional = false)
     @Column(name = "ORIENTACION")
-    private BigInteger orientacion;
+    private BigDecimal orientacion;
     @Basic(optional = false)
     @Column(name = "JUICIO")
-    private BigInteger juicio;
+    private BigDecimal juicio;
     @Basic(optional = false)
     @Column(name = "VIDA_SOCIAL")
-    private BigInteger vidaSocial;
+    private BigDecimal vidaSocial;
     @Basic(optional = false)
     @Column(name = "HOGAR")
-    private BigInteger hogar;
+    private BigDecimal hogar;
     @Basic(optional = false)
     @Column(name = "CUIDADOPERSONAL")
-    private BigInteger cuidadopersonal;
+    private BigDecimal cuidadopersonal;
     @Id
     @Basic(optional = false)
     @Column(name = "PERFIL_MEDICO_CEDULA")
@@ -71,7 +71,7 @@ public class Cdr implements Serializable {
         this.perfilMedicoCedula = perfilMedicoCedula;
     }
 
-    public Cdr(String perfilMedicoCedula, BigInteger memoria, BigInteger orientacion, BigInteger juicio, BigInteger vidaSocial, BigInteger hogar, BigInteger cuidadopersonal) {
+    public Cdr(String perfilMedicoCedula, BigDecimal memoria, BigDecimal orientacion, BigDecimal juicio, BigDecimal vidaSocial, BigDecimal hogar, BigDecimal cuidadopersonal) {
         this.perfilMedicoCedula = perfilMedicoCedula;
         this.memoria = memoria;
         this.orientacion = orientacion;
@@ -81,51 +81,51 @@ public class Cdr implements Serializable {
         this.cuidadopersonal = cuidadopersonal;
     }
 
-    public BigInteger getMemoria() {
+    public BigDecimal getMemoria() {
         return memoria;
     }
 
-    public void setMemoria(BigInteger memoria) {
+    public void setMemoria(BigDecimal memoria) {
         this.memoria = memoria;
     }
 
-    public BigInteger getOrientacion() {
+    public BigDecimal getOrientacion() {
         return orientacion;
     }
 
-    public void setOrientacion(BigInteger orientacion) {
+    public void setOrientacion(BigDecimal orientacion) {
         this.orientacion = orientacion;
     }
 
-    public BigInteger getJuicio() {
+    public BigDecimal getJuicio() {
         return juicio;
     }
 
-    public void setJuicio(BigInteger juicio) {
+    public void setJuicio(BigDecimal juicio) {
         this.juicio = juicio;
     }
 
-    public BigInteger getVidaSocial() {
+    public BigDecimal getVidaSocial() {
         return vidaSocial;
     }
 
-    public void setVidaSocial(BigInteger vidaSocial) {
+    public void setVidaSocial(BigDecimal vidaSocial) {
         this.vidaSocial = vidaSocial;
     }
 
-    public BigInteger getHogar() {
+    public BigDecimal getHogar() {
         return hogar;
     }
 
-    public void setHogar(BigInteger hogar) {
+    public void setHogar(BigDecimal hogar) {
         this.hogar = hogar;
     }
 
-    public BigInteger getCuidadopersonal() {
+    public BigDecimal getCuidadopersonal() {
         return cuidadopersonal;
     }
 
-    public void setCuidadopersonal(BigInteger cuidadopersonal) {
+    public void setCuidadopersonal(BigDecimal cuidadopersonal) {
         this.cuidadopersonal = cuidadopersonal;
     }
 

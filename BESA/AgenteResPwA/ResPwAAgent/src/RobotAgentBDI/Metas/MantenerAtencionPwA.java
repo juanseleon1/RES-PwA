@@ -57,11 +57,12 @@ public class MantenerAtencionPwA extends GoalBDI {
     @Override
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta MantenerAtencionPwA detectGoal");
-
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        System.out.println("Atencion " + blvs.getbEstadoEmocionalPwA().getAtencion());
+
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
-            //se debe cambiar el tiempo de acuerdo a dificultad, tiempo, intereses
-            if (blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() > 1 && blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() > 1) {
+
+            if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.5 && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
                 return 1.0;
             }
         }
@@ -79,7 +80,7 @@ public class MantenerAtencionPwA extends GoalBDI {
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MantenerAtencionPwA evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion() + blvs.getbEstadoActividad().getBoostMantenerAtencionPwA();
+        return blvs.getbEstadoEmocionalPwA().getTiempoSinAtencion() + blvs.getbEstadoEmocionalPwA().getTiempoSinRelajacion();
     }
 
     @Override
@@ -92,8 +93,7 @@ public class MantenerAtencionPwA extends GoalBDI {
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta MantenerAtencionPwA goalSucceeded");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if ((blvs.getbEstadoEmocionalPwA().getTiempoAtencion()/1000) > 300)
-        {
+        if ((blvs.getbEstadoEmocionalPwA().getTiempoAtencion() / 1000) > 300) {
             return true;
         }
         return false;

@@ -6,7 +6,7 @@
 package ResPwAEntities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "PERFILPWA")
@@ -62,7 +62,7 @@ public class Perfilpwa implements Serializable {
     private String paisnacimiento;
     @Basic(optional = false)
     @Column(name = "EDAD")
-    private BigInteger edad;
+    private BigDecimal edad;
     @Id
     @Basic(optional = false)
     @Column(name = "CEDULA")
@@ -95,7 +95,7 @@ public class Perfilpwa implements Serializable {
         this.cedula = cedula;
     }
 
-    public Perfilpwa(String cedula, String nombre, String apellido, Date fechanacimiento, String paisnacimiento, BigInteger edad, String profesion) {
+    public Perfilpwa(String cedula, String nombre, String apellido, Date fechanacimiento, String paisnacimiento, BigDecimal edad, String profesion) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -137,11 +137,11 @@ public class Perfilpwa implements Serializable {
         this.paisnacimiento = paisnacimiento;
     }
 
-    public BigInteger getEdad() {
+    public BigDecimal getEdad() {
         return edad;
     }
 
-    public void setEdad(BigInteger edad) {
+    public void setEdad(BigDecimal edad) {
         this.edad = edad;
     }
 

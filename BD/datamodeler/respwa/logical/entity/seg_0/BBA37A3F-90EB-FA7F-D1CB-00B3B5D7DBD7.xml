@@ -4,8 +4,7 @@
 <createdTime>2020-10-27 20:33:15 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,8 +20,7 @@
 <createdTime>2020-10-27 20:34:11 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -34,8 +32,7 @@
 <createdTime>2020-10-27 20:33:46 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -49,8 +46,7 @@
 <generatorID>D51D2B31-BDE8-9C7D-FA90-7D0FEA5AEFB6</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <referedAttribute>0655F14C-D67B-351E-2180-8B86C4D30570</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -64,38 +60,34 @@
 <createdTime>2021-05-08 14:46:54 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>20</dataTypeSize>
-<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="accion" id="FC01A89C-2981-8358-D661-2001E4ACCA11">
 <createdBy>maria.f.garces.cala</createdBy>
 <createdTime>2021-05-08 14:46:57 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>20</dataTypeSize>
-<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="urlImagen" id="194E6627-6B7D-6F7D-4491-3ECEB4371C05">
 <createdBy>maria.f.garces.cala</createdBy>
 <createdTime>2021-05-08 16:57:08 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="true"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="true"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -110,10 +102,8 @@
 <createdBy>juans</createdBy>
 <createdTime>2020-10-27 20:34:29 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="23CE9C9C-8783-F954-1060-F3652BFA63B4" value="false"/>
-<item key="2AA957CA-F122-1D21-D45E-EA19873AADE2" value="false"/>
+<item key="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

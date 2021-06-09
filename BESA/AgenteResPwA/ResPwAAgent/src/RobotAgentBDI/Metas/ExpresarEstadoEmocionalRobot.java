@@ -26,17 +26,17 @@ import rational.mapping.Task;
  *
  * @author mafegarces
  */
-public class ExpresarEstadoEmocionalRobot extends GoalBDI{
-    
+public class ExpresarEstadoEmocionalRobot extends GoalBDI {
+
     private static String descrip = "ExpresarEmocional";
-    
+
     public static ExpresarEstadoEmocionalRobot buildGoal() {
-        
+
         Interacciones inter = new Interacciones();
         List<Task> taskList = new ArrayList<>();
-        Plan rolePlan= new Plan();
+        Plan rolePlan = new Plan();
         rolePlan.addTask(inter);
-        
+
         RationalRole interSocial = new RationalRole(descrip, rolePlan);
         ExpresarEstadoEmocionalRobot b = new ExpresarEstadoEmocionalRobot(InitRESPwA.getPlanID(), interSocial, descrip, GoalBDITypes.NEED);
         return b;
@@ -56,14 +56,11 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta InteraccionSocial detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        
-        Random rand = new Random();
-        if(!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() &&  blvs.getbEstadoInteraccion().isLogged())
-        {
-//            if(rand.nextDouble() <= blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor()*rand.nextDouble())
-//            {
-//                return 1;
-//            }
+
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged()) {
+            if (blvs.getbEstadoRobot().getTiempoEmocionPredominante() > 600000) {
+                return 1;
+            }
         }
         return 0;
     }
@@ -77,7 +74,7 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
     @Override
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta InteraccionSocial evaluateContribution");
-        RobotAgentBelieves blvs = (RobotAgentBelieves)stateBDI.getBelieves();
+        RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
         double value = 0;
 //        if(blvs.getbEstadoEmocionalRobot().getEm().getState().getDominantEmotion().equals(EmotionPwA.HAPPINESS)){
 //            value = blvs.getbEstadoEmocionalRobot().getEm().getState().getInfluenceFactor();
@@ -94,9 +91,7 @@ public class ExpresarEstadoEmocionalRobot extends GoalBDI{
     @Override
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta InteraccionSocial goalSucceeded");
-        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        //FALTAAAAA
         return false;
     }
-    
+
 }

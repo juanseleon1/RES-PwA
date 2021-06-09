@@ -64,7 +64,6 @@ public class PedirAyuda extends GoalBDI {
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendidoInt() && blvs.getbEstadoInteraccion().isLogged() && blvs.getbEstadoInteraccion().isAyudaActividadSolicitada()) {
             return 1;
         }
-
         return 0;
     }
 
@@ -78,7 +77,7 @@ public class PedirAyuda extends GoalBDI {
     public double evaluateContribution(StateBDI stateBDI) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta PedirAyuda evaluateContribution");
         RobotAgentBelieves blvs = (RobotAgentBelieves) stateBDI.getBelieves();
-        return 1.0 + blvs.getbEstadoActividad().getBoostPedirAyuda();
+        return 1.0;
     }
 
     @Override

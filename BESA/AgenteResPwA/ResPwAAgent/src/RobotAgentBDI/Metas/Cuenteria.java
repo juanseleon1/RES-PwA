@@ -9,15 +9,12 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Cuenteria.EvaluarEstrategiaEnriquecer;
-import Tareas.Cuenteria.MoverseFrentePwA;
-import Tareas.Cuenteria.RecibirRetroalimentacion;
-import Tareas.Cuenteria.RecomendarCuento;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
+import Tareas.Cuenteria.SeleccionarCuento;
 import Tareas.Cuenteria.ReproducirCuento;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,30 +32,23 @@ public class Cuenteria extends GoalBDI {
     private static String descrip = "Cuenteria";
 
     public static Cuenteria buildGoal() {
-        MoverseFrentePwA moversePwA = new MoverseFrentePwA();
-        RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
-        RecomendarCuento recomCuento = new RecomendarCuento();
+        RecibirRetroalimentacionCuento retro = new RecibirRetroalimentacionCuento();
+        SeleccionarCuento recomCuento = new SeleccionarCuento();
         ReproducirCuento rCuento = new ReproducirCuento();
 
-        List<String> resources = new ArrayList<>();
-        List<Task> tarea = new ArrayList<>();
+        List<Task> taskList;
         Plan rolePlan = new Plan();
 
         rolePlan.addTask(recomCuento);
-        rolePlan.addTask(moversePwA);
+        
+        taskList = new ArrayList<>();
+        taskList.add(recomCuento);
+        rolePlan.addTask(rCuento, taskList);
 
-        tarea = new ArrayList<>();
-        tarea.add(moversePwA);
-        tarea.add(recomCuento);
+        taskList = new ArrayList<>();
+        taskList.add(rCuento);
+        rolePlan.addTask(retro, taskList);
 
-        tarea = new ArrayList<>();
-        tarea.add(recomCuento);
-        tarea.add(moversePwA);
-        rolePlan.addTask(rCuento, tarea);
-
-        tarea = new ArrayList<>();
-        tarea.add(rCuento);
-        rolePlan.addTask(retro, tarea);
 
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.OPORTUNITY);
@@ -79,15 +69,14 @@ public class Cuenteria extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        System.out.println("Atencion: " + blvs.getbEstadoEmocionalPwA().getAtencion());
-        System.out.println("Relajacion: " + blvs.getbEstadoEmocionalPwA().getRelajacion());
 
-        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
+        if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()&& blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
             if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {
-                return 1;
+                return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.CUENTERIA)*0.6);
+
             }
         }
-        return 0;
+        return 1;
     }
 
     @Override
@@ -104,13 +93,13 @@ public class Cuenteria extends GoalBDI {
         double valor = 0;
 
         for (Actxpreferencia act : listaAct) {
-            if (act.getActividadpwa().getNombre().equals(ResPwAActivity.CUENTERIA)) {
+            if (act.getActividadpwa().getNombre().equalsIgnoreCase(ResPwAActivity.CUENTERIA.toString())) {
                 valor = act.getGusto();
             }
-        }
-        System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
-        System.out.println("Gusto: "+valor);
-        return valor + blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
+        }       
+
+        return valor+1;
+
     }
 
     @Override
@@ -123,7 +112,8 @@ public class Cuenteria extends GoalBDI {
     public boolean goalSucceeded(Believes believes) throws KernellAgentEventExceptionBESA {
         //System.out.println("Meta Cuenteria evaluateViability");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if ((System.currentTimeMillis() - blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && blvs.getbEstadoEmocionalPwA().getEmocionPredominante()>0) {
+        if ((System.currentTimeMillis() - blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && (blvs.getbEstadoEmocionalPwA().getAtencion()>0.5 || blvs.getbEstadoEmocionalPwA().getRelajacion()> 0.7)) {
+
             return true;
         }
         return false;

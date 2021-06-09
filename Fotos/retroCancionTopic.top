@@ -1,0 +1,12 @@
+    topic: ~retroCancionTopic()
+        language: spe
+        concept: (calificacion)  [uno dos tres]
+        u:(si no) ¿dime la primera palabra que se te viene a la mente?
+            u1: (e:Dialog/NotSpeaking5) ¿qué recuerdos te trae la canción?
+                u2: (e:Dialog/NotSpeaking5) Muchas gracias, me gusta escuchar tus experiencias. Te quiero hacer unas preguntas. De uno a tres, ¿que le parecio la actividad?
+                    u3: (_~calificacion) De uno a tres, ¿que tal le parecio la cancion que escucho?
+                        u4: (_~calificacion) De uno a tres, ¿como le parecio mi atencion?
+                            u5: (_~calificacion) ¡Gracias por tu opinion! Continuemos...
+
+        
+                                

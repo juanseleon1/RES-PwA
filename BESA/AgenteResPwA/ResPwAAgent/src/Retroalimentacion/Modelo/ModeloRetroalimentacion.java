@@ -35,7 +35,7 @@ public class ModeloRetroalimentacion<T> {
         Regla reglaAplicada = findRule(antecedentes);
         if (activity instanceof Preferenciaxcancion) {
             Preferenciaxcancion c = (Preferenciaxcancion) activity;
-            
+
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 c.setGusto(1.0f);
             } else {
@@ -45,6 +45,8 @@ public class ModeloRetroalimentacion<T> {
                     c.setGusto(c.getGusto() + reglaAplicada.getFeedback());
                 }
             }
+            System.out.println("New Gusto: " + c.getGusto());
+            RESPwABDInterface.updatePrefXCancion(c);
 
         } else if (activity instanceof Preferenciaxcuento) {
             Preferenciaxcuento c = (Preferenciaxcuento) activity;
@@ -58,6 +60,8 @@ public class ModeloRetroalimentacion<T> {
                 }
 
             }
+            RESPwABDInterface.updatePrefXCuento(c);
+
         } else if (activity instanceof Preferenciaxbaile) {
             Preferenciaxbaile b = (Preferenciaxbaile) activity;
             if (b.getGusto() + reglaAplicada.getFeedback() > 1.0f) {

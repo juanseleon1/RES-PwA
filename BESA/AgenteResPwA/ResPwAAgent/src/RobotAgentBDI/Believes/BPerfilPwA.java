@@ -124,17 +124,17 @@ public class BPerfilPwA implements Believes {
         return this;
     }
     
-    public OpcionesAnimar getAnimarStrategy()
-    {
-        Random rand = new Random();
-        OpcionesAnimar[]opcs = OpcionesAnimar.values();
-        return opcs[rand.nextInt(opcs.length)];
-    }
-    
     public OpcionesAtencion getAtencionStrategy()
     {
         Random rand = new Random();
         OpcionesAtencion[]opcs = OpcionesAtencion.values();
         return opcs[rand.nextInt(opcs.length)];
     }
+
+    @Override
+    public String toString() {
+        return "BPerfilPwA{" + "perfil=" + perfil + ", blvs=" + blvs + '}';
+    }
+    
+    
 }

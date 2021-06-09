@@ -7,7 +7,7 @@ package ResPwAEntities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "ACTIVIDADRUTINARIA")
@@ -49,7 +49,7 @@ public class Actividadrutinaria implements Serializable {
     private BigDecimal id;
     @Basic(optional = false)
     @Column(name = "DURACION")
-    private BigInteger duracion;
+    private BigDecimal duracion;
     @Basic(optional = false)
     @Column(name = "HORA")
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,7 +65,7 @@ public class Actividadrutinaria implements Serializable {
         this.id = id;
     }
 
-    public Actividadrutinaria(BigDecimal id, String nombre, BigInteger duracion, Date hora) {
+    public Actividadrutinaria(BigDecimal id, String nombre, BigDecimal duracion, Date hora) {
         this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -88,11 +88,11 @@ public class Actividadrutinaria implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getDuracion() {
+    public BigDecimal getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(BigInteger duracion) {
+    public void setDuracion(BigDecimal duracion) {
         this.duracion = duracion;
     }
 

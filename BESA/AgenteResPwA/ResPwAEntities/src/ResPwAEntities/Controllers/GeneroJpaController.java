@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class GeneroJpaController implements Serializable {
 

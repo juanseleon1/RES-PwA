@@ -391,7 +391,11 @@
 	<model_compare_storage_props_filter>
 	</model_compare_storage_props_filter>
 	<naming_options>
+<<<<<<< HEAD
+		<model_options objectid="0F582D95-94DC-2E13-CEEE-CD1FB89998E1">
+=======
 		<model_options objectid="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4">
+>>>>>>> master
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Table" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.Column" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />
 			<naming_option class_name="oracle.dbtools.crest.model.design.relational.TableView" max_name_length="30" case_type="2" valid_characters="" all_valid="true" />

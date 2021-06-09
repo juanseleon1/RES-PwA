@@ -20,7 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
+ * @author maria.f.garces.cala
+=======
  * @author juans
+>>>>>>> master
  */
 @Entity
 @Table(name = "PREFERENCIAXBAILE")
@@ -36,7 +40,7 @@ public class Preferenciaxbaile implements Serializable {
     @EmbeddedId
     protected PreferenciaxbailePK preferenciaxbailePK;
     @Column(name = "GUSTO")
-    private Double gusto;
+    private double gusto;
     @JoinColumn(name = "BAILE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Baile baile;
@@ -63,11 +67,12 @@ public class Preferenciaxbaile implements Serializable {
         this.preferenciaxbailePK = preferenciaxbailePK;
     }
 
-    public Double getGusto() {
+    public double getGusto() {
         return gusto;
     }
 
-    public void setGusto(Double gusto) {
+    public void setGusto(double gusto) {
+
         this.gusto = gusto;
     }
 

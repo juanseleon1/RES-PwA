@@ -5,7 +5,9 @@
  */
 package Tareas.AnimarElogiarPwA;
 
+import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
@@ -16,42 +18,27 @@ import rational.mapping.Believes;
  *
  * @author mafegarces
  */
-public class AnimarStrategy implements ResPwAStrategy{
-    
+public class AnimarStrategy implements ResPwAStrategy {
+
     private OpcionesAnimar opcion;
-    
+
     @Override
-    public ServiceDataRequest execStrategy() {
-        HashMap<String,Object> infoServicio = new HashMap<>(); 
+    public void execStrategy(Believes believes) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        HashMap<String, Object> infoServicio = new HashMap<>();
         ServiceDataRequest srb = null;
-        switch (opcion)
-        {
-            case FRASEELOGIANTE:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case CHISTE:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case ADIVINANZA:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case DATOCURIOSO:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case PREGUNTAEMPATICA:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
-            case CONSEJO:
-                infoServicio.put("SAY", opcion);
-                srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
-                break;
+
+        if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() > 0.5) {
+            this.opcion = OpcionesAnimar.FRASEELOGIANTE;
+            infoServicio.put("SAY", "Mi mundo se ilumina cuando estás cerca, eres lo más lindo, tierno y hermoso que ocupa mi corazón");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
+        } else if (blvs.getbEstadoEmocionalPwA().getEmocionPredominante() < -0.5) {
+            this.opcion = OpcionesAnimar.PREGUNTAEMPATICA;
+            infoServicio.put("SAY", "¿Como te sientes?");
+            srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
+            ResPwaUtils.requestService(srb, blvs);
         }
-        return srb;
     }
 
     public OpcionesAnimar getOpcion() {
@@ -63,10 +50,9 @@ public class AnimarStrategy implements ResPwAStrategy{
     }
 
     @Override
-    public ServiceDataRequest execStrategy(Believes b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isFinished(Believes b) {
+        RobotAgentBelieves blvs = (RobotAgentBelieves) b;
+        return blvs.getbEstadoInteraccion().isEstaHablando();
     }
-    
-    
-    
+
 }

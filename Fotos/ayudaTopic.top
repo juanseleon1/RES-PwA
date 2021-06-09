@@ -1,0 +1,14 @@
+    topic: ~aiudaTopic()
+        language: spe
+        concept:(saludos) [Hola buenas saludos "Muy buenos dias" "Buen dia"]
+
+        u: (ayuda) Cuentame qué es lo que necesitas?
+            u1: (["Quien eres" "Quien es usted" ]) Yo me llamo Pepper, soy un robot humanoide. Mucho gusto
+            u1: ("Que hago aca") Estas en un taller con robotica muy divertido 
+            u1: ("Donde estoy")  Estas conmigo en el laboratorio en Bogota, Colombia
+            u1: (["Como se llama" "Usted como se llama"]) Yo me llamo pepper, estoy con mis compañeros de equipo
+            u1: (["Me quiero ir" "No quiero estar aca" "Necesito aire"]) Si señor, en un momento lo ayudaremos a salir
+            u1: (["Donde esta *" "Quiero ver a *" "Quiero que venga *"]) En este momento no esta aca, ahorita buscaremos a esa persona
+            
+
+

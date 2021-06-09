@@ -88,8 +88,8 @@ public class BEstadoInteraccion implements Believes {
         System.out.println("BEstadoInteraccion update Received: " + si);
         SensorData infoRecibida = (SensorData) si;
 
-        if (infoRecibida.getDataP().containsKey(keyNameConf + "Display")) {
-            confirmacionRepDisp = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Display"));
+        if (infoRecibida.getDataP().containsKey("endVideo")) {
+            confirmacionRepDisp = (boolean) infoRecibida.getDataP().get("endVideo");
         }
         if (infoRecibida.getDataP().containsKey(keyNameConf + "Audio")) {
             confirmacionRepAud = Boolean.valueOf((String) infoRecibida.getDataP().get(keyNameConf + "Audio"));
@@ -113,7 +113,9 @@ public class BEstadoInteraccion implements Believes {
                 nivelEnriquecimiento--;
             }
         }
-        
+        if(infoRecibida.getDataP().containsKey("retroValue")){
+            retroalimentacionValue = (String)infoRecibida.getDataP().get("retroValue");
+        }
         if (infoRecibida.getDataP().containsKey("wakeUpFinished")) {
             sistemaSuspendido = Boolean.valueOf((String) infoRecibida.getDataP().get("wakeUpFinished"));
         }
@@ -176,10 +178,7 @@ public class BEstadoInteraccion implements Believes {
             movError = true;
 
         }
-        if (infoRecibida.getDataP().containsKey("moviendose")) {
-            estaMoviendo = Boolean.valueOf((String) infoRecibida.getDataP().get("desplazandose"));
 
-        }
         if (infoRecibida.getDataP().containsKey("stimulusDetected")) {
             hayInteraccionFisica = true;
         }
@@ -200,11 +199,8 @@ public class BEstadoInteraccion implements Believes {
                 tiempoEmergenciaTrans = System.currentTimeMillis();
             }
         }
-        if (infoRecibida.getDataP().containsKey("peticionAyuda")) {
-            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("peticionAyuda"));
-        }
-        if (infoRecibida.getDataP().containsKey("ayudaExitosa")) {
-            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("ayudaExitosa"));
+        if (infoRecibida.getDataP().containsKey("ayudaValue")) {
+            ayudaActividadSolicitada = Boolean.valueOf((String) infoRecibida.getDataP().get("ayudaValue"));
         }
 
         if (infoRecibida.getDataP().containsKey("DialogInput")) {
@@ -216,7 +212,6 @@ public class BEstadoInteraccion implements Believes {
                     modificarPreferencias = true;
                 }
             }
-            System.out.println("Recibir Rrspuesta " + recibirRespuestaPwA);
             if (!respuestaPreferencia.equalsIgnoreCase("")) {
                 recibirRespuestaPwA = true;
                 respuestasPorContexto++;
@@ -237,7 +232,6 @@ public class BEstadoInteraccion implements Believes {
         if (infoRecibida.getDataP().containsKey("speechTextDone")) {
             Integer done = (Integer) infoRecibida.getDataP().get("speechTextDone");
             estaHablando = 0 == done;
-
         }
 
         return true;
@@ -341,14 +335,6 @@ public class BEstadoInteraccion implements Believes {
 
     public void setEstaHablando(boolean estaHablando) {
         this.estaHablando = estaHablando;
-    }
-
-    public boolean isEstaBailando() {
-        return estaMoviendo;
-    }
-
-    public void setEstaBailando(boolean estaBailando) {
-        this.estaMoviendo = estaBailando;
     }
 
     public boolean isHayInteraccionFisica() {
@@ -531,6 +517,10 @@ public class BEstadoInteraccion implements Believes {
 
     public void setTiempoInt(long tiempoInt) {
         this.tiempoInt = tiempoInt;
+    }
+
+    public boolean estaBailando() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

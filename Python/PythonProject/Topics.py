@@ -120,12 +120,18 @@ topico_ira = "/data/home/nao/topics/iraTopic.top"
 #topico_emocional = "/data/home/nao/topics/emoTopic.top"
 topico_normal = "/data/home/nao/topics/normalTopic.top"
 topico_ayuda = "/data/home/nao/topics/ayudaTopic.top"
-topico_retro = "/data/home/nao/topics/retroalimentacionTopic.top"
+topico_retroCancion = "/data/home/nao/topics/retroCancionTopic.top"
+topico_retroCuento = "/data/home/nao/topics/retroCuentoTopic.top"
 topico_saludable = "/data/home/nao/topics/saludaTopic.top"
 topico_sonido = "/data/home/nao/topics/soundTopic.top"
+<<<<<<< HEAD
+topico_blank = "/data/home/nao/topics/blankaTopic.top"
+
+=======
+>>>>>>> master
 #topicorron = "/data/home/nao/topics/superTopico.top"
 
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]
 
-topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda,topico_retro,topico_saludable]
+topic_list = [topico_alegre, topico_ira, topic_content_1,topico_ayuda,topico_retroCancion,topico_retroCuento,topico_saludable,topico_triste, topico_blank]
 

@@ -7,7 +7,7 @@ package Tareas.AnimarElogiarPwA;
 
 import EmotionalAnalyzerAgent.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
@@ -36,27 +36,18 @@ public class EvaluarEstrategiaAnimar extends Task{
     @Override
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
-        
-        RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        //falta escoger estrategia, segun perfil
-        OpcionesAnimar estrategia = blvs.getbPerfilPwA().getAnimarStrategy();
+
         AnimarStrategy as = new AnimarStrategy();
-        as.setOpcion(estrategia);
-        
-        blvs.getbEstadoActividad().setEstrategia(as);
-        
-        ServiceDataRequest srb = as.execStrategy();
-        ResPwaUtils.requestService(srb,blvs);
+        as.execStrategy(parameters);
+
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(blvs.getbEstadoInteraccion().isEstaHablando()){
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
+        blvs.getbEstadoActividad().setEstrategia(null);
+
     }
 
     @Override
@@ -64,17 +55,13 @@ public class EvaluarEstrategiaAnimar extends Task{
         System.out.println("--- Cancel Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
-        if(blvs.getbEstadoInteraccion().isEstaHablando()){
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb,blvs);
-        }
     }
 
     @Override
     public boolean checkFinish(Believes believes) {
         
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy) {
+        if(!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoActividad().getEstrategia()!=null && blvs.getbEstadoActividad().getEstrategia() instanceof AnimarStrategy && blvs.getbEstadoActividad().getEstrategia().isFinished(believes)) {
             return true;
         }
         return false;

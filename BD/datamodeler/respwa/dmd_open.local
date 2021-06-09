@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <design id="D307E5D7-60DB-F3E7-A06F-543F87442E35">
 	<models>
+<<<<<<< HEAD
+		<model id="0F582D95-94DC-2E13-CEEE-CD1FB89998E1" open="true" open_d_pm="false"/>
+=======
 		<model id="473F4055-CCEE-D54F-E2E3-5824F41E8C95" open="true" open_d_pm="false"/>
+>>>>>>> master
 	</models>
 </design>

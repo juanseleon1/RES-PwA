@@ -7,7 +7,7 @@ package Tareas.Test;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
@@ -34,8 +34,8 @@ public class TestTask extends Task {
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Revisar Perfil ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        infoServicio.put("", "");
-        ServiceDataRequest data = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
+        infoServicio.put("TAGSDANCE", "QUESTION");
+        ServiceDataRequest data = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
         ResPwaUtils.requestService(data, blvs);
     }
 
@@ -51,7 +51,6 @@ public class TestTask extends Task {
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
 
         return false;
     }

@@ -9,15 +9,15 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
 import Init.InitRESPwA;
+import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAActivity;
-import Tareas.Cuenteria.RecibirRetroalimentacion;
-import Tareas.MusicoTerapia.InicializarBaile;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
 import Tareas.MusicoTerapia.ReproduccionCancion;
 import Tareas.MusicoTerapia.SeleccionarCancion;
+import Tareas.Retroalimentacion.RecibirRetroalimentacionCancion;
 import java.util.ArrayList;
 import java.util.List;
 import rational.RationalRole;
@@ -34,21 +34,16 @@ public class MusicoTerapia extends GoalBDI{
     private static String descrip = "MusicoTerapia";
     
     public static MusicoTerapia buildGoal() {
-        
-        InicializarBaile iBaile = new InicializarBaile();
         SeleccionarCancion sCancion = new SeleccionarCancion();
         ReproduccionCancion rCancion = new ReproduccionCancion();
-        RecibirRetroalimentacion retro = new RecibirRetroalimentacion();
+        RecibirRetroalimentacionCancion retro = new RecibirRetroalimentacionCancion();
         
-        List<String> resources = new ArrayList<>();
         List<Task> tarea;
         Plan rolePlan = new Plan();
 
-        rolePlan.addTask(iBaile);
         rolePlan.addTask(sCancion);
         tarea = new ArrayList<>();
         tarea.add(sCancion);
-        tarea.add(iBaile);
         rolePlan.addTask(rCancion,tarea);
         
         tarea = new ArrayList<>();
@@ -79,8 +74,9 @@ public class MusicoTerapia extends GoalBDI{
         System.out.println("EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getEmocionPredominante());
 
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
-            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0) {
-                return 1;
+            if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0 && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
+                return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.MUSICOTERAPIA)*0.6);
+
             }
         }
         return 0;
@@ -100,15 +96,12 @@ public class MusicoTerapia extends GoalBDI{
         double valor=0;
         
         for (Actxpreferencia act: listaAct) {
-            if(act.getActividadpwa().getNombre().equals(ResPwAActivity.MUSICOTERAPIA)) {
+            if(act.getActividadpwa().getNombre().equalsIgnoreCase(ResPwAActivity.MUSICOTERAPIA.toString())) {
                 valor = act.getGusto();
             }
         }
-        System.out.println("T_EmocionPredominante: "+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante());            
-        System.out.println("Gusto: "+valor);
+        return valor;
 
-
-        return valor+blvs.getbEstadoEmocionalPwA().getTiempoEmocionPredominante();
     }
 
     @Override

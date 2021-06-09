@@ -1,10 +1,14 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="BaileXPerfilPreferencia" directorySegmentName="seg_0" id="4A152F8C-6394-9DE9-A2E1-A63CFAEB0058">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PreferenciaXBaile" directorySegmentName="seg_0" id="4A152F8C-6394-9DE9-A2E1-A63CFAEB0058">
 <createdBy>ASUS</createdBy>
 <createdTime>2021-05-06 22:47:30 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="E8F7C22A-23EE-4560-F9B3-7CDAADA09BCE" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <identifying>false</identifying>
 <optionalSource>false</optionalSource>
@@ -21,7 +25,11 @@
 <createdTime>2021-05-20 22:03:02 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="E8F7C22A-23EE-4560-F9B3-7CDAADA09BCE" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>

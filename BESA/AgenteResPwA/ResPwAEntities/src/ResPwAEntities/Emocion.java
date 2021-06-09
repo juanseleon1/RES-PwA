@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "EMOCION")
@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Emocion.findAll", query = "SELECT e FROM Emocion e"),
     @NamedQuery(name = "Emocion.findById", query = "SELECT e FROM Emocion e WHERE e.id = :id"),
-    @NamedQuery(name = "Emocion.findByEmotionaltag", query = "SELECT e FROM Emocion e WHERE e.emotionaltag = :emotionaltag")})
+    @NamedQuery(name = "Emocion.findByEmotionaltag", query = "SELECT e FROM Emocion e WHERE e.emotionaltag = :emotionaltag"),
+    @NamedQuery(name = "Emocion.findByImagen", query = "SELECT e FROM Emocion e WHERE e.imagen = :imagen")})
 public class Emocion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Emocion implements Serializable {
     @Basic(optional = false)
     @Column(name = "EMOTIONALTAG")
     private String emotionaltag;
+    @Basic(optional = false)
+    @Column(name = "IMAGEN")
+    private String imagen;
     @JoinColumn(name = "ROBOT_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Robot robotId;
@@ -56,9 +60,10 @@ public class Emocion implements Serializable {
         this.id = id;
     }
 
-    public Emocion(String id, String emotionaltag) {
+    public Emocion(String id, String emotionaltag, String imagen) {
         this.id = id;
         this.emotionaltag = emotionaltag;
+        this.imagen = imagen;
     }
 
     public String getId() {
@@ -75,6 +80,14 @@ public class Emocion implements Serializable {
 
     public void setEmotionaltag(String emotionaltag) {
         this.emotionaltag = emotionaltag;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public Robot getRobotId() {

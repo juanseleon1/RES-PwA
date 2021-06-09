@@ -4,7 +4,11 @@
 <createdTime>2020-10-27 18:05:16 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,7 +25,11 @@
 <generatorID>0CEC30AD-D8E5-8B93-4EC1-4F41536AA71D</generatorID>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <referedAttribute>7D8AF2AF-E0B4-67F7-8221-224634856615</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -35,7 +43,11 @@
 <createdTime>2020-10-27 18:17:51 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -48,7 +60,11 @@
 <createdTime>2020-10-27 18:18:19 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -60,7 +76,11 @@
 <createdTime>2020-10-27 18:18:51 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -72,7 +92,11 @@
 <createdTime>2020-10-27 18:19:43 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -84,7 +108,23 @@
 <createdTime>2020-10-27 18:20:16 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="brilloPreferido" id="EC316B19-D907-7333-367F-8247C5AA1EF7">
+<createdBy>maria.f.garces.cala</createdBy>
+<createdTime>2021-05-22 15:45:24 UTC</createdTime>
+<ownerDesignName>respwa</ownerDesignName>
+<engineerTo>
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="true"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -98,7 +138,11 @@
 <createdTime>2020-10-27 18:15:27 UTC</createdTime>
 <ownerDesignName>respwa</ownerDesignName>
 <engineerTo>
+<<<<<<< HEAD
+<item key="AFB7F8A0-A86E-2D38-8FE6-30F7F26D7874" value="false"/>
+=======
 <item key="9B7D5EC9-9A25-9BFA-9D6D-BA29B1DFC5E4" value="true"/>
+>>>>>>> master
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

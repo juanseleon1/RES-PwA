@@ -7,9 +7,13 @@ package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
 import ResPwAEntities.Actividadpwa;
+import ResPwAEntities.Actxpreferencia;
 import ResPwAEntities.Baile;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
+import ResPwAEntities.Preferenciaxbaile;
+import ResPwAEntities.Preferenciaxcancion;
+import ResPwAEntities.Preferenciaxcuento;
 import ResPwAEntities.Registroactividad;
 import ResPwAEntities.RegistroactividadPK;
 import RobotAgentBDI.ResPwAStrategy;
@@ -30,36 +34,25 @@ import rational.mapping.Believes;
 public class BEstadoActividad implements Believes {
 
     private long tiempoInicioActividad = 0;
-    private ResPwAActivity actividadActual=ResPwAActivity.CUENTERIA;
+    private ResPwAActivity actividadActual = ResPwAActivity.CUENTERIA;
     private String estadoInit = null;
     private boolean actividadEnCurso = false;
     private boolean mejoraEmocional = false;
     private ResPwAStrategy estrategia;
-    private Cancion cancionActual;
-    private Cuento cuentoActual;
+    private Preferenciaxcancion cancionActual;
+    private Preferenciaxcuento cuentoActual;
+    private Preferenciaxbaile baileActual;
     private List<Baile> bailes;
-    private Integer boostActivarKaraoke = 0;
-    private Integer boostAnimarElogiarPwA = 0;
-    private Integer boostBailar = 0;
-    private Integer boostCambiarEnriquecimientoHistoria = 0;
-    private Integer boostCancelarActividad = 0;
-    private Integer boostConversarEmpaticamente = 0;
-    private Integer boostLogIn = 0;
-    private Integer boostMantenerAtencionPwA = 0;
-    private Integer boostPausarInteraccion = 0;
-    private Integer boostPedirAyuda = 0;
-    private Integer boostReanudarActividad = 0;
-    private Integer boostRecargarBateria = 0;
-    private Integer boostReiniciarActividad = 0;
-    private Integer boostSeleccionarCancionGusto = 0;
-    private Integer boostSeleccionarCuentoGusto = 0;
     private String cedula;
     private Integer indexCuento = 0;
     private RobotAgentBelieves blvs = null;
+    private boolean estaBailando;
+    private boolean estaMoviendo;
 
     public BEstadoActividad(String cedula, RobotAgentBelieves blvs) {
         this.cedula = cedula;
         this.blvs = blvs;
+        this.estaBailando = false;
     }
 
     @Override
@@ -77,6 +70,14 @@ public class BEstadoActividad implements Believes {
                 createNewInteResgistry();
             }
         }
+
+        if (infoRecibida.getDataP().containsKey("finishAnim")) {
+            estaBailando = (boolean) infoRecibida.getDataP().get("finishAnim");
+        }
+        if (infoRecibida.getDataP().containsKey("finishAnim")) {
+            estaMoviendo = (boolean) infoRecibida.getDataP().get("finishAnim");
+
+        }
         return true;
     }
 
@@ -92,6 +93,16 @@ public class BEstadoActividad implements Believes {
         return actividadActual;
     }
 
+    public double getGustoActividad(ResPwAActivity actividad) {
+        double gusto = 0;
+        for (Actxpreferencia a : blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getActxpreferenciaList()) {
+            if (a.getActividadpwa().getNombre().equalsIgnoreCase(actividad.toString())) {
+                gusto = a.getGusto();
+            }
+        }
+        return gusto;
+    }
+
     public void setActividadActual(ResPwAActivity actividadActual) {
         this.actividadActual = actividadActual;
     }
@@ -100,7 +111,7 @@ public class BEstadoActividad implements Believes {
         return actividadEnCurso;
     }
 
-    public Cancion getCancionActual() {
+    public Preferenciaxcancion getCancionActual() {
         return cancionActual;
     }
 
@@ -134,15 +145,15 @@ public class BEstadoActividad implements Believes {
         return time;
     }
 
-    public void setCancionActual(Cancion cancionActual) {
+    public void setCancionActual(Preferenciaxcancion cancionActual) {
         this.cancionActual = cancionActual;
     }
 
-    public void setCuentoActual(Cuento cuentoActual) {
+    public void setCuentoActual(Preferenciaxcuento cuentoActual) {
         this.cuentoActual = cuentoActual;
     }
 
-    public Cuento getCuentoActual() {
+    public Preferenciaxcuento getCuentoActual() {
         return cuentoActual;
     }
 
@@ -152,126 +163,6 @@ public class BEstadoActividad implements Believes {
 
     public void setBailes(List<Baile> bailes) {
         this.bailes = bailes;
-    }
-
-    public Integer getBoostActivarKaraoke() {
-        return boostActivarKaraoke;
-    }
-
-    public void setBoostActivarKaraoke(Integer boostActivarKaraoke) {
-        this.boostActivarKaraoke = boostActivarKaraoke;
-    }
-
-    public Integer getBoostAnimarElogiarPwA() {
-        return boostAnimarElogiarPwA;
-    }
-
-    public void setBoostAnimarElogiarPwA(Integer boostAnimarElogiarPwA) {
-        this.boostAnimarElogiarPwA = boostAnimarElogiarPwA;
-    }
-
-    public Integer getBoostBailar() {
-        return boostBailar;
-    }
-
-    public void setBoostBailar(Integer boostBailar) {
-        this.boostBailar = boostBailar;
-    }
-
-    public Integer getBoostCambiarEnriquecimientoHistoria() {
-        return boostCambiarEnriquecimientoHistoria;
-    }
-
-    public void setBoostCambiarEnriquecimientoHistoria(Integer boostCambiarEnriquecimientoHistoria) {
-        this.boostCambiarEnriquecimientoHistoria = boostCambiarEnriquecimientoHistoria;
-    }
-
-    public Integer getBoostConversarEmpaticamente() {
-        return boostConversarEmpaticamente;
-    }
-
-    public void setBoostConversarEmpaticamente(Integer boostConversarEmpaticamente) {
-        this.boostConversarEmpaticamente = boostConversarEmpaticamente;
-    }
-
-    public Integer getBoostLogIn() {
-        return boostLogIn;
-    }
-
-    public void setBoostLogIn(Integer boostLogIn) {
-        this.boostLogIn = boostLogIn;
-    }
-
-    public Integer getBoostMantenerAtencionPwA() {
-        return boostMantenerAtencionPwA;
-    }
-
-    public void setBoostMantenerAtencionPwA(Integer boostMantenerAtencionPwA) {
-        this.boostMantenerAtencionPwA = boostMantenerAtencionPwA;
-    }
-
-    public Integer getBoostPausarInteraccion() {
-        return boostPausarInteraccion;
-    }
-
-    public void setBoostPausarInteraccion(Integer boostPausarInteraccion) {
-        this.boostPausarInteraccion = boostPausarInteraccion;
-    }
-
-    public Integer getBoostPedirAyuda() {
-        return boostPedirAyuda;
-    }
-
-    public void setBoostPedirAyuda(Integer boostPedirAyuda) {
-        this.boostPedirAyuda = boostPedirAyuda;
-    }
-
-    public Integer getBoostReanudarActividad() {
-        return boostReanudarActividad;
-    }
-
-    public void setBoostReanudarActividad(Integer boostReanudarActividad) {
-        this.boostReanudarActividad = boostReanudarActividad;
-    }
-
-    public Integer getBoostRecargarBateria() {
-        return boostRecargarBateria;
-    }
-
-    public void setBoostRecargarBateria(Integer boostRecargarBateria) {
-        this.boostRecargarBateria = boostRecargarBateria;
-    }
-
-    public Integer getBoostReiniciarActividad() {
-        return boostReiniciarActividad;
-    }
-
-    public void setBoostReiniciarActividad(Integer boostReiniciarActividad) {
-        this.boostReiniciarActividad = boostReiniciarActividad;
-    }
-
-    public Integer getBoostSeleccionarCancionGusto() {
-        return boostSeleccionarCancionGusto;
-    }
-
-    public void setBoostSeleccionarCancionGusto(Integer boostSeleccionarCancionGusto) {
-        this.boostSeleccionarCancionGusto = boostSeleccionarCancionGusto;
-    }
-
-    public Integer getBoostSeleccionarCuentoGusto() {
-        return boostSeleccionarCuentoGusto;
-    }
-
-    public void setBoostSeleccionarCuentoGusto(Integer boostSeleccionarCuentoGusto) {
-        this.boostSeleccionarCuentoGusto = boostSeleccionarCuentoGusto;
-    }
-
-    public Integer getBoostCancelarActividad() {
-        return boostCancelarActividad;
-    }
-
-    public void setBoostCancelarActividad(Integer boostCancelarActividad) {
-        this.boostCancelarActividad = boostCancelarActividad;
     }
 
     public void createNewInteResgistry() {
@@ -318,12 +209,35 @@ public class BEstadoActividad implements Believes {
     public void setIndexCuento(Integer indexCuento) {
         this.indexCuento = indexCuento;
     }
-    
+
+    public Preferenciaxbaile getBaileActual() {
+        return baileActual;
+    }
+
+    public void setBaileActual(Preferenciaxbaile baileActual) {
+        this.baileActual = baileActual;
+    }
+
+    public boolean isEstaBailando() {
+        return estaBailando;
+    }
+
+    public void setEstaBailando(boolean estaBailando) {
+        this.estaBailando = estaBailando;
+    }
 
     @Override
     public Believes clone() throws CloneNotSupportedException {
         super.clone();
         return this;
+    }
+
+    public boolean isEstaMoviendo() {
+        return estaMoviendo;
+    }
+
+    public void setEstaMoviendo(boolean estaMoviendo) {
+        this.estaMoviendo = estaMoviendo;
     }
 
 }

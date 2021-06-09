@@ -5,20 +5,18 @@
  */
 package Tareas.MusicoTerapia;
 
-import ResPwAEntities.Familiar;
-import ResPwAEntities.Tags;
-import ResPwaUtils.AudioUtils;
-import ResPwaUtils.Imagen;
-import ResPwaUtils.YTUtils;
+import Personalizacion.Modelo.CromosomaBaile;
+import Personalizacion.Modelo.ModeloSeleccion;
+import ResPwAEntities.Preferenciaxbaile;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
+import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
+import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import rational.mapping.Task;
@@ -30,61 +28,92 @@ import rational.mapping.Task;
 public class ReproduccionCancion extends Task {
 
     private HashMap<String, Object> infoServicio = new HashMap<>();
+    private boolean envioVideo;
+    private long start = -1;
 
     public ReproduccionCancion() {
 //        System.out.println("--- Task Busqueda Cancion Iniciada ---");
+        envioVideo = false;
+
     }
 
     @Override
     public void executeTask(Believes parameters) {
-        System.out.println("--- Execute Task Busqueda Cancion ---");
+        System.out.println("--- Execute Task Reproducir Cancion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) parameters;
-        
-        //Tener en cuenta opcion seleccionada para mandar info
-        //Dependiendo de canción seleccionada, seleccionar baile->se mandan tags, cambio velocidad->segun cancion y activar letra
+        List<Preferenciaxbaile> bailes = blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getPreferenciaxbaileList();
+        long now = System.currentTimeMillis();
 
-        if (blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustokaraoke() > blvs.getbPerfilPwA().getPerfil().getPerfilPreferencia().getGustomusica()) {
-            String urlcancion = blvs.getbEstadoActividad().getCancionActual().getUrl();
+//        ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.CHECKANIMATIONFINISH, infoServicio);
+//        ResPwaUtils.requestService(srb, blvs);
+        if ((now - start > 3000 || start == -1) && !blvs.getbEstadoActividad().isEstaBailando()) {
+            start = now;
+
+            infoServicio = new HashMap<>();
+            ModeloSeleccion<Preferenciaxbaile> modeloBaile = new ModeloSeleccion<Preferenciaxbaile>(bailes);
+            Preferenciaxbaile baileSelected = null;
+            CromosomaBaile cromosoma = null;
+            cromosoma = (CromosomaBaile) modeloBaile.selectCromosoma();
+            if (cromosoma != null && !blvs.getbEstadoActividad().isEstaBailando()) {
+                baileSelected = cromosoma.getBaile();
+                blvs.getbEstadoActividad().setBaileActual(baileSelected);
+                infoServicio = new HashMap<>();
+                infoServicio.put("TAGSDANCE", blvs.getbEstadoActividad().getBaileActual().getBaile().getNombre());
+                infoServicio.put("FACTOR", null);
+                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.RUNANIMATION, infoServicio);
+                ResPwaUtils.requestService(srb, blvs);
+            }
+        }
+
+        if (!envioVideo) {
+            String urlcancion = blvs.getbEstadoActividad().getCancionActual().getCancion().getUrl();
+            infoServicio = new HashMap<>();
             infoServicio.put("SHOWVIDEO", urlcancion);
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
-            ResPwaUtils.requestService(srb,blvs);
+            ResPwaUtils.requestService(srb, blvs);
+            envioVideo = true;
+
         }
+
     }
 
     @Override
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Busqueda Cancion ---");
-        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
 
     @Override
     public void cancelTask(Believes believes) {
         System.out.println("--- Cancel Task Busqueda Cancion ---");
-        
+        RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+        blvs.getbEstadoRobot().setStoryMode(true);
     }
-    
+
     @Override
     public boolean checkFinish(Believes believes) {
-                
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-        if(!blvs.getbEstadoInteraccion().isConfirmacionRepDisp() && !blvs.getbEstadoInteraccion().isConfirmacionRepAud()) {
-            return true;
-        }
-        return false;
-    }
-
-    public List<Imagen> getImgxTag(String tag, List<Imagen> imgs) {
-        List<Imagen> imagenes = new ArrayList<>();
-
-        for (Imagen i : imgs) {
-            for (String t : i.getTags()) {
-                if (t.equalsIgnoreCase(tag)) {
-                    imagenes.add(i);
-                }
+        if (blvs.getbEstadoInteraccion().isConfirmacionRepDisp()) {
+            if (!blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.RETROCANCIONTOPIC) && envioVideo) {
+                ResPwaUtils.deactivateTopic(PepperTopicsNames.BLANKATOPIC, believes);
+                System.out.println("CALI MIRE VEA");
+                ResPwaUtils.activateTopic(PepperTopicsNames.RETROCANCIONTOPIC, believes);
+                blvs.getbEstadoRobot().setStoryMode(false);
+                envioVideo = false;
+                infoServicio = new HashMap<>();
+                ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.KILLALL, infoServicio);
+                ResPwaUtils.requestService(srb, blvs);
+                
             }
+            blvs.getbEstadoRobot().setStoryMode(false);
+
+            return true;
+        } else {
+            setTaskWaitingForExecution();
+            return false;
         }
-        return imagenes;
     }
 
 }

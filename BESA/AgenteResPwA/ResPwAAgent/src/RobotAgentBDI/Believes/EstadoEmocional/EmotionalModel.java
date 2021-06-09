@@ -7,7 +7,8 @@ import BESA.Kernel.System.Directory.AgHandlerBESA;
 import EmotionalAnalyzerAgent.EmotionalData;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.EstadoEmocional.Personality.EmotionElementType;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
+
 import ServiceAgentResPwA.ServiceDataRequest;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,7 +52,11 @@ public abstract class EmotionalModel {
 
     public void processEmotionalEvent(EmotionalEvent ev) {
         float i = estimateEmotionIntensity(ev);
+        if(ev.getPerson()!=null){
+          System.out.println("XEREVENTO: "+ev + " Valencia"+i);
+        }
         emotionalState.updateEmotions(ev.getEvent(), i);
+        System.out.println(ev.toString());
         emotionalStateChanged();
     }
 

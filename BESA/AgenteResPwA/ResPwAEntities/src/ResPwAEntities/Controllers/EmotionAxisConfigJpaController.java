@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 public class EmotionAxisConfigJpaController implements Serializable {
 

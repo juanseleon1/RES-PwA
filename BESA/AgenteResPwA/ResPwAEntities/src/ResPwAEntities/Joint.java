@@ -7,7 +7,7 @@ package ResPwAEntities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juans
+ * @author maria.f.garces.cala
  */
 @Entity
 @Table(name = "JOINT")
@@ -50,7 +50,7 @@ public class Joint implements Serializable {
     private double angulo;
     @Basic(optional = false)
     @Column(name = "TIEMPO")
-    private BigInteger tiempo;
+    private BigDecimal tiempo;
     @ManyToMany(mappedBy = "jointList", fetch = FetchType.EAGER)
     private List<Accion> accionList;
 
@@ -61,7 +61,7 @@ public class Joint implements Serializable {
         this.id = id;
     }
 
-    public Joint(BigDecimal id, String nombre, double angulo, BigInteger tiempo) {
+    public Joint(BigDecimal id, String nombre, double angulo, BigDecimal tiempo) {
         this.id = id;
         this.nombre = nombre;
         this.angulo = angulo;
@@ -92,11 +92,11 @@ public class Joint implements Serializable {
         this.angulo = angulo;
     }
 
-    public BigInteger getTiempo() {
+    public BigDecimal getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(BigInteger tiempo) {
+    public void setTiempo(BigDecimal tiempo) {
         this.tiempo = tiempo;
     }
 

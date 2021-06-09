@@ -6,7 +6,7 @@
 package Tareas.LogIn;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwaUtils;
+import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
@@ -57,10 +57,6 @@ public class ConversacionInicial extends Task {
         System.out.println("--- Interrupt Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
@@ -68,10 +64,6 @@ public class ConversacionInicial extends Task {
         System.out.println("--- Cancel Task Preguntar Estado Animo ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
-        if (blvs.getbEstadoInteraccion().isEstaHablando()) {
-            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
-            ResPwaUtils.requestService(srb, blvs);
-        }
     }
 
     @Override
@@ -80,14 +72,14 @@ public class ConversacionInicial extends Task {
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("Esta hablando: " + blvs.getbEstadoInteraccion().isEstaHablando() + " " + "Recibir respuesta: " + blvs.getbEstadoInteraccion().isRecibirRespuestaPwA());
+        System.out.println("TOPICO "+blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC));
         if (!blvs.getbEstadoInteraccion().isEstaHablando() && blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
             System.out.println("--- Check Finish Conversacion Inicial ---");
-            blvs.getbEstadoInteraccion().setLogged(true);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             if (blvs.getbEstadoInteraccion().isTopicoActivo(PepperTopicsNames.SALUDARTOPIC)){
-                System.out.println("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 ResPwaUtils.deactivateTopic(PepperTopicsNames.SALUDARTOPIC, believes);
             }
+            blvs.getbEstadoInteraccion().setLogged(true);
             return true;
         }
         return false;
