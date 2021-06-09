@@ -35,6 +35,7 @@ public class ModeloRetroalimentacion<T> {
         Regla reglaAplicada = findRule(antecedentes);
         if (activity instanceof Preferenciaxcancion) {
             Preferenciaxcancion c = (Preferenciaxcancion) activity;
+
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
                 c.setGusto(1.0f);
             } else {

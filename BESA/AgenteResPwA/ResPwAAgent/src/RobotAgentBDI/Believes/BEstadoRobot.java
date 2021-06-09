@@ -326,7 +326,6 @@ public class BEstadoRobot extends ResPwaEmotionalModel implements Believes {
 
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(RobotStateServiceRequestType.ROBOTEMOTION, infoServicio);
             ResPwaUtils.requestService(srb);
-
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(BEstadoRobot.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -36,6 +36,7 @@ public class BEstadoEmocionalPwA implements Believes {
     private double relajacion;
     private float valencia;
 
+
     public BEstadoEmocionalPwA() {
         emoMap = new HashMap<>();
         for (EmotionPwA epwa : EmotionPwA.values()) {
@@ -95,13 +96,13 @@ public class BEstadoEmocionalPwA implements Believes {
 
             auxEmotionAverage = getEmotionAverage(emoMap.get(entry));
             if (entry.equals(ANGER) || entry.equals(SADNESS)) {
+
                 auxEmotionAverage *= -1;
             }
             if (Math.abs(auxEmotionAverage) > Math.abs(emotionFeedback)) {
                 emotionFeedback = auxEmotionAverage;
             }
         }
-
         return emotionFeedback;
     }
 

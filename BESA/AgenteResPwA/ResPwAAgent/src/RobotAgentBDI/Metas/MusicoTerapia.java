@@ -76,9 +76,10 @@ public class MusicoTerapia extends GoalBDI{
         if(!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()) {
             if(blvs.getbEstadoEmocionalPwA().getEmocionPredominante()<0 && blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
                 return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.MUSICOTERAPIA)*0.6);
+
             }
         }
-        return 1;
+        return 0;
     }
 
     @Override
@@ -100,6 +101,7 @@ public class MusicoTerapia extends GoalBDI{
             }
         }
         return valor;
+
     }
 
     @Override

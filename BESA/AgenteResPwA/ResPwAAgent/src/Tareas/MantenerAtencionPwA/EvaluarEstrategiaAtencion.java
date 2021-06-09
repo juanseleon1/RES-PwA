@@ -9,6 +9,7 @@ import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ResPwAStrategy;
 import rational.mapping.Believes;
 import Utils.ResPwaUtils;
+
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.ServiceDataRequest;
@@ -43,6 +44,7 @@ public class EvaluarEstrategiaAtencion extends Task{
         AtencionStrategy cs = new AtencionStrategy();
         blvs.getbEstadoActividad().setEstrategia(cs);
         cs.execStrategy(blvs);
+
     }
 
     @Override
@@ -57,6 +59,11 @@ public class EvaluarEstrategiaAtencion extends Task{
         System.out.println("--- Cancel Task Seleccionar Estrategia Atencion ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
+
+        if(blvs.getbEstadoInteraccion().isEstaHablando()) {
+            ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.STOPALL, null);
+            ResPwaUtils.requestService(srb,blvs);
+        }
     }
 
     @Override

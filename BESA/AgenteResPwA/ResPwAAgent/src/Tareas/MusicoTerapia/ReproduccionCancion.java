@@ -72,6 +72,7 @@ public class ReproduccionCancion extends Task {
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(TabletServiceRequestType.SHOWVIDEO, infoServicio);
             ResPwaUtils.requestService(srb, blvs);
             envioVideo = true;
+
         }
 
     }

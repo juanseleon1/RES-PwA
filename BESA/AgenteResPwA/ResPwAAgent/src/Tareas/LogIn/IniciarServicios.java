@@ -40,7 +40,7 @@ public class IniciarServicios extends Task {
         infoServicio.put("SAY", "Iniciando servicios");
         srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
         ResPwaUtils.requestService(srb, blvs);
-        
+
         infoServicio = new HashMap<>();
         infoServicio.put("ACTIVATE", true);
         srb = ServiceRequestBuilder.buildRequest(AutonomyServiceRequestType.ACTIVATE, infoServicio);
@@ -137,8 +137,6 @@ public class IniciarServicios extends Task {
         ResPwaUtils.requestService(srb,blvs);
 
         ResPwaUtils.activateTopic(PepperTopicsNames.SALUDARTOPIC, parameters);
-        
-        
 
         blvs.getbEstadoInteraccion().setConfirmarActServicios(true);
 

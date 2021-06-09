@@ -20,7 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author maria.f.garces.cala
+=======
+ * @author juans
+>>>>>>> master
  */
 @Entity
 @Table(name = "PREFERENCIAXBAILE")
@@ -68,6 +72,7 @@ public class Preferenciaxbaile implements Serializable {
     }
 
     public void setGusto(double gusto) {
+
         this.gusto = gusto;
     }
 

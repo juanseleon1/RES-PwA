@@ -22,7 +22,11 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
+<<<<<<< HEAD
  * @author maria.f.garces.cala
+=======
+ * @author juans
+>>>>>>> master
  */
 public class PreferenciaxcancionJpaController implements Serializable {
 
@@ -41,6 +45,7 @@ public class PreferenciaxcancionJpaController implements Serializable {
         }
         preferenciaxcancion.getPreferenciaxcancionPK().setCancionNombre(preferenciaxcancion.getCancion().getNombre());
         preferenciaxcancion.getPreferenciaxcancionPK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxcancion.getPerfilPreferencia().getPerfilpwaCedula());
+
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -80,6 +85,7 @@ public class PreferenciaxcancionJpaController implements Serializable {
     public void edit(Preferenciaxcancion preferenciaxcancion) throws NonexistentEntityException, Exception {
         preferenciaxcancion.getPreferenciaxcancionPK().setCancionNombre(preferenciaxcancion.getCancion().getNombre());
         preferenciaxcancion.getPreferenciaxcancionPK().setPerfilPreferenciaPerfilpwaCedula(preferenciaxcancion.getPerfilPreferencia().getPerfilpwaCedula());
+
         EntityManager em = null;
         try {
             em = getEntityManager();

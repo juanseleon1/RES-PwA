@@ -21,7 +21,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author maria.f.garces.cala
+=======
+ * @author juans
+>>>>>>> master
  */
 @Entity
 @Table(name = "PREFERENCIAXCANCION")
@@ -61,6 +65,7 @@ public class Preferenciaxcancion implements Serializable {
         this.preferenciaxcancionPK = preferenciaxcancionPK;
         this.gusto = gusto;
         this.reminiscencia = reminiscencia;
+
     }
 
     public Preferenciaxcancion(String perfilPreferenciaPerfilpwaCedula, String cancionNombre) {

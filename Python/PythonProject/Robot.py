@@ -76,6 +76,7 @@ class Robot:
         # print "GUI LISTA"
         self.topicContentMap = {"basicoTopic": topic_content_1,
                                 "alegreTopic": topico_alegre,
+<<<<<<< HEAD
                                 "sadTopic": topico_triste,
                                 "iraTopic": topico_ira,
                                 "ayudaTopic": topico_ayuda,
@@ -91,9 +92,25 @@ class Robot:
             "VHAPPY": "animations/Stand/Emotions/Positive/Happy_1",
             "SILBAR": "animations/Stand/Waiting/CallSomeone_1"
         }
+=======
+                                 "sadTopic":topico_triste,
+                                 "iraTopic":topico_ira,
+                                 "ayudaTopic":topico_ayuda,
+                                 "normalTopic":topico_normal,
+                                 "retroTopic":topico_retro,
+                                 "saludarTopic":topico_saludable,
+                                 "soundTopic": topico_sonido
+                                }
+>>>>>>> master
         self.alDialogProxy = session.service("ALDialog")
         print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
+<<<<<<< HEAD
+=======
+
+       # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
+        self.alDialogProxy.setLanguage("Spanish")
+>>>>>>> master
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
@@ -242,9 +259,14 @@ class Robot:
         try:
             # uncomment the following line and modify the IP if you use this script outside Choregraphe.
             # motion = ALProxy("ALMotion", IP, 9559)
+<<<<<<< HEAD
             self.alMotion.angleInterpolation(animation_names, animation_keys,
                                              self.change_speed(self.emotionStateRobot.getFactorVelocity(),
                                                                animation_times), True)
+=======
+            #print "TIMES  -> ", animation_times
+            self.alMotion.angleInterpolation(animation_names, animation_keys, self.change_speed(self.emotionStateRobot.getFactorVelocity() ,animation_times), True)
+>>>>>>> master
         except BaseException, err:
             print err
 
@@ -447,7 +469,11 @@ class Robot:
             try:
                 self.init_timers()
                 self.sensorsModule = PepperModuleV2.pepperModuleV2(self.session)
+<<<<<<< HEAD
                 # self.app.run()
+=======
+                #self.app.run()
+>>>>>>> master
             except Exception, e:
                 print "Main Error"
                 print e
@@ -707,13 +733,21 @@ class Robot:
             self.alDialogProxy.activateTopic(topicName)
 
     def desactivate_conversational_topic(self, topic_name):
+<<<<<<< HEAD
         # print self.alDialogProxy.getActivatedTopics()
+=======
+        print self.alDialogProxy.getActivatedTopics()
+>>>>>>> master
         if topic_name in self.alDialogProxy.getActivatedTopics():
             for topic in self.alDialogProxy.getActivatedTopics():
                 if topic == topic_name:
                     # print "ENTRA"
                     self.alDialogProxy.deactivateTopic(topic)
+<<<<<<< HEAD
                     # print "SALE"
+=======
+                    print "SALE"
+>>>>>>> master
                     break
         elif topic_name == "allTopics":
             self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())

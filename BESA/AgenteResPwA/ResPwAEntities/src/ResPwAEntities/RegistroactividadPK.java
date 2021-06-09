@@ -40,13 +40,14 @@ public class RegistroactividadPK implements Serializable {
 
     public RegistroactividadPK(Date fecha, String perfilpwaCedula, String tipo, BigDecimal actividadpwaId) {
         this.fecha = fecha;
+        this.tipo = tipo;
+    }
+    public RegistroactividadPK(Date fecha, String tipo) {
+
+        this.fecha = fecha;
         this.perfilpwaCedula = perfilpwaCedula;
         this.tipo = tipo;
         this.actividadpwaId = actividadpwaId;
-    }
-    public RegistroactividadPK(Date fecha, String tipo) {
-        this.fecha = fecha;
-        this.tipo = tipo;
     }
 
     public Date getFecha() {

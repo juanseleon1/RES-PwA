@@ -49,6 +49,7 @@ public class Cuenteria extends GoalBDI {
         taskList.add(rCuento);
         rolePlan.addTask(retro, taskList);
 
+
         RationalRole cuenteriaRole = new RationalRole(descrip, rolePlan);
         Cuenteria b = new Cuenteria(InitRESPwA.getPlanID(), cuenteriaRole, descrip, GoalBDITypes.OPORTUNITY);
         return b;
@@ -68,15 +69,11 @@ public class Cuenteria extends GoalBDI {
     public double detectGoal(Believes believes) throws KernellAgentEventExceptionBESA {
         System.out.println("Meta Cuenteria detectGoal");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
-//        System.out.println("Logged: " + blvs.getbEstadoInteraccion().isLogged());
-//        System.out.println("Atencion: " + blvs.getbEstadoEmocionalPwA().getAtencion());
-//        System.out.println("Relajacion: " + blvs.getbEstadoEmocionalPwA().getRelajacion());
-//        System.out.println("susp: " + blvs.getbEstadoInteraccion().isSistemaSuspendido());
-
 
         if (!blvs.getbEstadoInteraccion().isSistemaSuspendido() && blvs.getbEstadoInteraccion().isLogged()&& blvs.getbPerfilPwA().getPerfil().getPerfilMedico().getFast() <= 5) {
             if (blvs.getbEstadoEmocionalPwA().getAtencion() < 0.4 && blvs.getbEstadoEmocionalPwA().getRelajacion() < 0.6) {
                 return 0.4 + (blvs.getbEstadoActividad().getGustoActividad(ResPwAActivity.CUENTERIA)*0.6);
+
             }
         }
         return 1;
@@ -102,6 +99,7 @@ public class Cuenteria extends GoalBDI {
         }       
 
         return valor+1;
+
     }
 
     @Override
@@ -115,6 +113,7 @@ public class Cuenteria extends GoalBDI {
         //System.out.println("Meta Cuenteria evaluateViability");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if ((System.currentTimeMillis() - blvs.getbEstadoActividad().calcTiempoActividad()) >= 300 && (blvs.getbEstadoEmocionalPwA().getAtencion()>0.5 || blvs.getbEstadoEmocionalPwA().getRelajacion()> 0.7)) {
+
             return true;
         }
         return false;

@@ -52,6 +52,7 @@ public class Interacciones extends Task{
         {
             infoServicio.put("EMOTION", "VHAPPY");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.PLAYANIMATION, infoServicio);
+
             ResPwaUtils.requestService(srb,blvs);
         }
         
@@ -59,6 +60,7 @@ public class Interacciones extends Task{
         {
             infoServicio.put("EMOTION", "VSAD");
             ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(ActivityServiceRequestType.PLAYANIMATION, infoServicio);
+
             ResPwaUtils.requestService(srb,blvs);
         }
         

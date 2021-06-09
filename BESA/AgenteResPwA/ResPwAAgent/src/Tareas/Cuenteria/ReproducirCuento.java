@@ -105,6 +105,7 @@ public class ReproducirCuento extends Task {
     public void interruptTask(Believes believes) {
         System.out.println("--- Interrupt Task Buscar Animaciones ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
+
     }
 
     @Override
@@ -115,7 +116,6 @@ public class ReproducirCuento extends Task {
 
     @Override
     public boolean checkFinish(Believes believes) {
-        System.out.println("--- Check Finish ---");
 
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         System.out.println("TOTAL FRASES" + blvs.getbEstadoActividad().getCuentoActual().getCuento().getFrasesList().size());

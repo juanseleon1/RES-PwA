@@ -32,7 +32,6 @@ public class PeticionAyuda extends Task{
     public void executeTask(Believes parameters) {
         System.out.println("--- Execute Task Peticion Ayuda ---");
         tiempo = System.currentTimeMillis();
-        
         ResPwaUtils.activateTopic(PepperTopicsNames.AYUDATOPIC, parameters);
         infoServicio.put("SAY", "¿En que te puedo ayudar?");
         ServiceDataRequest srb = ServiceRequestBuilder.buildRequest(VoiceServiceRequestType.SAY, infoServicio);
@@ -53,7 +52,6 @@ public class PeticionAyuda extends Task{
 
     @Override
     public boolean checkFinish(Believes believes) {
-                
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         if(blvs.getbEstadoInteraccion().getRespuestasPorContexto() > 1) {
             ResPwaUtils.deactivateTopic(PepperTopicsNames.AYUDATOPIC, believes);

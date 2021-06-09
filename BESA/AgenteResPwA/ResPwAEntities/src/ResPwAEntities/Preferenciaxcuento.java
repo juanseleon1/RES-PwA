@@ -19,7 +19,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author maria.f.garces.cala
+=======
+ * @author juans
+>>>>>>> master
  */
 @Entity
 @Table(name = "PREFERENCIAXCUENTO")

@@ -22,7 +22,11 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
+<<<<<<< HEAD
  * @author maria.f.garces.cala
+=======
+ * @author juans
+>>>>>>> master
  */
 public class PreferenciaxbaileJpaController implements Serializable {
 

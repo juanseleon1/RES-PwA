@@ -38,8 +38,8 @@ public class EvaluarEstrategiaAnimar extends Task{
         System.out.println("--- Execute Task Seleccionar Estrategia Animar PwA ---");
 
         AnimarStrategy as = new AnimarStrategy();
-
         as.execStrategy(parameters);
+
     }
 
     @Override
@@ -47,6 +47,7 @@ public class EvaluarEstrategiaAnimar extends Task{
         System.out.println("--- Interrupt Task Seleccionar Estrategia Animar PwA ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoActividad().setEstrategia(null);
+
     }
 
     @Override

@@ -26,6 +26,7 @@ public class PreguntarSentimientos extends Task {
     private HashMap<String, Object> infoServicio = new HashMap<>();
     private long start;
 
+
     public PreguntarSentimientos() {
 //        System.out.println("--- Task Preguntar Sentimientos Iniciada ---");
     }
@@ -50,6 +51,7 @@ public class PreguntarSentimientos extends Task {
         ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
         ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
+
     }
 
     @Override
@@ -59,6 +61,7 @@ public class PreguntarSentimientos extends Task {
         ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
         ResPwaUtils.deactivateTopic(PepperTopicsNames.IRATOPIC, believes);
         ResPwaUtils.deactivateTopic(PepperTopicsNames.SADTOPIC, believes);
+
     }
 
     @Override
@@ -71,6 +74,7 @@ public class PreguntarSentimientos extends Task {
             ResPwaUtils.deactivateTopic(PepperTopicsNames.ALEGRETOPIC, believes);
             blvs.getbEstadoInteraccion().setRecibirRespuestaPwA(false);
             blvs.getbEstadoInteraccion().setRespuestasPorContexto(0);
+
             return true;
         }
         return false;

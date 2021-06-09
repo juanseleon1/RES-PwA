@@ -30,7 +30,7 @@ public class SeleccionarCuento extends Task {
     private HashMap<String, Object> infoServicio = new HashMap<>();
 
     public SeleccionarCuento() {
-//        System.out.println("--- Task Recomendar Cuento Iniciada ---");
+  System.out.println("--- Task Recomendar Cuento Iniciada ---");
     }
 
     @Override
@@ -64,6 +64,7 @@ public class SeleccionarCuento extends Task {
         System.out.println("--- Interrupt Task Recomendar Cuento ---");
         RobotAgentBelieves blvs = (RobotAgentBelieves) believes;
         blvs.getbEstadoRobot().setStoryMode(false);
+
     }
 
     @Override
