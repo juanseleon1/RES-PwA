@@ -5,9 +5,9 @@ import qi
 import Utils
 import sys
 import argparse
-from Message import messageManager
-from Robot import Robot
-from Utils import activities_running, send, callbacks_running
+from Utils.Message import messageManager
+from ServiceDispatcher.Robot import Robot
+from Utils.Utils import activities_running, send, callbacks_running
 
 
 # ------------------------------------- -------------Functions-----------------------------------------------------------------------

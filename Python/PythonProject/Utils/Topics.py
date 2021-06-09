@@ -124,11 +124,8 @@ topico_retroCancion = "/data/home/nao/topics/retroCancionTopic.top"
 topico_retroCuento = "/data/home/nao/topics/retroCuentoTopic.top"
 topico_saludable = "/data/home/nao/topics/saludaTopic.top"
 topico_sonido = "/data/home/nao/topics/soundTopic.top"
-<<<<<<< HEAD
 topico_blank = "/data/home/nao/topics/blankaTopic.top"
 
-=======
->>>>>>> master
 #topicorron = "/data/home/nao/topics/superTopico.top"
 
 #topic_list = [topic_content_1, topico_alegre, topico_triste, topico_ira, topico_normal, conversacion_musica]

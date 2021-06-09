@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
-from Utils import activities_running, send
+from Utils.Utils import activities_running, send
 import re
 
 
