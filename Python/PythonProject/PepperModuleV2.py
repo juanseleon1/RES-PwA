@@ -181,14 +181,7 @@ class pepperModuleV2(object):
         print "DeactivateTopic", json_params
         send(-1, "int", json_params, False)
 
-<<<<<<< HEAD
-=======
-    def activateTopic(self, value):
-        json_params = {}
-        json_params["ActivateTopic"] = True
-        send(-1, "rob", json_params)
-    # def
->>>>>>> master
+
 
     # Raised when an animated speech is done.
     def endOfAnimatedSpeech(self, value):
@@ -468,11 +461,8 @@ class pepperModuleV2(object):
     def distanceOfTrackedHuman(self, value):
         json_params = {}
         # The value is the distance in meters to the tracked human. -1.0 if no one is tracked.
-<<<<<<< HEAD
-        if (value != -1):
-=======
         if (value is not -1):
->>>>>>> master
+
             json_params["distanceOfTrackedHuman"] = value
             send(-1, "int", json_params)
 
@@ -523,11 +513,8 @@ class pepperModuleV2(object):
         json_params["personWaving"] = True
         send(-1, "int", json_params, False)
 
-<<<<<<< HEAD
     def sendValue(self, resultValue, sirve=True):
-=======
-    def sendValue(self, resultValue):
->>>>>>> master
+
         print "enviar", resultValue
         if sirve:
             if "ayuda" in resultValue:
@@ -537,11 +524,7 @@ class pepperModuleV2(object):
         else:
             json_params = {"retroValue": resultValue}
         print "DialogInput", json_params
-<<<<<<< HEAD
         send(-1, "int", json_params, False)
-=======
-        send(-1, "int", json_params)
->>>>>>> master
 
     def preferenceInput(self, completeSentence):
         resultValue = ""
@@ -564,19 +547,12 @@ class pepperModuleV2(object):
 
     def retroalimentacionFilter(self, value):
 
-<<<<<<< HEAD
         if value == 'uno' or value == 'dos' or value == 'tres' or value == 'cuatro' or  value == 'cinco':
             self.retroalimentacionCompleta += " " + value
 
         # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
         if (len(self.retroalimentacionCompleta.split()) == 3):
-=======
-        if value == 'Bien' or value == 'Regular' or value == 'Mal':
-            self.retroalimentacionCompleta += " " + value
 
-        # EL 8 VARIA SEGuN LA CANTIDAD DE PREGUNTAS DE RETROALIMENTACION
-        if (len(self.retroalimentacionCompleta.split()) == 8):
->>>>>>> master
             return (True, self.retroalimentacionCompleta)
         else:
             return (False, "")
