@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.RobotStateServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

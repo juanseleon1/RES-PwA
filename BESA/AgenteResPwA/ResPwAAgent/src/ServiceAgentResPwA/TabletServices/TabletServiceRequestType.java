@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.TabletServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

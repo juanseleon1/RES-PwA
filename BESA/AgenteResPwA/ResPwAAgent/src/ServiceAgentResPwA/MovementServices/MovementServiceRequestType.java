@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.MovementServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

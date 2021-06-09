@@ -5,12 +5,12 @@
  */
 package PepperPackage.EmotionalModel;
 
-import EmotionalAnalyzerAgent.EmotionPwA;
-import EmotionalAnalyzerAgent.EmotionalAnalyzerStrategy;
-import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalEventType;
-import EmotionalAnalyzerAgent.EmotionalSubjectType;
-import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
+import EmotionalAnalyzerAgent.Agent.EmotionalAnalyzerStrategy;
+import EmotionalAnalyzerAgent.Guards.EmotionalData;
+import EmotionalAnalyzerAgent.Utils.EmotionalEventType;
+import EmotionalAnalyzerAgent.Utils.EmotionalSubjectType;
+import RobotAgentBDI.Believes.ModeloEmocional.EmotionalEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.HumanServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

@@ -5,15 +5,14 @@
  */
 package Tareas.ExpresarEstadoEmocionalRobot;
 
-import EmotionalAnalyzerAgent.EmotionPwA;
-import EmotionalAnalyzerAgent.EmotionalAnalyzerState;
-import EmotionalAnalyzerAgent.EmotionalState;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
+import EmotionalAnalyzerAgent.Agent.EmotionalAnalyzerState;
 import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;

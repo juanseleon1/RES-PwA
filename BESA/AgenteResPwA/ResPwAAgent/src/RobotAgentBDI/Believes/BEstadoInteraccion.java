@@ -5,7 +5,7 @@
  */
 package RobotAgentBDI.Believes;
 
-import SensorHandlerAgent.SensorData;
+import SensorHandlerAgent.Guards.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import java.util.HashMap;

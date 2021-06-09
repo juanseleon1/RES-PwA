@@ -13,7 +13,7 @@ import Init.InitRESPwA;
 import ResPwAEntities.Actividadpwa;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAActivity;
+import RobotAgentBDI.Utils.ResPwAActivity;
 import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
 import Tareas.MusicoTerapia.ReproduccionCancion;
 import Tareas.MusicoTerapia.SeleccionarCancion;

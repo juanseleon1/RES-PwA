@@ -5,13 +5,13 @@
  */
 package Tareas.AnimarElogiarPwA;
 
-import EmotionalAnalyzerAgent.EmotionPwA;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.Arrays;
 import java.util.HashMap;

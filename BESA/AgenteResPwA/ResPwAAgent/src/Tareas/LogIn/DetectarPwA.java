@@ -11,7 +11,7 @@ import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 import rational.mapping.Task;

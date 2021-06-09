@@ -10,7 +10,7 @@ import Utils.ResPwaUtils;
 import rational.mapping.Believes;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;

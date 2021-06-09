@@ -11,7 +11,7 @@ import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;

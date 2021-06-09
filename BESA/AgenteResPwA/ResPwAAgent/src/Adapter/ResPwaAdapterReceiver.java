@@ -10,8 +10,8 @@ import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.System.AdmBESA;
 import BESA.Kernel.System.Directory.AgHandlerBESA;
 import Init.InitRESPwA;
-import SensorHandlerAgent.GetInfoGuard;
-import SensorHandlerAgent.SensorData;
+import SensorHandlerAgent.Guards.GetInfoGuard;
+import SensorHandlerAgent.Guards.SensorData;
 
 /**
  *

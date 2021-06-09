@@ -5,7 +5,7 @@
  */
 package PepperPackage.EmotionalModel;
 
-import EmotionalAnalyzerAgent.EmotionPwA;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
 import java.time.LocalTime;
 
 /**

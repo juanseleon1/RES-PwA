@@ -10,7 +10,7 @@ import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.RobotStateServices.RobotStateService;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import java.util.HashMap;
 import rational.mapping.Believes;
 import rational.mapping.Task;

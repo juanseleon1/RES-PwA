@@ -11,10 +11,10 @@ import ServiceAgentResPwA.EnergyServices.EnergyServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
-import ServiceAgentResPwA.RobotSPAgent;
+import ServiceAgentResPwA.Agent.ServiceAgentRESPwA;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import java.util.HashMap;
 
@@ -29,31 +29,31 @@ public class ServiceRequestBuilder {
         String serv=null;
         if( e instanceof ActivityServiceRequestType)
         {
-            serv=RobotSPAgent.servActividades;
+            serv=ServiceAgentRESPwA.servActividades;
         }else if( e instanceof AutonomyServiceRequestType)
         {
-            serv=RobotSPAgent.servAutonomia;
+            serv=ServiceAgentRESPwA.servAutonomia;
         }else if( e instanceof EnergyServiceRequestType)
         {
-            serv=RobotSPAgent.servEnergia;
+            serv=ServiceAgentRESPwA.servEnergia;
         }else if( e instanceof HumanServiceRequestType)
         {
-            serv=RobotSPAgent.servHumanos;
+            serv=ServiceAgentRESPwA.servHumanos;
         }else if( e instanceof LocationServiceRequestType)
         {
-            serv=RobotSPAgent.servLocation;
+            serv=ServiceAgentRESPwA.servLocation;
         }else if( e instanceof MovementServiceRequestType)
         {
-            serv=RobotSPAgent.servMovimiento;
+            serv=ServiceAgentRESPwA.servMovimiento;
         }else if( e instanceof RobotStateServiceRequestType)
         {
-            serv=RobotSPAgent.servEstadoRobot;
+            serv=ServiceAgentRESPwA.servEstadoRobot;
         }else if( e instanceof TabletServiceRequestType)
         {
-            serv=RobotSPAgent.servTablet;
+            serv=ServiceAgentRESPwA.servTablet;
         }else            
         {
-            serv=RobotSPAgent.servVoz;
+            serv=ServiceAgentRESPwA.servVoz;
         } 
         ServiceDataRequest sdr = new ServiceDataRequest(serv, e.getServiceType(), params);
 //        System.out.println("SDR Builded "+serv+"  "+e.getServiceType());

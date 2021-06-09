@@ -10,7 +10,7 @@ import EmotionalAnalyzerAgent.EmotionalObjectType;
 import EmotionalAnalyzerAgent.EmotionalSubjectType;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Frases;
-import RobotAgentBDI.Believes.EstadoEmocional.EmotionalEvent;
+import RobotAgentBDI.Believes.ModeloEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import rational.mapping.Believes;
 import Utils.ResPwaUtils;

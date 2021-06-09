@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.ActivityServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

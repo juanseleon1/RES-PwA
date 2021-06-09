@@ -8,7 +8,7 @@ package Tareas.AsegurarConexionInternet;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.LocationServices.LocationServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;

@@ -13,7 +13,7 @@ import BESA.Kernel.System.SystemExceptionBESA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;

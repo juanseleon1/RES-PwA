@@ -6,11 +6,11 @@
 package Tareas.MantenerAtencionPwA;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.Utils.ResPwAStrategy;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import Tareas.AnimarElogiarPwA.OpcionesAnimar;
 import java.util.HashMap;

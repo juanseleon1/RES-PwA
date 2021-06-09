@@ -9,7 +9,7 @@ import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.BDI.AgentStructuralModel.GoalBDITypes;
 import BESA.BDI.AgentStructuralModel.StateBDI;
 import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
-import EmotionalAnalyzerAgent.EmotionPwA;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
 import Init.InitRESPwA;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Tareas.ConversarEmpaticamente.PreguntarSentimientos;

@@ -5,12 +5,12 @@
  */
 package RobotAgentBDI.Believes;
 
-import EmotionalAnalyzerAgent.EmotionPwA;
-import static EmotionalAnalyzerAgent.EmotionPwA.ANGER;
-import static EmotionalAnalyzerAgent.EmotionPwA.SADNESS;
-import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.Utils.EmotionPwA;
+import static EmotionalAnalyzerAgent.Utils.EmotionPwA.ANGER;
+import static EmotionalAnalyzerAgent.Utils.EmotionPwA.SADNESS;
+import EmotionalAnalyzerAgent.Guards.EmotionalData;
 import PepperPackage.EmotionalModel.Emotion;
-import SensorHandlerAgent.SensorData;
+import SensorHandlerAgent.Guards.SensorData;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;

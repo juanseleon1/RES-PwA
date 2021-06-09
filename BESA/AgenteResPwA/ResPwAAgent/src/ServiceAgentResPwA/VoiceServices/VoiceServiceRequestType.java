@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.VoiceServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

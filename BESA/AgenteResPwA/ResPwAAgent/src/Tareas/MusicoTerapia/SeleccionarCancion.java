@@ -13,14 +13,14 @@ import ResPwAEntities.Preferenciaxcancion;
 import ResPwAEntities.Preferenciaxcuento;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAActivity;
+import RobotAgentBDI.Utils.ResPwAActivity;
 import rational.mapping.Believes;
 import Utils.ResPwaUtils;
 
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.HumanServices.HumanServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

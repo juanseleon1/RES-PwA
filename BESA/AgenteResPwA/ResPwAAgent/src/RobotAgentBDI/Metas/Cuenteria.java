@@ -12,7 +12,7 @@ import BESA.Kernel.Agent.Event.KernellAgentEventExceptionBESA;
 import Init.InitRESPwA;
 import ResPwAEntities.Actxpreferencia;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAActivity;
+import RobotAgentBDI.Utils.ResPwAActivity;
 import Tareas.Retroalimentacion.RecibirRetroalimentacionCuento;
 import Tareas.Cuenteria.SeleccionarCuento;
 import Tareas.Cuenteria.ReproducirCuento;

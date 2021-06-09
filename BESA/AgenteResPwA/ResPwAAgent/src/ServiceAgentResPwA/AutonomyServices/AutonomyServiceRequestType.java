@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.AutonomyServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

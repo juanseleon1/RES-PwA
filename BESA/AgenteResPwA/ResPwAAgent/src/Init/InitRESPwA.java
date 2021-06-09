@@ -4,8 +4,8 @@ import BDInterface.RESPwABDInterface;
 import BESA.BDI.AgentStructuralModel.GoalBDI;
 import BESA.ExceptionBESA;
 import BESA.Kernel.System.AdmBESA;
-import EmotionalAnalyzerAgent.EmotionalAnalyzerAgent;
-import PepperPackage.PepperAdapter;
+import EmotionalAnalyzerAgent.Agent.EmotionalAnalyzerAgent;
+import PepperPackage.Utils.PepperAdapter;
 import PepperPackage.EmotionalModel.PepperEAStrategy;
 import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import ResPwAEntities.Accion;
@@ -18,17 +18,17 @@ import RobotAgentBDI.Metas.Cuenteria;
 import RobotAgentBDI.Metas.LogIn;
 import RobotAgentBDI.Metas.MantenerAtencionPwA;
 import RobotAgentBDI.Metas.MusicoTerapia;
-import RobotAgentBDI.RobotAgentBDI;
+import RobotAgentBDI.Agent.RobotAgentBDI;
 import RobotAgentBDI.Metas.ReportarEmergencia;
 import RobotAgentBDI.Metas.PedirAyuda;
 import RobotAgentBDI.Metas.RecargarBateria;
 import RobotAgentBDI.Metas.TestPlan;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import SensorHandlerAgent.SensorHandlerAgent;
+import SensorHandlerAgent.Agent.SensorHandlerAgent;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
 import ServiceAgentResPwA.MovementServices.MovementServiceRequestType;
-import ServiceAgentResPwA.RobotSPAgent;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Agent.ServiceAgentRESPwA;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import Tareas.Test.TestTask;
@@ -70,7 +70,7 @@ public class InitRESPwA {
             EmotionalAnalyzerAgent EAA = new EmotionalAnalyzerAgent(aliasEAAgent, new PepperEAStrategy());
             SensorHandlerAgent SHA = new SensorHandlerAgent(aliasSHAAgent);
             PepperAdapter p = new PepperAdapter();
-            RobotSPAgent SPA = RobotSPAgent.buildRobotSPAgent(aliasSPAgent, p);
+            ServiceAgentRESPwA SPA = ServiceAgentRESPwA.buildRobotSPAgent(aliasSPAgent, p);
             startAllAgents(RABDI, EAA, SHA, SPA);
             startConfig(p);
 //            HashMap<String, Object> hm1 = new HashMap<>();
@@ -158,7 +158,7 @@ public class InitRESPwA {
         return RAGoals;
     }
 
-    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, RobotSPAgent SPA) throws ExceptionBESA {
+    private static void startAllAgents(RobotAgentBDI RABDI, EmotionalAnalyzerAgent EAA, SensorHandlerAgent SHA, ServiceAgentRESPwA SPA) throws ExceptionBESA {
         RABDI.start();
         SPA.start();
         EAA.start();

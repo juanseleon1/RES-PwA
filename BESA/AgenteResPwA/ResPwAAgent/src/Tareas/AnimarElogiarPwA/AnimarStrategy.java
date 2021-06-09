@@ -6,10 +6,10 @@
 package Tareas.AnimarElogiarPwA;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import RobotAgentBDI.ResPwAStrategy;
+import RobotAgentBDI.Utils.ResPwAStrategy;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.util.HashMap;
 import rational.mapping.Believes;

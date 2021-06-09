@@ -12,7 +12,7 @@ import ResPwAEntities.Preferenciaxcuento;
 import RobotAgentBDI.Believes.RobotAgentBelieves;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

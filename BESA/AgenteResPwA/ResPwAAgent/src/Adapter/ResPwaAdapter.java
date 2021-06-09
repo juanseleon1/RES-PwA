@@ -7,14 +7,14 @@ package Adapter;
 
 import BESA.Adapter.AdapterBESA;
 import BESA.Kernel.Social.ServiceProvider.agent.SPServiceDataRequest;
-import ServiceAgentResPwA.RobotSPAgent;
+import ServiceAgentResPwA.Agent.ServiceAgentRESPwA;
 
 /**
  *
  * @author juans
  */
 public abstract class ResPwaAdapter extends AdapterBESA{
-    protected RobotSPAgent rpa;
+    protected ServiceAgentRESPwA rpa;
     protected final int robotPort=7896;
     protected final String IP= "127.0.0.1"; 
     protected ResPwaAdapterReceiver receiver;
@@ -25,11 +25,11 @@ public abstract class ResPwaAdapter extends AdapterBESA{
         super(null,null);
     }
     
-    public RobotSPAgent getRpa() {
+    public ServiceAgentRESPwA getRpa() {
         return rpa;
     }
 
-    public void setRpa(RobotSPAgent rpa) {
+    public void setRpa(ServiceAgentRESPwA rpa) {
         this.rpa = rpa;
     }
     public synchronized static int sendNewSendable(){

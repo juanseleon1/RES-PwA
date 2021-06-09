@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.LocationServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *

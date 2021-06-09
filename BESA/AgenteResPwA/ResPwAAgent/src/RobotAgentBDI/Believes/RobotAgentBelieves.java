@@ -6,7 +6,7 @@
 package RobotAgentBDI.Believes;
 
 import BDInterface.RESPwABDInterface;
-import EmotionalAnalyzerAgent.EmotionalData;
+import EmotionalAnalyzerAgent.Guards.EmotionalData;
 import ResPwAEntities.Antecedente;
 import ResPwAEntities.Cancion;
 import ResPwAEntities.Cuento;
@@ -16,8 +16,8 @@ import ResPwAEntities.Preferenciaxcancion;
 import ResPwAEntities.Preferenciaxcuento;
 import Utils.Imagen;
 import Retroalimentacion.Modelo.ModeloRetroalimentacion;
-import RobotAgentBDI.ResPwAActivity;
-import SensorHandlerAgent.SensorData;
+import RobotAgentBDI.Utils.ResPwAActivity;
+import SensorHandlerAgent.Guards.SensorData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

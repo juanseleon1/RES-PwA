@@ -5,7 +5,7 @@
  */
 package ServiceAgentResPwA.EnergyServices;
 
-import ServiceAgentResPwA.ServiceRequestType;
+import ServiceAgentResPwA.Guard.ServiceRequestType;
 
 /**
  *
