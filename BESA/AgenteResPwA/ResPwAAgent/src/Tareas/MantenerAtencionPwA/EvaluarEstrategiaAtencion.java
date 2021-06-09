@@ -42,9 +42,14 @@ public class EvaluarEstrategiaAtencion extends Task{
         
         OpcionesAtencion estrategia = blvs.getbPerfilPwA().getAtencionStrategy();
         AtencionStrategy cs = new AtencionStrategy();
+<<<<<<< HEAD
         blvs.getbEstadoActividad().setEstrategia(cs);
         cs.execStrategy(blvs);
 
+=======
+        
+        cs.execStrategy();
+>>>>>>> e21bc670f62226fafb14bd480109fc3b33b7d27d
     }
 
     @Override
