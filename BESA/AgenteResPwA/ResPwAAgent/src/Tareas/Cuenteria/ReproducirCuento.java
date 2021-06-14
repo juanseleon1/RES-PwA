@@ -5,9 +5,7 @@
  */
 package Tareas.Cuenteria;
 
-import EmotionalAnalyzerAgent.EmotionalEventType;
-import EmotionalAnalyzerAgent.EmotionalObjectType;
-import EmotionalAnalyzerAgent.EmotionalSubjectType;
+import EmotionalAnalyzerAgent.Utils.*;
 import ResPwAEntities.Cuento;
 import ResPwAEntities.Frases;
 import RobotAgentBDI.Believes.ModeloEmocional.EmotionalEvent;
@@ -16,7 +14,7 @@ import rational.mapping.Believes;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
 import ServiceAgentResPwA.ActivityServices.ActivityServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.TabletServices.TabletServiceRequestType;
 import ServiceAgentResPwA.VoiceServices.PepperTopicsNames;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;

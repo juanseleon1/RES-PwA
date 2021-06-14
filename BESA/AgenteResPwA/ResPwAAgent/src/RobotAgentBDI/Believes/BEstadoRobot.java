@@ -5,19 +5,19 @@
  */
 package RobotAgentBDI.Believes;
 
-import EmotionalAnalyzerAgent.EmotionalData;
-import EmotionalAnalyzerAgent.EmotionalEventType;
+import EmotionalAnalyzerAgent.Guards.EmotionalData;
+import EmotionalAnalyzerAgent.Utils.EmotionalEventType;
 import PepperPackage.EmotionalModel.ResPwaEmotionalModel;
 import RobotAgentBDI.Believes.ModeloEmocional.EmotionAxis;
 import RobotAgentBDI.Believes.ModeloEmocional.EmotionalEvent;
 import RobotAgentBDI.Believes.ModeloEmocional.EmotionalModel;
-import SensorHandlerAgent.SensorData;
 import PepperPackage.EmotionalModel.PepperEmotionRanges;
 import PepperPackage.Utils.PepperConf;
 import Utils.ResPwaUtils;
 import RobotAgentBDI.ServiceRequestDataBuilder.ServiceRequestBuilder;
+import SensorHandlerAgent.Guards.SensorData;
+import ServiceAgentResPwA.Guard.ServiceDataRequest;
 import ServiceAgentResPwA.RobotStateServices.RobotStateServiceRequestType;
-import ServiceAgentResPwA.ServiceDataRequest;
 import ServiceAgentResPwA.VoiceServices.VoiceServiceRequestType;
 import java.awt.Color;
 import java.util.HashMap;
