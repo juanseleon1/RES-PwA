@@ -22,11 +22,13 @@ import rational.guards.ChangeRationalRoleGuard;
 import rational.mapping.Believes;
 
 /**
- * <p>Class that represents the second Thread BDI Guard</p>
- * @author  SIDRe - Pontificia Universidad Javeriana
- * @author  Takina  - Pontificia Universidad Javeriana
+ * <p>
+ * Class that represents the second Thread BDI Guard</p>
+ *
+ * @author SIDRe - Pontificia Universidad Javeriana
+ * @author Takina - Pontificia Universidad Javeriana
  * @version 2.0, 11/01/11
- * @since   JDK1.0
+ * @since JDK1.0
  */
 public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
@@ -43,9 +45,13 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
             if(paramsBDI.getIntention() !=null){
                 paramsBDI.getPyramidGoals().callGarbageCollector(believes, paramsBDI);
             }
-            */            
-            /** detect each potencial goal*/
-            /** duties*/
+             */
+            /**
+             * detect each potencial goal
+             */
+            /**
+             * duties
+             */
             for (GoalBDI dutyGoal : potencialGoalStructure.getDutyGoalsList()) {
                 dutyGoal.setDetectionValue(dutyGoal.detectGoal(believes));
                 if (dutyGoal.getDetectionValue() > paramsBDI.getDutyThreshold()) {
@@ -61,7 +67,9 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
             }
 
-            /** needs*/
+            /**
+             * needs
+             */
             for (GoalBDI needGoal : potencialGoalStructure.getNeedGoalsList()) {
                 needGoal.setDetectionValue(needGoal.detectGoal(believes));
                 if (needGoal.getDetectionValue() > paramsBDI.getNeedThreshold()) {
@@ -77,7 +85,9 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
             }
 
-            /** oportunities*/
+            /**
+             * oportunities
+             */
             for (GoalBDI oportunityGoal : potencialGoalStructure.getOportunityGoalsList()) {
                 oportunityGoal.setDetectionValue(oportunityGoal.detectGoal(believes));
                 if (oportunityGoal.getDetectionValue() > paramsBDI.getOportunityThreshold()) {
@@ -93,7 +103,9 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
             }
 
-            /** requiremets*/
+            /**
+             * requiremets
+             */
             for (GoalBDI requirementGoal : potencialGoalStructure.getRequirementGoalsList()) {
                 requirementGoal.setDetectionValue(requirementGoal.detectGoal(believes));
                 if (requirementGoal.getDetectionValue() > paramsBDI.getRequirementThreshold()) {
@@ -109,8 +121,9 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
 
             }
 
-
-            /** survival*/
+            /**
+             * survival
+             */
             for (GoalBDI survivalGoal : potencialGoalStructure.getSurvivalGoalsList()) {
                 survivalGoal.setDetectionValue(survivalGoal.detectGoal(believes));
                 if (survivalGoal.getDetectionValue() > paramsBDI.getSurvivalThreshold()) {
@@ -125,8 +138,10 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                 }
 
             }
-            
-            /** AttentionCycle*/
+
+            /**
+             * AttentionCycle
+             */
             for (GoalBDI attentionCycle : potencialGoalStructure.getAttentionCycleGoalsList()) {
                 attentionCycle.setDetectionValue(attentionCycle.detectGoal(believes));
                 if (attentionCycle.getDetectionValue() > paramsBDI.getAttentionCycleThreshold()) {
@@ -141,9 +156,9 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                 }
 
             }
-            
+
             paramsBDI.setIntention(paramsBDI.getPyramidGoals().getCurrentIntentionGoal());
-            if (paramsBDI.getIntention() != null) {               
+            if (paramsBDI.getIntention() != null) {
                 if (paramsBDI.getIntention().evaluateMappingViability(paramsBDI, believes)) {
                     if (paramsBDI.getIntention().predictResultUnlegality(stateBDI)) {
                         EventBESA eventBesa = new EventBESA(ChangeRationalRoleGuard.class.getName(), paramsBDI.getIntention().getRole());
@@ -152,7 +167,7 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
                     }
                 }
             }
-            
+
         } catch (ExceptionBESA e) {
             ReportBESA.error(e.getMessage());
         } catch (Exception ex) {
@@ -167,6 +182,6 @@ public class DesireToIntentionInstantiationGuard extends GuardBESA {
         } catch (ExceptionBESA e) {
             ReportBESA.error(e.getMessage());
         }
-            
+
     }
 }

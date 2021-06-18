@@ -17,6 +17,7 @@ import rational.mapping.Task;
  *
  * @author Andres
  */
+//Guarda para el manejo de la expropiacion
 public class ChangeRationalRoleGuard extends GuardBESA{
 
     @Override
@@ -33,6 +34,7 @@ public class ChangeRationalRoleGuard extends GuardBESA{
                     for (Task task : plan.getTasksInExecution()) {
                         if (task.isInExecution()) {
                             task.cancelTask(state.getBelieves());
+                            //CAMBIAR ESTADO A INTERRUMPIDO Cambiar estado a interrupted
                             plan.getTasksInExecution().remove(task);
                         }else if(task.isFinalized()){
                             plan.getTasksInExecution().remove(task);
