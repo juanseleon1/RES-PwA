@@ -16,12 +16,14 @@ public class Plan {
     HashMap<Task, List<Task>> dependencyGraph;
     List<Task> tasksInExecution;
     List<Task> tasksWaitingForExecution;
+    List<Task> tasksInInterruption;
     Task initial;
 
     public Plan() {
         graphPlan = new HashMap<>();
         tasksInExecution = new LinkedList<>();
         tasksWaitingForExecution = new LinkedList<>();
+        tasksInInterruption = new LinkedList<>();
         dependencyGraph = new HashMap<>();
         initial = new VoidTask();
         initial.setTaskFinalized();
@@ -49,25 +51,33 @@ public class Plan {
     public void setTasksWaitingForExecution(List<Task> tasksWaitingForExecution) {
         this.tasksWaitingForExecution = tasksWaitingForExecution;
     }
-    
+
+    public List<Task> getTasksInInterruption() {
+        return tasksInInterruption;
+    }
+
+    public void setTasksInInterruption(List<Task> tasksInInterruption) {
+        this.tasksInInterruption = tasksInInterruption;
+    }
+
     public Set<Task> getTasks() {
         return graphPlan.keySet();
     }
-    
-    public void addTask(Task task){
+
+    public void addTask(Task task) {
         List<Task> l = new LinkedList<>();
         l.add(initial);
         addTask(task, l);
     }
-    
-    public boolean addTask(Task task, List<Task> previousTask){
+
+    public boolean addTask(Task task, List<Task> previousTask) {
         for (Task prevTask : previousTask) {
-            if(!graphPlan.containsKey(prevTask)){
+            if (!graphPlan.containsKey(prevTask)) {
                 return false;
             }
         }
         graphPlan.put(task, new LinkedList<Task>());
-        if(!dependencyGraph.containsKey(task)){
+        if (!dependencyGraph.containsKey(task)) {
             dependencyGraph.put(task, new LinkedList<Task>());
         }
         dependencyGraph.get(task).addAll(previousTask);
@@ -81,15 +91,22 @@ public class Plan {
         return !tasksInExecution.isEmpty();
     }
 
-    public void reset() {
-        tasksInExecution = new LinkedList<>();
-        tasksWaitingForExecution = new LinkedList<>();
+    public void reset(Believes believes) {
+        tasksInExecution.clear();
+        tasksWaitingForExecution.clear();
         for (Task task : this.graphPlan.keySet()) {
-            task.setTaskWaitingForExecution();
+            if (!task.isInterrupted()) {
+                task.setTaskWaitingForExecution();
+                task.initTask(believes);
+            } else {
+                task.setTaskInExecution();
+                tasksInExecution.add(task);
+            }
         }
-        tasksInExecution.add(initial);
+        if (tasksInExecution.isEmpty()) {
+            tasksInExecution.add(initial);
+        }
 //        initial.setTaskFinalized();
     }
 
-    
 }

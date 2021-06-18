@@ -1,5 +1,9 @@
 # ----------------------------------------------------------------------------MODULE---------------------------------------------------------------------------------------------
-from Utils.Utils import activities_running, send
+import json
+from datetime import datetime
+from socket import socket, SOCK_STREAM, AF_INET
+
+from Utils.Utils import activities_running, responsesXTime, checkTimeMessageSended, json_creator
 import re
 
 
@@ -687,3 +691,26 @@ class pepperModuleV2(object):
                 self.sendValue(resultValue, False)
             else:
                 self.sendValue(value)
+
+
+def send(id_response, responseType, params, block=True):
+    HOST_LOCAL = '127.0.0.1'
+    PORT = 7897
+    FORMAT = 'utf-8'
+    should_send_message = True
+    key = params.keys().pop()
+    if key in responsesXTime:
+        #print "key: ", key
+        should_send_message = checkTimeMessageSended(key)
+    else:
+        responsesXTime[key] = datetime.now()
+
+    if should_send_message or (block is False):
+        ADDR = (HOST_LOCAL, PORT)
+        client = socket(AF_INET, SOCK_STREAM)
+        client.connect(ADDR)
+        msg_to_send = json.dumps(json_creator(id_response, responseType, params))
+        #print("send ", msg_to_send)
+
+        client.send(msg_to_send + '\r\n')
+        client.close()

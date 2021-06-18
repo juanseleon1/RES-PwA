@@ -2,6 +2,7 @@ package rational;
 
 import BESA.Kernel.Agent.Event.DataBESA;
 import java.util.List;
+import rational.mapping.Believes;
 import rational.mapping.Plan;
 import rational.mapping.Task;
 
@@ -45,7 +46,7 @@ public class RationalRole extends DataBESA{
         this.rolePlan = rolePlan;
     }
     
-    public void resetPlan(){
-        this.rolePlan.reset();
+    public void resetPlan(Believes believes){
+        this.rolePlan.reset(believes);
     }
 }

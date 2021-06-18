@@ -2,10 +2,11 @@ import threading
 import time
 
 from EventHandler import PepperModuleV2
+from EventHandler.PepperModuleV2 import send
 from ServiceDispatcher.Animation import Animation
 from Utils.Emotion import Emotion
 from Utils.Topics import *
-from Utils.Utils import activities_running, send
+from Utils.Utils import activities_running
 
 
 # ----------------------------------------------------------------------------Robot class---------------------------------------------------------------------------------------------

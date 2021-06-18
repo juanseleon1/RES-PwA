@@ -17,40 +17,43 @@ import rational.mapping.Task;
  *
  * @author Andres
  */
-public class ChangeRationalRoleGuard extends GuardBESA{
+//Guarda para el manejo de la expropiacion
+public class ChangeRationalRoleGuard extends GuardBESA {
 
     @Override
     public void funcExecGuard(EventBESA ebesa) {
-        RationalState state = (RationalState)this.getAgent().getState();
-        RationalRole newrole = (RationalRole)ebesa.getData();
+        RationalState state = (RationalState) this.getAgent().getState();
+        RationalRole newrole = (RationalRole) ebesa.getData();
 
-        if(state.getMainRole()!=null && !state.getMainRole().getRoleName().equals(((RationalRole)ebesa.getData()).getRoleName())){            
+        if (state.getMainRole() != null && !state.getMainRole().getRoleName().equals(((RationalRole) ebesa.getData()).getRoleName())) {
 
             //System.out.println("Intentando cambiar de rol a " + newrole.getRoleName());
             if (state.getMainRole() != null) {
-            Plan plan = state.getMainRole().getRolePlan();
+                Plan plan = state.getMainRole().getRolePlan();
                 if (plan != null) {
                     for (Task task : plan.getTasksInExecution()) {
                         if (task.isInExecution()) {
-                            task.cancelTask(state.getBelieves());
+                            task.setTaskInterrupted();
+                            task.interruptTask(state.getBelieves());
                             plan.getTasksInExecution().remove(task);
-                        }else if(task.isFinalized()){
+                            plan.getTasksInInterruption().add(task);
+                        } else if (task.isFinalized()) {
                             plan.getTasksInExecution().remove(task);
                         }
                         task.setTaskFinalized();
                     }
                 }
             }
-            newrole.resetPlan();
+            newrole.resetPlan(state.getBelieves());
             state.setMainRole(newrole);
-        }else if(state.getMainRole()==null){
-             //System.out.println("Insertando nuevo plan: " + newrole.getRoleName());
-            newrole.resetPlan();
+        } else if (state.getMainRole() == null) {
+            //System.out.println("Insertando nuevo plan: " + newrole.getRoleName());
+            newrole.resetPlan(state.getBelieves());
             state.setMainRole(newrole);
-        }else if (!state.getMainRole().getRolePlan().inExecution()){
+        } else if (!state.getMainRole().getRolePlan().inExecution()) {
             //System.out.println("Reseteando plan: " + state.getMainRole().getRoleName());
-            state.getMainRole().getRolePlan().reset();
+            state.getMainRole().getRolePlan().reset(state.getBelieves());
         }
     }
-    
+
 }

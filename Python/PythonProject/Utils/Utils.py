@@ -23,28 +23,6 @@ def json_creator(id_response, responseType, params):
     return json.loads(json.dumps(json_string))
 
 
-def send(id_response, responseType, params, block=True):
-    HOST_LOCAL = '127.0.0.1'
-    PORT = 7897
-    FORMAT = 'utf-8'
-    should_send_message = True
-    key = params.keys().pop()
-    if key in responsesXTime:
-        #print "key: ", key
-        should_send_message = checkTimeMessageSended(key)
-    else:
-        responsesXTime[key] = datetime.now()
-
-    if should_send_message or (block is False):
-        ADDR = (HOST_LOCAL, PORT)
-        client = socket(AF_INET, SOCK_STREAM)
-        client.connect(ADDR)
-        msg_to_send = json.dumps(json_creator(id_response, responseType, params))
-        #print("send ", msg_to_send)
-
-        client.send(msg_to_send + '\r\n')
-        client.close()
-
 def isAnEmotionalAck(params):
     encontrado = False
     emotionalAck = [
