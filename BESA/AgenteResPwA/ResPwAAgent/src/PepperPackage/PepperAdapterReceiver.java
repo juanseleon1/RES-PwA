@@ -7,24 +7,17 @@ package PepperPackage;
 
 import Adapter.ResPwaAdapterReceiver;
 import BESA.ExceptionBESA;
-import Init.InitRESPwA;
 import SensorHandlerAgent.SensorData;
 import SensorHandlerAgent.SensorDataType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,14 +31,10 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     public static final int revPort = 7897;
     protected AtomicBoolean ready;
     protected ServerSocket ss;
-    public static ConcurrentMap<Integer,Long> lapses;
-    public static ConcurrentMap<Long,Integer> q;
-    public static int totalPck=0;
+
     public PepperAdapterReceiver() throws IOException {
         ready = new AtomicBoolean(true);
         ss = new ServerSocket(revPort);
-        lapses= new ConcurrentHashMap<>();
-        q= new ConcurrentHashMap<>();
     }
 
     @Override
@@ -68,8 +57,6 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                                 if(PepperAdapter.lista.containsKey(sd.getAck())){
                                     long lapse= PepperAdapter.lista.get(sd.getAck());
                                     PepperAdapter.lista.remove(sd.getAck());
-                                    lapses.put(sd.getAck(),lapse);
-                                    totalPck--;
                                 }
                             }
                             updateBlvs(sd);
