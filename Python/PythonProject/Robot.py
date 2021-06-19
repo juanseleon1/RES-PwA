@@ -90,19 +90,19 @@ class Robot:
             "SILBAR": "animations/Stand/Waiting/CallSomeone_1"
         }
         self.alDialogProxy = session.service("ALDialog")
-        print "AWITA A MIL", self.alDialogProxy.getAllLoadedTopics()
+        print "Topicos Cargados: ", self.alDialogProxy.getAllLoadedTopics()
         # Clean Topics
         self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
         self.alDialogProxy.setLanguage("Spanish")
         # self.alDialogProxy.stopTopics(self.alDialogProxy.getAllLoadedTopics())
-        print "Medio PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
+        print "Topicos Cargados: ", self.alDialogProxy.getAllLoadedTopics()
         self.alDialogProxy.setConfidenceThreshold("BNF", 0.3, "Spanish")
         if len(self.alDialogProxy.getAllLoadedTopics()) < 3:
-            print "Iniciando Topics"
+            print "Iniciando Topicos"
             self.init_topics()
 
-        print "PAPITAS A MIL", self.alDialogProxy.getAllLoadedTopics()
-        print "MILTON", self.alDialogProxy.getActivatedTopics()
+        print "Topicos Cargados: ", self.alDialogProxy.getAllLoadedTopics()
+        print "Topicos Activos: ", self.alDialogProxy.getActivatedTopics()
 
         # print "ROBOT CARGADO Y LISTO"
         # time.sleep(10)
