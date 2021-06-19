@@ -35,7 +35,16 @@ public class ModeloRetroalimentacion<T> {
         Regla reglaAplicada = findRule(antecedentes);
         if (activity instanceof Preferenciaxcancion) {
             Preferenciaxcancion c = (Preferenciaxcancion) activity;
+            //Se puede quitar el if porque por el promedio ya no se va a pasar del limite.
+            //Entonces:
+            //var1=c.getGusto()*c.getVecesRetroalimentadas()
+            //numerador=var1+reglaAplicada.getFeedback()
+            //nuevoValorRetro=1+c.getVecesRetroalimentadas()
+            //c.setVecesRetroalimentadas(nuevoValorRetro)
+            //nuevoGusto = (double) numerador/nuevoValorRetro
+            //c.setGusto(nuevoGusto)
             if (c.getGusto() + reglaAplicada.getFeedback() > 1.0f) {
+                //
                 c.setGusto(1.0f);
             } else {
                 if (c.getGusto() + reglaAplicada.getFeedback() < 0.0f) {

@@ -80,9 +80,11 @@ class Robot:
                                 "iraTopic": topico_ira,
                                 "ayudaTopic": topico_ayuda,
                                 "normalTopic": topico_normal,
-                                "retroTopic": topico_retro,
+                                "retroCuentoTopic": topico_retroCuento,
+                                "retroCancionTopic": topico_retroCancion,
                                 "saludarTopic": topico_saludable,
-                                "soundTopic": topico_sonido
+                                "soundTopic": topico_sonido,
+                                "blankaTopic": topico_blank
                                 }
         self.path = {
             "VSAD": "boston_animation_library/Stand/cry",
@@ -146,7 +148,7 @@ class Robot:
             "MOVEFORWARD": [self.move_forward, True, "act", True],  #
             "MOVETO": [self.move_to, True, "act", True],  #
             "MOVETOPOSITION": [self.move_to_position, True, "act", True],  #
-            "INITIALCONF": [self.initial_conf, False, "rob", True],
+            "INITIALCONF": [self.initial_conf, True, "rob", True],
             # RobotStateServices-------------------------------------------------------
             "WAKEUP": [self.wake_up, True, "act", False],  #
             "SUSPEND": [self.suspend, True, "act", False],  #
@@ -157,17 +159,17 @@ class Robot:
             "SETLEDSINTENSITY": [self.set_leds_intensity, True, "act", False],  #
             "CHANGELEDCOLOR": [self.change_led_color, True, "act", False],  #
             "ACTIVATESTIFFNESS": [self.activate_stiffness, True, "act", False],  #
-            "ROBOTEMOTION": [self.change_emotion_expression, False, "rob", False],
+            "ROBOTEMOTION": [self.change_emotion_expression, True, "rob", False],
             # TabletServices-------------------------------------------------------
             "TABLETON": [self.tablet_on, True, "act", False],
             "WAKETABLET": [self.wake_tablet, True, "act", False],
             "SUSPENDTABLET": [self.suspend_tablet, True, "act", False],
             "TABLETOFF": [self.tablet_off, True, "act", False],
-            "SHOWVIDEO": [self.show_video, False, "act", True],
-            "QUITVIDEO": [self.quit_video, False, "act", False],
-            "PAUSEVIDEO": [self.pause_video, False, "act", False],
-            "RESUMEVIDEO": [self.resume_video, False, "act", False],
-            "PRELOADIMG": [self.preload_image, False, "act", False],
+            "SHOWVIDEO": [self.show_video, True, "act", True],
+            "QUITVIDEO": [self.quit_video, True, "act", False],
+            "PAUSEVIDEO": [self.pause_video, True, "act", False],
+            "RESUMEVIDEO": [self.resume_video, True, "act", False],
+            "PRELOADIMG": [self.preload_image, True, "act", False],
             "SHOWIMG": [self.show_image, True, "act", True],
             "HIDEIMG": [self.hide_image, True, "act", False],
             "SETTABLETBRIGHT": [self.set_tablet_bright, True, "act", False],
@@ -533,7 +535,7 @@ class Robot:
     def show_video(self, params):
         print "CRACK", params.get("SHOWVIDEO")
         value = params.get("SHOWVIDEO")
-        self.alTabletService.playVideo(value)
+        self.alTabletService.playVideo("http://10.195.22.103:49152/content/media/object_id/68/res_id/0")
 
     # Close the video player.
     def quit_video(self):
@@ -656,8 +658,7 @@ class Robot:
 
     def deactivate_topics(self, topicsList):
         for topic in self.alDialogProxy.getActivatedTopics():
-            if topic != "blankTopic":
-                self.desactivate_conversational_topic(topic)
+            self.desactivate_conversational_topic(topic)
             time.sleep(5)
 
     # def

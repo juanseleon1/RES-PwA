@@ -121,8 +121,8 @@ def callFunction(jsonObj):
 """---------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------"""
 # ----------------------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------
 print("Server starting...pop")
-HOST = '10.195.22.105'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
-HOST_LOCAL = '127.0.0.1'
+HOST = '192.168.2.2'#'10.195.22.105'  # socket.gethostbyname(socket.gethostname()) # Standard loopback interface             address (localhost)
+HOST_LOCAL = '0.0.0.0'
 print("Server starting on", HOST_LOCAL)
 PORT = 7896  # Port to listen on (non-privileged ports are > 1023)
 print("Server starting...pop0000000000000000")
@@ -172,5 +172,5 @@ t = threading.Timer(10.0, timer_activities)
 t.start()
 """ Robot class declaration"""
 robot = Robot(app, session)
-kthread = Utils.KeyboardThread(input_cbk=my_callback, robot=robot)
+#kthread = Utils.KeyboardThread(input_cbk=my_callback, robot=robot)
 receive_request(robot)

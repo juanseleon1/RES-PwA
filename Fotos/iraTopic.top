@@ -1,0 +1,7 @@
+topic: ~iraTopic()
+    language: spe
+    concept: (bloque_uno) ["Estoy cansado" "Estoy molesto" "Me siento molesto" "Estoy enojado" "Me siento enojado" "Estoy jodido" "Me siento jodido" "Estoy fastidiado" "Me siento fastidiado" "Estoy mamado" "Me siento mamada"] 
+    concept: (bloque_dos) ["Tengo piedra" "Tengo la piedra afuera" "Tengo rabia" "Siento mucha rabia"  "Siento ira" "Tengo ira" "Tengo mucha ira" "Siento furia" "Estoy furioso"  "Tengo colera"] 
+    u: ( _~bloque_uno) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: (_~bloque_dos) Entiendo que te sientas asi, pero tienes que superarlo   
+    u: ([Vayase Vete]) Esta bien nos vemos luego 

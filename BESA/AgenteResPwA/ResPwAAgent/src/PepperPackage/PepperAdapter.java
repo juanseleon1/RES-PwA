@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +25,14 @@ import java.util.logging.Logger;
 public class PepperAdapter extends ResPwaAdapter{
     
     protected Thread recvThread;
+    public static ConcurrentMap<Integer, Long> lista;
     public PepperAdapter() throws Exception {
         super();
         receiver=new PepperAdapterReceiver();
         serviceMapper=new PepperServiceMapper();
         recvThread= new Thread((PepperAdapterReceiver)receiver);
         this.rpa=null;
+        lista = new ConcurrentHashMap<>();
         //System.out.println("PepperAdapter Created");
         startPepperRcv();
     }
@@ -117,6 +121,7 @@ public class PepperAdapter extends ResPwaAdapter{
    {
        PepperServiceMapper mapper=(PepperServiceMapper) serviceMapper;
        PepperSendable s= new PepperSendable(sendNewSendable(),data.getSubservice(),data.getSubservice(),data.getParams());
+       lista.put(s.getId(), System.currentTimeMillis());
        return new ObjectMapper().writeValueAsString(s);
    }
 }

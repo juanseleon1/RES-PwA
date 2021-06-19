@@ -13,7 +13,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -36,7 +35,6 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
     public PepperAdapterReceiver() throws IOException {
         ready = new AtomicBoolean(true);
         ss = new ServerSocket(revPort);
-//        System.out.println("PepperAdptRecvReady");
     }
 
     @Override
@@ -54,7 +52,13 @@ public class PepperAdapterReceiver extends ResPwaAdapterReceiver<String> impleme
                             SensorData sd = toSensorData(json);
                             if (sd.getAck()!=-1){
                                 System.out.println("Llego: " + json);
-                        }
+                        } else{
+
+                                if(PepperAdapter.lista.containsKey(sd.getAck())){
+                                    long lapse= PepperAdapter.lista.get(sd.getAck());
+                                    PepperAdapter.lista.remove(sd.getAck());
+                                }
+                            }
                             updateBlvs(sd);
                         } catch (ExceptionBESA ex) {
                             Logger.getLogger(PepperAdapterReceiver.class.getName()).log(Level.SEVERE, null, ex);

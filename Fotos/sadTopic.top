@@ -1,0 +1,11 @@
+topic: ~sadTopic()
+   language: spe
+    concept: (bloque_uno) [aburrido cansado fastidiado mamado] 
+    concept: (bloque_dos) [mal terrible horrible] 
+    concept: (bloque_tres) [triste melancolica melancolico adolorido dolido ] 
+    concept: (bloque_cuatro ) [tristeza melancolia ] 
+    u: (["Estoy aburrido" "me siento cansado" "estoy cansado" "me siento aburrido" "estoy fastidiado" "me siento fastidiado" "estoy mamado" "me siento mamado" ]) Que lastima, quisiera poder hacer algo para hacerte sentir mejor, Que tal una cancion? 
+    u: (["Estoy mal" "me siento mal" "estoy terrible" "me siento terrible" "me siento horrible" "estoy horrible" "estoy muy mal" "me siento mal" ]) Aca estoy para ayudarte con eso, esos sentimientos nos ayudan a sanar heridas. Cuentame un poco mas
+      u1: (e:Dialog/NotSpeaking10)  Tranquilo, todo va a mejorar. Mientras disfruta conmigo.
+    u: (["Estoy triste" "me siento triste" "estoy dolido" "estoy melancolico" "me siento melancolico" "Estoy adolorido" "me siento melancolica" ]) Tranquilo, to do pasara. Recuerda que pronto volveras a estar bien y seras mucho mejor 
+    u: ( ["Siento tristeza" "Siento melancolia" "Tengo tristeza" "Tengo melancolia"]) Te comprendo, pero piensa que podras verte a ti mismo de otra manera y saldras adelante mucho mejor
