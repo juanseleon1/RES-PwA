@@ -1,13 +1,7 @@
 package rational.guards;
 
-import BESA.ExceptionBESA;
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
-import BESA.Kernel.System.AdmBESA;
-import BESA.Kernel.System.Directory.AgHandlerBESA;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rational.RationalRole;
 import rational.RationalState;
 import rational.mapping.Plan;
@@ -26,17 +20,22 @@ public class ChangeRationalRoleGuard extends GuardBESA {
         RationalRole newrole = (RationalRole) ebesa.getData();
 
         if (state.getMainRole() != null && !state.getMainRole().getRoleName().equals(((RationalRole) ebesa.getData()).getRoleName())) {
-
             //System.out.println("Intentando cambiar de rol a " + newrole.getRoleName());
             if (state.getMainRole() != null) {
                 Plan plan = state.getMainRole().getRolePlan();
                 if (plan != null) {
                     for (Task task : plan.getTasksInExecution()) {
                         if (task.isInExecution()) {
-                            task.setTaskInterrupted();
-                            task.interruptTask(state.getBelieves());
-                            plan.getTasksInExecution().remove(task);
-                            plan.getTasksInInterruption().add(task);
+                            if (!task.checkFinish(state.getBelieves())) {
+                                task.setTaskInterrupted();
+                                task.interruptTask(state.getBelieves());
+                                plan.getTasksInExecution().remove(task);
+                                plan.getTasksInInterruption().add(task);
+                            } else {
+                               plan.getTasksInExecution().remove(task);
+                               plan.getTasksWaitingForExecution().add(task);
+                            }
+
                         } else if (task.isFinalized()) {
                             plan.getTasksInExecution().remove(task);
                         }
@@ -55,5 +54,4 @@ public class ChangeRationalRoleGuard extends GuardBESA {
             state.getMainRole().getRolePlan().reset(state.getBelieves());
         }
     }
-
 }
