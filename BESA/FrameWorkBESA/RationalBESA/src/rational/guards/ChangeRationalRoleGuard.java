@@ -2,6 +2,8 @@ package rational.guards;
 
 import BESA.Kernel.Agent.Event.EventBESA;
 import BESA.Kernel.Agent.GuardBESA;
+import java.util.List;
+import java.util.Set;
 import rational.RationalRole;
 import rational.RationalState;
 import rational.mapping.Plan;
@@ -13,6 +15,9 @@ import rational.mapping.Task;
  */
 //Guarda para el manejo de la expropiacion
 public class ChangeRationalRoleGuard extends GuardBESA {
+
+    private RationalRole expropiatedRole = null;
+    private boolean interumpido = false;
 
     @Override
     public void funcExecGuard(EventBESA ebesa) {
@@ -31,17 +36,26 @@ public class ChangeRationalRoleGuard extends GuardBESA {
                                 task.interruptTask(state.getBelieves());
                                 plan.getTasksInExecution().remove(task);
                                 plan.getTasksInInterruption().add(task);
+                                interumpido = true;
                             } else {
-                               plan.getTasksInExecution().remove(task);
-                               plan.getTasksWaitingForExecution().add(task);
+                                plan.getTasksInExecution().remove(task);
                             }
-
                         } else if (task.isFinalized()) {
                             plan.getTasksInExecution().remove(task);
                         }
                         task.setTaskFinalized();
                     }
                 }
+            }
+            if (expropiatedRole == null && interumpido) {
+                expropiatedRole = state.getMainRole();
+            } else if (expropiatedRole != null && !(expropiatedRole.equals(newrole) && !interumpido)) {
+                Plan plan = expropiatedRole.getRolePlan();
+                Set<Task> tasks = plan.getTasks();
+                tasks.forEach(task -> {
+                    task.setTaskWaitingForExecution();
+                });
+                expropiatedRole = null;
             }
             newrole.resetPlan(state.getBelieves());
             state.setMainRole(newrole);
