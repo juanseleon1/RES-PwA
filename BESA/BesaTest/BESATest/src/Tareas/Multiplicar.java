@@ -6,10 +6,7 @@
 package Tareas;
 
 import RobotAgentBDI.Believes.RobotAgentBelieves;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import rational.mapping.Believes;
 import rational.mapping.Task;
 
